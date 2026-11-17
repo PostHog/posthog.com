@@ -18,7 +18,7 @@ tags:
   - Inside PostHog
 seo:
   metaTitle: Behind the scenes of a $400,000 billboard campaign
-  metaDescription: How we bought, designed, got approval for, and measured a London billboard campaign aimed at developers in London.
+  metaDescription: How we bought, designed, got approval for, and measured a billboard campaign aimed at developers in London.
 ---
 
 As a mostly normal person, I always figured billboard campaigns were a huge waste of money for whatever company did them. That was until my comrade Charles came to me and said “I’m gonna be off for a month, so someone needs to take over our London billboard campaign”.
