@@ -9,7 +9,7 @@ export interface LearnVideo {
     description: string
     /** The Wistia media ID. `MediaPlayer` plays it, and the transcript reads its English captions. */
     wistiaId: string
-    /** The card image: the Wistia thumbnail. */
+    /** The card image, 16:9. */
     poster: string
     /** The next video in the series. Without `url`, it shows as coming soon. */
     next?: { title: string; url?: string }
@@ -24,7 +24,7 @@ export const LEARN_VIDEOS: LearnVideo[] = [
         description:
             'Use a trace to see inside one AI request, work back from a bad answer to the bug, then check that the fix works.',
         wistiaId: 'p092lqjim8',
-        poster: 'https://embed-ssl.wistia.com/deliveries/cf26633370616daabf457e1c682336ed1e51ac43.jpg?image_crop_resized=1920x1080',
+        poster: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_1_6bd8e39cfe.png',
         next: { title: 'Evals' },
     },
 ]

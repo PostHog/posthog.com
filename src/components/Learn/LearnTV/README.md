@@ -20,7 +20,7 @@ The video plays from Wistia in the site's `MediaPlayer`. Its captions and the tr
 
 1. Compress the MP4 and upload it to Wistia. The first video uses HandBrake: 1920×1080, constant 30 fps, H.264 (x264, Slow preset), 630 kbps two-pass, and AAC 128 kbps stereo. That is about 24 MB for 4:24.
 2. Upload the English captions (WebVTT or SRT) to the same Wistia media. Do not edit the caption text. Keep the frame rate and the frame count of the edit, or the captions go out of sync. Do not add caption files to the repo.
-3. Add the video to `LEARN_VIDEOS` in `videos.ts`: the Wistia media ID, and the Wistia thumbnail as `poster`. If the previous video's `next` has no `url`, add one.
+3. Add the video to `LEARN_VIDEOS` in `videos.ts`: the Wistia media ID, and a 16:9 card image (upload it to Cloudinary) as `poster`. If the previous video's `next` has no `url`, add one.
 4. Add `src/pages/learn/videos/<slug>.tsx`, which renders `<LearnTVPage slug="<slug>" />`.
 5. If the product's Learn hub has no Videos page yet, add `'videos'` to that volume's `learnHub.pages` in `src/constants/pocketGuides.ts`. Then add `src/pages/learn/<product>/videos.tsx`, which renders `LearnVideosPage` (in `components/Learn`) with the product's handle, name, and intro line. The hub overview then shows the product's first video in its Watch the lesson section.
 
