@@ -170,6 +170,11 @@
     ],
     "redirects": [
         {
+            "source": "/suh",
+            "destination": "/standard-unit-of-hedgehog",
+            "permanent": true
+        },
+        {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true

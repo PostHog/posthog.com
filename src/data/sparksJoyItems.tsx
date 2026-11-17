@@ -134,5 +134,10 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             link: '/field-guide',
             icon: <HedgehogExplorer className="size-12" />,
         },
+        {
+            label: "Standard Unit of Hedgehog",
+            link: "/standard-unit-of-hedgehog",
+            icon: <img src="/images/hedgehog.svg" alt="" className="size-12" />,
+        },
     ],
 }
