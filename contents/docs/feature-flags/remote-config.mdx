@@ -81,6 +81,7 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 ```php
 $config = PostHog::getRemoteConfigPayload('landing-page-config');
 // config is returned as a parsed value. A JSON object becomes an associative array.
+// It is null when the flag has no payload.
 ```
 
 ```java
@@ -91,17 +92,27 @@ Object config = posthog.getRemoteConfigPayload("landing-page-config");
 
 ```rust
 let config = client.get_remote_config_payload("landing-page-config").await?;
-// config is an Option<serde_json::Value>. It is None when the client is disabled.
+// config is an Option<serde_json::Value>.
+// It is None when the flag has no payload or the client is disabled.
 ```
 
 ```elixir
 {:ok, config} = PostHog.FeatureFlags.get_remote_config_payload("landing-page-config")
-# config is a decoded JSON value, such as a map.
+# config is a decoded JSON value, such as a map. It is nil when the flag has no payload.
 ```
 
 </MultiLanguage>
 
 > **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
+
+### Which method to use
+
+Use `getRemoteConfigPayload` to read a remote config flag on the server, and always when its payload is encrypted. The flag payload method, such as `getFeatureFlagPayload`, also works on the server, but only for a payload that isn't encrypted, and it needs a distinct ID.
+
+| Method | Needs a distinct ID | Key used | Encrypted payloads |
+| --- | --- | --- | --- |
+| `getRemoteConfigPayload` | No | Secret API key or personal API key | Returned. See [encrypted payloads](#encrypted-payloads) for which key decrypts them |
+| Flag payload method | Yes | Project token | Excluded from `/flags` |
 
 ## Encrypted payloads
 
