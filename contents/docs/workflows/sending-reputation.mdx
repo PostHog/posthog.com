@@ -94,7 +94,7 @@ Separate the two streams in three steps, from least to most isolation.
 
 1. **Use a transactional category.** Put each transactional email step in a transactional [message category](/docs/workflows/opt-outs#message-categories). It then goes out ahead of queued marketing email and never waits for the daily cap. Use it only for email a person needs, such as receipts and password resets, because it also skips opt-outs.
 2. **Use a subdomain per stream.** Send marketing from one subdomain, such as `news.example.com`, and transactional email from another, such as `account.example.com`. Verify both on the [Channels tab](/docs/workflows/configure-channels). A spike in marketing complaints then lands on the marketing subdomain's reputation, not on the one your password resets use.
-3. **Use a project per stream.** In one project, both streams share a tier, an allowance, and an SES tenant. A suspension stops both. Send each stream from its own PostHog project to give each its own tier, allowance, and tenant.
+3. **Use a project per stream.** In one project, both streams share a tier, an allowance, and an SES tenant. A suspension stops both. Send each stream from its own PostHog project to give each its own tier, allowance, and tenant. A new project starts at tier 0 and climbs on its own record, so move the stream that needs less volume, such as transactional email, which never waits for the allowance.
 
 All projects in a region still share the regional SES account, so these steps reduce the risk but don't remove it.
 
@@ -107,7 +107,7 @@ No. Workflow email always goes out through PostHog's Amazon SES setup. You bring
 Your domain keeps its reputation when you move. Mailbox providers still notice when a domain starts to send from new infrastructure, so move gradually.
 
 1. **Verify your domain.** Add your sending domain or subdomain on the [Channels tab](/docs/workflows/configure-channels).
-2. **Bring your lists first.** Import your old provider's bounces and unsubscribes before the first send, with the [messaging suppressions API](/docs/api/messaging-suppressions) and the [messaging preferences API](/docs/api/messaging-preferences). Sending to an address that already bounced or opted out costs reputation right away.
+2. **Bring your lists first.** Import your old provider's bounces, complaints, and unsubscribes before the first send. Add bounces and complaints in bulk with the [messaging suppressions API](/docs/api/messaging-suppressions), and set each entry's `reason` to `bounce` or `complaint`. Only a `bounce` entry also blocks transactional email. Add unsubscribes with the [messaging preferences API](/docs/api/messaging-preferences). Sending to an address that already bounced or opted out costs reputation right away.
 3. **Start with engaged recipients.** Move transactional email and your most active users first. Move the rest over a few weeks. The sending tiers pace the move as well.
 4. **Watch the Reputation tab.** Check your bounce and complaint rates after each step, before you move more volume.
 

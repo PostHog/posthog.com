@@ -274,7 +274,7 @@ Work down this list. Each step rules out one cause.
 
 1. **Did the send return a message ID?** If it returned an error, its `code` says why. See [errors](#errors).
 2. **Is the send on the email's Sends tab?** If it isn't, check that you used a key from the right project. A key belongs to one project, and `@current` is that project.
-3. **Is the status `queued`?** The email waits to go out. Transactional emails never wait for your [sending allowance](/docs/workflows/sending-reputation), so this status is usually short.
+3. **Is the status `queued`?** The email waits on the email queue to go out. Transactional emails never wait for your [sending allowance](/docs/workflows/sending-reputation) and go out ahead of marketing emails, so this status is usually short. If it lasts more than a few minutes, [contact support](https://app.posthog.com/#panel=support).
 4. **Is the status `failed` or `bounced`?** `reason` says why. A suppressed or unreachable address gets no email until you fix the address.
 5. **Is the status `delivered`?** The recipient's mail server accepted the email. Check the spam folder, and check that your domain's DNS records are still in place in [configure channels](/docs/workflows/configure-channels).
 

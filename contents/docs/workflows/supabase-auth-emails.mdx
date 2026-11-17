@@ -132,7 +132,7 @@ To go back to Supabase's own emails, turn the hook off in Supabase. To remove th
 
 Supabase limits how many auth emails your project sends per hour, and checks that limit before it calls PostHog. With Supabase's built-in mailer, the limit is 2 an hour. When a user goes over it, Supabase shows "email rate limit exceeded" and PostHog never gets the request.
 
-Now that PostHog sends your auth emails, Supabase lets you change the limit. In Supabase, open **Authentication** > **Rate Limits** and raise **Rate limit for sending emails** to a value that fits your sign-up traffic. Auth emails are transactional, so they never wait for your PostHog [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers). They still count toward it like any other email, so pick a Supabase limit that fits inside it.
+Now that PostHog sends your auth emails, Supabase lets you change the limit. In Supabase, open **Authentication** > **Rate Limits** and raise **Rate limit for sending emails** to a value that fits your sign-up traffic. Auth emails are transactional, so they never wait for your PostHog [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers). They still use it up like any other email, which leaves less for your marketing emails, so pick a Supabase limit that fits inside it.
 
 </Step>
 
