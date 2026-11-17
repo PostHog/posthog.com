@@ -1,22 +1,38 @@
 import React, { useEffect, useRef } from 'react'
-import { formatTime, type PlayerState } from './Player'
+import type { TranscriptLine } from './wistiaCaptions'
+
+const formatTime = (seconds: number): string =>
+    `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60)
+        .toString()
+        .padStart(2, '0')}`
+
+interface TranscriptProps {
+    /** Every caption cue, by start time. */
+    lines: TranscriptLine[]
+    /** The cues on screen now. Overlapping cues can both be active. */
+    activeIds: string[]
+    /** Seek to a time and play. */
+    playFrom: (seconds: number) => void
+    /** The .vtt file, for the download link. */
+    captionsUrl: string
+    /** The captions could not load. */
+    failed?: boolean
+    /** Sets the height of the scrolling list. */
+    listClassName?: string
+}
 
 /**
- * The transcript for a `LearnTVPlayer`. It lists the player's caption cues as buttons that play from that line, and
- * keeps the current line in view inside its own box, without scrolling the page.
+ * A video transcript from its caption cues. Each line is a button that plays from that line. The box keeps the current
+ * line in view, without scrolling the page.
  */
 export default function Transcript({
     lines,
     activeIds,
     playFrom,
     captionsUrl,
+    failed = false,
     listClassName = 'max-h-56',
-}: PlayerState & {
-    /** The .vtt file, for the download link. */
-    captionsUrl: string
-    /** Sets the height of the scrolling list. */
-    listClassName?: string
-}): JSX.Element {
+}: TranscriptProps): JSX.Element {
     const listRef = useRef<HTMLOListElement>(null)
     const headingId = `transcript-${captionsUrl.replace(/\W+/g, '-')}`
 
@@ -44,7 +60,7 @@ export default function Transcript({
             </div>
             {lines.length === 0 ? (
                 <p className="m-0 mt-2 rounded-md border border-primary bg-light dark:bg-dark px-3 py-2 text-sm text-secondary">
-                    Loading transcript…
+                    {failed ? "The transcript didn't load." : 'Loading transcript…'}
                 </p>
             ) : (
                 <ol
