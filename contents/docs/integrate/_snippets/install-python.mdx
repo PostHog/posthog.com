@@ -1,12 +1,14 @@
 ```bash
-pip install "posthog<8"
+pip install "posthog<9"
 ```
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconInfo" title="Upgrading to v6" type="fyi">
+<CalloutBox icon="IconInfo" title="Upgrading to v8" type="fyi">
 
-Version `6.x` of the PostHog Python SDK introduces a new [contexts](/docs/libraries/python#contexts) API and breaking changes. If you're upgrading from `5.x` to `6.x`, read the [migration guide](/tutorials/python-v6-migration) first to learn more.
+Version `8.x` of the PostHog Python SDK sends every event to the capture v1 endpoints, `/i/v1/analytics/events` and `/i/v1/ai/events`, and removes the legacy capture path. It also removes the `capture_mode` and `gzip` options, and makes constructor arguments after `host` keyword-only. Most apps upgrade without code changes. If you're upgrading from `7.x` or you send events through your own reverse proxy, read the [migration guide](https://github.com/PostHog/posthog-python/blob/main/docs/migration-7.x-to-8.0.md) first.
+
+If you're upgrading from `5.x` to `6.x`, read the [6.x migration guide](/tutorials/python-v6-migration) first. Version `6.x` introduces a new [contexts](/docs/libraries/python#contexts) API and breaking changes.
 
 </CalloutBox>
 
@@ -17,6 +19,8 @@ from posthog import Posthog
 
 posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 ```
+
+Constructor arguments after `host` are keyword-only. Pass them by name, for example `Posthog('<ph_project_token>', host='<ph_client_api_host>', debug=True)`.
 
 > **Note:** As a rule of thumb, we do not recommend having API keys or tokens in plaintext. Setting it as an environment variable is best.
 
