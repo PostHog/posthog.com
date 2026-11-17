@@ -7,7 +7,6 @@ import { useTeamMembers, TeamMember } from 'hooks/useTeamMembers'
 import { IconSpinner, IconPencil, IconDownload } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
-import { isPostHogEmail } from 'lib/employee'
 import { useApp } from '../context/App'
 
 const columns = [
@@ -204,10 +203,10 @@ function memberToRow(
 }
 
 export default function Team(): JSX.Element {
-    const { user, isValidating } = useUser()
+    const { user, isModerator, isValidating } = useUser()
     const { openSignIn } = useApp()
 
-    if (isPostHogEmail(user?.email)) return <TeamDirectory />
+    if (isModerator) return <TeamDirectory />
 
     return (
         <>
@@ -219,7 +218,7 @@ export default function Team(): JSX.Element {
                     </div>
                 ) : (
                     <div className="bg-accent p-4 rounded border border-primary">
-                        <p className="mt-0 font-semibold">Access denied</p>
+                        <h3 className="mt-0 mb-0">Access denied</h3>
                         <p className="mb-4 text-muted">This page is only available to PostHog team members.</p>
                         {!user && (
                             <OSButton variant="primary" size="md" onClick={() => openSignIn()}>
