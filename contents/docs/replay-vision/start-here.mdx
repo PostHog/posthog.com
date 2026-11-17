@@ -53,7 +53,7 @@ The draft opens on an overview of what PostHog AI set up:
 - **Name** – the scanner's name and a short description.
 - **What it will ask** – the scanner type and the prompt, for example a monitor that describes what "stuck" looks like on your pages.
 - **Eligible recordings** – the recording filters, chosen from your product's real pages and events, with a count of matching recordings from recent days.
-- **Sampling and budget** – the model, the sampling rate, the session coverage, and the estimated cost.
+- **Sampling and budget** – the model, the sampling rate, and the estimated cost.
 
 Each section has an **Edit** button that opens the matching step of the scanner editor: **Details**, **Configure**, **Recordings**, or **Budget**. **Start over** throws the draft away.
 
@@ -63,7 +63,7 @@ For a first run, leave the prompt and model alone. To keep volume low while you 
 
 <CalloutBox type="fyi" title="Estimate your usage first">
 
-The overview and the editor's **Budget** step show an estimated monthly cost based on your project's recent recording volume, the filters you set, the session coverage, the sampling rate, and the model. Use that to size against your [budget](/docs/replay-vision/quota-and-limits) before saving.
+The overview and the editor's **Budget** step show an estimated monthly cost based on your project's recent recording volume, the filters you set, the sampling rate, and the model. Use that to size against your [budget](/docs/replay-vision/quota-and-limits) before saving.
 
 </CalloutBox>
 
@@ -127,6 +127,6 @@ You'll see a count over time of sessions the scanner flagged. From here you can 
 ## What's next
 
 - [Scanner types](/docs/replay-vision/scanner-types) – understand monitor vs. classifier vs. scorer vs. summarizer before authoring your second one.
-- [Creating scanners](/docs/replay-vision/creating-scanners) – every way to set one up, plus how filters, session coverage, and sampling interact.
+- [Creating scanners](/docs/replay-vision/creating-scanners) – every way to set one up, plus how filters and sampling interact.
 - [Running scanners](/docs/replay-vision/running-scanners) – automatic background sweeps vs. on-demand triggers, and what happens to ineligible sessions.
 - [Observations](/docs/replay-vision/observations) – read results, rate them, and query them as events.

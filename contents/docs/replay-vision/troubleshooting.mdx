@@ -29,12 +29,11 @@ Start on the scanner's **Overview** tab. The **Scanner status** strip says what 
 If the status doesn't explain it, check, in order:
 
 1. **Are the filters too narrow?** Try removing filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
-2. **Is the session coverage too strict?** **High activity recordings only** skips most recordings. Try a broader setting.
-3. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
-4. **Is your organization over a usage limit?** If Product Analytics or Session Replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
-5. **Is AI data processing turned on?** Scanners don't scan anything while it's off for your organization. An organization admin can turn it on in organization settings.
-6. **Are the recordings too short?** The background sweep skips recordings shorter than 15 seconds, with fewer than 10 seconds of activity, or with more than an hour of activity. If your filters only match recordings like these, nothing gets queued.
-7. **Are all the matched sessions ineligible?** The scanner may be producing ineligible observations but no successful ones. See [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
+2. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
+3. **Is your organization over a usage limit?** If Product Analytics or Session Replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
+4. **Is AI data processing turned on?** Scanners don't scan anything while it's off for your organization. An organization admin can turn it on in organization settings.
+5. **Are the recordings too short?** The background sweep skips recordings shorter than 15 seconds, with fewer than 10 seconds of activity, or with more than an hour of activity. If your filters only match recordings like these, nothing gets queued.
+6. **Are all the matched sessions ineligible?** The scanner may be producing ineligible observations but no successful ones. See [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
 
 Recordings become candidates about 35 minutes after the session's last activity, so a session that just ended won't show up right away.
 

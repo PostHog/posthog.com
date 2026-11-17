@@ -5,14 +5,13 @@ title: Creating scanners
 import { ProductScreenshot } from "components/ProductScreenshot";
 import WizardCommand from 'components/WizardCommand'
 
-A scanner is made up of six things you author:
+A scanner is made up of five things you author:
 
 1. A **prompt** describing what to look for.
 2. A **scanner type** that determines the output shape – see [scanner types](/docs/replay-vision/scanner-types).
 3. **Recording filters** that select which sessions the scanner applies to.
-4. A **session coverage** mode that pre-filters by how much happens in a recording.
-5. A **sampling rate** that controls how many matching sessions get scanned.
-6. A **model**, which sets what each observation costs.
+4. A **sampling rate** that controls how many matching sessions get scanned.
+5. A **model**, which sets what each observation costs.
 
 You can also give a scanner its own **credit limit**, so it can never spend more than that in a billing period.
 
@@ -40,7 +39,7 @@ Under **How much should this scanner use?**, pick one:
 Either way, the draft:
 
 - Picks the model by how much judgment the goal needs.
-- Chooses a session coverage mode and the highest sampling rate the budget covers, based on recent recording volume. A free scanner is sized to your monthly free credits.
+- Chooses the highest sampling rate the budget covers, based on recent recording volume. A free scanner is sized to your monthly free credits.
 - With a budget, sets the scanner's credit limit to it, so a wrong estimate can't overspend it. A free scanner needs no limit, because it stops at your free credits.
 - Can scope the scanner to an action, a cohort, or a survey when your goal names one.
 - Makes an [experiment scanner](/docs/replay-vision/scanner-types#experiment) when your goal names a running experiment.
@@ -89,7 +88,7 @@ Whichever way you start, the scanner editor has the steps below. A drafted scann
 - **Details** – a name, a description, and tags. All three are optional, and the scanning model doesn't see the description or tags.
 - **Configure** – the scanner type, the model, the prompt, the type's own options, and the [self-driving](#handing-off-to-responder-agents) toggle.
 - **Recordings** – the [recording filters](#filters-scoping-the-scanner).
-- **Budget** – the [sampling rate](#sampling-rate-controlling-volume), [session coverage](#session-coverage-filtering-by-activity), an optional [scanner limit](#scanner-limit-capping-one-scanner), and the estimated cost.
+- **Budget** – the [sampling rate](#sampling-rate-controlling-volume), an optional [scanner limit](#scanner-limit-capping-one-scanner), and the estimated cost.
 
 Editing a saved scanner uses the same steps. The type can't be changed after the scanner is created.
 
@@ -194,44 +193,21 @@ To watch the sessions of an experiment, create an [experiment scanner](/docs/rep
 
 A good default discipline: start with a narrow filter while you're tuning the prompt, then widen the filter once you trust the results.
 
-## Session coverage: filtering by activity
-
-The **Session coverage** setting on the **Budget** step pre-filters recordings by their activity level before sampling is applied. It uses an activity score that estimates how much happens in a recording – interactions, errors, navigation – versus idle or empty sessions.
-
-| Mode                                    | What it keeps                                     |
-| --------------------------------------- | ------------------------------------------------- |
-| **High activity recordings only**       | Roughly the top 25% of sessions by activity score |
-| **Medium and high activity recordings** | Roughly the top 65% of sessions by activity score |
-| **All recordings**                      | Every session matching your filters               |
-
-A scanner you set up in the editor starts on **Medium and high activity recordings**. Sessions that don't have an activity score yet are treated as average and kept by every mode.
-
-Keep **All recordings** when your scanner looks for quiet behavior, such as people giving up or drifting away. Those sessions look uneventful, so a tighter mode would skip the very sessions the scanner is looking for.
-
-The three-step filtering process is:
-
-1. **Recording filters** pick sessions matching your criteria.
-2. **Session coverage** drops low-activity sessions by activity score.
-3. **Sampling rate** randomly keeps a fraction of what's left.
-
-Use a tighter coverage mode when you want to spend your budget on sessions where something actually happened, rather than idle or empty recordings.
-
 ## Sampling rate: controlling volume
 
-The sampling rate (0.1–100%) is applied **after** the filters and session coverage. A scanner with filter "sessions over 30 seconds" and sampling 25% scans roughly one in four of those sessions.
+The sampling rate (0.1–100%) is applied **after** the filters. A scanner with filter "sessions over 30 seconds" and sampling 25% scans roughly one in four of those sessions.
 
-The **Budget** step shows an **Estimated cost** – the credits the scanner is projected to spend per month at the selected model's price, next to what you've spent this billing period, what your other scanners and backfills are projected to spend, and your spend limit. It's based on your project's recent recording volume, the filters you've set, the session coverage mode, the sampling rate, and the model. Use this to size the scanner against your [budget](/docs/replay-vision/quota-and-limits) _before_ saving.
+The **Budget** step shows an **Estimated cost** – the credits the scanner is projected to spend per month at the selected model's price, next to what you've spent this billing period, what your other scanners and backfills are projected to spend, and your spend limit. It's based on your project's recent recording volume, the filters you've set, the sampling rate, and the model. Use this to size the scanner against your [budget](/docs/replay-vision/quota-and-limits) _before_ saving.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_editor_budget_free_only_d67ed45096.png"
-  alt="The Budget step of the scanner editor: sampling rate, session coverage, the Free credits only and Scanner limit switches, and the estimated monthly cost"
+  alt="The Budget step of the scanner editor: sampling rate, the Free credits only and Scanner limit switches, and the estimated monthly cost"
   classes="rounded"
 />
 
-If the estimate looks too high, you have four knobs:
+If the estimate looks too high, you have three knobs:
 
 - Narrow the filters.
-- Tighten the session coverage mode (All recordings → Medium and high activity recordings → High activity recordings only).
 - Lower the sampling rate.
 - Pick a cheaper model.
 

@@ -12,10 +12,9 @@ Once a scanner is **enabled**, PostHog runs a background sweep for it every five
 
 1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed. A recording becomes a candidate about 35 minutes after its session's last activity, so the session has ended before it's scanned.
 2. Skips recordings that can't be scanned: shorter than 15 seconds, fewer than 10 seconds of activity, or more than an hour of activity.
-3. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-filtering-by-activity) setting to drop low-activity recordings (**All recordings** keeps everything).
-4. Applies the sampling rate to what's left, so a 10% rate means roughly one in ten remaining recordings get queued.
-5. Queues an observation per recording for the model to process.
-6. Records the result – succeeded, failed, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
+3. Applies the sampling rate to what's left, so a 10% rate means roughly one in ten remaining recordings get queued.
+4. Queues an observation per recording for the model to process.
+5. Records the result – succeeded, failed, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
 
 Each scanner and recording pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
 
@@ -86,7 +85,7 @@ Your own code can scan up to 200 sessions per request through the API, with a pr
 On-demand scans:
 
 - Work even when the scanner is disabled. Only the background sweep follows the toggle.
-- Skip the filters, session coverage, and sampling rate. Every recording you pick is scanned if it's eligible.
+- Skip the filters and sampling rate. Every recording you pick is scanned if it's eligible.
 - Jump ahead of background and backfill work, so results arrive sooner.
 - Are attributed to the user who triggered them, so you can tell a person's spot-check apart from the background sweep.
 
@@ -104,13 +103,13 @@ A backfill scans every recording in a past date range that matches the scanner's
 
 On the scanner's **Run** tab, open **Backfill a date range**, pick a range (presets run from the last 3 hours to the last 90 days, or pick custom dates up to a year long), and check the **Estimated cost** before clicking **Start backfill**. A backfill:
 
-- Applies the scanner's filters, session coverage, and sampling rate, like the background sweep.
+- Applies the scanner's filters and sampling rate, like the background sweep.
 - Skips recordings the scanner already observed, so you're never charged twice for one.
 - Freezes the scanner's settings when it starts. Editing the scanner later doesn't change a backfill that's already running.
 - Scans the most recent recordings first.
 - Runs alongside the background sweep without starving it.
 
-The estimate is an upper bound: recordings that turn out to be ineligible cost nothing. One scanner can run one backfill at a time.
+The estimate is an upper bound: recordings that turn out to be ineligible cost nothing. A backfill stops when it has scanned the number of recordings in its estimate, even if more matching recordings arrive later. One scanner can run one backfill at a time.
 
 **Backfill history** lists every backfill with its progress, spend, and status. **View observations** opens the Observations tab filtered to that backfill, and **Cancel** stops one: scans already started finish, and nothing new starts.
 
