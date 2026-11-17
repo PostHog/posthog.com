@@ -20,15 +20,12 @@ const columns = [
     { name: 'Team lead', width: 'minmax(100px,auto)', align: 'left' as const },
     { name: 'Pineapple?', width: 'auto', align: 'center' as const },
     { name: 'T-shirt fit', width: 'minmax(82px,auto)', align: 'left' as const },
-    { name: 'T-shirt size', width: 'minmax(92px,auto)', align: 'left' as const },
-    { name: 'T-shirt info', width: 'minmax(120px,auto)', align: 'left' as const },
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]
 
 // Also defined in src/pages/community/profiles/[id].tsx — update both if changed
 const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
 const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
-const allSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL']
 
 const baseInputClass =
     'w-full bg-transparent border rounded px-1 py-0.5 text-sm text-primary outline-none focus:border-yellow transition-colors duration-300'
@@ -72,35 +69,6 @@ function EditableTShirtFitCell({
             <option value="">—</option>
             <option value="unisex">Unisex</option>
             <option value="female">Female</option>
-        </select>
-    )
-}
-
-function EditableTShirtSizeCell({
-    member,
-    updateProfile,
-}: {
-    member: TeamMember
-    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
-}) {
-    const sizes = member.tShirtFit === 'female' ? femaleSizes : member.tShirtFit === 'unisex' ? unisexSizes : allSizes
-    const { flash, borderClass } = useSaveFlash()
-
-    return (
-        <select
-            className={`${baseInputClass} ${borderClass} cursor-pointer`}
-            value={member.tShirtSize || ''}
-            onChange={async (e) => {
-                const ok = await updateProfile(member.id, { tShirtSize: e.target.value || null })
-                if (ok) flash()
-            }}
-        >
-            <option value="">—</option>
-            {sizes.map((s) => (
-                <option key={s} value={s}>
-                    {s}
-                </option>
-            ))}
         </select>
     )
 }
@@ -174,25 +142,6 @@ function memberToRow(
                     <EditableTShirtFitCell member={member} updateProfile={updateProfile} />
                 ) : (
                     member.tShirtFit || '—'
-                ),
-                className: 'text-sm',
-            },
-            {
-                content: isEditing ? (
-                    <EditableTShirtSizeCell member={member} updateProfile={updateProfile} />
-                ) : (
-                    member.tShirtSize || '—'
-                ),
-                className: 'text-sm',
-            },
-            {
-                content: isEditing ? (
-                    <EditableTextCell
-                        value={member.tShirtAdditionalInfo}
-                        onSave={async (val) => updateProfile(member.id, { tShirtAdditionalInfo: val })}
-                    />
-                ) : (
-                    member.tShirtAdditionalInfo || '—'
                 ),
                 className: 'text-sm',
             },
@@ -343,12 +292,6 @@ export default function Team(): JSX.Element {
                             { label: 'Female', value: 'female' },
                         ],
                         filter: (obj: TeamMember, value: string) => obj.tShirtFit === value,
-                        operator: 'equals',
-                    },
-                    {
-                        label: 't-shirt size',
-                        options: [{ label: 'Any', value: null }, ...allSizes.map((s) => ({ label: s, value: s }))],
-                        filter: (obj: TeamMember, value: string) => obj.tShirtSize === value,
                         operator: 'equals',
                     },
                 ]}
