@@ -32,7 +32,7 @@ How’d that happen? Ruby, the PM for team [Surfaces](/teams/surfaces), was taki
 
 With it gone, the flag turned on for everyone.
 
-After a brief moment of panic (and filter adjustment), we realized most people were curious about the new UI, and a few even asked to be opted back in. Those who were upset weren’t upset about the change itself, but the lack of warning.
+After a brief moment of panic (and putting the 0% rollout condition back), we realized most people were curious about the new UI, and a few even asked to be opted back in. Those who were upset weren’t upset about the change itself, but the lack of warning.
 
 A few others asked the obvious question: if people are handing more of the work to agents, why redo the UI at all?
 
