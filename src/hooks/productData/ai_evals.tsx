@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconListCheck } from '@posthog/icons'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // Evaluations share AI Observability's product page and are billed as AI Observability events
 // (same free tier, same rate). Listed here so the pricing table and calculator show them as
@@ -11,7 +12,7 @@ export const aiEvals = {
     description: 'Run LLM-as-a-judge evaluations to catch regressions.',
     handle: 'llm_evals',
     type: 'llm_evals',
-    color: 'lilac',
+    color: PRODUCT_COLORS.llm_evals,
     colorSecondary: 'lilac',
     category: 'ai',
     slug: 'ai-observability',

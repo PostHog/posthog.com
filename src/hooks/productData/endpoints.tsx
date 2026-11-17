@@ -15,6 +15,7 @@ import {
 import { features } from './endpoints/features'
 import { applications, keyFeatures } from './endpoints/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const endpoints = {
     ...getTool('endpoints'),
@@ -22,7 +23,7 @@ export const endpoints = {
     type: 'endpoints',
     teamSlug: 'data-modeling',
     forumTag: 'endpoints',
-    color: 'teal',
+    color: PRODUCT_COLORS.endpoints,
     colorSecondary: 'teal',
     shortDescription: 'Custom API endpoints powered by your PostHog data',
     billingDescription: <p className="m-0">Billed with data warehouse. Free for now.</p>,

@@ -47,7 +47,7 @@ export const nonProductPages = {
     // MCP Analytics has no marketing page – the nav entry points straight at the docs.
     mcpAnalytics: {
         slug: 'mcp-analytics',
-        url: '/docs/mcp-analytics',
+        url: '/mcp-analytics',
         icon: IconMCP,
         color: 'purple',
     },
