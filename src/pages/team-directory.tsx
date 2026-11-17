@@ -19,8 +19,16 @@ const columns = [
     { name: 'Teams', width: 'minmax(200px,1fr)', align: 'left' as const },
     { name: 'Team lead', width: 'minmax(100px,auto)', align: 'left' as const },
     { name: 'Pineapple?', width: 'auto', align: 'center' as const },
+    { name: 'T-shirt fit', width: 'minmax(82px,auto)', align: 'left' as const },
+    { name: 'T-shirt size', width: 'minmax(92px,auto)', align: 'left' as const },
+    { name: 'T-shirt info', width: 'minmax(120px,auto)', align: 'left' as const },
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]
+
+// Also defined in src/pages/community/profiles/[id].tsx — update both if changed
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+const allSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL']
 
 const baseInputClass =
     'w-full bg-transparent border rounded px-1 py-0.5 text-sm text-primary outline-none focus:border-yellow transition-colors duration-300'
@@ -38,6 +46,63 @@ function useSaveFlash() {
     const borderClass = saved ? 'border-green' : 'border-primary'
 
     return { flash, borderClass }
+}
+
+function EditableTShirtFitCell({
+    member,
+    updateProfile,
+}: {
+    member: TeamMember
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
+}) {
+    const { flash, borderClass } = useSaveFlash()
+
+    return (
+        <select
+            className={`${baseInputClass} ${borderClass} cursor-pointer`}
+            value={member.tShirtFit || ''}
+            onChange={async (e) => {
+                const fit = e.target.value || null
+                const newSizes = fit === 'female' ? femaleSizes : unisexSizes
+                const size = member.tShirtSize && newSizes.includes(member.tShirtSize) ? member.tShirtSize : null
+                const ok = await updateProfile(member.id, { tShirtFit: fit, tShirtSize: size })
+                if (ok) flash()
+            }}
+        >
+            <option value="">—</option>
+            <option value="unisex">Unisex</option>
+            <option value="female">Female</option>
+        </select>
+    )
+}
+
+function EditableTShirtSizeCell({
+    member,
+    updateProfile,
+}: {
+    member: TeamMember
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
+}) {
+    const sizes = member.tShirtFit === 'female' ? femaleSizes : member.tShirtFit === 'unisex' ? unisexSizes : allSizes
+    const { flash, borderClass } = useSaveFlash()
+
+    return (
+        <select
+            className={`${baseInputClass} ${borderClass} cursor-pointer`}
+            value={member.tShirtSize || ''}
+            onChange={async (e) => {
+                const ok = await updateProfile(member.id, { tShirtSize: e.target.value || null })
+                if (ok) flash()
+            }}
+        >
+            <option value="">—</option>
+            {sizes.map((s) => (
+                <option key={s} value={s}>
+                    {s}
+                </option>
+            ))}
+        </select>
+    )
 }
 
 function EditableTextCell({ value, onSave }: { value: string | null; onSave: (newValue: string) => Promise<boolean> }) {
@@ -74,7 +139,8 @@ function memberToRow(
     member: TeamMember,
     index: number,
     isEditing: boolean,
-    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>,
+    isModerator: boolean
 ) {
     return {
         key: String(member.id),
@@ -104,6 +170,37 @@ function memberToRow(
             { content: member.teams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.leadsTeams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.pineappleOnPizza === true ? 'Yes' : member.pineappleOnPizza === false ? 'No' : '—' },
+            ...(isModerator
+                ? [
+                      {
+                          content: isEditing ? (
+                              <EditableTShirtFitCell member={member} updateProfile={updateProfile} />
+                          ) : (
+                              member.tShirtFit || '—'
+                          ),
+                          className: 'text-sm',
+                      },
+                      {
+                          content: isEditing ? (
+                              <EditableTShirtSizeCell member={member} updateProfile={updateProfile} />
+                          ) : (
+                              member.tShirtSize || '—'
+                          ),
+                          className: 'text-sm',
+                      },
+                      {
+                          content: isEditing ? (
+                              <EditableTextCell
+                                  value={member.tShirtAdditionalInfo}
+                                  onSave={async (val) => updateProfile(member.id, { tShirtAdditionalInfo: val })}
+                              />
+                          ) : (
+                              member.tShirtAdditionalInfo || '—'
+                          ),
+                          className: 'text-sm',
+                      },
+                  ]
+                : []),
             { content: member.startDate || '—', className: 'text-sm' },
         ],
     }
@@ -118,6 +215,7 @@ export default function Team(): JSX.Element {
         { value: any; filter: (obj: any, value: any) => boolean }
     > | null>(null)
     const [isEditing, setIsEditing] = useState(false)
+    const visibleColumns = isModerator ? columns : columns.filter((c) => !c.name.startsWith('T-shirt'))
 
     const allTeamNames = useMemo(() => Array.from(new Set(teamMembers.flatMap((m) => m.teams))).sort(), [teamMembers])
 
@@ -125,6 +223,20 @@ export default function Team(): JSX.Element {
         () => Array.from(new Set(teamMembers.map((m) => m.country).filter(Boolean) as string[])).sort(),
         [teamMembers]
     )
+
+    const sizeCounts = useMemo(() => {
+        const all = [...teamMembers, ...futureJoiners]
+        const unisex: Record<string, number> = {}
+        const female: Record<string, number> = {}
+        for (const m of all) {
+            if (m.tShirtFit === 'unisex' && m.tShirtSize) {
+                unisex[m.tShirtSize] = (unisex[m.tShirtSize] || 0) + 1
+            } else if (m.tShirtFit === 'female' && m.tShirtSize) {
+                female[m.tShirtSize] = (female[m.tShirtSize] || 0) + 1
+            }
+        }
+        return { unisex, female }
+    }, [teamMembers, futureJoiners])
 
     const applyFilters = (data: TeamMember[]) => {
         if (!activeFilters) return data
@@ -229,6 +341,29 @@ export default function Team(): JSX.Element {
                             value ? obj.leadsTeams.length > 0 : obj.leadsTeams.length === 0,
                         operator: 'equals',
                     },
+                    ...(isModerator
+                        ? [
+                              {
+                                  label: 't-shirt fit',
+                                  options: [
+                                      { label: 'Any', value: null },
+                                      { label: 'Unisex', value: 'unisex' },
+                                      { label: 'Female', value: 'female' },
+                                  ],
+                                  filter: (obj: TeamMember, value: string) => obj.tShirtFit === value,
+                                  operator: 'equals',
+                              },
+                              {
+                                  label: 't-shirt size',
+                                  options: [
+                                      { label: 'Any', value: null },
+                                      ...allSizes.map((s) => ({ label: s, value: s })),
+                                  ],
+                                  filter: (obj: TeamMember, value: string) => obj.tShirtSize === value,
+                                  operator: 'equals',
+                              },
+                          ]
+                        : []),
                 ]}
                 handleFilterChange={(filters) => setActiveFilters(filters as typeof activeFilters)}
             >
@@ -267,12 +402,104 @@ export default function Team(): JSX.Element {
                             ) : null}
                         </div>
                         <OSTable
-                            columns={columns}
+                            columns={visibleColumns}
                             size="sm"
                             rows={displayMembers.map((member, index) =>
-                                memberToRow(member, index, isEditing, updateProfile)
+                                memberToRow(member, index, isEditing, updateProfile, isModerator)
                             )}
                         />
+                        {isModerator && displayFutureJoiners.length > 0 && (
+                            <>
+                                <h3 className="mt-6 mb-2 text-base font-semibold">Future joiners</h3>
+                                <p className="!mt-0 mb-2 text-sm text-muted">
+                                    {displayFutureJoiners.length} upcoming joiner
+                                    {displayFutureJoiners.length !== 1 ? 's' : ''} with a start date in the future
+                                </p>
+                                <OSTable
+                                    columns={visibleColumns}
+                                    size="sm"
+                                    rows={displayFutureJoiners.map((member, index) =>
+                                        memberToRow(member, index, isEditing, updateProfile, isModerator)
+                                    )}
+                                />
+                            </>
+                        )}
+                        {isModerator && (
+                            <div className="flex flex-wrap gap-8 mt-6">
+                                {unisexSizes.some((s) => sizeCounts.unisex[s]) && (
+                                    <div>
+                                        <h3 className="mb-2 text-base font-semibold">Unisex</h3>
+                                        <OSTable
+                                            columns={[
+                                                { name: 'Size', width: '80px', align: 'left' as const },
+                                                { name: 'Count', width: '80px', align: 'right' as const },
+                                            ]}
+                                            size="sm"
+                                            rows={[
+                                                ...unisexSizes
+                                                    .filter((s) => sizeCounts.unisex[s])
+                                                    .map((s) => ({
+                                                        key: s,
+                                                        cells: [
+                                                            { content: s, className: 'text-sm font-medium' },
+                                                            { content: sizeCounts.unisex[s], className: 'text-sm' },
+                                                        ],
+                                                    })),
+                                                {
+                                                    key: 'total',
+                                                    cells: [
+                                                        { content: 'Total', className: 'text-sm font-bold' },
+                                                        {
+                                                            content: Object.values(sizeCounts.unisex).reduce(
+                                                                (a, b) => a + b,
+                                                                0
+                                                            ),
+                                                            className: 'text-sm font-bold',
+                                                        },
+                                                    ],
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                )}
+                                {femaleSizes.some((s) => sizeCounts.female[s]) && (
+                                    <div>
+                                        <h3 className="mb-2 text-base font-semibold">Women's</h3>
+                                        <OSTable
+                                            columns={[
+                                                { name: 'Size', width: '80px', align: 'left' as const },
+                                                { name: 'Count', width: '80px', align: 'right' as const },
+                                            ]}
+                                            size="sm"
+                                            rows={[
+                                                ...femaleSizes
+                                                    .filter((s) => sizeCounts.female[s])
+                                                    .map((s) => ({
+                                                        key: s,
+                                                        cells: [
+                                                            { content: s, className: 'text-sm font-medium' },
+                                                            { content: sizeCounts.female[s], className: 'text-sm' },
+                                                        ],
+                                                    })),
+                                                {
+                                                    key: 'total',
+                                                    cells: [
+                                                        { content: 'Total', className: 'text-sm font-bold' },
+                                                        {
+                                                            content: Object.values(sizeCounts.female).reduce(
+                                                                (a, b) => a + b,
+                                                                0
+                                                            ),
+                                                            className: 'text-sm font-bold',
+                                                        },
+                                                    ],
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </>
                 )}
             </Editor>
