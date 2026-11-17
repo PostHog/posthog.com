@@ -6,7 +6,7 @@ showTitle: true
 
 ### Summary
 
-Metabase dashboards mirror a customer’s PostHog usage so we can diagnose billing, implementation quality, and quick-win optimizations. For audio and video learners, check out this:
+Metabase dashboards mirror a customer’s PostHog usage so we can diagnose billing, implementation quality, and quick-win optimizations. For audio and video learners:
 
 - <PrivateLink url="https://app.buildbetter.app/call/314774">Metabase overview recording</PrivateLink>
 
