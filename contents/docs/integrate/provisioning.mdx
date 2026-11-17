@@ -173,15 +173,17 @@ Until your app is registered, the other endpoints return HTTP 401 with a message
 
 After you register a client that declares `com.posthog.provisioning`, PostHog reviews it before it can provision. Until the review accepts your app, provisioning stays inactive: your app can't create accounts or provision resources. Most reviews finish within minutes. Some go to PostHog staff and take longer.
 
-To check the status, call the [registration endpoint](#register-your-app) again. While your app is under review, registration fails, and its `provisioning_enabled` check fails with one of these details:
+To check the status, call the [registration endpoint](#register-your-app) again. While your app is under review or blocked, registration fails, and its `provisioning_enabled` check fails with one of these details:
 
-| Detail                                                                                                | What it means                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `PostHog is reviewing this client before it can provision. Register again in a few minutes to check.` | The review is in progress. Call the registration endpoint again in a few minutes.                                                |
-| `PostHog staff are reviewing this client before it can provision. Register again later to check.`     | PostHog staff are reviewing your app. Call the registration endpoint again later.                                                |
-| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.`             | PostHog blocked provisioning for your app, for example because the review rejected it. Registering again doesn't lift the block. |
+| Detail                                                                                                | What it means                                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PostHog is reviewing this client before it can provision. Register again in a few minutes to check.` | The review is in progress. Call the registration endpoint again in a few minutes.                                                              |
+| `PostHog staff are reviewing this client before it can provision. Register again later to check.`     | PostHog staff are reviewing your app. Call the registration endpoint again later.                                                              |
+| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.`             | PostHog blocked provisioning for your app, because the review rejected it or staff blocked it later. Registering again doesn't lift the block. |
 
 Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
+
+PostHog staff can change the decision later. They can block an accepted app, for example after reports of abuse, and they can accept an app that was blocked. If your app is blocked and you think that is a mistake, contact PostHog support. When staff lift a block, call the registration endpoint again to check, and have your users connect again: blocking signs out every connection your app had.
 
 The review reads your metadata document and researches your app on the web. PostHog loads the homepage at your `client_uri` and searches the web for your product, your domain, and reports of abuse. A model then judges three things from that evidence: whether your app is a real product of the organization that owns the domain, whether it shows signs of abuse, and whether the metadata document is on your own site. When the model isn't sure, PostHog staff decide.
 
@@ -194,7 +196,7 @@ To pass:
 
 PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP address, or on a throwaway host such as a tunnel (for example ngrok), a request bin, or a JSON or paste hosting service. The review also won't accept a document on a site where anyone can publish content, such as a public Etherpad, a public git forge, or shared object storage. Register from the website your users actually use, not from a local or preview environment.
 
-Once PostHog accepts one client, another client whose metadata document is on the same host is accepted even when the model isn't sure about it, as long as the document is on your own site and shows no signs of abuse. For example, after `https://api.yourapp.com/.well-known/yourapp.json` is accepted, `https://api.yourapp.com/.well-known/yourapp-staging.json` is accepted too. A client on another host, such as `staging.yourapp.com`, gets its own review.
+While a client that PostHog accepted stays active, another client whose metadata document is on the same host is accepted even when the model isn't sure about it, as long as the document is on your own site and shows no signs of abuse. For example, after `https://api.yourapp.com/.well-known/yourapp.json` is accepted, `https://api.yourapp.com/.well-known/yourapp-staging.json` is accepted too. A client on another host, such as `staging.yourapp.com`, gets its own review.
 
 <a id="sign-requests-with-a-key-optional" />
 
