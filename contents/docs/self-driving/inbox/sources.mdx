@@ -149,9 +149,14 @@ External sources pull issue context into the same inbox queue as your product si
 
 ### Search analytics
 
-Search-performance opportunities from connected analytics sources. The inbox identifies pages that rank and receive meaningful impressions but have unusually low click-through rates, then surfaces the query, landing page, impressions, clicks, CTR, and average position for investigation.
+Search-performance opportunities and site audit issues from connected search and SEO tools.
 
-- Google Search Console
+- **Google Search Console** – The inbox identifies pages that rank and receive meaningful impressions but have unusually low click-through rates, then surfaces the query, landing page, impressions, clicks, CTR, and average position for investigation.
+- **Bing Webmaster Tools** – URLs that Bing can't crawl or index, such as pages that return 4xx or 5xx errors, time out, fail DNS resolution, or are blocked by robots.txt. Requires the `crawl_issues` table.
+- **Ahrefs** – Errors and warnings from your latest site audit. Notices are skipped. Requires the `site_audit_issues` table.
+- **Semrush** – Issues from your latest site audit. Requires the `site_audit_issue_details` and `site_audit_issue_descriptions` tables.
+
+Site audit sources send one signal for each issue type on each site, not one for each URL. An issue that stays open sends a signal at most once a week.
 
 ### Issue trackers
 
