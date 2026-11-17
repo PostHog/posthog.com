@@ -470,9 +470,9 @@ The process is slightly different depending on the SDK you're using.
 <Tab.Panels>
   <Tab.Panel>
 
-  In [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
+  In the [JavaScript Web](/docs/libraries/js) SDK, you can override the default properties by passing a `before_send` callback. In the [Node.js](/docs/libraries/node) SDK 6.x.x, pass a `beforeSend` callback to `new PostHog()` instead. This callback is called before any exception is captured.
 
-  ```javascript 
+  ```javascript file=Web
   posthog.init('<ph_project_token>', {
   api_host:'<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
@@ -490,6 +490,23 @@ The process is slightly different depending on the SDK you're using.
     }
     return event
     }
+  })
+  ```
+
+  ```javascript file=Node.js
+  const posthog = new PostHog('<ph_project_token>', {
+    host: '<ph_client_api_host>',
+    beforeSend: (event) => {
+      if (event.event === '$exception') {
+        event.properties = {
+          ...event.properties,
+          custom_property: 'custom_value',
+          // Optional: you can also override generated properties like fingerprint
+          $exception_fingerprint: 'MyCustomGroup',
+        }
+      }
+      return event
+    },
   })
   ```
   

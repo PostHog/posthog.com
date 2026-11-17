@@ -798,6 +798,10 @@
             "destination": "/compare/best-fathom-alternatives"
         },
         {
+            "source": "/blog/best-feature-flag-software-for-developers",
+            "destination": "/compare/best-feature-flag-tools-for-developers"
+        },
+        {
             "source": "/blog/best-flagsmith-alternatives",
             "destination": "/compare/best-flagsmith-alternatives"
         },
@@ -852,6 +856,10 @@
         {
             "source": "/blog/best-mouseflow-alternatives",
             "destination": "/compare/best-mouseflow-alternatives"
+        },
+        {
+            "source": "/blog/best-open-source-llm-observability-tools",
+            "destination": "/compare/best-open-source-llm-observability-tools"
         },
         {
             "source": "/blog/best-optimizely-alternatives",
@@ -1412,11 +1420,6 @@
             "statusCode": 301
         },
         {
-            "source": "/mcp-analytics",
-            "destination": "/docs/mcp-analytics",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/data-warehouse/run-sql-mcp:ext(\\.md)?",
             "destination": "/docs/data-warehouse/surfaces/mcp:ext?",
             "statusCode": 301
@@ -1433,6 +1436,10 @@
         {
             "source": "/code",
             "destination": "/desktop"
+        },
+        {
+            "source": "/inbox",
+            "destination": "/self-driving"
         },
         {
             "source": "/teams/logs",
@@ -6775,19 +6782,39 @@
         },
         {
             "source": "/docs/ai-engineering/langfuse-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/langfuse-posthog:ext?"
+            "destination": "/compare/posthog-vs-langfuse"
         },
         {
             "source": "/docs/ai-engineering/helicone-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/helicone-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
         },
         {
             "source": "/docs/ai-engineering/keywords-ai-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog:ext?"
+            "destination": "/docs/ai-observability/start-here:ext?"
         },
         {
             "source": "/docs/ai-engineering/traceloop-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/traceloop-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/langfuse-posthog:ext(\\.md)?",
+            "destination": "/compare/posthog-vs-langfuse"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/helicone-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/keywords-ai-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/traceloop-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
         },
         {
             "source": "/docs/llm-analytics/manual-capture:ext(\\.md)?",

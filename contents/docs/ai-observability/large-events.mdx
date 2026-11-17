@@ -104,7 +104,7 @@ In Python, call `posthog.flush()` before exit (or enable `sync_mode`), just like
 
 ## Other platforms
 
-Not on an SDK with an AI capture method? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one – same request format, different path:
+Not on an SDK with an AI capture method? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one. The request format is the same, and only the path changes:
 
 ```shell
 POST <ph_client_api_host>/i/v0/ai/batch/

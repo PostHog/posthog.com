@@ -1,4 +1,4 @@
-import { GatsbyNode } from 'gatsby'
+import { GatsbyNode, Reporter } from 'gatsby'
 
 import path from 'path'
 import fs from 'fs'
@@ -120,8 +120,10 @@ const LIBRARIES = path.resolve(__dirname, '../contents/docs/libraries')
  * so it builds like any other docs page. The SDK repo writes the page, front matter included.
  * These files are gitignored, and the ones from the last build are removed first. They render as
  * plain Markdown, never as MDX (see gatsby/sdkMarkdownReferences.js).
+ * The published SDKs' landing pages redirect to these references, so `gatsby build` fails when one of them
+ * is missing rather than deploying 404s; `gatsby develop` only logs it.
  */
-async function writeSdkMarkdownReferences(): Promise<void> {
+async function writeSdkMarkdownReferences(reporter: Reporter): Promise<void> {
     const host = process.env.GATSBY_SQUEAK_API_HOST
     if (!host) return
     const query = [
@@ -133,15 +135,21 @@ async function writeSdkMarkdownReferences(): Promise<void> {
         'fields[2]=markdown',
         'pagination[pageSize]=100',
     ].join('&')
+    const attempts = 3
     let data
-    try {
-        const res = await fetch(`${host}/api/sdk-references?${query}`, { signal: AbortSignal.timeout(30000) })
-        // Strapi answers 400 with no data until its sdk-reference type has the `markdown` field.
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        ;({ data } = await res.json())
-    } catch (error) {
-        console.warn('Skipping the Markdown SDK references:', error)
-        return
+    for (let attempt = 1; ; attempt++) {
+        try {
+            const res = await fetch(`${host}/api/sdk-references?${query}`, { signal: AbortSignal.timeout(30000) })
+            if (!res.ok) throw new Error(`HTTP ${res.status}`)
+            ;({ data } = await res.json())
+            break
+        } catch (error) {
+            if (attempt === attempts) {
+                reporter.panicOnBuild(`Couldn't fetch the Markdown SDK references after ${attempts} attempts: ${error}`)
+                return
+            }
+            await delay(attempt * 5000)
+        }
     }
     for (const sdk of fs.existsSync(LIBRARIES) ? fs.readdirSync(LIBRARIES) : []) {
         const dir = path.join(LIBRARIES, sdk)
@@ -162,10 +170,18 @@ async function writeSdkMarkdownReferences(): Promise<void> {
         fs.mkdirSync(dir, { recursive: true })
         fs.writeFileSync(path.join(dir, `${page}.md`), attributes.markdown)
     }
+    const missing = PUBLISHED_SDK_REFERENCES.filter(
+        (id) => !fs.existsSync(path.join(LIBRARIES, id.replace(/^posthog-/, ''), 'reference.md'))
+    )
+    if (missing.length) {
+        reporter.panicOnBuild(
+            `Strapi has no reference page for ${missing.join(', ')}, and their SDK pages redirect to it.`
+        )
+    }
 }
 
-export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
-    await writeSdkMarkdownReferences()
+export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store, reporter }) => {
+    await writeSdkMarkdownReferences(reporter)
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()

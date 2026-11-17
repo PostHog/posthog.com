@@ -175,7 +175,7 @@ const LeftSidebarContent = React.memo(
         return (
             <ScrollArea className="h-full">
                 {/* Job list */}
-                <div ref={jobListRef}>
+                <div ref={jobListRef} data-sidebar-label>
                     {searchQuery.trim() ? (
                         // Show search results
                         <>
