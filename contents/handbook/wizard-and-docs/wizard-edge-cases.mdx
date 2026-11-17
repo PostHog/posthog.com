@@ -703,7 +703,7 @@ callbacks: {
 // identify only when the stable id is a string; otherwise skip and stay anonymous
 if (typeof session.user?.id === 'string') posthog.identify(session.user.id, { email: session.user.email })
 // truly system-level: no person profile
-posthog.capture({ distinctId: 'cron', event: 'nightly_sync', properties: { $process_person_profile: false } })
+posthog.capture({ distinctId: crypto.randomUUID(), event: 'nightly_sync', options: { process_person_profile: false } })
 ```
 
 **Also catches:**

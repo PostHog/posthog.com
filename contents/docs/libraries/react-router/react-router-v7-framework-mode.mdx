@@ -293,8 +293,10 @@ import { posthogErrorContext } from './lib/posthog-middleware.server';
 
 export const handleError: HandleErrorFunction = (error, { context }) => {
   const saved = context.get(posthogErrorContext);
-  posthog.captureException(error, saved?.distinctId,
-    saved?.sessionId ? { $session_id: saved.sessionId } : undefined);
+  posthog.captureException(error, {
+    distinctId: saved?.distinctId,
+    properties: saved?.sessionId ? { $session_id: saved.sessionId } : undefined,
+  });
 };
 ```
 
