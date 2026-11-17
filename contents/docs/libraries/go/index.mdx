@@ -87,6 +87,26 @@ client.Enqueue(posthog.Alias{
 
 We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## AI events
+
+In version 2 of the SDK (`github.com/posthog/posthog-go/v2`), send `$ai_` events with `EnqueueAI`. It sends events to PostHog's dedicated AI capture endpoint, which accepts much larger events than the analytics endpoint:
+
+```go
+client.EnqueueAI(posthog.Capture{
+    DistinctId: "distinct_id",
+    Event:      "$ai_generation",
+    Properties: map[string]interface{}{
+        "$ai_model": "gpt-4o",
+    },
+})
+```
+
+`EnqueueAI` runs on an isolated lane, with its own queue, batching, and retry state. The SDK starts this lane the first time you call `EnqueueAI`. `Enqueue` never sends an `$ai_` event to the AI endpoint, so use `EnqueueAI` for these events. In HTTP handlers, use `posthog.EnqueueAIWithContext` as you would `posthog.EnqueueWithContext` (see [request context](#request-context)).
+
+`Flush` and `Close` also wait for events on the AI lane. To configure the AI lane, set `CaptureAICompression`, `CaptureAIMaxQueueSize`, and `CaptureAIBatchUploadTimeout` in `posthog.Config`. AI requests are not compressed unless you set `CaptureAICompression`.
+
+For the full list of changes in version 2, see the [migration guide](https://github.com/PostHog/posthog-go/blob/main/docs/migration-v2.md).
+
 ## Request context
 
 Use request context to apply a distinct ID, session ID, and common request properties to capture and exception events inside a `net/http` request. This is useful when connecting frontend activity to backend events, session replay, error tracking, and feature flag evaluation.
@@ -110,7 +130,7 @@ handler := posthog.NewRequestContextMiddleware(http.HandlerFunc(func(w http.Resp
 
 The middleware adds `$current_url`, `$request_method`, `$request_path`, `$user_agent`, and `$ip` properties. By default, it also reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as request-scoped defaults. Explicit `DistinctId` values and `$session_id` properties passed to captures take precedence over request context.
 
-If request context is attached but no distinct ID is available, capture and exception events are sent as [personless events](/docs/data/anonymous-vs-identified-events) with an auto-generated UUID and `$process_person_profile: false`. Calls to `Enqueue` without request context still require `DistinctId`. `EvaluateFlagsWithContext` uses the request-scoped distinct ID when `EvaluateFlagsPayload.DistinctId` is empty, but it never generates personless IDs and returns `ErrNoDistinctID` when no distinct ID is available.
+If request context is attached but no distinct ID is available, capture and exception events are sent as [personless events](/docs/data/anonymous-vs-identified-events). The SDK generates a UUIDv7 distinct ID and sets the `process_person_profile` event option to `false`, unless the event, the request context, or `Config.DefaultEventOptions` already sets that option. Calls to `Enqueue` without request context still require `DistinctId`. `EvaluateFlagsWithContext` uses the request-scoped distinct ID when `EvaluateFlagsPayload.DistinctId` is empty, but it never generates personless IDs and returns `ErrNoDistinctID` when no distinct ID is available.
 
 Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side decisions, pass an authenticated `DistinctId` explicitly or attach one to the request context:
 
