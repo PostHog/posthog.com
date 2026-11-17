@@ -42,6 +42,21 @@ If a consent lookup fails at send time, the email is sent untracked (fail closed
 
 The per-email step toggle takes priority: if **Track opens and link clicks** is off on an email step, the email is always sent untracked regardless of consent mode or recipient preference.
 
+## Workflow run link tag
+
+In tracked sends, PostHog can add a `ph_workflow_run` query parameter to links that point to your sending domain. The parameter holds the run ID of the send. When the landing page runs [posthog-js](/docs/libraries/js), the parameter links each click to the session it starts.
+
+Untracked sends never get the parameter. Links with click tracking turned off (`clicktracking="off"` or `data-ph-no-track`) never get it either.
+
+This tag is on by default. To turn it off for your project, set `email_workflow_run_link_tag_enabled` to `false` in the `workflows_config` object when you update your project through the API:
+
+```bash
+curl -X PATCH "https://us.posthog.com/api/projects/:project_id/" \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"workflows_config": {"email_workflow_run_link_tag_enabled": false}}'
+```
+
 ## Conversion events
 
 When a workflow has a [conversion goal](/docs/workflows/workflow-builder) configured, PostHog automatically captures a `$workflows_conversion` event each time a user meets that goal. This works regardless of whether the workflow is configured to exit on conversion — so you get conversion data even for workflows that continue running after a user converts.
