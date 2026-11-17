@@ -46,7 +46,7 @@ To track our app and set up an A/B test, we install PostHog. If you don't have a
 Start by installing the `posthog-js` SDK:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, create a `providers.js` file in your `app` folder. In it, initialize PostHog with your project token and instance address and export a provider component.
@@ -130,7 +130,7 @@ Set up a function in `layout.js` that:
 Start by installing `uuidv7` and `posthog-node`:
 
 ```bash
-npm i uuidv7 posthog-node
+npm i uuidv7 posthog-node@5
 ```
 
 Next, create a `utils` folder and create a folder named `genId.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.

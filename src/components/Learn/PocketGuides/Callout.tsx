@@ -10,12 +10,15 @@ import { useEntry } from './bookContext'
 export default function Callout({
     to,
     label,
+    title,
     children,
 }: {
     /** Where the button goes. Omit for a callout with no action. */
     to?: string
     /** Button text. Ignored without `to`. */
     label?: string
+    /** A bold first line, e.g. "Prerequisites" above a short list. */
+    title?: string
     children: React.ReactNode
 }): JSX.Element {
     const posthog = usePostHog()
@@ -25,7 +28,15 @@ export default function Callout({
     return (
         // Same box as a figure, so it reads as part of the book.
         <aside className="my-[0.8em] rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4">
-            <p className={`m-0 text-[0.9em] leading-relaxed text-secondary ${hasAction ? 'mb-3' : ''}`}>{children}</p>
+            {/* A div, not a p, so the children can be a list. */}
+            <div
+                className={`m-0 text-[0.9em] leading-relaxed text-secondary [&>*:last-child]:mb-0 [&_ul]:my-1 ${
+                    hasAction ? 'mb-3' : ''
+                }`}
+            >
+                {title && <strong className="block text-primary">{title}</strong>}
+                {children}
+            </div>
             {hasAction && (
                 <OSButton
                     asLink

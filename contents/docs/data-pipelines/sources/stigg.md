@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Stigg connector syncs your pricing, packaging, and monetization data – customers, subscriptions, products, plans, addons, features, and coupons – into PostHog, so you can analyze your billing and entitlement data alongside your product data.
+The Stigg connector syncs your pricing, packaging, and monetization data – customers, subscriptions, products, plans, addons, features, coupons, plan entitlements, plan charges, addon charges, credit grants, credit ledger, and customer entitlements – into PostHog, so you can analyze your billing and entitlement data alongside your product data.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ When linking Stigg, you'll need:
 
 <SyncModes />
 
-Stigg tables sync as full refresh. Stigg's API doesn't expose an updated-since filter, so incremental sync would miss updates to existing records like subscription status changes.
+Most Stigg tables sync as full refresh because Stigg's API doesn't expose an updated-since filter, so incremental sync would miss updates to existing records like subscription status changes. The `credit_ledger` table is the exception: ledger events are immutable, so it syncs incrementally on the `timestamp` field.
 
 ## Configuration
 
@@ -41,7 +41,9 @@ Stigg tables sync as full refresh. Stigg's API doesn't expose an updated-since f
 
 <SourceTables />
 
-The subscriptions table doesn't include subscription entitlements – Stigg's API omits them from the subscription list for performance. Plan and addon entitlements are included in the `entitlements` column of the plans and addons tables.
+The subscriptions table doesn't include subscription entitlements – Stigg's API omits them from the subscription list for performance. Plan and addon entitlements are also included in the `entitlements` column of the plans and addons tables.
+
+The `plan_entitlements`, `plan_charges`, and `plan_overage_charges` tables fan out over the plans table – each plan gets one set of rows regardless of how many versions it has. The `addon_charges` table fans out over the addons table in the same way. The `credit_grants`, `credit_ledger`, and `customer_entitlements` tables fan out over the customers table. The `credit_grants` table syncs only grants that are not scoped to a resource.
 
 ## Troubleshooting
 

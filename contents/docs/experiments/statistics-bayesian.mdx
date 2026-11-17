@@ -10,7 +10,7 @@ For example, instead of saying "statistically significant at p < 0.05," you get 
 
 ## Input data: What goes into the analysis
 
-The Bayesian engine processes four types of metrics:
+The Bayesian engine processes five types of metrics:
 
 ### Funnel metrics
 
@@ -19,6 +19,10 @@ Track whether users complete a specific action like "Did they complete checkout?
 ### Mean metrics
 
 Measure numeric values for each user, such as revenue per user or session duration. We calculate the average value across all users in each variant. [Learn more about mean metrics](/docs/experiments/metrics#mean).
+
+### Percentile metrics
+
+Measure a percentile of a numeric event property across all matching events in each variant, such as p90 load time. The analysis accounts for multiple events from the same user. [Learn more about percentile metrics](/docs/experiments/metrics#percentile).
 
 ### Ratio metrics
 

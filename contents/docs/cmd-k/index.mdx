@@ -35,6 +35,43 @@ Notable features
 - Search for **Jump to timestamp** to navigate to events around a specific point in time.
 - Search for **dark**, **light**, **theme**, or **appearance** to toggle between dark and light mode.
 
+## Search filters
+
+You can narrow search results using `key:value` filters. Filters are case-insensitive. Negate any filter with a `-` prefix (e.g., `-is:dashboard`). Quote values that contain spaces (e.g., `createdBy:"Ada Lovelace"`).
+
+### Available filters
+
+| Filter                             | Description                                                    | Example                   |
+| ---------------------------------- | -------------------------------------------------------------- | ------------------------- |
+| `is:` (or `type:`)                 | Filter by object type (dashboard, feature flag, insight, etc.) | `is:dashboard`, `is:flag` |
+| `createdBy:` (or `by:`, `author:`) | Filter by creator                                              | `createdBy:me`            |
+| `in:` (or `folder:`, `path:`)      | Filter by folder location                                      | `in:"Growth team"`        |
+| `name:` (or `title:`)              | Match name only, not description                               | `name:revenue`            |
+
+### Additional `is:` types
+
+Beyond standard object types, these additional `is:` values search their own APIs:
+
+| Filter            | What it searches                                  | Example                             |
+| ----------------- | ------------------------------------------------- | ----------------------------------- |
+| `is:alert`        | Insight alerts (by name)                          | `is:alert cpu`                      |
+| `is:ticket`       | Support tickets (by number, subject, or customer) | `is:ticket refund`, `is:ticket #42` |
+| `is:destination`  | Data pipeline destinations (server and browser)   | `is:destination slack`              |
+| `is:workflow`     | Workflows                                         | `is:workflow welcome`               |
+| `is:endpoint`     | API endpoints                                     | `is:endpoint`                       |
+| `is:product_tour` | Product tours                                     | `is:product_tour`                   |
+
+> **Note:** These types search their own API and don't support `createdBy:`, `in:`, or word exclusions with `-`. Queries combining these filters return no results. `is:alert` covers insight alerts only — log alerts are not yet searchable.
+
+### Examples
+
+- `is:dashboard revenue` — find dashboards with "revenue" in the name
+- `is:flag createdBy:me` — find feature flags you created
+- `is:ticket #42` — find support ticket number 42
+- `-is:insight` — find everything except insights
+
+When using an `is:` filter, a **View all** option appears to open the full list page for that type.
+
 ## Keyboard shortcuts
 
 You can use these shortcuts anywhere in PostHog without opening the command palette:

@@ -64,7 +64,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 To start, install [PostHog’s Node library](/docs/libraries/node):
 
 ```bash
-npm install posthog-node
+npm install posthog-node@5
 ```
 
 Next, we initialize our PostHog client in `server.js` using our project token and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).

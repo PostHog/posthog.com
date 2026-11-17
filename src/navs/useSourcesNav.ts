@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { SELF_HOSTED_SOURCES } from '../constants/sources'
+import { EXTRA_SOURCES } from '../constants/sources'
 import { getSourceDocsPath } from '../lib/sourceDocs'
 
 export default function useSourcesNav(basePath = '/docs/data-pipelines/sources'): { url?: string; name: string }[] {
@@ -24,10 +24,10 @@ export default function useSourcesNav(basePath = '/docs/data-pipelines/sources')
         name: node.name,
     }))
 
-    const selfManaged = SELF_HOSTED_SOURCES.map((s) => ({
+    const extra = EXTRA_SOURCES.map((s) => ({
         name: s.name,
         url: `${basePath}/${s.slug}`,
     }))
 
-    return [...managed, { name: 'Self-managed' }, ...selfManaged]
+    return [...managed, ...extra].sort((a, b) => a.name.localeCompare(b.name))
 }

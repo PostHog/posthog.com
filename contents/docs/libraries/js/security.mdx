@@ -19,44 +19,47 @@ Review and deploy updates regularly so pins don't prevent security fixes from re
 
 [Subresource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) enables the browser to check a downloaded script against an expected cryptographic hash before executing it. Use it with an exact-version URL, not a moving URL such as `/static/array.js` or `/static/1/array.js`.
 
-### Generate and review the hash
+### Download and review the integrity manifest
 
-Download the exact asset you intend to deploy and calculate its SHA-384 digest. Version `1.444.0` below is an example; choose a release you have reviewed.
+Release integrity manifests and the loader's `data-core-integrity` attribute require `posthog-js` [1.445.0 or later](https://github.com/PostHog/posthog-js/releases/tag/posthog-js%401.445.0). Use the release manifest's SHA-384 hashes instead of calculating them manually.
+
+Download the manifest during your dependency approval or deployment process. Replace `<SDK_VERSION>` in all examples with the same exact release you have reviewed.
 
 ```bash
 curl --fail --show-error --silent --location \
-  "https://us-assets.i.posthog.com/static/1.444.0/array.js" \
-  --output posthog-array.js
-
-printf 'sha384-'
-openssl dgst -sha384 -binary posthog-array.js | openssl base64 -A
-printf '\n'
+  "https://us-assets.i.posthog.com/static/<SDK_VERSION>/integrity.json" \
+  --output posthog-integrity.json
 ```
 
-Use your actual regional asset host or reverse-proxy URL. Review the downloaded artifact through your normal dependency approval process, then store the expected hash in your application code. Calculating a hash from a compromised download doesn't establish that the code is trustworthy. Don't fetch the expected hash dynamically from the same server at page load.
+The manifest's `files` object maps asset filenames to complete SRI values, such as `"array.js": "sha384-..."`. Use `files["array.js"]` for the core SDK and `files["loader.js"]` for the static loader. The npm package also includes its build's manifest at `dist/integrity.json`.
 
-### Add the hash to the SDK script
+Use the CDN manifest from the regional asset host you serve; regional toolbar assets can differ. If you use a reverse proxy, it must serve the same approved bytes. Review the release and assets through your normal dependency approval process, then store the selected hashes in your application source or build artifacts.
 
-In the [HTML snippet](/docs/libraries/js#installation), replace the `p.src` assignment with these comma-separated assignments, before the script is inserted into the DOM:
+A manifest from a compromised server doesn't establish that the code is trustworthy. Don't fetch expected hashes dynamically at page load.
 
-<!-- prettier-ignore -->
-```js
-p.integrity = "sha384-<SHA384_BASE64_DIGEST>",
-p.crossOrigin = "anonymous",
-p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/1.444.0/array.js"
+### Add the hashes to the SDK loader
+
+Use this loader instead of the inline snippet. Set `integrity` to `files["loader.js"]` and `data-core-integrity` to `files["array.js"]` from your approved manifest:
+
+```html
+<script
+    src="https://us-assets.i.posthog.com/static/<SDK_VERSION>/loader.js"
+    integrity="sha384-<LOADER_SHA384_BASE64_DIGEST>"
+    data-core-integrity="sha384-<ARRAY_SHA384_BASE64_DIGEST>"
+    data-project-token="<ph_project_token>"
+    crossorigin="anonymous"
+></script>
 ```
 
-Replace `<SHA384_BASE64_DIGEST>` with the digest from the previous step, and keep the rest of the snippet unchanged. The URL must serve the exact bytes you hashed. Cross-origin SRI requires a CORS response header such as `Access-Control-Allow-Origin: *`; PostHog's asset hosts provide this. Preserve it if you serve assets through a cross-origin proxy.
+If you serve the loader through a reverse proxy, set `data-api-host` to your ingestion URL. Move existing initialization options into `data-config` as JSON. For function-valued options, set `data-defer-init="true"` and call `posthog.init(...)` explicitly.
 
-Adding `integrity` to the outer inline `<script>` that contains the snippet doesn't protect the SDK it downloads. Set it on the generated `p` script element as shown above. When upgrading, update the version and hash together. If the hash doesn't match, the browser blocks execution; don't retry without integrity to work around the error.
+Replace both complete hash placeholders and the project token. When upgrading, update the version and both hashes together. If a hash doesn't match, the browser blocks execution; don't retry without integrity.
+
+Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide these; preserve them if you use a cross-origin proxy.
 
 ### Understand the coverage
 
-SRI protects only the resource carrying the hash. Hashing `array.js` doesn't protect additional scripts it loads, including the recorder, surveys, toolbar, or `config.js`.
-
-The [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives) can set `integrity` on SDK-created dependency script elements when you maintain reviewed hashes for their exact URLs. It doesn't protect the initial `array.js` download or guarantee coverage of scripts created by other code. Don't apply one hash to every dependency, and don't use a fixed release hash for mutable project configuration.
-
-If your requirement is to avoid runtime executable downloads altogether, use the bundled approach below instead of treating SRI on the initial script as complete coverage.
+These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js`. For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
 
 ## Configure Content Security Policy
 

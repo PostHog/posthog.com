@@ -65,7 +65,7 @@ narrow:                          wide (@2xl/reader-content+):
                                  └────────────────────────────────────┘
 ```
 
-Best for portrait or smaller screenshots where text-wrapping reads well. Optional `<Glow>` halo around the image, opt-in via `image.glow`.
+Best for portrait or smaller screenshots where text-wrapping reads well.
 
 ## Props
 
@@ -76,7 +76,7 @@ Best for portrait or smaller screenshots where text-wrapping reads well. Optiona
 | Prop | Type | Notes |
 |---|---|---|
 | `slide` | `CarouselSlide` | The slide config (see schema below). |
-| `productData` | `any` | Used for resolving `image` string refs (`productData.screenshots[key]`), default glow color (`productData.color`), and the image alt fallback (`productData.name`). |
+| `productData` | `any` | Used for resolving `image` string refs (`productData.screenshots[key]`) and the image alt fallback (`productData.name`). |
 
 ## Schema: `CarouselSlide`
 
@@ -113,7 +113,7 @@ These are passed through to `TabbedCarouselTab` by the template — they're on t
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `image` | `string \| ImageConfig` | no | String shorthand resolves `productData.screenshots[key]`. Object form lets you carry overrides (`maxWidth`, `containerClassName`, `imgClassName`, `glow`, `frameless`). Omit for prose-only slides. See [Image config](#image-config-imageconfig). |
+| `image` | `string \| ImageConfig` | no | String shorthand resolves `productData.screenshots[key]`. Object form lets you carry overrides (`maxWidth`, `containerClassName`, `imgClassName`, `frameless`). Omit for prose-only slides. See [Image config](#image-config-imageconfig). |
 
 ### Overrides
 
@@ -140,7 +140,6 @@ Used when `slide.image` is an object instead of a string shorthand.
 | `framePadding` | `string` | `'p-4'` (framed) / `''` (frameless) | Replaces the default `p-4` frame padding. Accepts any Tailwind spacing class, including responsive container-query variants. Use this to add desktop-only padding (e.g. `'@3xl/reader-content:pt-4 @3xl/reader-content:px-4'`) without needing `!important` overrides. |
 | `containerClassName` | `string` | none | Extra classes on the wrapper div. Appended after frame classes. Use for `pb-0 leading-[0]` (flush-bottom), responsive border (`'@3xl/reader-content:border-t @3xl/reader-content:border-primary'`), or any other one-off styling. |
 | `imgClassName` | `string` | none | Extra classes on the `<img>` element. Appended after the defaults. The `stack` default applies `h-auto border border-secondary rounded-md` (or just `h-auto` when `frameless: true`). Use `'w-full !border-0 !rounded-none'` for a full-width borderless image. |
-| `glow` | `boolean \| GlowColor` | `undefined` | `float` layout only. `true` wraps the image in `<Glow>` using `productData.color`; pass a specific `GlowColor` (`'red'`, `'blue'`, etc.) to override. Ignored in `stack` layout. |
 
 ### Image source: three modes
 
@@ -183,7 +182,6 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 - **Float image width**: `w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2` (percentage of the slide once floated, so the text column doesn't get crushed mid-resize).
 - **Theme-aware image**: when `siteSettings.theme === 'dark'` and `image.srcDark` exists, `srcDark` is used. Otherwise falls through to `src`.
 - **Image alt fallback**: `image.alt` ⟶ `productData.name`.
-- **Float glow color fallback**: `productData.color` (the product's brand color).
 
 ## Common recipes
 
@@ -237,7 +235,7 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 }
 ```
 
-### Floating image with brand-color glow
+### Floating image
 
 ```tsx
 {
@@ -250,14 +248,8 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
     layout: 'float',
     heading: 'Event timeline',
     description: '...',
-    image: { ref: 'overview', glow: true },                    // glow color comes from productData.color
+    image: 'overview',
 }
-```
-
-### Floating image with a specific glow color
-
-```tsx
-image: { ref: 'overview', glow: 'purple' }                     // any GlowColor: yellow|blue|red|green|purple|orange|teal|seagreen|black|white
 ```
 
 ### Centered image (less than full-width, centered)

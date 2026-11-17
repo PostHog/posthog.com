@@ -55,6 +55,8 @@ Each condition has three parts:
 
 3. **Value** – the string to match against
 
+To drop every event with one name, you can also delete its event definition with **Delete and stop ingesting**. PostHog adds the `event_name` condition to the filter of each environment for you. See [deleting event definitions](/docs/data/events#deleting-event-definitions).
+
 ### Combining conditions
 
 - **AND groups** match when **all** conditions in the group are true.

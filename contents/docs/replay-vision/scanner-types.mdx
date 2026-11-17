@@ -21,8 +21,8 @@ Every type also returns:
 
 - A **confidence** score representing how sure the model is about the result – shown as a percentage in the app, stored as a value from 0.0 to 1.0 on the event.
 - **Reasoning** that explains the result in plain language and may include **citations** – timestamps that link directly to the relevant moment in the recording's timeline. (Summarizers are the exception: the summary itself plays this role, so there's no separate reasoning field.)
-- A **key moment** – the single point in the recording the answer rests on. Opening the observation from the **What to watch** feed starts the recording there.
-- A **notability** judgment – a score from 0.0 to 1.0 for how much your team would gain from watching the session, with one sentence naming the moment that makes it worth a look. The model judges this on the session's own merits, separately from the scanner's question, and **What to watch** uses it to pick sessions.
+- A **key moment** – the single point in the recording the answer rests on. Opening the session from the **Highlights** feed starts the recording there.
+- A **notability** judgment – a score from 0.0 to 1.0 for how much your team would gain from watching the session, with one sentence naming the moment that makes it worth a look. The model judges this on the session's own merits, separately from the scanner's question.
 
 On the `$recording_observed` event these land as `scanner_output_confidence`, `scanner_output_key_moment_ms`, `scanner_output_notability`, and `scanner_output_notability_reason`. Observations scanned before key moments and notability existed don't have them.
 

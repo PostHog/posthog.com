@@ -5,6 +5,7 @@ import {
     HedgehogDirector,
     HedgehogDollHouse,
     HedgehogImTheDriver,
+    HedgehogPanic,
     HedgehogTrafficController,
     HedgehogXRay,
 } from '@posthog/brand/hoggies'
@@ -20,6 +21,7 @@ export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; cla
     'ai-observability': HedgehogXRay,
     'data-stack': HedgehogDollHouse,
     'session-replay': HedgehogDirector,
+    'error-tracking': HedgehogPanic,
     'feature-flags': HedgehogTrafficController,
 }
 

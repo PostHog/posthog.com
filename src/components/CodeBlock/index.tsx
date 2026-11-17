@@ -9,7 +9,7 @@ import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import Mermaid from 'components/Mermaid'
+const Mermaid = React.lazy(() => import('components/Mermaid'))
 import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
 import { useAppSettings, useAppActions } from '../../context/App'
@@ -92,7 +92,11 @@ type MdxCodeBlockChildren = {
 
 export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element | null => {
     if (children?.props?.className?.includes('language-mermaid')) {
-        return <Mermaid>{children.props.children}</Mermaid>
+        return (
+            <React.Suspense fallback={null}>
+                <Mermaid>{children.props.children}</Mermaid>
+            </React.Suspense>
+        )
     }
     const childArray = Array.isArray(children) ? children : [children]
 

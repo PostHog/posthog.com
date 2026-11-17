@@ -191,7 +191,7 @@ Feel free to add features and make it look better, but for the sake of our tutor
 To get analytics, user identification, feature flags, and all the other features of PostHog into our app, we must install and set up PostHog. The first step to doing this is installing all the relevant libraries for using PostHog:
 
 ```bash
-npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
+npx expo install posthog-react-native@4 expo-file-system expo-application expo-device expo-localization
 ```
 
 Next, import `PostHogProvider` into `App.js` and add it between `NavigationContainer` and `Stack.Navigator` with your project token and instance address (found in your project settings). This enables PostHog data and methods usage throughout the app. 

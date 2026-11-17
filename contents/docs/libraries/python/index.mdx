@@ -37,7 +37,7 @@ import PythonInstall from '../../integrate/_snippets/install-python.mdx'
 The Python SDK includes an asyncio-native client in version `7.45.0` and later. Continue to use `Posthog` in synchronous apps. For an asyncio app, install the optional async dependencies:
 
 ```bash
-pip install "posthog[async]>=7.45.0"
+pip install "posthog[async]>=7.45.0,<8"
 ```
 
 Import `AsyncPosthog`, the customer-facing name for `AsyncClient`. Both names provide the same async context manager and lifecycle methods. Keep one client for the lifetime of your app. For example, use a FastAPI lifespan handler:
@@ -528,6 +528,10 @@ The list of properties that this overrides:
 5. `$geoip_continent_code`
 6. `$geoip_postal_code`
 7. `$geoip_time_zone`
+8. `$geoip_subdivision_1_code`
+9. `$geoip_subdivision_1_name`
+10. `$geoip_subdivision_2_code`
+11. `$geoip_subdivision_2_name`
 
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 

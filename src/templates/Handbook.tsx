@@ -481,6 +481,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             belowTitle={belowTitle}
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
+            renderMdx={(content) => <MDXRenderer>{content}</MDXRenderer>}
             commits={commits}
             filePath={post.parent?.relativePath}
             showSurvey
@@ -563,6 +564,7 @@ export const query = graphql`
         post: mdx(id: { eq: $id }) {
             id
             body
+            timeToRead
             excerpt(pruneLength: 150)
             fields {
                 slug

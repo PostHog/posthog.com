@@ -57,6 +57,9 @@ logger_provider.add_log_record_processor(
 
 # Attach the OpenTelemetry handler to the root logger
 logging.getLogger().addHandler(LoggingHandler(logger_provider=logger_provider))
+
+# Let INFO logs through (Python's root logger defaults to WARNING)
+logging.getLogger().setLevel(logging.INFO)
 ```
 
 Alternatively, you can pass the API key as a query parameter:
@@ -75,8 +78,6 @@ With the handler attached in the previous step, you can start logging with stand
 
 ```python
 import logging
-
-logging.basicConfig(level=logging.INFO)
 
 # Use standard Python logging
 logger = logging.getLogger("my-app")

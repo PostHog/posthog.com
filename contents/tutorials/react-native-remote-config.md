@@ -29,7 +29,7 @@ With our app structure set up, let's install and configure PostHog. If you don't
 To start, install PostHog's React Native SDK and its dependencies:
 
 ```bash
-npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
+npx expo install posthog-react-native@4 expo-file-system expo-application expo-device expo-localization
 ```
 
 Next, update your root layout file (`app/_layout.tsx`) to include the `PostHogProvider` set up with your project's API key and client host which you can find in [your project settings](https://us.posthog.com/settings/project).

@@ -1,6 +1,4 @@
 import React from 'react'
-import type { GlowColor } from 'components/Glow'
-
 /**
  * A single entry in a product's `productMenu` (or `pricingMenu`). Defined on
  * the product data (e.g. `src/hooks/productData/session_replay.tsx`) and
@@ -144,11 +142,6 @@ export interface ImageConfig {
      * as `containerClassName`.
      */
     imgClassName?: string
-    /**
-     * Float-layout only: wrap in `<Glow>`. `true` uses `productData.color`; pass a
-     * specific `GlowColor` to override.
-     */
-    glow?: boolean | GlowColor
 }
 
 /** Bullet item for the optional bullet list inside a slide body. */
@@ -172,7 +165,7 @@ export type CarouselSlide = CarouselSlideStyle & {
     /**
      * `stack`: image always renders below the prose, full-width within the slide.
      * `float`: at narrow container sizes the image stacks above; at `@2xl/reader-content`+
-     *          it floats right and the prose wraps around it. Glow halo is opt-in via `image.glow`.
+     *          it floats right and the prose wraps around it.
      */
     layout: 'stack' | 'float'
     /** Body content. */

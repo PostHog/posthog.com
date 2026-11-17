@@ -57,17 +57,20 @@ All SharePoint tables are full refresh. Each sync replaces the contents of the t
 
 Here's a summary of the tables the connector syncs:
 
-| Table         | Description                                                                          |
-| ------------- | ------------------------------------------------------------------------------------ |
-| `sites`       | SharePoint sites the app can read, excluding personal OneDrive sites                 |
-| `lists`       | Lists and document libraries in each site                                            |
-| `list_items`  | Items in every visible list, with the list's column values in a `fields` JSON column |
-| `drives`      | Document libraries (drives) in each site                                             |
-| `drive_items` | File and folder metadata in every document library (not file contents)               |
+| Table                    | Description                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------ |
+| `sites`                  | SharePoint sites the app can read, excluding personal OneDrive sites                 |
+| `lists`                  | Lists and document libraries in each site                                            |
+| `list_items`             | Items in every visible list, with the list's column values in a `fields` JSON column |
+| `drives`                 | Document libraries (drives) in each site                                             |
+| `drive_items`            | File and folder metadata in every document library (not file contents)               |
+| `drive_item_permissions` | Sharing permissions and sharing links on files and folders (not selected by default) |
+| `site_pages`             | Modern site pages and news posts in each site                                        |
 
 ## Limitations
 
 - **File metadata only** – `drive_items` syncs file and folder metadata. It does not parse or import file contents (CSV, Excel, etc.).
+- **Permissions table not selected by default** – `drive_item_permissions` makes one request per file and folder, so it is not selected by default. Select it manually if you need permission data.
 - **Personal OneDrive sites excluded** – the sync automatically skips personal OneDrive sites.
 - **Hidden system lists excluded** – SharePoint's internal system lists (workflow history, user info, etc.) are not synced.
 - **Full refresh only** – all tables use full refresh sync. Incremental sync is not available.

@@ -9,7 +9,7 @@ availability:
 sourceId: Shortio
 ---
 
-Enter your Short.io API key to pull your branded-link domains into the PostHog data warehouse.
+Enter your Short.io API key to pull your domains, links, and click statistics into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -23,16 +23,19 @@ Once the syncs are complete, you can start using Short.io data in PostHog.
 
 ## Available tables
 
-| Table     | Description                                                    | Sync method  |
-| --------- | -------------------------------------------------------------- | ------------ |
-| `domains` | Branded short-link domains configured in your Short.io account | Full refresh |
+| Table              | Description                                                               | Sync method  |
+| ------------------ | ------------------------------------------------------------------------- | ------------ |
+| `domains`          | Branded short-link domains configured in your Short.io account            | Full refresh |
+| `links`            | Short links in a Short.io domain, including changes to existing links     | Full refresh |
+| `link_clicks`      | Total click count for each link within the account's available history    | Full refresh |
+| `last_clicks`      | Raw click events in the account's available history                       | Full refresh |
+| `link_by_interval` | Daily click counts per link in UTC within the account's available history | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
-- The `domains` table syncs via full refresh only. Short.io's domain list API does not expose a reliable server-side timestamp filter for incremental syncing.
-- Per-domain links and click statistics are not synced yet.
+- All tables sync via full refresh only. Short.io's APIs do not expose reliable server-side filters for incremental syncing.
 
 ## Configuration
 

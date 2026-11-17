@@ -9,9 +9,9 @@ availability:
 sourceId: Skyvern
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Skyvern connector syncs workflows, runs, schedules, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -44,6 +44,12 @@ Some Skyvern tables sync incrementally, so later runs only fetch new or updated 
 <SourceParameters />
 
 ## Supported tables
+
+<CalloutBox icon="IconInfo" title="run_timeline is disabled by default" type="fyi">
+
+The `run_timeline` table is disabled by default because it makes one API request per run. For accounts with many runs, this can significantly impact sync performance. To enable it, select it during source setup or edit your existing source configuration.
+
+</CalloutBox>
 
 <SourceTables />
 
