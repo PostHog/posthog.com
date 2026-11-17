@@ -43,7 +43,9 @@ Tier 0 is a probation tier for a domain with no sending record. Its caps sit far
 
 An email that does not fit in the current allowance stays queued. The worker sends it once the allowance refills. The workflow's invocations show the delay. Transactional email never waits, as [the FAQ](#do-transactional-emails-count-against-the-allowance) explains. This is different from the per-person [frequency cap](/docs/workflows/frequency-cap), which skips marketing messages over the cap unless you set a hold time.
 
-A batch send is different. When the audience is larger than the tier allows, the trigger button blocks the launch and shows the current limit. Add filters to narrow the audience, or wait for the next tier. This batch cap only applies to workflows with an email step.
+A batch send is different. When the audience is larger than the tier allows, the trigger button blocks the launch and shows the current limit. Add filters to narrow the audience, set a sending rate limit, or wait for the next tier. This batch cap only applies to workflows with an email step.
+
+A sending rate limit raises the batch cap. All of your workflows share the daily allowance, so a batch that sends slowly leaves room for the others. With a rate limit of at most half your daily allowance, a batch can reach as many people as that rate sends to in 7 days, up to about 3.5 times your daily allowance. For example, at tier 3, a rate of 200 emails per hour lets a batch reach 33,600 people. You can't change the rate limit while such a batch still sends.
 
 </CalloutBox>
 
@@ -108,14 +110,14 @@ Your domain keeps its reputation when you move. Mailbox providers still notice w
 
 1. **Verify your domain.** Add your sending domain or subdomain on the [Channels tab](/docs/workflows/configure-channels).
 2. **Bring your lists first.** Import your old provider's bounces, complaints, and unsubscribes before the first send. Add bounces and complaints in bulk with the [messaging suppressions API](/docs/api/messaging-suppressions), and set each entry's `reason` to `bounce` or `complaint`. Only a `bounce` entry also blocks transactional email. Add unsubscribes with the [messaging preferences API](/docs/api/messaging-preferences). Sending to an address that already bounced or opted out costs reputation right away.
-3. **Start with engaged recipients.** Move transactional email and your most active users first. Move the rest over a few weeks. The sending tiers pace the move as well.
+3. **Start with engaged recipients.** Move transactional email and your most active users first. Move the rest over a few weeks. The sending tiers pace the move as well. If they are too slow for your current volume, [request a higher allowance](#can-i-request-a-higher-tier).
 4. **Watch the Reputation tab.** Check your bounce and complaint rates after each step, before you move more volume.
 
 Amazon's [guide to migrating to Amazon SES](https://aws.amazon.com/blogs/messaging-and-targeting/guide-to-ip-and-domain-warming-and-migrating-to-amazon-ses/) has more detail.
 
 ### Can I request a higher tier?
 
-Sending earns tiers, and the daily review is the same for every project. If you have a verified sending history elsewhere and need volume from day one, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
+Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you move from another provider, and need more volume sooner, ask for a higher allowance. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support ticket with your project's sending record. If the card doesn't show the link, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
 
 ### Do transactional emails count against the allowance?
 
