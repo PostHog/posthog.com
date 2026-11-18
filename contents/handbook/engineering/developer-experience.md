@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The <SmallTeam slug="developer-experience" /> owns the path code takes from an engineer's editor, or an agent's, to production: the local stack, CI, the merge queue, the bots that review and approve PRs, and the structure of the monorepo itself. When something slows every team down a little but no single team enough to fix it, it's usually ours.
+The <SmallTeam slug="developer-experience" /> owns the path code takes from an engineer's editor, or an agent's, to production: the local stack, CI, the merge queue, the bots that review and approve PRs, and the structure of the monorepo itself. We also own cross-cutting code that no single product owns and that isn't a customer-facing feature: code organization, architecture, base classes, and shared building blocks like webhook ingress and egress. When something slows every team down a little but no single team enough to fix it, it's usually ours.
 
 The current goal is to make 10,000 merged PRs a month easy. What we're working on this quarter is on the [team page](/teams/developer-experience).
 
@@ -22,7 +22,8 @@ The current goal is to make 10,000 merged PRs a month easy. What we're working o
 | **CI** | GitHub Actions workflows, Depot CI, speed and cost, flaky tests and quarantine, Playwright and Storybook jobs |
 | **Review and approval** | Stamphog, PostHog Review (ReviewHog), visual review, `@posthog` commands in PRs and Slack |
 | **Code ownership** | `owners.yaml` and how reviews get routed to teams |
-| **Product architecture** | Product folder structure, the isolation model, product boundaries, guardrails |
+| **Architecture** | Code organization, product folder structure, the isolation model, product boundaries, guardrails |
+| **Cross-cutting code** | Base classes, shared abstractions, and other code every product uses but no product owns |
 | **API contracts** | OpenAPI generation, generated TypeScript clients, MCP tool codegen, schema integrity |
 | **Webhooks and outbound calls** | The shared webhook ingress package, egress domains, GitHub API rate limits |
 | **Migrations** | Safe migration tooling, migration checks, squashing |

@@ -165,6 +165,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         notes: <em>See SDKs</em>,
         label: false,
     },
+    'code-architecture': {
+        feature: 'Code architecture and cross-cutting code',
+        owner: ['developer-experience'],
+        notes: 'Code organization, product boundaries, base classes, webhook ingress, and egress.',
+        label: 'team-devex',
+    },
     cohorts: {
         feature: 'Cohorts',
         owner: ['feature-flags'],
