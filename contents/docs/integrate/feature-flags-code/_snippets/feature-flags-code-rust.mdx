@@ -123,6 +123,12 @@ The SDK deduplicates these events per `(distinct_id, flag, value)` in a local ca
 
 ### Blocking client
 
+With `default-features = false`, the Rust SDK 1.x.x has no TLS. Add the `tls` feature:
+
+```toml
+posthog = { version = "1", default-features = false, features = ["tls"] }
+```
+
 If you're using the blocking client (with `default-features = false`), the API is the same but without `.await`:
 
 ```rust
