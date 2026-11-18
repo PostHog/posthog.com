@@ -165,10 +165,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         notes: <em>See SDKs</em>,
         label: false,
     },
-    'code-architecture': {
-        feature: 'Code architecture and cross-cutting code',
+    'product-foundation': {
+        feature: 'Product foundation and shared mechanisms',
         owner: ['developer-experience'],
-        notes: 'Code organization, product boundaries, base classes, webhook ingress, and egress.',
+        notes: 'The standard product shape, isolation and facades, base classes, webhook ingress, and egress.',
         label: 'team-devex',
     },
     cohorts: {

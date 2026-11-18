@@ -6,7 +6,7 @@ showTitle: true
 
 Each feature at PostHog has an Engineering owner. This owner is responsible for maintaining the feature (keep the lights on), championing any efforts to improve it (e.g. by bringing up improvements in sprint planning), [planning launches](/handbook/marketing/product-announcements) for new parts of it, and making sure it is well documented.
 
-Shared developer tooling that cuts across product teams belongs to [Developer Experience](/handbook/engineering/developer-experience): CI, the merge queue, Stamphog and other review bots, local dev, migration tooling, code organization and architecture, and cross-cutting code that isn't a customer-facing feature. Ask in #team-devex.
+Shared developer tooling, and the foundation products are built on, belong to [Developer Experience](/handbook/engineering/developer-experience): CI, the merge queue, Stamphog and other review bots, local dev, migration tooling, the standard product shape, and shared mechanisms like webhook ingress and egress. Ask in #team-devex.
 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 

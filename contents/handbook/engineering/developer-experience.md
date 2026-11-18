@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The <SmallTeam slug="developer-experience" /> owns the path code takes from an engineer's editor, or an agent's, to production: the local stack, CI, the merge queue, the bots that review and approve PRs, and the structure of the monorepo itself. We also own cross-cutting code that no single product owns and that isn't a customer-facing feature: code organization, architecture, base classes, and shared building blocks like webhook ingress and egress. When something slows every team down a little but no single team enough to fix it, it's usually ours.
+The <SmallTeam slug="developer-experience" /> owns the path code takes from an engineer's editor, or an agent's, to production: the local stack, CI, the merge queue, and the bots that review and approve PRs. We also own the foundation products are built on: the standard shape of a product in the monorepo, and the shared mechanisms every product uses the same way, like webhook ingress, egress, API codegen, and base classes. When several products need the same mechanism, we build it once and products plug into it. When something slows every team down a little but no single team enough to fix it, it's usually ours.
 
 The current goal is to make 10,000 merged PRs a month easy. What we're working on this quarter is on the [team page](/teams/developer-experience).
 
@@ -22,10 +22,9 @@ The current goal is to make 10,000 merged PRs a month easy. What we're working o
 | **CI** | GitHub Actions workflows, Depot CI, speed and cost, flaky tests and quarantine, Playwright and Storybook jobs |
 | **Review and approval** | Stamphog, PostHog Review (ReviewHog), visual review, `@posthog` commands in PRs and Slack |
 | **Code ownership** | `owners.yaml` and how reviews get routed to teams |
-| **Architecture** | Code organization, product folder structure, the isolation model, product boundaries, guardrails |
-| **Cross-cutting code** | Base classes, shared abstractions, and other code every product uses but no product owns |
+| **Product foundation** | The standard product shape: folder structure, isolation and facades, product boundaries, guardrails |
+| **Shared mechanisms** | Code that many products build on and no product owns: base classes, webhook ingress, egress domains, GitHub API rate limits |
 | **API contracts** | OpenAPI generation, generated TypeScript clients, MCP tool codegen, schema integrity |
-| **Webhooks and outbound calls** | The shared webhook ingress package, egress domains, GitHub API rate limits |
 | **Migrations** | Safe migration tooling, migration checks, squashing |
 | **Upgrades and dependencies** | Django, Python, TypeScript, React, and build tool upgrades, Renovate, security sync, package and image publishing |
 | **Local dev** | hogli, phrocs, flox, worktrees, devboxes, PR previews |
@@ -62,5 +61,7 @@ The current goal is to make 10,000 merged PRs a month easy. What we're working o
 **Report what's slowing you down.** Flaky tests, slow builds, a PR stuck in the queue, local dev friction, tooling that doesn't work right. We know about a lot of it, but not all of it, and `hogli devex:feedback` is the quickest way to tell us.
 
 **Loop us in early.** If your team is making decisions that touch shared tooling, CI, code architecture, or conventions, bring DevEx into the conversation. It's easier than cleaning up afterwards. Think new products, new services, big refactors, dependency changes, and CI workflow changes.
+
+**Ask before you build your own version.** If your product needs something another product already has, like a webhook handler, a client for an outside API, or a base class, ask in #team-devex first. It may exist already, or it may belong in the shared foundation.
 
 **Expect a DevEx reviewer on some PRs.** `owners.yaml` routes edits to guardrails, shared CI workflows, and new files at the repo root to us. It keeps shared rules from changing by accident.
