@@ -4,11 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog sends email only from a domain you verified. You add a sender on the [**Channels** tab](https://app.posthog.com/workflows/channels), add the DNS records PostHog shows to your domain, and PostHog checks them. Transactional emails, broadcasts, and workflow email steps all use the same verified senders.
+PostHog sends email to your users only from a domain you verified. You add a sender on the [**Channels** tab](https://app.posthog.com/workflows/channels), add the DNS records PostHog shows to your domain, and PostHog checks them. Transactional emails, broadcasts, drip campaigns, and workflow email steps all use the same verified senders. To try email before your domain is verified, use the [sandbox sender](/docs/workflows/sandbox-sender).
 
 Verification applies to the domain, not to the address. When a domain is verified for one sender in a project, every other sender on that domain in the same project is verified too, and you don't add the DNS records again.
 
 ## Add a sender
+
+Only project admins and higher can add a sender. If your access level is member, ask a project admin to add it for you.
 
 1. Go to workflows > [**Channels** tab](https://app.posthog.com/workflows/channels), click **+ New channel**, and select **Email**.
 2. Enter the **from name**, such as `PostHog Team`, and the **from email**, such as `team@yourdomain.com`. This is what recipients see in their inbox.
@@ -44,13 +46,13 @@ When the first sender in a project is verified, it becomes the project's default
 
 ## Before your domain is verified
 
-Some projects can send test emails before the domain is verified. These emails go only to members of your organization whose PostHog email address is verified. To send to anyone else, verify the domain.
+Until your domain is verified, you can send test emails with the [sandbox sender](/docs/workflows/sandbox-sender), a PostHog-managed sender that is rolling out to projects. It delivers only to active members of your organization whose PostHog email address is verified, and it has daily caps. To send to anyone else, verify the domain, then select your sender in each email step.
 
 ## Troubleshooting
 
 | Issue | Solution |
 | --- | --- |
-| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. |
+| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. Only project admins and higher can add a sender. |
 | Domain still pending? | Check that each record is on the right host name. Some DNS hosts add your domain to the end of the name, so `feedback.yourdomain.com` becomes `feedback.yourdomain.com.yourdomain.com`. Enter only the part before your domain in those hosts. |
 | Emails going to spam? | Check that DKIM and SPF pass, add the DMARC record, and read [sending reputation and allowance](/docs/workflows/sending-reputation). |
 | A send fails with `sender_not_verified`? | The `from` address isn't on a verified domain, or the project has no verified default sender. See [the API errors](/docs/workflows/transactional-emails/api). |

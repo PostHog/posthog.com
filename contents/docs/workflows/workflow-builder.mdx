@@ -43,6 +43,12 @@ You can edit a workflow after it's enabled, and your changes reach people who ar
 
 Disabling an enabled workflow stops new runs from starting, but doesn't cancel runs already in flight. To stop those, cancel them from the **Invocations** tab. See [stopping runs](/docs/workflows/editing-live-workflows#stopping-runs).
 
+## Organize workflows with tags
+
+Add tags to workflows to group them by team, topic, or project. The workflows list has a **Tags** column where you can add or edit tags without opening the workflow. Filter the list by tag, click a tag in any row to add it to the filter, or type a tag name into the search box.
+
+Tags are shared across your project, so the tags on your dashboards, insights, actions, and feature flags work here too. To tag workflows from code, see the [API](/docs/workflows/surfaces/api) and [MCP](/docs/workflows/surfaces/mcp).
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers define what kicks off the workflow.
@@ -270,10 +276,10 @@ Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any Po
 
 | Dispatch type    | Description                                                                                                                           |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.                     |
+| Email            | Send an email natively through PostHog. Needs a [verified sender](/docs/workflows/verify-domain).                                     |
 | Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.                          |
-| Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section.       |
-| Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                                      |
+| Push             | Send a native mobile push notification (iOS/Android). Needs a [push channel](/docs/workflows/push-notifications#set-up-a-push-channel). |
+| Webhook          | Call external systems. Configured on the step.                                                                                        |
 | CDP destinations | Use any [realtime destination](/docs/data-pipelines/destinations) as an dispatch step to deliver messages to users or other services. |
 
 ### Email dispatch options

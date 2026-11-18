@@ -35,7 +35,7 @@ The cool thing is that workflows can be built independently of your code. Only t
 ## Getting started
 ### Sending emails 
 
-Email sending is very easy to [configure and set up](/docs/workflows/configure-channels#create-a-new-workflows-channel). Four DNS entries need to be made, which are displayed directly in the setup window. Once the entries are verified, the email address is marked as verified and can be used for email sending.
+Email sending is very easy to [configure and set up](/docs/workflows/verify-domain). Four DNS entries need to be made, which are displayed directly in the setup window. Once the entries are verified, the email address is marked as verified and can be used for email sending.
 
 ![email setup screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr1_c1a2a6db00.webp)
 
@@ -81,7 +81,7 @@ Workflows can send native mobile push notifications directly. Add a **Push notif
 
 Two things have to be in place first:
 
-1. Connect a channel under **Workflows > Channels**: Firebase Cloud Messaging for Android, Apple Push Notification service for iOS. See [Configure a workflows channel](/docs/workflows/configure-channels?tab=Push).
+1. Connect a channel under **Workflows > Channels**: Firebase Cloud Messaging for Android, Apple Push Notification service for iOS. See [set up a push channel](/docs/workflows/push-notifications#set-up-a-push-channel).
 2. Register each user's device token from your app through the PostHog mobile SDK. See [Push notifications](/docs/workflows/push-notifications). The SDK does not collect tokens on its own, and it does not request notification permission for you.
 
 Each send counts toward your workflows destinations usage and quota.

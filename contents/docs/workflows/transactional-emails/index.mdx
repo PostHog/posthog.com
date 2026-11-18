@@ -16,7 +16,7 @@ Transactional emails are the one-off emails that a person triggers in your produ
 
 ## Send your first email
 
-You need a verified sending domain first. If your project doesn't have one yet, [verify your sending domain](/docs/workflows/verify-domain). Verification usually takes a few minutes.
+You need a verified sending domain first. If your project doesn't have one yet, [verify your sending domain](/docs/workflows/verify-domain). Verification usually takes a few minutes. Until then, an email with content from your code can go out from the [sandbox sender](/docs/workflows/sandbox-sender) to members of your organization, if your project has it.
 
 <Steps>
 
@@ -104,7 +104,7 @@ The [`sending-transactional-emails` agent skill](/docs/workflows/skills) teaches
 
 1. Open [**Transactional**](https://app.posthog.com/transactional) in PostHog and click **New transactional email**.
 2. Name the email. Turn on [**Protect sensitive data**](#protect-sensitive-data) if it carries sign-in codes or reset links.
-3. Choose the verified sender that the email comes from. To set up a sender, see [configure a channel](/docs/workflows/configure-channels).
+3. Choose the verified sender that the email comes from. To set up a sender, see [verify your sending domain](/docs/workflows/verify-domain).
 4. Write the subject and the body. Add the variables that your code sends, such as `reset_link`, and use them as `{{ variables.reset_link }}`.
 5. Copy the example send, with the email's template ID, from the **API** tab.
 
@@ -276,7 +276,7 @@ Work down this list. Each step rules out one cause.
 2. **Is the send on the email's Sends tab?** If it isn't, check that you used a key from the right project. A key belongs to one project, and `@current` is that project.
 3. **Is the status `queued`?** The email waits to go out. This happens when your project reaches its hourly or daily [sending allowance](/docs/workflows/sending-reputation). The email goes out when the allowance frees up.
 4. **Is the status `failed` or `bounced`?** `reason` says why. A suppressed or unreachable address gets no email until you fix the address.
-5. **Is the status `delivered`?** The recipient's mail server accepted the email. Check the spam folder, and check that your domain's DNS records are still in place in [configure channels](/docs/workflows/configure-channels).
+5. **Is the status `delivered`?** The recipient's mail server accepted the email. Check the spam folder, and check that your domain's DNS records are still in place. See [verify your sending domain](/docs/workflows/verify-domain).
 
 ## How transactional emails behave
 

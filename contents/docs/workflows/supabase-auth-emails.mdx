@@ -38,7 +38,7 @@ If you use an AI coding agent with the [PostHog MCP server](/docs/model-context-
 
 You need:
 
-- An [email channel](/docs/workflows/configure-channels) with a verified sending domain. Starter templates can't be created without a verified sender.
+- An [email sender](/docs/workflows/verify-domain) with a verified sending domain. Starter templates can't be created without a verified sender.
 - Access to your Supabase project's **Authentication** settings.
 - Editor access to workflows in your PostHog project.
 
@@ -147,7 +147,7 @@ Supabase waits for the hook before it finishes the user's action. If PostHog tak
 | Supabase shows "email rate limit exceeded" | Supabase's own hourly email limit stopped the email before it reached PostHog. Raise it under **Authentication** > **Rate Limits** in Supabase. |
 | Auth emails fail with "We couldn't send your email. Try again in a few minutes." | Check that the **Supabase project URL** is saved, that each mapped template still exists and is transactional and marked sensitive, and that your email channel still has a verified sending domain. If all of that is fine, the send was slow or hit your [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers). Try again. |
 | A template doesn't appear in the picker | The template must be transactional and marked sensitive. Turn both on in the template's **API** tab, or use **Create starter templates**. |
-| **Create starter templates** fails | Verify a sending domain on your [email channel](/docs/workflows/configure-channels) first. |
+| **Create starter templates** fails | [Verify a sending domain](/docs/workflows/verify-domain) first. |
 | Links in emails point to the wrong place | Check the **Supabase project URL**. Confirmation links use it to build the `/auth/v1/verify` link. |
 
 If Supabase retries a hook request, PostHog doesn't send the same email twice.
