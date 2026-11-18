@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The IBM Instana Observability connector syncs your events (incidents, issues, and changes), application and service catalogs, monitoring configuration, and infrastructure inventory into the PostHog Data Warehouse, so you can track reliability trends alongside your product data.
+The IBM Instana Observability connector syncs your events (incidents, issues, and changes), application and service catalogs, monitoring configuration, infrastructure and host agent inventory, user and team membership, audit and access logs, and business perspectives into the PostHog Data Warehouse, so you can track reliability trends alongside your product data.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ When linking Instana, you'll need:
 
 <SyncModes />
 
-The `events` table supports incremental sync using the event `start` timestamp (epoch milliseconds) and only reaches back 30 days on the initial sync, matching Instana's event retention. The other tables are configuration and topology catalogs without an updated-since filter, so they sync as full refresh.
+The `events` table supports incremental sync using the event `start` timestamp (epoch milliseconds) and only reaches back 30 days on the initial sync, matching Instana's event retention. The other tables are configuration and topology catalogs without an updated-since filter, so they sync as full refresh. The `audit_logs` and `access_logs` tables also sync as full refresh, because Instana has no time filter for them.
 
 ## Configuration
 
