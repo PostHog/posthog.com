@@ -36,7 +36,7 @@ Afterward, go into your app and install PostHog.
 
 ```bash
 cd beta-page
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Once installed, go into the `app` folder and create a `providers.js` file. In this file, initialize PostHog with your project token and instance address which you can get in [your project settings](https://app.posthog.com/project/settings). Make sure to set the `opt_in_site_apps` property to `true` so we can use the early access opt-in app. Finally, return a `PostHogProvider` initialized with the PostHog client.

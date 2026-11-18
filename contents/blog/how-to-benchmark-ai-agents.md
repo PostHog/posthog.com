@@ -28,7 +28,7 @@ Labs like Anthropic and OpenAI use them to measure, compare, and market new mode
 
 But benchmarks aren't just for frontier labs. They're useful for anyone who wants to understand how well a model, harness, or skill works in their given stack. For example, you might run three different models with the same code review prompt on the same PR to choose the best one based on how many known bugs they catch, how long they take, and what they cost.
 
-The idea is similar to running [controlled experiments](/product-engineers/ab-testing), but in reality, benchmarking is never that easy. Evaluation is often subjective, behavior is unpredictable, and – perhaps most painful of all – agents love to cheat. They'll search for leaked context, memory, and database query logs to pass benchmark tests with as little work as possible.
+The idea is similar to running [controlled experiments](/product-engineers/experiments), but in reality, benchmarking is never that easy. Evaluation is often subjective, behavior is unpredictable, and – perhaps most painful of all – agents love to cheat. They'll search for leaked context, memory, and database query logs to pass benchmark tests with as little work as possible.
 
 In this post, I'll explain how we benchmark our agents at PostHog, what we learned, and where we messed up (so you don't have to) – all with links to real PRs.
 

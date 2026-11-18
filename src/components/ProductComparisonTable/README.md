@@ -295,7 +295,7 @@ export const experiments = {
     comparison: {
         companies: [
             { name: 'Optimizely', key: 'optimizely', link: '/compare/posthog-vs-optimizely' },
-            { name: 'Amplitude', key: 'amplitude', link: '/blog/posthog-vs-amplitude' },
+            { name: 'Amplitude', key: 'amplitude', link: '/compare/posthog-vs-amplitude' },
             { name: 'PostHog', key: 'posthog' },
         ],
         rows: ['experiments'], // Auto-expands to all sections + platform

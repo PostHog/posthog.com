@@ -24,7 +24,7 @@ interface AppsListProps {
 // stays in sync with the real product lineup instead of scraping the docs nav.
 export const AppsList = ({ className = '' }: AppsListProps): JSX.Element => {
     const { products } = useProducts()
-    const docsProducts = products.filter((product) => product.handle !== 'posthog_code')
+    const docsProducts = products.filter((product) => product.handle !== 'posthog_code' && !product.hideFromAppsList)
 
     return (
         <div data-scheme="primary" className={`columns-2 @md:columns-3 @2xl:columns-4 gap-x-8 ${className}`}>

@@ -18,6 +18,7 @@ import {
 import { features } from './feature_flags/features'
 import { applications, keyFeatures } from './feature_flags/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const featureFlags = {
     ...getTool('feature_flags'),
@@ -26,7 +27,7 @@ export const featureFlags = {
     teamSlug: 'feature-flags',
     pocketGuideVolume: 'feature-flags',
     forumTag: 'feature-flags',
-    color: 'seagreen',
+    color: PRODUCT_COLORS.feature_flags,
     colorSecondary: 'seagreen',
     wizardSupport: 'In development',
     shortDescription: 'Control feature access with precision',
@@ -297,9 +298,6 @@ export const featureFlags = {
                 {
                     title: 'Edge network support',
                     description: 'like Vercel Edge Config',
-                },
-                {
-                    title: 'Approvals',
                 },
                 {
                     title: 'Multi-armed bandit',

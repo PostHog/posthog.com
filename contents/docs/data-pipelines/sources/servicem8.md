@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The ServiceM8 connector syncs job, company, company contact, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The ServiceM8 connector syncs job, company, company contact, and more into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All ServiceM8 tables are full refresh. Each sync replaces the contents of the table.
+ServiceM8 tables support incremental sync using the `edit_date` field to fetch new or updated records. You can also use full refresh to replace the table contents on each sync.
 
 ## Configuration
 

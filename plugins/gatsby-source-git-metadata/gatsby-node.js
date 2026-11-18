@@ -78,7 +78,13 @@ async function fetchChunkWithRetry(args, reporter, index) {
     }
 }
 
-exports.onPreInit = async function ({ reporter }, options = {}) {
+let metadataPromise
+exports.onPreInit = (...args) => {
+    metadataPromise = fetchMetadata(...args)
+    metadataPromise.catch(() => undefined)
+}
+
+async function fetchMetadata({ reporter }, options = {}) {
     const {
         owner = 'PostHog',
         repo = 'posthog.com',
@@ -123,6 +129,7 @@ exports.onPreInit = async function ({ reporter }, options = {}) {
 exports.onCreateNode = async function ({ node, getNode, actions }) {
     const { createNodeField } = actions
     if (node.internal.type !== 'MarkdownRemark' && node.internal.type !== 'Mdx') return
+    await metadataPromise
 
     const parent = getNode(node.parent)
     if (parent?.internal.type !== 'File') return

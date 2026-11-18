@@ -23,23 +23,27 @@ Once the syncs are complete, you can start using Shortcut data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `members` | Members of your Shortcut workspace | Full refresh |
-| `groups` | Groups (teams) in your workspace | Full refresh |
-| `projects` | Projects | Full refresh |
-| `workflows` | Workflows and their states | Full refresh |
-| `epics` | Epics | Full refresh |
-| `iterations` | Iterations | Full refresh |
-| `labels` | Labels | Full refresh |
-| `categories` | Categories | Full refresh |
-| `objectives` | Objectives | Full refresh |
-| `custom_fields` | Custom field definitions | Full refresh |
-| `files` | Uploaded files | Full refresh |
-| `linked_files` | Linked files | Full refresh |
-| `repositories` | Connected version control repositories | Full refresh |
-| `entity_templates` | Story entity templates | Full refresh |
-| `stories` | Stories (work items) | Incremental |
+| Table              | Description                                                                  | Sync method  |
+| ------------------ | ---------------------------------------------------------------------------- | ------------ |
+| `members`          | Members of your Shortcut workspace                                           | Full refresh |
+| `groups`           | Groups (teams) in your workspace                                             | Full refresh |
+| `projects`         | Projects                                                                     | Full refresh |
+| `workflows`        | Workflows and their states                                                   | Full refresh |
+| `epics`            | Epics                                                                        | Full refresh |
+| `epic_comments`    | Discussion comments on epics, with nested replies                            | Full refresh |
+| `epic_workflow`    | The workspace workflow that defines the available epic states                | Full refresh |
+| `iterations`       | Iterations                                                                   | Full refresh |
+| `labels`           | Labels                                                                       | Full refresh |
+| `categories`       | Categories                                                                   | Full refresh |
+| `objectives`       | Objectives                                                                   | Full refresh |
+| `custom_fields`    | Custom field definitions                                                     | Full refresh |
+| `files`            | Uploaded files                                                               | Full refresh |
+| `linked_files`     | Linked files                                                                 | Full refresh |
+| `repositories`     | Connected version control repositories                                       | Full refresh |
+| `entity_templates` | Story entity templates                                                       | Full refresh |
+| `documents`        | Documents readable by the API token's user, with titles and application URLs | Full refresh |
+| `story_history`    | Changes to stories, including workflow state transitions                     | Full refresh |
+| `stories`          | Stories (work items)                                                         | Incremental  |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

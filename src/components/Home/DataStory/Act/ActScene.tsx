@@ -178,9 +178,6 @@ const InboxWindow = ({ elapsed }: { elapsed: number }) => {
                     <p className={cn(SCENE_TEXT[12], 'm-0 flex items-center gap-1.5')}>
                         <IconRocket className={SCENE_SIZE[14]} />
                         <span className="font-semibold">Self-driving inbox</span>
-                        <span className={cn(SCENE_TEXT[10], 'rounded-full border border-orange/60 px-1.5 text-orange')}>
-                            beta
-                        </span>
                     </p>
                     <div className={cn(SCENE_TEXT[12], 'mt-2 flex gap-4')}>
                         <span className="border-b-2 border-[#F54E00] pb-1.5 font-semibold text-[#F54E00]">Reports</span>

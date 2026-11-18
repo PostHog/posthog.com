@@ -1,77 +1,68 @@
 # CardStackCarousel
 
-A draggable, swipeable card-stack carousel with a generic primitive, a swappable card visual layer, and a concrete `HearAboutUsCarousel` composition currently used in [contents/blog/aeo-advice.mdx](../../../contents/blog/aeo-advice.mdx).
-
-The architecture is intentionally split so the same stack/animation behavior can be reused with a different card design (and/or a different data set) later — just swap the visual layer.
+A carousel that shows a stack of three cards: the active card in front and one tilted card on each side. `CardStackCarousel` controls the stack and the motion. You supply the card visual with `renderCard`.
 
 ## Files
 
-- `index.tsx` – the generic `<CardStackCarousel />` primitive (animation, drag, chevrons, counter, keyboard).
-- `SignupQuoteCard.tsx` – `<SignupQuoteCard />`, the white "Where did you hear about us?" signup-form card visual.
-- `HearAboutUsCarousel.tsx` – `<HearAboutUsCarousel />`, composes the primitive + `SignupQuoteCard` + `quotes.json`. This is the MDX shortcode.
-- `quotes.json` – array of `{ content: string }` where `<strong>...</strong>` markers are highlighted via `RoughAnnotation`.
+- `index.tsx` – `<CardStackCarousel />`, the stack, chevrons, counter, and keyboard controls
+- `SignupQuoteCard.tsx` – the "Where did you hear about us?" signup-form card
+- `HearAboutUsCarousel.tsx` – the stack with `SignupQuoteCard` and `quotes.json`. It is a global MDX shortcode (`<HearAboutUsCarousel />`), used in `contents/blog/aeo-advice.mdx`.
+- `quotes.json` – `{ "content": "..." }` entries. Wrap a phrase in `<strong>...</strong>` to highlight it.
 
-## Usage in MDX
-
-`HearAboutUsCarousel` is registered as a global MDX shortcode in [src/mdxGlobalComponents.js](../../mdxGlobalComponents.js):
-
-```mdx
-<HearAboutUsCarousel />
-```
-
-## Reusing the stack with a different visual layer
-
-Author a new card component, then compose:
+## Usage
 
 ```tsx
-import { CardStackCarousel } from "components/CardStackCarousel"
-import { MyOtherCard } from "./MyOtherCard"
-import data from "./my-data.json"
+import { CardStackCarousel } from 'components/CardStackCarousel'
 
-export function MyOtherCarousel() {
-    return (
-        <CardStackCarousel
-            count={data.length}
-            renderCard={(i, { isActive }) => <MyOtherCard {...data[i]} isActive={isActive} />}
-            ariaLabel="My other carousel"
-        />
-    )
-}
+<CardStackCarousel
+    count={data.length}
+    renderCard={(i, { isActive }) => <MyCard {...data[i]} isActive={isActive} />}
+    ariaLabel="Customer quotes"
+/>
 ```
 
-## `<CardStackCarousel />` API
+To put the stack straight on the page, with no frame:
 
-| Prop          | Type                                  | Default          | Description                                    |
-| ------------- | ------------------------------------- | ---------------- | ---------------------------------------------- |
-| `count`       | `number`                              | _required_       | Total number of slides.                        |
-| `renderCard`  | `(index: number, meta: { isActive: boolean }) => React.ReactNode`  | _required_       | Renders the card at a given absolute index. `isActive` is true for the centered (front) slide only.    |
-| `loop`        | `boolean`                             | `true`           | Loop from last → first (and vice versa).       |
-| `className`   | `string`                              | `''`             | Extra classes on the outer container.          |
-| `ariaLabel`   | `string`                              | `Card carousel`  | Accessible label for the carousel region.      |
+```tsx
+<CardStackCarousel
+    count={notes.length}
+    renderCard={renderNote}
+    size="sm"
+    framed={false}
+    showCounter={false}
+    stageClassName="mt-4 h-[calc(min(90cqw,240px)_+_20px)]"
+/>
+```
 
-### Behavior
+## Props
 
-- **Stack layout** – three slides at rest (offsets −1, 0, 1): left inner, center, right inner. All cards use **`transform-origin: top center`**. On **first mount** (when not `prefers-reduced-motion`), both side neighbors **fly in** from the same entry poses used on navigation. On **next** / **previous**, the new neighbor uses a **nav** entrance from the matching edge. **While dragging**, the deck picks up a small shared rotation tied to pointer movement.
-- **CSS transitions** – `transform` / `opacity` ~420ms `cubic-bezier(0.22, 1, 0.36, 1)`. No external animation library.
-- **Drag/swipe** – Pointer Events on the stage. A drag past ~22% of the card width (or 60px, whichever is larger) advances. Otherwise it snaps back.
-- **Continuous swipes** – cards are keyed by absolute index, so React preserves DOM nodes across navigation. Swiping during an active animation smoothly redirects the in-flight card.
-- **Click vs. drag** – movement under 4px is treated as a click, so the chevrons and any in-card buttons keep working.
-- **Keyboard** – `ArrowLeft` / `ArrowRight` when the carousel is focused.
-- **Reduced motion** – respects `prefers-reduced-motion`; transitions become instant.
-- **`@container`** – widths and breakpoints adapt to the carousel's own container width, not the viewport, so it works inside any `<Reader />` / `<Editor />` window size.
-- **Side cards** – the left/right stack slots are **`hidden` below the container `@lg` breakpoint** and **`@lg:block`** from `@lg` up, so narrow layouts only show the centered card (chevrons and swipe still work).
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `count` | `number` | required | The number of cards. |
+| `renderCard` | `(index, { isActive }) => ReactNode` | required | Renders the card at `index`. `isActive` is true only for the front card. |
+| `loop` | `boolean` | `true` | Go from the last card back to the first card. |
+| `ariaLabel` | `string` | `'Card carousel'` | The accessible name of the carousel. |
+| `size` | `'sm' \| 'md'` | `'md'` | The card width (240px or 368px) and the chevron size. |
+| `framed` | `boolean` | `true` | The tan background, border, rounded corners, and vertical margin. |
+| `showCounter` | `boolean` | `true` | Shows "1 of 6" above the stack. When false, only screen readers announce it. |
+| `stageClassName` | `string` | `'h-[285px] @md:h-[325px]'` | Replaces the stage height. The cards are absolutely positioned, so set a height that fits your card. |
+| `contained` | `boolean` | `false` | Shrinks the cards so the stack and both chevrons fit inside the container, and shows the side cards at any width. Set `stageClassName` to a height that matches, for example `h-[calc(min(58cqw_-_2.25rem,240px)_+_20px)]` for `sm`. |
+| `row` | `boolean` | `false` | From a 672px (`@2xl`) container width, shows the front card and both side cards side by side at full size, with the front card a little lower. Below that width, the stack shows. Set a `stageClassName` height for each layout, for example `@2xl:h-[calc((100cqw_-_7.5rem)/3_+_2rem)]` for square cards. |
+| `className` | `string` | `''` | Classes for the outer container. |
 
-## `<SignupQuoteCard />` API
+## Behavior
 
-| Prop       | Type      | Description                                                                       |
-| ---------- | --------- | --------------------------------------------------------------------------------- |
-| `content`  | `string`  | Body copy. Wrap any segment in `<strong>...</strong>` to highlight it in yellow. |
-| `isActive` | `boolean` | Pass from `renderCard`'s meta: `true` only when this slide is centered. Rough highlights are delayed until the card is active so `rough-notation` measures an un-rotated layout; once shown, they stay on as the card moves to the side. |
+- **Controls:** the chevrons, and `ArrowLeft` / `ArrowRight` when the carousel has focus.
+- **Motion:** CSS transitions on `transform` and `opacity` (420ms). On mount and on each move, the new side card comes in from the edge.
+- **Reduced motion:** with `prefers-reduced-motion`, all moves are instant.
+- **Narrow containers:** the side cards are transparent below the `@lg` container width (512px), so only the front card shows.
+- **Focus:** side cards are `aria-hidden`. Give focusable elements in a card `tabIndex={isActive ? 0 : -1}`. In a `row`, the three cards in view are all active.
 
-The card has a fixed-height "input" area so all slides share an identical UI silhouette regardless of quote length. The "Create account" button is decorative — it does not navigate.
+## `<SignupQuoteCard />`
 
-Highlights use [`<RoughAnnotation type="highlight" />`](../Code/RoughAnnotation.tsx) (PostHog yellow at 35% alpha) **only while the card is centered** — side cards render plain `<strong>` so rough-notation never measures text under a CSS transform (which caused misaligned or “popping” highlights). After the stack settles, the highlight draws in over ~1.6s.
+| Prop | Type | Description |
+| --- | --- | --- |
+| `content` | `string` | The quote. `<strong>...</strong>` segments get a yellow `RoughAnnotation` highlight. |
+| `isActive` | `boolean` | Pass it from `renderCard`. The highlight draws only when the card is in front, because `rough-notation` measures incorrectly under a CSS transform. |
 
-## Editing quotes
-
-Edit [`quotes.json`](./quotes.json). Each entry is a `{ "content": "..." }` object; wrap highlighted phrases in `<strong>...</strong>`. Standard JSON escaping rules apply (escape `"` as `\"`).
+The input area has a fixed height, so all cards have the same shape. The "Create account" button does nothing.

@@ -9,11 +9,11 @@ availability:
 sourceId: Shipmail
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Shipmail connector syncs message analytics, mailboxes, domains, and suppressions into the PostHog Data warehouse, so you can analyze email activity alongside your product data.
+The Shipmail connector syncs message analytics, mailboxes, domains, suppressions, threads, newsletters, audience subscribers, and organization members into the PostHog Data warehouse, so you can analyze email activity alongside your product data.
 
 ## Prerequisites
 
@@ -23,6 +23,10 @@ You need a Shipmail account and an API key. Grant the key the read scopes for th
 - `mailboxes:read` for mailboxes
 - `domains:read` for domains
 - `suppressions:read` for suppressions
+- `threads:read` and `mailboxes:read` for threads
+- `newsletters:read` for newsletters
+- `audiences:read` for audience subscribers
+- `members:read` for organization members
 
 ## Adding a data source
 
@@ -36,7 +40,7 @@ When linking Shipmail, create an **API key** in your [Shipmail API settings](htt
 
 The `messages` table supports incremental syncs using `updated_at`. Incremental sync is recommended because it captures new messages and status updates without reloading the full table.
 
-The `mailboxes`, `domains`, and `suppressions` tables use full refresh because their API endpoints don't support filtering by update time.
+The `mailboxes`, `domains`, `suppressions`, `threads`, `newsletters`, `audience_subscribers`, and `members` tables use full refresh because their API endpoints don't support filtering by update time.
 
 ## Configuration
 
@@ -45,6 +49,10 @@ The `mailboxes`, `domains`, and `suppressions` tables use full refresh because t
 ## Supported tables
 
 The `messages` table contains an analytics-safe projection. It excludes message bodies, subjects, BCC addresses, headers, attachment filenames, and free-form metadata. The `contact_addresses` and `client_reference` fields can still contain personal data.
+
+The `threads` table requires both `threads:read` and `mailboxes:read` scopes because thread data is scoped to the mailboxes your API key can access.
+
+The `audience_subscribers` table contains subscriber email addresses and display names. The `members` table contains organization member email addresses.
 
 <SourceTables />
 

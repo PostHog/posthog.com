@@ -27,7 +27,7 @@ Next, go into your newly created `404s` folder and install `posthog-js`.
 
 ```bash
 cd 404s 
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In the `app` folder, create a `provider.js` file where we initialize PostHog on the client side.

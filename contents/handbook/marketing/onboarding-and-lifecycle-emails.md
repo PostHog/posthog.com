@@ -8,7 +8,7 @@ How PostHog's automated onboarding and lifecycle emails work in Customer.io, and
 
 > **Launching something, or want a second pair of eyes?** <TeamMember name="Joe Black" photo /> owns customer comms — loop him in early.
 
-This is about *marketing* onboarding (emails new users get automatically), not the Sales/CS [onboarding program](/handbook/onboarding/onboarding-program). For the underlying email setup — topics, unsubscribes, sending addresses — see [email marketing](/handbook/marketing/email-comms).
+This is about *marketing* onboarding (emails new users get automatically), not the Sales/CS [onboarding program](/handbook/scaled-customer-success/onboarding-program). For the underlying email setup — topics, unsubscribes, sending addresses — see [email marketing](/handbook/marketing/email-comms).
 
 ## How the system works
 

@@ -1,0 +1,39 @@
+.ui-rolling-reel {
+    animation-duration: var(--rolling-duration);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+.ui-rolling-viewport {
+    visibility: hidden;
+}
+
+.ui-rolling-text[data-active] .ui-rolling-reel {
+    animation-play-state: running;
+}
+
+.ui-rolling-text:hover .ui-rolling-reel,
+.ui-rolling-text:focus-within .ui-rolling-reel {
+    animation-play-state: paused;
+}
+
+.ui-rolling-text[data-active] .ui-rolling-viewport {
+    visibility: visible;
+}
+
+.ui-rolling-text[data-active] .ui-rolling-static {
+    visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-rolling-text .ui-rolling-reel {
+        animation: none;
+    }
+    .ui-rolling-text[data-active] .ui-rolling-viewport {
+        visibility: hidden;
+    }
+    .ui-rolling-text[data-active] .ui-rolling-static {
+        visibility: visible;
+    }
+}

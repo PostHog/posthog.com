@@ -55,7 +55,7 @@ We use PostHog to create and control our survey as well as monitor results. If y
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In `src/main.ts`, initialize PostHog using your project token and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).

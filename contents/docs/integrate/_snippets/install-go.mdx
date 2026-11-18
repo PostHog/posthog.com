@@ -1,5 +1,5 @@
 ```bash
-go get github.com/posthog/posthog-go
+go get github.com/posthog/posthog-go/v2
 ```
 
 ```go
@@ -7,15 +7,15 @@ package main
 
 import (
     "os"
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 func main() {
 	client, _ := posthog.NewWithConfig(
 		os.Getenv("POSTHOG_API_KEY"),
 		posthog.Config{
-			PersonalApiKey: "your personal API key", // Optional, but much more performant.  If this token is not supplied, then fetching feature flag values will be slower.
-			Endpoint:       "<ph_client_api_host>",
+			SecretKey: "your secret API key", // Optional, but much more performant. If this key is not supplied, then fetching feature flag values will be slower.
+			Endpoint:  "<ph_client_api_host>",
 		},
 	)
 	defer client.Close()
