@@ -177,6 +177,12 @@ ORDER BY calls DESC
 
 A high share of `inferred` means most clients do not supply context. Review `context.description` or improve `intentFallback`.
 
+## Recurring automated intents
+
+Scheduled agents and scripts often open many sessions with the same intent. Intent clustering lists an intent that opens 3 or more sessions under **Recurring automated intents**, not in the intent groups. This stops one busy automation from looking like a theme.
+
+An automation can word the same step a little differently on each run. Intent clustering merges these near-identical wordings into one entry and adds their session, call, and error counts. The entry shows the most common wording. The API also returns `variant_count`, the number of merged wordings, and `sample_variants`, up to five of those wordings, most common first. If intent text is redacted, `sample_variants` is empty. If the merge fails, each exact wording stays as a separate entry.
+
 ## Gotchas
 
 <CalloutBox icon="IconWarning" title="`get_more_tools` reports its source as `context_parameter`" type="caution">
