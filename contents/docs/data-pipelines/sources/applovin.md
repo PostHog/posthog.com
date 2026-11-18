@@ -28,7 +28,7 @@ Connect your AppLovin account to pull MAX mediation revenue, per-user ad revenue
 
 Find your **Report Key** in the AppLovin dashboard: click your account in the top right, then **Keys**.
 
-To sync campaigns, creative sets, and campaign operation logs, also add your **Campaign Management API key** (under **Keys**) and your **Account ID** (under **Go to settings**, the number after your account name).
+To sync campaigns, creative sets, assets, and campaign operation logs, also add your **Campaign Management API key** (under **Keys**) and your **Account ID** (under **Go to settings**, the number after your account name).
 
 AppLovin only serves the last 45 days of report data and the last 30 days of campaign operation logs, so anything older than that can't be backfilled.
 
@@ -46,7 +46,7 @@ Sync behavior varies by table:
 
 - **Report tables** (`max_ad_revenue`, `max_ad_unit_revenue`, `publisher_report`, `user_ad_revenue`) - Incremental sync on `day`. Report rows restate as metrics settle, so each sync merges recent data.
 - **Campaign operation logs** - Incremental sync on `operation_time`, covering the last 30 days.
-- **Campaigns** and **Creative sets** - Full refresh. The API has no server-side time filter for these tables, so each sync replaces the full table.
+- **Campaigns**, **Creative sets**, and **Assets** - Full refresh. The API has no server-side time filter for these tables, so each sync replaces the full table.
 
 ## Configuration
 
