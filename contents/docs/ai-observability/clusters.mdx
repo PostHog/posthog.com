@@ -45,7 +45,9 @@ You can turn clustering off from the **No clusters yet** page or the **Jobs** pa
 
 ## Viewing clusters
 
-Navigate to **AI Observability** > **Clusters** to see the overview.
+Navigate to **AI Observability** > **Clusters** to see the overview. Select a run to see how many items it analyzed and its date range.
+
+For trace and generation runs, use **Filter traces** or **Filter generations** to show only items with matching event, person, group, or cohort properties. You can also filter out test accounts. These filters change only what you see. They don't change how clusters are created or affect future runs.
 
 ### Managing clustering jobs
 
@@ -77,9 +79,14 @@ Click **Map** to show the interactive scatter plot beside the cluster table. Hov
 
 Nearby dots represent items with similar content. The axes don't represent metrics such as cost or latency.
 
+Use the controls above the plot to change how dots appear:
+
+- **Highlight** – Color dots by **Cluster**, or by **Errors** to find items that failed.
+- **Size by** – Size dots by **Cost** or **Latency**, or select **None** for equal sizes.
+
 | Feature | Description |
 |---------|-------------|
-| Dots | Each dot represents one trace, generation, or evaluation result, color-coded by cluster |
+| Dots | Each dot represents one trace, generation, or evaluation result, color-coded by cluster or by errors |
 | Centroids | Larger dots marking the center of each cluster |
 | Click dot | Open the item in a drawer without leaving the cluster view |
 | Click centroid | Navigate to the cluster detail page |
@@ -102,9 +109,10 @@ Items that don't fit any cluster appear under **Outliers**.
 
 Click a cluster title or centroid to open the detail page. Here you'll find:
 
-- **Cluster title, description, and item count** with the date range
-- **Focused scatter plot** showing only items in this cluster
-- **Paginated item list** with summaries
+- **Cluster title and description** with the date range
+- **Metrics** – Item count, share of all items in the run, average cost, average latency, and error rate (pass rate for evaluation clusters)
+- **Focused scatter plot** showing only items in this cluster, with the same **Highlight** and **Size by** controls
+- **Paginated item list** with summaries, which you can filter by properties for trace and generation clusters
 
 Click an item to inspect it in a drawer and move between items in the same cluster.
 
