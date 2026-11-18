@@ -125,6 +125,16 @@ PostHog::init(
 
 For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation). For distributed or stateless PHP applications, use `flag_definition_cache_provider` to share flag definitions across workers or requests. See [local evaluation in distributed environments](/docs/feature-flags/local-evaluation/distributed-environments?tab=PHP).
 
+### Remote config
+
+To read the payload of a [remote config flag](/docs/feature-flags/remote-config), call `PostHog::getRemoteConfigPayload()` with the flag key. It doesn't need a distinct ID, but it does need the secret API key that you initialized the SDK with. Use it instead of `$flags->getFlagPayload()` for remote config flags, because flag evaluation leaves out remote config flags with [encrypted payloads](/docs/feature-flags/remote-config#encrypted-payloads). Requires posthog-php 4.26.0+.
+
+```php
+$config = PostHog::getRemoteConfigPayload('landing-page-config');
+```
+
+The method returns the decoded payload. A personal API key returns encrypted payloads decrypted, and a project secret API key returns them redacted. If the SDK has no secret API key or the request fails, the method logs a warning and returns `null`. If the flag has no payload, it returns `null` without a warning. The method doesn't send a `$feature_flag_called` event.
+
 ### Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:

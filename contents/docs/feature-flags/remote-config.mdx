@@ -78,6 +78,11 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 // config is a JsonDocument
 ```
 
+```php
+$config = PostHog::getRemoteConfigPayload('landing-page-config');
+// $config is the decoded payload, or null if the payload can't be read
+```
+
 </MultiLanguage>
 
 > **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
