@@ -8672,6 +8672,10 @@ export const docsMenu = {
                     url: '/docs/logs/surfaces/api',
                     icon: 'IconBrackets',
                     color: 'seagreen',
+                    children: [
+                        { name: 'Overview', url: '/docs/logs/surfaces/api' },
+                        { name: 'Query logs with LogQL', url: '/docs/logs/surfaces/logql-api' },
+                    ],
                 },
                 {
                     name: 'Services and attributes',
