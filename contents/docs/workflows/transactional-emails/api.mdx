@@ -15,7 +15,7 @@ POST https://us.posthog.com/api/messaging/send/email/
 ```
 
 - **Host** – Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project** – The path has no project, because the key names it. PostHog uses the project that the key belongs to. The routes with a project ID in the path, such as `/api/projects/:project_id/messaging/send/email/`, still work.
+- **Project** – The path has no project, because the key names it. PostHog uses the project that the key belongs to.
 
 ### Request
 
@@ -165,8 +165,6 @@ $result = PostHog::emails()->send([
 </MultiLanguage>
 
 Each SDK page shows how to set up the client and handle errors.
-
-The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
 
 When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files).
 
