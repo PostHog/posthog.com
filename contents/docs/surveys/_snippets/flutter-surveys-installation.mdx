@@ -10,7 +10,7 @@ import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manu
 
 ## Step two: Install PosthogObserver
 
-For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys. See [Capturing screen views](/docs/libraries/flutter/reference#posthogobserver) for `navigatorObservers` and `go_router` examples.
+For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys. See [Capturing screen views](/docs/libraries/flutter#capturing-screen-views) for `navigatorObservers` and `go_router` examples.
 
 ## Configuration
 
@@ -64,6 +64,6 @@ config.surveys = false; // Disable surveys
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
 - If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#install-posthogobserver).
-  - Using [navigatorObservers](/docs/libraries/flutter/reference#posthogobserver)
-  - Using [go_router](/docs/libraries/flutter/reference#posthogobserver)
+  - Using [navigatorObservers](/docs/libraries/flutter#using-navigatorobservers)
+  - Using [go_router](/docs/libraries/flutter#using-go_router)
 - If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

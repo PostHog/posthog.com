@@ -83,7 +83,7 @@ Our basic set up is now complete. Build and run your app to see it in action.
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios/reference#install).
+First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods).
 
 To add the package dependency to your Xcode project, select `File > Add Package Dependency` and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
@@ -140,7 +140,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 
 To implement the feature flag, we: 
 
-1. Fetch the `my-cool-flag` flag using [`PostHogSDK.shared.isFeatureEnabled()`](/docs/libraries/ios/reference#is-feature-enabled).
+1. Fetch the `my-cool-flag` flag using [`PostHogSDK.shared.isFeatureEnabled()`](/docs/libraries/ios/usage#feature-flags).
 2. Change the background color of `FeatureScreenView` based on the value of the flag.
 
 To do this, update the code in `ContentView.swift` with the following:

@@ -271,7 +271,7 @@ To check your setup, build and run your app. Click your button a few times. You 
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [PostHog.capture()](/docs/libraries/android/reference#capture):
+To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [PostHog.capture()](/docs/libraries/android#capturing-events):
 
 ```kotlin file=HomeActivity.kt
 // rest of your imports
@@ -322,7 +322,7 @@ class HomeActivity : AppCompatActivity() {
 
 ### Identifying users
 
-Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`PostHog.identify()`](/docs/libraries/android/reference#identify) with a `distinctId` argument. The `distinctId` must be a unique identifier for the user – usually their email or database ID.
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`PostHog.identify()`](/docs/libraries/android#identifying-users) with a `distinctId` argument. The `distinctId` must be a unique identifier for the user – usually their email or database ID.
 
 To show you an example, update the code for the login button to the following:
 
@@ -354,7 +354,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`PostHog.reset()`](/docs/libraries/android/reference#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`PostHog.reset()`](/docs/libraries/android#reset-after-logout). This resets the PostHog ID and ensures that events are associated to the correct user.
 
 ```kotlin file=HomeActivity.kt
         logoutButton.setOnClickListener {
@@ -376,7 +376,7 @@ Lastly, when the user logs out, you should call [`PostHog.reset()`](/docs/librar
 
 To enable group analytics, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include them. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million events per month – so you won't be charged anything yet.
 
-To create groups in PostHog, simply include them in your code by calling [`PostHog.group()`](/docs/libraries/android/reference#group):
+To create groups in PostHog, simply include them in your code by calling [`PostHog.group()`](/docs/libraries/android#group-analytics):
 
 ```kotlin file=MainActivity.kt
 class MainActivity : AppCompatActivity() {

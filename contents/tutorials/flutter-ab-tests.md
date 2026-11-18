@@ -210,7 +210,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 
 The first part of setting up our A/B test in PostHog is setting up the goal metric. We'll use the number of clicks on the button on `FeatureScreenView` as our goal.
 
-To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `feature_button_clicked` when the button is clicked. To do this, update the code in `feature_screen_view.dart` to call [`Posthog().capture`](/docs/libraries/flutter/reference#capture) in `onPressed`:
+To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `feature_button_clicked` when the button is clicked. To do this, update the code in `feature_screen_view.dart` to call [`Posthog().capture`](/docs/libraries/flutter#capturing-events) in `onPressed`:
 
 ```dart file=feature_screen_view.dart
 import 'package:flutter/material.dart';
@@ -271,7 +271,7 @@ Once created, set the primary metric to a trend of `feature_button_clicked` and 
 
 The final step is to add the experiment code. We'll add code that does the following:
 
-1. Fetch the `my-cool-experiment` flag using [`await Posthog().getFeatureFlag('my-cool-experiment')`](/docs/libraries/flutter/reference#get-feature-flag).
+1. Fetch the `my-cool-experiment` flag using [`await Posthog().getFeatureFlag('my-cool-experiment')`](/docs/libraries/flutter#multivariate-feature-flags).
 2. Change the background color of `FeatureScreenView` based on the value of the flag (`control` or `test`).
 
 To do this, update the code in `main.dart` to the following:

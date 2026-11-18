@@ -191,31 +191,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/ios/usage:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/ios/configuration:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/android:ext(\\.md)?",
-            "destination": "/docs/libraries/android/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/flutter:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter/reference:ext?",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/references/posthog-node:ext(\\.md)?",
             "destination": "/docs/libraries/node/reference:ext?",
             "statusCode": 301
@@ -233,26 +208,6 @@
         {
             "source": "/docs/references/posthog-node-:version/:path*:ext(\\.md)?",
             "destination": "/docs/libraries/node/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-react-native:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-react-native/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-react-native-:version([^/]+?):ext(\\.md)?",
-            "destination": "/docs/libraries/react-native/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-react-native-:version/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native/reference:ext?",
             "statusCode": 301
         },
         {
@@ -279,6 +234,26 @@
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
+        },
+        {
+            "source": "/docs/references/posthog-react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
         },
         {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations.md",
@@ -1923,7 +1898,7 @@
         },
         {
             "source": "/docs/integrations/android-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/android/reference:ext?"
+            "destination": "/docs/libraries/android:ext?"
         },
         {
             "source": "/docs/integrations/community:ext(\\.md)?",
@@ -1939,7 +1914,7 @@
         },
         {
             "source": "/docs/integrations/flutter-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter/reference:ext?"
+            "destination": "/docs/libraries/flutter:ext?"
         },
         {
             "source": "/docs/integrations/gatsby-integration:ext(\\.md)?",
@@ -1951,7 +1926,7 @@
         },
         {
             "source": "/docs/integrations/ios-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?"
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
             "source": "/docs/integrations/javascript-integration:ext(\\.md)?",
@@ -2367,11 +2342,11 @@
         },
         {
             "source": "/docs/integrate/client/ios/index:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?"
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
             "source": "/docs/integrate/client/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?"
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
             "source": "/docs/integrate/client/js/index:ext(\\.md)?",
@@ -3496,7 +3471,7 @@
         },
         {
             "source": "/docs/integrate/android:ext(\\.md)?",
-            "destination": "/docs/libraries/android/reference:ext?"
+            "destination": "/docs/libraries/android:ext?"
         },
         {
             "source": "/docs/integrate/api:ext(\\.md)?",
@@ -3512,7 +3487,7 @@
         },
         {
             "source": "/docs/integrate/flutter:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter/reference:ext?"
+            "destination": "/docs/libraries/flutter:ext?"
         },
         {
             "source": "/docs/integrate/go:ext(\\.md)?",
@@ -3520,7 +3495,7 @@
         },
         {
             "source": "/docs/integrate/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?"
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
             "source": "/docs/integrate/java:ext(\\.md)?",
@@ -3862,7 +3837,7 @@
         },
         {
             "source": "/docs/sdks/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios/reference:ext?"
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
             "source": "/signup/cloud/enterprise",

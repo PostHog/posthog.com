@@ -48,9 +48,6 @@ const REFERENCE_SDKS: LibraryNode[] = [
     referenceSdk('python', 'Python', { ...server, tracing: true }),
     referenceSdk('go', 'Go', server),
     referenceSdk('rust', 'Rust', server),
-    referenceSdk('ios', 'iOS', client),
-    referenceSdk('android', 'Android', client),
-    referenceSdk('flutter', 'Flutter', { ...client, autoCapture: false }),
 ]
 
 export const LibraryComparison = () => {

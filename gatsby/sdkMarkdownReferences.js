@@ -14,9 +14,6 @@ const PUBLISHED_SDK_REFERENCES = [
     'posthog-go',
     'posthog-rust',
     'posthog-node',
-    'posthog-ios',
-    'posthog-android',
-    'posthog-flutter',
     'posthog-react-native',
 ]
 

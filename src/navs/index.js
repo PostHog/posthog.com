@@ -2926,25 +2926,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Android',
-                            url: '/docs/libraries/android/reference',
+                            url: '/docs/libraries/android',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
-                            children: [
-                                {
-                                    name: '4.x.x',
-                                    url: '/docs/libraries/android/4.x.x',
-                                },
-                                {
-                                    name: '3.x.x',
-                                    url: '/docs/libraries/android/3.x.x',
-                                },
-                                {
-                                    name: 'Migration guide',
-                                    url: '/docs/libraries/android/migration',
-                                },
-                            ],
                         },
                         {
                             name: 'Capacitor',
@@ -2959,21 +2945,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flutter',
-                            url: '/docs/libraries/flutter/reference',
-                            children: [
-                                {
-                                    name: '6.x.x',
-                                    url: '/docs/libraries/flutter/6.x.x',
-                                },
-                                {
-                                    name: '5.x.x',
-                                    url: '/docs/libraries/flutter/5.x.x',
-                                },
-                                {
-                                    name: 'Migration guide',
-                                    url: '/docs/libraries/flutter/migration',
-                                },
-                            ],
+                            url: '/docs/libraries/flutter',
                         },
                         {
                             name: 'Go',
@@ -3003,23 +2975,23 @@ export const docsMenu = {
                         },
                         {
                             name: 'iOS',
-                            url: '/docs/libraries/ios/reference',
+                            url: '/docs/libraries/ios',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: '4.x.x',
-                                    url: '/docs/libraries/ios/4.x.x',
+                                    name: 'Installation',
+                                    url: '/docs/libraries/ios',
                                 },
                                 {
-                                    name: '3.x.x',
-                                    url: '/docs/libraries/ios/3.x.x',
+                                    name: 'Usage',
+                                    url: '/docs/libraries/ios/usage',
                                 },
                                 {
-                                    name: 'Migration guide',
-                                    url: '/docs/libraries/ios/migration',
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/ios/configuration',
                                 },
                             ],
                         },
