@@ -8547,9 +8547,9 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Import opt-out lists from Customer.io',
-                    url: '/docs/workflows/import-customerio-optouts',
-                    icon: 'IconUpload',
+                    name: 'Migrate from Resend',
+                    url: '/docs/workflows/migrate-from-resend',
+                    icon: 'IconArrowRight',
                     color: 'blue',
                 },
                 {

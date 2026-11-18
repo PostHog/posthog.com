@@ -1,0 +1,66 @@
+---
+title: Migrate from Resend
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconInfo" title="The Resend importer is rolling out" type="fyi">
+
+The Resend importer is rolling out, so it might not be in your project yet. If you don't see Resend as an option, the import isn't turned on for your project.
+
+</CalloutBox>
+
+PostHog copies your Resend data in one background import: your suppression list, unsubscribes, topics, templates, and automations. You then set up DNS, review what the import flagged, and move your sending over one email at a time. Imported automations are draft workflows, and drafts never send until you enable them.
+
+## What moves
+
+| From Resend | In PostHog | What you do |
+| --- | --- | --- |
+| Suppression list | [Suppression list](/docs/workflows/opt-outs#the-suppression-list) | Read the summary |
+| Unsubscribed contacts | Opted out of all marketing email | Nothing |
+| Public topics and topic choices | Marketing [message categories](/docs/workflows/opt-outs#message-categories) and opt-outs | Check topics that only send to people who opted in |
+| Templates | [Library](/docs/workflows/library) templates, keyed by their alias | Fix what the notes mention, then send a test |
+| Automations | Draft workflows | Send the trigger events to PostHog, review, and enable |
+| Domains | A list of domains and which ones can already send from PostHog | Add each domain and publish new DNS records |
+
+These don't move:
+
+- **Contacts.** Contacts never become people in PostHog, and the import reads only who opted out. A segment that an automation adds people to becomes an empty static cohort.
+- **Audience membership and broadcasts.** Rebuild an audience with [person properties and cohorts](/docs/workflows/audiences), and send a [broadcast](/docs/workflows/broadcasts) from PostHog.
+- **Private topics.** They stay in Resend.
+- **API keys, webhooks, send history, and stats.** They stay in Resend, so rebuild what you need.
+
+## Run the import
+
+Resend has no read-only API keys, so the import needs a key with full access. Create one at [resend.com/api-keys](https://resend.com/api-keys), just for this import. PostHog only reads from your account, and deletes the key when the import ends.
+
+1. In PostHog, go to **Workflows > Opt-outs** and click **Import from another tool**.
+2. Choose Resend, and paste your API key.
+3. Choose what to import, and click **Start import**.
+
+The import runs in the background, and PostHog shows progress for each step. A step that hits an error retries by itself.
+
+The topic preferences step reads contacts one at a time, about 7,000 an hour, so a large list can take a day. An import stops after 24 hours. The next import from Resend continues from where it stopped, but only with the same key, so keep the key until every step has finished.
+
+If an import fails, PostHog deletes the key too. A rejected key needs a new key. For any other error, run the import again.
+
+### Import with your agent
+
+With the [PostHog MCP](/docs/workflows/surfaces/mcp) connected, ask your agent to move your email from Resend to PostHog. The `migrating-from-email-providers` [agent skill](/docs/workflows/skills) confirms the project with you, asks you to create the API key and treats it as a secret, calls `provider-imports-providers` to check that Resend is available, and starts the import with `provider-imports-create`. It follows the import with `provider-imports-get`, then goes through each template and workflow that has notes.
+
+### Import again
+
+Importing again adds what's missing and doesn't duplicate anything. It never undoes a change you made in PostHog: an address you removed from the suppression list, a person who opted back in, and an edited or deleted category or template all stay as they are. So a template or automation that you imported before doesn't pick up changes from Resend. To import one again, change its alias in Resend, or copy the change by hand.
+
+## Spam complaints
+
+Resend blocks all email to an address with a spam complaint, and to an address your team added to the suppression list. PostHog blocks only marketing email to these addresses, and still sends them transactional email. Hard bounces block all email in both tools.
+
+## Switch your sending to PostHog
+
+1. **Domains.** PostHog signs mail with its own keys, so each domain needs new DNS records, even if it already sends through Resend. Add each domain on the [**Channels** tab](https://app.posthog.com/workflows/channels) and publish its records. See [verify your sending domain](/docs/workflows/verify-domain). Keep your Resend records in place, because both tools can sign mail for one domain while you move. If Resend already uses the `feedback` subdomain that PostHog uses for its MAIL FROM records, choose another MAIL FROM subdomain in PostHog, because two services can't share one MX record. A note in the import says when this applies.
+2. **Templates.** Open each template that has notes, fix what they mention, and send yourself a test. Resend fills `FIRST_NAME` and other contact fields itself, but PostHog doesn't, so your app must pass them.
+3. **Code.** Make a template [transactional](/docs/workflows/transactional-emails), and change your app to send it through PostHog. The template key is the Resend alias, or `resend-<id>` when the template has no alias. Start with a low-risk email, and move the rest one at a time. PostHog refuses a send to a hard-bounced address with `recipient_suppressed`, so don't retry that error.
+4. **Automations.** Each draft notes which events your app must also send to PostHog. Test the draft, then enable it. Turn off the automation in Resend at the same time, so nobody gets the same email twice.
+5. **Volume.** Mailbox providers slow down mail from a sender whose volume jumps. If you send a lot of email, move it over several days. New projects start with a low limit on marketing email, so check your [sending allowance](/docs/workflows/sending-reputation) first.
+6. **Clean up.** Once nothing sends through Resend, remove its DNS records and delete the API key you created for the import.
