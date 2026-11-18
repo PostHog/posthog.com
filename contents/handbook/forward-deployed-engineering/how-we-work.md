@@ -37,7 +37,7 @@ For billable engagements, we invoice half the fee when the order form is signed,
 
 Engagements with a total fee under 10,000 USD are the exception: we invoice the entire fee upfront, on the same Net 30 terms.
 
-Engagements paid with prepaid credits follow the same rules as above, but we deduct credits instead of sending an invoice.
+For engagements paid with prepaid credits, we deduct the entire fee from the customer's credits upfront.
 
 ## Principles
 
