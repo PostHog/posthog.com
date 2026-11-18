@@ -78,6 +78,12 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 // config is a JsonDocument
 ```
 
+```java
+Object config = posthog.getRemoteConfigPayload("landing-page-config");
+// config is parsed from JSON. It is a Map, List, String, Number, Boolean, or null.
+// It is null when the request fails or the flag has no payload.
+```
+
 </MultiLanguage>
 
 > **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
