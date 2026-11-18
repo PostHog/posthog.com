@@ -108,33 +108,30 @@ Sessions with no identity are sent with person processing off, so anonymous sess
 
 ## Differences between SDKs
 
-The TypeScript and Python SDKs send everything above. The others differ:
+[What each SDK captures](/docs/mcp-analytics/installation#what-each-sdk-captures) lists which events each SDK sends. The TypeScript and Python SDKs send every property above. The other SDKs differ in these ways:
 
 **Go**
 
-- Sends no `$mcp_tools_list`, `$mcp_initialize`, or resource events.
-- A call to an unregistered tool sends `$mcp_unknown_tool`, and a `2026-07-28` tool that asks the client for input sends `$mcp_input_required`. Both carry `$mcp_tool_name`. `$mcp_input_required` also has `$mcp_input_request_methods`.
+- `$mcp_unknown_tool` and `$mcp_input_required` carry `$mcp_tool_name`. `$mcp_input_required` also has `$mcp_input_request_methods`, the request methods without their contents.
 - `$mcp_unknown_tool`, `$mcp_input_required`, and `$mcp_missing_capability` don't carry `$mcp_source`.
 - Error types are package-qualified, such as `fs.PathError`.
 - Reads the client name only from `initialize`, so it's missing on stateless `2025-11-25` servers.
 - On stateless HTTP, a request with no conversation handle gets a new session ID.
 - `$exception` has no stack trace.
 - `$set` needs an explicit `DistinctID`.
-- Doesn't send `$mcp_interface`, `$mcp_server_build`, `$mcp_input_keys`, or `$mcp_input_aliases_used`.
+- Doesn't send `$mcp_interface`.
 
 **Rust**
 
-- Sends no resource events. Sends `$mcp_unknown_tool` and `$mcp_input_required` like Go.
 - Only `$mcp_tool_call` carries `$mcp_source`.
 - `$exception` has no stack trace.
 - `$set` is on every event, including `$exception`.
-- Doesn't send `$mcp_server_build`, `$mcp_input_keys`, or `$mcp_input_aliases_used`.
 
 **Ruby**
 
 - Sends a separate `$identify` event when the identity changes, instead of putting it on every event.
 - The only SDK that sends `$mcp_prompts_list` and `$mcp_prompt_get`.
-- Doesn't send `$mcp_interface`, `$mcp_server_build`, `$mcp_input_keys`, or `$mcp_input_aliases_used`.
+- Doesn't send `$mcp_interface`.
 
 ## Constants exported from the package
 
