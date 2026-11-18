@@ -318,4 +318,6 @@ For sync code, pass a `requests.Session` with a test adapter to `Emails(session=
 
 On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
 
+From version 8.0.2, the client sends emails, uploads files, and gets statuses through the `/api/messaging/` paths. These need PostHog Cloud, or a self-hosted PostHog from 2026-11-18 or later. An older self-hosted PostHog answers them with a `404`.
+
 When the client evaluates a flag locally, it still loads flag definitions from `host` with the secret key. If that host is a proxy that must not see the key, don't evaluate flags locally with this client.
