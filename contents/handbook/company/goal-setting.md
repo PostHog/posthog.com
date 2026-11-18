@@ -13,7 +13,7 @@ We plan objectives every quarter. The <SmallTeam slug="blitzscale" /> set the di
 3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Blitzscale team for review at a minimum.
 4. Goal PRs need to be merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
 
-In terms of accountability, <TeamMember name="Scott Lewis" photo /> will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
+In terms of accountability, <TeamMember name="Judy Opperwall" photo /> will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but she will not schedule the meetings for you. 
 
 > If you prep properly (see below), planning meetings should take 1 hour max. The meeting is not the end of the process - you may still have some back and forth on the PR, but the meeting should give the team lead enough info to write a good PR. 
 
@@ -68,9 +68,9 @@ What themes can we distill from the above HOGS list? What are categories of thin
 
 ## New goals (15 minutes - do as a team)
 
-This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped.
+This is an example - feel free to adapt as you need. **Each objective must have a single named owner, and so must each thing you'll ship.** Write the name next to the item. Other people can help, but only one person is accountable. Do not leave a goal with no name or with a team name - shared goals usually result in less getting shipped.
 
-Objective 1: PostHog in the EU
+Objective 1: PostHog in the EU (Owner Name)
 Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.
 What we'll ship:
   - This thing (Name)
@@ -86,7 +86,7 @@ When a team has set their quarterly goals it is the responsibility of the [team 
 
 You can easily see what goals teams have set on the [WIP](/wip) page, which pulls all goals from the respective team pages. 
 
-Teams can choose to document their goals publicly in a number of formats, but below is a useful template for getting started. Individuals may also choose to create planning issues to track their work in greater detail.
+Teams can choose to document their goals publicly in a number of formats, but below is a useful template for getting started. Always include the owner's name with the goal, as the template shows. Individuals may also choose to create planning issues to track their work in greater detail.
 
 ```
 <details>
@@ -101,6 +101,7 @@ Teams can choose to document their goals publicly in a number of formats, but be
 
 ## Good goal setting
 
+- Each objective has one named owner - the person who is accountable for it, even if the whole team helps
 - As few objectives as possible
 - Motivation - explains why the objective is set
 - Things we'll ship that show if we're en route to achieving an objective

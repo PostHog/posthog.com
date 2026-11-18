@@ -23,7 +23,7 @@ There are two types of feature trailer, depending on how much time you have and 
 
 ### 1. Message the video team
 
-Drop a message in [Team YouTube on Slack](https://posthog.slack.com/archives/C01R387F6H5) explaining what you want to create and why. There's no official request process – just start the conversation.
+Drop a message in <PrivateLink url="https://posthog.slack.com/archives/C01R387F6H5">Team YouTube on Slack</PrivateLink> explaining what you want to create and why. There's no official request process – just start the conversation.
 
 > **Important:** Videos typically take two weeks to make, but a minimum of four weeks is necessary if you want to hit a specific date. This is because we need to fit things around existing video work, and leave time to agree a creative direction before production can start.
 
@@ -31,21 +31,29 @@ Drop a message in [Team YouTube on Slack](https://posthog.slack.com/archives/C01
 
 The team will advise on what else is in progress and whether your timeline is realistic. If it's a yes, you'll move on to a storyboard.
 
-### 3. Create a storyboard
+### 3. Agree on the example use case
 
-As the requester, you'll put together a short storyboard of what you want the video to cover. This is especially useful for 30–90 second feature trailers.
+Product marketer should lead this and collaborate with product manager / product team. A good example use case:
 
-Use [this storyboard template](https://docs.google.com/document/d/1ONoytWmzDFMTN61KhVdtLCVA6_0SYuUf_eSmkj33mhU/edit?tab=t.3a3la71j8gql) as a starting point – copy it and adapt it for your video.
+- Comes from our own use of the product, with something real you can put on screen, like a PR, a report, or a session recording.
+- Shows what only this product can do. If another PostHog product could have surfaced the same thing, the example isn't making the case.
+- Is recognizable to someone outside PostHog. Viewers should see their own problem in it without knowing how we work.
+
+### 4. Create a storyboard
+
+As the requester, you'll put together a short storyboard of what you want the video to cover, built around the example you agreed on. This is especially useful for 30–90 second feature trailers.
+
+Use <PrivateLink url="https://docs.google.com/document/d/1ONoytWmzDFMTN61KhVdtLCVA6_0SYuUf_eSmkj33mhU/edit?tab=t.3a3la71j8gql">this storyboard template</PrivateLink> as a starting point – copy it and adapt it for your video.
 
 Also note any existing assets for the product – webpage, blog post, social post, artwork, custom hoggies, etc – and provide URLs if you have them. The team can reuse these rather than starting from scratch.
 
 > **The storyboard doesn't need to be polished.** It doesn't need a creative vision or production-quality assets. All it needs to do is convey the narrative beats you want the video to hit. For example, the storyboard for [PostHog self-driving](/self-driving) laid out: show the before and after, show a user solving the problem, ship the fix, then reveal that it was actually fixed autonomously using PostHog self-driving. Each beat just needs a note and a screenshot or rough screen recording.
 
-### 4. Review the storyboard together
+### 5. Review the storyboard together
 
 You'll meet with Jordo and Andy to talk through the storyboard and make any changes. Once everyone's happy with it, Jordo will turn it into a scratch edit – a rough moving version of the storyboard with a draft voiceover and script. It'll have plenty of missing pieces, but it gives you something to react to.
 
-### 5. Iterate on the script and visuals
+### 6. Iterate on the script and visuals
 
 From here, you'll go back and forth refining the script and wording, then refining the visuals.
 

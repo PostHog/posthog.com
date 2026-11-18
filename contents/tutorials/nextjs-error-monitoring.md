@@ -75,7 +75,7 @@ Once saved, run `npm run dev` to see your new app in action. Click either of the
 To start, in [your PostHog project settings under error tracking](https://us.posthog.com/settings/environment-error-tracking), toggle on **Enable exception autocapture**. Once done, go back to your app and install both `posthog-js` and `posthog-node`:
 
 ```bash
-npm i posthog-js posthog-node
+npm i posthog-js@1 posthog-node@6
 ```
 
 ### Frontend setup
@@ -173,7 +173,7 @@ posthog.captureException(error, additionalProperties)
 ```
 
 ```node
-posthog.captureException(e, 'user_distinct_id', additionalProperties)
+posthog.captureException(e, { distinctId: 'user_distinct_id', properties: additionalProperties })
 ```
 
 </MultiLanguage>
@@ -269,7 +269,10 @@ export const onRequestError = async (err, request, context) => {
     const sessionId = request.headers.get('X-POSTHOG-SESSION-ID');
     const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID');
 
-    await posthog.captureException(err, distinctId || undefined, { $session_id: sessionId })
+    await posthog.captureException(err, {
+      distinctId: distinctId || undefined,
+      properties: { $session_id: sessionId },
+    })
   }
 }
 ```
@@ -294,7 +297,7 @@ Once you've set up error capture in your app, you can head to the [error trackin
   classes="rounded"
 />
 
-You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/product-analytics/sql).
+You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/data-warehouse/sql).
 
 ## 5. Uploading source maps
 

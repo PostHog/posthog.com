@@ -5,6 +5,7 @@ author:
     - james-hawkins
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/interview_thumb_ef4a0f0be9.jpg
 featuredImageType: full
+ogImage: generated
 featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
     - Guides

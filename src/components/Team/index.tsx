@@ -209,12 +209,14 @@ const JobCard = ({ job }: { job: any }) => {
                                     Open role
                                 </span>
                             </div>
-                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1">
+                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1 line-clamp-4 @2xs:line-clamp-none">
                                 {job.fields.title}
                             </h3>
                             <div className="text-black/80 text-sm space-y-1">
                                 {locationField?.value && <p className="m-0">📍 {locationField.value}</p>}
-                                {timezoneField?.value && <p className="m-0">🕒 {timezoneField.value}</p>}
+                                {timezoneField?.value && (
+                                    <p className="m-0 text-xs @2xs:text-sm">🕒 {timezoneField.value}</p>
+                                )}
                             </div>
                         </div>
                         <div className="mt-auto">
@@ -787,7 +789,7 @@ export default function Team({
 
             {objectives && (
                 <>
-                    <h2>Goals</h2>
+                    <h2 id="goals">Goals</h2>
                     <div className="article-content team-page-content">
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
                             {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - team objectives from CMS, not user input */}

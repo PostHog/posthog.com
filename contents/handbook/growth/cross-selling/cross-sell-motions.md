@@ -16,7 +16,7 @@ Described here are some of the current goals and tactics to improve effective cr
 
 The main objective is to get existing PostHog customers to adopt more of the platform. We firmly believe that adopting more products leads to a better experience and higher satisfaction with PostHog. 
 
-For a TAM today, a quantitative goal is to move from an average 4.8 products adopted currently to 6 products adopted for AM managed accounts over the next two quarters. Accounts may be promoted to CSM coverage and continue with the adoption plan.
+For a TAM today, a quantitative goal is to move from an average 4.8 products adopted currently to 6 products adopted for TAM managed accounts over the next two quarters. Accounts may be promoted to CSM coverage and continue with the adoption plan.
 
 AEs and CSMs goals might be polar opposites. Where AEs may want wide exposure, it's also important to establish the right time for product adoption, rather than overselling something that may not apply to the initial implementation.  
 
@@ -141,7 +141,7 @@ Here are some other known examples that aren't necessarily 0 to 1 linear adoptio
 - Data warehouse has continued to receive special attention since the launch of PostHog's related products. 
   - AI Observability + data warehouse - enrich AI Observability with data from other sources like Stripe or Supabase
   - Customer analytics + data warehouse - natural fit between connecting up stripe and enriching data further
-  - Read a hot topic on [churn in high growth customers](https://posthog.slack.com/docs/TSS5W8YQZ/F0A0FGBNCNL) for specific advice
+  - Read a hot topic on <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0A0FGBNCNL">churn in high growth customers</PrivateLink> for specific advice
 - Feature flag + mobile replay - use for sampling/roll out that is not natively supported by mobile replay
 - Experiments / feature flags + error tracking - insight into errors for new/beta features, and seeing the impact of those errors on conversion rates is valuable
 - Feature flags + AI Observability - ability to granularly segment features based on cost/engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend
@@ -223,7 +223,7 @@ What alerts would be helpful to have that would indicate good cross sell opportu
 
 ## **Discovery through conversation**
 
-Effective [discovery](https://posthog.com/handbook/cs-and-onboarding/getting-to-know-your-customers) focuses on understanding customer challenges rather than pushing products.
+Effective [discovery](https://posthog.com/handbook/customer-success/getting-started-with-customers#3-your-first-call) focuses on understanding customer challenges rather than pushing products.
 
 ### Example questions to ask
 

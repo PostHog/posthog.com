@@ -2,7 +2,7 @@
 title: How CloudPeek cut debugging time by 10x with PostHog Logs and Error Tracking
 customer: CloudPeek
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/cloudpeek_0b047d9eab.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/cloudpeek_1920x1080_5580a17db2.png
 date: 2026-03-10
 ---
 
@@ -77,6 +77,6 @@ The team has also found that watching Logs live during testing has changed how t
 
 ## Why it all works: one tool, one place
 
-CloudPeek's philosophy is that observability shouldn't require jumping between a dozen different dashboards. Having [Logs](/docs/logs), [Error tracking](/error-tracking), and [AI Observability](/llm-analytics) in a single platform means the team spends their time investigating problems rather than context-switching between tools.
+CloudPeek's philosophy is that observability shouldn't require jumping between a dozen different dashboards. Having [Logs](/docs/logs), [Error tracking](/error-tracking), and [AI Observability](/ai-observability) in a single platform means the team spends their time investigating problems rather than context-switching between tools.
 
 _"We don't want to pivot between 10 different windows, 10 different tools to find a problem. We want to be in one place only."_

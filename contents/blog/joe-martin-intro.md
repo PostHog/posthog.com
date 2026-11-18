@@ -1,6 +1,6 @@
 ---
 date: 2021-08-06
-title: Introducing Joe Martin - Our first Product Marketer
+title: Introducing Joe Black - Our first Product Marketer
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -10,10 +10,11 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/joe-martin-intro.png
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 ---
 
-Before joining PostHog, <TeamMember name="Joe Martin" photo /> had never owned a Mac.
+Before joining PostHog, <TeamMember name="Joe Black" photo /> had never owned a Mac.
 
 The former tech and games journalist previously did everything on PC, but joining PostHog’s [Apple-dominated](https://posthog.com/handbook/people/spending-money#laptop) culture came with a few… necessary adjustments.
 

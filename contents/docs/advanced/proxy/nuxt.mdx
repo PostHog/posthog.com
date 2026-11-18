@@ -63,11 +63,15 @@ export default defineEventHandler(async (event) => {
 
   // Forward headers, excluding ones that shouldn't be proxied
   const headers = new Headers()
-  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding']
+  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding', 'cookie']
 
   const requestHeaders = getRequestHeaders(event)
   for (const [key, value] of Object.entries(requestHeaders)) {
-    if (value && !excludedHeaders.includes(key.toLowerCase())) {
+    const name = key.toLowerCase()
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    const isNonBearerAuth = name === 'authorization' && !/^Bearer ph[csx]_/.test(value ?? '')
+    if (value && !excludedHeaders.includes(name) && !isNonBearerAuth) {
       headers.set(key, value)
     }
   }
@@ -121,11 +125,15 @@ export default defineEventHandler(async (event) => {
 
   // Forward headers, excluding ones that shouldn't be proxied
   const headers = new Headers()
-  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding']
+  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding', 'cookie']
 
   const requestHeaders = getRequestHeaders(event)
   for (const [key, value] of Object.entries(requestHeaders)) {
-    if (value && !excludedHeaders.includes(key.toLowerCase())) {
+    const name = key.toLowerCase()
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    const isNonBearerAuth = name === 'authorization' && !/^Bearer ph[csx]_/.test(value ?? '')
+    if (value && !excludedHeaders.includes(name) && !isNonBearerAuth) {
       headers.set(key, value)
     }
   }
@@ -172,7 +180,7 @@ Here's what the code does:
 
 - Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Preserves query parameters (like `?compression=gzip-js`) required for compressed requests
-- Forwards relevant headers while excluding ones that shouldn't be proxied
+- Forwards relevant headers while excluding ones that shouldn't be proxied, such as cookies and any `Authorization` header that isn't a PostHog key (`Bearer phc_`, `phs_` or `phx_`). Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, so the handler forwards that header. Keys created before these prefixes need their exact `Bearer <key>` value allowed too.
 - Reads the request body as binary to preserve gzip-compressed data
 - Forwards the client's IP address for accurate geolocation
 - Returns the response as binary data to handle all content types correctly

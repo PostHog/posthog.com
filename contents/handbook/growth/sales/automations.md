@@ -6,7 +6,7 @@ showTitle: true
 
 # Automations
 
-As [Vitally](https://posthog.vitally-eu.io/) connects all of our Product, Stripe, Zendesk and HubSpot data together it's 
+As <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink> connects all of our Product, Stripe, Zendesk and HubSpot data together it's
 the best place to trigger automations via Playbooks.  These Playbooks can call a webhook after Accounts or Users meet certain
 criteria.  This allows us to call out to [Zapier](https://zapier.com/) to use their inbuilt actions to update Zendesk, HubSpot, Slack and more.
   We use Zapier extensively throughout the company for automation.  There is a shared Zapier login in 1Password.

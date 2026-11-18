@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -20,7 +21,7 @@ So, what have we been doing with the money?
 
 Since last time - AWS marketplace deployment, docusaurus integration, much better testing, a shiny new user sessions view, and see a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy. Almost.
 
-If you're self hosting and desire these features - [update your PostHog](/docs/runbook/upgrading-posthog).
+If you're self hosting and desire these features - [update your PostHog](/docs/self-host).
 
 ## Release notes
 

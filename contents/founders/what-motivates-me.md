@@ -6,8 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
+  - Being CEO
 crosspost:
   - Blog
 ---
@@ -28,7 +30,7 @@ It is _a lot_ of fun getting things right, and this motivated me early in the co
 
 * Having a board that is focused on the long run.
 
-* [Hiring people that we are _excited_ to work with](../handbook/company/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
+* [Hiring people that we are _excited_ to work with](/handbook/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
 
 * Paying everyone according to [a system](../handbook/people/compensation) versus random bargaining. This cuts down churn and politics.
 
@@ -48,7 +50,7 @@ Overnight (after [our Hacker News launch](https://news.ycombinator.com/item?id=2
 
 So, we had a lot of hype. But we hadn't focused on revenue yet.
 
-Last summer, we got a lot of requests for a paid product (extra features or people wanting us to host it for them). At the same time, lots of investors were interested _and_ my [daughter was very ill](ceo-diary-3). Since I had to look after her, we felt we had to choose _either_ revenue _or_ fundraising.
+Last summer, we got a lot of requests for a paid product (extra features or people wanting us to host it for them). At the same time, lots of investors were interested _and_ my [daughter was very ill](/blog/ceo-diary-3). Since I had to look after her, we felt we had to choose _either_ revenue _or_ fundraising.
 
 We picked revenue.
 

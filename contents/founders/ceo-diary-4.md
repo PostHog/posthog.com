@@ -6,9 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Marketing
+  - Brand and marketing
 crosspost:
   - Blog
 ---

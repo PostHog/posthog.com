@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   PostHog 1.34.0 focuses on supporting collaboration. New features include a new
   default homepage for projects, smart names for all insights, an entire Data
@@ -30,7 +31,7 @@ PostHog 1.34.0 focuses on supporting collaboration and helping you to find and s
 
 ## PostHog 1.34.0 release notes
 
-> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/runbook/upgrading-posthog).
+> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host).
 
 **Release highlights:**
 

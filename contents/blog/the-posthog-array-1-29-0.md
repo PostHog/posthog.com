@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-28-0.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   Fully revamped Paths experience enables you to better explore what actions
   your users take. New features include multivariate feature flags, private
@@ -25,7 +26,7 @@ PostHog 1.29.0 includes a fully revamped Paths experience which enables you to b
 
 ## PostHog 1.29.0 release notes
 
-> For a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> For a better experience and new features, remember to [update your PostHog instance](/docs/self-host).
 
 **Release highlights:**
 

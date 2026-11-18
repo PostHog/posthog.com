@@ -15,6 +15,8 @@ tags:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
+ogImage: generated
+
 ---
 
 Today, we're releasing a major new feature as a public beta: the ability to directly query your PostHog data [using SQL](/blog/sql-for-analytics). We call this [HogQL](/docs/product-analytics/hogql) because... hedgehogs love SQL, probably?
@@ -67,7 +69,7 @@ _And_ you can use HogQL to aggregate results in a funnel, too. Is there anything
 
 ### Custom SQL insights
 
-Of course, the most powerful way to leverage HogQL within PostHog is via the new [SQL insight type](/docs/product-analytics/sql). This gives you direct SQL access to your data in PostHog, so you can create custom table insights that answer complex questions.
+Of course, the most powerful way to leverage HogQL within PostHog is via the new [SQL insight type](/docs/data-warehouse/sql). This gives you direct SQL access to your data in PostHog, so you can create custom table insights that answer complex questions.
 
 For example, while you can use a retention insight to discover which **features** keep users coming back for more, you could build an SQL insight to find which **users** keep coming back, and identify outliers. 
 

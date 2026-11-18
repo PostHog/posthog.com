@@ -7,7 +7,7 @@ showStepsToc: true
 import { Steps, Step } from 'components/Docs/Steps'
 import MetricsNextSteps from './_snippets/metrics-next-steps.mdx'
 
-> **Note:** Metrics is in alpha. Setup details may change before general availability.
+> **Note:** Metrics is in open alpha. Any team can turn it on — open [Metrics](https://app.posthog.com/metrics) and select **Enable metrics** in the onboarding view. Setup details may change before general availability.
 
 The [posthog-python](/docs/libraries/python) SDK includes the `posthog.metrics` API, so you can record metrics with the same client you use for events and feature flags.
 
@@ -16,10 +16,10 @@ The [posthog-python](/docs/libraries/python) SDK includes the `posthog.metrics` 
 <Step title="Install posthog-python" badge="required">
 
 ```bash
-pip install posthog
+pip install "posthog>=8,<9"
 ```
 
-Metrics requires an up-to-date SDK version, so upgrade if you're on an older release.
+Metrics requires `posthog` 7.23.0 or later, so upgrade if you're on an older release.
 
 </Step>
 

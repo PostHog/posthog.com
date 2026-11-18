@@ -113,7 +113,11 @@ function AppsPage({ location }) {
                             image: thumbnail?.publicURL,
                         })
                     ),
-                    { label: <>Build your own &rarr;</>, url: '/docs/cdp/build', image: '/images/builder-hog.png' },
+                    {
+                        label: <>Build your own &rarr;</>,
+                        url: '/docs/data-pipelines/destinations',
+                        image: '/images/builder-hog.png',
+                    },
                 ]}
             />
 

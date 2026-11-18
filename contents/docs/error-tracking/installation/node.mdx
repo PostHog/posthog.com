@@ -1,5 +1,5 @@
 ---
-title: Node.js error tracking installation
+title: Node.js Error Tracking installation
 platformLogo: nodejs
 showStepsToc: true
 ---
@@ -11,5 +11,9 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 -->
 
 import { ErrorTrackingNodeJSInstallationWrapper } from './_snippets/et-installation-wrapper.tsx'
+
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Node.js" flagCommand={{ flag: 'error-tracking-new-wizard', command: 'error-tracking' }} />
 
 <ErrorTrackingNodeJSInstallationWrapper /> 

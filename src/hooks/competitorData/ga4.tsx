@@ -80,7 +80,7 @@ export const ga4 = {
                 breakdown_by_device_and_browser: true,
                 breakdown_by_geoip: true,
                 conversions: true,
-                cookieless_tracking: true,
+                cookieless_tracking: false,
                 custom_channel_types: true,
                 entry_exit_paths: true,
                 first_party_cookies: true,

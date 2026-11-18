@@ -8,9 +8,10 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import Input from 'components/OSForm/input'
 import Textarea from 'components/OSForm/textarea'
 import OSSelect from 'components/OSForm/select'
+import CampusSpotlightCarousel from 'components/Students/CampusSpotlightCarousel'
 import usePostHog from 'hooks/usePostHog'
-import { HedgehogPartyHog, HedgehogCodingGroup } from '@posthog/brand/hoggies'
-import { IconCheck, IconConfetti, IconGraduationCap } from '@posthog/icons'
+import { HedgehogSurfer, HedgehogCodingGroup } from '@posthog/brand/hoggies'
+import { IconCheck, IconConfetti, IconGraduationCap, IconQuote } from '@posthog/icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -19,14 +20,14 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-// Eligible schools for the dropdown. Selecting one (anything but OTHER) personalizes the page copy,
-// swapping the generic "campus" for the school's name.
+// todo: move to a feature flag
 const OTHER = 'Other'
 const SCHOOLS = [
     'Stanford',
     'UC Berkeley',
     'Caltech',
     'UCLA',
+    'USC',
     'UC San Diego',
     'UC Davis',
     'UC Irvine',
@@ -163,6 +164,7 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
         const form = formRef.current
         const nameInput = form?.elements.namedItem('name') as HTMLInputElement | null
         const emailInput = form?.elements.namedItem('email') as HTMLInputElement | null
+        const linkedinInput = form?.elements.namedItem('linkedin') as HTMLInputElement | null
         const pitchInput = form?.elements.namedItem('pitch') as HTMLTextAreaElement | null
 
         // The school dropdown isn't a native form control, so validate it by hand.
@@ -172,10 +174,20 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
         }
 
         if (emailInput && emailInput.value) {
+            // Also write identity to the person profile: the site runs person_profiles
+            // 'identified_only', so without this anonymous applicants have no
+            // person.properties.email for downstream automations to key on.
+            posthog?.setPersonProperties?.({
+                email: emailInput.value,
+                name: nameInput?.value,
+                school,
+            })
             posthog?.capture('student_mixer_application', {
                 name: nameInput?.value,
                 email: emailInput.value,
                 school,
+                // Optional field, so send the key only when the applicant filled it in.
+                linkedin: linkedinInput?.value || undefined,
                 pitch: pitchInput?.value,
             })
             form?.reset()
@@ -211,6 +223,14 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
                             }}
                             touched={schoolTouched}
                             error={schoolTouched && !school ? 'Please pick your school' : undefined}
+                        />
+                        <Input
+                            label="Your LinkedIn profile"
+                            name="linkedin"
+                            type="text"
+                            direction="column"
+                            description="Optional"
+                            placeholder="linkedin.com/in/your-profile"
                         />
                         <Textarea
                             label={`Tell us about ${campusTarget} and the event you'd run`}
@@ -270,7 +290,7 @@ export default function StudentProgram(): JSX.Element {
 
     const steps = [
         // Eligibility scope – stays generic even when a school is selected.
-        "You're a Bay Area or a University of California student",
+        "You're a Bay Area or a California student",
         `You or your student org apply to host an event`,
         'We pair you with a PostHog team member and schedule your event',
         'We cover food and merch, you bring the builders',
@@ -331,14 +351,14 @@ export default function StudentProgram(): JSX.Element {
                                         Bring PostHog to {campusTarget}
                                     </CallToAction>
                                     <span className="text-xs text-secondary italic">
-                                        * Currently Bay Area universities and UC campuses across California
+                                        * Currently Bay Area universities and campuses across California
                                     </span>
                                 </div>
                             </div>
 
                             <div className="w-full flex justify-center self-center @2xl/reader-content:w-auto @2xl/reader-content:flex-[0_0_240px] @4xl/reader-content:flex-[0_0_300px]">
-                                <HedgehogPartyHog
-                                    title="A hedgehog at a party"
+                                <HedgehogSurfer
+                                    title="A hedgehog surfing"
                                     className="w-full max-w-[240px] @2xl/reader-content:max-w-none"
                                 />
                             </div>
@@ -379,6 +399,31 @@ export default function StudentProgram(): JSX.Element {
                             </div>
                         ))}
                     </div>
+
+                    <h3>
+                        Campus <Highlight>spotlight</Highlight>
+                    </h3>
+                    <p>See what past PostHog for Students events have looked like on campus.</p>
+                    <div className="not-prose my-6">
+                        <CampusSpotlightCarousel />
+                    </div>
+                    <figure className="not-prose mb-8 max-w-2xl">
+                        <IconQuote className="mb-1 size-6 text-secondary/40" />
+                        <blockquote className="m-0 border-0 p-0 text-lg font-light italic leading-relaxed text-secondary @md/reader-content:text-xl">
+                            Crazy to think that a cold email led to a university event at UC Davis. It feels very much
+                            like PostHog showed up for student builders.
+                        </blockquote>
+                        <figcaption className="mt-3 text-sm text-secondary/70">
+                            <Link
+                                to="https://www.linkedin.com/in/samarv/"
+                                externalNoIcon
+                                className="font-normal text-red/90 hover:text-red dark:text-yellow/90 dark:hover:text-yellow"
+                            >
+                                Samar Varma
+                            </Link>
+                            , UC Davis campus ambassador
+                        </figcaption>
+                    </figure>
 
                     {/* Startup School callout – bordered accent card, matching the /startups CTA blocks. */}
                     <div

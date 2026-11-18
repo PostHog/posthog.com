@@ -1,0 +1,68 @@
+---
+title: Detect a PostHog task environment
+sidebar: Docs
+showTitle: true
+---
+
+Use these variables when your scripts or agent instructions need to detect a PostHog task environment. This guide covers agent tasks in a cloud sandbox, across all PostHog products and entry points.
+
+The variables belong to shared [task infrastructure](/docs/tasks). They do not identify which product started the task, such as Slack, Desktop, or Self-driving.
+
+## Environment variables
+
+PostHog supplies both variables to the agent environment for a cloud task run.
+
+| Variable | Value | Purpose |
+|---|---|---|
+| `POSTHOG_TASK_RUN_ID` | The UUID of the current task run | Identifies the run. Check for a nonempty value to detect PostHog task context. |
+| `IS_SANDBOX` | The string `1` | Marks the sandbox environment. Check for this exact value to detect the sandbox marker. |
+
+Use `POSTHOG_TASK_RUN_ID` for behavior that needs PostHog task context, such as linking a result to the current run. A task run is one execution of a task, so the run ID is not the task ID.
+
+Use `IS_SANDBOX` for behavior that needs a sandbox. Do not use it alone to identify PostHog: other tools can set the same variable.
+
+Do not set these variables yourself to make local code appear to run in a PostHog sandbox.
+
+## Check from a shell script
+
+Require both a nonempty run ID and the sandbox marker when your code needs a PostHog task in a sandbox:
+
+```bash
+if [ -n "${POSTHOG_TASK_RUN_ID:-}" ] && [ "${IS_SANDBOX:-}" = "1" ]; then
+    printf "%s\n" "PostHog task context and the sandbox marker are present."
+else
+    printf "%s\n" "PostHog task context or the sandbox marker is absent."
+fi
+```
+
+The `:-` expansion handles unset and empty variables. This check also works when your script uses `set -u`.
+
+## Check from Node.js
+
+Keep the two checks separate so your code can choose the behavior it needs:
+
+```javascript
+const taskRunId = process.env.POSTHOG_TASK_RUN_ID
+const isPostHogTask = Boolean(taskRunId)
+const isSandbox = process.env.IS_SANDBOX === "1"
+const isPostHogSandboxTask = isPostHogTask && isSandbox
+
+console.log({ isPostHogTask, isSandbox, isPostHogSandboxTask })
+```
+
+Environment variables are strings. A value such as `"0"` or `"false"` is still a nonempty string. Compare `IS_SANDBOX` with `"1"` instead of converting it to a boolean.
+
+## Interpret the result
+
+| `POSTHOG_TASK_RUN_ID` | `IS_SANDBOX` | Result |
+|---|---|---|
+| Nonempty | `1` | Both PostHog task context and the sandbox marker are present. |
+| Nonempty | Unset or another value | Task context is present, but the sandbox check does not pass. |
+| Unset or empty | `1` | The sandbox marker is present, but no PostHog task context is available. |
+| Unset or empty | Unset or another value | Neither check passes. |
+
+If a process loses these variables, the checks cannot detect its original task environment. Preserve the variables when you start child processes that need task context.
+
+These variables are environment markers, not credentials. Do not use them to authorize API requests or bypass permission checks. Do not print the full environment when you debug these checks: other variables can contain credentials.
+
+To work with the current run through the API, see the [Task-runs API reference](/docs/api/task-runs).

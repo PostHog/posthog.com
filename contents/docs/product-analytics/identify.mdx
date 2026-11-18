@@ -91,7 +91,7 @@ Many frameworks wrap the base SDKs, so the way you access PostHog to call `ident
 
 You pass that same `distinct_id` into your server-side code and use it when capturing backend events. It's your job to find a way for the frontend and backend IDs to agree, whether through the user's auth session, or by passing the ID as a part of your API requests.
 
-Backend SDKs have no concept of an anonymous session, so there's nothing to merge. Instead, pass the same `distinct_id` you use on the frontend when capturing events. Some SDKs expose an `identify` method, while others set [person properties](/docs/data/user-properties) with `$set` on a captured event.
+Backend SDKs have no concept of an anonymous session, so there's nothing to merge. Instead, pass the same `distinct_id` you use on the frontend when capturing events. Some SDKs expose an `identify` method, while others set [person properties](/docs/product-analytics/person-properties) with `$set` on a captured event.
 
 <CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
 
@@ -191,7 +191,7 @@ client.capture(event);
 
 </MultiLanguage>
 
-Some frameworks attach the `distinct_id` for you, often via [contexts](/docs/libraries/python#contexts). The examples below are copied directly from each framework's setup guide.
+Some frameworks attach the `distinct_id` for you, often via [contexts](/docs/libraries/python/reference#posthognew_context). The examples below are copied directly from each framework's setup guide.
 
 <Tab.Group tabs={['Python', 'Node', 'Elixir']}>
 
@@ -340,14 +340,7 @@ posthog.alias("frontend_id", "backend_id");
 ```
 
 ```rust
-use posthog_rs::Event;
-
-// The Rust SDK doesn't currently expose an alias helper.
-// See /docs/libraries/rust#alias for more details.
-let mut event = Event::new("$create_alias", "frontend_id");
-event.insert_prop("alias", "backend_id").unwrap();
-
-client.capture(event);
+client.alias("frontend_id", "backend_id");
 ```
 
 ```bash
@@ -428,7 +421,7 @@ posthog.alias("user2", "user1");
 
 </MultiLanguage>
 
-You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app. Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not, i.e. whether you can use their ID as an `alias_id` or not.
+You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/product-analytics/person-properties#how-to-view-and-edit-a-person-profile-and-properties) in the PostHog app. Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not, i.e. whether you can use their ID as an `alias_id` or not.
 
 <ProductScreenshot
 imageLight = {mergeRestrictionsLight}
@@ -536,7 +529,7 @@ When calling either of these with invalid inputs (such as in the examples descri
 2. Merging users will be refused and an ingestion warning will be logged (see [ingestion warnings](/manual/data-management#ingestion-warnings) for more details).
 3. The event will be only be tied to the user associated with `distinct_id`.
 
-PostHog also has built-in protections to stop the most common distinct ID mistakes. See the FAQ at the end of this page for more details.
+PostHog also has built-in protections to stop the most common distinct ID mistakes. On [capture v1](/docs/api/capture-v1#choosing-a-distinct-id), events with a placeholder distinct ID, such as the strings below, are stored without a person profile, and events whose distinct ID is empty or only whitespace are dropped. The capture v1 SDKs treat such an ID as missing, so they never send one. See the FAQ at the end of this page for more details.
 
 - We do not allow identifying users with empty space strings of any length, e.g. `' '`, `'       '`, etc.
 - We do not allow identifying users with the following strings (case insensitive):
@@ -598,7 +591,7 @@ PostHogSDK.shared.identify("distinct_id_two",
 
 #### How are properties managed when merging users?
 
-When a `User B` is merged into another `User A`, all the properties of the `User B` are added to `User A`, following the [property conflict rule](#person-properties) above. For example:
+When a `User B` is merged into another `User A`, all the properties of the `User B` are added to `User A`, following the [property conflict rule](#setting-person-properties) above. For example:
 
 ```node
 /* Assume User A has the properties:
@@ -635,7 +628,7 @@ client.capture({
 
 #### How are properties managed when identifying anonymous users?
 
-When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`, following the [property conflict rule](#person-properties) above. For example:
+When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`, following the [property conflict rule](#setting-person-properties) above. For example:
 
 ```js-web
 /* Assume existing User A has the properties:

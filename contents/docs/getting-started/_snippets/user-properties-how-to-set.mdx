@@ -96,7 +96,7 @@ posthog.capture("distinct_id", "$set", new HashMap<String, Object>() {
 
 ```rust
 use std::collections::HashMap;
-use posthog_rs::Event;
+use posthog::Event;
 
 let mut event = Event::new("$set", "distinct_id");
 
@@ -127,7 +127,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 </MultiLanguage>
 
-You can also set person properties when you call the [`identify`](/docs/data/identify) method:
+You can also set person properties when you call the [`identify`](/docs/product-analytics/identify) method:
 
 import IdentifyFrontendCode from "../../_snippets/identify-frontend-code.mdx"
 

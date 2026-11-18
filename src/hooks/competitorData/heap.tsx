@@ -5,7 +5,7 @@ export const heap = {
     key: 'heap',
     assets: {
         icon: '/images/competitors/heap.svg',
-        comparisonArticle: '/blog/posthog-vs-heap',
+        comparisonArticle: '/compare/posthog-vs-heap',
     },
     products: {
         product_analytics: {
@@ -255,6 +255,9 @@ export const heap = {
             available: false,
         },
         workflows: {
+            available: false,
+        },
+        ai_observability: {
             available: false,
         },
     },

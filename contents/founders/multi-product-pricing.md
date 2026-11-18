@@ -6,10 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
 tags:
-  - Revenue
-  - Product
   - Founders
+  - Sales and pricing
 crosspost:
   - Blog
 ---
@@ -36,7 +36,7 @@ We put a small team on it, who quickly iterated with customers and improved the 
 
 We spent the first year and a half of PostHog prioritizing our open-source project – we wanted to build an inbound sales model, so we could double down on product rather than investing in cold calling. Leverage, baby. This meant we'd need a great free product and a reasonably large community. After 18 months, we were ready to focus on our first paid product – product analytics.
 
-Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience – a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
+Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience – a core part of our product. We '[nailed funnels](/blog/new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
 
 This journey has repeated itself with session replay. 
 

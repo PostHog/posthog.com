@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    IconBolt,
     IconClockRewind,
     IconConfetti,
     IconCursor,
@@ -148,23 +147,6 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                     ...siteSettings,
                     skinMode: siteSettings.skinMode === 'classic' ? 'modern' : 'classic',
                 }),
-        },
-        {
-            id: 'reduce-transparency',
-            label: siteSettings.reduceTransparency ? 'Turn off reduce transparency' : 'Turn on reduce transparency',
-            icon: <IconBolt />,
-            keywords: ['transparency', 'blur', 'frosted', 'visual', 'separation', 'accessibility', 'heater'],
-            keepOpen: true,
-            perform: () => {
-                const next = !siteSettings.reduceTransparency
-                updateSiteSettings({ ...siteSettings, reduceTransparency: next })
-                if (next) {
-                    toast(
-                        <IconBolt className="size-5 inline-block mr-1" />,
-                        'Reduce transparency on - solid window backgrounds'
-                    )
-                }
-            },
         },
         {
             id: 'scrollbars',

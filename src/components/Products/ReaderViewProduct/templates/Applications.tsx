@@ -1,6 +1,7 @@
 import React from 'react'
 import TabbedCarousel from 'components/TabbedCarousel'
 import CarouselSlide from '../CarouselSlide'
+import { SECTION_H2 } from '../helpers'
 import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '../types'
 
 interface ApplicationsProps extends SectionComponentProps {
@@ -12,8 +13,7 @@ const Applications = ({ id, productData, slides = [] }: ApplicationsProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">How do I use it?</h2>
-            <p>There are a few ways to explore {productData.name}.</p>
+            <h2 className={SECTION_H2}>How do I use it?</h2>
             <TabbedCarousel
                 tabs={slides.map((s) => ({
                     value: s.slug,
@@ -22,11 +22,13 @@ const Applications = ({ id, productData, slides = [] }: ApplicationsProps) => {
                     color: s.color,
                     activeText: s.activeText,
                     progressBar: s.progressBar,
+                    triggerClassName:
+                        'border border-b-0 border-transparent data-[state=active]:border-primary data-[state=active]:-mb-px',
                     content: <CarouselSlide slide={s} productData={productData} />,
                 }))}
                 slideDuration={6000}
                 showActiveBg={false}
-                slideClassName="!min-h-0 !p-0 !rounded"
+                slideClassName="!min-h-0 !p-0 overflow-hidden border border-primary [&>div]:!shadow-none [&>div]:!rounded-none"
                 className="mt-4 mb-12"
             />
         </section>

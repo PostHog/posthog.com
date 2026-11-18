@@ -2,7 +2,7 @@
 title: How ElevenLabs uses every tool PostHog has to launch new features
 customer: ElevenLabs
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/eleven_labs_b5853d00b7.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_1920x1080_788e31d01e.png
 date: 2024-03-25
 ---
 

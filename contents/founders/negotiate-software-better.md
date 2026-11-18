@@ -4,9 +4,10 @@ title: How software salespeople will try to screw you (and how to fight back)
 author:
   - charles-cook
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/saleshog_9f74052914.png
+ogImage: generated
 tags:
-  - Culture
-  - People
+  - Founders
+  - Running the company
 crosspost:
   - Blog
   - Newsletter      

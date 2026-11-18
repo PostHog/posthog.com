@@ -1,14 +1,108 @@
-## Q3 2026 objectives
+## Q4 2026 objectives
 
 These are the primary goals the team is prioritizing this quarter.
 
 <details>
+<summary>Make agents first-class citizens for onboarding and implementation – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Rafael Audibert" photo /></summary>
+
+**Note:** Rafael will drive this goal while Matt is on parental leave.
+
+**Motivation:** As an agent, it is hard to sign up, to implement PostHog correctly, and to know what to do with it. The wizard exists and it's amazing at installing PostHog. It is, however, hard to use the wizard as an agent because it's a TUI application. Also, agents don't usually use the wizard as their default way to implement PostHog. They prefer to implement it "from memory" rather than running the wizard or checking our docs.
+
+**What we'll ship:**
+- A production-ready headless CLI wizard that works with any user's coding agent
+- Our skills exposed through a CLI, plus a way to make agents aware of it
+- A provisioning API and authorization flows for agent-first onboarding via the wizard, which might include headless signups and a first-party OAuth app for the wizard
+- Extensions to the wizard platform that the headless and cloud wizards need
+- Broader evals of agents attempting to install PostHog when exposed to different scenarios (with/without Wizard/MCP/CLI/docs)
+
+**We'll know we're successful when:**
+- Agents can sign up, provision a project, and implement PostHog without a human opening a browser
+- Agents reach for the wizard or our skills instead of implementing PostHog "from memory"
+- We can compare how well agents implement PostHog depending on the scenario they are exposed to
+
+**Synergy:**
+- <SmallTeam slug="wizard-and-docs" /> owns the underlying wizard platform and agent library, and the TUI wizard. We build the headless wizard on top of it and contribute platform extensions back
+- <SmallTeam slug="wizard-and-docs" /> is building an official benchmark for agents using our docs. Our evals cover MCP, CLI, and SDKs, and both teams will try Gauge if the pricing makes sense
+- <SmallTeam slug="context-and-mcp" /> is choosing the MCP architecture. The CLI and the MCP should expose the same skills and give agents the same experience
+- <SmallTeam slug="client-libraries" /> is rebuilding the SDKs around shared specifications. New SDKs (`@posthog/browser` v2, `@posthog/next` v1, and others) should be easy for agents to implement, and our evals should catch regressions in how agents use them
+
+</details>
+
+<details>
+<summary>Improve the human journey through their time using PostHog – <TeamMember name="Fernando Gomes" photo /></summary>
+
+**Motivation:** As a human, it is hard to know how to get set up and what you can do with PostHog. We have solved some of our onboarding issues and also our complicated sidebar, BUT PostHog is still rooted in a world where we portray our product in the same way we organize our teams internally. This is not how customers want to use the product. They want it to be organized the way **their own product** is organized instead.
+
+**What we'll ship:**
+- User-centric, task-oriented onboarding for the parts of your product you care about, instead of setting up each PostHog tool one by one
+- A cloud in-app wizard for point implementations, such as adding a new product
+- Handoffs between the wizard and the PostHog app, so users can start a task in one and finish it in the other. For example, the wizard detects data warehouse sources and users complete source creation in the app
+- A review of the onboarding email flow for the current stage of PostHog
+- A more careful onboarding flow for each new product you add
+
+**We'll know we're successful when:**
+- More new users reach their first meaningful use of PostHog, and they get there faster
+- Users add a new product from the app with the cloud wizard instead of writing the code themselves
+- Tasks that start in the wizard finish in the app (and the other way around) without users getting lost
+
+**Synergy:**
+- <SmallTeam slug="wizard-and-docs" /> and Growth both own the handoffs between the wizard and the PostHog app
+- <SmallTeam slug="self-driving" /> wants a UI-first onboarding and runs the CLI wizard in a cloud sandbox. We share the cloud wizard infrastructure and the handoff from PostHog onboarding to Self-Driving onboarding
+- <SmallTeam slug="platform-ux" /> is working to make PostHog web simple again. Together, we want to introduce spaces: customers split PostHog into the parts of their own product (e.g. checkout, onboarding, mobile app), and each space brings together the insights, replays, flags, and errors for that part. Spaces should become the default way to view PostHog, instead of the per-product split that mirrors how our teams are organized
+- <SmallTeam slug="error-tracking" />, <SmallTeam slug="web-analytics" />, <SmallTeam slug="feature-flags" />, and <SmallTeam slug="experiments" /> all want wizard-guided setup for their products. The cloud wizard should make that easy for them
+
+</details>
+
+<details>
+<summary>Cross-sell PostHog products via agents – <TeamMember name="Rafael Audibert" photo /></summary>
+
+**Motivation:** After a codebase uses one product, how do we make sure agents suggest and implement the other PostHog products that go with it? We have a lot of products, and we have found different ways to cross-sell them to customers: in-app exposition, email campaigns, social media awareness posts, etc. Some of these methods, specifically the ones that happen in our UI, don't translate to a world where the main way customers interact with PostHog is via an agent. This goal is more abstract than the others, so we must try many things to see what sticks.
+
+**What we'll ship:**
+- New product and tool suggestions in MCP and CLI tool call responses
+- Incremental skill surfacing that guides users to new products
+- Cross-sell and incremental upgrade opportunities in the cloud in-app wizard
+- Wizard signals (product and tech stack metadata from user codebases) used to enrich customer profiles and create opportunities for activation, cross-sell, and upgrades in the PostHog app
+- More docs that agents can index
+
+**We'll know we're successful when:**
+- Agents suggest a second PostHog product without being asked, and users accept the suggestion
+- Codebase signals from the wizard turn into in-app cross-sell and upgrade opportunities that convert
+
+**Synergy:**
+- <SmallTeam slug="wizard-and-docs" /> is building a Jev / Decisions API wizard feature that tags user codebases with product and tech stack metadata. We use those signals downstream
+- <SmallTeam slug="wizard-and-docs" /> is turning docs into a skill library. Incremental skill surfacing builds on it
+- <SmallTeam slug="context-and-mcp" /> owns the MCP, where tool call responses can suggest new products
+- <SmallTeam slug="self-driving" /> reports already find problems in a customer's product. They are a natural place to suggest the PostHog product that solves them
+- <SmallTeam slug="surfaces" /> runs agent sessions in PostHog Desktop, which is another place where agents can suggest new products
+- <SmallTeam slug="feature-flags" /> is shipping a "flag by default" skill that the wizard installs. It's a good model for how other products can cross-sell through agents
+
+</details>
+
+### Side-quest
+
+<details>
+<summary>Increase product-depth for humans</summary>
+
+**Motivation:** After a user starts to use a product, how do we deepen their knowledge about that product so that the user uses it more? Each product team should own this for its own product, but not all of them do it well.
+
+**What we'll ship:**
+- A platform that makes it easy for product teams to deepen usage of their own product
+
+</details>
+
+## Q3 2026 recap
+
+These were the primary goals the team prioritized this quarter.
+
+<details>
 <summary>Redesign the authentication and onboarding flows – <TeamMember name="Fernando Gomes" photo /></summary>
 
-- Self-driving
-- Slack/GitHub integrations
-- Run the enrichment model in the background while the slower parts of onboarding are happening
-- Help guide people towards PostHog Code or not, new AI-first UI or not, send directly to Sales team or not
+- Built new self-driving optimized onboarding
+- Redesigned login/signup flow around the new website design
+- Handoff from PostHog onboarding to self-driving onboarding
+- Wizard cloud infrastructure
 
 </details>
 
@@ -17,8 +111,6 @@ These are the primary goals the team is prioritizing this quarter.
 
 - Establish baseline of Code activation
 - Monitor impact on existing revenue streams
-- PostHog Code onboarding
-- Implement all of the tracking that's probably lacking on their end
 
 </details>
 
@@ -27,62 +119,14 @@ These are the primary goals the team is prioritizing this quarter.
 
 - Model what kind of customer someone is to guide them towards the right onboarding process – <TeamMember name="Mine Kansu" photo />
 - Avoid keeping stale enriched data
-- Marketing should also be able to base their decisions off of this data
+- Replaced Clay with in-house enrichment model
+- Built "AI-pilledness" pipeline in the new system
 
 </details>
-
-## Q2 2026 recap
-
-**North star:** 20% of sign ups should happen outside posthog.com/signup
-
-These were the primary goals the team prioritized this quarter.
-
-<details>
-<summary>Make agentic sign ups first-citizen of PostHog – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /></summary>
-
-- **Rationale:** Agents are increasingly the ones picking and setting up tools. If our sign-up assumes a human clicking through a dashboard, we miss the fastest-growing top of funnel.
-- **Things we could do:** Agentic onboarding by default — headless onboarding, Wizard, Stripe projects, AI-first flows. Wizard should be able to create orgs + projects on its own with no UI clicks. Expand the pattern beyond Stripe (done) to Vercel, Lovable, Supabase, and Replit.
-- **We'll know we're successful when:** An agent can bring a PostHog org and project online through any of our partner surfaces without a human in the loop.
-
-</details>
-
-<details>
-<summary>Allow anyone to integrate/provision an org + project in PostHog – <TeamMember name="Rafael Audibert" photo /> <TeamMember name="Matt Brooker" photo /></summary>
-
-- **Rationale:** Every partner, every embedded platform, and every agentic flow needs a programmatic way to spin up a PostHog org or project. One-off integrations don't scale — a generic path does.
-- **Things we could do:** Lean on the soon-to-come Partnerships Wrangler. Market it as either PostHog Marketplace or PostHog as a platform. Review what Agentic Provisioning needs to become generic (just an API). Write docs and settle on how to do it. Stand up the right application process — probably Support Hero-driven.
-- **We'll know we're successful when:** A partner or agent can provision an org + project through a single public path, with no custom work from us.
-
-</details>
-
-<details>
-<summary>Activation rate across all onboarding experiences should be 60%+ – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo /></summary>
-
-- **Rationale:** A single numerical bar pulls every onboarding experience towards the same outcome. Different channels — warm, lukewarm, cold, frozen — need different treatment, and a unified target forces us to treat them as one system.
-- **Things we could do:** Settle the activation metric alongside PMs — we're currently on "soft activation" per-product; global activation is still TBD. Implement channel-specific onboarding: website (warm), Wizard (lukewarm), agentic provisioning (cold), Lovable/Replit auto-adding Analytics (frozen). Explicitly de-scope PostHog Code activation for now — Signals + PostHog Code team will handle that.
-- **We'll know we're successful when:** Measured activation rate across every onboarding surface is 60% or higher.
-
-</details>
-
-<details>
-<summary>Shape the external interface for Signals – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo /></summary>
-
-- **Rationale:** Signals is still early and its external surface isn't settled. Getting the shape right now — before partners depend on it — avoids painful contract breaks later. Partner vibecoding app builders are the most credible early validators.
-- **Things we could do:** Write a spec for the external interface and validate with partner vibecoding app builders. We believe these partners want Signals, but Signals may not be ready to expose yet — first check feasibility. Once that's done, stop and reflect: how do we make this the next big thing after MCP?
-- **We'll know we're successful when:** We have a validated spec and a clear read on whether Signals can be the next big thing after MCP.
-
-</details>
-
-### Stretch goals
-
-- Launching VSCode extension – <TeamMember name="Fernando Gomes" photo />
-- Launching MCP Analytics alongside Lucas/Surveys team – <TeamMember name="Rafael Audibert" photo />
-- With the wizard getting context from posthog, foster cross-selling - TBD
-- Something fun? – <TeamMember name="Matt Brooker" photo />
 
 ## Next quarters
 
 Non-exhaustive list of things we want to work on eventually:
-- One-click migration away from competitors
+- One-click/wizard-based migration away from competitors (<SmallTeam slug="forward-deployed-engineering" /> owns the migration playbook and wants to put it in the wizard)
 - Demo environment for customers to try out PostHog with existing data (and relatable to their own business domain)
 - Improved ingestion URL (dynamic, harder to block/guess)

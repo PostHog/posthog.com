@@ -1,0 +1,19 @@
+owner: product-analytics
+tags: [instrumentation, javascript, groups]
+status: active
+
+checks:
+    - id: group-by-project
+      description: >-
+          Baseline: can an agent set up group analytics from a one-line request? The
+          agent gets no docs, so docs-read shows which pages it finds on its own.
+      codebase_to_test: web-vite
+      prompt: >-
+          Set up PostHog in the app in {folder}/ and group events by project.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              group-call: >-
+                  src/pages/project-detail.js, or code it calls when a project is
+                  opened, calls posthog.group('project', <project id>, { name: <project
+                  name> }), using the project's real id. Cite the file and line(s).

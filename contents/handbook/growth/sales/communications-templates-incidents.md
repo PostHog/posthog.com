@@ -139,15 +139,15 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 | **Regional Backup (Americas / EMEA / APAC)** | Covers accounts when owners are offline. Takes handoff from CMOC, sends comms, and ensures follow-up continuity. |
 | **Engineering Incident Lead** | Owns technical response and provides updates to CMOC for accurate messaging. |
 
-> All coordination between CMOC and Account Owners should happen in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) transparently so that everyone who manages customers is in the loop.
+> All coordination between CMOC and Account Owners should happen in <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink> transparently so that everyone who manages customers is in the loop.
 
 ### **Workflow**
 
-> **SEV 0 override:** For SEV 0 incidents, the CMOC skips steps 4–5 and sends the initial message directly via Slack to all affected customer channels. Account owners are notified in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) simultaneously, and take over individual follow-up threads once online. The CMOC continues to own broadcast updates until the incident is resolved or downgraded.
+> **SEV 0 override:** For SEV 0 incidents, the CMOC skips steps 4–5 and sends the initial message directly via Slack to all affected customer channels. Account owners are notified in <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink> simultaneously, and take over individual follow-up threads once online. The CMOC continues to own broadcast updates until the incident is resolved or downgraded.
 1. **Incident declared** (Engineering).
 2. **CMOC activated**, notified of impact.
 3. **Assess customer impact**, this <PrivateLink url="https://us.posthog.com/project/2/insights/EBiXOD91">insight</PrivateLink> (or this <PrivateLink url="https://docs.google.com/spreadsheets/d/1EyV55L0vWTfD4W02j5A3Vx3YZYPUODmQQC1toFPcKXU/edit?gid=1396499197#gid=1396499197">Google Sheet</PrivateLink> as a backup) will help you understand which customers are using which components in which cloud environment.
-4. **CMOC drafts the initial message**, shares with the Account Owners in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
+4. **CMOC drafts the initial message**, shares with the Account Owners in <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink>
 5. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
 6. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).
 7. **Regional handoffs** coordinated by CMOC.

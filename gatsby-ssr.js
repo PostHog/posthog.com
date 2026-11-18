@@ -10,25 +10,23 @@ const React = require('react')
 import { initKea, wrapElement } from './kea'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
-import KoreanWrapper from './src/components/Korean/KoreanWrapper'
 import { Provider } from './src/context/App'
 import { Provider as ToastProvider } from './src/context/Toast'
-
-const isKoreanPath = (pathname) => pathname === '/ko' || pathname?.startsWith('/ko/')
+import { Toast as LibraryToast } from './src/components/UI/Toast'
 
 export const wrapRootElement = ({ element }) => (
     <ToastProvider>
-        <UserProvider>{wrapElement({ element })}</UserProvider>
+        <LibraryToast.SiteProvider>
+            <UserProvider>{wrapElement({ element })}</UserProvider>
+        </LibraryToast.SiteProvider>
     </ToastProvider>
 )
 
 export const wrapPageElement = ({ element, props: { location } }) => {
     initKea(true, location)
-    const WrapperComponent = isKoreanPath(location?.pathname) ? KoreanWrapper : Wrapper
-
     return (
         <Provider element={element} location={location}>
-            <WrapperComponent />
+            <Wrapper />
         </Provider>
     )
 }

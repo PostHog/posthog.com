@@ -17,16 +17,16 @@ export default function SQL() {
         return <div>Product not found</div>
     }
 
-    const { name, overview, features, Icon, color, screenshots } = sqlProduct
+    const { name, overview, features, Icon, color, screenshots, seo } = sqlProduct
 
     return (
         <>
             <SEO
-                title={overview?.title || 'SQL (HogQL)'}
-                description={overview?.description || 'Query data directly with HogQL'}
+                title={seo?.title || `${name} - PostHog`}
+                description={seo?.description || overview?.description}
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
+            <ReaderView leftSidebar={<LeftSidebarContent />} title={name} hideTitle>
                 <div className="space-y-8">
                     <div>
                         <div className="flex gap-2 items-center">

@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
+ogImage: generated
 tags:
   - Product analytics
   - Product engineers
@@ -76,7 +77,7 @@ So those are the fundamentals of the pirate metrics framework, but why should yo
 
 So you're sold on the AARRR framework, how do you get started?
 
-It all starts with how you track user behavior in your product. While you can use Google Analytics to track some pirate metrics, it's best to use a product analytics tool like PostHog, [Amplitude](/blog/posthog-vs-amplitude) or [Mixpanel](/blog/posthog-vs-mixpanel).
+It all starts with how you track user behavior in your product. While you can use Google Analytics to track some pirate metrics, it's best to use a product analytics tool like PostHog, [Amplitude](/compare/posthog-vs-amplitude) or [Mixpanel](/blog/posthog-vs-mixpanel).
 
 > ☠️ **Try our AARRR dashboard template:** PostHog users can use our [customizable AARRR pirate metrics template](/templates/aarrr-dashboard) to get started. Simply input your events and tweak as you require.
 
@@ -98,7 +99,7 @@ For an e-commerce website, overall unique users is an important metric, but user
 
 It may also be prudent to add a quality metric here, too. Tracking signups based on an [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) can be important to avoid over optimizing for the wrong kind of new users.
 
-> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/product-market-fit-game).
+> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/founders/product-market-fit-game).
  
 ### 2. Activation
 
@@ -208,7 +209,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 
 ### Further reading
 
-- **[In-depth guide to measuring product-market fit](/blog/measure-product-market-fit):** The 7 ways to measure product-market fit, explained. 
+- **[In-depth guide to measuring product-market fit](/founders/measure-product-market-fit):** The 7 ways to measure product-market fit, explained. 
 
 - **[The most useful B2B product metrics for SaaS companies](/blog/b2b-saas-product-metrics):** Need help choosing the right metrics for your product? This guide looks specifically at product metrics and which ones are worth measuring.
 

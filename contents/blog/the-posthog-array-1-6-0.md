@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -16,7 +17,7 @@ tags:
 
 One of the most fun weeks we've had so far with our UX - resizable and touch-enabled dashboards with a new display mode, Microsoft Teams support, and paths for events. Plus, a ton of performance improvements.
 
-Want to try this out and self hosting? [Update your PostHog](/docs/runbook/upgrading-posthog).
+Want to try this out and self hosting? [Update your PostHog](/docs/self-host).
 
 ## Release notes
 

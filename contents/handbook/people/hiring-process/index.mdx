@@ -6,11 +6,17 @@ showTitle: true
 hideAnchor: false
 ---
 
+<CalloutBox icon="IconInfo" title="Want to move to a different team or role?" type="fyi">
+
+This page is about how we hire people from outside PostHog. If you already work at PostHog and want to move internally, check the [small teams page](/handbook/company/small-teams#can-people-change-teams) Speak to your Blitzscale team member early, before you talk to other teams.
+
+</CalloutBox>
+
 ## Our approach to hiring
 
-Our goal is to build a [diverse](/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](/handbook/company/small-teams).
+Our goal is to build a [diverse](/handbook/company/grown-ups), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](/handbook/company/small-teams).
 
-Our [recruitment strategy](/blog/early-stage-startup-hiring-strategy) is to run:
+Our [recruitment strategy](/founders/early-stage-startup-hiring-strategy) is to run:
 
 -   **100% inbound by default** – effectively a word of mouth strategy, like our marketing and sales model.
 -   Supplement this with **occasional, targeted sourcing** to increase the pool of diverse candidates (if needed).
@@ -28,6 +34,7 @@ This has resulted in the highest number of qualified and motivated candidates re
 <CountriesWeHireIn
     excludedCountries={[
         'Afghanistan',
+        'Antarctica',
         'Armenia',
         'Australia',
         'Azerbaijan',
@@ -130,7 +137,7 @@ All of our recruiting is done in-house, and we do not work with external agencie
 
 ### Deciding to hire
 
-[‘You're the driver’](/handbook/company/values#youre-the-driver) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire!
+[‘You're the driver’](/handbook/values#youre-the-driver) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire!
 
 We use Pry to plan our hiring. We use the hiring forecast as a guide, but iterate on this pretty much every month, so we can stay super responsive to changes PostHog's needs. Typically we know:
 
@@ -138,7 +145,7 @@ We use Pry to plan our hiring. We use the hiring forecast as a guide, but iterat
 -   6 months out – number of each type of job (e.g. 1x designer, 3x engineer)
 -   12-24 months out – number of hires overall we want to add to the team
 
-For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the [new hire form](https://github.com/PostHog/company-internal/issues/new?assignees=couaphang&labels=people&template=new-hire-request.md&title=Proposed+New+Hire+%5BROLE%5D). Everyone will have the opportunity to give their feedback on the proposed role before we publish it.
+For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the <PrivateLink url="https://github.com/PostHog/company-internal/issues/new?assignees=couaphang&amp;labels=people&amp;template=new-hire-request.md&amp;title=Proposed+New+Hire+%5BROLE%5D">new hire form</PrivateLink>. Everyone will have the opportunity to give their feedback on the proposed role before we publish it.
 
 ### The role of the Hiring Manager
 
@@ -189,7 +196,7 @@ Ashby also had a partnership with YC's job board so all roles to YC's [Work at a
 
 -   [Mind the Product](https://www.mindtheproduct.com/)
 -   [ProductHunt](https://www.producthunt.com/)
--   [Lenny's Job Board](https://lennys-jobs.pallet.com/jobs)
+-   [Lenny's Job Board](https://www.lennysjobs.com/)
 
 ### Referrals
 
@@ -296,6 +303,32 @@ If you are involved in interviewing it is important to keep your calendar up to 
 
 If you have an interview booked in you cannot make, do not just respond "no" to the calendar invite, please let the ops team know asap, or even better find a replacement for your interview and let Ops know, and we can update the interview. We aim to provide a great candidate experience and moving interviews is one way to reduce the quality of that experience.
 
+### How to use archive reasons in Ashby
+
+The archive reason is how we find people again. Ashby filters and Claude (through the Ashby connector) both rely on the archive reason to find candidates. There are three types of archive reason: Lead, Applicant, and Admin.
+
+-   **Lead or Applicant?** If they applied, or were sourced and moved into the interview process/had a first call, use an **[Applicant]** reason. Otherwise, use a **[Lead]** reason.
+-   **Don't use Ashby's default reasons.** "Fraudulent Candidate", "Not Interested after Outreach" and "Did Not Respond to Outreach" are Ashby defaults that can't be removed or edited. Use the best alternative instead.
+-   Be specific when choosing the archive reason and add a short archive note when possible.
+
+#### Lead vs. Applicant reasons
+
+You can find a breakdown of when to use which reason in the [Lead vs Applicant document](https://docs.google.com/document/d/1KX_5XDf4tRCHDfcz8nEGYnIxcyde3iRtRnYBgPdBwx4/edit?tab=t.0).
+
+#### Admin reasons and edge cases
+
+-   **Moving someone to another role:** archive them on the old job with "[Applicant] - Moved to another role" to avoid a fake rejection.
+-   **Duplicates:** use "[Admin] - Duplicate candidate/application" (or "[Admin] - Duplicate referral") and keep the profile with the most history.
+-   **Closing a role:** archive any uncontacted leads still on it with "[Lead] - Not contacted - Role closed before outreach".
+-   **Bulk cleanup:** "[Admin] - System clean up" is only for database tidying or test profiles.
+
+#### Resurfacing candidates
+
+-   **In Ashby:** filter candidates by archive reason, then narrow by job or team and archive date.
+-   **With Claude:** ask in plain language, as it searches Ashby through the connector.
+
+Old reasons that were archived instead of renamed can be unarchived, and they can still be searched.
+
 ## Hiring stage overview
 
 ### Application
@@ -310,11 +343,20 @@ If a candidate hasn't customized the application or resume to the role, it is a 
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
 
+### 12 month cooling application period
+To ensure a fair and consistent experience for all candidates, we ask that applicants wait 12 months before reapplying for the same or a substantially similar role. This time allows candidates an opportunity to build on their experience, develop new skills, and strengthen areas that may not have fully met the role’s requirements during the interview process.
+
+After 12 months, candidates are welcome to apply again; however, reapplying does not guarantee that the application will be reconsidered or that the candidate will move forward in the process. Our teams and hiring needs are continually evolving, so the requirements of a role may change, and the candidate’s experience may no longer align with what we’re looking for at that time.
+
+We appreciate your interest in joining our team and encourage you to continue growing your skills and experience in the meantime.
+
 ### Interviews
 
 As a rule, all interviews at PostHog are conducted in English. Whilst this might seem obvious to some, we are lucky to have people from multiple different countries, that speak multiple languages. We are hiring for people to be successful at PostHog, and at PostHog we conduct our business in English, so it is important the hiring process is also conducted in English.
 
 If you are paired with an interviewee who speaks your native language, just politely acknowledge this and let them know all interviews are conducted in English. We also require these calls to be conducted as a video call, so a working webcam is necessary.
+
+Our interviewers often use AI note-taker apps during interviews. This means we can be more present in the conversation, instead of writing everything down.
 
 ### How interviews are scored
 
@@ -354,9 +396,9 @@ As a rule of thumb, everyone interviewing must feel a genuine sense of excitemen
 
 For engineering roles only: during high-volume seasons, this round might be recorded for training purposes to help us onboard and train new interviewers faster. The candidate will, of course, have the chance to opt out by either letting their recruiter know in advance or letting the interviewer know at the start of the interview.
 
-### 3. Small Team interview with an Exec Team member
+### 3. Interview with a Blitzscale Team member or relevant Group Lead
 
-This is a call with either James, Tim, Raquel, Paul, Ben, or Charles depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values.
+This is a call with a Blitzscale Team member or the relevant Group Lead, depending on the role. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values.
 
 Candidates who are unsuccessful at this stage should receive a short email with feedback.
 
@@ -386,8 +428,8 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 -   Send them an email in the first instance to schedule the SuperDay - we aim to do this as soon as possible, as candidates often will need to book a day off work. Use the Ashby email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason. For all US candidates there is a requirement we collect a [W9](https://www.irs.gov/forms-pubs/about-form-w-9) from the candidate for accounting and tax purposes (_this doesn't apply if the US candidate decides to donate the funds to one of our sponsored projects_)
 -   We also send the candidate a follow-up email with details of the day, and ask them for their day rate and bank details right away, so the candidate can be fully-prepared for what to expect and who they will meet. There is a template for this email in Ashby, depending on the role - this will probably need customizing.
 -   When scheduling in Ashby, please make sure to turn on the option to create a private Slack channel for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc (`#superday-[first-name]-[role]`). Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
--   The last step will be to schedule the appropriate engineering task to go to the candidate's GitHub handle the day of their SuperDay. Sign in to your [Vercel app](https://posthog-superdays.vercel.app/superdays) and click on **Manage SuperDays** and fill out the form for the candidate's info. Please be aware the task is case-sensitive.
--   For the Clickhouse Engineer task, please follow this [task](https://github.com/PostHog/clickhouse-superday) and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone.
+-   The last step will be to schedule the appropriate engineering task to go to the candidate's GitHub handle the day of their SuperDay. Sign in to your <PrivateLink url="https://posthog-superdays.vercel.app/superdays">Vercel app</PrivateLink> and click on **Manage SuperDays** and fill out the form for the candidate's info. Please be aware the task is case-sensitive.
+-   For the Clickhouse Engineer task, please follow this <PrivateLink url="https://github.com/PostHog/clickhouse-superday">task</PrivateLink> and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone.
 -   (One day before the SuperDay) For non-technical roles, invite the candidate to a kickoff meeting with the hiring manager at the start of the day and send the candidate the task - aim to send this before the kick-off session so if the candidate has any questions they are able to go through them during the kick-off session. We encourage the candidate to ask questions throughout their SuperDay, but sometimes it is nice to have any questions answered in advance, so they can kick off their task appropriately.
 -   It is important for product engineer candidates to be prepped for their check-in call to do a deep dive of their progress so far with their SuperDay buddy while other non-technical roles in Sales, Onboarding, and Customer Success, the candidates will be running a demo mid-point of their SuperDay.
 -   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
@@ -441,18 +483,30 @@ You will not be able to see every other candidate in the pipeline, this is becau
 
 ## Visa sponsorship
 
-Building a diverse team is at the heart of our culture at PostHog, and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the UK.
+Building a diverse team is at the heart of our culture at PostHog, and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We can consider visa sponsorship or support for new hires in the UK, US and Germany. Availability very much depends on the role, location and individual eligibility. Where sponsorship is agreed, we cover approved visa-related fees but do not provide relocation funding. Unfortunately, we cannot sponsor visas for Spouses or Dependants.  
 
--   If the candidate is already in the UK on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
--   If they wish to relocate and need a visa, we unfortunately will not cover the cost for obtaining the visa or any relocation costs.
+This is not an exhaustive list but the types of visas we are open to sponsoring are:
+
+**UK**
+Skilled Worker
+Youth Mobility - if you're currently on a youth mobility visa, we can sponsor the move to Skilled Worker. This applies to any employee, new or current. 
+
+**US**
+TN - Canadian Citizens
+TN - Mexican Citizens
+E-3 - Australian Nationals
+H-1B1 - Chile or Singapore Citizens
+
+**Germany**
+EU Blue Card - non-EU/EFTA nationals
+Skilled Worker - non-EU nationals of any citizenship
+Experience Worker / IT - non-EU/EFTA nationals of any citizenship
 
 For employees where PostHog covers the costs related to obtaining a visa, the employee agrees to reimburse PostHog if they voluntarily terminate their employment prior to the completion of 12 months of service. The costs will be calculated on a monthly basis, so when the employee decides to leave after 10 months, they will have to repay 2/12 of the costs related to the visa.
 
-If a candidate needs visa sponsorship, including sponsoring or transfer of H1B visa in the US, at this time, we cannot hire them.
+## Employment Checks
 
-## E-Verify
-
-We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all US new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates.
+We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all US new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates. We also use Zincwork to perform our Right to Work Checks, Idenity Checks and Background checks across UK, US & Germany. Anyone hired outside of these countries will have their checks performed via Deel.
 
 ## Location
 
@@ -505,4 +559,3 @@ Once agreed the second half should be focused on agreeing one or two fixes to th
 #### post post-mortem call
 
 The talent partner should write up the post-mortem and share it in the #team-talent channel cross-posting to #tell-posthog-anything. They should then update any handbook pages about the process and be sure to share any findings with the relevant interviewing channels like #technical-interviewers. 
-

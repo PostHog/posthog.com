@@ -78,7 +78,7 @@ Ensure that failures (e.g. email bounce, webhook error) are captured and surface
 
 Email delivery failures like bounces and complaints are automatically logged as entries on individual invocations, so you can debug specific issues. You can also click the **Bounced** and **Blocked** metric tiles to jump directly to the **Invocations** tab filtered to invocations that experienced those failures.
 
-For long-running workflows (with delays), track user state (which step they are in), and provide a way to debug or abort if something goes wrong.
+For long-running workflows (with delays), track user state (which step they are in). If something goes wrong, you can [cancel in-flight runs](/docs/workflows/editing-live-workflows#stopping-runs) from the **Invocations** tab.
 Periodically review metrics: how many messages sent, how many workflows triggered, bounce/failure rate, conversion rate (if you've configured a conversion goal), etc.
 
 <ProductScreenshot

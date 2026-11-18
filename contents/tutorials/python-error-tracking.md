@@ -27,7 +27,7 @@ Next, activate that virtual environment and install PostHog.
 
 ```bash
 source venv/bin/activate
-pip install posthog
+pip install "posthog>=8,<9"
 ```
 
 Once done, we can create our script in an `error.py` file. It initializes PostHog with a project token and host from [your project settings](https://us.posthog.com/settings/project), and then intentionally raises an exception. We can use PostHog’s `enable_exception_autocapture` config option to automatically capture that unhandled exception.
@@ -40,7 +40,7 @@ import os
 from posthog import Posthog
 
 posthog = Posthog(
-    api_key="<ph_project_token>",
+    "<ph_project_token>",
     host="<ph_client_api_host>",
     enable_exception_autocapture=True
 )
@@ -142,4 +142,4 @@ Beyond the basic [activity tab view](/docs/activity), PostHog has a dedicated [e
   classes="rounded"
 />
 
-You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/product-analytics/sql).
+You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/data-warehouse/sql).

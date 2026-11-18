@@ -67,7 +67,7 @@ export default function CustomerMetadata({ customerKey }: CustomerMetadataProps)
             </div>
             {customerData.toolsUsedHandles && customerData.toolsUsedHandles.length > 0 && (
                 <div>
-                    <strong className="text-sm text-secondary">Products used:</strong>
+                    <strong className="text-sm text-secondary">Tools used:</strong>
                     <ul className="not-prose space-y-1 mt-1">
                         {customerData.toolsUsedHandles.map((toolHandle) => {
                             // Check if allProducts is an array

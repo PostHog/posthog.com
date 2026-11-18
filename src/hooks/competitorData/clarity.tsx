@@ -93,6 +93,9 @@ export const clarity = {
                 autocapture: true,
                 cohorts: true,
             },
+            funnels: {
+                available: true,
+            },
             group_analytics: {
                 available: false,
             },

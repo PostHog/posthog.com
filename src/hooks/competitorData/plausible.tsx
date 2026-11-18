@@ -3,7 +3,7 @@ export const plausible = {
     key: 'plausible',
     assets: {
         icon: '/images/competitors/plausible.svg',
-        comparisonArticle: '/blog/posthog-vs-plausible',
+        comparisonArticle: '/compare/posthog-vs-plausible',
     },
     products: {
         web_analytics: {

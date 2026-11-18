@@ -74,6 +74,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
+    // Remove cookies before forwarding to PostHog
+    headers.delete('cookie')
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    if (!/^Bearer ph[csx]_/.test(headers.get('authorization') ?? '')) {
+      headers.delete('authorization')
+    }
     headers.set('accept-encoding', '')
 
     // Forward client IP for geolocation
@@ -117,6 +124,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
+    // Remove cookies before forwarding to PostHog
+    headers.delete('cookie')
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    if (!/^Bearer ph[csx]_/.test(headers.get('authorization') ?? '')) {
+      headers.delete('authorization')
+    }
     headers.set('accept-encoding', '')
 
     // Forward client IP for geolocation

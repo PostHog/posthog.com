@@ -27,7 +27,7 @@ export interface ImageAnnotationsImageProps {
 const clamp = (value: number) => Math.max(0, Math.min(100, value))
 
 function Marker({ annotation, index }: { annotation: Annotation; index: number }): JSX.Element {
-    const { type, hoveredIndex, setHoveredIndex } = useImageAnnotations()
+    const { type, hoveredIndex, setHoveredIndex, markerClassName } = useImageAnnotations()
     const isActive = hoveredIndex === index
 
     const anchorStyle: React.CSSProperties = {
@@ -53,7 +53,7 @@ function Marker({ annotation, index }: { annotation: Annotation; index: number }
                         <span
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
-                            className={`flex items-center justify-center size-6 rounded-full bg-red text-white text-[13px] font-semibold shadow-md ring-2 ring-white transition-transform duration-200 cursor-default ${scaleClass} ${
+                            className={`flex items-center justify-center size-6 rounded-full ${markerClassName} text-[13px] font-semibold shadow-md ring-2 ring-white transition-transform duration-200 cursor-default ${scaleClass} ${
                                 isActive ? 'shadow-lg' : ''
                             }`}
                         >
@@ -87,8 +87,12 @@ function Marker({ annotation, index }: { annotation: Annotation; index: number }
                         onMouseLeave={() => setHoveredIndex(null)}
                         className={`relative flex items-center justify-center transition-transform duration-200 ${scaleClass}`}
                     >
-                        <span className="absolute inline-flex size-5 rounded-full bg-red opacity-60 animate-ping" />
-                        <span className="relative inline-flex size-4 rounded-full bg-red ring-2 ring-white shadow-md" />
+                        <span
+                            className={`absolute inline-flex size-5 rounded-full ${markerClassName} opacity-60 animate-ping`}
+                        />
+                        <span
+                            className={`relative inline-flex size-4 rounded-full ${markerClassName} ring-2 ring-white shadow-md`}
+                        />
                     </button>
                 }
             >

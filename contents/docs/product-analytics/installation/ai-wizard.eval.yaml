@@ -1,0 +1,17 @@
+owner: wizard-and-docs
+tags: [install, wizard]
+status: active
+
+checks:
+    - id: setup-command
+      description: >-
+          Baseline: does an agent recommend the PostHog wizard for a Next.js setup? The
+          agent gets no docs, so docs-read shows which pages it finds on its own.
+      prompt: >-
+          How do I set up PostHog in my Next.js app?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              gives-command: >-
+                  The final message gives the command `npx @posthog/wizard` exactly. A
+                  different package name, such as posthog-wizard or @posthog/cli, fails.

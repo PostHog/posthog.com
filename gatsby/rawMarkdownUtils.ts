@@ -1,14 +1,17 @@
 import path from 'path'
 import fs from 'fs'
+import { availableParallelism } from 'node:os'
+import { Worker } from 'node:worker_threads'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
-import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
 import {
-    createTurndownService,
-    extractTitleFromHtml,
-    extractMainContent,
-    postProcessMarkdown,
-    preprocessHtmlForTabs,
-} from './turndownService'
+    getLanguageFromSdkId,
+    hasConcreteVersion,
+    isLatestVersion,
+    typeHasPage,
+} from '../src/components/SdkReferences/utils'
+import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
+import { buildMcpBrief, BriefToolCategory } from '../src/components/MCPPage/agentBrief'
+import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -43,25 +46,21 @@ export const generateRawMarkdownPages = async (
     })
 
     const processedPages: Array<{ slug: string; title: string }> = []
+    const batchSize = Math.max(1, Math.ceil(filteredNodes.length / Math.min(30, availableParallelism())))
+    const batches = Array.from(
+        { length: Math.ceil(filteredNodes.length / batchSize) },
+        (_, index) =>
+            new Promise<Array<{ slug: string; title: string; markdown: string }>>((resolve, reject) => {
+                const worker = new Worker(path.resolve('gatsby/markdownWorker.ts'), {
+                    workerData: { nodes: filteredNodes.slice(index * batchSize, (index + 1) * batchSize), publicPath },
+                })
+                worker.once('message', resolve)
+                worker.once('error', reject)
+            })
+    )
 
-    for (const node of filteredNodes) {
+    for (const { slug, title, markdown } of (await Promise.all(batches)).flat()) {
         try {
-            const { slug } = node.fields
-            const htmlFilePath = path.join(publicPath, slug, 'index.html')
-
-            if (!fs.existsSync(htmlFilePath)) {
-                continue
-            }
-
-            const html = fs.readFileSync(htmlFilePath, 'utf8')
-            const title = extractTitleFromHtml(html) || node.frontmatter.title || 'Untitled'
-            const mainContent = extractMainContent(html)
-            const preprocessedContent = preprocessHtmlForTabs(mainContent)
-
-            const turndownService = createTurndownService(title)
-            let markdown = turndownService.turndown(preprocessedContent)
-            markdown = postProcessMarkdown(markdown, title)
-
             const outputPath = path.join(publicPath, `${slug}.md`)
             const dirPath = path.dirname(outputPath)
 
@@ -81,6 +80,17 @@ export const generateRawMarkdownPages = async (
         fields: { slug: page.slug },
         frontmatter: { title: page.title },
     }))
+}
+
+// Publish the OpenAPI document itself, alongside the per-operation markdown below.
+// The markdown is for LLMs reading prose; this is the machine-readable artifact that
+// API clients, codegen and function-calling tools expect to find at a stable URL.
+export const generateOpenApiSpec = (spec: any) => {
+    console.log('Writing openapi.json...')
+
+    const filePath = path.join(process.cwd(), 'public', 'openapi.json')
+    fs.writeFileSync(filePath, JSON.stringify(spec), 'utf8')
+    console.log(`✅ Wrote openapi.json (${Object.keys(spec.paths || {}).length} paths)`)
 }
 
 // Function to generate individual API endpoint markdown files from the OpenAPI spec
@@ -188,6 +198,58 @@ ${jsonContent}
     console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/open-api-spec/`)
 }
 
+const renderTypeAsText = (type: string): string => {
+    return type
+}
+
+const renderParameters = (params: any[], title = 'Parameters'): string => {
+    if (!params || params.length === 0) return ''
+
+    const paramLines = params.map((param) => {
+        const name = param.isOptional ? `${param.name}?` : param.name
+        const type = renderTypeAsText(param.type)
+        let paramLine = `- **\`${name}\`** (\`${type}\`)`
+
+        if (param.description) {
+            paramLine += ` - ${param.description}`
+        }
+        return paramLine
+    })
+
+    return `### ${title}\n\n${paramLines.join('\n')}`
+}
+
+const renderReturnType = (returnType: any): string => {
+    if (!returnType) return ''
+
+    const typeString = returnType.name
+    const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
+
+    if (isUnionOrIntersection) {
+        const separator = typeString.includes('|') ? '|' : '&'
+        const types = typeString.split(separator).map((t: string) => t.trim())
+        const label = separator === '|' ? 'Union of' : 'Intersection of'
+
+        const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
+        return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
+    } else {
+        return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
+    }
+}
+
+const renderExamples = (examples: any[], language: string, title = 'Examples'): string => {
+    if (!examples || examples.length === 0) return ''
+
+    if (examples.length === 1) {
+        return `### ${title}\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
+    } else {
+        const exampleBlocks = examples.map(
+            (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
+        )
+        return `### ${title}\n\n${exampleBlocks.join('\n\n')}`
+    }
+}
+
 export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) => {
     const sdkSpecDir = path.join(process.cwd(), 'public', 'docs', 'references')
     if (!fs.existsSync(sdkSpecDir)) {
@@ -198,7 +260,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     // Follow the same path logic as createPages.ts
     let fileName: string
-    if (sdkReferences.version.includes('latest')) {
+    if (isLatestVersion(sdkReferences.version)) {
         fileName = `${sdkReferences.referenceId}.md`
     } else {
         fileName = `${sdkReferences.id}.md`
@@ -206,62 +268,12 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const filePath = path.join(sdkSpecDir, fileName)
 
-    const renderTypeAsText = (type: string): string => {
-        return type
-    }
-
-    const renderParameters = (params: any[]): string => {
-        if (!params || params.length === 0) return ''
-
-        const paramLines = params.map((param) => {
-            const name = param.isOptional ? `${param.name}?` : param.name
-            const type = renderTypeAsText(param.type)
-            let paramLine = `- **\`${name}\`** (\`${type}\`)`
-
-            if (param.description) {
-                paramLine += ` - ${param.description}`
-            }
-            return paramLine
-        })
-
-        return `### Parameters\n\n${paramLines.join('\n')}`
-    }
-
-    const renderReturnType = (returnType: any): string => {
-        if (!returnType) return ''
-
-        const typeString = returnType.name
-        const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
-
-        if (isUnionOrIntersection) {
-            const separator = typeString.includes('|') ? '|' : '&'
-            const types = typeString.split(separator).map((t: string) => t.trim())
-            const label = separator === '|' ? 'Union of' : 'Intersection of'
-
-            const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
-            return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
-        } else {
-            return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
-        }
-    }
-
-    const renderExamples = (examples: any[], language: string): string => {
-        if (!examples || examples.length === 0) return ''
-
-        if (examples.length === 1) {
-            return `### Examples\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
-        } else {
-            const exampleBlocks = examples.map(
-                (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
-            )
-            return `### Examples\n\n${exampleBlocks.join('\n\n')}`
-        }
-    }
-
     const markdownNodes: string[] = []
 
     markdownNodes.push(`# ${sdkReferences.info.title}`)
-    markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    if (hasConcreteVersion(sdkReferences.info.version)) {
+        markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    }
     markdownNodes.push(sdkReferences.info.description)
 
     if (sdkReferences.categories && sdkReferences.categories.length > 0) {
@@ -332,6 +344,44 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
     const markdownContent = markdownNodes.join('\n\n')
 
     fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
+}
+
+/** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
+export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
+    if (!isLatestVersion(sdkReferences.version)) {
+        return
+    }
+
+    const typesDir = path.join(process.cwd(), 'public', 'docs', 'references', sdkReferences.referenceId, 'types')
+    fs.mkdirSync(typesDir, { recursive: true })
+
+    const sdkLanguage = getLanguageFromSdkId(sdkReferences.referenceId)
+
+    sdkReferences.types?.forEach((type) => {
+        if (!typeHasPage(type)) {
+            return
+        }
+
+        const markdownNodes: string[] = [`# ${type.name}`, `**SDK:** ${sdkReferences.info.title}`]
+
+        if (type.description) {
+            markdownNodes.push(type.description)
+        }
+
+        const propertiesMarkdown = renderParameters(type.properties, 'Properties')
+        if (propertiesMarkdown) {
+            markdownNodes.push(propertiesMarkdown)
+        }
+
+        const exampleMarkdown = type.example
+            ? renderExamples([{ code: type.example }], sdkLanguage, 'Example values')
+            : ''
+        if (exampleMarkdown) {
+            markdownNodes.push(exampleMarkdown)
+        }
+
+        fs.writeFileSync(path.join(typesDir, `${type.id}.md`), markdownNodes.join('\n\n'), 'utf8')
+    })
 }
 
 // Function to generate llms.txt file according to spec
@@ -479,6 +529,55 @@ const CONTEXT_BLURB =
 const CONTEXT_WAREHOUSE_BLURB =
     'The data warehouse plus the full context-ingestion pipeline for your product — where context lives and a significant part of how we bill.'
 
+const PRODUCT_DESCRIPTOR = "one of PostHog's products — the surfaces you adopt to access self-driving"
+const TOOL_DESCRIPTOR = "one of PostHog's tools — the functional capabilities that make your product self-driving"
+
+// Pages in the Product nav that need the same .md twin as the taxonomy entries above, but that the
+// taxonomy can't generate one for: Support and Replay Vision are entries whose canonical link points
+// at docs instead of a slug, context warehouse and self-driving are layers of their own rather than
+// tools, and tracing and heatmaps have no entry. Listing them here writes the identical .md without
+// touching /platform.md or llms.txt — where each belongs in the taxonomy is a separate question.
+type MdOnlyPage = { name: string; slug: string; oneLiner: string; descriptor: string }
+
+const MD_ONLY_PAGES: MdOnlyPage[] = [
+    {
+        name: 'Tracing',
+        slug: 'tracing',
+        oneLiner: 'The span-level signal that shows agents where a request broke.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Heatmaps',
+        slug: 'heatmaps',
+        oneLiner: 'The visual signal — where people click, scroll, and rage-click.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Replay Vision',
+        slug: 'replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Support',
+        slug: 'support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Context warehouse',
+        slug: 'context-warehouse',
+        oneLiner: CONTEXT_WAREHOUSE_BLURB,
+        descriptor: "one of the four layers of PostHog — where your product's context lives",
+    },
+    {
+        name: 'Self-driving',
+        slug: 'self-driving',
+        oneLiner: 'The loop itself — agents find problems and opportunities in your product and ship the fix.',
+        descriptor: "PostHog's umbrella story — the loop every product and tool serves",
+    },
+]
+
 const pageLinkFor = (item: PlatformItem): string => item.link || `https://posthog.com/${item.slug}`
 const mdLinkFor = (item: PlatformItem): string =>
     item.slug ? `https://posthog.com/${item.slug}.md` : item.link || 'https://posthog.com'
@@ -533,34 +632,59 @@ All docs are available as Markdown (append \`.md\` to any docs URL). Full index:
 export const generateProductPagesMarkdown = () => {
     const publicPath = path.resolve(__dirname, '../public')
 
-    for (const item of PLATFORM_ITEMS) {
-        if (!item.slug) continue // Web / MCP point at existing pages, no bespoke .md
-        const layerLabel =
-            item.layer === 'product'
-                ? "one of PostHog's products — the surfaces you adopt to access self-driving"
-                : "one of PostHog's tools — the functional capabilities that make your product self-driving"
+    const pages = [
+        // Web points at an existing page, no bespoke .md. MCP has its own: generateMcpMd
+        ...PLATFORM_ITEMS.filter((item) => item.slug).map((item) => ({
+            name: item.name,
+            slug: item.slug as string,
+            oneLiner: item.oneLiner,
+            descriptor: item.layer === 'product' ? PRODUCT_DESCRIPTOR : TOOL_DESCRIPTOR,
+            pageLink: pageLinkFor(item),
+        })),
+        ...MD_ONLY_PAGES.map((page) => ({ ...page, pageLink: `https://posthog.com/${page.slug}` })),
+    ]
 
-        const content = `# ${item.name}
+    for (const page of pages) {
+        const content = `# ${page.name}
 
-${item.oneLiner}
+${page.oneLiner}
 
-${item.name} is ${layerLabel}.
+${page.name} is ${page.descriptor}.
 
 PostHog is the platform for self-driving products: it pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship better products, faster.
 
-- Full page: ${pageLinkFor(item)}
+- Full page: ${page.pageLink}
 - All products and tools: https://posthog.com/platform.md
 - Pricing: https://posthog.com/pricing.md
 
-For features, screenshots, and details, see ${pageLinkFor(item)}.
+For features, screenshots, and details, see ${page.pageLink}.
 `
 
-        const outputPath = path.join(publicPath, `${item.slug}.md`)
+        const outputPath = path.join(publicPath, `${page.slug}.md`)
         const dirPath = path.dirname(outputPath)
         if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
         fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
-        console.log(`Generated: ${item.slug}.md`)
+        console.log(`Generated: ${page.slug}.md`)
     }
+}
+
+// The /mcp page is a React page, so the HTML-scrape path can't produce useful markdown for it.
+// The page's "Agent" view renders the same brief, so the two can't drift.
+export const generateMcpMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    const toolsPath = path.resolve(__dirname, '../src/data/mcp-tools.json')
+    let categories: BriefToolCategory[] | null = null
+    try {
+        categories = JSON.parse(fs.readFileSync(toolsPath, 'utf8')).categories
+    } catch {
+        // The tool list is fetched in onPreBootstrap. Without it, the brief links to the tools reference.
+    }
+    fs.writeFileSync(
+        path.join(publicPath, 'mcp.md'),
+        buildMcpBrief(categories, new Date().toISOString().slice(0, 10)),
+        'utf8'
+    )
+    console.log('Generated: mcp.md')
 }
 
 type ChangelogRoadmapNode = {
@@ -570,7 +694,7 @@ type ChangelogRoadmapNode = {
     date: string
     cta?: { label?: string; url?: string }
     teams?: { data?: Array<{ attributes?: { name?: string } }> }
-    topic?: { data?: { attributes?: { label?: string } } }
+    topic?: { data?: { attributes?: { label?: string; slug?: string } } }
 }
 
 type ChangelogVideoNode = {
@@ -612,8 +736,17 @@ export const generateChangelogMd = (roadmaps: ChangelogRoadmapNode[], videos: Ch
         const meta = [dayTitle(roadmap.date), team && `${team} Team`, topic].filter(Boolean).join(' · ')
         const description = cleanDescription(roadmap.description)
         const cta = roadmap.cta?.url ? `[${roadmap.cta.label || 'Learn more'}](${absoluteUrl(roadmap.cta.url)})` : ''
+        const docsPath = getChangelogDocsPath(roadmap)
+        const docs =
+            docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '')
+                ? `[Docs](${absoluteUrl(docsPath)})`
+                : ''
+        const links = [docs, cta].filter(Boolean).join(' · ')
+        const title = roadmap.strapiID
+            ? `### [${roadmap.title}](https://posthog.com/changelog?id=${roadmap.strapiID})`
+            : `### ${roadmap.title}`
 
-        return [`### ${roadmap.title}`, `_${meta}_`, description, cta].filter(Boolean).join('\n\n')
+        return [title, `_${meta}_`, description, links].filter(Boolean).join('\n\n')
     }
 
     // Group entries and videos by YYYY-MM, newest first (input is sorted date DESC)
@@ -800,7 +933,7 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
-**MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`.
+**MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`. To decide if the MCP server fits a task, read the [MCP brief](https://posthog.com/mcp.md): what it does, its limits, safety controls, and the full tool list.
 
 `
 
@@ -891,8 +1024,10 @@ export const generatePricingMd = (products: any[]) => {
     const tierTable = (tiers: any[], unit: string): string => {
         if (!tiers || tiers.length === 0) return ''
 
+        // A GB-month already includes the months, and one unbounded tier has no volume bands
+        const singleTier = tiers.length === 1 && tiers[0].up_to === null
         const rows: string[] = []
-        rows.push(`| Monthly volume | Price per ${unit} |`)
+        rows.push(`| ${singleTier || unit.endsWith('-month') ? 'Volume' : 'Monthly volume'} | Price per ${unit} |`)
         rows.push('|---|---|')
 
         for (let i = 0; i < tiers.length; i++) {
@@ -900,7 +1035,9 @@ export const generatePricingMd = (products: any[]) => {
             const price = formatPrice(tier.unit_amount_usd)
             const prevUpTo = i > 0 ? tiers[i - 1].up_to : 0
 
-            if (tier.up_to === null) {
+            if (singleTier) {
+                rows.push(`| Every ${unit} | ${price} |`)
+            } else if (tier.up_to === null) {
                 // Last tier (unlimited)
                 rows.push(`| Above ${formatVolume(prevUpTo)} | ${price} |`)
             } else if (parseFloat(tier.unit_amount_usd) === 0) {
@@ -947,6 +1084,13 @@ export const generatePricingMd = (products: any[]) => {
         },
     }
 
+    // Add-on notes the billing API doesn't carry
+    const addonMeta: Record<string, { note: string }> = {
+        logs_retention_custom: {
+            note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires.",
+        },
+    }
+
     const productDisplayOrder = [
         'product_analytics',
         'session_replay',
@@ -959,8 +1103,9 @@ export const generatePricingMd = (products: any[]) => {
 
     // Separate products from the platform product
     const platformProduct = products.find((p) => p.type === 'platform_and_support')
+    // Companion products are listed with their parent's add-ons below
     const billedProducts = products.filter(
-        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only
+        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only && !p.companion_of
     )
 
     // Sort products: known order first, then any new ones from the API
@@ -996,11 +1141,10 @@ export const generatePricingMd = (products: any[]) => {
     // Build product add-ons section
     const productAddons: any[] = []
     for (const product of orderedProducts) {
-        if (product.addons) {
-            for (const addon of product.addons) {
-                if (addon.legacy_product) continue
-                productAddons.push({ ...addon, parentName: product.name })
-            }
+        for (const addon of withCompanionAddons(product, products).addons || []) {
+            // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
+            if (addon.legacy_product || addon.type === 'logs_retention_30d') continue
+            productAddons.push({ ...addon, parentName: product.name })
         }
     }
 
@@ -1013,6 +1157,12 @@ export const generatePricingMd = (products: any[]) => {
             addonsSection += `### ${addon.name}\n\n`
             addonsSection += `*Extends ${addon.parentName}*\n\n`
             addonsSection += `${addon.description}\n\n`
+            if (addonMeta[addon.type]) {
+                addonsSection += `${addonMeta[addon.type].note}\n\n`
+            }
+            if (addon.no_billing_limit) {
+                addonsSection += `Billing limits don't apply. Your ${addon.parentName} billing limit doesn't cap it.\n\n`
+            }
 
             const paidPlan = addon.plans?.find((plan: any) => plan.tiers)
             if (paidPlan?.tiers) {
@@ -1067,7 +1217,7 @@ All prices are in USD. Full interactive pricing calculator: https://posthog.com/
 PostHog has two plans:
 
 - **Free** — No credit card required. Generous monthly usage limits on every product. 1 project. 1 year data retention. Community support.
-- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 7 year data retention. Email support.
+- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 2-year data retention. Email support.
 
 There are no per-seat charges. Your whole team can use PostHog.
 
@@ -1115,6 +1265,7 @@ For full details on how discounts work, see our transparent contract rules: http
 - **Exception**: A single error or exception captured
 - **Row**: A single row synced from an external data source
 - **Trigger event**: A single event sent to a realtime destination
+- **GB-month**: One GB kept for 30 days, counted by the day
 
 All prices are in USD, excluding taxes.
 `

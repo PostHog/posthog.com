@@ -3,7 +3,7 @@ export const amplitude = {
     key: 'amplitude',
     assets: {
         icon: '/images/competitors/amplitude.svg',
-        comparisonArticle: '/blog/posthog-vs-amplitude',
+        comparisonArticle: '/compare/posthog-vs-amplitude',
     },
     products: {
         product_analytics: {
@@ -88,13 +88,13 @@ export const amplitude = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: '1,000 recordings',
+                free_tier: '10,000 recordings',
             },
             features: {
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
-                conditional_recording: false,
+                conditional_recording: true,
                 event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
@@ -139,13 +139,14 @@ export const amplitude = {
             ai: {
                 features: {
                     ai_summaries: true,
+                    replay_vision: 'Growth and Enterprise add-on',
                 },
             },
         },
         feature_flags: {
             available: true,
             pricing: {
-                free_tier: '2M events/mo',
+                free_tier: 'Unlimited flags',
             },
             features: {
                 boolean_flags: true,
@@ -204,7 +205,7 @@ export const amplitude = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: '50,000 impressions per month',
+                free_tier: '1 active experiment',
             },
             features: {
                 count_value_metrics: true,
@@ -212,14 +213,16 @@ export const amplitude = {
                 dynamic_cohorts: true,
                 experiment_analysis: true,
                 funnel_metrics: true,
+                funnel_tests: true,
                 namespacing: false,
-                native_goal_tracking: false,
+                native_goal_tracking: true,
                 no_code_experiments: true,
-                ratio_metrics: false,
-                recommended_run_time: false,
+                low_code_experiments: true,
+                ratio_metrics: true,
+                recommended_run_time: true,
                 secondary_metrics: true,
-                shared_metrics_library: false,
-                split_testing: false,
+                shared_metrics_library: true,
+                split_testing: true,
                 visual_editor: true,
             },
             supported_tests: {
@@ -230,8 +233,8 @@ export const amplitude = {
                     data_warehouse_experiments: false,
                     fake_door_testing: true,
                     holdout_testing: true,
-                    multi_armed_bandit: 'Enterprise',
-                    mutually_exclusive_experiments: 'Enterprise',
+                    multi_armed_bandit: 'Growth',
+                    mutually_exclusive_experiments: 'Growth',
                     redirect_testing: true,
                 },
             },
@@ -241,7 +244,7 @@ export const amplitude = {
                     custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: true,
-                    group_level_experiments: false,
+                    group_level_experiments: true,
                     holdouts: true,
                     target_by_percentage: true,
                 },
@@ -250,7 +253,7 @@ export const amplitude = {
                 features: {
                     api_access: true,
                     feature_flag_foundation: true,
-                    json_payloads: false,
+                    json_payloads: true,
                     multivariate_testing: true,
                 },
             },
@@ -354,8 +357,35 @@ export const amplitude = {
         error_tracking: {
             available: false,
         },
+        // Agent Analytics
         ai_observability: {
-            available: false,
+            available: true,
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    tool_call_tracking: true,
+                    session_replay_link: true,
+                    user_profile_context: true,
+                    // Queryable in charts and via the export API, not SQL.
+                    sql_queries_on_traces: false,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    // Agent events carry user_id and [Agent] Cost USD, so charts can group cost by user.
+                    cost_by_user: true,
+                },
+            },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    datasets: true,
+                    // [Agent] Experiment Variant on agent events, in the same project as product events.
+                    ab_experiments_on_product_metrics: true,
+                },
+            },
         },
         logs: {
             available: false,
@@ -403,7 +433,7 @@ export const amplitude = {
         developer: {
             api: true,
             mobile_sdks: true,
-            proxies: false,
+            proxies: true,
             sdks: true,
             sql: true,
             terraform: false,

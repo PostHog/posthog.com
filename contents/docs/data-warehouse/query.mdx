@@ -13,7 +13,9 @@ import { CalloutBox } from "components/Docs/CalloutBox";
 
 PostHog provides the full flexibility of SQL to query your data warehouse using the [SQL editor](/docs/data-warehouse/sql).
 
-To create a query, go to the [SQL editor](https://us.posthog.com/sql). Here you can see and search the schema of all available sources and [PostHog tables](/docs/data-warehouse/sources/posthog) as well as saved views.
+To create a query, go to the [SQL editor](https://app.posthog.com/sql). Here you can see and search the schema of all available sources and [PostHog tables](/docs/data-pipelines/sources/posthog) as well as saved views.
+
+Warehouse tables and views denied by [access control](/docs/settings/warehouse-access-control) are hidden.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_22_2x_f4bfc84ae3.png"
@@ -44,6 +46,20 @@ Here you can:
 [PostHog AI](/docs/posthog-ai) can help write SQL for you. Just click the icon in the corner of your screen and ask it to write or tweak your query for you.
 
 </CalloutBox>
+
+## Searching the schema sidebar
+
+The schema sidebar supports searching by name and filtering by materialization status. Type in the search field to filter tables and views by name.
+
+For [materialized views](/docs/data-warehouse/views/materialize), you can also filter by run status using search tokens:
+
+- `status:failed` — show only views whose last run failed
+- `status:running` — show only views currently running
+- `status:completed` — show only views whose last run succeeded
+
+Combine status filters with name searches. For example, `orders status:failed` shows failed views with "orders" in their name. You can also use the funnel icon next to the search field to toggle status filters.
+
+Status filters apply to the PostHog Warehouse sidebar and the **Models** tab but not to direct connections.
 
 ## Working with multiple queries
 
@@ -100,6 +116,8 @@ In the **Series** tab, you can format numerical columns with different number st
 - **Percentage** - Display values as percentages
 
 You can also set a prefix, suffix, and decimal places for each series.
+
+For table visualizations, you can add a **description** to any column to explain what it represents. The description appears as an info icon in the column header that readers can click to view. This is useful for explaining abbreviated or technical column names without expanding the table's main description.
 
 For example, with tables, you can add conditional formatting rules. These enable you to highlight cells based on their value and are set up in the **Conditional formatting** tab.
 

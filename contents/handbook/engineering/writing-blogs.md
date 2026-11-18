@@ -52,11 +52,11 @@ The general workflow for a post looks like this:
 
 1. Have an idea.
 
-2. Share in the [`#content-and-video-ideas`](https://posthog.slack.com/archives/C015CRUQR7Y) Slack channel. This is optional, but useful if you want feedback on the idea first. You can also just write up an outline or draft right away.
+2. Share in the <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y"><code>#content-and-video-ideas</code></PrivateLink> Slack channel. This is optional, but useful if you want feedback on the idea first. You can also just write up an outline or draft right away.
 
 3. Open pull request of your draft in [posthog.com](https://github.com/PostHog/posthog.com). Blogs go in the [`/contents/blog` folder](https://github.com/PostHog/posthog.com/tree/master/contents/blog) (you can see the format from other blogs there).
 
-4. Get review from someone from the <SmallTeam slug="editorial" /> and (optionally) a relevant teammate. If you're not sure who to ask, message the [`#team-editorial`](https://app.slack.com/client/TSS5W8YQZ/C09GU689J1X) Slack channel with a link to your PR.
+4. Get review from someone from the <SmallTeam slug="editorial" /> and (optionally) a relevant teammate. If you're not sure who to ask, message the <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C09GU689J1X"><code>#team-editorial</code></PrivateLink> Slack channel with a link to your PR.
 
 5. Iterate on feedback (usual 1-2 rounds).
 

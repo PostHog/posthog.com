@@ -10,7 +10,13 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
 category: CEO diaries
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Big decisions
 ---
 
 The longer your strategy gets, the more useless it becomes.

@@ -78,7 +78,7 @@ There are plenty of other techniques, that you can do in parallel to get a signa
 
 * **Use the public roadmap.** If you have a rough idea, create a GitHub issue and create an item on posthog.com/roadmap. This will gauge demand.
 
-* **Ask internally for help.** There are lots of people that can help you. The CS team talk to users all the time, the support team have a strong sense of pain points, other product engineers have all talked to users, James and Tim have a broader view of how PostHog is doing, the marketing team can help you get usage or validate demand.
+* **Ask internally for help.** There are lots of people that can help you. The CS team talk to users all the time, the support team have a strong sense of pain points, other product engineers have all talked to users, James and Tim have a broader view of how PostHog is doing, the Developer Marketing team can help you get usage or validate demand.
 
 * **Interviews.** Our Product Managers regularly run interviews, ask to be included and give a heads up what you're trying to learn about, or just message users directly! You can even embed your calendar in our surveys app to book your own user interviews. You will need lots of existing potentially relevant customers for this to make sense, since response rates are typically low.
 
@@ -148,4 +148,4 @@ Ask things like:
 * How important is this issue compared to other things you have to work on?
 * Has your company spent money trying to solve this before?
 
-[Write down every interview](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). This helps us come back as the rest of the team, or you, consider other products or features in future.
+<PrivateLink url="https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit">Write down every interview</PrivateLink>. This helps us come back as the rest of the team, or you, consider other products or features in future.

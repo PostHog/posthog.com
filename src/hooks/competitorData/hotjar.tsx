@@ -3,7 +3,7 @@ export const hotjar = {
     key: 'hotjar',
     assets: {
         icon: '/images/competitors/hotjar.svg',
-        comparisonArticle: '/blog/posthog-vs-hotjar',
+        comparisonArticle: '/compare/posthog-vs-hotjar',
     },
     products: {
         product_analytics: {

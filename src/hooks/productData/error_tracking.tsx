@@ -16,25 +16,27 @@ import {
     IconWarning,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
-import { applications, topFeatures } from './error_tracking/slides'
+import { applications, keyFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const errorTracking = {
     ...getTool('error_tracking'),
     Icon: IconWarning,
     type: 'error_tracking',
     teamSlug: 'error-tracking',
-    forumTopicId: 389,
-    color: 'orange',
+    pocketGuideVolume: 'error-tracking',
+    forumTag: 'error-tracking',
+    color: PRODUCT_COLORS.error_tracking,
     colorSecondary: 'red',
     wizardSupport: true,
     shortDescription: 'Catch and fix issues with full context',
     pricingDescription:
         'Error Tracking is billed on $exception events ingested. You get 100k free every month, then pay for what you use – no per-seat charges.',
     seo: {
-        title: 'Error Tracking – Catch and fix issues faster with PostHog',
+        title: 'Error Tracking – Error monitoring and alerts | PostHog',
         description:
-            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+            'Error monitoring with stack traces, issue grouping, and alerts. See the session replay behind every error. 100K exceptions free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     /**
@@ -45,7 +47,11 @@ export const errorTracking = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -68,11 +74,11 @@ export const errorTracking = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -109,8 +115,7 @@ export const errorTracking = {
     ],
     overview: {
         title: 'Track errors and resolve issues',
-        description:
-            'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix. Built to natively work with product analytics, session replay, and feature flags.',
+        description: '"Show me new errors since the last deploy, ranked by users affected"',
         eli5: "Error Tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's session replay, events, and properties attached – so you can see what went wrong instead of trying to reproduce it.",
         textColor: 'text-black', // tw
     },
@@ -183,7 +188,6 @@ export const errorTracking = {
         },
     },
     useCases: {
-        intro: 'Error Tracking is used across teams depending on your role.',
         rows: [
             [
                 'Product & Growth Engineers',
@@ -313,7 +317,7 @@ export const errorTracking = {
             {
                 name: 'LogRocket',
                 key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
+                link: '/compare/posthog-vs-logrocket',
             },
             {
                 name: 'PostHog',
@@ -326,7 +330,7 @@ export const errorTracking = {
             {
                 name: 'Sentry',
                 key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
+                link: '/compare/posthog-vs-sentry',
             },
             {
                 name: 'Signoz',

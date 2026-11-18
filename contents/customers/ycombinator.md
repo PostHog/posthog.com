@@ -2,7 +2,7 @@
 title: How Y Combinator used PostHog experiments to boost engagement by 40%
 customer: Y Combinator
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_YC_68ed8fa1bb.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/YC_1920x1080_4f7d68d93a.png
 date: 2022-10-05
 ---
 
@@ -30,7 +30,7 @@ Y Combinator empowers each team to choose its own processes, tools, and OKRs. So
 
 PostHog also offered the benefit of autocapture, which enabled the team to get started quickly without wasting weeks defining tracking plans. 
 
-“Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/integrate/client/js) and still [configure custom events](/tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
+“Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/libraries/js) and still [configure custom events](/tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
 
 ![Y Combinator analytics screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/ycombinator/ycombinator-analytics.png)
 

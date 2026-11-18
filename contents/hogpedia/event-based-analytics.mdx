@@ -1,0 +1,66 @@
+---
+title: Event-based analytics
+description: Event-based analytics records what people do as a stream of named events with properties, rather than as counts of page visits. It is the data model underneath product analytics, session replay, experiments, and feature flag reporting.
+hogpedia:
+    categories: ['Concepts']
+    aliases: ['Event analytics', 'Event stream', 'Event model']
+    infobox:
+        title: Event-based analytics
+        hog: HedgehogOrganized
+        rows:
+            - label: Type
+              value: Data model
+            - label: Unit of record
+              value: The event
+            - label: Alternative to
+              value: Page-based analytics
+            - label: Glossary
+              value: '[/docs/glossary](/docs/glossary)'
+    seeAlso:
+        - 'Product analytics|/hogpedia/product-analytics'
+        - 'Product engineering|/hogpedia/product-engineering'
+        - 'PostHog|/hogpedia/posthog'
+    references:
+        - id: 1
+          text: 'PostHog glossary, "Event", "Property", "Person", "Autocapture"'
+          url: /docs/glossary
+        - id: 2
+          text: 'PostHog documentation, Product analytics'
+          url: /docs/product-analytics
+        - id: 3
+          text: 'PostHog documentation, SQL'
+          url: /docs/sql
+    external:
+        - title: 'PostHog glossary'
+          url: /docs/glossary
+---
+
+**Event-based analytics** records what people do as a stream of named **events**, each with **properties** and each tied to a **person**. It is a data model, not a product. Most modern analytics tools are built on it, including every PostHog product.
+
+It contrasts with page-based analytics, where the unit of record is a page visit. A page visit answers "how many people saw this page". An event answers "how many people did this thing", which is a different and usually more useful question.
+
+## The model
+
+Three record types carry almost everything.<Ref id="1" />
+
+**Event.** A named thing that happened, with a timestamp. For example `signed_up`, or `file_uploaded`.
+
+**Property.** A value attached to an event or to a person. An event property describes the occurrence – which plan, which browser, which file size. A person property describes the actor, and is the current value rather than a historical one.
+
+**Person.** The identity that groups events together. A person is usually anonymous first and identified later, so a tool must be able to join the two sets of events when the identity becomes known.
+
+From three record types, a surprising number of questions become one query: a count is a filter over events, a funnel is an ordered sequence of them, retention is the same event at two points in time, and a cohort is a rule over person properties.
+
+## Why it replaced page-based analytics
+
+A page visit was a reasonable unit of record when a product was a set of pages. It stopped being one for two reasons.
+
+**A page stopped being a step.** A single-page application changes without a navigation, so the interesting actions produce no page visit at all.
+
+**The question changed.** A marketing team asks how many people arrived. A product team asks how many people succeeded. Success is an action, not a location.
+
+## How PostHog uses it
+
+PostHog stores one event stream and builds every product on it.<Ref id="2" /> This is the reason a [session replay](/hogpedia/session-replay) can be opened from a funnel step, and why an [experiment](/hogpedia/experiments) metric is an ordinary insight: they are queries over the same table, not integrations between separate systems.
+
+The same data can be queried directly in SQL, which matters because a fixed set of insight types will always exclude some question.<Ref id="3" />

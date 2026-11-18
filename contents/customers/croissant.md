@@ -2,7 +2,7 @@
 title: How Croissant connects product data and outreach with PostHog Workflows
 
 featuredImage: >-
-   https://res.cloudinary.com/dmukukwp6/image/upload/getcroissant_d26d405d9d.jpg
+   https://res.cloudinary.com/dmukukwp6/image/upload/Croissant_1920x1080_d3ec2ce9a4.png
 date: 2025-11-13
 ---
 

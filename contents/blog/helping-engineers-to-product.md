@@ -11,6 +11,12 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Big decisions
 ---
 
 One of the things I've learned at PostHog is the simpler a strategy, the more likely it's right.

@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 This guide walks you through the full lifecycle of releasing new products and features at PostHog, from initial planning to general availability.
 
-For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md).
+For complete step-by-step checklists when creating a new product, use <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md">the new product RFC template</PrivateLink>.
 
 ## Overview of the product lifecycle
 
@@ -35,7 +35,7 @@ In short: you set a feature's stage in **Early Access Management**, and users ac
 
 Create an early access feature in the `concept` stage early. Concept-stage features appear in the **Coming soon** tab of feature previews, and adding them early offers several advantages. It enables us to gauge interest in a new feature via sign-ups, equips our marketing teams with news they can promote to users, and ensures that betas can have sample users ready from the moment they launch.
 
-When someone joins a coming soon waitlist (in-app or on posthog.com), a `$feature_enrollment_update` event with `$feature_enrollment_stage: concept` is sent to Customer.io through a data pipeline, and they immediately receive a simple confirmation that they're on the waitlist. See [onboarding and lifecycle emails](/handbook/marketing/onboarding-and-lifecycle-emails#the-waitlist-alpha-beta-onboarding-flow) for the full flow.
+When someone joins a coming soon waitlist (in-app or on posthog.com), a `$feature_enrollment_update` event with `$feature_enrollment_stage: concept` enters them into a flow in PostHog Workflows, and they immediately receive a simple confirmation that they're on the waitlist. See [onboarding and lifecycle emails](/handbook/marketing/onboarding-and-lifecycle-emails#the-waitlist-alpha-beta-onboarding-flow) for the full flow.
 
 Concept features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months.
 
@@ -64,7 +64,7 @@ To give customers a minimum amount of information and usability, set up the earl
 - It has a [feature owner](/handbook/engineering/feature-ownership)
 - It has a `product_key`
 
-Titles, descriptions, and links are all set on the early access feature in [Early Access Management](https://us.posthog.com/early_access_features). Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the <SmallTeam slug="content" /> can help, if needed.
+Titles, descriptions, and links are all set on the early access feature in [Early Access Management](https://us.posthog.com/early_access_features). Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the <SmallTeam slug="marketing" /> can help, if needed.
 
 <div className="flex justify-center">
   <CloudinaryImage
@@ -88,7 +88,7 @@ Betas do not need to be performant for high-volume users and can have big bugs, 
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
-  It's helpful to let the marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+  It's helpful to let the Developer Marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">the marketing Slack channel</PrivateLink>.
 
 </CalloutBox>
 
@@ -98,7 +98,7 @@ Teams are encouraged to collect feedback from users in current betas so that the
 
 Joining an alpha or beta triggers automatic feedback emails from the `beta-feedback@posthog.com` Google Group: alpha users get an immediate email warning of rough edges and asking for feedback, while beta users get an email asking for feedback after 5 days. By default, all team leads and exec team members are in this Google Group and will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings.
 
-Regardless, replies to this Google Group are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
+Regardless, replies to this Google Group are routed to the support inbox, where the support team assesses each customer issue or piece of feedback, responds to the customer first, and routes it to the correct engineering team for follow-up. PMs and team leads are still encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
 
 Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
 
@@ -129,9 +129,9 @@ For complex new product releases, we recommend setting up a Slack channel to coo
 
 See [product announcements](/handbook/marketing/product-announcements) for details.
 
-**If you're planning to launch your product in a specific quarter, you MUST let the marketing team know at the start of the quarter.**
+**If you're planning to launch your product in a specific quarter, you MUST let the Developer Marketing team know at the start of the quarter.**
 
-Smaller features which don't require [major announcements](/handbook/marketing/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
+Smaller features which don't require [major announcements](/handbook/marketing/product-announcements) should be announced internally via the <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">Tell PostHog Anything channel</PrivateLink> so other teams are aware.
 
 ### Edge case: open betas
 

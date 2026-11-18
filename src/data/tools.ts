@@ -30,15 +30,15 @@ export const tools = [
         handle: 'cdp',
         name: 'CDP',
         description: 'Get data into PostHog and send it where it needs to go.',
-        slug: 'cdp',
+        slug: 'data-pipelines',
         category: 'data',
         aliases: ['Customer data platform', 'Data pipelines'],
     },
     {
         handle: 'data_warehouse',
-        name: 'Managed warehouse',
+        name: 'Warehouse',
         searchDescription: 'Query product and third-party data together in a managed warehouse.',
-        slug: 'context-warehouse/managed-warehouse',
+        slug: 'warehouse',
         category: 'data',
         status: 'beta',
         aliases: ['Data warehouse', 'PostHog warehouse'],
@@ -49,7 +49,6 @@ export const tools = [
         description: 'Custom API endpoints powered by your PostHog data.',
         slug: 'endpoints',
         category: 'product_engineering',
-        status: 'beta',
         aliases: ['Query API endpoint'],
     },
     {
@@ -87,6 +86,14 @@ export const tools = [
         slug: 'logs',
         category: 'product_engineering',
         aliases: ['Logging'],
+    },
+    {
+        handle: 'metrics',
+        name: 'Application metrics',
+        description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+        slug: 'docs/metrics',
+        category: 'product_engineering',
+        status: 'alpha',
     },
     {
         handle: 'mcp_analytics',
@@ -129,11 +136,10 @@ export const tools = [
     },
     {
         handle: 'traces',
-        name: 'Traces',
+        name: 'Tracing',
         description: 'Distributed tracing that goes straight to the line that broke',
-        slug: 'traces',
+        slug: 'tracing',
         category: 'product_engineering',
-        status: 'beta',
     },
     {
         handle: 'web_analytics',
@@ -150,16 +156,6 @@ export const tools = [
         slug: 'workflows',
         category: 'automation',
         aliases: ['Customer messaging'],
-    },
-    {
-        handle: 'user_interviews',
-        name: 'User interviews',
-        description: 'Get feedback from users.',
-        // Points at the tool directory as a placeholder. Give this a real slug before removing
-        // WIP status, or search will treat /products as the User Interviews canonical page.
-        slug: 'products',
-        category: 'communication',
-        status: 'WIP',
     },
     {
         handle: 'support',
@@ -191,7 +187,7 @@ export const tools = [
         handle: 'group_analytics',
         name: 'Group Analytics',
         description: 'Analyze multi-seat accounts and other groups.',
-        slug: 'group-analytics',
+        slug: 'docs/product-analytics/group-analytics',
         category: 'analytics',
     },
     {
@@ -337,7 +333,7 @@ export const tools = [
         name: 'Data sources & import (ELT)',
         description: 'Data sources & import (ELT)',
         searchDescription: 'Connect external data sources and import them into PostHog.',
-        slug: 'context-warehouse/sources',
+        slug: 'data-pipelines',
         category: 'data',
     },
     {
@@ -347,7 +343,6 @@ export const tools = [
         searchDescription: 'Transform, enrich, and model your data.',
         slug: 'context-warehouse/data-modeling',
         category: 'data',
-        status: 'beta',
     },
     {
         handle: 'sql_editor',
@@ -361,7 +356,7 @@ export const tools = [
         name: 'Reverse ETL & export',
         description: 'Send data out of PostHog to other tools',
         searchDescription: 'Export and stream your PostHog data to external systems.',
-        slug: 'context-warehouse/reverse-etl-export',
+        slug: 'data-pipelines',
         category: 'data',
         status: 'alpha',
     },

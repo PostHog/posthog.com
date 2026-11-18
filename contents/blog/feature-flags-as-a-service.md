@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Feature flags
@@ -18,9 +19,9 @@ tags:
 
 [Feature flags](/blog/what-is-a-feature-flag) are a tool to conditionally turn on or off code and components. They enable you to safely deploy or roll back new features, which helps you follow the [best practice of disconnecting deployment from release](/blog/github-gitlab-feature-flags#why-do-github-and-gitlab-use-feature-flags).
 
-The basic functionality of feature flags is simple enough to build yourself. The challenge comes as you scale and your needs become more complex. In this post, we'll cover:
+The basic functionality of feature flags is simple enough to [build yourself](/blog/build-or-buy-feature-flags). The challenge comes as you scale and your needs become more complex. In this post, we'll cover:
 
-- The functionality of a [feature flag service](/blog/best-open-source-feature-flag-tools).
+- The functionality of a [feature flag service](/compare/best-open-source-feature-flag-tools).
 - The challenges of building a service in-house.
 - The benefits of feature flags as a service.
 - How to make the build vs. buy decision.

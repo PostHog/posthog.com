@@ -5,7 +5,9 @@ import {
     IconApps,
     IconBox,
     IconBrackets,
+    IconChatHelp,
     IconCode,
+    IconCompass,
     IconCursor,
     IconDashboard,
     IconDatabase,
@@ -21,6 +23,7 @@ import {
     IconPlug,
     IconPrivacy,
     IconPulse,
+    IconRevert,
     IconRewindPlay,
     IconReceipt,
     IconRocket,
@@ -40,6 +43,8 @@ import {
     IconMagicWand,
     IconLlmAnalytics,
     IconSparkles,
+    IconSpotlight,
+    IconTelescope,
     IconEndpoints,
 } from '@posthog/icons'
 
@@ -79,16 +84,21 @@ export const topicIcons = {
     'posthog ai': IconSparkles,
     'migrating to posthog': DataManagement, // to be replaced or removed
     migration: IconUpload,
+    '#mistakes-were-made': IconRevert,
     more: IconEllipsis,
     paths: PathAnalysis, // to be replaced or removed
     'people & properties': IconBrackets,
+    '#poll-the-hogs': IconChatHelp,
     'pricing & billing': IconReceipt,
     monitoring: IconPulse,
     'product analytics': IconGraph,
     sdks: IconBox,
     security: IconPrivacy,
+    '#self-driving': IconCompass,
     'session replay': IconRewindPlay,
+    '#show-and-tell': IconSpotlight,
     'sparks joy': SparksJoy, // to be replaced or removed
+    '#thinking-out-loud': IconTelescope,
     trends: IconTrends,
     toolbar: IconToolbar,
     uncategorized: IconEllipsis,
@@ -123,7 +133,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                         return (
                             <div key={id} className="py-2.5">
                                 <Link
-                                    to={`/questions/topic/${slug}`}
+                                    to={`/forum`}
                                     className={`${className} group flex items-center relative px-2 py-2.5 -mt-2.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
                                 >
                                     <div className="grid grid-cols-12 items-center w-full">

@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -21,7 +22,7 @@ Quality was the name of the game over the last two weeks.
 
 We have a few user facing tweaks and a mountain of bug fixes and refactoring this week. We're not sure what the collective noun for a bunch of bug fixes and refactoring pull requests is - a "virtue"?
 
-If you're self-hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/runbook/upgrading-posthog).
+If you're self-hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/self-host).
 
 ## Release Notes
 

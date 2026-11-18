@@ -24,6 +24,8 @@ interface ExplorerProps {
     rightSidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
     fullScreen?: boolean
+    /** Let the standard app-window background show through the content. */
+    transparent?: boolean
     showTitle?: boolean
     padding?: boolean
     headerBarOptions?: string[]
@@ -79,6 +81,7 @@ export default function Explorer({
     rightSidebarContent,
     children,
     fullScreen = false,
+    transparent = false,
     showTitle = true,
     padding = true,
     headerBarOptions,
@@ -158,10 +161,7 @@ export default function Explorer({
                 )}
             </>
             <ContentWrapper>
-                <div
-                    data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'}`}
-                >
+                <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 h-full">
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
                         <aside
@@ -204,7 +204,7 @@ export default function Explorer({
                     <main
                         data-app="Explorer"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full"
+                        className={`@container flex-1 relative h-full ${transparent ? '' : 'bg-primary'}`}
                     >
                         {fullScreen ? (
                             children

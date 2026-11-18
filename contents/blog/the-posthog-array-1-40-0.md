@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -16,7 +17,7 @@ tags:
 
 Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
 
-> Running a self-hosted instance? Check out our [guide to upgrading PostHog](/docs/runbook/upgrading-posthog).
+> Running a self-hosted instance? Check out our [guide to upgrading PostHog](/docs/self-host).
 
 ## PostHog 1.40.0 release notes
 

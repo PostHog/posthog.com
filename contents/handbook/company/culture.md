@@ -17,7 +17,7 @@ Being all remote has a bunch of advantages:
 * It creates space for lots of uninterrupted work.
 * We judge performance based on real outcomes, not hours spent in an office.
 
-In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#how-it-works), or to cover coffee shop expenses. There's no fixed travel budget, but you can [use your monthly budget](/handbook/people/spending-money#hub-travel-budget) for ad-hoc meetups.
+In addition to all the equipment you'll need, your monthly [`User Limit`](/handbook/people/spending-money#how-it-works) covers things like coworking space or coffee shop expenses. There's no fixed travel budget either - you can use the same limit for [ad-hoc meetups](/handbook/people/spending-money#hub-travel-budget).
 
 ## We're extremely welcoming
 
@@ -31,7 +31,7 @@ This isn't just a meaningless corporate statement. Most of our communication hap
 
 Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improved, which helps increase our responsiveness to the community. 
 
-We're committed to much more than just [public code](/handbook/company/values#make-it-public). 
+We're committed to much more than just [public code](/handbook/values#make-it-public). 
 
 ## We write everything down
 

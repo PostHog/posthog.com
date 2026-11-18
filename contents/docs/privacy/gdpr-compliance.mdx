@@ -91,6 +91,8 @@ You will be using PostHog in one of two ways:
 | PostHog Cloud | Hosted and managed by PostHog | PostHog | You |
 | Self-hosted | Hosted on your private cloud or infrastructure | You | You |
 
+If you use PostHog Cloud, PostHog may be considered a data processor. Article 28 of the GDPR and similar data privacy frameworks may require a contract between a controller and a processor. That contract is the Data Processing Agreement (DPA). See [how to get a signed DPA](/docs/privacy#how-do-i-get-a-signed-dpa).
+
 ### Step 1: Choose a hosting provider
 
 We recommend using [PostHog Cloud EU](/eu) for GDPR compliance, though you can use PostHog Cloud US if you follow additional steps to protect user data. 
@@ -109,7 +111,7 @@ When using PostHog Cloud, you can manage security and [access control](/docs/pri
 
 When self-hosting, it is up to you to [secure your instance](/docs/self-host/configure/securing-posthog). Minimally, we recommend using HTTPS to secure data in transmission and limiting access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links.
 
-We advise caution when installing, building, and enabling [CDPs](/docs/cdp) for your PostHog instance. CDPs are a great way to share and augment data from your instance with other systems, but it's essential to ensure you have the proper controls in place when sharing personal data outside of your self-hosted PostHog instance.
+We advise caution when installing, building, and enabling [CDPs](/docs/data-pipelines) for your PostHog instance. CDPs are a great way to share and augment data from your instance with other systems, but it's essential to ensure you have the proper controls in place when sharing personal data outside of your self-hosted PostHog instance.
 
 ### Step 4: Configure consent
 

@@ -18,19 +18,20 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { features } from './experiments/features'
-import { applications, topFeatures } from './experiments/slides'
+import { applications, keyFeatures } from './experiments/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const experiments = {
     ...getTool('experiments'),
     Icon: IconFlask,
-    type: 'feature_flags',
+    type: 'experiments',
     sharesFreeTier: 'feature_flags',
     // Billed as feature flag requests – Plans/calculator resolve against this billing product.
     billingType: 'feature_flags',
     slug: 'experiments',
     teamSlug: 'experiments',
-    forumTopicId: 350,
-    color: 'purple',
+    forumTag: 'experiments',
+    color: PRODUCT_COLORS.experiments,
     colorSecondary: 'lilac',
     wizardSupport: 'In development',
     billedWith: 'Feature Flags',
@@ -61,7 +62,11 @@ export const experiments = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -84,11 +89,11 @@ export const experiments = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -127,8 +132,7 @@ export const experiments = {
     ],
     overview: {
         title: 'Test changes with statistical significance',
-        description:
-            'Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change actually worked. Built to natively work with product analytics, session replay, feature flags, and surveys.',
+        description: '"Create an A/B test for new onboarding against control"',
         eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },
@@ -199,7 +203,6 @@ export const experiments = {
         },
     },
     useCases: {
-        intro: 'Experiments is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
@@ -330,17 +333,17 @@ export const experiments = {
             {
                 name: 'Optimizely',
                 key: 'optimizely',
-                link: '/blog/posthog-vs-optimizely',
+                link: '/compare/posthog-vs-optimizely',
             },
             {
                 name: 'Amplitude',
                 key: 'amplitude',
-                link: '/blog/posthog-vs-amplitude',
+                link: '/compare/posthog-vs-amplitude',
             },
             // {
             //     name: 'Pendo',
             //     key: 'pendo',
-            //     link: '/blog/posthog-vs-pendo',
+            //     link: '/compare/posthog-vs-pendo',
             // },
             {
                 name: 'VWO',
@@ -349,7 +352,7 @@ export const experiments = {
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',
@@ -389,7 +392,7 @@ export const experiments = {
         'comparison-summary':
             "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform with both Bayesian and frequentist engines. Because results live in one platform, agents can read them directly and act on what actually worked – it's the evaluation that makes your product self-driving. We also support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
         'feature-comparison':
-            "This comparison highlights our unique strengths. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
+            "This comparison highlights our strengths. Group-level experiments are critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
         docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact.",
         'pairs-with':
             "PostHog Experiments truly shine when combined with our other products. Start with an experiment on a new feature, then use product analytics to dive deeper than your primary metric—maybe conversion increased but time-to-convert also increased. Watch session recordings of users in each variant to see exactly how they interact differently. If the experiment wins, roll it out gradually using the same feature flag. This integrated workflow means you're not jumping between tools or trying to match user IDs across systems. It's one platform where everything connects.",

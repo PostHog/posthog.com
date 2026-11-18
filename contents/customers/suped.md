@@ -2,7 +2,7 @@
 title: How Suped is consolidating product data and email automation with PostHog Workflows
 customer: Suped
 featuredImage: >-
-   https://res.cloudinary.com/dmukukwp6/image/upload/2026_Suped_bb639c38a5.png
+   https://res.cloudinary.com/dmukukwp6/image/upload/Suped_1920x1080_ca0a54b6eb.png
 date: 2026-03-03
 ---
 

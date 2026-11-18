@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Product engineers
   - User research
@@ -91,7 +92,7 @@ For each of these insights, you can use session replays to dive deeper into exac
 
 ![Dive](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/dive.mp4)
 
-Enabling session replay also captures performance metrics which you can aggregate and analyze using [SQL insights](/docs/product-analytics/sql) and the `raw_session_replay_events` table.
+Enabling session replay also captures performance metrics which you can aggregate and analyze using [SQL insights](/docs/data-warehouse/sql) and the `raw_session_replay_events` table.
 
 The combination of these insights enables you to understand your current user experience and what areas need improvement.
 

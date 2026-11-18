@@ -9,7 +9,7 @@ import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import Mermaid from 'components/Mermaid'
+const Mermaid = React.lazy(() => import('components/Mermaid'))
 import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
 import { useAppSettings, useAppActions } from '../../context/App'
@@ -35,6 +35,8 @@ type CodeBlockProps = {
     showAskAI?: boolean
     focusOnLines?: string
     tooltips?: { lineNumber: number; content: string }[]
+    /** Fired after the code reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 
     onChange?: (language: LanguageOption) => void
     currentLanguage: LanguageOption
@@ -50,6 +52,8 @@ type SingleCodeBlockProps = {
     showAskAI?: boolean
     language: string
     children: string
+    /** Fired after the code reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 }
 
 type MdxCodeBlock = {
@@ -88,7 +92,11 @@ type MdxCodeBlockChildren = {
 
 export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element | null => {
     if (children?.props?.className?.includes('language-mermaid')) {
-        return <Mermaid>{children.props.children}</Mermaid>
+        return (
+            <React.Suspense fallback={null}>
+                <Mermaid>{children.props.children}</Mermaid>
+            </React.Suspense>
+        )
     }
     const childArray = Array.isArray(children) ? children : [children]
 
@@ -187,6 +195,7 @@ export const CodeBlock = ({
     onChange,
     lineNumberStart = 1,
     tooltips,
+    onCopy,
 }: CodeBlockProps): JSX.Element | null => {
     if (languages.length < 0 || !currentLanguage) {
         return null
@@ -238,15 +247,20 @@ export const CodeBlock = ({
             .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
-            .replace(/<ph_posthog_js_defaults>/g, '2026-05-30')
+            .replace(/<ph_posthog_js_defaults>/g, '2026-08-30')
             .replace(
                 /<ph_proxy_path>/g,
                 projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
             )
     }
 
-    const copyToClipboard = (code: string): void => {
-        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+    const copyToClipboard = async (code: string): Promise<void> => {
+        try {
+            await navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+        } catch {
+            return
+        }
+        onCopy?.()
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)
     }
@@ -328,7 +342,10 @@ export const CodeBlock = ({
                             </Tab.List>
                         </Tab.Group>
                     ) : showLabel ? (
-                        <div className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50">
+                        <div
+                            className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50"
+                            data-md-export={currentLanguage.file || label ? undefined : 'skip'}
+                        >
                             {currentLanguage.file ? (
                                 <div className="flex items-center space-x-1.5">
                                     <svg
@@ -395,7 +412,10 @@ export const CodeBlock = ({
                             return (
                                 <>
                                     {activeLanguage.runInPostHog !== 'false' && activeLanguage.language === 'sql' && (
-                                        <div className="relative flex items-center justify-center px-1">
+                                        <div
+                                            className="relative flex items-center justify-center px-1"
+                                            data-md-export="skip"
+                                        >
                                             <a
                                                 href={`${generateSQLEditorLink(activeLanguage.code)}`}
                                                 target="_blank"

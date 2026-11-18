@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -16,7 +17,7 @@ tags:
 
 Big new integration - PostHog now has a library for iOS!
 
-Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host) your instance.
 
 ## Release notes
 

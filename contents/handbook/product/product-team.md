@@ -39,7 +39,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend className="bg-transparent"><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="posthog-desktop" />
 -   <SmallTeam slug="self-driving" />
 
 </fieldset>
@@ -69,7 +68,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend className="bg-transparent"><TeamMember name="Mike Warren" photo /></legend>
 
--   <SmallTeam slug="analytics-platform" />
+-   <SmallTeam slug="query-performance" />
 -   <SmallTeam slug="mcp-analytics" />
 -   <SmallTeam slug="product-analytics" />
 -   <SmallTeam slug="web-analytics" />
@@ -91,6 +90,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="feature-flags" />
+-   <SmallTeam slug="surfaces" />
 
 </fieldset>
 

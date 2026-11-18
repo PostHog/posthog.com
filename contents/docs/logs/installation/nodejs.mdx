@@ -1,11 +1,15 @@
 ---
-title: Node.js logs installation
+title: Node.js Logs installation
 platformLogo: nodejs
 showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+> **Note:** This guide sends Node.js logs through OpenTelemetry. `posthog-node` 5.65.0 or later also has a native logs API: set the `logs` client option (for example `logs: { serviceName: 'my-service' }`), then call `posthog.logger.info('message', attributes)` or `posthog.captureLog({ body, level, attributes })`. Native records carry the active span's trace and span IDs. See the [SDK support table](/docs/logs/installation#sdk-support-by-signal).
+
+> **Note:** If you use Pino or Winston, follow the [Pino](/docs/logs/installation/pino) or [Winston](/docs/logs/installation/winston) guide instead. It sends your existing logs without changes to your logger calls.
 
 <Steps>
 
@@ -41,14 +45,16 @@ const sdk = new NodeSDK({
   resource: resourceFromAttributes({
     'service.name': 'my-node-service',
   }),
-  logRecordProcessor: new BatchLogRecordProcessor(
-    new OTLPLogExporter({
-      url: '<ph_client_api_host>/i/v1/logs',
-      headers: {
-        'Authorization': 'Bearer <ph_project_token>'
-      }
+  logRecordProcessors: [
+    new BatchLogRecordProcessor({
+      exporter: new OTLPLogExporter({
+        url: '<ph_client_api_host>/i/v1/logs',
+        headers: {
+          'Authorization': 'Bearer <ph_project_token>'
+        }
+      })
     })
-  )
+  ]
 });
 
 sdk.start();
@@ -58,11 +64,13 @@ Alternatively, you can pass the API key as a query parameter:
 
 ```javascript
 const sdk = new NodeSDK({
-  logRecordProcessor: new BatchLogRecordProcessor(
-    new OTLPLogExporter({
-      url: '<ph_client_api_host>/i/v1/logs?token=<ph_project_token>'
+  logRecordProcessors: [
+    new BatchLogRecordProcessor({
+      exporter: new OTLPLogExporter({
+        url: '<ph_client_api_host>/i/v1/logs?token=<ph_project_token>'
+      })
     })
-  )
+  ]
 });
 ```
 

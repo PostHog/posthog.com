@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -17,7 +18,7 @@ tags:
 
 Annotations, filtering all functionality by cohorts, retention table filtering and many, many bugfixes. It's all in this PostHog update.
 
-If you're self hosting and want these features - [update your PostHog](/docs/runbook/upgrading-posthog).
+If you're self hosting and want these features - [update your PostHog](/docs/self-host).
 
 Please also update your `posthog-js` version to at least `1.3.4` if you have it installed via NPM. If you're using the snippet, you're good to go!  
 

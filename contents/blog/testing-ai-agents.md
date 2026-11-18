@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820
+ogImage: generated
 category: Engineering
 tags:
   - Engineering
@@ -112,7 +113,7 @@ LLM-as-a-Judge evaluators have a higher cost than deterministic code-based evalu
 
 After learning about the types of evaluators that can help you test your agent, similar to how you used to write integration tests, you now write multiple evaluation suites, with a mix of code-based and LLM-as-a-Judge evaluators. You cover your happy paths as well as edge cases and some of the bugs you've been fixing over the past little while.
 
-Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with instances of your database and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
+Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with [instances of your database](/blog/how-to-benchmark-ai-agents#level-3-restored-real-data-slices) and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
 
 You then realize that running these locally means trusting that everyone to do that before shipping changes, but as with unit tests, we don't leave it to chance. You add a pipeline step in your CI to run all of these evaluation suites. You can, and probably should, limit which PRs these evaluations are run for. If there are no changes in the agent code it's not worth spending money on LLM tokens to run the evaluations.
 
@@ -126,7 +127,7 @@ The offline evaluations we run while developing our agent only capture the input
 
 Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/ai-evals). You can't, however, only depend on code-based evaluators, so you can also:
 
-1. Use a cheaper LLM-as-a-Judge model that can still capture the intricacies of what you're evaluating
+1. Use a [cheaper LLM-as-a-Judge model](/newsletter/decision-models#4-use-them-in-place-of-overqualified-llms) that can still capture the intricacies of what you're evaluating
 2. Filter the traces on which you run certain evaluators, for example by feature
 3. Only run the evaluator on a sample of your production traces, we recommend 5-10%, which should give you a representative random sample
 

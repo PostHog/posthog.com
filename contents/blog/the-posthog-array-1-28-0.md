@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-28-0.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   Understand your conversion rates better, PostHog 1.28.0 has launched!
   Significantly revamped performance for slower queries, advanced engagement
@@ -35,7 +36,7 @@ This version includes a subsequent patch release (1.28.1) launched on **Septembe
 
 ## PostHog 1.28.0 release notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host).
 
 **Release highlights:**
 

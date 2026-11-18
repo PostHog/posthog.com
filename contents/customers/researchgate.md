@@ -2,7 +2,7 @@
 title: 'How ResearchGate tests product changes for over 25M users'
 customer: ResearchGate
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_posthog_7a5a2cf3ac.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_1920x1080_040d47a06b.png
 date: 2024-06-25
 ---
 
@@ -30,7 +30,7 @@ Over the years ResearchGate’s team has built everything from internal experime
 
 The scale of ResearchGate’s community meant that the decision to switch wasn’t made lightly, or quickly. Paul spoke with multiple providers before making a decision, with many conversations ending due to pricing and scalability issues. 
 
-“We have hundreds of millions of pageviews per month,” explains Paul. “So, based just on our volume, we’re always in that custom enterprise package and have to ‘Talk to Sales’. I had explicit conversations with [LaunchDarkly](/blog/posthog-vs-launchdarkly), [Optimizely](/blog/posthog-vs-optimizely), and others, but they were way out of our price range.”
+“We have hundreds of millions of pageviews per month,” explains Paul. “So, based just on our volume, we’re always in that custom enterprise package and have to ‘Talk to Sales’. I had explicit conversations with [LaunchDarkly](/compare/posthog-vs-launchdarkly), [Optimizely](/compare/posthog-vs-optimizely), and others, but they were way out of our price range.”
 
 In addition to offering lower and more transparent pricing, PostHog also worked closely with Paul’s team to provide proactive support — including in an on-site visit earlier this year. 
 

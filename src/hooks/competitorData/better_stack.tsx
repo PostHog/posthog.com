@@ -5,6 +5,43 @@ export const better_stack = {
         icon: '/images/competitors/betterstack.png',
     },
     products: {
+        traces: {
+            available: true,
+            tracing: {
+                features: {
+                    distributed_trace_waterfall: true,
+                    service_dependency_map: true,
+                    code_level_profiling: false,
+                    sampling_controls: true,
+                    retention_controls: true,
+                },
+            },
+            standards_and_setup: {
+                features: {
+                    native_open_telemetry_ingest: true,
+                    no_proprietary_sdk_required: true,
+                    instrumentation: 'eBPF',
+                },
+            },
+            one_platform: {
+                features: {
+                    signals_alongside_traces: true,
+                },
+            },
+            ai_and_self_driving: {
+                features: {
+                    ai_opens_code_fix_pr: false,
+                    fix_and_open_pr_from_slack: false,
+                },
+            },
+            pricing: {
+                features: {
+                    pricing_model: 'Per GB ingested',
+                    free_tier: true,
+                    open_source: false,
+                },
+            },
+        },
         error_tracking: {
             available: true,
         },

@@ -1,0 +1,93 @@
+---
+title: Troubleshooting materialized views
+sidebar: Docs
+showTitle: true
+---
+
+This page covers troubleshooting for materialized views. For setup, see [materialized views](/docs/data-warehouse/views/materialize). For what happens after repeated failures, see [failures and suspension](/docs/data-warehouse/views/failures-and-suspension). For sources and syncs, see [data warehouse troubleshooting](/docs/data-warehouse/troubleshooting).
+
+## Start with the run history
+
+**Run history** on a view's **Materialization** tab lists every run with its status, how many rows it wrote, and the error if it failed. Almost every problem below is diagnosed from that list, so check it first.
+
+A run is one of:
+
+- **Completed.** The run finished and the stored table is up to date as of that run.
+- **Running.** The run is in progress. The previous result is still being served until it finishes.
+- **Failed.** The run stopped on an error. The stored table still holds the last successful result, so queries keep working, but the data is as old as that run.
+- **Skipped.** The view never ran, because a view it depends on failed or is suspended. The error names that upstream view. Fix the upstream one and this view refreshes on its next run.
+- **Canceled.** The run was stopped before it finished, usually because a newer run of the same view started first. The next scheduled run picks it back up.
+
+## A run failed
+
+Open the failed run in the runs list and read its error. Most failures are the query itself rather than the schedule, and the same error usually reproduces if you run the query in the [SQL editor](https://app.posthog.com/sql).
+
+Common causes:
+
+- **A source table changed.** A column was renamed or dropped upstream, or a linked source stopped syncing. Fix the query or the source, then use **Sync now**.
+- **The query is too expensive.** See the timeout section below.
+- **A view it depends on failed.** If your view reads another materialized view, check that one's runs too. Fixing the upstream view fixes both.
+
+Failed runs are retried on the next scheduled tick, so a failure caused by a transient problem clears on its own. After 5 failures in a row, PostHog [suspends the view](/docs/data-warehouse/views/failures-and-suspension).
+
+## A run timed out
+
+Materialization queries get more time than standard queries, but a run's query still stops after 10 minutes. PostHog tries a run up to 3 times before it marks the run as failed. A run that runs out of memory is not retried.
+
+If a view times out repeatedly, the query is doing too much work per run. Options, roughly in order of effort:
+
+- **Narrow what the query reads.** Add a date bound, or drop columns you don't use.
+- **Switch to [incremental](/docs/data-warehouse/views/materialize#incremental-materialization).** Each run then reads only new rows rather than the whole history, which is usually the largest single win for a view that has outgrown its window.
+- **Split the view.** Materialize the expensive subquery as its own view, then build the rest on top of it.
+
+## The view isn't refreshing
+
+If the numbers are stale but nothing shows as failed, scheduled runs are probably paused. There are two reasons for that, and the panel tells you which:
+
+**Refreshes are paused.** Someone chose **Pause refreshes**, and the panel says scheduled refreshes are paused. Pick a cadence to start them again, or use **Sync now** for a one-off refresh.
+
+**The view is suspended.** After a view fails 5 times in a row, PostHog stops scheduling it. The panel shows a banner with the error that suspended it and a **Resume schedule** button. Fix the cause first, then resume. Resuming without fixing the query just fails again. See [failures and suspension](/docs/data-warehouse/views/failures-and-suspension).
+
+Views can be suspended separately on ClickHouse and Trino (the managed warehouse). The web UI **Resume** button resumes both engines. To resume only one engine, use the [`view-resume`](/docs/data-warehouse/surfaces/mcp#view-management-tools) MCP tool with the `engine` parameter set to `clickhouse` or `trino`.
+
+## The data is older than the refresh interval
+
+A view is only as fresh as its last completed run and the data it reads. See [how fresh is the data, really](/docs/data-warehouse/views/freshness#how-fresh-is-the-data-really).
+
+If you need fresher data than the view can produce, make each run faster before making the cadence shorter.
+
+## Duplicate rows after switching to incremental
+
+Each run matches the rows it produces against the rows already stored, using the unique key. A match updates the stored row. No match adds a new one. So duplicates mean the unique key is not identifying rows the way you expect.
+
+Check that:
+
+- The unique key includes every column that distinguishes one output row from another. If your query groups rows, it must include every `GROUP BY` column.
+- No column in the unique key can be null. A null never matches an existing row, so it appends a duplicate on every run. Wrap it in `coalesce()`.
+
+After correcting the unique key, the duplicates already stored need clearing. Changing the incremental configuration rebuilds the table on the next run anyway, so this usually resolves itself.
+
+## Rows that should be gone are still there
+
+Incremental runs add and update rows, but never delete them. A row that disappears from your source data stays in the materialized table.
+
+Choose **Run full refresh** from the menu next to **Sync now** to clear them, or switch the view to full refresh if rows regularly go away.
+
+## The view is always refreshed in full
+
+Two different things produce this.
+
+**The query isn't eligible.** The panel says the view is always refreshed in full and names a reason. See [which queries can be incremental](/docs/data-warehouse/views/materialize#which-queries-can-be-incremental) for the full list and what to use instead.
+
+**The query changed.** Editing a view's SQL, incremental column, or unique key makes the stored rows unsafe to build on, so the next run rebuilds everything. This is expected and one-off. If a view rebuilds in full on _every_ run, check whether something is rewriting the query between runs.
+
+## Incremental is on but runs aren't any faster
+
+If the incremental column sits behind an aggregating subquery, PostHog can't narrow what the source scan reads, so each run scans about as much as a full refresh. The panel warns about this when it applies.
+
+Restructure the query so the incremental column comes from the source rows directly rather than out of an aggregate.
+
+## Further reading
+
+- [Materialized views](/docs/data-warehouse/views/materialize)
+- [Cutting costs](/docs/data-warehouse/cutting-costs)

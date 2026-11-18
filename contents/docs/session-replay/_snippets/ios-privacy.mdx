@@ -1,5 +1,7 @@
 import SensitiveThirdPartyScreens from "./sensitive-third-party-screens.mdx"
 
+### Masking views
+
 To replace any type of `UIView` with a redacted version in the replay, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) to `ph-no-capture`:
 
 ```swift
@@ -8,6 +10,27 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 ```
 
 > **Note:** For SwiftUI please refer to the [Masking in SwiftUI](#masking-in-swiftui) section below
+
+### Unmasking views
+
+To explicitly prevent a `UIView` and all its subviews from being masked, even when `maskAllTextInputs` or `maskAllImages` is enabled, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) or [accessibilityLabel](https://developer.apple.com/documentation/objectivec/nsobject-swift.class/accessibilitylabel) to `ph-no-mask`:
+
+```swift
+let lblPublicTitle = UILabel(frame: CGRect(x: 50, y: 50, width: 200, height: 40))
+lblPublicTitle.accessibilityIdentifier = "ph-no-mask"
+```
+
+The match is a case-insensitive substring, so `ph-no-mask` can be combined with an identifier you already use:
+
+```swift
+lblPublicTitle.accessibilityIdentifier = "screen-title ph-no-mask"
+```
+
+<CalloutBox title="Requires version 3.71.0" type="info" icon="IconInfo">
+
+Support for the `ph-no-mask` identifier is added in iOS SDK version 3.71.0.
+
+</CalloutBox>
 
 ### Masking in SwiftUI
 
@@ -36,5 +59,9 @@ Apps built with Xcode 26 use a new SwiftUI rendering model that changes how Swif
 **If you're building with Xcode 26**, update to [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later to ensure these modifiers work correctly.
 
 </CalloutBox>
+
+### Precedence and propagation
+
+`ph-no-mask` applies to the view it is set on and all of its subviews, and it takes precedence over both `ph-no-capture` and PostHog's default masking heuristics. A view marked with `ph-no-capture` that sits inside a `ph-no-mask` subtree is **not** masked, and neither are sensitive views such as text fields that PostHog would otherwise mask automatically. Only set `ph-no-mask` on a subtree you know contains no sensitive data.
 
 <SensitiveThirdPartyScreens />

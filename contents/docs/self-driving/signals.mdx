@@ -7,12 +7,6 @@ showTitle: true
 
 import { CallToAction } from "components/CallToAction";
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 A signal is a structured finding: something worth knowing, with the evidence behind it and a suggested action. Signals are the raw material of the [self-improving loop](/docs/self-driving/self-improving-loop). Everything self-driving does starts from a signal.
 
 ## What's in a signal
@@ -53,7 +47,7 @@ Neither is the upgrade from the other, and most projects run both. They make a r
 
 So: reach for a **source** when the stream is well-defined and missing an item would be unacceptable. Reach for a **scout** when everything in the stream is technically "something" and you need judgement applied, when the interesting thing spans several surfaces, or when "worth knowing" is a matter of opinion only your team can define.
 
-They also compose. If a detector already exists, a scout can sit on top of it rather than replace it – the source keeps its deterministic coverage while the scout bundles related items, weighs who's affected, and flags what nobody actioned.
+They also compose. If a detector already exists, a scout can sit on top of it rather than replace it – the source keeps its deterministic coverage while the scout bundles related items, weighs who's affected, and flags what nobody actioned. An issue tracker splits cleanly this way. The GitHub Issues or Linear source catches each new issue as it arrives. A scout re-reads the open backlog and finds the issues whose state changed after someone filed them.
 
 ## From signals to reports
 

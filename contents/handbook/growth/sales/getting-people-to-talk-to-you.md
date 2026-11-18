@@ -50,7 +50,7 @@ Despite the organization using PostHog, they may not recognize you/PostHog, or m
 
 When crafting a message, consider the following:
 
-1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. [Tim has some great thoughts on this subject](https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549).
+1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. <PrivateLink url="https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549">Tim has some great thoughts on this subject</PrivateLink>.
 2. Avoid fluff. "I'm just reaching out to", "I just wanted to" etc. are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
 3. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
 4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?

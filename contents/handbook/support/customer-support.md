@@ -78,7 +78,7 @@ When support engineers need to escalate issues to other engineering teams for de
 
 ### CSAT surveys
 
-We send out a [CSAT survey](https://us.posthog.com/project/2/surveys/019f37dc-7c9a-0000-d86a-aa8bf46f4917) after a ticket has been resolved for at least 1 day using [this workflow for tickets set to resolved](https://us.posthog.com/project/2/workflows/019f3834-8dbd-0000-4b19-073031109b21/workflow) and [this workflow for tickets set to pending](https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow). The emails contain a link to the hosted survey with their `distinct_id`, `ticket_id`, and `ticket_number` as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event.
+We send out a <PrivateLink url="https://us.posthog.com/project/2/surveys/019f37dc-7c9a-0000-d86a-aa8bf46f4917">CSAT survey</PrivateLink> after a ticket has been resolved for at least 1 day using <PrivateLink url="https://us.posthog.com/project/2/workflows/019f3834-8dbd-0000-4b19-073031109b21/workflow">this workflow for tickets set to resolved</PrivateLink> and <PrivateLink url="https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow">this workflow for tickets set to pending</PrivateLink>. The emails contain a link to the hosted survey with their `distinct_id`, `ticket_id`, and `ticket_number` as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event.
 
 As an incentive, we offer to feed one hedgehog for every survey sent, and we do this by making a quarterly donation to [the Suffolk Prickles Hedgehog Rescue Charity](https://suffolkprickles.org/).
 
@@ -99,6 +99,12 @@ We very rarely receive messages from people wishing to make a legal claim agains
 
 Support =/= community - we consider them to be separate things.
 
+### Community questions and Discord
+
+Community is not support, but it is one of our best sources of product feedback. [Community questions](/questions) and Discord show what users ask and say about each product area, in real time.
+
+Questions are routed to team Slack channels by topic, so each team can see the posts about its own products. Support heroes are welcome to [read their team's community posts](/handbook/engineering/support-hero#community-questions-and-discord) when they have time, but it is not a requirement. PostHog AI and other community members answer most questions.
+
 ### Tutorials
 
 We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](/tutorials), [blog posts](/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
@@ -116,21 +122,21 @@ Issues related to billing are handled exclusively by our billing engineers. Bill
 
 We often receive requests for demos, consultations or other sales-related requests. Most of the time these can be escalated to the [Sales team](/handbook/growth/sales/overview) if they arrive via PostHog Support.
 
-We also often get requests for partnerships, backlinks, or messages trying to sell us baby Yahama pianos. Sometimes, people want to invest in PostHog. Most of these are obviously spam and can be ignored, but if you think an opportunity may be genuine then you can forward it to <TeamMember name="Joe Martin" photo /> so he can take over. 
+We also often get requests for partnerships, backlinks, or messages trying to sell us baby Yahama pianos. Sometimes, people want to invest in PostHog. Most of these are obviously spam and can be ignored, but if you think an opportunity may be genuine then you can forward it to <TeamMember name="Joe Black" photo /> so he can take over. 
 
 ### Users asking for their data to be deleted
 
-Most of the time users can self-serve deletion requests and should be encouraged to do so in order to save time and ensure they take responsibility for deleting their own data. Users can delete their [environment](https://us.posthog.com/settings/environment-danger-zone), [project](https://us.posthog.com/settings/project-danger-zone), and [organization](https://us.posthog.com/settings/organization-danger-zone) in the appropriate 'Danger Zone' section of their settings page if they have the correct permissions. Admins can remove members from their organization in [the Members page](https://us.posthog.com/settings/organization-members).
+Most of the time users can self-serve deletion requests and should be encouraged to do so in order to save time and ensure they take responsibility for deleting their own data. Users can delete their [project](https://app.posthog.com/settings/project-danger-zone) and [organization](https://app.posthog.com/settings/organization-danger-zone) in the appropriate 'Danger Zone' section of their settings page if they have the correct permissions. Admins can remove members from their organization in [the Members page](https://app.posthog.com/settings/organization-members).
 
 If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that of an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through PostHog Support.) Only then should you delete any data on their behalf. 
 
-If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Martin" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
+If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Black" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
 
 #### Targeted deletion requests
 
 Occasionally users will mistakenly share sensitive data which should not have been shared via event/person properties.  As such they wish to be more targeted in their deletion by removing only certain properties or events instead of an entire project.  
 
-> Before taking any deletion action, they should ensure that they are no longer sending the sensitive data to us either by [redacting information client-side](/docs/libraries/js/usage#redacting-information-in-events) or setting up a [CDP transformation](https://posthog.com/docs/cdp/transformations/property-filter-plugin).  If they don't do this first they will continue to send us the sensitive data even after deletion is actioned.
+> Before taking any deletion action, they should ensure that they are no longer sending the sensitive data to us either by [redacting information client-side](/docs/libraries/js/usage#redacting-information-in-events) or setting up a [CDP transformation](/docs/data-pipelines/transformations/template-filter-properties).  If they don't do this first they will continue to send us the sensitive data even after deletion is actioned.
 
 Due to the nature of how our infrastructure works, events and properties cannot be amended once they are stored in Clickhouse.  As such, the only way to remove sensitive data is to delete the person profile associated with the events where the sensitive data has been captured.  This can be achieved [in the app or via the API](https://posthog.com/docs/data/persons#deleting-person-data).  As per our [deletion docs](https://posthog.com/docs/privacy/data-deletion#asynchronous-data-deletion), the person profile will be removed immediately but the events will take some time (days or even weeks) to be removed.
 
@@ -178,7 +184,7 @@ Steps for feature requests from normal and high priority users are pretty much t
 
 #### Reaching the sales / CS / onboarding teams
 
-If you need to reach the humans who look after a customer — for example, a support ticket should be handled by one of the sales / CS / onboarding teams, or you've spotted a sales lead — message [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) to let the teams know. It's the cross-team channel for everyone who owns customers.
+If you need to reach the humans who look after a customer — for example, a support ticket should be handled by one of the sales / CS / onboarding teams, or you've spotted a sales lead — message <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink> to let the teams know. It's the cross-team channel for everyone who owns customers.
 
 
 #### How should I handle self-hosted setups?

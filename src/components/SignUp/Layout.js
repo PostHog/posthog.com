@@ -16,7 +16,7 @@ export default function Layout({ children, crumbs = [] }) {
                         className="text-primary opacity-20"
                         width="auto"
                     />
-                    <Link to="/questions" className="opacity-50 font-semibold text-black hover:text-black">
+                    <Link to="/forum" className="opacity-50 font-semibold text-black hover:text-black">
                         Questions?
                     </Link>
                 </div>

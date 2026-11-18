@@ -11,7 +11,7 @@ tags:
 
 > This tutorial requires you to first create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
 
-It's useful receive Slack notifications as soon as users respond to your surveys. You can do this in PostHog using our [realtime destinations](/docs/cdp/destinations).
+It's useful receive Slack notifications as soon as users respond to your surveys. You can do this in PostHog using our [realtime destinations](/docs/data-pipelines/destinations).
 
 After you've created your survey, go to the [data pipeline destinations tab](https://app.posthog.com/data-management/destinations), search for the **Slack** destination and click **+ Create**. Then on the creation screen:
 

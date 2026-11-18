@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Film_Noir_Hog_Evals_beta_announcement_blog_95685493eb.png
 featuredImageType: full
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -57,7 +58,7 @@ You can also create custom evals to suit the specific use cases of your AI featu
 ## Why use evals? A tale of two math problems
 **Problem 1: Manual review doesn’t scale**
 
-[LLM observability tools](/blog/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
+[LLM observability tools](/compare/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
 
 Slop (a disguting yet accurate term) is any output from an LLM that feels generic, low quality, or just plain wrong.
 
@@ -139,7 +140,7 @@ When you connect eval results to real user behavior, you can see which AI behavi
 
 **The AI product improvement loop:**
 
-**1. [AI Observability](/llm-analytics)** shows what your AI is doing
+**1. [AI Observability](/ai-observability)** shows what your AI is doing
 - See inputs, outputs, latency, tokens, costs, errors
 - Summarize LLM traces and events for quick debugging 
 - Run evals to batch test for issues and opportunities 
@@ -157,7 +158,7 @@ When you connect eval results to real user behavior, you can see which AI behavi
 </div>
 
 ## Try it now
-If you're already using [AI Observability](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, you'll need to use your LLM API key. Evals count as regular LLM events (100K events included on our free tier).
+If you're already using [AI Observability](/ai-observability) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, you'll need to use your LLM API key. Evals count as regular LLM events (100K events included on our free tier).
 
 <p>
 	<CallToAction to="https://app.posthog.com/ai-evals/evaluations">

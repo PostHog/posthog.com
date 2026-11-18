@@ -71,7 +71,7 @@ Our third and current harness uses the Claude Agent SDK with MCP tools and skill
 
 1. **Our agent could be more creative.** The Claude Agent SDK gives PostHog AI access to a code-execution sandbox. The agent can use it to query with SQL and run custom scripts, unlocking new capabilities without us needing to build them.
 
-2. **Agents are a primary persona.** Our “users” are increasingly agents, whether that is through PostHog AI or [our MCP server](/docs/model-context-protocol). Our work here should converge and support both using a single architecture.
+2. **Agents are a primary persona.** Our “users” are [increasingly agents](/newsletter/analytics-changed#3-treat-agents-like-a-new-set-of-users), whether that is through PostHog AI or [our MCP server](/docs/model-context-protocol). Our work here should converge and support both using a single architecture.
 
 The flexibility of the sandbox plus the scalability of MCP tools and skill standards (which I’ll explain more about later) solves the issues of the second harness and positions us better for an [agent-first future](/newsletter/2030-shaped-software#product-infrastructure-is-agent-first).
 
@@ -115,7 +115,7 @@ We didn’t have observability and evaluation early and regretted it. We wish we
 
 - Automated scorers like [LLM-as-judge](/blog/stop-ai-slop) and deterministic checks
 
-Basically, [AI Observability](/llm-analytics).
+Basically, [AI Observability](/ai-observability).
 
 Unfortunately, AI Observability alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
 

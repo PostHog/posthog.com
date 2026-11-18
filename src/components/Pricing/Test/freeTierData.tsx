@@ -65,7 +65,7 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-red',
     },
     {
-        name: 'Data warehouse',
+        name: 'Sources',
         allocation: '1M rows + FREE historical',
         note: (
             <>
@@ -77,7 +77,26 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-purple',
     },
     {
-        name: 'Data pipelines',
+        name: 'Marketing analytics',
+        badge: 'Beta',
+        description: 'Billed with sources',
+        icon: Icons.IconMegaphone,
+        iconColor: 'text-orange',
+    },
+    {
+        name: 'Data modeling',
+        description: 'Billed with data warehouse. Free for now.',
+        icon: Icons.IconStack,
+        iconColor: 'text-lilac',
+    },
+    {
+        name: 'Endpoints',
+        description: 'Billed with data warehouse. Free for now.',
+        icon: Icons.IconEndpoints,
+        iconColor: 'text-teal',
+    },
+    {
+        name: 'Destinations',
         allocation: '10K events + 1M rows',
         note: (
             <>
@@ -91,9 +110,15 @@ export const freeTierProducts: FreeTierProduct[] = [
     },
     {
         name: 'AI Observability',
-        allocation: '100K events',
+        allocation: '100K events/month, shared with evaluations',
         icon: Icons.IconLlmAnalytics,
         iconColor: 'text-purple',
+    },
+    {
+        name: 'Evaluations',
+        description: 'Billed with AI observability',
+        icon: Icons.IconListCheck,
+        iconColor: 'text-lilac',
     },
     {
         name: 'PostHog AI',
@@ -103,8 +128,8 @@ export const freeTierProducts: FreeTierProduct[] = [
     },
     {
         name: 'Inbox',
-        badge: 'Beta',
-        allocation: '3 PRs',
+        allocation: '1,000 credits, first month only',
+        note: 'Worth $10, for up to 5 reports. One time, not monthly: there is no recurring free tier.',
         icon: Icons.IconNotification,
         iconColor: 'text-blue',
     },
@@ -125,5 +150,18 @@ export const freeTierProducts: FreeTierProduct[] = [
         allocation: '2500 credits (worth $25)',
         icon: Icons.IconEye,
         iconColor: 'text-yellow',
+    },
+    {
+        name: 'PostHog Desktop',
+        badge: 'Beta',
+        allocation: '2000 credits (worth $20)',
+        note: (
+            <>
+                Its own balance, separate from PostHog AI's. Model tokens are passed through at the provider's price
+                with no markup; cloud tasks also spend credits on the sandbox they run on.
+            </>
+        ),
+        icon: Icons.IconLaptop,
+        iconColor: 'text-brown dark:text-brown-dark',
     },
 ]

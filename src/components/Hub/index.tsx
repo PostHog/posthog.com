@@ -8,7 +8,7 @@ export default function Hub({ folder, sidebar, title }: { folder: string; sideba
             <div className="flex gap-8 h-full">
                 <section className="flex-1">
                     <ScrollArea>
-                        <h2 className="mb-4">{title}</h2>
+                        <h1 className="mb-4">{title}</h1>
                         <CategoryGrid folder={folder} />
                     </ScrollArea>
                 </section>

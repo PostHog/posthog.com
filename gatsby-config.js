@@ -1,4 +1,5 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
+const { isNoindexSdkReference, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
@@ -17,6 +18,7 @@ const getQuestionPages = async (base) => {
         // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
             fields: ['permalink'],
+            filters: { forumTopic: { id: { $notNull: true } } },
             pagination: {
                 page,
                 pageSize: 100,
@@ -51,7 +53,7 @@ const getQuestionPages = async (base) => {
     )
 
     const questions = allResponses.flatMap((response) =>
-        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+        response.data.map((question) => ({ path: `${base}/forum/p/${question.attributes.permalink}` }))
     )
 
     return questions
@@ -72,6 +74,7 @@ module.exports = {
     },
     flags: {
         DEV_SSR: false,
+        PARALLEL_SOURCING: process.env.NODE_ENV === 'development',
     },
     siteMetadata: {
         title: 'PostHog',
@@ -130,21 +133,25 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                // Eval files sit beside their pages but are read only by evals/, never by the site.
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`, `**/*.eval.yaml`],
             },
         },
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                lessBabel: true,
                 shouldBlockNodeFromTransformation: (node) =>
-                    node.internal.type === 'File' &&
-                    // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
-                    // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
-                    // (and thus pages).
-                    ((node.sourceInstanceName === 'posthog-main-repo' &&
-                        node.name === 'SKILL' &&
-                        (node.relativeDirectory || '').includes('/skills/')) ||
-                        (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
+                    // SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js).
+                    isSdkReferenceFile(node) ||
+                    (node.internal.type === 'File' &&
+                        // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
+                        // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
+                        // (and thus pages).
+                        ((node.sourceInstanceName === 'posthog-main-repo' &&
+                            node.name === 'SKILL' &&
+                            (node.relativeDirectory || '').includes('/skills/')) ||
+                            (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com'))),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -207,7 +214,7 @@ module.exports = {
                 background_color: '#E5E7E0',
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
-                icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
+                icon: 'src/images/posthog-icon-white.svg',
             },
         },
         `gatsby-plugin-postcss`,
@@ -233,11 +240,31 @@ module.exports = {
                     return site.siteMetadata.siteUrl
                 },
                 resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
-                    const transformedPages = allPages.map(({ path }) => {
-                        return {
-                            path: `${site.siteMetadata.siteUrl}${path}`,
-                        }
-                    })
+                    // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
+                    const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
+
+                    // These SDKs' HogRef pages redirect to their Markdown references (see vercel.json).
+                    const REDIRECTED_SDK_REFERENCES = ['posthog-python', 'posthog-node']
+                    const isRedirectedSdkReference = (path) =>
+                        REDIRECTED_SDK_REFERENCES.some(
+                            (id) =>
+                                path === `/docs/references/${id}` ||
+                                path.startsWith(`/docs/references/${id}/`) ||
+                                path.startsWith(`/docs/references/${id}-`)
+                        )
+
+                    const transformedPages = allPages
+                        .filter(
+                            ({ path }) =>
+                                !VERSIONED_SDK_REFERENCE.test(path) &&
+                                !isNoindexSdkReference(path) &&
+                                !isRedirectedSdkReference(path)
+                        )
+                        .map(({ path }) => {
+                            return {
+                                path: `${site.siteMetadata.siteUrl}${path}`,
+                            }
+                        })
 
                     let plugins = []
                     try {
@@ -264,8 +291,8 @@ module.exports = {
                     if (path === '/') {
                         priority = 1.0
                         changefreq = 'monthly'
-                    } else if (path.includes('blog')) {
-                        if (path === '/blog') {
+                    } else if (path.includes('blog') || path.includes('compare')) {
+                        if (path === '/blog' || path === '/compare') {
                             changefreq = 'weekly'
                         } else {
                             changefreq = 'yearly'
@@ -385,6 +412,9 @@ module.exports = {
                         `,
                         output: '/rss.xml',
                         title: "PostHog's RSS Feed",
+                        site_url: 'https://posthog.com',
+                        feed_url: 'https://posthog.com/rss.xml',
+                        language: 'en',
                         // optional configuration to insert feed reference in pages:
                         // if `string` is used, it will be used to create RegExp and then test if pathname of
                         // current page satisfied this regular expression;
@@ -401,6 +431,9 @@ module.exports = {
                                     .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
                                     .replace(/\]\(\//g, `](${siteUrl}/`) // absolutize relative links
                                     .trim()
+                                const profile = node.profiles?.data?.[0]?.attributes
+                                const author = [profile?.firstName, profile?.lastName].filter(Boolean).join(' ')
+                                const media = node.media?.data?.attributes
 
                                 return {
                                     title: node.title,
@@ -409,6 +442,8 @@ module.exports = {
                                     url: `${siteUrl}/changelog?id=${node.strapiID}`,
                                     guid: `posthog-changelog-${node.strapiID}`,
                                     categories: [team && `${team} Team`, topic].filter(Boolean),
+                                    ...(author ? { author } : {}),
+                                    ...(media?.url ? { enclosure: { url: media.url, type: media.mime } } : {}),
                                     custom_elements: [
                                         {
                                             'content:encoded': {
@@ -431,6 +466,22 @@ module.exports = {
                                     title
                                     description
                                     date
+                                    media {
+                                        data {
+                                            attributes {
+                                                url
+                                                mime
+                                            }
+                                        }
+                                    }
+                                    profiles {
+                                        data {
+                                            attributes {
+                                                firstName
+                                                lastName
+                                            }
+                                        }
+                                    }
                                     teams {
                                         data {
                                             attributes {
@@ -451,6 +502,12 @@ module.exports = {
                         `,
                         output: '/changelog.rss',
                         title: 'PostHog Changelog',
+                        description: 'New features, improvements, and fixes shipped in PostHog.',
+                        // Without site_url and feed_url, node-rss falls back to its own repo as the
+                        // channel link and writes no self reference, so readers cannot follow either.
+                        site_url: 'https://posthog.com/changelog',
+                        feed_url: 'https://posthog.com/changelog.rss',
+                        language: 'en',
                         // inserts <link rel="alternate" type="application/rss+xml"> on /changelog pages
                         match: '^/changelog',
                     },

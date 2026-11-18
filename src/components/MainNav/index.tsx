@@ -598,7 +598,7 @@ export const Main = () => {
                                         <li className="px-1">
                                             <Link
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                to="/questions"
+                                                to="/forum"
                                             >
                                                 <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 Forums

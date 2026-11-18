@@ -18,7 +18,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import usePostHog from '../../hooks/usePostHog'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import { TreeMenu } from 'components/TreeMenu'
@@ -42,18 +42,20 @@ import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
-import CustomerMetadata from './CustomerMetadata'
+const CustomerMetadata = React.lazy(() => import('./CustomerMetadata'))
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
+import { shouldNavigateMenuTab } from './tabNavigation'
 
 dayjs.extend(relativeTime)
 
 /**
  * A swappable menu tab for the LeftSidebar. When `menuTabs` is provided to
  * ReaderView, a ToggleGroup is rendered above the menu and clicking a tab
- * swaps which `menu` is shown. Tab state is local to the sidebar — switching
- * tabs never navigates; only clicking a link inside a `menu` does.
+ * swaps which `menu` is shown. Tabs with an `href` navigate when inactive;
+ * `navigateOnActiveClick` also lets the active tab return to its root page.
  */
 export interface MenuTab {
     label: React.ReactNode
@@ -70,6 +72,8 @@ export interface MenuTab {
     icon?: React.ReactNode
     /** If set, clicking this tab navigates to the given path instead of only switching local state. */
     href?: string
+    /** When true, clicking the already-active tab returns to its `href`. */
+    navigateOnActiveClick?: boolean
 }
 
 interface ReaderViewProps {
@@ -84,18 +88,24 @@ interface ReaderViewProps {
         tags?: { label: string; url: string }[]
     }
     title?: string
+    /** Optional typography override for the rendered page title. */
+    titleClassName?: string
     header?: React.ReactNode
+    /** Compact navigation row above the reader on narrow layouts. */
+    mobileTopBar?: React.ReactNode
     hideTitle?: boolean
     belowTitle?: React.ReactNode
     tableOfContents?: any
-    hideMobileTableOfContents?: boolean
     mdxComponents?: any
+    renderMdx?: (content: string) => React.ReactNode
     commits?: any[]
     filePath?: string
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
     hideRightSidebar?: boolean
+    /** Hides the search box at the top of the left sidebar, for pages that put their own search in the content. */
+    hideSidebarSearch?: boolean
     contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
@@ -115,6 +125,8 @@ interface ReaderViewProps {
     parent?: MenuItem
     showQuestions?: boolean
     showAbout?: boolean
+    /** Renders the "Still have questions?" PostHog AI input just above the survey. */
+    showAskAI?: boolean
     sourceInstanceName?: string
     defaultNavVisible?: boolean
     /**
@@ -196,6 +208,9 @@ const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
         backgroundSize: 'cover',
     },
 ]
+
+const SCROLL_EDGE_FADE_MASK =
+    '[mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]'
 
 const ContributorsSmall = ({ contributors }) => {
     return contributors?.[0] ? (
@@ -418,18 +433,21 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
 export default function ReaderView({
     body = {} as ReaderViewProps['body'],
     title,
+    titleClassName,
     header,
+    mobileTopBar,
     hideTitle = false,
     belowTitle,
     tableOfContents,
-    hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
@@ -442,6 +460,7 @@ export default function ReaderView({
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     defaultNavVisible,
     chrome = false,
@@ -455,17 +474,20 @@ export default function ReaderView({
             <ReaderViewContent
                 body={body}
                 title={title}
+                titleClassName={titleClassName}
                 header={header}
+                mobileTopBar={mobileTopBar}
                 hideTitle={hideTitle}
                 belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
-                hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
+                renderMdx={renderMdx}
                 commits={commits}
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
                 hideRightSidebar={hideRightSidebar}
+                hideSidebarSearch={hideSidebarSearch}
                 contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
@@ -478,6 +500,7 @@ export default function ReaderView({
                 parent={parent}
                 showQuestions={showQuestions}
                 showAbout={showAbout}
+                showAskAI={showAskAI}
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
                 menuTabs={menuTabs}
@@ -528,8 +551,17 @@ const Menu = (props: { parent: MenuItem }) => {
     const visibleChildren = filterMenuByFlags(parent.children, activeFlags)
     const activeInternalMenu = windowActiveInternalMenu || visibleChildren?.[0]
     const visibleActiveChildren = filterMenuByFlags(activeInternalMenu?.children, activeFlags)
+    // Docs sections set `navAppearance: 'sidebar'` in `src/navs` to match the product docs sidebar.
+    const sidebarAppearance =
+        (activeInternalMenu as MenuItem & { navAppearance?: 'sidebar' })?.navAppearance === 'sidebar'
 
-    return <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(visibleActiveChildren)} />
+    return (
+        <TreeMenu
+            key={activeInternalMenu?.url}
+            items={resolveMenuIcons(visibleActiveChildren)}
+            {...(sidebarAppearance ? { appearance: 'sidebar' as const, rootHeading: activeInternalMenu?.name } : {})}
+        />
+    )
 }
 
 /**
@@ -649,7 +681,7 @@ const SidebarSearchResults = ({
         }
         const matches = extractOnPageMatches(contentRef.current, searchQuery)
         setOnPageMatches(matches.slice(0, 20))
-    }, [searchQuery])
+    }, [searchQuery, currentPath])
 
     useEffect(() => {
         if (!searchQuery || searchQuery.length < 2) {
@@ -843,10 +875,12 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
+    /** Smaller type when the stacked row is crowded (more than 3 tabs). */
+    compact: boolean
     onClick: () => void
 }
 
-const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+const SidebarTabButton = ({ tab, active, showLabel, stacked, compact, onClick }: SidebarTabButtonProps) => {
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -887,7 +921,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
             onClick={onClick}
             role="tab"
             aria-selected={active}
-            className={`relative rounded text-sm leading-tight flex ${
+            className={`relative rounded ${compact ? 'text-xs' : 'text-sm'} leading-tight flex ${
                 stacked
                     ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
                     : // Icon-only AND with-label both use justify-start so
@@ -976,7 +1010,8 @@ const LeftSidebar = ({
     onMobileClose,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
-    const { hasMounted } = useReaderView()
+    const { hasMounted, isWidthMeasured } = useReaderView()
+    const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
     // Persist/restore the menu scroll position across navigations (ReaderView
@@ -993,9 +1028,17 @@ const LeftSidebar = ({
         return () => vp.removeEventListener('scroll', onScroll)
     }, [sidebarScrollKey])
     const hasTabs = !!menuTabs && menuTabs.length > 0
+    const showTabStrip = !!menuTabs && menuTabs.length > 1
     const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
+
+    // An in-window navigation keeps this component mounted while the tab set changes: a page
+    // with no tabs, then a product docs page with three. The old value then matches no tab and
+    // the sidebar shows nothing, so follow the new page and select its default tab.
+    useEffect(() => {
+        setActiveTab(initialTab)
+    }, [currentPath, initialTab])
 
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
@@ -1025,6 +1068,23 @@ const LeftSidebar = ({
     // On mobile the panel is a drawer: it's fully expanded whenever open and
     // fully hidden otherwise, so pin/hover state is bypassed entirely.
     const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
+
+    // The mobile drawer and desktop rail are two different layout modes. If
+    // their width/transform transitions run while crossing the breakpoint,
+    // the article is repeatedly squeezed through its own container-query
+    // breakpoints. Suppress transitions for one frame during that handoff;
+    // hover and pin animations remain unchanged within desktop mode.
+    const previousMobile = useRef(mobile)
+    const mobileChanged = previousMobile.current !== mobile
+    const [suppressResponsiveTransition, setSuppressResponsiveTransition] = useState(false)
+    useLayoutEffect(() => {
+        if (previousMobile.current === mobile) return
+        previousMobile.current = mobile
+        setSuppressResponsiveTransition(true)
+        const frame = requestAnimationFrame(() => setSuppressResponsiveTransition(false))
+        return () => cancelAnimationFrame(frame)
+    }, [mobile])
+    const transitionsEnabled = hasMounted && !mobileChanged && !suppressResponsiveTransition
 
     // `displayExpanded` mirrors `expanded` instantly when growing, but only
     // flips to false AFTER the panel's shrink transition finishes (driven by
@@ -1111,8 +1171,10 @@ const LeftSidebar = ({
     return (
         <aside
             data-scheme="secondary"
-            className={`relative flex-shrink-0 ${hasMounted && !mobile ? 'transition-[flex-basis] duration-300' : ''} ${
-                mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'
+            className={`relative flex-shrink-0 ${
+                transitionsEnabled && !mobile ? 'transition-[flex-basis] duration-300' : ''
+            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'} ${
+                isWidthMeasured ? '' : 'hidden @2xl/app-reader:block'
             }`}
         >
             <div
@@ -1128,7 +1190,7 @@ const LeftSidebar = ({
                 style={{
                     width: mobile ? 250 : expanded ? 250 : 48,
                     transform: mobile && !mobileOpen ? 'translateX(-110%)' : undefined,
-                    transition: hasMounted
+                    transition: transitionsEnabled
                         ? mobile
                             ? 'transform 300ms cubic-bezier(0.32, 0.72, 0, 1)'
                             : SIDEBAR_CSS_TRANSITION
@@ -1138,9 +1200,9 @@ const LeftSidebar = ({
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG}`
                         : 'z-30'
                 }`}
             >
@@ -1173,7 +1235,7 @@ const LeftSidebar = ({
                             <div
                                 style={{
                                     width: expanded ? 234 : 32,
-                                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                    transition: transitionsEnabled ? SIDEBAR_CSS_TRANSITION : 'none',
                                 }}
                                 className={`mx-2 pb-2 flex-shrink-0 [&_button>svg:last-child]:transition-opacity [&_button>svg:last-child]:duration-200 [&_button>span>span>span:nth-child(2)]:transition-opacity [&_button>span>span>span:nth-child(2)]:duration-200 ${
                                     expanded
@@ -1201,7 +1263,7 @@ const LeftSidebar = ({
                                 <div
                                     style={{
                                         width: expanded ? 234 : 32,
-                                        transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                        transition: transitionsEnabled ? SIDEBAR_CSS_TRANSITION : 'none',
                                     }}
                                     className={`overflow-hidden [&_input]:transition-colors [&_input]:duration-200 ${
                                         expanded ? '' : '[&_input]:!bg-transparent [&_input]:!border-transparent'
@@ -1217,7 +1279,7 @@ const LeftSidebar = ({
                         - Otherwise (collapsed OR hover-expanded): vertical
                           icon-only column. We deliberately don't reflow on
                           hover — tabs only rotate axes when the user pins. */}
-                        {hasTabs && !hasActiveSearch && (
+                        {showTabStrip && !hasActiveSearch && (
                             // Single container across all states (pinned, hover,
                             // collapsed) so SidebarTabButton instances stay
                             // mounted — required for the icon FLIP animation to
@@ -1229,7 +1291,7 @@ const LeftSidebar = ({
                             <div
                                 style={{
                                     width: tabsWidthTarget,
-                                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                    transition: transitionsEnabled ? SIDEBAR_CSS_TRANSITION : 'none',
                                 }}
                                 onTransitionEnd={(e) => {
                                     if (e.propertyName === 'width' && e.target === e.currentTarget) {
@@ -1238,7 +1300,9 @@ const LeftSidebar = ({
                                     }
                                 }}
                                 className={`mx-2 flex gap-px flex-shrink-0 ${
-                                    appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
+                                    appliedPinned
+                                        ? 'flex-row justify-between'
+                                        : 'flex-col items-stretch py-2 border-y border-secondary'
                                 }`}
                                 role="tablist"
                                 aria-label="Sidebar mode"
@@ -1250,8 +1314,24 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
+                                        compact={appliedPinned && menuTabs?.length > 3}
                                         onClick={() => {
-                                            if (t.href && t.value !== activeTab) {
+                                            // Proximate metric: downstream outcomes move too slowly to read.
+                                            posthog?.capture('reader_tab_click', {
+                                                tab: t.value,
+                                                from_tab: activeTab,
+                                                tab_count: menuTabs!.length,
+                                            })
+                                            if (
+                                                t.href &&
+                                                shouldNavigateMenuTab({
+                                                    href: t.href,
+                                                    tabValue: t.value,
+                                                    activeTab,
+                                                    navigateOnActiveClick: t.navigateOnActiveClick,
+                                                    currentPath,
+                                                })
+                                            ) {
                                                 navigate(t.href)
                                             } else {
                                                 setActiveTab(t.value)
@@ -1365,18 +1445,21 @@ const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: F
 function ReaderViewContent({
     body,
     title,
+    titleClassName = '',
     header,
+    mobileTopBar,
     hideTitle = false,
     belowTitle,
     tableOfContents,
-    hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize,
@@ -1389,6 +1472,7 @@ function ReaderViewContent({
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     chrome = false,
     menuTabs,
@@ -1396,7 +1480,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { compact } = useApp()
+    const { compact, focusedWindow, isMobile } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1408,8 +1492,32 @@ function ReaderViewContent({
     // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
     const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
 
-    const { isNavVisible, isTocVisible, isNarrow, fullWidthContent, backgroundImage, toggleNav, toggleToc } =
-        useReaderView()
+    const {
+        isNavVisible,
+        isTocVisible,
+        isNarrow,
+        fullWidthContent,
+        backgroundImage,
+        toggleNav,
+        toggleToc,
+        setContainerWidth,
+    } = useReaderView()
+    const readerViewRef = useRef<HTMLDivElement>(null)
+
+    // The outer browser can resize an expanded app window without updating the
+    // stored app-window dimensions. Observe the reader itself so the mobile
+    // drawer reliably changes back into the desktop sidebar when space returns.
+    useLayoutEffect(() => {
+        const reader = readerViewRef.current
+        if (!reader || typeof ResizeObserver === 'undefined') return
+
+        const updateWidth = () => setContainerWidth(reader.getBoundingClientRect().width)
+        updateWidth()
+        const observer = new ResizeObserver(updateWidth)
+        observer.observe(reader)
+
+        return () => observer.disconnect()
+    }, [setContainerWidth])
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
     const renderLeftSidebar = !compact && !hideLeftSidebar
@@ -1460,8 +1568,13 @@ function ReaderViewContent({
                     if (detailsParent) {
                         detailsParent.open = true
                     }
+                    // Not `offsetTop` — that measures from the nearest positioned ancestor, which
+                    // on a <Steps> page is the step container, not the viewport.
+                    const targetRect = targetElement.getBoundingClientRect()
+                    const scrollRect = scrollElement.getBoundingClientRect()
+                    const scrollMarginTop = parseFloat(getComputedStyle(targetElement).scrollMarginTop) || 0
                     scrollElement.scrollTo({
-                        top: targetElement.offsetTop || 0,
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop - scrollMarginTop),
                         behavior: 'smooth',
                     })
                     return
@@ -1580,6 +1693,7 @@ function ReaderViewContent({
     return (
         <SearchProvider>
             <div
+                ref={readerViewRef}
                 data-scheme="secondary"
                 data-app="ReaderView"
                 className={`@container/app-reader relative w-full h-full flex min-h-0 max-w-full ${className}`}
@@ -1599,7 +1713,13 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
+                            hideSidebarSearch ? undefined : (
+                                <InlineSearch
+                                    contentRef={onSearch ? undefined : contentRef}
+                                    onSearch={onSearch}
+                                    currentPath={appWindow?.path}
+                                />
+                            )
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
@@ -1648,10 +1768,16 @@ function ReaderViewContent({
                             <IconSidebarClose className="size-5" />
                         </button>
                     )}
+                    {showMobileNav && mobileTopBar && (
+                        <div className="flex shrink-0 items-center border-b border-primary bg-primary px-1 py-1.5">
+                            {mobileTopBar}
+                        </div>
+                    )}
                     <div className="flex flex-1 min-h-0">
                         <ScrollArea
                             dataScheme="primary"
-                            className="flex-1 min-w-0 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
+                            isScrollRoot={focusedWindow === appWindow}
+                            className={`flex-1 min-w-0 min-h-0 relative ${isMobile ? '' : SCROLL_EDGE_FADE_MASK}`}
                         >
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
@@ -1710,7 +1836,7 @@ function ReaderViewContent({
                                     )}
                                     {title && !hideTitle && (
                                         <h1
-                                            className={`transition-all ${
+                                            className={`transition-all ${titleClassName} ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass
@@ -1763,28 +1889,6 @@ function ReaderViewContent({
                                             )}
                                         </div>
                                     )}
-                                    {tableOfContents &&
-                                        tableOfContents.length > 0 &&
-                                        !hideMobileTableOfContents &&
-                                        !hideRightSidebar && (
-                                            <div
-                                                id="mobile-toc"
-                                                data-scheme="secondary"
-                                                className={`@4xl/app-reader:hidden mt-4 transition-all ${
-                                                    fullWidthContent || body?.type !== 'mdx'
-                                                        ? 'max-w-full'
-                                                        : contentMaxWidthClass
-                                                        ? contentMaxWidthClass
-                                                        : 'mx-auto max-w-2xl'
-                                                }`}
-                                            >
-                                                <TableOfContents
-                                                    tableOfContents={tableOfContents}
-                                                    contentRef={contentRef}
-                                                    title="Contents"
-                                                />
-                                            </div>
-                                        )}
                                     {body?.featuredVideo && (
                                         <iframe
                                             src={body.featuredVideo}
@@ -1802,11 +1906,13 @@ function ReaderViewContent({
                                                 }`}
                                             >
                                                 {isCustomerPage && customerKey && (
-                                                    <CustomerMetadata customerKey={customerKey} />
+                                                    <React.Suspense fallback={null}>
+                                                        <CustomerMetadata customerKey={customerKey} />
+                                                    </React.Suspense>
                                                 )}
 
                                                 <MDXProvider components={mdxComponents}>
-                                                    <MDXRenderer>{body.content}</MDXRenderer>
+                                                    {renderMdx?.(body.content)}
                                                 </MDXProvider>
                                             </div>
                                         ) : (
@@ -1832,7 +1938,7 @@ function ReaderViewContent({
                                                     : contentMaxWidthClass || 'max-w-2xl'
                                             } overflow-x-hidden`}
                                         >
-                                            <h3 id="squeak-questions" className="mb-4">
+                                            <h3 id="community-questions" className="mb-4">
                                                 Community questions
                                             </h3>
                                             <Questions
@@ -1844,6 +1950,18 @@ function ReaderViewContent({
                                                         : contentMaxWidthClass || 'max-w-2xl'
                                                 }`}
                                             />
+                                        </div>
+                                    )}
+                                    {showAskAI && (
+                                        <div
+                                            className={`mt-8 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
+                                            <h3 className="text-xl font-bold m-0 mb-3">Still have questions?</h3>
+                                            <AskAIInput placeholder="Ask PostHog AI about this page..." />
                                         </div>
                                     )}
                                     {showSurvey && (

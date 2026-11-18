@@ -8,7 +8,7 @@ If you plan on recording a demo, a screen share, or the PostHog UI for use on th
 
 > **Important!** While Loom is great for personal use videos, it does not meet our quality standards for videos that will be going on the PostHog website and/or YouTube channel. Please use [Screen Studio](https://screen.studio/download) for such recordings, steps listed below.
 
-Feel free to ask any questions in the [#team-youtube](https://posthog.slack.com/archives/C01R387F6H5) Slack channel.
+Feel free to ask any questions in the <PrivateLink url="https://posthog.slack.com/archives/C01R387F6H5">#team-youtube</PrivateLink> Slack channel.
 
 ## Video:
 
@@ -83,7 +83,7 @@ Now simply go up to the “File” menu and select “Save as...”.
 
 Use your name or the project’s name for the file name, and ensure the file ends in the `.screenstudio` file extension. 
 
-Drag that file into the [“ScreenStudio Projects” Google Drive](https://drive.google.com/drive/folders/1syLVUYgRkX81fP7LXzt1M7hSK0OarrWn?usp=drive_link) and ping the YouTube team/member in the corresponding GitHub issue.  
+Drag that file into the <PrivateLink url="https://drive.google.com/drive/folders/1syLVUYgRkX81fP7LXzt1M7hSK0OarrWn?usp=drive_link">“ScreenStudio Projects” Google Drive</PrivateLink> and ping the YouTube team/member in the corresponding GitHub issue. <br />
         
 > **Important!** If your recording contains any customer-sensitive information that needs to be blurred or removed, please leave exact timestamps of where the information appears in the recording project. Please triple check your work, as our post team will not always be able to catch this on our own.  
 
@@ -95,4 +95,4 @@ You don't need a Cloudinary login. Sign in on PostHog.com, then choose **Upload 
 
 Keep exports under 20MB so Cloudinary accepts them – for anything longer, use [Wistia](/handbook/engineering/posthog-com/markdown#embedding-wistia-videos) instead.
 
-And voila! You’re done! Thanks for following these steps, and feel free to ask any questions in the [\#team-youtube](https://posthog.slack.com/archives/C01R387F6H5) Slack channel.
+And voila! You’re done! Thanks for following these steps, and feel free to ask any questions in the <PrivateLink url="https://posthog.slack.com/archives/C01R387F6H5">#team-youtube</PrivateLink> Slack channel.

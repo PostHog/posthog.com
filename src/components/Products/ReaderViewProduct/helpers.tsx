@@ -1,7 +1,13 @@
 import React from 'react'
 
+/** Typography shared by the H1 on Product, Docs, and Learn surfaces. */
+export const PRODUCT_SURFACE_H1 = '!text-4xl font-bold !leading-tight !tracking-normal'
+
 /** Title inside a bordered card or panel. Stays small on purpose. */
 export const CARD_H3 = 'text-base font-bold text-primary mt-0 mb-1 leading-snug'
+
+/** Heading style shared by top-level sections in the product reader. */
+export const SECTION_H2 = 'text-[1.75rem] font-bold text-primary mt-0 mb-3 leading-tight text-balance'
 
 /**
  * Section header: a heading plus an optional lede paragraph.
@@ -20,7 +26,7 @@ export const SectionHeading = ({
     className?: string
 }) => (
     <header className={`mb-4 ${className}`}>
-        <h2 className="text-[1.75rem] font-bold text-primary mt-0 mb-3 leading-tight text-balance">{children}</h2>
+        <h2 className={SECTION_H2}>{children}</h2>
         {lede && <p className="text-lg text-secondary leading-relaxed m-0 mb-6 max-w-prose text-balance">{lede}</p>}
     </header>
 )
@@ -51,7 +57,7 @@ export const LabeledList = ({
                 <React.Fragment key={typeof label === 'string' ? label : i}>
                     <div className={`pt-2 @lg:pt-4 @lg:pb-4 font-bold ${colSpanClass[labelCols]}`}>{label}</div>
                     <div
-                        className={`pb-2 @lg:pt-4 @lg:pb-4 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance ${colSpanClass[descCols]}`}
+                        className={`pb-2 @lg:pt-4 @lg:pb-4 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-pretty ${colSpanClass[descCols]}`}
                     >
                         {description}
                     </div>

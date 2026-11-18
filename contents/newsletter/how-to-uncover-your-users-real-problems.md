@@ -36,7 +36,7 @@ Emmett Shear, former CEO of Twitch 👾, [recommends tailoring your approach](ht
 
 If you think you're asking the right questions but getting poor answers, reconsider who you're talking to.
 
-> **Read [The Product-Market Fit Game](/blog/product-market-fit-game), our guide to finding product-market fit, for more**
+> **Read [The Product-Market Fit Game](/founders/product-market-fit-game), our guide to finding product-market fit, for more**
 
 ## 2. Find the right time and place ⏳
 
@@ -118,7 +118,7 @@ Products change. There's no reason you can't ask the same questions repeatedly t
 
 They created a loop of iterating new features and then asking again until 40% of users responded “very disappointed” – a key indicator of product-market fit.
 
-> **Read [How to measure product-market fit](/blog/measure-product-market-fit) for more on Superhuman's story, and several other ways to measure product-market fit.**
+> **Read [How to measure product-market fit](/founders/measure-product-market-fit) for more on Superhuman's story, and several other ways to measure product-market fit.**
 
 Another example is Zola, an online wedding registry, which has sent Net Promoter Score (NPS) surveys every month since its launch.
 

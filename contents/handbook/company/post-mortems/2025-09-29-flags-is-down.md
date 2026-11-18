@@ -9,7 +9,7 @@ tags:
 
 ---
 
-Internal post-mortem: <https://github.com/PostHog/incidents-analysis/pull/120>
+Internal post-mortem: <PrivateLink url="https://github.com/PostHog/incidents-analysis/pull/120">https&#58;//github.com/PostHog/incidents-analysis/pull/120</PrivateLink>
 
 On September 29, 2025, the PostHog Feature Flags service experienced an outage lasting 1 hour and 48 minutes, from 16:58 to 18:46 UTC. During this period, approximately 78% of flag evaluation requests in the US region failed with HTTP 504 errors.
 

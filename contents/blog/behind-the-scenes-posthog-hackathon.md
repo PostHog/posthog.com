@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/ben_dreams_of_hedgehogs_a90e7c58cf.png
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
   - Offsites

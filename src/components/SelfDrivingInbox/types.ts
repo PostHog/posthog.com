@@ -38,6 +38,13 @@ export interface ScoutSpec {
     raw?: string
     /** Display-only, e.g. "Daily" – the app owns the real schedule. Lives in index.mdx. */
     schedule?: string
+    /**
+     * A template key PostHog already ships, e.g. `costly-users`. Set it and the CTA opens that
+     * template in the app instead of encoding this SKILL.md into the link – the app's own copy
+     * carries tags and a schedule, which the `#createScout=` payload deliberately doesn't.
+     * Lives in index.mdx.
+     */
+    appTemplate?: string
 }
 
 /** Fallback rail label for a template that hasn't declared a category yet. */
@@ -47,9 +54,9 @@ export const UNCATEGORIZED = 'Other'
 export interface InboxTemplate {
     /** Product surface, e.g. "Error Tracking". Authored in frontmatter, never mapped from title. */
     category: string
-    /** Route to the guide page, e.g. /pocket-guides/self-driving/silent-failure-core-action */
+    /** Route to the guide page, e.g. /docs/self-driving/pocket-guide/silent-failure-core-action */
     url: string
-    /** The template's own title, e.g. "Silent failure in your core action" */
+    /** The template's own title, e.g. "Catch a core action failing without errors" */
     templateTitle: string
     /** Short name for tight surfaces like the index tabs. Fall back to `templateTitle`. */
     templateShortTitle?: string
@@ -61,4 +68,29 @@ export interface InboxTemplate {
     watches?: WatchedSource[]
     requires?: Requirement[]
     scout?: ScoutSpec
+}
+
+/** A real report from PostHog's own inbox that led to real work, for /docs/self-driving/from-our-inbox. */
+export interface InboxExample {
+    /** The inbox report's id. The curator scout dedupes on it, so it never changes once published. */
+    reportId: string
+    /** The day the example was added to the page. Drives the feed's order. */
+    publishedAt: string
+    /** Product surface, e.g. "Error tracking". */
+    category: string
+    report: SelfDrivingReport
+    /** One or two sentences on what the work changed. Markdown. */
+    outcome?: string
+    /** Set when the work was a merged pull request. Exactly one of this and `resolution` is set. */
+    pullRequest?: {
+        url: string
+        title: string
+        mergedAt?: string
+    }
+    /** Set when the work needed no pull request, e.g. a scout that fixed its own instructions. */
+    resolution?: {
+        /** Short label for what changed, e.g. "Scout updated" or "Dashboard updated". */
+        label: string
+        resolvedAt?: string
+    }
 }

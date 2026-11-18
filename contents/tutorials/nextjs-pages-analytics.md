@@ -284,7 +284,7 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 Next, install [`posthog-js`](https://github.com/posthog/posthog-js) and `@posthog/react`:
 
 ```shell
-npm install --save posthog-js @posthog/react
+npm install --save posthog-js@1 @posthog/react@1
 ```
 
 Afterwards, create an `instrumentation-client.js` file in the base `pages-tutorial` directory. This is where you initialize PostHog like this:
@@ -308,7 +308,7 @@ Once saved, restart your app and click around, you should see pageviews and even
   classes="rounded"
 />
 
-PostHog autocaptures clicks, inputs, session recordings (if enabled), pageviews, exceptions, and more. You can also use all the features of [`posthog-js`](/docs/integrate/client/js) which we will set up during the rest of this tutorial.
+PostHog autocaptures clicks, inputs, session recordings (if enabled), pageviews, exceptions, and more. You can also use all the features of [`posthog-js`](/docs/libraries/js) which we will set up during the rest of this tutorial.
 
 ## Capturing custom events
 
@@ -539,7 +539,7 @@ The code we wrote in the client-side rendering section did all of this after the
 This is done by moving the flag evaluation to the server-side. And because flag evaluation happens on the server-side, we need to install the `posthog-node` library:
 
 ```bash
-npm i posthog-node
+npm i posthog-node@6
 ```
 
 We then replace `getStaticProps` in `[id].js` with `getServerSideProps`. This enables us to both get the post details and evaluate feature flags on the server-side. In it, we use `posthog-node` to create a client that we use to `getAllFlags` using the `session.user.email` for the user. This means the user needs to be signed in for this to work.

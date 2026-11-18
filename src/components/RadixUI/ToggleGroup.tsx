@@ -35,6 +35,12 @@ export const ToggleGroup = ({
 }: ToggleGroupProps) => {
     const defaultValue = value ? options.find((option) => option.default)?.value || options[0]?.value : undefined
 
+    // Radix emits '' when the active item is clicked again; ignore that deselect
+    const handleValueChange = (newValue: string) => {
+        if (!newValue) return
+        onValueChange(newValue)
+    }
+
     return (
         <>
             {!hideTitle && <label className="pt-1.5 text-[15px] block mb-1">{title}</label>}
@@ -46,7 +52,7 @@ export const ToggleGroup = ({
                 data-scheme="primary"
                 defaultValue={defaultValue}
                 aria-label={title}
-                onValueChange={onValueChange}
+                onValueChange={handleValueChange}
                 value={value}
             >
                 {options.map((option) => (

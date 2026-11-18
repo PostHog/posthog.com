@@ -12,6 +12,18 @@ If you have special circumstances where this doesn't work for you, contact our [
 
 You can check our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs), or use the [pricing calculator](/pricing) to estimate costs. However, often the best way to estimate costs is to signup for free and go from there.
 
+## What does the price of an event include?
+
+Collecting it, processing it, storing it, and every query you run on it in PostHog. [What you actually get when you pay for an event](/docs/billing/what-you-pay-for-per-event) explains each step.
+
+It's also confidence that your data is safe, that there's a team of on-call engineers responsible for maintaining it, and that it's been stored correctly. Those things are harder to quantify, but they're still part of the value.
+
+## Do projects share usage and free allowances?
+
+Yes. Billing is organization-wide, so usage from all projects in an organization is combined into one bill with one free allowance. For example, if your development, staging, and production projects each send 400,000 events in a month, that counts as 1.2 million events, not three separate free tiers.
+
+The free plan includes one project. To create more, add a card to upgrade to a paid plan. See [how to organize projects](/docs/settings/projects#how-to-organize-projects) for our recommended setup.
+
 ## How do I update billing information or see previous months' invoices or usage?
 
 Go to your organization's [billing settings](https://app.posthog.com/organization/billing) and click **Manage card details and view past invoices** to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.
@@ -22,11 +34,54 @@ You can also download invoices or receipts from here by clicking on them under *
 
 ## Can I set a billing limit?
 
-Yes, you can set a billing limit for each of PostHog's products in your organization's [billing settings](https://app.posthog.com/organization/billing). Check out our doc on [billing limits and alerts](/docs/billing/estimating-usage-costs) for more information.
+Yes, you can set a billing limit for most of PostHog's products in your organization's [billing settings](https://app.posthog.com/organization/billing). Check out our doc on [billing limits and alerts](/docs/billing/limits-alerts) for more information.
 
 ## Are events or replays dropped when I reach billing limits?
 
 Yes, PostHog drops data after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the number of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
+
+## What does each product bill for?
+
+PostHog bills only what it ingests, which means data it **receives** and **stores**. 
+
+Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. Events that another product bills, like `$exception`, don't also bill as Product Analytics events.
+
+| [Product Analytics](/product-analytics/pricing), billed per event | Billed |
+| --- | --- |
+| Custom events | Yes |
+| `$pageview`, `$pageleave`, `$autocapture` | Yes |
+| `$identify`, `$create_alias`, `$groupidentify` | Yes |
+
+| [Session Replay](/session-replay/pricing), billed per recording | Billed |
+| --- | --- |
+| Recordings | Yes |
+| Heatmap data | No |
+
+| [Feature Flags](/feature-flags/pricing), billed per request | Billed |
+| --- | --- |
+| `/flags` requests | Yes |
+| Local evaluation polls that return new definitions, 10 requests each | Yes |
+| Local evaluation polls that return `304`, 1 request each | Yes |
+| `$feature_flag_called` | No |
+
+| [Experiments](/experiments/pricing), billed through Feature Flags | Billed |
+| --- | --- |
+| `/flags` requests | Yes |
+| `$experiment_exposure` | No |
+
+| [Error Tracking](/error-tracking/pricing), billed per exception | Billed |
+| --- | --- |
+| `$exception` | Yes |
+
+| [LLM Analytics](/ai-observability/pricing), billed per event | Billed |
+| --- | --- |
+| `$ai_generation`, `$ai_trace`, `$ai_span`, `$ai_embedding` | Yes |
+| Every other `$ai_` event | Yes |
+
+| [Surveys](/surveys/pricing), billed per response | Billed |
+| --- | --- |
+| `survey sent` | Yes |
+| `survey shown`, `survey dismissed` | No |
 
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
@@ -39,3 +94,9 @@ Non-profits can contact our [sales team](/talk-to-a-human) after signing up to d
 We send billing emails to all owners and administrators in the organization. These are important emails, so we currently don't allow these notification settings to be configured.
 
 If you'd like a specific email address to receive these communications, we recommend inviting that email to your organization and assigning them an administrator role.
+
+## Can someone see usage and spend without being an admin?
+
+By default, billing is only available to organization admins and owners. See our [access control docs](/docs/settings/access-control) for the full list of permissions.
+
+If you want members to see the **Usage** and **Spend** tabs without giving them the rest of billing, [contact support](/questions) and we can enable it for your organization. They get read-only access to usage and spend data for the projects they can already see. They can't change your plan, payment details, or billing limits.

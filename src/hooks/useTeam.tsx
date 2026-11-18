@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useUser } from './useUser'
 import qs from 'qs'
 
-const teamQuery = (slug: string) =>
+const teamQuery = (slug: string, includeDrafts: boolean) =>
     qs.stringify(
         {
             filters: {
@@ -10,7 +10,7 @@ const teamQuery = (slug: string) =>
                     $eqi: slug,
                 },
             },
-            publicationState: 'preview',
+            ...(includeDrafts ? { publicationState: 'preview' } : {}),
             populate: {
                 profiles: {
                     filters: {
@@ -45,17 +45,22 @@ const teamQuery = (slug: string) =>
     )
 
 export default function useTeam({ slug }: { slug: string }) {
-    const { getJwt } = useUser()
+    const { getJwt, isModerator } = useUser()
     const [team, setTeam] = useState()
     const [loading, setLoading] = useState(true)
 
     const fetchTeam = async () => {
         if (!slug) return
-        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(slug)}`)
-            .then((res) => res.json())
-            .then(({ data }) => {
-                setTeam(data?.[0] ?? [])
-            })
+        try {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(slug, isModerator)}`)
+            if (!res.ok) {
+                throw new Error(`Failed to fetch team (${res.status})`)
+            }
+            const { data } = await res.json()
+            setTeam(data?.[0] ?? [])
+        } catch (err) {
+            console.error('Failed to fetch team', err)
+        }
     }
 
     const addTeamMember = async (profileID: number) => {
@@ -149,8 +154,8 @@ export default function useTeam({ slug }: { slug: string }) {
     }
 
     useEffect(() => {
-        fetchTeam().then(() => setLoading(false))
-    }, [slug])
+        fetchTeam().finally(() => setLoading(false))
+    }, [slug, isModerator])
 
     return {
         loading,

@@ -30,6 +30,7 @@ Anduril
 Ansible
 [Aa]nthropic
 [Aa]sana
+Ashby
 Assembla
 [Aa]stro
 Atlassian
@@ -137,7 +138,7 @@ Hotjar
 HubSpot
 Hugging Face
 Hyperengage
-InKeep
+Inkeep
 Inleads
 [Ii]nsider
 Instana
@@ -152,6 +153,7 @@ Kameleoon
 Kibana
 [Kk]inesis
 Klaviyo
+KMP
 Knative
 [Kk]nock
 [Kk]oala
@@ -189,6 +191,7 @@ MinIO
 Mixpanel
 Moloco
 MongoDB
+Multiplatform
 MySQL
 Netlify
 NGINX
@@ -233,6 +236,7 @@ Replit
 Revolut
 RevX
 [Rr]ipe
+Rokt
 RudderStack
 [Rr]unway
 Salesforce
@@ -381,6 +385,7 @@ JSX
 JWT
 JWTs
 KPIs
+kmp
 kubectl
 Kubernetes
 Laravel
@@ -479,3 +484,17 @@ Altinity
 [Ll]ookahead(s)?
 [Ll]ookaround(s)?
 [Ll]ookbehind(s)?
+
+# Hogpedia, and the proper nouns its articles cite from the handbook and the press kit
+Hogpedia
+MonoBook
+Hogpatch
+Blobby
+Mykonos
+Combinator
+Formus
+Andra
+Collison
+Coxon
+Duong
+Greenhill

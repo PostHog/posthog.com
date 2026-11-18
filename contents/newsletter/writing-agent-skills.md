@@ -152,7 +152,7 @@ Reading all this might inspire you to write skills for everything, but remember 
 
 - **Needs context models don’t have out-of-the-box.** For example, a bunch of data like [AI observability](/ai-observability) and [logs](/logs) in PostHog have nested or non-obvious payload shapes. A skill ensures agents don’t need to rediscover this shape every conversation.
 
-- **Can run on autopilot.** You can create [loops](/newsletter/loops) to handle this. Add a goal, context, way to evaluate work, and put it on a schedule. Examples include [PR babysitting](/newsletter/code-review-tips#2-delegate-pr-babysitting-to-loops), flaky test hunting, and [performance improvement autoresearching](/blog/karpathy-autoresearch-query-engine-bug). Our [scouts](/blog/what-is-a-scout) are long-running agents guided by a skill.
+- **Can run on autopilot.** You can create [loops](/newsletter/loops) to handle this. Add a goal, context, way to evaluate work, and put it on a schedule. Examples include [PR babysitting](/newsletter/code-review-tips#2-delegate-pr-babysitting-to-loops), [flaky test hunting](/newsletter/scheduled-agents#4-diagnosing-flaky-tests), and [performance improvement autoresearching](/blog/karpathy-autoresearch-query-engine-bug). Our [scouts](/blog/what-is-a-scout) are long-running agents guided by a skill.
 
 > **Try this:** Run this prompt to create some new skill candidates.
 >

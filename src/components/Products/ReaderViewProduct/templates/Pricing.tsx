@@ -100,7 +100,12 @@ const AddonRates = ({ addons, unit }: { addons: any[]; unit: string }) => {
 }
 
 const Pricing = ({ id, productData }: SectionComponentProps) => {
-    const billingHandle = productData?.sharesFreeTier || productData?.handle
+    // `useProduct` resolves `sharesFreeTier` from a handle string into the full
+    // product object, so read the handle back off it. Accept both shapes – callers
+    // that pass raw productData still hand us the string.
+    const sharesFreeTier = productData?.sharesFreeTier
+    const billingHandle =
+        (typeof sharesFreeTier === 'string' ? sharesFreeTier : sharesFreeTier?.handle) || productData?.handle
     const product = useProduct({ handle: billingHandle })
     const billing = product?.billingData
 

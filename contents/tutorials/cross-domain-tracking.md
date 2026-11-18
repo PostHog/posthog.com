@@ -144,6 +144,88 @@ export default SignUpPage
 
 This connects the events from both sites to the same user. See our docs on [identifying users](/docs/product-analytics/identify) and using [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) for more details.
 
+## Tracking journeys through a site you don't control
+
+The methods above assume you run `posthog-js` on both sites, but many journeys send the user to a partner site you cannot instrument such as a ticketing service, a checkout, or a payment provider. The user leaves your site, acts on the partner site, and comes back. You cannot see the partner leg, but you can keep the same person and session across the trip, and you can measure the leg as a gap between two of your own events.
+
+### Put the IDs on the return URL
+
+Most partners let you set a redirect or callback URL, so add `distinct_id` and `session_id` to that URL, and read them again when the user comes back.
+
+```js
+import { usePostHog } from '@posthog/react'
+
+function CheckoutButton() {
+  const posthog = usePostHog()
+
+  const startCheckout = () => {
+    const sessionId = posthog.get_session_id()
+    const distinctId = posthog.get_distinct_id()
+
+    // The partner returns the user to this URL after checkout.
+    const returnUrl = `https://yoursite.com/return#session_id=${sessionId}&distinct_id=${distinctId}`
+
+    posthog.capture('checkout_started', {}, { transport: 'sendBeacon', send_instantly: true })
+    window.location.href = `https://partner.com/pay?return_url=${encodeURIComponent(returnUrl)}`
+  }
+
+  return <button onClick={startCheckout}>Pay</button>
+}
+
+export default CheckoutButton
+```
+
+> **Note:** Be wary about `session_id` and `distinct_id` in this case. Although neither is a PostHog credential and any script on your own page can already read them, a `distinct_id` can hold personal data if you set it to an email or account ID.  The values can also be changed in transit, so don't treat the IDs you read back as trusted.
+
+On your return page, read the IDs from the hash and bootstrap them, the same way you do on a second site you own. Turn off automatic pageview capture at the same time, so you can set the correct referrer on the return pageview yourself (see below):
+
+```js
+const hashParams = new URLSearchParams(window.location.hash.substring(1))
+const distinct_id = hashParams.get('distinct_id')
+const session_id = hashParams.get('session_id')
+
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  capture_pageview: false,
+  bootstrap: {
+    sessionID: session_id,
+    distinctID: distinct_id
+  }
+})
+```
+
+### Measure the partner leg with an event pair
+
+You cannot capture events on the partner site. To measure the leg, capture one event when the user leaves and one event when the user comes back. In the example above, the events are `checkout_started` and a `checkout_returned` event on the return page.
+
+`checkout_started` fires right before the browser leaves your site, so the example above captures it with `transport: 'sendBeacon'` and `send_instantly: true`. Without these options, [event batching](/docs/libraries/js/usage#sending-events-before-a-page-unload) can hold the event until after the navigation and drop it, which loses the first funnel step and overstates your conversion rate. Even with them, the browser controls final delivery, so treat it as best effort.
+
+```js
+posthog.capture('checkout_returned')
+```
+
+You can then build a [funnel](/docs/product-analytics/funnels) with `checkout_started` as the first step and `checkout_returned` as the second to see the drop off and time between the two steps. 
+
+### Fix the referrer and session reset
+
+The return redirect arrives with the partner as the `$referrer`. This breaks attribution, because PostHog reads the partner as the source of the visit. The redirect can also start a new session, which splits one journey into two.
+
+The bootstrap above fixes the session reset, because it keeps the same `session_id` across the round trip.
+
+The referrer needs one more step. When `posthog.init()` runs on the return page, it captures a `$pageview` automatically, and that pageview reads the partner as the `$referrer`. Setting the referrer on `checkout_returned` alone does not fix this, because the automatic pageview carries the partner value too. This is why the return-page `init` above sets `capture_pageview: false`. Capture the pageview and the return event yourself, with the correct referrer on both:
+
+```js
+posthog.capture('$pageview', {
+  $referrer: 'https://yoursite.com/checkout',
+  $referring_domain: 'yoursite.com'
+})
+
+posthog.capture('checkout_returned', {
+  $referrer: 'https://yoursite.com/checkout',
+  $referring_domain: 'yoursite.com'
+})
+```
+
 ## Using third-party cookies (or their equivalent)
 
 Another way is using third-party cookies (or an equivalent method) to get the data from one site to another. **This isn’t recommended**.

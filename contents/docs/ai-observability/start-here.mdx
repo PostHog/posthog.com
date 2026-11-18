@@ -9,6 +9,7 @@ import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
 import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
 import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
+import GuidesForProduct from 'components/Learn/PocketGuides/GuidesForProduct'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate AI Observability!">
@@ -183,6 +184,20 @@ Reports land in your [inbox](/docs/self-driving/inbox), where one click turns th
 
 </QuestLogItem>
 
+<QuestLogItem
+  title="Learn it by use case"
+  subtitle="Recommended"
+  icon="IconCompass"
+>
+
+The reference tells you what everything does. The pocket guide walks you through real problems, end to end.
+
+<div>
+  <GuidesForProduct product="ai-observability" />
+</div>
+
+</QuestLogItem>
+
 <QuestLogItem 
   title="Use for free"
   subtitle="Free 100k events/mo"
@@ -194,7 +209,7 @@ Reports land in your [inbox](/docs/self-driving/inbox), where one click turns th
 ### TL;DR 💸
 
   - No credit card required to start
-  - First 100K LLM events per month are free with 30-day retention
+  - First 100K LLM events per month are free with 30-day retention. Every event whose name starts with `$ai_` counts as an LLM event
   - Above 100k, we have volume-based pricing starting at $0.00035/event and falling to $0.00006/event as volume grows
   - Set billing limits to avoid surprise charges
   - See our [pricing page](/pricing) for more up-to-date details

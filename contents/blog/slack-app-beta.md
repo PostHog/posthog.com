@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_blog_post_da4d458870.png
 featuredImageType: full
+ogImage: generated
 category: Blog
 tags:
   - Product
@@ -47,7 +48,7 @@ Here's a few examples of @PostHog usage across the org chart:
 
 ### The one where it built a new feature for the web app
 
-[Will Wearing](/community/profiles/41941) (technical account manager) asked @PostHog to add support to copy and paste for markdown into PostHog [notebooks](/docs/notebooks) with proper rendering. The bot wrote the code, added 20 test cases, and auto-closed a related stale GitHub issue.
+[Will Wearing](/community/profiles/41941) ([technical account manager](/blog/technical-account-manager)) asked @PostHog to add support to copy and paste for markdown into PostHog [notebooks](/docs/notebooks) with proper rendering. The bot wrote the code, added 20 test cases, and auto-closed a related stale GitHub issue.
 
 ![Will Wearing prompts @PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_will_w_1_5398cb556b.png)
 

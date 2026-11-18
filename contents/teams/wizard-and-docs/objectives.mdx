@@ -22,101 +22,147 @@ This means each product engineering team writes and maintains their own product 
 </details>
 
 
-## Goals for Q3 2026 
+## Goals for Q4 2026 
 
 <details>
-<summary>Make great technical content about self-driving</summary>
-
-**Driver:** <TeamMember name="Sarah Sanders" photo /> <SmallTeam slug="wizard-and-docs" />
-
-**Motivation:** Define the mental model for self-driving development. We'll create clear, technically rich content that demonstrates what self-driving is and what its unique capabilities are with PostHog.
-
-**What we'll ship:** 
-- In-wizard content for self-driving 
-- Docs that teach self-driving best practices and use cases
-- Example apps or projects that demonstrate self-driving in action
-- Other kinds of learning resources like videos, diagrams, or skill libraries
-
-**We'll know we're successful when:** 
-- A customer can self-serve their way to self-driving
-- Marketing or demand gen teams reuse our content or assets
-- Engineers and customer-facing teams consider it a strong learning resource
-- Competitors start to borrow our framing
-
-**Make it weird:** 
-- We bring back Max. He's self-driving now and is heading down the Fury Road. Sand. The guitar guy. Glory. *Max Fury Road*: the game and learning experience.  
-
-</details>
-
-<details>
-<summary>Make wizard development self-driving</summary>
+<summary>Optimize the wizard as a platform for data-first PostHog setup</summary>
 
 **Driver:** <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
 
-**Motivation:** We are the bottleneck. Multiple teams are building on top of us and their PRs are piling up. We can't ship features fast enough to keep up with our own roadmap. It's time to incorporate self-driving development ourselves. 
+**Motivation:** The wizard should push adoption of PostHog's data-first products and use cases. We'll optimize the wizard to install and instrument the PostHog platform to deepen data capture and data usage for new users.
 
 **What we'll ship:** 
-- Upgraded CI and E2E systems so agents can ship and self-heal
-- Revamped analytics and alerting for signals and observability
-- An agent loop that turns GitHub issues into reviewed, merged PRs
-- A project management system that directs and tracks wizard self-driving development
+- Wizard support for all data-first PostHog products in the default wizard command
+- MCP install and setup as a primary interface for PostHog usage
+- Refreshed TUI, content, and setup flow to showcase value of PostHog's data platform
+- Wizard-as-platform improvements in performance, speed, in-app handoffs, and exensibility so other teams can build on top of it
 
 **We'll know we're successful when:** 
-- Our PR review and merge process is 2-3x faster and still reliable
-- We can build and test wizard-compatible end-to-end features by tagging @PostHog
-- We can point to our own repos as exemplary self-driving codebases
-- It helps us create better content about self-driving
+- The wizard is improving activation of data-first products and features
+- The wizard is increasing MCP installations and usage
+- Users reach their first meaningful use of that data faster
+- Users praise the wizard's new data-first experience in #brand-mentions
 
-**Make it weird:** 
-- Record and ship our own version of the *MEEP* soundbite in PostHog Code
+**Distribution ideas:** 
+- Position the wizard as a personalized PostHog data setup consultant. Community members are asking for help setting up PostHog in Discord. The wizard should be our first recommendation.
+
+**Synergy:**
+- <SmallTeam slug="growth" /> is owning the headless CLI wizard that works with anyone's coding agent
+- <SmallTeam slug="growth" /> is owning the in-app cloud wizard for cross-sell, upgrade opportunities, etc.
+- <SmallTeam slug="forward-deployed-engineering" /> is owning a first-class migration wizard program for data competitors
 
 </details>
 
 <details>
-<summary>Make the wizard multi-harness, multi-skill, and multi-model</summary>
+<summary>Build an agent RAG system for updating and searching our docs</summary>
+
+**Driver:** <TeamMember name="John Waters" photo /> <TeamMember name="Sarah Sanders" photo />
+
+**Motivation:** The quality of our RAG search for docs is getting worse and so is the performance of our docs writer agent. AI agents now read our docs ~2:1 compared to carbon units (humans), so our docs need better tools and systems to stay correct and up to date for AI consumption.
+
+**What we'll ship:** 
+- An integration with our Business Knowledge product to index and search across our docs, repos, and other sources through a shared RAG system
+- An agent writer system that creates docs PRs from multiple triggers: monorepo merges, support tickets, docs evals, scouts, Slack tags, feature flag rollouts, etc.
+- Improve the agent writer's accuracy, consistency, and adherence to our style guide
+- Replace the website AI chat with a new RAG-powered feature
+- An approval / notification system for docs PRs generated by the agent writer
+
+**We'll know we're successful when:** 
+- Docs PRs merge at the highest velocity ever 
+- Product teams and developer marketers trust that their product docs are up to date and accurate
+- We can reuse the new agent writer to maintain the handbook, READMEs, changelog, and other technical content
+- New RAG system provides useful answers from our docs in #at-posthog-anything and on the website
+- We're providing great product feedback to the Conversations Teams
+
+**Distribution ideas:**
+- Write a blog post about how we used Business Knowledge to overhaul our docs search and maintenance 
+systems
+- Expose our docs RAG search through a public search-docs API endpoint for users and agents
+
+
+**Synergy:** 
+- <SmallTeam slug="conversations" /> is building the Business Knowledge product
+- <SmallTeam slug="support" /> can update and fix the docs using our system
+
+</details>
+
+<details>
+<summary>Measure and improve how well agents use PostHog docs </summary>
+
+**Driver:** <TeamMember name="Edwin Lim" photo /> <TeamMember name="John Waters" photo /> <TeamMember name="Sarah Sanders" photo />
+
+**Motivation:** We want to continually improve how people's agents use the PostHog platform according to our docs. To do that, we'll need a benchmark. We want to measure and evaluate how agents interpret, consume, and execute our product docs. 
+
+**What we'll ship:** 
+- An automated evals suite that tests models, efforts, tools, and prompts against our docs
+- A qualitative or quantitative criteria for specific tasks like install and instrumentation
+- Eval configs for each docs page 
+- A trigger for the docs writer agent to make improvements based on eval results
+
+**We'll know we're successful when:** 
+- We can evaluate new model releases and understand how well each use PostHog with and without our docs
+- Eval failures lead to docs improvements that increase agent success rates
+- We have an official benchmark for the wizard and all PostHog installation / getting started tasks
+- We have visibility into how agents use our docs in the wild
+
+**Distribution ideas:**
+- Publish our eval results as a blog post or official benchmark for how well agents can use a product with only its public documentation as context.
+
+**Synergy:**
+- <SmallTeam slug="growth" /> is running broader evals of agents using PostHog through MCP, CLI, and SDKs. 
+
+</details>
+
+<details>
+<summary>Turn docs into a skill library for robots</summary>
 
 **Driver:** <TeamMember name="Vincent Ge" photo /> <TeamMember name="Edwin Lim" photo />
 
-**Motivation:** The current wizard architecture has hit its ceiling. It was built for linear integration flows, but now everything is more ambitious, like multi-step workflows and self-driving. We need a lower-level, more flexible foundation so other teams can build 2030-shaped wizard programs to augment their products.
+**Motivation:** Turn docs into context food for robots. We want to restructure the docs to basically be an instruction manual that's designed for agents. Our docs should be directly usable as micro-skills.
 
 **What we'll ship:** 
-- Multi-harness and multi-model architecture for the wizard 
-- Orchestrator that queues composable agent queries within a single wizard program
-- Chainable, reusable micro skills
-- Chainable programs
+- Rewrite and reorganize docs around task-based, reusable micro-skills
+- Rethink docs navigation and information architecture
+- Build new in-page components for structured prompts, skill downloads, etc.
+- Expose docs and skills through a website API for agents and external tools
+- Canonical tag and reference system of our docs for agents to use as a map
 
 **We'll know we're successful when:** 
-- <SmallTeam slug="self-driving" /> and <SmallTeam slug="growth" /> can build the best activation experience possible with our new feature set
-- We can route wizard programs between Anthropic Agent SDK, Pi, and <SmallTeam slug="agents" /> harness
-- Other teams are regularly building new wizard programs and demoing at all-hands
-- We can switch between model providers to avoid outages
+- Most docs pages are packageable as a skill
+- There's a feedback loop with both the evals project and RAG / docs writer project
+- We can effectively replace the context mill for the wizard
+- We see more agent usage and traffic with our docs
 
-**Make it weird:** 
-- We successfully coin the term "micro skills" as an AI buzzword and we release it as a premium coffee bean roast with Vincent's face on the label
+**Distribution ideas:**
+- We can use skills as an actionable CTA across blogs, newsletters, and landing pages
+- Run a suite of AEO experiments on the docs with <TeamMember name="Natalia Amorim" photo />
+- Publish our skills everywhere on open source, like third-party skill aggregators and MCPs like Context 7
 
 </details>
 
 <details>
-<summary>Upgrade the wizard's TUI</summary>
+<summary>Create educational content people love</summary>
 
-**Driver:** <TeamMember name="Sarah Sanders" photo /> <TeamMember name="Edwin Lim" photo />
+**Driver:** <TeamMember name="Sarah Sanders" photo /> <SmallTeam slug="wizard-and-docs" />
 
-**Motivation:** The TUI is one of our most distinctive marketing surfaces: every wizard run is a chance to look like the self-driving future. It also needs better navigation now that the wizard supports multiple use cases. It's time for a refresh and refactor.
+**Motivation:** We want to make the best educational content for people learning how to build products with PostHog. Our **Learn** content should focus on teaching humans the technical concepts, practical use cases, and value props of the PostHog platform.
 
 **What we'll ship:** 
-- Wizard `v3.0` release with a new UI
-- Program and skill discovery and navigation
-- A new component library
-- Revamped content rendering and screen system
+- Hands-on learning courses that teach end-to-end product development and data capture with PostHog
+- Interactive example apps where readers can explore real data, experiment, and learn by doing 
+- Reorganize Docs AI and Learn to make educational content easier to discover and navigate
+- New data-first content that teaches data capture and usage with PostHog platform
 
 **We'll know we're successful when:** 
-- People post wizard screenshots in `#brand-mentions`
-- People think it looks and feels like a self-driving interface (based on vibes)
-- Users discover and run wizard programs without the exact CLI command
-- We can build more flexible, branching UX flows
-- Wizard contributions all have a similar look and feel
+- Customer-facing teams regularly share Learn content with users and prospects
+- Developers and community members recommend our content because it's genuinely useful, even outside PostHog
+- We see organic mentions, positive feedback, and in-person praise for the quality of our technical content
+- Other PostHog teams teams re-use our content and components
 
-**Make it weird:** 
-- Add <TeamMember name="Lottie Coxon" photo />'s ASCII tamagotchi. It talks and wears hats
+**Distribution ideas:**
+- Lots to draw from the content playbook: socials, book clubs with community, paid ads, blog, and emails.
+
+**Synergy:**
+- Align with <SmallTeam slug="developer-marketing" /> on products to prioritize. Create educational content that supports their upcoming marketing launches and campaigns.
 
 </details>

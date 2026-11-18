@@ -16,8 +16,10 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
-import { applications, topFeatures } from './session_replay/slides'
+import { applications, keyFeatures } from './session_replay/slides'
 import { getTool } from '../../data/tools'
+import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const sessionReplay = {
     ...getTool('session_replay'),
@@ -25,8 +27,10 @@ export const sessionReplay = {
     label: 'Web recordings',
     type: 'session_replay',
     teamSlug: 'replay',
-    forumTopicId: 377,
-    color: 'yellow',
+    forumTag: 'session-replay',
+    // Volume id in src/constants/pocketGuides.ts – gives the docs a Learn tab.
+    pocketGuideVolume: 'session-replay',
+    color: PRODUCT_COLORS.session_replay,
     colorSecondary: '[#B56C00]',
     wizardSupport: true,
     includeAddonRates: true,
@@ -34,9 +38,9 @@ export const sessionReplay = {
     pricingDescription:
         'Web session recordings capture clicks, scrolls, console logs, and network calls so you can replay exactly what users did in your product.',
     seo: {
-        title: 'Session Replay – Debug and analyze sessions with PostHog',
+        title: 'Session Replay – Record and watch user sessions | PostHog',
         description:
-            'Watch exactly why something happened so the fix is obvious – the session context agents use to debug and ship. One of the tools that makes your product self-driving.',
+            'Watch session recordings of real users on web and mobile. See clicks, console logs, and network requests to find friction and debug issues fast.',
     },
     /**
      * Sections rendered on the Product surface (`/session-replay`). Each entry
@@ -46,7 +50,11 @@ export const sessionReplay = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -61,6 +69,7 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconMagic className="size-4" />,
         },
+        { slug: 'field-guide', name: 'Field guide', component: FieldGuideCallout, hideFromNav: true },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -69,11 +78,11 @@ export const sessionReplay = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -110,8 +119,7 @@ export const sessionReplay = {
     ],
     overview: {
         title: 'See how people use your product',
-        description:
-            'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
+        description: '"Show me sessions where users quit onboarding"',
         eli5: "Session Replay records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
@@ -141,12 +149,59 @@ export const sessionReplay = {
                 },
             },
         },
+        'player-overview': {
+            // Store the bare delivery URL: CloudinaryImage falls back to a plain <img> for any
+            // src containing a comma, and that branch drops `className` – which is where the
+            // dark/light toggle lives, so an inline-transformation URL renders both variants.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_light_902aadff54.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_dark_d03f1adf30.png',
+            alt: 'The session replay page: the list of recordings on the left, the player in the middle, the event list on the right',
+            // 2578x1300. The light and dark variants show different sessions but the same three
+            // panels at the same size, so one set of panel-level coordinates holds for both.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/101.
+        },
+        'player-inspector': {
+            // Cropped to the player and the inspector beside it, 3649x2074 at source. The
+            // transformations are carried inline on purpose – `<ScreenshotFigure>` puts the
+            // dark/light toggle on a wrapper, so CloudinaryImage's comma fallback is harmless.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_light_d95c9f5cd8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
+            alt: "A session playing back on the left, with the inspector's event list and its five views on the right",
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/101.
+        },
+        'issue-recordings': {
+            // Cropped to the issue's right-hand pane, where both ways into a replay sit. Source
+            // is 2608x1570; the crop and the resize are carried inline, which is safe because
+            // `<ScreenshotFigure>` puts the dark/light toggle on a wrapper rather than the image.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_light_056bf99ba7.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_dark_8efab34ebd.png',
+            alt: 'An Error Tracking issue, with the button for every recording of the issue above and the Recording tab for this one exception below',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/finding-replays.
+        },
+        'player-controls': {
+            // The foot of the player, recropped from the same 3649x2074 source as
+            // `player-inspector` – the controls are worth their own figure, the recording above
+            // them is not. Shown in the pinned layout, which is what the crop makes legible.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_light_d95c9f5cd8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
+            alt: 'The bottom of the replay player: the seek bar, the transport controls, and the row of capture and comment buttons',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/watching-replays.
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
+            // 1110x640, measured against the light variant – the dark one is the same screen at
+            // the same size, so coordinates hold for both.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/101.
             playlist: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
                 srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',
@@ -263,7 +318,6 @@ export const sessionReplay = {
         },
     ],
     useCases: {
-        intro: 'Session Replay is used across teams depending on your role.',
         rows: [
             ['Product Engineers', "Debug production issues that can't be reproduced locally"],
             ['Support', 'Pinpoint the source of issues with visual verification and console logs'],
@@ -390,22 +444,22 @@ export const sessionReplay = {
             {
                 name: 'FullStory',
                 key: 'fullstory',
-                link: '/blog/posthog-vs-fullstory',
+                link: '/compare/posthog-vs-fullstory',
             },
             {
                 name: 'Hotjar',
                 key: 'hotjar',
-                link: '/blog/posthog-vs-hotjar',
+                link: '/compare/posthog-vs-hotjar',
             },
             // {
             //     name: 'Matomo',
             //     key: 'matomo',
-            //     link: '/blog/posthog-vs-matomo',
+            //     link: '/compare/posthog-vs-matomo',
             // },
             {
                 name: 'LogRocket',
                 key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
+                link: '/compare/posthog-vs-logrocket',
             },
             {
                 name: 'Clarity',
@@ -414,14 +468,14 @@ export const sessionReplay = {
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        rows: ['session_replay', 'heatmaps'],
+        rows: ['session_replay'],
         excluded_sections: ['platform.integrations', 'platform.libraries', 'platform.developer', 'platform.security'],
     },
     pairsWith: [

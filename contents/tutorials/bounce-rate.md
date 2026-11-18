@@ -43,7 +43,7 @@ PostHog's [web analytics](/web-analytics) makes it easy to see the bounce rate f
 
 ## Calculating bounce rate with SQL insights
 
-You can also use [SQL insights](/docs/product-analytics/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the **SQL** tab. This is where we write our SQL statements.
+You can also use [SQL insights](/docs/data-warehouse/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the **SQL** tab. This is where we write our SQL statements.
 
 We can use `$is_bounce` to find sessions that meet the default bounce criteria mentioned above. The value of `$is_bounce` is either `1` or `0`, so we can take the average for all sessions to get the bounce rate. We multiply by `100` to view it as a percentage and round to a single decimal place.
 
@@ -67,7 +67,7 @@ WHERE
     $entry_pathname = '/'
 ```
 
-The query above will only work for sessions that started on the home page. If we want to find the bounce rate for the `/pricing` page (not only for sessions that started on that page), we'll need to join on the [`events` table](/docs/data-warehouse/sources/posthog) and filter for pageviews that match the URL.
+The query above will only work for sessions that started on the home page. If we want to find the bounce rate for the `/pricing` page (not only for sessions that started on that page), we'll need to join on the [`events` table](/docs/data-pipelines/sources/posthog) and filter for pageviews that match the URL.
 
 ```sql
 SELECT

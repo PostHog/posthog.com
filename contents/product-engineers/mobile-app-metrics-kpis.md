@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1727786448/posthog.com/contents/header-mobile-app-metrics.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Guides
   - Product metrics
@@ -240,7 +241,7 @@ Jump to a specific category:
 - How does the average session length vary across different user segments (e.g., new vs. long-term users)?
 - What is the impact of push notifications or email campaigns on session length?
 
-**How to track it:** Create a [trend insight](/docs/product-analytics/trends) and set the event to `All events`. Change the aggregation from `Total count` to `Property value - average` and then set the property to `Session duration`. Breakdown by `Device Type` or `OS` to see the distribution by platform.
+**How to track it:** Create a [trend insight](/docs/product-analytics/trends/overview) and set the event to `All events`. Change the aggregation from `Total count` to `Property value - average` and then set the property to `Session duration`. Breakdown by `Device Type` or `OS` to see the distribution by platform.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1727792385/posthog.com/contents/Screenshot_2024-10-01_at_3.19.26_PM.png"
@@ -581,7 +582,7 @@ Jump to a specific category:
 - Which features are the most problematic for these users?
 - How do error rates change after app updates for these users?
 
-**How to track it:** Create a [SQL](/docs/product-analytics/sql) insight with the following query:
+**How to track it:** Create a [SQL](/docs/data-warehouse/sql) insight with the following query:
 
 ```sql
 WITH user_pageviews AS (
@@ -619,9 +620,9 @@ ORDER BY pageview_count DESC
 
 ## Further reading
 
-- [Best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
-- [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
-- [7 best session replay tools for mobile apps (iOS & Android)](/blog/best-mobile-app-session-replay-tools)
+- [Best mobile app analytics tools](/compare/best-mobile-app-analytics-tools)
+- [The 9 best mobile app A/B testing tools](/compare/best-mobile-app-ab-testing-tools)
+- [7 best session replay tools for mobile apps (iOS & Android)](/compare/best-mobile-app-session-replay-tools)
 
 #### Footnotes
 

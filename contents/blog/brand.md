@@ -8,13 +8,12 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/brand_startup_1aa2b151d6.png
 featuredImageType: full
+ogImage: generated
 author:
   - james-hawkins
 tags:
-- CEO diaries
-- Culture
-- Marketing
-- Growth
+- Founders
+- Brand and marketing
 crosspost:
 - Blog
 - Newsletter

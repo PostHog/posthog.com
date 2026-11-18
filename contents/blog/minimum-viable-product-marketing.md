@@ -8,8 +8,9 @@ hideAnchor: true
 author:
     - joe-martin
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/this_is_fine_6336efb0ae.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/this_is_fine_6336efb0ae.jpg
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
     - Marketing

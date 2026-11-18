@@ -26,7 +26,27 @@ type LibraryFeatures = {
     aiObservability?: boolean
     errorTracking?: boolean
     logs?: boolean
+    tracing?: boolean
 }
+
+// These SDKs' docs are their generated references, which carry no frontmatter, so their features live here.
+const referenceSdk = (sdk: string, title: string, features: LibraryFeatures): LibraryNode => ({
+    fields: { slug: `/docs/libraries/${sdk}/reference` },
+    frontmatter: { title, features },
+})
+const server = {
+    eventCapture: true,
+    userIdentification: true,
+    featureFlags: true,
+    groupAnalytics: true,
+    errorTracking: true,
+}
+const REFERENCE_SDKS: LibraryNode[] = [
+    referenceSdk('node', 'Node.js', { ...server, tracing: true }),
+    referenceSdk('python', 'Python', { ...server, tracing: true }),
+    referenceSdk('go', 'Go', server),
+    referenceSdk('rust', 'Rust', server),
+]
 
 export const LibraryComparison = () => {
     const {
@@ -81,10 +101,12 @@ export const LibraryComparison = () => {
         { name: 'Group analytics', width: '1fr', align: 'center' as const },
         { name: 'Error tracking', width: '1fr', align: 'center' as const },
         { name: 'Logs', width: '1fr', align: 'center' as const },
+        { name: 'Tracing', width: '1fr', align: 'center' as const },
     ]
 
-    const rows = sdks.nodes
+    const rows = [...sdks.nodes, ...REFERENCE_SDKS]
         .filter((lib) => lib.frontmatter.features)
+        .sort((a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title))
         .map((lib) => ({
             key: lib.fields.slug,
             cells: [
@@ -118,6 +140,9 @@ export const LibraryComparison = () => {
                 },
                 {
                     content: renderAvailability(lib.frontmatter.features?.logs),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.tracing),
                 },
             ],
         }))

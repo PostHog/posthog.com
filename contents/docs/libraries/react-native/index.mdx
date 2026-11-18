@@ -18,15 +18,86 @@ features:
   logs: true
 ---
 
+import ReactNativeCocoaPodsNotice from "../../_snippets/react-native-cocoapods-notice.mdx"
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="React Native" />
 
 ## Installation
 
 import ReactNativeInstall from '../../integrate/_snippets/install-react-native.mdx'
 
 <ReactNativeInstall />
+
+### Choose an iOS dependency path for the native plugin
+
+<ReactNativeCocoaPodsNotice>
+
+</ReactNativeCocoaPodsNotice>
+
+The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use. Then choose one iOS dependency path:
+
+| Path | Requirements | What it resolves |
+| --- | --- | --- |
+| CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin and `posthog-ios`. This remains the default path. |
+| CocoaPods with `posthog-ios` through Swift Package Manager | React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. |
+| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
+
+This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate the full Swift Package Manager path for your configuration.
+
+#### CocoaPods
+
+Use the standard React Native CocoaPods flow:
+
+```bash
+cd ios
+pod install
+```
+
+The plugin podspec adds `posthog-ios` as a CocoaPods dependency. You do not need to add `posthog-ios` separately.
+
+#### CocoaPods with `posthog-ios` through Swift Package Manager
+
+Add the following property to `ios/Podfile.properties.json`:
+
+```json
+{
+  "posthog.useSpm": "true"
+}
+```
+
+Add dynamic frameworks to your `ios/Podfile`:
+
+```ruby
+use_frameworks! :linkage => :dynamic
+```
+
+Then install the pods:
+
+```bash
+cd ios
+pod install
+```
+
+This setting changes only how the plugin resolves `posthog-ios`. The plugin and other React Native dependencies still use CocoaPods.
+
+#### Full Swift Package Manager
+
+This path uses React Native's experimental CocoaPods-free iOS integration. Every native dependency in your app must support React Native's full Swift Package Manager integration. Use CocoaPods or the hybrid path if a dependency does not support it.
+
+Install your JavaScript dependencies first. Make a clean commit or a backup of your iOS project before the conversion. Then run this command from the `ios` directory:
+
+```bash
+npx react-native spm add --deintegrate --yes
+```
+
+The `--deintegrate` option removes the complete CocoaPods integration from the iOS project. React Native then finds the plugin's `ios/Package.swift` manifest. Swift Package Manager resolves the plugin and `posthog-ios`. Do not run `pod install` for this path.
+
+PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. The CocoaPods and hybrid paths keep the plugin podspec's iOS 13 minimum.
 
 <DetailSetUpReverseProxy />
 
@@ -69,7 +140,7 @@ You can further customize how PostHog works through its configuration on initial
 | `before_send`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                              | A callback function that is called before each event is sent to PostHog. You can use it to modify, filter, or suppress events. Return `null` to drop the event, or return the modified event to send it. See [customizing exception capture](#customizing-exception-capture-with-before_send) for details. |
 | `capturePushNotificationSubscriptions`<br/><br/>**Type:** Boolean<br/>**Default:** `true`           | Whether to automatically register this device's push token so [Workflows](/docs/workflows) can target it. Requires `@posthog/react-native-plugin`. See [push notifications](#push-notifications). Available in version 4.62.0+.                                                                            |
 | `capturePushNotificationOpened`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Whether to automatically capture `$push_notification_opened` when the user taps a push notification. Requires `@posthog/react-native-plugin`. See [push notifications](#push-notifications). Available in version 4.62.0+.                                                                                 |
-| `pushIdentityProvider`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                     | Supplies a signed identity-verification token for push subscription requests. Only needed when your push channel requires identity verification. See [identity verification](#identity-verification). Available in version 4.62.0+.                                                                        |
+| `pushIdentityProvider`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                     | Supplies a signed identity-verification token for push subscription requests. Only needed when your push channel requires identity verification. See [identity verification](/docs/workflows/push-notifications/react-native#identity-verification). Available in version 4.62.0+.                                                                        |
 
 ### Tracing headers
 
@@ -246,11 +317,11 @@ In this case, you can use `alias` to assign another distinct ID to the same user
 posthog.alias('distinct_id')
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Setting person properties
 
-Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
+Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends/filters) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
 
 To set a user's properties, include the `$set` or `$set_once` property when capturing any event:
 
@@ -287,7 +358,7 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
-This does **not** set the user's properties. This only sets the properties for their events. To store person properties, see the [setting person properties section](#setting-user-properties).
+This does **not** set the user's properties. This only sets the properties for their events. To store person properties, see the [setting person properties section](#setting-person-properties).
 
 ### Removing stored super properties
 
@@ -300,6 +371,28 @@ posthog.unregister('icecream pref'),
 This will remove the super property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply [`posthog.reset()`](#reset-after-logout) which takes care of clearing all stored Super Properties and more.
+
+## Setting the app language
+
+> Requires `posthog-react-native` 4.86.0 or later.
+
+`posthog.setAppLanguage()` sets `$app_language`, the language your app displays, on every event. `$locale` is the device's language, which can differ when your app translates in JavaScript, for example with i18next. The SDK can't see that language, so events carry no `$app_language` until you call it.
+
+Call it right after you create the client and again whenever the language changes. Pass a BCP 47 language tag such as `de` or `pt-BR`:
+
+```js
+// With i18next or react-i18next
+posthog.setAppLanguage(i18n.resolvedLanguage)
+i18n.on('languageChanged', () => posthog.setAppLanguage(i18n.resolvedLanguage ?? null))
+```
+
+Pass `null` to stop sending it:
+
+```js
+posthog.setAppLanguage(null)
+```
+
+The value is kept in memory only, so set it on every app launch. It survives `reset()`. A `$app_language` you set with `posthog.register()` takes precedence.
 
 ## Opt out of data capture
 
@@ -364,7 +457,7 @@ posthog.optIn() // opt in
 posthog.optOut() // opt out
 ```
 
-If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
+If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/tutorials/filter-internal-users).
 
 ## Feature Flags
 
@@ -456,7 +549,30 @@ To set up error tracking in your project, see the [error tracking docs](/docs/er
 
 ### Native crash autocapture
 
-The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+JavaScript autocapture only covers exceptions thrown in your JS/TS code. To capture crashes in native code – a native module, the React Native runtime, or a C/C++ library – install the optional `@posthog/react-native-plugin` package and enable one or both of these options. What each option covers depends on the platform:
+
+| Option | iOS | Android |
+| --- | --- | --- |
+| `nativeCrashes` | Every native crash: uncaught Objective-C exceptions, Mach exceptions, and signals such as `SIGSEGV` and `SIGABRT`, including crashes in C/C++ code | Java/Kotlin crashes only |
+| `androidNdkCrashes` | Ignored | C/C++ (NDK) crashes, on Android 12 (API 31) or later. Requires `posthog-react-native` 4.78.0 and `@posthog/react-native-plugin` 2.12.0 or later |
+
+To capture every native crash on both platforms, enable both:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  errorTracking: {
+    autocapture: {
+      nativeCrashes: true,
+      androidNdkCrashes: true,
+    },
+  },
+})
+```
+
+Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+An Android NDK crash kills the process immediately, so PostHog captures it on the next app launch from the records the OS kept. Properties such as `$app_version` and the identity describe that launch, not the crash. The first launch after you enable `androidNdkCrashes` also captures NDK crashes the OS still holds from before.
 
 Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
 

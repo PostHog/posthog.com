@@ -14,7 +14,7 @@ import { CalloutBox } from "components/Docs/CalloutBox";
 Install the [PostHog PHP SDK](/docs/libraries/php) via Composer:
 
 ```bash
-composer require posthog/posthog-php
+composer require "posthog/posthog-php:^4.0"
 ```
 
 </Step>
@@ -178,6 +178,16 @@ try {
     PostHog\PostHog::captureException($e, 'test_user');
 }
 ```
+
+</Step>
+
+<Step title="Link releases" badge="optional">
+
+Great, you're capturing exceptions! To see which release each exception comes from, give your app the release ID when you deploy.
+
+<CallToAction className="my-2" size="sm" to="/docs/error-tracking/link-releases/php" external={true}>
+    Link releases
+</CallToAction>
 
 </Step>
 

@@ -10,12 +10,13 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
+ogImage: generated
 category: Using PostHog
 tags:
   - Guides
 ---
 
-As is the case with many fan-favorite Google products, their A/B testing platform, Optimize, was recently sunset. 
+As is the case with many fan-favorite Google products, its A/B testing platform, Optimize, was recently sunset. 
 
 PostHog is a great alternative that enables you to set up, run, and track A/B tests. It provides analytics built-in, along with a suite of dev tools like feature flags, session replay, and surveys.
 

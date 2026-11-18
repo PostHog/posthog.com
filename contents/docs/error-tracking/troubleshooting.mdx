@@ -4,10 +4,6 @@ title: Error Tracking troubleshooting
 
 This page covers troubleshooting for Error Tracking. For setup, see the [installation guides](/docs/error-tracking/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Exceptions not appearing
 
 If PostHog isn't capturing errors:
@@ -141,7 +137,7 @@ Rules can become disabled if PostHog encounters a processing error while evaluat
 
 To fix and re-enable a disabled rule:
 
-1. Go to your [custom grouping rules](/docs/error-tracking/grouping-issues#custom-grouping-rule) or [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) in the **Configuration** tab
+1. Go to your [grouping rules](/docs/error-tracking/grouping-issues#option-1-custom-grouping-rule) or [assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) in the **Configuration** tab
 2. Find the rule with the disabled banner and review the error message
 3. Edit the rule to correct the configuration issue
 4. Save the rule – this automatically re-enables it
@@ -151,10 +147,10 @@ If the error persists after editing, reach out to support.
 ## Solved community questions
 
 <SolvedQuestions
-  topicLabel="Error Tracking"
-  pinnedQuestions={[
-    "code-variables-for-external-libraries-for-python",
-    "trouble-setting-up-source-map-in-vite-react",
-    "webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel",
-  ]}
+topicLabel="Error Tracking"
+pinnedQuestions={[
+"code-variables-for-external-libraries-for-python",
+"trouble-setting-up-source-map-in-vite-react",
+"webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel",
+]}
 />

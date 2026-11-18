@@ -102,15 +102,15 @@ If you’re applying for a job right now, you will probably not like this stuff 
 
 37. On the flip side, yes, [cover letters](/newsletter/how-to-get-job-startup) still matter. When you get 500 applications for a job, you’re still looking for ways to easily say ‘no’ to people.
 
-38. Make it [obviously personalized](/founders/what-recruiters-see#write-a-short-and-obviously-personalized-cover-letter). Yes, we are still pretty good at spotting AI-generated stuff.
+38. Make it [obviously personalized](/blog/what-recruiters-see#write-a-short-and-obviously-personalized-cover-letter). Yes, we are still pretty good at spotting AI-generated stuff.
 
 ![cover letters](https://res.cloudinary.com/dmukukwp6/image/upload/cover_letter_7bd5129ea6.png)
 
-39. Make your resumé [easy to read](/founders/what-recruiters-see#keep-your-cv-simple-and-up-to-date). Lighten the cognitive load on the person screening.
+39. Make your resumé [easy to read](/blog/what-recruiters-see#keep-your-cv-simple-and-up-to-date). Lighten the cognitive load on the person screening.
 
 40. Getting a [warm referral](/newsletter/how-to-get-job-startup#one-simple-annoying-trick) still works best, unfortunately. Randomly adding someone on LinkedIn doesn’t count.
 
-41. You won’t get the [feedback](/founders/what-recruiters-see#i-did-all-this-and-it-didnt-work--wheres-my-feedback-you-assholes) you want, even from the companies that try really hard at this (because it’s not worth it to them, frankly).
+41. You won’t get the [feedback](/blog/what-recruiters-see#i-did-all-this-and-it-didnt-work--wheres-my-feedback-you-assholes) you want, even from the companies that try really hard at this (because it’s not worth it to them, frankly).
 
 42. Learn to ask [good questions](/founders/what-to-ask-in-interviews). Don’t be overly deferential to your interviewer - smart questions are another signal of a good candidate.
 

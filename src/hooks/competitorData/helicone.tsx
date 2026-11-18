@@ -37,7 +37,8 @@ export const helicone = {
                     // Sessions group multi-step requests into a tree.
                     hierarchical_traces: true,
                     custom_spans: true,
-                    tool_call_tracking: false,
+                    // Tool calls and function executions logged into sessions via the Logger SDK.
+                    tool_call_tracking: true,
                     // Vector DB calls can be logged into sessions.
                     rag_retrieval_tracking: true,
                     session_grouping: true,

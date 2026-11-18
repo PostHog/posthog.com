@@ -6,6 +6,7 @@ interface ScalableSlideProps {
     baseHeight?: number
     className?: string
     mode?: 'thumbnail' | 'editor' | 'presentation'
+    renderBeforeInitialization?: boolean
 }
 
 const ScalableSlide: React.FC<ScalableSlideProps> = ({
@@ -14,6 +15,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     baseHeight = 720,
     className = '',
     mode = 'editor',
+    renderBeforeInitialization = mode !== 'thumbnail',
 }) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
@@ -105,7 +107,6 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
             return
         }
 
-        // Calculate scale to fit container while maintaining aspect ratio
         const scaleX = containerRect.width / baseWidth
         const scaleY = containerRect.height / baseHeight
         let newScale = Math.min(scaleX, scaleY)
@@ -188,8 +189,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
         }
     }, [updateScale, mode, children])
 
-    // Don't render scaled content until we have proper dimensions
-    if (!isInitialized) {
+    if (!isInitialized && !renderBeforeInitialization) {
         return (
             <div ref={containerRef} className={`relative w-full h-full overflow-hidden ${className}`}>
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -201,6 +201,11 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
 
     return (
         <div ref={containerRef} className={`relative w-full h-full overflow-hidden rounded ${className}`}>
+            {!isInitialized && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                </div>
+            )}
             <div
                 ref={contentRef}
                 data-scheme="primary"
@@ -209,6 +214,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
                     width: baseWidth,
                     height: baseHeight,
                     transform: `translate(-50%, -50%) scale(${scale})`,
+                    visibility: isInitialized ? 'visible' : 'hidden',
                 }}
             >
                 {children}

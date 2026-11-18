@@ -9,12 +9,12 @@ const SECONDS_PER_ITEM = 2.5
 // Core products plus notable betas, in the order they scroll.
 export const DEFAULT_HANDLES = [
     'product_analytics',
-    'web_analytics',
     'session_replay',
+    'error_tracking',
+    'web_analytics',
     'feature_flags',
     'experiments',
     'surveys',
-    'error_tracking',
     'data_warehouse',
     'cdp',
     'workflows_emails',
@@ -34,6 +34,16 @@ const SLUG_OVERRIDES: Record<string, string> = {
     inbox: 'docs/self-driving/inbox',
 }
 
+export function useToolsProducts(handles = DEFAULT_HANDLES) {
+    const allProducts = useProduct()
+    return handles
+        .map((handle) =>
+            Array.isArray(allProducts) ? allProducts.find((product: any) => product.handle === handle) : undefined
+        )
+        .map((product: any) => (product ? { ...product, slug: SLUG_OVERRIDES[product.handle] ?? product.slug } : null))
+        .filter((product: any) => product?.name && product?.slug)
+}
+
 interface ToolsTickerProps {
     handles?: string[]
     label?: string
@@ -48,15 +58,8 @@ export default function ToolsTicker({
     className = '',
     direction = 'left',
 }: ToolsTickerProps): JSX.Element | null {
-    const allProducts = useProduct()
+    const products = useToolsProducts(handles)
     const [isPaused, setIsPaused] = useState(false)
-
-    const products = handles
-        .map((handle) =>
-            Array.isArray(allProducts) ? allProducts.find((product: any) => product.handle === handle) : undefined
-        )
-        .map((product: any) => (product ? { ...product, slug: SLUG_OVERRIDES[product.handle] ?? product.slug } : null))
-        .filter((product: any) => product?.name && product?.slug)
 
     if (!products.length) {
         return null

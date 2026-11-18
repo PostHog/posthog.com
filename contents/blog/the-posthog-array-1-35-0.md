@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   PostHog 1.35.0 introduces activity logs and a brand new way of visualizing
   where your users are coming from with the World Map. Additionally we now
@@ -29,7 +30,7 @@ We've also recently launched a new newsletter, which we send once every two week
 
 ## PostHog 1.35.0 release notes
 
-> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/runbook/upgrading-posthog).
+> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host).
 
 **Release highlights:**
 - [Activity log](#new-activity-log)
@@ -48,7 +49,7 @@ You can now view changes to feature flags and persons made in the UI and see who
 ### New: World map
 ![PostHog - World Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_35_0_map.png)
 
-A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](https://posthog.com/integrations/geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
+A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](/docs/data-pipelines/transformations/template-geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
 
 ### New: Multi-tenant SAML
 

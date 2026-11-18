@@ -3,7 +3,7 @@ export const statsig = {
     key: 'statsig',
     assets: {
         icon: '/images/competitors/statsig.svg',
-        comparisonArticle: '/blog/posthog-vs-statsig',
+        comparisonArticle: '/compare/posthog-vs-statsig',
     },
     products: {
         cdp: {
@@ -35,6 +35,7 @@ export const statsig = {
                 namespacing: true,
                 native_goal_tracking: true,
                 no_code_experiments: true,
+                low_code_experiments: true,
                 ratio_metrics: true,
                 recommended_run_time: true,
                 secondary_metrics: true,
@@ -58,6 +59,7 @@ export const statsig = {
             targeting: {
                 features: {
                     cohort_integration: true,
+                    custom_targeting: true,
                     exclusion_rules: true,
                     geographic_targeting: true,
                     group_level_experiments: true,
@@ -77,7 +79,7 @@ export const statsig = {
             },
             analysis: {
                 features: {
-                    llm_support: false,
+                    llm_support: true,
                     results_visualization: true,
                     side_effect_monitoring: true,
                     statistical_significance: true,

@@ -16,6 +16,8 @@ tags:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
+ogImage: generated
+
 ---
 
 We are big fans of ClickHouse. We rely on it heavily to store and retrieve the massive amount of data we process every day. In doing this at scale for multiple years now, we’ve built a lot of expertise and systems related to ClickHouse. 

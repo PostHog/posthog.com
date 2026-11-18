@@ -42,6 +42,10 @@ pnpm update posthog-js
 yarn upgrade posthog-js
 ```
 
+```bash file=Bun
+bun update posthog-js
+```
+
 </MultiLanguage>
 
 Other patterns that cause version drift in npm setups:
@@ -147,6 +151,10 @@ pnpm update posthog-js
 yarn upgrade posthog-js
 ```
 
+```bash file=Bun
+bun update posthog-js
+```
+
 </MultiLanguage>
 
 > **Note:** yarn's update command is named `upgrade` in yarn v1, or `up` in yarn v2+.
@@ -187,7 +195,7 @@ npm update @posthog/nuxt
 
 ```bash file=Python
 # Updates the `posthog-python` package:
-pip install --upgrade posthog
+pip install --upgrade "posthog>=8,<9"
 ```
 
 ```bash file=Ruby
@@ -202,7 +210,7 @@ composer update posthog/posthog-php
 
 ```bash file=Go
 # Updates the `posthog-go` package:
-go get -u github.com/PostHog/posthog-go@latest
+go get -u github.com/posthog/posthog-go/v2@latest
 ```
 
 ```bash file=Elixir
@@ -213,7 +221,7 @@ mix deps.update posthog
 
 ```bash file=.NET
 # Updates the `posthog-dotnet` package:
-dotnet add package PostHog
+dotnet add package PostHog --version 2.21.2
 ```
 
 </MultiLanguage>

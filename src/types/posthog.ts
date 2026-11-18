@@ -13,6 +13,7 @@ export type PostHog = {
     getFeatureFlag: (...args: any[]) => any
     getFeatureFlagPayload: (...args: any[]) => any
     get_distinct_id: (...args: any[]) => string
+    has_opted_out_capturing?: () => boolean
     get_property: (...args: any[]) => any
     identify: (...args: any[]) => void
     isFeatureEnabled: (...args: any[]) => boolean | undefined

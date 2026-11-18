@@ -9,7 +9,7 @@ export const microsoft_clarity = {
         product_analytics: {
             available: false,
             funnels: {
-                available: false,
+                available: true,
             },
             user_paths: {
                 available: false,

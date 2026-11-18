@@ -40,7 +40,7 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 import useProduct from 'hooks/useProduct'
-import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import { buildProductMenuTabs, PRODUCT_SURFACE_H1, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -53,7 +53,7 @@ const DestinationsLibraryCallout = () => {
             <p className="m-0 !mb-3 !mt-1.5">
                 We're building new destinations and want your input on what to build next.
             </p>
-            <CallToAction to="/cdp#library" size="sm">
+            <CallToAction to="/docs/data-pipelines" size="sm">
                 Browse the library
             </CallToAction>
         </div>
@@ -121,14 +121,14 @@ const Contributors = (props) => {
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
-            {location.pathname.startsWith('/docs/cdp/destinations') &&
-                location.pathname !== '/docs/cdp/destinations' && (
+            {location.pathname.startsWith('/docs/data-pipelines/destinations') &&
+                location.pathname !== '/docs/data-pipelines/destinations' && (
                     <div className="p-4 mb-8 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
                         <h5 className="m-0 text-lg font-bold leading-tight">Did somebody say destinations?</h5>
                         <p className="text-sm m-0 mb-3 mt-1.5">
                             We're building more destinations and prioritzing them based on your feedback.
                         </p>
-                        <CallToAction size="sm" to="/cdp#library">
+                        <CallToAction size="sm" to="/docs/data-pipelines">
                             Browse the library
                         </CallToAction>
                     </div>
@@ -358,20 +358,34 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const posthog = usePostHog()
     const { pathname } = useLocation()
     // Hand-written source docs use this template (not DataWarehouseSource). Show the
-    // warehouse wizard nudge on data-warehouse source URLs and on CDP source pages
-    // linked to a postHogSource.
+    // warehouse wizard nudge on data pipeline source URLs and on any page linked to a postHogSource.
     const showWarehouseWizardHint =
         !!postHogSource ||
-        pathname === '/docs/data-warehouse/sources' ||
-        pathname.startsWith('/docs/data-warehouse/sources/')
+        pathname === '/docs/data-pipelines/sources' ||
+        pathname.startsWith('/docs/data-pipelines/sources/')
 
     // Same nudge for AI observability SDK installation pages. The coding-agent integrations
     // (Claude Code, OpenClaw, OpenCode, Pi) are excluded: they instrument the agent itself, so
-    // running the wizard in a project doesn't set them up. The installation index has its own
-    // AI wizard section in the MDX.
+    // running the wizard in a project doesn't set them up. Anthropic renders the hint inside its
+    // Claude SDK tab only, because its Claude Platform tab has no project code to set up.
+    // The installation index has its own AI wizard section in the MDX.
     const showAIObservabilityWizardHint =
         pathname.startsWith('/docs/ai-observability/installation/') &&
-        !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
+        !['anthropic', 'claude-code', 'openclaw', 'opencode', 'pi'].includes(
+            pathname.split('/').filter(Boolean).pop() ?? ''
+        )
+
+    const wizardHint =
+        (showWarehouseWizardHint && <WarehouseWizardHint />) ||
+        (showAIObservabilityWizardHint && <AIObservabilityWizardHint />) ||
+        null
+    // `undefined` when there is nothing to show, so ReaderView skips the wrapper's margin.
+    const belowTitle = wizardHint || undefined
+
+    // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
+    // Gated on the MDX slug (not `pathname`). Scoped to /docs so the
+    // handbook and the Using PostHog manual, which share this template, stay unchanged.
+    const showAskAI = typeof slug === 'string' && slug.startsWith('/docs/')
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
@@ -384,16 +398,23 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const allProducts = useProduct() as any[]
     const docsProductSlug = typeof slug === 'string' && slug.startsWith('/docs/') ? slug.split('/')[2] : null
     const productSurfaceData = docsProductSlug
-        ? allProducts.find((p: any) => {
-              const lastSegment = p.slug?.split('/').pop()
-              return lastSegment === docsProductSlug
-          })
+        ? allProducts
+              // `docsSlug` covers the products whose docs don't sit at
+              // `/docs/<product slug>` (Traces docs live at /docs/distributed-tracing).
+              .filter((p: any) => (p.docsSlug ?? p.slug?.split('/').pop()) === docsProductSlug)
+              .sort((a: any, b: any) => (b.productMenu?.length ? 1 : 0) - (a.productMenu?.length ? 1 : 0))[0]
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
     const productMenuTabs = isProductDocsPage
-        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        ? buildProductMenuTabs({
+              productData: productSurfaceData,
+              activeSurface: 'docs',
+              currentPath: slug,
+          })
         : undefined
-    const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
+    const productSelect = isProductDocsPage ? (
+        <ProductSwitcher activeHandle={productSurfaceData.handle} surface="docs" />
+    ) : undefined
 
     const components = {
         Team,
@@ -456,15 +477,15 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                     : null),
             }}
             title={title}
-            belowTitle={
-                (showWarehouseWizardHint && <WarehouseWizardHint />) ||
-                (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
-            }
+            titleClassName={isProductDocsPage ? PRODUCT_SURFACE_H1 : undefined}
+            belowTitle={belowTitle}
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
+            renderMdx={(content) => <MDXRenderer>{content}</MDXRenderer>}
             commits={commits}
             filePath={post.parent?.relativePath}
             showSurvey
+            showAskAI={showAskAI}
             hideRightSidebar={hideRightSidebar}
             contentMaxWidthClass={contentMaxWidthClass}
             sourceInstanceName={post.parent?.sourceInstanceName}
@@ -543,6 +564,7 @@ export const query = graphql`
         post: mdx(id: { eq: $id }) {
             id
             body
+            timeToRead
             excerpt(pruneLength: 150)
             fields {
                 slug

@@ -73,7 +73,7 @@ As one engineer put it:
 
 ## 5. Taking too long to re-hire roles
 
-Talent compounds is one of [our key values](/handbook/company/values). We believe working with great people is hugely motivating, and the feedback we get bears this out. People love working at PostHog because they’re surrounded by world-class talent.
+Talent compounds is one of [our key values](/handbook/values). We believe working with great people is hugely motivating, and the feedback we get bears this out. People love working at PostHog because they’re surrounded by world-class talent.
 
 As a result, we prefer to let people go quickly when things aren’t working – and we [pay more than the industry average](/handbook/people/compensation) in severance. This works for us, but one unintended consequence is we developed a fear of re-hiring roles when the original hire didn’t work out.
 

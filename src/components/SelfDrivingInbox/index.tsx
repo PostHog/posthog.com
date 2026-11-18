@@ -1,12 +1,35 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { InboxTemplate, UNCATEGORIZED } from './types'
+import { pocketGuideDestination } from '../../constants/pocketGuides'
+import scoutSkillsData from '../../data/scout-skills.json'
+
+import { InboxTemplate, ScoutSpec, UNCATEGORIZED } from './types'
+
+interface ScoutSkillsData {
+    skills: Record<string, { name: string; description: string; raw: string }> | null
+}
+
+/**
+ * A guide that names an `appTemplate` shows a scout PostHog already ships, so its file is fetched
+ * from the monorepo at build time (`gatsby/utils/fetchScoutSkills.ts`) rather than kept as a second
+ * copy here. Guides with their own scout keep using their sibling `SKILL.md`.
+ *
+ * Returns undefined when the fetch failed, which leaves the scout figure unrendered rather than
+ * showing a scout that may no longer match what the app creates.
+ */
+function scoutFromAppTemplate(appTemplate: string, schedule?: string): ScoutSpec | undefined {
+    const skill = (scoutSkillsData as ScoutSkillsData).skills?.[appTemplate]
+    if (!skill) {
+        return undefined
+    }
+    return { name: skill.name, description: skill.description, raw: skill.raw, schedule, appTemplate }
+}
 
 export function useSelfDrivingTemplates(): InboxTemplate[] {
     const data = useStaticQuery(graphql`
         query SelfDrivingInboxQuery {
-            guides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides/self-driving//" } } }) {
+            guides: allMdx(filter: { fields: { slug: { regex: "/^/learn/self-driving/pocket-guide/" } } }) {
                 nodes {
                     id
                     fields {
@@ -31,6 +54,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         }
                         category
                         schedule
+                        appTemplate
                         report {
                             title
                             source
@@ -65,9 +89,12 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
     return useMemo(() => {
         const nodes = data?.guides?.nodes || []
 
-        // Keyed by the guide slug that owns each scout: /pocket-guides/x/SKILL -> /pocket-guides/x
+        // Join guide and sibling skill by their public reader URL.
         const scoutsByTemplate = new Map<string, any>(
-            (data?.scouts?.nodes || []).map((node: any) => [node.fields.slug.replace(/\/SKILL$/, ''), node])
+            (data?.scouts?.nodes || []).map((node: any) => [
+                pocketGuideDestination(node.fields.slug.replace(/\/SKILL$/, '')),
+                node,
+            ])
         )
 
         return (
@@ -85,9 +112,9 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                     )
                 })
                 .map((node: any) => {
-                    const scoutNode = scoutsByTemplate.get(node.fields.slug)
+                    const scoutNode = scoutsByTemplate.get(pocketGuideDestination(node.fields.slug))
                     return {
-                        url: node.fields.slug,
+                        url: pocketGuideDestination(node.fields.slug),
                         category: node.frontmatter.category || UNCATEGORIZED,
                         templateTitle: node.frontmatter.title,
                         templateShortTitle: node.frontmatter.shortTitle,
@@ -97,7 +124,9 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         tldr: node.frontmatter.tldr,
                         watches: node.frontmatter.watches,
                         requires: node.frontmatter.requires,
-                        scout: scoutNode
+                        scout: node.frontmatter.appTemplate
+                            ? scoutFromAppTemplate(node.frontmatter.appTemplate, node.frontmatter.schedule)
+                            : scoutNode
                             ? {
                                   name: scoutNode.frontmatter?.name,
                                   description: scoutNode.frontmatter?.description,

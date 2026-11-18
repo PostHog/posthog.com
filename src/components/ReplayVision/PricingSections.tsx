@@ -115,6 +115,12 @@ const boostedFreeCredits = (
 
 const planRows: { label: string; free: PlanValue; paid: PlanValue }[] = [
     { label: 'Monthly free credits', free: boostedFreeCredits, paid: boostedFreeCredits },
+    {
+        label: 'After free credits',
+        free: 'Scans pause until the next billing period',
+        paid: `$${CREDIT_PRICE.toFixed(2)}/credit, up to your spending limit`,
+    },
+    { label: 'Credit card', free: 'Not required', paid: 'Required' },
     { label: 'Monthly volume', free: `Up to ${FREE_CREDITS.toLocaleString()} credits`, paid: 'Unlimited' },
     { label: 'All scanner types', free: true, paid: true },
     { label: 'All AI models', free: true, paid: true },
@@ -128,12 +134,15 @@ const PlanValueCell = ({ value }: { value: PlanValue }) => {
     return <span className="text-sm text-primary">{value}</span>
 }
 
-export const PricingPlans = ({ id }: SectionComponentProps) => (
+// `intro` renders above the plans in the left column, so a page can put the TL;DR
+// there and the sidebar starts level with it (as in the shared `Plans` template).
+export const PricingPlans = ({ id, intro }: SectionComponentProps & { intro?: React.ReactNode }) => (
     <section
         id={id}
         className="scroll-mt-20 not-prose @container grid grid-cols-1 gap-10 @4xl:gap-x-16 @4xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]"
     >
         <div className="@container">
+            {intro && <div className="mb-12">{intro}</div>}
             <h2 className="text-3xl font-bold text-primary mt-0 mb-4">Plans</h2>
             <div className="divide-y divide-primary">
                 {/* Column headers */}
@@ -141,19 +150,6 @@ export const PricingPlans = ({ id }: SectionComponentProps) => (
                     <span className="hidden @xl:block" />
                     <span className="text-base font-bold text-primary">Totally free</span>
                     <span className="text-base font-bold text-primary">Pay-as-you-go</span>
-                </div>
-
-                {/* Price per credit */}
-                <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
-                    <span className={`${LABEL_CELL} text-base text-primary/70`}>Price per credit</span>
-                    <span>
-                        <strong className="text-lg text-primary">$0</strong>
-                        <span className="block text-sm text-primary/50 mt-0.5">No credit card required</span>
-                    </span>
-                    <span>
-                        <strong className="text-lg text-primary">${CREDIT_PRICE.toFixed(2)}/credit</strong>
-                        <span className="block text-sm text-primary/50 mt-0.5">1 credit = $0.01</span>
-                    </span>
                 </div>
 
                 {/* Feature rows */}

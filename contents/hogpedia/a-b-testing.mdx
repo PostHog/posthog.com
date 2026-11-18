@@ -1,0 +1,62 @@
+---
+title: A/B testing
+description: A/B testing compares two versions of a product by showing each to a randomly assigned group of users and measuring which performs better against a chosen metric. Random assignment is what lets the difference be attributed to the change.
+hogpedia:
+    categories: ['Concepts']
+    aliases: ['Split testing', 'Randomised controlled trial', 'Multivariate testing']
+    infobox:
+        title: A/B testing
+        hog: HedgehogBeaker
+        rows:
+            - label: Type
+              value: Statistical method
+            - label: Compares
+              value: Two or more variants
+            - label: Requires
+              value: Random assignment
+            - label: In PostHog
+              value: '[Experiments](/hogpedia/experiments)'
+    seeAlso:
+        - 'Experiments|/hogpedia/experiments'
+        - 'Feature flags|/hogpedia/feature-flags'
+        - 'Product analytics|/hogpedia/product-analytics'
+    references:
+        - id: 1
+          text: 'PostHog documentation, Experiments'
+          url: /docs/experiments
+    external:
+        - title: 'PostHog Experiments documentation'
+          url: /docs/experiments
+---
+
+**A/B testing** compares two versions of a product by showing each version to a randomly assigned group of people and measuring which group performs better against a metric chosen in advance. It is also called split testing. A test with more than two versions is usually called multivariate testing.
+
+The method is a randomised controlled trial applied to software. Random assignment is the whole mechanism: it makes the two groups comparable in every respect except the one being tested, so any difference in the result can be attributed to the change.
+
+## Why it is necessary
+
+The obvious alternative – ship the change and watch the metric – measures the change and the passage of time together. A metric moves for many reasons at once: the day of the week, a campaign, a holiday, a competitor, an unrelated release. Before-and-after comparison cannot separate them.
+
+Running both versions simultaneously on comparable groups removes the confounding, because every other influence applies to both groups equally.
+
+## How a test is constructed
+
+1. **State the hypothesis first.** What change, which metric, in which direction. A hypothesis written after the result is not a hypothesis.
+2. **Choose one primary metric.** More than one primary metric means more than one chance of a positive result, and the test loses its discipline.
+3. **Assign people at random, and stably.** A person must see the same variant every time, or the comparison measures nothing.
+4. **Set the duration in advance.** This is the part most often skipped, and the reason is the next section.
+5. **Watch for damage elsewhere.** Secondary metrics catch a change that improves one number by harming another.
+
+## Common errors
+
+**Stopping when it looks good.** A metric checked repeatedly will eventually cross a significance threshold by chance. Deciding to stop because the result is currently positive converts noise into a conclusion. The duration must be fixed before the test begins.
+
+**Too little traffic.** Detecting a small difference requires a large sample. A test on low traffic does not produce a weak answer; it produces no answer, whatever the interface displays.
+
+**Testing something trivial.** A test costs time and traffic. Spending both on a button color is a real cost with a small possible payoff.
+
+**Measuring the click and not the outcome.** A variant that increases clicks and decreases completions has made the product worse.
+
+## In PostHog
+
+PostHog implements A/B testing as the [Experiments](/hogpedia/experiments) product, which uses a multi-variant [feature flag](/hogpedia/feature-flags) for assignment and a [product analytics](/hogpedia/product-analytics) insight for the metric.<Ref id="1" />

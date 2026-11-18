@@ -7,15 +7,15 @@ PostHog can capture network requests that occur during the browser session, so y
 You can enable network recording from your [project settings](https://app.posthog.com/project/settings):
 
 <ProductScreenshot
-    imageLight={EnableSessionReplayLight} 
-    imageDark={EnableSessionReplayDark}
-    alt="Enable network recording in your PostHog" 
-    classes="rounded"
+imageLight={EnableSessionReplayLight}
+imageDark={EnableSessionReplayDark}
+alt="Enable network recording in your PostHog"
+classes="rounded"
 />
 
 When enabled PostHog always captures:
 
-* the network request URL, 
+* the network request URL,
 * [performance information](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) about the request,
 
 When request capture is enabled you can also enabled payload and body capture, this includes:
@@ -24,6 +24,8 @@ When request capture is enabled you can also enabled payload and body capture, t
 * the response code
 * request & response headers (if enabled)
 * request & response body (if enabled)
+
+Request and response body and header capture are off by default. You can enable them through your project settings or SDK configuration.
 
 ## Sensitive information
 
@@ -93,6 +95,44 @@ posthog.init('<ph_project_token>', {
     }
 })
 ```
+
+### Filter captured output by URL
+
+To keep only requests to an exact URL, use an allowlist:
+
+```js-web
+posthog.init("<ph_project_token>", {
+    session_recording: {
+        maskCapturedNetworkRequestFn: (request) =>
+            request.name === "https://api.example.com/public/status" ? request : null,
+    },
+})
+```
+
+Replace the example URL with one whose captured content you intend to keep. Exact matching excludes other hosts, paths, and query strings. This callback doesn't enable body or header capture. It returns allowed content unchanged, so redact sensitive payloads yourself, as described above.
+
+The callback filters output after collection. Returning `null` or `undefined` drops an ordinary request, but enabled body and header capture may already have read its data. Removing fields in the callback also doesn't undo those reads. This is not a URL allowlist that prevents collection.
+
+Initial navigation and performance entries (`isInitial === true`) are an exception. Replay keeps required timing metadata when you drop an initial entry, but removes its URL, headers, and body. The callback also affects replay page URLs, so check the [URL redaction guidance](/docs/session-replay/privacy#url-redaction) before applying an allowlist.
+
+## Prevent body and header access
+
+To prevent the replay network plugin from reading request and response bodies and headers, set both options to `false` at initialization:
+
+```js-web
+posthog.init("<ph_project_token>", {
+    session_recording: {
+        recordBody: false,
+        recordHeaders: false,
+    },
+})
+```
+
+Both options are booleans. An explicit local `false` overrides remote enablement for that option. With both disabled, the replay network plugin doesn't install its `fetch` and XHR detail-capture wrappers. This applies to every URL, not a selection of URLs.
+
+Disabling only `recordBody` doesn't prevent all access: header capture can still inspect headers and request-body properties. Disabling only `recordHeaders` doesn't prevent header inspection needed for body capture.
+
+These options don't disable network timing or URL recording, DOM snapshots, other SDK collection, or all transmission to PostHog. Configure [replay privacy controls](/docs/session-replay/privacy) and consent separately.
 
 ## Troubleshooting
 

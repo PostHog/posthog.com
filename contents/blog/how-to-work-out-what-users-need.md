@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
+ogImage: generated
 category: Product growth
 tags:
   - Guides
@@ -91,6 +92,6 @@ There's no shortcut here; research takes time to do and has to be done thoroughl
 
 - [An introduction to customer retention](/blog/introduction-to-customer-retention): Explains customer retention, why it's important and tactics you can use to reduce churn
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/founders/product-market-fit-game): How to approach finding market fit for a B2B product
 
 <NewsletterForm />

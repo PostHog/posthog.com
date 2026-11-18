@@ -16,8 +16,9 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { applications, topFeatures } from './workflows/slides'
+import { applications, keyFeatures } from './workflows/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const workflows = {
     ...getTool('workflows_emails'),
@@ -25,17 +26,17 @@ export const workflows = {
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
-    forumTopicId: 392, // /questions/topic/workflows squeakId
-    color: 'teal',
+    forumTag: 'workflows',
+    color: PRODUCT_COLORS.workflows_emails,
     colorSecondary: 'green-2',
     includeAddonRates: true,
-    // Matches billing API / pricing page (Emails + Destinations free tiers + first paid tiers).
+    // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).
     pricingDescription:
-        'First 10,000 emails and 10,000 destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
+        'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Automate workflows with product data',
+        title: 'Workflows – Automate emails and messages from user behavior',
         description:
-            'Automations that act on live user behavior – send Slack messages, emails, or events. The actions agents take to close the loop and make your product self-driving.',
+            'Trigger emails, push notifications, Slack messages, and webhooks from live user behavior. Build automations in PostHog with 10K emails free monthly.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -45,7 +46,11 @@ export const workflows = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -68,11 +73,11 @@ export const workflows = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -109,8 +114,7 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
-        description:
-            'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
+        description: '"Create an onboarding email series for trial users"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>
@@ -118,12 +122,6 @@ export const workflows = {
                     Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
                     your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
                     triggers, delays, audience splits, message sends, and PostHog actions.
-                </p>
-                <p>
-                    Because workflows run on the same events and person properties you already send to PostHog, you can
-                    act on real product behavior instead of a separate marketing dataset. Any real-time destination in
-                    PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and
-                    automation.
                 </p>
             </>
         ),
@@ -169,7 +167,6 @@ export const workflows = {
     },
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
     useCases: {
-        intro: 'Workflows is used across teams depending on your role.',
         rows: [
             [
                 'Product Leads / Technical PMs',
@@ -363,7 +360,7 @@ export const workflows = {
         ],
     },
     slider: {
-        marks: [10000, 50000, 100000, 1000000, 10000000],
+        marks: [10000, 1000000, 10000000],
         min: 10000,
         max: 10000000,
     },
@@ -371,9 +368,9 @@ export const workflows = {
     addonSliders: [
         {
             key: 'workflows_destinations',
-            label: 'Destinations',
+            label: 'Push and other destinations',
             sliderConfig: {
-                marks: [10000, 50000, 100000, 1000000, 10000000],
+                marks: [10000, 1000000, 10000000],
                 min: 10000,
                 max: 10000000,
             },

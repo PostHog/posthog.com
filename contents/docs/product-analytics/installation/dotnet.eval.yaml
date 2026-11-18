@@ -1,0 +1,24 @@
+owner: wizard-and-docs
+tags: [install, dotnet]
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a .NET app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: dotnet-app
+      prompt: >-
+          Set up PostHog in the .NET app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  The app's .csproj in {folder}/ references PostHog.AspNetCore (for an
+                  ASP.NET Core app) or PostHog (for a console or worker app).
+              initialized: >-
+                  For ASP.NET Core, Program.cs calls builder.AddPostHog() and
+                  configuration supplies ProjectToken and HostUrl. Otherwise, the app
+                  creates one PostHogClient with the project token and host. Cite the
+                  file and line(s).

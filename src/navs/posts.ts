@@ -158,17 +158,17 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'General',
-                url: '/blog/general',
+                url: '/blog/categories/general',
                 icon: 'IconNewspaper',
                 color: 'green',
             },
-            {
-                name: 'Comparisons',
-                url: '/blog/comparisons',
-                icon: 'IconColumns',
-                color: 'lilac',
-            },
         ],
+    },
+    {
+        name: 'Compare',
+        url: '/compare',
+        icon: 'IconColumns',
+        color: 'lilac',
     },
     {
         name: 'Changelog',

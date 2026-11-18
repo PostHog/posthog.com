@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect, useContext, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
-import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import LevelBadge from './LevelBadge'
 import Days from './Days'
 import Markdown from './Markdown'
@@ -12,20 +12,8 @@ import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
-import {
-    IconArchive,
-    IconPencil,
-    IconPin,
-    IconSparkles,
-    IconTrash,
-    IconUndo,
-    IconExpand,
-    IconShieldLock,
-} from '@posthog/icons'
+import { IconArchive, IconPencil, IconSparkles, IconTrash, IconUndo, IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
-import { Check2 } from 'components/Icons'
 import { navigate } from 'gatsby'
 import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
@@ -33,9 +21,6 @@ import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { TopicSelector } from './TopicSelector'
-import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
 
@@ -51,131 +36,10 @@ type QuestionProps = {
     onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
     subscribeButton?: boolean
     isInForum?: boolean
-    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
     refreshList?: () => void
 }
 
 export const CurrentQuestionContext = createContext<any>({})
-
-const createSupportTicket = async (
-    posthog: NonNullable<ReturnType<typeof usePostHog>>,
-    message: string,
-    traits: { name: string | null; email: string | null }
-) => {
-    if (!posthog.conversations?.isAvailable?.()) {
-        throw new Error('Conversations are not available')
-    }
-    // newTicket=true so each escalate creates a fresh support ticket
-    const ticket = await posthog.conversations.sendMessage(message, traits, true)
-    if (!ticket) throw new Error('Failed to create support ticket')
-    return ticket
-}
-
-const TopicSelect = (props: {
-    selectedTopics: StrapiData<TopicData[]>
-    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
-}) => {
-    const { pinTopics } = useContext(CurrentQuestionContext)
-    const [topicGroups, setTopicGroups] = useState([])
-    const [selectedTopics, setSelectedTopics] = useState<StrapiRecord<TopicData>[]>([])
-    const { addToast } = useToast()
-
-    const handleChange = async (topics: StrapiRecord<TopicData>[]) => {
-        setSelectedTopics(topics)
-        await pinTopics(topics.map((topic) => topic.id))
-        props.onPinTopics?.(topics)
-        const topicsAdded = topics.length - selectedTopics.length
-        const action = topicsAdded > 0 ? 'pinned' : 'unpinned'
-        addToast({
-            title: `Topic ${action}`,
-            description: `The topic has been ${action} successfully.`,
-        })
-    }
-
-    useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => {
-            setTopicGroups(topicGroups)
-            const selectedTopics: StrapiRecord<TopicData>[] = []
-            topicGroups.forEach(({ attributes: { topics } }) => {
-                topics.data.forEach((topic) => {
-                    if (props.selectedTopics.data.some((selectedTopic) => selectedTopic.id === topic.id)) {
-                        selectedTopics.push(topic)
-                    }
-                })
-            })
-            setSelectedTopics(selectedTopics)
-        })
-    }, [])
-
-    return (
-        <div className="relative [&>*]:inline-flex [&>*]:items-center">
-            <Listbox value={selectedTopics} onChange={handleChange} multiple>
-                <Listbox.Button as={React.Fragment}>
-                    <OSButton
-                        hover="border"
-                        icon={<IconPin />}
-                        tooltip={
-                            <>
-                                <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" /> Pin
-                                thread
-                            </>
-                        }
-                        size="md"
-                    >
-                        <IconExpand className="size-4 inline-block" />
-                    </OSButton>
-                </Listbox.Button>
-                {topicGroups?.length > 0 && (
-                    <Listbox.Options
-                        data-scheme="primary"
-                        className={`list-none p-0 m-0 absolute z-20 max-h-[500px] divide-y divide-primary mt-2 bg-primary shadow-xl border border-primary rounded min-w-52`}
-                    >
-                        <div className="relative w-full">
-                            <ScrollArea className="min-h-0 h-[500px] max-h-[500px]">
-                                {topicGroups
-                                    .sort(
-                                        (a, b) =>
-                                            topicGroupsSorted.indexOf(a?.attributes?.label) -
-                                            topicGroupsSorted.indexOf(b?.attributes?.label)
-                                    )
-                                    .map(({ attributes: { label, topics } }) => {
-                                        return (
-                                            <div key={label}>
-                                                <div className="py-1 px-2 text-[13px] border-b border-primary whitespace-nowrap text-secondary">
-                                                    {label}
-                                                </div>
-                                                {topics?.data.map((topic) => {
-                                                    const active = selectedTopics.some(
-                                                        (selectedTopic) => selectedTopic.id === topic.id
-                                                    )
-                                                    return (
-                                                        <Listbox.Option key={topic.id} value={topic}>
-                                                            <div
-                                                                data-scheme="primary"
-                                                                className={`${
-                                                                    active ? 'font-semibold' : ''
-                                                                } prose-invert py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 text-primary hover:bg-accent bg-primary`}
-                                                            >
-                                                                <span className="flex-shrink-0 w-3">
-                                                                    {active && <Check2 />}
-                                                                </span>
-
-                                                                <span>{topic.attributes.label}</span>
-                                                            </div>
-                                                        </Listbox.Option>
-                                                    )
-                                                })}
-                                            </div>
-                                        )
-                                    })}
-                            </ScrollArea>
-                        </div>
-                    </Listbox.Options>
-                )}
-            </Listbox>
-        </div>
-    )
-}
 
 const DeleteButton = ({ questionID }: { questionID: number }) => {
     const { getJwt } = useUser()
@@ -189,7 +53,7 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
                 },
                 body: JSON.stringify({ data: { publishedAt: null } }),
             })
-            await navigate('/questions')
+            await navigate('/forum')
         }
     }
     return (
@@ -223,7 +87,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                             <div className="flex items-center !text-black dark:!text-white">
                                 <div className="mr-2 relative">
                                     <Avatar
-                                        className={` ${isInForum ? 'size-[40px]' : 'w-[25px] h-[25px]'} rounded-full`}
+                                        className={` ${isInForum ? 'size-8' : 'w-[25px] h-[25px]'} rounded-full`}
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
@@ -241,7 +105,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                 </Tooltip>
                 <div
                     className={` mt-1 py-2 px-4 bg-accent rounded-md border border-primary ${
-                        isInForum ? 'ml-[calc(44px_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
+                        isInForum ? 'ml-[calc(2rem_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
                     }`}
                 >
                     {children}
@@ -324,14 +188,14 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
             tooltip={
                 <>
                     <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
-                    {alreadyAsked ? 'Max has already been asked in this thread' : 'Ask Max'}
+                    {alreadyAsked ? 'PostHog AI has already been asked in this thread' : 'Ask PostHog AI'}
                 </>
             }
         />
     )
 }
 
-const AskMax = ({
+export const AskMax = ({
     question,
     refresh,
     manual = false,
@@ -346,6 +210,9 @@ const AskMax = ({
 }) => {
     const [loading, setLoading] = useState(true)
     const [confident, setConfident] = useState(false)
+    // The server refuses automatic replies in forum topics with AI replies off. That is not a failed search, so
+    // nothing shows.
+    const [refused, setRefused] = useState(false)
     const { getJwt } = useUser()
 
     useEffect(() => {
@@ -362,8 +229,13 @@ const AskMax = ({
                         manual,
                         withContext,
                     }),
-                }).then((res) => res.json())
-                setConfident(response.confident)
+                })
+                if (response.status === 403) {
+                    setRefused(true)
+                    return
+                }
+                const data = await response.json()
+                setConfident(data.confident)
                 setLoading(false)
                 refresh()
             } catch (error) {
@@ -374,7 +246,7 @@ const AskMax = ({
         window.history.replaceState({ ...window.history.state, askMax: false }, '')
     }, [])
 
-    return loading ? (
+    return refused ? null : loading ? (
         <AskMaxLoading isInForum={isInForum} />
     ) : !confident ? (
         <MaxReply isInForum={isInForum}>
@@ -387,50 +259,110 @@ const AskMax = ({
     ) : null
 }
 
-export function Question(props: QuestionProps) {
-    const {
-        id,
-        question,
-        showSlug,
-        buttonText,
-        showActions = true,
-        isInForum = false,
-        onPinTopics,
-        refreshList,
-    } = props
-    const [expanded, setExpanded] = useState(props.expanded || false)
-    const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const { user, notifications, setNotifications, isModerator } = useUser()
-    const { appWindow } = useWindow()
+export function ModeratorTools({ questionData }: { questionData: StrapiRecord<QuestionData> }) {
+    const { user, isModerator } = useUser()
     const { addToast } = useToast()
     const posthog = usePostHog()
-    const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-    const [conversationsAvailable, setConversationsAvailable] = useState(false)
+    const [escalateState, setEscalateState] = useState<'idle' | 'sent'>('idle')
+
+    const handleEscalateToSupport = () => {
+        if (escalateState === 'sent' || !posthog) return
+        const authorProfile = questionData.attributes.profile?.data
+        const authorName =
+            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
+            'Anonymous'
+        posthog.capture('community question escalated', {
+            questionId: questionData.id,
+            subject: questionData.attributes.subject,
+            body: questionData.attributes.body,
+            url: `https://posthog.com/forum/p/${questionData.attributes.permalink}`,
+            permalink: questionData.attributes.permalink,
+            authorName,
+            topics: questionData.attributes.forumTopic?.data
+                ? [questionData.attributes.forumTopic.data.attributes.label]
+                : questionData.attributes.topics?.data?.map((topic) => topic.attributes.label),
+            escalatedBy: [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ') || null,
+            escalatedByEmail: user?.email,
+        })
+        setEscalateState('sent')
+        addToast({
+            title: 'Escalated',
+            description: 'Moderators have been notified.',
+            duration: 3000,
+        })
+    }
+
+    return (
+        <div className="bg-accent rounded-md p-6 text-primary border border-border">
+            <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">Moderator tools</h4>
+            {isModerator && (
+                <div className="grid grid-cols-2">
+                    <div>
+                        <Link
+                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
+                            className="text-yellow font-bold"
+                        >
+                            {questionData?.attributes?.profile?.data?.attributes?.firstName
+                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
+                                : 'Anonymous'}
+                        </Link>
+                        <input
+                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                            type="text"
+                            value={questionData?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
+                            readOnly
+                            onFocus={(e) => e.target.select()}
+                        />
+                    </div>
+                    <div className="w-full relative">
+                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                            <Link className="font-bold" to={questionData.attributes.permalink} externalNoIcon>
+                                View in PostHog
+                            </Link>
+                            <Link
+                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                externalNoIcon
+                                className="font-bold"
+                            >
+                                View in Strapi
+                            </Link>
+                            <OSButton
+                                variant="secondary"
+                                size="sm"
+                                onClick={handleEscalateToSupport}
+                                disabled={escalateState === 'sent'}
+                            >
+                                {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
+                            </OSButton>
+                        </p>
+                    </div>
+                </div>
+            )}
+            {!isModerator && (
+                <div className="mb-4">
+                    <OSButton
+                        variant="secondary"
+                        size="sm"
+                        onClick={handleEscalateToSupport}
+                        disabled={escalateState === 'sent'}
+                    >
+                        {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
+                    </OSButton>
+                </div>
+            )}
+        </div>
+    )
+}
+
+export function Question(props: QuestionProps) {
+    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, refreshList } = props
+    const [expanded, setExpanded] = useState(props.expanded || false)
+    const [isEditingQuestion, setIsEditingQuestion] = useState(false)
+    const { user, notifications, setNotifications, isModerator, isForumModerator } = useUser()
+    const { appWindow } = useWindow()
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
-
-    // posthog-js and its conversations widget load asynchronously, so a single
-    // isAvailable() check at render time can miss it — poll briefly instead
-    useEffect(() => {
-        if (!isModerator || !isInForum) return
-        const isAvailable = () => !!window?.posthog?.conversations?.isAvailable?.()
-        if (isAvailable()) {
-            setConversationsAvailable(true)
-            return
-        }
-        let attempts = 0
-        const interval = setInterval(() => {
-            attempts++
-            if (isAvailable()) {
-                setConversationsAvailable(true)
-                clearInterval(interval)
-            } else if (attempts >= 20) {
-                clearInterval(interval)
-            }
-        }, 500)
-        return () => clearInterval(interval)
-    }, [isModerator, isInForum])
 
     useEffect(() => {
         if (
@@ -458,9 +390,7 @@ export function Question(props: QuestionProps) {
         handleReplyDelete,
         voteReply,
         archive,
-        pinTopics,
         mutate,
-        removeTopic,
     } = useQuestion(id, { data: question, onResolve: refreshList })
 
     useEffect(() => {
@@ -487,76 +417,13 @@ export function Question(props: QuestionProps) {
         }
     }
 
-    const handleEscalateToSupport = async () => {
-        if (escalateState === 'sending' || escalateState === 'sent') return
-        setEscalateState('sending')
-        const authorProfile = questionData.attributes.profile?.data
-        const authorName =
-            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
-            'Anonymous'
-        const authorEmail = authorProfile?.attributes?.user?.data?.attributes?.email
-        const moderatorName = [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ')
-        const topics = questionData.attributes.topics?.data?.map((topic) => topic.attributes.label).join(', ')
-        const message = [
-            'Community question escalated by a moderator',
-            `Title: ${questionData.attributes.subject}`,
-            `Link: https://posthog.com/questions/${questionData.attributes.permalink}`,
-            `Author: ${authorName}${authorEmail ? ` (${authorEmail})` : ''}`,
-            topics ? `Topics: ${topics}` : null,
-            `Escalated by: ${moderatorName || 'Moderator'} (${user?.email})`,
-            // Widget tickets only deliver replies to the widget session that created them,
-            // which is a throwaway here — make sure support contacts the author directly
-            `Note: replies in this thread won't reach the author. Reply on the community question above (they'll be notified there)${
-                authorEmail ? `, or email them directly at ${authorEmail}` : ''
-            }.`,
-        ]
-            .filter(Boolean)
-            .join('\n')
-        try {
-            if (!posthog) throw new Error('PostHog is not loaded')
-            // Attribute the ticket to the question author so support replies reach them
-            const ticket = await createSupportTicket(posthog, message, {
-                name: authorName,
-                email: authorEmail || null,
-            })
-            setEscalateState('sent')
-            addToast({
-                title: 'Escalated to support',
-                // Default 3s is too short to read and click the ticket link
-                duration: 10000,
-                description: (
-                    <>
-                        A support ticket was created for this question.{' '}
-                        {ticket?.ticket_id && (
-                            <Link
-                                // Tickets live in the posthog.com project (id 2) on US Cloud
-                                to={`${
-                                    process.env.GATSBY_POSTHOG_UI_HOST || 'https://us.posthog.com'
-                                }/project/2/support/tickets/${ticket.ticket_id}`}
-                                external
-                                className="font-semibold underline"
-                            >
-                                View the ticket
-                            </Link>
-                        )}
-                    </>
-                ),
-            })
-        } catch (error) {
-            setEscalateState('error')
-            addToast({
-                title: 'Escalation failed',
-                description: "The support ticket couldn't be created. Please try again.",
-                error: true,
-            })
-            posthog?.captureException?.(error)
-        }
-    }
-
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
     const isQuestionAuthor = questionData?.attributes.profile?.data?.id === user?.profile?.id
     const publishedAt = questionData?.attributes?.publishedAt
+    const isBuilderLounge = questionData.attributes.topics?.data?.some((topic) =>
+        topic.attributes.label?.startsWith('#')
+    )
 
     return (
         <CurrentQuestionContext.Provider
@@ -566,7 +433,6 @@ export function Question(props: QuestionProps) {
                 handleResolve,
                 handleReplyDelete,
                 voteReply,
-                pinTopics,
                 mutate,
             }}
         >
@@ -595,6 +461,7 @@ export function Question(props: QuestionProps) {
                         }`}
                     >
                         <Profile
+                            compact={isInForum}
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
@@ -605,14 +472,8 @@ export function Question(props: QuestionProps) {
                             edits={questionData.attributes.edits}
                         />
                         <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
-                            {user?.role?.type === 'moderator' && showActions && (
+                            {isForumModerator && showActions && (
                                 <>
-                                    {!archived && (
-                                        <TopicSelect
-                                            onPinTopics={onPinTopics}
-                                            selectedTopics={questionData.attributes.pinnedTopics}
-                                        />
-                                    )}
                                     {!archived ? (
                                         <OSButton
                                             onClick={() => archive(!archived)}
@@ -638,20 +499,27 @@ export function Question(props: QuestionProps) {
                                             }
                                         />
                                     )}
-                                    <DeleteButton questionID={questionData.id} />
-                                    <AskMaxButton
-                                        onClick={() =>
-                                            setMaxQuestions([...maxQuestions, { manual: true, withContext: true }])
-                                        }
-                                        askedMax={questionData?.attributes.askedMax}
-                                    />
+                                    {isModerator && (
+                                        <>
+                                            <DeleteButton questionID={questionData.id} />
+                                            <AskMaxButton
+                                                onClick={() =>
+                                                    setMaxQuestions([
+                                                        ...maxQuestions,
+                                                        { manual: true, withContext: true },
+                                                    ])
+                                                }
+                                                askedMax={questionData?.attributes.askedMax}
+                                            />
+                                        </>
+                                    )}
                                 </>
                             )}
                             {!isQuestionAuthor && <ReportSpamButton type="question" id={questionData.id} />}
                             {!archived && (props.subscribeButton ?? true) && (
                                 <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
                             )}
-                            {isQuestionAuthor && !isEditingQuestion && (
+                            {(isQuestionAuthor || isModerator) && !isEditingQuestion && (
                                 <OSButton
                                     onClick={() => setIsEditingQuestion(true)}
                                     icon={<IconPencil />}
@@ -671,7 +539,7 @@ export function Question(props: QuestionProps) {
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link
-                                        to={`/questions/${questionData.attributes.permalink}`}
+                                        to={`/forum/p/${questionData.attributes.permalink}`}
                                         className="!no-underline hover:!underline font-semibold"
                                     >
                                         {questionData.attributes.subject}
@@ -703,6 +571,7 @@ export function Question(props: QuestionProps) {
                         </div>
                         <Replies expanded={expanded} setExpanded={setExpanded} isInForum={isInForum} />
                         {maxQuestions.map((question, index) => {
+                            if (!question.manual && isBuilderLounge) return null
                             return (
                                 <AskMax
                                     key={`ask-max-${index}`}
@@ -733,104 +602,9 @@ export function Question(props: QuestionProps) {
                             isInForum={isInForum}
                         />
                     </div>
-                    {isModerator && isInForum && (
+                    {isForumModerator && isInForum && (
                         <div className="p-4 pb-0">
-                            <div className="bg-accent rounded-md p-6 text-primary border border-border">
-                                <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
-                                    Moderator tools
-                                </h4>
-                                <div className="grid grid-cols-2">
-                                    <div>
-                                        <Link
-                                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
-                                            className="text-yellow font-bold"
-                                        >
-                                            {questionData?.attributes?.profile?.data?.attributes?.firstName
-                                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
-                                                : 'Anonymous'}
-                                        </Link>
-                                        <input
-                                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
-                                            type="text"
-                                            value={
-                                                questionData?.attributes?.profile?.data?.attributes?.user?.data
-                                                    ?.attributes?.email
-                                            }
-                                            readOnly
-                                            onFocus={(e) => e.target.select()}
-                                        />
-                                    </div>
-                                    <div className="w-full relative">
-                                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
-                                            <Link
-                                                className="font-bold"
-                                                to={questionData.attributes.permalink}
-                                                externalNoIcon
-                                            >
-                                                View in PostHog
-                                            </Link>
-                                            <Link
-                                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
-                                                externalNoIcon
-                                                className="font-bold"
-                                            >
-                                                View in Strapi
-                                            </Link>
-                                            {conversationsAvailable && (
-                                                <OSButton
-                                                    variant="secondary"
-                                                    size="sm"
-                                                    onClick={handleEscalateToSupport}
-                                                    disabled={escalateState === 'sending' || escalateState === 'sent'}
-                                                >
-                                                    {escalateState === 'sending'
-                                                        ? 'Escalating…'
-                                                        : escalateState === 'sent'
-                                                        ? 'Escalated ✓'
-                                                        : 'Escalate to support'}
-                                                </OSButton>
-                                            )}
-                                            {escalateState === 'error' && (
-                                                <span className="text-red text-xs font-semibold">
-                                                    Couldn't create ticket. Try again?
-                                                </span>
-                                            )}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 border-t border-border">
-                                    <div className="pt-4">
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
-                                                Forum topics
-                                            </h4>
-                                            <TopicSelector
-                                                questionId={questionData.id}
-                                                permalink={questionData.attributes.permalink}
-                                            />
-                                        </div>
-                                        <ul className="flex items-center list-none p-0 flex-wrap">
-                                            {questionData.attributes?.topics?.data.map((topic) => (
-                                                <li
-                                                    key={topic.id}
-                                                    className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
-                                                >
-                                                    <Link
-                                                        to={`/questions/topic/${topic.attributes.slug}`}
-                                                        className="text-yellow text-sm"
-                                                    >
-                                                        {topic.attributes.label}
-                                                    </Link>
-
-                                                    <button onClick={() => removeTopic(topic)}>
-                                                        <XIcon className="h-4 w-4 text-primary" />
-                                                    </button>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <ModeratorTools questionData={questionData} />
                         </div>
                     )}
                 </div>

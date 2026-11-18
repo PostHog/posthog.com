@@ -12,6 +12,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/leo-anthias.png
 featuredImageType: full
+ogImage: generated
 category: Startups
 tags:
   - Open source

@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -21,7 +22,7 @@ So, without further ado, here they are:
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host).
 
 ### [Session Recording (Beta)](https://github.com/PostHog/posthog/issues/1846)
 

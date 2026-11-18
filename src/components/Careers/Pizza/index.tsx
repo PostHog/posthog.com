@@ -14,6 +14,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { pizzaPhotos } from './photos'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }
@@ -38,30 +39,15 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({ image, onClose }) => 
 
 const pizzaImages = [
     {
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20220926_122003344_f2ecbfb133.jpg"
-                alt="Pizza 4"
-            />
-        ),
+        image: <CloudinaryImage {...pizzaPhotos[0]} />,
         pineapple: false,
     },
     {
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20221104_004314601_y_f698bf09b8.jpg"
-                alt="Pizza 5"
-            />
-        ),
+        image: <CloudinaryImage {...pizzaPhotos[1]} />,
         pineapple: true,
     },
     {
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_y_1852a0cbfb.jpg"
-                alt="Pizza 6"
-            />
-        ),
+        image: <CloudinaryImage {...pizzaPhotos[2]} />,
         pineapple: true,
     },
     {
@@ -380,7 +366,7 @@ export const Pizza = () => {
                             <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
                                 Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
-                            <div className="flex items-baseline gap-1">
+                            <div className="flex items-baseline gap-1 leading-none">
                                 <h3 className="text-[19px] leading-tight m-0 font-bold">
                                     <span className="text-yellow">are SPLIT</span>
                                 </h3>

@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -20,7 +21,7 @@ We're back! 2020 was a hectic year for us and our team put in a whole lot of eff
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host).
 
 ### [Apps, Apps, and more Apps](/plugins)
 

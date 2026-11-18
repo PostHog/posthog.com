@@ -6,10 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/sales_call_b5548388aa.png
 featuredImageType: full
+ogImage: generated
 tags:
-  - Product-market fit
-  - Sales & CS
-  - Growth
+  - Founders
+  - Sales and pricing
 crosspost:
   - Blog
   - Newsletter

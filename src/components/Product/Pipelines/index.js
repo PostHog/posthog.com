@@ -538,7 +538,7 @@ const PipelinePreview = ({ pipeline }) => {
                     <NotifyMe pipeline={pipeline} />
                 ) : (
                     <CallToAction
-                        to={pipeline.mdx?.fields?.slug || `/docs/cdp/${pipeline.type}s/${pipeline.slug}`}
+                        to={pipeline.mdx?.fields?.slug || `/docs/data-pipelines/${pipeline.type}s/${pipeline.slug}`}
                         type="secondary"
                     >
                         Learn more in docs
@@ -596,7 +596,7 @@ function PipelinesPage({ location }) {
         <Layout>
             <SEO
                 title="CDP sources & destinations"
-                description="Get all your data into PostHog with 60+ sources & destinations"
+                description="Get all your data into PostHog with 1,400+ sources & destinations"
                 image={`images/og/cdp.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>

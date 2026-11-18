@@ -40,7 +40,7 @@ export function WaitlistForm({
     const posthog = usePostHog()
     const selectedProduct = useProduct({ handle: productHandle })
     // Only apply the PostHog Code question id when we're actually using its survey —
-    // callers that pass their own surveyId (e.g. Replay Vision) have different questions.
+    // callers that pass their own surveyId have different questions.
     const effectiveQuestionId =
         surveyQuestionId ?? (surveyId === POSTHOG_CODE_SURVEY_ID ? POSTHOG_CODE_SURVEY_QUESTION_ID : undefined)
     // Same guard for the enrollment flag: only default to PostHog Desktop's flag when we're

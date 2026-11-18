@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import {
-    IconThoughtBubble,
     IconCoffee,
     IconDashboard,
     IconDownload,
@@ -22,17 +21,17 @@ import {
     IconAsterisk,
     IconAI,
     IconTestTube,
-    IconTarget,
-    IconArrowUpRight,
+    IconShuffle,
     IconTrends,
     IconCursorClick,
-    IconChat,
     IconAtSign,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
 import { support } from './productData/support'
+import { groupAnalytics } from './productData/group_analytics'
+import { dataPipelines } from './productData/data_pipelines'
 import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
@@ -61,10 +60,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         // },
         traces,
         {
-            ...getTool('user_interviews'),
-            Icon: IconThoughtBubble,
-            color: 'purple',
-            colorSecondary: 'purple',
+            ...getTool('metrics'),
+            Icon: IconTrends,
+            color: 'green',
+            colorSecondary: 'green',
         },
         support,
         {
@@ -107,18 +106,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             },
         },
-        // A UI-only product card that shares AI Observability's page, not a canonical tool with its own root page.
-        {
-            name: 'AI Evals',
-            Icon: IconTarget,
-            description: 'Run LLM-as-a-judge evaluations to catch regressions.',
-            handle: 'llm_evals',
-            color: 'blue',
-            colorSecondary: 'blue',
-            category: 'ai',
-            slug: 'ai-observability',
-            status: 'beta',
-        },
         // A feature of Experiments used in product UI, not a canonical tool with its own root page.
         {
             handle: 'no_code_ab_testing',
@@ -131,44 +118,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'blue',
             colorSecondary: 'blue',
         },
-        {
-            ...getTool('group_analytics'),
-            Icon: IconPeople,
-            color: 'teal',
-            colorSecondary: 'purple',
-            overview: {
-                title: 'Group Analytics',
-                description:
-                    'Analyze multi-seat accounts and other groups. Associate events with a group or entity - such as a company, community, or project, then analyze these events as if they were sent by that entity itself. Great for B2B, marketplaces, and more.',
-                textColor: 'text-black', // tw
-            },
-            features: [
-                {
-                    title: 'B2B SaaS app',
-                    headline: 'B2B SaaS app',
-                    description:
-                        '<p>Aggregate events at an account-level. Calculate metrics like:</p><ul><li>number of daily active companies</li><li>company churn rate</li><li>How many companies have adopted a new feature.</li></ul>',
-                },
-                {
-                    title: 'Collaborative, project-based services',
-                    headline: 'Collaborative, project-based services',
-                    description:
-                        '<p>For project-based products like Notion, Jira, or Figma, create a project group type to calculate:</p><ul><li>metrics at a project level</li><li>users per project</li><li>project engagement</li></ul>',
-                },
-                {
-                    title: 'Communication-based apps',
-                    headline: 'Communication-based apps',
-                    description:
-                        '<p>For a product like Slack, you can create a channel group type to measure:</p><ul><li>the average number of messages per channel</li><li>the number of monthly active channels</li><li>total number of channel participants</li></ul>',
-                },
-                {
-                    title: 'Social media apps',
-                    headline: 'Social media apps',
-                    description:
-                        '<p>For a social network-type product, create a post group type to measure:</p><ul><li>average number of replies per post</li><li>total count of unique posters per month</li></ul>',
-                },
-            ],
-        },
+        groupAnalytics,
+        dataPipelines,
         {
             handle: 'platform_packages',
             name: 'Platform packages',
@@ -680,6 +631,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconMagicWand,
             color: 'purple',
             colorSecondary: 'lilac',
+            seo: {
+                title: 'Business intelligence - PostHog',
+                description:
+                    'Query your data warehouse with SQL, visualize external data sources, and build dashboards that combine product and business data.',
+            },
             overview: {
                 title: 'Business intelligence for data-driven teams',
                 description:
@@ -2142,8 +2098,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             description: 'Access heatmaps while browsing your live site',
                         },
                         {
-                            title: 'No extra billing',
-                            description: 'Heatmap data is captured with regular events - no extra cost',
+                            title: 'Free to ingest',
+                            description:
+                                'Heatmap data is free. Free plan covers 3 pages you choose; pay-as-you-go unlocks unlimited pages and viewing heatmaps from the toolbar',
                         },
                     ],
                 },
@@ -2231,7 +2188,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             FullStory: false,
                             'Microsoft Clarity': true,
                             CrazyEgg: false,
-                            PostHog: true,
+                            PostHog: 'Limited',
                         },
                     },
                 ],
@@ -2538,17 +2495,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
-        {
-            ...getTool('data_modeling'),
-            parentIcon: 'dataBlender',
-            Icon: IconAsterisk,
-            color: 'red',
-            colorSecondary: 'red',
-            seo: {
-                title: 'Transform, enrich, and model your data',
-                description: 'Get your data in the exact shape you need it.',
-            },
-        },
         // {
         //     name: 'Integrations library (145+)',
         //     parentIcon: 'spreadsheetSearch',
@@ -2620,8 +2566,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             ...getTool('data_out'),
-            parentIcon: 'dataOut',
-            Icon: IconArrowUpRight,
+            Icon: IconShuffle,
             color: 'orange',
             colorSecondary: 'orange',
             seo: {

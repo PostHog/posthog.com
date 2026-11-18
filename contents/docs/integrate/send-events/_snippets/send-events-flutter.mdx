@@ -28,16 +28,22 @@ await Posthog().capture(
 
 PostHog autocapture automatically tracks the following events for you:
 
--   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
--   **Application Backgrounded** - when the app is sent to the background by the user
--   **Application Installed** - when the app is installed.
--   **Application Updated** - when the app is updated.
--   **$screen** - when the user navigates (if using [navigatorObservers](https://docs.flutter.dev/ui/navigation) or [go_router](https://pub.dev/packages/go_router). You'd need to set up the `PosthogObserver` manually.)
--   **$exception** - when the app throws exceptions.
+-   **Application Opened** – when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** – when the app is sent to the background by the user
+-   **Application Installed** – when the app is installed.
+-   **Application Updated** – when the app is updated.
+-   **$screen** – when the user navigates, once you add the `PosthogObserver`
+-   **$exception** – when the app throws exceptions.
+-   **$autocapture** – when the user interacts with elements on Flutter Web, captured by posthog-js (see [Interaction autocapture](#interaction-autocapture))
+-   **$rageclick** – when the user rapidly taps in the same area (iOS/macCatalyst by default, Flutter Web via posthog-js)
 
 ### Capturing screen views
 
-> Note: Your routes should be named. Otherwise, they won't be recorded.
+Screen views aren't captured automatically. Add the `PosthogObserver` to your app yourself. Without it, your app sends no `$screen` events at all.
+
+This works with any routing package, not just the plain `Navigator` API. Add the observer wherever your router takes navigator observers, as shown below for `MaterialApp` and `go_router`.
+
+> Note: Screen names come from each route's `RouteSettings.name`. Most routing packages set this for you. If yours doesn't, name your routes so `$screen` events are readable.
 
 #### Using `navigatorObservers`
 
@@ -113,3 +119,45 @@ GoRoute(
 ),
 ...
 ```
+
+### Interaction autocapture
+
+The Flutter SDK doesn't autocapture taps or other widget interactions on iOS or Android. On Flutter Web, interaction autocapture and rage clicks come from [posthog-js](/docs/libraries/js), which you configure in the `posthog.init` call in your `web/index.html`. The Flutter SDK doesn't call `posthog.init` itself, so these options don't go in `PostHogConfig`.
+
+### Rage click autocapture
+
+> **Note:** On iOS and macCatalyst, the native SDK captures `$rageclick` by default through `PostHogConfig.rageClickConfig`. These events don't name the widget. Android doesn't support rage clicks. See the [iOS rage click configuration](/docs/libraries/ios/configuration#autocapture-configuration) for the thresholds.
+
+On Flutter Web, a `$rageclick` event names the widget a user tapped, but only after you enable autocapture in posthog-js and semantics in Flutter. Without both, you either get no rage clicks or rage clicks that only report `flutter-view`.
+
+1. **Enable autocapture and rage clicks in `web/index.html`.** posthog-js detects rage clicks inside its autocapture click handler, so `$rageclick` doesn't fire while `autocapture` is off.
+
+   ```js
+   posthog.init('<ph_project_token>', {
+     api_host: '<ph_client_api_host>',
+     autocapture: true,
+     rageclick: true,
+   })
+   ```
+
+   If you want to limit autocapture to tappable widgets, use `css_selector_allowlist: ['[role="button"]']`. Don't use `element_allowlist: ['button']` – Flutter's semantics nodes are `flt-semantics` elements, not `<button>` elements, so that allowlist matches nothing. Rage clicks go through the same allowlist check as `$autocapture`, so an allowlist that matches no semantics node drops rage clicks too.
+
+2. **Enable semantics in `main.dart`.** Flutter Web draws your app into a single canvas, so by default every click targets the `flutter-view` element and `$rageclick` has no `$el_text`. With semantics on, Flutter places a `flt-semantics` node over each widget and tappable nodes receive the click. `$rageclick` then includes the widget label and `role` in `$elements_chain`. Which field carries the label depends on how Flutter renders the semantics node: a leaf button puts the label in DOM text, which fills `$el_text`, while a node with children puts it in `aria-label`.
+
+   ```dart
+   import 'package:flutter/semantics.dart';
+
+   void main() {
+     WidgetsFlutterBinding.ensureInitialized();
+     SemanticsBinding.instance.ensureSemantics();
+     runApp(const MyApp());
+   }
+   ```
+
+   Semantics also changes how Flutter Web delivers taps. On a tappable widget, the engine sends a semantic tap action instead of raw pointer events. `onPressed` and `onTap` keep working, but code that relies on `Listener`, `onTapDown`/`onTapUp`, custom gesture recognizers, or drags that start on a button needs testing. Flutter already turns semantics on when a screen reader is active, so assistive-technology users get this behavior today. A custom Dart rage click detector built on raw pointer events can't coexist with semantics on the same widgets, so choose one approach.
+
+3. **Optional: give key widgets a stable identifier.** Wrap a widget in `Semantics(identifier: 'cashier_deposit', child: ...)` and the identifier appears in `$elements_chain` as `attr__flt-semantics-identifier`. Flutter puts the identifier on a parent `group` node rather than on the button node itself, so filter with **Elements chain contains** `cashier_deposit` instead of matching the clicked element.
+
+Semantics adds per-frame work on web. If a screen has many widgets, profile it before and after you turn semantics on.
+
+These steps work with Flutter 3.44.8 and posthog-js 1.438.0.

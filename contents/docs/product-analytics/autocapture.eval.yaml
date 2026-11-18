@@ -1,0 +1,24 @@
+owner: product-analytics
+tags: [instrumentation, javascript, autocapture]
+status: active
+
+checks:
+    - id: configure-autocapture
+      description: >-
+          Baseline: can an agent turn on autocapture and exclude one element from a
+          one-line request? The agent gets no docs, so docs-read shows which pages it
+          finds on its own.
+      codebase_to_test: web-vite
+      prompt: >-
+          Set up PostHog autocapture in the app in {folder}/, and don't capture clicks
+          on the Reset All Data button.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              autocapture-on: >-
+                  posthog.init runs without setting autocapture to false. Cite the file
+                  and line(s).
+              reset-button-excluded: >-
+                  The Reset All Data button in src/pages/settings.js is excluded from
+                  autocapture: with the ph-no-capture or ph-no-autocapture class, a
+                  data-ph-no-autocapture attribute, or a css_selector_ignorelist entry.

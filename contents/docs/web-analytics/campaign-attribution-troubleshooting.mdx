@@ -6,10 +6,6 @@ showTitle: true
 
 This page covers troubleshooting for campaign attribution issues. For general web analytics troubleshooting, see the [main troubleshooting page](/docs/web-analytics/troubleshooting). If you're using [Marketing Analytics](/docs/web-analytics/marketing-analytics) to tie ad spend to conversions, the same attribution mechanics apply – campaigns are matched to your conversion events via `utm_campaign` and `utm_source`.
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Why are my UTMs showing on pageviews but not on conversions?
 
 If you see UTM parameters on `$pageview` events but conversions aren't attributed correctly, the issue is almost always **identity fragmentation** – not a UTM capture problem.

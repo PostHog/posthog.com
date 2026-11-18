@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
 featuredImageType: full
+ogImage: generated
 author:
   - karl-aksel-puulmann
 category: Engineering
@@ -135,7 +136,7 @@ WHERE project_id = 2
     AND timestamp < '2022-04-01'
 ```
 
-When executing this query, ClickHouse can leverage data being sorted and the sparse index to skip reading most of data from disk. In this case, events from other projects and organizations and events from months other than March.
+When executing this query, ClickHouse can leverage data being sorted and the sparse index to skip reading most of the data from disk. In this case, events from other projects and organizations and events from months other than March.
 
 However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause to the following one:
 
@@ -169,7 +170,7 @@ Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect perf
 
 ## What’s next?
 
-Performance work is [never complete](/blog/autoresearch-found-a-3-year-old-clickhouse-bug) and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
+Performance work is [never complete](/blog/karpathy-autoresearch-query-engine-bug) and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
 
 Some projects currently in the pipeline are:
 

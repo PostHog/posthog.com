@@ -31,6 +31,15 @@ Open **Endpoints** in [PostHog](https://app.posthog.com/endpoints) to see every 
 
 Each endpoint's page is split into tabs – **Query**, **Configuration**, **Versions**, **Playground**, **Logs**, and **History** – and the **Usage** tab on the Endpoints list aggregates executions, bytes read, CPU time, and error rate across all of them.
 
+## Self-driving reports
+
+Endpoints raises a [signal](/docs/self-driving/signals) in two situations:
+
+- **A run fails.** The signal carries the endpoint name, the version, the executed query, whether it ran materialized or inline, and the error – so whatever picks it up can reason about the cause rather than guess at it.
+- **A breakdown hits its limit.** When an insight-based endpoint returns an "Other" bucket, callers are silently seeing aggregated values for the long tail. The signal flags it and suggests a lower-cardinality breakdown or a tighter filter.
+
+There's no endpoints-specific scout investigating these. They join the same queue as every other [signal source](/docs/self-driving/inbox/sources): the inbox deduplicates them, groups related ones, and turns them into a [report](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox). An endpoint failure doesn't open a pull request on its own – if the report points at a code fix, you're the one who starts it. To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
 ## Related
 
 - Build your first endpoint end to end in [Start here](/docs/endpoints/start-here).

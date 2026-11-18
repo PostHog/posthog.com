@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/simpler-self-deployments.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Guides
@@ -168,7 +169,7 @@ jobs:
 
 ### Keeping stale PRs in check
 
-As our team has grown, so has the number of PRs open across repositories. Especially with our [pull requests over issues](https://posthog.com/handbook/company/values#step-on-toes) approach, some PRs are left lingering for a bit – maybe because the work is blocked by something else, awaiting review, deprioritized, or only a proof-of-concept. 
+As our team has grown, so has the number of PRs open across repositories. Especially with our [pull requests over issues](/handbook/values) approach, some PRs are left lingering for a bit – maybe because the work is blocked by something else, awaiting review, deprioritized, or only a proof-of-concept. 
 
 In any case, the longer a PR sits unattended, the harder it is to come back to, and it just causes more confusion later on.
 

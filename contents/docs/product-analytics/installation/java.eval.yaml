@@ -1,0 +1,24 @@
+owner: wizard-and-docs
+tags: [install, java]
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Java app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: java-app
+      prompt: >-
+          Set up PostHog in the Java app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pom.xml or {folder}/build.gradle declares
+                  com.posthog:posthog-server.
+              initialized: >-
+                  The app builds a config with PostHogConfig.builder(<project
+                  token>).host(<PostHog host>).build(), creates the client with
+                  PostHog.with(config), and calls flush() and close() before exit. Cite
+                  the file and line(s).

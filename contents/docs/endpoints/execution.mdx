@@ -63,10 +63,39 @@ A successful response (HTTP 200) includes:
 }
 ```
 
-- `results` - Array of rows, each row is an array of values
-- `columns` - Column names matching the order of values in each row
-- `execution_id` - Unique identifier for this execution, useful for tracing results to their [log entries](#execution-logs)
+- `results` – Array of rows, each row is an array of values
+- `columns` – Column names matching the order of values in each row
+- `execution_id` – Unique identifier for this execution, useful for tracing results to their [log entries](#execution-logs)
 - Additional metadata fields for materialization status, endpoint version, etc
+
+## Error responses
+
+Query timeouts, memory limits, oversized query text, and estimated execution time limits return HTTP 400. When the shared ClickHouse query pool reaches capacity, it returns HTTP 503.
+
+These responses include:
+
+- `type` – Error category, which is `server_error` for these errors, including HTTP 400 responses
+- `code` – Error code that your client can use to choose an action
+- `detail` – Error description and recommended action
+- `attr` – Request field that caused the error, or `null` when the error does not refer to a field
+
+For example, a query that exceeds the execution time limit returns HTTP 400:
+
+```json
+{
+  "type": "server_error",
+  "code": "query_timeout",
+  "detail": "This query exceeded the execution time limit. Narrow its scope (e.g. a smaller date range) or materialize the endpoint for dedicated compute.",
+  "attr": null
+}
+```
+
+Use the HTTP status and `code` to handle these errors in your client. Do not use the `detail` text to identify an error.
+
+- For HTTP 400 query performance errors, change the query before you retry
+- For HTTP 503 with `code: "query_capacity"`, wait for the duration in the `Retry-After` response header before you retry
+
+See [query performance errors](/docs/endpoints/troubleshooting#query-performance-errors-400) for the error codes and recommended actions. See [capacity errors](/docs/endpoints/troubleshooting#capacity-errors-503) for retry guidance.
 
 ## Debugging
 
@@ -88,4 +117,4 @@ The **Logs** tab on an endpoint's page shows one log entry per execution. Each e
 
 Both successful (`INFO`) and failed (`ERROR`) runs appear in the logs, including rejected requests that fail validation (for example, an invalid `refresh` value). Filter by log level or search by free text to find specific entries.
 
-Each log entry's instance ID matches the `execution_id` returned in the [run response](#response-format), so you can trace a specific API response back to its log entry.
+For a successful run, the log entry's instance ID matches the `execution_id` in the [run response](#response-format). Use this ID to find the log entry for a result.

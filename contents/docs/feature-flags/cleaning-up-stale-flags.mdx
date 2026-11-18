@@ -64,6 +64,8 @@ The MCP server calls `feature-flag-get-all` with `active: "STALE"` and returns t
 
 Once you know which flags are stale, you need to decide what happens to the code they gate. This depends on the flag's rollout state:
 
+> **Tip:** For flags backing experiments, PostHog can open the cleanup PR for you when you end the experiment. See [opening a flag cleanup PR](/docs/experiments/managing-lifecycle#opening-a-flag-cleanup-pr).
+
 ### Fully rolled out flags
 
 The flag was at 100% with no targeting conditions. The enabled code path is the one to keep.

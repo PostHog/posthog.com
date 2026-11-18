@@ -238,13 +238,13 @@ Before enriching, we filter out personal email domains (Gmail, Yahoo, etc.) and 
 
 ### Job switchers → Clay (daily)
 
-A daily query (Clickhouse + Customer.io) detects [job-change signals](https://us.posthog.com/project/2/insights/AJnFRfBD) — someone who was at a company using PostHog just moved to a new role. Only changed or new records are sent to a Clay webhook so we stay within Clay's submission limits.
+A daily query (Clickhouse + Customer.io) detects <PrivateLink url="https://us.posthog.com/project/2/insights/AJnFRfBD">job-change signals</PrivateLink> — someone who was at a company using PostHog just moved to a new role. Only changed or new records are sent to a Clay webhook so we stay within Clay's submission limits.
 
 Why this matters: when someone who already knows PostHog changes jobs, that's a timely outreach moment. They're evaluating tools at their new company and already have context on what we do.
 
 ### Product-led outbound → Clay (daily)
 
-First, a daily [Warmbound query](https://us.posthog.com/project/2/insights/2bYedblE) pulls a base set of target accounts filtered by revenue band (MRR $100–$499), company size (50+ employees), and company type. 
+First, a daily <PrivateLink url="https://us.posthog.com/project/2/insights/2bYedblE">Warmbound query</PrivateLink> pulls a base set of target accounts filtered by revenue band (MRR $100–$499), company size (50+ employees), and company type.
 
 Then a second qualification step filters those accounts against product signals. Only accounts that pass both steps *and* have changed since the last sync are sent to Clay.
 

@@ -17,7 +17,7 @@ This is useful for:
 - Syncing data from CRMs, payment processors, form builders, and more
 - Creating automated workflows that capture important business events in PostHog
 
-> **Note:** This guide covers sending events **to** PostHog from Zapier. If you want to trigger Zaps based on PostHog events, see our [Zapier destination documentation](/docs/cdp/destinations/zapier).
+> **Note:** This guide covers sending events **to** PostHog from Zapier. If you want to trigger Zaps based on PostHog events, see our [Zapier destination documentation](/docs/data-pipelines/destinations/zapier).
 
 ## Prerequisites
 
@@ -102,7 +102,7 @@ Yes! When connecting your PostHog account in Zapier, simply enter your self-host
 ### What's the difference between this and the PostHog Zapier destination?
 
 - **This integration** (Zapier app): Sends events **to** PostHog from other apps via Zapier
-- **[Zapier destination](/docs/cdp/destinations/zapier)**: Sends events **from** PostHog to trigger Zaps when actions occur
+- **[Zapier destination](/docs/data-pipelines/destinations/zapier)**: Sends events **from** PostHog to trigger Zaps when actions occur
 
 ### What if my question isn't answered above?
 

@@ -7,12 +7,6 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 A report groups related [signals](/docs/self-driving/signals) into one item of work. Instead of triaging a noisy stream of findings, you get a single, framed problem with the evidence behind it.
 
 ## Why reports, not raw signals
@@ -27,8 +21,15 @@ A report is enriched and ranked:
 - **Priority** – how urgent it is, so the most important work rises to the top.
 - **State** – whether it's **actionable**, so an agent can open a pull request, or **needs input** before anything can be worked on.
 - **Charts** – where a finding is about something that moved, the report can carry the chart that shows it, so you can see the shape of the problem without rebuilding the query yourself.
+- **Tags** – a few short labels for the product area, feature, or entity the report is about, such as `session-replay`, `billing`, or `ingestion`. The investigating agent sets them and reuses your project's existing tags before it makes new ones, so related reports share a label. Read them through the [PostHog MCP](/docs/model-context-protocol) or the API.
 
 A report also accumulates a history as work happens on it: the commits and pull requests opened against it, the code the investigating agent referenced, CI status and review comments on its PR, related reports, and any notes people left while triaging. You're reading the whole trail, not just the original finding.
+
+## Ask AI about a report
+
+A report is a starting point, not a verdict. Click **Ask AI** on a report to ask a question about what it found – who else is affected, whether the problem is new, what to do next. The agent already has the report and its evidence, so you don't have to re-explain the problem. It works in a task you can follow, and you can keep the conversation going there.
+
+Some reports arrive with suggested questions above the question box. The [scout](/docs/self-driving/scouts) that wrote the report knows which threads it left open, so it offers those as a way in. Click one to fill the box, then send it as written or edit it first – nothing is sent until you click **Ask AI**, so a wrong pick costs you nothing. Not every report suggests questions, and you can always ignore them and write your own.
 
 ## Where reports go
 

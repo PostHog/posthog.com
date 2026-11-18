@@ -152,7 +152,7 @@ Yeah. I mean, given the key's flexibility, you could do this 100 different ways.
  
 **Sam:**
  
-Yeah. I kind feel what Buddy is saying about separating out the concerns a little bit, especially because I don't think we have a case where we're showing multiple of these things at the same time, right? If trends and funnels are not shown at the same time, they don't need to be super decoupled, right? Because if insights owns it and they're not... Do you get what I'm saying?
+Yeah. I kind of feel what Buddy is saying about separating out the concerns a little bit, especially because I don't think we have a case where we're showing multiple of these things at the same time, right? If trends and funnels are not shown at the same time, they don't need to be super decoupled, right? Because if insights owns it and they're not... Do you get what I'm saying?
  
 **Eric:**
  
@@ -360,7 +360,7 @@ I mean, at least you don't have to deal with any of them. I mean, yeah. But yeah
  
 **Eric:**
  
-Yeah. And this is part of that. It's like, when do we pay that debt? And how quickly can we pay it? That's just what I always reemphasize. Because we can do this, but like you said, there are some details that even I might've just haven't mentioned here. So when you start refactoring you'll be like, oh crap, got to consider this, this, and this. And then it turns into a two week refractor rather than what we thought would be a three-day refactor. So we'll have to be careful here. I think we all open a ticket following this talk obviously about the proposal, and then we just have to figure out all the [inaudible 00:27:04] before we just dive in.
+Yeah. And this is part of that. It's like, when do we pay that debt? And how quickly can we pay it? That's just what I always reemphasize. Because we can do this, but like you said, there are some details that even I might've just not mentioned here. So when you start refactoring you'll be like, oh crap, got to consider this, this, and this. And then it turns into a two week refractor rather than what we thought would be a three-day refactor. So we'll have to be careful here. I think we all open a ticket following this talk obviously about the proposal, and then we just have to figure out all the [inaudible 00:27:04] before we just dive in.
  
 **Buddy:**
  
@@ -444,7 +444,7 @@ Yup. And now we can go into ClickHouse trends, that's taking this here. This act
  
 **Eric:**
  
-There's some action checking here to make sure that they exist. But the important part actually of what's going on here is you're going through each entity, which is these things, and you're creating graphs from them. So user signed up would be an entity, which is an event entity. And then if you clicked, this would be an action entity as a user signed up. Yeah, it would be an event. Oops. But they're both event entities. And you iterate through them and then create the queries for them. So let's say handle compare. This is a wrapper that will make sure that if you do this, it'll double up that query in a different time period. So you'll get the first time period and then it also make sure that you get the second time period. And then it'll pass in the run query function, which is actually where the building happens. So I'm just going to go right to here.
+There's some action checking here to make sure that they exist. But the important part actually of what's going on here is you're going through each entity, which is these things, and you're creating graphs from them. So user signed up would be an entity, which is an event entity. And then if you clicked, this would be an action entity as a user signed up. Yeah, it would be an event. Oops. But they're both event entities. And you iterate through them and then create the queries for them. So let's say handle compare. This is a wrapper that will make sure that if you do this, it'll double up that query in a different time period. So you'll get the first time period and then it also makes sure that you get the second time period. And then it'll pass in the run query function, which is actually where the building happens. So I'm just going to go right to here.
  
 **Eric:**
  
@@ -572,7 +572,7 @@ Yeah.
  
 **Buddy:**
  
-Which is, the speed at which this stuff executes is going to depend on how well formed those queries are, right, and what indexes are in place, things like that. And then the secondary thing I think would be expensive is I could see how you could go from writing raw SQL in your, I don't know, database tool of choice to code like this. But then to go backwards out of code like this to debugging feels like it could be quite hard. So do you have any tools in place to help you with that? Such as, okay, we had an issue with this query, so here's the query that was ran, and then you could do the same process by working from the query back to the code. Because I think going from the code to try and figure out what's wrong would be quite difficult.
+Which is, the speed at which this stuff executes is going to depend on how well formed those queries are, right, and what indexes are in place, things like that. And then the secondary thing I think would be expensive is I could see how you could go from writing raw SQL in your, I don't know, database tool of choice to code like this. But then to go backwards out of code like this to debugging feels like it could be quite hard. So do you have any tools in place to help you with that? Such as, okay, we had an issue with this query, so here's the query that was run, and then you could do the same process by working from the query back to the code. Because I think going from the code to try and figure out what's wrong would be quite difficult.
  
 **Eric:**
  
@@ -620,7 +620,7 @@ So good.
  
 **Buddy:**
  
-Okay. And this is the last query that was ran?
+Okay. And this is the last query that was run?
  
 **Eric:**
  

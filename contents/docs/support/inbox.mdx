@@ -29,14 +29,23 @@ Each ticket carries a set of properties you can filter, sort, and act on.
 | **Ticket number** | Auto-incremented unique number, for example #1, #2, #3              |
 | **Status**        | `new`, `open`, `pending`, `on_hold`, or `resolved`                  |
 | **Priority**      | `low`, `medium`, or `high`. Unset by default                        |
-| **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, or `github` |
+| **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, `teams`, or `github` |
 | **Assignee**      | The user or role responsible for the ticket                         |
 | **Session ID**    | The PostHog session used to load events and exceptions              |
 | **Distinct ID**   | The `distinct_id` used to link the ticket to a person               |
 
 ## Reply with full context
 
-Open a ticket and the customer's story sits next to the conversation, so you resolve issues without asking anyone to reproduce them. Each ticket detail page can show:
+Open a ticket and the customer's story sits next to the conversation, so you resolve issues without asking anyone to reproduce them.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_45_56_037ee7a709.png"
+    alt="Reply with full context"
+    classes="rounded"
+/>
+
+
+Each ticket detail page can show:
 
 - **Chat thread** - The conversation with the customer. Replies you send reach them on the channel they used.
 - **Session recording** - Watch the customer's [session replay](/docs/session-replay) for widget tickets, if replay is enabled.
@@ -62,6 +71,12 @@ You can mark any message as a private note. Private notes are visible only to yo
 
 Use the **Send** button's dropdown to reply and update the ticket status in one step. Click the arrow next to **Send** to choose **Send and set pending**, **Send and set on hold**, or **Send and set resolved**.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_41_59_da1d50d0af.png"
+    alt="Reply and update status"
+    classes="rounded"
+/>
+
 When you use one of these options:
 
 - Your reply is sent first, then the ticket status is updated.
@@ -70,9 +85,67 @@ When you use one of these options:
 
 The confirmation dialog gives you two choices: **Send and save** commits all changes, while **Cancel** aborts everything – nothing is sent and nothing is saved.
 
+## Reply macros
+
+Save replies you send often and insert them into the ticket composer. You can share a macro with your team or keep it to yourself.
+
+### Create a macro
+
+1. Go to **Support** > **Settings** > **Macros** (or open the **Macros** menu on a ticket and click **Manage macros**).
+2. Click **New macro**.
+3. Give the macro a name, an optional `/shortcut` (lowercase letters, numbers, and hyphens), who can see it, and the reply body.
+4. Click **Save**.
+
+Leave the shortcut blank to keep the macro in the **Macros** menu only.
+
+Under **Visible to**, choose who can see and use the macro:
+
+- **Everyone** (`shared`, default) shares the macro with everyone in the project. Creating, editing, or deleting a shared macro is recorded in the activity log.
+- **Only me** (`personal`) keeps the macro private to you. Teammates cannot see it in the app, by ID, or over MCP, and changes stay out of the team activity log. It shows **Only you** in the picker, the slash menu, and the settings table. Only the person who created a macro can set it to **Only me**.
+
+Shortcuts are unique within their scope: shared shortcuts are unique across the project's shared macros, and personal shortcuts are unique to you. A personal shortcut never blocks a teammate from using the same shortcut.
+
+### Variables
+
+Macro bodies use markdown and can include variables in double braces. You can type them or click the variable buttons below the editor:
+
+| Variable | Fills in with |
+| --- | --- |
+| `{{customer.first_name}}` | First word of the customer's name |
+| `{{customer.name}}` | Customer's name, or their email address when no name is set |
+| `{{customer.email}}` | Customer's email address |
+| `{{agent.first_name}}` | Your first name |
+| `{{agent.name}}` | Your full name, or your email address when no name is set |
+| `{{ticket.number}}` | Ticket number |
+
+Variables fill in when you insert the macro. If a variable has no value on the ticket (for example, `{{customer.first_name}}` when the ticket only has an email address), the `{{...}}` token stays in the text so you can see the gap before sending.
+
+### Insert a macro
+
+On a ticket, insert a macro in either of two ways:
+
+- Click **Macros** at the bottom of the composer and pick a macro.
+- Type `/` at the start of the draft or after a space, then type the shortcut or search text and press **Enter**.
+
+If the composer is empty, the macro replaces the draft. If you have already typed text, the macro is inserted at the cursor. Inserting a macro keeps the draft's current visibility (public reply or private note).
+
+The **Macros** menu lists your most-used macros first. When you type a query or `/shortcut`, an exact shortcut match ranks first, and your personal macro ranks above a shared macro with the same shortcut.
+
 ## Assign, tag, and snooze
 
-Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
+Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. You can also auto-assign with [Workflows](/docs/support/workflows). Each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
+
+## Delete a ticket
+
+Delete a ticket when it holds information that shouldn't stay in PostHog, such as sensitive details a customer shared by mistake. Open the ticket, click **Delete ticket** at the bottom of the sidebar, and confirm.
+
+- The ticket and its messages disappear for your team and the customer right away.
+- PostHog permanently deletes the ticket 14 days later, along with its messages, attachments, and analytics events.
+- Messages already sent to Slack, Teams, email, or GitHub stay in those tools.
+
+You can't delete a single message. To remove a message, delete the whole ticket.
+
+If your organization uses [access control](/docs/settings/access-control), only ticket managers and organization admins can delete tickets. Otherwise, anyone who can edit tickets can delete them.
 
 ## Track SLAs
 
@@ -88,5 +161,6 @@ For the repetitive parts, let rules do the work. [Workflows](/docs/support/workf
 - Look at the exceptions panel to identify bugs quickly.
 - Review previous tickets to avoid asking repeat questions.
 - Use **Send and set pending** to reply and mark the ticket as waiting for a customer response in one step.
+- Save common answers as [reply macros](#reply-macros) with `/shortcuts` and variables like `{{customer.first_name}}`.
 - Use saved views to switch between common filter combinations.
 - Snooze tickets when you're waiting on something external, instead of leaving them open.

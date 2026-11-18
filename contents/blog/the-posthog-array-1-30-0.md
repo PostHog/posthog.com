@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-30-0.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   Brand new and faster user interface, automatic conversion signal detection
   with Correlation analysis, saving insights for future use and a fully revamped
@@ -26,7 +27,7 @@ PostHog 1.30.0 is a milestone release! We've introduced a brand new, faster user
 
 ## PostHog 1.30.0 release notes
 
-> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host).
 
 **Release highlights:**
 

@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   PostHog 1.32.0 makes it easier to find what you want in the Persons & Groups
   page, introduces vertical funnels and sets the stage for the launch of
@@ -24,7 +25,7 @@ tags:
 
 ## PostHog 1.32.0 release notes
 
-> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host).
 
 **Release highlights:**
 

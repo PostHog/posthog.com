@@ -52,7 +52,10 @@ export type AllShopifyProduct = {
 export type ShopifyMediaImage = {
     preview: {
         image: {
-            localFile: ImageLocalFile
+            localFile?: ImageLocalFile
+            width?: number
+            height?: number
+            originalSrc?: string
         }
     }
 }

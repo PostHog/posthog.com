@@ -26,7 +26,7 @@ export default function AboutDocs(): JSX.Element {
                             </p>
                             <p className="mb-2">
                                 Prefer humans? Ask a question at the end of any article and it cross-posts to our{' '}
-                                <Link to="/questions" state={{ newWindow: true }} className="underline font-medium">
+                                <Link to="/forum" state={{ newWindow: true }} className="underline font-medium">
                                     community forums
                                 </Link>
                                 .

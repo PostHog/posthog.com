@@ -6,11 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/working_at_posthog_c7c74d7e65.png
 featuredImageType: full
+ogImage: generated
 tags:
  - People
  - Culture
-crosspost:
- - Founders
 ---
 
 I never thought it would happen to me.

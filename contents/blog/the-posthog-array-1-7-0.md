@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -16,7 +17,7 @@ tags:
 
 This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
 
-Self hosting and want to upgrade? [Update your PostHog](/docs/runbook/upgrading-posthog).
+Self hosting and want to upgrade? [Update your PostHog](/docs/self-host).
 
 ## Release notes
 

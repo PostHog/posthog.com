@@ -98,3 +98,32 @@ A small letter-tile placeholder stands in for Cursor, VS Code, Windsurf, Zed, Lo
 
 - The button style is intentionally local while we evaluate it. If we promote it to a shared primitive, lift `IconButton.tsx` into `components/` and update consumers.
 - All container queries / Tailwind tokens follow project conventions (no stock Tailwind colors, no media queries).
+
+
+## Direct platform links
+
+Pass `linkOnly` with the card variant to render platform logos as direct links instead of instruction buttons. Tooltips and accessible names identify each platform without visible labels. `linkOnly` defaults to `false`, preserving the existing expandable installer. Inline mode is unchanged.
+
+Each `Platform` can specify an `href` for this mode. Internal paths open in a site window; external URLs use the normal external-link behavior. Entries without an `href` are omitted, and an empty link list has no footer. In link-only mode, no instruction panel is rendered.
+
+```tsx
+<PlatformInstall
+    linkOnly
+    schema={{
+        ...mcpInstallSchema,
+        supports: undefined,
+        secondaryAction: { label: 'Docs', to: '/docs/model-context-protocol' },
+        platforms: mcpInstallSchema.platforms.filter(({ id }) => ['claude', 'codex', 'cursor'].includes(id)),
+    }}
+/>
+```
+
+The homepage's second slide supplies a compact schema with Claude and ChatGPT connector links plus Cursor, VS Code, and Codex setup links. It keeps the shared display/copy command and places the PostHog Desktop link outside the installer.
+
+### Hide the secondary header link
+
+Pass `hideSecondaryAction` to hide the card header’s secondary link, such as “Docs” or “Learn more,” without changing the schema. It defaults to `false` and does not affect inline mode. The homepage’s product context slide enables it.
+
+```tsx
+<PlatformInstall schema={mcpInstallSchema} linkOnly hideSecondaryAction />
+```

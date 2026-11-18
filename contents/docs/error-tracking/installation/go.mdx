@@ -1,11 +1,15 @@
 ---
-title: Go error tracking installation
+title: Go Error Tracking installation
 platformLogo: go
 showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
 import { CalloutBox } from 'components/Docs/CalloutBox'
+
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Go" flagCommand={{ flag: 'error-tracking-new-wizard', command: 'error-tracking' }} />
 
 <Steps>
 
@@ -14,7 +18,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 Install the [PostHog Go SDK](/docs/libraries/go):
 
 ```bash
-go get github.com/posthog/posthog-go
+go get github.com/posthog/posthog-go/v2
 ```
 
 <CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
@@ -31,7 +35,7 @@ The Go SDK resolves stack traces in-process, so captured frames include file nam
 package main
 
 import (
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 func main() {
@@ -58,7 +62,7 @@ Use `NewDefaultException` to capture errors directly. This automatically generat
 ```go
 import (
     "time"
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 exception := posthog.NewDefaultException(
@@ -75,7 +79,7 @@ For more control, build the `Exception` struct manually:
 ```go
 import (
     "time"
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 handled := true
@@ -98,7 +102,7 @@ exception := posthog.Exception{
 client.Enqueue(exception)
 ```
 
-To see how `net/http` services can automatically associate backend exceptions with frontend users, view the [Go request context documentation](/docs/libraries/go#request-context).
+To see how `net/http` services can automatically associate backend exceptions with frontend users, view the [Go request context documentation](/docs/libraries/go/reference#posthognewrequestcontextmiddleware).
 
 ### Option B: Automatic capture with slog
 
@@ -113,7 +117,7 @@ import (
     "log/slog"
     "os"
 
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 client, _ := posthog.NewWithConfig(

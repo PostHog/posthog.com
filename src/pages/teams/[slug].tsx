@@ -32,6 +32,7 @@ import Header from 'components/Team/Header'
 import Profile, { ProfileData } from 'components/Team/Profile'
 import Roadmap from 'components/Team/Roadmap'
 import TeamImage from 'components/Team/TeamImage'
+import CloudinaryImage from 'components/CloudinaryImage'
 import {
     StickerPineappleYes,
     StickerPineappleNo,
@@ -118,12 +119,14 @@ const JobCard = ({ job }: { job: any }) => {
                                     Open role
                                 </span>
                             </div>
-                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1">
+                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1 line-clamp-4 @2xs:line-clamp-none">
                                 {job.fields.title}
                             </h3>
                             <div className="text-black/80 text-sm space-y-1">
                                 {locationField?.value && <p className="m-0">📍 {locationField.value}</p>}
-                                {timezoneField?.value && <p className="m-0">🕒 {timezoneField.value}</p>}
+                                {timezoneField?.value && (
+                                    <p className="m-0 text-xs @2xs:text-sm">🕒 {timezoneField.value}</p>
+                                )}
                             </div>
                         </div>
                         <div className="mt-auto">
@@ -140,10 +143,13 @@ type TeamPageProps = {
     params: {
         slug: string
     }
+    pageContext: {
+        slug?: string
+    }
 }
 
 export default function TeamPage(props: TeamPageProps) {
-    const slug = props?.params?.slug || (props?.params as any)?.['*']
+    const slug = props?.params?.slug || (props?.params as any)?.['*'] || props?.pageContext?.slug
     const [editing, setEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
@@ -165,6 +171,7 @@ export default function TeamPage(props: TeamPageProps) {
         leadProfiles,
         teamImage,
         miniCrest,
+        slackChannel,
     } = (team as any)?.attributes || {}
 
     const data = useStaticQuery(graphql`
@@ -327,6 +334,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamLeads: team?.attributes?.leadProfiles?.data || [],
             miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
             spiritAnimal: team?.attributes?.spiritAnimal,
+            slackChannel: slackChannel ?? '',
         },
         onSubmit: async ({
             name,
@@ -340,6 +348,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamLeads,
             miniCrest,
             spiritAnimal,
+            slackChannel: submittedSlackChannel,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -387,6 +396,7 @@ export default function TeamPage(props: TeamPageProps) {
                 ...(teamMembers ? { profiles: teamMembers.map(({ id }: any) => ({ id })) } : {}),
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }: any) => ({ id })) } : {}),
                 ...(uploadedMiniCrestImage ? { miniCrest: uploadedMiniCrestImage.id } : {}),
+                slackChannel: submittedSlackChannel.trim() || null,
             }
             if (!team) {
                 await createTeam(updatedTeam)
@@ -636,7 +646,7 @@ export default function TeamPage(props: TeamPageProps) {
     return (
         <>
             <SEO
-                title={`${name || teamData?.name || slug} - PostHog`}
+                title={`${name || teamData?.name || slug} Team - PostHog`}
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />
@@ -677,6 +687,33 @@ export default function TeamPage(props: TeamPageProps) {
             >
                 {/* <DebugContainerQuery />
                 <DebugContainerQuery name="reader-content" /> */}
+
+                {editing && isModerator && (
+                    <div className="not-prose mb-8">
+                        <Fieldset legend="Community question alerts">
+                            <label htmlFor="slackChannel" className="text-sm opacity-75 mb-1">
+                                New forum posts in the topics and tags this team follows get posted to this Slack
+                                channel. Use the channel ID (in Slack: channel name → About → bottom of the panel), not
+                                the #name. You must also add the Community bot app to the channel. If the app is not a
+                                member, Slack rejects the post and no alert appears. Leave blank to stop notifications.
+                                Manage which topics and tags this team follows on{' '}
+                                <Link to="/forum/alerts" state={{ newWindow: true }}>
+                                    /forum/alerts
+                                </Link>
+                                .
+                            </label>
+                            <input
+                                id="slackChannel"
+                                name="slackChannel"
+                                value={values.slackChannel}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                placeholder="C0123ABCDEF"
+                                className="w-full max-w-xs p-2 text-[15px] rounded-md bg-white dark:bg-accent-dark border border-input"
+                            />
+                        </Fieldset>
+                    </div>
+                )}
 
                 <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-8 mb-8">
                     {heightToHedgehogs > 0 && (
@@ -762,6 +799,10 @@ export default function TeamPage(props: TeamPageProps) {
 
                         {loading ? (
                             <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
+                        ) : slug === 'platform-features' ? (
+                            <figure className="rotate-2 max-w-md w-full mx-auto @2xl/reader-content:mr-0">
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Restoration_974fb5ccb9.png" />
+                            </figure>
                         ) : (
                             <TeamImage
                                 values={values}
@@ -916,7 +957,9 @@ export default function TeamPage(props: TeamPageProps) {
                 {objectives && (
                     <>
                         <h2>Goals</h2>
-                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}>
+                        <MDXProvider
+                            components={{ PrivateLink, TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}
+                        >
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </>
@@ -924,7 +967,7 @@ export default function TeamPage(props: TeamPageProps) {
 
                 {body && (
                     <>
-                        <h2>Handbook</h2>
+                        {slug !== 'demand-gen' && <h2>Handbook</h2>}
                         <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

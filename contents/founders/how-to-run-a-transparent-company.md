@@ -6,10 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Culture
-  - Ops & finance
+  - Building the team
 crosspost:
   - Blog
 ---
@@ -124,7 +124,7 @@ Sharing this one means people realize more easily if their colleagues are workin
 
 ### Personal readmes
 
-These are a fun one - team members write out how they can help others, what their focus is, and quirks of working with them. We borrowed the idea from [Sid's at GitLab](https://about.gitlab.com/handbook/ceo/), but extended it to everyone. We make them optional, but quite a few people do them. <TeamMember name="Joe Martin" photo /> has a particularly nicely written one. 
+These are a fun one - team members write out how they can help others, what their focus is, and quirks of working with them. We borrowed the idea from [Sid's at GitLab](https://about.gitlab.com/handbook/ceo/), but extended it to everyone. We make them optional, but quite a few people do them. <TeamMember name="Joe Black" photo /> has a particularly nicely written one. 
 
 ## You don't have to do this all at once
 

@@ -16,30 +16,33 @@ import {
 } from '@posthog/icons'
 import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
-import { applications, topFeatures } from './logs/slides'
+import { applications, keyFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 
 export const logs = {
     ...getTool('logs'),
     Icon: IconActivity,
-    productVariantName: 'Logs ingestion (14-day retention)',
+    // Shown on the /pricing calculator only, so the rest of the site still says "Logs"
+    categoryName: 'Logs & Tracing',
+    productVariantName: 'Logs/Tracing ingestion (14-day retention)',
     type: 'logs',
     teamSlug: 'apm',
     // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
     // forumTopicId: /* create topic, then uncomment community menu item below */,
-    color: 'red',
+    color: PRODUCT_COLORS.logs,
     colorSecondary: 'green-2',
     wizardSupport: 'Coming soon',
     includeAddonRates: true,
     // From contents/docs/logs/pricing.mdx
     pricingDescription:
-        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; extend newly ingested logs to 30 days with an add-on.',
+        'Logs and Tracing are billed together, by the number of GB ingested across both. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
-            'Works with your existing OTel setup. Backend context, user data, and session replays in one place – the context agents use to find a bug and ship the fix.',
+            'Search, filter, and alert on application logs. Works with OpenTelemetry and links each log to users, errors, and session replays in PostHog.',
     },
     /**
      * Sections rendered on the Product surface (`/logs`). Each entry
@@ -49,7 +52,11 @@ export const logs = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -72,11 +79,11 @@ export const logs = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -114,8 +121,7 @@ export const logs = {
     ],
     overview: {
         title: 'Logs that already know your users',
-        description:
-            'Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
+        description: '"Show me logs behind the spike in 500 errors since the last deploy"',
         eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it.',
         textColor: 'text-white',
         layout: 'overlay',
@@ -160,32 +166,41 @@ export const logs = {
     },
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
-        marks: [0, 10, 50, 100, 500, 1000, 5000],
+        marks: [0, 10, 100, 1000, 5000],
         min: 0,
         scaleMin: 1,
         max: 5000,
     },
     volume: 10,
     freeAllocationText: 'First 10 GB free – every month!',
-    addonSliders: [
-        {
-            key: 'logs_retention_30d',
-            label: '30-day retention',
-            // Billing meters all ingested GB (any retention) on the base logs product, then bills
-            // 30-day GB again at the add-on rate as a storage premium.
-            countsTowardParentVolume: true,
-            note: 'These GB also count toward logs ingestion above – this price is just the added cost of storing them longer.',
-            sliderConfig: {
-                marks: [0, 10, 50, 100, 500, 1000, 5000],
-                min: 0,
-                scaleMin: 1,
-                max: 5000,
-            },
-            volume: 0,
-            unit: 'GB',
-            freeAllocation: 0,
-        },
-    ],
+    // Replaces the billing limit point on /logs/pricing and /tracing/pricing once billing reports
+    // `no_billing_limit` for custom retention
+    noBillingLimitDetail: {
+        headline: 'Set a billing limit on ingestion.',
+        body: "Custom retention isn't capped by it.",
+    },
+    // Retention input on both calculators. Customers set one retention for each project, so it applies to
+    // every GB ingested: 14 days are included, and each month kept bills every GB again.
+    retention: {
+        key: 'logs_retention_custom',
+        label: 'Retention',
+        // Names the volume input, which counts every GB ingested whatever its retention
+        volumeLabel: 'Logs/Tracing ingestion',
+        includedLabel: '14 days (included)',
+        includedMark: '14d',
+        includedNote: 'The 14-day default is included in the ingestion price.',
+        // Billing takes 14 days or any whole number of months up to 86; marks are labels only
+        maxMonths: 86,
+        marks: [0, 1, 3, 12, 36, 84],
+        // Shown on /logs/pricing and /tracing/pricing
+        pricingDescription:
+            "Keep logs and traces longer than the 14-day default. Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. Set it per service or per source in your logs and traces settings.",
+        // Shown on /pricing
+        note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires.",
+        // Added to both once billing reports `no_billing_limit` for custom retention
+        noBillingLimitNote:
+            "Your Logs billing limit stops ingestion but doesn't cap custom retention, and custom retention can't have a limit of its own.",
+    },
     customers: {
         key: {
             headline: '',
@@ -195,7 +210,6 @@ export const logs = {
     // Roles/scenarios reshaped from contents/docs/logs/basics.mdx ("When logs save you")
     // and link-person / link-session-replay docs.
     useCases: {
-        intro: 'Logs is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

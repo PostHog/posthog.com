@@ -23,7 +23,7 @@ Next, go into your `banner` folder and install `posthog-js`.
 
 ```bash
 cd banner
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 After installing PostHog, create a `providers.js` file in the `app` folder which contains the PostHog initialization with your project token and instance address (you can get both in [your project settings](https://app.posthog.com/project/settings))

@@ -78,7 +78,7 @@ const ClickableCommand = ({
 }) => {
     const fieldRef = useRef<HTMLDivElement>(null)
     const posthog = usePostHog()
-    const { displayCommand, copyCommand } = buildWizardCommand({ subcommand: 'self-driving' })
+    const { displayCommand, copyCommand } = buildWizardCommand({ fullCommand: 'npx -y @posthog/wizard@latest' })
 
     const copyFromAnywhere = (event: React.MouseEvent) => {
         // Every copy passes through the button – either clicked directly, or via the forwarded click
@@ -132,7 +132,6 @@ const VariantControl = () => {
     return (
         <PlatformInstall
             schema={wizardInstallSchema}
-            selfDriving
             onCopy={() => posthog?.capture(COPY_EVENT)}
             onSecondaryAction={() => posthog?.capture(WEB_SIGNUP_EVENT)}
         />
@@ -146,15 +145,8 @@ const SIGNUP_CARD_POINTS = [
 ]
 
 const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: React.ReactNode }) => {
-    const entrance = useWindowEntrance()
-
     return (
-        <div
-            className={cn(
-                'not-prose w-full max-w-md min-w-0 text-left border border-primary rounded-md bg-primary shadow-2xl',
-                entrance
-            )}
-        >
+        <div className="not-prose w-full max-w-md min-w-0 text-left border border-primary rounded-md bg-primary shadow-2xl">
             <div className="p-4 space-y-3">
                 <h3 className="!text-lg font-bold text-primary m-0 flex items-center gap-2">
                     Set up

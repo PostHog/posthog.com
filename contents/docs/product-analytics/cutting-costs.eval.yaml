@@ -1,0 +1,22 @@
+owner: product-analytics
+tags: [concept, billing]
+status: active
+
+checks:
+    - id: reduce-bill
+      description: >-
+          Baseline: can an agent give PostHog-specific ways to cut a product analytics
+          bill? The agent gets no docs, so docs-read shows which pages it finds on its
+          own.
+      prompt: >-
+          How do I reduce my PostHog product analytics bill?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              anonymous-events: >-
+                  The answer says anonymous events cost less than identified events, so
+                  events should only be identified when needed.
+              autocapture-and-pageviews: >-
+                  The answer suggests limiting autocapture (an allow or ignore list, or
+                  turning it off), or turning off automatic pageview and pageleave
+                  capture.

@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The SDK Support Hero rotation is managed by the <SmallTeam slug="client-libraries" />. Each week, one member of the team is designated the SDK Support Hero. [The schedule is managed in incident.io](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S).
+The SDK Support Hero rotation is managed by the <SmallTeam slug="client-libraries" />. Each week, one member of the team is designated the SDK Support Hero. <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S">The schedule is managed in incident.io</PrivateLink>.
 
 Your primary responsibility is to make sure SDK questions get some love — across all SDKs, including mobile. During the rotation, please keep an eye on:
 
-- Escalated SDK tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets) — your team's view is bookmarked in `#support-client-libraries`
+- Escalated SDK tickets in <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink> — your team's view is bookmarked in `#support-client-libraries`
 - New issues in the SDK repositories:
   - [posthog-js (Web, Web Lite, React, React Native, Next, Node, AI)](https://github.com/PostHog/posthog-js/)
   - [posthog-python](https://github.com/PostHog/posthog-python)

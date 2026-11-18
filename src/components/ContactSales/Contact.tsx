@@ -351,7 +351,7 @@ export default function Contact({
                     information.&nbsp;
                 </p>
                 <p className="mb-0">
-                    If you have any questions in the meantime, <Link to="/questions">let us know</Link>!
+                    If you have any questions in the meantime, <Link to="/forum">let us know</Link>!
                 </p>
             </div>
         </>

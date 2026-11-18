@@ -642,7 +642,7 @@ export default function SlidesTemplate({
         ),
         // Wrapped content for editor view - mobile
         mobileContent: (
-            <ScalableSlide mode="editor" baseWidth={720} baseHeight={1280}>
+            <ScalableSlide mode="editor" baseWidth={720} baseHeight={1280} renderBeforeInitialization={false}>
                 {slide.content}
             </ScalableSlide>
         ),

@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/saleshog_9f74052914.png
 featuredImageType: full
+ogImage: generated
 category: Startups
 tags:
   - Guides

@@ -70,6 +70,13 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers)
   headers.set("host", hostname)
+  // Remove cookies before forwarding to PostHog
+  headers.delete("cookie")
+  // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+  // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+  if (!/^Bearer ph[csx]_/.test(headers.get("authorization") ?? "")) {
+    headers.delete("authorization")
+  }
   headers.delete("accept-encoding")
 
   const response = await fetch(newUrl, {
@@ -120,6 +127,13 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers)
   headers.set("host", hostname)
+  // Remove cookies before forwarding to PostHog
+  headers.delete("cookie")
+  // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+  // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+  if (!/^Bearer ph[csx]_/.test(headers.get("authorization") ?? "")) {
+    headers.delete("authorization")
+  }
   headers.delete("accept-encoding")
 
   const response = await fetch(newUrl, {
