@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Zuora connector syncs your subscription billing data into PostHog, so you can analyze billing activity alongside your product data.
+The Zuora connector syncs your subscription billing data into PostHog, so you can analyze billing activity alongside your product data. This includes subscription rate plans and charges, invoice line items, and order line items, so you can break revenue down by charge, product, or subscription.
 
 ## Prerequisites
 
