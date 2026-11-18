@@ -113,10 +113,18 @@ If you want more precision when a single event type is inflated, use the 'Event 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
 -   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
 -   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
+-   **Pay-as-you-go customers:** issue credits if the period hasn't ended and the invoice isn't finalized. If the invoice has been finalized, issue a refund via billing admin.
+-   **Prepaid customers (annual contracts or self-serve credit purchases):** don't add a credit. Wait until the invoice with the spike is issued, then go to Billing Admin → the invoice → **Start refund** and choose **Balance first**. This puts their prepaid credits back.
+    -   **Why:** prepaid credits already paid for the spike, so it counts as revenue. A free credit doesn't undo that and our revenue model counts it again when it's used.
+    -   **Amount:** refund the spike's share of each product line, using the invoice amounts (should be at list price). If the spike covers a whole line, copy that line's amount. If not, price the usage with and without the spike and refund the difference. Split by invoice if the spike crosses billing periods.
+    -   **Card payments:** if the card paid part of the invoice, ask RevOps before refunding.
+
 
 ## How to issue refunds or credits
 
 ### Issuing credits
+
+Before you start, check whether the customer is prepaid (annual or prepurchased credits). If they are, use the refund flow in [Refund or credit?](#refund-or-credit) instead of the steps below.
 
 1. Go to <PrivateLink url="https://billing.posthog.com/admin/">billing admin</PrivateLink>
 2. Next to 'Credits', click on 'Add'
