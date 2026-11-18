@@ -27,9 +27,13 @@ You also need an IAM user or role with the following permissions:
 - `ce:GetReservationUtilization`
 - `ce:GetReservationCoverage`
 - `ce:GetSavingsPlansUtilization`
+- `ce:GetSavingsPlansUtilizationDetails`
 - `ce:GetSavingsPlansCoverage`
+- `ce:GetCostForecast`
+- `ce:GetRightsizingRecommendation`
+- `ce:GetReservationPurchaseRecommendation`
 
-The existing tables work without the four new permissions. Add them only if you want the new tables.
+The other tables work without `ce:GetSavingsPlansUtilizationDetails`, `ce:GetCostForecast`, `ce:GetRightsizingRecommendation`, and `ce:GetReservationPurchaseRecommendation`. Add these four permissions only if you want the `savings_plans_utilization_details_daily`, `cost_forecast_daily`, `rightsizing_recommendations`, and `reservation_purchase_recommendations` tables.
 
 To see spend across every member account, connect the management (payer) account.
 
@@ -62,7 +66,11 @@ When linking AWS Cost Explorer, you'll need:
         "ce:GetReservationUtilization",
         "ce:GetReservationCoverage",
         "ce:GetSavingsPlansUtilization",
-        "ce:GetSavingsPlansCoverage"
+        "ce:GetSavingsPlansUtilizationDetails",
+        "ce:GetSavingsPlansCoverage",
+        "ce:GetCostForecast",
+        "ce:GetRightsizingRecommendation",
+        "ce:GetReservationPurchaseRecommendation"
       ],
       "Resource": "*"
     }
@@ -79,20 +87,24 @@ When linking AWS Cost Explorer, you'll need:
 
 <SyncModes />
 
-Most tables support incremental sync using `period_start` as the cursor. The `dimension_values` table is full refresh only.
+Most tables support incremental sync using `period_start` as the cursor. The `dimension_values`, `cost_forecast_daily`, `rightsizing_recommendations`, and `reservation_purchase_recommendations` tables are full refresh only, because they show the current state rather than a history.
 
 AWS restates recent cost periods until bills finalize (rows come back marked as estimated). To capture these corrections, incremental syncs automatically re-read a trailing window behind the last synced value:
 
-| Table                                 | Lookback window | Notes                                                                                     |
-| ------------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
-| `cost_and_usage_daily`                | 7 days          |                                                                                           |
-| `cost_and_usage_monthly`              | 45 days         |                                                                                           |
-| `cost_and_usage_with_resources_daily` | 7 days          | Only covers last 14 days. Requires resource-level data enabled in Cost Explorer settings. |
-| `dimension_values`                    | –               | Full refresh only (no incremental sync).                                                  |
-| `reservation_utilization_daily`       | 7 days          |                                                                                           |
-| `reservation_coverage_daily`          | 7 days          | Covers EC2, RDS, ElastiCache, and Redshift.                                               |
-| `savings_plans_utilization_daily`     | 7 days          |                                                                                           |
-| `savings_plans_coverage_daily`        | 7 days          |                                                                                           |
+| Table                                     | Lookback window | Notes                                                                                                                           |
+| ----------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `cost_and_usage_daily`                    | 7 days          |                                                                                                                                 |
+| `cost_and_usage_monthly`                  | 45 days         |                                                                                                                                 |
+| `cost_and_usage_with_resources_daily`     | 7 days          | Only covers last 14 days. Requires resource-level data enabled in Cost Explorer settings.                                       |
+| `dimension_values`                        | –               | Full refresh only (no incremental sync).                                                                                        |
+| `reservation_utilization_daily`           | 7 days          |                                                                                                                                 |
+| `reservation_coverage_daily`              | 7 days          | Covers EC2, RDS, ElastiCache, and Redshift.                                                                                     |
+| `savings_plans_utilization_daily`         | 7 days          |                                                                                                                                 |
+| `savings_plans_coverage_daily`            | 7 days          |                                                                                                                                 |
+| `savings_plans_utilization_details_daily` | 7 days          | One row per Savings Plan per day. Uses one billed API request per day.                                                          |
+| `cost_forecast_daily`                     | –               | Full refresh only. Forecasts the next 89 days per cost metric, with an 80% prediction interval.                                 |
+| `rightsizing_recommendations`             | –               | Full refresh only. Requires rightsizing recommendations enabled in Cost Explorer preferences.                                   |
+| `reservation_purchase_recommendations`    | –               | Full refresh only. Covers EC2, RDS, ElastiCache, and Redshift, for a 1-year No Upfront term based on the last 30 days of usage. |
 
 Duplicate rows are merged by primary key, so re-read periods don't create duplicates.
 
@@ -108,10 +120,11 @@ Duplicate rows are merged by primary key, so re-read periods don't create duplic
 
 - If you see "AWS rejected the access key", check that the access key ID and secret access key are correct and that the key is still active in IAM.
 - If you see a signature error, re-enter the secret access key. If you are using temporary credentials, the session token may have expired.
-- If you see "missing Cost Explorer permissions", grant `ce:GetCostAndUsage`, `ce:GetCostAndUsageWithResources`, `ce:GetDimensionValues`, `ce:GetReservationUtilization`, `ce:GetReservationCoverage`, `ce:GetSavingsPlansUtilization`, and `ce:GetSavingsPlansCoverage` to the IAM user or role.
+- If you see "missing Cost Explorer permissions", grant `ce:GetCostAndUsage`, `ce:GetCostAndUsageWithResources`, `ce:GetDimensionValues`, `ce:GetReservationUtilization`, `ce:GetReservationCoverage`, `ce:GetSavingsPlansUtilization`, `ce:GetSavingsPlansUtilizationDetails`, `ce:GetSavingsPlansCoverage`, `ce:GetCostForecast`, `ce:GetRightsizingRecommendation`, and `ce:GetReservationPurchaseRecommendation` to the IAM user or role.
 - If you see "no Cost Explorer data", make sure Cost Explorer is enabled on the AWS account. It can take up to 24 hours after enabling for data to appear.
 - If you see "dates are older than the data AWS keeps", move the start date forward and try again.
 - If the `cost_and_usage_with_resources_daily` table has no data, enable resource-level data in your AWS Cost Explorer settings. Go to **AWS Console** > **Cost Explorer** > **Settings** > **Cost Explorer Settings** and turn on resource-level data for EC2, Lambda, and any other services you want to track.
 - If the start date is older than 14 days for the resource table, the sync automatically clamps it to 14 days ago. AWS does not serve resource-level data beyond this window.
+- If the `rightsizing_recommendations` table fails or has no data, turn on rightsizing recommendations in your AWS Cost Explorer preferences.
 
 <TroubleshootingLink />
