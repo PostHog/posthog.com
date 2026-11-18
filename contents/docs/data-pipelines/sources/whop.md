@@ -9,9 +9,9 @@ availability:
 sourceId: Whop
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Whop connector syncs memberships, payments, members, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -43,6 +43,10 @@ All Whop tables are full refresh. Each sync replaces the contents of the table.
 ## Supported tables
 
 <SourceTables />
+
+## Migration notes
+
+**Leads table retired (November 2026)** – The `leads` table is no longer available. Whop moved leads to the `members` table. If you were syncing `leads`, sync `members` instead. Members that were formerly leads include the original lead ID in their metadata as `lead_id`.
 
 ## Troubleshooting
 
