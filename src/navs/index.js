@@ -7615,16 +7615,6 @@ export const docsMenu = {
                     icon: 'IconMessage',
                     color: 'salmon',
                     featured: true,
-                    children: [
-                        {
-                            name: 'React integration with useThumbSurvey',
-                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
-                        },
-                        {
-                            name: 'Manual event capture',
-                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
-                        },
-                    ],
                 },
                 {
                     name: 'Resources',

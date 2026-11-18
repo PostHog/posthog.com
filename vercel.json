@@ -7572,6 +7572,16 @@
             "source": "/docs/ai-evals/taggers",
             "destination": "/docs/ai-evals#categories",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/use-thumb-survey",
+            "destination": "/docs/ai-observability/collect-user-feedback#react-use-the-usethumbsurvey-hook",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/manual-event-capture",
+            "destination": "/docs/ai-observability/collect-user-feedback#capture-feedback-events-manually",
+            "statusCode": 301
         }
     ]
 }
