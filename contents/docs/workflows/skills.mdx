@@ -4,10 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AgentSkillsList from 'components/AgentSkillsList'
 import CalloutBox from 'components/Docs/CalloutBox'
 
-PostHog ships agent skills that teach your coding agent how to send transactional email, design email templates, build workflows and broadcasts, measure how an email performs, and move off Customer.io. The skills work through the [PostHog MCP server](/docs/workflows/surfaces/mcp), and they're the same skills PostHog's own agents run.
+PostHog ships agent skills that teach your coding agent how to send transactional email, design email templates, build workflows and broadcasts, measure how an email performs, connect Supabase auth emails, import push tokens, and move off Customer.io or Resend. The skills work through the [PostHog MCP server](/docs/workflows/surfaces/mcp), and they're the same skills PostHog's own agents run.
 
 ## Set up
 
@@ -23,23 +22,15 @@ Every PostHog skill also ships as `skills.zip` on the [latest skills release](ht
 
 Each skill's description tells your agent when to load it. Ask "send our password reset email through PostHog", and your agent loads `sending-transactional-emails` without you naming it.
 
-## Example prompts
-
-| Ask your agent | Skill it loads |
-| --- | --- |
-| "Send password resets from our Node backend with PostHog" | `sending-transactional-emails` |
-| "Design a launch email for the new editor in our brand colors" | `designing-email-templates` |
-| "Send it Tuesday at 9am to everyone on the old editor" | `building-workflows` |
-| "Build an onboarding sequence: a welcome email at sign-up, and a nudge two days later if they haven't created a project" | `building-workflows` |
-| "How did last week's product update do, and who upgraded after opening it?" | `measuring-email-performance` |
-| "Move our Customer.io campaigns into PostHog" | `migrating-from-customer-io` |
-
 ## The skills
 
-### Transactional email
-
-<AgentSkillsList product="messaging" />
-
-### Broadcasts, automations, and templates
-
-<AgentSkillsList product="workflows" />
+| Skill | What it does | Ask your agent |
+| --- | --- | --- |
+| `sending-transactional-emails` | Sets up [transactional emails](/docs/workflows/transactional-emails), such as password resets, sign-in codes, and receipts. Keeps the email in your code or designs it in PostHog, then writes the send with your SDK, idempotency keys, and status checks. | "Send password resets from our Node backend with PostHog" |
+| `designing-email-templates` | Creates and edits email templates in the [library](/docs/workflows/library), with Liquid personalization, over MCP. Templates stay editable in the visual editor. | "Design a launch email for the new editor in our brand colors" |
+| `building-workflows` | Builds, edits, tests, enables, and monitors workflows and broadcasts over MCP, including first-time setup such as the email sender and the frequency cap. Enables a workflow only after you approve. | "Send it Tuesday at 9am to everyone on the old editor" or "Build an onboarding sequence: a welcome email at sign-up, and a nudge two days later if they haven't created a project" |
+| `measuring-email-performance` | Reports how an email performs, read-only: sends, deliveries, opens, clicks, bounces, and spam complaints per step, version comparisons, clicked links, what recipients did next in your product, and one person's email history. | "How did last week's product update do, and who upgraded after opening it?" |
+| `setting-up-supabase-auth-emails` | Connects a Supabase project so its [auth emails](/docs/workflows/supabase-auth-emails) send through PostHog templates with the Send Email Hook, in an order that doesn't break sign-ups. | "Send our Supabase auth emails through PostHog" |
+| `migrating-from-customer-io` | Moves Customer.io automations into PostHog as draft workflows. Reads them with the Customer.io MCP or CLI, previews the import, and reports what needs your input. See [migrate from Customer.io](/docs/workflows/migrate-from-customer-io). | "Move our Customer.io campaigns into PostHog" |
+| `migrating-from-email-providers` | Moves you from an email API provider such as Resend: imports suppressions, unsubscribes, topics, templates, and automations, then walks you through DNS, template review, and the cutover. See [migrate from Resend](/docs/workflows/migrate-from-resend). | "Move our email from Resend to PostHog" |
+| `importing-push-tokens` | Moves existing mobile push devices from another provider, such as OneSignal, Braze, Customer.io, Airship, or your own Firebase backend, into a PostHog push channel. Checks the pairing with a dry run, then imports in batches. See [import device tokens](/docs/workflows/push-notifications/import-device-tokens). | "Import our OneSignal push tokens into PostHog" |
