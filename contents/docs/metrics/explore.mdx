@@ -69,6 +69,25 @@ When a chart is worth keeping, turn it into something durable:
 - **Save as insight** saves the current chart as a reusable insight.
 - **Add to dashboard** drops it onto an existing or new dashboard.
 - **New service dashboard** builds a starter dashboard in one step — pick the metrics (optionally scoped to a service) and PostHog creates one insight per metric, each charted with its recommended aggregation.
+- **Save as metric** keeps a derived span series as a metric of its own. See [Save a span series as a metric](#save-a-span-series-as-a-metric).
+
+### Save a span series as a metric
+
+The derived span series — `posthog.derived.spans.requests`, `posthog.derived.spans.errors`, and `posthog.derived.spans.duration` — are computed from your stored spans each time you query them. To keep one as a lasting metric, for longer retention or cheaper dashboards and alerts, chart it in the viewer and choose **Save** > **Save as metric**.
+
+> **Note:** Save as metric is rolling out behind a feature flag. If you don't see it in the **Save** menu, it isn't enabled for your project yet.
+
+The option is available when the query has one derived span series and no formula. In the modal, set the **Metric name** and click **Create metric**. PostHog creates an enabled span metric rule:
+
+- **Requests** becomes a count of matching spans.
+- **Errors** becomes a count of matching spans with an error status.
+- **Duration** becomes a distribution of each span's duration in milliseconds (`duration_ms`).
+
+The chart's filters and group-by keys carry over to the rule, up to 5 group-by keys. If the query doesn't filter on span kind, the rule counts only server spans. For a service that has no server spans, the chart counts root spans instead, so the saved metric can be lower than the chart. The rule matches filter values without regard to case. The modal lists any part of the query the rule can't carry over, such as a regex over span kind or status names.
+
+The metric name must start with a letter and contain only letters, digits, dots, underscores, and dashes. Names that start with `posthog.derived.` are reserved.
+
+The rule counts spans from the moment you save it. There's no backfill, so the new metric starts empty.
 
 ### Metrics table on a dashboard
 

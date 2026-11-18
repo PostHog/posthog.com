@@ -93,6 +93,8 @@ Rules are defined per project and shared by all of its environments.
 
 Rules are also available over the [Logs API](/docs/logs/surfaces/api) at `/api/projects/:project_id/logs/metric_rules/`, which supports list, retrieve, create, update, and delete. This is the way to keep rules in version control alongside the rest of your configuration.
 
+The same endpoint also returns span metric rules (`source` set to `spans`). You create these from a derived span series in the Metrics viewer — see [Save a span series as a metric](/docs/metrics/explore#save-a-span-series-as-a-metric).
+
 ## Troubleshooting
 
 **The metric has no data points.** Check that the rule is enabled, and that its filter matches recent logs — the sparkline in the rule form and a [log search](/docs/logs/search) with the same filter both tell you. Also check the timestamps your service sends: lines older than 20 minutes are ignored.
