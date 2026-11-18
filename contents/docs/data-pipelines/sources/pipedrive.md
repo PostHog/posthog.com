@@ -9,7 +9,7 @@ availability:
 sourceId: Pipedrive
 ---
 
-The Pipedrive connector syncs your CRM data – deals, deal products, deal history, persons, organizations, products, pipelines, stages, activities, notes, leads, users, field metadata, mailbox data, and projects – into PostHog.
+The Pipedrive connector syncs your CRM data – deals, deal products, deal history, persons, organizations, products, pipelines, stages, activities, call logs, notes, leads, users, goals, currencies, field metadata, mailbox data, and projects – into PostHog.
 
 ## Adding a data source
 
@@ -39,6 +39,9 @@ Once the syncs are complete, you can start using Pipedrive data in PostHog.
 | `stages`              | Stages within pipelines                              | Full refresh |
 | `activities`          | Activities like calls, meetings, and tasks           | Full refresh |
 | `activity_types`      | Activity types like call, meeting, and email         | Full refresh |
+| `call_logs`           | Phone calls logged by the API token's user           | Full refresh |
+| `currencies`          | Currencies supported in your Pipedrive account       | Full refresh |
+| `goals`               | Sales goals with their targets and assignees         | Full refresh |
 | `notes`               | Notes attached to deals, persons, or organizations   | Full refresh |
 | `leads`               | Sales leads                                          | Full refresh |
 | `lead_labels`         | Labels for categorizing leads                        | Full refresh |
