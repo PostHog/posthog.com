@@ -42,7 +42,7 @@ The fastest way to set it up is our wizard, which installs the package, adds you
 Prefer to do it by hand, or want to see exactly what the wizard wires up? Install the SDK alongside the [PostHog Node.js SDK](/docs/libraries/node):
 
 ```bash
-npm install @posthog/mcp@1 posthog-node@5
+npm install @posthog/mcp@1 posthog-node@6
 ```
 
 Then call `instrument(server, posthog)` once at startup. You bring your own `posthog-node` client and pass it in as the second argument:
@@ -396,9 +396,12 @@ export class PostHogAnalyticsProvider implements AnalyticsProvider {
     }
   ): Promise<void> {
 
-    this.client?.captureException(error, this.mcpInteractionId, {
-      duration_ms: context.duration_ms,
-      tool_name: context.tool_name,
+    this.client?.captureException(error, {
+      distinctId: this.mcpInteractionId,
+      properties: {
+        duration_ms: context.duration_ms,
+        tool_name: context.tool_name,
+      },
     });
 
     console.error(

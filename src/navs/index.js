@@ -1388,6 +1388,14 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/icp-fit-score',
             },
             {
+                name: 'Commissions',
+                url: '/handbook/growth/revops/commissions',
+            },
+            {
+                name: 'Commission queries',
+                url: '/handbook/growth/revops/commission-queries',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
@@ -2871,12 +2879,8 @@ export const docsMenu = {
                     icon: 'IconBox',
                     children: [
                         {
-                            name: 'SDK comparison',
+                            name: 'Choosing an SDK',
                             url: '/docs/libraries',
-                        },
-                        {
-                            name: 'SDK bootstrapping',
-                            url: '/docs/libraries/bootstrapping',
                         },
                         {
                             name: 'JavaScript Web',
@@ -2945,7 +2949,21 @@ export const docsMenu = {
                         },
                         {
                             name: 'Go',
-                            url: '/docs/libraries/go',
+                            url: '/docs/libraries/go/reference',
+                            children: [
+                                {
+                                    name: '2.x.x',
+                                    url: '/docs/libraries/go/2.x.x',
+                                },
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/go/1.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/go/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Godot',
@@ -2995,15 +3013,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Node.js',
-                            url: '/docs/libraries/node',
+                            url: '/docs/libraries/node/reference',
                             children: [
                                 {
-                                    name: 'Setup and usage',
-                                    url: '/docs/libraries/node',
+                                    name: '6.x.x',
+                                    url: '/docs/libraries/node/6.x.x',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/references/posthog-node',
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/node/5.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/node/migration',
                                 },
                             ],
                         },
@@ -3013,15 +3035,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Python',
-                            url: '/docs/libraries/python',
+                            url: '/docs/libraries/python/reference',
                             children: [
                                 {
-                                    name: 'Setup and usage',
-                                    url: '/docs/libraries/python',
+                                    name: '8.x.x',
+                                    url: '/docs/libraries/python/8.x.x',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/references/posthog-python',
+                                    name: '7.x.x',
+                                    url: '/docs/libraries/python/7.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/python/migration',
                                 },
                             ],
                         },
@@ -3065,7 +3091,21 @@ export const docsMenu = {
                         },
                         {
                             name: 'Rust',
-                            url: '/docs/libraries/rust',
+                            url: '/docs/libraries/rust/reference',
+                            children: [
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/rust/1.x.x',
+                                },
+                                {
+                                    name: '0.x.x',
+                                    url: '/docs/libraries/rust/0.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/rust/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Unity',
@@ -3074,6 +3114,10 @@ export const docsMenu = {
                         {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
+                        },
+                        {
+                            name: 'SDK bootstrapping',
+                            url: '/docs/libraries/bootstrapping',
                         },
                     ],
                 },
@@ -3495,6 +3539,10 @@ export const docsMenu = {
                         {
                             name: 'Capture',
                             url: '/docs/api/capture',
+                        },
+                        {
+                            name: 'Capture (v1)',
+                            url: '/docs/api/capture-v1',
                         },
                         {
                             name: 'Flags',
@@ -6333,11 +6381,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Node.js SDK',
-                            url: '/docs/references/posthog-node?filter=error-tracking',
+                            url: '/docs/libraries/node/reference#capture-exception',
                         },
                         {
                             name: 'Python SDK',
-                            url: '/docs/references/posthog-python?filter=error-tracking',
+                            url: '/docs/libraries/python/reference#capture-exception',
                         },
                         {
                             name: 'Error tracking API',
@@ -7510,35 +7558,6 @@ export const docsMenu = {
                 },
                 {
                     name: 'Integrations',
-                },
-                {
-                    name: 'Third-party integrations',
-                    url: '/docs/ai-observability/integrations',
-                    icon: 'IconApps',
-                    featured: true,
-                    color: 'yellow',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/ai-observability/integrations',
-                        },
-                        {
-                            name: 'Helicone',
-                            url: '/docs/ai-observability/integrations/helicone-posthog',
-                        },
-                        {
-                            name: 'Langfuse',
-                            url: '/docs/ai-observability/integrations/langfuse-posthog',
-                        },
-                        {
-                            name: 'Traceloop',
-                            url: '/docs/ai-observability/integrations/traceloop-posthog',
-                        },
-                        {
-                            name: 'Keywords AI',
-                            url: '/docs/ai-observability/integrations/keywords-ai-posthog',
-                        },
-                    ],
                 },
                 {
                     name: 'Link Session Replay',

@@ -26,7 +26,7 @@ Coming from Customer.io? [Import your opt-out lists](/docs/workflows/import-cust
 
 The suppression list is address-level and category-independent. Each entry records the recipient, how it got there (a bounce, a spam complaint, or a manual entry), the reason or last bounce diagnostic, and when it was suppressed.
 
-PostHog adds addresses automatically, which is what protects your sending domain's reputation:
+PostHog adds addresses automatically, which is what protects your sending domain's [reputation](/docs/workflows/sending-reputation):
 
 - **Hard bounce** – the address doesn't exist or refuses mail. PostHog suppresses it after the first hard bounce.
 - **Soft bounces** – the mailbox is full or temporarily unavailable. PostHog suppresses it after several soft bounces in a row, with no delivery between them.
@@ -38,7 +38,7 @@ A suppressed address gets no email outside a transactional category. [Transactio
 
 ## Managing the lists over the API
 
-Both lists are available over the [REST API](/docs/api), so your own product can honor an unsubscribe or a resubscribe without anyone opening PostHog.
+Both lists are available over the [REST API](/docs/api), so your own product can honor an unsubscribe or a resubscribe without anyone opening PostHog. If you move from another provider, import its bounces and unsubscribes before your first send, as [move from another provider](/docs/workflows/sending-reputation#move-from-another-provider) explains.
 
 The [messaging preferences API](/docs/api/messaging-preferences) manages the opt-out list: list a category's opt-outs, add them one at a time or up to 1,000 in bulk, remove one when a recipient opts back in, and export a category's list as CSV. Leave out the category to work with the global opt-out that covers all marketing messages.
 

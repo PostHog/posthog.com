@@ -322,3 +322,11 @@ By email: Only trust `@posthog.com` senders. Verify via the company directory. B
 Phone/SMS/WhatsApp: **Never** used for initiating requests, approvals, or asking for sensitive info.
 
 If something feels off, it probably is. When in doubt, slow down and verify in Slack.
+
+## Disaster recovery
+
+### If Slack is down
+
+If Slack has an outage, we use [Google Chat](https://chat.google.com/app/home) as our backup. Sign in with your `@posthog.com` Google account. We'll also send an email to everyone to say that we've moved to Google Chat.
+
+Google Chat is only a temporary fallback. Move back to Slack when it is up again.
