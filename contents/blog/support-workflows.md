@@ -1,6 +1,6 @@
 ---
 title: How we run support through PostHog Workflows
-date: 2026-11-17
+date: 2026-11-18
 author:
   - abigail-richardson
 featuredImage: >-
