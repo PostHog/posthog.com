@@ -40,7 +40,7 @@ Resend has no read-only API keys, so the import needs a key with full access. Cr
 
 The import runs in the background, and PostHog shows progress for each step. A step that hits an error retries by itself.
 
-The topic preferences step reads contacts one at a time, about 7,000 an hour, so a large list can take a day. An import stops after 24 hours. The next import from Resend continues from where it stopped, but only with the same key, so keep the key until every step has finished.
+The topic preferences step reads contacts one at a time, about 7,000 an hour, so a large list can take a day. An import stops after 24 hours. To finish, start another import from Resend and paste the same key. It continues from where the last one stopped, but only with the same key, so don't delete the key in Resend until every step has finished.
 
 If an import fails, PostHog deletes the key too. A rejected key needs a new key. For any other error, run the import again.
 
