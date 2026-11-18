@@ -177,14 +177,14 @@ const claimSteps: { title: string; copy: React.ReactNode }[] = [
 const newsletterPosts: { title: string; url: string; image: string; author: string; date: string }[] = [
     {
         title: 'Not everything needs an LLM',
-        url: 'https://newsletter.posthog.com/p/decision-models',
+        url: '/newsletter/decision-models',
         image: 'https://substack-post-media.s3.amazonaws.com/public/images/f406379a-4ff2-4e21-aaac-69cda7d7b37e_1200x630.png',
         author: 'Jina Yoon',
         date: 'Nov 9, 2026',
     },
     {
         title: "Analytics has changed. Here's what to do about it",
-        url: 'https://newsletter.posthog.com/p/analytics-changed',
+        url: '/newsletter/analytics-changed',
         image: 'https://substack-post-media.s3.amazonaws.com/public/images/cc4bf50c-44a8-49e2-b507-d1131131c916_1200x630.png',
         author: 'Ian Vanagas',
         date: 'Nov 2, 2026',
