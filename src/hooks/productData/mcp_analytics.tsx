@@ -38,6 +38,7 @@ export const mcpAnalytics = {
         title: 'MCP Analytics – See everything agents do on your MCP server',
         description:
             'Every tool call, agent intent, failure, and missing capability from your MCP server, captured as PostHog events. Wrap your server once and start learning what agents actually need.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_og_os_notes_b5b230d92d.png',
     },
     /**
      * Sections rendered on the Product surface (`/mcp-analytics`), in page order. Each entry resolves to a
