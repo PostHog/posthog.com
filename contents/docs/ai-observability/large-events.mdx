@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconFlask" title="Public beta" type="fyi">
 
-Large event capture is in public beta. The [capture v1 SDKs](/docs/libraries#sdk-versions-and-capture-v1) use it for every event sent with their AI capture method, and posthog-python and posthog-node also use it for their AI integrations: [posthog-python](/docs/libraries/python/reference#capture-ai) 8.0.0+, [posthog-node](/docs/libraries/node/reference#capture-ai) 6.0.0+, [posthog-go](/docs/libraries/go) v2.0.0+, and the [Rust SDK](/docs/libraries/rust) 1.0.0+. Older versions of posthog-python (7.39+) and posthog-node (5.49+, with `@posthog/ai` 8.8+) support it as an opt-in. We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we roll it out.
+Large event capture is in public beta. The [capture v1 SDKs](/docs/libraries#sdk-versions-and-capture-v1) use it for every event sent with their AI capture method, and posthog-python and posthog-node also use it for their AI integrations: [posthog-python](/docs/libraries/python/reference#capture-ai) 8.0.0+, [posthog-node](/docs/libraries/node/reference#capture-ai) 6.0.0+, [posthog-go](/docs/libraries/go) v2.0.0+, the [Rust SDK](/docs/libraries/rust) 1.0.0+, the iOS and Android SDKs 4.0.0+, and the Flutter SDK 6.0.0+ (except on the web). Older versions of posthog-python (7.39+) and posthog-node (5.49+, with `@posthog/ai` 8.8+) support it as an opt-in. We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we roll it out.
 
 </CalloutBox>
 
@@ -46,7 +46,7 @@ With the flag on, nothing is truncated or redacted. On posthog-python 8.0.0+ and
 
 ## Calling capture_ai directly
 
-If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID. The other capture v1 SDKs have an AI capture method too: `EnqueueAI` in Go and `capture_ai` in Rust. Your SDK's [migration guide](/docs/libraries#sdk-versions-and-capture-v1) lists its AI settings.
+If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID. The other capture v1 SDKs have an AI capture method too: `EnqueueAI` in Go, `capture_ai` in Rust, and `captureAi` on [iOS](/docs/libraries/ios/reference#capture-ai), [Android](/docs/libraries/android/reference#capture-ai), and [Flutter](/docs/libraries/flutter/reference#capture-ai). Your SDK's [migration guide](/docs/libraries#sdk-versions-and-capture-v1) lists its AI settings. The mobile SDKs keep AI events in their own on-disk queue and drop an event over 8 MiB plus 64 KiB before sending it. On Flutter web, `captureAi` is a no-op.
 
 <CalloutBox icon="IconWarning" title="Plain capture drops large events in Python" type="caution">
 
