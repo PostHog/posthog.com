@@ -2,6 +2,8 @@
 title: Evaluations
 ---
 
+import EvalsPlaygroundCallout from 'components/EvalsPlaygroundCallout'
+
 Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations). PostHog supports three types of evaluations:
 
 - **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result, a numeric score, or categories. You [choose a judge method](#choosing-a-judge-method): **LLM with explanation** provides written reasoning, while **Decision model** returns typed results without reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
@@ -16,6 +18,8 @@ PostHog runs two kinds of evals, and most teams use both:
 - **Offline evals** – Score a fixed set of test cases in your CI before you ship a change. Use them to stop known problems from coming back. See [offline evals](/docs/ai-evals/offline-evals).
 
 To run an online eval over traffic you captured before you created it, use a [backfill](/docs/ai-evals/backfills).
+
+<div><EvalsPlaygroundCallout /></div>
 
 ## Why use evaluations?
 

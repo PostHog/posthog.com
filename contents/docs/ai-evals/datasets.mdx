@@ -167,6 +167,73 @@ Editing, archiving, or restoring an item can add a version. Each version counts 
 
 After your CI run scores each dataset item, send the results to PostHog with [offline evals](/docs/ai-evals/offline-evals). Each run appears as an experiment, with one row per test case and one column per evaluator, so you can compare runs and find the items that regressed.
 
+### Use a dataset in offline evals
+
+Use a PostHog [dataset](/docs/ai-evals/datasets) to manage cases in PostHog or save them from production traces. This example loads a dataset revision before starting the experiment.
+
+To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, as in the cases above. Set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+snapshot = evaluations.datasets.snapshot(os.environ["POSTHOG_DATASET_ID"])
+items = list(snapshot.iter_items())
+
+experiment = evaluations.create_experiment(
+    name="Support agent from a dataset",
+    suite_key="support-agent",
+    dataset_revision_id=snapshot.revision_id,
+    run_source="local",
+)
+
+for row in items:
+    output = run_agent(row.input)
+    item = EvaluationItem.from_dataset_item(row, output=output)
+    for key, result in evaluate_answer(output, row.expected_output).items():
+        experiment.upload_result(
+            item=item,
+            scorer_version_id=scorers[key].current_version_id,
+            **result,
+        )
+```
+
+```typescript file=TypeScript
+const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!)
+const items = []
+for await (const row of snapshot) {
+    items.push(row)
+}
+
+const experiment = await evaluations.createExperiment({
+    name: "Support agent from a dataset",
+    suiteKey: "support-agent",
+    datasetRevisionId: snapshot.revisionId,
+    runSource: "local",
+})
+
+for (const row of items) {
+    if (typeof row.input !== "string") {
+        throw new Error("The demo requires string inputs")
+    }
+    const output = await runAgent(row.input)
+    const scores = evaluateAnswer(output, row.expectedOutput as ToolCall)
+    const item = EvaluationItem.fromDatasetItem(row, { output })
+    for (const key of ["tool", "arguments"] as const) {
+        await experiment.uploadResult({
+            item,
+            scorerVersionId: scorers[key].currentVersionId,
+            ...scores[key],
+        })
+    }
+}
+```
+
+</MultiLanguage>
+
+`from_dataset_item()` / `fromDatasetItem()` copies the test case and its version into the experiment item. Always supply the new run's output. The dataset's `source_output` is an earlier answer.
+
+By default, `snapshot()` selects the latest revision when you call it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript. The revision must still be available under the [dataset retention policy](/docs/ai-evals/datasets#data-retention).
+
 ## Further reading
 
 - [Evaluations overview](/docs/ai-evals) – online evaluations that score production generations automatically
