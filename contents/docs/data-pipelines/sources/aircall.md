@@ -9,7 +9,7 @@ availability:
 sourceId: Aircall
 ---
 
-The Aircall connector syncs your call center data – calls, contacts, users, teams, numbers, tags, outbound campaigns, and conversation trackers – into PostHog.
+The Aircall connector syncs your call center data – calls, contacts, users, user availability, teams, numbers, tags, outbound campaigns, conversation trackers, and AI-generated call summaries and predicted CSAT scores – into PostHog.
 
 ## Adding a data source
 
@@ -23,19 +23,23 @@ Once the syncs are complete, you can start using Aircall data in PostHog.
 
 ## Available tables
 
-| Table                    | Description                                                            | Sync method  |
-| ------------------------ | ---------------------------------------------------------------------- | ------------ |
-| `calls`                  | Phone calls handled in Aircall                                         | Incremental  |
-| `contacts`               | Contacts in your Aircall account                                       | Incremental  |
-| `users`                  | Agents and other users in your account                                 | Full refresh |
-| `teams`                  | Teams of agents                                                        | Full refresh |
-| `numbers`                | Phone numbers configured in Aircall                                    | Full refresh |
-| `tags`                   | Tags used to label calls                                               | Full refresh |
-| `campaigns`              | Outbound calling campaigns                                             | Full refresh |
-| `campaign_outcomes`      | Company-wide call outcomes catalog                                     | Full refresh |
-| `campaign_stats`         | Progress statistics per campaign                                       | Full refresh |
-| `campaign_call_outcomes` | Disposition log per campaign contact                                   | Full refresh |
-| `trackers`               | Conversation Intelligence keyword trackers (requires AI Assist add-on) | Full refresh |
+| Table                         | Description                                                                          | Sync method  |
+| ----------------------------- | ------------------------------------------------------------------------------------ | ------------ |
+| `calls`                       | Phone calls handled in Aircall                                                       | Incremental  |
+| `contacts`                    | Contacts in your Aircall account                                                     | Incremental  |
+| `users`                       | Agents and other users in your account                                               | Full refresh |
+| `user_availabilities`         | Current availability of each user, one row per user                                  | Full refresh |
+| `teams`                       | Teams of agents                                                                      | Full refresh |
+| `numbers`                     | Phone numbers configured in Aircall                                                  | Full refresh |
+| `tags`                        | Tags used to label calls                                                             | Full refresh |
+| `call_predicted_csats`        | AI-predicted customer satisfaction (CSAT) score per call (requires AI Assist add-on) | Full refresh |
+| `call_summaries`              | AI-generated summary per call (requires AI Assist add-on)                            | Full refresh |
+| `call_custom_summary_results` | Custom summary template result per call (requires AI Assist Pro package)             | Full refresh |
+| `campaigns`                   | Outbound calling campaigns                                                           | Full refresh |
+| `campaign_outcomes`           | Company-wide call outcomes catalog                                                   | Full refresh |
+| `campaign_stats`              | Progress statistics per campaign                                                     | Full refresh |
+| `campaign_call_outcomes`      | Disposition log per campaign contact                                                 | Full refresh |
+| `trackers`                    | Conversation Intelligence keyword trackers (requires AI Assist add-on)               | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
