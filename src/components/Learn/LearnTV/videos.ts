@@ -24,7 +24,7 @@ export const LEARN_VIDEOS: LearnVideo[] = [
         description:
             'Use a trace to see inside one AI request, work back from a bad answer to the bug, then check that the fix works.',
         wistiaId: 'p092lqjim8',
-        poster: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_1_6bd8e39cfe.png',
+        poster: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/aio_traces_thumbnail_ab60d544d2.png',
         next: { title: 'Evals' },
     },
 ]
