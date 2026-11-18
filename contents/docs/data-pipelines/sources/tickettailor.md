@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Ticket Tailor connector syncs events, event series, orders, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Ticket Tailor connector syncs events, event series, orders, checkout forms, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -36,6 +36,8 @@ You'll be asked for:
 <SyncModes />
 
 All Ticket Tailor tables are full refresh. Each sync replaces the contents of the table.
+
+Some tables sync per parent record. The `waitlist_signups` and `event_series_overrides` tables make one request for each event series, and the `checkout_form_elements` table makes one request for each checkout form. Each row of these tables includes the ID of its parent record (`event_series_id` or `checkout_form_id`).
 
 ## Configuration
 
