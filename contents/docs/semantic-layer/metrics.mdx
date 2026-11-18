@@ -66,6 +66,15 @@ Creating a metric with a name that a live metric already holds fails with a 409 
 
 When the existing metric reads a table you don't have access to, the 409 only says the name is taken, and `overwrite` can't replace it.
 
+## Drafting metrics with AI
+
+You don't have to define every metric by hand. The [`setting-up-data-catalog` skill](https://github.com/PostHog/posthog/blob/master/products/data_catalog/skills/setting-up-data-catalog/SKILL.md) drafts metrics from the insights and dashboards your project uses most. It leaves every metric it adds as `proposed`, so your team reviews each one before it's canonical. Start it from the Data Catalog:
+
+- **Set up with PostHog AI** runs the setup in [PostHog AI](/docs/posthog-ai). If your organization hasn't [allowed PostHog AI access](/docs/posthog-ai/allow-access) yet, you're asked to approve it first. The button only shows where PostHog AI can load the setup skill.
+- **Copy prompt for your agent** copies a setup prompt that names your project. Paste it into Claude Code, Cursor, or any agent connected to the [PostHog MCP server](/docs/model-context-protocol).
+
+Both buttons show when the catalog has no metrics. A catalog with fewer than 10 metrics shows them in a banner that you can dismiss. When an external agent adds metrics to an empty catalog, they appear when you return to the Data Catalog tab.
+
 ## Renaming and deleting
 
 Both are ways a name stops meaning what it used to, so both come with the same warning: anything that references the metric by name – saved SQL, API calls, links – stops working until it's updated.
