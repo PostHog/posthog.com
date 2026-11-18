@@ -6753,6 +6753,18 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Intercom',
+                    url: '/docs/support/imports/intercom',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
+                {
+                    name: 'Pylon',
+                    url: '/docs/support/imports/pylon',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
+                {
                     name: 'Automation',
                 },
                 {
