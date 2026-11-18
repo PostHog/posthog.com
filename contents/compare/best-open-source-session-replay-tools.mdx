@@ -1,0 +1,437 @@
+---
+date: 2026-11-18
+title: The best open source session replay tools, compared
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/best_open_source_session_replay_tools_c6222ec64f.png
+featuredImageType: full
+author:
+  - natalia-amorim
+category: General
+tags:
+  - Roundups
+seo:
+  metaTitle: Best open source session replay tools (free and self-hosted)
+  metaDescription: >-
+    What are the best open source session replay tools? Compare 5 free, self-hosted session recording tools on license, features, mobile support, and pricing.
+---
+
+[Open-source analytics](/compare/best-open-source-analytics-tools) gives you hard numbers, but numbers don't show you why users got stuck. You can [talk to users](/product-engineers/10x-engineers-do-user-interviews) or gather feedback, but for us, nothing beats watching session replays.
+
+Replays (aka session recordings) are a great way to understand:
+
+- What causes bugs and user frustration.
+- Where users get stuck or hesitate in your funnel.
+- How users interact with individual elements of your product.
+
+[Hotjar](/compare/posthog-vs-hotjar) (now part of Contentsquare) and [Fullstory](/compare/posthog-vs-fullstory) are popular session replay products, but they're closed source, can't be self-hosted, and are built mainly for marketing teams. In this guide, we're looking at [Hotjar alternatives](/compare/best-hotjar-alternatives) that are free or open source.
+
+<details>
+<summary>What features do you need in an open-source session replay tool?</summary>
+
+A good open-source session replay tool lets you watch how real users experience your product without sending their sessions to a closed platform. Most solid tools include:
+ 
+- Recordings of clicks, scrolls, mouse movements, and page changes
+- Privacy controls that mask inputs and other sensitive elements
+- Filters to find sessions by user, page, or event
+- Self-hosting options so you keep full control of your data
+
+More advanced tools go further with:
+ 
+- **Console logs and network requests** so you can debug straight from the recording
+- **Error-linked replays** that attach a recording to each exception
+- **Mobile replay** for iOS, Android, React Native, and Flutter apps
+- **Heatmaps** for an aggregate view of clicks and scrolling
+- **Product analytics integration** so you can jump from a funnel drop-off to the sessions behind it
+- **AI analysis** that summarizes sessions and flags friction, so you don't have to watch every recording
+- **MCP access** so a coding agent can search and read recordings
+
+</details>
+
+<details>
+<summary>What are the best open source session replay tools? The short version</summary>
+
+| Tool | License | Self-hosting | Free hosted plan |
+|---|---|---|---|
+| **PostHog** | MIT | Free, but unsupported | 5,000 web and 2,500 mobile recordings a month |
+| **OpenReplay** | AGPLv3 | Free | 1,000 sessions a month, 2 users |
+| **Sentry** | FSL (source-available) | Free, for low volumes | 50 replays a month, 1 user |
+| **UXWizz** | Proprietary, source included | One-time license from $299 | None (14-day trial) |
+| **Matomo** | GPLv3, with a proprietary replay plugin | Free core, paid replay plugin | None (21-day trial) |
+ 
+**PostHog** is the pick if you want to know which recordings are worth watching: start from a funnel drop-off, an error, or a feature flag and land on the sessions behind it, with 5,000 web and 2,500 mobile recordings free every month.
+
+PostHog also solves for the pain point of having to watch many recordings manually. With [Replay Vision](/replay-vision), PostHog's AI scanners watch recordings for you, summarizing sessions and flagging friction so you only open the ones worth your time.
+ 
+**OpenReplay** is the strongest option if self-hosting is the priority: replay, DevTools, and co-browsing in an AGPLv3 package you run yourself. 
+
+**Sentry** fits teams that already use it for errors and want a replay attached to each one, though its license is source-available rather than open source.
+ 
+**UXWizz** and **Matomo** are self-hosted website analytics tools with recording on the side. UXWizz is commercial software for a one-time fee, and Matomo's recording is a paid plugin on top of its open source core.
+ 
+</details>
+
+<details>
+<summary>Prefer video? Watch our rundown of open source session replay tools in 6 minutes</summary>
+
+<iframe
+    width="100%"
+    height="400"
+    src="https://www.youtube-nocookie.com/embed/mWW3lJw81LE"
+    title="The top session recording and replay tools (open source)"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+
+<br />
+
+This video was made for an earlier version of this guide, so some details have changed since.
+
+</details>
+
+## 1. PostHog
+
+- **Who it's for:** Startups, [product engineers](/product-engineer/what-is-a-product-engineer), and product teams who want session replay connected to events, flags, and errors, on web and mobile.
+- **Who it isn't for:** Teams that need to self-host replay at scale with vendor support (our self-hosted deployment is unsupported and built for small volumes), or live co-browsing with users.
+- **License:** MIT (enterprise features are licensed separately)
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
+
+[PostHog](/) (that's us 👋) is your product's context layer. It combines [session replay](/session-replay) with [product analytics](/product-analytics), [heatmaps](/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [more developer tools](/products), and a [data warehouse](/warehouse) and [data pipelines](/data-pipelines) connect it all to the business data you keep elsewhere.
+
+PostHog's [session replay](/docs/session-replay) includes [console logs](/docs/session-replay/console-log-recording), [network activity](/docs/session-replay/network-recording), a DOM explorer, and performance metrics so you can identify the root cause of bugs without leaving the replay. You can filter recordings by user, event, feature flag, or any combination of properties, save collections of related sessions, and [share or embed](/docs/session-replay/sharing) them.
+
+[Replay Vision](/replay-vision) has AI scanners watch your recordings for you: it summarizes sessions and flags and scores friction, so you don't have to watch every recording in full. PostHog also supports [replay for mobile apps](/docs/session-replay/mobile) on Android, iOS, React Native, and Flutter, making it a good option if you're also looking for a tool that offers Hotjar features for mobile apps.
+
+### What does PostHog Session Replay include?
+ 
+- **Session replay:** [Console logs](/docs/session-replay/console-log-recording), [network activity](/docs/session-replay/network-recording), a DOM explorer, and performance metrics. Filter recordings by user, event, or feature flag, save them to [collections](/docs/session-replay/how-to-watch-recordings), and [share or embed](/docs/session-replay/sharing) them.
+- **Replay Vision:** [AI scanners](/docs/replay-vision) that summarize recordings and flag and score friction for you. It's [metered in credits](/replay-vision/pricing), with a free allowance every month.
+- **Mobile replay:** [SDKs for iOS, Android, React Native, and Flutter](/docs/session-replay/mobile) with 2,500 free mobile recordings per month.
+- **Heatmaps:** [Visualize clicks](/docs/toolbar/heatmaps) (including rage clicks and dead clicks), scroll depth, and mouse movement. Heatmap data doesn't add to your bill, though the free plan covers up to three pages.
+- **Error tracking:** Monitor [exceptions and stack traces](/docs/error-tracking) connected directly to session replays.
+- **Product analytics:** [Funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths), [retention](/docs/product-analytics/retention), trends, and [SQL access](/docs/sql) for custom queries.
+- **Privacy controls:** Inputs are masked by default, and you can [mask text or block elements](/docs/session-replay/privacy) with CSS selectors. Masking runs in the browser or app, so masked data never reaches PostHog.
+- **Agent access:** The [MCP server](/docs/session-replay/surfaces/mcp) lets an AI agent search recordings, read a session's details, and manage collections from your editor.
+
+### How much does PostHog cost?
+ 
+PostHog is free up to 1 million captured events, 5,000 web and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. After that, web recordings start at $0.005 each and get cheaper with volume. 
+
+Recordings are [kept](/docs/session-replay/recording-retention) for 30 days on the free plan and 90 days on pay-as-you-go.
+ 
+PostHog is open source under the MIT license, and session replay is part of the [self-hosted deployment](/docs/self-host). Self-hosted PostHog is unsupported and built for small volumes, so we recommend the free Cloud tier for most teams.
+
+> #### Bottom line
+>
+> PostHog is the best open source session replay tool if you want more than just replay. Its generous free tier, mobile support, and tight integration with analytics, feature flags, and error tracking make it the most complete option on this list.
+ 
+<WizardCTA
+    command="replay-vision"
+    title="Turn on session replay with one command"
+    subtitle="The wizard turns on Session Replay and creates Replay Vision scanners written for your product."
+    learnMoreTo="/docs/session-replay/installation"
+/>
+
+## 2. OpenReplay
+
+- **Who it's for:** Developer and support teams that want to self-host session replay with DevTools and co-browsing.
+- **Who it isn't for:** Teams that need SSO, role-based access, or audit logs when self-hosting for free (they're in the paid Enterprise Edition), or production-ready mobile replay (its mobile SDKs are in beta).
+- **License:** AGPLv3 (enterprise features are licensed separately)
+
+![OpenReplay - open source session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
+
+**OpenReplay** is an open-source session replay and product analytics platform you can self-host, and an [alternative to Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) with more technical features for engineers. 
+
+Its tooling is particularly effective for debugging application state and for customer support. Its product analytics now covers trends, funnels, journeys, and web analytics, though there's no retention analysis.
+
+OpenReplay moved from the Elastic License to AGPLv3 in 2024. In 2026, it added an MCP app and a Flutter SDK.
+
+### What does OpenReplay include?
+ 
+- **Session replay:** Recordings with event timelines, network activity, console logs, and JS error capture.
+- **DevTools:** Reproduce bugs as if they happened in your own browser, with application state, GraphQL queries (through a plugin), and 40+ performance metrics.
+- **Co-browsing:** Live screen sharing and calls with users via WebRTC – no third-party software required. It's included in the open source edition.
+- **Heatmaps:** Click heatmaps with rage-click highlights.
+- **Product analytics:** Trends, funnels, journeys, web analytics, and custom dashboards.
+- **Mobile replay:** SDKs for iOS, Android, React Native, and Flutter, all labelled beta.
+- **Spot:** A Chrome extension for recording bugs directly from the browser with full technical context attached.
+- **Agent access:** An MCP app that works with both cloud and self-hosted instances.
+
+### How much does OpenReplay cost?
+ 
+OpenReplay offers three ways to deploy, plus a custom enterprise option:
+ 
+- The **open source** edition is free and includes all core features, but you host it on your own infrastructure and manage storage, scaling, and retention yourself. 
+- **Dedicated** is a fully managed, single-tenant instance starting at $199/month, billed hourly at $0.276/hour with no limits on users, recordings, or retention. It adds SSO, custom data retention, and data residency across 50 regions.
+- **Serverless** is a usage-based option where you pay only for the sessions you record. It's free up to 1,000 sessions a month, with two users, one project, and 7-day data retention, and then $5.95 per 1,000 sessions.
+
+> #### Bottom line
+>
+> OpenReplay is the best self-hosted option for developer teams that need advanced debugging tools and full data sovereignty, and co-browsing is included in its open source edition. As long as you have the DevOps resources to deploy and maintain it, OpenReplay is a strong pick.
+
+## 3. Sentry
+
+- **Who it's for:** Developers and engineering teams that already use Sentry for error monitoring and want a replay attached to each error.
+- **Who it isn't for:** Teams that need more than 50 replays a month without paying for extra volume.
+- **License:** Functional Source License (source-available; each release converts to Apache 2.0 after two years)
+
+![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_03_12_T19_18_34_436_Z_d79ea5531f.png)
+
+[Sentry](/compare/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring.
+ 
+Session replay became generally available for web in 2023 and for mobile in 2025. It's tightly integrated with Sentry's error data: when an exception fires, the session replay for the affected user is automatically linked, giving you the full interaction context without any additional investigation.
+ 
+[Sentry](/compare/best-sentry-alternatives) approaches replay from an error-first perspective – it's most valuable when you want to understand what a user was doing right before something broke. It's built for developers and engineering teams, not UX or product teams.
+
+### What does Sentry include?
+ 
+- **Session replay:** Video-like reproduction of user interactions including page visits, mouse movements, clicks, taps, and scrolls. On web, all text is masked and media is blocked by default.
+- **Error-linked replay:** Errors link to the relevant session replay for instant context.
+- **Mobile replay:** Generally available for iOS, Android, React Native, and Flutter.
+- **Performance monitoring:** Web vitals, tracing, and frontend performance data alongside replays.
+- **Error tracking:** Real-time exception monitoring with stack traces across 100+ platforms and frameworks.
+- **AI and agent access:** AI replay summaries on web, and an MCP server that can pull replay details into your AI tools.
+- **Self-hosting:** Free with Docker Compose, with session replay included. Sentry's AI features aren't available when you self-host.
+
+### How much does Sentry cost?
+ 
+Sentry has four plans.
+ 
+- The **Developer** plan is free and includes 1 user, error monitoring, and 50 session replays/month.
+- The **Team** plan is $26/month billed annually ($29 billed monthly) with unlimited users and 50 replays included, with additional replays available at usage-based rates.
+- The **Business** plan is $80/month billed annually ($89 billed monthly) and adds unlimited custom dashboards and anomaly detection.
+- **Enterprise** pricing is custom.
+
+Developer, Team, and Business each include 50 replays a month. Self-hosting is free via Docker Compose, though it's built for low-volume deployments and comes without dedicated support.
+
+> #### Bottom line
+>
+> Sentry is a good option if your team already uses it for error monitoring and wants to add session replay without a new vendor. It's not a standalone replay tool – it's most valuable when replay is part of a broader error and performance monitoring workflow.
+
+## 4. UXWizz
+
+- **Who it's for:** Individuals and small businesses who want self-hosted website analytics, session recordings, and heatmaps for a one-time fee.
+- **Who it isn't for:** Teams that need open source code (it's commercial software with the source included), a hosted version, or replay for mobile apps.
+- **License:** Proprietary (source code included, but not open source)
+
+![UXWizz - self hosted session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
+
+**UXWizz** is a self-hosted website analytics tool offering visitor insights, session recording, heatmaps, segments, and basic A/B testing.
+ 
+By default, it uses a lightweight version of session recording that only stores the URL of the page and the user actions. This keeps storage low, but it doesn't work well with dynamic content or pages behind a login. A full recording mode that captures the page content is also available.
+
+### What does UXWizz include?
+ 
+- **Session recording:** Lightweight and full recording modes.
+- **Heatmaps:** Click, move, and scroll heatmaps.
+- **Visitor segmentation:** Filter and group visitors by behavior, device, or custom properties.
+- **A/B testing:** Basic split testing built in.
+- **Error tracking:** Monitor and log JavaScript errors.
+- **AI analysis:** Ask AI to generate stats and charts using natural language queries, with your own OpenAI or OpenRouter API key.
+- **WordPress plugin:** Easy installation for WordPress sites.
+
+### How much does UXWizz cost?
+ 
+UXWizz is self-hosted only with a one-time license fee.
+ 
+- The **Solo** license is $299 and covers unlimited websites, visitors, recordings, and heatmaps for a single user on one server.
+- The **Growth & Scale** license is $749 and adds unlimited dashboard users, per-website access controls, and up to 5 servers.
+- The **Agency** license is $2,490 and adds white-labeling, custom branding, and custom dashboard pages – intended for agencies managing analytics on behalf of clients.
+
+All tiers include one year of support and updates. After that, your installed version keeps working and renewing is optional, from $49.99 a year for Solo. There's no free tier and no standard cloud plan, though managed hosting is available on request and there's a 14-day free trial.
+ 
+> #### Bottom line
+>
+> UXWizz is a good fit for individuals and small businesses who want basic self-hosted analytics and session recording without a monthly bill. It isn't open source, and you run and secure the server yourself, but the one-time pricing makes it a low-stakes option to try.
+
+## 5. Matomo
+
+- **Who it's for:** Marketing and content teams that want privacy-focused web analytics first, with session recording as an add-on.
+- **Who it isn't for:** Teams that want replay included in the open source release (it's a paid, closed-source plugin when you self-host), or replay for mobile apps.
+- **License:** GPLv3 (the Heatmap & Session Recording plugin is proprietary)
+
+![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
+
+[Matomo](/compare/posthog-vs-matomo) is an open source web analytics platform. Seen as [an alternative to Google Analytics](/compare/ga4-alternatives), Matomo is largely focused on understanding marketing website analytics. Session recording is included in Matomo Cloud and available as a paid plugin for self-hosted installs.
+
+[Matomo](/compare/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. 
+
+Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
+
+### What does Matomo include?
+
+- **Web analytics:** Traffic, referrers, goals, funnels, and acquisition analysis.
+- **Session recording:** Replays clicks, mouse movements, scrolls, and form interactions, with keystrokes off and form fields masked by default. It's included in Matomo Cloud and a paid plugin for self-hosted.
+- **Heatmaps:** Click, move, and scroll heatmaps, in the same paid plugin for self-hosted.
+- **GDPR compliance:** Consent and opt-out tools, with Matomo Cloud data stored in Frankfurt, Germany.
+- **Self-hosting:** Full on-premise deployment with no data sent to third parties.
+- **Agent access:** An MCP server for Matomo Cloud and On-Premise, released in 2026.
+
+### How much does Matomo cost?
+
+Matomo On-Premise is free and open source – the core analytics platform costs nothing to self-host, with optional paid plugins available separately. Heatmap & Session Recording is one of them: it's sold as a subscription with a 30-day free trial, or as part of Matomo's On-Premise bundles, which start at €275 a month.
+
+Matomo Cloud is priced by monthly hit volume, starting at 50,000 hits a month, with a 21-day free trial.
+
+Cloud plans include session recordings and heatmaps, with a monthly quota that depends on your plan, and recordings are kept for three months. Enterprise plans for very high volumes are available on request.
+
+> #### Bottom line
+>
+> Matomo is the best option on this list if you primarily want website analytics and want session recording as a secondary add-on. The session recording feature is not included in the free open source release, which limits its appeal compared to tools where replay is a core feature.
+
+## Other open source tools worth knowing
+ 
+These didn't make the list, either because replay is a newer or smaller part of what they do, or because they need more assembly:
+ 
+- **rrweb** – The MIT-licensed recording library that PostHog and many other replay tools are built on. It records and replays sessions, but you build the storage, search, and interface yourself. Its maintainers now sell rrweb Cloud, a hosted version with $50 of free usage a month.
+- **ClickStack** – ClickHouse's MIT-licensed observability stack, formerly HyperDX, with session replay alongside logs, metrics, and traces. You can self-host it from a single Docker image.
+- **OpenObserve** – An AGPLv3 observability platform with real user monitoring and session replay for web and React Native. It's free to self-host, and its cloud has a 14-day trial but no free plan.
+- **Umami** – MIT-licensed web analytics that added session replays in version 3.1. Replays are free when you self-host, but on Umami Cloud they need the Business plan.
+- **Rybbit, OpenPanel, and Swetrix** – Three AGPLv3 web analytics tools that include session replay when you self-host. None has a free cloud plan.
+- **Dataflare** – A new MIT-licensed analytics tool with session replay that deploys into your own Cloudflare account. See our [PostHog vs Dataflare comparison](/compare/posthog-vs-dataflare).
+
+<CalloutBox icon="IconInfo" title="A note on UXlens" type="fyi">
+
+UXlens was on earlier versions of this list. It's a session recording tool with segment filtering and input masking by default, sold as a cloud subscription from $6 a month or a one-time self-hosted license from $200.
+ 
+Its site is still up, but new cloud sign-ups are disabled and its public changelog hasn't been updated since January 2019. It's also proprietary rather than open source, so it's no longer one we'd recommend starting with.
+ 
+</CalloutBox>
+
+## Which open source session replay tool should you choose?
+ 
+- Want session replay connected to the rest of your product data, from analytics to flags to errors, scanned by AI with [Replay Vision](/replay-vision), and searchable by your agents through the MCP? Go with **PostHog**.
+- Need a powerful self-hosted option with advanced DevTools, co-browsing, and strict data residency requirements? Choose **OpenReplay**.
+- Already using Sentry for error monitoring and want replay without adding another vendor? Stick with **Sentry**.
+- Want basic self-hosted recording and heatmaps with no monthly fees? **UXWizz** is your best bet.
+- Need open source web analytics with session recording available as an add-on? Try **Matomo**.
+ 
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the best open source session replay tool if:
+
+- You want session replay tightly connected to product analytics, feature flags, and error tracking.
+- You need mobile replay (iOS, Android, React Native, Flutter) on all plans including free.
+- You want transparent, usage-based pricing with a generous free tier and no sales calls.
+- You want open source code you can audit and contribute to.
+- You want your coding agent to find and read recordings through [the MCP](/mcp).
+
+It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or check out [our docs](/docs) to do it yourself.
+
+<WizardCTA
+    title="Start recording sessions with one command"
+    subtitle="The wizard installs PostHog in your app, so you're ready to capture your first replays."
+    learnMoreTo="/docs/session-replay/start-here"
+/>
+
+## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+It means your replays sit next to everything else you know about the user. [Session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [logs](/logs) all write to the same place and share one model of users and sessions. From any recording, you can see the events the user fired, the flags they were on, and the errors they hit.
+
+The [data warehouse](/warehouse) and [CDP](/data-pipelines) extend it to the business data that lives elsewhere, like Stripe, HubSpot, and Postgres, and an agent working from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp) can work across all of it without stitching tools together.
+
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+<summary>What is open source session replay?</summary>
+
+Open source session replay tools record how users interact with your website or app – clicks, scrolls, mouse movements, and form interactions – and let you replay those sessions to understand user behavior. 
+
+Unlike proprietary tools like Hotjar or FullStory, open source tools give you access to the source code, the ability to self-host, and full control over your data. This matters for teams with strict privacy requirements, data residency needs, or who simply want to avoid vendor lock-in.
+ 
+</details>
+ 
+<details>
+<summary>What's the difference between open source and self-hosted session replay?</summary>
+
+**Open source** means the source code is publicly available and you can audit, modify, or contribute to it. 
+
+**Self-hosted** means you run the tool on your own infrastructure rather than using a vendor's cloud. 
+
+Most open source session replay tools can be self-hosted, but not all self-hosted tools are open source. For example, Sentry uses a Business Source License (source-available, not fully open source) but can still be self-hosted for free.
+ 
+</details>
+ 
+<details>
+<summary>Which open source session replay tool has the best free tier?</summary>
+
+**PostHog** has the most [generous free cloud tier](/pricing) on this list: 5,000 web and 2,500 mobile session replays, and 1 million analytics events per month. For comparison, OpenReplay's free cloud tier covers 1,000 sessions a month with 7-day retention, and Sentry's covers 50 replays. 
+ 
+**OpenReplay** and **Sentry** also offer free self-hosted versions with no usage limits if you're willing to manage your own infrastructure. 
+ 
+</details>
+ 
+<details>
+<summary>Which tools support mobile session replay?</summary>
+
+**PostHog** is the strongest option for mobile, supporting iOS, Android, React Native, and Flutter with 2,500 free mobile recordings per month included on all plans. **OpenReplay** has SDKs for iOS, Android, React Native, and Flutter, all labelled beta in its docs. **Sentry**'s mobile replay is generally available for iOS, Android, React Native, and Flutter. **UXWizz** and **Matomo** only record websites.
+ 
+</details>
+
+<details>
+<summary>Which open source session replay tools have an MCP server?</summary>
+
+PostHog, OpenReplay, Sentry, and Matomo all document one, so a coding agent like Claude Code or Cursor can work with your data:
+ 
+- **PostHog** – An agent can search recordings, read a session's details, and manage collections through the [MCP server](/docs/session-replay/surfaces/mcp).
+- **OpenReplay** – An MCP app, added in 2026, that works with cloud and self-hosted instances.
+- **Sentry** – An MCP server that can pull replay details into your AI tools.
+- **Matomo** – An MCP server for Matomo Cloud and On-Premise, released in 2026.
+
+</details>
+
+<details>
+<summary>Is Highlight.io still available?</summary>
+
+Not as a hosted product. Highlight.io was acquired by [LaunchDarkly](/compare/posthog-vs-launchdarkly) in April 2025, and its hosted service shut down on February 28, 2026, with customers moved to LaunchDarkly's observability product. The code is still on GitHub under an Apache 2.0 license, but it only gets maintenance updates, so we don't recommend it for new deployments.
+ 
+</details>
+
+<details>
+<summary>What happened to Hotjar?</summary>
+
+Contentsquare acquired [Hotjar](/compare/posthog-vs-hotjar) in 2021 and has since folded it into its own platform. You can no longer create a new Hotjar account: new users sign up for Contentsquare, which has a free plan, and existing Hotjar accounts are moved over and become read-only. 
+
+The core Hotjar tools (session replay, heatmaps, surveys) still exist within Contentsquare's offering. See our guide to [Hotjar alternatives](/compare/best-hotjar-alternatives) for more.
+
+</details>
+ 
+<details>
+<summary>What are the best session replay tools overall (not just open source)?</summary> 
+
+The top session replay tools in 2026 include:
+
+- **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
+- **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option, with no traffic limits or paid version
+- **[LogRocket](/compare/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
+- **[FullStory](/compare/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
+- **[Smartlook](/compare/smartlook-alternatives)** – Strong for mobile-first apps with crash reports, but it no longer sells paid plans and closes on September 30, 2027
+See our full guide to the [best session replay tools](/compare/best-session-replay-tools) for more options.
+ 
+</details>
+
+<NewsletterForm />
+ 
