@@ -170,7 +170,7 @@ We now need to register our custom application class. Go to `AndroidManifest.xml
 </manifest>
 ```
 
-Finally, we [capture a custom event](/docs/libraries/android#capturing-events) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
+Finally, we [capture a custom event](/docs/libraries/android/reference#capture) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
 
 Update the `SecondScreen` function in `MainActivity.kt` to the following:
 

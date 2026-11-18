@@ -41,11 +41,13 @@ const server = {
     groupAnalytics: true,
     errorTracking: true,
 }
+const client = { ...server, autoCapture: true, sessionRecording: true, logs: true }
 const REFERENCE_SDKS: LibraryNode[] = [
     referenceSdk('node', 'Node.js', { ...server, tracing: true }),
     referenceSdk('python', 'Python', { ...server, tracing: true }),
     referenceSdk('go', 'Go', server),
     referenceSdk('rust', 'Rust', server),
+    referenceSdk('android', 'Android', client),
 ]
 
 export const LibraryComparison = () => {
