@@ -69,8 +69,8 @@ Here's how the most popular open-source A/B testing tools compare:
 
 ## 1. PostHog
 
-- **Who it's for:** product engineers and product teams who want experiments, feature flags, and analytics in one place.
-- **Who it isn't for:** marketers who want a visual editor first (we have [no-code web experiments](/docs/experiments/no-code-web-experiments) but they are limited), or teams that need multi-armed bandits.
+- **Who it's for:** Product engineers and product teams who want experiments, feature flags, and analytics in one place.
+- **Who it isn't for:** Marketers who want a visual editor first (we have [no-code web experiments](/docs/experiments/no-code-web-experiments) but they are limited), or teams that need multi-armed bandits.
 - **License:** MIT (enterprise features are licensed separately)
 
 <ProductScreenshot
@@ -116,8 +116,8 @@ PostHog is open source under the MIT license, and experiments are part of the [s
 
 ## 2. GrowthBook
 
-- **Who it's for:** data and engineering teams that already have a data warehouse and want experiments analyzed on top of it.
-- **Who it isn't for:** teams that want CUPED, sequential testing, or bandits without paying (they're on Pro and Enterprise), or more than one project on the free plans.
+- **Who it's for:** Data and engineering teams that already have a data warehouse and want experiments analyzed on top of it.
+- **Who it isn't for:** Teams that want CUPED, sequential testing, or bandits without paying (they're on Pro and Enterprise), or more than one project on the free plans.
 - **License:** MIT (enterprise features are licensed separately)
 
 ![GrowthBook - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
@@ -147,15 +147,15 @@ The Pro cloud plan costs $40 per seat per month for up to 30 users and adds adva
 
 ## 3. Unleash
 
-- **Who it's for:** engineering teams that mainly need feature flags and controlled rollouts, want to self-host, and already have an analytics tool for reading experiment results.
-- **Who it isn't for:** teams that want experiment results and statistics built in, a free hosted plan, or more than one project and two environments without paying.
+- **Who it's for:** Engineering teams that mainly need feature flags and controlled rollouts, want to self-host, and already have an analytics tool for reading experiment results.
+- **Who it isn't for:** Teams that want experiment results and statistics built in, a free hosted plan, or more than one project and two environments without paying.
 - **License:** AGPLv3 since June 2026 (Apache 2.0 before)
 
 ![Unleash - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/img2_Unleash.png)
 
 **Unleash** is a feature management platform that provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting. It appeals to privacy-conscious organizations because flags can be evaluated inside your own infrastructure, so you don't have to share user data with third parties.
 
-You can use Unleash to define the rules of your experiments, but the platform doesn't provide all the tools you need to manage A/B tests end-to-end. Instead, you'll need to connect your experiment with an analytics platform like [PostHog](/product-analytics), [Google Analytics](/blog/posthog-vs-ga4) or [Mixpanel](/blog/posthog-vs-mixpanel) in order to visualize results.
+You can use Unleash to define the rules of your experiments, but the platform doesn't provide all the tools you need to manage A/B tests end-to-end. Instead, you'll need to connect your experiment with an analytics platform like [PostHog](/product-analytics), [Google Analytics](/blog/posthog-vs-ga4), or [Mixpanel](/blog/posthog-vs-mixpanel) to visualize results.
 
 Unleash moved its server from Apache 2.0 to AGPLv3 with version 8 in June 2026. Its SDKs keep their permissive licenses.
 
@@ -176,11 +176,10 @@ Unleash's open source edition is free to self-host, with one project and two env
 >
 > Unleash is the best open-source option for teams that primarily need feature flag management and want to add basic A/B testing on top.
 
-
 ## 4. Flagsmith
 
-- **Who it's for:** engineering teams that want feature flags and remote config they can self-host, with experimentation in the same tool.
-- **Who it isn't for:** teams that need a mature experimentation suite today (its native experiments are in beta and Bayesian only), or more than one team member on the free cloud plan.
+- **Who it's for:** Engineering teams that want feature flags and remote config they can self-host, with experimentation in the same tool.
+- **Who it isn't for:** Teams that need a mature experimentation suite today (its native experiments are in beta and Bayesian only), or more than one team member on the free cloud plan.
 - **License:** BSD 3-Clause (enterprise features are licensed separately)
 
 ![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_17_T17_32_53_304_Z_e498e0017f.png)
@@ -203,7 +202,7 @@ It now has native experimentation, in beta: multivariate flags serve the variant
  
 Flagsmith is open source under a BSD 3-clause license and free to self-host. A supported Enterprise edition for on-premises or private cloud hosting is priced on request. 
 
-Their cloud free plan includes up to 50,000 requests per month for 1 team member with unlimited flags, environments, and segments. The Start-Up cloud plan is $45 per month ($40 if billed yearly) for up to 1 million requests and 3 team members, and Scale-Up is $300 per month ($250 if billed yearly) for 5 million or more.
+Their cloud free plan includes up to 50,000 requests per month for 1 project with 1 team member with unlimited flags, environments, and segments. The Start-Up cloud plan is $45 per month ($40 if billed yearly) for up to 1 million requests and 3 team members, and Scale-Up is $300 per month ($250 if billed yearly) for 5 million or more.
 
 > #### Bottom line
 >
@@ -213,9 +212,9 @@ Their cloud free plan includes up to 50,000 requests per month for 1 team member
  
 These didn't make the list, either because they're newer and less widely used or because they don't analyze results:
  
-- **Bucketeer** – An Apache 2.0 feature flag and experimentation platform from CyberAgent. It has built-in Bayesian analysis with a sample ratio mismatch check, and you self-host it with Docker Compose or Kubernetes. No free hosted plan is documented.
-- **FeatBit** – An MIT-licensed, open core feature flag platform with Bayesian A/B/n analysis and guardrail metrics. It's free to self-host with no seat limits, and its cloud has a free plan for up to 1,000 monthly active users.
-- **GO Feature Flag** – A fully MIT-licensed flag tool built around OpenFeature. It can split traffic for an experiment and export the data, but it doesn't analyze results.
+- **Bucketeer**: An Apache 2.0 feature flag and experimentation platform from CyberAgent. It has built-in Bayesian analysis with a sample ratio mismatch check, and you self-host it with Docker Compose or Kubernetes. No free hosted plan is documented.
+- **FeatBit**: An MIT-licensed, open core feature flag platform with Bayesian A/B/n analysis and guardrail metrics. It's free to self-host with no seat limits, and its cloud has a free plan for up to 1,000 monthly active users.
+- **GO Feature Flag**: A fully MIT-licensed flag tool built around OpenFeature. It can split traffic for an experiment and export the data, but it doesn't analyze results.
 
 <CalloutBox icon="IconInfo" title="A note on Mojito" type="fyi">
 Mojito was on earlier versions of this list. It's an open source (BSD 3-clause) split testing stack from Mint Metrics that lets you build, launch, and analyze experiments through Git and CI. Its JavaScript library still gets a few maintenance commits a year, but the storage and reporting components haven't been updated since 2021 and 2020. It can still suit a team that wants a tiny, fully source-controlled setup, but it's no longer one we'd recommend starting with.
@@ -288,10 +287,10 @@ It depends on what you need.
 
 All four on this list do, so a coding agent like Claude Code or Cursor can work with your experiments:
  
-- **PostHog** – An agent can create an experiment, launch it, read its results, and end it through the [MCP server](/docs/experiments/surfaces/mcp).
-- **GrowthBook** – An MCP server on all plans, hosted on Cloud or run locally when you self-host.
-- **Flagsmith** – An MCP server that gives agents access to its management API, hosted or self-hosted.
-- **Unleash** – An MCP server that can set up an experiment but doesn't analyze its results.
+- **PostHog**: An agent can create an experiment, launch it, read its results, and end it through the [MCP server](/docs/experiments/surfaces/mcp).
+- **GrowthBook**: An MCP server on all plans, hosted on Cloud or run locally when you self-host.
+- **Flagsmith**: An MCP server that gives agents access to its management API, hosted or self-hosted.
+- **Unleash**: An MCP server that can set up an experiment but doesn't analyze its results.
 
 </details>
 
@@ -323,7 +322,12 @@ You can also use a [combination of an AI agent and MCP to help you do this](/blo
 <details>
   <summary>Do I need a separate analytics tool with open-source A/B testing?</summary>
 
-It depends on the tool. **PostHog** includes full product analytics alongside experimentation, so you don't need anything else. **GrowthBook** is warehouse-native: it analyzes experiments on your existing data warehouse, or on its managed warehouse if you use GrowthBook Cloud. If you self-host, you need your own warehouse and event pipeline. **Unleash** is primarily a feature flag tool – you'll need a separate analytics platform (like PostHog, Google Analytics, or Mixpanel) to analyze your experiment results. **Flagsmith** can now analyze experiments itself, in beta, using its managed warehouse or your own, or you can keep sending data to a separate analytics platform.
+It depends on the tool. 
+
+- **PostHog** includes full product analytics alongside experimentation, so you don't need anything else. 
+- **GrowthBook** is warehouse-native: it analyzes experiments on your existing data warehouse, or on its managed warehouse if you use GrowthBook Cloud. If you self-host, you need your own warehouse and event pipeline. 
+- **Unleash** is primarily a feature flag tool – you'll need a separate analytics platform (like PostHog, Google Analytics, or Mixpanel) to analyze your experiment results. 
+- **Flagsmith** can now analyze experiments itself, in beta, using its managed warehouse or your own, or you can keep sending data to a separate analytics platform.
 
 </details>
 
@@ -333,7 +337,6 @@ It depends on the tool. **PostHog** includes full product analytics alongside ex
 These are two statistical approaches for analyzing experiment results. 
 
 - **Frequentist** testing uses p-values and confidence intervals – you define a sample size upfront, run the test, and check if results are statistically significant at the end. 
-
 - **Bayesian** testing calculates the probability that one variant is better than another and updates continuously as data comes in, making it easier to interpret mid-experiment.
 
 **PostHog** and **GrowthBook** support both approaches. **Flagsmith**'s native experiments are Bayesian only, and **Unleash** doesn't include statistical analysis at all – you'll need to calculate significance yourself or use a separate tool.
