@@ -191,6 +191,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/flutter:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter/reference:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
             "destination": "/docs/libraries/node/reference:ext?",
             "statusCode": 301
@@ -1889,7 +1894,7 @@
         },
         {
             "source": "/docs/integrations/flutter-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter:ext?"
+            "destination": "/docs/libraries/flutter/reference:ext?"
         },
         {
             "source": "/docs/integrations/gatsby-integration:ext(\\.md)?",
@@ -3462,7 +3467,7 @@
         },
         {
             "source": "/docs/integrate/flutter:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter:ext?"
+            "destination": "/docs/libraries/flutter/reference:ext?"
         },
         {
             "source": "/docs/integrate/go:ext(\\.md)?",
