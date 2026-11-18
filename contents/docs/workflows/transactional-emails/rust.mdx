@@ -278,7 +278,7 @@ async fn sends_password_reset() {
     let send = server
         .mock_async(|when, then| {
             when.method(POST)
-                .path("/api/projects/@current/messaging/send/email/")
+                .path_suffix("/messaging/send/email/")
                 .header("idempotency-key", "password-reset-1");
             then.status(202)
                 .json_body(json!({ "message_id": "msg_1", "replayed": false }));
