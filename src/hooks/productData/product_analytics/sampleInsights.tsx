@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
  */
 
 const AXIS = 'text-[11px] text-secondary'
-const GROW = { duration: 0.6, ease: 'easeOut' }
+const GROW = { duration: 0.6, ease: 'easeOut' } as const
 
 const FunnelInsight = () => (
     <div className="flex h-48 items-end gap-3">
