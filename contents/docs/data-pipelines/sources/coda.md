@@ -32,11 +32,14 @@ Once the sync completes, you can start querying your Coda data in PostHog.
 
 Coda's data model is hierarchical: docs contain tables, and tables contain rows. PostHog injects parent linkage fields (`_doc_id`, `_table_id`) to form composite primary keys, since table and row IDs are only unique within their parent.
 
-| Table    | Description                                                                    | Primary keys                 |
-| -------- | ------------------------------------------------------------------------------ | ---------------------------- |
-| `docs`   | All documents in your workspace                                                | `id`                         |
-| `tables` | Tables within each document                                                    | `_doc_id`, `id`              |
-| `rows`   | Rows from every table of every document, with cell values keyed by column name | `_doc_id`, `_table_id`, `id` |
+| Table            | Description                                                                                | Primary keys                 |
+| ---------------- | ------------------------------------------------------------------------------------------ | ---------------------------- |
+| `docs`           | All documents in your workspace                                                            | `id`                         |
+| `tables`         | Tables within each document                                                                | `_doc_id`, `id`              |
+| `rows`           | Rows from every table of every document, with cell values keyed by column name             | `_doc_id`, `_table_id`, `id` |
+| `controls`       | Controls within each document, such as buttons, sliders, and select lists                  | `_doc_id`, `id`              |
+| `formulas`       | Named formulas within each document                                                        | `_doc_id`, `id`              |
+| `pack_analytics` | Usage analytics for each Pack the API token's owner can edit, with metrics for each period | `pack_id`                    |
 
 The `rows` table is a two-level fan-out endpoint — PostHog fetches all your docs, then all tables within each doc, then all rows within each table.
 
