@@ -148,11 +148,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['growth', 'error-tracking'],
         notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
+    'ci-and-merge-queue': {
+        feature: 'CI and merge queue',
+        owner: ['developer-experience'],
+        notes: (
+            <>
+                Shared developer tooling. See{' '}
+                <Link to="/handbook/engineering/developer-experience">Developer experience</Link>.
+            </>
+        ),
+        label: 'team-devex',
+    },
     'client-libraries': {
         feature: 'Client libraries',
         owner: ['client-libraries'],
         notes: <em>See SDKs</em>,
         label: false,
+    },
+    'product-foundation': {
+        feature: 'Product foundation and shared mechanisms',
+        owner: ['developer-experience'],
+        notes: 'The standard product shape, isolation and facades, base classes, webhook ingress, and egress.',
+        label: 'team-devex',
     },
     cohorts: {
         feature: 'Cohorts',
@@ -248,6 +265,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Endpoints',
         owner: ['data-modeling'],
     },
+    'engineering-analytics': {
+        feature: 'Engineering analytics',
+        owner: ['developer-experience'],
+        notes: 'CI and pull request data per team: merge times, CI health, and flaky tests.',
+        label: false,
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -311,6 +334,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Live events',
         owner: ['clickhouse'],
         label: false,
+    },
+    'local-development': {
+        feature: 'Local development (hogli, devboxes)',
+        owner: ['developer-experience'],
+        label: 'local-dev',
     },
     loops: {
         feature: 'Loops',
@@ -433,6 +461,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'PostHog Desktop',
         owner: ['surfaces'],
         label: 'feature/posthog-code',
+    },
+    'posthog-commands': {
+        feature: 'PostHog commands',
+        owner: ['developer-experience'],
+        notes: (
+            <>
+                <code>@posthog</code> commands from PR comments and Slack mentions.
+            </>
+        ),
+        label: false,
+    },
+    'posthog-review': {
+        feature: 'PostHog Review',
+        owner: ['developer-experience'],
+        notes: 'AI code review bot on PRs, also known as ReviewHog.',
+        label: false,
     },
     'project-homepage': {
         feature: 'Project homepage',
@@ -611,6 +655,20 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-features'],
         label: false,
     },
+    stamphog: {
+        feature: 'Stamphog',
+        owner: ['developer-experience'],
+        notes: (
+            <>
+                AI approval agent for PRs. See{' '}
+                <Link to="/handbook/engineering/how-we-review#enabling-stamphog-on-a-repo">
+                    Enabling Stamphog on a repo
+                </Link>
+                .
+            </>
+        ),
+        label: false,
+    },
     'statistical-analysis': {
         feature: 'Statistical analysis',
         owner: ['product-analytics'],
@@ -663,6 +721,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     variables: {
         feature: 'Variables',
         owner: ['product-analytics'],
+    },
+    'visual-review': {
+        feature: 'Visual review',
+        owner: ['developer-experience'],
+        notes: 'Screenshot regression checks on PRs, with an approval flow.',
+        label: false,
     },
     'vscode-extension': {
         feature: 'VS Code extension',

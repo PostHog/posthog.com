@@ -109,7 +109,7 @@ Any client that speaks MCP works. Setup steps for each:
 - Zed: https://posthog.com/docs/model-context-protocol/zed.md
 - Other clients: https://posthog.com/docs/model-context-protocol.md
 
-Plugin: the PostHog AI plugin adds the MCP server and PostHog skills to Claude Code, Codex, Cursor, and Gemini CLI: https://github.com/PostHog/ai-plugin
+Skills: PostHog skills ship with the MCP server, so a connected agent loads the one it needs when a task calls for it. There's nothing extra to install: https://posthog.com/docs/skills.md
 
 Platforms that connect to PostHog through the MCP server:
 

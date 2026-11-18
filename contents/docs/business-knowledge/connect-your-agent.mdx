@@ -1,0 +1,120 @@
+---
+title: Connect your own agent to Business Knowledge
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+
+<PrivateBeta />
+
+An agent you build can answer from the same sources PostHog AI and Support use. A support agent, a help desk, a coding agent, or an internal tool connects to Business Knowledge through the PostHog [MCP](/docs/model-context-protocol) server and searches your sources when it needs a fact.
+
+The agent signs in with a project secret API key and not as a PostHog user. It can read the Business Knowledge the key covers. It can't change anything, and it can't read other PostHog data.
+
+## How to connect an agent
+
+You need to be a project admin to create a key.
+
+<Steps>
+
+<Step title="Choose what the agent can read" badge="required">
+
+A key covers either one library or all the Business Knowledge in the project. A [library](/docs/business-knowledge/sources#group-sources-into-libraries) is a group of sources and repositories.
+
+Give each agent the smallest set it needs. For example, put your public docs in one library for a customer-facing agent, and keep internal policies in another.
+
+</Step>
+
+<Step title="Create a key" badge="required">
+
+Open [**Business Knowledge** settings](https://app.posthog.com/business-knowledge/settings) and find **Connect your agent**.
+
+1. Choose **All business knowledge** or one library
+2. Enter a name for the key, such as the name of the agent
+3. Click **Create key**
+
+PostHog shows the new key once, inside a ready-to-copy configuration. Copy it before you leave the page.
+
+</Step>
+
+<Step title="Add the MCP server to your agent" badge="required">
+
+Add this server to your agent's MCP configuration. Most agents and agent frameworks accept this format:
+
+```json
+{
+    "mcpServers": {
+        "business-knowledge": {
+            "url": "https://mcp.posthog.com/mcp/business-knowledge",
+            "headers": {
+                "Authorization": "Bearer <your project secret API key>"
+            }
+        }
+    }
+}
+```
+
+The URL is the same for every project, in both the US and EU regions. PostHog finds your project and region from the key.
+
+</Step>
+
+<Step title="Ask a question" checkpoint>
+
+Ask your agent something only your sources can answer, such as your refund policy. The agent searches Business Knowledge and answers from the result.
+
+If the agent finds nothing, check that the source is [ready](/docs/business-knowledge/ai-data-processing) and that it's in the library the key covers.
+
+</Step>
+
+</Steps>
+
+<CalloutBox icon="IconLock" title="Keep the key on your server" type="caution">
+
+Anyone who has the key can read the Business Knowledge it covers. Don't put it in a website or a mobile app.
+
+</CalloutBox>
+
+## What the agent can do
+
+The connection gives the agent six read-only tools.
+
+| Tool | What it does |
+| --- | --- |
+| `business-knowledge-documents-search` | Searches your sources and returns the matching passages |
+| `business-knowledge-document-window-retrieve` | Reads the text around a search result |
+| `business-knowledge-libraries-list` | Lists the libraries the key covers |
+| `business-knowledge-libraries-retrieve` | Gets one library |
+| `business-knowledge-repositories-search` | Finds files by name and README in your [selected GitHub repositories](/docs/business-knowledge/github) |
+| `business-knowledge-repositories-file-retrieve` | Reads a file from a selected repository |
+
+The agent can't add, edit, or delete sources, and it has no access to events, persons, insights, or any other PostHog data.
+
+## What a key covers
+
+| Choice | What the agent reads |
+| --- | --- |
+| **All business knowledge** | Every source and selected repository in the project, in a library or not |
+| One library | The sources and repositories in that library |
+
+A [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) that you create in project settings with the `business_knowledge:read` scope also reads all your Business Knowledge.
+
+The table under **Connect your agent** lists each key, what it reads, and when an agent last used it.
+
+If you delete a library, a key limited to that library reads nothing. Create a new key for another library.
+
+## Roll or delete a key
+
+Roll or delete a key under **Project secret API keys** in [project settings](https://app.posthog.com/settings/environment-secret-api-keys). An agent that uses a deleted key loses access immediately.
+
+## How this differs from the main PostHog MCP server
+
+| | Business Knowledge endpoint | [PostHog MCP server](/docs/model-context-protocol) |
+| --- | --- | --- |
+| URL | `https://mcp.posthog.com/mcp/business-knowledge` | `https://mcp.posthog.com/mcp` |
+| Signs in with | A project secret API key | A PostHog user, through OAuth or a personal API key |
+| Built for | An agent you build and run for your customers or team | Your own coding agent or AI client |
+| Access | Read-only Business Knowledge tools | The PostHog tools your user and scopes allow |
+
+Each endpoint accepts only its own kind of credential. A project secret API key doesn't work on the main MCP server, and a personal API key doesn't work on the Business Knowledge endpoint.
