@@ -33,11 +33,13 @@ Customers can also apply their prepaid credits toward an FDE engagement on a dis
 
 ### How we invoice customers
 
-For billable engagements, we invoice half the fee when the order form is signed, with payment due Net 30 from the term start date. As we complete each milestone, we draw the milestone's billable amount down from that upfront payment. Once the upfront payment is used up, we invoice each further milestone at the time of completion, including any part of a milestone the upfront payment didn't cover.
+How we bill depends on the total fee and how the customer pays:
 
-Engagements with a total fee under 10,000 USD are the exception: we invoice the entire fee upfront, on the same Net 30 terms.
+- **Billable, 10,000 USD or more:** We invoice half the fee when the order form is signed, with payment due Net 30 from the term start date. As we complete each milestone, we draw its billable amount down from that upfront payment. Once the upfront payment is used up, we invoice the rest as we complete each milestone.
 
-For engagements paid with prepaid credits, we deduct the entire fee from the customer's credits upfront.
+- **Billable, under 10,000 USD:** We invoice the entire fee when the order form is signed, with payment due Net 30 from the term start date.
+
+- **Paid with prepaid credits:** We deduct the entire fee from the customer's credits before kickoff.
 
 ## Principles
 
