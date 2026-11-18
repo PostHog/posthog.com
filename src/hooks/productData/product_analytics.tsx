@@ -82,9 +82,8 @@ export const productAnalytics = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Product analytics (and so much more)',
-        description:
-            "Ingest events from your product, link them to a person or group profile, analyze them with PostHog AI or pre-built tools to visualize funnels, trends, stickiness, and more. SQL available if you're a masochist.",
+        title: 'Product analytics (and more)',
+        description: 'Analyze data from your product or anywhere in your stack using AI, pre-built tools, or SQL.',
         footnote: 'Your first 1M events are free, every month. 97% of users never pay for PostHog.',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw

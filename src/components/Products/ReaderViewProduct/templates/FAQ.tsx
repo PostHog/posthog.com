@@ -15,12 +15,10 @@ interface FaqItem {
 /**
  * Question and answer list for readers and agents. Reads `productData.faq`;
  * `ProductReaderView` sends the same items to the FAQPage structured data.
- * The product's `questions` (tutorial links) render underneath.
  */
 const FAQ = ({ id, productData }: SectionComponentProps) => {
     const faq = productData?.faq
     if (!faq?.items?.length) return null
-    const questions: { question: string; url: string }[] = productData?.questions ?? []
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
@@ -51,21 +49,6 @@ const FAQ = ({ id, productData }: SectionComponentProps) => {
                     }))}
                 />
             </div>
-
-            {questions.length > 0 && (
-                <div className="mt-12">
-                    <h2 className={SECTION_H2}>{faq.moreQuestionsTitle}</h2>
-                    <ul className="grid grid-cols-1 @xl/reader-content:grid-cols-2 gap-x-6 gap-y-2 list-none m-0 p-0">
-                        {questions.map(({ question, url }) => (
-                            <li key={question} className="m-0 text-[15px]">
-                                <Link to={url} state={{ newWindow: true }} className={LINK_CLASSES}>
-                                    {question}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
         </section>
     )
 }

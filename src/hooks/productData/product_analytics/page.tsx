@@ -1,21 +1,11 @@
 import React from 'react'
-import {
-    IconBrowser,
-    IconDatabase,
-    IconHogQL,
-    IconPhone,
-    IconPlug,
-    IconServer,
-    IconShieldLock,
-    IconTerminal,
-    IconUpload,
-} from '@posthog/icons'
+import { IconBrowser, IconPhone, IconTerminal } from '@posthog/icons'
 import { HedgehogChart, HedgehogHahaBizzniss } from '@posthog/brand/hoggies'
 import Link from 'components/Link'
 import SlotMachineText from 'components/SlotMachineText'
 import { IconClaudeCode, IconMCP, IconOpenAI, IconSlack } from 'components/OSIcons'
 import posthogIcon from 'images/posthog-icon-white.svg'
-import { PAGE_INSIGHTS } from './pageInsights'
+import { SAMPLE_INSIGHTS } from './sampleInsights'
 
 /**
  * Content for the product analytics page prototype. Each key is read by the
@@ -50,138 +40,106 @@ const docs = (path: string) => `/docs/product-analytics/${path}`
 /** One color per insight tool. */
 const TOOL_TAGS: Record<string, string> = {
     Funnels: 'bg-orange/15 text-orange',
+    Stickiness: 'bg-seagreen/15 text-seagreen',
     Trends: 'bg-blue/15 text-blue',
     Retention: 'bg-green/15 text-green',
     Correlation: 'bg-purple/15 text-purple',
-    Paths: 'bg-seagreen/15 text-seagreen',
     SQL: 'bg-red/15 text-red',
 }
 
 export const eventJourney = {
     title: 'Analyze more than just events',
-    lede: (
+    lede: "Raw events only get you so far. That's why PostHog has tools to do more with your data.",
+    points: [
         <>
-            Raw events only get you so far. PostHog adds{' '}
+            Enrich events with{' '}
             <Link to="/docs/data/events" state={{ newWindow: true }} className={LINK_CLASSES}>
                 properties
             </Link>
-            , like GeoIP, and creates{' '}
-            <Link to="/docs/data/persons" state={{ newWindow: true }} className={LINK_CLASSES}>
-                person
-            </Link>{' '}
-            and{' '}
-            <Link to="/docs/product-analytics/group-analytics" state={{ newWindow: true }} className={LINK_CLASSES}>
-                group
-            </Link>{' '}
-            profiles, so you can break down any insight by who, where, and which company. Group people into{' '}
-            <Link to="/docs/data/cohorts" state={{ newWindow: true }} className={LINK_CLASSES}>
-                cohorts
-            </Link>{' '}
-            and events into{' '}
+            , like GeoIP or device
+        </>,
+        <>
+            Combine events into{' '}
             <Link to="/docs/data/actions" state={{ newWindow: true }} className={LINK_CLASSES}>
                 actions
             </Link>{' '}
-            to match how your team talks about your product.
-        </>
-    ),
-    event: 'purchase_completed',
-    stages: [
-        {
-            key: 'ingestion',
-            label: 'Ingestion',
-            detail: 'Capture with any SDK',
-            Icon: IconUpload,
-            tile: 'bg-orange/15 text-orange border-orange',
-        },
-        {
-            key: 'validation',
-            label: 'Validation',
-            detail: 'Enrich with properties and more',
-            Icon: IconShieldLock,
-            tile: 'bg-purple/15 text-purple border-purple',
-        },
-        {
-            key: 'storage',
-            label: 'Enrichment',
-            detail: 'Connect to replays and profiles',
-            Icon: IconDatabase,
-            tile: 'bg-seagreen/15 text-seagreen border-seagreen',
-        },
-        {
-            key: 'querying',
-            label: 'Querying',
-            detail: 'Build insights with AI',
-            Icon: IconHogQL,
-            tile: 'bg-blue text-white border-blue',
-            youAreHere: true,
-        },
-        {
-            key: 'everywhere',
-            label: 'Usage',
-            detail: 'Use data for flags and more',
-            Icon: IconPlug,
-            tile: 'bg-green/15 text-green border-green',
-        },
-        {
-            key: 'export',
-            label: 'Export',
-            detail: 'Send your data anywhere',
-            Icon: IconServer,
-            tile: 'bg-red/15 text-red border-red',
-        },
+            for complex behaviors
+        </>,
+        <>
+            Simplify profiles with{' '}
+            <Link to="/docs/data/anonymous-vs-identified-events" state={{ newWindow: true }} className={LINK_CLASSES}>
+                anonymization
+            </Link>
+            , or enrich them with{' '}
+            <Link to="/docs/product-analytics/group-analytics" state={{ newWindow: true }} className={LINK_CLASSES}>
+                groups
+            </Link>
+        </>,
+        <>
+            Organize data into{' '}
+            <Link to="/docs/data/cohorts" state={{ newWindow: true }} className={LINK_CLASSES}>
+                cohorts
+            </Link>
+            ,{' '}
+            <Link to="/docs/notebooks" state={{ newWindow: true }} className={LINK_CLASSES}>
+                notebooks
+            </Link>
+            , or{' '}
+            <Link to="/docs/product-analytics/dashboards" state={{ newWindow: true }} className={LINK_CLASSES}>
+                dashboards
+            </Link>
+        </>,
     ],
-    youAreHereLabel: 'You are here',
+    placeholder: 'Probably some visualization here to show how people can get data in and analyze it with product data',
 }
 
 const question = (
     tool: string,
     to: string,
     fields: { question: string; summary: string; answer: string }
-): Record<string, unknown> => ({ tool, to, tag: TOOL_TAGS[tool], Insight: PAGE_INSIGHTS[tool], ...fields })
+): Record<string, unknown> => ({ tool, to, tag: TOOL_TAGS[tool], Insight: SAMPLE_INSIGHTS[tool], ...fields })
 
 export const queryExamples = {
     title: askTitle,
-    lede: (
-        <>
-            See how we use Product Analytics to answer questions about <em>this actual page</em>.
-        </>
-    ),
+    lede: "Find out what's changing in your product using data from any source.",
     docsLinkLabel: 'Read the docs',
-    insightLabel: 'Example data',
+    insightLabel: 'Sample data',
     questions: [
         question('Funnels', docs('funnels'), {
-            question: 'How far down this page do people get?',
+            question: 'Where do people fall out of the onboarding funnel?',
             summary:
                 'Funnels show where people get stuck in a flow, so you can fix it. Like it or not, more people will always start a funnel than finish it.',
-            answer: "64% make it to the diagram and 22% reach the FAQ. If you're still reading, you're in the top fifth. Congratulations, probably.",
+            answer: '59% never create a project, so they never see anything worth paying for. Fix that step before you touch anything else.',
+        }),
+        question('Stickiness', docs('stickiness'), {
+            question: 'What features are the stickiest?',
+            summary:
+                "Stickiness counts how many days people use something. It separates the features people tried once from the ones they can't stop using.",
+            answer: 'Dashboards, at 4.2 days a week. Exports get used once and forgotten, like a gym membership.',
         }),
         question('Trends', docs('trends/overview'), {
-            question: 'How many people read this page this week?',
+            question: 'Did signups go up after we launched the new pricing page?',
             summary:
                 "Trends show how any number changes over time. Break it down by any property, or write a formula when one line isn't enough.",
-            answer: "11,482 people, up 18% on last week. Tuesday's spike was our newsletter. Hi, newsletter readers.",
+            answer: 'Weekly signups are up 42% since the launch. Someone on the pricing team has earned a long lunch.',
         }),
         question('Retention', docs('retention'), {
-            question: 'Do people who sign up from this page come back?',
+            question: 'Do users who invite a teammate stick around longer?',
             summary:
                 "Retention shows who comes back, and who never does. You can buy signups with ads. You can't buy people coming back.",
-            answer: '61% are still active three weeks later. The other 39% are about to get a polite email.',
+            answer: '64% are still active after eight weeks, against 22% of people who use it alone. Make the invite button bigger.',
         }),
         question('Correlation', docs('correlation'), {
-            question: 'What do people who sign up from here do differently?',
+            question: 'What do customers who upgrade do differently?',
             summary:
                 "Correlation analysis shows which events and properties make people more or less likely to convert, including the ones you didn't think to check.",
-            answer: "People who click a question here are 2.8x more likely to sign up. Statistically, you're doing great.",
-        }),
-        question('Paths', docs('paths'), {
-            question: 'Where do people go after this page?',
-            summary: "Paths show the routes people take through your product. They're rarely the ones you designed.",
-            answer: "31% sign up, 24% read the docs, and 27% close the tab. We're working on the 27%.",
+            answer: 'They connect GitHub. People who do it in their first week are 3.1x more likely to upgrade.',
         }),
         question('SQL', '/docs/data-warehouse/sql', {
-            question: 'Which countries read this page the most?',
-            summary: "SQL is for the questions the other tools don't cover. Analytics in hard mode.",
-            answer: 'The US, then Germany, then the UK. Germans also reach the FAQ more often than anyone.',
+            question: 'Which plans bring in the most revenue?',
+            summary:
+                "SQL is for the questions the other tools don't cover, like joining product data with Stripe. Analytics in hard mode.",
+            answer: 'Pro brings in $48,210, more than Team and Starter together. Nobody is surprised, but now you can prove it.',
         }),
     ],
 }
@@ -225,7 +183,7 @@ export const midCTA = {
 }
 
 export const whyPostHog = {
-    title: 'Why you should analyze your product with PostHog',
+    title: 'Why you should choose PostHog',
     badge: 'Opinion piece',
     lede: (
         <>
@@ -447,5 +405,4 @@ export const faq = {
             link: { label: 'SDK docs', to: '/docs/libraries' },
         },
     ],
-    moreQuestionsTitle: 'More questions you can answer with Product Analytics',
 }

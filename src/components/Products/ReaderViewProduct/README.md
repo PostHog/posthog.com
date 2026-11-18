@@ -229,12 +229,12 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 | `getting-started`      | `name`                                  | Wizard install command + signup CTA.                           |
 | `calculator`           | (none yet)                              | Stub – pricing calculator placeholder for the Pricing surface. |
 | `plans`                | (none yet)                              | Stub – plans summary placeholder for the Pricing surface.      |
-| `event-journey` | `eventJourney` | A `title` and optional `lede` beside a vertical pipeline diagram of one event's trip through PostHog. The event stops and pulses at the stage marked "You are here", then fades out at the last stage. |
-| `query-examples` | `queryExamples` | Clickable example questions, each tagged with the tool that answers it. A click shows that tool's animated insight (`Insight`), the answer, and what the tool is for. |
+| `event-journey` | `eventJourney` | A `title`, an optional `lede`, and a list of `points`, beside a dashed `placeholder` box for a future visualization. |
+| `query-examples` | `queryExamples` | Clickable example questions, each tagged with the tool that answers it. A click shows that tool's animated sample insight (`Insight`), the answer, and what the tool is for. |
 | `mid-cta` | `midCTA`, `wizardCommand` | Sign-up block with the `CTAs` buttons and an "Available on" list of platforms, each with a one-line `description`. |
 | `why-posthog` | `whyPostHog`, `handle` | The opinions behind PostHog for this product, as cards with a colored border (`accent`) and a highlighted title (`highlight`), then customer quote cards linked to case studies (`customers`). An optional `badge` shows as a spinning starburst after the heading. |
 | `closing-cta`          | `closingCTA`, `wizardCommand`           | Closing sign-up block with `CTAs`, an optional `footer` line, and an optional `Hog`. |
-| `faq`                  | `faq`, `questions`                      | Accordion of `faq.items`, then the `questions` tutorial links. `ProductReaderView` also sends `faq.items` to the FAQPage structured data. |
+| `faq` | `faq` | Accordion of `faq.items`. `ProductReaderView` also sends `faq.items` to the FAQPage structured data. |
 
 The `overview` template also accepts `props: { hideScreenshot: true, hog }` to replace the screenshot with a hog. It reads an optional `overview.footnote`, shown under the buttons through the `CTAs` `footnote` prop.
 
