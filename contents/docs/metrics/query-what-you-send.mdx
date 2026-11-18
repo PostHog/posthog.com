@@ -10,11 +10,11 @@ This page shows how a metric you record with `posthog.metrics` in [posthog-js](/
 
 The SDKs pre-aggregate in memory and flush one OTLP data point per series every 10 seconds by default. Each type is sent like this:
 
-| Call | OTLP type | Temporality | What one data point holds |
-|------|-----------|-------------|---------------------------|
-| `metrics.count()` | Monotonic sum | Delta | The total added in that flush window |
-| `metrics.gauge()` | Gauge | – | The last value recorded in that window |
-| `metrics.histogram()` | Histogram | Delta | The count, sum, min, max, and per-bucket counts for that window |
+| Call                  | OTLP type     | Temporality | What one data point holds                                       |
+| --------------------- | ------------- | ----------- | --------------------------------------------------------------- |
+| `metrics.count()`     | Monotonic sum | Delta       | The total added in that flush window                            |
+| `metrics.gauge()`     | Gauge         | –           | The last value recorded in that window                          |
+| `metrics.histogram()` | Histogram     | Delta       | The count, sum, min, max, and per-bucket counts for that window |
 
 Delta temporality means each flush carries only what happened in that interval. It isn't a running total since process start. The [viewer](/docs/metrics/explore) and `increase` or `rate` aggregations account for this. If you query through a Prometheus-style tool, they don't, as the next sections explain.
 
@@ -35,10 +35,10 @@ Histograms use these bucket boundaries, in the unit you record (milliseconds for
 There's one more bucket above the last boundary, so values over 10000 are still counted. In posthog-node (5.63.0 or later) and posthog-js (1.447.0 or later), you can pass `bounds` when you record to use different boundaries:
 
 ```js
-posthog.metrics.histogram('job.duration', 42, {
-  unit: 'ms',
+posthog.metrics.histogram("job.duration", 42, {
+  unit: "ms",
   bounds: [10, 50, 100, 500, 1000],
-})
+});
 ```
 
 The first sample of a histogram (its name and unit) fixes the bounds until the client resets. A later sample with different bounds is recorded in the fixed buckets and logs a warning, and a sample with invalid bounds is dropped.
@@ -82,6 +82,20 @@ For the average duration, divide the summed `_sum` by the summed `_count`:
 ```promql
 sum(sum_over_time(dash_query_duration_ms_sum[5m]))
   / sum(sum_over_time(dash_query_duration_ms_count[5m]))
+```
+
+### Histograms: request rate from count
+
+To chart requests per second (throughput) rather than latency, use the `_count` series. The viewer's **Count rate (/s)** and **Count increase** aggregations do this automatically, but in PromQL:
+
+```promql
+sum(sum_over_time(dash_query_duration_ms_count[$__interval]))
+```
+
+This counts the total observations (requests) in each interval. Divide by the interval width for a per-second rate:
+
+```promql
+sum(sum_over_time(dash_query_duration_ms_count[$__interval])) / $__interval_seconds
 ```
 
 ### Gauges
