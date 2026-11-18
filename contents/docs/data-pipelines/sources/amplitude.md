@@ -9,7 +9,7 @@ availability:
 sourceId: Amplitude
 ---
 
-The Amplitude connector syncs your raw events, cohorts, and annotations into PostHog. It authenticates against Amplitude's Export API, Cohorts API, and Annotations API using your project's API key and secret key.
+The Amplitude connector syncs your raw events, cohorts, annotations, event and property definitions, and retention, user composition, and revenue LTV charts into PostHog. It authenticates against Amplitude's Export API, Cohorts API, Annotations API, Taxonomy API, and Dashboard REST API using your project's API key and secret key.
 
 ## Adding a data source
 
@@ -28,12 +28,17 @@ Once the syncs are complete, you can start using Amplitude data in PostHog.
 | `events` | Raw events from Amplitude's Export API (only the last 30 days are pulled on the initial sync) | Incremental |
 | `cohorts` | Behavioral cohorts from the Cohorts API | Full refresh |
 | `annotations` | Dashboard annotations from the Annotations API | Full refresh |
+| `retention` | Daily retention of new users who return with any event, from the Dashboard REST API (last 90 days) | Full refresh |
+| `composition` | Unique users per value of each built-in user property, such as platform, country, and version, from the Dashboard REST API (last 90 days) | Full refresh |
+| `revenue_ltv` | Daily lifetime value of new users for each revenue metric (ARPU, ARPPU, total revenue, and paying users), from the Dashboard REST API (last 90 days) | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
 The events stream uses Amplitude's Export API, which enforces a roughly 2-hour data latency — events uploaded to Amplitude within the last couple of hours may not yet be available to sync. The initial sync only pulls the last 30 days of events; subsequent incremental syncs fetch newer data using server upload time as the cursor.
+
+The `retention`, `composition`, and `revenue_ltv` tables cover the last 90 days. Their values keep changing until a cohort matures, so each sync replaces the whole table with the latest 90-day window. The `composition` table includes only Amplitude's built-in user properties, not custom properties.
 
 ## Configuration
 
