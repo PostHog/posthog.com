@@ -283,11 +283,11 @@ The SDK doesn't send a request for every `capture` call. This is what it does on
 
 | Behavior | Default | Option |
 |----------|---------|--------|
-| Batching | Events are queued and sent together every 3 seconds. Events captured before the page finishes loading wait until it has. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` sends each event on its own. Pass `send_instantly: true` to `capture` for a single event. |
+| Batching | Events are queued and sent together every 3 seconds, starting as soon as `posthog.init` returns. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` sends each event on its own. Pass `send_instantly: true` to `capture` for a single event. |
 | Page unload | The queue is sent with [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon), events before Session Replay data, so it doesn't delay navigation. | `disable_beacon` |
 | Compression | Payloads are compressed with `gzip` when your project's remote config allows it. Where the browser supports [`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream), compression runs asynchronously instead of on the main thread. | `disable_compression` |
 | Retries | Network failures and `5xx` responses are retried with exponential backoff and jitter, starting at about 3 seconds and capped at 30 minutes, up to 10 times (3 times when no response arrives). A `Retry-After` header is respected. `4xx` responses, including `429`, aren't retried. | – |
-| Startup | The SDK fetches your project's remote config and evaluates Feature Flags with `/flags`. Scripts such as `recorder.js` and `surveys.js` load only when that feature is on. None of these requests block page rendering. | [`advanced_disable_flags`](#disable-flags-endpoint), `advanced_disable_feature_flags_on_first_load`, `remote_config_refresh_interval_ms` |
+| Startup | The SDK fetches your project's remote config and evaluates Feature Flags with `/flags`. `recorder.js` loads only when Session Replay is on for the session. `surveys.js` loads once remote config arrives, unless you set `disable_surveys: true`. None of these requests block page rendering or delay sending events. | [`advanced_disable_flags`](#disable-flags-endpoint), `advanced_disable_feature_flags_on_first_load`, `remote_config_refresh_interval_ms` |
 
 To check what a page sends, filter your browser's network tab by your `api_host`.
 
