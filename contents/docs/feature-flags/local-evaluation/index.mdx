@@ -326,7 +326,15 @@ posthog.reload_feature_flags()
 ```
 
 ```go
+// Schedules a reload and returns immediately
 client.ReloadFeatureFlags()
+
+// Reloads and waits until the new definitions are in use
+if r, ok := client.(posthog.FlagReloader); ok {
+    if err := r.ReloadFeatureFlagsWithContext(ctx); err != nil {
+        // Handle the error, for example posthog.ErrFlagDefinitionsQuotaLimited
+    }
+}
 ```
 
 ```python
@@ -354,6 +362,8 @@ posthog.reloadFeatureFlags()
 ```
 
 </MultiLanguage>
+
+In the Go SDK, `ReloadFeatureFlags()` only schedules the fetch. To wait for the fresh definitions, call `ReloadFeatureFlagsWithContext(ctx)` through the `FlagReloader` interface. It returns when the new definitions are in use, or with the error that stopped them from loading. If the context ends first, it returns `ctx.Err()` and the fetch continues in the background. A quota-limited response returns `ErrFlagDefinitionsQuotaLimited`.
 
 ## Restriction on local evaluation
 
