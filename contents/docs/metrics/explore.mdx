@@ -25,6 +25,7 @@ The **Viewer** tab is where you explore a single metric without writing any quer
 
 - **Pick a metric** by name to chart it over time.
 - **Choose an aggregation** — sum, average, series count, min, max, p95, rate, or increase. The viewer recommends one based on the metric's type: `increase` for counters, `avg` for gauges, `p95` for histograms and summaries.
+- **Chart request rate from a histogram** with **Count rate (/s)** or **Count increase**. These count the values a histogram records, such as requests per second from a latency histogram, instead of reading the running sum of those values like rate and increase do. For an error rate, divide a count rate filtered to 5xx responses by a count rate of all requests.
 - **Group by** an attribute to break the metric into one line per value, for example request rate per route or queue depth per worker.
 - **Filter** with `key=value` chips to focus on one service, environment, or status, and adjust the date range.
 
