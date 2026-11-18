@@ -196,7 +196,7 @@ export const transactional: CarouselSlide[] = [
         icon: <IconCode className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'Send from the SDK you already use',
+        heading: 'Send from the PostHog SDK',
         description: (
             <>
                 <p>

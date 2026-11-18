@@ -8299,7 +8299,7 @@ export const docsMenu = {
             icon: 'IconMegaphone',
             color: 'red',
             url: '/docs/workflows',
-            description: 'Send transactional email, broadcasts, and automations from your product data.',
+            description: 'Send transactional email, broadcasts, and workflows from your product data.',
             children: [
                 {
                     name: 'Email & Messaging',

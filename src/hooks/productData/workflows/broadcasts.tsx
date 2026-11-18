@@ -73,7 +73,7 @@ export const broadcasts: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Build emails in the editor or start from a template, then reuse them in any broadcast or sequence.
+                    Build emails in the editor or start from a template, then reuse them in any broadcast or workflow.
                 </p>
                 {list([
                     {
@@ -166,7 +166,7 @@ export const broadcasts: CarouselSlide[] = [
                     {
                         label: 'Conversion goals',
                         description:
-                            'Pick an event or a property, such as purchase completed or plan is growth, and see the conversion rate per campaign and per step.',
+                            'Pick an event or a property, such as purchase completed or plan is growth, and see the conversion rate per broadcast and per workflow step.',
                     },
                     {
                         label: 'Engagement events',
@@ -181,7 +181,7 @@ export const broadcasts: CarouselSlide[] = [
                     {
                         label: 'Per-step metrics',
                         description:
-                            'See how many people reached each step of a campaign and where they dropped off, with the run log for any one person.',
+                            'See how many people reached each step of a workflow and where they dropped off, with the run log for any one person.',
                     },
                 ])}
             </>

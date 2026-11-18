@@ -29,7 +29,7 @@ export const automation: CarouselSlide[] = [
         icon: <IconDecisionTree className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'Send sequences based on what people do',
+        heading: 'Build a workflow from what people do',
         description: (
             <>
                 <p>
@@ -40,7 +40,7 @@ export const automation: CarouselSlide[] = [
                     {
                         label: 'Trigger on an event',
                         description:
-                            'Start the sequence from any event PostHog captures, once per person or every time, with a conversion goal and exit conditions.',
+                            'Start the workflow from any event PostHog captures, once per person or every time, with a conversion goal and exit conditions.',
                     },
                     {
                         label: 'Wait for the right moment',
@@ -72,7 +72,7 @@ export const automation: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    A sequence starts from something PostHog already knows: an event someone just did, a cohort they
+                    A workflow starts from something PostHog already knows: an event someone just did, a cohort they
                     joined, or a schedule you set.
                 </p>
                 {list([
