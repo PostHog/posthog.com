@@ -1077,22 +1077,117 @@
         },
         {
             "source": "/docs/workflows/customerio-import:ext(\\.md)?",
-            "destination": "/docs/workflows/migrate-from-customer-io:ext?",
+            "destination": "/docs/email/migrate-from-customer-io:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/workflows/import-customerio-optouts",
-            "destination": "/docs/workflows/migrate-from-customer-io#2-import-opt-outs-and-suppressions",
+            "destination": "/docs/email/migrate-from-customer-io#2-import-opt-outs-and-suppressions",
             "statusCode": 301
         },
         {
             "source": "/docs/workflows/import-customerio-optouts.md",
-            "destination": "/docs/workflows/migrate-from-customer-io.md",
+            "destination": "/docs/email/migrate-from-customer-io.md",
             "statusCode": 301
         },
         {
-            "source": "/docs/workflows/surfaces/web-app:ext(\\.md)?",
-            "destination": "/docs/workflows:ext?",
+            "source": "/docs/workflows/installation:ext(\\.md)?",
+            "destination": "/docs/email/installation:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/sandbox-sender:ext(\\.md)?",
+            "destination": "/docs/email/sandbox-sender:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/verify-domain:ext(\\.md)?",
+            "destination": "/docs/email/verify-domain:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/skills:ext(\\.md)?",
+            "destination": "/docs/email/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/supabase-auth-emails:ext(\\.md)?",
+            "destination": "/docs/email/supabase-auth-emails:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/broadcasts:ext(\\.md)?",
+            "destination": "/docs/email/broadcasts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/audiences:ext(\\.md)?",
+            "destination": "/docs/email/audiences:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/library:ext(\\.md)?",
+            "destination": "/docs/email/library:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/create-emails-ai:ext(\\.md)?",
+            "destination": "/docs/email/create-emails-ai:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/email-drip-campaign:ext(\\.md)?",
+            "destination": "/docs/email/email-drip-campaign:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/opt-outs:ext(\\.md)?",
+            "destination": "/docs/email/opt-outs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/frequency-cap:ext(\\.md)?",
+            "destination": "/docs/email/frequency-cap:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/sending-reputation:ext(\\.md)?",
+            "destination": "/docs/email/sending-reputation:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/engagement-events:ext(\\.md)?",
+            "destination": "/docs/email/engagement-events:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/migrate-from-customer-io:ext(\\.md)?",
+            "destination": "/docs/email/migrate-from-customer-io:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/migrate-from-resend:ext(\\.md)?",
+            "destination": "/docs/email/migrate-from-resend:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails:ext(\\.md)?",
+            "destination": "/docs/email/transactional-emails:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/:path*",
+            "destination": "/docs/email/transactional-emails/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications:ext(\\.md)?",
+            "destination": "/docs/email/push-notifications:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/:path*",
+            "destination": "/docs/email/push-notifications/:path*",
             "statusCode": 301
         },
         {
