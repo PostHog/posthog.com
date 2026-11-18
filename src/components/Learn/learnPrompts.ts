@@ -228,7 +228,7 @@ Then look at my recent events, and help me find one thing worth changing before 
         },
         {
             title: 'Destinations and batch exports',
-            prompt: `Teach me how PostHog sends data to other tools, using the tools my team already uses. Compare the two ways. A realtime destination sends each event a few seconds after it arrives, and it can read the person at that time. A batch export moves large volumes to a warehouse like S3, BigQuery, or Snowflake on a schedule, and it never updates rows after it exports them. Explain what happens when the other tool fails: a destination retries a few times, and PostHog disables it if it keeps failing. A batch export can retry a whole run.
+            prompt: `Teach me how PostHog sends data to other tools, using the tools my team already uses. Compare the two ways. A realtime destination sends each event a few seconds after it arrives, and it can read the person at that time. A batch export moves large volumes to a warehouse like S3, BigQuery, or Snowflake on a schedule. Its events model only appends rows, so an exported event never changes, but its persons model merges updates into rows it already exported. Explain what happens when the other tool fails: a destination retries a few times, and PostHog disables it if it keeps failing. A batch export can retry a whole run.
 
 Then help me pick one for a real need in my product. Help me write a filter that sends only the events I need, and explain why a filter on $identify or later matters if I need person properties. Test it before I turn it on, and tell me which metrics and logs to watch for the first hour.`,
         },
