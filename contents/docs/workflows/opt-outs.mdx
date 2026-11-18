@@ -20,7 +20,7 @@ The opt-out list shows who has opted out of which category. Recipients land on i
 
 Every genuine transition from opted-in to opted-out also writes a `$workflows_email_unsubscribed` event, carrying the `category` and the `source` (`one_click` or `preferences_page`). See [workflow events](/docs/workflows/engagement-events#properties-on-unsubscribe-events) for the full property list, and note that repeated unsubscribe requests do not emit duplicate events.
 
-Coming from Customer.io? [Import your opt-out lists](/docs/workflows/import-customerio-optouts) and keep them in sync with a reporting webhook.
+Coming from another tool? Import your opt-out lists from [Customer.io](/docs/workflows/migrate-from-customer-io#2-import-opt-outs-and-suppressions), and keep them in sync with a reporting webhook, or from [Resend](/docs/workflows/migrate-from-resend).
 
 ## The suppression list
 
@@ -38,11 +38,12 @@ Sends check the message's category and the global opt-out together, so opting so
 
 The [messaging suppressions API](/docs/api/messaging-suppressions) manages the suppression list: list entries, add one, or remove one.
 
-Authenticate with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:read` scope for reads or `hog_flow:write` for writes.
+Authenticate with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:read` scope for reads or `hog_flow:write` for writes. Listing and removing suppressions also need the `person:read` scope.
 
 ## Related
 
 - [Frequency cap](/docs/workflows/frequency-cap) - limiting how many marketing messages one person gets
-- [Import opt-out lists from Customer.io](/docs/workflows/import-customerio-optouts)
+- [Migrate from Customer.io](/docs/workflows/migrate-from-customer-io) - importing opt-out lists and keeping them in sync
+- [Migrate from Resend](/docs/workflows/migrate-from-resend) - importing suppressions, unsubscribes, and topics
 - [Content library and message templates](/docs/workflows/library) – adding unsubscribe links to emails
 - [Workflow events](/docs/workflows/engagement-events) – unsubscribe and bounce events in your project

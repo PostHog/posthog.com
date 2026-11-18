@@ -1077,7 +1077,17 @@
         },
         {
             "source": "/docs/workflows/customerio-import:ext(\\.md)?",
-            "destination": "/docs/workflows/import-customerio-optouts:ext?",
+            "destination": "/docs/workflows/migrate-from-customer-io:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/import-customerio-optouts",
+            "destination": "/docs/workflows/migrate-from-customer-io#2-import-opt-outs-and-suppressions",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/import-customerio-optouts.md",
+            "destination": "/docs/workflows/migrate-from-customer-io.md",
             "statusCode": 301
         },
         {
