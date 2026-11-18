@@ -1,0 +1,76 @@
+---
+title: Set up traces alerts
+---
+
+Traces alerts notify you when the requests to your services cross a threshold. Use them to catch a high error rate, slow responses, or a service that stops getting requests.
+
+> **Note:** Traces alerting is in beta. If you don't see an **Alerts** tab in [Tracing](https://app.posthog.com/tracing), it isn't enabled for your project yet.
+
+Each alert checks its requests every minute.
+
+## Create an alert from an operation
+
+The fastest way to create an alert is from the operations table in [Tracing](https://app.posthog.com/tracing). PostHog fills in the alert from the operation you pick.
+
+1. In the operations table, find the operation you want to watch.
+2. Click the **⋯** button at the end of its row.
+3. Under **Alert on this**, select a preset:
+   - **Error rate is high** fires when the error rate goes above 1.5 times the operation's current error rate. The threshold is at least 1% and at most 99%.
+   - **p95 latency is high** fires when the p95 latency goes above 1.5 times the operation's current p95 latency, in milliseconds.
+   - **Requests stop** fires when the operation gets no requests.
+4. Review the prefilled alert. Change the threshold, window, or other fields if you need to.
+5. Add a [notification destination](#configure-notifications) and click **Create alert**.
+
+Each preset scopes the alert to the row's service and operation name, and uses a 5-minute window. The alert name is the service, the operation, and the condition, for example `checkout GET /api/cart: error rate`.
+
+The **⋯** button is disabled while the table loads. The presets are disabled for an operation that has no entry spans, because alerts count [entry spans](#which-spans-an-alert-counts) only.
+
+## Create an alert from the alerts tab
+
+1. Open the **Alerts** tab in [Tracing](https://app.posthog.com/tracing) and click **New alert**. The new alert starts from the services and filters that the viewer shows.
+2. **Configure:** Give the alert a descriptive name, then pick the services and filters for the requests it measures.
+3. **Set trigger:** Set the [trigger condition](#set-the-trigger-condition). Optionally adjust the [advanced options](#advanced-options).
+4. **Notify:** Add one or more [notification destinations](#configure-notifications).
+5. **Review:** Confirm the alert and click **Create alert**.
+
+## Which spans an alert counts
+
+An alert counts entry spans only. An entry span is a root span, a server span, or a consumer span. An operation that contains only internal or client spans never fires an alert.
+
+## Set the trigger condition
+
+The trigger condition reads as "Alert when [measure] is [above or below] [threshold] over [window]". Configure:
+
+- **Measure** – one of:
+  - **Request count** – the number of requests
+  - **Error count** – the number of failed requests
+  - **Error rate** – the percentage of requests that failed
+  - **Latency** – the request duration in milliseconds, at the p50, p90, p95, or p99 percentile
+- **Operator** – whether the measure must go **above** or **below** the threshold
+- **Threshold** – the value that triggers the alert. For error rate, use a percentage from 0 to 100.
+- **Window** – the time window to check, one of 5, 10, 15, 30, or 60 minutes
+
+### Check separately for
+
+By default, an alert checks all matching requests together. To check each group on its own, select **Each service** or **Each service and operation**. A grouped alert fires and resolves for each group separately. If you change this on a saved alert, PostHog clears the alert's current groups.
+
+## Configure notifications
+
+Add at least one destination:
+
+- **[Slack](/docs/data-pipelines/destinations/slack)** – pick a connected Slack workspace and channel.
+- **[Webhook](/docs/data-pipelines/destinations/webhook)** – provide a URL to receive an HTTP POST when the alert fires.
+
+You can create an alert without a destination, but it doesn't send notifications.
+
+## Advanced options
+
+### Reduce noise
+
+By default, an alert fires as soon as one check matches the condition. To ignore brief spikes, set how many of the last checks must match before the alert fires. For example, "3 of 5 checks must match to fire" fires only when the condition matches in at least three of the last five checks.
+
+The alert resolves when the condition stops matching.
+
+### Notification cooldown
+
+The cooldown sets the minimum time, in minutes, between notifications. Set it to 0 for no minimum. The default is 0.

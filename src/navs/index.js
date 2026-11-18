@@ -8872,6 +8872,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Alerts',
+                    url: '/docs/distributed-tracing/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
                     name: 'Link traces to AI Observability',
                     url: '/docs/distributed-tracing/link-ai-observability',
                     icon: 'IconLlmAnalytics',
