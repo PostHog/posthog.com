@@ -78,6 +78,11 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 // config is a JsonDocument
 ```
 
+```elixir
+{:ok, config} = PostHog.FeatureFlags.get_remote_config_payload("landing-page-config")
+# config is returned as a parsed term, or nil if the flag has no payload.
+```
+
 </MultiLanguage>
 
 > **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
