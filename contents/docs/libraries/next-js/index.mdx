@@ -104,6 +104,10 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
 })
 ```
 
+### Edge runtime
+
+`posthog-node` ships a build for the edge runtime, so the same client works in middleware and in route handlers that set `export const runtime = 'edge'`. Edge functions stop when the response is sent, so send events with `after(() => posthog.shutdown())` (Next.js 15.1 and later) rather than awaiting them before you respond.
+
 ## Configuring a reverse proxy to PostHog
 
 To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), the [Next.js proxy file](/docs/advanced/proxy/nextjs-middleware) (`middleware.ts` on Next.js 15 and earlier), and [Vercel rewrites](/docs/advanced/proxy/vercel). With the Next.js rewrites and proxy file options, also set `skipTrailingSlashRedirect: true` in your Next.js config. PostHog API paths end with a slash, and without this setting, Next.js redirects each request before it forwards it.
