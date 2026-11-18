@@ -38,11 +38,9 @@ A few others asked the obvious question: if people are handing more of the work 
 
 ## Too much PostHog
 
-It’s been a theme for years: “The PostHog UI is overwhelming.” Tim, our co-founder, reckons every other tweet about us says some version of it (he’s not far off).
+It’s been a theme for years: “The PostHog UI is overwhelming.” Tim, our co-founder, reckons every other tweet about us says some version of it (he’s not far off). Customers say it on calls too. When we sorted the complaints by topic, usability came up about twice as often as anything else.
 
-Customers say it on calls too. When we sorted the complaints by topic, usability came up about twice as often as anything else. The biggest theme: PostHog is too big and too hard to learn, especially if you’re not an engineer.
-
-No wonder. There are (quite literally) thousands of things to do in PostHog. A single [Trends chart](/trends) has at least 9,600 possible setups before you add a filter. The Web app has 236 pages, but just ten pages get more than half of all pageviews. Every extra choice slows people down (that’s [Hick’s law](https://lawsofux.com/hicks-law/)).
+It's no wonder that PostHog feels "too much". There are (quite literally) thousands of things you can do with it. A single [Trends chart](/trends) has at least 9,600 possible setups before you add a filter. The Web app has 236 pages, but just ten pages get more than half of all pageviews. Every extra choice slows people down (that’s [Hick’s law](https://lawsofux.com/hicks-law/)).
 
 We needed to fix how you get in, do what you need, and get out.
 
