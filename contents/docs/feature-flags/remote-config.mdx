@@ -107,12 +107,12 @@ let config = client.get_remote_config_payload("landing-page-config").await?;
 
 ### Which method to use
 
-Use `getRemoteConfigPayload` to read a remote config flag on the server, and always when its payload is encrypted. The flag payload method, such as `getFeatureFlagPayload`, also works on the server, but only for a payload that isn't encrypted, and it needs a distinct ID.
+Use `getRemoteConfigPayload` to read a remote config flag on the server, and always when its payload is encrypted. You can also read the payload from a flag evaluation, such as `evaluateFlags` followed by `getFlagPayload`. That works on the server only for a payload that isn't encrypted, and it needs a distinct ID.
 
 | Method | Needs a distinct ID | Key used | Encrypted payloads |
 | --- | --- | --- | --- |
 | `getRemoteConfigPayload` | No | Secret API key or personal API key | Returned decrypted with a personal API key, redacted with a secret API key. See [encrypted payloads](#encrypted-payloads) |
-| Flag payload method | Yes | Project token | Excluded from `/flags` |
+| Flag evaluation (`evaluateFlags` and `getFlagPayload`) | Yes | Project token | Excluded from `/flags` |
 
 ## Encrypted payloads
 
