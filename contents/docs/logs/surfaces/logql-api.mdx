@@ -6,6 +6,12 @@ showTitle: true
 
 PostHog exposes a Loki-compatible query API over your logs. Tools that speak LogQL, such as Grafana's Loki data source or `logcli`, can query PostHog logs without a Loki server.
 
+<CalloutBox icon="IconFlask" title="The LogQL API is in private alpha" type="action">
+
+The LogQL API is available only to organizations in the private alpha. If your organization does not have access, every request returns `403 Forbidden`, even with a valid `logs:read` key. To get access, [reach out to us](https://app.posthog.com/settings/#panel=support%3Asupport%3A%3A%3Afalse) via in-app support.
+
+</CalloutBox>
+
 ## Endpoint
 
 Point your Loki client at the logs API of your project:
