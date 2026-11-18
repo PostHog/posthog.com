@@ -10,6 +10,14 @@ Describe what you need and PostHog AI generates the function code, configures th
 
 You can iterate on the generated code by asking follow-up questions like "add a filter for internal IPs" or "also send the user's email in the Slack message."
 
+## Change input values
+
+PostHog AI can also change the configured values of a function's inputs, such as the Slack message blocks of a destination, a webhook body, or a URL. For example, ask "change the Slack message to include the event name." PostHog AI keeps templates such as `{event.properties.name}` unless you ask it to change them.
+
+The editor shows the changed values as a diff that you accept or reject. You cannot save or test the function until you accept or reject the suggestion.
+
+PostHog AI does not read or change secret inputs. It also does not change integration inputs, such as the connected Slack workspace, or email senders.
+
 ## Function types PostHog AI can write
 
 | Type | What it does |
