@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from 'react'
+import { formatTime } from 'components/MediaControls'
 import type { TranscriptLine } from './wistiaCaptions'
-
-const formatTime = (seconds: number): string =>
-    `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60)
-        .toString()
-        .padStart(2, '0')}`
 
 interface TranscriptProps {
     /** Every caption cue, by start time. */
