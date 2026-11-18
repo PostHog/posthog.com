@@ -93,7 +93,7 @@ A common use case for automatic issue assignment is to alert assignees of new is
 
 ## Link external issues
 
-You can create new issues in GitHub, GitLab, Linear, or Jira, or link to existing issues and GitHub pull requests. This connects PostHog error tracking issues to your existing workflows and helps track fixes.
+You can create issues in external tracking systems like GitHub Issues, Linear, GitLab, or Jira, or link to ones that already exist. This connects PostHog error tracking issues to your existing issue tracking workflows.
 
 First, set up an [integration](/docs/error-tracking/integrations) with your tracking system.
 
@@ -116,6 +116,6 @@ You can also create external references programmatically using the [PostHog API]
 
 ### Via MCP
 
-AI agents using the [PostHog MCP server](/docs/model-context-protocol) can create new external issues with `error-tracking-external-references-create` or link existing issues and pull requests with `error-tracking-external-references-link`. Agents can also read `external_issues` from `query-error-tracking-issue` to see what's already linked and avoid duplicates. See the [MCP debugging guide](/docs/error-tracking/surfaces/mcp) for more.
+AI agents using the [PostHog MCP server](/docs/model-context-protocol) can create new external issues with the `error-tracking-external-references-create` tool, or link existing issues and pull requests with the `error-tracking-external-references-link` tool. See the [MCP debugging guide](/docs/error-tracking/surfaces/mcp) for more.
 
 > If you use another issue tracking system and would like to request it, [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
