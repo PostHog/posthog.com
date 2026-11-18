@@ -48,5 +48,6 @@ All Whop tables are full refresh. Each sync replaces the contents of the table.
 
 - If the connection fails with an authorization error, the API key is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If the `leads` table stops syncing with an error, this is expected. Whop retired its leads endpoint and moved existing leads to members, so the `leads` table is no longer available. Sync the `members` table instead. A member that was a lead has the lead's ID in its metadata as `lead_id`.
 
 <TroubleshootingLink />
