@@ -1081,6 +1081,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/workflows/surfaces/web-app:ext(\\.md)?",
+            "destination": "/docs/workflows:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/messaging:ext(\\.md)?",
             "destination": "/docs/workflows:ext?",
             "statusCode": 301

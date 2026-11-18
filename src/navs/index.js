@@ -7059,7 +7059,7 @@ export const docsMenu = {
                     name: 'Reference',
                 },
                 {
-                    name: 'MCP tools',
+                    name: 'MCP',
                     url: '/docs/semantic-layer/mcp-tools',
                     icon: 'IconSparkles',
                     color: 'purple',
@@ -8285,9 +8285,9 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Agent skills',
-                    url: '/docs/workflows/skills',
-                    icon: 'IconSparkles',
+                    name: 'Sandbox sender',
+                    url: '/docs/workflows/sandbox-sender',
+                    icon: 'IconFlask',
                     color: 'purple',
                 },
                 {
@@ -8297,32 +8297,19 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Configure a channel',
-                    url: '/docs/workflows/configure-channels',
-                    icon: 'IconMegaphone',
-                    color: 'blue',
-                    featured: true,
+                    name: 'Agents and MCP',
                 },
                 {
-                    name: 'Where to use',
-                },
-                {
-                    name: 'PostHog Web',
-                    url: '/docs/workflows/surfaces/web-app',
-                    icon: 'IconLaptop',
-                    color: 'yellow',
-                },
-                {
-                    name: 'PostHog MCP',
-                    url: '/docs/workflows/surfaces/mcp',
-                    icon: 'IconMagic',
+                    name: 'Agent skills',
+                    url: '/docs/workflows/skills',
+                    icon: 'IconSparkles',
                     color: 'purple',
                 },
                 {
-                    name: 'API',
-                    url: '/docs/workflows/surfaces/api',
-                    icon: 'IconBrackets',
-                    color: 'blue',
+                    name: 'MCP',
+                    url: '/docs/workflows/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'purple',
                 },
                 {
                     name: 'Transactional email',
@@ -8468,37 +8455,57 @@ export const docsMenu = {
                 },
                 {
                     name: 'Push notifications',
+                },
+                {
+                    name: 'Overview',
                     url: '/docs/workflows/push-notifications',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/workflows/push-notifications',
-                        },
-                        {
-                            name: 'Import device tokens',
-                            url: '/docs/workflows/push-notifications/import-device-tokens',
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/workflows/push-notifications/ios',
-                        },
-                        {
-                            name: 'Android',
-                            url: '/docs/workflows/push-notifications/android',
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/workflows/push-notifications/react-native',
-                        },
-                        {
-                            name: 'Flutter',
-                            url: '/docs/workflows/push-notifications/flutter',
-                        },
-                        {
-                            name: 'Push step settings',
-                            url: '/docs/workflows/push-notifications/push-step-options',
-                        },
-                    ],
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
+                    name: 'iOS',
+                    url: '/docs/workflows/push-notifications/ios',
+                    icon: 'IconApple',
+                    color: 'blue',
+                },
+                {
+                    name: 'Android',
+                    url: '/docs/workflows/push-notifications/android',
+                    icon: 'IconAndroid',
+                    color: 'green',
+                },
+                {
+                    name: 'Flutter',
+                    url: '/docs/workflows/push-notifications/flutter',
+                    icon: 'IconFlutter',
+                    color: 'blue',
+                },
+                {
+                    name: 'React Native',
+                    url: '/docs/workflows/push-notifications/react-native',
+                    icon: 'IconReact',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import device tokens',
+                    url: '/docs/workflows/push-notifications/import-device-tokens',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Push step settings',
+                    url: '/docs/workflows/push-notifications/push-step-options',
+                    icon: 'IconGear',
+                    color: 'purple',
+                },
+                {
+                    name: 'Other channels',
+                },
+                {
+                    name: 'Slack, SMS, and webhooks',
+                    url: '/docs/workflows/configure-channels',
+                    icon: 'IconMegaphone',
+                    color: 'blue',
                 },
                 {
                     name: 'Deliverability',
@@ -8543,6 +8550,15 @@ export const docsMenu = {
                     name: 'Import opt-out lists from Customer.io',
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'API',
+                },
+                {
+                    name: 'Workflows API',
+                    url: '/docs/workflows/surfaces/api',
+                    icon: 'IconBrackets',
                     color: 'blue',
                 },
                 {
