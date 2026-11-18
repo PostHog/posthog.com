@@ -122,7 +122,9 @@ If you send AI traces with [OpenTelemetry](/docs/ai-observability/installation/o
 POST <ph_client_api_host>/i/v0/ai/otel
 ```
 
-Two size limits apply on this path, and they fail in different ways:
+If you set the general `OTEL_EXPORTER_OTLP_ENDPOINT` variable to this path instead of `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`, your exporter appends `/v1/traces`, and your spans arrive at `/i/v0/ai/otel/v1/traces`. PostHog accepts traces on that path too. It only accepts traces, so log and metric exports to the same base path get a `404`.
+
+Two size limits apply on both paths, and they fail in different ways:
 
 - **4MB per export.** PostHog rejects an OTLP export body over 4MB (measured after decompression for gzipped exports) with HTTP 413 and ingests none of its spans. Your collector logs the failure but does not retry it, per the OTLP spec, so the whole export is lost. This cap is lower than the per-event ceiling, so a batch of spans can exceed it before any single span does.
 - **8MB per event.** Each span becomes one AI event, held to the same 8MB ceiling as the other paths. A span whose converted event exceeds the ceiling is dropped, but the rest of the export is ingested and the request still returns success. A failure response would only make your collector retry a span that can never fit. The only signal is a `MessageSizeTooLarge` [ingestion warning](/docs/data/ingestion-warnings): your application gets no error, and the span is lost silently.
