@@ -25,6 +25,29 @@ A report is enriched and ranked:
 
 A report also accumulates a history as work happens on it: the commits and pull requests opened against it, the code the investigating agent referenced, CI status and review comments on its PR, related reports, and any notes people left while triaging. You're reading the whole trail, not just the original finding.
 
+## Change a report's repository
+
+Each report targets one repository from your connected GitHub account. Research selects it, and later implementation runs open their pull requests there. If research selected the wrong repository, send a `PUT` request to `/api/projects/:project_id/signals/reports/:report_id/repository/` with the correct repository in `owner/repo` format:
+
+```json
+{ "repository": "posthog/posthog" }
+```
+
+The project's GitHub integration must have access to the repository, and the repository must not be archived. The API key needs the `inbox:write` and `task:write` scopes.
+
+Later implementation runs use the new repository. A run that already started keeps its repository. The report's work log keeps the earlier selection and records who changed it. The change does not change whether PostHog can open a pull request for the report automatically. If you send the current repository again, nothing changes.
+
+## See who made each decision
+
+When you get one report from the API, the response includes a `decisions` object. It shows the current value of each decision about the report: `repository`, `priority`, `actionability`, and `already_addressed`. Each decision has:
+
+- `value` – the current value.
+- `reason` – the reason stored with the value, or `null` if none was stored.
+- `set_by` – who set the value. Its `kind` is `user` for a person in PostHog, `agent` for a person's external coding agent, `task` for a PostHog agent task such as research, or `system` for the pipeline or for an older value with no recorded setter.
+- `set_at` – when the value was set.
+
+A decision is `null` if the report does not have one yet. In list responses, `decisions` is always `null`.
+
 ## Ask AI about a report
 
 A report is a starting point, not a verdict. Click **Ask AI** on a report to ask a question about what it found – who else is affected, whether the problem is new, what to do next. The agent already has the report and its evidence, so you don't have to re-explain the problem. It works in a task you can follow, and you can keep the conversation going there.
