@@ -89,7 +89,16 @@ function resolveUrl(value, file, redirects, isKnown = () => false) {
     return { url, redirected, error: 'Too many redirects' }
 }
 
+const MARKDOWN_EXPORT_SUFFIX = '.md'
+const markdownExportsSkipped = process.env.LINK_CHECK_MINIMAL_BUILD === 'true'
+
 function builtUrlExists(pathname, pages) {
+    if (builtFileOrPageExists(pathname, pages)) return true
+    if (!markdownExportsSkipped || !pathname.endsWith(MARKDOWN_EXPORT_SUFFIX)) return false
+    return builtFileOrPageExists(pathname.slice(0, -MARKDOWN_EXPORT_SUFFIX.length), pages)
+}
+
+function builtFileOrPageExists(pathname, pages) {
     const normalized = pathname.replace(/\/$/, '') || '/'
     const canonical = normalized.replace(/\/index\.html$/, '') || '/'
     const contains = (value) =>
@@ -97,6 +106,25 @@ function builtUrlExists(pathname, pages) {
     if (contains(normalized) || contains(canonical)) return true
     const asset = path.join(process.cwd(), 'public', pathname)
     return (fs.existsSync(asset) && fs.statSync(asset).isFile()) || fs.existsSync(path.join(asset, 'index.html'))
+}
+
+let fullSiteOnlyPages
+
+const normalizedPath = (pathname) => pathname.replace(/\/$/, '') || '/'
+
+function sitemapPaths(file) {
+    const locations = file ? fs.readFileSync(file, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g) : []
+    return new Set([...locations].map((match) => normalizedPath(new URL(match[1].trim()).pathname)))
+}
+
+function inFullSiteOnly(pathname, pages) {
+    if (fullSiteOnlyPages === undefined) {
+        const baselineBuiltPages = sitemapPaths(process.env.LINK_CHECK_BASELINE_SITEMAP)
+        fullSiteOnlyPages = new Set(
+            [...sitemapPaths(process.env.LINK_CHECK_FULL_SITEMAP)].filter((page) => !baselineBuiltPages.has(page))
+        )
+    }
+    return fullSiteOnlyPages.has(normalizedPath(pathname)) && !builtUrlExists(pathname, pages)
 }
 
 function maskExamples(content) {
@@ -194,6 +222,7 @@ module.exports = {
     routeMatch,
     resolveUrl,
     builtUrlExists,
+    inFullSiteOnly,
     extractLinks,
     importingPages,
     changedFiles,

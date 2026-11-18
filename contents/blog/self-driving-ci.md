@@ -29,7 +29,7 @@ We saw this and decided to fight fire with fire. The same self-driving agents th
 
 We're proud to be open source and use [GitHub to host our monorepo](https://github.com/PostHog/posthog). This means most of our CI-related data lives on GitHub and is queryable from there. But querying this data frequently means we hit rate limits and, in any case, it would be really wasteful to constantly ask GitHub for mostly unchanging data (think last week's merged PRs and completed workflow runs). Above all, PostHog is a data company! So we decided to get CI/CD data into our own product and see what features and ideas we could unlock from there.
 
-To accomplish this, we rely on our [GitHub warehouse source](/docs/cdp/sources/github), which continuously syncs repository data. Specifically, we were interested in pull requests, workflow runs, and workflow jobs data.
+To accomplish this, we rely on our [GitHub warehouse source](/docs/data-pipelines/sources/github), which continuously syncs repository data. Specifically, we were interested in pull requests, workflow runs, and workflow jobs data.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_22_at_16_39_44_2x_fca9283bfb.png"
@@ -91,7 +91,7 @@ Finally, once we had GitHub and related CI data ingested, the team came up with 
 
 We're continuing to shape Engineering Analytics as an internal beta product, but you can build something similar today by combining warehouse sources with our MCP and scouts. To do this:
 
-1. **Get your CI data into the warehouse.** Link the [GitHub source](/docs/cdp/sources/github) and sync the pull request, workflow run, and workflow job [tables](/docs/cdp/sources/github#supported-tables). Add [webhooks](/docs/cdp/sources/github#webhooks) to keep runs and jobs up to date in real time.
+1. **Get your CI data into the warehouse.** Link the [GitHub source](/docs/data-pipelines/sources/github) and sync the pull request, workflow run, and workflow job [tables](/docs/data-pipelines/sources/github#supported-tables). Add [webhooks](/docs/data-pipelines/sources/github#webhooks) to keep runs and jobs up to date in real time.
 
 2. **Let your agent query it.** Connect your agent(s) to the [PostHog MCP](/docs/model-context-protocol#get-started-in-30-seconds) and try asking it something specific, like which CI workflow got slower this week.
 

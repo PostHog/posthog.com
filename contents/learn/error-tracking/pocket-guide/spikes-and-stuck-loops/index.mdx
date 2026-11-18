@@ -1,0 +1,92 @@
+---
+title: Catch error spikes and stuck loops
+shortTitle: Spikes and stuck loops
+subtitle: 'Is that error spike a bug many people hit, or a few clients stuck in a loop?'
+pocketGuideOrder: 8
+section: Self-drive
+pocketGuideCta:
+  kind: link
+  label: Open your scouts
+  href: https://app.posthog.com/inbox/scouts
+  note: Find Error tracking in the list and switch it on.
+---
+
+<LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="What the scout saw: At 02:10, exceptions on Twig's Trip details issue jumped from about 20 an hour to about 240 an hour. Distinct users held at four the whole time."
+    markerAt={0.5}
+    markerLabel="02:10"
+    series={[
+        {
+            label: 'Distinct users',
+            note: 'flat at 4',
+            values: [0.42, 0.4, 0.44, 0.41, 0.43, 0.42, 0.4, 0.43, 0.41, 0.42, 0.44, 0.42],
+        },
+        {
+            label: 'Exceptions',
+            note: '~20/hour → ~240/hour',
+            emphasis: true,
+            values: [0.05, 0.04, 0.06, 0.05, 0.04, 0.06, 0.55, 0.82, 0.88, 0.9, 0.87, 0.9],
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="The report card in your inbox shows the scout's claim and triage. The full evidence is inside the report."
+    priority="P3"
+    status="Ready"
+    actionability="Actionable"
+    headline="Exceptions jumped to ~240 an hour at 02:10 while distinct users held at 4, because four guests keep clicking Try again on a Trip details page that throws every time"
+    report={{
+        title: 'Trip details retries loop on the same TypeError, ~240 exceptions an hour from 4 guests',
+        source: 'Scout · error tracking',
+        receivedAgo: '3h',
+        affected: '4 guests · ~240 exceptions an hour',
+        body: "`TypeError: Cannot read properties of undefined (reading 'name')` went from about 20 exceptions an hour to about 240 at 02:10, and it's still firing. Distinct users held at 4 the whole time, so a few guests are stuck on the same error.\n\nThe top frame is `readTripHost` in `src/trips/trip-details.ts`, and every exception carries `surface: trip_details`. **Trip details** calls `readTripHost({}, stay.hostId)`, so `host` is `undefined` and reading its name throws. Each of the four guests keeps clicking **Try again**, and each click throws the same exception.",
+        suggestedAction: 'Pass the loaded host records with `readTripHost(hosts, stay.hostId)`, so Trip details loads on the first try.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Catch error spikes and stuck loops
+
+This <Term name="scout" /> reports error spikes and ranks them by how many guests they affect. A bug that breaks booking for hundreds of guests ranks above a few browsers stuck in a retry loop.
+
+## What the scout looks at
+
+The scout reports an issue when its exceptions jump well above the issue's own baseline. It sets the priority by comparing exceptions with distinct users:
+
+- **Both climb.** Many guests hit a regression. The report is P1, or P2 when the reach is moderate.
+- **Exceptions climb, users stay flat.** A few browsers are stuck in a loop <SeeFig n={1} />. The report is P3, or P2 when it's fresh and in the thousands.
+- **A resolved issue fires again.** The report is P1.
+
+The scout files new issues with overlapping stack traces as one report, and skips one-off exceptions and known upstream errors.
+
+## The report in your inbox
+
+Each spike becomes a <Term name="report" /> in the team's <Term name="inbox" />, with exceptions, distinct users, and an hourly chart against the issue's baseline <SeeFig n={2} />. From the report, the engineers can [ask AI](/docs/self-driving/reports#ask-ai-about-a-report) who else is affected or what to do next.
+
+## The scout itself
+
+PostHog maintains this scout, listed as **Error tracking** in the project's scouts. Its [skill file](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) is on GitHub. Each run queries Twig's issues and `$exception` events through the [PostHog MCP](/learn/error-tracking/agent-prompts-and-mcp), and checks its notes and the team's inbox so it doesn't report the same spike twice. It runs every 24 hours by default and stays quiet unless something needs the team's attention.
+
+## Add this to your scout troop
+
+The engineers turn it on for each project. It needs exceptions reaching PostHog.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Scouts](/docs/self-driving/scouts) · [Scout examples](/docs/self-driving/scout-examples) · [Reports](/docs/self-driving/reports) · [Signal sources](/docs/self-driving/inbox/sources) · [Detect spikes](/docs/error-tracking/spikes)
+
+</SeeAlso>
+
+</RightPage>

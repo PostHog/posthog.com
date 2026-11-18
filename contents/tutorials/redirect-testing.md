@@ -33,7 +33,7 @@ Next, we set up PostHog. Start by going into your new `redirect-test` folder and
 
 ```bash
 cd redirect-test
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, in the `redirect-test/app` folder, create a `providers.js` file and set up a component that returns an initialized `PostHogProvider`. You can get the project token and instance address you need for initialization from [your project settings](https://app.posthog.com/project/settings).

@@ -20,6 +20,8 @@ Metrics is in **open alpha**. Any team can turn it on for their project — no i
 2. On a new project, the onboarding view shows a preview of the metrics viewer and a getting-started checklist. Select **Enable metrics**.
 3. Metrics turns on for your whole project, and the **Overview**, **Viewer**, and **SQL** tabs become available.
 
+The viewer only controls whether you can see metrics. Metrics you send while it's off are stored for the project, so data sent before you enable metrics is there when you do (subject to the 30-day retention). The endpoint returns `200` for a request with an unknown project token too, so a `200` alone doesn't confirm delivery. To confirm data is landing, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
+
 Once enabled, there are three ways to send metrics:
 
 1. **Already have PostHog installed?** Record metrics directly with the [`posthog.metrics` API](#already-have-posthog-installed-use-posthogmetrics) built into the PostHog SDK, with no extra packages.

@@ -1,4 +1,4 @@
-import { GatsbyNode } from 'gatsby'
+import { GatsbyNode, Reporter } from 'gatsby'
 
 import path from 'path'
 import fs from 'fs'
@@ -10,6 +10,7 @@ import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTo
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
 import { cacheFetchResponsesInDevelopment } from './devFetchCache'
+import { PUBLISHED_SDK_REFERENCES, isSdkReferencePage } from './sdkMarkdownReferences'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -112,7 +113,75 @@ async function downloadPostHogBootstrap(): Promise<string> {
     }
 }
 
-export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
+const LIBRARIES = path.resolve(__dirname, '../contents/docs/libraries')
+
+/**
+ * Writes each SDK reference that Strapi stores as Markdown to contents/docs/libraries/<sdk>/<version>.md,
+ * so it builds like any other docs page. The SDK repo writes the page, front matter included.
+ * These files are gitignored, and the ones from the last build are removed first. They render as
+ * plain Markdown, never as MDX (see gatsby/sdkMarkdownReferences.js).
+ * The published SDKs' landing pages redirect to these references, so `gatsby build` fails when one of them
+ * is missing rather than deploying 404s; `gatsby develop` only logs it.
+ */
+async function writeSdkMarkdownReferences(reporter: Reporter): Promise<void> {
+    const host = process.env.GATSBY_SQUEAK_API_HOST
+    if (!host) return
+    const query = [
+        'filters[markdown][$notNull]=true',
+        'filters[referenceId][$notNull]=true',
+        'filters[version][$notNull]=true',
+        'fields[0]=referenceId',
+        'fields[1]=version',
+        'fields[2]=markdown',
+        'pagination[pageSize]=100',
+    ].join('&')
+    const attempts = 3
+    let data
+    for (let attempt = 1; ; attempt++) {
+        try {
+            const res = await fetch(`${host}/api/sdk-references?${query}`, { signal: AbortSignal.timeout(30000) })
+            if (!res.ok) throw new Error(`HTTP ${res.status}`)
+            ;({ data } = await res.json())
+            break
+        } catch (error) {
+            if (attempt === attempts) {
+                reporter.panicOnBuild(`Couldn't fetch the Markdown SDK references after ${attempts} attempts: ${error}`)
+                return
+            }
+            await delay(attempt * 5000)
+        }
+    }
+    for (const sdk of fs.existsSync(LIBRARIES) ? fs.readdirSync(LIBRARIES) : []) {
+        const dir = path.join(LIBRARIES, sdk)
+        if (!fs.statSync(dir).isDirectory()) continue
+        for (const file of fs.readdirSync(dir).filter(isSdkReferencePage)) fs.rmSync(path.join(dir, file))
+    }
+    for (const { attributes } of data ?? []) {
+        if (!attributes.referenceId || !attributes.version) continue
+        if (!PUBLISHED_SDK_REFERENCES.includes(attributes.referenceId)) continue
+        const sdk = attributes.referenceId.replace(/^posthog-/, '')
+        // A major version, such as 7, is served at 7.x.x. Other pages keep their name.
+        const page = isNaN(Number(attributes.version)) ? attributes.version : `${attributes.version}.x.x`
+        // A page can only be one of the names above, so a row can't replace a hand-written page.
+        // Each name must also be one plain path segment, so a row can't write outside contents/docs/libraries.
+        if (!isSdkReferencePage(`${page}.md`)) continue
+        if ([sdk, page].some((name) => name !== path.basename(name) || name.startsWith('.'))) continue
+        const dir = path.join(LIBRARIES, sdk)
+        fs.mkdirSync(dir, { recursive: true })
+        fs.writeFileSync(path.join(dir, `${page}.md`), attributes.markdown)
+    }
+    const missing = PUBLISHED_SDK_REFERENCES.filter(
+        (id) => !fs.existsSync(path.join(LIBRARIES, id.replace(/^posthog-/, ''), 'reference.md'))
+    )
+    if (missing.length) {
+        reporter.panicOnBuild(
+            `Strapi has no reference page for ${missing.join(', ')}, and their SDK pages redirect to it.`
+        )
+    }
+}
+
+export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store, reporter }) => {
+    await writeSdkMarkdownReferences(reporter)
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
@@ -147,6 +216,10 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     },
     error_tracking: {
         __capturePostHogExceptions: true,
+    },
+    metrics: {
+        flags: true,
+        serviceName: 'posthog.com',
     },
     // Drop exceptions coming from local dev servers so developers' local
     // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)

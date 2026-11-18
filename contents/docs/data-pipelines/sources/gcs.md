@@ -6,62 +6,70 @@ availability:
   free: full
   selfServe: full
   enterprise: full
+sourceId: GoogleCloudStorage
 ---
 
-You can sync and query files and folders from Google Cloud Storage (GCS) in PostHog by setting up a link.
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import ObjectStorageFiles from "../_snippets/object-storage-files.mdx"
+import ObjectStorageSyncModes from "../_snippets/object-storage-sync-modes.mdx"
+import ObjectStorageTroubleshooting from "../_snippets/object-storage-troubleshooting.mdx"
+import SelfManagedMigration from "../_snippets/self-managed-migration.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-## Step 1: Creating a bucket in GCS
+The Google Cloud Storage (GCS) source imports CSV, JSON Lines, and Parquet files, and Delta Lake tables, from a GCS bucket into PostHog. PostHog keeps the tables up to date on the schedule you choose, so you can query your files alongside your product data.
 
-1. Go to your Google Cloud console.
-2. Create a bucket in GCS. 
-    - For location, we recommend choosing `us-east1` for US Cloud or `europe-west3` for EU Cloud to keep them close to our servers.
-    - For storage class, choose `Standard`.
-    - For access control, choose `Uniform`.
-3. Upload your data to the bucket. This can be as simple as a `.csv` file like this:
+<SelfManagedMigration />
 
-```csv
-name,age
-John,30
-Jane,25
-```
+## Prerequisites
 
-## Step 2: Set up a service account
+You need:
 
-GCS uses service accounts to control access to resources. We need one to connect to GCS. To create one:
+- A GCS bucket that contains your files.
+- An HMAC key for a service account that can read the bucket.
 
-1. Go to the [service accounts page](https://console.cloud.google.com/iam-admin/serviceaccounts) in the GCS console and click **Create service account**.
-2. Fill in the account name and ID and click **Create and continue**.
-3. Grant the account the **Storage Object User** role.
+### Create a service account
+
+1. Go to the [service accounts page](https://console.cloud.google.com/iam-admin/serviceaccounts) in the Google Cloud console and click **Create service account**.
+2. Enter the account name and ID, then click **Create and continue**.
+3. Give the account the **Storage Object Viewer** role.
 4. Click **Done**.
 
-## Step 3: Set up access keys.
+### Create an HMAC key
 
-1. Go to the [cloud storage settings page](https://console.cloud.google.com/storage/settings) and click the **Interoperability** tab.
-2. Click **Create a key for another service account**.
-3. Select the service account you created in step 2 and click **create key**.
-4. Copy both the access key and secret. Save them some place safe because you'll need to regenerate them if you lose them.
+1. Go to the [Cloud Storage settings page](https://console.cloud.google.com/storage/settings) and select the **Interoperability** tab.
+2. Click **Create a key for a service account**.
+3. Select the service account that you created and click **Create key**.
+4. Copy the **Access key** and the **Secret**. Google Cloud shows the secret only once.
 
 ![Access keys](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_17_at_12_57_42_2x_ace42b1d0e.png)
 
-## Step 4: Create the table in PostHog
+## Adding a data source
 
-1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
-2. Click **New source**. Under self managed, look for **Google Cloud Storage** and click **Link**
-3. Fill the table name, then use the data from GCS: 
-    - For files URL pattern, use `https://storage.googleapis.com/` followed by your bucket and file or folder name like `https://storage.googleapis.com/posthog-warehouse/july12_google_ads_fixed.csv`. You can also use `*` to query multiple files.
-    - Choose the correct file format
-    - When using CSV format, choose the **CSV quote handling** option: **RFC 4180 double quotes** for CSVs that use standard double-quote escaping, or **Literal quotes** (default) for CSVs where quotes are treated as literal characters.
-    - For access key, use your Access Key ID
-    - For secret key, use your Secret Access Key
-4. Click **Next**
+<SourceSetupIntro />
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_17_at_13_03_25_2x_0ec0ddecaf.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_17_at_13_03_43_2x_465b2300b3.png"
-    alt="GCS source configuration form"
-    classes="rounded"
-/>
+When you link GCS, enter:
 
-## Step 5: Query the table
+- **Files URL**: The URL of your files. You can use a `gs://` URI, such as `gs://your-bucket/orders/`, or a URL such as `https://storage.googleapis.com/your-bucket/orders/**/*.parquet`.
+- **HMAC access key** and **HMAC secret**: The HMAC key that you created.
 
-Once it is done syncing, you can now [query](/docs/data-warehouse/query) your new table using the table name.
+## Files and tables
+
+<ObjectStorageFiles />
+
+## Sync modes
+
+<ObjectStorageSyncModes />
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<ObjectStorageTroubleshooting />
+
+<TroubleshootingLink />

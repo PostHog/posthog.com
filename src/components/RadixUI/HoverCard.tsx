@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { HoverCard as RadixHoverCard } from 'radix-ui'
 import { cn } from '../../utils'
 
@@ -23,10 +23,32 @@ export default function HoverCard({
     triggerClassName = '',
     contentClassName = '',
 }: HoverCardProps) {
+    const [open, setOpen] = useState(false)
+    const suppressed = useRef(false)
+
     return (
-        <RadixHoverCard.Root openDelay={openDelay} closeDelay={closeDelay}>
+        <RadixHoverCard.Root
+            open={open}
+            onOpenChange={(next) => {
+                if (next && suppressed.current) return
+                setOpen(next)
+            }}
+            openDelay={openDelay}
+            closeDelay={closeDelay}
+        >
             <RadixHoverCard.Trigger asChild>
-                <span className={triggerClassName}>{trigger}</span>
+                <span
+                    className={triggerClassName}
+                    onContextMenu={() => {
+                        suppressed.current = true
+                        setOpen(false)
+                    }}
+                    onPointerEnter={() => {
+                        suppressed.current = false
+                    }}
+                >
+                    {trigger}
+                </span>
             </RadixHoverCard.Trigger>
             <RadixHoverCard.Portal>
                 <RadixHoverCard.Content

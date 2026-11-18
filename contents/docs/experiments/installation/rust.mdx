@@ -31,7 +31,7 @@ Once PostHog is initialized, you should be able to capture events. For your expe
 For this tutorial, let's report a conversion event when a user clicks a CTA. In server SDKs like Rust, this can be called when a specific route is visited or reported from your client side app.
 
 ```rust
-use posthog_rs::Event;
+use posthog::Event;
 
 let event = Event::new("cta clicked", "user_distinct_id");
 client.capture(event);
@@ -62,7 +62,7 @@ client.capture(event);
 Use the PostHog SDK to call the experiment flag and update how your page renders based on the assigned variant.
 
 ```rust
-use posthog_rs::{EvaluateFlagsOptions, FlagValue};
+use posthog::{EvaluateFlagsOptions, FlagValue};
 
 let flags = client.evaluate_flags(
     "user_distinct_id",

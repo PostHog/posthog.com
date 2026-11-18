@@ -119,7 +119,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | Deletion is processed in the background and typically takes a couple of minutes. You'll see a blocking screen while it completes. All data under the organization's projects (including events) are automatically removed. |
 | **Persons**       | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten)    | When a person is deleted, all events and [session recordings](/docs/session-replay) for that person can be deleted                                                                                                          |
 
-Organization admins can also set a [custom events retention window](/docs/data/events-retention#custom-retention). PostHog deletes events older than the window at the next monthly cleanup, not right away. To answer a right to be forgotten request, delete the person instead.
+Organization admins can also set a [custom events retention window](/docs/data/events-retention#how-to-customize-your-retention-period). PostHog deletes events older than the window at the next monthly cleanup, not right away. To answer a right to be forgotten request, delete the person instead.
 
 ### Right to be forgotten
 

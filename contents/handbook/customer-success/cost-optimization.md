@@ -89,6 +89,18 @@ Two or three recommendations, each with a saving attached. A longer list reads l
 Quantify roughly, keep the saving separate from the tradeoff, and say what the change actually takes – their engineering capacity decides what happens next. Don't invent numbers, and don't assume the biggest saving is the right one. Customers know their business better than we do.
 
 
+## Check retention before you suggest a downgrade
+
+A cheaper plan can cost a customer their event history. Before you suggest a lower [platform package](/platform-packages) or the Free plan, check what the change does to their [events retention](/docs/data/events-retention).
+
+- Each plan has a maximum retention period: 1 year on Free, 2 years on pay-as-you-go, 3 years on Boost, and 5 years on Scale. After a downgrade, PostHog lowers a longer retention period to the new plan's maximum.
+- An organization that was on a paid plan before November 5, 2026 keeps 7-year retention. It keeps it only while it stays on its plan and platform package, or moves to a higher package.
+- If that organization downgrades, its retention drops to the new plan's default, not its maximum: 1 year on Free and 2 years on every paid plan. On a paid plan, an admin can raise it in settings, up to the new plan's maximum.
+- Events older than the new retention period expire. We can delete expired events at any point, and we can't restore them after we delete them.
+
+Present the retention change as its own tradeoff, next to the saving. Ask how far back they query their data. If they still want the downgrade, tell them to set up a [batch export](/docs/data-pipelines/batch-exports) and [backfill](/docs/data-pipelines/batch-exports#backfills-exporting-historical-data) the history they need. A new batch export only sends events from its first interval onward, so only the backfill carries the history. Confirm that the backfill finished before they downgrade, because a backfill can only send events we still have.
+
+
 ## Common cost optimizations
 
 Most of the money sits in a handful of patterns. This isn't the full list, and it isn't the diagnostic guide – [checking the health of a customer's deployment](/handbook/customer-success/health-checks) has a checklist and some queries to run.

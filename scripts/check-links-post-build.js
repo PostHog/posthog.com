@@ -38,6 +38,7 @@ const {
     changedFiles,
     cliOptions,
     builtUrlExists,
+    inFullSiteOnly,
 } = require('./link-check-utils')
 
 // ============================================================================
@@ -359,6 +360,7 @@ function processLink(link, file, pages, redirects) {
             ...(error ? { reason: error } : {}),
         },
     })
+    if (!error && inFullSiteOnly(pathname, pages)) return { type: 'excluded', redirected }
     if (error || !builtUrlExists(pathname, pages)) {
         return result('broken')
     }

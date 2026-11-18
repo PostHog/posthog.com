@@ -139,7 +139,18 @@ CLI access is on the way, so you'll be able to pull a dataset revision and run i
 
 ## Limits
 
-PostHog applies limits to datasets to prevent abuse. These limits are subject to change.
+These limits are subject to change.
+
+| Resource | Limit | What counts |
+| --- | --- | --- |
+| Datasets per project | 100 by default | Active datasets and archived datasets that haven't expired. |
+| Items per dataset | 2,000 | Both active and archived items. |
+| Retained versions per item | 40 | The item's first version and each subsequent version. |
+| Retained item versions per project | 25,000 | Item versions across all datasets in the project. |
+| Payload per item | 406,666 bytes | The combined size of `input`, `expected_output`, `source_output`, and `metadata` as compact UTF-8 JSON. |
+| JSONL export | 250 MB | The entire file. A dataset with large items can exceed this limit even when each item fits within its payload limit. |
+
+Editing, archiving, or restoring an item can add a version. Each version counts toward both version limits until PostHog deletes it under the [retention policy](#data-retention).
 
 ## Report results with offline evals
 

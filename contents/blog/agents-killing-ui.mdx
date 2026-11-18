@@ -59,7 +59,7 @@ Design two entry points to your product:
 
 **What this looks like:**
 
-- The fastest way to try PostHog is the `npx -y @posthog/wizard@latest` [command](/docs/getting-started/install) that sets up your account, scans your codebase for what to instrument, and logs each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, some people continue their PostHog journey headless through the MCP. Plenty of others jump back into the web app (they want to _see_ their data and click around).
+- The fastest way to try PostHog is the `npx -y @posthog/wizard@latest` [command](/docs/getting-started/install) that sets up your account, scans your codebase for what to instrument, and logs each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, some people continue their PostHog journey headless through the MCP. Plenty of others [jump back into the web app](/blog/accidentally-launched-new-ui) (they want to _see_ their data and click around).
 - Our [Slack app](/blog/slack-app-beta) turns a message prompt into a draft PR. I 99% trust it to build things correctly. The 1% difference is why I still check the diff in GitHub (a different UI) before merging it.
 - [AgentMail](https://docs.agentmail.to/agent-onboarding)'s onboarding docs teach the agent to provision an inbox and key itself (no console required). Even there, a human UI is needed, and that UI is email: a six-digit code gets sent to a person. Until a human hands it over, the agent can only send mail to the address it signed up with.
 

@@ -56,8 +56,8 @@ Run the following commands in your root directory:
 
 ```bash
 # in the root directory
-npm install posthog-node
-npm install posthog-js @posthog/react
+npm install posthog-node@6
+npm install posthog-js@1 @posthog/react@1
 touch src/app/providers.js
 ```
 
@@ -247,7 +247,7 @@ To do this, go to the [A/B testing tab](https://us.posthog.com/experiments) and 
 
 To implement the A/B test, we:
 
-1. Fetch the `llm-experiment` flag in `api/generate-recipe/route.js` using [`posthog.getFeatureFlag()`](/docs/libraries/node#feature-flags)
+1. Fetch the `llm-experiment` flag in `api/generate-recipe/route.js` using [`posthog.getFeatureFlag()`](/docs/libraries/node/reference#get-feature-flag)
 2. Update the model or prompt depending on the flag value.
 3. Call `await posthog.shutdown()` at the end of our request to flush and send all pending events.
 

@@ -4,6 +4,8 @@ title: Install metrics
 
 > **Note:** Metrics is in open alpha. Any team can turn it on — open [Metrics](https://app.posthog.com/metrics) and select **Enable metrics** in the onboarding view. Setup details, including the ingestion endpoint, may change before general availability.
 
+import SignalSdkSupport from '../../integrate/_snippets/signal-sdk-support.mdx'
+
 There are three ways to get metrics into PostHog:
 
 - **PostHog SDKs**: if a PostHog SDK is already in your app, record metrics with the `posthog.metrics` API. No new packages, no extra authentication.
@@ -11,6 +13,10 @@ There are three ways to get metrics into PostHog:
 - **Metrics agent**: if your services already expose Prometheus `/metrics` endpoints, run the PostHog metrics agent with [Docker](/docs/metrics/installation/docker) or the [Kubernetes Helm chart](/docs/metrics/installation/kubernetes) to scrape and forward them, with no code changes. The same agent can also [pull from Google Cloud Monitoring](/docs/metrics/installation/google-cloud) for managed-service metrics like Cloud SQL and load balancers.
 
 Already capturing metrics with Prometheus, StatsD, or Datadog? You don't need to replace anything: add the PostHog call next to your existing instrumentation, using the same metric name and attributes, and migrate at your own pace.
+
+## SDK support by signal
+
+<SignalSdkSupport />
 
 ## Platforms
 

@@ -33,7 +33,7 @@ When linking Skio, you'll need:
 
 <SyncModes />
 
-All Skio tables support incremental sync on `updatedAt` (recommended) or `createdAt`.
+All Skio tables support incremental sync on `updatedAt` (recommended) or `createdAt`. The `cancel_flow_v2_sessions` table names these fields `updated_at` and `created_at`.
 
 ## Configuration
 

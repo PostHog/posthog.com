@@ -181,10 +181,12 @@ Steps:
 -   Something seems off
 -   They've asked for multiple refunds lately
 -   The case doesn't match the simple cases above
--   It's a big customer (spending $1,667+ monthly)
+-   It's a big customer (spending $1,667+ monthly), unless it's a small credit (see below)
 -   Need to create or modify an invoice for the correction. Support team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
 
-Message <TeamMember name="Mine Kansu" photo /> in Slack with what you checked, what you think we should do, and any other relevant context, and attach a private note to the ticket linking to the conversation. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
+A big customer on its own isn't a reason to escalate. If the credit is under $1,000, clearly fits one of the scenarios above, and nothing else on the list applies, use your judgement and issue it. Add a note with your calculation and a reference link so others can see why you gave it.
+
+When you'd like to escalate: Post in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> and tag the RevOps team Slack group with what you checked, what you think we should do, and any other relevant context, and attach a private note to the ticket linking to the conversation. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
 
 ### Our approach
 
@@ -193,6 +195,6 @@ We'd rather fix unexpected usage issues than have customers pay one massive invo
 ### Trial periods and usage spikes
 
 -   We're generous with trial periods for actively engaged new ICP customers
--   Tag accounts as "trial" in the billing system. If they're already paying when actively testing the product, inform Mine/RevOps for proper tagging and revenue recognition
+-   Tag accounts as "trial" in the billing system. If they're already paying when actively testing the product, tag the RevOps team in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> for proper tagging and revenue recognition
 -   If you spot accidental usage spikes, proactively reach out and work with customers to reduce their spend to fit their budget and needs
--   When you're unsure about handling a specific case, ping Mine/RevOps directly for review
+-   When you're unsure about handling a specific case, tag the RevOps team in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> for review

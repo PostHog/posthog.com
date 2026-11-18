@@ -183,36 +183,50 @@ const claimSteps: { title: string; copy: React.ReactNode }[] = [
     },
     {
         title: 'Redeem and build',
-        copy: 'The coupon applies, then you drop into onboarding.',
+        copy: 'On the free plan? Add a card to upgrade first. You only pay for what you use, and you can set billing limits as low as $0. Then the coupon applies, and you drop into onboarding.',
     },
 ]
 
 // A handful of newsletter posts to show off the writing. Substack-hosted images for now.
 const newsletterPosts: { title: string; url: string; image: string; author: string; date: string }[] = [
     {
+        title: 'Not everything needs an LLM',
+        url: '/newsletter/decision-models',
+        image: 'https://substack-post-media.s3.amazonaws.com/public/images/f406379a-4ff2-4e21-aaac-69cda7d7b37e_1200x630.png',
+        author: 'Jina Yoon',
+        date: 'Nov 9, 2026',
+    },
+    {
+        title: "Analytics has changed. Here's what to do about it",
+        url: '/newsletter/analytics-changed',
+        image: 'https://substack-post-media.s3.amazonaws.com/public/images/cc4bf50c-44a8-49e2-b507-d1131131c916_1200x630.png',
+        author: 'Ian Vanagas',
+        date: 'Nov 2, 2026',
+    },
+    {
         title: 'You need to find product-market fit again (sorry)',
-        url: 'https://newsletter.posthog.com/p/you-need-to-find-product-market-fit',
+        url: '/newsletter/find-pmf-again',
         image: 'https://substack-post-media.s3.amazonaws.com/public/images/c7da9331-5ada-429d-9f08-9e7c07f1bb98_1200x630.png',
         author: 'Cleo Lant',
         date: 'Aug 25, 2026',
     },
     {
         title: 'Read this before deleting your AGENTS.md',
-        url: 'https://newsletter.posthog.com/p/your-agentsmd-is-holding-you-back',
+        url: '/newsletter/fix-your-agents',
         image: 'https://substack-post-media.s3.amazonaws.com/public/images/305f04ed-304f-415f-900a-e027696b5ae3_2400x1260.png',
         author: 'Jina Yoon',
         date: 'Aug 31, 2026',
     },
     {
         title: 'Can software factories actually work?',
-        url: 'https://newsletter.posthog.com/p/software-factories',
+        url: '/newsletter/software-factories',
         image: 'https://substack-post-media.s3.amazonaws.com/public/images/5eeba4b2-705a-4ebf-a8a8-d0a9ef5535d6_2912x2096.png',
         author: 'Jina Yoon',
         date: 'Aug 11, 2026',
     },
     {
         title: '2030-shaped software',
-        url: 'https://newsletter.posthog.com/p/2030-shaped-software',
+        url: '/newsletter/2030-shaped-software',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/blog_9e40d54459.png',
         author: 'Ian Vanagas',
         date: 'Jul 20, 2026',
@@ -356,8 +370,26 @@ const faqItems = [
         trigger: 'What happens after the 12 months?',
         content: (
             <p>
-                The special plans and features run for 12 months from the day you redeem, then we switch you back to the
-                default paid plans. Nothing you built goes away.
+                The special plans and features run for 12 months from the day you redeem. The offer doesn't renew. When
+                it ends, the free Scale add-on switches to paid{' '}
+                <Link to="/platform-packages" className="font-semibold underline">
+                    Scale
+                </Link>{' '}
+                and your other products go back to the default paid plans. We email you 30 days and 7 days before, so
+                you can remove Scale first if you don't want it. Nothing you built goes away.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Will I pay anything during the 12 months?',
+        content: (
+            <p>
+                Scale is free. If your usage goes above the doubled free allowance, you pay for the extra usage at our
+                usual{' '}
+                <Link to="/pricing" className="font-semibold underline">
+                    pricing
+                </Link>
+                . Set billing limits to control your spend.
             </p>
         ),
     },
@@ -368,6 +400,23 @@ const faqItems = [
                 It depends on whether you've ever paid us. If you have no paid invoices before December 1, 2025, you're
                 eligible – even if you've been on the free tier for years. If you were already paying us before that
                 date, this one isn't for you.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I get PostHog merch for my Lenny Meetup?',
+        content: (
+            <p>
+                We'd love to help. If you're organizing a Lenny community meetup and want PostHog involved, here's how
+                we can support you:{' '}
+                <Link
+                    to="https://app.notion.com/p/PostHog-for-Lenny-s-Meetup-hosts-41152be1aa2f806d868adaa390c3b851"
+                    externalNoIcon
+                    className="font-semibold underline"
+                >
+                    PostHog for Lenny's Meetup hosts
+                </Link>
+                .
             </p>
         ),
     },
@@ -388,7 +437,11 @@ const faqStructuredData = [
     },
     {
         question: 'What happens after the 12 months of free PostHog Scale?',
-        answer: 'The special plans and features are available for 12 months from the date you redeem your coupon. After that, you switch back to the default paid plans.',
+        answer: "The special plans and features are available for 12 months from the date you redeem your coupon. The offer doesn't renew. When it ends, the free Scale add-on switches to paid Scale and your other products go back to the default paid plans. PostHog emails you 30 days and 7 days before, so you can remove Scale first if you don't want it.",
+    },
+    {
+        question: 'Will I pay anything during the 12 months of the Lenny offer?',
+        answer: 'Scale is free. If your usage goes above the doubled free allowance, you pay for the extra usage at the usual PostHog pricing. Set billing limits to control your spend.',
     },
     {
         question: 'What counts as a new PostHog customer?',
@@ -573,7 +626,10 @@ export default function LennyProductPass(): JSX.Element {
                                         You have no paid PostHog invoices before December 1, 2025 – years on the free
                                         tier don't count against you
                                     </li>
-                                    <li>You have an active paid PostHog subscription</li>
+                                    <li>
+                                        You have an active paid PostHog subscription. If you're on the free plan, you
+                                        can upgrade when you claim
+                                    </li>
                                 </ul>
                             </div>
                         </div>

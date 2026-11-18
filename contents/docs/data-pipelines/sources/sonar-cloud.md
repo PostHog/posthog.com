@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Sonar Cloud connector syncs projects, issues, metrics, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Sonar Cloud connector syncs projects, components, pull requests, issues and their change history, metrics and their values over time, rules, quality gates, and quality profiles into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -38,6 +38,8 @@ You'll be asked for:
 <SyncModes />
 
 All Sonar Cloud tables are full refresh. Each sync replaces the contents of the table.
+
+**Issue changelog** needs one request per issue, so it's off by default. Turn it on when you need the change history of each issue.
 
 ## Configuration
 

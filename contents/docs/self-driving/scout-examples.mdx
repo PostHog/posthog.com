@@ -7,12 +7,6 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 A [scout](/docs/self-driving/scouts) can watch almost anything you land in PostHog. There are two kinds: the **canonical** scouts PostHog ships with, and **custom** scouts you create for the patterns specific to your product. This page is a catalog of both, to spark ideas for what to point a scout at.
 
 <CalloutBox icon="IconBook" title="Prefer to learn by use case?" type="fyi">
@@ -23,7 +17,7 @@ The [pocket guides](/pocket-guides) walk through real scouts end to end – the 
 
 ## Canonical scouts
 
-PostHog ships a fleet of canonical scouts out of the box, each watching a common pattern. You turn each one on or off per project. Each scout is just a skill you can read (named `signals-scout-*`) – the table links straight to its `SKILL.md` in the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills). Here's the full set:
+PostHog ships a fleet of canonical scouts out of the box, each watching a common pattern. You turn most of them on or off per project. The Workflows scout instead starts when you turn on **Suggest improvements** for a workflow. Each scout is just a skill you can read (named `signals-scout-*`) – the table links straight to its `SKILL.md` in the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills). Here's the full set:
 
 | Scout | What it looks for |
 |---|---|
@@ -57,6 +51,7 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [Unused features](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-unused-features/SKILL.md) | Clickable elements and pages with low use relative to their reach, with likely causes and suggestions for features people can reach but rarely use |
 | [Web analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-analytics/SKILL.md) | Acquisition channels diverging, attribution breakage, and 404 spikes |
 | [Web vitals](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-vitals/SKILL.md) | Core Web Vitals regressions and other recent performance shifts in web traffic |
+| [Workflows](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-workflows/SKILL.md) | Email steps in opted-in workflows that underperform on their own delivery metrics, with one suggested change per workflow that a person reviews before anything changes |
 
 Most are specialists that watch one surface in depth; the [general](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) scout is the exception – it watches the seams between surfaces, like a deploy, then an error burst, then a conversion dip, that no single specialist would catch on its own. Browse them all in the [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) directory.
 

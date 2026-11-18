@@ -122,19 +122,19 @@ func chargeCustomer(ctx context.Context, customerID string) error {
 Install the optional PostHog OpenTelemetry module:
 
 ```bash
-go get github.com/posthog/posthog-go/otel
+go get github.com/posthog/posthog-go/otel/v2
 ```
 
 Register the context processor on your existing provider before requests start, then wrap your HTTP handler:
 
 ```go
-import posthogotel "github.com/posthog/posthog-go/otel"
+import posthogotel "github.com/posthog/posthog-go/otel/v2"
 
 tp.RegisterSpanProcessor(posthogotel.NewContextSpanProcessor(client))
 handler := posthogotel.NewRequestContextMiddleware(client, existingHandler)
 ```
 
-The wrapper accepts the [core request middleware options](/docs/libraries/go#request-context). Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Put OpenTelemetry HTTP middleware outside the PostHog wrapper to enrich its existing request span. Create child spans with `r.Context()` so the processor can read the request IDs.
+The wrapper accepts the [core request middleware options](/docs/libraries/go/reference#posthognewrequestcontextmiddleware). Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Put OpenTelemetry HTTP middleware outside the PostHog wrapper to enrich its existing request span. Create child spans with `r.Context()` so the processor can read the request IDs.
 
 The bridge adds missing `sessionId` and `posthogDistinctId` attributes. Existing `sessionId` and `posthogDistinctId` attributes take precedence. Set authenticated application identity with `posthogDistinctId`. Missing IDs stay absent. The optional module keeps your existing provider, exporter, and sampler. It does not change the core SDK dependencies.
 

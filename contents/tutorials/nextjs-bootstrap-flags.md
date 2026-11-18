@@ -26,7 +26,7 @@ Next, go into your app and install PostHog.
 
 ```bash
 cd middle-bootstrap
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Once done, set up a PostHog provider by creating a new file in the `app` folder named `providers.js`. In this file, import `PostHogProvider`, initialize PostHog with your project token and instance address (from your [project settings](https://app.posthog.com/project/settings)), and set up the provider component.
