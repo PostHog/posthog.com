@@ -31,6 +31,8 @@ A scout is a set of prompts and skills that an agent executes on a schedule. The
 
 Scouts remember across runs through a durable scratchpad. Entries are keyed by prefix. `pattern:` is what normal looks like. `dedupe:` is what's already been filed. `noise:` and `allowlist:` are what to skip. `addressed:` is what's fixed. This is what stops a daily scout from re-filing the same finding every morning. Dedupe keys go on the stable identifier, like the issue id or the flag key. They never go on the instance of it, like the account or the day.
 
+Durable entries don't expire, so a memory can go stale. For example, a skill change can leave a `dedupe:` marker that no scout uses anymore. To remove one, open the scout memory list, expand the entry, and click **Delete**, then confirm in the **Delete this memory?** dialog. Scouts stop reading the entry, but a scout can write it again on a later run. You can't undo a delete. You need editor access to skills to delete a memory, because memories steer the scouts.
+
 ## Reference shapes
 
 Every scout is a variation on a small set of shapes: anomaly watcher, liveness watcher, watchlist, warehouse-backed source, daily digest, and so on. The [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) catalogs them all. It covers the discriminator, memory, and gotchas for each shape.
