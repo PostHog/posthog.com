@@ -102,9 +102,9 @@ export const mcpAnalytics = {
         // No `q_auto,f_auto` here: CloudinaryImage renders a URL with a comma as a plain <img> and drops the
         // class that hides the other color mode's image, so both would show.
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/NEW_MCP_analytics_dashboard_light_ab100d9fb3.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_light_f4327f4709.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/NEW_MCP_analytics_dashboard_dark_44a5c6b92a.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_dark_aa82abfd74.png',
             alt: 'MCP Analytics dashboard showing tool calls, error rates, and latency',
         },
     },
