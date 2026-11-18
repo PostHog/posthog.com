@@ -4,7 +4,7 @@ import buildProductMenuTabs, { surfaceBasePath } from 'components/Products/Reade
 import ProductSwitcher from 'components/Products/ReaderViewProduct/ProductSwitcher'
 import ReaderView from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
-import { volumeById } from '../../constants/pocketGuides'
+import { hasLearnTab, learnHubFor } from '../../constants/pocketGuides'
 
 // Kept apart from LearnPage: AppWindow imports this file on every page, so it must not pull in guide content.
 
@@ -29,14 +29,13 @@ export default function LearnShell({
     const currentPath = path.replace(/\/$/, '')
     const productData = products.find((product) => {
         if (productHandle) return product.handle === productHandle
-        const learnUrl = product.pocketGuideVolume && surfaceBasePath(product.slug, 'learn')
+        const learnUrl = hasLearnTab(product) && surfaceBasePath(product.slug, 'learn')
         return learnUrl && (currentPath === learnUrl || currentPath.startsWith(`${learnUrl}/`))
     })
     if (!productData) return <>{children}</>
     // A hub root shows the product's landing page, which has no markdown to copy.
     const isLearnLanding =
-        Boolean(volumeById(productData.pocketGuideVolume)?.learnHub) &&
-        currentPath === surfaceBasePath(productData.slug, 'learn')
+        Boolean(learnHubFor(productData)) && currentPath === surfaceBasePath(productData.slug, 'learn')
 
     return (
         <ReaderView

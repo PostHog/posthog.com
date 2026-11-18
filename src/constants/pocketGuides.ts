@@ -142,6 +142,36 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
 ]
 
+/** The Learn fields a product's data can set. */
+export interface LearnProduct {
+    slug?: string
+    /** Volume id; the volume's `learnHub` decides the hub pages. */
+    pocketGuideVolume?: string
+    /** Hub pages for a product whose pocket guide isn't written yet. Its Learn tab lists the guide as coming soon. */
+    learnHubPages?: LearnHubPage[]
+}
+
+/** The hub a product's Learn tab shows: its volume's, or the product's own while its guide is unwritten. */
+export function learnHubFor(product?: LearnProduct | null): PocketGuideVolume['learnHub'] | undefined {
+    if (!product) return undefined
+    const volume = product.pocketGuideVolume ? volumeById(product.pocketGuideVolume) : undefined
+    if (volume) return volume.learnHub
+    return product.learnHubPages ? { pages: product.learnHubPages } : undefined
+}
+
+/** True when a product has a Learn tab: it has a pocket guide, or a hub whose guide is coming soon. */
+export function hasLearnTab(product?: LearnProduct | null): boolean {
+    return Boolean(product?.pocketGuideVolume || product?.learnHubPages)
+}
+
+/**
+ * The `volume` property on Learn events. A product without a guide yet reports its slug, which is the
+ * id its volume will take, so its events line up once the guide ships.
+ */
+export function learnTrackingVolume(product?: LearnProduct | null): string | undefined {
+    return product?.pocketGuideVolume ?? product?.slug
+}
+
 /** The volume that teaches a product, if one does. Drives `GuidesForProduct` on tool docs pages. */
 export function volumeForProduct(docsProduct: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.docsProduct === docsProduct && !v.comingSoon)

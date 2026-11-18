@@ -19,7 +19,12 @@ export interface LearnPromptSet {
     chapterPrompts: AuthoredPrompt[]
     /** Ready-to-run prompts, shown as written after the teaching prompts. */
     examplePrompts?: AuthoredPrompt[]
+    /** Teach by asking: one question at a time, predict before explaining, hints instead of answers. Applies to every prompt in the set. */
+    askFirst?: boolean
 }
+
+/** The `askFirst` instructions for topic and example prompts. */
+const ASK_FIRST = `Ask me one question and wait for my answer. Have me predict before you explain, and give me a hint, not the answer, when I’m wrong.`
 
 /** A prompt exactly as a reader copies it, with the label and tracking resource it is shown with. */
 export interface LearnPrompt {
@@ -36,14 +41,18 @@ export function learnPrompts({
     focus,
     chapterPrompts,
     examplePrompts = [],
+    askFirst,
 }: LearnPromptSet): LearnPrompt[] {
+    const teach = askFirst
+        ? `Teach one concept at a time. ${ASK_FIRST}`
+        : 'Teach one concept at a time with a small exercise, and review my answer before continuing.'
     const teachingPrompts = [
-        { title: 'Start with your product', prompt: agentTeachingPrompt(productName, docsSlug, focus) },
+        { title: 'Start with your product', prompt: agentTeachingPrompt(productName, docsSlug, focus, askFirst) },
         ...chapterPrompts.map(({ title, prompt }) => ({
             title,
             prompt: `${prompt}
 
-Use my code and PostHog data. Teach one concept at a time with a small exercise, and review my answer before continuing. Use https://posthog.com/docs/${docsSlug}.md as the source of truth.
+Use my code and PostHog data. ${teach} Use https://posthog.com/docs/${docsSlug}.md as the source of truth.
 
 Don’t change my project without asking. If context is missing, ask for it.`,
         })),
@@ -56,6 +65,7 @@ Don’t change my project without asking. If context is missing, ask for it.`,
         })),
         ...examplePrompts.map((entry) => ({
             ...entry,
+            prompt: askFirst ? `${entry.prompt}\n\n${ASK_FIRST}` : entry.prompt,
             label: 'Example prompt' as const,
             resource: 'agent_example' as const,
         })),
@@ -197,6 +207,56 @@ export const ERROR_TRACKING_PROMPTS: LearnPromptSet = {
     ],
 }
 
+export const DATA_PIPELINES_PROMPTS: LearnPromptSet = {
+    productHandle: 'data_pipelines',
+    productName: 'Data Pipelines',
+    docsSlug: 'data-pipelines',
+    focus: 'sources, transformations, destinations, and gaps',
+    askFirst: true,
+    chapterPrompts: [
+        {
+            title: 'Sources',
+            prompt: `Teach me PostHog data pipeline sources using a tool my product already depends on, like Stripe, my CRM, or my production database. Start with what a source does: it copies tables into PostHog on a schedule, so I can query them next to my events. Then explain the three sync modes and what each one costs me. Incremental syncs only new and changed rows by a field like updated_at, but misses deletions. Append-only adds new rows and never updates old ones. Full refresh copies the whole table every time. Also explain primary keys, why they lock after the first incremental sync, and when a lookback window catches rows that arrive late.
+
+Then help me choose a sync mode and a sync frequency for each table I need. Last, help me join one synced table to my events or persons with a SQL query, and check that the join matches the rows I expect.`,
+        },
+        {
+            title: 'Transformations',
+            prompt: `Teach me PostHog transformations using the events my product sends. Start with where a transformation runs: during ingestion, before PostHog stores the event. Explain what that means. A transformation can add, change, or remove properties, or drop the event, and the change is permanent. It can see the event but not the person or groups, because PostHog hasn't resolved them yet. If a transformation fails on an event, PostHog logs the error and keeps processing other events.
+
+Then look at my recent events, and help me find one thing worth changing before it's stored, like a property that holds personal data, a URL with tokens in it, or traffic I don't want to pay for. Then write the transformation and test it against a real recent event. Before I turn it on, tell me which insights, cohorts, or destinations read the property it changes, and what will change for each one.`,
+        },
+        {
+            title: 'Destinations and batch exports',
+            prompt: `Teach me how PostHog sends data to other tools, using the tools my team already uses. Compare the two ways. A realtime destination sends each event a few seconds after it arrives, and it can read the person at that time. A batch export moves large volumes to a warehouse like S3, BigQuery, or Snowflake on a schedule, and it never updates rows after it exports them. Explain what happens when the other tool fails: a destination retries a few times, and PostHog disables it if it keeps failing. A batch export can retry a whole run.
+
+Then help me pick one for a real need in my product. Help me write a filter that sends only the events I need, and explain why a filter on $identify or later matters if I need person properties. Test it before I turn it on, and tell me which metrics and logs to watch for the first hour.`,
+        },
+    ],
+    examplePrompts: [
+        {
+            title: 'Failing destinations',
+            prompt: `List my active realtime destinations and batch exports. For each one, show its successes, failures, and filtered events from the last 24 hours. Before you show the numbers, explain the difference: a failure means the other tool rejected the event or couldn't be reached, and a filtered event means my filters never matched it. For each destination with failures, read its logs and group the errors by cause, like bad credentials, a bad payload, a rate limit, or the other tool being down. Tell me which ones I can fix in PostHog and which ones I must fix on the other side. For a destination with no successes and many filtered events, show me its filters and explain why they match nothing.`,
+        },
+        {
+            title: 'Check a payload',
+            prompt: `Help me check my [destination name] destination before I trust it. First, show me its filters and inputs. Then test-invoke it against one recent event that should match and one that shouldn't. A test sends nothing, so it's safe to repeat. Show me the request it would send, and explain each field that's empty or wrong. If a value is missing, tell me whether the event doesn't have it or the inputs don't map it.`,
+        },
+        {
+            title: 'Drop test traffic',
+            prompt: `Teach me how to drop test traffic before PostHog stores it. Look at my recent events and help me find a reliable signal for test traffic, like a localhost or staging $current_url, a test_mode property, or an internal distinct ID. Explain why the signal must be on the event: a transformation runs before PostHog resolves the person, so it can't read person properties. Also explain how this differs from the project's internal and test user filter, which hides events in insights but still stores them. Then create a transformation that drops those events, and test it against one recent event it should drop and one it should keep. Show me both results. Leave it disabled until I confirm, and tell me which metrics to check after I turn it on.`,
+        },
+        {
+            title: 'Transformation order',
+            prompt: `Explain how PostHog runs my transformations: one after another, in a set order, where each one gets the event that the one before it returned. Then list my transformations in the order they run, with what each one adds, changes, or removes. Take one real recent event and show me how it looks after each step. Tell me if a transformation reads a property that an earlier one removes or renames, or if events are dropped only after other transformations have already done work on them. Suggest a better order and explain why, but don't change it until I confirm.`,
+        },
+        {
+            title: 'Export as files',
+            prompt: `Teach me when to use a file download export instead of a batch export or the query API. Then help me export last week's $pageview events as Parquet files. Explain the limits first: one export covers at most one week, it runs through the API with a personal API key that has the batch_export:write and batch_export:read scopes, and the files use the same schema as an S3 batch export. Show me the request before you send it, then poll until the export is done and give me the download links. Last, show me how to count the rows in the files, and compare the count with a $pageview trend for the same week in PostHog.`,
+        },
+    ],
+}
+
 /** Every product with an agent prompts page, in the order the `/learn/prompts` library lists them. */
 export const LEARN_PROMPT_SETS: LearnPromptSet[] = [
     PRODUCT_ANALYTICS_PROMPTS,
@@ -204,4 +264,5 @@ export const LEARN_PROMPT_SETS: LearnPromptSet[] = [
     SESSION_REPLAY_PROMPTS,
     FEATURE_FLAGS_PROMPTS,
     ERROR_TRACKING_PROMPTS,
+    DATA_PIPELINES_PROMPTS,
 ]

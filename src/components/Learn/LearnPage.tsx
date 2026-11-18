@@ -4,7 +4,8 @@ import { useLocation } from '@reach/router'
 import { surfaceBasePath } from 'components/Products/ReaderViewProduct'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
-import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
+import { learnHubFor, learnTrackingVolume, pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
+import type { PocketGuideVolume } from '../../constants/pocketGuides'
 
 import LearnShell, { LearnShellContext } from './LearnShell'
 import LearnSurface from './PocketGuides/LearnSurface'
@@ -28,7 +29,12 @@ export interface LearnLandingProps {
     storyUrl: string
     /** The hub root, `/learn/<product>`. */
     learnUrl: string
-    volumeId: string
+    /** Undefined for a hub whose pocket guide isn't written yet. */
+    volumeId?: string
+    /** The hub's pages, from the volume or, before the guide exists, the product. */
+    hub?: PocketGuideVolume['learnHub']
+    /** The `volume` property on Learn events: the volume id, or the product slug before the guide exists. */
+    trackingVolume?: string
 }
 
 /** Page content shared by the index and per-chapter routes. */
@@ -44,7 +50,8 @@ export default function LearnPage({
     const productData = useProduct({ handle: productHandle }) as any
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
-    const isLearnLanding = Boolean(volumeId && Landing && !chapter)
+    const hub = learnHubFor(productData)
+    const isLearnLanding = Boolean((volumeId || hub) && Landing && !chapter)
     const volume = volumeId ? volumeById(volumeId) : undefined
     // The registry owns the guide URL, so links match the pages createPages builds.
     const guideBasePath = volume
@@ -58,6 +65,8 @@ export default function LearnPage({
         storyUrl: guideBasePath,
         learnUrl: productData ? surfaceBasePath(productData.slug, 'learn') : '',
         volumeId,
+        hub,
+        trackingVolume: learnTrackingVolume(productData),
     } as LearnLandingProps
 
     const guide = volumeId ? (

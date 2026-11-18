@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+    HedgehogConstruction,
     HedgehogTrenchcoat,
     HedgehogDirector,
     HedgehogDollHouse,
@@ -9,6 +10,11 @@ import {
     HedgehogTrafficController,
     HedgehogXRay,
 } from '@posthog/brand/hoggies'
+
+/** The hedgehog carrying a pipe, as on the Data Pipelines product page. */
+const HedgehogCarryingPipe = (props: { size?: number; className?: string }) => (
+    <HedgehogConstruction variant="2" {...props} />
+)
 
 /**
  * One specimen per volume, so a new volume picks an existing hoggie instead of commissioning one.
@@ -25,6 +31,11 @@ export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; cla
     'feature-flags': HedgehogTrafficController,
 }
 
+/** Art for volumes that aren't written yet, keyed by the id they will take. Drawn on their coming-soon covers. */
+const UPCOMING_VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    'data-pipelines': HedgehogCarryingPipe,
+}
+
 export function volumeArt(id?: string): React.ComponentType<{ size?: number; className?: string }> | undefined {
-    return id ? VOLUME_ART[id] : undefined
+    return id ? VOLUME_ART[id] ?? UPCOMING_VOLUME_ART[id] : undefined
 }

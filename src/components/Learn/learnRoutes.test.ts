@@ -270,3 +270,28 @@ test('a Learn hub root shows a landing page exactly when its volume has a learnH
         assert.equal(/\blanding=\{/.test(readFileSync(index, 'utf8')), Boolean(volume.learnHub), volume.id)
     }
 })
+
+test('a Learn hub without a pocket guide has its overview and every listed hub page', () => {
+    // Product data can open a Learn tab with `learnHubPages` before its volume exists.
+    const productDataDir = new URL('../../hooks/productData/', import.meta.url)
+    const hubs = readdirSync(productDataDir)
+        .filter((file) => file.endsWith('.tsx'))
+        .map((file) => readFileSync(new URL(file, productDataDir), 'utf8'))
+        .map((source) => ({
+            slug: source.match(/^ {4}slug: '([^']+)'/m)?.[1],
+            pages: source.match(/learnHubPages: \[([^\]]*)\]/)?.[1].match(/'[^']+'/g),
+            hasVolume: /pocketGuideVolume:/.test(source),
+        }))
+        .filter((hub) => hub.pages)
+    assert.ok(hubs.some((hub) => hub.slug === 'data-pipelines'))
+    for (const { slug, pages, hasVolume } of hubs) {
+        assert.equal(hasVolume, false, `${slug}: a product with a volume takes its hub pages from the volume`)
+        const index = new URL(`../../pages/learn/${slug}/index.tsx`, import.meta.url)
+        assert.ok(existsSync(index), `${slug} needs src/pages/learn/${slug}/index.tsx`)
+        assert.match(readFileSync(index, 'utf8'), /\blanding=\{/)
+        for (const page of pages ?? []) {
+            const file = new URL(`../../pages/learn/${slug}/${page.replace(/'/g, '')}.tsx`, import.meta.url)
+            assert.ok(existsSync(file), `${slug} lists ${page} but has no page for it`)
+        }
+    }
+})
