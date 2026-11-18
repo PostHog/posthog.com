@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Tailscale connector syncs devices, users, keys, services, and network flow logs into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Tailscale connector syncs devices, device posture attributes, users, invites, keys, services, and network flow logs into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,9 +23,9 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Sync your Tailscale devices, users, keys, services, and network flow logs.
+Sync your Tailscale devices, device posture attributes, users, invites, keys, services, configuration audit logs, and network flow logs.
 
-An **OAuth client** is the recommended credential for recurring syncs - API access tokens expire after at most 90 days. Create one in the [Tailscale admin console](https://login.tailscale.com/admin/settings/oauth) under **Settings > OAuth clients**, with read scopes for the tables you want to sync (for example `devices:core:read`, `users:read`, `auth_keys:read`, `logs:configuration:read`, `services:read`, and `logs:network:read`).
+An **OAuth client** is the recommended credential for recurring syncs - API access tokens expire after at most 90 days. Create one in the [Tailscale admin console](https://login.tailscale.com/admin/settings/oauth) under **Settings > OAuth clients**, with read scopes for the tables you want to sync (for example `devices:core:read`, `devices:posture_attributes:read`, `device_invites:read`, `users:read`, `auth_keys:read`, `services:read`, `logs:configuration:read`, and `logs:network:read`).
 
 Alternatively, generate an API access token under **Settings > Keys**. Leave the tailnet field blank to use the credential's default tailnet.
 
@@ -38,6 +38,8 @@ You'll be asked for:
 <SyncModes />
 
 Most Tailscale tables use full refresh, where each sync replaces the contents of the table. The `configuration_audit_logs` and `network_flow_logs` tables use incremental sync (append-only), which adds new records without replacing existing data.
+
+The `user_invites` and `device_invites` tables do not include the invite link, because anyone who has the link can accept the invite. The `user_invites` table contains only open invites. When a user accepts an invite, the invite is removed from the table on the next sync.
 
 ## Configuration
 
