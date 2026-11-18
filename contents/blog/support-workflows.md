@@ -42,7 +42,7 @@ Moving to PostHog Support, I was adamant that I didn't want a branch per team th
 3. Runs a read-only [PostHog AI task](/docs/workflows/ai-tasks) that:
     1. Works out a team tag and an SME tag in a format I've defined.
     2. Works out the ticket's priority, based on the examples in our handbook.
-4. Checks the response from the AI step is in the format I expect, then applies the team and SME tags and sets the priority.
+4. Checks the response from the AI step is in the format I expect, then applies the team and SME tags, and sets the priority.
 5. Captures a custom PostHog event to say the ticket has been classified and which tags were applied.
 6. Starts a second read-only AI task that investigates the ticket and pulls together useful context for the support engineer (including events, replays, customer analytics, errors, past tickets, etc.).
 
