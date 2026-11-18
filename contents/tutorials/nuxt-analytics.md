@@ -178,7 +178,7 @@ When you click the button now, PostHog captures a custom `home_button_clicked` e
 
 ## Adding PostHog on the server side
 
-Nuxt is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the [`posthog-js` library](/docs/libraries/js) we installed won’t work on the server side. Instead, we must use the [`posthog-node` SDK](/docs/libraries/node). We can start by installing it:
+Nuxt is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the [`posthog-js` library](/docs/libraries/js) we installed won’t work on the server side. Instead, we must use the [`posthog-node` SDK](/docs/libraries/node/reference). We can start by installing it:
 
 ```bash
 npm install posthog-node@6

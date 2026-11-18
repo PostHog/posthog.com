@@ -316,11 +316,11 @@ POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 
 ### 5. Adopt contexts
 
-Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](/docs/libraries/python) to learn more.
+Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](/docs/libraries/python/reference) to learn more.
 
 ## Further reading
 
-- [Python SDK docs](/docs/libraries/python)
+- [Python SDK docs](/docs/libraries/python/reference)
 - [Full Python SDK reference](/docs/references/posthog-python)
 - [Django contexts middleware docs](/docs/libraries/django#django-contexts-middleware)
 - [Contexts docs](/docs/libraries/python/reference#posthognew_context)

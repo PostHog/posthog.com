@@ -52,7 +52,7 @@ Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see you
 
 ## Adding PostHog
 
-Next, we install and set up PostHog using the [Python SDK](/docs/libraries/python).
+Next, we install and set up PostHog using the [Python SDK](/docs/libraries/python/reference).
 
 ```bash
 pip install "posthog>=8,<9"
