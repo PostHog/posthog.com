@@ -4,33 +4,63 @@ sidebar: Docs
 showTitle: true
 ---
 
-Workflows are stored as **hog flows**, and every one of them is available over the PostHog [REST API](/docs/api). Use it when you want workflows under version control, generated from your own system, or created as part of a deploy.
+Everything in Workflows is available over the PostHog [REST API](/docs/api): sending transactional email, templates, senders, opt-outs, suppressions, workflows, broadcasts, and imports from other tools. Use it when you want workflows under version control, generated from your own system, or created as part of a deploy.
 
-## Before you start
-
-1. **Set up Workflows** – Workflows are no-code, so there's nothing to install. [Install a PostHog SDK](/docs/workflows/installation) if you want event-based triggers.
-2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
-
-## What you can do here
-
-- **Manage workflows.** `/api/projects/:project_id/hog_flows/` lists, creates, reads, updates, and deletes workflows, including their trigger, graph of actions, and enabled state.
-- **Organize with tags.** Pass a `tags` array when creating or updating a workflow to label it by team or topic. Filter the list with `?tags=["growth","marketing"]` – a JSON-encoded list that returns workflows carrying at least one of the listed tags. Tags are shared across your project, the same as dashboards, insights, actions, and feature flags.
-- **Reuse templates.** `/api/projects/:project_id/hog_flow_templates/` covers the workflow templates in your project.
-- **Manage message categories.** `/api/projects/:project_id/messaging_categories/` lists, creates, reads, and updates the [message categories](/docs/workflows/opt-outs#message-categories) that workflows use for opt-outs. Marketing categories let recipients opt out; transactional categories ignore opt-outs for critical messages like receipts.
-- **Honor unsubscribes and resubscribes.** `/api/projects/:project_id/messaging_preferences/` manages the [opt-out list](/docs/workflows/opt-outs): list a category's opt-outs, add them one at a time or in bulk, remove one when a recipient opts back in, and export the list as CSV. Full details in the [messaging preferences API reference](/docs/api/messaging-preferences).
-- **Keep the suppression list current.** `/api/projects/:project_id/messaging_suppressions/` lists, adds, and removes [suppressed addresses](/docs/workflows/opt-outs#the-suppression-list). Full details in the [messaging suppressions API reference](/docs/api/messaging-suppressions).
-- **Check blast radius before you publish.** The API can report how many people a workflow's audience filters would match, so you don't accidentally message everyone.
-- **Inspect runs.** Batch job status endpoints report on workflows triggered against a batch audience.
-- **Cancel runs.** `/api/projects/:project_id/hog_flows/:id/invocations/cancel` cancels a workflow's in-flight runs, by ID or all at once. `/api/projects/:project_id/hog_flows/:id/batch_jobs/:batch_job_id/cancel` stops a batch run: enrollment halts and its in-flight runs are canceled. Both are asynchronous and report when another pass is needed.
-
-A workflow's graph is validated on write. If a trigger, action, or template reference is invalid, the API rejects it with a message naming the offending action rather than saving a broken workflow.
+Each group of endpoints below has a generated reference page with every endpoint, field, and response.
 
 ## Authentication
 
-Use a [personal API key](/docs/api#authentication) scoped to the project you're writing to, and send it as a bearer token. Workflows, message categories, opt-outs, and suppressions all use the `hog_flow` scope: grant the key `hog_flow:read` for reads and `hog_flow:write` for writes. Treat the key like a password – it can create and enable workflows that send real messages, so keep it in a secret store, never in client-side code.
+The API uses two kinds of key. Send either one as a bearer token in the `Authorization` header.
+
+- **Sending** - A [project secret API key](/docs/api/project-secret-api-keys), which starts with `phs_`. It can send [transactional emails](/docs/workflows/transactional-emails), upload their attachments, and read their status, and nothing else. See [create an API key](/docs/workflows/transactional-emails#create-an-api-key).
+- **Everything else** - A [personal API key](/docs/api/personal-api-keys) scoped to the project you're writing to, with the scopes in the table below.
+
+Treat both keys like a password. A personal API key with `hog_flow:write` can create and enable workflows that send real messages, so keep it in a secret store, never in client-side code.
+
+## Endpoints
+
+All paths start with `/api/projects/:project_id/`. With a project secret API key, you can use `@current` in place of the project ID, which is the project that the key belongs to.
+
+| Endpoints | What they cover | Key and scopes | Reference |
+| --- | --- | --- | --- |
+| `messaging/` | Send a transactional email, upload its attachments, and read its status | Project secret API key with `transactional_email:write` to send and upload. `transactional_email:read` is enough to read a status | [Messaging](/docs/api/messaging) |
+| `messaging_templates/` | Email templates in the [content library](/docs/workflows/library), and making a template transactional | `hog_flow:read` or `hog_flow:write`. Making a template transactional needs `transactional_email:write` | [Messaging templates](/docs/api/messaging-templates) |
+| `messaging_categories/` | [Message categories](/docs/workflows/opt-outs#message-categories) | `hog_flow:read` or `hog_flow:write` | [Messaging categories](/docs/api/messaging-categories) |
+| `messaging_preferences/` | The [opt-out list](/docs/workflows/opt-outs) | `hog_flow:read` or `hog_flow:write` | [Messaging preferences](/docs/api/messaging-preferences) |
+| `messaging_suppressions/` | The [suppression list](/docs/workflows/opt-outs#the-suppression-list) | `hog_flow:read` or `hog_flow:write`. Listing and removing addresses also need `person:read` | [Messaging suppressions](/docs/api/messaging-suppressions) |
+| `integrations/` | Email senders: add a sender, check its DNS records, and verify its domain | `integration:read` or `integration:write` | [Integrations](/docs/api/integrations) |
+| `hog_flows/` | Workflows and broadcasts | `hog_flow:read` or `hog_flow:write`. Some endpoints also need `person:read`, see below | [Hog flows](/docs/api/hog-flows) |
+| `messaging_provider_imports/` | Imports from other email tools, such as [Resend](/docs/workflows/migrate-from-resend) | `hog_flow:read` to list and read imports, `hog_flow:write` to start one | [Messaging provider imports](/docs/api/messaging-provider-imports) |
+
+A read needs the `:read` scope, and a write needs the `:write` scope. A key with `hog_flow:write` can still send transactional emails, but new keys should use `transactional_email:write`.
+
+## Send transactional email
+
+`POST /api/projects/@current/messaging/send/email/` sends one email to one recipient with a project secret API key. [Send transactional emails with the API](/docs/workflows/transactional-emails/api) covers the request, idempotency keys, attachments, statuses, and every error. If your language has a [server SDK](/docs/workflows/installation#send-email-from-your-backend), use it instead.
+
+## Manage workflows and broadcasts
+
+Workflows are stored as **hog flows**. A broadcast is a hog flow with `origin_product` set to `broadcasts`.
+
+- **Manage workflows.** `/api/projects/:project_id/hog_flows/` lists, creates, reads, updates, and deletes workflows, including their trigger, graph of actions, and enabled state.
+- **Organize with tags.** Pass a `tags` array when creating or updating a workflow to label it by team or topic. Filter the list with `?tags=["growth","marketing"]`, a JSON-encoded list that returns workflows carrying at least one of the listed tags. Tags are shared across your project, the same as dashboards, insights, actions, and feature flags.
+- **Reuse templates.** `/api/projects/:project_id/hog_flow_templates/` covers the workflow templates in your project.
+- **Check blast radius before you publish.** The API can report how many people a workflow's audience filters would match, so you don't accidentally message everyone. This needs `person:read` as well as `hog_flow:read`.
+- **Inspect runs.** Batch job status endpoints report on workflows triggered against a batch audience. Reading invocation results needs `person:read` as well as `hog_flow:read`.
+- **Cancel runs.** `/api/projects/:project_id/hog_flows/:id/invocations/cancel` cancels a workflow's in-flight runs, by ID or all at once. `/api/projects/:project_id/hog_flows/:id/batch_jobs/:batch_job_id/cancel` stops a batch run: enrollment halts and its in-flight runs are canceled. Both are asynchronous and report when another pass is needed.
+
+Starting a batch run or attaching a schedule needs `person:read` as well as `hog_flow:write`.
+
+A workflow's graph is validated on write. If a trigger, action, or template reference is invalid, the API rejects it with a message naming the offending action rather than saving a broken workflow.
+
+## Manage opt-outs and suppressions
+
+- **Manage message categories.** `/api/projects/:project_id/messaging_categories/` lists, creates, reads, and updates the [message categories](/docs/workflows/opt-outs#message-categories) that workflows use for opt-outs. Marketing categories let recipients opt out. Transactional categories ignore opt-outs for critical messages like receipts.
+- **Honor unsubscribes and resubscribes.** `/api/projects/:project_id/messaging_preferences/` manages the [opt-out list](/docs/workflows/opt-outs): list a category's opt-outs, add them one at a time or in bulk, remove one when a recipient opts back in, and export the list as CSV.
+- **Keep the suppression list current.** `/api/projects/:project_id/messaging_suppressions/` lists, adds, and removes [suppressed addresses](/docs/workflows/opt-outs#the-suppression-list).
 
 ## Related
 
-- [PostHog API overview](/docs/api) – authentication, rate limits, and pagination
-- [Use Workflows over PostHog MCP](/docs/workflows/surfaces/mcp) – the same operations from an AI tool
-- [Workflow builder](/docs/workflows/workflow-builder) – what the graph you're writing actually means
+- [PostHog API overview](/docs/api) - authentication, rate limits, and pagination
+- [Workflows MCP tools](/docs/workflows/surfaces/mcp) - the same operations from an AI tool
+- [Workflow builder](/docs/workflows/workflow-builder) - what the graph you're writing actually means
