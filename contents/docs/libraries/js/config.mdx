@@ -277,6 +277,26 @@ posthog.init('<ph_project_token>', {
 
 `posthog-js` doesn't create spans. To link backend traces to browser sessions, set [`tracing_headers`](#tracing-headers). To send spans from the server, see [Node.js](/docs/distributed-tracing/installation/nodejs) or [Python](/docs/distributed-tracing/installation/python).
 
+## How the SDK sends data
+
+The SDK doesn't send a request for every `capture` call. This is what it does on the network, and the options that change it.
+
+| Behavior | Default | Option |
+|----------|---------|--------|
+| Batching | Events are queued and sent together every 3 seconds. Events captured before the page finishes loading wait until it has. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` sends each event on its own. Pass `send_instantly: true` to `capture` for a single event. |
+| Page unload | The queue is sent with [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon), events before Session Replay data, so it doesn't delay navigation. | `disable_beacon` |
+| Compression | Payloads are compressed with `gzip` when your project's remote config allows it. Where the browser supports [`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream), compression runs asynchronously instead of on the main thread. | `disable_compression` |
+| Retries | Network failures and `5xx` responses are retried with exponential backoff and jitter, starting at about 3 seconds and capped at 30 minutes, up to 10 times (3 times when no response arrives). A `Retry-After` header is respected. `4xx` responses, including `429`, aren't retried. | – |
+| Startup | The SDK fetches your project's remote config and evaluates Feature Flags with `/flags`. Scripts such as `recorder.js` and `surveys.js` load only when that feature is on. None of these requests block page rendering. | [`advanced_disable_flags`](#disable-flags-endpoint), `advanced_disable_feature_flags_on_first_load`, `remote_config_refresh_interval_ms` |
+
+To check what a page sends, filter your browser's network tab by your `api_host`.
+
+### Initializing after page load
+
+You can call `posthog.init` later, for example after login, but attribution is read from the page when the SDK runs. UTM and other campaign parameters come from the current URL, and the initial URL and referrer are stored the first time the SDK loads for a user. If your app has already navigated away from the landing URL, those values are lost.
+
+To keep attribution, initialize on page load with the features you don't need yet turned off (for example `disable_session_recording: true`), then turn them on later with methods such as [`posthog.startSessionRecording()`](/docs/libraries/js/usage#session-replay).
+
 ## Advanced configuration
 
 These are features for advanced users and may lead to unintended side effects if not reviewed carefully.
