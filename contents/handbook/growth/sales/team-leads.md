@@ -45,7 +45,7 @@ When looking at accounts to include in a new CSM's book, the following priority 
 2. Accounts tagged as `csm handover needed` or `csm overlay needed` in PostHog Customer Analytics
 3. Other accounts not covered by a PostHog human in descending ARR order
 
-For accounts in bucket 2 we have region tags which are <PrivateLink url="[posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb](https://us.posthog.com/project/2/workflows/01a0e77c-e3fa-0000-0801-1d43e5c7fc05/overview)">automatically</PrivateLink> applied to the account when the handover or overlay tags are added to the customer.  The regions are covered as follows:
+For accounts in bucket 2 we have region tags which are <PrivateLink url="https://us.posthog.com/project/2/workflows/01a0e77c-e3fa-0000-0801-1d43e5c7fc05/overview">automatically</PrivateLink> applied to the account when the handover or overlay tags are added to the customer.  The regions are covered as follows:
 
 - **EU Team**: Europe, Africa, Asia
 - **NA Team**: North America, South America, Oceania
