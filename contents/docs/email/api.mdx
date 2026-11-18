@@ -1,0 +1,55 @@
+---
+title: Email & Messaging API
+sidebar: Docs
+showTitle: true
+---
+
+Everything in Email & Messaging is available over the PostHog [REST API](/docs/api): sending transactional email, templates, senders, opt-outs, suppressions, broadcasts, and imports from other tools. Use it when you want your email setup under version control, generated from your own system, or created as part of a deploy.
+
+Each group of endpoints below has a generated reference page with every endpoint, field, and response. For workflows and drip campaigns, see the [Workflows API](/docs/workflows/surfaces/api).
+
+## Authentication
+
+The API uses two kinds of key. Send either one as a bearer token in the `Authorization` header.
+
+- **Sending** - A [project secret API key](/docs/api/project-secret-api-keys), which starts with `phs_`. It can send [transactional emails](/docs/email/transactional-emails), upload their attachments, and read their status, and nothing else. See [create an API key](/docs/email/transactional-emails#create-an-api-key).
+- **Everything else** - A [personal API key](/docs/api/personal-api-keys) scoped to the project you're writing to, with the scopes in the table below.
+
+Treat both keys like a password. A personal API key with `hog_flow:write` can create and launch broadcasts that send real messages, so keep it in a secret store, never in client-side code.
+
+## Endpoints
+
+All paths start with `/api/projects/:project_id/`. With a project secret API key, you can use `@current` in place of the project ID, which is the project that the key belongs to.
+
+| Endpoints | What they cover | Key and scopes | Reference |
+| --- | --- | --- | --- |
+| `messaging/` | Send a transactional email, upload its attachments, and read its status | Project secret API key with `transactional_email:write` to send and upload. `transactional_email:read` is enough to read a status | [Messaging](/docs/api/messaging) |
+| `messaging_templates/` | Email templates in the [content library](/docs/email/library), and making a template transactional | `hog_flow:read` or `hog_flow:write`. Making a template transactional needs `transactional_email:write` | [Messaging templates](/docs/api/messaging-templates) |
+| `messaging_categories/` | [Message categories](/docs/email/opt-outs#message-categories) | `hog_flow:read` or `hog_flow:write` | [Messaging categories](/docs/api/messaging-categories) |
+| `messaging_preferences/` | The [opt-out list](/docs/email/opt-outs) | `hog_flow:read` or `hog_flow:write` | [Messaging preferences](/docs/api/messaging-preferences) |
+| `messaging_suppressions/` | The [suppression list](/docs/email/opt-outs#the-suppression-list) | `hog_flow:read` or `hog_flow:write`. Listing and removing addresses also need `person:read` | [Messaging suppressions](/docs/api/messaging-suppressions) |
+| `integrations/` | Email senders: add a sender, check its DNS records, and verify its domain | `integration:read` or `integration:write` | [Integrations](/docs/api/integrations) |
+| `hog_flows/` | [Broadcasts](/docs/email/broadcasts) | `hog_flow:read` or `hog_flow:write`. Some endpoints also need `person:read`, see the [Workflows API](/docs/workflows/surfaces/api) | [Hog flows](/docs/api/hog-flows) |
+| `messaging_provider_imports/` | Imports from other email tools, such as [Resend](/docs/email/migrate-from-resend) | `hog_flow:read` to list and read imports, `hog_flow:write` to start one | [Messaging provider imports](/docs/api/messaging-provider-imports) |
+
+A read needs the `:read` scope, and a write needs the `:write` scope. A key with `hog_flow:write` can still send transactional emails, but new keys should use `transactional_email:write`.
+
+## Send transactional email
+
+`POST /api/projects/@current/messaging/send/email/` sends one email to one recipient with a project secret API key. [Send transactional emails with the API](/docs/email/transactional-emails/api) covers the request, idempotency keys, attachments, statuses, and every error. If your language has a [server SDK](/docs/email/installation#send-email-from-your-backend), use it instead.
+
+## Manage broadcasts
+
+A broadcast is a **hog flow** with `origin_product` set to `broadcasts`. You manage it with the same `/api/projects/:project_id/hog_flows/` endpoints as a workflow. The [Workflows API](/docs/workflows/surfaces/api) covers them, including tags, audience size checks, batch runs, and cancelling runs.
+
+## Manage opt-outs and suppressions
+
+- **Manage message categories.** `/api/projects/:project_id/messaging_categories/` lists, creates, reads, and updates the [message categories](/docs/email/opt-outs#message-categories) that workflows and broadcasts use for opt-outs. Marketing categories let recipients opt out. Transactional categories ignore opt-outs for critical messages like receipts.
+- **Honor unsubscribes and resubscribes.** `/api/projects/:project_id/messaging_preferences/` manages the [opt-out list](/docs/email/opt-outs): list a category's opt-outs, add them one at a time or in bulk, remove one when a recipient opts back in, and export the list as CSV.
+- **Keep the suppression list current.** `/api/projects/:project_id/messaging_suppressions/` lists, adds, and removes [suppressed addresses](/docs/email/opt-outs#the-suppression-list).
+
+## Related
+
+- [PostHog API overview](/docs/api) - authentication, rate limits, and pagination
+- [Email & Messaging MCP tools](/docs/email/mcp) - the same operations from an AI tool
+- [Workflows API](/docs/workflows/surfaces/api) - workflows, drip campaigns, and workflow templates
