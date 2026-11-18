@@ -4,4 +4,6 @@ You can no longer create self-managed tables, which PostHog read directly from y
 
 A moved table has syncing turned off. Until you turn it on, the table continues to read the files in your bucket directly, at no charge. To import the data into PostHog, open the source, find the table, and turn on syncing. PostHog then imports the data on the schedule you choose. Synced rows count toward your data warehouse rows synced.
 
+A source that holds moved tables reads from anywhere in its bucket, so PostHog can't find new tables in it. To add a table to it, [add the table by its path](#add-a-table-by-its-path).
+
 </CalloutBox>

@@ -33,6 +33,20 @@ If all the files share the same columns, such as a daily export, turn on **Combi
 
 After you connect, select the tables to import, then choose a sync method and a sync frequency for each table.
 
+### Add a table by its path
+
+You can add a table to an existing source from a folder, a file, or a wildcard pattern in its bucket. Do this when you add new files to the bucket, or when you want a table that PostHog didn't create for you.
+
+1. Open the source and go to the **Schemas** tab.
+2. Click **Add table**.
+3. Enter the **Path** of the files. The path starts at the folder of the files URL. You can also paste a full URL to the files, but it must be inside that folder. A folder imports every file in it and its subfolders. You can use the wildcards `*`, `**`, and `{a,b}`, such as `events/2026/*.parquet`. A Delta Lake table path can't contain wildcards.
+4. Select the **File format**, or keep **Detect from file names**.
+5. Enter a **Table name**. It must start with a letter or an underscore, contain only letters, numbers, and underscores, and be different from the names of the other tables in the source.
+6. To start the import immediately, select **Start syncing after adding**. If you don't, the new table has syncing turned off until you turn it on.
+7. Click **Add table**.
+
+PostHog reads only the path that you enter to make sure it contains files that it can import. You can't add a table to a source whose files URL points to a single file or a pattern. Change the files URL to a folder first.
+
 ### Limits
 
 - A source can have up to 1,000 tables.
