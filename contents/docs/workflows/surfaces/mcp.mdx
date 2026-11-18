@@ -1,39 +1,22 @@
 ---
-title: Workflows MCP tools
+title: Use Workflows over PostHog MCP
 sidebar: Docs
 showTitle: true
 ---
 
-The PostHog [MCP server](/docs/model-context-protocol) brings Workflows into Claude Code, Cursor, and other AI tools. Your agent can set up a sender, send transactional email, design templates, build and publish workflows and broadcasts, manage opt-outs, and read the results, without leaving your editor. The [agent skills](/docs/workflows/skills) teach your agent how to use these tools.
+The PostHog [MCP server](/docs/model-context-protocol) brings Workflows into Claude Code, Cursor, and other AI tools. It covers the full lifecycle - create a draft, edit its graph, test it, publish it, and read its stats and logs - so you can build and ship a workflow without leaving your editor. The `building-workflows` [agent skill](/docs/email/skills) teaches your agent how to use these tools.
+
+The tools for senders, transactional email, email templates, broadcasts, message categories, opt-outs, suppressions, imports from other tools, and Supabase auth emails are in [Email & Messaging MCP tools](/docs/email/mcp).
 
 ## Before you start
 
-1. **Set up Workflows** - Workflows are no-code, so there's nothing to install. [Install a PostHog SDK](/docs/workflows/installation) if you want event-based triggers or to send transactional email from your backend.
+1. **Set up Workflows** - Workflows are no-code, so there's nothing to install. [Install a PostHog SDK](/docs/email/installation#trigger-broadcasts-and-automations-from-events) if you want event-based triggers.
 2. **Connect the MCP server** - [install it in your AI tool](#set-up) and give it access to your project.
 
 Some tools are still rolling out, so your project might not have every tool below yet.
 
-## Set up sending
+## Build workflows
 
-- **Check setup.** `workflows-setup-status` shows which messaging setup steps the project has done: email sender, verified sending domain, opt-out categories, frequency cap, email template, and first workflow.
-- **Add and verify a sender.** `integrations-email-create` adds an email sender, `integrations-email-status-retrieve` lists the DNS records to publish with the status of each, and `integrations-email-verify-create` marks the domain verified once the records resolve. Verifying needs a project admin. See [verify your sending domain](/docs/workflows/verify-domain).
-- **Set sending rules.** `workflows-sending-rules-get` and `workflows-sending-rules-update` read and change the project-wide [frequency cap](/docs/workflows/frequency-cap), email tracking consent, and whether [engagement events](/docs/workflows/engagement-events) are captured.
-- **Check your allowance.** `workflows-reputation-get` reports the project's email health over the last 30 days and its [sending allowance](/docs/workflows/sending-reputation).
-
-## Send transactional email
-
-- **Make a template transactional.** `workflows-make-email-template-transactional-prepare` and `workflows-make-email-template-transactional-execute` turn a template into a [transactional email](/docs/workflows/transactional-emails). This can't be undone.
-- **Send a test.** `workflows-send-email-template-prepare` and `workflows-send-email-template-execute` send a transactional template to one recipient. `workflows-send-email-prepare` and `workflows-send-email-execute` send content that your agent passes, with no template. Each send needs you to reply `confirm`.
-- **Read the sends.** `workflows-transactional-emails-list` lists sends, `workflows-transactional-email-get` reads one send and its status, and `workflows-transactional-email-stats` reports delivery stats.
-- **See what recipients did.** `workflows-transactional-email-activity` shows what one recipient did around a send, and `workflows-transactional-email-results` shows what people did after an email.
-
-## Design email templates
-
-`workflows-create-email-template`, `workflows-get-email-template`, `workflows-list-email-templates`, `workflows-update-email-template`, `workflows-patch-email-template`, and `workflows-show-email-template` create, read, edit, and preview templates in the [content library](/docs/workflows/library#create-templates-with-mcp). Templates that your agent creates stay editable in the drag-and-drop builder.
-
-## Build broadcasts and workflows
-
-- **Create a broadcast.** `broadcasts-create` creates a [broadcast](/docs/workflows/broadcasts) as a draft, which you review and launch in the broadcast editor. `workflows-convert-to-broadcast` moves a workflow that sends one email to a batch audience over to broadcasts. This can't be undone.
 - **Create and edit workflows.** `workflows-create` makes a draft, `workflows-patch-graph` and `workflows-update` change it, `workflows-patch-action-email` edits the email in one step, and `workflows-discard-draft` throws the draft away. Drafts can include any step, including [Replay Vision](/docs/workflows/replay-vision) and [AI tasks](/docs/workflows/ai-tasks).
 - **Start from a suggestion.** `workflows-data-suggestions-list` suggests up to three workflows from your project's own events, `workflows-data-suggestions-create` builds one as a draft, and `workflows-data-suggestions-get` checks on the suggestions. `workflows-email-drafts-create` builds a draft email workflow for each event you pick.
 - **Suggest a change for review.** `workflows-suggest` proposes a change to a workflow for a person to approve, and `workflows-list-proposals` lists the suggested changes.
@@ -41,33 +24,18 @@ Some tools are still rolling out, so your project might not have every tool belo
 - **Read and list.** `workflows-list` and `workflows-get` pull workflows into your session, and `workflows-update-schedule` changes when a scheduled workflow runs.
 - **Organize with tags.** `workflows-create` and `workflows-update` accept a `tags` array to label workflows by team or topic, and `workflows-list` takes a `tags` filter to return only matching workflows.
 - **Move between revisions.** `workflows-list-revisions`, `workflows-get-revision`, and `workflows-restore-revision` let you inspect history and roll back.
+- **Import from Customer.io.** `workflows-import-customerio` turns Customer.io automations into draft workflows, and `workflows-import-notes` shows what the import changed or left out. See [migrate from Customer.io](/docs/email/migrate-from-customer-io).
 
 ## Read results and debug runs
 
 - **Check performance.** `workflows-stats` reports on one workflow and `workflows-global-stats` across all of them. `workflows-list-versions` lists a workflow's published versions, and `workflows-version-stats` reports on one version, so you can compare a change with the version before it.
 - **Debug a run.** `workflows-list-invocations`, `workflows-get-invocation`, `workflows-logs`, and `workflows-list-batch-jobs` show what actually happened on a given run.
 
-## Manage opt-outs and suppressions
-
-- **Message categories.** `message-categories-list`, `message-categories-get`, `message-categories-create`, and `message-categories-update` manage the [message categories](/docs/workflows/opt-outs#message-categories) that workflow email steps reference. Recipients can opt out of marketing categories. Transactional categories ignore opt-outs.
-- **Opt-outs.** `opt-outs-list` lists who opted out of a category, `opt-outs-add` opts up to 1,000 recipients out in one call, and `opt-outs-remove` opts a recipient back in.
-- **Suppressions.** `suppressions-list` lists the [suppression list](/docs/workflows/opt-outs#the-suppression-list), `suppressions-add` adds up to 1,000 addresses in one call, and `suppressions-remove` removes up to 100.
-
-## Import from other tools
-
-- **Customer.io automations.** `workflows-import-customerio` turns Customer.io automations into draft workflows, and `workflows-import-notes` shows what the import changed or left out. See [migrate from Customer.io](/docs/workflows/migrate-from-customer-io).
-- **Opt-outs, suppressions, templates, and more.** `provider-imports-providers` lists the tools your project can import from and what each one brings over. `provider-imports-create` starts an import, and `provider-imports-list` and `provider-imports-get` show its progress and results. See [migrate from Resend](/docs/workflows/migrate-from-resend).
-- **Push devices.** `integrations-push-tokens-create` imports existing device tokens into a push channel. See [import device tokens](/docs/workflows/push-notifications/import-device-tokens).
-
-## Connect Supabase auth emails
-
-`supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, and `supabase-auth-emails-starter-templates-create` connect a Supabase project and map its [auth emails](/docs/workflows/supabase-auth-emails) to templates. These tools are in private beta.
-
 For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
 
 ## Drafts are the safety net
 
-A workflow or broadcast created over MCP is a draft. It does not run and nobody receives a message until it's published, so an agent can build the whole thing and hand it to you for review. Test it with `workflows-test-run` first, then publish from MCP or from the [workflow builder](/docs/workflows/workflow-builder). Tools that send an email or make a template transactional ask you to reply `confirm` first.
+A workflow created over MCP is a draft. It does not run and nobody receives a message until it's published, so an agent can build the whole thing and hand it to you for review. Test it with `workflows-test-run` first, then publish - from MCP or from the [web app](/docs/workflows/surfaces/web-app).
 
 ## Set up
 
@@ -76,6 +44,6 @@ Connect the PostHog MCP server to your AI tool of choice, then grant it access t
 ## Related
 
 - [MCP overview](/docs/model-context-protocol) - install and authentication
-- [Agent skills for Workflows](/docs/workflows/skills) - what your agent loads to use these tools
-- [Workflow builder](/docs/workflows/workflow-builder) - the visual builder
-- [Content library and message templates](/docs/workflows/library#create-templates-with-mcp) - creating templates over MCP
+- [Email & Messaging MCP tools](/docs/email/mcp) - senders, transactional email, templates, broadcasts, and opt-outs
+- [Workflows in the web app](/docs/workflows/surfaces/web-app) - the visual builder
+- [Workflow builder](/docs/workflows/workflow-builder) - every trigger, delay, split, and action
