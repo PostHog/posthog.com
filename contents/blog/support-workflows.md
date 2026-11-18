@@ -35,15 +35,16 @@ In Zendesk, triage was mostly manual – customers had to pick a product area an
 
 It was also a lot of upkeep for me and for engineering teams. Every time a team was created, renamed, or split, we had to update the sidebar topics and the Zendesk triggers that routed tickets.
 
-Moving to PostHog Support, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket it:
+Moving to PostHog Support, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket the workflow:
 
 1. Fetches the ticket.
-2. Runs a spam pre-filter, and skips and auto-resolves anything we don't want classified.
-3. Runs a [PostHog AI task](/docs/workflows/ai-tasks) that:
-    1. Applies a team tag and an SME tag in a format I've defined
-    2. Sets the ticket's priority, based on the examples in our handbook
-    3. Captures a custom PostHog event to say the ticket has been classified and which tags were applied
-    4. Investigates the ticket and pulls useful context onto it for the support engineer (including events, replays, customer analytics, errors, past tickets, etc.)
+2. Checks for spam and prompt injection. It auto-resolves spam and sends anything suspicious to a person.
+3. Runs a read-only [PostHog AI task](/docs/workflows/ai-tasks) that:
+    1. Works out a team tag and an SME tag in a format I've defined.
+    2. Works out the ticket's priority, based on the examples in our handbook.
+4. Checks the response from the AI step is in the format I expect, then applies the team and SME tags and sets the priority.
+5. Captures a custom PostHog event to say the ticket has been classified and which tags were applied.
+6. Starts a second read-only AI task that investigates the ticket and pulls together useful context for the support engineer (including events, replays, customer analytics, errors, past tickets, etc.).
 
 ![Triaging and categorizing tickets workflow](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_5_85d7b81326.png)
 
@@ -52,7 +53,7 @@ Having the tags automatically applied like this also means that:
 - I can easily report on support at a product-by-product level.
 - If a ticket does need escalating to engineering, the support engineer can see straight away which team it belongs to, without having to look anything up.
 
-I don't need to worry about team changes anymore. The task uses what's currently on our [teams page](/teams), [feature ownership page](/handbook/engineering/feature-ownership), and [support SME page](/handbook/support/support-smes) to decide which team owns a ticket. The classification event it captures then triggers a custom [destination](/docs/cdp/destinations) rather than a Slack step in the workflow. Doing it in the workflow would mean a branch for every team and Slack channel, which I'd have to update whenever a team changes. Instead, the destination works out the channel from the team tag, using our naming convention – a product analytics ticket notifies `#support-product-analytics`. So if a team is renamed or a new one is created, there's nothing for me to update. A second destination listens for the `$conversation_ticket_assigned` event and does the same whenever a ticket is assigned, notifying the new assignee's team.
+I don't need to worry about team changes anymore. The task uses what's currently on our [teams page](/teams), [feature ownership page](/handbook/engineering/feature-ownership), and [support SME page](/handbook/support/support-smes) to decide which team owns a ticket. The classification event the workflow captures then triggers a custom [destination](/docs/cdp/destinations) rather than a Slack step in the workflow. Doing it in the workflow would mean a branch for every team and Slack channel, which I'd have to update whenever a team changes. Instead, the destination works out the channel from the team tag, using our naming convention – a product analytics ticket notifies `#support-product-analytics`. So if a team is renamed or a new one is created, there's nothing for me to update. A second destination listens for the `$conversation_ticket_assigned` event and does the same whenever a ticket is assigned, notifying the new assignee's team.
 
 Workflows also knows which email address a ticket was sent to or what channel was used (email, widget, Slack, etc.), so I can have a workflow that routes tickets sent to our merch email address straight to our merch team.
 
