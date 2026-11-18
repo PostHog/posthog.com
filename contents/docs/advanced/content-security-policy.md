@@ -14,7 +14,7 @@ If you choose to use a CSP it is important to ensure that PostHog domains are pe
 
 Depending on how you have installed `posthog-js`, the SDK will dynamically load extra JavaScript assets as necessary. For example, [the snippet](/docs/getting-started/install?tab=snippet) is very small and just loads `array.js`. This requires the `script-src` directive.
 
-Once loaded, the SDK will make API calls to the various endpoints for feature flags, analytics ingestion etc. This requires the `connect-src` directive. Additionally, if additional JavaScript assets are required such as the larger bundle for the Session Replay recorder, then they will be loaded via additional `<script/>` tags which in turn require the `script-src` directive.
+Once loaded, the SDK will make API calls to the various endpoints for feature flags, analytics ingestion, remote configuration etc. This requires the `connect-src` directive. From `posthog-js` 1.451.0, the SDK fetches remote configuration as JSON from the assets domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`), so `connect-src` must allow the assets domain, not only `script-src`. If `connect-src` blocks it, features such as session replay, surveys, and autocapture use their default or saved settings. Feature flags are not affected. Additionally, if additional JavaScript assets are required such as the larger bundle for the Session Replay recorder, then they will be loaded via additional `<script/>` tags which in turn require the `script-src` directive.
 
 Below is an example of a relatively restrictive CSP that limits only scripts and API calls to all posthog domains. We generally do not recommend being stricter than this as the exact subdomains may change over time as we optimize our traffic routing.
 
@@ -108,9 +108,9 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 |Domain|Usage|
 |----|----|
 | `us.i.posthog.com` | US ingestion endpoint for client SDK API calls |
-| `us-assets.i.posthog.com` | US CDN for client SDK assets (such as `array.js`) |
+| `us-assets.i.posthog.com` | US CDN for client SDK assets (such as `array.js`) and remote configuration. Needs both `script-src` and `connect-src` |
 | `eu.i.posthog.com` | EU ingestion endpoint for client SDK API calls |
-| `eu-assets.i.posthog.com` | EU CDN for client SDK assets (such as `array.js`) |
+| `eu-assets.i.posthog.com` | EU CDN for client SDK assets (such as `array.js`) and remote configuration. Needs both `script-src` and `connect-src` |
 | `eu.posthog.com` | EU PostHog app domain (used by the Toolbar) and also legacy ingestion  |
 | `us.posthog.com` | US PostHog app domain (used by the Toolbar) |
 | `app.posthog.com` | Legacy ingestion endpoint |
@@ -127,10 +127,10 @@ You can [send reports of CSP rule violations](/docs/csp-tracking) to PostHog, wh
 
 ### What is the absolute bare minimum CSP I could have?
 
-If you really want to have a restrictive CSP with the absolute bare minimum changes, you can bundle all required `posthog-js` dependencies as part of your own application JavaScript, ensuring there is no need to load extra scripts at runtime.
+If you really want to have a restrictive CSP with the absolute bare minimum changes, you can bundle all required `posthog-js` dependencies as part of your own application JavaScript, ensuring there is no need to load extra scripts at runtime. The SDK fetches remote configuration as JSON, so this works unless you enable [JS snippets](/docs/js-snippets) with `opt_in_site_apps: true`, which loads `config.js` as a script.
 
 1. Follow the instructions to **bundle all required extensions** when [installing PostHog via a package manager](/docs/libraries/js#option-2-install-via-package-manager) or [install the snippet](/docs/libraries/js#installation).
-2. Update your content security policy to only include the `connect-src` directive as below
+2. Update your content security policy to only include the `connect-src` directive as below. It must allow both the ingestion and assets domains, which `https://*.posthog.com` covers.
 
 ```html
 <meta http-equiv="Content-Security-Policy" content="
@@ -139,7 +139,7 @@ If you really want to have a restrictive CSP with the absolute bare minimum chan
 ">
 ```
 
-**Note**: This will not work with the toolbar and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
+**Note**: This will not work with the toolbar or JS snippets and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
 
 ### What if I use a reverse proxy?
 
