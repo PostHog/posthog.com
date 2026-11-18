@@ -6577,7 +6577,8 @@ export const docsMenu = {
             url: '/docs/business-knowledge',
             icon: 'IconBook',
             color: 'purple',
-            description: 'Facts PostHog AI, Support, and MCP use when they answer questions about your business',
+            description:
+                'Facts PostHog AI, Support, and your own agents use when they answer questions about your business',
             children: [
                 {
                     name: 'Business Knowledge',
@@ -6624,6 +6625,12 @@ export const docsMenu = {
                     url: '/docs/business-knowledge/where-to-use',
                     icon: 'IconMagic',
                     color: 'purple',
+                },
+                {
+                    name: 'Connect your agent',
+                    url: '/docs/business-knowledge/connect-your-agent',
+                    icon: 'IconPlug',
+                    color: 'green',
                 },
                 {
                     name: 'Learn from support',
