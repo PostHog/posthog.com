@@ -31,13 +31,11 @@ Give each agent the smallest set it needs. For example, put your public docs in 
 
 Open [**Business Knowledge** settings](https://app.posthog.com/business-knowledge/settings) and find **Connect your agent**.
 
-1. Choose a library
+1. Choose **All business knowledge** or one library
 2. Enter a name for the key, such as the name of the agent
 3. Click **Create key**
 
 PostHog shows the new key once, inside a ready-to-copy configuration. Copy it before you leave the page.
-
-To let an agent read all your Business Knowledge, create a project secret API key with the `business_knowledge:read` scope in [project settings](https://app.posthog.com/settings/environment-secret-api-keys) instead.
 
 </Step>
 
@@ -95,10 +93,12 @@ The agent can't add, edit, or delete sources, and it has no access to events, pe
 
 ## What a key covers
 
-| Key | What the agent reads |
+| Choice | What the agent reads |
 | --- | --- |
-| Created under **Connect your agent** | The sources and repositories in the library you chose |
-| Project secret API key with `business_knowledge:read` | Every source and selected repository in the project |
+| **All business knowledge** | Every source and selected repository in the project, in a library or not |
+| One library | The sources and repositories in that library |
+
+A [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) that you create in project settings with the `business_knowledge:read` scope also reads all your Business Knowledge.
 
 The table under **Connect your agent** lists each key, what it reads, and when an agent last used it.
 
