@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconGraph, IconMegaphone, IconPencil, IconPeople, IconToggle } from '@posthog/icons'
+import { IconGraph, IconMegaphone, IconPencil, IconToggle } from '@posthog/icons'
 import Link from 'components/Link'
 import { InlineCode, LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -53,11 +53,6 @@ export const broadcasts: CarouselSlide[] = [
                         description:
                             'Send now, send later, or recur. Type "every Monday at 9am" and check the next occurrences before you launch. Spread a big send with a sending rate limit.',
                     },
-                    {
-                        label: 'Goal',
-                        description:
-                            'Set a conversion goal, such as a sign-up or a purchase, and the broadcast page counts the recipients who did it.',
-                    },
                 ])}
             </>
         ),
@@ -66,40 +61,6 @@ export const broadcasts: CarouselSlide[] = [
             srcDark: cloudinary('broadcasts_docs_schedule_dark_92d125a904'),
             alt: 'The Schedule step of a broadcast with a weekly recurring schedule',
         },
-    },
-    {
-        ...slideStyle,
-        slug: 'audiences',
-        label: 'Audiences',
-        icon: <IconPeople className="size-5" />,
-        progressBar: 'bg-purple',
-        layout: 'stack',
-        heading: 'Target the people you already track',
-        description: (
-            <>
-                <p>
-                    You email the same people you see in your analytics, so there's no list to upload and no sync job to
-                    keep running.
-                </p>
-                {list([
-                    {
-                        label: 'Person properties',
-                        description:
-                            'Plan, sign-up date, company, or anything you set with identify(), as an audience filter or a branch condition.',
-                    },
-                    {
-                        label: 'Events',
-                        description:
-                            'Start a campaign from an event, filtered by its properties, the moment it happens.',
-                    },
-                    {
-                        label: 'Cohorts',
-                        description:
-                            'The cohorts you built in PostHog, as a broadcast audience or a cohort branch inside a campaign.',
-                    },
-                ])}
-            </>
-        ),
     },
     {
         ...slideStyle,

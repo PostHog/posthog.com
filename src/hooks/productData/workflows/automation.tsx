@@ -95,5 +95,5 @@ export const automation: CarouselSlide[] = [
             </>
         ),
     },
-    ...keyFeatures.filter((slide) => slide.slug !== 'messaging'),
+    ...keyFeatures.filter((slide) => slide.slug === 'channels'),
 ]
