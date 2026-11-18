@@ -1096,21 +1096,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/workflows/sandbox-sender:ext(\\.md)?",
-            "destination": "/docs/email/sandbox-sender:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/workflows/verify-domain:ext(\\.md)?",
-            "destination": "/docs/email/verify-domain:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/workflows/skills:ext(\\.md)?",
-            "destination": "/docs/email/skills:ext?",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/workflows/supabase-auth-emails:ext(\\.md)?",
             "destination": "/docs/email/supabase-auth-emails:ext?",
             "statusCode": 301
@@ -1118,11 +1103,6 @@
         {
             "source": "/docs/workflows/broadcasts:ext(\\.md)?",
             "destination": "/docs/email/broadcasts:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/workflows/audiences:ext(\\.md)?",
-            "destination": "/docs/email/audiences:ext?",
             "statusCode": 301
         },
         {
@@ -1161,16 +1141,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/workflows/migrate-from-customer-io:ext(\\.md)?",
-            "destination": "/docs/email/migrate-from-customer-io:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/workflows/migrate-from-resend:ext(\\.md)?",
-            "destination": "/docs/email/migrate-from-resend:ext?",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/workflows/transactional-emails:ext(\\.md)?",
             "destination": "/docs/email/transactional-emails:ext?",
             "statusCode": 301
@@ -1192,7 +1162,7 @@
         },
         {
             "source": "/docs/messaging:ext(\\.md)?",
-            "destination": "/docs/workflows:ext?",
+            "destination": "/docs/email:ext?",
             "statusCode": 301
         },
         {
