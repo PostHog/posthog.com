@@ -196,7 +196,12 @@ test('Twig clicks use current consent and SDK, and create profiles only for a ha
     // Every Learn overview shares LearnLanding, which owns the Explore Twig handoff.
     const Landing = component('./LearnLanding.tsx', window, {
         '@posthog/brand/hoggies': { HedgehogEinstein: () => null, HedgehogRobot: () => null },
-        '@posthog/icons': { IconBook: () => null, IconPlay: () => null, IconTerminal: () => null },
+        '@posthog/icons': {
+            IconBook: () => null,
+            IconPlay: () => null,
+            IconTerminal: () => null,
+            IconVideoCamera: () => null,
+        },
         'components/OSButton': Button,
         'components/Products/ReaderViewProduct': { PRODUCT_SURFACE_H1: '' },
         '../../constants': { TWIG_URL: twigUrl },
@@ -204,6 +209,8 @@ test('Twig clicks use current consent and SDK, and create profiles only for a ha
         '../../hooks/usePocketGuideCounts': () => ({}),
         '../../hooks/usePostHog': () => window.posthog,
         './PocketGuides/Cover': () => null,
+        './LearnTV/VideoCard': () => null,
+        './LearnTV/videos': { LEARN_VIDEOS: [] },
         './PocketGuides/bookOpening': { openPocketGuide: () => undefined },
         './PocketGuides/bookModel': { learnChapterPath: (base: string) => base, useBookPages: () => [] },
     })

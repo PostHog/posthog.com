@@ -1,8 +1,17 @@
 import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
-import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
+import {
+    IconClosedCaptions,
+    IconClosedCaptionsFilled,
+    IconFullScreen,
+    IconPlayhead,
+    IconVolumeFull,
+    IconVolumeHalf,
+    IconVolumeMuted,
+} from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
-import React, { useEffect, useRef, useState } from 'react'
+import OSButton from 'components/OSButton'
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
     interface Window {
@@ -18,14 +27,31 @@ interface MediaPlayerProps {
     source?: 'youtube' | 'wistia'
     startTime?: number
     borderRadius?: boolean
+    /** Wistia only. Shows the captions uploaded to the Wistia media, on by default, with a CC toggle. */
+    captions?: boolean
+    /** Called with the playback position in seconds, for example to follow along in a transcript. */
+    onTimeUpdate?: (seconds: number) => void
 }
 
-export default function MediaPlayer({
-    videoId,
-    source = 'youtube',
-    startTime = 0,
-    borderRadius = true,
-}: MediaPlayerProps) {
+/** Control the player from outside, for example to play from a transcript line. */
+export interface MediaPlayerHandle {
+    /** Seek to a time in seconds and play. */
+    playFrom: (seconds: number) => void
+}
+
+/** Turns the captions of a Wistia video on or off. Returns false if the captions plugin is not ready yet. */
+function setWistiaCaptions(video: any, on: boolean): boolean {
+    const plugin = video?.plugin?.captions
+    if (!plugin) return false
+    if (on) plugin.show?.() ?? plugin.enable?.()
+    else plugin.hide?.() ?? plugin.disable?.()
+    return true
+}
+
+const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(function MediaPlayer(
+    { videoId, source = 'youtube', startTime = 0, borderRadius = true, captions = false, onTimeUpdate },
+    ref
+) {
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,
@@ -38,6 +64,10 @@ export default function MediaPlayer({
     const [isScrubbing, setIsScrubbing] = useState(false)
     const [scrubTime, setScrubTime] = useState(0)
     const [isSeeking, setIsSeeking] = useState(false)
+    const [captionsOn, setCaptionsOn] = useState(captions)
+    // The player script did not load. Retry adds the script again.
+    const [loadFailed, setLoadFailed] = useState(false)
+    const [reloadKey, setReloadKey] = useState(0)
     const seekSuppressTimeout = useRef<NodeJS.Timeout | null>(null)
     const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -104,6 +134,10 @@ export default function MediaPlayer({
             if (!window.YT) {
                 const tag = document.createElement('script')
                 tag.src = 'https://www.youtube.com/iframe_api'
+                tag.onerror = () => {
+                    tag.remove()
+                    setLoadFailed(true)
+                }
                 const firstScriptTag = document.getElementsByTagName('script')[0]
                 if (firstScriptTag && firstScriptTag.parentNode) {
                     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
@@ -149,6 +183,7 @@ export default function MediaPlayer({
                         bigPlayButton: false,
                         playerColor: '000000',
                         ...(borderRadius ? {} : { playerBorderRadius: 0, roundedPlayer: 0 }),
+                        ...(captions ? { plugin: { 'captions-v1': { onByDefault: true } } } : {}),
                     },
                     onReady: (video: any) => {
                         if (!borderRadius) {
@@ -193,12 +228,16 @@ export default function MediaPlayer({
                 script.src = 'https://fast.wistia.com/assets/external/E-v1.js'
                 script.async = true
                 script.onload = initializeWistiaPlayer
+                script.onerror = () => {
+                    script.remove()
+                    setLoadFailed(true)
+                }
                 document.head.appendChild(script)
             } else {
                 initializeWistiaPlayer()
             }
         }
-    }, [videoId, source, startTime, borderRadius])
+    }, [videoId, source, startTime, borderRadius, reloadKey])
 
     const handlePlayPause = () => {
         if (playerState.player) {
@@ -342,6 +381,40 @@ export default function MediaPlayer({
         setIsScrubbing(false)
     }
 
+    // Report the position to the page, for example a transcript.
+    const onTimeUpdateRef = useRef(onTimeUpdate)
+    onTimeUpdateRef.current = onTimeUpdate
+    useEffect(() => {
+        onTimeUpdateRef.current?.(playerState.currentTime)
+    }, [playerState.currentTime])
+
+    useImperativeHandle(ref, () => ({
+        playFrom: (seconds: number) => {
+            performSeek(seconds)
+            if (source === 'youtube') playerState.player?.playVideo?.()
+            else playerState.player?.play?.()
+        },
+    }))
+
+    const toggleCaptions = () => setCaptionsOn((on) => !on)
+
+    // Apply the CC choice to the Wistia player. The captions plugin can load after the player is ready, and the viewer
+    // can press CC before either, so retry for a short time until the plugin takes it.
+    useEffect(() => {
+        if (!captions || source !== 'wistia' || !playerState.player) return
+        if (setWistiaCaptions(playerState.player, captionsOn)) return
+        let tries = 0
+        const interval = setInterval(() => {
+            if (setWistiaCaptions(playerState.player, captionsOn) || ++tries >= 20) clearInterval(interval)
+        }, 250)
+        return () => clearInterval(interval)
+    }, [captions, source, playerState.player, captionsOn])
+
+    const retryLoad = () => {
+        setLoadFailed(false)
+        setReloadKey((key) => key + 1)
+    }
+
     useEffect(() => {
         return () => {
             if (!seekSuppressTimeout.current) return
@@ -360,7 +433,7 @@ export default function MediaPlayer({
                 >
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
-                        <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
+                        <div className="relative flex-1 flex flex-col justify-center items-center bg-primary mb-2">
                             {source === 'youtube' ? (
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
@@ -368,6 +441,17 @@ export default function MediaPlayer({
                                     ref={containerRef}
                                     className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
                                 />
+                            )}
+                            {loadFailed && (
+                                <div
+                                    role="alert"
+                                    className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/80 p-4 text-center"
+                                >
+                                    <p className="m-0 text-sm font-semibold text-white">The video didn't load.</p>
+                                    <OSButton variant="primary" size="md" onClick={retryLoad}>
+                                        Try again
+                                    </OSButton>
+                                </div>
                             )}
                         </div>
 
@@ -490,6 +574,21 @@ export default function MediaPlayer({
                                         className="text-sm font-semibold text-right dark:text-white"
                                     />
                                 </div>
+                                {captions && source === 'wistia' && (
+                                    <button
+                                        onClick={toggleCaptions}
+                                        className="text-sm font-semibold text-right dark:text-white"
+                                        aria-label="Captions"
+                                        aria-pressed={captionsOn}
+                                        title={captionsOn ? 'Hide captions' : 'Show captions'}
+                                    >
+                                        {captionsOn ? (
+                                            <IconClosedCaptionsFilled className="size-6" />
+                                        ) : (
+                                            <IconClosedCaptions className="size-6" />
+                                        )}
+                                    </button>
+                                )}
                                 <button
                                     onClick={toggleFullscreen}
                                     className="text-sm font-semibold text-right dark:text-white"
@@ -503,4 +602,6 @@ export default function MediaPlayer({
             </div>
         </div>
     )
-}
+})
+
+export default MediaPlayer
