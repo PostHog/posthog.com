@@ -342,9 +342,9 @@ posthog.reloadFeatureFlags()
 ```
 
 ```rust
-// The Rust SDK automatically reloads flags in the background
-// at the interval specified by poll_interval_seconds (default: 30).
-// Manual reload is not currently supported.
+// Fetches flag definitions now and returns once they are in use,
+// so the next local evaluation sees them. The background poller keeps its own schedule.
+client.reload_feature_flags().await.unwrap();
 ```
 
 ```elixir
