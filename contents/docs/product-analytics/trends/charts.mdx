@@ -138,6 +138,20 @@ The **Count** column shows the number of observations used to calculate the dist
 
 The slope graph shows the change from the start to the end of your selected date range. Each series appears as a line connecting its starting value to its ending value, making it easy to see the direction and magnitude of change over the period. This is useful for comparing how different metrics or breakdown values changed relative to each other.
 
+### Assigning series to Y-axes
+
+When a chart has multiple series with different scales, PostHog automatically groups them onto separate left and right Y-axes. To manually control which series share an axis, click a Y-axis label on the chart to open the axis settings dialog.
+
+In the dialog:
+
+1. Select which series belong on this axis using the checkboxes
+2. Switch between the **Left Y-axis** and **Right Y-axis** tabs to configure each side
+3. Click **Save axis** to apply your changes, or **Use automatic axes** to restore the default grouping
+
+Axis assignments are available on line charts (linear and cumulative) and grouped bar charts. They aren't available on area charts, stacked bar charts, or percent stack views. Series colors remain independent of axis assignments.
+
+> **Note:** Axis settings aren't available on shared, embedded, or read-only charts.
+
 ## Total value
 
 ### Number
