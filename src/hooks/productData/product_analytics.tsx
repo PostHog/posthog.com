@@ -61,7 +61,7 @@ export const productAnalytics = {
         },
         {
             slug: 'how-it-works',
-            name: 'Getting events and using them',
+            name: 'Analyze more than just events',
             template: 'event-journey',
             icon: <IconServer className="size-4" />,
         },
