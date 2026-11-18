@@ -23,6 +23,8 @@ On `2025-11-25`, the client sends its name and version only at `initialize`. For
 
 `@rekog/mcp-nest` supports this with `enableJsonResponse: true`. The legacy path in `createMcpHandler` does not. On that path, expect `$mcp_client_name` and `$mcp_client_version` to be absent. `$mcp_protocol_version` remains available.
 
+For Vercel's [`mcp-handler`](/docs/mcp-analytics/installation/typescript#nextjs-and-vercel-mcp-handler), wrap the route in `withMcpSessionHeader` (`@posthog/mcp` 1.5.0 or later). It adds the token outside the server, so `$mcp_client_name` and `$mcp_client_version` come back.
+
 </CalloutBox>
 
 ## Capture model identity on both revisions
