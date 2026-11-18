@@ -5833,6 +5833,10 @@ export const docsMenu = {
                             name: 'Analyze with PostHog AI',
                             url: '/docs/experiments/analyze-experiments-ai',
                         },
+                        {
+                            name: 'Playground',
+                            url: '/docs/ai-observability/playground',
+                        },
                     ],
                 },
                 {
@@ -5945,6 +5949,30 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
                     color: 'red',
+                },
+                {
+                    name: 'Prompts',
+                },
+                {
+                    name: 'Prompt management',
+                    url: '/docs/prompt-management',
+                    icon: 'IconPencil',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/prompt-management',
+                        },
+                        {
+                            name: 'A/B testing prompts',
+                            url: '/docs/prompt-management/prompt-experiments',
+                        },
+                        {
+                            name: 'Temporal workflows',
+                            url: '/docs/prompt-management/temporal',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',
@@ -7452,14 +7480,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Custom parsers',
-                    url: '/docs/ai-observability/custom-parser',
-                    icon: 'IconBrackets',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    name: 'Link Session Replay',
+                    url: '/docs/ai-observability/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link Error Tracking',
+                    url: '/docs/ai-observability/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
                 },
                 {
                     name: 'Tracing',
@@ -7519,6 +7549,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Custom parsers',
+                    url: '/docs/ai-observability/custom-parser',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Analyze LLM performance',
                     url: '/docs/ai-observability/dashboard',
                     icon: 'IconGraph',
@@ -7542,18 +7582,6 @@ export const docsMenu = {
                     url: '/docs/ai-observability/analyze-traces-ai',
                     icon: 'IconMagicWand',
                     color: 'orange',
-                },
-                {
-                    name: 'Link Session Replay',
-                    url: '/docs/ai-observability/link-session-replay',
-                    icon: 'IconRewindPlay',
-                    color: 'blue',
-                },
-                {
-                    name: 'Link Error Tracking',
-                    url: '/docs/ai-observability/link-error-tracking',
-                    icon: 'IconWarning',
-                    color: 'red',
                 },
                 {
                     name: 'Collect user feedback',
@@ -7650,36 +7678,6 @@ export const docsMenu = {
                     icon: 'IconBolt',
                     color: 'orange',
                     featured: true,
-                },
-                {
-                    name: 'Tools for iterating',
-                },
-                {
-                    name: 'Playground',
-                    url: '/docs/ai-observability/playground',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'blue',
-                },
-                {
-                    name: 'Prompt management',
-                    url: '/docs/prompt-management',
-                    icon: 'IconPencil',
-                    color: 'purple',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/prompt-management',
-                        },
-                        {
-                            name: 'A/B testing prompts',
-                            url: '/docs/prompt-management/prompt-experiments',
-                        },
-                        {
-                            name: 'Temporal workflows',
-                            url: '/docs/prompt-management/temporal',
-                        },
-                    ],
                 },
                 {
                     name: 'Where to use',
