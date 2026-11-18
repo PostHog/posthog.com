@@ -9,7 +9,7 @@ availability:
 sourceId: AmazonAds
 ---
 
-The Amazon Ads connector pulls your Amazon advertising entity data – profiles, Sponsored Products campaigns, and ad groups – into the PostHog data warehouse.
+The Amazon Ads connector pulls your Amazon advertising data – profiles, portfolios, Sponsored Products, Sponsored Brands, and Sponsored Display entities, campaign performance reports, change history, and invoices – into the PostHog data warehouse.
 
 You need a Login with Amazon (LWA) application with Advertising API access. PostHog uses your LWA credentials to authenticate with Amazon's Advertising API and sync entity data from every advertising profile your token can access.
 
@@ -36,15 +36,40 @@ Once the syncs are complete, you can start using Amazon Ads data in PostHog.
 
 ## Available tables
 
-| Table          | Description                                              | Sync method  |
-| -------------- | -------------------------------------------------------- | ------------ |
-| `profiles`     | Amazon Advertising profiles associated with your account | Full refresh |
-| `sp_campaigns` | Sponsored Products campaigns across all profiles         | Full refresh |
-| `sp_ad_groups` | Sponsored Products ad groups across all profiles         | Full refresh |
+| Table                           | Description                                                             | Sync method  |
+| ------------------------------- | ----------------------------------------------------------------------- | ------------ |
+| `ads_accounts`                  | Amazon Ads accounts above your profiles, for multi-account rollups      | Full refresh |
+| `profiles`                      | Amazon Advertising profiles associated with your account                | Full refresh |
+| `portfolios`                    | Portfolios that group campaigns across all profiles                     | Full refresh |
+| `sp_campaigns`                  | Sponsored Products campaigns across all profiles                        | Full refresh |
+| `sp_ad_groups`                  | Sponsored Products ad groups across all profiles                        | Full refresh |
+| `sp_product_ads`                | Sponsored Products ads across all profiles                              | Full refresh |
+| `sp_keywords`                   | Sponsored Products keyword targets across all profiles                  | Full refresh |
+| `sp_targets`                    | Sponsored Products product and category targets across all profiles     | Full refresh |
+| `sp_negative_keywords`          | Sponsored Products ad group negative keywords across all profiles       | Full refresh |
+| `sp_campaign_negative_keywords` | Sponsored Products campaign negative keywords across all profiles       | Full refresh |
+| `sp_negative_targets`           | Sponsored Products ad group negative targets across all profiles        | Full refresh |
+| `sp_campaign_negative_targets`  | Sponsored Products campaign negative targets across all profiles        | Full refresh |
+| `sp_campaign_reports`           | Daily Sponsored Products campaign performance across all profiles       | Incremental  |
+| `sb_campaigns`                  | Sponsored Brands campaigns across all profiles                          | Full refresh |
+| `sb_ad_groups`                  | Sponsored Brands ad groups across all profiles                          | Full refresh |
+| `sb_ads`                        | Sponsored Brands ads across all profiles                                | Full refresh |
+| `sb_targets`                    | Sponsored Brands targets across all profiles                            | Full refresh |
+| `sd_campaigns`                  | Sponsored Display campaigns across all profiles                         | Full refresh |
+| `sd_ad_groups`                  | Sponsored Display ad groups across all profiles                         | Full refresh |
+| `sd_ads`                        | Sponsored Display ads across all profiles                               | Full refresh |
+| `sd_targets`                    | Sponsored Display targets across all profiles                           | Full refresh |
+| `change_history`                | History of changes to bids, budgets, and status across all profiles     | Incremental  |
+| `invoices`                      | Advertising billing invoices across all profiles                        | Full refresh |
 
-All tables use **full refresh** sync because the Amazon Ads API doesn't expose an updated-since filter for entity lists. Each sync reloads all data.
+Entity tables use **full refresh** sync because the Amazon Ads API doesn't expose an updated-since filter for entity lists. Each sync reloads all data for these tables. The `invoices` table also uses full refresh, because invoice status and remaining amounts can change after Amazon issues an invoice.
 
-Sponsored Products rows (`sp_campaigns` and `sp_ad_groups`) include a `_profile_id` field identifying which advertising profile they belong to. Data is synced from every profile your token can access.
+Two tables support **incremental** sync:
+
+- `sp_campaign_reports` syncs incrementally on `date`. Amazon updates recent days as attribution data arrives, so each sync reads back over recent days again.
+- `change_history` syncs incrementally on `timestamp`. Amazon keeps change history for 90 days, so the first sync imports only the most recent 89 days. Change history includes campaign, ad group, ad, keyword, negative keyword, and product targeting events. Theme events are not included. History events have no ID of their own, so PostHog adds an `_event_id` field that is a hash of the event.
+
+Tables synced per profile include a `_profile_id` field identifying which advertising profile each row belongs to. Data is synced from every profile your token can access. The `invoices` table syncs from the profiles where your token has view access to billing. The `change_history` table syncs from the profiles where your token has view access to campaigns.
 
 ## Configuration
 
