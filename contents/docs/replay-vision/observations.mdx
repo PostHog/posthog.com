@@ -35,6 +35,12 @@ If the recording has passed your project's retention period, the player is repla
 
 Click **Share** to copy a link to the observation. The link starts the recording where you are in the player, or you can untick **Start recording at** or type a different time. The person you share it with needs access to your PostHog project.
 
+### Sending an observation to an agent
+
+Click **Send to agent** next to **Share** to give the observation to an AI agent as Markdown. Pick where to open it: PostHog AI, PostHog Desktop, Claude Code, Cursor, Codex, or your clipboard. The button shows only on observations that succeeded.
+
+The Markdown holds the scanner and its question, the result with its timestamps, the confidence, links to the observation and the recording, and the observation and session IDs. It leaves out the email of the person in the recording. The agent can get the full observation with the `vision-observations-get` [MCP tool](/docs/replay-vision/mcp).
+
 ### Rating observations
 
 Below each result, PostHog asks **Did the scanner get this right?** Give it a thumbs up or down (<kbd>y</kbd> or <kbd>n</kbd>), then optionally add a note on what it got right or wrong and why. Click the active thumb again to remove a rating.
