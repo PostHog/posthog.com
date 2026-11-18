@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Maxio connector syncs your Maxio Advanced Billing (formerly Chargify) data into PostHog – customers, subscriptions, invoices, products, components, coupons, and billing events – so you can analyze revenue and billing activity alongside your product data.
+The Maxio connector syncs your Maxio Advanced Billing (formerly Chargify) data into PostHog – customers, subscriptions, invoices, products, components, component usage and allocations, coupons, reason codes, and billing and invoice events – so you can analyze revenue and billing activity alongside your product data.
 
 ## Prerequisites
 
@@ -33,9 +33,11 @@ When linking Maxio, you'll need:
 
 <SyncModes />
 
-Subscriptions, invoices, customers, and events support incremental sync. All other tables use full refresh.
+Subscriptions, invoices, customers, events, invoice events, and subscription component usages support incremental sync. All other tables use full refresh.
 
-Incremental runs on subscriptions, invoices, and customers re-read a trailing day of updates to account for your site's timezone. Duplicate rows are merged away by primary key. Events use an integer cursor (`since_id`) which is exact and doesn't need a lookback window.
+Incremental runs on subscriptions, invoices, customers, and subscription component usages re-read a trailing day of updates to account for your site's timezone. Duplicate rows are merged away by primary key. Events and invoice events use an integer cursor (`since_id`) which is exact and doesn't need a lookback window.
+
+Subscription component usages and allocations are read once for each component on each subscription, so these tables can take longer to sync on sites with many subscriptions.
 
 ## Configuration
 
