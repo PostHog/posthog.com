@@ -8339,12 +8339,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Email & Messaging',
-                    url: '/docs/email',
-                    icon: 'IconLetter',
-                    color: 'red',
-                },
-                {
                     name: 'Resources',
                 },
                 {
