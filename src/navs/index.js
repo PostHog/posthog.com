@@ -3068,8 +3068,16 @@ export const docsMenu = {
                             },
                             children: [
                                 {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/react-native/5.x.x',
+                                },
+                                {
                                     name: '4.x.x',
                                     url: '/docs/libraries/react-native/4.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/react-native/migration',
                                 },
                             ],
                         },
