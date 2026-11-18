@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Membrain API key and account subdomain to sync your CRM data, including companies, contacts, prospects, sales projects, and tickets.
+Enter your Membrain API key and account subdomain to sync your CRM data, including companies, contacts, prospects, sales projects, project stakeholders, orders, and tickets.
 
 A Membrain admin can create an API key under **System Setup → Membrain API**. Your subdomain is the first part of your Membrain URL. For `acme.membrain.com` the subdomain is `acme`.
 
