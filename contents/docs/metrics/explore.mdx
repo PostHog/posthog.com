@@ -19,6 +19,15 @@ The **Overview** tab is the first place to check whether ingestion is healthy. I
 
 Click a service to jump into the viewer scoped to that service. If nothing has arrived yet, the tab links you to the [setup guide](/docs/metrics).
 
+Below the service table, the **Metrics** table lists each metric name that arrived in the last 24 hours, with its:
+
+- **Type** and **Unit**
+- **Tags** — the number of distinct attribute keys on the metric
+- **Series** — the approximate number of distinct label sets. A metric with an unexpectedly high series count often has a high-cardinality attribute, such as a user or request ID.
+- **Last seen** time
+
+The table is sorted by series count, highest first. Click a column header to sort by another column, and use **Filter metrics** to search by name. The table shows up to 500 metrics; filter to find a metric that isn't in the list. Click a metric name to open it in the viewer.
+
 ## Viewer
 
 The **Viewer** tab is where you explore a single metric without writing any queries.
