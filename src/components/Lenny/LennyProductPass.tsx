@@ -391,6 +391,23 @@ const faqItems = [
             </p>
         ),
     },
+    {
+        trigger: 'Can I get PostHog merch for my Lenny Meetup?',
+        content: (
+            <p>
+                We'd love to help. If you're organizing a Lenny community meetup and want PostHog involved, here's how
+                we can support you:{' '}
+                <Link
+                    to="https://app.notion.com/p/PostHog-for-Lenny-s-Meetup-hosts-41152be1aa2f806d868adaa390c3b851"
+                    externalNoIcon
+                    className="font-semibold underline"
+                >
+                    PostHog for Lenny's Meetup hosts
+                </Link>
+                .
+            </p>
+        ),
+    },
 ]
 
 const faqStructuredData = [
@@ -623,18 +640,6 @@ export default function LennyProductPass(): JSX.Element {
                         <h2 className="mb-4">FAQs</h2>
                         <Accordion data-scheme="primary" className="" defaultValue="" items={faqItems} />
                     </div>
-
-                    <p className="m-4 @3xl:m-8 max-w-3xl">
-                        If you're organizing a Lenny community meetup and want PostHog involved, here's how we can
-                        support you.{' '}
-                        <Link
-                            to="https://app.notion.com/p/PostHog-for-Lenny-s-Meetup-hosts-41152be1aa2f806d868adaa390c3b851"
-                            externalNoIcon
-                            className="font-semibold underline"
-                        >
-                            PostHog for Lenny's Meetup hosts
-                        </Link>
-                    </p>
 
                     {/* Closing CTA – the boxed "paper desk" panel, same treatment as the /pricing hero. */}
                     <div className="@container not-prose m-4 @3xl:m-8 max-w-6xl mb-8 @3xl:mb-12">
