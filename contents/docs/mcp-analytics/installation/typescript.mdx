@@ -129,11 +129,12 @@ Connect an agent to your server and call a tool. Then open the [activity feed](h
 
 ### Next.js and Vercel (`mcp-handler`)
 
-[`mcp-handler`](https://github.com/vercel/mcp-handler) gives you an `McpServer` in its setup callback. Call `instrument()` there:
+[`mcp-handler`](https://github.com/vercel/mcp-handler) gives you a new `McpServer` for each request in its setup callback. Call `instrument()` there. Wrap the handler in `withMcpSessionHeader` to keep one session per client on the `2025-11-25` protocol:
 
 ```ts
-import { createMcpHandler } from "mcp-handler"
-import { PostHog, instrument } from "@posthog/mcp"
+import { createMcpHandler, withMcpAuth } from "mcp-handler"
+import { PostHog, instrument, withMcpSessionHeader } from "@posthog/mcp"
+import { verifyToken } from "./auth" // your token check, returning mcp-handler's AuthInfo
 
 // Create the client once at module scope, not per request.
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
@@ -149,13 +150,15 @@ const handler = createMcpHandler(
   { basePath: "/api" },
 )
 
-export { handler as GET, handler as POST }
+// Put auth outermost, so a request without a valid token is rejected before anything reads its body.
+const route = withMcpAuth(withMcpSessionHeader(handler), verifyToken, { required: true })
+
+export { route as GET, route as POST }
 ```
 
-`mcp-handler` creates a new server for each request and sends no `Mcp-Session-Id` header. Without another signal, each request gets its own `$session_id`. To group a client's calls:
+`withMcpSessionHeader` needs `@posthog/mcp` 1.5.0 or later. `mcp-handler` streams the `initialize` response, so the SDK can't add the [session token](#stateless-and-multi-pod-servers) from inside the server. The wrapper creates the token at `initialize` and returns it in the `Mcp-Session-Id` response header. The client sends it back on each request, so every per-request server gets the same `$session_id`, `$mcp_client_name`, and `$mcp_client_version`. The wrapper doesn't add a session to `2026-07-28` traffic. Keep [conversation IDs](/docs/mcp-analytics/conversation-id) on (the default) to group calls there.
 
-- Return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users), such as the OAuth subject. This needs no client changes.
-- Keep [conversation IDs](/docs/mcp-analytics/conversation-id) on (the default). Calls group when the agent echoes the handle.
+To attribute calls to a user, return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users). `withMcpAuth` puts the verified token on `extra.http.authInfo`.
 
 Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
 
@@ -229,7 +232,7 @@ new StreamableHTTPServerTransport({
 })
 ```
 
-With `@rekog/mcp-nest`, set `streamableHttp: { statelessMode: true, enableJsonResponse: true }` on the module. The legacy path in `createMcpHandler` can't send the token, so `$mcp_client_name` and `$mcp_client_version` are absent there.
+With `@rekog/mcp-nest`, set `streamableHttp: { statelessMode: true, enableJsonResponse: true }` on the module. The legacy path in `createMcpHandler` streams its responses, so the SDK can't send the token from inside the server. Wrap a fetch-style handler in `withMcpSessionHeader` to send it, as in [Next.js and Vercel](#nextjs-and-vercel-mcp-handler). Without the wrapper, `$mcp_client_name` and `$mcp_client_version` are absent there.
 
 If you must stream (SSE), set the header yourself before the response headers go out:
 

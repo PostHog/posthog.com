@@ -21,7 +21,7 @@ The protocol revision belongs to each request. A v2 server also serves `2025-11-
 
 On `2025-11-25`, the client sends its name and version only at `initialize`. For servers that create an instance per request, the SDK uses a session token. The transport must write response headers after the handler runs to send this token.
 
-`@rekog/mcp-nest` supports this with `enableJsonResponse: true`. The legacy path in `createMcpHandler` does not. On that path, expect `$mcp_client_name` and `$mcp_client_version` to be absent. `$mcp_protocol_version` remains available.
+`@rekog/mcp-nest` supports this with `enableJsonResponse: true`. The legacy path in `createMcpHandler` does not. Wrap a fetch-style handler in [`withMcpSessionHeader`](/docs/mcp-analytics/installation/typescript#nextjs-and-vercel-mcp-handler) to send the token. Without the wrapper, expect `$mcp_client_name` and `$mcp_client_version` to be absent. `$mcp_protocol_version` remains available.
 
 </CalloutBox>
 
