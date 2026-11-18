@@ -202,7 +202,8 @@ Link your app to a PostHog organization with a [verification token](#link-your-p
 
 - The organization's admins and owners get an email when the review accepts your app, rejects it, or hands it to PostHog staff, and again whenever staff change the decision. The email carries any message staff left for you.
 - In PostHog, go to **Organization settings → OAuth applications** and expand your app. It shows the provisioning status, when your app registered, when the review was decided, and any message from PostHog.
-- While your app waits for PostHog staff or is blocked, the same row has **Contact support about this review**. It opens a support request with your app's details filled in, on every plan. Use it to send PostHog information the review missed.
+- While your app waits for PostHog staff, or its provisioning is off or blocked, the same row has **Contact support about this review**. It opens a support request with your app's details filled in, on every plan. Use it to send PostHog information the review missed.
+- Until PostHog verifies your app, the same row has **Request verification**. It opens a support request for a [Verified badge](#what-your-app-can-do) with your app's details filled in, on every plan.
 - An agent connected to the [PostHog MCP server](/docs/model-context-protocol) can read the same status with the `oauth-applications-list` tool.
 
 Only organization admins and owners see this page. An app that isn't linked to an organization gets no email, so call the [registration endpoint](#register-your-app) to check its status.
