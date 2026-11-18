@@ -1,0 +1,46 @@
+---
+title: Choose an audience
+sidebar: Docs
+showTitle: true
+---
+
+Broadcasts and workflows send to the people already in your PostHog project. You choose them with the same [person properties](/docs/data/persons) and [cohorts](/docs/data/cohorts) you use in insights, so there's no list to upload and no sync job to keep running.
+
+## Who a broadcast reaches
+
+In the **Recipients** step of a [broadcast](/docs/email/broadcasts), click **Add condition** and filter by person properties, cohorts, or distinct IDs. A person must match all of your conditions. With no conditions, the broadcast goes to everyone in your project.
+
+The step shows an estimate of how many people the broadcast reaches before you send it.
+
+## Send to a list
+
+To send to a list from outside PostHog, upload it as a CSV. PostHog saves it as a static cohort, which you then pick as the audience.
+
+- The CSV needs an `email` column.
+- A `distinct_id` or `id` column matches rows to people already in PostHog.
+- Other columns update properties on those people.
+
+## When PostHog works out the audience
+
+PostHog works out the audience when the broadcast or batch runs, not when you save it. A person who matches your conditions at send time gets the email. A [static cohort](/docs/data/cohorts) uses the people saved in it.
+
+PostHog reads person properties again when each message goes out, so a `{{ person.properties.first_name }}` merge tag uses the current value.
+
+## One email per address
+
+When two or more people share an email address, PostHog sends that address one email. It compares addresses after it lowercases them and trims spaces.
+
+This applies when every email step sends to the standard `person.properties.email` property. An email step with a custom recipient isn't deduplicated this way.
+
+## Who an automation reaches
+
+An automation reaches people through its trigger. For each trigger type, see [triggers in the workflow builder](/docs/workflows/workflow-builder#triggers).
+
+| Trigger | Who it reaches |
+| --- | --- |
+| Event | Each person who does the event, the moment they do it. |
+| Batch | Each person who matches an audience, once or on a schedule. This is how you send a recurring broadcast. |
+
+Webhook, manual, schedule, tracking pixel, and Slack triggers start from something outside a person's activity in your product. A schedule trigger runs once per occurrence, without a person.
+
+To keep a person from getting too many messages, set a [frequency cap](/docs/email/frequency-cap). To respect what people opted out of, see [opt-outs and suppression](/docs/email/opt-outs).

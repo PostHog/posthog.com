@@ -31,7 +31,7 @@ Everything runs on the same event data you already track. Want to send a welcome
 
 Workflows now support a range of actions:
 
--   Send emails, from simple notifications to full [drip campaigns](/docs/workflows/email-drip-campaign)
+-   Send emails, from simple notifications to full [drip campaigns](/docs/email/email-drip-campaign)
 -   Trigger Slack messages or webhooks based on live product events
 -   Add delays, conditions, and branches to control when and how actions fire
 -   Update user properties or trigger events as part of your automation

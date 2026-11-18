@@ -10,8 +10,8 @@ import AddSlackToChannel from './_snippets/add-posthog-to-slack-channel.mdx'
 
 Workflows can send more than email. Connect Slack to post messages to a Slack channel, and Twilio to send SMS. To call a webhook or another service, use a [realtime destination](/docs/data-pipelines/destinations) as a step.
 
-- To send email, [verify your sending domain](/docs/workflows/verify-domain).
-- To send push notifications, [set up a push channel](/docs/workflows/push-notifications#set-up-a-push-channel).
+- To send email, [verify your sending domain](/docs/email/verify-domain).
+- To send push notifications, [set up a push channel](/docs/email/push-notifications#set-up-a-push-channel).
 
 <Steps>
 
@@ -75,7 +75,7 @@ Add a **Slack** or **SMS** step in the [workflow builder](/docs/workflows/workfl
 | Issue | Solution |
 | --- | --- |
 | Variables not populating? | Confirm the property exists on the person profile, such as `person.name`. |
-| Email or push issues? | See [verify your sending domain](/docs/workflows/verify-domain#troubleshooting) and [push notifications](/docs/workflows/push-notifications#troubleshooting). |
+| Email or push issues? | See [verify your sending domain](/docs/email/verify-domain#troubleshooting) and [push notifications](/docs/email/push-notifications#troubleshooting). |
 
 </Step>
 

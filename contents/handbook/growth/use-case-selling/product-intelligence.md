@@ -25,7 +25,7 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 - **[Session Replay](/docs/session-replay)** — The qualitative layer. Watch what users actually do when the numbers say they're dropping off. Bridges the gap between "40% drop at step 3" and "oh, the button doesn't render on mobile Safari."
 - **[Surveys](/docs/surveys/creating-surveys)** — Direct feedback loop at key moments. NPS after onboarding, CSAT after support, "why did you cancel?" on churn. Ties qualitative signal to quantitative behavior data.
 - **[Experiments](/docs/experiments)** — Validate hypotheses with statistical rigor before committing to a full build. A/B test changes against real metrics, not gut feel. Requires [Feature Flags](/docs/feature-flags) for implementation.
-- **[Workflows](/docs/workflows/start-here)** — Onboarding sequences, activation nudges, lifecycle engagement. The action layer: once you've identified a drop-off in analytics, Workflows lets you do something about it automatically. ([Email drip campaigns](/docs/workflows/email-drip-campaign))
+- **[Workflows](/docs/workflows/start-here)** — Onboarding sequences, activation nudges, lifecycle engagement. The action layer: once you've identified a drop-off in analytics, Workflows lets you do something about it automatically. ([Email drip campaigns](/docs/email/email-drip-campaign))
 - **AI Evals** — For products with AI features: proactively surface where users are struggling based on AI output quality. This is product intelligence driven by AI observability. A bridge product to the [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) use case.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Natural language querying and insight discovery. Lowers the bar for non-technical product stakeholders to self-serve. A PM asks "why did retention drop last week?" instead of building a custom query. ([Example prompts](/docs/posthog-ai/example-prompts))
 - **[Replay Vision](/docs/replay-vision)** — AI scanners that watch session recordings for you and turn what they see into queryable events. Point a scanner at a set of recordings and it flags dead ends, scores frustration, tags intent, or summarizes what happened — with citations that jump to the exact moment. The output lands as a `$recording_observed` event, so a finding becomes a funnel breakdown or a cohort, not a note in a vendor's AI panel. See the caveats under pain points before promising it. ([Scanner types](/docs/replay-vision/scanner-types) · [Observations](/docs/replay-vision/observations))
@@ -240,7 +240,7 @@ On AI specifically, be careful not to oversell: nearly every competitor shipped 
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
 - **Surveys docs:** [Creating surveys](/docs/surveys/creating-surveys)
 - **Experiments docs:** [Experiments](/docs/experiments) · [Exposures](/docs/experiments/exposures)
-- **Workflows docs:** [Getting started](/docs/workflows/start-here) · [Email drip campaigns](/docs/workflows/email-drip-campaign)
+- **Workflows docs:** [Getting started](/docs/workflows/start-here) · [Email drip campaigns](/docs/email/email-drip-campaign)
 - **Feature Flags docs:** [Getting started](/docs/feature-flags/start-here)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
 - **Group Analytics docs:** [Group Analytics](/docs/product-analytics/group-analytics)

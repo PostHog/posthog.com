@@ -43,7 +43,7 @@ Keep records/logs where possible, especially for later debugging (e.g. knowing t
 
 ### Design for fallback and safe defaults
 
-For actions that send messages or update user data: ensure that if some data is missing (e.g. user email, user property) the workflow safely skips or uses defaults rather than failing or sending bad messages. For message templates, see the [Liquid default value tip](/docs/workflows/library#liquid-and-merge-tags) for the recommended syntax.
+For actions that send messages or update user data: ensure that if some data is missing (e.g. user email, user property) the workflow safely skips or uses defaults rather than failing or sending bad messages. For message templates, see the [Liquid default value tip](/docs/email/library#liquid-and-merge-tags) for the recommended syntax.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/error_handling_28a45d2ecf.png"
@@ -56,7 +56,7 @@ For actions that send messages or update user data: ensure that if some data is 
 
 ### Ensure messaging channels are properly configured and tested
 
-Before sending emails or other messages, [set up and verify your channels](/docs/workflows/verify-domain). For email: configure "from" name, from-address, and DNS (SPF/DKIM) to avoid spam/folder issues.
+Before sending emails or other messages, [set up and verify your channels](/docs/email/verify-domain). For email: configure "from" name, from-address, and DNS (SPF/DKIM) to avoid spam/folder issues.
 
 Use templating and personalization carefully (e.g. with placeholders like `{{ person.name }}`), but also verify that placeholders resolve and avoid sending messages with unresolved variables.
 
