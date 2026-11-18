@@ -32,8 +32,11 @@ export interface MediaPlayerHandle {
 function setWistiaCaptions(video: any, on: boolean): boolean {
     const plugin = video?.plugin?.captions
     if (!plugin) return false
-    if (on) plugin.show?.() ?? plugin.enable?.()
-    else plugin.hide?.() ?? plugin.disable?.()
+    // Only show or hide the captions. Do not also call enable or disable: those remove and add the whole captions
+    // plugin, and that can leave the browser's own caption track on screen while CC is off.
+    const toggle = on ? plugin.show ?? plugin.enable : plugin.hide ?? plugin.disable
+    if (typeof toggle !== 'function') return false
+    toggle.call(plugin)
     return true
 }
 
