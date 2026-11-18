@@ -191,6 +191,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/usage:ext(\\.md)?",
+            "destination": "/docs/libraries/ios/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/configuration:ext(\\.md)?",
+            "destination": "/docs/libraries/ios/reference:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
             "destination": "/docs/libraries/node/reference:ext?",
             "statusCode": 301
@@ -1901,7 +1916,7 @@
         },
         {
             "source": "/docs/integrations/ios-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrations/javascript-integration:ext(\\.md)?",
@@ -2317,11 +2332,11 @@
         },
         {
             "source": "/docs/integrate/client/ios/index:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrate/client/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrate/client/js/index:ext(\\.md)?",
@@ -3470,7 +3485,7 @@
         },
         {
             "source": "/docs/integrate/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrate/java:ext(\\.md)?",
@@ -3812,7 +3827,7 @@
         },
         {
             "source": "/docs/sdks/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/signup/cloud/enterprise",

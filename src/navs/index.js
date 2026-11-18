@@ -2975,23 +2975,23 @@ export const docsMenu = {
                         },
                         {
                             name: 'iOS',
-                            url: '/docs/libraries/ios',
+                            url: '/docs/libraries/ios/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: 'Installation',
-                                    url: '/docs/libraries/ios',
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/ios/4.x.x',
                                 },
                                 {
-                                    name: 'Usage',
-                                    url: '/docs/libraries/ios/usage',
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/ios/3.x.x',
                                 },
                                 {
-                                    name: 'Configuration',
-                                    url: '/docs/libraries/ios/configuration',
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/ios/migration',
                                 },
                             ],
                         },
