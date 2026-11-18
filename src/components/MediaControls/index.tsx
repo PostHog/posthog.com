@@ -48,7 +48,7 @@ export interface MediaControlsProps {
 }
 
 /**
- * The scrub bar and control bar for the site's video players (`MediaPlayer` and Learn TV). The player owns playback
+ * The scrub bar and control bar of `MediaPlayer`, the site's video player. The player owns playback
  * and passes its state and callbacks. Every control is a native button or range input with a label, so it works with
  * the keyboard and with screen readers. Place it inside an `@container` element: narrow players hide the volume
  * slider and the speed menu.
@@ -113,7 +113,9 @@ export default function MediaControls({
                         aria-label="Seek"
                         aria-valuetext={`${formatTime(shownTime)} of ${formatTime(duration)}`}
                         ref={inputRef}
-                        onMouseDown={() => startScrub(['mouseup'])}
+                        // Only the main button drags. A right-click opens the context menu, which can keep the
+                        // mouseup from the page, so the scrub would not end.
+                        onMouseDown={(e) => e.button === 0 && startScrub(['mouseup'])}
                         onTouchStart={() => startScrub(['touchend', 'touchcancel'])}
                         onChange={(e) => {
                             const time = Number(e.target.value)

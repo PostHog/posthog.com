@@ -1,6 +1,6 @@
 # MediaControls
 
-The scrub bar and control bar for the site's video players. `components/MediaPlayer` (Wistia and YouTube, for example `/demo` and the changelog videos) and Learn TV (`components/Learn/LearnTV/Player.tsx`) both render it, so the two players look and behave the same.
+The scrub bar and control bar of the site's video player, `components/MediaPlayer`. Every `MediaPlayer` page renders it: Wistia and YouTube videos, for example `/demo`, the changelog videos, and Learn TV.
 
 ## Usage
 
@@ -28,7 +28,7 @@ Place it inside an `@container` element. In a narrow player, the volume slider a
 
 ## Behavior
 
-- **Scrubbing:** while the pointer drags the scrubber, the time shows the drag position. `onSeek` runs once, on release. The release can be anywhere on the page: the component listens on the window.
+- **Scrubbing:** while the pointer drags the scrubber, the time shows the drag position. `onSeek` runs once, on release. The release can be anywhere on the page: the component listens on the window. Only the main mouse button drags, so a right-click does not start a scrub.
 - **Keyboard and screen readers:** with the scrubber focused, the arrow keys seek 5 seconds back or forward, and Home and End go to the start and the end. A screen reader's increment or decrement (for example a VoiceOver swipe) also seeks 5 seconds. Page Up and Page Down keep the browser's larger jump. Keys do nothing until the player knows the duration.
 - **±10 seconds:** the back and forward buttons call `onSeek(currentTime ∓ 10)`.
 - **Clamping:** `onSeek` can get a time below 0 or past the end. The player clamps it.
