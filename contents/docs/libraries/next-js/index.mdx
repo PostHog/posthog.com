@@ -106,7 +106,7 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
 
 ### Edge runtime
 
-`posthog-node` ships a build for the edge runtime, so the same client works in middleware and in route handlers that set `export const runtime = 'edge'`. Edge functions stop when the response is sent, so send events with [`after`](https://nextjs.org/docs/app/api-reference/functions/after) (Next.js 15.1 and later) rather than awaiting them before you respond. Use `after(() => posthog.flush())` for a client you share across requests, and `after(() => posthog.shutdown())` only for a client you create per request.
+`posthog-node` ships a build for the edge runtime, so the same client works in middleware (`proxy` in Next.js 16) and in route handlers that set `export const runtime = 'edge'`. Edge functions stop when the response is sent, so send events with [`after`](https://nextjs.org/docs/app/api-reference/functions/after) (Next.js 15.1 and later) rather than awaiting them before you respond. Use `after(() => posthog.flush())` for a client you share across requests, and `after(() => posthog.shutdown())` only for a client you create per request.
 
 ## Configuring a reverse proxy to PostHog
 
