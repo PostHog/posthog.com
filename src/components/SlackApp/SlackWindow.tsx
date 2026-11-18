@@ -71,6 +71,8 @@ export type SlackMessage = { at: number; time: string } & (
           attachment?: string
           /** When the bot adds the eyes reaction. It stays, like in Slack. */
           reactedAt?: number
+          /** When the bot adds the orange heart, for a polite message. It shows with the eyes reaction. */
+          heartAt?: number
       }
     | {
           from: 'bot'
@@ -92,6 +94,7 @@ export interface SlackScene {
 }
 
 const WORKSPACE = 'PostHog'
+const WORKSPACE_NOTE = 'Actual things happening in the PostHog Slack workspace.'
 const SAMPLE_LABEL = 'Sample data'
 
 type Profile = {
@@ -144,7 +147,12 @@ const pacedScene = (scene: SlackScene): SlackScene => ({
     messages: scene.messages.map(
         (message): SlackMessage =>
             message.from === 'person'
-                ? { ...message, at: pace(message.at), reactedAt: message.reactedAt && pace(message.reactedAt) }
+                ? {
+                      ...message,
+                      at: pace(message.at),
+                      reactedAt: message.reactedAt && pace(message.reactedAt),
+                      heartAt: message.heartAt && pace(message.heartAt),
+                  }
                 : {
                       ...message,
                       at: pace(message.at),
@@ -174,7 +182,7 @@ const sceneBoundaries = ({ messages, endAt }: SlackScene): number[] =>
         endAt + HOLD_MS,
         ...messages.flatMap((message) =>
             message.from === 'person'
-                ? [message.at, message.reactedAt]
+                ? [message.at, message.reactedAt, message.heartAt]
                 : [message.at, message.replies?.at, ...message.blocks.flatMap(blockBoundaries)]
         ),
     ].filter((at): at is number => at !== undefined)
@@ -491,11 +499,16 @@ const PersonAvatar = ({ name, size = 28 }: { name: string; size?: 12 | 28 }) => 
     )
 }
 
-const Reaction = () => (
+const Reaction = ({ heart }: { heart: boolean }) => (
     <span className={cn(SCENE_TEXT[11], 'flex gap-1')}>
         <span className="flex items-center gap-1 rounded-full border border-[#1D9BD1] bg-[#1D9BD1]/10 px-2 py-0.5">
             <span className="leading-none">👀</span> 1
         </span>
+        {heart && (
+            <span className="flex items-center gap-1 rounded-full border border-[#1D9BD1] bg-[#1D9BD1]/10 px-2 py-0.5">
+                <span className="leading-none">🧡</span> 1
+            </span>
+        )}
         <span className="flex items-center rounded-full bg-[#1D1C1D]/5 px-2 py-0.5 dark:bg-white/10">
             <IconEmojiAdd className={SCENE_SIZE[12]} />
         </span>
@@ -518,7 +531,9 @@ const Message = ({ message, elapsed }: { message: SlackMessage; elapsed: number 
                         {message.attachment}
                     </span>
                 )}
-                {message.reactedAt !== undefined && elapsed >= message.reactedAt && <Reaction />}
+                {message.reactedAt !== undefined && elapsed >= message.reactedAt && (
+                    <Reaction heart={message.heartAt !== undefined && elapsed >= message.heartAt} />
+                )}
             </MessageRow>
         )
     }
@@ -694,6 +709,9 @@ const Sidebar = ({ channel, channels, onSelectChannel, people }: ChannelPicker &
         <p aria-hidden className={cn(SCENE_TEXT[14], 'm-0 flex items-center gap-1 px-2 font-bold text-white')}>
             {WORKSPACE} <IconChevronDown className={SCENE_SIZE[14]} />
         </p>
+        <p aria-hidden className={cn(SCENE_TEXT[11], 'm-0 -mt-3 px-2 leading-snug')}>
+            {WORKSPACE_NOTE}
+        </p>
         <SidebarSection title="Channels">
             {channels.map((name) => (
                 <ChannelButton
@@ -852,7 +870,7 @@ export default function SlackWindow({
                 // Beside the prompt list in `ThreadDemo`, the thread is as tall as the list
                 <div
                     className={cn(
-                        SCENE_TEXT[13],
+                        SCENE_TEXT[12],
                         'flex h-96 flex-col overflow-hidden rounded-md border leading-snug @2xl/reader-content:h-full',
                         BORDER,
                         PANE
@@ -872,7 +890,7 @@ export default function SlackWindow({
                             Search {WORKSPACE}
                         </span>
                     }
-                    className={cn(SCENE_TEXT[13], 'rounded-md border-[#3F0E40] bg-[#3F0E40] leading-snug')}
+                    className={cn(SCENE_TEXT[12], 'rounded-md border-[#3F0E40] bg-[#3F0E40] leading-snug')}
                 >
                     <div className="flex min-h-0 flex-1">
                         <Sidebar

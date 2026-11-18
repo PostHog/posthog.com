@@ -23,7 +23,7 @@ export interface Demo {
 const prompts: Demo[] = [
     {
         title: 'Fix a dead-end screen',
-        label: "@PostHog new accounts get the Desktop sign-ups paused screen, and it's a dead end. It says we'll contact them, but nothing does. Drop that, and send them to the hedgehog games instead?",
+        label: "@PostHog new accounts get the Desktop sign-ups paused screen, and it's a dead end. It says we'll contact them, but nothing does. Please drop that, and send them to the hedgehog games instead?",
         scene: {
             channel: 'desktop',
             label: 'Real PR',
@@ -34,8 +34,9 @@ const prompts: Demo[] = [
                     at: 600,
                     time: '5:40 PM',
                     name: 'Cleo Lant',
-                    text: "@PostHog new accounts get the Desktop sign-ups paused screen, and it's a dead end. It says we'll contact them, but nothing does. Drop that, and send them to the hedgehog games instead?",
+                    text: "@PostHog new accounts get the Desktop sign-ups paused screen, and it's a dead end. It says we'll contact them, but nothing does. Please drop that, and send them to the hedgehog games instead?",
                     reactedAt: 1300,
+                    heartAt: 2000,
                 },
                 {
                     from: 'bot',
