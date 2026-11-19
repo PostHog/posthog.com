@@ -67,13 +67,20 @@ The blob prefix provided for data exporting can include template variables which
 
 Template variables include:
 
-* Date and time variables:
+* Date and time variables, taken from the end of the batch export data interval:
   * `year`
   * `month`
   * `day`
   * `hour`
   * `minute`
   * `second`
+* Date and time variables, taken from the start of the batch export data interval:
+  * `start_year`
+  * `start_month`
+  * `start_day`
+  * `start_hour`
+  * `start_minute`
+  * `start_second`
 * Name of the table exported (for example, 'events' or 'persons')
   * `table`
 * Batch export data bounds:
@@ -81,6 +88,8 @@ Template variables include:
   * `data_interval_end`
 
 So, as an example, setting `{year}-{month}-{day}_{table}/` as a blob prefix, will produce files prefixed with keys like `2023-07-28_events/`.
+
+The start date and time variables are not available when a backfill exports all data from the beginning, because that run has no data interval start.
 
 ### File formats
 
