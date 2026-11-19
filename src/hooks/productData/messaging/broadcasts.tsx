@@ -49,6 +49,11 @@ export const broadcasts: CarouselSlide[] = [
                             'Filter by person properties, cohorts, or distinct IDs, and see how many people it reaches before you send. One email per address, even when two people share it.',
                     },
                     {
+                        label: 'Send from where it happens',
+                        description:
+                            "Resolve an error and tell the people it hit that it's fixed. Roll a flag out to everyone and tell them it's live. Send to a cohort straight from the cohort.",
+                    },
+                    {
                         label: 'Schedule',
                         description:
                             'Send now, send later, or recur. Type "every Monday at 9am" and check the next occurrences before you launch. Spread a big send with a sending rate limit.',

@@ -289,7 +289,7 @@ export const messaging = {
                     title: 'You want email that runs on your live product data',
                 },
                 {
-                    title: 'You want to trigger actions from real user behavior',
+                    title: 'You want to see what each person did after your email',
                 },
                 {
                     title: 'You want 10,000 free emails each month, then $3 per 1,000',
