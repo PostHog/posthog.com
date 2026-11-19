@@ -47,45 +47,7 @@ logs_config:
 
 <Step title="Dual-ship to Datadog and PostHog" badge="optional">
 
-To compare PostHog and Datadog side by side, send the same logs to both at the same time. Instead of changing `logs_dd_url`, keep Datadog as the Agent's main endpoint and add PostHog as an additional endpoint, as described in Datadog's [dual shipping docs](https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm#logs).
-
-This requires Datadog Agent 7.70 or later, which supports `path_prefix` on additional endpoints.
-
-<MultiLanguage>
-
-```yaml file=datadog.yaml
-logs_config:
-  force_use_http: true
-  additional_endpoints:
-    - api_key: "<ph_project_token>"
-      Host: "us.i.posthog.com" # Use eu.i.posthog.com for EU Cloud
-      Port: 443
-      path_prefix: "/i/v1/logs/datadog/<ph_project_token>"
-      is_reliable: true
-```
-
-```bash file=Environment
-DD_LOGS_CONFIG_FORCE_USE_HTTP=true
-# Use eu.i.posthog.com for EU Cloud
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS='[{"api_key": "<ph_project_token>", "Host": "us.i.posthog.com", "Port": 443, "path_prefix": "/i/v1/logs/datadog/<ph_project_token>", "is_reliable": true}]'
-```
-
-```yml file=Helm
-# values.yaml for the Datadog Agent Helm chart
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_FORCE_USE_HTTP
-      value: "true"
-    - name: DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS
-      # Use eu.i.posthog.com for EU Cloud
-      value: '[{"api_key": "<ph_project_token>", "Host": "us.i.posthog.com", "Port": 443, "path_prefix": "/i/v1/logs/datadog/<ph_project_token>", "is_reliable": true}]'
-```
-
-</MultiLanguage>
-
-With `is_reliable: true`, the Agent treats both endpoints equally. If one is unavailable, logs keep flowing to the other.
-
-On older Agent versions, do it the other way around. Set `logs_dd_url` to PostHog as shown in the previous step, then add Datadog as the additional endpoint:
+To compare PostHog and Datadog side by side, send the same logs to both at the same time. Keep `logs_dd_url` set to PostHog as shown in the previous step, then add Datadog as an additional endpoint, as described in Datadog's [dual shipping docs](https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm#logs):
 
 ```yaml file=datadog.yaml
 logs_config:
@@ -97,6 +59,8 @@ logs_config:
       Port: 443
       is_reliable: true
 ```
+
+With `is_reliable: true`, the Agent treats both endpoints equally. If one is unavailable, logs keep flowing to the other.
 
 <CalloutBox icon="IconInfo" title="Get a discounted trial while you test" type="fyi">
 
