@@ -41,6 +41,7 @@ type LibraryNode = {
 type ResolvedItem = InstallItem & { url: string }
 
 const sortByName = (a: InstallItem, b: InstallItem) => a.name.localeCompare(b.name)
+const tileSlugs = new Set(TAXONOMY.flatMap((category) => category.items.map((item) => item.slug)))
 
 const subheading = 'text-[11px] font-semibold text-secondary m-0 mb-1'
 const tileGrid = 'grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-4 gap-y-1 p-0 m-0'
@@ -115,8 +116,10 @@ const InstallFrameworkGrid = ({
 
     const resolveUrl = (item: InstallItem): string | null => {
         if (productSlug) {
-            // Some guides use the library name, such as `installation/node` for the `nodejs` tile.
-            for (const slug of [item.slug, item.librarySlug]) {
+            // Some guides use the library name, such as `installation/node` for the `nodejs` tile,
+            // unless another tile owns that name (FastAPI must not take the Python guide).
+            const slugs = tileSlugs.has(item.librarySlug) ? [item.slug] : [item.slug, item.librarySlug]
+            for (const slug of slugs) {
                 const candidate = `/docs/${productSlug}/installation/${slug}`
                 if (productInstallUrls.has(candidate)) return candidate
             }

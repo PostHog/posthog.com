@@ -25,7 +25,9 @@ function renderGrid(productInstalls: string[], productSlug?: string) {
     const data = {
         libraries: { nodes: [{ fields: { slug: '/docs/libraries/ruby' }, frontmatter: { platformLogo: 'ruby' } }] },
         productInstalls: { nodes: productInstalls.map((slug) => ({ fields: { slug } })) },
-        sdkReferences: { nodes: [{ slug: '/docs/libraries/node/reference' }] },
+        sdkReferences: {
+            nodes: [{ slug: '/docs/libraries/node/reference' }, { slug: '/docs/libraries/python/reference' }],
+        },
     }
     const { default: InstallFrameworkGrid } = load('./index.tsx', {
         react: React,
@@ -37,10 +39,15 @@ function renderGrid(productInstalls: string[], productSlug?: string) {
         '../../../constants/installation-taxonomy': taxonomy,
     })
     const html = renderToStaticMarkup(
-        React.createElement(InstallFrameworkGrid, { categories: ['backend-languages'], productSlug, searchable: false })
+        React.createElement(InstallFrameworkGrid, {
+            categories: ['backend-languages', 'backend-frameworks'],
+            productSlug,
+            searchable: false,
+        })
     )
-    return (name: string) =>
+    const tile = (name: string) =>
         html.match(new RegExp(`<a href="([^"]+)"><img src="([^"]+)"[^>]*/><span[^>]*>${name}</span>`))
+    return Object.assign(tile, { html })
 }
 
 test('an SDK with only a generated reference links to that reference, and an SDK with no page is hidden', () => {
@@ -49,10 +56,10 @@ test('an SDK with only a generated reference links to that reference, and an SDK
     assert.equal(tile('Node.js')?.[1], '/docs/libraries/node/reference')
     assert.equal(tile('Node.js')?.[2], logos.getLogo('nodejs'))
     assert.equal(tile('Ruby')?.[1], '/docs/libraries/ruby')
-    assert.equal(tile('Go'), null)
+    assert.doesNotMatch(tile.html, />Go</)
 })
 
-test('a product guide named after the tile wins, then one named after the library', () => {
+test('a product guide named after the tile wins, then one named after the library unless a tile owns it', () => {
     assert.equal(
         renderGrid(['/docs/error-tracking/installation/node'], 'error-tracking')('Node.js')?.[1],
         '/docs/error-tracking/installation/node'
@@ -61,4 +68,8 @@ test('a product guide named after the tile wins, then one named after the librar
         renderGrid(['/docs/logs/installation/node', '/docs/logs/installation/nodejs'], 'logs')('Node.js')?.[1],
         '/docs/logs/installation/nodejs'
     )
+
+    const flags = renderGrid(['/docs/feature-flags/installation/python'], 'feature-flags')
+    assert.equal(flags('Python')?.[1], '/docs/feature-flags/installation/python')
+    assert.equal(flags('FastAPI')?.[1], '/docs/libraries/python/reference')
 })
