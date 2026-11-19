@@ -19,6 +19,7 @@ import { transactional } from './messaging/transactional'
 import { broadcasts } from './messaging/broadcasts'
 import { automation } from './messaging/automation'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const messaging = {
     ...getTool('messaging'),
@@ -27,7 +28,7 @@ export const messaging = {
     teamSlug: 'workflows',
     docsSlug: 'email',
     forumTag: 'workflows',
-    color: 'teal',
+    color: PRODUCT_COLORS.messaging,
     colorSecondary: 'green-2',
     // Billed with Workflows: emails and push are metered on the `workflows_emails` billing product.
     sharesFreeTier: 'workflows_emails',
