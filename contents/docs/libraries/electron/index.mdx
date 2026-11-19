@@ -220,7 +220,18 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
 
-The main process loads feature flags, keeps them in a cache, and shares them with each registered window and utility process. The flag methods read the cache synchronously. They do not fetch flags. Await `posthog.ready()` in main, or `init()` in a renderer, before you read flags.
+The main process loads feature flags, keeps them in a cache, and shares them with each registered window and utility process. The flag methods read the cache synchronously. They do not fetch flags.
+
+`posthog.ready()` in main and `init()` in a renderer load the cached flags from the previous run. They do not wait for the first flag request. On a fresh install, the cache is empty, so the flag methods return `undefined`. To get the latest flag values before you use them, await `reloadFeatureFlags()` or use [`onStateChange()`](#listen-for-changes):
+
+```js
+const posthog = await init()
+await posthog.reloadFeatureFlags()
+
+if (posthog.isFeatureEnabled("flag-key")) {
+  // Do something
+}
+```
 
 ```js
 // A boolean flag
@@ -243,7 +254,7 @@ const payload = posthog.getFeatureFlagPayload("flag-key")
 const flags = posthog.getAllFeatureFlags()
 ```
 
-If a flag is not known, `getFeatureFlag()` returns `false` when flags are loaded and `undefined` when they are not loaded. To set a value for unknown flags, use `isFeatureEnabled("flag-key", { defaultValue: false })`.
+If a flag is not known, `getFeatureFlag()` returns `false` when the cache has at least one flag. It returns `undefined` when the cache is empty, which includes when a project has no flags for the user. To set a fallback value for unknown flags, use `isFeatureEnabled("flag-key", { defaultValue: false })`.
 
 `getFeatureFlag()`, `isFeatureEnabled()`, and `getFeatureFlagResult()` send a `$feature_flag_called` event. The SDK sends only one event for each flag value. To stop the event, use `{ sendFeatureFlagEvent: false }`. Payload reads and `getAllFeatureFlags()` do not send the event.
 
@@ -469,13 +480,18 @@ To send queued events immediately, call `flush()`. The promise rejects if the SD
 await posthog.flush()
 ```
 
-When the app quits, the SDK tries to send queued events, but it does not delay the quit. To send all events before the app quits, call `shutdown()` with a timeout in milliseconds:
+When the app quits, the SDK tries to send queued events, but it does not delay the quit. To send all events before the app quits, call `shutdown()` with a timeout in milliseconds in a `will-quit` handler. Electron emits `will-quit` after all windows close, so unsaved-work prompts and other quit handlers still run:
 
 ```js
-app.on("before-quit", async (event) => {
+let shutdownDone = false
+
+app.on("will-quit", (event) => {
+  if (shutdownDone) return
   event.preventDefault()
-  await posthog.shutdown(2000)
-  app.exit()
+  posthog.shutdown(2000).finally(() => {
+    shutdownDone = true
+    app.quit()
+  })
 })
 ```
 
