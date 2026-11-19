@@ -101,7 +101,7 @@ For [local evaluation](/docs/feature-flags/local-evaluation), set `POSTHOG_SECRE
 
 #### Remote config
 
-To read the payload of a [remote config](/docs/feature-flags/remote-config) flag, call `getRemoteConfigPayload` with the flag key. It needs no distinct ID, and it requires `POSTHOG_SECRET_KEY`:
+To read the payload of a [remote config](/docs/feature-flags/remote-config) flag, call `getRemoteConfigPayload` with the flag key. It needs no distinct ID, and it requires `POSTHOG_SECRET_KEY` and `posthog/posthog-laravel` 0.5.0 or later:
 
 ```php
 use PostHog\Laravel\Facades\PostHog;

@@ -79,24 +79,28 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 ```
 
 ```php
+// Requires posthog-php 4.26.0+.
 $config = PostHog::getRemoteConfigPayload('landing-page-config');
 // config is returned as a parsed value. A JSON object becomes an associative array.
 // It is null when the flag has no payload.
 ```
 
 ```java
+// Requires posthog-server 2.25.0+.
 Object config = posthog.getRemoteConfigPayload("landing-page-config");
 // config is a parsed JSON value: a Map, List, String, Number, Boolean, or null.
 // It is null when the call fails or the flag has no payload.
 ```
 
 ```rust
+// Requires posthog 1.2.0+.
 let config = client.get_remote_config_payload("landing-page-config").await?;
 // config is an Option<serde_json::Value>.
 // It is None when the flag has no payload or the client is disabled.
 ```
 
 ```elixir
+# Requires posthog 2.23.0+.
 {:ok, config} = PostHog.FeatureFlags.get_remote_config_payload("landing-page-config")
 # config is a decoded JSON value, such as a map. It is nil when the flag has no payload.
 ```
