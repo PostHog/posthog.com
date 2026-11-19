@@ -53,8 +53,8 @@ When you edit a source or a refresh finds changed content, the changed document 
 
 Each search runs two lookups and merges the results.
 
-- **Keyword** - Matches the words in the query against the words in each chunk. It's available as soon as a document passes the content check.
-- **Semantic** - Matches by meaning, so "money back" finds a chunk about refunds. The semantic index builds in the background and can take up to an hour after the content check.
+- **Keyword** – Matches the words in the query against the words in each chunk. It's available as soon as a document passes the content check.
+- **Semantic** – Matches by meaning, so "money back" finds a chunk about refunds. The semantic index builds in the background and can take up to an hour after the content check.
 
 PostHog ranks the merged list, then adds the chunk before and the chunk after each match, so a result comes with its surrounding text. A search returns 10 chunks by default and 20 at most.
 
@@ -77,7 +77,7 @@ One chunk is often not enough to answer a question. An agent can ask for the chu
 
 ## Guidance in every reply
 
-A source with [**Always include in replies**](/docs/business-knowledge/sources#always-include-in-replies) on isn't searched for. PostHog adds its text to every Support reply and Playground answer, up to 20,000 characters across all such sources. Use it for tone and policy, not for facts an agent can search for.
+A source with [**Always include in replies**](/docs/business-knowledge/sources#always-include-in-replies) on gets one more use. PostHog adds its text to every Support reply and Playground answer, whatever the question, up to 20,000 characters across all such sources. Search still finds the source like any other, including searches by your own agents. Use the setting for tone and policy, and leave it off for facts an agent can search for.
 
 ## GitHub repositories
 
