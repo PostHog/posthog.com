@@ -32,8 +32,6 @@ The SDK supports:
 - Error tracking for JavaScript exceptions
 - DOM autocapture in renderer windows (opt-in)
 
-The SDK does not support session replay, surveys, product tours, or native crash reports.
-
 ## Installation
 
 Install `@posthog/electron` with your package manager:
@@ -287,8 +285,6 @@ By default, these methods reload flags. To keep the current flag values, set the
 
 To clear the properties, use `resetPersonPropertiesForFlags()` and `resetGroupPropertiesForFlags()`.
 
-> **Note:** The SDK does not send a `$device_id`. Thus, you cannot use device ID bucketing with this SDK.
-
 ### Experiments (A/B tests)
 
 Experiments use feature flags, so you can use the same methods. For more information, see the [experiments docs](/docs/experiments).
@@ -520,8 +516,6 @@ import { session } from "electron"
 
 await session.fromPartition("posthog-electron").setProxy({ proxyRules: "http://proxy.example.com:8080" })
 ```
-
-> **Note:** The SDK does not support proxies that require authentication.
 
 If a request fails because of a network error or a `407`, `408`, `429`, or `5xx` response, the SDK keeps the events and tries again later. PostHog can receive the same event more than one time.
 
