@@ -330,7 +330,7 @@ Support can request the deletion for you, or turn on event deletion in the PostH
 
 Deleting a person, along with their events and recordings, doesn't remove every copy of their data:
 
-- **AI events:** person deletion doesn't remove `$ai_` events. Their large properties, like prompts and outputs, are deleted after [30 days](/docs/ai-observability/data-retention).
+- **AI events:** person deletion removes the person's `$ai_` events from the events table, but not the full copy PostHog keeps in `ai_events`, which includes prompts and outputs. That copy is deleted after [30 days](/docs/ai-observability/data-retention).
 - **Heatmaps:** heatmap data can't be deleted per person. It expires after 90 days.
 - **PostHog AI chats:** chats that quote the person's data stay until the chat's user, project, or organization is deleted.
 - **Events without a person profile:** see [deleting events without a person profile](#deleting-events-without-a-person-profile).
