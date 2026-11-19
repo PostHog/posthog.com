@@ -151,7 +151,7 @@ export const tools = [
     },
     {
         handle: 'workflows_emails',
-        name: 'Email & Messaging',
+        name: 'Messaging',
         description: 'Send transactional email, broadcasts, and workflows from your product data',
         slug: 'workflows',
         category: 'automation',

@@ -23,7 +23,7 @@ import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const workflows = {
     ...getTool('workflows_emails'),
-    productVariantName: 'Email & Messaging',
+    productVariantName: 'Messaging',
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
@@ -36,7 +36,7 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Email & Messaging – Send email from your product data',
+        title: 'Messaging – Send email from your product data',
         description:
             'Send transactional email from the PostHog SDK, broadcasts to cohorts, and workflows triggered by events. 10,000 emails a month free.',
     },
@@ -78,8 +78,8 @@ export const workflows = {
                 heading: 'Workflows',
                 intro: (
                     <p>
-                        Build a workflow that starts from an event, a cohort, or a schedule. Each step can wait, branch
-                        on what the person did, or send an email, Slack message, push notification, or webhook.
+                        Start campaigns from an event, a cohort, or a schedule. Each step can wait, branch, or send an
+                        email, Slack message, push notification, or webhook.
                     </p>
                 ),
             },
@@ -153,16 +153,13 @@ export const workflows = {
     ],
     overview: {
         title: 'Email people based on what they do in your product',
-        description: '"Email new sign-ups who haven\'t created a project after two days"',
+        description: 'How technical marketers build workflows that convert.',
         eli5: (
             <>
                 <p>
-                    Email & Messaging sends email, SMS, and push notifications to your users, using the events and
-                    cohorts you have in PostHog. Build a welcome workflow in the visual editor, send a launch email to a
-                    cohort, or send a password reset from your backend with the PostHog SDK. Every send, open, and click
-                    is an event on the person, so you check if an email worked in the same funnels and replays as
-                    everything else. The first 10,000 emails each month are free. After that, 1,000 emails cost $3, with
-                    lower rates at higher volume.
+                    Messaging enables you to trigger emails, SMS, and push notifications using the product data you have
+                    in PostHog. Build onboarding flows, launch announcements, send transactional updates – and track
+                    every send, open, and click alongside your product data so you can find out what really works.
                 </p>
             </>
         ),
@@ -208,17 +205,14 @@ export const workflows = {
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
     useCases: {
         rows: [
-            [
-                'Founders',
-                'Send onboarding emails and password resets from one tool, without separate Customer.io and Postmark accounts',
-            ],
+            ['Founders', 'Build welcome flows quickly, without signing up for separate tools and bloating your stack.'],
             [
                 'Product Marketers',
-                'Send a product update to a cohort you already built, and let people opt out of one category instead of everything',
+                'Create launch emails, newsletters, nurture flows, and more by triggering off of actual user data and events.',
             ],
             [
                 'Growth Engineers',
-                'Start an onboarding workflow at sign-up and email the people who stall before they activate',
+                'Trigger feedback requests, churn prevention, and reactivation campaigns using dynamic cohorts of your existing users.',
             ],
             [
                 'Backend Engineers',

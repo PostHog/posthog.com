@@ -8295,14 +8295,14 @@ export const docsMenu = {
             },
         },
         {
-            name: 'Email & Messaging',
+            name: 'Messaging',
             icon: 'IconMegaphone',
             color: 'red',
             url: '/docs/workflows',
             description: 'Send transactional email, broadcasts, and workflows from your product data.',
             children: [
                 {
-                    name: 'Email & Messaging',
+                    name: 'Messaging',
                 },
                 {
                     name: 'Overview',
