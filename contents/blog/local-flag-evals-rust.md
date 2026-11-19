@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10092_Cropped_186c3c9455.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Inside PostHog

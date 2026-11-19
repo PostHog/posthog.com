@@ -23,36 +23,40 @@ Once the syncs are complete, you can start using Salesloft data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `accounts` | Accounts in your Salesloft instance | Incremental |
-| `account_stages` | Account stages | Incremental |
-| `actions` | Actions | Incremental |
-| `cadences` | Cadences | Incremental |
-| `cadence_memberships` | Cadence memberships | Incremental |
-| `call_data_records` | Call data records | Incremental |
-| `calls` | Call activities | Incremental |
-| `crm_activities` | CRM activities | Incremental |
-| `emails` | Email activities | Incremental |
-| `email_templates` | Email templates | Incremental |
-| `notes` | Notes | Incremental |
-| `people` | People | Incremental |
-| `successes` | Successes | Incremental |
-| `team_templates` | Team templates | Incremental |
-| `account_tiers` | Account tiers | Full refresh |
-| `call_dispositions` | Call dispositions | Full refresh |
-| `call_sentiments` | Call sentiments | Full refresh |
-| `crm_users` | CRM users | Full refresh |
-| `custom_fields` | Custom fields | Full refresh |
-| `email_template_attachments` | Email template attachments | Full refresh |
-| `groups` | Groups | Full refresh |
-| `imports` | Imports | Full refresh |
-| `meetings` | Meetings | Full refresh |
-| `person_stages` | Person stages | Full refresh |
-| `phone_number_assignments` | Phone number assignments | Full refresh |
-| `steps` | Cadence steps | Full refresh |
-| `team_template_attachments` | Team template attachments | Full refresh |
-| `users` | Users | Full refresh |
+| Table                        | Description                             | Sync method  |
+| ---------------------------- | --------------------------------------- | ------------ |
+| `accounts`                   | Accounts in your Salesloft instance     | Incremental  |
+| `account_stages`             | Account stages                          | Incremental  |
+| `actions`                    | Actions                                 | Incremental  |
+| `activity_histories`         | Activity histories                      | Incremental  |
+| `cadences`                   | Cadences                                | Incremental  |
+| `cadence_memberships`        | Cadence memberships                     | Incremental  |
+| `call_data_records`          | Call data records                       | Incremental  |
+| `calls`                      | Call activities                         | Incremental  |
+| `crm_activities`             | CRM activities                          | Incremental  |
+| `emails`                     | Email activities                        | Incremental  |
+| `email_templates`            | Email templates                         | Incremental  |
+| `notes`                      | Notes                                   | Incremental  |
+| `opportunities`              | Sales opportunities synced from the CRM | Incremental  |
+| `people`                     | People                                  | Incremental  |
+| `successes`                  | Successes                               | Incremental  |
+| `tasks`                      | Tasks assigned to users                 | Incremental  |
+| `team_templates`             | Team templates                          | Incremental  |
+| `account_tiers`              | Account tiers                           | Full refresh |
+| `cadence_stats`              | Aggregate performance stats per cadence | Full refresh |
+| `call_dispositions`          | Call dispositions                       | Full refresh |
+| `call_sentiments`            | Call sentiments                         | Full refresh |
+| `crm_users`                  | CRM users                               | Full refresh |
+| `custom_fields`              | Custom fields                           | Full refresh |
+| `email_template_attachments` | Email template attachments              | Full refresh |
+| `groups`                     | Groups                                  | Full refresh |
+| `imports`                    | Imports                                 | Full refresh |
+| `meetings`                   | Meetings                                | Full refresh |
+| `person_stages`              | Person stages                           | Full refresh |
+| `phone_number_assignments`   | Phone number assignments                | Full refresh |
+| `steps`                      | Cadence steps                           | Full refresh |
+| `team_template_attachments`  | Team template attachments               | Full refresh |
+| `users`                      | Users                                   | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

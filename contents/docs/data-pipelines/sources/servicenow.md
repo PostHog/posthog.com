@@ -13,21 +13,23 @@ The ServiceNow connector syncs your ITSM data into the PostHog data warehouse, i
 
 ## Available tables
 
-| Table name          | ServiceNow table |
-| ------------------- | ---------------- |
-| incidents           | `incident`       |
-| problems            | `problem`        |
-| change_requests     | `change_request` |
-| change_tasks        | `change_task`    |
-| tasks               | `task`           |
-| catalog_requests    | `sc_request`     |
-| requested_items     | `sc_req_item`    |
-| catalog_tasks       | `sc_task`        |
-| users               | `sys_user`       |
-| user_groups         | `sys_user_group` |
-| configuration_items | `cmdb_ci`        |
-| knowledge_articles  | `kb_knowledge`   |
-| assets              | `alm_asset`      |
+| Table name          | ServiceNow table    |
+| ------------------- | ------------------- |
+| incidents           | `incident`          |
+| problems            | `problem`           |
+| change_requests     | `change_request`    |
+| change_tasks        | `change_task`       |
+| tasks               | `task`              |
+| catalog_requests    | `sc_request`        |
+| requested_items     | `sc_req_item`       |
+| catalog_tasks       | `sc_task`           |
+| users               | `sys_user`          |
+| user_groups         | `sys_user_group`    |
+| configuration_items | `cmdb_ci`           |
+| knowledge_articles  | `kb_knowledge`      |
+| assets              | `alm_asset`         |
+| services            | `cmdb_ci_service`   |
+| group_members       | `sys_user_grmember` |
 
 All tables support incremental sync using `sys_updated_on` (catches both inserts and updates) or `sys_created_on` (append-only style syncs).
 

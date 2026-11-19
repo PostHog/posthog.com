@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/workflows_beta_cover_a04e206b7a.jpg
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
     - Workflows

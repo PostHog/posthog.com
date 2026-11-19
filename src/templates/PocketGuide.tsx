@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import DocsPocketGuide from 'components/PocketGuides/DocsPocketGuide'
-import LearnPage from 'components/PocketGuides/LearnPage'
+import DocsPocketGuide from 'components/Learn/PocketGuides/DocsPocketGuide'
+import LearnPage from 'components/Learn/LearnPage'
 import { pocketGuidePageTitle, volumeById } from '../constants/pocketGuides'
 
 interface PocketGuideTemplateProps {

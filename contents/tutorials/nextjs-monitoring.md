@@ -41,7 +41,7 @@ This starts up your Next.js site, which we can now add PostHog to set up monitor
 To add PostHog, install [`posthog-js`](/docs/libraries/js). 
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 After this, create a `providers.js` file in your `app` folder. In this file, set up PostHog for the client using the `PostHogProvider` component as well as your project token and instance address, which you can get from the getting started flow or [your project settings](https://app.posthog.com/project/settings).

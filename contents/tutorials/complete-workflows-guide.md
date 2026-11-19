@@ -9,6 +9,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/b42_blog_repost_1aa6acf050.png
 featuredImageType: full
+ogImage: generated
 category: Product
 tags:
     - workflows

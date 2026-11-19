@@ -14,7 +14,8 @@ import {
 } from '@posthog/icons'
 import Link from 'components/Link'
 import { getTool } from '../../data/tools'
-import { applications, GetAccess, topFeatures } from './data_warehouse/slides'
+import { applications, GetAccess, keyFeatures } from './data_warehouse/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
@@ -26,7 +27,7 @@ export const dataWarehouse = {
     Icon: IconDatabase,
     type: 'data_warehouse',
     categoryName: 'Sources',
-    color: 'purple',
+    color: PRODUCT_COLORS.data_warehouse,
     colorSecondary: 'lilac',
     // The product lives at /warehouse, but its docs live at /docs/data-warehouse.
     docsSlug: 'data-warehouse',
@@ -94,11 +95,11 @@ export const dataWarehouse = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
@@ -545,7 +546,7 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'S3 & BigQuery',
-                    description: 'Run SQL in PostHog over data in your object storage',
+                    description: 'Import files from your object storage and query them with SQL',
                 },
             ],
         },

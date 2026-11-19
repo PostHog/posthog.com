@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
+ogImage: generated
 author:
   - simon-fisher
 category: Using PostHog

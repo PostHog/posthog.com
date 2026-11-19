@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/announcing-notebooks/notebooks.jpg
 featuredImageType: full
+ogImage: generated
 author:
   - joe-martin
 category: PostHog news

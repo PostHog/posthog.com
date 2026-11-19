@@ -1,7 +1,4 @@
-export const SELF_HOSTED_SOURCES = [
+// Sources that the public source catalog doesn't list, so the site adds them by hand.
+export const EXTRA_SOURCES: { name: string; slug: string; logo?: string }[] = [
     { name: 'File upload', slug: 'file-upload' },
-    { name: 'S3', slug: 's3', logo: 's3' },
-    { name: 'Google Cloud Storage', slug: 'gcs', logo: 'googleCloud' },
-    { name: 'Cloudflare R2', slug: 'r2', logo: 'cloudflareR2' },
-    { name: 'Azure Blob', slug: 'azure-blob', logo: 'azureBlob' },
 ]

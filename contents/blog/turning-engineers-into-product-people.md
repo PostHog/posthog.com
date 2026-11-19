@@ -4,6 +4,7 @@ title: How to turn your engineers into product people
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
 featuredImageType: full
+ogImage: generated
 rootPage: /blog
 sidebar: Blog
 showTitle: true

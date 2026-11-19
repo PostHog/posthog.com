@@ -18,7 +18,8 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { features } from './experiments/features'
-import { applications, topFeatures } from './experiments/slides'
+import { applications, keyFeatures } from './experiments/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const experiments = {
     ...getTool('experiments'),
@@ -30,7 +31,7 @@ export const experiments = {
     slug: 'experiments',
     teamSlug: 'experiments',
     forumTag: 'experiments',
-    color: 'purple',
+    color: PRODUCT_COLORS.experiments,
     colorSecondary: 'lilac',
     wizardSupport: 'In development',
     billedWith: 'Feature Flags',
@@ -88,11 +89,11 @@ export const experiments = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -337,7 +338,7 @@ export const experiments = {
             {
                 name: 'Amplitude',
                 key: 'amplitude',
-                link: '/blog/posthog-vs-amplitude',
+                link: '/compare/posthog-vs-amplitude',
             },
             // {
             //     name: 'Pendo',

@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   PostHog 1.35.0 introduces activity logs and a brand new way of visualizing
   where your users are coming from with the World Map. Additionally we now

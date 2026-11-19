@@ -5,6 +5,7 @@ author:
   - sara-miteva
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/vercel_integration_7b155713cf.png
+ogImage: generated
 rootPage: /blog
 sidebar: Blog
 showTitle: true

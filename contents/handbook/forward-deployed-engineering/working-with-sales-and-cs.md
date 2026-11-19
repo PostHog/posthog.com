@@ -31,6 +31,6 @@ FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing te
 Clean handoffs in both directions:
 
 - **Into FDE:** CS or sales gives us the customer context and the technical ask, and we scope it before committing.
-- **Out of FDE:** when the technical work is done, we hand the relationship back with a record of what was built, what the customer should do next, and any follow-on work captured explicitly. See [handover](/handbook/forward-deployed-engineering/working-with-customers#handover) for the checklist, and the sales team's [sales handover](/handbook/onboarding/sales-handover) for the adjacent process.
+- **Out of FDE:** when the technical work is done, we hand the relationship back with a record of what was built, what the customer should do next, and any follow-on work captured explicitly. See [handover](/handbook/forward-deployed-engineering/working-with-customers#handover) for the checklist, and the sales team's [sales handover](/handbook/scaled-customer-success/sales-handover) for the adjacent process.
 
 One rule of thumb: if the customer's team needs to act on something without us in the room, it belongs in a durable deliverable, not a Slack DM or a thread they'll never manage to find again.

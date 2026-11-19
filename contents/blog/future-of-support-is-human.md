@@ -5,6 +5,7 @@ author:
   - abigail-richardson
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png
+ogImage: generated
 category: Startups
 tags:
   - Guides

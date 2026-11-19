@@ -19,7 +19,8 @@ import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 import { getTool } from '../../data/tools'
 import { features } from './web_analytics/features'
-import { applications, topFeatures } from './web_analytics/slides'
+import { applications, keyFeatures } from './web_analytics/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const webAnalytics = {
     ...getTool('web_analytics'),
@@ -29,7 +30,7 @@ export const webAnalytics = {
     billingType: 'product_analytics',
     teamSlug: 'web-analytics',
     forumTag: 'web-analytics',
-    color: 'green-2',
+    color: PRODUCT_COLORS.web_analytics,
     colorSecondary: '[#37945D]',
     wizardSupport: true,
     billedWith: 'Product Analytics',
@@ -86,11 +87,11 @@ export const webAnalytics = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

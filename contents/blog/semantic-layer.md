@@ -11,6 +11,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/semantic_layer_blog_header_a19ba93b69.png
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
     - Context Warehouse

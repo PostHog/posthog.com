@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/hogs_logs_675386f4fe.jpg
 featuredImageType: full
+ogImage: generated
 category: Product
 tags:
     - Logs

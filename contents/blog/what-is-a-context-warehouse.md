@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Context_warehouse_blog_header_b21c5b6f1c.png
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
     - Data warehouse

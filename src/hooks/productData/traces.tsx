@@ -15,13 +15,14 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { getTool } from '../../data/tools'
-import { applications, topFeatures } from './traces/slides'
+import { applications, keyFeatures } from './traces/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const traces = {
     ...getTool('traces'),
     Icon: IconGanttChart,
     type: 'traces',
-    color: 'blue',
+    color: PRODUCT_COLORS.traces,
     colorSecondary: 'sky-blue',
     // The docs live at /docs/distributed-tracing, which matches neither the
     // product name nor its slug, so the Docs tab is pointed there explicitly.
@@ -65,11 +66,11 @@ export const traces = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

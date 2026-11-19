@@ -9,7 +9,8 @@ export interface TabbedCarouselTab {
     value: string
     label: React.ReactNode
     icon?: React.ReactNode
-    content: React.ReactNode
+    /** Pass a function to get `selectTab`, so the slide can switch to another tab. */
+    content: React.ReactNode | ((selectTab: (value: string) => void) => React.ReactNode)
     color: string
     activeText: string
     progressBar: string
@@ -17,7 +18,7 @@ export interface TabbedCarouselTab {
     triggerClassName?: string
 }
 
-export type TabbedCarouselVariant = 'minimal' | 'hero'
+export type TabbedCarouselVariant = 'minimal' | 'hero' | 'flush'
 
 export interface TabbedCarouselProps {
     tabs: TabbedCarouselTab[]
@@ -44,13 +45,27 @@ export interface TabbedCarouselProps {
      *   embedded carousels inside articles where chrome should be quiet.
      * - 'hero': bordered tabs with hover lift, blurred color halo behind the active tab and slide,
      *   active-tab reorder on small screens, always paints active color. Matches the homepage hero.
+     * - 'flush': the slide has no padding, minimum height, or shadow, and the tabs stay in one row. For
+     *   slides that bring their own frame, like a product demo.
      */
     variant?: TabbedCarouselVariant
+    /**
+     * Holds auto-advance while true, alongside the built-in hover, offscreen, and pause-button holds — useful
+     * when a slide has its own pause control, or for reduced motion. Default: false.
+     */
+    paused?: boolean
+    /**
+     * When true, auto-advance also pauses while focus is inside the carousel, so keyboard users get the same
+     * hold as hover. Default: false.
+     */
+    pauseOnFocus?: boolean
 }
 
 interface VariantConfig {
     /** Extra classes on the inner tab-strip wrapper (the row of triggers). */
     tabsRowClassName: string
+    /** Whether tabs wrap to 2 columns below @md, with the active row moved next to the slide. */
+    wrapTabs: boolean
     /** Base extra classes on every Tabs.Trigger (padding, border, transitions). */
     triggerBaseClassName: string
     /** Extra classes on the active Tabs.Trigger. */
@@ -61,6 +76,8 @@ interface VariantConfig {
     showActiveTabHalo: boolean
     /** Extra classes on the slide outer container (the colored frame around the slide content). */
     slideContainerClassName: string
+    /** Minimum height and padding of the slide outer container. */
+    slideSizeClassName: string
     /** Whether to render a blurred color halo behind the slide content. */
     showSlideHalo: boolean
     /** Extra classes on the inner content wrapper (the white box containing slide content). */
@@ -69,30 +86,49 @@ interface VariantConfig {
     alwaysShowActiveBg: boolean
 }
 
+const SLIDE_SIZE = 'min-h-[300px] @[820px]:min-h-[400px] p-2'
+
 const VARIANT_CONFIG: Record<TabbedCarouselVariant, VariantConfig> = {
     minimal: {
         tabsRowClassName: '',
-        triggerBaseClassName: 'py-2.5 transition-colors',
+        wrapTabs: true,
+        triggerBaseClassName: 'px-3 py-2.5 transition-colors',
         triggerActiveClassName: '',
         triggerInactiveClassName: '',
         showActiveTabHalo: false,
         slideContainerClassName: 'rounded-b-md rounded-t-md transition-colors',
+        slideSizeClassName: SLIDE_SIZE,
         showSlideHalo: false,
-        contentWrapperClassName: 'overflow-hidden',
+        contentWrapperClassName: 'overflow-hidden rounded shadow-2xl',
         alwaysShowActiveBg: false,
     },
     hero: {
         tabsRowClassName: 'gap-1',
-        triggerBaseClassName: 'py-1.5 @3xl:py-2.5 border border-b-0',
+        wrapTabs: true,
+        triggerBaseClassName: 'px-3 py-1.5 @3xl:py-2.5 border border-b-0',
         triggerActiveClassName: 'border-black/10 dark:border-white/60 @md:transition-background-color',
         triggerInactiveClassName:
             '@lg:hover:text-primary @lg:hover:bg-white/30 @lg:hover:backdrop-blur border-transparent @lg:hover:border-black/10 dark:@lg:hover:border-white/60 z-20 @lg:hover:-top-px',
         showActiveTabHalo: true,
         slideContainerClassName:
             '@md:rounded-b-md @md:rounded-t-md border border-black/10 dark:border-white/60 -mt-px @md:transition-colors',
+        slideSizeClassName: SLIDE_SIZE,
         showSlideHalo: true,
-        contentWrapperClassName: 'relative',
+        contentWrapperClassName: 'relative rounded shadow-2xl',
         alwaysShowActiveBg: true,
+    },
+    flush: {
+        tabsRowClassName: '',
+        wrapTabs: false,
+        triggerBaseClassName: 'px-2 py-2.5 transition-colors border border-b-0 -mb-px',
+        triggerActiveClassName: 'border-primary',
+        triggerInactiveClassName: 'border-transparent',
+        showActiveTabHalo: false,
+        slideContainerClassName: 'rounded-b-md rounded-t-md transition-colors',
+        slideSizeClassName: '',
+        showSlideHalo: false,
+        contentWrapperClassName: 'overflow-hidden rounded-b',
+        alwaysShowActiveBg: false,
     },
 }
 
@@ -104,10 +140,13 @@ export default function TabbedCarousel({
     slideClassName,
     showActiveBg = true,
     variant = 'minimal',
+    paused = false,
+    pauseOnFocus = false,
 }: TabbedCarouselProps) {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
+    const [isFocused, setIsFocused] = useState(false)
     const [isOffscreen, setIsOffscreen] = useState(false)
     // Holds auto-advance paused until `autoplayStartDelay` ms have elapsed after mount.
     const [isWaitingToStart, setIsWaitingToStart] = useState(autoplayStartDelay > 0)
@@ -141,7 +180,8 @@ export default function TabbedCarousel({
         return () => observer.disconnect()
     }, [])
 
-    const effectivelyPaused = isPaused || isHovering || isOffscreen || isWaitingToStart
+    const effectivelyPaused =
+        paused || isPaused || isHovering || isOffscreen || isWaitingToStart || (pauseOnFocus && isFocused)
 
     const advance = useCallback(() => {
         setActiveTab((prev) => {
@@ -194,6 +234,14 @@ export default function TabbedCarousel({
             className={`@container ${className || ''}`}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
+            onFocus={pauseOnFocus ? () => setIsFocused(true) : undefined}
+            onBlur={
+                pauseOnFocus
+                    ? (event) => {
+                          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsFocused(false)
+                      }
+                    : undefined
+            }
         >
             <Tabs.Root value={activeTab} onValueChange={handleTabChange} className="flex flex-col">
                 <Tabs.List className="flex items-center gap-0 relative z-10">
@@ -204,8 +252,12 @@ export default function TabbedCarousel({
                                 <Tabs.Trigger
                                     key={tab.value}
                                     value={tab.value}
-                                    style={{ order: orderForTab(i) }}
-                                    className={`relative flex-1 min-w-[calc(50%-0.25rem)] @md:min-w-0 @md:!order-none px-3 text-sm font-semibold cursor-pointer select-none text-balance rounded-t-md ${triggerLayoutClassName} ${
+                                    style={config.wrapTabs ? { order: orderForTab(i) } : undefined}
+                                    className={`relative flex-1 ${
+                                        config.wrapTabs
+                                            ? 'min-w-[calc(50%-0.25rem)] @md:min-w-0 @md:!order-none'
+                                            : 'min-w-0'
+                                    } text-sm font-semibold cursor-pointer select-none text-balance rounded-t-md ${triggerLayoutClassName} ${
                                         config.triggerBaseClassName
                                     } ${
                                         isActive
@@ -241,7 +293,7 @@ export default function TabbedCarousel({
                 </Tabs.List>
 
                 <div
-                    className={`min-h-[300px] @[820px]:min-h-[400px] p-2 ${isFirst ? '@md:rounded-tl-none' : ''} ${
+                    className={`${config.slideSizeClassName} ${isFirst ? '@md:rounded-tl-none' : ''} ${
                         isLast ? '@md:rounded-tr-none' : ''
                     } relative ${paintActiveBg ? activeColor : ''} flex ${config.slideContainerClassName} ${
                         slideClassName ?? ''
@@ -254,7 +306,7 @@ export default function TabbedCarousel({
                         />
                     )}
                     <div
-                        className={`flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded ${config.contentWrapperClassName}`}
+                        className={`flex flex-col bg-light dark:bg-dark flex-1 w-full ${config.contentWrapperClassName}`}
                     >
                         <span className="absolute top-4 right-4 z-10">
                             <Tooltip
@@ -282,7 +334,7 @@ export default function TabbedCarousel({
                                 value={tab.value}
                                 className="data-[state=active]:animate-[carousel-fade-in_300ms_ease-out] flex-1"
                             >
-                                {tab.content}
+                                {typeof tab.content === 'function' ? tab.content(handleTabChange) : tab.content}
                             </Tabs.Content>
                         ))}
                     </div>

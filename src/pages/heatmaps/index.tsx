@@ -27,7 +27,7 @@ import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import Eli5 from 'components/Products/ReaderViewProduct/templates/Eli5'
 import Overview from 'components/Products/ReaderViewProduct/templates/Overview'
-import TopFeatures from 'components/Products/ReaderViewProduct/templates/TopFeatures'
+import KeyFeatures from 'components/Products/ReaderViewProduct/templates/KeyFeatures'
 import UseCases from 'components/Products/ReaderViewProduct/templates/UseCases'
 
 const productMenu: ProductNavItem[] = [
@@ -45,7 +45,7 @@ const productMenu: ProductNavItem[] = [
         icon: <IconMagic className="size-4" />,
     },
     { slug: 'how-to-use', name: 'How do I use it?', icon: <IconCursorClick className="size-4" /> },
-    { slug: 'top-features', name: 'Top features', icon: <IconList className="size-4" /> },
+    { slug: 'key-features', name: 'Key features', icon: <IconList className="size-4" /> },
     { slug: 'installation', name: 'Install', icon: <IconCode className="size-4" /> },
 ]
 
@@ -105,7 +105,7 @@ const HeatmapsHowToUse = ({ id }: SectionComponentProps) => (
     </section>
 )
 
-const topFeatures: CarouselSlide[] = [
+const keyFeatures: CarouselSlide[] = [
     {
         slug: 'heatmaps',
         label: 'Heatmaps',
@@ -289,11 +289,11 @@ export default function Heatmaps() {
                         <Eli5 id="eli5" productData={productData} allProducts={[]} />
                         <UseCases id="use-cases" productData={productData} allProducts={[]} />
                         <HeatmapsHowToUse id="how-to-use" productData={productData} allProducts={[]} />
-                        <TopFeatures
-                            id="top-features"
+                        <KeyFeatures
+                            id="key-features"
                             productData={productData}
                             allProducts={[]}
-                            slides={topFeatures}
+                            slides={keyFeatures}
                         />
                         <HeatmapsInstallation id="installation" productData={productData} allProducts={[]} />
                     </div>

@@ -9,11 +9,11 @@ availability:
 sourceId: Wix
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Wix connector syncs orders, products, contacts, members, and blog posts from one Wix site into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Wix connector syncs orders, products, contacts, members, blog posts, bookings, inventory, pricing plans, and more from one Wix site into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ A Wix account with an API key, and the ID of the site you want to sync. Only an 
 
 <SourceSetupIntro />
 
-Create an API key in the [Wix API Key Manager](https://manage.wix.com/account/api-keys) and give it read access to the areas you want to sync: eCommerce Orders, Stores, Contacts, Members, and Blog.
+Create an API key in the [Wix API Key Manager](https://manage.wix.com/account/api-keys) and give it read access to the areas you want to sync: eCommerce Orders, Stores, Contacts, Members, Blog, Pricing Plans, and Inventory.
 
 You'll be asked for:
 
@@ -36,7 +36,7 @@ A key that is missing one of those permissions still connects. The table picker 
 
 <SyncModes />
 
-Orders sync incrementally, using the Wix filter on `createdDate` or `updatedDate`, whichever you pick as the sync field. The other tables are full refresh, because their endpoints do not document a server-side timestamp filter.
+Orders, store categories, bookings, inventory items, and pricing plans sync incrementally on `createdDate` or `updatedDate`, whichever you pick as the sync field. Order transactions and order fulfillments are child tables of orders and sync alongside them. Pricing plan orders and the remaining tables are full refresh.
 
 ## Configuration
 

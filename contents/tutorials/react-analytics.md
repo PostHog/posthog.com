@@ -101,7 +101,7 @@ With our app set up, it's time to install and set up PostHog. If you don't have 
 First install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js @posthog/react
+npm install posthog-js@1 @posthog/react@1
 ```
 
 Next, import PostHog into `src/main.jsx` and set up it up using your project token and host from [your project settings](https://app.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component.

@@ -7,6 +7,15 @@
     },
     "headers": [
         {
+            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x):ext(\\.md)?",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -151,6 +160,281 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/libraries/capture-v1:ext(\\.md)?",
+            "destination": "/docs/libraries:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/node:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/python:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/go:ext(\\.md)?",
+            "destination": "/docs/libraries/go/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/prompts-and-offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/prompts-and-offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/prompts-and-offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/prompts-and-offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/101",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/101.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/101",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/101.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/101",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/101.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/unexplained-answers",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/unexplained-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/unexplained-answers",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/unexplained-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/unexplained-answers",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/unexplained-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/quality-output",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/quality-output.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/quality-output",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/quality-output.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/quality-output",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/quality-output.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/invented-functions",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/invented-functions.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/invented-functions",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/invented-functions.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/invented-functions",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/invented-functions.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/throw-away-answers",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/throw-away-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/throw-away-answers",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/throw-away-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/throw-away-answers",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/throw-away-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/ai-cost",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/ai-cost.md",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/ai-cost",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/ai-cost.md",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/ai-cost",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/ai-cost.md",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance.md",
+            "permanent": true
+        },
         {
             "source": "/field-guide/foreword",
             "destination": "/field-guide#about",
@@ -380,6 +664,10 @@
             "destination": "/compare/best-sentry-alternatives"
         },
         {
+            "source": "/blog/posthog-alternatives",
+            "destination": "/compare/best-posthog-alternatives"
+        },
+        {
             "source": "/blog/posthog-vs-growthbook",
             "destination": "/compare/posthog-vs-growthbook"
         },
@@ -436,6 +724,10 @@
             "destination": "/compare/best-amplitude-alternatives"
         },
         {
+            "source": "/blog/posthog-vs-amplitude",
+            "destination": "/compare/posthog-vs-amplitude"
+        },
+        {
             "source": "/blog/best-braintrust-alternatives",
             "destination": "/compare/best-braintrust-alternatives"
         },
@@ -454,6 +746,10 @@
         {
             "source": "/blog/best-fathom-alternatives",
             "destination": "/compare/best-fathom-alternatives"
+        },
+        {
+            "source": "/blog/best-feature-flag-software-for-developers",
+            "destination": "/compare/best-feature-flag-tools-for-developers"
         },
         {
             "source": "/blog/best-flagsmith-alternatives",
@@ -510,6 +806,10 @@
         {
             "source": "/blog/best-mouseflow-alternatives",
             "destination": "/compare/best-mouseflow-alternatives"
+        },
+        {
+            "source": "/blog/best-open-source-llm-observability-tools",
+            "destination": "/compare/best-open-source-llm-observability-tools"
         },
         {
             "source": "/blog/best-optimizely-alternatives",
@@ -612,8 +912,16 @@
             "destination": "/compare/best-mcp-servers-for-startups"
         },
         {
+            "source": "/blog/best-mobile-app-analytics-tools",
+            "destination": "/compare/best-mobile-app-analytics-tools"
+        },
+        {
             "source": "/blog/best-mobile-app-ab-testing-tools",
             "destination": "/compare/best-mobile-app-ab-testing-tools"
+        },
+        {
+            "source": "/blog/best-open-source-ab-testing-tools",
+            "destination": "/compare/best-open-source-ab-testing-tools"
         },
         {
             "source": "/blog/best-mobile-app-session-replay-tools",
@@ -1066,11 +1374,6 @@
             "statusCode": 301
         },
         {
-            "source": "/mcp-analytics",
-            "destination": "/docs/mcp-analytics",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/data-warehouse/run-sql-mcp:ext(\\.md)?",
             "destination": "/docs/data-warehouse/surfaces/mcp:ext?",
             "statusCode": 301
@@ -1087,6 +1390,10 @@
         {
             "source": "/code",
             "destination": "/desktop"
+        },
+        {
+            "source": "/inbox",
+            "destination": "/self-driving"
         },
         {
             "source": "/teams/logs",
@@ -1187,6 +1494,11 @@
         {
             "source": "/blog/is-autocapture-still-bad",
             "destination": "/docs/product-analytics/autocapture",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/workflows",
+            "destination": "/handbook/growth/sales/workflows-positioning",
             "statusCode": 301
         },
         {
@@ -1594,7 +1906,7 @@
         },
         {
             "source": "/docs/integrations/go-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/go:ext?"
+            "destination": "/docs/libraries/go/reference:ext?"
         },
         {
             "source": "/docs/integrations/ios-integration:ext(\\.md)?",
@@ -1646,7 +1958,7 @@
         },
         {
             "source": "/docs/integrations/node-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/node:ext?"
+            "destination": "/docs/libraries/node/reference:ext?"
         },
         {
             "source": "/docs/integrations/php-integration:ext(\\.md)?",
@@ -1654,7 +1966,7 @@
         },
         {
             "source": "/docs/integrations/python-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/python:ext?"
+            "destination": "/docs/libraries/python/reference:ext?"
         },
         {
             "source": "/docs/integrations/react-native-integration:ext(\\.md)?",
@@ -3163,7 +3475,7 @@
         },
         {
             "source": "/docs/integrate/go:ext(\\.md)?",
-            "destination": "/docs/libraries/go:ext?"
+            "destination": "/docs/libraries/go/reference:ext?"
         },
         {
             "source": "/docs/integrate/ios:ext(\\.md)?",
@@ -3179,7 +3491,7 @@
         },
         {
             "source": "/docs/integrate/node:ext(\\.md)?",
-            "destination": "/docs/libraries/node:ext?"
+            "destination": "/docs/libraries/node/reference:ext?"
         },
         {
             "source": "/docs/integrate/php:ext(\\.md)?",
@@ -3187,7 +3499,7 @@
         },
         {
             "source": "/docs/integrate/python:ext(\\.md)?",
-            "destination": "/docs/libraries/python:ext?"
+            "destination": "/docs/libraries/python/reference:ext?"
         },
         {
             "source": "/docs/integrate/react:ext(\\.md)?",
@@ -3203,7 +3515,7 @@
         },
         {
             "source": "/docs/integrate/rust:ext(\\.md)?",
-            "destination": "/docs/libraries/rust:ext?"
+            "destination": "/docs/libraries/rust/reference:ext?"
         },
         {
             "source": "/docs/integrate/identifying-users:ext(\\.md)?",
@@ -4561,6 +4873,10 @@
             "destination": "/docs/billing/pre-paid-plans:ext?"
         },
         {
+            "source": "/docs/billing/limits:ext(\\.md)?",
+            "destination": "/docs/billing/limits-alerts:ext?"
+        },
+        {
             "source": "/legal",
             "destination": "/terms"
         },
@@ -5614,7 +5930,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/managed-warehouse"
+            "destination": "/teams/warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -6349,7 +6665,15 @@
         },
         {
             "source": "/manual/correlation",
-            "destination": "/docs/product-analytics/correlation"
+            "destination": "/docs/product-analytics/funnels"
+        },
+        {
+            "source": "/docs/product-analytics/correlation:ext(\\.md)?",
+            "destination": "/docs/product-analytics/funnels:ext?"
+        },
+        {
+            "source": "/correlation-analysis",
+            "destination": "/product-analytics"
         },
         {
             "source": "/manual/experimentation",
@@ -6425,19 +6749,39 @@
         },
         {
             "source": "/docs/ai-engineering/langfuse-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/langfuse-posthog:ext?"
+            "destination": "/compare/posthog-vs-langfuse"
         },
         {
             "source": "/docs/ai-engineering/helicone-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/helicone-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
         },
         {
             "source": "/docs/ai-engineering/keywords-ai-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog:ext?"
+            "destination": "/docs/ai-observability/start-here:ext?"
         },
         {
             "source": "/docs/ai-engineering/traceloop-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/traceloop-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/langfuse-posthog:ext(\\.md)?",
+            "destination": "/compare/posthog-vs-langfuse"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/helicone-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/keywords-ai-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/traceloop-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
         },
         {
             "source": "/docs/llm-analytics/manual-capture:ext(\\.md)?",
@@ -6552,12 +6896,12 @@
             "destination": "/docs/libraries/js/usage:ext?"
         },
         {
-            "source": "/handbook/engineering/on-call-rotation",
-            "destination": "/handbook/engineering/operations/on-call-rotation"
+            "source": "/handbook/engineering/on-call-rotation:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/on-call-rotation:ext?"
         },
         {
-            "source": "/handbook/engineering/incidents",
-            "destination": "/handbook/engineering/operations/incidents"
+            "source": "/handbook/engineering/incidents:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/incidents:ext?"
         },
         {
             "source": "/handbook/engineering/support-hero",
@@ -6602,6 +6946,46 @@
         {
             "source": "/handbook/cs-and-onboarding/:path*",
             "destination": "/handbook/customer-success/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-team:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/scaled-customer-success-team:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-tracking:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/operations-and-processes:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-data:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/data:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-conversations-playbook:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/conversations-playbook:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-skills:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-program:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/onboarding-program:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/sales-handover:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/sales-handover:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/new-hire-onboarding:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/new-hire-onboarding:ext?",
             "statusCode": 301
         },
         {
@@ -6799,7 +7183,7 @@
         },
         {
             "source": "/ai-observability/features",
-            "destination": "/ai-observability#top-features"
+            "destination": "/ai-observability#key-features"
         },
         {
             "source": "/error-tracking/customers",
@@ -7066,11 +7450,27 @@
         },
         {
             "source": "/teams/data-stack",
-            "destination": "/teams/managed-warehouse"
+            "destination": "/teams/warehouse"
         },
         {
             "source": "/teams/data-stack/:path*",
-            "destination": "/teams/managed-warehouse/:path*"
+            "destination": "/teams/warehouse/:path*"
+        },
+        {
+            "source": "/teams/onboarding",
+            "destination": "/teams/scaled-customer-success"
+        },
+        {
+            "source": "/teams/onboarding/:path*",
+            "destination": "/teams/scaled-customer-success/:path*"
+        },
+        {
+            "source": "/teams/managed-warehouse",
+            "destination": "/teams/warehouse"
+        },
+        {
+            "source": "/teams/managed-warehouse/:path*",
+            "destination": "/teams/warehouse/:path*"
         },
         {
             "source": "/teams/signals/:path*",

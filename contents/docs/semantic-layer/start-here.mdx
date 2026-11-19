@@ -67,7 +67,7 @@ Open a new session – or a completely different MCP client – and ask the ques
 
 > **You:** What's our MRR?
 >
-> **Agent:** _Calls `metric-list` and finds one approved, non-drifted match: `mrr`. Reads its approval with `metric-describe`, then calls `data-catalog-metric-run`._ 🛡️ **From your data catalog**: MRR, approved definition, reviewed by you on Jul 1, 2026. Your MRR is **$142,300**. Here's the `posthog_url` deep link if you want to open the exact query in PostHog.
+> **Agent:** _Calls `metric-list` and finds one approved, non-drifted match: `mrr`. Reads its approval with `metric-describe`, then calls `data-catalog-metric-run`._  **From your data catalog**: MRR, approved definition, reviewed by you on Jul 1, 2026. Your MRR is **$142,300**. Here's the `posthog_url` deep link if you want to open the exact query in PostHog.
 
 This is the payoff. The agent didn't reinvent MRR – it found the approved metric, ran it, and opened the answer by saying which approved definition the number came from. Every session, every tool, every teammate now gets the same answer, and the [deep link](/docs/semantic-layer/metrics#running-a-metric) lets anyone audit exactly what ran.
 
@@ -81,7 +81,7 @@ One conversation gave you the full trust chain:
 
 From here:
 
-- [`setting-up-data-catalog` skill](https://github.com/PostHog/posthog/blob/master/products/data_catalog/skills/setting-up-data-catalog/SKILL.md) – with the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) installed, ask your agent to set up the data catalog, and it proposes metrics from your project's most-used insights for you to review
+- [`setting-up-data-catalog` skill](https://github.com/PostHog/posthog/blob/master/products/data_catalog/skills/setting-up-data-catalog/SKILL.md) – with the [PostHog MCP server](/docs/model-context-protocol) connected, ask your agent to set up the data catalog, and it proposes metrics from your project's most-used insights for you to review
 - [Metrics](/docs/semantic-layer/metrics) – definition kinds, the lifecycle, and what happens when a metric drifts
 - [Certifications and relationships](/docs/semantic-layer/certifications-and-relationships) – govern the tables your answers come from, not just the answers
 - [MCP tools](/docs/semantic-layer/mcp-tools) – the full tool reference and more example prompts

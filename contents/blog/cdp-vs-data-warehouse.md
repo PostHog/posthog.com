@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/cdp_vs_dw_06a0b878d6.png
 featuredImageType: full
+ogImage: generated
 tags:
  - Data warehouse
  - Data pipelines

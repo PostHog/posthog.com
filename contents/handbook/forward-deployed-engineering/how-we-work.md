@@ -6,18 +6,19 @@ showTitle: true
 
 ## The engagement lifecycle
 
-Every engagement moves through four phases:
+Every engagement moves from opportunity through scoping and delivery to close. For each stage, see the [engagement lifecycle](/handbook/forward-deployed-engineering/fde-engagement-lifecycle).
 
-1. **Intake.** A colleague or customer raises a need with the information outlined in [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That's enough for us to scope it.
-2. **Scope.** We then classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can confirm before we commit. Details below.
-3. **Execute.** We do the hands-on work: instrumentation, data modeling, migrations, integrations, dashboards, and reference implementations. We capture the durable artifacts as we go.
-4. **Wrap-up.** We confirm the deliverable was shipped and approved, then hand the relationship back to [sales and CS](/handbook/forward-deployed-engineering/working-with-sales-and-cs). We write down anything worth keeping for the next customer, along with any learnings to take back to product.
+### Scoping engagements
 
-## Scoping engagements
-
-Before delivery starts, every engagement needs a measurable outcome, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to confirm before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
+Before delivery starts, every engagement needs a measurable outcome, milestones, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to confirm before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
 
 While scoping, we always ask: **Is the described problem indicating a deeper pattern?** Understanding the real problem space and our ability to identify structure problems that may cause long-term problems matters more than anything else in making an engagement succeed.
+
+### Milestones
+
+When we define each milestone, we set its definition of "done" and, for billable engagements, its billable amount. The customer signs off on each milestone before kickoff, whether the engagement is billable or non-billable.
+
+When we complete a milestone, we send the deliverable to the customer to review against that definition. If we don't hear back within ten working days, we treat the milestone as approved.
 
 ### What it costs
 
@@ -28,7 +29,17 @@ Pricing depends on shape, effort, and commercial context, so exact numbers live 
 
 Never invent an exact number on the spot. If a customer asks, say you'll get them a quote within a day and route it through the account owner.
 
-Customers can also apply their prepaid credits toward an FDE engagement on a discretionary basis, provided there is justifiable account-level upside.  This needs approval from Simon (Ben B as backup).
+Customers can also apply their prepaid credits toward an FDE engagement on a discretionary basis, provided there is justifiable account-level upside. This needs approval from Simon (Ben B as backup).
+
+### How we invoice customers
+
+How we bill depends on the total fee and how the customer pays:
+
+- **Billable, 10,000 USD or more:** We invoice half the fee when the order form is signed, with payment due Net 30 from the term start date. As we complete each milestone, we draw its billable amount down from that upfront payment. Once the upfront payment is used up, we invoice the rest as we complete each milestone.
+
+- **Billable, under 10,000 USD:** We invoice the entire fee when the order form is signed, with payment due Net 30 from the term start date.
+
+- **Paid with prepaid credits:** We deduct the entire fee from the customer's credits before kickoff.
 
 ## Principles
 

@@ -10,6 +10,7 @@ You mention `@PostHog` to start a task. Everything else – routing rules, proje
 | `@PostHog <task description>` | Create a task for the agent to work on |
 | `/posthog rules list` | Show all routing rules |
 | `/posthog rules add "description" org/repo` | Add a routing rule |
+| `/posthog rules add "description"` | Add a routing rule and pick the repo from a list |
 | `/posthog rules remove <number(s)>` | Remove routing rules by number (e.g. `remove 1` or `remove 1,2`) |
 | `/posthog project` | Show which PostHog project your mentions route to in this workspace |
 | `/posthog project <id>` | Set the PostHog project your mentions route to in this workspace |
@@ -18,7 +19,7 @@ You mention `@PostHog` to start a task. Everything else – routing rules, proje
 | `/posthog welcome channel\|private\|off` | Post the welcome in the channel, show it only to the person who added the bot, or turn it off (Slack admins/owners only) |
 | `/posthog help` | Show the command list |
 
-Bare `/posthog` shows the command list too.
+Bare `/posthog` shows the command list too. The list shows `project workspace` and `welcome channel|private|off` only to Slack workspace admins and owners.
 
 A slash command answers only you, so you can reconfigure the bot without posting a message the whole channel reads. It reads the same in a channel and in a DM too.
 
@@ -35,24 +36,34 @@ Routing rules let you map a mention's content to a specific repo so the agent do
 /posthog rules add "billing changes" posthog/billing
 ```
 
-A rule needs both parts. `/posthog rules add "frontend bug"` with no repo is refused, and the bot replies with the full spelling to use.
+Leave out the repo (`/posthog rules add "frontend bug"`) and the bot posts a repo picker. Pick a repo to save the rule. The picker expires after 25 minutes.
 
-When several rules match, the first one in `rules list` wins. Use `/posthog rules remove 1,2` to drop rules you no longer want. The numbers correspond to the positions printed by `rules list`.
+Use `/posthog rules remove 1,2` to drop rules you no longer want. The numbers correspond to the positions printed by `rules list`.
 
 ### How the agent picks a repo
 
-When you mention `@PostHog`, it reads your routing rules first. A rule that matches sends the task straight to its repo. If no rule matches and you have several repos connected, the bot opens a picker in the thread. If you have only one, it uses that one.
+The repos the agent can choose from come from your personal GitHub connections. When you mention `@PostHog`, it picks a repo in this order:
+
+1. If you have no repos, the task runs without one. If the request turns out to need code, the agent asks you to connect GitHub.
+2. If you have exactly one repo, the agent uses it.
+3. If your message, or an earlier message in the thread, names a repo you can access (`org/repo` or a GitHub link), the agent uses that repo.
+4. Otherwise the bot checks whether the request needs code at all. If it doesn't, the task runs without a repo.
+5. Otherwise a discovery agent picks the best match. If no repo fits, the task runs without one.
+
+If the discovery step fails, the bot opens a repo picker in the thread instead.
+
+Routing rules feed steps 4 and 5. They're instructions to a model, not exact-match routing, and they're given in the order `rules list` shows. A rule that points at a repo outside your list is skipped.
 
 ## Limitations
 
 Before you lean on the Slack app, here's a list of things to know:
 
 - **Ephemeral sandbox.** Each task runs in a fresh sandbox that lives roughly six hours. Long iterations need re-prompting once it recycles.
-- **Personal GitHub auth is per user.** Every teammate who wants to ship a PR has to connect their own GitHub once. First-time setup has known rough edges.
-- **Attachment limits.** The agent reads images, PDFs, and plain-text attachments (logs, markdown, CSV, JSON, YAML) – up to five per message, 10 MB each. Other file types are skipped with a note.
+- **Personal GitHub auth is per user.** Every teammate who wants PRs opened as them has to connect their own GitHub once. Without a personal connection, a task can fall back to the project's GitHub App installation and open the PR as the PostHog bot. See [Connect your personal GitHub](/docs/slack/setup#connect-your-personal-github). First-time setup has known rough edges.
+- **Attachment limits.** Up to 15 attachments per message, 30 MB each (10 MB for PDFs), plus up to 15 more from earlier in the thread, with 50 MB in total per turn. Files over a limit are skipped with a note.
 - **Runtime is fixed per task.** You can switch models mid-run, but only within the same runtime family (Claude or Codex). Moving to the other family requires starting a new thread.
 - **The model and project you name are read, not parsed.** A [model request](/docs/slack#pick-a-model) or a [project name](/docs/slack#pick-a-project) in your message is read by an LLM, so an unusual phrasing can be missed. A miss leaves the run on your saved defaults, which is the safe outcome.
 - **No `/posthog` for external members.** A Slack Connect channel shares a conversation, not an app install. Someone from the other workspace can mention `@PostHog`, but the slash command isn't installed for them, so they can't change any setting.
-- **500-repo cap on the picker.** If your team's GitHub install exposes more than 500 repos, the list is truncated. Add a routing rule for repos that fall off the end.
-- **Workflow timeouts.** The 10-minute timeout covers accepting a mention and starting the agent, not the task itself. A running task can keep working well past that, until its sandbox recycles. The repo picker times out after 15 minutes.
+- **500-repo cap.** If your personal GitHub connections expose more than 500 repos, the list is cut off alphabetically and the bot doesn't warn you. Repos past the cap can't be picked or matched. Narrow which repos your GitHub connection can access if you hit this.
+- **Workflow timeouts.** Each step of accepting a mention and starting the agent has a 10-minute timeout. This covers the start, not the task itself. A running task can keep working well past that, until its sandbox recycles. The repo picker for a task times out after 15 minutes, and the picker for `rules add` after 25 minutes.
 - **Behavior is still moving.** Prompt construction and review-bot trust heuristics are being actively iterated. Expect shifts between beta builds.

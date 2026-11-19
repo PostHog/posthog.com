@@ -1,5 +1,5 @@
 ---
-title: Why we're moving our warehouse off DuckDB
+title: Why we're moving our warehouse product off DuckDB
 date: 2026-11-02
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/moving_off_duckdb_4c95538aac.png
@@ -15,11 +15,11 @@ tags:
     - Infrastructure
     - Engineering
 seo:
-    metaTitle: Why we're moving our warehouse off DuckDB
-    metaDescription: "We moved our data warehouse off DuckDB and DuckLake onto our own flavor of Trino and a new open table format, HogLake. Here's what broke at scale and why."
+    metaTitle: Why we're moving our warehouse product off DuckDB
+    metaDescription: "We moved our warehouse product off DuckDB and DuckLake onto our own flavor of Trino and a new open table format, HogLake. Here's what broke at scale and why."
 ---
 
-Five months ago, [we rebuilt our warehouse on DuckDB](/blog/why-we-rebuilt-our-data-warehouse) instead of ClickHouse. We did it because a shared ClickHouse cluster couldn't handle hours-long modeling queries, and it lacked a cost-based query optimizer. DuckDB gave every customer their own instance, and tools like dbt could connect over Postgres. We're still fans.
+Five months ago, we rebuilt [PostHog's warehouse product](/warehouse) on DuckDB instead of ClickHouse, as [we explained at the time](/blog/why-we-rebuilt-our-data-warehouse). We did it because a shared ClickHouse cluster couldn't handle hours-long modeling queries, and it lacked a cost-based query optimizer. DuckDB gave every customer their own instance, and tools like dbt could connect over Postgres. We're still fans.
 
 But we underestimated how big and complex our customers' workloads would get. We didn't want them to have just a good experience, we wanted the best experience you can get when you pay someone else to run your warehouse. It should work at any scale, at a fair price.
 
@@ -63,7 +63,7 @@ Offering direct Postgres connections over port 5432 sounds like a great idea. In
 
 Missing reconnects and managing TTLs and idle connections at scale is hard, and long-running connections are expensive. There's also very little tooling for load balancing pgwire compared with HTTP. Compare the ergonomics of an AWS NLB with an ALB and you'll see what we mean. HTTP headers also make routing in Kubernetes much more flexible.
 
-There's also an endless list of Postgres clients, and each expects its own niche Postgres behavior. Customers kept asking us to fix their client or library. We spent a lot of time shipping many of those fixes, but coverage never got good enough. We'd rather spend our time building an excellent warehouse than chasing the long tail of Postgres compatibility.
+There's also an endless list of Postgres clients, and each expects its own niche Postgres behavior. Customers kept asking us to fix their client or library. We spent a lot of time shipping many of those fixes, but coverage never got good enough. We'd rather spend our time building an excellent warehouse product than chasing the long tail of Postgres compatibility.
 
 ## We're rebuilding on Trino with HogLake
 

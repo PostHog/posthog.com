@@ -6,6 +6,7 @@ author:
 featuredImageType: full
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/x_ray_d970e3c839.png
+ogImage: generated
 tags:
   - PostHog news
 ---

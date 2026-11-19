@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 import OSSelect from 'components/OSForm/select'
 import { useSidebarExpanded } from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
-import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
+import { PRODUCT_CATEGORIES } from 'constants/productNavigation'
 import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTabs'
 
 interface ProductSwitcherProps {
@@ -17,8 +17,8 @@ interface ProductSwitcherProps {
 
 /**
  * Searchable product picker rendered at the top of `ReaderView`'s LeftSidebar.
- * Uses the same curated handle list/order as the taskbar "Browse tools" menu
- * (`BROWSE_TOOLS_HANDLES`). Navigates to the target product's tab for the current
+ * Lists products in the same order as the taskbar Products menu (`PRODUCT_CATEGORIES`),
+ * without the group labels. Navigates to the target product's tab for the current
  * `surface` (e.g. Learn), or to the product root (`/<slug>`) when the target
  * product has no such tab.
  *
@@ -30,7 +30,8 @@ const ProductSwitcher = ({ activeHandle, excludeHandles = [], surface = 'product
 
     const options = useMemo(
         () =>
-            BROWSE_TOOLS_HANDLES.map((handle) => allProducts.find((p: any) => p.handle === handle))
+            PRODUCT_CATEGORIES.flatMap(({ handles }) => handles)
+                .map((handle) => allProducts.find((p: any) => p.handle === handle))
                 .filter((p: any) => p?.handle && p?.slug && !excludeHandles.includes(p.handle))
                 .map((p: any) => ({
                     label: p.name,

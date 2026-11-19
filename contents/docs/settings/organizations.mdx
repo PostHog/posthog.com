@@ -47,7 +47,7 @@ Newly-joined users get the basic Member access level.
 
 ### Deleting an organization
 
-An organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your [organization settings](https://app.posthog.com/settings/organization) for more information.
+An organization can be deleted by any organization Owner. This action is irreversible. See the **Delete organization** section in your [organization settings](https://app.posthog.com/settings/organization) for more information.
 
 Deletion is processed asynchronously in the background. While it completes, all organization members are redirected to a blocking screen – this typically takes a couple of minutes. From this screen, you can switch to another organization (if you belong to one) or contact support.
 
@@ -72,7 +72,7 @@ The setting shows the range of months you can choose from. A window can't be lon
 
 > **Warning:** PostHog deletes events older than the window at the next monthly cleanup. Deleted events can't be restored, so PostHog asks you to confirm before it saves.
 
-Each project can use its own window instead, under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention#custom-retention).
+Each project can use its own window instead, under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention#how-to-customize-your-retention-period).
 
 ### Notifications
 
@@ -125,3 +125,33 @@ Find this setting under [**Settings** > **Organization** > **Security**](https:/
 When disabled, members only see themselves and other members in their projects.
 
 > **Note:** This feature requires the [Boost, Scale, or Enterprise plan](/platform-packages).
+
+### IP restrictions
+
+IP restrictions let you limit management access to your organization to a set of approved IP addresses or CIDR blocks. When enabled, only requests from an allowed network can access PostHog on behalf of your organization.
+
+Find this setting under [**Settings** > **Organization** > **Security** > **IP restrictions**](https://app.posthog.com/settings/organization-security).
+
+To configure IP restrictions:
+
+1. Add up to 100 IP addresses or CIDR blocks to the allowlist (e.g., `10.0.0.0/8`, `192.168.1.1`).
+2. Use the **Enabled** toggle to activate or deactivate enforcement. Disabling restrictions keeps your allowlist saved but unenforced.
+
+IP restrictions apply to:
+
+- Browser sessions
+- Personal API keys
+- OAuth access tokens
+- SCIM provisioning
+- Livestream connections
+
+The following are **exempt** and remain accessible regardless of IP restrictions:
+
+- SDK endpoints (event capture, feature flag evaluation)
+- Public survey pages
+- Shared and embedded dashboards
+- Email preference pages
+
+When a request is denied, the caller receives an HTTP 403 response with the code `ip_not_allowed`.
+
+> **Note:** IP restrictions require the [Enterprise plan](/platform-packages).

@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Film_Noir_Hog_Evals_beta_announcement_blog_95685493eb.png
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
     - AI observability
@@ -148,7 +149,7 @@ You can always migrate later, but realistically you won't need to (also, migrati
 
 There are free tiers everywhere – [PostHog gives you 100K LLM events/mo free](/ai-observability), Langfuse is free to self-host, [Datadog](/compare/posthog-vs-datadog) includes 40K LLM spans/mo on its free tier... use one of them instead.
 
-> For a deeper dive into free and self-hostable options, see our comparison of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+> For a deeper dive into free and self-hostable options, see our comparison of [the best open source LLM observability tools](/compare/best-open-source-llm-observability-tools).
 
 ### Drift detection, governance dashboards, AI red-teaming pipelines
 
@@ -189,7 +190,7 @@ As your product matures, the bar for observability rises. Here's the rough order
 
 **Add drift monitoring.** Models change (especially if you're on the latest version of an API). Inputs change. Your evals need to keep up. Track quality scores over time and alert on regressions.
 
-**Add cost optimization workflows.** Things like routing simpler requests to cheaper models, caching responses where you can, and identifying users or prompts that are eating budget.
+**Add cost optimization workflows.** Things like [routing simpler requests to cheaper models](/newsletter/decision-models#2-use-them-as-model-routers), caching responses where you can, and identifying users or prompts that are eating budget.
 
 **Add governance.** If you're selling to enterprise, you'll need things like PII redaction, data residency, audit logs, and human-in-the-loop review queues for high-risk outputs. This is where dedicated tools start to earn their keep.
 
@@ -197,7 +198,7 @@ As your product matures, the bar for observability rises. Here's the rough order
 
 The right tool for "day one" should also support most of "later" without needing to migrate – otherwise you're going to do this all again in six months.
 
-For a deeper comparison of tools available, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+For a deeper comparison of tools available, see our roundup of [the best open source LLM observability tools](/compare/best-open-source-llm-observability-tools).
 
 And if you're earlier in your product journey, our guide to [the best analytics stack for vibe-coded apps](/compare/best-analytics-stack-for-vibe-coded-apps) covers the whole analytics stack, not just the AI parts.
 

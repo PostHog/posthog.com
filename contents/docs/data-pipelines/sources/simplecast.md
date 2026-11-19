@@ -23,9 +23,14 @@ Once the syncs are complete, you can start using Simplecast data in PostHog.
 
 ## Available tables
 
-| Table      | Description                                                      | Sync method  |
-| ---------- | ---------------------------------------------------------------- | ------------ |
-| `podcasts` | Podcasts (shows) hosted on Simplecast that your token can access | Full refresh |
+| Table               | Description                                                      | Sync method  |
+| ------------------- | ---------------------------------------------------------------- | ------------ |
+| `podcasts`          | Podcasts (shows) hosted on Simplecast that your token can access | Full refresh |
+| `episodes`          | Episodes of a podcast, in any status                             | Full refresh |
+| `downloads`         | Daily download counts per podcast                                | Full refresh |
+| `listeners`         | Daily unique listener counts per podcast                         | Full refresh |
+| `episode_downloads` | All-time download totals per episode                             | Full refresh |
+| `episode_listeners` | All-time unique listener totals per episode                      | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 

@@ -41,6 +41,10 @@ export function useEventClock(
     const playing = inView && pageVisible && !shouldReduceMotion
 
     useEffect(() => {
+        if (shouldReduceMotion) {
+            setElapsed(restingMs)
+            return
+        }
         if (!playing) return
         const startedAt = timelineNow() - position.current
         const clockPosition = () => {
@@ -68,9 +72,9 @@ export function useEventClock(
             window.clearTimeout(timer)
             position.current = Math.min(clockPosition(), loopMs)
         }
-    }, [playing, stops, loopMs, loop])
+    }, [playing, shouldReduceMotion, restingMs, stops, loopMs, loop])
 
-    return shouldReduceMotion ? restingMs : elapsed
+    return elapsed
 }
 
 export function useLoopingAnimation<T extends HTMLElement>(

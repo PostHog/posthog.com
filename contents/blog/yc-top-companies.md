@@ -9,6 +9,7 @@ author:
   - mo-shehu
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/yc-top-companies/yc-top-companies.png
+ogImage: generated
 category: PostHog news
 tags:
   - Y Combinator

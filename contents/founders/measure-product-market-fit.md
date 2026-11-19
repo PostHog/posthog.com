@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-guide.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
   - Finding product-market fit

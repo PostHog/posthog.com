@@ -1,7 +1,7 @@
 import React from 'react'
 
-import LearnPage from 'components/PocketGuides/LearnPage'
-import ProductAnalyticsLearnLanding from 'components/PocketGuides/ProductAnalyticsLearnLanding'
+import LearnPage from 'components/Learn/LearnPage'
+import ProductAnalyticsLearnLanding from 'components/Learn/ProductAnalyticsLearnLanding'
 
 export default function ProductAnalyticsLearn(): JSX.Element {
     return (

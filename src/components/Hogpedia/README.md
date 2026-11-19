@@ -98,7 +98,7 @@ The Main Page's "Featured hog" rotates through the same registry for the same re
 
 ## The skin
 
-`hogpedia.css` is the only file with non-token colors and a non-project font stack, and every rule in it is scoped under `.hogpedia`. This is the same approach `src/components/PocketGuides/twigMockup.css` takes. It touches no Tailwind config, mints no utility, and cannot leak.
+`hogpedia.css` is the only file with non-token colors and a non-project font stack, and every rule in it is scoped under `.hogpedia`. This is the same approach `src/components/Learn/TwigExhibits/twigMockup.css` takes. It touches no Tailwind config, mints no utility, and cannot leak.
 
 **Hogpedia is always light.** MonoBook had no dark variant, so there is nothing to be faithful to and an invented one would break the premise. The root paints an opaque background and sets `color-scheme: light`, so a dark site theme shows a light page inside a themed window frame – which reads as a website in a browser, the effect we want.
 

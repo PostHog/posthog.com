@@ -12,24 +12,45 @@ Almost nothing here is urgent. There is no response time target. If you are not 
 
 ## Community surfaces
 
-Two spaces:
+Four spaces:
 
-- **Discord**
 - **The forum**, at [posthog.com/forum](/forum)
-
-This does not include Reddit or GitHub at the moment, but this will change.
+- **Discord**
+- **GitHub**, for pull requests from external contributors. See [external pull requests](#external-pull-requests).
+- **Reddit**, at [r/posthog](https://www.reddit.com/r/posthog). See [Reddit](#reddit).
 
 ## Where to look
 
-Slack shows everything. You do not need to open Discord or the forum to see what is new.
+Slack shows everything for the forum and Discord. You do not need to open either one to see what is new. GitHub and Reddit are not in Slack, so check them directly.
 
 | Channel | What it carries |
 | --- | --- |
-| <PrivateLink url="https://posthog.slack.com/archives/C0AURNYBN4W">#discord-feed</PrivateLink> | Every Discord message, as a card with a "See message" button |
 | <PrivateLink url="https://posthog.slack.com/archives/C03B04XGLAZ">#community-questions</PrivateLink> | Each new forum question, and a morning digest of the questions with no answer |
+| <PrivateLink url="https://posthog.slack.com/archives/C0AURNYBN4W">#discord-feed</PrivateLink> | Every Discord message, as a card with a "See message" button |
 | <PrivateLink url="https://posthog.slack.com/archives/C0BQX7MPYSF">#community-escalations</PrivateLink> | Anything a community moderator sends to us |
 
-The morning digest is the fastest way to see what is open.
+## External pull requests
+
+External contributors open real pull requests, and they deserve an answer. Our job is to make sure each one gets to a team that can review it. We do not review the code ourselves.
+
+Look for open pull requests from external contributors that are not drafts, and that:
+
+- Have no reviewer assigned, or
+- Have had a reviewer assigned for more than a week with no reply
+
+For now, ask Claude to find these for you. We're building a dashboard that will show them in one place.
+
+For each one:
+
+1. Find the team that owns the code it changes.
+2. Assign a reviewer from that team, or ping the team in their Slack channel if you are not sure who.
+3. If a reviewer has been assigned for more than a week, nudge them on the pull request or in Slack.
+
+> All we ask of the reviewer is a reply: "useful, here's why", "not a fit, here's why", or "leaving it open to see if others want it".
+
+## Reddit
+
+Look at [r/posthog](https://www.reddit.com/r/posthog) when you check the other spaces. It's quiet, so this takes a minute. When you see a new post, acknowledge it or reply. If it needs a team, flag it to them in their Slack channel.
 
 ## How often to check
 
@@ -45,7 +66,7 @@ If we answer nothing for two days, that's fine. We just don't want anything goin
 
 ## When to reply
 
-Most of the Discord feed does not need PostHog employee interaction, but it's great to chime in when we have something to add.
+Most of the Discord feed does not need an answer. Have fun with it – there's no PostHog line you need to toe. Be yourself, and talk with the other founders and builders there.
 
 - **Chatter.** A person writes "morning hogs", or something like it. Join the conversation, or add a reaction. This is the community working, not a waste of your time.
 - **A question you can answer.** Answer it.
@@ -65,8 +86,8 @@ Use the `answering-community-questions` skill in PostHog AI (in the builder rela
 
 Escalate and follow up when a person is truly stuck and cannot continue with their work.
 
-1. Copy the link to the Discord message or the forum post.
-2. Get the user's email (if in Discord, ask them to DM you; if on the forum, you can see it in their profile).
+1. Copy the link to the forum post or the Discord message.
+2. Get the user's email (if on the forum, you can see it in their profile; if in Discord, ask them to DM you).
 3. Create a new support ticket. You can follow a <PrivateLink url="https://us.posthog.com/project/2/support/tickets/75872">format like this ticket</PrivateLink>:
 
    > Hey there, we just created a ticket for you on behalf of your community post (LINK):

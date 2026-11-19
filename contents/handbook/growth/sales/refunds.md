@@ -113,10 +113,18 @@ If you want more precision when a single event type is inflated, use the 'Event 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
 -   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
 -   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
+-   **Pay-as-you-go customers:** issue credits if the period hasn't ended and the invoice isn't finalized. If the invoice has been finalized, issue a refund via billing admin.
+-   **Prepaid customers (annual contracts or self-serve credit purchases):** don't add a credit. Wait until the invoice with the spike is issued, then go to Billing Admin → the invoice → **Start refund** and choose **Balance first**. This puts their prepaid credits back.
+    -   **Why:** prepaid credits already paid for the spike, so it counts as revenue. A free credit doesn't undo that and our revenue model counts it again when it's used.
+    -   **Amount:** refund the spike's share of each product line, using the invoice amounts (should be at list price). If the spike covers a whole line, copy that line's amount. If not, price the usage with and without the spike and refund the difference. Split by invoice if the spike crosses billing periods.
+    -   **Card payments:** if the card paid part of the invoice, ask RevOps before refunding.
+
 
 ## How to issue refunds or credits
 
 ### Issuing credits
+
+Before you start, check whether the customer is prepaid (annual or prepurchased credits). If they are, use the refund flow in [Refund or credit?](#refund-or-credit) instead of the steps below.
 
 1. Go to <PrivateLink url="https://billing.posthog.com/admin/">billing admin</PrivateLink>
 2. Next to 'Credits', click on 'Add'
@@ -181,10 +189,12 @@ Steps:
 -   Something seems off
 -   They've asked for multiple refunds lately
 -   The case doesn't match the simple cases above
--   It's a big customer (spending $1,667+ monthly)
+-   It's a big customer (spending $1,667+ monthly), unless it's a small credit (see below)
 -   Need to create or modify an invoice for the correction. Support team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
 
-Message <TeamMember name="Mine Kansu" photo /> in Slack with what you checked, what you think we should do, and any other relevant context, and attach a private note to the ticket linking to the conversation. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
+A big customer on its own isn't a reason to escalate. If the credit is under $1,000, clearly fits one of the scenarios above, and nothing else on the list applies, use your judgement and issue it. Add a note with your calculation and a reference link so others can see why you gave it.
+
+When you'd like to escalate: Post in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> and tag the RevOps team Slack group with what you checked, what you think we should do, and any other relevant context, and attach a private note to the ticket linking to the conversation. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
 
 ### Our approach
 
@@ -193,6 +203,6 @@ We'd rather fix unexpected usage issues than have customers pay one massive invo
 ### Trial periods and usage spikes
 
 -   We're generous with trial periods for actively engaged new ICP customers
--   Tag accounts as "trial" in the billing system. If they're already paying when actively testing the product, inform Mine/RevOps for proper tagging and revenue recognition
+-   Tag accounts as "trial" in the billing system. If they're already paying when actively testing the product, tag the RevOps team in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> for proper tagging and revenue recognition
 -   If you spot accidental usage spikes, proactively reach out and work with customers to reduce their spend to fit their budget and needs
--   When you're unsure about handling a specific case, ping Mine/RevOps directly for review
+-   When you're unsure about handling a specific case, tag the RevOps team in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> for review

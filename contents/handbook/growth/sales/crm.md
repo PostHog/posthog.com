@@ -211,7 +211,9 @@ Opportunities track potential deals in Salesforce. Managing opportunities effect
 
 New Revenue: Select this type when engaging with a customer who has never paid us before. This includes new customers and startup customers transitioning to a paid plan for the first time.
 
-New Revenue – Existing Customer: Choose this type for additional credits to a customer who is already paying us. This includes upsells, cross sells, or expansion within the same account.
+New Revenue – Existing Customer: Choose this type for upsells, cross sells, or expansion within the same account.
+
+Credit Top Up: Choose this type for a mid-contract credit purchase from an existing annual contract customer (for example, they bought $50k in credits, then later want an additional $30k before the term ends). Only annual contract Types apply to this record type; see [Opportunity stages](#opportunity-stages) below for its simplified stages.
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
@@ -297,6 +299,12 @@ Exit criteria:
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
+The Credit Top Up record type uses a 4-stage process:
+1. Identified
+2. Commercial Agreement
+3. Closed Won (100%)
+4. Closed Lost (0%) - The Loss Reason field is required for any opportunity marked as Closed Lost.
+
 ### Forecast categories
 
 **Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter.
@@ -326,7 +334,7 @@ The renewal pipeline stages are:
 3. Product Evaluation (50%) - This step becomes relevant if decision makers have changed in organization or if new teams within the company are considering using us.
 4. Commercial & Legal Review (80%) - We are now working with them on contractual items such as custom pricing, MSAs etc.
 5. Closed Won (100%) - They have signed the contract.
-6. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
+6. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap. This includes customers who move to monthly payments, even for one month. See [customers moving to monthly](/handbook/customer-success/renewals#customers-moving-to-monthly).
 
 ### Opportunity notes
 

@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820
+ogImage: generated
 category: Engineering
 tags:
   - Engineering
@@ -126,7 +127,7 @@ The offline evaluations we run while developing our agent only capture the input
 
 Running your evaluators on all production traces sounds expensive, because it is, especially if you depend on LLM-as-a-Judge evaluators. This is why it's important to use code-based evaluators where possible. At PostHog, code-based evaluators for online evaluations use [Hog](/docs/ai-evals). You can't, however, only depend on code-based evaluators, so you can also:
 
-1. Use a cheaper LLM-as-a-Judge model that can still capture the intricacies of what you're evaluating
+1. Use a [cheaper LLM-as-a-Judge model](/newsletter/decision-models#4-use-them-in-place-of-overqualified-llms) that can still capture the intricacies of what you're evaluating
 2. Filter the traces on which you run certain evaluators, for example by feature
 3. Only run the evaluator on a sample of your production traces, we recommend 5-10%, which should give you a representative random sample
 

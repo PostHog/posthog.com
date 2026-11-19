@@ -7,10 +7,11 @@ import {
     IconPiggyBank,
     IconPresent,
     IconTerminal,
+    IconVideoCamera,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/PocketGuides/bookModel'
-import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
+import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
@@ -20,6 +21,7 @@ import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
 
 const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    videos: { name: 'Videos', icon: <IconVideoCamera className="size-4" /> },
     'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
     'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
 }
@@ -121,6 +123,9 @@ const LearnNav = ({
         wrap: fullTitles,
     }))
     const hub = volume?.learnHub
+    const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
+    // Only the Self-driving introduction is numbered, so the scout pages come through unnumbered.
+    const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
@@ -128,10 +133,22 @@ const LearnNav = ({
                   name: 'Pocket guide',
                   url: guideBasePath,
                   icon: <IconBook className="size-4" />,
-                  children: chapters.filter((_, index) => !pages[index].isFrontMatter),
+                  children: [
+                      ...chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
+                      // The story ends in Self-driving, the guide's last numbered chapter. Its first
+                      // page is the introduction, so the label opens it and the chevron lists the scouts.
+                      ...(scoutChapters.length ? [{ ...scoutChapters[0], children: scoutChapters.slice(1) }] : []),
+                  ],
               },
               // Only the hub pages this volume has, so a smaller hub has no dead links.
-              ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
+              ...(hub.pages ?? []).map((page) => {
+                  const children = hub.subpages?.[page]?.map(({ slug, name }) => ({
+                      name,
+                      url: `${basePath}/${page}/${slug}`,
+                  }))
+                  // A hub page with subpages has no page of its own, so it opens the first one.
+                  return { ...HUB_PAGES[page], url: children?.[0]?.url ?? `${basePath}/${page}`, children }
+              }),
           ]
         : chapters
 
@@ -149,7 +166,7 @@ const LearnNav = ({
         } else if (url === basePath) {
             posthog?.capture('learn_section_selected', { volume: volumeId, section: 'overview', placement: 'sidebar' })
         } else {
-            const section = hub?.pages?.find((page) => url === `${basePath}/${page}`)
+            const section = hub?.pages?.find((page) => url?.startsWith(`${basePath}/${page}`))
             if (section) posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
         }
     }

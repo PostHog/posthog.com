@@ -330,9 +330,9 @@ const response = await openai.chat.completions.create({
 
 ### Prerequisites
 
-- **Personal API key (`phx_...`)** – Used as Bearer auth for prompt fetches
+- **Personal API key (`phx_...`) or project secret API key (`phs_...`)** – Used as Bearer auth for prompt fetches. The key needs the `llm_prompt:read` scope
 - **Project Token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
-- **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
+- **PostHog SDK** – Install the Python or JavaScript SDK with the AI package, or the .NET SDK (the `PostHog` NuGet package, version 2.22.0 or later)
 
 When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys.
 Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
@@ -450,6 +450,52 @@ const config = result.config ?? {}
 // ... your OpenAI/Anthropic call here
 ```
 
+### .NET
+
+Prompts are part of the core `PostHog` NuGet package. Set `SecretKey` on the client options. The SDK sends prompt requests to `HostUrl`, so the default host works.
+
+```csharp
+using PostHog;
+using PostHog.Prompts;
+
+await using var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "<ph_project_token>",
+    SecretKey = "<ph_personal_api_key>", // or your project secret API key
+});
+
+// Fetch the version a label points to (recommended for production apps)
+var prompt = await posthog.Prompts.GetAsync("support-system-prompt", new GetPromptOptions
+{
+    Label = "production",
+    Fallback = "You are a helpful assistant.", // Used if the fetch fails and nothing is cached
+});
+
+// Or fetch a specific version, or the latest version
+var pinned = await posthog.Prompts.GetAsync("support-system-prompt", new GetPromptOptions { Version = 2 });
+var latest = await posthog.Prompts.GetAsync("support-system-prompt");
+
+// Compile with variables
+var systemPrompt = prompt.Compile(new Dictionary<string, object>
+{
+    ["company"] = "Acme Corp",
+    ["tier"] = "premium",
+    ["user_name"] = "Alice",
+});
+
+// Model parameters or other settings stored with the version, as a JsonElement (null when there are none)
+var model = prompt.Config is { } config && config.TryGetProperty("model", out var configuredModel)
+    ? configuredModel.GetString()
+    : "your-default-model";
+
+// Use in your LLM call
+// ... your OpenAI/Anthropic call here
+```
+
+`prompt.Source` says where the result came from: `Api`, `Cache`, `StaleCache`, or `CodeFallback`. Without a fallback, a failed fetch with nothing cached throws a `PromptFetchException`. Its `Code` names the cause, for example `not_found` or `unauthorized`.
+
+In ASP.NET Core, register PostHog with `AddPostHog` and inject `IPostHogPrompts`.
+
 ### Fetching all prompts in one request
 
 If your app uses many prompts, fetch them all in one request instead of one request per prompt. Each fetched prompt is stored in the cache, so later `get()` calls are served from cache until the TTL expires:
@@ -490,17 +536,20 @@ With a label, the result maps each prompt name to the version the label points t
 
 Without a label, every prompt is included at its latest version, the same version a plain `get(name)` returns. This includes prompts whose latest version has never been released through a label.
 
+The .NET SDK fetches one prompt per request and has no bulk fetch yet.
+
 ## Caching
 
 Prompts are cached on the SDK side to minimize latency and API calls:
 
 - **Default TTL**: 5 minutes (300 seconds)
-- **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
+- **Configurable per-request**: Override with `cache_ttl_seconds` (Python), `cacheTtlSeconds` (JS), or `CacheTtl` on `GetPromptOptions` (.NET). In .NET, `PostHogOptions.PromptCacheTtl` changes the default for the whole client
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Refetch cooldown**: After a failed refetch, the stale value is served for 60 seconds before the SDK tries the network again. When the server sends a `Retry-After` header, the SDK waits that long instead, up to 1 hour
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
 - **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
-- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt in one request, at a label or at the latest version, and fill the cache for later fetches
+- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt in one request, at a label or at the latest version, and fill the cache for later fetches. Not available in .NET yet
+- **Clearing the cache**: `clear_cache` (Python), `clearCache` (JS), and `ClearCache` (.NET) remove every cached prompt, one prompt by name, or one version of a prompt. Use it after you publish a new version so the next fetch gets it
 
 ## Linking prompts to traces
 
@@ -530,7 +579,20 @@ const response = await openai.chat.completions.create({
 })
 ```
 
+```csharp
+// ToTraceProperties returns $ai_prompt_name and $ai_prompt_version for the fetched prompt.
+// It returns an empty dictionary for a code fallback, because no PostHog prompt was used.
+var properties = prompt.ToTraceProperties();
+properties["$ai_model"] = "gpt-5";
+properties["$ai_input"] = new[] { new { role = "system", content = systemPrompt } };
+// ... the other $ai_generation properties, see the manual capture docs
+
+posthog.Capture("user_123", "$ai_generation", properties);
+```
+
 </MultiLanguage>
+
+In .NET, you capture the `$ai_generation` event yourself from the core package. See [manual capture](/docs/ai-observability/installation/manual-capture) for the properties it takes.
 
 Once linked, you can:
 - Filter generations by prompt name and version
@@ -540,7 +602,7 @@ Once linked, you can:
 
 ## Prompt usage
 
-Every SDK fetch of a prompt by name captures a `$llm_prompt_fetched` event. The **Usage** tab on a prompt shows these events in two views:
+Every Python and JavaScript SDK fetch of a prompt by name captures a `$llm_prompt_fetched` event. The .NET SDK does not capture it yet, so fetches from .NET do not appear here. The **Usage** tab on a prompt shows these events in two views:
 
 - **Trend**: a graph of prompt fetches over time
 - **Log**: the individual fetch events, including the version each fetch resolved to

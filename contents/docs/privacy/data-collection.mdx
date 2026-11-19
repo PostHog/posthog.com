@@ -11,7 +11,7 @@ You should consider the following tools to help you manage data collection:
 
 | Feature | Description |
 |---------|-------------|
-| [Asking for opt out](#asking-for-opt-out) | A top-level opt out of all data collection |
+| [Asking for opt out](#asking-for-opt-out) | A top-level opt out of event capture |
 | [Using a consent management platform](#using-posthog-with-a-consent-management-platform-cmp) | Integrate PostHog with a CMP like OneTrust or Cookiebot |
 | [IP data capture](#ip-data-capture) | Control whether client IP addresses are captured or discarded |
 | [Autocapture behavior](#autocapture) | Configure what elements and interactions are automatically captured |
@@ -26,7 +26,12 @@ If you require that certain data never reaches PostHog servers, you can use one 
 
 Before capturing data, you may need to ask your users for consent. PostHog provides a top level switch to control data collection. 
 
-Opting out on a PostHog client will prevent **all data** from being captured and sent to PostHog. This includes any autocaptures, manual captures, and session replays.
+Opting out on a PostHog client stops it from capturing new events. This includes autocaptured events, manual captures, and session replays.
+
+Opting out doesn't affect:
+
+- **Feature flags.** Flags still load while the user is opted out. The SDK sends `/flags` requests that include the distinct ID and any person properties set for flag evaluation.
+- **Events captured before opting out.** Events already queued on the device can still be sent to PostHog after the user opts out.
 
 ### Opting in and out
 You can opt out the current device by calling `posthog.opt_out_capturing()`.
@@ -115,7 +120,7 @@ The problem: if the SDK never loads, it can't count the visitors who ignore or d
 
 The recommended pattern is to load PostHog opted out by default, then opt the user in once they consent:
 
-1. Initialize PostHog with `opt_out_capturing_by_default: true` (see [opting out by default](#opting-out-by-default)) so nothing is captured until the user consents.
+1. Initialize PostHog with `opt_out_capturing_by_default: true` (see [opting out by default](#opting-out-by-default)) so no events are captured until the user consents.
 2. When the user grants consent, call `posthog.opt_in_capturing()`.
 3. When the user withdraws or denies consent, call `posthog.opt_out_capturing()`.
 
@@ -138,7 +143,7 @@ function onConsentChange(hasConsented) {
 
 Every CMP (OneTrust, Cookiebot, and others) exposes some kind of callback or event that fires when consent changes. Call `opt_in_capturing()` and `opt_out_capturing()` from that callback, using whatever consent-change hook your CMP provides.
 
-Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog still loads and counts users with a privacy-preserving hash, and only starts storing cookies once the user opts in – without you needing to wire up the opt in and out calls yourself.
+Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog uses a privacy-preserving hash to count users who opt out, and only starts storing cookies once the user opts in. You still call `opt_in_capturing()` and `opt_out_capturing()` from your CMP. Until one of them runs, PostHog sends no events. Don't combine this with `opt_out_capturing_by_default: true`: PostHog then treats a visitor with no choice as opted out and sends cookieless events right away.
 
 ## IP data capture
 
@@ -154,7 +159,7 @@ To configure the organization default:
 2. Find the **IP data capture default** setting
 3. Choose whether new projects should capture or discard client IP data by default
 
-**EU organizations**: Automatically default to IP data capture disabled for GDPR compliance. This ensures that all new projects created in EU organizations are configured with appropriate privacy settings from the start.
+**PostHog EU organizations**: Automatically default to IP data capture disabled for GDPR compliance. This ensures that all new projects created in these organizations are configured with appropriate privacy settings from the start.
 
 ### Project-level configuration
 
@@ -171,7 +176,19 @@ To configure at the project level:
 - **New projects**: Automatically inherit the organization's IP data capture default setting
 - **Existing projects**: Are not affected by organization-level changes - they retain their current configuration
 - **Project-level override**: Individual projects can override the organization default if needed
-- **Privacy compliance**: Disabling IP capture helps with GDPR and other privacy regulations by preventing collection of identifiable network information
+- **Privacy compliance**: Discarding IP data helps with GDPR and other privacy regulations because PostHog does not store client IP addresses with your events
+
+### Location data when IPs are discarded
+
+Discarding IP data does not remove location data. PostHog still receives the client IP address with each event. [Transformations](/docs/data-pipelines/transformations) run before PostHog discards the IP:
+
+- The [GeoIP enrichment transformation](/docs/data-pipelines/transformations/template-geoip) still adds location properties such as `$geoip_country_name` and `$geoip_city_name` to events and persons
+- The [bot detection transformation](/docs/data-pipelines/transformations/template-bot-detection) still uses the IP address
+- PostHog removes the `$ip` property before it stores the event
+
+To stop location enrichment too, disable the GeoIP transformation in your project's [transformations](/docs/data-pipelines/transformations). To skip it for a single event, set the `$geoip_disable` property to `true` on that event.
+
+> **Note:** Events sent with [cookieless tracking](#cookieless-tracking) lose their IP address before transformations run, so they get no GeoIP or bot detection enrichment.
 
 ## Autocapture
 
@@ -283,22 +300,34 @@ PostHog can be configured to do cookieless tracking by setting `cookieless_mode`
 
 <CalloutBox type="info" title="Enable cookieless tracking">
 
-Before configuring cookieless tracking, go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**.
+Before configuring cookieless tracking, go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**. If this setting is off, PostHog discards cookieless events and shows an [ingestion warning](/docs/data/ingestion-warnings#discarded-cookieless-event-because-cookieless-tracking-is-disabled).
 
 </CalloutBox>
 
 First is `cookieless_mode: "always"`:
 - Doesn't require a cookie banner (unless something else on your website uses cookies)
 - Never stores PostHog data in cookies or local/session storage
+- Ignores `opt_in_capturing()` and `opt_out_capturing()`, so capture continues regardless of the user's choice
 - Doesn't block `identify()`, but you should avoid identifying users in this mode: a persistent distinct ID is considered Personal Data under GDPR and other similar privacy regulations, which undoes the privacy benefit of cookieless tracking. Set [`person_profiles: 'never'`](/docs/data/anonymous-vs-identified-events) to turn `identify()` calls into no-ops
 - Doesn't support `alias()`: alias events are dropped during ingestion
 - Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
 
 Second is `cookieless_mode: "on_reject"`:
 - Is useful if you do want to show a cookie banner and only enable cookies when the user consents with `posthog.opt_in_capturing()` or similar method
-- Never stores PostHog data in cookies or local/session storage until the user opts in
-- **No events are captured** until after consent is either given or denied
+- Stores no PostHog data in cookies or local/session storage until the user opts in or out. If the user opts out, PostHog stores only that choice in local storage
+- **No events are captured** until after consent is either given or denied, unless you set `opt_out_capturing_by_default: true`, or set `respect_dnt: true` and the browser sends Do Not Track. In either case, PostHog treats a visitor with no choice as opted out and captures cookieless events right away
 - If consent is denied, still counts those users, using a privacy-preserving hash calculated on PostHog's servers
+
+### What each mode does by consent state
+
+| Mode and visitor choice | Events sent | Browser storage | Session replay and surveys | Heatmaps | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `always` | Yes | No | No | Yes | Events use an anonymous ID from PostHog's servers. |
+| `on_reject`, no answer yet | No | No | No | No | PostHog sends nothing until the visitor answers. |
+| `on_reject`, accepted | Yes | Yes | Yes | Yes | PostHog stores a cookie and a persistent distinct ID. |
+| `on_reject`, declined | Yes | Yes | No | Yes | Events use an anonymous ID. The browser stores only the consent choice. |
+
+With `opt_out_capturing_by_default: true`, or with `respect_dnt: true` and Do Not Track, a visitor with no answer gets the "declined" row. PostHog stores nothing in the browser for that visitor.
 
 <CalloutBox type="info" title="More to do">
 

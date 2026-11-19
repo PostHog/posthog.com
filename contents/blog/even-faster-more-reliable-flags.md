@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/flags_c5beffa331.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Inside PostHog

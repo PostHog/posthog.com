@@ -28,7 +28,7 @@ After doing this, go into your newly created `fake-door` folder and install `pos
 
 ```bash
 cd fake-door
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 After installing `posthog-js`, set up the PostHog initialization. This requires going to our `app` folder, creating a `providers.js` file, adding our PostHog initialization behind a window check, and creating a provider component like this:

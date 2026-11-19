@@ -80,7 +80,7 @@ Slide templates are intended to be kept DRY, with content being sourced from rel
 
 ## Product reader view carousels
 
-**Product reader pages** (`/session-replay`, etc.) use a carousel system built on `CarouselSlide`. These are the "How do I use it?" (Applications) and "Top features" (TopFeatures) sections.
+**Product reader pages** (`/session-replay`, etc.) use a carousel system built on `CarouselSlide`. These are the "How do I use it?" (Applications) and "Key features" (KeyFeatures) sections.
 
 Slide arrays live in the **page file** (e.g. `src/pages/session-replay/index.tsx`), not in the productData hook. Each slide is a `CarouselSlide` config object passed via `props: { slides }` on the menu item.
 

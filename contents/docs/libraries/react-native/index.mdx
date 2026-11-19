@@ -18,6 +18,7 @@ features:
   logs: true
 ---
 
+import ReactNativeCocoaPodsNotice from "../../_snippets/react-native-cocoapods-notice.mdx"
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
@@ -33,6 +34,10 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 <ReactNativeInstall />
 
 ### Choose an iOS dependency path for the native plugin
+
+<ReactNativeCocoaPodsNotice>
+
+</ReactNativeCocoaPodsNotice>
 
 The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use. Then choose one iOS dependency path:
 
@@ -366,6 +371,28 @@ posthog.unregister('icecream pref'),
 This will remove the super property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply [`posthog.reset()`](#reset-after-logout) which takes care of clearing all stored Super Properties and more.
+
+## Setting the app language
+
+> Requires `posthog-react-native` 4.86.0 or later.
+
+`posthog.setAppLanguage()` sets `$app_language`, the language your app displays, on every event. `$locale` is the device's language, which can differ when your app translates in JavaScript, for example with i18next. The SDK can't see that language, so events carry no `$app_language` until you call it.
+
+Call it right after you create the client and again whenever the language changes. Pass a BCP 47 language tag such as `de` or `pt-BR`:
+
+```js
+// With i18next or react-i18next
+posthog.setAppLanguage(i18n.resolvedLanguage)
+i18n.on('languageChanged', () => posthog.setAppLanguage(i18n.resolvedLanguage ?? null))
+```
+
+Pass `null` to stop sending it:
+
+```js
+posthog.setAppLanguage(null)
+```
+
+The value is kept in memory only, so set it on every app launch. It survives `reset()`. A `$app_language` you set with `posthog.register()` takes precedence.
 
 ## Opt out of data capture
 

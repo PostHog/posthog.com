@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/robocop_8939115965.png
 featuredImageType: full
+ogImage: generated
 category: Blog
 tags:
 - Startups

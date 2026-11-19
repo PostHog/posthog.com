@@ -19,7 +19,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import { TreeMenu } from 'components/TreeMenu'
@@ -45,7 +44,7 @@ import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
-import CustomerMetadata from './CustomerMetadata'
+const CustomerMetadata = React.lazy(() => import('./CustomerMetadata'))
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 import { shouldNavigateMenuTab } from './tabNavigation'
@@ -97,14 +96,16 @@ interface ReaderViewProps {
     hideTitle?: boolean
     belowTitle?: React.ReactNode
     tableOfContents?: any
-    hideMobileTableOfContents?: boolean
     mdxComponents?: any
+    renderMdx?: (content: string) => React.ReactNode
     commits?: any[]
     filePath?: string
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
     hideRightSidebar?: boolean
+    /** Hides the search box at the top of the left sidebar, for pages that put their own search in the content. */
+    hideSidebarSearch?: boolean
     contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
@@ -438,14 +439,15 @@ export default function ReaderView({
     hideTitle = false,
     belowTitle,
     tableOfContents,
-    hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
@@ -478,13 +480,14 @@ export default function ReaderView({
                 hideTitle={hideTitle}
                 belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
-                hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
+                renderMdx={renderMdx}
                 commits={commits}
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
                 hideRightSidebar={hideRightSidebar}
+                hideSidebarSearch={hideSidebarSearch}
                 contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
@@ -1448,14 +1451,15 @@ function ReaderViewContent({
     hideTitle = false,
     belowTitle,
     tableOfContents,
-    hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize,
@@ -1709,11 +1713,13 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch
-                                contentRef={onSearch ? undefined : contentRef}
-                                onSearch={onSearch}
-                                currentPath={appWindow?.path}
-                            />
+                            hideSidebarSearch ? undefined : (
+                                <InlineSearch
+                                    contentRef={onSearch ? undefined : contentRef}
+                                    onSearch={onSearch}
+                                    currentPath={appWindow?.path}
+                                />
+                            )
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
@@ -1883,28 +1889,6 @@ function ReaderViewContent({
                                             )}
                                         </div>
                                     )}
-                                    {tableOfContents &&
-                                        tableOfContents.length > 0 &&
-                                        !hideMobileTableOfContents &&
-                                        !hideRightSidebar && (
-                                            <div
-                                                id="mobile-toc"
-                                                data-scheme="secondary"
-                                                className={`@4xl/app-reader:hidden mt-4 transition-all ${
-                                                    fullWidthContent || body?.type !== 'mdx'
-                                                        ? 'max-w-full'
-                                                        : contentMaxWidthClass
-                                                        ? contentMaxWidthClass
-                                                        : 'mx-auto max-w-2xl'
-                                                }`}
-                                            >
-                                                <TableOfContents
-                                                    tableOfContents={tableOfContents}
-                                                    contentRef={contentRef}
-                                                    title="Contents"
-                                                />
-                                            </div>
-                                        )}
                                     {body?.featuredVideo && (
                                         <iframe
                                             src={body.featuredVideo}
@@ -1922,11 +1906,13 @@ function ReaderViewContent({
                                                 }`}
                                             >
                                                 {isCustomerPage && customerKey && (
-                                                    <CustomerMetadata customerKey={customerKey} />
+                                                    <React.Suspense fallback={null}>
+                                                        <CustomerMetadata customerKey={customerKey} />
+                                                    </React.Suspense>
                                                 )}
 
                                                 <MDXProvider components={mdxComponents}>
-                                                    <MDXRenderer>{body.content}</MDXRenderer>
+                                                    {renderMdx?.(body.content)}
                                                 </MDXProvider>
                                             </div>
                                         ) : (

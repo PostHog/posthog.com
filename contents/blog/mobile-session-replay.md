@@ -8,6 +8,7 @@ rootpage: /blog
 featuredImage: >- 
   https://res.cloudinary.com/dmukukwp6/image/upload/mobile_replay_7ff47733d8.png
 featuredImageType: full
+ogImage: generated
 tags:
  - Guides
 ---

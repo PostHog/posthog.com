@@ -284,8 +284,8 @@ const scannerCards: {
     },
 ]
 
-// Top features for Replay Vision – how scanners look, get configured, and run.
-export const topFeatures: CarouselSlide[] = [
+// Key features for Replay Vision – how scanners look, get configured, and run.
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'what-it-looks-for',
         label: 'Scanners',

@@ -24,7 +24,8 @@ import { PricingTLDR, PricingPlans, PricingCredits } from 'components/ReplayVisi
 import PricingFooterCTASection from 'components/ReplayVision/PricingFooterCTASection'
 import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
 import { sessionReplay } from './session_replay'
-import { topFeatures } from './replay_vision/slides'
+import { keyFeatures } from './replay_vision/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // Feature-comparison rows. Header rows group the table; feature rows carry the
 // row label and pull each competitor's value from `products.replay_vision.features`
@@ -191,7 +192,7 @@ export const replayVision = {
     // from the same sources.
     teamSlug: 'replay',
     forumTag: 'session-replay',
-    color: 'yellow',
+    color: PRODUCT_COLORS.replay_vision,
     colorSecondary: '[#B56C00]',
     wizardSupport: true,
     // Wizard subcommand appended to `npx @posthog/wizard` in the hero and Get
@@ -236,10 +237,10 @@ export const replayVision = {
             icon: <IconCursorClick className="size-4" />,
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             icon: <IconList className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ai-prompts',

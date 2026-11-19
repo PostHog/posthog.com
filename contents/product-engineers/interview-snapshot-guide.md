@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Product engineers
   - User research
