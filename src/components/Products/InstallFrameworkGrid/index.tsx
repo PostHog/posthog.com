@@ -11,7 +11,8 @@ import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxo
  * page so the framework list is never duplicated.
  *
  * Tiles resolve their URL by preferring a product-specific install guide at
- * `/docs/{productSlug}/installation/{slug}` (looked up from MDX at build time),
+ * `/docs/{productSlug}/installation/{slug}` or `.../{librarySlug}` (looked up
+ * from MDX at build time),
  * falling back to the generic `/docs/libraries/{librarySlug}` page or its
  * generated `reference`. Items with neither page (wizard-only stacks) are not
  * shown, so no tile links to a 404.
@@ -114,8 +115,11 @@ const InstallFrameworkGrid = ({
 
     const resolveUrl = (item: InstallItem): string | null => {
         if (productSlug) {
-            const candidate = `/docs/${productSlug}/installation/${item.slug}`
-            if (productInstallUrls.has(candidate)) return candidate
+            // Some guides use the library name, such as `installation/node` for the `nodejs` tile.
+            for (const slug of [item.slug, item.librarySlug]) {
+                const candidate = `/docs/${productSlug}/installation/${slug}`
+                if (productInstallUrls.has(candidate)) return candidate
+            }
         }
         return libraryMeta.get(item.librarySlug)?.url ?? null
     }
