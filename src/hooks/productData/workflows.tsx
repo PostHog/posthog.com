@@ -147,8 +147,9 @@ export const workflows = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Email people based on what they do in your product',
-        description: 'How technical marketers build workflows that convert.',
+        title: 'Send emails using product data',
+        description:
+            'Build marketing campaigns that convert, newsletters that grow audiences, and transactional emails that boost revenue.',
         eli5: (
             <>
                 <p>
