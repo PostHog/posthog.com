@@ -8420,14 +8420,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Email & Messaging',
+            name: 'Messaging',
             icon: 'IconLetter',
             color: 'red',
             url: '/docs/email',
             description: 'Send transactional email, broadcasts, push notifications, and drip campaigns.',
             children: [
                 {
-                    name: 'Email & Messaging',
+                    name: 'Messaging',
                 },
                 {
                     name: 'Overview',
@@ -8683,7 +8683,7 @@ export const docsMenu = {
                     name: 'API',
                 },
                 {
-                    name: 'Email & Messaging API',
+                    name: 'Messaging API',
                     url: '/docs/email/api',
                     icon: 'IconBrackets',
                     color: 'blue',
