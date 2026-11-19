@@ -15,8 +15,8 @@ The agent signs in with a project secret API key, not as a PostHog user. It can 
 
 There are two ways to connect:
 
-- **[MCP](/docs/model-context-protocol)** - For an agent or framework that supports MCP servers. The agent gets search tools and decides when to use them.
-- **[REST API](#call-the-rest-api)** - For code that calls search itself and puts the results into a prompt.
+- **[MCP](/docs/model-context-protocol)** – For an agent or framework that supports MCP servers. The agent gets search tools and decides when to use them.
+- **[REST API](#call-the-rest-api)** – For code that calls search itself and puts the results into a prompt.
 
 Both use the same key.
 
@@ -214,9 +214,10 @@ curl -G "https://us.posthog.com/api/projects/@current/business_knowledge/documen
 
 A key for one library behaves as if nothing else exists:
 
-- A search always reads that library, whatever `library_id` the agent passes
+- A search with no `library_id` reads that library
+- A search that passes the ID of another library returns `404`. Leave `library_id` out, or pass the key's own library ID.
 - The list of libraries holds that library only
-- A request for another library, or for a document outside the library, returns `404`
+- A request to get another library, or to read a document outside the library, also returns `404`
 
 A [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) that you create in project settings with the `business_knowledge:read` scope also reads all your Business Knowledge.
 
