@@ -37,6 +37,12 @@ The activity tab also has multiple views:
 
 5. **Jump to timestamp:** Press `J` then `T` to quickly navigate to events around a specific point in time.
 
+## Flag calls
+
+If PostHog stores your project's new flag calls only in the `flag_evaluations` table, the activity tab has a **Flag calls** tab. For more about this table, see [Where does PostHog store flag calls?](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls)
+
+The **Flag calls** tab shows `$feature_flag_called` events for all your flags. By default, it shows the flag key, the flag response, the person, the URL or screen, the library, and the time. You can filter and customize the columns the same as on the events list. The tab shows flag calls from the last 90 days.
+
 ## Terminal live events (posthog-live)
 
 You can also view live PostHog events directly in your terminal using the `posthog-live` CLI tool.
