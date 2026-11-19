@@ -16,8 +16,8 @@ import {
 } from '@posthog/icons'
 import { features } from './workflows/features'
 import { transactional } from './workflows/transactional'
-import { broadcasts } from './workflows/broadcasts'
-import { automation } from './workflows/automation'
+import { build } from './workflows/build'
+import { campaigns } from './workflows/campaigns'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
 
@@ -68,31 +68,26 @@ export const workflows = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'automation',
-            name: 'Workflows',
+            slug: 'build',
+            name: 'Build',
             group: 'divided',
             template: 'key-features',
             icon: <IconDecisionTree className="size-4" />,
             props: {
-                slides: automation,
-                heading: 'Workflows',
-                intro: (
-                    <p>
-                        Start campaigns from an event, a cohort, or a schedule. Each step can wait, branch, or send an
-                        email, Slack message, push notification, or webhook.
-                    </p>
-                ),
+                slides: build,
+                heading: 'Build by hand, or with PostHog AI',
+                intro: <p>Create campaigns, broadcasts, or transactional messages using your existing product data.</p>,
             },
         },
         {
-            slug: 'broadcasts',
-            name: 'Broadcasts',
+            slug: 'campaigns',
+            name: 'Campaigns and broadcasts',
             group: 'divided',
             template: 'key-features',
             icon: <IconSend className="size-4" />,
             props: {
-                slides: broadcasts,
-                heading: 'Broadcasts',
+                slides: campaigns,
+                heading: 'Build campaigns and broadcasts for anything',
                 intro: (
                     <p>
                         Send a product update, changelog, or event invite to a cohort in PostHog. There's no list to
