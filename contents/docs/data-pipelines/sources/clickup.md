@@ -23,20 +23,27 @@ Once the syncs are complete, you can start using ClickUp data in PostHog.
 
 ## Available tables
 
-| Table        | Description                                       | Sync method  |
-| ------------ | ------------------------------------------------- | ------------ |
-| `workspaces` | Workspaces your token can access                  | Full refresh |
-| `spaces`     | Spaces within the workspace                       | Full refresh |
-| `folders`    | Folders within each space                         | Full refresh |
-| `lists`      | Lists (folderless lists and lists within folders) | Full refresh |
-| `tasks`      | Tasks within the workspace                        | Incremental  |
-| `goals`      | Goals within the workspace                        | Full refresh |
+| Table               | Description                                                                     | Sync method  |
+| ------------------- | ------------------------------------------------------------------------------- | ------------ |
+| `workspaces`        | Workspaces your token can access                                                | Full refresh |
+| `spaces`            | Spaces within the workspace                                                     | Full refresh |
+| `folders`           | Folders within each space                                                       | Full refresh |
+| `lists`             | Lists (folderless lists and lists within folders)                               | Full refresh |
+| `tasks`             | Tasks within the workspace                                                      | Incremental  |
+| `goals`             | Goals within the workspace                                                      | Full refresh |
+| `custom_task_types` | Custom task types in the workspace, which resolve the `custom_item_id` on tasks | Full refresh |
+| `space_tags`        | Task tags available in each space                                               | Full refresh |
+| `list_members`      | Members with explicit access to each list                                       | Full refresh |
+| `task_members`      | Members with explicit access to each task                                       | Full refresh |
+| `task_comments`     | Top-level comments on each task (threaded replies are not included)             | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
 Only the tasks table supports incremental sync, using `date_updated` as the cursor. The other tables are full refresh only.
+
+The `list_members`, `task_members`, and `task_comments` tables make one request per list or task on each sync, so they are not selected by default. Select them when you set up the source if you need them.
 
 ## Configuration
 
