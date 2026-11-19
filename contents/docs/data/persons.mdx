@@ -122,6 +122,8 @@ Clicking on a person in the [People tab](https://app.posthog.com/persons) opens 
 
 - **Feature flags:** shows all [feature flags](/docs/feature-flags) that are enabled for the person.
 
+- **Flag calls:** shows the `$feature_flag_called` events of the person, across all flags. This tab appears only after PostHog [stops writing flag calls to the `events` table](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls) for your project. It shows flag calls from the last 90 days.
+
 - **History:** shows any manual changes that have been made to the person's profile.
 
 ## Deleting person data
