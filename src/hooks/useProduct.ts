@@ -32,6 +32,7 @@ import { traces } from './productData/traces'
 import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
 import { dataPipelines } from './productData/data_pipelines'
+import { messaging } from './productData/messaging'
 import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
@@ -66,6 +67,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'green',
         },
         support,
+        messaging,
         {
             ...getTool('posthog_code'),
             Icon: IconCoffee,

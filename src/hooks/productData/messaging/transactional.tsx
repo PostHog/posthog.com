@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { IconCode, IconDecisionTree, IconGraph, IconLaptop, IconSend, IconShieldLock } from '@posthog/icons'
+import { IconCode, IconLaptop, IconShieldLock } from '@posthog/icons'
 import { CodeBlock } from 'components/CodeBlock'
-import Link from 'components/Link'
 import { InlineCode, LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 
@@ -18,12 +17,6 @@ const list = (items: { label: string; description: React.ReactNode }[]) => (
     <div className="@container">
         <LabeledList items={items} />
     </div>
-)
-
-const docsLink = (to: string, children: React.ReactNode) => (
-    <Link to={to} className="font-bold underline" state={{ newWindow: true }}>
-        {children}
-    </Link>
 )
 
 const sendSnippets: { label: string; language: string; code: string }[] = [
@@ -203,7 +196,7 @@ export const transactional: CarouselSlide[] = [
         icon: <IconCode className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'Send from the SDK you already use',
+        heading: 'Send from the PostHog SDK',
         description: (
             <>
                 <p>
@@ -226,6 +219,11 @@ export const transactional: CarouselSlide[] = [
                         label: 'Scoped key',
                         description:
                             'A project secret API key with the Workflow scope can send email and read statuses, and nothing else.',
+                    },
+                    {
+                        label: 'Send before you verify',
+                        description:
+                            'The sandbox sender delivers to members of your organization before your domain is verified, so the first test takes minutes.',
                     },
                 ])}
             </>
@@ -263,124 +261,6 @@ export const transactional: CarouselSlide[] = [
                     {
                         label: 'Versions',
                         description: 'Each publish adds a version. Roll back to any of them.',
-                    },
-                ])}
-            </>
-        ),
-    },
-    {
-        ...slideStyle,
-        slug: 'send-api',
-        label: 'Send API',
-        icon: <IconSend className="size-5" />,
-        progressBar: 'bg-teal',
-        layout: 'stack',
-        heading: 'Retry without sending twice',
-        description: (
-            <>
-                <p>
-                    Every send returns a message ID. Errors come back with a code you can handle, and an idempotency key
-                    makes a retry safe.
-                </p>
-                {list([
-                    {
-                        label: 'Idempotency keys',
-                        description:
-                            'Send the ID of the reset request as the key. A retry after a timeout replays the first send instead of sending again.',
-                    },
-                    {
-                        label: 'Status lookup',
-                        description:
-                            'Read queued, sent, delivered, bounced, or complained by message ID for 30 days after the send.',
-                    },
-                    {
-                        label: 'Error codes',
-                        description: (
-                            <>
-                                <InlineCode>recipient_suppressed</InlineCode>, <InlineCode>quota_limited</InlineCode>,{' '}
-                                <InlineCode>sending_paused</InlineCode>, and the rest, each with what to do next.
-                            </>
-                        ),
-                    },
-                    {
-                        label: 'Linked to the person',
-                        description:
-                            'Pass the distinct ID you pass to identify(), and the send and its opens and clicks land on that person.',
-                    },
-                ])}
-            </>
-        ),
-    },
-    {
-        ...slideStyle,
-        slug: 'delivery',
-        label: 'Delivery',
-        icon: <IconDecisionTree className="size-5" />,
-        progressBar: 'bg-orange',
-        layout: 'stack',
-        heading: 'Send right away from your own domain',
-        description: (
-            <>
-                <p>
-                    Password resets don't wait behind a marketing send. PostHog sends from your verified domain, and
-                    returns an error code when it can't deliver to an address.
-                </p>
-                {list([
-                    {
-                        label: 'Sent at once',
-                        description: 'Each send is queued the moment you call, and nothing in front of it holds it up.',
-                    },
-                    {
-                        label: 'Only hard bounces block',
-                        description: (
-                            <>
-                                The only address PostHog refuses is one that can't receive mail, and the API says so
-                                with <InlineCode>recipient_suppressed</InlineCode> instead of dropping the email.
-                            </>
-                        ),
-                    },
-                    {
-                        label: 'Reputation',
-                        description:
-                            'Verified sending domains, bounce and complaint rates per domain, and automatic pauses when they climb.',
-                    },
-                    {
-                        label: 'Send before you verify',
-                        description:
-                            'The sandbox sender delivers to members of your organization before your domain is verified, so the first test takes minutes.',
-                    },
-                ])}
-            </>
-        ),
-    },
-    {
-        ...slideStyle,
-        slug: 'observability',
-        label: 'Observability',
-        icon: <IconGraph className="size-5" />,
-        progressBar: 'bg-blue',
-        layout: 'stack',
-        heading: 'See what people did after the email',
-        description: (
-            <>
-                <p>
-                    Sends, opens, and clicks are events on the person, next to their sessions and feature flags. Check
-                    whether the reset email got them to log back in.
-                </p>
-                {list([
-                    {
-                        label: 'What happened after',
-                        description:
-                            'Pick an email and an event, such as purchase completed, and see how many recipients did it, the median time to it, and the revenue.',
-                    },
-                    {
-                        label: 'Engagement events',
-                        description: (
-                            <>
-                                {docsLink('/docs/workflows/engagement-events', 'Email events')} in PostHog you can put
-                                in funnels, cohorts, and session replay filters.
-                            </>
-                        ),
                     },
                 ])}
             </>

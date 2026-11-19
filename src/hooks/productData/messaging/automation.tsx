@@ -2,7 +2,7 @@ import React from 'react'
 import { IconBolt, IconDecisionTree } from '@posthog/icons'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
-import { keyFeatures } from './slides'
+import { keyFeatures } from '../workflows/slides'
 
 /**
  * Copy on these slides is checked against contents/docs/workflows/{email-drip-campaign,workflow-builder}.mdx.
@@ -29,7 +29,7 @@ export const automation: CarouselSlide[] = [
         icon: <IconDecisionTree className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'Send sequences based on what people do',
+        heading: 'Build a drip campaign from what people do',
         description: (
             <>
                 <p>
@@ -40,7 +40,7 @@ export const automation: CarouselSlide[] = [
                     {
                         label: 'Trigger on an event',
                         description:
-                            'Start the sequence from any event PostHog captures, once per person or every time, with a conversion goal and exit conditions.',
+                            'Start the drip campaign from any event PostHog captures, once per person or every time, with a conversion goal and exit conditions.',
                     },
                     {
                         label: 'Wait for the right moment',
@@ -72,8 +72,8 @@ export const automation: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    A sequence starts from something PostHog already knows: an event someone just did, a cohort they
-                    joined, or a schedule you set.
+                    A drip campaign starts from something PostHog already knows: an event someone just did, a cohort
+                    they joined, or a schedule you set.
                 </p>
                 {list([
                     {
@@ -84,7 +84,7 @@ export const automation: CarouselSlide[] = [
                     {
                         label: 'Audiences',
                         description:
-                            'Run a workflow for everyone who matches person properties, cohorts, or distinct IDs, with a live estimate of the reach.',
+                            'Run a drip campaign for everyone who matches person properties, cohorts, or distinct IDs, with a live estimate of the reach.',
                     },
                     {
                         label: 'Schedules',
@@ -95,5 +95,5 @@ export const automation: CarouselSlide[] = [
             </>
         ),
     },
-    ...keyFeatures.filter((slide) => slide.slug !== 'messaging'),
+    ...keyFeatures.filter((slide) => slide.slug === 'channels'),
 ]
