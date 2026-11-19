@@ -259,11 +259,6 @@ export const transactional: CarouselSlide[] = [
                         description: "Every send with its status and log messages, and on the recipient's person.",
                     },
                     {
-                        label: 'What happened next',
-                        description:
-                            'See what the recipient did in the 7 days before and after a send, with the page and session of each event.',
-                    },
-                    {
                         label: 'Versions',
                         description: 'Each publish adds a version. Roll back to any of them.',
                     },

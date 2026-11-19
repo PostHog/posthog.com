@@ -19,6 +19,8 @@ import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxo
 interface InstallFrameworkGridProps {
     /** TAXONOMY category ids to show (e.g. `['web', 'mobile', 'no-code']`). Omit for all. */
     categories?: string[]
+    /** When set, show only these items, each linked to its URL. Keyed by item slug. */
+    hrefs?: Record<string, string>
     /** Prefer `/docs/{productSlug}/installation/{slug}` guides when they exist. */
     productSlug?: string
     /** Show the search input. */
@@ -45,6 +47,7 @@ const tileGrid = 'grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-4 g
 
 const InstallFrameworkGrid = ({
     categories,
+    hrefs,
     productSlug,
     searchable = true,
     className = '',
@@ -101,6 +104,7 @@ const InstallFrameworkGrid = ({
     }, [data])
 
     const resolveUrl = (item: InstallItem): string | null => {
+        if (hrefs) return hrefs[item.slug] ?? null
         if (productSlug) {
             const candidate = `/docs/${productSlug}/installation/${item.slug}`
             if (productInstallUrls.has(candidate)) return candidate
@@ -116,7 +120,7 @@ const InstallFrameworkGrid = ({
                     .map((item) => ({ ...item, url: resolveUrl(item) }))
                     .filter((item): item is ResolvedItem => item.url !== null),
             })),
-        [categories, libraryMeta, productInstallUrls, productSlug]
+        [categories, hrefs, libraryMeta, productInstallUrls, productSlug]
     )
 
     const renderTile = (item: ResolvedItem, keyPrefix: string) => {

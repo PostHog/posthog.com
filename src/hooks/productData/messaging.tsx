@@ -13,11 +13,13 @@ import {
     IconPieChart,
     IconRocket,
     IconSend,
+    IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
 import { transactional } from './messaging/transactional'
 import { broadcasts } from './messaging/broadcasts'
 import { automation } from './messaging/automation'
+import { standout } from './messaging/standout'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
 
@@ -117,6 +119,18 @@ export const messaging = {
                         branch on what the person did, or send an email, SMS, or push notification.
                     </p>
                 ),
+            },
+        },
+        {
+            slug: 'why-posthog',
+            name: 'Why PostHog',
+            group: 'divided',
+            template: 'key-features',
+            icon: <IconSparkles className="size-4" />,
+            props: {
+                slides: standout,
+                heading: 'Why PostHog',
+                intro: <p>Your email runs on the same data as the rest of your product, so it can do more.</p>,
             },
         },
         {
@@ -226,9 +240,19 @@ export const messaging = {
         title: 'Install',
         headline: 'Install',
         description:
-            "You can build broadcasts and drip campaigns in PostHog without an SDK. Install a PostHog SDK to send transactional email from your backend and to start drip campaigns from events. It's the same SDK as Product Analytics, so if PostHog is installed already, you're set.",
+            "You can build broadcasts and drip campaigns in PostHog without an SDK. To send transactional email from your backend, install a PostHog server SDK. It's the same SDK as Product Analytics, so if PostHog is installed already, you're set.",
         productSlug: 'workflows',
-        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+        categories: ['backend-languages'],
+        // The server SDKs with an email send method, each linked to its send guide.
+        hrefs: {
+            nodejs: '/docs/email/transactional-emails/node',
+            python: '/docs/email/transactional-emails/python',
+            go: '/docs/email/transactional-emails/go',
+            ruby: '/docs/email/transactional-emails/ruby',
+            php: '/docs/email/transactional-emails/php',
+            rust: '/docs/email/transactional-emails/rust',
+            elixir: '/docs/email/transactional-emails/elixir',
+        },
     },
     questions: [
         {

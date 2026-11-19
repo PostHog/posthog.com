@@ -51,11 +51,6 @@ export const automation: CarouselSlide[] = [
                         description:
                             'Branch on a property, or split at random to A/B test the message, and compare the metrics for each path.',
                     },
-                    {
-                        label: 'Get suggested fixes',
-                        description:
-                            "Turn on suggestions, and PostHog reads each email step's results and proposes one change at a time. Nothing changes until you approve it.",
-                    },
                 ])}
             </>
         ),
