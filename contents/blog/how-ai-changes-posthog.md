@@ -1,6 +1,6 @@
 ---
 title: How AI changes the way PostHog is used
-date: 2026-10-27
+date: 2026-11-19
 author:
   - ian-vanagas
 rootpage: /blog
