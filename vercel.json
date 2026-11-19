@@ -7574,13 +7574,28 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/ai-evals/taggers.md",
+            "destination": "/docs/ai-evals.md#categories",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-observability/user-feedback/use-thumb-survey",
             "destination": "/docs/ai-observability/collect-user-feedback#react-use-the-usethumbsurvey-hook",
             "statusCode": 301
         },
         {
+            "source": "/docs/ai-observability/user-feedback/use-thumb-survey.md",
+            "destination": "/docs/ai-observability/collect-user-feedback.md",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-observability/user-feedback/manual-event-capture",
             "destination": "/docs/ai-observability/collect-user-feedback#capture-feedback-events-manually",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/manual-event-capture.md",
+            "destination": "/docs/ai-observability/collect-user-feedback.md",
             "statusCode": 301
         }
     ]

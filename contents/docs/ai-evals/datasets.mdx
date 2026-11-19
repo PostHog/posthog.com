@@ -171,7 +171,7 @@ After your CI run scores each dataset item, send the results to PostHog with [of
 
 Use a PostHog [dataset](/docs/ai-evals/datasets) to manage cases in PostHog or save them from production traces. This example loads a dataset revision before starting the experiment.
 
-To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, as in the cases above. Set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call.
+This example builds on the [offline evals quickstart](/docs/ai-evals/offline-evals#run-your-first-experiment). Complete the quickstart first. To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, like the `cases` list in [step 3 of the quickstart](/docs/ai-evals/offline-evals#3-run-the-cases-and-upload-scores). Set `POSTHOG_DATASET_ID` to your dataset's ID. Then, in the step 3 code, replace the experiment creation and the loop over `cases` with the code below. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call.
 
 <MultiLanguage selector="tabs">
 
