@@ -59,7 +59,7 @@ Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide t
 
 ### Understand the coverage
 
-These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js` (loaded only with `opt_in_site_apps: true`). For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js` (from `posthog-js` 1.451.0, loaded only with `opt_in_site_apps: true`). For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
 
 ## Configure Content Security Policy
 
