@@ -5845,7 +5845,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Playground',
-                            url: '/docs/ai-observability/playground',
+                            url: '/docs/experiments/playground',
                         },
                     ],
                 },
@@ -5977,6 +5977,10 @@ export const docsMenu = {
                         {
                             name: 'A/B testing prompts',
                             url: '/docs/prompt-management/prompt-experiments',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Temporal workflows',
@@ -6000,16 +6004,6 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
-                },
-                {
-                    name: 'A/B testing prompts',
-                    url: '/docs/experiments/llm-prompt-experiments',
-                    icon: 'IconFlask',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Tutorials and guides',
@@ -7677,7 +7671,7 @@ export const docsMenu = {
                     name: 'Offline evals',
                 },
                 {
-                    name: 'Offline evals',
+                    name: 'Offline evals overview',
                     url: '/docs/ai-evals/offline-evals',
                     icon: 'IconFlask',
                     color: 'purple',
@@ -7704,7 +7698,7 @@ export const docsMenu = {
                     name: 'Clusters',
                 },
                 {
-                    name: 'Clusters',
+                    name: 'Clusters overview',
                     url: '/docs/ai-observability/clusters',
                     icon: 'IconCompass',
                     color: 'salmon',
@@ -7713,7 +7707,7 @@ export const docsMenu = {
                     name: 'Self-driving',
                 },
                 {
-                    name: 'Self-driving',
+                    name: 'Self-driving overview',
                     url: '/docs/ai-observability/self-driving',
                     icon: 'IconBolt',
                     color: 'orange',
