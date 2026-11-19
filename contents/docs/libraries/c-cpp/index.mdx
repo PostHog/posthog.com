@@ -18,7 +18,7 @@ features:
 
 > **Note:** This SDK is experimental. Before version 1.0, a minor version can change the API.
 
-The PostHog C/C++ SDK (`posthog-rs-ffi`) is a C API for the [PostHog Rust SDK](/docs/libraries/rust/reference). You can use it from C and C++ applications, such as servers, desktop apps, CLIs, and games. It uses the same code as the Rust SDK for batching, retries, feature flags, and local evaluation.
+The PostHog C/C++ SDK (`posthog-rs-ffi`) is a C API for the [PostHog Rust SDK](/docs/libraries/rust/reference). You can use it from C and C++ applications, such as servers, desktop apps, CLIs, and games. It uses the same code as the Rust SDK for batching, retries, Feature Flags, and local evaluation.
 
 - **Capture** adds events to a queue and returns immediately. A background thread batches, retries, and sends them.
 - **Feature flag evaluation** blocks the calling thread while it gets flags, or evaluates them locally when you enable local evaluation.
@@ -154,7 +154,7 @@ Set these options on `PostHogOptions` before you call `posthog_client_new`:
 | `posthog_options_set_feature_flags_request_max_retries` | `1` | Retries after a temporary `/flags` failure. |
 | `posthog_options_set_shutdown_timeout_ms` | `30000` | Maximum time that shutdown uses to send the events in the queue, in milliseconds. |
 | `posthog_options_set_secret_key` | None | Project secret API key (`phs_...`) for [local evaluation](#local-evaluation). |
-| `posthog_options_set_enable_local_evaluation` | `false` | Evaluates feature flags locally. Requires a secret API key. |
+| `posthog_options_set_enable_local_evaluation` | `false` | Evaluates Feature Flags locally. Requires a secret API key. |
 | `posthog_options_set_local_evaluation_only` | `false` | Never uses remote `/flags` when local evaluation cannot give a result. |
 | `posthog_options_set_poll_interval_seconds` | `30` | Time between requests for local evaluation flag definitions. |
 
@@ -233,9 +233,9 @@ To set properties on a group, use `posthog_group_identify`. The properties must 
 posthog_group_identify(client, "company", "acme", "{\"name\":\"Acme Inc.\",\"employees\":50}");
 ```
 
-## Feature flags
+## Feature Flags
 
-`posthog_evaluate_flags` evaluates the [feature flags](/docs/feature-flags) for a user and gives a snapshot. The snapshot does not send more requests when you read flags from it. Free the snapshot with `posthog_flags_free`:
+`posthog_evaluate_flags` evaluates the [Feature Flags](/docs/feature-flags) for a user and gives a snapshot. The snapshot does not send more requests when you read flags from it. Free the snapshot with `posthog_flags_free`:
 
 ```c
 PostHogFlags *flags = NULL;
@@ -294,7 +294,7 @@ posthog_flags_free(accessed);
 
 ### Experiments
 
-Use `posthog_flags_get_flag` to get the variant for a user in an [experiment](/docs/experiments). This captures the `$feature_flag_called` event that experiments use for exposures.
+Use `posthog_flags_get_flag` to get the variant for a user in an [Experiment](/docs/experiments). This captures the `$feature_flag_called` event that experiments use for exposures.
 
 ### Local evaluation
 
@@ -307,7 +307,7 @@ posthog_options_set_enable_local_evaluation(options, true);
 
 The SDK gets flag definitions at the poll interval. To get them immediately, call `posthog_reload_feature_flags(client)`.
 
-> **Warning:** Do not put a secret API key in an app that you distribute, such as a desktop app or CLI. Users can extract the key from the binary or its configuration and read your flag definitions. Distributed apps must use only the project token, which evaluates flags remotely.
+> **Warning:** Do not put a secret API key in an app that you distribute, such as a desktop app or CLI. Anyone with the binary or its configuration can extract the key and read your flag definitions. Distributed apps must use only the project token, which evaluates flags remotely.
 
 ## Errors
 
@@ -360,6 +360,6 @@ For a full C program, see [`capture.c`](https://github.com/PostHog/posthog-rs/bl
 
 ## Limitations
 
-- **Error tracking:** the SDK does not capture C or C++ crashes. To send errors, capture your own `$exception` events with `posthog_capture`, or use a crash reporter.
+- **Error Tracking:** the SDK does not capture C or C++ crashes. To send errors, capture your own `$exception` events with `posthog_capture`, or use a crash reporter.
 - **Not available yet:** the `before_send` and `on_error` hooks, AI events, and transactional email.
 - **No automatic capture:** the SDK does not capture events, such as app opens or screen views, automatically.
