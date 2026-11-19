@@ -195,6 +195,15 @@ A few things to know before you turn a switch on:
 - **Changes apply from the scout's next run**, and each grant is recorded in your project's activity log. So is every change the scout makes: look for edits by the scout's owner marked as made via MCP inside the run's time window.
 - **Only the scout's author or a project admin can grant write access.** The scout runs as its author, so it can never do more than that person could.
 
+### Letting a scout fix a report's pull request
+
+By default, a scout cannot start a report action, such as a run that fixes a report's pull request. You can grant one through the scout config API or the PostHog MCP:
+
+- `report_actions` lists the actions the scout may start. Only `make_it_green` can be granted, which starts a run that makes the failing checks on a report's pull request pass. A scout can never merge a pull request, and it cannot send its own message with an action.
+- `max_report_actions_per_day` caps how many actions the scout starts in a rolling 24 hours, across all its runs. The default is 3 and the maximum is 20.
+
+The started run acts as the scout's author, with that person's full access, so only the author can add an action or raise the cap. A project admin can only remove an action or lower the cap. A scoped API key needs `inbox:write` and `task:write`. A dry run never holds the grant, and a run that a scout starts cannot start more runs. The report's work log names the scout that started the run.
+
 A well-built maintaining scout keeps a curated list of what it looks after, applies small, verified fixes itself (re-running a stale view, retuning an alert it has back-tested, repairing a dead dashboard tile), caps how many changes it makes per run, and hands anything that drops data or changes meaning to a person with the exact change spelled out. Ask your agent to build one with the [authoring skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/SKILL.md), which carries the pattern.
 
 ## Every report is also an event
