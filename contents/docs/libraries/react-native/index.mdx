@@ -41,7 +41,7 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 
 The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use.
 
-`@posthog/react-native-plugin` 3.0 and later requires React Native 0.75 or later and, on every iOS dependency path, Xcode 26 or later and an iOS 15 or later deployment target (macOS 11 or later for React Native macOS apps). See [Upgrading to `@posthog/react-native-plugin` 3.0](#upgrading-to-posthogreact-native-plugin-30).
+`@posthog/react-native-plugin` 3.0 and later requires React Native 0.75 or later and, on every iOS dependency path, Xcode 26 or later and an iOS 15 or later deployment target (macOS 12 or later for React Native macOS apps). See [Upgrading to `@posthog/react-native-plugin` 3.0](#upgrading-to-posthogreact-native-plugin-30).
 
 Then choose one iOS dependency path:
 
@@ -736,7 +736,7 @@ const MyComponent = () => {
 
 - React Native 0.75 or later
 - Xcode 26 or later, on every iOS dependency path
-- An iOS 15 or later deployment target, and macOS 11 or later for React Native macOS apps
+- An iOS 15 or later deployment target, and macOS 12 or later for React Native macOS apps
 - Kotlin 2.0 or later on Android. React Native 0.75 and 0.76 templates, including Expo SDK 52, use Kotlin 1.9, so set `kotlinVersion` to `2.0.21` and pin the Kotlin Gradle plugin to it. On Expo SDK 52, `npx expo prebuild --clean` wipes these edits, so make them with a config plugin or upgrade to Expo SDK 53 or later. The [migration guide](https://github.com/PostHog/posthog-js/blob/main/packages/react-native-plugin/MIGRATION.md) has the details.
 
 On iOS, the plugin now always resolves `posthog-ios` through Swift Package Manager:
