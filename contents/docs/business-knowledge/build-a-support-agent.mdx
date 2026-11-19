@@ -46,9 +46,19 @@ Open the `Public docs` library. Under **Connect an agent**, name the key `suppor
 
 Copy the key and store it as an environment variable on the machine that runs the agent, next to the API key for your model provider:
 
-```bash
+<MultiLanguage selector="tabs">
+
+```bash file=OpenAI
 export POSTHOG_BUSINESS_KNOWLEDGE_KEY="<your project secret API key>"
+export OPENAI_API_KEY="<your OpenAI API key>"
 ```
+
+```bash file=Anthropic
+export POSTHOG_BUSINESS_KNOWLEDGE_KEY="<your project secret API key>"
+export ANTHROPIC_API_KEY="<your Anthropic API key>"
+```
+
+</MultiLanguage>
 
 </Step>
 
