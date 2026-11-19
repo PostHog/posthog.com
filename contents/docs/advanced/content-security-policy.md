@@ -99,6 +99,8 @@ This will modify the script/stylesheet to be loaded before they are inserted to 
 
 Make sure you return the script/stylesheet or else we won't append it to the DOM.
 
+If you set `require_subresource_integrity: true` (`posthog-js` 1.452.0 or later), the hook must keep the script's `integrity` and `crossOrigin` values and a non-empty `src`. It can still set a nonce or change the URL. See [require integrity for extension scripts](/docs/libraries/js/security#require-integrity-for-extension-scripts).
+
 ## Domains used by PostHog clients
 
 > WARNING: Adding more specific domains is _not_ recommended as we may change target subdomains over time. If you do specify a non-wildcard domain, we cannot guarantee that it will continue to work in the future.

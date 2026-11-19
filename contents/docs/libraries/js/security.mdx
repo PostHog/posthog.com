@@ -59,7 +59,29 @@ Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide t
 
 ### Understand the coverage
 
-These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js` (from `posthog-js` 1.451.0, loaded only with `opt_in_site_apps: true`). For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+These hashes protect only `loader.js` and `array.js`. By default, they don't protect the additional scripts the SDK loads at runtime, such as the recorder, surveys, toolbar, or `config.js` (from `posthog-js` 1.451.0, loaded only with `opt_in_site_apps: true`). To verify the SDK's feature scripts too, [require integrity for extension scripts](#require-integrity-for-extension-scripts). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+
+### Require integrity for extension scripts
+
+From `posthog-js` [1.452.0](https://github.com/PostHog/posthog-js/releases/tag/posthog-js%401.452.0), set `require_subresource_integrity: true` to also verify the scripts the SDK loads at runtime, such as the session recorder and surveys:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    require_subresource_integrity: true,
+})
+```
+
+With the loader, add it to `data-config` instead.
+
+The hashes are built into the SDK, so you don't copy any new ones. Pin the SDK itself first, with the loader hashes above or an exact npm version. If a script doesn't match, the browser blocks it and that feature stays off.
+
+With this option on:
+
+-   The [toolbar](/docs/toolbar) and [JS snippets](/docs/js-snippets) don't load, because their code can't be pinned to a hash.
+-   Your asset host or [reverse proxy](/docs/advanced/proxy) must serve `/static/<SDK_VERSION>/*` unchanged, with CORS headers. PostHog's asset hosts already do.
+
+It doesn't cover third-party widgets such as Intercom. Set it on every PostHog SDK instance on the page.
 
 ## Configure Content Security Policy
 
@@ -98,4 +120,4 @@ Before deployment and after each upgrade:
 -   Use a clean browser profile to check the Network panel during initialization, event capture, feature flag evaluation, and optional features.
 -   Check for duplicate SDK installations, unexpected executable downloads, CSP violations, and integrity failures.
 -   For the no-external setup, verify that JSON configuration, flags, and events work without vendor script downloads. Test without CSP first, then with CSP, so blocked requests don't hide unwanted loading attempts.
--   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. Check any proxy or CDN transformations that could change the bytes.
+-   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. With `require_subresource_integrity`, also check that feature scripts load with an `integrity` attribute. Check any proxy or CDN transformations that could change the bytes.
