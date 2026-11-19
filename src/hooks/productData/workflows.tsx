@@ -104,7 +104,7 @@ export const workflows = {
             icon: <IconCode className="size-4" />,
             props: {
                 slides: transactional,
-                heading: 'Transactional email',
+                heading: 'Send transactional emails securely',
                 intro: (
                     <p>
                         Send password resets, sign-in codes, receipts, and invites from your backend with one call on
@@ -349,7 +349,7 @@ export const workflows = {
                 title: 'Workflows',
                 tool: 'building-workflows, migrating-from-customer-io',
                 prompts: [
-                    "Build an onboarding workflow: a welcome email at sign-up, and a nudge two days later if they haven't created a project",
+                    'Build an onboarding workflow: a welcome email at sign-up, and a nudge two days later',
                     'Post in #sales when someone upgrades to a paid plan',
                     'Move our Customer.io campaigns into PostHog',
                 ],
