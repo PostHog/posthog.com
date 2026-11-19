@@ -1,0 +1,79 @@
+---
+title: Troubleshooting Business Knowledge
+sidebarTitle: Troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+Fixes for the problems that come up most often. Each fix links to the page with the full details.
+
+## An agent can't find a fact you added
+
+1. Open the source and check its [status](/docs/business-knowledge/sources#source-status). Search reads a source that shows **ready** or **indexing**. An **indexing** source is found by keyword only, until its semantic index is built.
+2. Confirm your organization approved [AI data processing](/docs/business-knowledge/ai-data-processing). Without it, the content check doesn't run and search leaves every document out.
+3. A new or changed document waits for the content check, which runs about once an hour.
+4. Ask the question in the [Playground](/docs/business-knowledge/playground) **Search** tab. If the chunk appears there and your own agent doesn't find it, check which [library](/docs/business-knowledge/sources#group-sources-into-libraries) the agent's key covers.
+5. If the wording of the question is far from the wording of the source, wait for semantic search. The source shows **indexing** until it's ready.
+
+## A source stays on indexing
+
+**Indexing** means keyword search works and the semantic index is still building. It can take up to an hour. Large sources take more than one pass.
+
+If the source shows **indexing** for several hours, check that AI data processing is still approved for the organization.
+
+## A URL source fails
+
+| Message | What to do |
+| --- | --- |
+| `URL is not reachable.` or `URL is not reachable from this environment.` | PostHog can't reach the address. The page has to be public. Private and internal addresses are refused. |
+| `Remote responded with status ...` | The site returned an error. Open the URL in a private browser window. A page behind a login can't be indexed. |
+| `Could not extract any text from the URL.` | The page has no readable text, or it builds its content with JavaScript after it loads. Add the text as a text source. |
+| `Sitemap is not valid XML.` | The sitemap URL doesn't return a sitemap. Use the **Same-origin crawl** option. |
+| `Remote response exceeds the maximum allowed size.` | The page is over 10 MB. |
+| `Another source is already being processed. Please wait and try again.` | A project processes one URL source at a time. Add the next one when the first is ready. |
+| `Processing timed out. You can retry via refresh.` | Click **Refresh** on the source. |
+
+A crawl skips pages that `robots.txt` disallows for the `PostHog-BusinessKnowledge` crawler. If pages are missing, check your `robots.txt`, the **Max pages** and **Max depth** settings, and **Skip paths**.
+
+When a refresh fails, the row shows **refresh failed** and the previous text keeps answering questions.
+
+## A file doesn't upload
+
+| Message | What to do |
+| --- | --- |
+| `Unsupported file type.` | Upload a PDF, DOCX, Markdown, CSV, or plain text file |
+| `File exceeds the 50 MB cap.` | Split the file |
+| `PDF contains no extractable text (it may be scanned/image-only).` | The PDF holds images of pages. Run text recognition on it first, or paste the text. |
+| `Encrypted PDFs are not supported.` | Remove the password and upload again |
+| `PDF has ... pages (cap is 2,000).` | Split the PDF |
+| `CSV has no header row.` | Add a first row with column names |
+
+A CSV file keeps its first 10,000 rows.
+
+## A source shows unsafe content
+
+The [content check](/docs/business-knowledge/how-it-works#the-content-check) flagged at least one page, and search leaves that page out. On a URL source, **Indexed pages** shows which page. Remove the text that reads as an instruction to an AI agent, then refresh the source.
+
+## You reach a limit
+
+`Knowledge source quota exceeded for this project.` means the project is at a [limit](/docs/business-knowledge/sources#limits) for sources or chunks. Delete sources you don't need, or lower **Max pages** on a large URL source.
+
+## The Playground refuses questions
+
+The Playground needs [AI data processing](/docs/business-knowledge/ai-data-processing) approved for the organization. An organization owner or admin turns it on.
+
+## Your own agent gets an error
+
+See [troubleshooting for connected agents](/docs/business-knowledge/connect-your-agent#troubleshooting).
+
+## A repository search finds nothing
+
+Repository search matches file names, path fragments, and identifiers. It doesn't search inside files. Pass `billing-policy` or `README`, not a whole sentence. See [GitHub repositories](/docs/business-knowledge/github).
+
+## Still stuck
+
+[Send feedback in the app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue) and include the name of the source.
