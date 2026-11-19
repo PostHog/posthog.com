@@ -32,27 +32,32 @@ Claude offers two identity sources. If your organization signs in to Claude thro
 | **Who vouches for the user** | Claude, under an issuer URL unique to your Claude organization | Your Okta org |
 | **What you need** | No identity provider or SSO | Okta with Cross App Access, and Claude sign-in through Okta |
 | **Where access is controlled** | Claude roles, and PostHog membership | Okta assignments and scopes, and PostHog membership |
-| **Setup effort** | A few minutes, in Claude and PostHog | Longer, in Okta, Claude, and PostHog |
+| **Setup effort** | A few minutes: connect PostHog from Claude and approve it once | Longer, in Okta, Claude, and PostHog |
 
 ## Claude-issued identity
 
 With Claude-issued identity, Claude tells PostHog which member of your Claude organization is signed in. PostHog must trust your Claude organization's issuer URL. You can set this up in two ways:
 
-- **Automatic setup:** you approve Claude on a PostHog consent screen, and Claude registers its issuer URL for you.
-- **Manual setup:** you copy the issuer URL from Claude and paste it into PostHog.
+- **Automatic setup (recommended):** you click **Connect PostHog** in Claude and approve Claude on a PostHog consent screen. Claude registers its issuer URL for you, so there is nothing to copy or fill in.
+- **[Manual setup](#manual-setup):** you copy the issuer URL from Claude and paste it into an XAA configuration in PostHog.
 
 ### Automatic setup
-
-Claude may not offer automatic setup for PostHog in your Claude organization yet. If it doesn't, use [manual setup](#manual-setup).
 
 To approve Claude, you must be an admin of the PostHog organization. The organization needs the Scale or Enterprise add-on and at least one verified domain. If it only admits emails on its verified domains, your PostHog email must be on one of them.
 
 1. In Claude, go to **Organization settings → Connectors** and select the **PostHog** connector.
 2. On the **Configuration** tab, click **Set up** next to **Managed authorization**, and choose **Claude-issued** under **Identity source**.
-3. Choose to connect PostHog automatically. Claude opens the PostHog consent screen. PostHog asks you to sign in again if your last sign-in isn't recent.
-4. Under **Organization**, select your PostHog organization. If you can't select it, open the list to see why.
-5. Read what approving turns on, then click **Trust Claude**.
-6. Back in Claude, click **Test connection**, then **Enable and continue**, and choose which roles get the PostHog connector.
+3. Claude's **Setup guide** shows your Claude organization and its issuer URL. Click **Connect PostHog**. If you aren't an admin of your PostHog organization, click **Send to an admin** so one of them can approve it.
+4. Claude opens the PostHog consent screen. PostHog asks you to sign in again if your last sign-in isn't recent.
+5. Under **Organization**, select your PostHog organization. If you can't select it, open the list to see why.
+6. Read what approving turns on, then click **Trust Claude**.
+7. Back in Claude, click **Test connection**, then **Enable and continue**, and choose which roles get the PostHog connector.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_16_T20_17_50_882_Z_b86b9db13a.png"
+    alt="Claude's setup guide for the PostHog connector with the Connect PostHog and Send to an admin buttons"
+    classes="rounded"
+/>
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/ema_consent_screen_e647f84ee2.png"
@@ -71,6 +76,8 @@ PostHog then shows a configuration named **Claude** under **XAA authentication**
 The configuration is read-only in PostHog. Click **View** to see it. To change it, run the automatic setup again from Claude, which replaces the issuer. To stop trusting Claude, delete the configuration.
 
 ### Manual setup
+
+Use manual setup only when automatic setup doesn't fit. Automatic setup always covers all of your organization's verified domains, so use manual setup to limit the configuration to some of them.
 
 #### 1. Copy the issuer URL from Claude
 

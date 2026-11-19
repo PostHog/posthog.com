@@ -43,7 +43,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 > Before you do any of this stuff, [get to know](/handbook/onboarding/onboarding-team#account-analysis) your customer as well as you possibly can. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
-Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission. 
+Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#5-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission. 
 
 ### Your first message where we've never had contact
 Despite the organization using PostHog, they may not recognize you/PostHog, or may not even be the correct person to talk to about PostHog, which means your message needs to be well crafted.

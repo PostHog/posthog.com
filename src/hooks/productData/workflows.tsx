@@ -19,6 +19,7 @@ import { features } from './workflows/features'
 import { applications, keyFeatures } from './workflows/slides'
 import { getTool } from '../../data/tools'
 import Link from 'components/Link'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const workflows = {
     ...getTool('workflows_emails'),
@@ -27,7 +28,7 @@ export const workflows = {
     type: 'workflows_emails',
     teamSlug: 'workflows',
     forumTag: 'workflows',
-    color: 'teal',
+    color: PRODUCT_COLORS.workflows_emails,
     colorSecondary: 'green-2',
     includeAddonRates: true,
     // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).

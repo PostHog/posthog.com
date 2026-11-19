@@ -53,7 +53,7 @@ After creating the app:
 ![SDK Releaser bot icon](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2514924_640cf3f534.png)
 
 2. Set the background color to `#D97148`
-2. Click the big "Generate a private key" button to generate a private key and save it locally — you'll need it later
+2. Go to **Credentials > Key Pairs** in the sidebar, click **Generate a private key**, and save the key locally. You'll need it later
 3. Also save the "App ID" number - you'll need it later
 3. Go to **Install App** in the sidebar
 4. Install the app in the PostHog organization, restricting it to only the SDK repository
@@ -105,6 +105,16 @@ The GitHub App needs to bypass certain protections to push release commits direc
 5. Save the ruleset
 
 ![CodeQL bypass exemption](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_29_04_157_Z_a403522dbe.png)
+
+#### Security Audit bypass
+
+The org-wide Security Audit ruleset requires the Semgrep workflow on the default branch of every repository. The release commits must bypass it too.
+
+1. Access the [Security Audit ruleset](https://github.com/organizations/PostHog/settings/rules/13791474)
+2. Under **Bypass list**, click **Add bypass**
+3. Select your GitHub App (`Releaser (<sdk_name>)`)
+4. Keep the bypass mode as **Always allow**, which is the mode that the other release apps use
+5. Save the ruleset
 
 #### Repository PR bypass
 

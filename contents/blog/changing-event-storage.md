@@ -70,9 +70,11 @@ Here's more details on what this means:
 
 Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations and workflows keep receiving `$feature_flag_called` events. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
 
+From November 30, queries that read every event and don't name `$feature_flag_called` don't count new flag calls. This includes insight series and retention steps on **All events**, funnel steps on **All events** (unless the funnel also has a `$feature_flag_called` step), and SQL such as `SELECT count() FROM events` or `SELECT event, count() FROM events GROUP BY event`. Their totals drop by the number of flag calls you send. Unique-user counts, such as daily active users, also drop if you evaluate flags for users who send no other events. Server-side flag evaluation often does this. Queries that name `$feature_flag_called` still return flag calls, from at most the last 90 days.
+
 Three exceptions:
 
-- **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
+- **SQL with `SELECT *` or some `SAMPLE` forms:** a query that reads `$feature_flag_called` with `SELECT *`, `COLUMNS(...)`, a `SAMPLE` with an `OFFSET`, or a `SAMPLE` of a row count returns an error. List the columns you need instead of `*`, and write `SAMPLE` as a ratio, such as `SAMPLE 0.1`.
 - **Batch exports:** from November 30, exports of the `events` table will not include `$feature_flag_called` events. To keep exporting them, see [What changes for batch exports](#what-changes-for-batch-exports).
 - **Legacy apps:** from November 30, legacy apps won't receive `$feature_flag_called` events. To keep receiving them, switch to the matching destination, such as [Customer.io](/docs/data-pipelines/destinations/customerio) or [RudderStack](/docs/data-pipelines/destinations/rudderstack).
 
