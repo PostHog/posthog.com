@@ -181,6 +181,20 @@ When you flag an account as at risk, add the **Churn Risk** tag to the account i
 
 Adding the tag triggers a PostHog workflow that automatically posts to the #customer-churn Slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
 
+**Set the Churn competitive solution property**
+
+On the same account, also set the **Churn competitive solution** property. It records where the customer plans to go instead of PostHog Cloud, and why. Pick the closest option from what you know:
+
+| Option | Use when the customer plans to move to |
+|--------|----------------------------------------|
+| Self-hosted PostHog | Our open-source, self-hosted deployment |
+| NoHog | A solution they build and manage themselves |
+| Other Vendor | A competitor product |
+
+Each option has a reason attached: **cost**, **data residency**, or **other security/privacy**. If you don't know the full answer yet, make your best guess and update it as you learn more. Confirm it when the account churns.
+
+We use this property to see which alternatives we lose customers to and why, across all at-risk and churned accounts. A single note tells us about one account. This property lets us spot patterns, for example a rise in data residency churn to self-built solutions, and feed them to product and leadership.
+
 **2. Weekly at-risk account review**
 
 We hold a weekly team meeting to review all accounts tagged **Churn Risk** in PostHog Customer Analytics. Come prepared to:
@@ -219,7 +233,7 @@ Once flagged, your job is to diagnose and act:
 
 ### When churn happens
 
-Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/customer-success/customer-churn-retros) for the template and guidance.
+Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/customer-success/customer-churn-retros) for the template and guidance. Make sure the [Churn competitive solution](#internal-process) property on the account shows where they went and why.
 
 ---
 
