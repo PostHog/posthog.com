@@ -6610,6 +6610,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Libraries',
+                    url: '/docs/business-knowledge/libraries',
+                    icon: 'IconFolder',
+                    color: 'blue',
+                },
+                {
                     name: 'How it works',
                     url: '/docs/business-knowledge/how-it-works',
                     icon: 'IconGear',
