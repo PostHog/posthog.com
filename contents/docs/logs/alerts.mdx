@@ -46,11 +46,86 @@ For example, "alert if count goes above 100 in the last 10 minutes" fires when m
 
 An alert without a destination has nowhere to send notifications. Add at least one of:
 
-- **[Slack](/docs/cdp/destinations/slack)** – pick a connected Slack workspace and channel.
-- **[Microsoft Teams](/docs/cdp/destinations/microsoft-teams)** – provide a Microsoft Teams webhook URL (from a Power Automate Workflows connector).
-- **[Webhook](/docs/cdp/destinations/webhook)** – provide a URL to receive an HTTP POST when the alert fires.
+- **[Slack](/docs/data-pipelines/destinations/slack)** – pick a connected Slack workspace and channel.
+- **[Microsoft Teams](/docs/data-pipelines/destinations/microsoft-teams)** – provide a Microsoft Teams webhook URL (from a Power Automate Workflows connector).
+- **[Webhook](/docs/data-pipelines/destinations/webhook)** – provide a URL to receive an HTTP POST when the alert fires.
 
 Destinations are delivered through hog functions under the hood, so they reuse the same infrastructure as other PostHog destinations. The **Notifications** column in the alert list shows a struck-through bell when no destinations are configured.
+
+### Webhook payloads
+
+PostHog sends an HTTP `POST` with a JSON body in the [Alertmanager webhook format](https://prometheus.io/docs/alerting/latest/configuration/#webhook_config), so incident and on-call tools that accept Alertmanager webhooks can read it without a custom parser. The webhook URL must use `https`.
+
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 2` is the payload version. New fields may be added to the body without changing it, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+Each request carries one alert. The `posthog_event_kind` label tells you what happened. Route on it:
+
+| `posthog_event_kind` | `status` | Meaning |
+| --- | --- | --- |
+| `firing` | `firing` | The alert condition is met. |
+| `resolved` | `resolved` | The alert condition is no longer met. |
+| `errored` | `firing` | A check couldn't run. `annotations.error` carries the reason. |
+| `broken` | `firing` | Checks failed repeatedly and PostHog turned the alert off. |
+
+Alertmanager has only the `firing` and `resolved` statuses, so `errored` and `broken` are sent as `firing`. They use their own `fingerprint`, so a later `resolved` for the condition doesn't close them.
+
+Labels:
+
+- `alertname` is the alert's name.
+- `posthog_configuration_id` identifies the alert.
+- `posthog_source_kind` is `logs`.
+- `posthog_event_kind` is one of the values in the table above.
+- An alert that groups by service or severity adds a `service_name` or `severity_text` label with the group's value.
+
+Annotations:
+
+- `summary` is a one-line headline, such as "Log alert 'Checkout errors' is firing".
+- `description` lists the details, such as `Threshold breached: 132 logs in 10m (threshold: above 100)`.
+- `value` is the value the check measured, when there is one.
+- `error` is the reason a check couldn't run, on `errored` and `broken` payloads.
+
+`startsAt` is when the alert started firing, and `endsAt` is `0001-01-01T00:00:00Z` until it resolves. `generatorURL` links to the alert in PostHog. `fingerprint` is the same for the `firing` and `resolved` payloads of one alert, or of one group in a grouped alert, so you can use it to match them.
+
+A firing payload looks like this:
+
+```json
+{
+  "version": "4",
+  "groupKey": "0192f3a4-...:...",
+  "truncatedAlerts": 0,
+  "status": "firing",
+  "receiver": "posthog",
+  "groupLabels": {
+    "alertname": "Checkout errors",
+    "posthog_configuration_id": "0192f3a4-...",
+    "posthog_source_kind": "logs"
+  },
+  "commonLabels": {
+    "service_name": "checkout",
+    "alertname": "Checkout errors",
+    "posthog_configuration_id": "0192f3a4-...",
+    "posthog_source_kind": "logs",
+    "posthog_event_kind": "firing"
+  },
+  "commonAnnotations": { "summary": "Log alert 'Checkout errors' is firing", "...": "..." },
+  "externalURL": "https://us.posthog.com",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": { "...": "the same labels as commonLabels" },
+      "annotations": { "...": "the same annotations as commonAnnotations" },
+      "startsAt": "2026-11-05T12:00:00Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "https://us.posthog.com/project/1/...",
+      "fingerprint": "3f1c9a0b2d4e6f78"
+    }
+  ]
+}
+```
+
+Projects that had a webhook on logs or insight alerts by November 6, 2026 keep receiving the earlier payload, sent with `X-PostHog-Webhook-Version: 1`. Check the header to tell the two formats apart.
 
 ## Signals for the self-driving inbox
 

@@ -188,9 +188,9 @@ The open-source gem is free with unlimited flags. Flipper Cloud offers a free pl
 
 ### What is FeatBit?
 
-FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like [Datadog](/compare/posthog-vs-datadog), Grafana, and Amplitude.
+FeatBit is an open-source feature flag and A/B testing tool. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like [Datadog](/compare/posthog-vs-datadog), Grafana, and Amplitude.
 
-FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, and OpenTelemetry for observability. It's capable of supporting over 1 million simultaneous online users.
+FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, and OpenTelemetry for observability. It has three deployment options with the same core feature flag functionality: Standalone (Postgres only), Standard (adds Redis for caching and messaging), and Professional (adds Kafka and ClickHouse for high-volume analytics). These are infrastructure setups, not pricing plans. It's capable of supporting over 1 million simultaneous online users.
 
 ### Supported SDKs
 
@@ -200,11 +200,11 @@ FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, a
 
 ## How much does it cost?
 
-All features are completely free. FeatBit monetizes its platform by offering premium support packages, which start at $399 per month for dedicated support with a 2-hour reply SLA during business hours. Enterprise and cloud options are also available.
+The self-hosted Foundation tier is free, with no limits on seats, MAUs, or projects. It includes feature flags, targeting, audit logs, and experimentation. SSO, Terraform and GitOps, flag change approvals, scheduling, and shareable segments are only on the Enterprise plan, which costs $3,999 per year. Enterprise Premium adds more capabilities and dedicated support at custom prices.
 
 > ### Bottom line
 >
-> FeatBit is a strong choice for teams that want a feature-rich, self-hosted feature flag tool with no artificial feature gates. Its .NET foundation and enterprise-grade scalability make it appealing for larger organizations, though its community is smaller than the other tools on this list.
+> FeatBit is a strong choice for teams that want a feature-rich, self-hosted feature flag tool with a generous free tier. Its .NET foundation and enterprise-grade scalability make it appealing for larger organizations, though its community is smaller than the other tools on this list.
 
 ## 8. FeatureHub
 
@@ -238,7 +238,7 @@ FeatureHub offers a hosted option in addition to its open-source edition, and bo
 - Need open-source feature flags with remote configuration and on-premises hosting? Try **Flagsmith**.
 - Want a free, open-source tool with Git-native flag management? **Flipt** is for you.
 - Building with Ruby on Rails and want the best developer experience? **Flipper** is purpose-built for your stack.
-- Need a self-hosted, enterprise-grade tool with no artificial feature gates? **FeatBit** offers the most features for free.
+- Need a self-hosted, enterprise-grade tool with a generous free tier? **FeatBit** has no usage limits on its free Foundation tier.
 - Want a simple, no-frills open-source tool with cloud-native architecture? **FeatureHub** covers the basics well.
 
 ## Is PostHog right for you?
@@ -262,7 +262,7 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
 
-It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
@@ -277,7 +277,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), or your own editor vi
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a free, open-source tool with Git-native flag management. 
 
-For more options beyond open source, check out our guide to the [best feature flag tools for developers](/blog/best-feature-flag-software-for-developers).
+For more options beyond open source, check out our guide to the [best feature flag tools for developers](/compare/best-feature-flag-tools-for-developers).
 
 </details>
 

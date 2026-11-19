@@ -2,7 +2,7 @@
 title: Why Zealot switched to PostHog from Amplitude and BugSnag
 customer: Zealot
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/zealot_posthog_error_tracking_14fb1ab6cb.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/Zealot_1920x1080_a3bcea658f.png
 date: 2025-04-02
 ---
 
@@ -14,7 +14,7 @@ Knowing product analytics are essential for making such decisions, Brandon initi
 
 “Our customers are enterprises and they all use Amplitude, but I personally just love PostHog,” says Brandon. “One big difference is that when I’ve needed help with PostHog I get through to people like [David](https://posthog.com/community/profiles/30203) — the actual engineers building the tools, not a customer support agent.”
 
-“Plus, [Amplitude](/blog/posthog-vs-amplitude) was very clunky and it was missing data points. We would notice it was having a hard time capturing some things when we used it in parallel with PostHog. Using PostHog just became second nature and we felt it was definitely exceeding Amplitude.”
+“Plus, [Amplitude](/compare/posthog-vs-amplitude) was very clunky and it was missing data points. We would notice it was having a hard time capturing some things when we used it in parallel with PostHog. Using PostHog just became second nature and we felt it was definitely exceeding Amplitude.”
 
 As a result the team quickly doubled down on PostHog and Brandon immediately started inviting more of the team to use it. 
 

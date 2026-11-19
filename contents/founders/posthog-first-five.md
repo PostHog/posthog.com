@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
   - Building the team

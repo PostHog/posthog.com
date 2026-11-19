@@ -13,15 +13,20 @@ There are also some things that don’t have an owner at all, so we've created a
 An owner can be a single person, or a small team - either is fine. There are several places you can figure out who owns something at PostHog:
 
 - Product features - see the [Feature ownership page](/handbook/engineering/feature-ownership)
+- Changing something another team owns – see [PR or context?](/handbook/engineering/feature-ownership#pr-or-context)
 - Marketing activities – see the [Marketing ownership page](/handbook/marketing/ownership)
 - Docs updates – see the [Docs ownership page](/handbook/wizard-and-docs/docs-ownership)
+- Code in the [PostHog monorepo](https://github.com/PostHog/posthog) – the nearest `owners.yaml`, or a product's `product.yaml`, names the owning team. If a path has no owner, ask in #team-devex
+- Developer tooling, CI, code review bots, and the shared foundation products are built on – see the [Developer Experience page](/handbook/engineering/developer-experience)
 - Anything else - visit the relevant [small team page](/teams)
 
 If you spot anything out of date or not obviously clear, please raise a PR!
 
 ## Figuring out a new owner for a thing we’ve identified
 
-- First, raise that it doesn’t have an owner however you want. For example, you might add ‘Settings page’ to the Feature Ownership table but without an owner, then flag the PR in Slack.
+- For code, a quick test helps. If customers use it, a product team owns it, and that includes shared features like authentication and permissions on the [Feature ownership page](/handbook/engineering/feature-ownership). If only engineers build on it and more than one product depends on it, it belongs to [Developer Experience](/handbook/engineering/developer-experience). Tell them in #team-devex.
+
+- Otherwise, raise that it doesn’t have an owner however you want. For example, you might add ‘Settings page’ to the Feature Ownership table but without an owner, then flag the PR in Slack.
 
 - Ideally someone just puts their hand up and says ‘I’ll do it’. This can be for a fixed period, until something happens (e.g. new hire joins, X months elapse), or indefinitely.
 
@@ -30,6 +35,8 @@ If you spot anything out of date or not obviously clear, please raise a PR!
   - If you can’t work it out between team members/leads, ask a relevant person in Exec who can help be tiebreaker.
   
 - If you/your team becomes the owner in a _temporary_ way, part of your job as owner is to figure out the long term plan for the thing.
+
+- If the thing is code in the monorepo, write the new owner into `owners.yaml`. That file decides who reviews PRs to the code and who gets its flaky test reports and bot notifications.
 
 - If you’re struggling to figure out how to prioritize the new thing vs. other work, ask your team/manager for advice.
 

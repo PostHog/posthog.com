@@ -64,7 +64,7 @@ LIMIT 50
 
 <CalloutBox icon="IconWarning" title="Some tools can't take the injection" type="caution">
 
-The SDK cannot add `conversation_id` to schemas that use `oneOf`, `allOf`, `anyOf`, or `$ref`. It also skips tools without an input schema. It logs a warning and returns no handle for these tools. Use [`identify`](/docs/mcp-analytics/identifying-users) to group their calls by user.
+The SDK cannot add `conversation_id` to schemas that use `oneOf`, `allOf`, `anyOf`, or `$ref`. It also skips a tool that already declares `conversation_id`. The SDK logs a warning and returns no handle for these tools. Use [`identify`](/docs/mcp-analytics/identifying-users) to group their calls by user. In TypeScript, Python, and Ruby, a tool without an input schema gets one that holds only `conversation_id`.
 
 A client with a stale cached tool listing does not know about the new parameter. The `ttlMs` setting on `tools/list` can extend this period.
 

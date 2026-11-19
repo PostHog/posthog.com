@@ -9,6 +9,7 @@ import { flattenMenu, replacePath } from './utils'
 import { HOGPEDIA_RESERVED } from '../src/components/Hogpedia/categories'
 import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 import { POCKET_GUIDE_SOURCE, pocketGuidePageContext } from '../src/constants/pocketGuides'
+import { catalog, docUrl, libraryRootUrl } from '../src/components/UILibraryDocs/catalog'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -140,6 +141,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: { slug: team.slug },
         })
     }
+
+    for (const pagePath of [libraryRootUrl, ...catalog.map((entry) => docUrl(entry.slug))]) {
+        createPage({ path: pagePath, component: path.resolve('src/templates/UILibraryDocs.tsx'), context: {} })
+    }
+
+    // Minimal builds, such as the preview deploys, need these pages too.
+    await createSdkMarkdownReferencePages({ createPage, graphql })
 
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
@@ -559,31 +567,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     id
                     name
                     slug
-                }
-            }
-            postHogSourcesWithDocs: allPostHogSource(filter: { mdx: { id: { ne: null } }, unreleased: { ne: true } }) {
-                nodes {
-                    id
-                    slug
-                    mdx {
-                        id
-                        fields {
-                            slug
-                        }
-                    }
-                }
-            }
-            selfHostedSources: allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/docs/cdp/sources/(s3|azure-blob|r2|gcs)$/" } }
-                    frontmatter: { title: { ne: "" } }
-                }
-            ) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
                 }
             }
             ${SDK_REFERENCE_QUERY_FIELDS}
@@ -1130,58 +1113,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.postHogPipelines.nodes.forEach((node) => {
         createPage({
-            path: `/docs/cdp/${node.type}s/${node.slug}`,
+            path: `/docs/data-pipelines/${node.type}s/${node.slug}`,
             component: DataPipeline,
             context: { id: node.id, ignoreWrapper: true },
         })
     })
 
-    // Sources WITHOUT hand-written docs: create API-generated pages at both paths
+    // Sources WITHOUT hand-written docs: create API-generated pages.
+    // A different source can share a slug with a hand-written page (for example,
+    // PlanetScale MySQL and Postgres), so preserve the hand-written page.
+    const handWrittenDocPaths = new Set(result.data.docs.nodes.map((node) => node.fields?.slug))
     result.data.postHogSources.nodes.forEach((node) => {
+        const sourcePath = `/docs/data-pipelines/sources/${node.slug}`
+        if (handWrittenDocPaths.has(sourcePath)) return
+
         createPage({
-            path: `/docs/data-warehouse/sources/${node.slug}`,
+            path: sourcePath,
             component: DataWarehouseSource,
             context: { id: node.id, ignoreWrapper: true },
-        })
-        createPage({
-            path: `/docs/cdp/sources/${node.slug}`,
-            component: DataWarehouseSource,
-            context: { id: node.id, ignoreWrapper: true },
-        })
-    })
-
-    // Sources WITH hand-written docs: create data-warehouse page from the MDX content
-    // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/)
-    result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
-        if (node.mdx?.id) {
-            createPage({
-                path: `/docs/data-warehouse/sources/${node.slug}`,
-                component: HandbookTemplate,
-                context: {
-                    id: node.mdx.id,
-                    links: [],
-                    nextURL: '',
-                    searchFilter: 'Docs',
-                    breadcrumbBase: { name: 'Docs', url: '/docs' },
-                },
-            })
-        }
-    })
-
-    // Self-hosted sources: not in the API, but have MDX files at cdp/sources/
-    // Create data-warehouse alias pages for them
-    result.data.selfHostedSources.nodes.forEach((node) => {
-        const slug = node.fields.slug.replace('/docs/cdp/sources/', '')
-        createPage({
-            path: `/docs/data-warehouse/sources/${slug}`,
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                links: [],
-                nextURL: '',
-                searchFilter: 'Docs',
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-            },
         })
     })
 
@@ -1271,6 +1220,31 @@ function createSdkReferencePages({
                 })
             }
         })
+    })
+}
+
+/** SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js). */
+async function createSdkMarkdownReferencePages({
+    createPage,
+    graphql,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    graphql: Parameters<GatsbyNode['createPages']>[0]['graphql']
+}) {
+    const result = (await graphql(`
+        {
+            allSdkMarkdownReference {
+                nodes {
+                    id
+                    slug
+                }
+            }
+        }
+    `)) as any
+    if (result.errors) throw result.errors
+    const component = path.resolve(`src/templates/sdk/SdkMarkdownReference.tsx`)
+    result.data.allSdkMarkdownReference.nodes.forEach(({ id, slug }) => {
+        createPage({ path: slug, component, context: { id } })
     })
 }
 

@@ -19,11 +19,11 @@ A backwards compatibility break in SDK version 1.270.0 introduced a dependency o
 All times in UTC.
 
 - **10:45** – SDK version 1.270.0 deployed to production with backwards compatibility issue
-- **14:59** – [Support engineer notices two similar customer reports in tickets](https://posthog.slack.com/archives/C075D3C5HST/p1759503579040139)
+- **14:59** – <PrivateLink url="https://posthog.slack.com/archives/C075D3C5HST/p1759503579040139">Support engineer notices two similar customer reports in tickets</PrivateLink>
 - **15:25** – Issue confirmed by surveys team. Begin reverting suspected PRs: [Backend PR](https://github.com/PostHog/posthog/pull/39108/files) and [SDK PR](https://github.com/PostHog/posthog-js/pull/2397)
-- **16:00** – [Error Tracking team independently notices spike in exception throughput](https://posthog.slack.com/archives/C087FAT5FK5/p1759507228619759)
+- **16:00** – <PrivateLink url="https://posthog.slack.com/archives/C087FAT5FK5/p1759507228619759">Error Tracking team independently notices spike in exception throughput</PrivateLink>
 - **16:11** – Reverts deployed, issue mitigated. SDK version 1.270.1 released
-- **16:25** – [Formal incident declared retroactively](https://posthog.slack.com/archives/C09JR5WV0JG/p1759508704952599)
+- **16:25** – <PrivateLink url="https://posthog.slack.com/archives/C09JR5WV0JG/p1759508704952599">Formal incident declared retroactively</PrivateLink>
 - **16:45** – Customer communications sent to affected teams
 - **22:28** – Incident closed, post-mortem phase begins
 
@@ -132,7 +132,7 @@ We reverted the problematic changes and released SDK version 1.270.1, which rest
 
 This incident revealed a critical architectural weakness in how our asynchronously-loaded extensions interact with versioned SDK code. The assumption that extensions can safely call any SDK function breaks down when we have customers on old SDK versions but always serve them the latest extension code.
 
-[We also had this similar issue in another incident here](https://github.com/PostHog/product-internal/pull/815/files).
+<PrivateLink url="https://github.com/PostHog/product-internal/pull/815/files">We also had this similar issue in another incident here</PrivateLink>.
 
 The 4+ hour detection delay highlights gaps in our observability for client-side errors. We lack visibility into exceptions occurring in customer applications using our SDK.
 

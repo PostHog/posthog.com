@@ -28,7 +28,7 @@ npx create-next-app@latest cookie-banner
 Next, install PostHog's JavaScript Web SDK:
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 To set up PostHog, create a `instrumentation-client.js` file in the root of your project. In it, initialize PostHog with your project token and instance address from your [project settings](https://app.posthog.com/project/settings) like this:

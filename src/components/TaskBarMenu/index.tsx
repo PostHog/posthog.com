@@ -317,7 +317,7 @@ function TaskBarMenu() {
                     }}
                     className={`${TASKBAR_BG} ${
                         isAnimating ? MOTION_LAYER : ''
-                    } skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded px-2 shadow-2xl`}
+                    } border-secondary rounded px-2 shadow-2xl`}
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div
@@ -411,7 +411,7 @@ function TaskBarMenu() {
                                 }
                             >
                                 <div className="flex flex-col items-center gap-1">
-                                    <p className="text-sm mb-0">Ask Max</p>
+                                    <p className="text-sm mb-0">Ask PostHog AI</p>
                                     <div className="flex items-center gap-1">
                                         <KeyboardShortcut text="Shift" size="sm" />
                                         <KeyboardShortcut text="?" size="sm" />

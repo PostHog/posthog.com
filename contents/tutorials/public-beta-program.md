@@ -27,7 +27,7 @@ Next, we go into our newly created beta-program folder and install PostHog.
 
 ```bash
 cd beta-program
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 After this, we initialize PostHog. Create a `providers.js` file in the `app` folder, then set up PostHog with your project token and instance address (which you get from your [project settings](https://app.posthog.com/project/settings)). Make sure to include the `use client` directive, a check for the window, and opt-in to site apps (which we will use later).

@@ -82,7 +82,7 @@ For production, the best way to limit the impact of ad blockers is to [set up a 
 
 Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
-1. If you're using the [Filter Out](/cdp/filter-out) app, ensure that it is configured correctly.
+1. If you're using the [Filter Out](/docs/data-pipelines/transformations/drop-events) app, ensure that it is configured correctly.
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 
@@ -97,7 +97,7 @@ If you're using the [JavaScript web](/docs/libraries/js) library, you can identi
 1. Open devtools in your browser and switch to the network tab.
 2. Identify the failed requests to `https://us.i.posthog.com/e` (or `https://eu.i.posthog.com/e` if you're using EU Cloud).
 3. Right click one of those requests and click Copy -> Copy as cURL.
-4. See below on how to [report your issue](#report-your-issue) and attach your cURL command to get further support.
+4. See below on how to [report your issue](#its-none-of-the-above-how-do-i-report-an-issue) and attach your cURL command to get further support.
 
 ![network request being sent to posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/network-request-to-posthog.png)
 
@@ -118,9 +118,11 @@ To confirm if this is the issue, use the following steps:
     - ii) [Decode your request](/docs/product-analytics/troubleshooting#step-1-decode-your-curl-command).
     - iii) Send your event a cURL request. Wait 1 hour and check if the event is still not visible in PostHog.
 
-Once you have confirmed there is an issue with event ingestion, you can [report your issue](#report-your-issue) to get further support.
+Once you have confirmed there is an issue with event ingestion, you can [report your issue](#its-none-of-the-above-how-do-i-report-an-issue) to get further support.
 
 ### It's none of the above. How do I report an issue?
+
+<a id="step-1-decode-your-curl-command" />
 
 **Step 1: Decode your cURL command**
 
@@ -189,6 +191,37 @@ Body:
 // e.g.
 // The "login_type" property was missing.
 ```
+
+### Why do I see "This capture call is ignored due to client rate limiting"?
+
+The JavaScript web SDK limits how quickly a page can capture events, which stops a runaway loop from flooding your project. By default, it allows an average of 10 events per second, with bursts of up to 100.
+
+Events over the limit are dropped in the browser. They aren't sent or retried, so they won't appear in PostHog. This limit is separate from your [billing limits](/docs/billing/limits-alerts), and reloading the page doesn't reset it because the SDK stores its count in the browser.
+
+To find the cause, look for code that calls `posthog.capture()` far more often than you expect:
+
+- A call inside a render loop or a `useEffect` that runs repeatedly.
+- An event listener that's added on every render and never removed, so each browser event triggers several captures.
+- A handler on a frequent browser event, such as `scroll`, `mousemove`, or the `timeupdate` event on a media player.
+
+The SDK also reports this as an [ingestion warning](/docs/data/ingestion-warnings) that includes the number of dropped events, the page, and the session ID.
+
+The best fix is usually to capture less often, such as at video milestones instead of on every `timeupdate`, or by sending one summary event when an interaction ends.
+
+If your event volume is expected, you can raise the limit with [`rate_limiting`](/docs/libraries/js/config). This only affects future events. Events already dropped cannot be recovered. A higher limit may mean more events are sent, which can increase your bill.
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    rate_limiting: {
+        events_per_second: 50,
+        events_burst_limit: 500,
+    },
+})
+```
+
+If you see this message at low event volumes, update `posthog-js`. Older versions could drop events after the device clock moved backward.
 
 ### Does PostHog block bots by default?
 

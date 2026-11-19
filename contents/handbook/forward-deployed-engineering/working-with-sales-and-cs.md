@@ -9,7 +9,7 @@ Forward deployed engineering (FDE) works alongside the sales, customer success (
 ## Who owns what
 
 - **Sales** owns the deal and the commercial relationship; see [new business](/handbook/growth/sales/new-business-how-we-work).
-- **CS / TAMs** own the ongoing customer relationship and health; see [customer success](/handbook/cs-and-onboarding/customer-success).
+- **CS / TAMs** own the ongoing customer relationship and health; see [customer success](/handbook/customer-success/customer-success).
 - **FDE** owns scoped technical engagements that unblock adoption or expansion.
 
 We collaborate with these teams to provide focused, embedded technical work. The commercial relationship stays with the account owner throughout.
@@ -31,6 +31,6 @@ FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing te
 Clean handoffs in both directions:
 
 - **Into FDE:** CS or sales gives us the customer context and the technical ask, and we scope it before committing.
-- **Out of FDE:** when the technical work is done, we hand the relationship back with a record of what was built, what the customer should do next, and any follow-on work captured explicitly. See [handover](/handbook/forward-deployed-engineering/working-with-customers#handover) for the checklist, and the sales team's [sales handover](/handbook/onboarding/sales-handover) for the adjacent process.
+- **Out of FDE:** when the technical work is done, we hand the relationship back with a record of what was built, what the customer should do next, and any follow-on work captured explicitly. See [handover](/handbook/forward-deployed-engineering/working-with-customers#handover) for the checklist, and the sales team's [sales handover](/handbook/scaled-customer-success/sales-handover) for the adjacent process.
 
 One rule of thumb: if the customer's team needs to act on something without us in the room, it belongs in a durable deliverable, not a Slack DM or a thread they'll never manage to find again.

@@ -47,6 +47,8 @@ Content should be primarily recorded (Loom, Gong) or visual (Pitch) to support o
 
 New joiners to Sales, CS, and Onboarding teams go through PostHog GTM Academy, which incorporates product training content from SMEs in a structured learning path. This ensures consistent foundational knowledge across the team.
 
+Product marketers also make [per-product sales enablement material](/handbook/growth/sales/why-buy-posthog#per-product-sales-enablement). SMEs can use it as a starting point, and tell the product marketer what is missing.
+
 ### Staying current
 
 It's on the SME to schedule a regular (nominally monthly, but this may vary by product - use your judgement here) update call with the GTM team and someone from their product team to cover:

@@ -16,8 +16,9 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { applications, topFeatures } from './workflows/slides'
+import { applications, keyFeatures } from './workflows/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const workflows = {
     ...getTool('workflows_emails'),
@@ -26,7 +27,7 @@ export const workflows = {
     type: 'workflows_emails',
     teamSlug: 'workflows',
     forumTag: 'workflows',
-    color: 'teal',
+    color: PRODUCT_COLORS.workflows_emails,
     colorSecondary: 'green-2',
     includeAddonRates: true,
     // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).
@@ -72,11 +73,11 @@ export const workflows = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -113,6 +114,7 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
+        description: '"Create an onboarding email series for trial users"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>

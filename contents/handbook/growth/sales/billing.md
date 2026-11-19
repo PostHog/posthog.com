@@ -9,7 +9,7 @@ showTitle: true
 
 > This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
 >
-> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA).
+> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
@@ -20,7 +20,7 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
-The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) if you have a question about a deal.
+The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, then applies the credits. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> if you have a question about a deal.
 
 For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
 
@@ -43,16 +43,16 @@ If this is a new contract for an existing customer, you will need to add their e
 - Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
-- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
+- Send the invoice to the customer. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
-**Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
+**Do not proceed to the next steps until the invoice is sent.** Stripe pays an invoice from the customer's credit balance when the invoice is finalized. If you add credits before sending, they pay the purchase invoice itself, and the customer has nothing to pay. You don't need to wait for the customer to pay.
 
-> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on <PrivateLink url="https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU">Stripe</PrivateLink> which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
 > **How do I know if a customer is using Bill.com for payment?** You should try and get ahead of this by asking your customer whether they use Bill.com or ask to be connected to their finance team if unsure. Bill.com invoice notifications are sent to sales@posthog.com from account-services@inform.bill.com. The [sales Google group](https://groups.google.com/a/posthog.com/g/sales) archives them, so you can search the archive directly for subject lines like "Acme Inc sent you a payment" or "A payment from Acme Inc should arrive shortly". Note any that match accounts in your book.
 
 ###### Step 4: Apply credits
-- Make sure that the payment is fully processed to avoid any automatic deductions.
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
+- Make sure the invoice has been sent, so the credits don't pay it.
+- **If customer wishes to begin using credits immediately:** return to the Zapier table and click the "Apply Credit" button.
 - **If customer wishes to begin using credits  in the next billing cycle:** apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription
@@ -70,15 +70,26 @@ If this is a new contract for an existing customer, you will need to add their e
 We define late payments as follows:
 
 1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
-2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
+2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  After 4 failed payments we will stop attempting to take further payments.
 
-In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
+In either of the above scenarios the account owner needs to take action to ensure that payment is made. The account owners are the AE, CSM, and TAM in <PrivateLink url='https://us.posthog.com/project/2/customer_analytics/accounts'>Customer Analytics</PrivateLink>. If the account has no owner, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
 You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
 
+#### Automated reminders and alerts
+
+PostHog Workflows send these messages for you. Do not send the same reminder yourself.
+
+- **Payment reminders:** For an open invoice that the customer pays by bank transfer, the customer gets an email 7 days and 3 days before the due date. The email comes from collections@posthog.com and goes to the billing contacts in Stripe. The account owners are in CC.
+- **Overdue alerts:** An alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> tags the account owners at 09:00 UTC on days 1, 6, 7, 13, and 14. These are steps 1 to 5 below. Each alert tells you what to do, and links to this process, the Stripe invoice, and the customer payment page. If the customer already paid or agreed a different date, reply in the alert thread so the team knows.
+  - For an invoice that the customer pays by bank transfer, day 0 is the due date.
+  - For a card payment, day 0 is the first failed payment. We send this alert only if the account has an owner.
+
+The reminders and alerts stop when the customer pays. They only go to accounts that are tracked in Customer Analytics, not ignored.
+
 #### Step 1 - On the day their payment becomes late
 
-As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
+As the account owner, you are tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>. If the account has no owner, the alert tags <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> instead.
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
@@ -130,6 +141,57 @@ Make it explicit in your outreach that if we can't agree a pre-commitment, the a
 
 RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
+### Disputes and chargebacks
+
+A dispute (chargeback) occurs when a customer asks their bank to reverse a charge. While the dispute is open, the card network holds the funds, so we cannot refund the charge through Stripe. This process is handled by Finance.
+
+#### 1. Review the dispute
+
+Before you contact the customer, check:
+
+- The dispute reason and the "respond by" date in Stripe. We must submit evidence before this date, whatever else is happening.
+- What the charge was for.
+- The customer's PostHog activity: when they signed up, when they subscribed, and how much they have used the product.
+
+Most disputes come from customers who wanted to cancel and went to their bank instead. Some are mistakes, such as the wrong card being added and charged. If it looks like genuine fraud, raise it in #team-billing in Slack.
+
+#### 2. Email the customer
+
+Email all admins on the account. There is no template. Write a custom email that:
+
+- Acknowledges the dispute and explains what the charge was for.
+- Points them to our [refund policy](https://posthog.com/handbook/growth/sales/refunds) and says we are generally happy to refund if they withdraw the dispute with their bank.
+- Explains that we cannot refund while the dispute is open, because the card network holds the funds.
+- Gives them one week to withdraw the dispute.
+- Tells them that if they do not, we will contest the dispute, cancel their subscription, and block their access to PostHog.
+
+If they withdraw, process the refund when Stripe shows the dispute as closed. Cancel their subscription, and block their access to PostHog once done.
+
+#### 3. Counter the dispute
+
+If the customer does not respond or does not withdraw within one week, submit evidence in Stripe. If the "respond by" date is sooner than one week, submit evidence before that date.
+
+The evidence must show that the customer signed up, subscribed, and used PostHog, and that we only charged them for what they used. Include:
+
+- Screenshots from Customer.io.
+- Our logs that show their product usage.
+- The invoice, and the dates they signed up and subscribed.
+
+Stripe sends the evidence to the bank, and the bank makes the decision. This usually takes 1–2 months, and the decision can go either way.
+
+#### 4. Block access
+
+When you counter the dispute:
+
+1. Cancel their subscription in Stripe.
+2. Block access to PostHog. In Django admin, set the organization's "Active" field to "No". In the "De-activated reason" field, type an explanation, for example "Access revoked due to a disputed payment." Users see this text in the app, so keep it short and factual.
+3. Set `is_blocked_from_subscribing` to `true` in their Stripe customer metadata, so they cannot subscribe again.
+4. Email the admins to tell them about these steps.
+
+#### Restoring access
+
+We decide case by case whether to restore access or let the customer subscribe again. About 99% of the time, we do neither. If you think a customer should get an exception, ask billing support and finance.
+
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
 - 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
@@ -139,7 +201,7 @@ RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) s
 PostHog Inc is a US incorporated company and a US tax resident and we do not claim benefits under any Double Taxation Avoidance Agreements (DTAA). To support this, we provide:
 - Our Tax Residency Certificate
 - Our no PE (Permanent Establishment) Certificate
-These documents are available in the [shared Finance drive](https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing). You can share them with the customer on request.
+These documents are available in the <PrivateLink url="https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing">shared Finance drive</PrivateLink>. You can share them with the customer on request.
  
 The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
 

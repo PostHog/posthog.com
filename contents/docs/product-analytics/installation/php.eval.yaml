@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, php]
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a PHP app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: php-app
+      prompt: >-
+          Set up PostHog in the PHP app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/composer.json lists `posthog/posthog-php`.
+              initialized: >-
+                  The app calls PostHog\PostHog::init with the project token as the
+                  first argument and an options array that sets 'host' to the PostHog
+                  host. Cite the file and line(s).

@@ -5,6 +5,8 @@ showStepsToc: true
 
 In this guide we'll walk through importing your **opt-out lists from Customer.io** into PostHog and keeping them in sync.
 
+Moving your email from Customer.io? Import your opt-outs before the first send, then follow the [migration steps](/docs/workflows/sending-reputation#move-from-another-provider) on sending reputation and allowance.
+
 Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Import from Customer.io**.
 
 <ProductScreenshot
@@ -18,7 +20,7 @@ Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Imp
 
 <Step title="Import categories and global opt-outs" badge="required">
 
-This step imports all subscription topics and globally unsubscribed customers from Customer.io using an App API key.
+This step imports all subscription topics and globally unsubscribed customers from Customer.io using an App API key. The import runs in the background – you can close the modal and come back to check on progress at any time.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step1_light_bf6fe10f61.png"
@@ -37,7 +39,7 @@ Save this API key securely – Customer.io only shows it once.
 
 </CalloutBox>
 
-Go back to PostHog, paste the key into the first step, and click **Start import**. This will import:
+Go back to PostHog, paste the key into the first step, select which data to import, and click **Start import**. PostHog shows progress for each step as the import runs. Once it finishes, you'll see a toast notification. This will import:
 
 - All available categories from Customer.io
 - All customers who are generally unsubscribed (not subscribed to any category)

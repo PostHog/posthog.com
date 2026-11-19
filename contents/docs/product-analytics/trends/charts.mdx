@@ -126,6 +126,14 @@ When enabled, whiskers are clipped using the standard 1.5× IQR (interquartile r
 
 This option is enabled by default. Disable it to show the full data range including outliers.
 
+#### Detailed results
+
+Expand the results below the chart to see a detailed results table. For each time interval and series, the table displays the distribution statistics (min, Q1, median, mean, Q3, max) along with a **Count** column.
+
+The **Count** column shows the number of observations used to calculate the distribution for that time interval. Missing numeric values are excluded from the count, but outliers are included.
+
+> **Note:** Cached results generated before this column was added display `-` for the count. Refresh the insight to populate the value.
+
 ### Slope graph
 
 The slope graph shows the change from the start to the end of your selected date range. Each series appears as a line connecting its starting value to its ending value, making it easy to see the direction and magnitude of change over the period. This is useful for comparing how different metrics or breakdown values changed relative to each other.

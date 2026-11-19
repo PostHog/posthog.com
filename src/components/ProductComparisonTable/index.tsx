@@ -16,6 +16,7 @@ import { appsignal } from '../../hooks/competitorData/appsignal'
 import { arize_phoenix } from '../../hooks/competitorData/arize_phoenix'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { better_stack } from '../../hooks/competitorData/better_stack'
+import { bigquery } from '../../hooks/competitorData/bigquery'
 import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
@@ -28,6 +29,7 @@ import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
+import { dataflare } from '../../hooks/competitorData/dataflare'
 import { devcycle } from '../../hooks/competitorData/devcycle'
 import { drip } from '../../hooks/competitorData/drip'
 import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
@@ -78,6 +80,7 @@ import { posthog } from '../../hooks/competitorData/posthog'
 import { portkey } from '../../hooks/competitorData/portkey'
 import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
+import { redshift } from '../../hooks/competitorData/redshift'
 import { replay_io } from '../../hooks/competitorData/replay_io'
 import { rollbar } from '../../hooks/competitorData/rollbar'
 import { rudderstack } from '../../hooks/competitorData/rudderstack'
@@ -85,6 +88,7 @@ import { segment } from '../../hooks/competitorData/segment'
 import { sentry } from '../../hooks/competitorData/sentry'
 import { signoz } from '../../hooks/competitorData/signoz'
 import { smartlook } from '../../hooks/competitorData/smartlook'
+import { snowflake } from '../../hooks/competitorData/snowflake'
 import { split } from '../../hooks/competitorData/split'
 import { sprig } from '../../hooks/competitorData/sprig'
 import { splunk } from '../../hooks/competitorData/splunk'
@@ -639,6 +643,7 @@ export default function ProductComparisonTable({
         arize_phoenix,
         baremetrics,
         better_stack,
+        bigquery,
         braintrust,
         bugsnag,
         chartmogul,
@@ -651,6 +656,7 @@ export default function ProductComparisonTable({
         counter,
         crazy_egg,
         datadog,
+        dataflare,
         devcycle,
         dynamic_yield,
         dynatrace,
@@ -701,6 +707,7 @@ export default function ProductComparisonTable({
         portkey,
         quantum_metric,
         raygun,
+        redshift,
         replay_io,
         rollbar,
         rudderstack,
@@ -708,6 +715,7 @@ export default function ProductComparisonTable({
         sentry,
         signoz,
         smartlook,
+        snowflake,
         split,
         sprig,
         splunk,

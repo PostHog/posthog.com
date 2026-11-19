@@ -8,8 +8,8 @@ compose into figures and CTAs.
 The point is teaching by recognition. Nobody has to imagine what a self-driving report looks
 like, because they're already reading one.
 
-Guides render in the shared docs reader (`components/PocketGuides/LearnSurface.tsx`); the report appears as a
-figure via `components/PocketGuides/InboxFigure.tsx`, which composes this folder's `ReportCard`.
+Guides render in the shared docs reader (`components/Learn/PocketGuides/LearnSurface.tsx`); the report appears as a
+figure via `components/Learn/PocketGuides/InboxFigure.tsx`, which composes this folder's `ReportCard`.
 The old standalone master-detail inbox view was deleted when the pocket guides became the whole
 direction – if a browse-all surface returns, build it on the hook, not from git archaeology.
 
@@ -233,7 +233,7 @@ and does not propose it again.
 | `EnableScout.tsx` | The "add this scout" CTA, plus the book's pinned bottom bar |
 | `scoutDeepLink.ts` | Builds the CTA target: a `#createScout=` deep link, or an `appTemplate` link |
 | `sources.ts` | Product-source metadata: icons, color tokens, install and docs links |
-| _(terms moved)_ | `<Term>` and its definitions now live in `components/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
+| _(terms moved)_ | `<Term>` and its definitions now live in `components/Learn/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
 | `FromOurInbox.tsx` | `useInboxExamples()` and the read-only inbox on `/docs/self-driving/from-our-inbox` |
 | `types.ts` | `SelfDrivingReport`, `InboxTemplate`, `InboxExample` |
 

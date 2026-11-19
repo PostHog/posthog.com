@@ -9,6 +9,7 @@ keywords: null
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
+ogImage: generated
 author:
   - avi-press
 category: General

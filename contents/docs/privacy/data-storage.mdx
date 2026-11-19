@@ -16,6 +16,7 @@ This guide covers the following features:
 | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
 | [Data storage location](#data-storage-location)                   | Control where your data is physically stored for GDPR compliance |
 | [Processing data before storage](#processing-data-before-storage) | Redact or filter data before it's stored in PostHog              |
+| [Data retention](#data-retention)                                 | How long PostHog keeps each type of data                         |
 | [Data deletion](#data-deletion)                                   | Tools to help comply with data deletion requests                 |
 | [Data access control](#data-access-control)                       | Manage who can access what data in PostHog                       |
 
@@ -25,12 +26,12 @@ If you require GDPR compliance, there are [specific guidelines](/docs/privacy/gd
 
 ## Processing data before storage
 
-PostHog supports [realtime transformations](/docs/cdp/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
+PostHog supports [realtime transformations](/docs/data-pipelines/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
 
-- [Hashing PII data](https://posthog.com/docs/cdp/transformations/template-hash-properties) before it's stored in PostHog
-- Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/cdp/transformations/template-geoip)
-- [Dropping events](https://posthog.com/docs/cdp/transformations/drop-events) based on a filter
-- [IP anonymization](https://posthog.com/docs/cdp/transformations/template-ip-anonymization)
+- [Hashing PII data](https://posthog.com/docs/data-pipelines/transformations/template-hash-properties) before it's stored in PostHog
+- Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/data-pipelines/transformations/template-geoip)
+- [Dropping events](https://posthog.com/docs/data-pipelines/transformations/drop-events) based on a filter
+- [IP anonymization](https://posthog.com/docs/data-pipelines/transformations/template-ip-anonymization)
 
 When in doubt, you can always create your own [custom transformation](https://app.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
 
@@ -41,7 +42,7 @@ You can configure your project to discard client IP addresses from stored events
 When this setting is enabled:
 
 - Client IP addresses are **not stored** with your events
-- Transformations like [GeoIP enrichment](https://posthog.com/docs/cdp/transformations/template-geoip) and [bot detection](https://posthog.com/docs/cdp/transformations/template-bot-detection) can **still use the IP** before it is discarded
+- Transformations like [GeoIP enrichment](https://posthog.com/docs/data-pipelines/transformations/template-geoip) and [bot detection](https://posthog.com/docs/data-pipelines/transformations/template-bot-detection) can **still use the IP** before it is discarded
 
 This allows you to enrich your events with location data or filter out bot traffic while ensuring raw IP addresses are not retained in your data.
 
@@ -97,6 +98,16 @@ This allows you to enrich your events with location data or filter out bot traff
 
 </details>
 
+## Data retention
+
+How long PostHog keeps your data depends on the product. See the retention docs for each one:
+
+- [Events](/docs/data/events-retention)
+- [Session recordings](/docs/session-replay/recording-retention)
+- [AI events](/docs/ai-observability/data-retention)
+- [Logs](/docs/logs/pricing#retention)
+- [File download exports](/docs/data-pipelines/file-download-exports)
+
 ## Data deletion
 
 You can remove unwanted data from PostHog by deleting groups and persons.
@@ -108,7 +119,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | Deletion is processed in the background and typically takes a couple of minutes. You'll see a blocking screen while it completes. All data under the organization's projects (including events) are automatically removed. |
 | **Persons**       | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten)    | When a person is deleted, all events and [session recordings](/docs/session-replay) for that person can be deleted                                                                                                          |
 
-Retention is not one of these tools. Your plan sets how long PostHog keeps your events, and you cannot make that period shorter to remove data. See [events data retention](/docs/data/events-retention).
+Organization admins can also set a [custom events retention window](/docs/data/events-retention#how-to-customize-your-retention-period). PostHog deletes events older than the window at the next monthly cleanup, not right away. To answer a right to be forgotten request, delete the person instead.
 
 ### Right to be forgotten
 
@@ -214,7 +225,7 @@ Deleting a single person with `DELETE /api/projects/:project_id/persons/:id` sti
 
 #### Checking deletion status
 
-Event deletions run asynchronously during non-peak hours. To check the status of queued event deletions, use the deletion status endpoint:
+Event deletions run [asynchronously](#asynchronous-data-deletion) during non-peak hours. To check the status of queued event deletions, use the deletion status endpoint:
 
 <MultiLanguage>
 
@@ -276,7 +287,7 @@ You can manually delete persons and their events in the PostHog UI:
 
 ### Asynchronous data deletion
 
-While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
+While most data in PostHog is deleted instantly, event data is not. Instead, event data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud). The request cutoff time for each batch deletion is two days before the batch runs. Deletion requests that miss the cutoff time will be included in the batch after next.
 
 This is done because data deletion in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and it can impact performance for other users.
 

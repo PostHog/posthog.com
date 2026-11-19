@@ -34,12 +34,13 @@ List of ingestion warnings:
 - [Ignored an invalid timestamp, event was still ingested](#ignored-an-invalid-timestamp-event-was-still-ingested)
 - [An event was sent more than 23 hours in the future](#an-event-was-sent-more-than-23-hours-in-the-future)
 - [Discarded event exceeding 1MB limit](#discarded-event-exceeding-1mb-limit)
+- [Person properties nested too deep](#person-properties-nested-too-deep)
 - [Event ingestion has overflowed capacity](#event-ingestion-has-overflowed-capacity)
 - [Skipped person profile processing for a high-volume distinct ID](#skipped-person-profile-processing-for-a-high-volume-distinct-id)
 - [Ingested event after shortening its distinct ID to the 200 character limit](#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit)
 - [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
-- [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
+- [$set or $set_once is ignored on exception events and should not be sent](#invalid-set-operations-on-exception-events)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
 - [Discarded $groupidentify event with $group_type exceeding 400 characters](#discarded-groupidentify-event-with-group_type-exceeding-400-characters)
@@ -51,6 +52,7 @@ Validation warnings, raised when PostHog rejects a request as it arrives:
 - [Discarded event with no event name](#discarded-event-with-no-event-name)
 - [Discarded session replay batches](#discarded-session-replay-batches)
 - [Discarded AI events](#discarded-ai-events)
+- [Capture v1 validation warnings](#capture-v1-validation-warnings)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -64,7 +66,7 @@ See our [identify docs](/docs/product-analytics/identify#how-to-merge-users) for
 
 PostHog drops events with invalid UUIDs.
 
-There are very few cases where it would be good to provide an event UUID. PostHog generates these for you.
+On legacy capture, there are very few cases where it would be good to provide an event UUID, because PostHog generates these for you. On [capture v1](/docs/api/capture-v1#event-uuids), every event must carry a `uuid`, and PostHog SDKs generate it.
 
 When generating UUIDs, there are many gotchas to be aware of. For example, deduping based on event UUID is not guaranteed due to how merges work in [ClickHouse](/docs/how-posthog-works/clickhouse).
 
@@ -96,9 +98,25 @@ One distinct ID sent events much faster than expected, so PostHog skipped [perso
 
 This usually means one distinct ID is shared by many users or machines. See [rate limiting high-volume distinct IDs](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) for how to fix it.
 
+## Person properties nested too deep
+
+PostHog rejects person property updates when the properties are nested more than 128 levels deep. When this happens, the update is dropped and the person's events cannot be processed until the problem is resolved.
+
+This usually happens when you accidentally pass a complex object as a person property value – for example, a DOM element, a React node, or an SDK instance – instead of a plain value like a string, number, or simple object.
+
+To fix this:
+
+1. Find where the complex object is being passed as a person property value.
+2. Replace it with a plain value (string, number, boolean, or simple object).
+3. If a person already has deeply nested properties stored, [delete the person](/docs/data/persons#deleting-person-data) to resume processing their events.
+
+After deleting an affected person, their next event creates a new person profile.
+
 ## Ingested event after shortening its distinct ID to the 200 character limit
 
 PostHog shortens any `distinct_id` longer than 200 characters to its first 200 characters and ingests the event under the shortened ID. The same limit applies to [session replay](/docs/session-replay) events, which are ingested under the shortened ID without a warning.
+
+[Capture v1](/docs/api/capture-v1#limits-and-validation) doesn't shorten distinct IDs. It drops an event whose distinct ID is over 200 bytes and raises [Discarded event whose distinct ID exceeds the size limit](#capture-v1-validation-warnings) instead.
 
 A distinct ID this long usually means something other than a user ID, like a token or a serialized object, was passed as the distinct ID. Fix the `capture` or `identify` call to send a real user ID. Until then, events keep landing under the shortened ID.
 
@@ -188,7 +206,7 @@ Start with the `lib` and `lib_version` details. Warnings clustered on a single o
 
 Every event needs a `distinct_id` to attribute it to a person. PostHog reads the top-level `distinct_id` first, then falls back to `properties.distinct_id`, and drops the event when neither holds a usable value – when it's missing from both, `null`, empty, or only whitespace.
 
-PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
+Legacy capture accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. On [capture v1](/docs/api/capture-v1#choosing-a-distinct-id), `distinct_id` must be a string, and events with these placeholder values are stored without a person profile. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids). Placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
 
 Most PostHog SDKs block the obvious mistakes for you - for example in the posthog-js SDK, `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
 
@@ -223,6 +241,23 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 | Rejected a malformed AI or OpenTelemetry request                           | The request body couldn't be parsed.                                                                                                                                                                                                                      |
 | Accepted an OpenTelemetry export with no AI spans, so nothing was ingested | The export was valid but carried no AI spans. Check that your instrumentation is emitting them.                                                                                                                                                           |
 
+### Capture v1 validation warnings
+
+[Capture v1](/docs/api/capture-v1) checks each event on its own and drops only the events with a problem. It also tells your SDK which events it dropped, and why, in the [result details](/docs/api/capture-v1#result-details). A few problems still reject the whole request with a `400`. A request PostHog can't parse, such as one with a missing field or a field of the wrong type, gets a `400` [`request_parsing_error`](/docs/api/capture-v1#field-types) and raises no warning.
+
+| Warning | Cause |
+| --- | --- |
+| Discarded event whose name exceeds the length limit | The event name is longer than 200 bytes. |
+| Discarded event whose distinct ID exceeds the size limit | The `distinct_id` is longer than 200 bytes. |
+| Discarded event with an invalid timestamp | The `timestamp` isn't in RFC 3339 format. |
+| Discarded event with malformed properties | `properties` isn't a JSON object. |
+| Discarded event with invalid capture options | `options` isn't a JSON object, or an [option](/docs/api/capture-v1#event-options) value can't be read. The warning names the options. |
+| Rejected a request containing no events | The `batch` was empty. |
+| Rejected a batch with invalid metadata | `created_at` wasn't in RFC 3339 format. Nothing in the request was stored. |
+| Rejected a batch containing an event with no UUID | An event's `uuid` was empty. Nothing in the request was stored. |
+| Rejected a batch containing an event with an invalid UUID | An event's `uuid` wasn't a valid UUID. Nothing in the request was stored. |
+| Discarded events that reused another event's UUID in the same request | Two or more events in one request had the same `uuid`. PostHog kept the first and dropped the rest. Give every event its own [UUID](/docs/api/capture-v1#event-uuids). |
+
 ## Query warnings via MCP
 
-If you use the [PostHog MCP server](/docs/model-context-protocol), your AI agent can query ingestion warnings directly with the `ingestion-warnings-list` tool. Ask questions like "What ingestion warnings has my project received?" or "Why are my person merges failing?" and the agent will filter, search, and summarize warnings for you. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of available tools.
+If you use the [PostHog MCP server](/docs/model-context-protocol), your AI agent can find ingestion warnings with the `health-issues-list` tool, filtered to the `ingestion_warning` kind, and look up individual warnings with `execute-sql` against the `system.ingestion_warnings` table. Ask questions like "What ingestion warnings has my project received?" or "Why are my person merges failing?" and the agent will filter, search, and summarize warnings for you. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of available tools.

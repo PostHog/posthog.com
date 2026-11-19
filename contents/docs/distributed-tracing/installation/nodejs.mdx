@@ -14,7 +14,7 @@ There are two ways to send spans from Node.js.
 | ------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------- |
 | **Packages**                   | The SDK you already use for analytics                        | Six `@opentelemetry/*` packages                                       |
 | **Instrumentation**            | Manual – you wrap the operations you care about              | Manual, plus auto-instrumentation for HTTP, Express, databases, and more |
-| **Person and session join**    | Automatic inside a PostHog request context                   | Set the attributes yourself                                           |
+| **Person and session join**    | Automatic inside a PostHog request context                   | Optional PostHog context processor                                           |
 
 Pick OpenTelemetry if you already run it, or if you want spans from your HTTP server and database driver without writing them yourself. Pick `posthog-node` if PostHog is your only tracing backend and you'd rather instrument a handful of operations by hand than add an exporter pipeline.
 
@@ -22,7 +22,7 @@ Both routes send OTLP spans to the same endpoint, so you can start with one and 
 
 ## With `posthog-node`
 
-> **Minimum version:** `posthog-node@5.52.0` or later.
+> **Minimum version:** `posthog-node@5.52.0` or later. The native tracing API is experimental, so its options can change in a minor release. The ingestion endpoint currently returns `200` even for an unknown project token, so check your token, and confirm spans landed by searching for your `serviceName` in [Tracing](https://app.posthog.com/tracing).
 
 <Steps>
 
@@ -57,7 +57,7 @@ export const posthog = new PostHog('<ph_project_token>', {
 
 Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
 
-See the [Node.js SDK docs](/docs/libraries/node#configuration) for batching, queue, and span-limit options, and [`beforeSpanSend`](/docs/libraries/node#scrubbing-and-dropping-spans) for scrubbing attributes or dropping spans before they're exported.
+See the [Node.js SDK docs](/docs/libraries/node/reference#tracesconfig) for batching, queue, and span-limit options, and [`beforeSpanSend`](/docs/libraries/node/reference#beforespansendfn) for scrubbing attributes or dropping spans before they're exported.
 
 </Step>
 
@@ -80,7 +80,7 @@ If the callback throws or rejects, the span records the exception, its status is
 
 Span names should be low-cardinality operation names – `GET /users/:id`, not `GET /users/123`. Variable values belong in attributes.
 
-For work that can't wrap a callback, `startSpan` returns a span you end yourself. See the [Node.js SDK docs](/docs/libraries/node#distributed-tracing) for the full span API and for continuing a trace across services with W3C `traceparent` headers.
+For work that can't wrap a callback, `startSpan` returns a span you end yourself. See the [Node.js SDK docs](/docs/libraries/node/reference#traces) for the full span API and for continuing a trace across services with W3C `traceparent` headers.
 
 </Step>
 
@@ -94,7 +94,7 @@ posthog.withContext({ distinctId: user.id, sessionId }, async () => {
 })
 ```
 
-If you use Express, the [PostHog middleware](/docs/libraries/node#add-request-context-to-express) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+If you use Express, the [PostHog middleware](/docs/libraries/node/reference#setupexpressrequestcontext) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
 
 </Step>
 
@@ -208,7 +208,29 @@ function chargeCustomer(customerId) {
 }
 ```
 
-To join these spans to a person or a Session Replay recording, set `posthogDistinctId` and `sessionId` attributes yourself, from the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+To link spans to people and sessions, add the optional PostHog context processor to your existing provider. Use your existing `PostHog` client as `posthog`:
+
+```javascript
+import { PostHogContextSpanProcessor } from 'posthog-node/otel'
+
+const provider = new NodeTracerProvider({
+  resource: resourceFromAttributes({ [ATTR_SERVICE_NAME]: 'my-service' }),
+  spanProcessors: [
+    new PostHogContextSpanProcessor(posthog),
+    new BatchSpanProcessor(exporter),
+  ],
+})
+```
+
+Use this configuration in place of the provider configuration above. Keep your existing exporter and sampler. Register the processor before requests start.
+
+For Express, put [`setupExpressRequestContext`](/docs/libraries/node/reference#setupexpressrequestcontext) before your routes. It reads the browser tracing headers and adds missing `posthogDistinctId` and `sessionId` attributes to the active request span. The processor adds the same attributes to child spans when they start. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK.
+
+For a custom integration, call `enrichCurrentSpan(posthog)` from `posthog-node/otel` after you set the IDs inside `posthog.withContext()`. The helper is also exported from the main `posthog-node` entry without loading OpenTelemetry. It requires the registered processor. It does not manage another framework's request lifetime.
+
+At explicit request entry, the processor also fills missing IDs on the nearest recording server ancestor through parent span objects it has observed. This covers HTTP spans that start before framework middleware. If a sampler drops an intermediate span, that parent chain cannot be verified, so the earlier server span stays unchanged. New recording spans inside the request still receive context.
+
+Existing `sessionId` and `posthogDistinctId` span attributes take precedence. Set authenticated application identity with `posthogDistinctId`. Missing IDs stay absent. Express context stays active for work that the handler starts, including promises and timers that run after the response ends. A background job that needs its own IDs should start a fresh context with `fresh: true`. To end a context at a fixed point, pass `ContextOptions.signal` and abort it. The processor does not create a session, recording, trace provider, or exporter.
 
 </Step>
 

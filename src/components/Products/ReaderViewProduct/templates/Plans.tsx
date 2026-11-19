@@ -74,6 +74,11 @@ const ValueCell = ({ value }: { value: PlanFeatureValue }) => {
     )
 }
 
+const billingLimitDetail = {
+    headline: 'Set a billing limit and never get an unexpected bill.',
+    body: "You're always in control of what you spend.",
+}
+
 const pricingDetails: Array<{ headline: React.ReactNode; body: React.ReactNode }> = [
     {
         headline: 'More than 90% of companies use PostHog for free.',
@@ -87,10 +92,7 @@ const pricingDetails: Array<{ headline: React.ReactNode; body: React.ReactNode }
         headline: 'Volume discounts kick in automatically.',
         body: 'No negotiations needed.',
     },
-    {
-        headline: 'Set a billing limit and never get an unexpected bill.',
-        body: "You're always in control of what you spend.",
-    },
+    billingLimitDetail,
     {
         headline: 'We make a profit with every product.',
         body: 'No loss-leader pricing that goes up later or gets retired after a bad quarter.',
@@ -163,7 +165,18 @@ const SubheaderRow = ({ label }: { label: string }) => (
     </div>
 )
 
-const Plans = ({ id, productData }: SectionComponentProps) => {
+type PlansProps = SectionComponentProps & {
+    /** Names the billing meter in the TL;DR title ("Sources TL;DR:"), for pages that show Plans once per meter. */
+    meterName?: string
+    /** Hides the "Things you should know about our pricing" column, so a second Plans block doesn't repeat it. */
+    hidePricingDetails?: boolean
+    /** Content above the TL;DR in the left column, so the pricing notes column starts level with it. */
+    intro?: React.ReactNode
+    /** Section that the "or less!" link scrolls to. Set it when the calculator has a slug other than `calculator`. */
+    calculatorId?: string
+}
+
+const Plans = ({ id, productData, meterName, hidePricingDetails, intro, calculatorId = 'calculator' }: PlansProps) => {
     // `useProduct` resolves `sharesFreeTier` from a handle string into the full
     // product object, so read the handle back off it. Accept both shapes – callers
     // that pass raw productData still hand us the string.
@@ -210,6 +223,11 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const paidTiers = paidPlan?.tiers || []
     const unit = billing.unit || 'unit'
     const addons = billing.addons || []
+
+    // Billing sets `no_billing_limit` on add-ons that billing limits don't cap, like Logs custom retention
+    const noBillingLimitDetail = addons.some((addon: any) => addon.no_billing_limit === true)
+        ? product?.noBillingLimitDetail
+        : undefined
 
     const firstPaidTier = paidTiers.find((t: any) => parseFloat(t.unit_amount_usd) > 0)
     const dp = getMaxDecimalPlaces(paidTiers)
@@ -319,7 +337,10 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
         >
             {/* TL;DR */}
             <div className="@container @4xl:[grid-area:tldr]">
-                <h2 className="text-3xl font-bold text-primary mt-0 mb-6">TL;DR:</h2>
+                {intro}
+                <h2 className="text-3xl font-bold text-primary mt-0 mb-6">
+                    {meterName ? `${meterName} TL;DR:` : 'TL;DR:'}
+                </h2>
                 <p className="text-3xl leading-snug font-normal text-primary mb-3">
                     {freePlan?.free_allocation && (
                         <>
@@ -387,12 +408,12 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                         <em className="text-sm text-primary/60">
                                             {' '}
                                             <a
-                                                href="#calculator"
+                                                href={`#${calculatorId}`}
                                                 className="text-primary/60 hover:text-primary/80 underline decoration-dotted"
                                                 onClick={(e) => {
                                                     e.preventDefault()
                                                     document
-                                                        .getElementById('calculator')
+                                                        .getElementById(calculatorId)
                                                         ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                                                 }}
                                             >
@@ -582,17 +603,23 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
             </div>
 
             {/* Sidebar: combined pricing details */}
-            <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-primary @4xl:pl-12">
-                <h3 className="mb-4 !text-sm font-normal text-secondary">Things you should know about our pricing</h3>
-                <ul className="space-y-6 list-none m-0 p-0">
-                    {pricingDetails.map((point, i) => (
-                        <li key={i}>
-                            <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
-                            <p className="text-sm text-primary/60 mb-0">{point.body}</p>
-                        </li>
-                    ))}
-                </ul>
-            </aside>
+            {!hidePricingDetails && (
+                <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-primary @4xl:pl-12">
+                    <h3 className="mb-4 !text-sm font-normal text-secondary">
+                        Things you should know about our pricing
+                    </h3>
+                    <ul className="space-y-6 list-none m-0 p-0">
+                        {pricingDetails
+                            .map((detail) => (detail === billingLimitDetail && noBillingLimitDetail) || detail)
+                            .map((point, i) => (
+                                <li key={i}>
+                                    <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
+                                    <p className="text-sm text-primary/60 mb-0">{point.body}</p>
+                                </li>
+                            ))}
+                    </ul>
+                </aside>
+            )}
         </section>
     )
 }

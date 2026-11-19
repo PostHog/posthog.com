@@ -1,0 +1,93 @@
+---
+title: Query what you send
+---
+
+> **Note:** Metrics is in open alpha. Any team can turn it on — open [Metrics](https://app.posthog.com/metrics) and select **Enable metrics** in the onboarding view. The details on this page describe current behavior and may change before general availability.
+
+This page shows how a metric you record with `posthog.metrics` in [posthog-js](/docs/metrics/installation/javascript), [posthog-node](/docs/metrics/installation/nodejs), or [posthog-python](/docs/metrics/installation/python) reads back when you query it. The most important thing to know first: **counters and histograms arrive as deltas, not running totals.**
+
+## What the SDKs send
+
+The SDKs pre-aggregate in memory and flush one OTLP data point per series every 10 seconds by default. Each type is sent like this:
+
+| Call | OTLP type | Temporality | What one data point holds |
+|------|-----------|-------------|---------------------------|
+| `metrics.count()` | Monotonic sum | Delta | The total added in that flush window |
+| `metrics.gauge()` | Gauge | – | The last value recorded in that window |
+| `metrics.histogram()` | Histogram | Delta | The count, sum, min, max, and per-bucket counts for that window |
+
+Delta temporality means each flush carries only what happened in that interval. It isn't a running total since process start. The [viewer](/docs/metrics/explore) and `increase` or `rate` aggregations account for this. If you query through a Prometheus-style tool, they don't, as the next sections explain.
+
+## Resource attributes and names
+
+Everything you set in `serviceName`, `environment`, `serviceVersion`, and `resourceAttributes` becomes an OpenTelemetry resource attribute (`service.name`, `deployment.environment`, `service.version`, plus your own). The SDK also adds `telemetry.sdk.*` attributes. Attributes you pass on individual calls become data point attributes.
+
+Metric names are sent as you write them, so `http.client.request.duration` stays dotted. The default name from posthog-js `metrics.network` and its attributes (`url.template`, `http.request.method`) use dotted OpenTelemetry names too.
+
+## Default histogram buckets
+
+Histograms use these bucket boundaries, in the unit you record (milliseconds for durations):
+
+```text
+0, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000
+```
+
+There's one more bucket above the last boundary, so values over 10000 are still counted. In posthog-node (5.63.0 or later) and posthog-js (1.447.0 or later), you can pass `bounds` when you record to use different boundaries:
+
+```js
+posthog.metrics.histogram('job.duration', 42, {
+  unit: 'ms',
+  bounds: [10, 50, 100, 500, 1000],
+})
+```
+
+The first sample of a histogram (its name and unit) fixes the bounds until the client resets. A later sample with different bounds is recorded in the fixed buckets and logs a warning, and a sample with invalid bounds is dropped.
+
+The Python SDK (`posthog`) has no `bounds` option, so its histograms always use the default boundaries.
+
+## Query with SQL
+
+Every data point lands in the `posthog.metrics` table, scoped to your project. Use the **SQL** tab in [Metrics](https://app.posthog.com/metrics) to read it back directly. See [Use your metrics](/docs/metrics/explore) for the viewer and SQL tab.
+
+## Query with PromQL
+
+> **Note:** The behavior in this section comes from querying PostHog's Prometheus-compatible API with metrics sent by the SDKs. It describes what you see today and may change during the alpha.
+
+When you read metrics back as Prometheus series, expect this:
+
+- A histogram named `dash_query_duration_ms` reads back as `dash_query_duration_ms_bucket`, `dash_query_duration_ms_count`, and `dash_query_duration_ms_sum`, plus a bare `dash_query_duration_ms` series.
+- A counter keeps its name. PostHog doesn't add `_total`.
+- Resource attributes become labels, so you can filter on `service_name` or `region` (from `resourceAttributes`). Each series carries both the dotted OpenTelemetry label (`service.name`) and an underscore form (`service_name`), plus `deployment.environment` and `telemetry.sdk.*`.
+- Dotted names and labels must be quoted in PromQL: `{"deployment.environment"="production"}` and `sum by ("url.template", le)`. Grafana legend templates reference them as-is, for example `{{url.template}}`.
+
+### Counters: sum deltas, don't use rate()
+
+Because each point is a delta, `rate()` and `increase()` give wrong answers without an error. Sum the points instead:
+
+```promql
+sum_over_time(checkout_completed{plan="pro"}[$__interval])
+```
+
+### Histograms: percentiles from buckets
+
+```promql
+histogram_quantile(
+  0.95,
+  sum by (le) (sum_over_time(dash_query_duration_ms_bucket[5m]))
+)
+```
+
+For the average duration, divide the summed `_sum` by the summed `_count`:
+
+```promql
+sum(sum_over_time(dash_query_duration_ms_sum[5m]))
+  / sum(sum_over_time(dash_query_duration_ms_count[5m]))
+```
+
+### Gauges
+
+A gauge is the last value in each window, so you can query it as is, or smooth it:
+
+```promql
+avg_over_time(queue_depth{service_name="billing-worker"}[5m])
+```

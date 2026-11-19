@@ -161,10 +161,7 @@ export default function Explorer({
                 )}
             </>
             <ContentWrapper>
-                <div
-                    data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'}`}
-                >
+                <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 h-full">
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
                         <aside

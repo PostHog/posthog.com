@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-30-0.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   Brand new and faster user interface, automatic conversion signal detection
   with Correlation analysis, saving insights for future use and a fully revamped

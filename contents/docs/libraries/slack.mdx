@@ -130,7 +130,7 @@ For more details, see our [subscriptions documentation](/docs/product-analytics/
 
 ## Setting up event notifications
 
-You can send custom messages to Slack based on PostHog events or actions using [Data Pipelines destinations](/docs/cdp/destinations/slack).
+You can send custom messages to Slack based on PostHog events or actions using [Data Pipelines destinations](/docs/data-pipelines/destinations/slack).
 
 Common use cases include:
 - Notifying your team when a user completes a key action
@@ -147,7 +147,7 @@ To set up event notifications:
 5. Select your Slack connection and channel
 6. Template your message using event and person properties
 
-For detailed setup instructions, see our [Slack destination documentation](/docs/cdp/destinations/slack).
+For detailed setup instructions, see our [Slack destination documentation](/docs/data-pipelines/destinations/slack).
 
 ## Link unfurling
 
@@ -159,7 +159,7 @@ When you paste a PostHog insight or dashboard URL in any Slack channel where the
 
 <!-- TODO(screenshot): an unfurled insight link in Slack -->
 
-Link unfurling respects PostHog access permissions. Only team members with at least viewer access to the insight or dashboard will see the unfurled preview.
+Link unfurling checks PostHog access permissions for the person who pasted the link. If they have at least viewer access to the insight or dashboard, the preview is posted to the channel, so everyone in the channel sees it. Links are never unfurled in Slack Connect channels.
 
 ## What can you do with this integration?
 

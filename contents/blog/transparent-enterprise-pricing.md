@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog-in-a-room-generic.jpg
 featuredImageType: full
+ogImage: generated
 author:
   - simon-fisher
 category: Inside PostHog

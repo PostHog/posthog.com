@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hosthog-banner.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 ---
 

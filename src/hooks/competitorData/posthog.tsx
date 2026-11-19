@@ -101,7 +101,7 @@ export const posthog = {
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                log_management: 'Beta',
+                log_management: true,
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
@@ -184,6 +184,13 @@ export const posthog = {
                     heatmaps: true,
                 },
             },
+            ai: {
+                features: {
+                    ai_summaries: true,
+                    replay_vision: true,
+                    ai_observations_as_events: true,
+                },
+            },
         },
         logs: {
             available: true,
@@ -194,12 +201,12 @@ export const posthog = {
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                     high_cardinality_indexing: true,
-                    retention: '14 days (custom retention add-on)',
+                    retention: '14 days (custom retention available)',
                 },
             },
             search: {
                 features: {
-                    full_text_search: 'Attribute search',
+                    full_text_search: 'Message and attribute search',
                     no_proprietary_query_language: true,
                 },
             },
@@ -242,6 +249,7 @@ export const posthog = {
                     ingest_only_pricing: true,
                     no_query_compute_fees: true,
                     predictable_at_scale: true,
+                    free_tier: '10 GB',
                 },
             },
         },
@@ -276,7 +284,7 @@ export const posthog = {
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
                 monetization_analytics: true,
-                predictive_insights: false,
+                predictive_insights: true,
                 private_insights: true,
                 project_level_permissions: true,
                 ready_made_insight_types: true,
@@ -629,8 +637,8 @@ export const posthog = {
                 human_annotation: true,
                 // Beta per /docs/ai-observability/collect-user-feedback.
                 user_feedback: 'Beta',
-                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR (open beta).
-                agent_reports: 'Beta',
+                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR.
+                agent_reports: true,
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -712,7 +720,7 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: false,
+                    push: true,
                     webhooks: true,
                     whatsapp: false,
                 },
@@ -843,6 +851,9 @@ export const posthog = {
                 react: true,
                 ruby: true,
                 rust: true,
+                roblox: true,
+                unity: true,
+                kotlin_multiplatform: true,
             },
         },
         pricing: {
@@ -899,7 +910,7 @@ export const posthog = {
             cross_domain_tracking: true,
             mobile_sdks: true,
             native_data_sources: true,
-            sdks: '14',
+            sdks: '19',
             server_side_sdks: true,
             sql: true,
             terraform: true,
@@ -916,7 +927,7 @@ export const posthog = {
             ccpa_ready: true,
             cookieless_tracking: true,
             data_anonymization: true,
-            data_retention: '7 years',
+            data_retention: '2 years',
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,

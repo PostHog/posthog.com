@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/brand_startup_1aa2b151d6.png
 featuredImageType: full
+ogImage: generated
 category: Startups
 tags:
   - Guides

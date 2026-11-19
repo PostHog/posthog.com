@@ -13,7 +13,6 @@ import {
     IconGraph,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
@@ -21,7 +20,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Capability detail belongs in `topFeatures`.
+ * Capability detail belongs in `keyFeatures`.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -35,19 +34,17 @@ export const applications: CarouselSlide[] = [
         heading: f.mcp.headline,
         description: (
             <>
-                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
-                    <Glow color="black" intensity="gentle" rounded="lg">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
-                            className="dark:hidden w-full"
-                            imgClassName="w-full"
-                        />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
-                            className="hidden dark:inline-block w-full"
-                            imgClassName="w-full"
-                        />
-                    </Glow>
+                <aside className="my-4 @xl/reader-content:mt-2 @xl/reader-content:float-right max-w-[100%_+_1rem] @xl/reader-content:max-w-[300px] @3xl/reader-content:max-w-[360px] @4xl/reader-content:max-w-[440px] @xl/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
+                        className="dark:hidden w-full"
+                        imgClassName="w-full"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
+                        className="hidden dark:inline-block w-full"
+                        imgClassName="w-full"
+                    />
                 </aside>
                 <p>{f.mcp.description}</p>
                 <div className="@container">
@@ -106,7 +103,6 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.templates.images[0].src,
             alt: f.templates.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -146,7 +142,6 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.display_conditions.images[0].src,
             alt: f.display_conditions.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -196,7 +191,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'question-types',
         label: 'Question types',
@@ -210,7 +205,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.question_types.images[0].src,
             alt: f.question_types.images[0].alt,
-            glow: true,
             maxWidth: 'max-w-xs',
             // w-full needed: CloudinaryImage ignores wrapper className when the src has commas.
             imgClassName: 'w-full p-3',
@@ -229,7 +223,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.templates.images[0].src,
             alt: f.templates.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -245,7 +238,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.display_conditions.images[0].src,
             alt: f.display_conditions.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -261,7 +253,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.presentation_options.images[0].src,
             alt: f.presentation_options.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -277,7 +268,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.multi_step.images[0].src,
             alt: f.multi_step.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -293,7 +283,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.link_somewhere.images[0].src,
             alt: f.link_somewhere.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -309,7 +298,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.no_code_api.images[0].src,
             alt: f.no_code_api.images[0].alt,
-            glow: true,
         },
     },
     {

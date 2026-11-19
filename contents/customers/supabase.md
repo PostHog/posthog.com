@@ -2,7 +2,7 @@
 title: How Supabase 10Xed with the help of PostHog
 customer: Supabase
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/445225882_d7aa6795_3350_4e88_9ca7_091c61e86e39_0ed5ee1f16.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/supabase_1920x1080_ca830453a7.png
 date: 2025-06-15
 ---
 

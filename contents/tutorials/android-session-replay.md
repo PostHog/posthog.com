@@ -8,7 +8,7 @@ tags:
 ---
 
 [Session replay](/session-replay) is a useful support tool for understanding how users are interacting with your Android app. It also helps you debug and recreate issues. 
-To show how you to set it up with PostHog, this tutorial shows you how to create a basic Kotlin app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#android).
+To show how you to set it up with PostHog, this tutorial shows you how to create a basic Kotlin app, add PostHog, and [enable session recordings](/docs/session-replay/installation/android).
 
 ## 1. Create a basic Android app
 

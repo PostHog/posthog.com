@@ -1,6 +1,8 @@
 {
   "gitignore": true,
+  "customRules": ["./scripts/markdownlint/private-links.cjs"],
   "config": {
+    "private-links": true,
     "MD001": false,
     "MD004": false,
     "MD005": false,

@@ -7,6 +7,7 @@ rootpage: /blog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Engineering
   - Feature flags

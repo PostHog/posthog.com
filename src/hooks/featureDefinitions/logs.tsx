@@ -19,6 +19,10 @@ export const logsFeatures = {
             predictable_at_scale: {
                 name: 'Predictable at scale',
             },
+            free_tier: {
+                name: 'Monthly free tier',
+                description: 'Log volume included every month at no cost',
+            },
         },
     },
     core_logging_and_ingestion: {

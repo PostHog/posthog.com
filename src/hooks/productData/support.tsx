@@ -15,7 +15,8 @@ import {
 import { Tweet } from 'components/Tweet'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
-import { applications, topFeatures } from './support/slides'
+import { applications, keyFeatures } from './support/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 const SupportTweet = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
@@ -41,7 +42,7 @@ export const support = {
     handle: 'support',
     slug: 'support',
     teamSlug: 'conversations',
-    color: 'blue',
+    color: PRODUCT_COLORS.support,
     colorSecondary: 'blue',
     category: 'communication',
     description: 'Built-in customer support with chat widget and unified helpdesk.',
@@ -91,11 +92,11 @@ export const support = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -121,6 +122,7 @@ export const support = {
     ],
     overview: {
         title: 'One place for every user conversation',
+        description: '"Show me which features generate the most support tickets"',
         eli5: 'Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.',
         textColor: 'text-black', // tw
     },

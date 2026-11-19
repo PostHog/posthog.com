@@ -7,12 +7,6 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 The inbox is where self-driving hands work back to you. [Reports](/docs/self-driving/reports) and the pull requests the loop opens both land here, ranked by priority, so the most important work rises to the top.
 
 It's the human side of the [self-improving loop](/docs/self-driving/self-improving-loop): the loop watches, enriches, and proposes, and the inbox is where you review, steer, and decide.
@@ -41,9 +35,11 @@ Triage is also how you teach the loop. When you dismiss or snooze a report and s
 
 ## Where to find it
 
-The inbox is available across surfaces – the [web app](/docs/self-driving/web), [PostHog Desktop](/docs/posthog-desktop/self-driving), and Slack – so you can review and act on work wherever you are. It's the same inbox everywhere; only the way you open it changes.
+The inbox is available across surfaces – the [web app](/docs/self-driving/web) and Slack – so you can review and act on work wherever you are. It's the same inbox everywhere; only the way you open it changes.
 
 When a report notification arrives in Slack, reply in that thread and mention `@PostHog` to continue the work on that report. PostHog links the task to the report, so the follow-up stays with the original finding instead of starting as unrelated work. See the [Slack app docs](/docs/slack) for the other things you can do from a mention.
+
+Each report notification shows the priority of the report, from P0 to P4. The notification also has an **Implement** button when the report is **Actionable** and no fix exists or is in progress. Click **Implement** to start an [implementation agent](/docs/self-driving/inbox/implementation) from Slack. The agent works in the thread of the notification and opens a pull request. After the agent starts, PostHog removes the button from the message. To use the button, you need access to the PostHog project and editor access to tasks.
 
 Self-driving is one shared setup, not a separate one per surface. Your [signal sources](/docs/self-driving/inbox/sources), [scouts](/docs/self-driving/scouts), [reports](/docs/self-driving/reports), and inbox state are the same whether you open PostHog Desktop or the web app – connect a source or tune a scout in one place and it takes effect everywhere.
 

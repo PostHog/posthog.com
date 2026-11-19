@@ -16,8 +16,9 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
-import { applications, topFeatures } from './feature_flags/slides'
+import { applications, keyFeatures } from './feature_flags/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const featureFlags = {
     ...getTool('feature_flags'),
@@ -26,7 +27,7 @@ export const featureFlags = {
     teamSlug: 'feature-flags',
     pocketGuideVolume: 'feature-flags',
     forumTag: 'feature-flags',
-    color: 'seagreen',
+    color: PRODUCT_COLORS.feature_flags,
     colorSecondary: 'seagreen',
     wizardSupport: 'In development',
     shortDescription: 'Control feature access with precision',
@@ -73,11 +74,11 @@ export const featureFlags = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -114,6 +115,7 @@ export const featureFlags = {
     ],
     overview: {
         title: 'Safely roll out features to specific users or groups',
+        description: '"Roll out new sidebar to 50% of users"',
         eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
@@ -296,9 +298,6 @@ export const featureFlags = {
                 {
                     title: 'Edge network support',
                     description: 'like Vercel Edge Config',
-                },
-                {
-                    title: 'Approvals',
                 },
                 {
                     title: 'Multi-armed bandit',

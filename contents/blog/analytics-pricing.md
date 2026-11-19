@@ -3,6 +3,7 @@ date: 2024-08-01
 title: 'We’ve decided to make less money [Part 2]'
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog_is_the_cheapest_e77c4ea4a5.jpg
+ogImage: generated
 author:
     - james-hawkins
 featuredImageType: full

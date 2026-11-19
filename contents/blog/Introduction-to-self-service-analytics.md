@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/blog-generic-4.png
 featuredImageType: full
+ogImage: generated
 category: Product growth
 tags:
   - Explainers

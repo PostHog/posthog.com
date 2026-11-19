@@ -102,7 +102,7 @@ const Form = ({ topic, onDone, onDelete }: { topic?: ForumTopic; onDone: () => v
                         checked={values.aiRepliesEnabled}
                         onChange={(checked) => set('aiRepliesEnabled', checked)}
                     />
-                    <p className="text-sm text-secondary m-0 mt-1">Max replies to new posts automatically.</p>
+                    <p className="text-sm text-secondary m-0 mt-1">PostHog AI replies to new posts automatically.</p>
                 </div>
             </div>
             {error && <p className="text-sm text-red dark:text-yellow m-0">{error}</p>}

@@ -97,7 +97,7 @@ The command list is curated. A new `role: command` needs sign-off from a wizard 
 A program is a folder in the wizard repo. To add one:
 
 1. Create `src/programs/<id>/` with an `index.ts` that exports its `ProgramConfig`, and a `tsconfig.json` copied from a sibling program.
-2. Add it to `PROGRAM_REGISTRY` in `program-registry.ts`, and to the `references` in `src/programs/tsconfig.json`.
+2. Add it to `PROGRAM_REGISTRY` in `src/programs/program-runner/program-registry.ts`, and to the `references` in `src/programs/tsconfig.json`.
 3. Optionally add screens in `src/tui/programs/<id>/`, a command file in `src/cli/commands/`, and a `test/e2e.json` so wizard CI can drive it.
 
 The [programs README](https://github.com/PostHog/wizard/blob/main/src/programs/README.md) has the full checklist, and the [`adding-skill-program`](https://github.com/PostHog/wizard/tree/main/.claude/skills/adding-skill-program) skill walks an agent through it.

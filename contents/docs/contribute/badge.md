@@ -10,11 +10,11 @@ Now you can garnish your website footer with a tasteful PostHog logo - it's like
 
 <OverflowXSection>
 
-| <div class="text-center">Preview</div> | Version          | <div class="text-center">Use on (backgrounds)</div> | &nbsp; |
-|---------|---------------|--------|-----------------------|--------------------------------|
-| <img src="/brand/badge/posthog-badge-white-bg-color.svg" />     | Color logo, white background | <div class="text-center">Any</div> |  <div class="text-center"><CopyCode code='<a href="https://posthog.com?utm_source=badge" title="Built with PostHog analytics + more" target="_blank"><img src="https://d1hovhsvet4m1p.cloudfront.net/badges/posthog-badge-white-bg-color.svg" /></a>' /></div> |
-| <img src="/brand/badge/posthog-badge-transparent-bg-color.svg" />  | Color logo, transparent background | <div class="text-center">Light</div> |  <div class="text-center"><CopyCode code='<a href="https://posthog.com?utm_source=badge" title="Built with PostHog analytics + more" target="_blank"><img src="https://d1hovhsvet4m1p.cloudfront.net/badges/posthog-badge-transparent-bg-color.svg" /></a>' /></div> |
-| <img src="/brand/badge/posthog-badge-transparent-bg-black-text.svg" />  | Black text, transparent background | <div class="text-center">Light</div>    |  <div class="text-center"><CopyCode code='<a href="https://posthog.com?utm_source=badge" title="Built with PostHog analytics + more" target="_blank"><img src="https://d1hovhsvet4m1p.cloudfront.net/badges/posthog-badge-transparent-bg-black-text.svg" /></a>' /></div> |
-| <div style="background:#111;padding:5px 5px 0;margin-left:-5px;"><img src="/brand/badge/posthog-badge-transparent-bg-white-text.svg" /></div>  | White text, transparent background | <div class="text-center">Dark</div>    |  <div class="text-center"><CopyCode code='<a href="https://posthog.com?utm_source=badge" title="Built with PostHog analytics + more" target="_blank"><img src="https://d1hovhsvet4m1p.cloudfront.net/badges/posthog-badge-transparent-bg-white-text.svg" /></a>' /></div> |
+| <div class="text-center">Preview</div> | Version | <div class="text-center">Use on (backgrounds)</div> | &nbsp; |
+| --- | --- | --- | --- |
+| <img src="https://brand.posthog.com/badges/posthog-badge.svg" alt="Built with PostHog" width="100" height="50" /> | Standard badge | <div class="text-center">Light</div> | <div class="text-center"><CopyCode code='<a href="https://posthog.com/?utm_source=badge&utm_medium=referral&utm_content=posthog-badge" target="_blank" rel="noopener"><img src="https://brand.posthog.com/badges/posthog-badge.svg" alt="Built with PostHog" width="100" height="50" /></a>' /></div> |
+| <img src="https://brand.posthog.com/badges/posthog-badge-dark.svg" alt="Built with PostHog" width="100" height="50" /> | Dark badge | <div class="text-center">Dark</div> | <div class="text-center"><CopyCode code='<a href="https://posthog.com/?utm_source=badge&utm_medium=referral&utm_content=posthog-badge-dark" target="_blank" rel="noopener"><img src="https://brand.posthog.com/badges/posthog-badge-dark.svg" alt="Built with PostHog" width="100" height="50" /></a>' /></div> |
 
 </OverflowXSection>
+
+[brand.posthog.com/badges](https://brand.posthog.com/badges) has the SVG and PNG files, the Markdown version for a README, and the [terms of use](https://brand.posthog.com/badges#usage).

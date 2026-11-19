@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page isn't accurate - we have deprecated Pylon and don't have a comparable broadcast capability in SupportHog or elsewhere.  In the meantime if you want to get a Slack message out to customers ask account owners to do it on your behalf in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
+> This page isn't accurate - we have deprecated Pylon and don't have a comparable broadcast capability in SupportHog or elsewhere.  In the meantime if you want to get a Slack message out to customers ask account owners to do it on your behalf in <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink>
 
 We share [Slack channels with many of our customers and partners](/handbook/growth/sales/slack-channels) via Slack Connect, managed through [Pylon](/handbook/growth/sales/slack-channels), our own tool. These channels are normally used for support and relationship building, but Pylon's **broadcast** functionality also lets us send a single message to every customer or partner Slack channel at once.
 

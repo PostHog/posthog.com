@@ -5,7 +5,7 @@ import { Logo } from '@posthog/brand/logo'
 import React, { useState } from 'react'
 const companies = {
     Amplitude: {
-        comparisonURL: '/blog/posthog-vs-amplitude',
+        comparisonURL: '/compare/posthog-vs-amplitude',
     },
     AmplitudeExperiment: {
         comparisonURL: '',
@@ -41,7 +41,7 @@ const companies = {
         comparisonURL: '/compare/posthog-vs-logrocket',
     },
     Sentry: {
-        comparisonURL: '/blog/posthog-vs-sentry',
+        comparisonURL: '/compare/posthog-vs-sentry',
     },
     VWO: {
         comparisonURL: '',

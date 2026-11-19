@@ -204,14 +204,14 @@ const toolkit: {
     linkText: string
     href?: string
 }[] = [
-    { Icon: IconGraph, color: 'text-blue', product: 'Product analytics', prefix: 'like ', linkText: 'Amplitude', href: '/blog/posthog-vs-amplitude' }, // prettier-ignore
+    { Icon: IconGraph, color: 'text-blue', product: 'Product analytics', prefix: 'like ', linkText: 'Amplitude', href: '/compare/posthog-vs-amplitude' }, // prettier-ignore
     { Icon: IconPieChart, color: 'text-green-2', product: 'Web analytics', prefix: 'like ', linkText: 'Google Analytics', href: '/blog/posthog-vs-ga4' }, // prettier-ignore
     { Icon: IconRewindPlay, color: 'text-yellow', product: 'Session replay', prefix: 'like ', linkText: 'FullStory', href: '/compare/posthog-vs-fullstory' }, // prettier-ignore
     { Icon: IconToggle, color: 'text-seagreen', product: 'Feature flags', prefix: 'like ', linkText: 'LaunchDarkly', href: '/compare/posthog-vs-launchdarkly' }, // prettier-ignore
     { Icon: IconFlask, color: 'text-purple', product: 'Experiments', prefix: 'like ', linkText: 'Optimizely', href: '/compare/posthog-vs-optimizely' }, // prettier-ignore
-    { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/blog/posthog-vs-sentry' }, // prettier-ignore
+    { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/compare/posthog-vs-sentry' }, // prettier-ignore
     { Icon: IconLlmAnalytics, color: 'text-purple', product: 'AI observability', prefix: 'like ', linkText: 'Langfuse', href: '/compare/best-langfuse-alternatives' }, // prettier-ignore
-    { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/context-warehouse' }, // prettier-ignore
+    { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/warehouse' }, // prettier-ignore
     { Icon: IconMessage, color: 'text-salmon', product: 'Surveys', prefix: 'like ', linkText: 'Sprig', href: '/compare/best-sprig-alternatives' }, // prettier-ignore
     { Icon: IconCursorClick, color: 'text-red', product: 'Heatmaps', prefix: 'like ', linkText: 'Hotjar', href: '/compare/posthog-vs-hotjar' }, // prettier-ignore
     { Icon: IconPlug, color: 'text-sky-blue', product: 'CDP', prefix: 'like ', linkText: 'Segment', href: '/compare/best-customer-data-platforms-for-developers' }, // prettier-ignore
@@ -277,6 +277,29 @@ const faqItems = [
                 Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have
                 signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's email
                 domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.
+                Credits are always issued at PostHog's discretion.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I get credits more than once?',
+        content: (
+            <p>
+                No. We issue startup credits only once per founder and once per organization, whichever comes first. For
+                example, if you already got credits for one startup, you can't claim them again for a new company or a
+                new PostHog organization. We always issue credits at PostHog's discretion, and we can decline an
+                application or remove credits if it doesn't meet these rules.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can a new product or company that is part of an established group apply?',
+        content: (
+            <p>
+                No. Eligibility is based on the company, not the product. If an ineligible company owns a new product,
+                brand, or company, it isn't eligible, even if the new company is less than 2 years old and has no
+                outside funding. This applies whether you apply from a project in your existing organization or from a
+                new organization. Credits are always issued at PostHog's discretion.
             </p>
         ),
     },
@@ -418,7 +441,15 @@ const faqStructuredData = [
     },
     {
         question: 'Who is eligible for PostHog for Startups?',
-        answer: 'Your company needs to be less than 2 years old and have raised less than $5m in funding, you need to have signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.',
+        answer: "Your company needs to be less than 2 years old and have raised less than $5m in funding, you need to have signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted. Credits are always issued at PostHog's discretion.",
+    },
+    {
+        question: 'Can I get PostHog for Startups credits more than once?',
+        answer: "No. We issue startup credits only once per founder and once per organization, whichever comes first. For example, if you already got credits for one startup, you can't claim them again for a new company or a new PostHog organization. We always issue credits at PostHog's discretion, and we can decline an application or remove credits if it doesn't meet these rules.",
+    },
+    {
+        question: 'Can a new product or company that is part of an established group apply to PostHog for Startups?',
+        answer: "No. Eligibility is based on the company, not the product. If an established company owns a new product, brand, or company, it isn't eligible, even if the new company is less than 2 years old and has no outside funding. This applies whether you apply from a project in your existing organization or from a new organization. Credits are always issued at PostHog's discretion.",
     },
     {
         question: 'What if my startup does not have a company email domain yet?',

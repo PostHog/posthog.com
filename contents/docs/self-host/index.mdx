@@ -96,6 +96,8 @@ See posthog.com/pricing for more.`"]
     class cloud_free,cloud_cheaper endpoint
 ```
 
+If cost is your main reason, see [what you actually get when you pay for an event](/docs/billing/what-you-pay-for-per-event). It lists what PostHog Cloud runs for you, with a ledger to compare it with your own setup.
+
 You can follow the rest of the guide for instructions on how to set up self-hosted PostHog. If you want to use Cloud instead, you can sign up for our
  [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance.
 
@@ -195,6 +197,8 @@ The best place to start looking is in the `web` container, which runs all the da
 
 To upgrade, you can run the `upgrade-hobby` script from the PostHog repo.
 
+Upgrade before you move an SDK to a [capture v1](/docs/libraries#sdk-versions-and-capture-v1) version. Instances serve the capture v1 endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. Server SDKs on capture v1 drop events that still get a `404` after their retries.
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
 ```
@@ -205,4 +209,4 @@ Our recommendation is to keep your PostHog deployment up-to-date. While we avoid
 
 ## Migrating
 
-If your server is struggling, you can either increase your instance size or move to [PostHog Cloud](/docs/migrate/migrate-to-cloud#option-1-for-events-migration-self-hosted-migration-tool-alpha) for a hands-off experience
+If your server is struggling, you can either increase your instance size or move to [PostHog Cloud](/docs/migrate/migrate-to-cloud#migrating-events-from-self-hosted-to-cloud) for a hands-off experience

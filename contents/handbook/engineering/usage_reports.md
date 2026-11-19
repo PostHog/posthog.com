@@ -15,7 +15,7 @@ Usage reports are largely generated within `posthog/posthog` - because that's wh
 Occasionally the cron will get interrupted - when this happens the billing service won't receive or store any of the reports, and usage won't be sent to Stripe. You'll notice that usage reports have failed in two ways: 
 
 1. When looking at the Revenue dashboard in Metabase, you'll see that there are fewer reports than previous days, and one of the instance (generally US) will show 0 reports sent.
-2. When looking at the Usage report insight on the [Growth dashboard](https://app.posthog.com/dashboard/54139) you'll see a big dip in an otherwise steady trend.
+2. When looking at the Usage report insight on the <PrivateLink url="https://app.posthog.com/dashboard/54139">Growth dashboard</PrivateLink> you'll see a big dip in an otherwise steady trend.
 
 We don't currently have a way to automatically re-run failed usage reporting, so we have to do it manually. To do so, you'll need to follow the instructions to [connect to PostHog Cloud infra](/handbook/engineering/how-to-access-posthog-cloud-infra). Once you do so you can run a management command to re-run the usage reports for a specific date:
 

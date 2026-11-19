@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_531145ada2.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Product engineers
   - Engineering

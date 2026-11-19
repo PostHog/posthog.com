@@ -51,6 +51,8 @@ jobs:
 
             - name: Checkout
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+              with:
+                  fetch-depth: 2
 
             - name: Set up pnpm
               uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
@@ -81,6 +83,17 @@ jobs:
 
             - name: Check pocket guide conventions
               run: pnpm test:pocket-guides
+
+            - name: Check Twig guide integrations
+              run: pnpm test:twig-integration
+
+            - name: Check analytics bootstrap
+              run: pnpm test:posthog-loader
+              env:
+                  PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
+
+            - name: Check shared window paths
+              run: pnpm test:internal-path
 
             - name: Build site
               run: pnpm build
@@ -187,6 +200,48 @@ jobs:
                   edit-mode: replace
                   body-path: preview-comment.md
 
+            - name: Find base commit
+              id: base
+              if: success()
+              run: echo "sha=$(git rev-parse HEAD^1)" >> "$GITHUB_OUTPUT"
+
+            - name: Restore link baseline from master
+              id: link-baseline
+              if: success()
+              continue-on-error: true
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: link-check-baseline
+                  key: link-check-baseline-${{ steps.base.outputs.sha }}
+                  restore-keys: |
+                      link-check-baseline-
+
+            - name: Check links
+              if: success()
+              continue-on-error: true
+              timeout-minutes: 5
+              env:
+                  BASELINE_KEY: ${{ steps.link-baseline.outputs.cache-matched-key }}
+                  EXACT_BASELINE: ${{ steps.link-baseline.outputs.cache-hit }}
+              run: |
+                  mkdir -p link-check-results
+                  if [ -n "$BASELINE_KEY" ]; then
+                    mv link-check-baseline link-check-results/baseline
+                    echo "$BASELINE_KEY $EXACT_BASELINE" > link-check-results/baseline/source.txt
+                    export LINK_CHECK_BASELINE_SITEMAP=link-check-results/baseline/built-sitemap.xml
+                  fi
+                  scripts/link-check-scan.sh link-check-results --minimal-build
+
+            - name: Upload link check results
+              if: success()
+              continue-on-error: true
+              timeout-minutes: 5
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: link-check-results
+                  path: link-check-results/
+                  retention-days: 7
+
             - name: Notify reviewer on successful builds (Inkeep PRs only)
               if: success() && contains(github.event.pull_request.user.login, 'inkeep')
               uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
@@ -237,3 +292,40 @@ jobs:
                       - **MDX issues** - unescaped `<`/`>` characters, unclosed tags, or malformed JSX
                       - **External API timeouts** - GitHub, Strapi, or Ashby occasionally hiccup
                       </details>
+
+    check-links:
+        name: Check new broken links
+        needs: build-and-deploy
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+
+            - name: Download PR link check results
+              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+              with:
+                  name: link-check-results
+                  path: link-check-results
+
+            - name: Compare with master
+              run: |
+                  if [ ! -f link-check-results/baseline/source.txt ]; then
+                    echo "No master link baseline exists yet. Skipping the comparison." | tee -a "$GITHUB_STEP_SUMMARY"
+                    exit 0
+                  fi
+                  read -r BASELINE_KEY EXACT_BASELINE < link-check-results/baseline/source.txt
+                  if [ "$EXACT_BASELINE" = "true" ]; then
+                    node scripts/link-check-report.js link-check-results --compare-base=link-check-results/baseline
+                    exit
+                  fi
+                  echo "No baseline for this PR's base commit yet, so $BASELINE_KEY is used and new findings do not fail the check." | tee -a "$GITHUB_STEP_SUMMARY"
+                  node scripts/link-check-report.js link-check-results --compare-base=link-check-results/baseline || [ $? -eq 1 ]

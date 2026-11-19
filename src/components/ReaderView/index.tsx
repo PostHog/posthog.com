@@ -19,7 +19,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import { TreeMenu } from 'components/TreeMenu'
@@ -37,8 +36,7 @@ import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
-import { PANEL_BG, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
-import FrostedBackdrop from 'components/FrostedBackdrop'
+import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
@@ -46,7 +44,7 @@ import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
-import CustomerMetadata from './CustomerMetadata'
+const CustomerMetadata = React.lazy(() => import('./CustomerMetadata'))
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 import { shouldNavigateMenuTab } from './tabNavigation'
@@ -98,14 +96,16 @@ interface ReaderViewProps {
     hideTitle?: boolean
     belowTitle?: React.ReactNode
     tableOfContents?: any
-    hideMobileTableOfContents?: boolean
     mdxComponents?: any
+    renderMdx?: (content: string) => React.ReactNode
     commits?: any[]
     filePath?: string
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
     hideRightSidebar?: boolean
+    /** Hides the search box at the top of the left sidebar, for pages that put their own search in the content. */
+    hideSidebarSearch?: boolean
     contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
@@ -211,21 +211,6 @@ const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
 
 const SCROLL_EDGE_FADE_MASK =
     '[mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]'
-
-const FrostedScrollEdges = () => (
-    <>
-        <FrostedBackdrop
-            className="inset-x-0 top-0 h-8 [mask-image:linear-gradient(to_bottom,black,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
-            tintClassName={WINDOW_TINT}
-            dataScheme={WINDOW_SCHEME}
-        />
-        <FrostedBackdrop
-            className="inset-x-0 bottom-0 h-8 [mask-image:linear-gradient(to_top,black,transparent)] [-webkit-mask-image:linear-gradient(to_top,black,transparent)]"
-            tintClassName={WINDOW_TINT}
-            dataScheme={WINDOW_SCHEME}
-        />
-    </>
-)
 
 const ContributorsSmall = ({ contributors }) => {
     return contributors?.[0] ? (
@@ -454,14 +439,15 @@ export default function ReaderView({
     hideTitle = false,
     belowTitle,
     tableOfContents,
-    hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
@@ -494,13 +480,14 @@ export default function ReaderView({
                 hideTitle={hideTitle}
                 belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
-                hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
+                renderMdx={renderMdx}
                 commits={commits}
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
                 hideRightSidebar={hideRightSidebar}
+                hideSidebarSearch={hideSidebarSearch}
                 contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
@@ -564,8 +551,17 @@ const Menu = (props: { parent: MenuItem }) => {
     const visibleChildren = filterMenuByFlags(parent.children, activeFlags)
     const activeInternalMenu = windowActiveInternalMenu || visibleChildren?.[0]
     const visibleActiveChildren = filterMenuByFlags(activeInternalMenu?.children, activeFlags)
+    // Docs sections set `navAppearance: 'sidebar'` in `src/navs` to match the product docs sidebar.
+    const sidebarAppearance =
+        (activeInternalMenu as MenuItem & { navAppearance?: 'sidebar' })?.navAppearance === 'sidebar'
 
-    return <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(visibleActiveChildren)} />
+    return (
+        <TreeMenu
+            key={activeInternalMenu?.url}
+            items={resolveMenuIcons(visibleActiveChildren)}
+            {...(sidebarAppearance ? { appearance: 'sidebar' as const, rootHeading: activeInternalMenu?.name } : {})}
+        />
+    )
 }
 
 /**
@@ -685,7 +681,7 @@ const SidebarSearchResults = ({
         }
         const matches = extractOnPageMatches(contentRef.current, searchQuery)
         setOnPageMatches(matches.slice(0, 20))
-    }, [searchQuery])
+    }, [searchQuery, currentPath])
 
     useEffect(() => {
         if (!searchQuery || searchQuery.length < 2) {
@@ -1204,9 +1200,9 @@ const LeftSidebar = ({
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG}`
                         : 'z-30'
                 }`}
             >
@@ -1455,14 +1451,15 @@ function ReaderViewContent({
     hideTitle = false,
     belowTitle,
     tableOfContents,
-    hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize,
@@ -1716,7 +1713,13 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
+                            hideSidebarSearch ? undefined : (
+                                <InlineSearch
+                                    contentRef={onSearch ? undefined : contentRef}
+                                    onSearch={onSearch}
+                                    currentPath={appWindow?.path}
+                                />
+                            )
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
@@ -1775,7 +1778,6 @@ function ReaderViewContent({
                             dataScheme="primary"
                             isScrollRoot={focusedWindow === appWindow}
                             className={`flex-1 min-w-0 min-h-0 relative ${isMobile ? '' : SCROLL_EDGE_FADE_MASK}`}
-                            overlay={isMobile && <FrostedScrollEdges />}
                         >
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
@@ -1887,28 +1889,6 @@ function ReaderViewContent({
                                             )}
                                         </div>
                                     )}
-                                    {tableOfContents &&
-                                        tableOfContents.length > 0 &&
-                                        !hideMobileTableOfContents &&
-                                        !hideRightSidebar && (
-                                            <div
-                                                id="mobile-toc"
-                                                data-scheme="secondary"
-                                                className={`@4xl/app-reader:hidden mt-4 transition-all ${
-                                                    fullWidthContent || body?.type !== 'mdx'
-                                                        ? 'max-w-full'
-                                                        : contentMaxWidthClass
-                                                        ? contentMaxWidthClass
-                                                        : 'mx-auto max-w-2xl'
-                                                }`}
-                                            >
-                                                <TableOfContents
-                                                    tableOfContents={tableOfContents}
-                                                    contentRef={contentRef}
-                                                    title="Contents"
-                                                />
-                                            </div>
-                                        )}
                                     {body?.featuredVideo && (
                                         <iframe
                                             src={body.featuredVideo}
@@ -1926,11 +1906,13 @@ function ReaderViewContent({
                                                 }`}
                                             >
                                                 {isCustomerPage && customerKey && (
-                                                    <CustomerMetadata customerKey={customerKey} />
+                                                    <React.Suspense fallback={null}>
+                                                        <CustomerMetadata customerKey={customerKey} />
+                                                    </React.Suspense>
                                                 )}
 
                                                 <MDXProvider components={mdxComponents}>
-                                                    <MDXRenderer>{body.content}</MDXRenderer>
+                                                    {renderMdx?.(body.content)}
                                                 </MDXProvider>
                                             </div>
                                         ) : (
@@ -1956,7 +1938,7 @@ function ReaderViewContent({
                                                     : contentMaxWidthClass || 'max-w-2xl'
                                             } overflow-x-hidden`}
                                         >
-                                            <h3 id="squeak-questions" className="mb-4">
+                                            <h3 id="community-questions" className="mb-4">
                                                 Community questions
                                             </h3>
                                             <Questions

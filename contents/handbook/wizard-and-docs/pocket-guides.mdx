@@ -40,7 +40,7 @@ Start with what you want a human to understand or do by the end. Then give the T
 
 The story lives in `contents/learn/<volume>/pocket-guide/`. Each chapter has an `index.mdx` file. A short block at the top sets its title and reading order. Use the Product Analytics [introduction](https://github.com/PostHog/posthog.com/blob/master/contents/learn/product-analytics/pocket-guide/index.mdx) and [Events and properties chapter](https://github.com/PostHog/posthog.com/blob/master/contents/learn/product-analytics/pocket-guide/101/index.mdx) as examples of the story's shape.
 
-For component syntax and MDX details, use the [`PocketGuides` README](https://github.com/PostHog/posthog.com/blob/master/src/components/PocketGuides/README.md). Writing about scouts? The [`SelfDrivingInbox` README](https://github.com/PostHog/posthog.com/blob/master/src/components/SelfDrivingInbox/README.md) documents the current implementation, but that format is still evolving.
+For component syntax and MDX details, use the [`PocketGuides` README](https://github.com/PostHog/posthog.com/blob/master/src/components/Learn/PocketGuides/README.md). Writing about scouts? The [`SelfDrivingInbox` README](https://github.com/PostHog/posthog.com/blob/master/src/components/SelfDrivingInbox/README.md) documents the current implementation, but that format is still evolving.
 
 Keep the work in the right place:
 
@@ -48,7 +48,7 @@ Keep the work in the right place:
 | --- | --- |
 | `posthog.com` | The guide's story, teaching examples, and PostHog figures |
 | [`twig-components`](https://github.com/PostHog/twig-components) | Reusable Twig views, styles, and local lab UI |
-| [`twig.com`](https://github.com/PostHog/twig.com) | The Twig site, its interactions, and real PostHog instrumentation |
+| <PrivateLink url="https://github.com/PostHog/twig.com"><code>twig.com</code></PrivateLink> | The Twig site, its interactions, and real PostHog instrumentation |
 
 You can use Twig in a guide without adding new instrumentation to Twig.com. If you need a reusable Twig view, build it in `twig-components` so the guide and Twig can share it. The [Twig contribution guide](/handbook/wizard-and-docs/twig) explains that split in more detail.
 

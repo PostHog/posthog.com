@@ -40,7 +40,7 @@ For each of these steps after you are finished record a short video (we use Loom
 - Implement client-side feature flags and a realistic experiment which uses those flags.
 - Switch your feature flags to use server-side local evaluation.  What are the differences in process?  How do we bill for these two approaches?
 - Integrate error tracking both on client and server.
-- Add in any other products as you see fit. We have a useful [framework](/handbook/cs-and-onboarding/new-hire-onboarding#learning-posthog) which can be used as a guide.
+- Add in any other products as you see fit. We have a useful [framework](/handbook/customer-success/new-hire-onboarding#learning-posthog) which can be used as a guide.
 
 - Rerun the integration above with the [PostHog Wizard](/docs/ai-engineering/ai-wizard) to see how much easier it is, then ask it to audit your app. This is how other teams [self-serve discovery](/handbook/forward-deployed-engineering/how-to-get-fde-involved) before they bring the scope conversation to the FDE team.
 

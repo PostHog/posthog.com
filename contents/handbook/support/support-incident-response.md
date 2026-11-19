@@ -29,13 +29,13 @@ Once you've raised the incident, you should raise your hand to watch it from a s
 
 ## When an incident is declared
 
-When an incident gets declared, our [incident.io workflow](https://app.incident.io/posthog/settings/workflows/01J90ZX25Z3TR822JJCDKD572S) automatically posts to #team-support. This post asks for someone from support to raise their hand and take ownership of watching the incident. All members of the support team are responsible for making sure that an incident has a Support Watcher assigned during business hours.
+When an incident gets declared, our <PrivateLink url="https://app.incident.io/posthog/settings/workflows/01J90ZX25Z3TR822JJCDKD572S">incident.io workflow</PrivateLink> automatically posts to #team-support. This post asks for someone from support to raise their hand and take ownership of watching the incident. All members of the support team are responsible for making sure that an incident has a Support Watcher assigned during business hours.
 
 Support team members aren't automatically added to incident channels. You can keep an eye on #incidents for an overview of what's currently open. When you raise your hand in #team-support to watch an incident, join the incident channel using the link in the workflow post.
 
-When you join the incident channel, you'll be [automatically assigned](https://app.incident.io/posthog/settings/workflows/01KBG1T8DHEFQXQQ0KJ1AVR002) the [Support Watcher role](https://app.incident.io/posthog/settings/incident-roles) in incident.io. This makes it clear and visible to both the support team and the incident team who is managing the incident from a support perspective.
+When you join the incident channel, you'll be <PrivateLink url="https://app.incident.io/posthog/settings/workflows/01KBG1T8DHEFQXQQ0KJ1AVR002">automatically assigned</PrivateLink> the <PrivateLink url="https://app.incident.io/posthog/settings/incident-roles">Support Watcher role</PrivateLink> in incident.io. This makes it clear and visible to both the support team and the incident team who is managing the incident from a support perspective.
 
-If nobody from support joins the incident channel, the incident lead will get a [nudge](https://app.incident.io/posthog/settings/nudges/01KBG0YDAFEEHBW1PGNPJX09TC/edit) reminding them to assign the Support Watcher role, along with a note that support only watches incidents during business hours.
+If nobody from support joins the incident channel, the incident lead will get a <PrivateLink url="https://app.incident.io/posthog/settings/nudges/01KBG0YDAFEEHBW1PGNPJX09TC/edit">nudge</PrivateLink> reminding them to assign the Support Watcher role, along with a note that support only watches incidents during business hours.
 
 If you're online and available during your normal working hours, raise your hand on that thread. This is informal - it's just whoever can do it. If nobody responds after a few minutes and you're around, go ahead and volunteer even if you're in the middle of something else.
 

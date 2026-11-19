@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates
@@ -38,9 +39,9 @@ The new version includes a lot of bugfixes that improve our session recording fe
 
 R.I.P. to the hundreds of lines of JavaScript that were removed - you will not be missed.
 
-### [Apps are now available on Kubernetes deployments](https://github.com/PostHog/charts/pull/24)
+### Apps are now available on Kubernetes deployments
 
-Following feedback from a user, we have now added support for [PostHog Apps](/docs/plugins/overview) to our Helm chart. 
+Following feedback from a user, we have now <PrivateLink url="https://github.com/PostHog/charts/pull/24">added support</PrivateLink> for [PostHog Apps](/docs/plugins/overview) to our Helm chart.
 
 If you're using the chart to deploy PostHog, upgrading to the latest version will give you access to the new app server (Beta).
 

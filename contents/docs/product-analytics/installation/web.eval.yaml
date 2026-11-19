@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, javascript, web]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a web app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: web-vite
+      prompt: >-
+          Set up PostHog in the web app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-js`, or {folder}/index.html has
+                  the PostHog snippet inside <head>. Either passes.
+              initialized: >-
+                  posthog.init runs exactly once when the app loads, with the project
+                  token and an api_host option. Cite the file and line(s).

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import LearnLanding from 'components/PocketGuides/LearnLanding'
-import { TwigTripTracesFigure } from 'components/PocketGuides/AiObservabilityPlaygroundExhibits'
-import LearnPage from 'components/PocketGuides/LearnPage'
-import type { LearnLandingProps } from 'components/PocketGuides/LearnPage'
+import LearnLanding from 'components/Learn/LearnLanding'
+import { TwigTripTracesFigure } from 'components/Learn/TwigExhibits/AiObservabilityPlaygroundExhibits'
+import LearnPage from 'components/Learn/LearnPage'
+import type { LearnLandingProps } from 'components/Learn/LearnPage'
 
 const Landing = (props: LearnLandingProps): JSX.Element => (
     <LearnLanding {...props} playground={{ figure: <TwigTripTracesFigure /> }} />

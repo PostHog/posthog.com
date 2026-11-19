@@ -2,7 +2,7 @@
 title: How HostAI increased evaluation score by 50% with PostHog and LangFuse
 customer: HostAI
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/hostai_posthog_9aa09a3382.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Host_AI_1920x1080_f921c3d32d.png
 date: 2024-05-24
 ---
 

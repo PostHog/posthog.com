@@ -8,6 +8,8 @@ import PostHogDisambiguation from 'components/Squeak/components/Classic/PostHogD
 import Wizard from 'components/Wizard'
 import { useWindow } from '../../../context/Window'
 import { useApp } from '../../../context/App'
+import { navigate } from 'gatsby'
+import { consumePostHogOAuthReturnPath } from 'lib/posthogOAuth'
 
 // Landing page for the PostHog OAuth flow. Strapi finishes the PKCE exchange
 // with oauth.posthog.com server-side, then redirects the browser here with
@@ -33,9 +35,18 @@ export default function PostHogRedirect(): JSX.Element {
         return () => clearTimeout(timer)
     }, [])
 
+    const returnToStartingPage = () => {
+        const returnPath = consumePostHogOAuthReturnPath()
+        if (returnPath) {
+            navigate(returnPath, { replace: true })
+        } else {
+            closeWindow(appWindow!)
+        }
+    }
+
     const handleSuccess = () => {
         addToast({ title: 'Successfully signed in to PostHog.com', description: 'Welcome!' })
-        closeWindow(appWindow!)
+        returnToStartingPage()
     }
 
     useEffect(() => {
@@ -80,7 +91,7 @@ export default function PostHogRedirect(): JSX.Element {
                     return
                 }
                 addToast({ title: 'PostHog login connected' })
-                closeWindow(appWindow!)
+                returnToStartingPage()
                 return
             }
 
@@ -102,7 +113,7 @@ export default function PostHogRedirect(): JSX.Element {
                 title: 'Successfully signed in to PostHog.com',
                 description: 'Welcome back!',
             })
-            closeWindow(appWindow!)
+            returnToStartingPage()
         }
 
         run()

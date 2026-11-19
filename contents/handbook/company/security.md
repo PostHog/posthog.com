@@ -137,4 +137,4 @@ To provide a great customer experience, PostHog employees may occasionally need 
 
 ### Impersonating users via MCP
 
-The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.
+The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/customer-success/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.

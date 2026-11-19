@@ -22,7 +22,11 @@ const LARGE_IMAGE_BYTES = 1000000
 // Prefixes where files under contents/ are the only source of pages, so a missing file means a missing page.
 const CHECKED_URL_PREFIX =
     /^\/(docs|blog|tutorials|handbook|product-engineers|founders|newsletter|customers|spotlight)\//
-const GENERATED_URL_PATTERN = /\/(api|references|tags|categories)(\/|$)/
+// Pages that gatsby/createPages.ts builds from API data, with no file under contents/.
+const GENERATED_URL_PATTERN = /\/(api|references|tags|categories)(\/|$)|^\/docs\/data-pipelines\/\w+s\//
+const POCKET_GUIDES_PATH = 'src/constants/pocketGuides.ts'
+const PRODUCTION_ORIGIN = 'https://posthog.com'
+const MAX_PRODUCTION_CHECKS = 50
 
 function isPagePath(filename) {
     if (!filename || !filename.startsWith('contents/') || !PAGE_EXTENSIONS.test(filename)) {
@@ -31,15 +35,45 @@ function isPagePath(filename) {
     if (filename.startsWith('contents/images/')) {
         return false
     }
+    // Pocket guide SKILL.md files are agent instructions, not pages.
+    if (/\/SKILL\.md$/.test(filename)) {
+        return false
+    }
     // Snippets are imported into other pages and have no URL of their own.
     return !filename.split('/').some((segment) => segment.startsWith('_'))
 }
 
 // Mirrors the slug that gatsby-source-filesystem's createFilePath builds for a file under contents/.
-function contentPathToUrl(filename) {
+// pocketGuides maps a volume id to its public path, because gatsby/createPages.ts serves
+// contents/learn/<id>/pocket-guide/ at that path (see pocketGuidePageContext).
+function contentPathToUrl(filename, pocketGuides = {}) {
     let url = filename.replace(/^contents/, '').replace(PAGE_EXTENSIONS, '')
     url = url.replace(/\/index$/, '')
+    const guide = /^\/learn\/([^/]+)\/pocket-guide(\/.*)?$/.exec(url)
+    if (guide && pocketGuides[guide[1]]) {
+        url = `${pocketGuides[guide[1]]}${guide[2] || ''}`
+    }
     return url === '' ? '/' : url
+}
+
+// Reads the volume ids and public paths from POCKET_GUIDE_VOLUMES in src/constants/pocketGuides.ts.
+function pocketGuidePathsFromSource(source) {
+    const paths = {}
+    const start = (source || '').indexOf('POCKET_GUIDE_VOLUMES')
+    if (start === -1) {
+        return paths
+    }
+    const volumes = source.slice(start, source.indexOf('\n]', start))
+    let id = null
+    for (const match of volumes.matchAll(/\bid:\s*['"]([^'"]+)['"]|\blearnPath:\s*['"]([^'"]+)['"]/g)) {
+        if (match[1]) {
+            id = match[1]
+            paths[id] = `/pocket-guides/${id}`
+        } else if (id) {
+            paths[id] = match[2].replace(/\/$/, '')
+        }
+    }
+    return paths
 }
 
 function sourceToRegExp(source) {
@@ -110,14 +144,14 @@ function resolvesToPage(url, pageUrls, redirects) {
     return pageUrls.has(path) || Boolean(redirectFor(redirects, path))
 }
 
-function pageUrlsFromTree(tree) {
+function pageUrlsFromTree(tree, pocketGuides = {}) {
     const urls = new Set()
     for (const entry of tree) {
         if (entry.type !== 'blob') {
             continue
         }
         if (isPagePath(entry.path)) {
-            urls.add(contentPathToUrl(entry.path))
+            urls.add(contentPathToUrl(entry.path, pocketGuides))
         }
         const page = /^src\/pages\/(.*)\.(tsx|ts|jsx|js)$/.exec(entry.path)
         if (page && !/\[|(^|\/)_/.test(page[1])) {
@@ -125,6 +159,34 @@ function pageUrlsFromTree(tree) {
         }
     }
     return urls
+}
+
+// Links that the patch adds. A link that is also on a removed line was already there.
+function addedLinks(patch) {
+    const { added, removed } = parsePatch(patch)
+    const existing = new Set(internalLinks(removed))
+    return internalLinks(added).filter((link) => !existing.has(link))
+}
+
+// Returns the paths that production serves without an error. Production has every page that
+// already ships, including routes that gatsby/createPages.ts builds and this check cannot predict.
+async function livePaths(urls) {
+    const paths = [...new Set(urls.map(normalizeUrl))].slice(0, MAX_PRODUCTION_CHECKS)
+    const results = await Promise.all(
+        paths.map(async (path) => {
+            const url = new URL(path, PRODUCTION_ORIGIN)
+            if (url.origin !== PRODUCTION_ORIGIN) {
+                return null
+            }
+            try {
+                const response = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(10000) })
+                return response.ok ? path : null
+            } catch {
+                return null
+            }
+        })
+    )
+    return results.filter(Boolean)
 }
 
 function internalLinks(lines) {
@@ -201,7 +263,7 @@ function clean(text) {
 function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
     const findings = []
     const baseKeys = new Set(baseRedirects.map(redirectKey))
-    const headKeys = new Set(headRedirects.map(redirectKey))
+    const headSourceSet = new Set(headRedirects.map((r) => r.source))
     const headSources = headRedirects.filter((r) => !r.has)
 
     for (const redirect of headRedirects) {
@@ -222,7 +284,7 @@ function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
         const next = destination.startsWith('/') && !destination.includes(':') && redirectFor(headSources, destination)
         if (next && next !== redirect) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Redirect chain',
                 detail: `\`${clean(source)}\` goes to \`${clean(destination)}\`, which redirects again to \`${clean(
                     next.destination
@@ -251,7 +313,7 @@ function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
             destination.split(/[?#]/)[0].split('/').filter(Boolean).length <= 1
         ) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Redirect to a generic page',
                 detail: `\`${clean(source)}\` redirects to \`${clean(
                     destination
@@ -262,7 +324,7 @@ function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
         }
         if (isTemporary(redirect)) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Temporary redirect',
                 detail: `\`${clean(
                     source
@@ -273,14 +335,18 @@ function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
         }
     }
 
-    const removed = baseRedirects.filter((r) => !headKeys.has(redirectKey(r)) && !r.has)
+    // Compare by source: a redirect with a new destination still serves the old URL. A redirect that
+    // a real page replaces still serves the URL too.
+    const removed = baseRedirects.filter(
+        (r) => !headSourceSet.has(r.source) && !r.has && !(pageUrls && pageUrls.has(normalizeUrl(r.source)))
+    )
     if (removed.length > 0) {
         const sample = removed
             .slice(0, 5)
             .map((r) => `\`${clean(r.source)}\``)
             .join(', ')
         findings.push({
-            severity: 'review',
+            severity: 'blocker',
             title: `${removed.length} redirect${removed.length === 1 ? '' : 's'} removed`,
             detail: `Old URLs that people, search engines, or AI agents still visit will start to return 404: ${sample}${
                 removed.length > 5 ? ', and more' : ''
@@ -309,7 +375,7 @@ function analyzeVercelConfig(baseConfig, headConfig) {
     }
     if (JSON.stringify(base.rewrites || []) !== JSON.stringify(head.rewrites || [])) {
         findings.push({
-            severity: 'review',
+            severity: 'minor',
             title: 'Rewrites changed',
             detail: "A rewrite serves one URL with another URL's content. A wrong rewrite can create duplicate pages or hide a page from crawlers.",
             fix: 'Check each changed rewrite in the Vercel preview.',
@@ -325,7 +391,7 @@ function analyzeVercelConfig(baseConfig, headConfig) {
         )
     if (seoHeaders(base) !== seoHeaders(head)) {
         findings.push({
-            severity: 'review',
+            severity: 'minor',
             title: 'Response headers changed',
             detail: 'Headers such as `X-Robots-Tag`, `Link`, `Vary`, and `Cache-Control` affect how crawlers and AI agents index and cache pages.',
             fix: 'Check the headers of an affected page in the Vercel preview with `curl -I`.',
@@ -339,10 +405,12 @@ function analyzeVercelConfig(baseConfig, headConfig) {
 // headRedirects: the redirects array from vercel.json at the PR head.
 // ctx.pageUrls: every page URL at the PR head, or null when the tree was not loaded.
 // ctx.sizes: file size in bytes by path at the PR head.
+// ctx.pocketGuides: pocket guide public paths by volume id, from pocketGuidePathsFromSource.
 function analyzeFiles(files, headRedirects, ctx = {}) {
     const findings = []
     const pageUrls = ctx.pageUrls || null
     const sizes = ctx.sizes || {}
+    const pocketGuides = ctx.pocketGuides || {}
     const missingLinks = []
     const redirectedLinks = []
     const imagesWithoutAlt = []
@@ -352,9 +420,11 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
         const { added, removed } = parsePatch(patch)
 
         const lostPath = status === 'removed' ? filename : status === 'renamed' ? previousFilename : null
-        if (lostPath && isPagePath(lostPath)) {
-            const oldUrl = contentPathToUrl(lostPath)
-            const stillServed = status === 'renamed' && isPagePath(filename) && contentPathToUrl(filename) === oldUrl
+        // vercel.json rewrites every /teams/ URL to the team page, so a deleted team file never returns 404.
+        if (lostPath && isPagePath(lostPath) && !lostPath.startsWith('contents/teams/')) {
+            const oldUrl = contentPathToUrl(lostPath, pocketGuides)
+            const stillServed =
+                status === 'renamed' && isPagePath(filename) && contentPathToUrl(filename, pocketGuides) === oldUrl
             if (!stillServed && !redirectFor(headRedirects, oldUrl)) {
                 findings.push({
                     severity: 'blocker',
@@ -365,7 +435,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
                     fix:
                         status === 'renamed' && isPagePath(filename)
                             ? `Add \`{ "source": "${clean(oldUrl)}", "destination": "${clean(
-                                  contentPathToUrl(filename)
+                                  contentPathToUrl(filename, pocketGuides)
                               )}" }\` to \`redirects\` in \`vercel.json\`.`
                             : 'Add a redirect in `vercel.json` to the closest page that replaces it.',
                     file: lostPath,
@@ -400,7 +470,8 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
         }
 
         const robotsLines = [...added, ...removed].filter((l) => ROBOTS_RULE_PATTERN.test(l))
-        if (/robots/i.test(filename) || robotsLines.length > 0) {
+        // Docs often show HTTP headers such as `User-Agent:`, so only robots files and code count.
+        if (/(^|\/)robots\.txt$/.test(filename) || (isCode && robotsLines.length > 0)) {
             findings.push({
                 severity: 'blocker',
                 title: 'robots.txt rules changed',
@@ -412,7 +483,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (isCode && [...added, ...removed].some((l) => /canonical/i.test(l))) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Canonical logic changed',
                 detail: 'The canonical tag tells Google which URL to rank. A wrong canonical can move ranking to another page or drop a page from the index.',
                 fix: 'Check the canonical on a few changed pages in the Vercel preview.',
@@ -422,7 +493,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (filename === 'src/components/seo.tsx' || filename === 'gatsby-ssr.js') {
             findings.push({
-                severity: 'review',
+                severity: 'blocker',
                 title: 'Site-wide head tags changed',
                 detail: 'This file writes the title, description, canonical, Open Graph, and structured data for every page.',
                 fix: 'Compare the `<head>` of a docs page, a blog post, and the homepage in the Vercel preview against production.',
@@ -430,7 +501,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             })
         } else if (isCode && status !== 'added' && [...added, ...removed].some((l) => HEAD_TAG_PATTERN.test(l))) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Page head tags changed',
                 detail: 'This change edits the title, meta description, Open Graph, canonical, or structured data of the pages this component renders.',
                 fix: 'Check the `<head>` of an affected page in the Vercel preview.',
@@ -443,7 +514,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             [...added, ...removed].some((l) => /sitemap|excludes?\b|serialize/i.test(l))
         ) {
             findings.push({
-                severity: 'review',
+                severity: 'blocker',
                 title: 'Sitemap config changed',
                 detail: 'Pages left out of the sitemap get crawled less often, and a broken sitemap slows indexing of new pages.',
                 fix: 'Check `/sitemap/sitemap-index.xml` in the Vercel preview and confirm the important pages are still listed.',
@@ -456,7 +527,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             (filename === 'gatsby/onPostBuild.ts' && [...added, ...removed].some((l) => /llms|markdown|\.md/i.test(l)))
         ) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'llms.txt or Markdown pages changed',
                 detail: 'AI agents read `llms.txt` and the `.md` version of each docs page. A break here makes our docs harder for assistants to find and quote.',
                 fix: 'Check `/llms.txt` and a few `.md` URLs in the Vercel preview.',
@@ -466,7 +537,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (filename === 'middleware.ts') {
             findings.push({
-                severity: 'review',
+                severity: 'blocker',
                 title: 'Markdown serving for AI agents changed',
                 detail: 'This middleware serves the Markdown version of docs, handbook, blog, and newsletter pages to AI agents and to clients that ask for `text/markdown`.',
                 fix: 'Fetch a docs page with `curl -H "Accept: text/markdown"` in the Vercel preview and confirm it still returns Markdown.',
@@ -486,7 +557,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (isCode && [...added, ...removed].some((l) => BOT_PATTERN.test(l))) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Bot or user-agent handling changed',
                 detail: 'Code that treats bots differently can block Googlebot or AI crawlers (GPTBot, ClaudeBot, PerplexityBot), or serve them different content.',
                 fix: 'Confirm search and AI crawlers still get the full page.',
@@ -496,7 +567,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (/^src\/(templates|layouts)\//.test(filename) && isCode && added.some((l) => CLIENT_ONLY_PATTERN.test(l))) {
             findings.push({
-                severity: 'review',
+                severity: 'minor',
                 title: 'Content may render only in the browser',
                 detail: 'This template now renders part of the page only after JavaScript runs. Crawlers and AI agents read the server HTML, so they may not see that content.',
                 fix: 'Check that the main text is in the page source (View Source, not DevTools) in the Vercel preview.',
@@ -506,7 +577,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (isCode && added.some((l) => EXTERNAL_SCRIPT_PATTERN.test(l))) {
             findings.push({
-                severity: 'review',
+                severity: 'blocker',
                 title: 'New third-party script',
                 detail: 'Extra scripts slow page load and hurt Core Web Vitals, which Google uses for ranking.',
                 fix: 'Load it with `async` or `defer`, or only on the pages that need it.',
@@ -516,7 +587,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (IMAGE_EXTENSIONS.test(filename) && status === 'added' && sizes[filename] > LARGE_IMAGE_BYTES) {
             findings.push({
-                severity: 'review',
+                severity: 'blocker',
                 title: 'Large image added',
                 detail: `This image is ${(sizes[filename] / 1000000).toFixed(
                     1
@@ -527,7 +598,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
         }
 
         if (isPagePath(filename)) {
-            for (const link of internalLinks(added)) {
+            for (const link of addedLinks(patch)) {
                 const path = normalizeUrl(link)
                 if (!resolvesToPage(link, pageUrls, headRedirects)) {
                     missingLinks.push({ file: filename, link })
@@ -584,7 +655,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             const after = wordCount(file.headContent)
             if (file.baseContent && file.headContent && before >= 600 && after < before * 0.5) {
                 findings.push({
-                    severity: 'review',
+                    severity: 'minor',
                     title: 'Page lost most of its content',
                     detail: `\`${clean(
                         contentPathToUrl(filename)
@@ -625,7 +696,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
                 const after = frontmatterValue(added, key)
                 if (before && (after === undefined || after === '')) {
                     findings.push({
-                        severity: 'review',
+                        severity: 'minor',
                         title: `Page ${key} removed`,
                         detail: `\`${clean(
                             contentPathToUrl(filename)
@@ -641,7 +712,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             const lines = frontmatterLines(file.headContent)
             if (lines && status === 'added' && !frontmatterValue(lines, 'title')) {
                 findings.push({
-                    severity: 'review',
+                    severity: 'minor',
                     title: 'New page has no title',
                     detail: `\`${clean(
                         contentPathToUrl(filename)
@@ -655,7 +726,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             const headings = rendersTitleAsH1 ? addedH1s(patch, file.headContent) : []
             if (headings.length > 0) {
                 findings.push({
-                    severity: 'review',
+                    severity: 'minor',
                     title: 'Second H1 on the page',
                     detail: `The template already renders the page title as the H1, and this adds \`${clean(
                         headings[0]
@@ -674,7 +745,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             .join(', ') + (items.length > 3 ? `, and ${items.length - 3} more` : '')
     if (missingLinks.length > 0) {
         findings.push({
-            severity: 'review',
+            severity: 'blocker',
             title: `${missingLinks.length} link${missingLinks.length === 1 ? '' : 's'} to missing pages`,
             detail: `No page or redirect exists at ${examples(
                 missingLinks
@@ -712,7 +783,6 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
 function buildComment(findings, { reviewer, backupNote, imageUrl }) {
     const blockers = findings.filter((f) => f.severity === 'blocker')
-    const reviews = findings.filter((f) => f.severity === 'review')
     const minors = findings.filter((f) => f.severity === 'minor')
     const section = (heading, items) =>
         items.length === 0
@@ -731,7 +801,6 @@ function buildComment(findings, { reviewer, backupNote, imageUrl }) {
         `### This PR may affect SEO/AEO\n\n` +
         `@${reviewer}, please review the items below before this PR merges. ${backupNote}\n\n` +
         section('🚨 Likely to hurt search or AI visibility', blockers) +
-        section('🔍 Worth a look', reviews) +
         (minors.length === 0
             ? ''
             : `<details><summary>Minor (${minors.length})</summary>\n\n${section('Minor', minors)}</details>\n\n`) +
@@ -740,7 +809,7 @@ function buildComment(findings, { reviewer, backupNote, imageUrl }) {
 }
 
 function buildResolvedComment() {
-    return `${COMMENT_MARKER}\n✅ The latest commit has no SEO/AEO risks that this check can find.`
+    return `${COMMENT_MARKER}\n✅ The latest commit has no critical SEO/AEO risks that this check can find.`
 }
 
 async function getJsonFile(github, owner, repo, path, ref) {
@@ -787,14 +856,28 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
         per_page: 100,
     })
 
+    // Compare with the commit the branch started from. pr.base.sha can be newer, and then changes
+    // that landed on the base branch later look like this PR removed them.
+    const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
+        owner,
+        repo,
+        basehead: `${pr.base.sha}...${pr.head.sha}`,
+        per_page: 1,
+    })
+    const baseSha = comparison.merge_base_commit.sha
+
     const touchesPages = files.some((f) => isPagePath(f.filename) || isPagePath(f.previous_filename))
     const touchesVercel = files.some((f) => f.filename === 'vercel.json')
     let pageUrls = null
     const sizes = {}
+    const pocketGuides =
+        touchesPages || touchesVercel
+            ? pocketGuidePathsFromSource(await getText(github, owner, repo, POCKET_GUIDES_PATH, pr.head.sha))
+            : {}
     if (touchesPages || touchesVercel || files.some((f) => IMAGE_EXTENSIONS.test(f.filename))) {
         const { data: tree } = await github.rest.git.getTree({ owner, repo, tree_sha: pr.head.sha, recursive: 'true' })
         if (!tree.truncated) {
-            pageUrls = pageUrlsFromTree(tree.tree)
+            pageUrls = pageUrlsFromTree(tree.tree, pocketGuides)
         }
         for (const entry of tree.tree) {
             sizes[entry.path] = entry.size
@@ -811,17 +894,31 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
             file.headContent = await getText(github, owner, repo, file.filename, pr.head.sha)
         }
         if (file.status === 'modified' && removedLines >= 20) {
-            file.baseContent = await getText(github, owner, repo, file.filename, pr.base.sha)
+            file.baseContent = await getText(github, owner, repo, file.filename, baseSha)
         }
     }
 
     const headConfig =
         touchesPages || touchesVercel ? await getJsonFile(github, owner, repo, 'vercel.json', pr.head.sha) : null
     const headRedirects = headConfig?.redirects || []
+    const baseConfig = touchesVercel ? await getJsonFile(github, owner, repo, 'vercel.json', baseSha) : null
 
-    const findings = analyzeFiles(files, headRedirects, { pageUrls, sizes })
+    if (pageUrls) {
+        // Before a link or redirect target counts as missing, confirm that production does not serve it.
+        const baseKeys = new Set((baseConfig?.redirects || []).map(redirectKey))
+        const targets = [
+            ...files.filter((f) => isPagePath(f.filename)).flatMap((f) => addedLinks(f.patch)),
+            ...(touchesVercel ? headRedirects : [])
+                .filter((r) => !baseKeys.has(redirectKey(r)) && r.destination?.startsWith('/'))
+                .map((r) => r.destination),
+        ].filter((url) => !url.includes(':') && !resolvesToPage(url, pageUrls, headRedirects))
+        for (const path of await livePaths(targets)) {
+            pageUrls.add(path)
+        }
+    }
+
+    const findings = analyzeFiles(files, headRedirects, { pageUrls, sizes, pocketGuides })
     if (touchesVercel) {
-        const baseConfig = await getJsonFile(github, owner, repo, 'vercel.json', pr.base.sha)
         findings.push(...analyzeRedirects(baseConfig?.redirects || [], headRedirects, pageUrls))
         findings.push(...analyzeVercelConfig(baseConfig, headConfig))
     }
@@ -834,9 +931,8 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
     })
     const existing = comments.find((c) => c.user?.type === 'Bot' && c.body?.includes(COMMENT_MARKER))
 
-    // Minor items alone never start a comment or ping the reviewer.
-    const needsReview = findings.some((f) => f.severity !== 'minor')
-    if (!needsReview && !(existing && findings.length > 0)) {
+    // Only blockers start a comment or ping the reviewer. Minor items show only next to a blocker.
+    if (!findings.some((f) => f.severity === 'blocker')) {
         if (existing && !existing.body.includes('✅')) {
             await github.rest.issues.updateComment({
                 owner,
@@ -891,6 +987,7 @@ module.exports = {
     pageUrlsFromTree,
     buildComment,
     contentPathToUrl,
+    pocketGuidePathsFromSource,
     isPagePath,
     redirectFor,
     addedH1s,

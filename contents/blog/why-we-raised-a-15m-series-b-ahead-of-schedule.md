@@ -5,6 +5,7 @@ author:
   - joe-martin
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/series-b/series-b-baby.png
+ogImage: generated
 rootPage: /blog
 sidebar: Blog
 showTitle: true

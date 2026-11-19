@@ -35,7 +35,7 @@ const freeIncludes = [
 const paidAdds = [
     { name: 'Unlimited usage' },
     { name: '6 projects', detail: 'up from 1' },
-    { name: '7-year data retention', detail: 'up from 1 year' },
+    { name: '2-year data retention', detail: 'up from 1 year' },
     { name: 'Email support', detail: 'or Slack over $2k/mo' },
 ]
 
@@ -160,7 +160,7 @@ export default function PricingJourney(): JSX.Element {
 
                     <div className="mt-auto border-t border-primary pt-3">
                         <p className="text-sm text-secondary mb-4">
-                            Each product gets its own billing limit - going viral won't require another funding round.
+                            Most products get their own billing limit - going viral won't require another funding round.
                         </p>
                         <TrackedCTA
                             to={billingUrl}

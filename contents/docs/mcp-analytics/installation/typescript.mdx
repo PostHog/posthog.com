@@ -20,7 +20,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 | `@modelcontextprotocol/sdk` | v1 | `2025-11-25` and earlier |
 | `@modelcontextprotocol/core`, `/server`, `/client` | v2 | `2025-11-25` and `2026-07-28` |
 
-You need Node.js 20.20+ or 22.22+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
+You need:
+
+- Node.js 20.20+ or 22.22+
+- `@modelcontextprotocol/sdk` 1.26.0+ (v1) or `@modelcontextprotocol/server` 2.0.0+ (v2)
+- `posthog-node` 6
+- A PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key)
+
+Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
 
 <WizardCommand command="mcp-analytics" />
 
@@ -31,10 +38,10 @@ The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instru
 <Step title="Install the packages" badge="required">
 
 ```bash
-npm install @posthog/mcp posthog-node
+npm install @posthog/mcp@1 posthog-node@6
 ```
 
-`@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle.
+`@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle. `@posthog/mcp` re-exports `PostHog`, so one import covers both. `posthog-node` is still a peer dependency, so install it too.
 
 </Step>
 
@@ -42,12 +49,13 @@ npm install @posthog/mcp posthog-node
 
 Call `instrument(server, posthog)` once, before the server accepts requests. Pass the `McpServer` or the low-level `Server`. The SDK also instruments tools that you register later.
 
+`instrument()` labels the whole client: every event it sends reports `$lib` `posthog-node-mcp` and the `@posthog/mcp` version. If your app also captures its own events, give MCP analytics its own `PostHog` client. To find MCP traffic, filter on `$mcp_*` events rather than `$lib`.
+
 <MultiLanguage>
 
 ```ts file=SDK-v1
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
@@ -64,8 +72,7 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 
 ```ts file=SDK-v2
 import { McpServer } from "@modelcontextprotocol/server"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
@@ -82,7 +89,7 @@ server.registerTool("search_events", { /* ... */ }, async (args) => {
 
 </MultiLanguage>
 
-`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server logs a warning and returns early.
+`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server does nothing new. It logs a warning through the `logger` from the first call and returns a working handle.
 
 </Step>
 
@@ -92,6 +99,15 @@ server.registerTool("search_events", { /* ... */ }, async (args) => {
 
 ```ts
 process.on("SIGTERM", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
+```
+
+The MCP spec tells stdio clients to close `stdin` first and send `SIGTERM` only if the server doesn't exit in time, so the `SIGTERM` handler may never run. On a stdio server, also shut down when `stdin` ends:
+
+```ts
+process.stdin.on("end", async () => {
   await posthog.shutdown()
   process.exit(0)
 })
@@ -257,23 +273,52 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | --- | --- | --- |
 | `context` | `true` | Add a `context` argument to capture [agent intent](/docs/mcp-analytics/intent). Pass `{ description }` to change its prompt. |
 | `intentFallback` | – | `(request, extra) => string \| null`. Supplies intent when the agent sends no `context`. |
-| `captureModel` | `true` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. |
+| `captureModel` | `true` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. Pass `{ description }` to change the argument's prompt. |
 | `enableConversationId` | `true` | Add a `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
-| `identify` | – | `(request, extra) => UserIdentity \| null`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
+| `identify` | – | `(request, extra) => UserIdentity \| null`, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
+| `sendInitializeEvent` | `true` | Emit `$mcp_initialize` for each `initialize` handshake. Set to `false` to stop it. Other events keep their sessions and client names. MCP onboarding and the default dashboard's users and sessions tiles then show no data. |
+| `sendToolsListEvent` | `true` | Emit `$mcp_tools_list` for each `tools/list`. Set to `false` to stop it. Tools keep their injected arguments. |
 | `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
+| `eventOptions` | – | `(request, extra) => Record<string, unknown> \| null`. Sets [event options](#event-options) on every auto-captured event. |
 | `serverBuild` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
 | `shouldRecordInputKey` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
 | `resolveInputAliases` | – | `(toolName) => aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
 | `resolveOriginalTool` | – | `(toolName) => { inputSchema } \| undefined`. Resolves input ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message) => void`. A stdio-safe sink for SDK warnings. |
 
+`context`, `captureModel`, and `enableConversationId` are on by default, and each adds an argument to every tool: `context`, `llm_model`, and `conversation_id`. The model sees these arguments and their descriptions when it lists your tools, and they take up part of its context. `enableConversationId` also adds the `conversation_id` to each tool result so the model can send it back. Set an option to `false` to remove its argument.
+
+## Event options
+
+`eventOptions` sets [event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, on MCP events. It needs `@posthog/mcp` 1.3.0 or later. The name keeps them apart from the `instrument()` options.
+
+- Give `instrument()` an `eventOptions` callback for every auto-captured event. Like `eventProperties`, it takes `(request, extra)`. A failed call's `$exception` gets the same options.
+- Pass `eventOptions` per call to `analytics.capture()` and to the `PostHogMCP` capture methods.
+
+```ts
+const analytics = instrument(server, posthog, {
+  eventOptions: (request, extra) => ({ cookieless_mode: true }),
+})
+
+await analytics.capture({ event: "report_exported", eventOptions: { cookieless_mode: true } })
+
+// On a custom dispatcher, where posthog is a PostHogMCP client:
+posthog.captureToolCall({ toolName: "search_docs", sessionId, eventOptions: { cookieless_mode: true } })
+```
+
+An event from a session with no resolved identity gets `process_person_profile: false` by default. An explicit `process_person_profile` in `eventOptions` wins over that default.
+
+- `beforeSend` receives the options as `event.options` and can change them.
+- On `posthog-node` 5, `eventOptions` supports only `process_person_profile`, `cookieless_mode`, `disable_skew_correction`, and `product_tour_id`, and drops other keys.
+- `PostHogMCP.capture()` is posthog-node's own `capture()`, so it takes `options` instead.
+
 ## Custom dispatchers
 
-`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes the same constructor arguments:
+`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes its constructor arguments, plus `serverBuild`, `captureModel`, `enableConversationId`, and `missingCapabilityToolName`:
 
 ```ts
 import { PostHogMCP, getMoreToolsResult } from "@posthog/mcp"
@@ -292,8 +337,14 @@ const tools = posthog.prepareToolList(myTools, { reportMissing: true })
 // When you answer tools/call, before the tool runs:
 const prepared = posthog.prepareToolCall(name, request.params.arguments)
 if (prepared.isMissingCapability) {
-  posthog.captureMissingCapability({ context: prepared.intent, distinctId: user.id })
-  return getMoreToolsResult()
+  const reply = posthog.prepareToolResult(getMoreToolsResult(), prepared)
+  posthog.captureMissingCapability({
+    context: prepared.intent,
+    sessionId: reply.sessionId,
+    conversationId: reply.conversationId,
+    distinctId: user.id,
+  })
+  return reply.result
 }
 
 const start = Date.now()
@@ -330,6 +381,13 @@ posthog.captureInitialize({
 })
 ```
 
+Pass `errorType` to `captureToolCall` to set `$mcp_error_type` to your own label, such as `validation` or `rate_limited`.
+
+Other capture methods cover the rest of the protocol:
+
+- `captureToolsList({ toolNames })` sends `$mcp_tools_list`. Without it, a dispatcher server has no listing events, so you can't find tools that are advertised but never called.
+- `getToolInputProperties(args, inputSchema, { inputAliases })` returns `$mcp_input_keys`, plus `$mcp_input_aliases_used` when you pass `inputAliases`, for the original arguments. Pass the result in `properties`.
+
 These methods queue events and never throw, so analytics can't break your tool. Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
 
 Every capture method takes these fields:
@@ -337,13 +395,14 @@ Every capture method takes these fields:
 | Field | Becomes | Notes |
 | --- | --- | --- |
 | `distinctId` | `distinct_id` | Turns on person processing. Omit it for anonymous traffic. |
-| `sessionId` | `$session_id` | Omitted when you don't pass one. |
+| `sessionId` | `$session_id` | Omitted when you don't pass one. Keep it to 128 characters or fewer. |
 | `protocolVersion` | `$mcp_protocol_version` | Pass the revision of each request. |
 | `clientUserAgent` | `$mcp_client_user_agent` | The raw `User-Agent` header on HTTP transports. |
 | `vendorClient` | `$mcp_vendor_client` | A vendor client header, such as `x-anthropic-client`. |
 | `groups` | `$groups` | `{ groupType: groupKey }`. |
 | `setProperties` | `$set` | Person properties, such as name or plan. |
 | `properties` | event properties | Extra properties, added as they are. |
+| `eventOptions` | event `options` | [Event options](#event-options) for this event and its `$exception`. |
 | `timestamp` | event time | Defaults to the time of the call. |
 
-The `instrument()` hooks (`identify`, `intentFallback`, `eventProperties`) don't run on this path. Pass identity on each call. `prepareToolCall` and `prepareToolResult` handle intent, model capture, and conversation IDs. On a stateless server, pass the original tool as the `originalTool` option of `prepareToolCall`, so a process that didn't serve `tools/list` still knows which arguments it added. On `2026-07-28`, don't send `$mcp_initialize`, because that revision has no handshake.
+The `instrument()` hooks (`identify`, `intentFallback`, `eventProperties`, `eventOptions`) don't run on this path. Pass identity, and any `eventOptions`, on each call. `prepareToolCall` and `prepareToolResult` handle intent, model capture, and conversation IDs. On a stateless server, pass the original tool as the `originalTool` option of `prepareToolCall`, so a process that didn't serve `tools/list` still knows which arguments it added. On `2026-07-28`, don't send `$mcp_initialize`, because that revision has no handshake.

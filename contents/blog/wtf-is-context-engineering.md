@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Blog_Job_Posts_70bb45215b.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Explainers

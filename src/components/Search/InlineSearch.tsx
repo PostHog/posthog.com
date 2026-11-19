@@ -15,6 +15,7 @@ export const InlineSearch = ({
     clearable = true,
     autoFocus = false,
     icon = true,
+    currentPath,
 }: {
     contentRef?: React.RefObject<HTMLElement>
     onSearch?: (search: string) => void
@@ -23,6 +24,8 @@ export const InlineSearch = ({
     clearable?: boolean
     autoFocus?: boolean
     icon?: boolean
+    // Re-highlights the matches when the content under contentRef changes to a new page
+    currentPath?: string
 }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
@@ -41,7 +44,7 @@ export const InlineSearch = ({
         if (inputValue) {
             markedRef.current.mark(inputValue, { separateWordSearch: false })
         }
-    }, [inputValue])
+    }, [inputValue, currentPath])
 
     useEffect(() => {
         return () => {

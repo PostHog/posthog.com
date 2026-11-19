@@ -59,16 +59,16 @@ The funnel actors tool supports two modes: **step mode**, where a positive `funn
 
 ## Dashboard tools
 
-| Tool                          | Description                                 |
-| ----------------------------- | ------------------------------------------- |
-| `dashboard-create`            | Create a new dashboard.                     |
-| `dashboard-get`               | Get a dashboard and its tiles.              |
-| `dashboards-get-all`          | List all dashboards in the project.         |
-| `dashboard-update`            | Update a dashboard's name or description.   |
-| `dashboard-delete`            | Delete a dashboard.                         |
-| `dashboard-widgets-batch-add` | Add insights to a dashboard in one call.    |
-| `dashboard-insights-run`      | Run every insight on a dashboard.           |
-| `dashboards-bulk-delete`      | Delete up to 100 dashboards in one request. |
+| Tool                          | Description                                         |
+| ----------------------------- | --------------------------------------------------- |
+| `dashboard-create`            | Create a new dashboard.                             |
+| `dashboard-get`               | Get a dashboard and its tiles.                      |
+| `dashboards-get-all`          | List all dashboards in the project.                 |
+| `dashboard-update`            | Update a dashboard's name, description, or filters. |
+| `dashboard-delete`            | Delete a dashboard.                                 |
+| `dashboard-widgets-batch-add` | Add insights to a dashboard in one call.            |
+| `dashboard-insights-run`      | Run every insight on a dashboard.                   |
+| `dashboards-bulk-delete`      | Delete up to 100 dashboards in one request.         |
 
 ## Example prompts
 
@@ -93,6 +93,7 @@ When creating or updating SQL-backed insights, you can configure per-series disp
 | `trendLine`     | `true`, `false`               | Draw a linear trend line for the series.                                                            |
 | `label`         | string                        | Custom label shown in the legend and tooltips instead of the column name.                           |
 | `color`         | hex string (e.g. `#1d4aff`)   | Custom color for the series.                                                                        |
+| `description`   | string                        | Explanatory text for the column, shown via an info icon in the table header.                        |
 
 **Number formatting** – set on each Y-axis column under `settings.formatting`:
 

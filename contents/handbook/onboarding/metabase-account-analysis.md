@@ -6,10 +6,9 @@ showTitle: true
 
 ### Summary
 
-Metabase dashboards mirror a customer’s PostHog usage so we can diagnose billing, implementation quality, and quick-win optimizations. For audio and video learners, check out these:
+Metabase dashboards mirror a customer’s PostHog usage so we can diagnose billing, implementation quality, and quick-win optimizations. For audio and video learners:
 
 - <PrivateLink url="https://app.buildbetter.app/call/314774">Metabase overview recording</PrivateLink>
-- <PrivateLink url="https://www.loom.com/share/9c1080638919475dac8a9ca1c55d361f">Billing deep dive walkthrough</PrivateLink>
 
 While checking the account in Vitally, you can access a dedicated Metabase dashboard for this account directly from the sidebar:
 
@@ -92,7 +91,7 @@ If you see an unnatural spike in $set or $identify events in the two previous ch
 
 
 #### 9. Hog Destinations
-If they pay for [data pipelines](https://posthog.com/docs/cdp) but have no active destinations, flag the mismatch and suggest enabling or removing the add-on. Newer accounts pay by usage (rather than the add-on), so keep an eye out for that as well.
+If they pay for [data pipelines](https://posthog.com/docs/data-pipelines) but have no active destinations, flag the mismatch and suggest enabling or removing the add-on. Newer accounts pay by usage (rather than the add-on), so keep an eye out for that as well.
 
 ![Hog destinations, batch exports, data warehouse syncs](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/13_Metabase_hog_batch_warehouse_06e8238ce9.png)
 

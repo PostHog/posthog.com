@@ -3,13 +3,12 @@ date: 2025-01-26
 title: 'Why you should use a data warehouse'
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Session_Summaries_escher_draft_ff034af63d.png
+ogImage: generated
 author:
     - joe-martin
 featuredImageType: full
 category: PostHog news
 ---
-
-import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
 
 You've learned the difference between data lakes and data warehouses. You can drop acronyms like ETL and OLAP into conversation without flinching. But you’re still stuck on the annoying question underneath all of it.
 
@@ -33,7 +32,7 @@ If you don’t have much data then you probably don’t need a data warehouse, s
 
 It’s a rough guideline, but if you’re not either in the mid-millions of rows or anticipating being there soon then moving to a data warehouse is premature. Data warehouses are costly and only really pay off at scale anyway.
 
-Granted, if you’re anticipating explosive growth in the future then it could be worth looking at simple options ([PostHog](/context-warehouse) has generous free allowances, for example), but implementing anything as complex as Snowflake would likely be overkill. 
+Granted, if you’re anticipating explosive growth in the future then it could be worth looking at simple options ([PostHog](/warehouse) has generous free allowances, for example), but implementing anything as complex as Snowflake would likely be overkill. 
 
 ### 2. “You need transactional workloads”
 
@@ -77,13 +76,13 @@ If you’re trying to figure out your MRR and you’re tired of having to reconc
 
 Don’t be mean to [Postgres](/blog/duckdb-vs-postgres). It can do a lot of things well, but heavy, concurrent reporting queries with complex joins? Not so much. You’ll end up slowing down your product, timing out your queries, and upsetting your product managers.
 
-Once app performance starts to suffer and you're writing enough SQL to fill a book, it’s time to consider offloading that work. You can start small with tools like [DuckDB](/blog/duckdb-vs-clickhouse) for fast, local analytical processing on your own machine, or graduate to a [managed warehouse](/context-warehouse/warehouse) for team-wide access. 
+Once app performance starts to suffer and you're writing enough SQL to fill a book, it’s time to consider offloading that work. You can start small with tools like [DuckDB](/blog/duckdb-vs-clickhouse) for fast, local analytical processing on your own machine, or graduate to a [managed warehouse](/warehouse) for team-wide access. 
 
 ### 3. Something something single source of truth
 
 “Single source of truth” is a tired cliché, but the underlying problem is real: without a shared layer, everyone ends up building their own version of the truth. A warehouse, on the other hand, gives you a place to define things factually and without subjective bias.
 
-That can include not just what data should be referenced, but also [metric definitions](blog/semantic-layer), canonical tables or models, query versions, and more. Most importantly it also gives you a paper trail: when the CEO asks where a number came from then you have a comprehensible source to reference. 
+That can include not just what data should be referenced, but also [metric definitions](/blog/semantic-layer), canonical tables or models, query versions, and more. Most importantly it also gives you a paper trail: when the CEO asks where a number came from then you have a comprehensible source to reference. 
 
 ### 4. Governance, unfortunately
 
@@ -97,9 +96,6 @@ For example, if someone changes a column name in your production database withou
         <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
             Beta
         </span>
-        . Join the waitlist to get early access.
+        . <a href="/warehouse">Get access to the Warehouse beta</a>.
     </p>
-    <div className="max-w-md">
-        <DuckDBWaitlistSurvey />
-    </div>
 </div>

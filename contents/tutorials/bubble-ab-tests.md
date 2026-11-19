@@ -112,7 +112,7 @@ Finally, deploy your changes to live.
 
 ![Add script in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/add-flag-code.mp4)
 
-That's it! Your A/B test is now live. PostHog will split your users so half see the updated button text and tracks whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
+That's it! Your A/B test is now live. PostHog will split your users so half see the updated button text and tracks whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/analyzing-results) on the experiment page in PostHog.
 
 If you want to test each variant of your experiment to make sure it is working correctly, add the line `posthog.featureFlags.overrideFeatureFlags({ flags: {'bubble-button-experiment': 'variant_name'}})` to your code:
 

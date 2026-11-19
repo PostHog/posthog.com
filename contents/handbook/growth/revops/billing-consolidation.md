@@ -25,7 +25,7 @@ For the pros and cons of a shared Stripe customer against a separate one, see th
 Get a clear yes on each of these before the billing team makes a change. Each one changes what the customer pays or sees.
 
 - **Which setup.** Which of the three shapes above.
-- **Shared billing limitations.** For option 2, [review the limitations](https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations) (PostHog team only) and explain the relevant limitations to the customer. Confirm that this setup meets their usage reporting and budget needs before you migrate.
+- **Shared billing limitations.** For option 2, <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations">review the limitations</PrivateLink> (PostHog team only) and explain the relevant limitations to the customer. Confirm that this setup meets their usage reporting and budget needs before you migrate.
 - **Invoice email.** The email for the consolidated entity. If the customer has not decided, agree a placeholder (for example, their head of procurement) and set the final email later. Do not hold the migration for this.
 - **Final partial invoices.** Each paying account whose subscription is canceled gets a final invoice for its accrued usage. Confirm the customer accepts these. Credits on the consolidated customer do not automatically cover them. The billing team must reconcile usage across the old and shared subscriptions during the migration.
 - **Which account is the target.** We link the others to one account. Use the account with the largest spend, which usually already holds a credit balance. Internally, MRR and invoices attach to the canonical organization (the one with the lowest customer ID), so the other organizations show no MRR in our own tools. See the [customer billing configurations](/handbook/growth/billing/customer-billing-configurations) page.
@@ -37,9 +37,10 @@ The billing team runs these steps for option 2, once the customer confirms the p
 
 1. **Invoice the partial periods.** For each account that pays today, other than the target account, cancel the current subscription and invoice its accrued usage for the partial period. Send these before you link.
 2. **Link the accounts to the target Stripe customer.** Confirm that ongoing usage is reported through the shared subscription and uses the shared credit pool.
-3. **Align billing periods.** Once the old subscriptions are canceled and all organizations point to the shared subscription, update each organization's stored billing period to match the actual period on that subscription. Then refresh each organization's billing status and check its usage totals. See the [period and forecast caveats](https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#billing-periods-and-forecasts) (PostHog team only).
-4. **Set the invoice email** on the consolidated customer (the confirmed email, or the placeholder).
-5. **Tell the customer that access does not change.** The organizations stay separate, so each organization's users keep their own access.
+3. **Align billing periods.** Once the old subscriptions are canceled and all organizations point to the shared subscription, update each organization's stored billing period to match the actual period on that subscription. Then refresh each organization's billing status and check its usage totals. See the <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#billing-periods-and-forecasts">period and forecast caveats</PrivateLink> (PostHog team only).
+4. **Sync the plans map on each linked organization.** An add-on bills one time on the shared subscription, but only the organization that buys it gets the features, because only its plans map changes. In Billing admin, click **Sync plans map from Stripe** on each linked organization. Do this again each time the customer adds an add-on later.
+5. **Set the invoice email** on the consolidated customer (the confirmed email, or the placeholder).
+6. **Tell the customer that access does not change.** The organizations stay separate, so each organization's users keep their own access.
 
 ## Merge paying accounts into one organization
 
@@ -61,7 +62,7 @@ Get a clear yes on each of these in addition to the confirmations above:
 
 1. **Add any grandfathered grants to the target organization.** Do this before any project moves.
 2. **Set access in the target organization.** Set the default access for the existing projects so that only their current team can open them. Do this before you invite new users, or they see all the existing projects.
-3. **Move the projects.** In the same region, an owner or admin of both organizations moves each project from project settings. Across regions, a PostHog engineer moves it. A source organization must have at least two projects to move one, so create an empty project in each source organization before you move its last project.
+3. **Move the projects.** In the same region, an owner or admin of both organizations moves each project from project settings. Across regions, a PostHog engineer moves it. A source organization can move its last project, so it does not need a second one.
 4. **Set access on each moved project.** Give access only to the team that owns the project.
 5. **Invite the users of each source organization to the target organization.** Each user then sees only the projects that you gave their team.
 6. **Cancel and invoice each source organization.** After all its projects move, cancel its subscription and invoice its accrued usage for the partial period. Do not cancel a subscription while the organization still has active projects. A free plan organization has usage limits, and the customer can lose data.

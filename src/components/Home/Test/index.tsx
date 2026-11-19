@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react'
 import ReaderView from 'components/ReaderView'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import DataStackSection from 'components/Home/Sections/DataStackSection'
-import PricingSection from 'components/Home/Sections/PricingSection'
-import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
-import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSection'
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
+import { StepsSection } from 'components/Home/DataStory'
 import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
@@ -172,10 +169,7 @@ export default function HomeTest() {
             <div className="space-y-12">
                 <Hero />
                 <Customers />
-                <DataStackSection />
-                <PricingSection />
-                <WhyPostHogSection />
-                <BedtimeReadingSection />
+                <StepsSection />
                 <ShamelessCTASection />
                 <HitCounter />
             </div>

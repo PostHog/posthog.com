@@ -15,7 +15,7 @@ All approved brand assets — logos, colors, fonts, hedgehogs, and crests — li
 
 We’re really happy people want to build on top of PostHog, but we want to keep it clear when something is made by us or made by someone else. If you've built a third-party app on top of PostHog or want to partner with us in some way, here is some high-level guidance for you to bear in mind.
 
--   We're _generally OK_ with people using the PostHog name to describe compatibility. For example, you can say your product "works with PostHog," is "built for PostHog" or "built on PostHog".
+-   We're _generally OK_ with people using the PostHog name to describe compatibility. For example, you can say your product "works with PostHog" or is "built with PostHog," "built for PostHog," or "built on PostHog." To show it on your website, add a [Built with PostHog badge](https://brand.posthog.com/badges).
 
 -   We're _not OK_ with people using the PostHog name to make it look like your project is made by, endorsed by, or is officially partnered with PostHog if it isn't. So for example, while "Desktop Studio for PostHog" would be fine, "Official PostHog Desktop Studio" or "PostHog Desktop Studio" would not be.
 
@@ -153,7 +153,7 @@ He should be outlined with a strong, black monoline with consistent thickness. H
 
 All our currently approved hedgehogs are on [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies). Anyone — team member or not — can browse the library and download any hog as SVG or PNG, without Figma access and without relying on the design team.
 
-Team members can fall back to [the Figma brand book](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1) to export a hog at a custom size, or to grab one that hasn't synced to the library yet:
+Team members can fall back to <PrivateLink url="https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&amp;t=pCzspik0QSSbaemg-1">the Figma brand book</PrivateLink> to export a hog at a custom size, or to grab one that hasn't synced to the library yet:
 
 1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar.

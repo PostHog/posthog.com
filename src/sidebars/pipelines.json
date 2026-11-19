@@ -1,7 +1,7 @@
 [
     {
-        "name": "CDP",
-        "url": "/cdp"
+        "name": "Data pipelines",
+        "url": "/data-pipelines"
     },
     {
         "name": "Variance",

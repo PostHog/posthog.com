@@ -7,6 +7,7 @@ showTitle: true
 sidebar: Docs
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+ogImage: generated
 tags:
   - surveys
 ---
@@ -56,7 +57,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).

@@ -20,7 +20,7 @@ Cover for PTO and swaps is the exception: [overrides](#make-sure-your-availabili
 
 ### Team schedules
 
-A team has up to three schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules), and it gets the ones its Terraform block asks for:
+A team has up to three schedules in <PrivateLink url="https://app.incident.io/posthog/on-call/schedules">incident.io</PrivateLink>, and it gets the ones its Terraform block asks for:
 
 * `On call: {team}`
     - Working-hours cover, and where alerts routed to the team go. Everyone gets their own rotation, you just set the start of your normal working day, weekdays only
@@ -58,7 +58,7 @@ Manual escalation should be used when:
 
 ### Global on-call schedule
 
-[Schedule in incident.io](https://app.incident.io/posthog/on-call/schedules/01K7PNGFNP8ZZSCSTBXKPVWVAZ)
+<PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K7PNGFNP8ZZSCSTBXKPVWVAZ">Schedule in incident.io</PrivateLink>
 
 > 💡 You can use @on-call-global in Slack to reach out to whoever is on call! This syncs automatically with the incident.io schedule. This group is also automatically added to all incidents.
 
@@ -107,11 +107,11 @@ Non-critical alerts stop at step 1 – the team sees them in Slack, nobody gets 
 
 ## Managing on-call in Terraform
 
-Teams, schedules, rotations, and escalation paths all live in the [`incidentio-oncall` module](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-oncall) in `posthog-cloud-infra`. Everything one team needs is a single block in a single file: [`terraform/environments/incidentio/oncall/terragrunt.hcl`](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/oncall/terragrunt.hcl).
+Teams, schedules, rotations, and escalation paths all live in the <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-oncall"><code>incidentio-oncall</code> module</PrivateLink> in `posthog-cloud-infra`. Everything one team needs is a single block in a single file: <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/oncall/terragrunt.hcl"><code>terraform/environments/incidentio/oncall/terragrunt.hcl</code></PrivateLink>.
 
 You supply people and hours – rotation mechanics aren't configurable. Read the existing team blocks in that file for the structure, and the module's README and `teams` variable for what each field means and the rules they have to follow. Those are the source of truth, so this page doesn't restate them.
 
-Open a PR against [`posthog-cloud-infra`](https://github.com/PostHog/posthog-cloud-infra) and CI runs the plan. Read it before merging – it names every rotation and paging level that moves. Don't make these changes in the incident.io dashboard, because the next apply puts them back.
+Open a PR against <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra"><code>posthog-cloud-infra</code></PrivateLink> and CI runs the plan. Read it before merging – it names every rotation and paging level that moves. Don't make these changes in the incident.io dashboard, because the next apply puts them back.
 
 Rather than hand-writing the HCL, point your editor's agent at it:
 
@@ -145,9 +145,9 @@ Before going on call, make sure you have the **Incident.io mobile app** [Android
 
 > TRICKY: We use Slack auth for incident.io and Slack really doesn't like you using the mobile web version. Make sure to choose `Sign in with Slack` and then use your email to login to Slack, **not** google auth as that seems to cause redirect issues for some people.
 
-> Still having redirect issues signing up with Slack? [Create a Slack password instead of using Google SSO](https://posthog.slack.com/account/settings#password), then log in with that password.
+> Still having redirect issues signing up with Slack? <PrivateLink url="https://posthog.slack.com/account/settings#password">Create a Slack password instead of using Google SSO</PrivateLink>, then log in with that password.
 
-To get a calendar with all your on-call shifts from incident.io go to the [schedules section](https://app.incident.io/posthog/on-call/schedules), select `Sync calendar` at the top right and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
+To get a calendar with all your on-call shifts from incident.io go to the <PrivateLink url="https://app.incident.io/posthog/on-call/schedules">schedules section</PrivateLink>, select `Sync calendar` at the top right and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
 
 ### Make sure alerts can break through Do Not Disturb
 
@@ -186,9 +186,9 @@ If you are unavailable for any of your schedules you need to act! Overrides are 
 To be ready, make sure you have access to:
 
 - PostHog Cloud admin interfaces ([🇺🇸 US](https://us.posthog.com/admin/)  / [🇪🇺 EU](https://eu.posthog.com/admin/)) - post in #ask-posthog-anything to be added
-- Grafana ([🇺🇸 US](https://grafana.prod-us.posthog.dev/)  / [🇪🇺 EU](https://grafana.prod-eu.posthog.dev/))
-- [ArgoCD](https://argocd-internal.internal.posthog.dev) - this is where 99% of cluster operations take place such as restarting pods, scaling things up and down etc.
-- Metabase ([🇺🇸 US](https://metabase.prod-us.posthog.dev/)  / [🇪🇺 EU](https://metabase.prod-eu.posthog.dev/)) - post in #ask-posthog-anything to be invited
+- Grafana (<PrivateLink url="https://grafana.prod-us.posthog.dev/">🇺🇸 US</PrivateLink>  / <PrivateLink url="https://grafana.prod-eu.posthog.dev/">🇪🇺 EU</PrivateLink>)
+- <PrivateLink url="https://argocd-internal.internal.posthog.dev">ArgoCD</PrivateLink> - this is where 99% of cluster operations take place such as restarting pods, scaling things up and down etc.
+- Metabase (<PrivateLink url="https://metabase.prod-us.posthog.dev/">🇺🇸 US</PrivateLink>  / <PrivateLink url="https://metabase.prod-eu.posthog.dev/">🇪🇺 EU</PrivateLink>) - post in #ask-posthog-anything to be invited
 
 
 ### More advanced access
@@ -196,8 +196,8 @@ To be ready, make sure you have access to:
 If you are part of a team that looks after more critical infrastructure such as infra, ingestion, workflows, error-tracking etc. then you are expected to dive deeper than the usual on-call engineer.
 
 As well as the above access you should ensure you have access and feel comfortable working with:
-- EKS over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod) – follow [this guide](https://runbooks.posthog.com/EKS/access) to get access
-- Our tailnet, which gates our internal services (such as Grafana, Metabase, or runbooks) – follow [this guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network) to join
+- EKS over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod) – follow <PrivateLink url="https://runbooks.posthog.com/EKS/access">this guide</PrivateLink> to get access
+- Our tailnet, which gates our internal services (such as Grafana, Metabase, or runbooks) – follow <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network">this guide</PrivateLink> to join
 
 
 ## Responding to alerts when on-call

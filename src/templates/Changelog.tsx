@@ -22,7 +22,7 @@ import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import FactorySign from 'components/Changelog/FactorySign'
 import HumanCodedStarburst from 'components/Changelog/HumanCodedStarburst'
-import { isHumanCoded } from 'components/Changelog/isHumanCoded'
+import { humanCodedBaseline, isHumanCoded } from 'components/Changelog/isHumanCoded'
 import { colors } from '@posthog/brand/colors'
 import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -53,8 +53,6 @@ const updateDescriptors = [
 
 const humanCodedFoilGradient = `linear-gradient(125deg, ${colors.tangerine.core}, ${colors.yellow.core}, ${colors.green.core}, ${colors.tangerine.core})`
 const humanCodedFoilGradientDark = `linear-gradient(125deg, ${colors.violet.core}, ${colors.blue.core}, ${colors.green.core}, ${colors.blue.core}, ${colors.violet.core})`
-// Provisional last human-coded changelog entry: "Capture Android native crashes" (September 1, 2026).
-const humanCodedBaseline = '2026-09-01T12:57:37.996Z'
 
 type RoadmapNode = {
     id: number | string
@@ -188,7 +186,7 @@ const Roadmap = ({
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const docsPath = getChangelogDocsPath(roadmap)
-    const humanCoded = isHumanCoded(roadmap.tags)
+    const humanCoded = isHumanCoded(roadmap.tags, roadmap.githubUrls)
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
 
@@ -915,7 +913,7 @@ const RoadmapCards = ({
                                             ) : (
                                                 weekData.roadmaps.map((roadmap) => {
                                                     const active = activeRoadmap?.id === roadmap.id
-                                                    const humanCoded = isHumanCoded(roadmap.tags)
+                                                    const humanCoded = isHumanCoded(roadmap.tags, roadmap.githubUrls)
                                                     const teamName = roadmap.teams?.data?.[0]?.attributes?.name
                                                     const crestUrl =
                                                         roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
@@ -1054,7 +1052,9 @@ export default function Changelog({
     // The sign counts from the most recent human-coded entry.
     const humanCodedSince = useMemo(() => {
         const timestamp = (roadmap: RoadmapNode) => new Date(roadmap.publishedAt || roadmap.date).getTime()
-        const humanCoded = data.allRoadmap.nodes.filter((roadmap: RoadmapNode) => isHumanCoded(roadmap.tags))
+        const humanCoded = data.allRoadmap.nodes.filter((roadmap: RoadmapNode) =>
+            isHumanCoded(roadmap.tags, roadmap.githubUrls)
+        )
         if (humanCoded.length === 0) return humanCodedBaseline
         const since = Math.max(...humanCoded.map(timestamp))
         return new Date(since).toISOString()

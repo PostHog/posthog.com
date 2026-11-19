@@ -25,7 +25,7 @@ Use these templates unless explicitly instructed otherwise:
 - Set default (or min/max) dimensions via `src/context/App.tsx` in `appSettings`. Use defaults set for the homepage (`/`) for new pages so they're not arbitrarily wide.
 
 **`<Reader />`** for a collection of pages with shared navigation
-- Example: `/context-warehouse` which populates `LeftSidebarContent` with `<TreeMenu />` (`src/components/TreeMenu/index.tsx`)
+- Example: `/feature-matrix`, which passes `<TreeMenu />` as `leftSidebar` (`src/components/TreeMenu/index.tsx`)
 
 **Checklist:**
 - Link new pages from a relevant menu in `<TaskBarMenu />` (`src/components/TaskBarMenu/index.tsx`) via `src/components/TaskBarMenu/menuData.tsx`
@@ -80,7 +80,7 @@ Slide templates are intended to be kept DRY, with content being sourced from rel
 
 ## Product reader view carousels
 
-**Product reader pages** (`/session-replay`, etc.) use a carousel system built on `CarouselSlide`. These are the "How do I use it?" (Applications) and "Top features" (TopFeatures) sections.
+**Product reader pages** (`/session-replay`, etc.) use a carousel system built on `CarouselSlide`. These are the "How do I use it?" (Applications) and "Key features" (KeyFeatures) sections.
 
 Slide arrays live in the **page file** (e.g. `src/pages/session-replay/index.tsx`), not in the productData hook. Each slide is a `CarouselSlide` config object passed via `props: { slides }` on the menu item.
 

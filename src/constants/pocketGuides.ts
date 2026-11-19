@@ -1,10 +1,22 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
-/** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
-export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
+/**
+ * Spine colors. Each volume's `token` must equal its product's color in `PRODUCT_COLORS`
+ * (src/constants/productColors.ts), the color of the product's icon in the Products menu, so a book
+ * matches its product. It is a copy because this file has no imports (`node --test` and `gatsby/` load
+ * it directly); pocketGuides.test.ts fails if they differ. Limited to safelisted tokens, since the spine
+ * is built as `bg-<token>`.
+ */
+export type PocketGuideToken = 'blue' | 'purple' | 'yellow' | 'seagreen' | 'orange' | 'red'
 
 /** Optional pages under a Learn hub, at /learn/<product>/<page>. */
-export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
+export type LearnHubPage = 'videos' | 'agent-prompts-and-mcp' | 'live-playground'
+
+/** A page nested under a hub page, at /learn/<product>/<page>/<slug>. Its src/pages file must exist. The hub page link opens the first one. */
+export interface LearnHubSubpage {
+    slug: string
+    name: string
+}
 
 export interface PocketGuideVolume {
     /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
@@ -23,7 +35,12 @@ export interface PocketGuideVolume {
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
     /** Show an Overview page at /learn/<product> and list the extra hub pages that exist. Omit for a flat chapter list. */
-    learnHub?: { pages?: LearnHubPage[] }
+    learnHub?: {
+        pages?: LearnHubPage[]
+        subpages?: Partial<Record<LearnHubPage, LearnHubSubpage[]>>
+        /** Chapters with this `section:` frontmatter sit in a collapsible Self-driving group, not under Pocket guide. */
+        selfDrivingSection?: string
+    }
     /** Count the front matter and primer while this volume consists of those two learning pages. */
     countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
@@ -60,17 +77,26 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'ai-observability',
         productHandle: 'ai_observability',
         learnPath: '/learn/ai-observability/pocket-guide',
-        learnHub: { pages: ['agent-prompts-and-mcp', 'live-playground'] },
+        learnHub: {
+            pages: ['videos', 'agent-prompts-and-mcp', 'live-playground'],
+            subpages: {
+                'live-playground': [
+                    { slug: 'twig', name: 'Twig.com' },
+                    { slug: 'online-and-offline-evals', name: 'Online and offline evals' },
+                ],
+            },
+        },
     },
     {
         id: 'data-stack',
         title: 'Data Stack',
         description:
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
-        token: 'blue',
+        token: 'purple',
         volume: 3,
         docsProduct: 'data-warehouse',
-        learnPath: '/docs/data-warehouse/pocket-guide',
+        productHandle: 'data_warehouse',
+        learnPath: '/learn/warehouse/pocket-guide',
     },
     {
         id: 'session-replay',
@@ -87,7 +113,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         id: 'feature-flags',
         title: 'Feature Flags',
         description: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.',
-        token: 'orange',
+        token: 'seagreen',
         volume: 6,
         docsProduct: 'feature-flags',
         productHandle: 'feature_flags',
@@ -98,10 +124,21 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         id: 'self-driving',
         title: 'Self-driving',
         description: 'Scouts that watch your product and open a pull request when something breaks.',
-        token: 'orange',
+        token: 'red',
         volume: 1,
         docsProduct: 'self-driving',
         learnPath: '/docs/self-driving/pocket-guide',
+    },
+    {
+        id: 'error-tracking',
+        title: 'Error Tracking',
+        description: 'Catch what breaks, measure who it hurts, and hand the fix to an agent.',
+        token: 'orange',
+        volume: 7,
+        docsProduct: 'error-tracking',
+        productHandle: 'error_tracking',
+        learnPath: '/learn/error-tracking/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp'], selfDrivingSection: 'Self-drive' },
     },
 ]
 
@@ -112,6 +149,12 @@ export function volumeForProduct(docsProduct: string): PocketGuideVolume | undef
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
+}
+
+/** A page in the volume's Self-driving section (`learnHub.selfDrivingSection`), which sits after the story. */
+export function isSelfDrivingPage(volumeId: string, page: { section?: string | null }): boolean {
+    const section = volumeById(volumeId)?.learnHub?.selfDrivingSection
+    return Boolean(section) && page.section === section
 }
 
 /** SEO title for a chapter. The intro chapter shares the volume's title, so it reads "A pocket guide to <volume>". */

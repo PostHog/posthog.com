@@ -15,7 +15,7 @@ Open the [SQL editor](https://us.posthog.com/sql) to see the schema browser: you
 
 ## What you can do here
 
-- **[Link sources](/docs/data-warehouse/sources)** – connect Stripe, Postgres, Salesforce, HubSpot, and dozens more, pick which tables to sync, and re-run or reset a table when a sync goes wrong.
+- **[Link sources](/docs/data-pipelines/sources)** – connect Stripe, Postgres, Salesforce, HubSpot, and dozens more, pick which tables to sync, and re-run or reset a table when a sync goes wrong.
 - **[Query with SQL](/docs/data-warehouse/query)** – run [HogQL](/docs/data-warehouse/sql) against your events, persons, and sessions alongside every synced source table.
 - **[Join data across sources](/docs/data-warehouse/join)** – connect a source table to your PostHog data so product and business data answer the same question.
 - **[Create views](/docs/data-warehouse/views)** – save a query as a view and reference it from other queries.
@@ -23,12 +23,20 @@ Open the [SQL editor](https://us.posthog.com/sql) to see the schema browser: you
 - **[Visualize with insights](/docs/data-warehouse/insights)** – turn any query into a SQL insight and put it on a dashboard.
 - **Fix a query with [PostHog AI](/docs/posthog-ai)** – when a query in the SQL editor errors, PostHog AI can [repair it](/docs/data-warehouse/write-sql-ai) with your real schema in context. It's an interaction mode inside the SQL editor, not a separate surface, and it's the only place PostHog AI touches the warehouse.
 
+## Self-driving reports
+
+PostHog raises warehouse problems on its own – a materialized view that stopped refreshing, or a source whose sync keeps failing – and they land as [reports](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox). To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+- **Pick up warehouse signals** – PostHog watches the import side for the moments a source stops keeping its promise: a connection in error, a table schema that failed or is stuck mid-sync, silent staleness behind a green status, a dead webhook channel, and materialized views that fail to refresh. Each one becomes a [signal](/docs/self-driving/signals) carrying the source or view name and the underlying error, so a stale dashboard lands in your queue instead of going unnoticed. When imports are healthy, it looks for optimization candidates instead – expensive query shapes worth materializing, and materialized views nobody reads.
+- **Diagnose the failure** – start a discussion with an agent about the report to work out whether a column was renamed, an upstream source is itself broken, or the query is now too heavy to finish.
+
+A view's definition is stored in PostHog, not in your repository, so a fix to a view's SQL doesn't come as a pull request. Apply the corrected query to the view here in the web app. The check clears once a materialization succeeds.
+
 ## Related
 
 - Start with [Get started with the data warehouse](/docs/data-warehouse/start-here).
 - Run the same queries from your editor over [MCP](/docs/data-warehouse/surfaces/mcp).
 - Automate the same work with the [API](/docs/data-warehouse/surfaces/api).
-- Work through failing models and syncs in [PostHog Desktop](/docs/data-warehouse/surfaces/desktop).
 - Point a SQL client, a BI tool like Metabase, or your own code at your [warehouse](/docs/data-warehouse/warehouse/connect).
 - Restrict who can query tables and views with [warehouse access control](/docs/settings/warehouse-access-control).
 - Check [troubleshooting](/docs/data-warehouse/troubleshooting) when a query or sync misbehaves.

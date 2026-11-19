@@ -181,6 +181,15 @@ export default function PostsGallery({
     const { query, setQuery, activeTag, setActiveTag, sort, setSort, tags, filteredPosts, isFiltered, clear } =
         usePostFilters(posts)
     const [page, setPage] = useState(1)
+    const galleryRef = useRef<HTMLElement>(null)
+    const previousPageRef = useRef(page)
+
+    useEffect(() => {
+        if (previousPageRef.current !== page) {
+            galleryRef.current?.scrollIntoView({ block: 'start', behavior: 'auto' })
+            previousPageRef.current = page
+        }
+    }, [page])
 
     // Changing the search, tag, or sort re-filters the list — jump back to the first page
     useEffect(() => {
@@ -190,9 +199,22 @@ export default function PostsGallery({
     const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE))
     const currentPage = Math.min(page, totalPages)
     const visiblePosts = filteredPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE)
+    const pagination = (
+        <div className="flex flex-wrap items-center justify-center gap-4">
+            <OSButton size="sm" disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)}>
+                ← Previous
+            </OSButton>
+            <span className="text-sm text-secondary">
+                Page {currentPage} of {totalPages}
+            </span>
+            <OSButton size="sm" disabled={currentPage === totalPages} onClick={() => setPage(currentPage + 1)}>
+                Next →
+            </OSButton>
+        </div>
+    )
 
     return (
-        <section>
+        <section ref={galleryRef} className="scroll-mt-8">
             <div className="flex items-center justify-between gap-2">
                 <h2 className="m-0 min-w-0 shrink truncate text-lg font-bold">
                     {heading}
@@ -223,28 +245,13 @@ export default function PostsGallery({
             />
             {filteredPosts.length > 0 ? (
                 <>
+                    {currentPage > 1 && <div className="mb-8 pt-4">{pagination}</div>}
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 @lg:grid-cols-2 @lg:gap-x-6 @lg:gap-y-10 @3xl:grid-cols-3">
                         {visiblePosts.map((post) => (
                             <GalleryCard key={post.id} post={post} />
                         ))}
                     </div>
-                    {totalPages > 1 && (
-                        <div className="mt-8 flex items-center justify-center gap-4">
-                            <OSButton size="sm" disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)}>
-                                ← Previous
-                            </OSButton>
-                            <span className="text-sm text-secondary">
-                                Page {currentPage} of {totalPages}
-                            </span>
-                            <OSButton
-                                size="sm"
-                                disabled={currentPage === totalPages}
-                                onClick={() => setPage(currentPage + 1)}
-                            >
-                                Next →
-                            </OSButton>
-                        </div>
-                    )}
+                    {totalPages > 1 && <div className="mt-8">{pagination}</div>}
                 </>
             ) : (
                 <div className="rounded border border-dashed border-input p-8 text-center text-secondary">

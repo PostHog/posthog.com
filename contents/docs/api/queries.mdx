@@ -7,20 +7,28 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-API queries enable you to query your data in PostHog. This is useful for:
+API queries let you run SQL and insight queries against your PostHog data. Use them for one-off and exploratory queries.
 
-- Building [embedded analytics](/tutorials/embedded-analytics). 
-- Pulling aggregated PostHog data into your own or other apps.
+<CalloutBox icon="IconInfo" type="action" title="Use Endpoints for production code">
+
+If your code, script, scheduled job, or customer-facing feature runs a query more than once, use [Endpoints](/docs/endpoints) instead of `/query`. An endpoint saves the query in PostHog and gives you a named route to call. Use [variables](/docs/endpoints/variables) for per-user or per-customer lookups, and [materialization](/docs/endpoints/materialization) for heavy aggregates. Materialized endpoints have higher limits than `/query` (see [rate limits](/docs/api/queries#rate-limits)).
+
+- To ask questions about your data from an AI agent, use the [PostHog MCP](/docs/model-context-protocol).
+- To export data to a warehouse or another tool, use [batch exports](/docs/data-pipelines/batch-exports).
+
+See [Endpoints vs Query API](/docs/endpoints/endpoints-vs-query-api) for a full comparison.
+
+</CalloutBox>
 
 <CalloutBox icon="IconWarning" type="caution" title="The /query endpoint is not for exports">
 
-The `/query` endpoint is intended for ad-hoc analytics and embedded use cases. It is **not a supported export mechanism**.
+The `/query` endpoint is intended for ad-hoc and exploratory analytics. For embedded or customer-facing analytics, use [Endpoints](/docs/endpoints). It is **not a supported export mechanism**.
 
-- **Bulk or recurring exports of `events`, `persons`, or `query_log` are not supported** over `/query`. Use [batch exports](/docs/cdp/batch-exports) for ETL, data warehouse syncs, and any integration that pulls more than a few thousand rows on a schedule. For one-off bulk exports, use [file download exports](/docs/cdp/file-download-exports).
-- **Third-party connectors must use [batch exports](/docs/cdp/batch-exports) or [file download exports](/docs/cdp/file-download-exports)**, not `/query`. Connectors built on `/query` are not supported and will be rate-limited or rejected.
+- **Bulk or recurring exports of `events`, `persons`, or `query_log` are not supported** over `/query`. Use [batch exports](/docs/data-pipelines/batch-exports) for ETL, data warehouse syncs, and any integration that pulls more than a few thousand rows on a schedule. For one-off bulk exports, use [file download exports](/docs/data-pipelines/file-download-exports).
+- **Third-party connectors must use [batch exports](/docs/data-pipelines/batch-exports) or [file download exports](/docs/data-pipelines/file-download-exports)**, not `/query`. Connectors built on `/query` are not supported and will be rate-limited or rejected.
 - **`OFFSET` pagination is not supported for programmatic requests** (personal API keys, OAuth tokens, and similar). It currently returns HTTP 400 for personal API keys, and we may reject it for other authentication methods at any time. Use keyset pagination on `timestamp` instead (see [below](#7-use-keyset-pagination-instead-of-offset)).
 - We **reserve the right to rate-limit, restrict, or reject** queries that look like exports, including without prior notice. Pipelines built on `/query` may break at any time.
-- Use [real-time destinations](/docs/cdp/destinations) for sending data to Slack, webhooks, etc.
+- Use [real-time destinations](/docs/data-pipelines/destinations) for sending data to Slack, webhooks, etc.
 - Use [materialized views](/docs/data-warehouse/views/materialize) for expensive recurring aggregations. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
 
 </CalloutBox>
@@ -40,7 +48,7 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 
 By default, API queries return up to 100 rows. If you specify your own `LIMIT`, you can return up to 50k rows per query.
 
-For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#7-use-keyset-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/cdp/batch-exports) or [file download exports](/docs/cdp/file-download-exports) – `/query` is not a supported export path.
+For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#7-use-keyset-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/data-pipelines/batch-exports) or [file download exports](/docs/data-pipelines/file-download-exports) – `/query` is not a supported export path.
 
 </CalloutBox>
 
@@ -430,7 +438,7 @@ API queries are limited at the project-level to:
   - applies to query execution time, not HTTP request duration
 
 
-At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence, or a [file download export](/docs/cdp/file-download-exports) for a one-off export.
+These limits are fixed. For production traffic, use [Endpoints](/docs/endpoints). Materialized endpoints have higher rate and concurrency limits (see [endpoint rate limits](/docs/endpoints/rate-limits)). To pull raw data on a schedule, use [batch exports](/docs/data-pipelines/batch-exports), or a [file download export](/docs/data-pipelines/file-download-exports) for a one-off export.
 
 If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
 
@@ -450,10 +458,10 @@ For the larger budget, [subscribe to a paid plan](/pricing). PostHog is pay-as-y
 
 ## Further reading
 
-- [File download exports for one-off bulk exports](/docs/cdp/file-download-exports)
+- [File download exports for one-off bulk exports](/docs/data-pipelines/file-download-exports)
 - [Project setup for embedded analytics](/docs/data/embedded-analytics-projects)
-- [How to set up embedded analytics with PostHog, Next.js, and Recharts](/tutorials/embedded-analytics)
-- [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
+- [Build customer-facing analytics with endpoints](/docs/endpoints/customer-facing-analytics)
+- [Endpoints vs Query API](/docs/endpoints/endpoints-vs-query-api)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
 - [The query endpoint API reference](/docs/api/query/)
 - [The query API endpoint code on GitHub](https://github.com/PostHog/posthog/blob/master/posthog/api/query.py)

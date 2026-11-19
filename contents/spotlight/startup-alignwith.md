@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1713973018/posthog.com/contents/images/blog/spotlight-alignwith.jpg
 featuredImageType: full
+ogImage: generated
 category: Startups
 ---
 

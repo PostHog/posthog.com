@@ -103,7 +103,9 @@ const DistributedTracing: React.FC = () => {
     return (
         <ReaderView
             menuTabs={menuTabs}
-            productSelect={productData ? <ProductSwitcher activeHandle={productData.handle} /> : undefined}
+            productSelect={
+                productData ? <ProductSwitcher activeHandle={productData.handle} surface="docs" /> : undefined
+            }
         >
             <SEO title="Distributed tracing - Docs - PostHog" />
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import LivePlaygroundPage, { SectionIntro } from 'components/PocketGuides/LivePlaygroundPage'
-import { SessionReplayLinkFigure } from 'components/PocketGuides/ProductAnalyticsIdentityExhibits'
-import { TwigReplayMaskingFigure } from 'components/PocketGuides/SessionReplayPlaygroundExhibits'
+import LivePlaygroundPage, { SectionIntro } from 'components/Learn/LivePlaygroundPage'
+import { SessionReplayLinkFigure } from 'components/Learn/TwigExhibits/ProductAnalyticsIdentityExhibits'
+import { TwigReplayMaskingFigure } from 'components/Learn/TwigExhibits/SessionReplayPlaygroundExhibits'
 
 export default function SessionReplayLearnByDoing(): JSX.Element {
     return (

@@ -92,7 +92,7 @@ Here's what each part does:
 - The first rewrite routes static asset requests to PostHog's asset server. This serves the JavaScript SDK and other static files.
 - The second rewrite routes remote config requests (`/array/{token}/config.js`) to the asset server. The asset server returns proper `cache-control` headers for these responses, while the main API server strips them.
 - The third rewrite routes all other requests to PostHog's main API. This handles event capture, Feature flags, and session recordings.
-- `skipTrailingSlashRedirect` prevents Next.js from redirecting URLs with trailing slashes. PostHog's API uses trailing slashes (like `/e/`), and without this setting, Next.js would redirect them and break event capture.
+- `skipTrailingSlashRedirect` stops Next.js from redirecting URLs that end with a slash. PostHog API paths end with a slash, such as `/e/` and `/flags/`. Without this setting, Next.js answers each of these requests with a `308` redirect. Browsers follow it, so events still arrive, but each request takes an extra round trip.
 
 The static and array rewrites must come before the catch-all. Next.js evaluates rewrites in order, so if the catch-all rule came first, it would match `/yourpath/static/*` and `/yourpath/array/*` before the specific rules.
 
@@ -189,13 +189,14 @@ If requests to your proxy path return 404:
 
 ### Trailing slash conflicts with SEO
 
-The `skipTrailingSlashRedirect` setting is required for PostHog API requests but can cause SEO issues if pages become accessible at both `/page` and `/page/`.
+The `skipTrailingSlashRedirect` setting removes a redirect from each PostHog API request, but it can cause SEO issues if pages become accessible at both `/page` and `/page/`.
 
 Solutions:
 
 1. Handle trailing slash redirects in [Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) for non-PostHog routes
 2. Use `<link rel="canonical">` to specify the preferred URL for search engines
 3. Ensure your sitemap only includes one URL format
+4. Leave `skipTrailingSlashRedirect` out. PostHog requests still work, with one extra redirect each
 
 ### 401 errors or "No project token provided"
 

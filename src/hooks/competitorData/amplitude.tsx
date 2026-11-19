@@ -3,7 +3,7 @@ export const amplitude = {
     key: 'amplitude',
     assets: {
         icon: '/images/competitors/amplitude.svg',
-        comparisonArticle: '/blog/posthog-vs-amplitude',
+        comparisonArticle: '/compare/posthog-vs-amplitude',
     },
     products: {
         product_analytics: {
@@ -94,7 +94,7 @@ export const amplitude = {
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
-                conditional_recording: false,
+                conditional_recording: true,
                 event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
@@ -139,6 +139,7 @@ export const amplitude = {
             ai: {
                 features: {
                     ai_summaries: true,
+                    replay_vision: 'Growth and Enterprise add-on',
                 },
             },
         },
@@ -217,7 +218,7 @@ export const amplitude = {
                 native_goal_tracking: true,
                 no_code_experiments: true,
                 low_code_experiments: true,
-                ratio_metrics: false,
+                ratio_metrics: true,
                 recommended_run_time: true,
                 secondary_metrics: true,
                 shared_metrics_library: true,
@@ -356,8 +357,35 @@ export const amplitude = {
         error_tracking: {
             available: false,
         },
+        // Agent Analytics
         ai_observability: {
-            available: false,
+            available: true,
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    tool_call_tracking: true,
+                    session_replay_link: true,
+                    user_profile_context: true,
+                    // Queryable in charts and via the export API, not SQL.
+                    sql_queries_on_traces: false,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    // Agent events carry user_id and [Agent] Cost USD, so charts can group cost by user.
+                    cost_by_user: true,
+                },
+            },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    datasets: true,
+                    // [Agent] Experiment Variant on agent events, in the same project as product events.
+                    ab_experiments_on_product_metrics: true,
+                },
+            },
         },
         logs: {
             available: false,
@@ -405,7 +433,7 @@ export const amplitude = {
         developer: {
             api: true,
             mobile_sdks: true,
-            proxies: false,
+            proxies: true,
             sdks: true,
             sql: true,
             terraform: false,

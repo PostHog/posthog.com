@@ -1,11 +1,26 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { colors: brandPalette } = require('@posthog/brand/colors')
+
+const brandColors = Object.fromEntries(
+    Object.values(brandPalette).map(({ name, core, lighter, darker }) => [
+        name.replace(/\s+/g, '-'),
+        { DEFAULT: core, lighter, darker },
+    ])
+)
+
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './contents/**/*.{js,jsx,ts,tsx,mdx}', './safelist.txt'],
+    content: [
+        './src/**/*.{js,jsx,ts,tsx}',
+        './contents/**/*.{js,jsx,ts,tsx,mdx}',
+        './safelist.txt',
+        './node_modules/@posthog/quill-charts/dist/index.js',
+    ],
     options: {
         safelist: [
             // use safelist.txt
         ],
     },
-    darkMode: 'class', // or 'media' or 'class'
+    darkMode: 'class',
     theme: {
         screens: {
             '2xs': '425px',
@@ -55,6 +70,7 @@ module.exports = {
                 'ai-blue': '#3E6B9E',
             },
             backgroundImage: {
+                hatch: 'repeating-linear-gradient(135deg, rgb(var(--text-primary) / 0.08) 0 1px, transparent 1px 6px)',
                 ai: 'radial-gradient(at 84% 83%, hsla(195,45%,75%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, rgb(173, 212, 155) 0px, transparent 50%), radial-gradient(at 44% 51%, rgb(226, 219, 167) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(180,38%,78%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(155,42%,68%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(178,45%,65%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(200,40%,72%,1) 0px, transparent 50%)',
                 'llm-analytics':
                     'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 40%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 35%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 45%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 40%)',
@@ -136,6 +152,7 @@ module.exports = {
 
                 transparent: 'transparent',
                 current: 'currentColor',
+                brand: brandColors,
 
                 highlight: 'rgba(235,157,42,.2)',
                 footer: '#08042f',
@@ -245,24 +262,6 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                matter: [
-                    'Matter SQ',
-                    '-apple-system',
-                    'BlinkMacSystemFont',
-                    'avenir next',
-                    'avenir',
-                    'segoe ui',
-                    'helvetica neue',
-                    'helvetica',
-                    'Ubuntu',
-                    'roboto',
-                    'noto',
-                    'arial',
-                    'sans-serif',
-                ],
-                fancy: ['Zapfino', 'serif'],
-                button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
-                nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
                 rounded: ['RoundHog', 'sans-serif'],
                 squeak: ['Squeak', 'sans-serif'],
@@ -289,6 +288,9 @@ module.exports = {
             },
             fontSize: {
                 '2xs': '.625rem',
+                11: ['11px', { lineHeight: '14px' }],
+                13: ['13px', { lineHeight: '18px' }],
+                15: ['15px', { lineHeight: '22.5px' }],
             },
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',
@@ -520,17 +522,13 @@ module.exports = {
         require('tailwindcss-animated'),
         require('@tailwindcss/typography'),
         function ({ addVariant }) {
+            addVariant('reduce-transparency', '@media (prefers-reduced-transparency: reduce)')
             addVariant('skin-modern', 'body[data-skin="modern"] &')
             addVariant('skin-classic', 'body[data-skin="classic"] &')
             addVariant('wallpaper-keyboard-garden', 'body[data-wallpaper="keyboard-garden"] &')
             addVariant('wallpaper-hogzilla', 'body[data-wallpaper="hogzilla"] &')
             addVariant('wallpaper-office-party', 'body[data-wallpaper="office-party"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
-            // Site toggle (data attr, set early in theme-init) + OS prefers-reduced-transparency
-            addVariant('reduce-transparency', [
-                'body[data-reduce-transparency="true"] &',
-                '@media (prefers-reduced-transparency: reduce)',
-            ])
         },
     ],
 }

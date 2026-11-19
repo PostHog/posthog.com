@@ -1,0 +1,162 @@
+owner: wizard-and-docs
+tags: [install, ios, swift, mobile]
+status: active
+
+# One check for each flow the iOS docs teach. Every check is a baseline: a short prompt
+# in a user's words, no docs added. The prompt names PostHog and the kind of analytics,
+# and no API. The rubrics describe the correct result for posthog-ios 3, the major the
+# docs show. `install` runs in an app with no PostHog code. The other checks run in apps
+# that already use posthog-ios 3. iOS can't build in Gauge, so there's no `builds`.
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a SwiftUI iOS app from a one-line
+          request? Ice Cubes uses TelemetryDeck and has no PostHog code. The prompt names
+          only the stack; the agent gets no docs, so docs-read shows which pages it finds
+          on its own.
+      codebase_to_test: oss-icecubes
+      prompt: &install-prompt >-
+          Set up PostHog in this iOS app.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  posthog-ios is a Swift Package dependency at 3.x: either a package
+                  reference to https://github.com/PostHog/posthog-ios(.git) in the Xcode
+                  project with the `PostHog` product linked to the app target, or
+                  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "3.x")
+                  with .product(name: "PostHog", package: "posthog-ios") in a Package.swift
+                  target the app uses. A CocoaPods `pod "PostHog"` at 3.x also passes.
+              initialized: >-
+                  The app imports PostHog, creates PostHogConfig(projectToken:host:) and
+                  calls PostHogSDK.shared.setup(config) once at launch, in the App's init()
+                  or in application(_:didFinishLaunchingWithOptions:). Cite the file and
+                  line(s). Fails if it uses PostHogConfig(apiKey:).
+
+    - id: event-by-user
+      description: >-
+          Baseline in Element X, which is on posthog-ios 3.92.6, captures anonymous typed
+          events and never calls identify. Does an agent identify the signed-in user and
+          put the name on the person, as well as capture the event? The prompt does not
+          name identify. Element X has no email for a user, so the prompt asks for the
+          name only.
+      codebase_to_test: oss-element-x-ios
+      pages:
+          - docs/libraries/ios/usage
+          - docs/product-analytics/identify
+      prompt: >-
+          Track when a user reacts to a message in the iOS app, by user, with PostHog
+          product analytics. Make sure the user's name is populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  Reacting to a message calls capture(_:properties:) on
+                  PostHogSDK.shared, directly or through the app's PostHog client wrapper.
+                  Cite the file and line(s).
+              user-identified: >-
+                  The app calls PostHogSDK.shared.identify(<Matrix user ID>) when the user
+                  session starts (sign-in or restored session), directly or through the
+                  wrapper. Fails if identify runs only inside the reaction handler, or if
+                  the user ID is only an event property.
+              name-on-person: >-
+                  The display name is set on the person: identify(_:userProperties:),
+                  setPersonProperties(userPropertiesToSet:), or userProperties on
+                  capture. It is not only a plain event property.
+
+    - id: screen-views
+      description: >-
+          Baseline in Bouncer, a SwiftUI app on posthog-ios 3.92.0 that captures events but
+          no screens and leaves captureScreenViews at its default. Does an agent follow the
+          docs' SwiftUI advice: the postHogScreenView modifier with captureScreenViews off?
+          The prompt names neither.
+      codebase_to_test: oss-bouncer-ios
+      pages:
+          - docs/libraries/ios/usage
+      prompt: >-
+          Track which screens people view in this iOS app with PostHog product analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              screens-tracked: >-
+                  The app's full-screen SwiftUI views apply the .postHogScreenView()
+                  modifier, with or without a name, or call PostHogSDK.shared.screen(_:)
+                  when they appear. Cite the file and line(s).
+              auto-screens-off: >-
+                  The PostHogConfig sets captureScreenViews = false, so the SDK does not
+                  also send SwiftUI's internal view names.
+
+    - id: feature-flag
+      description: >-
+          Baseline in Element X, which sets preloadFeatureFlags = false because it uses no
+          flags. Does an agent read the flag and make sure flags load? The prompt does not
+          mention loading; an agent that leaves preload off ships a flag that is always
+          off.
+      codebase_to_test: oss-element-x-ios
+      pages:
+          - docs/libraries/ios/usage
+          - docs/feature-flags/installation/ios
+      prompt: >-
+          Put creating polls in the iOS app behind a PostHog feature flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code reads the flag on PostHogSDK.shared, directly or through the
+                  app's PostHog client wrapper, with getFeatureFlagResult(<flag key>) and
+                  its `.enabled`, or with isFeatureEnabled(<flag key>). Cite the file and
+                  line(s).
+              flags-load: >-
+                  Flags are loaded before the flag is read: the change sets
+                  preloadFeatureFlags to true (or removes the line that sets it to
+                  false), or calls reloadFeatureFlags() and reads the flag after the
+                  reload finishes, in its completion callback or on the
+                  PostHogSDK.didReceiveFeatureFlags notification.
+              flag-gates-polls: >-
+                  Creating a poll is hidden or refused when the flag is off.
+
+    - id: error
+      description: >-
+          Baseline in Element X, which turns exception autocapture off and has no
+          captureException call. Does an agent report the handled error with
+          captureException? The prompt does not name the method.
+      codebase_to_test: oss-element-x-ios
+      pages:
+          - docs/libraries/ios/usage
+          - docs/error-tracking/installation/ios
+      prompt: >-
+          Track errors when creating a room fails in the iOS app, with PostHog error
+          tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed room creation calls PostHogSDK.shared.captureException(error)
+                  or captureException(error, properties:), directly or through the app's
+                  PostHog client wrapper, with the Swift Error from the failure. Cite the
+                  file and line(s). Fails if it sends a plain capture() event instead.
+
+    # Next major: the same tasks for a project on posthog-ios 4. Expected to fail until the
+    # docs show that major.
+    - id: install-next
+      description: >-
+          The install task in an app with no PostHog code, graded for posthog-ios 4, which
+          the agent gets as the newest release. Expected to fail until the docs show that
+          major.
+      codebase_to_test: oss-icecubes
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  posthog-ios is a Swift Package dependency at 4.x: either a package
+                  reference to https://github.com/PostHog/posthog-ios(.git) in the Xcode
+                  project with the `PostHog` library linked to the app target, or
+                  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0")
+                  with .product(name: "PostHog", package: "posthog-ios") in a Package.swift
+                  target the app uses. Fails if it installs PostHog with CocoaPods.
+              initialized: >-
+                  The app imports PostHog, creates PostHogConfig(projectToken:host:) and
+                  calls PostHogSDK.shared.setup(config) once at launch, in the App's init()
+                  or in application(_:didFinishLaunchingWithOptions:). Cite the file and
+                  line(s).

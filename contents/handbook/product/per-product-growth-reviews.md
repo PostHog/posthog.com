@@ -29,7 +29,7 @@ Here are some examples:
 
 As mentioned before, we aim to analyse the same set of metrics month over month, so we can see trends and anomalies. However, there can be cases where we decide to change a metric if it’s a better indicator of long-term success, particularly for product activation and key product actions.
 
-We’ve found that the best way to review what is a quite long list of metrics is to combine all numbers (revenue as well as usage) in one spreadsheet with a new column for each month, and only open individual graphs where required. Below is a screenshot that shows a part of our growth review document. [View the internal growth review spreadsheet](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743) for internal users.
+We’ve found that the best way to review what is a quite long list of metrics is to combine all numbers (revenue as well as usage) in one spreadsheet with a new column for each month, and only open individual graphs where required. Below is a screenshot that shows a part of our growth review document. <PrivateLink url="https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743">View the internal growth review spreadsheet</PrivateLink> for internal users.
 
 ![Growth review template](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth-review-template.png)
 
@@ -101,7 +101,7 @@ Very similar to the above, except that the metrics walkthrough doesn't happen in
 
 ## Useful material (internal links)
 
-- [Main growth review document](https://docs.google.com/document/d/1MgunwZ4_scm7RaEBocyQJzQUt48kTkiBX_529Do50F4/edit#heading=h.na8qqkjykso0) (Session Replay example)
-- [Metrics overview spreadsheet](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743)
-- [PostHog notebook with relevant usage graphs](https://us.posthog.com/project/2/notebooks/6FwGbwN5) (Session Replay example)
-- [Metabase dashboard for per-product revenue](https://metabase.prod-us.posthog.dev/dashboard/39-revenue-growth-by-product?product=session_replay)
+- <PrivateLink url="https://docs.google.com/document/d/1MgunwZ4_scm7RaEBocyQJzQUt48kTkiBX_529Do50F4/edit#heading=h.na8qqkjykso0">Main growth review document</PrivateLink> (Session Replay example)
+- <PrivateLink url="https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743">Metrics overview spreadsheet</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/notebooks/6FwGbwN5">PostHog notebook with relevant usage graphs</PrivateLink> (Session Replay example)
+- <PrivateLink url="https://metabase.prod-us.posthog.dev/dashboard/39-revenue-growth-by-product?product=session_replay">Metabase dashboard for per-product revenue</PrivateLink>

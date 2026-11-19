@@ -47,6 +47,8 @@ tags:
 ---
 ```
 
+The featured image is the Open Graph image. When the art has no headline, add `ogImage: generated` and the site draws the title, author, and wordmark on top of it.
+
 The frontmatter for tutorials is similar, but they don't require a featured image:
 
 ```

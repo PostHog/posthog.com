@@ -3,7 +3,7 @@ import { CallToAction, child, container, TrackedCTA } from 'components/CallToAct
 import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { AnimatePresence, motion } from 'framer-motion'
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { NewsletterForm } from 'components/NewsletterForm'
 import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -14,6 +14,8 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconSpinner } from '@posthog/icons'
+import { AlertDialog } from 'components/UI/AlertDialog'
+import { Button } from 'components/UI/Button'
 
 const allowedFileTypes = ['application/pdf']
 
@@ -240,17 +242,31 @@ const Form = ({
     const posthog = usePostHog()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const [confirming, setConfirming] = useState(false)
+    const formRef = useRef<HTMLFormElement>(null)
+
+    const preventEnterSubmit = (e: React.KeyboardEvent<HTMLFormElement>) => {
+        if (e.key === 'Enter' && e.target instanceof HTMLInputElement) {
+            e.preventDefault()
+        }
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setConfirming(true)
+    }
+
+    const submitApplication = async () => {
+        const formElement = formRef.current as HTMLFormElement
         setLoading(true)
         setError(null)
 
         try {
-            const data = new FormData(e.currentTarget)
+            const data = new FormData(formElement)
             const form = new FormData()
 
             for (const [name, value] of data as any) {
-                const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
+                const el = formElement.querySelector(`[name="${name}"]`) as HTMLInputElement
                 const path = el?.dataset.path
                 if (el?.type === 'file') {
                     if (!allowedFileTypes.includes((value as File).type)) {
@@ -336,6 +352,7 @@ const Form = ({
             }
         } finally {
             setLoading(false)
+            setConfirming(false)
         }
     }
     return (
@@ -361,7 +378,7 @@ const Form = ({
                         </p>
                     </div>
                 )}
-                <form onSubmit={handleSubmit} className="p-4">
+                <form ref={formRef} onSubmit={handleSubmit} onKeyDown={preventEnterSubmit} className="p-4">
                     <div className="grid grid-cols-2 gap-3">
                         {info?.applicationFormDefinition?.sections?.map(({ fields }: { fields: any[] }) => {
                             return fields.map(
@@ -411,6 +428,24 @@ const Form = ({
                     </button>
                 </form>
             </div>
+            <AlertDialog.Root open={confirming} onOpenChange={(open) => !loading && setConfirming(open)}>
+                <AlertDialog.Popup>
+                    <AlertDialog.Header>Submit your application?</AlertDialog.Header>
+                    <AlertDialog.Body>
+                        <AlertDialog.Description>
+                            You cannot edit your answers after you submit. Check them before you continue.
+                        </AlertDialog.Description>
+                    </AlertDialog.Body>
+                    <AlertDialog.Footer>
+                        <AlertDialog.Close render={<Button />} disabled={loading}>
+                            Keep editing
+                        </AlertDialog.Close>
+                        <Button appearance="raised" variant="primary" loading={loading} onClick={submitApplication}>
+                            Submit application
+                        </Button>
+                    </AlertDialog.Footer>
+                </AlertDialog.Popup>
+            </AlertDialog.Root>
         </div>
     )
 }
@@ -486,7 +521,7 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                     {isInUnitedStates && (
                         <div className="px-6 md:px-12 mb-8">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/laptop_sticker_6c15a03be1.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_sticker_f57f258a6d.png"
                                 width={140}
                                 className="float-right ml-4 -mt-2 rotate-3"
                             />
@@ -543,7 +578,7 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                                 </button>
                             </div>
                             <CallToAction
-                                to="/merch?product=posthog-sticker"
+                                to={`/merch?product=posthog-sticker&coupon=${code}`}
                                 size="sm"
                                 className="!w-full"
                                 state={{ newWindow: true }}

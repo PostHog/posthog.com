@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/spotlight_unified.png
 featuredImageType: full
+ogImage: generated
 category: Startups
 ---
 This month we’re chatting to [Unified.to](https://unified.to/) co-founder and CEO, Roy Pereira. Roy is a serial entrepreneur, and Unified.to is his fifth startup. Previously, Roy had been the CEO and founder of CalendarHero (formerly known as Zoom.ai), which was acquired by [Vendasta](/customers/vendasta) in 2021.

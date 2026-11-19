@@ -2,7 +2,7 @@
 title: How Netdata uses PostHog and BigQuery to build modern devtools
 customer: Netdata
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/netdata_posthog_1ea718b951.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Netdata_1920x1080_253602ce3b.png
 date: 2022-08-23
 ---
 

@@ -7,10 +7,10 @@ showTitle: true
 The SDK health check watches the versions of the PostHog SDKs sending events to your project and flags any that have fallen significantly behind the latest release. It samples your recent events, compares each SDK against the latest published release, and surfaces anything that's meaningfully out of date so you can keep your integrations current.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_32_15_683_Z_4d40cced0b.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_32_20_176_Z_b58d6ca637.png"
-    alt="SDK health check in the Health checks section in the PostHog app"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_32_15_683_Z_4d40cced0b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_32_20_176_Z_b58d6ca637.png"
+  alt="SDK health check in the Health checks section in the PostHog app"
+  classes="rounded"
 />
 
 ## What this check looks for
@@ -46,22 +46,23 @@ Each SDK is labelled with a badge so you can see its status at a glance:
 
 ## Supported SDKs
 
-The check currently monitors 12 PostHog SDKs:
+The check currently monitors 13 PostHog SDKs:
 
-| Platform | Package name | Documentation link |
-|----------|--------------|-------------------|
-| **Web** | `posthog-js` | [JavaScript](/docs/libraries/js) |
-| **Python** | `posthog-python` | [Python](/docs/libraries/python) |
-| **Node.js** | `posthog-node` | [Node.js](/docs/libraries/node) |
+| Platform         | Package name           | Documentation link                           |
+| ---------------- | ---------------------- | -------------------------------------------- |
+| **Web**          | `posthog-js`           | [JavaScript](/docs/libraries/js)             |
+| **Python**       | `posthog-python`       | [Python](/docs/libraries/python)             |
+| **Node.js**      | `posthog-node`         | [Node.js](/docs/libraries/node)              |
 | **React Native** | `posthog-react-native` | [React Native](/docs/libraries/react-native) |
-| **Flutter** | `posthog-flutter` | [Flutter](/docs/libraries/flutter) |
-| **iOS** | `posthog-ios` | [iOS](/docs/libraries/ios) |
-| **Android** | `posthog-android` | [Android](/docs/libraries/android) |
-| **Go** | `posthog-go` | [Go](/docs/libraries/go) |
-| **PHP** | `posthog-php` | [PHP](/docs/libraries/php) |
-| **Ruby** | `posthog-ruby` | [Ruby](/docs/libraries/ruby) |
-| **Elixir** | `posthog-elixir` | [Elixir](/docs/libraries/elixir) |
-| **.NET** | `posthog-dotnet` | [.NET](/docs/libraries/dotnet) |
+| **Flutter**      | `posthog-flutter`      | [Flutter](/docs/libraries/flutter)           |
+| **iOS**          | `posthog-ios`          | [iOS](/docs/libraries/ios)                   |
+| **Android**      | `posthog-android`      | [Android](/docs/libraries/android)           |
+| **Go**           | `posthog-go`           | [Go](/docs/libraries/go)                     |
+| **PHP**          | `posthog-php`          | [PHP](/docs/libraries/php)                   |
+| **Laravel**      | `posthog-laravel`      | [Laravel](/docs/libraries/laravel)           |
+| **Ruby**         | `posthog-ruby`         | [Ruby](/docs/libraries/ruby)                 |
+| **Elixir**       | `posthog-elixir`       | [Elixir](/docs/libraries/elixir)             |
+| **.NET**         | `posthog-dotnet`       | [.NET](/docs/libraries/dotnet)               |
 
 ## Why it matters
 
@@ -81,7 +82,7 @@ See [keeping SDKs current](/docs/health-checks/keeping-sdks-current) for strateg
 Click on any version number in the SDK health table to open a dropdown with two ways to view events from that SDK version:
 
 - **Events on Activity page** – Opens the [Activity page](/docs/data/events) with filters pre-configured for the SDK type, version, and events from the last 7 days. Useful if you prefer a visual interface over writing queries.
-- **SQL query** – Opens the [SQL editor](/docs/hogql) with a HogQL query showing events for that SDK version. Useful if you want to customize the query or export data.
+- **SQL query** – Opens the [SQL editor](/docs/sql) with a HogQL query showing events for that SDK version. Useful if you want to customize the query or export data.
 
 ## Fix it automatically with the Inbox and PostHog Desktop
 

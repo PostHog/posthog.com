@@ -194,7 +194,7 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                 </strong>
                             </SidebarListItem>
                             <SidebarListItem>
-                                You can set billing limits per product so you never get a surprise bill
+                                You can set billing limits on most products so you never get a surprise bill
                             </SidebarListItem>
                             <SidebarListItem>
                                 We also offer{' '}
@@ -204,6 +204,12 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                     </strong>
                                 </Tooltip>{' '}
                                 for startups and non-profits
+                            </SidebarListItem>
+                            <SidebarListItem>
+                                We're transparent about <Link href="/docs/billing/what-you-pay-for-per-event" className={sidebarLinkClasses}>
+                                    what you actually pay for
+                                </Link>{' '}
+                                so you can decide whether to build or buy each part of our stack.
                             </SidebarListItem>
                         </SidebarList>
                     </div>

@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-to-pick-cofounder.png
 featuredImageType: full
+ogImage: generated
 category: Startups
 ---
 

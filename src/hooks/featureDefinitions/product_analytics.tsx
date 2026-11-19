@@ -43,7 +43,7 @@ export const productAnalyticsFeatures = {
             description: 'Track purchase value, LTV, and other revenue metrics',
         },
         predictive_insights: {
-            name: 'Predictive insights',
+            name: 'AI-powered metric alerts',
             description: 'AI-powered alerts when metrics change',
         },
         real_time_view: {
@@ -96,7 +96,7 @@ export const productAnalyticsFeatures = {
             name: 'Graphs & trends',
             description: 'Build custom insights and visualizations',
             url: '/product-analytics',
-            docsUrl: '/docs/product-analytics/trends',
+            docsUrl: '/docs/product-analytics/trends/overview',
         },
         features: {
             visualization_options: {

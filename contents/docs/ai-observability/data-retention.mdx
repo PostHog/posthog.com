@@ -31,4 +31,4 @@ PostHog deletes the `ai_events` copy after 30 days. The trimmed copy in the `eve
 - Metadata such as model, provider, token counts, cost, latency, and trace IDs stays available, so analysis of historical cost, usage, and performance is unaffected.
 - Insights, queries, and filters that don't reference the large properties keep working on data of any age.
 
-To keep raw prompts and completions beyond 30 days, set up a [batch export](/docs/cdp/batch-exports) to your own storage.
+To keep raw prompts and completions beyond 30 days, set up a [batch export](/docs/data-pipelines/batch-exports) to your own storage.

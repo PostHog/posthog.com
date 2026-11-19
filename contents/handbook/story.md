@@ -128,7 +128,7 @@ We've decided to double down on mass adoption of the platform in high potential 
 
 We went from "product analytics with some extra stuff thrown in" to "Product OS" and started charging for session replay separately.
 
-In the product, we're working on making the experience slicker, and we have plans for a standalone quality [CDP](/cdp) in Q2.
+In the product, we're working on making the experience slicker, and we have plans for a standalone quality [CDP](/data-pipelines) in Q2.
 
 ### March 2023: Decided to ship a warehouse
 

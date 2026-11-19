@@ -26,7 +26,7 @@ This constraint has worked out pretty well for us. Distribution is pretty easy w
 
 We even hire full-stack developers into our marketing team to make sure we can cover the full depth needed in a lot of our tutorials, docs, and posts.
 
-Things you won't find our marketing team doing: removing information from our website to increase conversion, focusing on paid ads, or letting colleagues ship content they aren't proud of.
+Things you won't find our marketing team doing: removing information from our website to increase conversion, running ads that we'd be embarrassed to see ourselves, or letting colleagues ship content they aren't proud of.
 
 ## We happily spend lots of money on our website
 

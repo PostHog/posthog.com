@@ -48,22 +48,22 @@ accounts can still be fine.
 
 This requires support-tool data. For churn warning signs from product usage alone, with no
 tickets involved, that's
-[Pre-cancellation behavior](/docs/data-warehouse/pocket-guide/pre-cancellation-behavior) instead.
+[Pre-cancellation behavior](/learn/warehouse/pocket-guide/pre-cancellation-behavior) instead.
 
 <SkillFigure n={2} caption="The Skill itself, the file an agent follows to answer this question." />
 
 ## Doing this by hand
 
-1. **Connect [Zendesk](/docs/cdp/sources/zendesk) or [Intercom](/docs/cdp/sources/intercom), and
-   [Stripe](/docs/cdp/sources/stripe)**, via [Data pipeline > Sources](/docs/data-warehouse/sources).
+1. **Connect [Zendesk](/docs/data-pipelines/sources/zendesk) or [Intercom](/docs/data-pipelines/sources/intercom), and
+   [Stripe](/docs/data-pipelines/sources/stripe)**, via [Data pipeline > Sources](/docs/data-pipelines/sources).
 2. **Pull your churned accounts list** from Stripe, and look each one up in your support tool's
    own reporting (Zendesk Explore, or Intercom's reports) for their ticket topics.
 3. **Tally revenue by topic**: either in a spreadsheet, with the [SQL editor](/docs/data-warehouse/sql), or by asking PostHog AI to find the answer.
 
 <SeeAlso>
 
-See also: [Pre-cancellation behavior](/docs/data-warehouse/pocket-guide/pre-cancellation-behavior) ·
-[ARR vs engagement](/docs/data-warehouse/pocket-guide/value-vs-engagement)
+See also: [Pre-cancellation behavior](/learn/warehouse/pocket-guide/pre-cancellation-behavior) ·
+[ARR vs engagement](/learn/warehouse/pocket-guide/value-vs-engagement)
 
 </SeeAlso>
 

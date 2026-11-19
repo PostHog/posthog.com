@@ -6,17 +6,20 @@
  * prints a JSON blob of NEW candidates (i.e. not already in the mapping file).
  *
  * Output is meant to be reviewed by a human before pasting into the mapping
- * file. The script never writes to the mapping file directly.
+ * file. Existing stale targets are reported but never changed automatically.
+ * The --merge option writes new candidates only.
  *
  * Usage:
- *   npx --yes tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts
- *   npx --yes tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts --merge   # writes merged file
+ *   pnpm dlx tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts
+ *   pnpm dlx tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts --merge   # writes merged file
+ *   pnpm dlx tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts --check   # checks targets only; exits 1 if stale
  */
 
 import fs from 'fs'
 import path from 'path'
 import https from 'https'
 import { fetchMCPToolDefinitions } from '../gatsby/utils/fetchMCPTools'
+import { findStaleMappings } from './mcp-rest-mapping'
 
 const SPEC_URL = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
 const MAPPING_FILE = path.resolve(__dirname, '../src/data/mcp-rest-mapping.json')
@@ -38,10 +41,26 @@ function get(url: string, headers: Record<string, string> = {}): Promise<string>
 }
 
 async function main(): Promise<void> {
+    const checkOnly = process.argv.includes('--check')
     const [specBody, tools] = await Promise.all([
-        get(SPEC_URL, { Accept: 'application/json' }),
+        checkOnly ? Promise.resolve('') : get(SPEC_URL, { Accept: 'application/json' }),
         fetchMCPToolDefinitions(),
     ])
+
+    const toolNames = new Set(Object.keys(tools))
+    const existing = fs.existsSync(MAPPING_FILE) ? JSON.parse(fs.readFileSync(MAPPING_FILE, 'utf8')) : {}
+    const stale = findStaleMappings(existing, toolNames)
+    const staleCount = Object.keys(stale).length
+
+    console.log(`Stale mappings: ${staleCount}`)
+    if (staleCount > 0) {
+        console.warn('Mapping targets missing from the MCP tool definitions (review replacements or removals):')
+        console.warn(JSON.stringify(stale, null, 2))
+    }
+    if (checkOnly) {
+        process.exitCode = staleCount > 0 ? 1 : 0
+        return
+    }
 
     let spec: any
     try {
@@ -50,7 +69,6 @@ async function main(): Promise<void> {
         console.error('Failed to parse OpenAPI spec as JSON. Try setting POSTHOG_OPEN_API_SPEC_URL to a JSON variant.')
         process.exit(1)
     }
-    const toolNames = new Set(Object.keys(tools))
 
     const operationIds: string[] = []
     for (const methods of Object.values(spec.paths || {})) {
@@ -60,8 +78,6 @@ async function main(): Promise<void> {
             }
         }
     }
-
-    const existing = fs.existsSync(MAPPING_FILE) ? JSON.parse(fs.readFileSync(MAPPING_FILE, 'utf8')) : {}
 
     const candidates: Record<string, string[]> = {}
     for (const opId of operationIds) {

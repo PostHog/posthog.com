@@ -1,0 +1,23 @@
+owner: product-analytics
+tags: [instrumentation, javascript, identify]
+status: active
+
+checks:
+    - id: identify-on-login
+      description: >-
+          Baseline: can an agent identify users on login and reset on logout from a
+          one-line request? The prompt doesn't mention reset. The agent gets no docs, so
+          docs-read shows which pages it finds on its own.
+      codebase_to_test: web-vite
+      prompt: >-
+          Set up PostHog in the app in {folder}/ and identify users when they log in.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              identify-after-login: >-
+                  After a successful login (src/pages/login.js, src/api.js or
+                  store.login in src/store.js), the code calls posthog.identify with the
+                  member's id or email. Cite the file and line(s).
+              reset-on-logout: >-
+                  The sign-out path (the logout button in src/components/shell.js,
+                  api.logout or store.logout) calls posthog.reset().

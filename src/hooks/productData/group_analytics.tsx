@@ -17,11 +17,12 @@ import {
     GroupAnalyticsPricingCTA,
 } from 'components/GroupAnalytics/Sections'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const groupAnalytics = {
     ...getTool('group_analytics'),
     Icon: IconPeople,
-    color: 'teal',
+    color: PRODUCT_COLORS.group_analytics,
     colorSecondary: 'purple',
     seo: {
         title: 'Group Analytics – Analyze companies, teams, and projects in PostHog',
@@ -105,7 +106,7 @@ export const groupAnalytics = {
             description: 'Evaluate experiment results using group-level aggregations instead of individual users.',
         },
         {
-            slug: 'context-warehouse/warehouse',
+            slug: 'warehouse',
             description: 'Join group data to warehouse tables and calculate usage across company segments.',
         },
     ],

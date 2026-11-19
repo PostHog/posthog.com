@@ -13,6 +13,9 @@ interface SliderProps {
     onChange: (value: number) => void
     value: number
     scaleMin?: number
+    // Label text for the marks and the drag tooltip, given a value on the slider's own scale (NonLinearSlider only)
+    formatMark?: (value: number) => string
+    formatTip?: (value: number) => string
 }
 
 const MySlider = Slider.createSliderWithTooltip(Slider)
@@ -56,9 +59,9 @@ const makeLinearMarks = (marks: number[]): Record<number, string> => {
     }, {} as Record<number, string>)
 }
 
-const makeNonLinearMarks = (marks: number[], max): Record<number, string> => {
+const makeNonLinearMarks = (marks: number[], max, format = abbreviateNumber): Record<number, string> => {
     return marks.reduce((acc, cur) => {
-        acc[nonLinearCurve(cur)] = abbreviateNumber(cur)
+        acc[nonLinearCurve(cur)] = format(cur)
         return acc
     }, {} as Record<number, string>)
 }
@@ -97,14 +100,23 @@ export const LinearSlider = ({ min, max, marks, stepsInRange, onChange, value }:
     )
 }
 
-export const NonLinearSlider = ({ min, max, marks, stepsInRange, onChange, value }: SliderProps): JSX.Element => {
+export const NonLinearSlider = ({
+    min,
+    max,
+    marks,
+    stepsInRange,
+    onChange,
+    value,
+    formatMark,
+    formatTip = prettyInt,
+}: SliderProps): JSX.Element => {
     return (
         <MySlider
             min={nonLinearCurve(min)}
             max={nonLinearCurve(max)}
-            marks={makeNonLinearMarks(marks, max)}
+            marks={makeNonLinearMarks(marks, max, formatMark)}
             step={(nonLinearCurve(max) - nonLinearCurve(min)) / stepsInRange}
-            tipFormatter={(value) => prettyInt(reverseNonLinearCurve(value))}
+            tipFormatter={(value) => formatTip(reverseNonLinearCurve(value))}
             onChange={onChange}
             className="slider center"
             value={value}

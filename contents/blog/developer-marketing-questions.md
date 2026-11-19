@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/vibes_based_marketing_aff77241ee.png
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
   - Marketing

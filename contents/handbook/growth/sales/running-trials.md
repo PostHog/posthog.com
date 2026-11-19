@@ -47,7 +47,7 @@ Every trial _should_ include:
 
 1. **Kickoff call** - Use this time to align on the "must-haves": success criteria, timeline. An understanding of "how" they will evaluate is just as critical as what you can be doing throughout the trial to help check off the success criteria. Using this time to collaboratively build the success criteria ensures alignment and mutual understanding.
 2. **Shared Slack channel** - Set up before kickoff if possible, so that there's a more "live" way to communicate that comes with better and more accessible support. See [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels) for additional guidance.
-3. **Onboarding success plan** - Use the [30-day onboarding success plan template](/handbook/cs-and-onboarding/onboarding-success-plan) as a starting point, then iterate where appropriate. Adapt for trial length, and share with the customer as a Slack canvas in the shared Slack channel.
+3. **Onboarding success plan** - Use the [30-day onboarding success plan template](/handbook/customer-success/onboarding-success-plan) as a starting point, then iterate where appropriate. Adapt for trial length, and share with the customer as a Slack canvas in the shared Slack channel.
 
 ## AI products in a trial
 
@@ -55,11 +55,11 @@ A trial gives unlimited usage on most products. Four AI products are different: 
 
 Many prospects in a sales-led trial do not have a subscription. For these prospects, the cap is 2x the free tier. This is low for a real evaluation. For example, the PostHog AI cap is 1,000 credits ($10). When the prospect gets to the cap, the product stops.
 
-If AI products are part of the evaluation, add the organization to the [`billing-trial-expanded-free-allocation`](https://us.posthog.com/project/2/feature_flags/902594) feature flag. Do this when you create the trial, before the kickoff call. The flag changes the cap to 10x the free tier. For example, the PostHog AI cap changes to 5,000 credits.
+If AI products are part of the evaluation, add the organization to the <PrivateLink url="https://us.posthog.com/project/2/feature_flags/902594"><code>billing-trial-expanded-free-allocation</code></PrivateLink> feature flag. Do this when you create the trial, before the kickoff call. The flag changes the cap to 10x the free tier. For example, the PostHog AI cap changes to 5,000 credits.
 
 To add an organization:
 
-1. Open the [flag](https://us.posthog.com/project/2/feature_flags/902594) and click **Edit**.
+1. Open the <PrivateLink url="https://us.posthog.com/project/2/feature_flags/902594">flag</PrivateLink> and click **Edit**.
 2. Add the organization to the release conditions. The organization name must match exactly.
 3. Click **Save**.
 
