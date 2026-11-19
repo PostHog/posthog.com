@@ -26,7 +26,7 @@ const CompanyHandbook: React.FC = () => {
                     Almost any question you'll have about working here is answered in our public handbook. But here are
                     some highlights you might be interested to know:
                 </p>
-                <ul className="mb-4 pl-4">
+                <ul className="mb-4 pl-[1.125rem]">
                     <li>Our revenue is over $50 million a year</li>
                     <li>
                         We're{' '}
