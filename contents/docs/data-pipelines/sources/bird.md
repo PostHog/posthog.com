@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Bird connector syncs your [Bird](https://bird.com) communication data into the PostHog data warehouse, so you can analyze contacts, audiences, email, SMS, and WhatsApp messages, broadcasts, templates, and daily sending stats alongside your product data.
 
-> **Beta:** This source is in beta. If you run into issues, let us know.
-
 ## Prerequisites
 
 You need a Bird account with access to create API keys. Create one in your Bird dashboard under **Platform tools > API keys**.
