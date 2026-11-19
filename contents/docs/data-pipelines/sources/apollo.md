@@ -11,13 +11,24 @@ sourceId: Apollo
 
 The Apollo connector syncs your Apollo CRM data to PostHog. The following objects are supported:
 
-| Object        | Sync mode    | Description                   |
-| ------------- | ------------ | ----------------------------- |
-| Contacts      | Incremental  | People in your Apollo CRM     |
-| Accounts      | Incremental  | Companies and organizations   |
-| Opportunities | Full refresh | Sales opportunities and deals |
+| Object             | Sync mode    | Description                                                                       |
+| ------------------ | ------------ | --------------------------------------------------------------------------------- |
+| Contacts           | Incremental  | People in your Apollo CRM                                                         |
+| Accounts           | Incremental  | Companies and organizations                                                       |
+| Opportunities      | Full refresh | Sales opportunities and deals                                                     |
+| Sequences          | Full refresh | Outreach sequences (`emailer_campaigns`)                                          |
+| Outreach emails    | Full refresh | Emails sent by sequences (`emailer_messages`)                                     |
+| Calls              | Full refresh | Phone calls (`phone_calls`)                                                       |
+| Conversations      | Full refresh | Recorded meetings and calls analyzed by Apollo, without transcripts or recordings |
+| Tasks              | Full refresh | Follow-up actions assigned to reps                                                |
+| Users              | Full refresh | Users in your Apollo team                                                         |
+| Lists              | Full refresh | Lists that group contacts, accounts, or sequences (`labels` in the API)           |
+| Custom fields      | Full refresh | Custom fields defined in your Apollo account                                      |
+| Contact stages     | Full refresh | Pipeline stages for contacts                                                      |
+| Account stages     | Full refresh | Pipeline stages for accounts                                                      |
+| Opportunity stages | Full refresh | Pipeline stages for opportunities                                                 |
 
-Contacts and accounts support incremental sync using the `updated_at` field, so only new or changed records are fetched after the first sync. Opportunities always perform a full refresh because Apollo doesn't support sorting on this endpoint.
+Contacts and accounts support incremental sync using the `updated_at` field, so only new or changed records are fetched after the first sync. Opportunities always perform a full refresh because Apollo doesn't support sorting on this endpoint. The other objects also always perform a full refresh, because Apollo has no filter on the time a record changed, and fields such as an email's reply status or a task's completion can change after the record is created.
 
 ## How to link Apollo
 
