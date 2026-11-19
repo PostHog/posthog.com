@@ -18,7 +18,14 @@ The sandbox sender has daily caps for each project and for each recipient. When 
 
 ## Where you can use it
 
-Once the sandbox sender is set up in your project, it shows as **Sandbox sender** on the [**Channels** tab](https://app.posthog.com/workflows/channels).
+Once the sandbox sender is set up in your project, it shows as **PostHog test sender** on the [**Channels** tab](https://app.posthog.com/workflows/channels).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/sandbox_sender_step_light_e0cd795aec.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/sandbox_sender_step_dark_5d9d8ff04f.png"
+    alt="The PostHog test sender in the From menu of a workflow email step"
+    classes="rounded"
+/>
 
 - **Workflow email steps** - Choose the sandbox sender as the step's sender. If it isn't set up yet, the step shows **Set up the sandbox sender**. The sandbox sender doesn't support a custom from name or address, several senders, a reply-to address, CC or BCC recipients, UTM tags on links, or turning off open and click tracking. When you switch a step to the sandbox sender, the step loses these settings.
 - **[Transactional emails](/docs/email/transactional-emails) from your code** - When the project has no verified sender, a send with content from your code goes out from the sandbox sender. The send can't include `from`, `reply_to`, `cc`, `bcc`, or `attachments`. A send with one of these fields fails with an error that asks you to verify a domain.

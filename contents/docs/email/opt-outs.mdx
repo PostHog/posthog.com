@@ -14,6 +14,13 @@ Opt-outs are organized into **message categories**, so someone can decline your 
 
 Create the categories you actually send against, then pick one on each message step in the [workflow builder](/docs/workflows/workflow-builder). Recipients who have opted out of that category are skipped. You can also manage categories over the [API](/docs/email/api) or [MCP](/docs/email/mcp).
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_light_8ffe0244a4.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_dark_f0182f29ef.png"
+    alt="Message categories and the opt-out list in PostHog"
+    classes="rounded"
+/>
+
 ## The opt-out list
 
 The opt-out list shows who has opted out of which category. Recipients land on it in a few ways: a one-click unsubscribe from an email client, the preferences page behind `{{unsubscribe_url}}` in your [email templates](/docs/email/library#email-merge-tags), an import from another tool, or you adding them directly.
@@ -26,7 +33,14 @@ Coming from another tool? Import your opt-out lists from [Customer.io](/docs/ema
 
 The suppression list is address-level and category-independent. Each entry records the recipient, how it got there (a bounce, a spam complaint, or a manual entry), the reason or last bounce diagnostic, and when it was suppressed.
 
-PostHog adds addresses automatically, which is what protects your sending domain's [reputation](/docs/workflows/sending-reputation):
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_light_0f0f19a931.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_dark_3ede49aca0.png"
+    alt="The suppression list in PostHog"
+    classes="rounded"
+/>
+
+PostHog adds addresses automatically, which is what protects your sending domain's [reputation](/docs/email/sending-reputation):
 
 - **Hard bounce** – the address doesn't exist or refuses mail. PostHog suppresses it after the first hard bounce.
 - **Soft bounces** – the mailbox is full or temporarily unavailable. PostHog suppresses it after several soft bounces in a row, with no delivery between them.
