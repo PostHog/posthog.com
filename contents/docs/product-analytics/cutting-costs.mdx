@@ -41,7 +41,10 @@ if (sent) {
   posthog.identify(id) // already identified with these properties: sends nothing
 } else {
   posthog.identify(id, { plan: user.plan })
-  try { sessionStorage.setItem('ph_person_props', key) } catch (e) {}
+  // only remember it if the event was actually sent (not before consent)
+  if (!posthog.has_opted_out_capturing()) {
+    try { sessionStorage.setItem('ph_person_props', key) } catch (e) {}
+  }
 }
 ```
 
