@@ -102,7 +102,7 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
-`asset_host` only applies to `/static/*` assets such as `recorder.js`, `surveys.js`, and `toolbar.js`. It does not change event capture, feature flag requests, or the token-specific remote config URL (`/array/<token>/config.js`).
+`asset_host` only applies to `/static/*` assets such as `recorder.js`, `surveys.js`, and `toolbar.js`. It does not change event capture, feature flag requests, or the token-specific remote config URLs (`/array/<token>/config` and `/array/<token>/config.js`).
 
 If you use a reverse proxy for `/static/*`, pick a regional asset host to serve requests: `https://us-assets.i.posthog.com` or `https://eu-assets.i.posthog.com`. Both hosts are served through a global CDN with edge caching, but it can still be worth choosing the host that gives your setup the lowest cache-miss latency, usually the one closest to your users or reverse proxy.
 
@@ -113,6 +113,7 @@ Your reverse proxy should forward all PostHog SDK paths your site can request:
 - `/static/1.380.0/array.js` for an exact-version snippet pin
 - `/static/<version>/<asset>.js` when `strict_script_versioning` is enabled
 - `/static/<asset>.js?v=<version>` for compatibility URLs
+- `/array/<token>/config` for project configuration as JSON, from `posthog-js` 1.451.0
 - `/array/<token>/config.js`
 - normal API paths such as `/e`, `/flags`, `/decide`, and `/s`
 
