@@ -302,20 +302,20 @@ export const messaging = {
         },
         companies: [
             {
-                name: 'Zapier',
-                key: 'zapier',
-            },
-            {
-                name: 'Make',
-                key: 'make',
-            },
-            {
                 name: 'Customer.io',
                 key: 'customer_io',
             },
             {
                 name: 'Brevo',
                 key: 'brevo',
+            },
+            {
+                name: 'Klaviyo',
+                key: 'klaviyo',
+            },
+            {
+                name: 'MailerLite',
+                key: 'mailerlite',
             },
             {
                 name: 'PostHog',
