@@ -6660,6 +6660,18 @@ export const docsMenu = {
                     icon: 'IconSparkles',
                     color: 'purple',
                 },
+                {
+                    name: 'Usage',
+                    url: '/docs/business-knowledge/usage',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/business-knowledge/troubleshooting',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                },
             ],
         },
         {
