@@ -49,6 +49,8 @@ config.sessionReplayConfig.captureLogsConfig.logSanitizer = { output in
 PostHogSDK.shared.setup(config)
 ```
 
+Before version 4.0, these types are named `PostHogLogLevel` and `PostHogLogEntry`.
+
 ### Configuring minimum log level
 
 By default, the SDK only captures error-level logs to minimize noise in session replays.
