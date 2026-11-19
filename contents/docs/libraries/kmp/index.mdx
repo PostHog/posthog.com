@@ -58,7 +58,7 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 
 On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
 
-`posthog-kmp` 0.7.0 and later requires iOS 15 or later. `posthog-kmp` 0.12.0 and later requires Xcode 26 or later to build, and macOS 11 or later for macOS targets.
+`posthog-kmp` 0.7.0 and later requires iOS 15 or later. `posthog-kmp` 0.12.0 and later requires Xcode 26 or later to build, and macOS 12 or later for macOS targets.
 
 After adding the dependency, run the linkage task once from your project root:
 
@@ -878,7 +878,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | --- | --- | --- |
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
 | iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM) |
-| macOS (Apple silicon) | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM). Version 0.12.0 and later requires macOS 11 or later. |
+| macOS (Apple silicon) | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM). Version 0.12.0 and later requires macOS 12 or later. |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
 | JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 
@@ -898,9 +898,9 @@ Version 0.12.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The 
 - **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
 - **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`. A registered `$session_id` replaces the SDK's session ID, which can detach events from their session replay.
 - **Registered `$process_person_profile`:** a `$process_person_profile = false` set with `register()`, or a `process_person_profile = false` set with `registerOptions()`, now applies to every event except the ones `identify()`, `alias()`, `group()`, and `setPersonProperties()` send. Before 0.12.0 the SDK replaced it with its own value, so it had no effect. Events after `identify()` that get it are still linked to the person and billed as identified events, but don't update the person profile. Remove the registered value and use `personProfiles` instead: the default `PersonProfiles.IDENTIFIED_ONLY` skips person profiles for anonymous users, and `PersonProfiles.NEVER` creates none.
-- **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets. Build your Xcode app once and commit the updated `KotlinMultiplatformLinkedPackage`, which now pins posthog-ios 4.0.
+- **Build requirements:** Xcode 26 or later, and macOS 12 or later for macOS targets. Build your Xcode app once and commit the updated `KotlinMultiplatformLinkedPackage`, which now pins posthog-ios 4.0.
 - **Binary compatibility:** recompile any library built against posthog-kmp 0.11 or earlier. Its Android and JVM bytecode fails at runtime with `NoSuchMethodError`. Java callers of `screen()`, `identify()`, `alias()`, `group()`, `setPersonProperties()`, `captureException()`, and `new CaptureOptions(groups, timestamp)` must pass the new `eventOptions` argument.
-- **Other PostHog artifacts:** if the same Android or JVM build uses `posthog-server`, use 2.25.0 or later. If it uses `posthog-android-surveys-compose`, declare `posthog-android` 4.0.0 or later alongside it.
+- **Other PostHog artifacts:** if the same Android or JVM build uses `posthog-server`, use 2.26.0 or later. If it uses `posthog-android-surveys-compose`, declare `posthog-android` 4.0.0 or later alongside it.
 - **Person processing in `beforeSend`:** when the SDK doesn't process person profiles for an event, it marks the event with the `process_person_profile` [event option](#event-options) instead of a `$process_person_profile = false` property. `beforeSend` reads and changes it in `event.options["process_person_profile"]`, and setting the `$process_person_profile` property there doesn't turn person processing on. A `$process_person_profile` that you pass to `capture()` now applies, even with `personProfiles = PersonProfiles.NEVER`. To turn person processing on, set the option in `beforeSend`, pass `CaptureOptions(eventOptions = mapOf(PostHogEventOptions.PROCESS_PERSON_PROFILE to true))` to `capture()`, call `identify()`, or set `personProfiles = PersonProfiles.ALWAYS`.
 - **Event options:** `$process_person_profile`, `$cookieless_mode`, `$ignore_sent_at`, and `$product_tour_id` have [event options](#event-options) that replace them. The properties still work.
 - **Event changes:** events with an empty name, or whose distinct ID `beforeSend` blanks, are dropped. `$feature_flag_called` for a missing flag leaves out `$feature_flag_response` – filter on *is not set*. `Application Installed`, `Application Updated`, and `Application Opened` no longer have `version` and `build` on iOS and macOS – use `$app_version` and `$app_build`. `$locale` is now the device's preferred language and region on Android, iOS, and macOS, such as `de-CH`, and a BCP 47 tag that keeps the script on the JVM, such as `zh-Hant-TW`. PostHog drops events whose name or distinct ID is over 200 bytes. On iOS and macOS, a `null` value inside a nested map is left out. On Android and the JVM, a `null` list element is sent as `null` at its position instead of being removed. `$sdk_debug_replay_capture_mode` is always `screenshot`. Android's `Deep Link Opened` leaves out query parameters whose name starts with `$`. Refer to the [migration guide](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md#event-changes) for the full list.
