@@ -11,7 +11,7 @@ const CompanyHandbook: React.FC = () => {
             <div className="relative mb-12">
                 <h2>Get to know us in our company handbook</h2>
 
-                <div className="@xl:float-right @xl:ml-4 @xl:-mt-8">
+                <div className="@xl:float-right @xl:ml-4 @xl:-mt-8 @4xl:-mt-[3.25rem] @[965px]:-mt-20">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                         alt="This hog has an answer"
