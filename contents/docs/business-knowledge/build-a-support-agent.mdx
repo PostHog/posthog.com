@@ -1,0 +1,153 @@
+---
+title: Build a support agent that answers from your docs
+sidebarTitle: Build a support agent
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+
+<PrivateBeta />
+
+This tutorial builds a small support agent in Python. The agent answers customer questions from your public docs, names its source, and says so when it doesn't know. It reads only the library you choose, so your internal policies stay out of its answers.
+
+The example uses the [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python), which connects to an MCP server in one request. Any agent framework that supports MCP servers works the same way. See [connect your own agent](/docs/business-knowledge/connect-your-agent) for other clients and the REST API.
+
+## Before you start
+
+You need:
+
+- A project with Business Knowledge and [AI data processing](/docs/business-knowledge/ai-data-processing) turned on
+- Project admin access, to create a key
+- Python 3.10 or later, and an Anthropic API key
+
+<Steps>
+
+<Step title="Add your public docs" badge="required">
+
+In [**Business Knowledge**](https://app.posthog.com/business-knowledge), click **Add source** and add your docs site as a URL source. Choose **Sitemap.xml** or **Same-origin crawl** so PostHog indexes every page, and set auto-refresh to every day.
+
+Wait until the source shows **ready**. See [source status](/docs/business-knowledge/sources#source-status).
+
+</Step>
+
+<Step title="Put the docs in a library" badge="required">
+
+Create a library named `Public docs` and add the source to it. Keep anything a customer must not see, such as internal runbooks, out of this library.
+
+See [group sources into libraries](/docs/business-knowledge/sources#group-sources-into-libraries).
+
+</Step>
+
+<Step title="Create a key for the library" badge="required">
+
+In [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings), under **Connect your agent**, choose the `Public docs` library, name the key `support-agent`, and click **Create key**.
+
+Copy the key and store it as an environment variable on the machine that runs the agent:
+
+```bash
+export POSTHOG_BUSINESS_KNOWLEDGE_KEY="<your project secret API key>"
+export ANTHROPIC_API_KEY="<your Anthropic API key>"
+```
+
+</Step>
+
+<Step title="Write the agent" badge="required">
+
+Install the SDK:
+
+```bash
+pip install anthropic
+```
+
+Create `support_agent.py`:
+
+```python
+import os
+
+import anthropic
+
+client = anthropic.Anthropic()
+
+SYSTEM_PROMPT = """You are the support agent for Acme.
+
+Search business knowledge before you answer a question about Acme's product, pricing, or policies.
+Answer only from what the search returns, and name the source you used.
+If the search finds nothing, say that you don't know and offer to pass the question to a person."""
+
+
+MAX_CONTINUATIONS = 5
+
+
+def answer(question: str) -> str:
+    messages = [{"role": "user", "content": question}]
+    content = []
+    for _ in range(MAX_CONTINUATIONS):
+        response = client.beta.messages.create(
+            model="claude-opus-5-5",
+            max_tokens=16000,
+            betas=["mcp-client-2025-11-20", "server-side-fallback-2026-07-01"],
+            fallbacks="default",
+            system=SYSTEM_PROMPT,
+            mcp_servers=[
+                {
+                    "type": "url",
+                    "url": "https://mcp.posthog.com/mcp/business-knowledge",
+                    "name": "business-knowledge",
+                    "authorization_token": os.environ["POSTHOG_BUSINESS_KNOWLEDGE_KEY"],
+                }
+            ],
+            tools=[{"type": "mcp_toolset", "mcp_server_name": "business-knowledge"}],
+            messages=messages,
+        )
+        content.extend(response.content)
+        if response.stop_reason != "pause_turn":
+            break
+        # A long run of searches pauses the turn. Send back everything so far so the model continues.
+        messages = [
+            {"role": "user", "content": question},
+            {"role": "assistant", "content": content},
+        ]
+
+    if response.stop_reason in ("refusal", "pause_turn"):
+        return "I can't answer that right now. I'll pass your question to a person."
+    return "".join(block.text for block in content if block.type == "text")
+
+if __name__ == "__main__":
+    print(answer("How long does a refund take?"))
+```
+
+The `mcp_servers` entry gives the model the six [Business Knowledge tools](/docs/business-knowledge/connect-your-agent#what-the-agent-can-do). The model decides when to search, reads more of a document when one passage isn't enough, and writes the answer. The loop resumes a turn that the API paused in the middle of a long run of searches, and keeps what the model found before the pause.
+
+</Step>
+
+<Step title="Ask a question your docs answer" checkpoint>
+
+```bash
+python support_agent.py
+```
+
+The answer uses the facts on your docs page and names the page. If the agent says it doesn't know, ask the same question in the [Playground](/docs/business-knowledge/playground) to check that the source holds the fact.
+
+</Step>
+
+<Step title="Check what the agent can't read" badge="recommended">
+
+Ask a question that only an internal source answers, such as a detail from a runbook that isn't in the `Public docs` library. The agent says it doesn't know, because the key reads only that library.
+
+</Step>
+
+</Steps>
+
+## Make it production-ready
+
+- **Keep the key on your server.** Call `answer()` from your backend. Never ship the key to a browser or a mobile app.
+- **Handle rate limits.** A key can make 480 requests per minute. One answer can use several requests, because each search and each read is one request.
+- **Keep answers current.** Set auto-refresh on your URL sources, so the agent reads new pages without a redeploy.
+- **Use one key for each agent.** The key table then shows when each agent last read your knowledge, and you can delete one key without stopping the others.
+
+## Next steps
+
+- [How Business Knowledge works](/docs/business-knowledge/how-it-works) explains what search returns and why
+- [Learn from support](/docs/business-knowledge/learn-from-support) adds your team's resolved answers as new sources
