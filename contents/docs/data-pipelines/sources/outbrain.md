@@ -24,14 +24,18 @@ The Outbrain connector syncs your Outbrain Amplify advertising data into PostHog
 
 ## Available tables
 
-| Table                        | Description                                                   | Sync method  |
-| ---------------------------- | ------------------------------------------------------------- | ------------ |
-| `marketers`                  | All marketers on your account                                 | Full refresh |
-| `campaigns`                  | Campaigns for each marketer                                   | Full refresh |
-| `budgets`                    | Budgets for each marketer                                     | Full refresh |
-| `promoted_links`             | Promoted links for each campaign                              | Full refresh |
-| `marketer_performance_daily` | Daily performance metrics per marketer                        | Incremental  |
-| `campaign_performance`       | Per-campaign performance totals over a trailing 30-day window | Full refresh |
+| Table                        | Description                                                                                                        | Sync method  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `marketers`                  | All marketers on your account                                                                                      | Full refresh |
+| `campaigns`                  | Campaigns for each marketer                                                                                        | Full refresh |
+| `budgets`                    | Budgets for each marketer                                                                                          | Full refresh |
+| `promoted_links`             | Promoted links for each campaign                                                                                   | Full refresh |
+| `promoted_link_sequences`    | Ordered sequences of promoted links for each campaign                                                              | Full refresh |
+| `engagement_metrics`         | Engagement metrics (such as session duration or bounce rate) for each marketer with a Google Analytics integration | Full refresh |
+| `marketer_performance_daily` | Daily performance metrics per marketer                                                                             | Incremental  |
+| `campaign_performance`       | Per-campaign performance totals over a trailing 30-day window                                                      | Full refresh |
+| `geo_performance`            | Per-region performance totals over a trailing 30-day window, with the country of each region                       | Full refresh |
+| `platform_performance`       | Per-device-platform (desktop, tablet, mobile) performance totals over a trailing 30-day window                     | Full refresh |
 
 ## Adding a data source
 
@@ -49,9 +53,9 @@ PostHog validates your credentials by exchanging them for an API token via the O
 
 ### Full refresh
 
-Most Outbrain tables only support full refresh syncing. The Outbrain Amplify API doesn't expose an "updated since" filter for entity endpoints (marketers, campaigns, budgets, promoted links), so PostHog re-downloads all rows on every sync.
+Most Outbrain tables only support full refresh syncing. The Outbrain Amplify API doesn't expose an "updated since" filter for entity endpoints (marketers, campaigns, budgets, promoted links, promoted link sequences, engagement metrics), so PostHog re-downloads all rows on every sync.
 
-The `campaign_performance` table is also full refresh — it returns per-campaign totals over a trailing 30-day window with no date column, so each sync is a point-in-time snapshot.
+The `campaign_performance` table is also full refresh — it returns per-campaign totals over a trailing 30-day window with no date column, so each sync is a point-in-time snapshot. The `geo_performance` and `platform_performance` tables work the same way, with per-region and per-device-platform totals.
 
 ### Incremental
 
