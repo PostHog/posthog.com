@@ -37,7 +37,7 @@ These kinds of problems fall into three broad categories:
 - **Reliability:** JavaScript exceptions, failed API calls, crashes, and features that stop working.
 - **Usability:** Rage clicks, dead clicks, confusing flows, and people giving up halfway through a task.
 
-And for web performance, [Core Web Vitals](https://posthog.com/docs/web-analytics/web-vitals) are a good starting point. They're Google's standard metrics for how fast, responsive, and stable a page feels to real users. In other words, they're RUM metrics by design. Each one has a clear threshold for what counts as "good":
+And for web performance, [Core Web Vitals](/docs/web-analytics/web-vitals) are a good starting point. They're Google's standard metrics for how fast, responsive, and stable a page feels to real users. In other words, they're RUM metrics by design. Each one has a clear threshold for what counts as "good":
 
 - **Largest Contentful Paint (LCP):** How long the main content takes to appear. Good is 2.5 seconds or less.
 - **Interaction to Next Paint (INP):** How quickly a page responds to user interactions. Good is 200 milliseconds or less.
