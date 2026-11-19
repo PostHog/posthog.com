@@ -1,0 +1,548 @@
+---
+title: Electron
+sidebarTitle: Electron
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-js/tree/main/packages/electron'
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
+  surveys: false
+  aiObservability: false
+  errorTracking: true
+---
+
+> **Note:** This SDK is in alpha. APIs and behavior can change in minor version releases. Test your packaged app on each operating system and Electron version that you ship.
+
+The PostHog Electron SDK (`@posthog/electron`) captures data from your Electron desktop app. It supports Electron 41 and later.
+
+One PostHog client runs in the main process. This client owns identity, consent, sessions, storage, and network requests. Renderer windows and utility processes send their calls to the main process through a secure bridge. Thus, all windows and processes share one identity and one session.
+
+The SDK supports:
+
+- Custom events and screen views
+- User identification, aliases, and person properties
+- Group analytics
+- Feature flags and experiments
+- Application lifecycle events
+- Error tracking for JavaScript exceptions
+- DOM autocapture in renderer windows (opt-in)
+
+The SDK does not support session replay, surveys, product tours, or native crash reports.
+
+## Installation
+
+Install `@posthog/electron` with your package manager:
+
+```bash
+npm install @posthog/electron
+```
+
+Keep `electron` as a development dependency of your app. Do not bundle Electron into your app's JavaScript.
+
+The package has a different entry point for each process type:
+
+| Entry point | Use it in |
+| --- | --- |
+| `@posthog/electron/main` | The main process |
+| `@posthog/electron/preload` | The preload script of a `BrowserWindow` |
+| `@posthog/electron/preload/helper` | Your own preload script, if you already have one |
+| `@posthog/electron/renderer` | Renderer windows |
+| `@posthog/electron/react` | Renderer windows that use React 18 or later |
+| `@posthog/electron/utility` | Utility processes that you start with `utilityProcess.fork()` |
+
+There is no root export. Always import from the entry point for the process.
+
+### Main process
+
+Initialize PostHog one time in the main process, before you create windows. Then register each window that can send data to PostHog:
+
+```js
+import { app, BrowserWindow } from "electron"
+import { createRequire } from "node:module"
+import { pathToFileURL } from "node:url"
+import { init } from "@posthog/electron/main"
+
+const require = createRequire(import.meta.url)
+
+const posthog = init({
+  projectToken: "<ph_project_token>",
+  host: "<ph_client_api_host>",
+  onError: (error) => console.error("[PostHog]", error),
+})
+
+app.whenReady().then(async () => {
+  await posthog.ready()
+
+  const page = "/absolute/path/to/index.html"
+  const window = new BrowserWindow({
+    webPreferences: {
+      preload: require.resolve("@posthog/electron/preload"),
+      sandbox: true,
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  })
+
+  posthog.registerWindow(window, { allowedUrls: [pathToFileURL(page).href] })
+  await window.loadFile(page)
+
+  await posthog.capture("application_ready")
+})
+```
+
+Set `projectToken` to your [project token](https://app.posthog.com/settings/project), not a personal API key. Set `host` to `https://us.i.posthog.com` or `https://eu.i.posthog.com`, for your region. You can also use a [reverse proxy](/docs/advanced/proxy) URL. The SDK does not follow redirects, so use the final URL, including the path of your proxy.
+
+> **Important:** If you use native ESM in the main process, do not use top-level `await app.whenReady()`. Use a callback or an async function that you do not await at module scope. If you do, Electron cannot finish loading the entry point.
+
+### Window registration and security
+
+Only registered windows can use the bridge. The SDK accepts calls only from the main frame of the window, and only at the URLs that you supply in `allowedUrls`. The URLs must match exactly, but the SDK ignores URL fragments. The SDK checks the URL again after each navigation.
+
+- Register each window that you trust, which includes windows in custom partitions.
+- Do not register windows that show remote content or content that you do not trust.
+- Keep `contextIsolation` enabled. Do not expose raw IPC APIs to the page.
+
+### Use your own preload script
+
+If your window already has a preload script, do not replace it. Add the PostHog bridge to your script:
+
+```js
+import { exposePostHogBridge } from "@posthog/electron/preload/helper"
+
+exposePostHogBridge()
+
+// The rest of your preload script
+```
+
+A sandboxed preload script cannot load npm packages at runtime. Bundle the helper into your preload script, and keep only `electron` as an external module.
+
+### Renderer
+
+Bundle your renderer code with Vite, esbuild, or a different browser bundler. Then initialize the renderer client:
+
+```js
+import { init } from "@posthog/electron/renderer"
+
+const posthog = await init()
+
+await posthog.capture("button_clicked", { button: "save" })
+```
+
+`init()` gets the current state from the main process. If you call `init()` more than one time, you get the same client, and only the options from the first call apply.
+
+Renderer and main methods that change data return promises. A capture promise resolves when the main process writes the event to disk, not when PostHog receives it. Await identity, reset, and consent changes before you capture events that depend on them.
+
+## Capturing events
+
+You can capture events in the main process, in a renderer, or in a utility process:
+
+```js
+await posthog.capture("user_signed_up", {
+  login_type: "email",
+  is_free_trial: true,
+})
+```
+
+To capture a screen view, use `screen()`. This captures a `$screen` event:
+
+```js
+await posthog.screen("Settings", { section: "billing" })
+```
+
+The SDK adds the `$electron_process` property to each event. Its value is `main`, `renderer`, or `utility`.
+
+### Super properties
+
+Super properties are properties that the SDK adds to each event that you capture. Use `register()` to set them:
+
+```js
+await posthog.register({ workspace: "primary" })
+```
+
+## Identifying users
+
+Identify users to link their events to a person profile. For more information, see [identifying users](/docs/product-analytics/identify).
+
+```js
+await posthog.identify("distinct_id_from_your_database", {
+  email: "max@hedgehogmail.com",
+  name: "Max Hedgehog",
+})
+```
+
+The app has one identity for all windows and processes, not one identity for each window.
+
+When a user logs out, call `reset()` before you identify a different user:
+
+```js
+await posthog.reset()
+```
+
+If a renderer sends a command for the previous user after an identity change, the SDK rejects the command. Do not replay a rejected capture for the new user.
+
+To link the current distinct ID to an alias, use `alias()`:
+
+```js
+await posthog.alias("alias_id")
+```
+
+To set [person properties](/docs/product-analytics/person-properties) without a change to the identity, use `setPersonProperties()`:
+
+```js
+await posthog.setPersonProperties(
+  { plan: "pro" }, // $set
+  { first_seen_version: "1.0.0" } // $set_once
+)
+```
+
+To read the current IDs, use `getDistinctId()`, `getAnonymousId()`, and `getSessionId()`.
+
+## Group analytics
+
+Group analytics let you associate events with a group, such as a team or a company. Read the [group analytics docs](/docs/product-analytics/group-analytics) for more information.
+
+> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
+
+```js
+await posthog.group("company", "company_id_in_your_db", {
+  name: "Awesome Inc.",
+})
+```
+
+## Feature flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+The main process loads feature flags, keeps them in a cache, and shares them with each registered window and utility process. The flag methods read the cache synchronously. They do not fetch flags. Await `posthog.ready()` in main, or `init()` in a renderer, before you read flags.
+
+```js
+// A boolean flag
+if (posthog.isFeatureEnabled("flag-key")) {
+  // Do something
+}
+
+// A multivariate flag
+if (posthog.getFeatureFlag("flag-key") === "variant-key") {
+  // Do something
+}
+
+// The full result, which includes the variant and the payload
+const result = posthog.getFeatureFlagResult("flag-key")
+
+// Only the payload
+const payload = posthog.getFeatureFlagPayload("flag-key")
+
+// All flags
+const flags = posthog.getAllFeatureFlags()
+```
+
+If a flag is not known, `getFeatureFlag()` returns `false` when flags are loaded and `undefined` when they are not loaded. To set a value for unknown flags, use `isFeatureEnabled("flag-key", { defaultValue: false })`.
+
+`getFeatureFlag()`, `isFeatureEnabled()`, and `getFeatureFlagResult()` send a `$feature_flag_called` event. The SDK sends only one event for each flag value. To stop the event, use `{ sendFeatureFlagEvent: false }`. Payload reads and `getAllFeatureFlags()` do not send the event.
+
+To get the latest flag values, call `reloadFeatureFlags()`:
+
+```js
+await posthog.reloadFeatureFlags()
+```
+
+### Listen for changes
+
+In a renderer or a utility process, use `onStateChange()` to get updates to identity, consent, or flags. It returns a function that removes the listener:
+
+```js
+const unsubscribe = posthog.onStateChange((state) => {
+  console.log(state.featureFlags)
+})
+```
+
+### Properties for flag evaluation
+
+To set person or group properties for flag evaluation only, without a profile event:
+
+```js
+await posthog.setPersonPropertiesForFlags({ plan: "pro" })
+await posthog.setGroupPropertiesForFlags({ company: { plan: "enterprise" } })
+```
+
+By default, these methods reload flags. To keep the current flag values, set the second argument to `false`, then call `reloadFeatureFlags()` when you are ready.
+
+To clear the properties, use `resetPersonPropertiesForFlags()` and `resetGroupPropertiesForFlags()`.
+
+> **Note:** The SDK does not send a `$device_id`. Thus, you cannot use device ID bucketing with this SDK.
+
+### Experiments (A/B tests)
+
+Experiments use feature flags, so you can use the same methods. For more information, see the [experiments docs](/docs/experiments).
+
+## Error tracking
+
+To capture an error that your code handles, use `captureException()` in main, in a renderer, or in a utility process:
+
+```js
+try {
+  // Code that can throw
+} catch (error) {
+  await posthog.captureException(error, { context: "save" })
+}
+```
+
+The SDK does not capture errors automatically by default. To capture uncaught errors, enable `enableExceptionAutocapture` in each process where you need it:
+
+```js
+// Main process
+const posthog = init({
+  projectToken: "<ph_project_token>",
+  enableExceptionAutocapture: true,
+})
+
+// Renderer
+const posthog = await init({ enableExceptionAutocapture: true })
+```
+
+In the renderer, the SDK captures `error` and `unhandledrejection` events. It does not capture errors when a resource does not load.
+
+In the main process, the SDK captures uncaught exceptions. It captures an unhandled promise rejection only when Node.js changes the rejection into an uncaught exception. Electron 42 and later only show a warning for unhandled rejections by default, so the SDK does not capture them.
+
+The SDK does not replace your error handlers, and it does not stop your app from exiting. It cannot guarantee that it sends an error before the app exits.
+
+> **Note:** The SDK captures JavaScript errors only. It does not capture native crashes, and it does not symbolicate native stack traces. It does not capture uncaught errors in utility processes.
+
+## Autocapture
+
+The SDK can capture clicks, changes, and form submissions in renderer windows. Autocapture is off by default. To enable it, set `autocapture` when you initialize each renderer:
+
+```js
+import { init } from "@posthog/electron/renderer"
+
+const posthog = await init({
+  autocapture: {
+    maskAllText: true,
+    maskAllElementAttributes: true,
+  },
+})
+```
+
+Set `autocapture: true` to use the default settings. The configuration object accepts these options:
+
+| Option | Description |
+| --- | --- |
+| `maskAllText` | Removes element text. Default is `false`. |
+| `maskAllElementAttributes` | Removes element attributes. Default is `false`. |
+| `disableCaptureUrlHashes` | Removes the URL fragment. Default is `false`. |
+| `url_allowlist`, `url_ignorelist` | Arrays of strings or regular expressions. |
+| `dom_event_allowlist` | Any of `"click"`, `"change"`, and `"submit"`. |
+| `element_allowlist` | Any of `"a"`, `"button"`, `"form"`, `"input"`, `"select"`, `"textarea"`, and `"label"`. |
+| `css_selector_allowlist`, `css_selector_ignorelist` | Arrays of CSS selectors. |
+| `element_attribute_ignorelist` | An array of attribute names. |
+
+Autocapture does not collect input values or clipboard contents. Elements with the `ph-no-capture` class are always ignored. If you set `css_selector_ignorelist`, it replaces the default list (`.ph-no-autocapture` and `[data-ph-no-autocapture]`). Include these selectors in your list if you need them.
+
+Text and attributes can contain personal data. Use masking, ignore lists, and `before_send` to apply your privacy policy.
+
+Autocapture also obeys the autocapture setting in your [project settings](https://app.posthog.com/settings/project-autocapture). If the SDK cannot get this setting, autocapture stays off.
+
+## React
+
+For React 18 and later, use `@posthog/electron/react`. Pass a renderer client that you already initialized to `PostHogProvider`. Do not pass a `posthog-js` client or a project token.
+
+```jsx
+import { createRoot } from "react-dom/client"
+import { init } from "@posthog/electron/renderer"
+import {
+  PostHogProvider,
+  usePostHog,
+  useFeatureFlagEnabled,
+  useFeatureFlagVariantKey,
+  useFeatureFlagPayload,
+} from "@posthog/electron/react"
+
+const posthog = await init()
+
+function App() {
+  const client = usePostHog()
+  const enabled = useFeatureFlagEnabled("new-ui")
+  const variant = useFeatureFlagVariantKey("new-ui")
+  const payload = useFeatureFlagPayload("new-ui")
+
+  return (
+    <button
+      disabled={!enabled}
+      onClick={() => void client.capture("new_ui_clicked", { variant: variant ?? null })}
+    >
+      Try the new UI
+    </button>
+  )
+}
+
+createRoot(document.getElementById("root")).render(
+  <PostHogProvider client={posthog}>
+    <App />
+  </PostHogProvider>
+)
+```
+
+The hooks return `undefined` while flags are not available. Handle this value in your components.
+
+`useFeatureFlagEnabled` and `useFeatureFlagVariantKey` send a `$feature_flag_called` event. `useFeatureFlagPayload` does not.
+
+When `PostHogProvider` unmounts, it does not dispose the client. Call `posthog.dispose()` after you unmount the provider.
+
+## Utility processes
+
+You can send data from a [utility process](https://www.electronjs.org/docs/latest/api/utility-process) that you own and trust. In the main process, register the child process immediately after you start it:
+
+```js
+import { utilityProcess } from "electron"
+
+const child = utilityProcess.fork("/absolute/path/to/utility.cjs")
+const unregister = posthog.registerUtilityProcess(child)
+
+// Later, to disconnect the child from PostHog without stopping it:
+unregister()
+```
+
+In the utility process, initialize the client:
+
+```js
+const { init } = require("@posthog/electron/utility")
+
+async function run() {
+  const posthog = await init()
+  await posthog.capture("background_work_completed", { task: "thumbnail" })
+  await posthog.flush()
+}
+
+run().catch(console.error)
+```
+
+The utility client has the same methods as the renderer client. It sends all calls to the main process. Each call waits a maximum of 10 seconds for the main process. If a call times out, do not retry it automatically, because the main process can have accepted it.
+
+> **Important:** A registered utility process can change the identity and consent of the app. Do not register a process that runs code that you do not trust.
+
+## Lifecycle events
+
+By default, the SDK captures these events:
+
+| Event | When |
+| --- | --- |
+| `Application Installed` | The first time that the SDK starts in the app |
+| `Application Updated` | The app version or `appBuild` is different from the previous start |
+| `Application Opened` | The app starts, or a registered window gets focus after the app was in the background |
+| `Application Backgrounded` | No registered window has focus |
+
+To disable these events, set `captureAppLifecycleEvents: false`.
+
+A new session starts each time the app starts. A session also ends after 30 minutes without activity, or after 24 hours.
+
+## Opt out of data capture
+
+The SDK captures data by default. To require consent first, set `defaultOptIn: false`. Then call `optIn()` when the user gives consent:
+
+```js
+const posthog = init({
+  projectToken: "<ph_project_token>",
+  defaultOptIn: false,
+})
+
+// Later, in main or in a renderer
+await posthog.optIn()
+await posthog.optOut()
+
+posthog.hasOptedOutCapturing()
+```
+
+When the user opts out, the SDK does not capture new events. The SDK still sends events that it captured before the user opted out.
+
+## Flush and shutdown
+
+To send queued events immediately, call `flush()`. The promise rejects if the SDK cannot send the events:
+
+```js
+await posthog.flush()
+```
+
+When the app quits, the SDK tries to send queued events, but it does not delay the quit. To send all events before the app quits, call `shutdown()` with a timeout in milliseconds:
+
+```js
+app.on("before-quit", async (event) => {
+  event.preventDefault()
+  await posthog.shutdown(2000)
+  app.exit()
+})
+```
+
+If a user closes all windows, the SDK continues to run. Thus, a tray app can continue to capture events.
+
+## Storage
+
+The SDK stores identity, consent, flags, and queued events in this file:
+
+```
+<app.getPath("userData")>/posthog/<hash>/state.json
+```
+
+The file is not encrypted. Do not put secrets or personal API keys in events or in your app.
+
+Only one process can write to the storage of a project at a time. If a second process uses the same storage, it stays inactive and reports an error through `onError`. To run a separate instance, set a different `storageDirectory`.
+
+## Network
+
+The SDK sends requests through an isolated Electron session (`posthog-electron`). The requests do not include cookies or HTTP credentials. The SDK does not follow redirects.
+
+To use a proxy, call `setProxy()` on this session after the app is ready and before you capture events:
+
+```js
+import { session } from "electron"
+
+await session.fromPartition("posthog-electron").setProxy({ proxyRules: "http://proxy.example.com:8080" })
+```
+
+> **Note:** The SDK does not support proxies that require authentication.
+
+If a request fails because of a network error or a `407`, `408`, `429`, or `5xx` response, the SDK keeps the events and tries again later. PostHog can receive the same event more than one time.
+
+## Configuration
+
+These are the options for `init()` in the main process:
+
+| Option | Description |
+| --- | --- |
+| `projectToken` | Your project token. Required. |
+| `host` | The URL of your PostHog instance or reverse proxy. |
+| `onError` | A function that the SDK calls when an error occurs, for example a network or storage error. |
+| `defaultOptIn` | Set to `false` to require `optIn()` before the SDK captures events. Default is `true`. |
+| `disabled` | Set to `true` to disable the SDK. |
+| `captureAppLifecycleEvents` | Captures [lifecycle events](#lifecycle-events). Default is `true`. |
+| `enableExceptionAutocapture` | Captures uncaught errors in the main process. Default is `false`. |
+| `appBuild` | Your app's build number. The SDK uses it to find app updates. |
+| `personProfiles` | Set to `"identified_only"` or `"never"` to limit [person profiles](/docs/data/persons). |
+| `before_send` | A function that can change or drop events before the SDK queues them. |
+| `bootstrap` | Initial distinct ID and feature flag values. |
+| `preloadFeatureFlags` | Loads flags when the SDK starts. |
+| `disableRemoteFeatureFlags` | Stops the SDK from loading flags from PostHog. |
+| `disableRemoteConfig` | Stops the SDK from loading the project configuration. |
+| `disableGeoip` | Stops GeoIP lookup for events and flags. |
+| `flushAt`, `flushInterval` | The number of events and the time in milliseconds before the SDK sends events. Set `flushInterval` to `0` to disable scheduled sends. |
+| `maxBatchSize` | The maximum number of events in one request. |
+| `maxQueueSize` | The maximum number of queued events. Default is `1000`. |
+| `maxStorageBytes` | The maximum size of the storage file. Default is 5 MiB. |
+| `maxQueueAgeMs` | The time after which the SDK discards queued events. Default is 7 days. |
+| `storageDirectory` | The directory for the storage file. Default is `<app.getPath("userData")>/posthog`. |
+| `sessionExpirationTimeSeconds` | The time without activity after which a session ends. Default is 30 minutes. |
+
+The options for `init()` in a renderer are `autocapture`, `enableExceptionAutocapture`, and `onError`.
+
+## Limitations
+
+- The SDK does not support session replay, surveys, product tours, or native crash reports.
+- The SDK does not support proxies that require authentication.
+- The SDK does not support device ID bucketing for feature flags.
+- In the main process, the SDK does not capture unhandled promise rejections with the default settings of Electron 42 and later.
