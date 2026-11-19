@@ -59,7 +59,30 @@ Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide t
 
 ### Understand the coverage
 
-These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js` (from `posthog-js` 1.451.0, loaded only with `opt_in_site_apps: true`). For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+By default, these hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js` (from `posthog-js` 1.451.0, loaded only with `opt_in_site_apps: true`). To also verify the SDK's feature scripts, [require integrity for extension scripts](#require-integrity-for-extension-scripts). For other controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+
+### Require integrity for extension scripts
+
+From `posthog-js` 1.452.0, set `require_subresource_integrity: true` to verify each feature script that the SDK loads at runtime, such as `lazy-recorder.js`, `surveys.js`, and `web-vitals.js`. With the loader, add the option to `data-config`.
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    require_subresource_integrity: true,
+})
+```
+
+The SHA-384 hashes for these scripts are built into the SDK bundle, so you don't copy more hashes. Because the hashes are part of `array.js`, pinning it with `data-core-integrity` on an exact-version `loader.js` that itself has an `integrity` attribute pins every extension too. For npm installations, pin an exact package version. The token-specific `/array/<token>/array.js` changes with project configuration, so you can't pin it. Use the loader, `/static/<SDK_VERSION>/array.js`, or npm instead.
+
+When this option is on:
+
+-   The SDK loads each feature script only from `/static/<SDK_VERSION>/<name>.js` with `integrity` and `crossorigin="anonymous"`. It never retries with a legacy query-string URL, whatever the value of `strict_script_versioning`.
+-   If a script fails the check, has no built-in hash, or the browser doesn't support SRI, only that feature stays off.
+-   The [toolbar](/docs/toolbar) doesn't load. [JS snippets](/docs/js-snippets) don't load, even with `opt_in_site_apps: true`. The SDK fetches project configuration as JSON instead of executable `config.js`.
+-   A `prepare_external_dependency_script` hook can set a nonce or change the URL, but it must keep `src`, `integrity`, and `crossOrigin` unchanged. If not, the SDK doesn't load that feature.
+-   Your asset host or [reverse proxy](/docs/advanced/proxy) must serve `/static/<SDK_VERSION>/*` unchanged, with CORS headers. PostHog's asset hosts already do.
+
+This option doesn't cover an unpinned initial loader, third-party widgets such as Intercom or Crisp, or a malicious release with valid hashes. Feature scripts share page globals, so set the option on every PostHog SDK instance on the page. If other code on the page already ran an unverified feature script, the SDK reuses it and the guarantee doesn't hold.
 
 ## Configure Content Security Policy
 
@@ -98,4 +121,4 @@ Before deployment and after each upgrade:
 -   Use a clean browser profile to check the Network panel during initialization, event capture, feature flag evaluation, and optional features.
 -   Check for duplicate SDK installations, unexpected executable downloads, CSP violations, and integrity failures.
 -   For the no-external setup, verify that JSON configuration, flags, and events work without vendor script downloads. Test without CSP first, then with CSP, so blocked requests don't hide unwanted loading attempts.
--   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. Check any proxy or CDN transformations that could change the bytes.
+-   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. With `require_subresource_integrity`, also check that feature scripts load with an `integrity` attribute. Check any proxy or CDN transformations that could change the bytes.
