@@ -36,7 +36,13 @@ const CompanyHandbook: React.FC = () => {
                     </li>
                     <li>If you join us, you will be expected to take a stance on if pineapple belongs on pizza</li>
                 </ul>
-                <CallToAction href="/handbook" type="secondary" size="sm" state={{ newWindow: true }}>
+                <CallToAction
+                    href="/handbook"
+                    type="secondary"
+                    size="sm"
+                    state={{ newWindow: true }}
+                    className="mx-[0.5px]"
+                >
                     Visit the handbook
                 </CallToAction>
             </div>
