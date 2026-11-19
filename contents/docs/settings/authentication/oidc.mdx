@@ -41,7 +41,7 @@ OpenID Connect (OIDC) enables users to access multiple systems with a single set
 
     b. Copy the "*Issuer URL*", "*Client ID*", "*Client Secret*" fields from your OIDC app's configuration in your IdP into the configuration fields in PostHog. If you do not see "*Issuer URL*" in your IdP, it will be the domain you use to login to the IdP, prefixed by `https://`.
 
-    c. Verify that your IdP shares the `email` and `email_verified` OpenID claims with PostHog. Without these claims, PostHog cannot associated your users with their email address.
+    c. Verify that your IdP shares the `email` OpenID claim with PostHog. Without this claim, PostHog cannot associate your users with their email address.
 
 4. Select **Save**.
 
@@ -165,64 +165,6 @@ The next time you enter your email address during login, you will see an option 
 
 8. In OneLogin, choose which users to assign to the application.
 
-9. OneLogin [does not send the `email_verified` claim during the OIDC handshake](https://developers.onelogin.com/docs/openid-connect/guides/email-verified). Because PostHog requires this claim, we must configure the OneLogin app to send it.
-
-   a. In OneLogin go to **Users** → **Custom User Fields**. Select **New User Field**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_custom_user_fields_510da3e5b5.png"
-       alt="OneLogin admin UI showing Custom User Fields"
-       classes="rounded"
-      />
-
-   b. For the name enter "*Email verified*". For the short name enter "*email_verified*". Select **Save**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_new_user_field_0084364174.png"
-       alt="OneLogin admin UI showing new custom user field dialog"
-       classes="rounded"
-      />
-
-   c. Go to **Users** → **Mappings**. Select **New Mapping**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_user_mappings_26f171170f.png"
-       alt="OneLogin admin UI showing user mappings"
-       classes="rounded"
-      />
-
-   d. Name it "*Email verified*". Select whatever condition you would like, for example `Status = Active`. For the action, select "*Set Email verified*" and set the value to "*true*". Select **Save**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_new_user_mapping_45ed41d545.png"
-       alt="OneLogin admin UI showing new user mapping page"
-       classes="rounded"
-      />
-
-   e. Select **Reapply All Mappings**. If you see a confirmation dialog, select **Continue**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_user_mappings_26f171170f.png"
-       alt="OneLogin admin UI showing user mappings with a reapply mappings button"
-       classes="rounded"
-      />
-
-   f. Go to **Applications**. Select your OIDC application, then navigate to the **Parameters** tab. Click the **+** icon on the top right of the table.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_oidc_parameters_008b84dcc7.png"
-       alt="OneLogin admin UI showing OIDC parameters"
-       classes="rounded"
-      />
-
-   g. Name the field "*email_verified*". Select **Save**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_new_oidc_parameter_pt_1_e4bc1b5881.png"
-       alt="OneLogin admin UI showing new OIDC parameter dialog"
-       classes="rounded"
-      />
-
-   h. For the value search for and select "*Email verified (Custom)*". Select **Save**.
-      <ProductScreenshot
-       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_26_onelogin_new_oidc_parameter_pt_2_14dc6dc5d4.png"
-       alt="OneLogin admin UI showing new OIDC parameter dialog"
-       classes="rounded"
-      />
-
 
 The next time you enter your email address during login, you will see an option to login using OIDC.
 
@@ -230,7 +172,7 @@ The next time you enter your email address during login, you will see an option 
 
 When using OIDC to authenticate users in PostHog, there are a few considerations to keep in mind:
 
-1. **Only use OIDC with identity providers you trust and that verify the user's email address.** During login we use the email address provided by the identity provider. An untrusted identity provider could spoof a user's email address to impersonate your users.
+1. **Only use OIDC with identity providers you trust and that verify the user's email address.** During login we use the email address provided by the identity provider. PostHog does not check the `email_verified` claim, so it relies on your identity provider to verify email addresses. An untrusted identity provider could spoof a user's email address to impersonate your users.
 
 2. Enabling or enforcing **OIDC will not disable Personal API Key usage**. Users can authenticate with the PostHog API using their API keys without first authenticating via OIDC. You can use [ID-JAG (XAA)](/docs/settings/authentication/id-jag) to programmatically restrict API access using policies defined in your identity provider.
 
