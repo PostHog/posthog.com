@@ -194,9 +194,8 @@ export const messaging = {
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_list_light_50450977b5.png',
-            srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_list_dark_c3d1d672e8.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/broadcasts_list_light_50450977b5.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/broadcasts_list_dark_c3d1d672e8.png',
             alt: 'Broadcasts in PostHog with sent, delivered, opened, clicked, and converted counts',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',

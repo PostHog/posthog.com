@@ -53,9 +53,8 @@ export const automation: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_drip_overview_light_74796bb39a.png',
-            srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_drip_overview_dark_384b529650.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_drip_overview_light_74796bb39a.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_drip_overview_dark_384b529650.png',
             alt: 'A drip campaign that sends a welcome email, waits for an upload, then sends a nudge',
         },
     },
@@ -93,9 +92,8 @@ export const automation: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_trigger_panel_light_65045a7652.png',
-            srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_trigger_panel_dark_bf54d41ffd.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_trigger_panel_light_65045a7652.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_trigger_panel_dark_bf54d41ffd.png',
             alt: 'The trigger panel of a drip campaign, set to the signed_up event',
             maxWidth: 'max-w-lg',
         },
