@@ -325,7 +325,7 @@ The core Hotjar tools (session replay, heatmaps, surveys) still exist within Con
 The top session replay tools in 2026 include:
  
 - **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
-- **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option, with up to 100,000 recordings per day
+- **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option with high limits
 - **[LogRocket](/compare/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
 - **[FullStory](/compare/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
 - **[Smartlook](/compare/smartlook-alternatives)** – Strong for mobile-first apps with crash reports, but it no longer sells paid plans and closes on September 30, 2027
