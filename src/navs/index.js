@@ -6610,6 +6610,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Libraries',
+                    url: '/docs/business-knowledge/libraries',
+                    icon: 'IconFolder',
+                    color: 'blue',
+                },
+                {
                     name: 'How it works',
                     url: '/docs/business-knowledge/how-it-works',
                     icon: 'IconGear',
@@ -6659,6 +6665,18 @@ export const docsMenu = {
                     url: '/docs/business-knowledge/playground',
                     icon: 'IconSparkles',
                     color: 'purple',
+                },
+                {
+                    name: 'Usage',
+                    url: '/docs/business-knowledge/usage',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/business-knowledge/troubleshooting',
+                    icon: 'IconWrench',
+                    color: 'orange',
                 },
             ],
         },

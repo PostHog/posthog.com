@@ -50,6 +50,29 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
+### Mask or unmask select choices
+
+Use `selectMaskingFn` to choose, for each `<select>` element, whether replays record which options are selected. Return `'unmasked'` to record the selection, or `'masked'` to hide it. This requires `posthog-js` version 1.453.0 or later.
+
+```ts
+posthog.init('<ph_project_token>', {
+    session_recording: {
+        maskAllInputs: true,
+        // Only selects marked with `data-replay-public` show their selected options
+        selectMaskingFn: (select) =>
+            select.matches('[data-replay-public]') ? 'unmasked' : 'masked',
+        maskInputFn: (text) => '*'.repeat(text.length),
+    }
+})
+```
+
+- `selectMaskingFn` overrides `maskAllInputs` and the `select` option of `maskInputOptions` for select elements. If you don't set it, select masking works as before.
+- Only `'unmasked'` records the selection. Any other return value, or an error in the function, masks it.
+- A masked select still sends its value through `maskInputFn`. If `maskInputFn` returns the original text, replays record that text.
+- Option labels on the page are still recorded. Clicks on options in list-style selects, such as `<select multiple>` or a select with `size` greater than 1, also record which option was clicked. To hide sensitive choices completely, add the `ph-no-capture` class to the select.
+- Keep the function fast and use the same function reference. PostHog calls it when a select changes and when it takes a snapshot. Replacing the function restarts the recording.
+- With `selectMaskingFn` set, PostHog doesn't carry a page's unsent recording data to the next page. Short page visits that end before your [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record) can be lost.
+
 ## Text elements
 
 General text is not masked by default, but we provide multiple options for masking text:
