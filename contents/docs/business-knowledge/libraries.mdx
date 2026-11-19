@@ -85,4 +85,4 @@ Deleting a library doesn't delete its sources or repositories. A key for the del
 
 ## Limit a search to a library
 
-A search through the [MCP tools or the REST API](/docs/business-knowledge/connect-your-agent) accepts a `library_id`. Copy the ID at the bottom of the library page. A key for one library always reads that library, whatever ID a request passes.
+A search through the [MCP tools or the REST API](/docs/business-knowledge/connect-your-agent) accepts a `library_id`. Copy the ID at the bottom of the library page. A key for one library reads that library when a request has no `library_id`. A request that passes the ID of another library returns `404`.
