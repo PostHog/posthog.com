@@ -15,6 +15,8 @@ import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
 The Apify Dataset connector syncs the rows of an Apify dataset into PostHog, so you can analyze the output of your Apify Actors and web scrapers alongside your product data.
 
+The connector also syncs field statistics for the dataset, and account-level tables for your Apify account: Actor runs, builds, tasks, Actors, datasets, request queues, and monthly usage.
+
 ## Prerequisites
 
 You need an Apify account with an API token that has read access to the dataset's storage, and the ID of the dataset you want to import.
@@ -25,14 +27,14 @@ You need an Apify account with an API token that has read access to the dataset'
 
 When linking Apify Dataset, you'll need:
 
-- **API token** – create one in your [Apify account settings](https://console.apify.com/settings/integrations). The token needs read access to the dataset's storage.
+- **API token** – create one in your [Apify account settings](https://console.apify.com/settings/integrations). The token needs read access to the dataset's storage. The account-level tables use the same token.
 - **Dataset ID** – find it in the [Apify Console](https://console.apify.com/storage/datasets), or use the `username~dataset-name` shorthand.
 
 ## Sync modes
 
 <SyncModes />
 
-Apify datasets are full refresh only. The whole dataset is re-imported on every sync.
+Apify datasets are full refresh only. The whole dataset is re-imported on every sync. All other tables are also full refresh only, except the Actor runs table, which can sync incrementally.
 
 ## Configuration
 
