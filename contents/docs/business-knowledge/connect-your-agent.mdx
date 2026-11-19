@@ -247,7 +247,7 @@ A request over the limit returns `429`. Wait and retry.
 | `This project secret API key cannot read business knowledge` | The key has no `business_knowledge:read` scope, or Business Knowledge isn't available in the project. Create a key under **Connect your agent**. |
 | `The library this project secret API key was limited to no longer exists` | Someone deleted the library. Create a new key for another library. |
 | `Business knowledge belongs to project ID ...` | The key comes from another environment of the project. Create the key in the project's main environment. |
-| The search returns nothing | The source isn't [ready](/docs/business-knowledge/sources#source-status), or it isn't in the library the key covers. Check the same query in the [Playground](/docs/business-knowledge/playground). |
+| The search returns nothing | The source hasn't passed its [content check](/docs/business-knowledge/sources#source-status) yet, or it isn't in the library the key covers. Check the same query in the [Playground](/docs/business-knowledge/playground). |
 
 ## How this differs from the main PostHog MCP server
 
