@@ -31,7 +31,7 @@ Here’s a peek behind the curtain at how this sort of thing actually comes toge
 
 First, Charles had to actually buy the inventory. He was advised to deal directly with the owners of the inventory rather than going via an agency. That meant getting in touch and negotiating directly with [Global](https://global.com/) for underground & station placements, and [JCDecaux](https://www.jcdecaux.com/) for above-ground.
 
-The latter spend matches in your first year, and if it’s the first time an organization is advertising with them, payment is due upfront. That meant going to finance with a relatively complex £300,000 bill, which thrilled the entire team.
+The latter also matches what you spend in your first year, which effectively doubles your budget. The only wrinkle is that if it’s the first time an organization is advertising with them, payment is due upfront. That meant going to finance with a relatively complex £300,000 bill, which thrilled the entire team.
 
 The goods and services exchanged for that money amounted to more than 3,000 tube card panels, above-ground placements (bus shelters, train stations, and billboards), and a big chunk of space in Old Street Station for two weeks.
 
