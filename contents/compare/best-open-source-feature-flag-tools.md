@@ -188,9 +188,9 @@ The open-source gem is free with unlimited flags. Flipper Cloud offers a free pl
 
 ### What is FeatBit?
 
-FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like [Datadog](/compare/posthog-vs-datadog), Grafana, and Amplitude.
+FeatBit is an open-source feature flag and A/B testing tool. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like [Datadog](/compare/posthog-vs-datadog), Grafana, and Amplitude.
 
-FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, and OpenTelemetry for observability. It's capable of supporting over 1 million simultaneous online users.
+FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, and OpenTelemetry for observability. It has three deployment options with the same core feature flag functionality: Standalone (Postgres only), Standard (adds Redis for caching and messaging), and Professional (adds Kafka and ClickHouse for high-volume analytics). These are infrastructure setups, not pricing plans. It's capable of supporting over 1 million simultaneous online users.
 
 ### Supported SDKs
 
@@ -262,7 +262,7 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
 
-It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
@@ -277,7 +277,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), or your own editor vi
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a free, open-source tool with Git-native flag management. 
 
-For more options beyond open source, check out our guide to the [best feature flag tools for developers](/blog/best-feature-flag-software-for-developers).
+For more options beyond open source, check out our guide to the [best feature flag tools for developers](/compare/best-feature-flag-tools-for-developers).
 
 </details>
 
