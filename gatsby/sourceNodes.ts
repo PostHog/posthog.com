@@ -11,6 +11,7 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { aiAdoptionPreviewRows } from './aiAdoptionPreview'
 import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -308,9 +309,12 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const sourceAIAdoption = async () => {
-        if (!process.env.POSTHOG_APP_API_KEY) return
+        const isPreview = process.env.AI_ADOPTION_PREVIEW_DATA === 'true'
+        if (!isPreview && !process.env.POSTHOG_APP_API_KEY) return
         try {
-            const rows = await fetchLeaderboardRows('ai_adoption_public_leaderboard_monthly')
+            const rows = isPreview
+                ? aiAdoptionPreviewRows()
+                : await fetchLeaderboardRows('ai_adoption_public_leaderboard_monthly')
             const series = rows.map(({ facet, label, points }) => {
                 if (
                     !['model', 'lab', 'framework', 'provider_diversity', 'coverage'].includes(String(facet)) ||
@@ -345,8 +349,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 id: createNodeId('ai-adoption-leaderboard'),
                 parent: null,
                 children: [],
+                isPreview,
                 series,
-                internal: { type: 'AIAdoptionReport', contentDigest: createContentDigest(series) },
+                internal: { type: 'AIAdoptionReport', contentDigest: createContentDigest({ isPreview, series }) },
             })
         } catch (err) {
             console.warn('Could not load the AI adoption leaderboard:', err)

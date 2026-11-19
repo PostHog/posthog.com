@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
 import CloudinaryImage from 'components/CloudinaryImage'
+import BrandLogo from 'components/MCPLeaderboard/BrandLogo'
+import { modelVendor } from 'components/MCPLeaderboard/data'
+import { getLogo, getDarkClassForLogo } from '../../constants/logos'
+import langchainMark from '../../../contents/images/docs/llms/langchain.svg'
 
 const sections = {
     model: [
@@ -77,7 +81,26 @@ const chartConfig = {
     tooltip: { valueFormatter: percent },
 }
 
-export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] }): JSX.Element {
+function rowLogo(section: Section, key: string, label: string) {
+    if (section === 'provider_diversity') return null
+    const family = section === 'model' ? key.split('-')[0] : key
+    const logo = family === 'langchain' ? langchainMark : getLogo(family)
+    if (logo) {
+        const darkClass = family === 'langchain' || family === 'vercel' ? 'dark:invert' : getDarkClassForLogo(logo)
+        return (
+            <img src={logo} className={`size-4 shrink-0 object-contain ${darkClass}`} width={16} height={16} alt="" />
+        )
+    }
+    return <BrandLogo name={label} fallback={modelVendor(key)} />
+}
+
+export default function AIAdoptionReport({
+    series,
+    isPreview,
+}: {
+    series: AdoptionSeries[]
+    isPreview?: boolean
+}): JSX.Element {
     const months = Array.from(new Set(series.flatMap((row) => row.points.map((point) => point.month)))).sort()
     const [selected, setSelected] = useState('')
     const [section, setSection] = useState<Section>('model')
@@ -124,6 +147,7 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                 <div>
                     <p className="m-0 font-mono text-xs">AI Observability · Monthly report</p>
                     <h1 className="my-2 text-4xl @lg:text-5xl tracking-tight">How teams use AI</h1>
+                    {isPreview && <p className="mb-2 font-semibold">Design preview with synthetic data</p>}
                     <p className="m-0 max-w-prose">
                         Which models, labs, and tools show up in the AI events teams send to PostHog? Each team counts
                         once, whether it sends a hundred events or a million.
@@ -244,11 +268,12 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                                                 <th scope="row" className="max-w-36 break-words py-2 text-left">
                                                     <button
                                                         type="button"
-                                                        className="text-left hover:underline"
+                                                        className="inline-flex max-w-full items-center gap-2 text-left hover:underline"
                                                         aria-expanded={expanded === row.key}
                                                         onClick={() => setExpanded(expanded === row.key ? '' : row.key)}
                                                     >
-                                                        {row.label}
+                                                        {rowLogo(section, row.key, row.label)}
+                                                        <span className="min-w-0">{row.label}</span>
                                                     </button>
                                                 </th>
                                                 <td className="hidden w-24 pr-4 @md:table-cell">

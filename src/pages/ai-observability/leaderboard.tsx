@@ -7,7 +7,7 @@ import AIAdoptionReport, { AdoptionSeries } from 'components/AIAdoptionReport'
 export default function Leaderboard({
     data,
 }: {
-    data: { aiAdoptionReport: { series: AdoptionSeries[] } | null }
+    data: { aiAdoptionReport: { isPreview: boolean; series: AdoptionSeries[] } | null }
 }): JSX.Element {
     return (
         <>
@@ -24,7 +24,10 @@ export default function Leaderboard({
                 hideMarkdownActions
                 showQuestions={false}
             >
-                <AIAdoptionReport series={data.aiAdoptionReport?.series ?? []} />
+                <AIAdoptionReport
+                    series={data.aiAdoptionReport?.series ?? []}
+                    isPreview={data.aiAdoptionReport?.isPreview}
+                />
             </ReaderView>
         </>
     )
@@ -33,6 +36,7 @@ export default function Leaderboard({
 export const query = graphql`
     query AIAdoptionLeaderboardPage {
         aiAdoptionReport {
+            isPreview
             series {
                 facet
                 label
