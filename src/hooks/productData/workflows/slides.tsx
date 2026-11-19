@@ -1,5 +1,14 @@
 import React from 'react'
-import { IconBrackets, IconBrowser, IconClock, IconDecisionTree, IconLaptop, IconPlug, IconSend } from '@posthog/icons'
+import {
+    IconBrackets,
+    IconBrowser,
+    IconClock,
+    IconDecisionTree,
+    IconLaptop,
+    IconPlug,
+    IconSend,
+    IconSparkles,
+} from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -211,6 +220,45 @@ export const keyFeatures: CarouselSlide[] = [
         image: {
             src: f.flow_logic.images[0].src,
             alt: f.flow_logic.images[0].alt,
+        },
+    },
+    // Copy reshaped from contents/docs/workflows/{ai-tasks,replay-vision}.mdx
+    {
+        slug: 'ai-steps',
+        label: 'AI steps',
+        icon: <IconSparkles className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-purple',
+        layout: 'float',
+        heading: 'Hand a step to an agent',
+        description: (
+            <>
+                <p>
+                    Some steps need judgment, not a rule. Add an AI step, and the workflow waits for the answer, then
+                    continues with it.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Create AI task',
+                                description:
+                                    'Start an agent with your instructions, the triggering event and person, and the GitHub repositories, connectors, and skills you allow. It can tag a support ticket, open a pull request, or review trial accounts each week.',
+                            },
+                            {
+                                label: 'Replay Vision',
+                                description:
+                                    'Have Replay Vision watch the session behind the event, then answer a question, categorize it, score it, or summarize it. Branch on the result.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_edb58a27f2.png',
+            alt: "A workflow that scores each signup's first session with Replay Vision, then branches on the score",
         },
     },
     {
