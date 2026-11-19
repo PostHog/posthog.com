@@ -2,13 +2,13 @@
 title: Choose a judge method
 ---
 
-Every evaluation needs a judge: something that reads a generation and returns a result. PostHog has three judge methods. Pick one before you create an [evaluation](/docs/ai-evals), because the method decides what you write, what it costs, and what you get back.
+Every evaluation needs a judge: something that reads a generation, a trace, or a session and returns a result. PostHog has three judge methods, and each one works whether the evaluation grades generations, traces, or sessions (you choose with the [**Evaluate** setting](/docs/ai-evals#choosing-what-to-evaluate)). Pick a method before you create an [evaluation](/docs/ai-evals), because the method decides what you write, what it costs, and what you get back.
 
 |  | LLM with explanation | Decision model | Code-based (Hog) |
 |---|---|---|---|
-| **How it judges** | An LLM reads your prompt and the generation | An LLM reads your prompt and the generation | Your Hog code runs against the generation |
+| **How it judges** | An LLM reads your prompt and the generation, trace, or session | An LLM reads your prompt and the generation, trace, or session | Your Hog code runs against the generation, trace, or session |
 | **Returns** | A result plus written reasoning | A result, no reasoning | A result, plus optional reasoning from `print()` |
-| **Cost** | One LLM API call per evaluation | One LLM API call per evaluation, faster and lower-cost | Free |
+| **Cost** | One LLM API call per evaluation | One LLM API call per evaluation, faster and lower-cost | No LLM API cost |
 | **Best for** | Subjective checks where you want to know why it failed | Subjective checks at volume, when you don't need the reasoning | Deterministic rules: format, keywords, length |
 | **You write** | A prompt | A prompt | Hog code |
 
@@ -182,7 +182,7 @@ Code-based evaluations share the same sampling rate and property filter options 
 
 ### Available globals
 
-Your Hog code has access to these variables:
+On an evaluation that grades each generation, your Hog code has access to these variables:
 
 | Variable            | Type             | Description                              |
 | ------------------- | ---------------- | ---------------------------------------- |
@@ -192,6 +192,8 @@ Your Hog code has access to these variables:
 | `event.uuid`        | string           | The event UUID                           |
 | `event.event`       | string           | The event name                           |
 | `event.distinct_id` | string           | The distinct ID of the user              |
+
+**Note:** `input`, `output`, `properties`, and `event` only exist when the evaluation grades each generation. For a whole trace or session, use `target` (the trace or session's `type`, `id`, `total_cost_usd`, and `total_latency_seconds`) and `evaluation_events`, a list of every event in it. Each event has `uuid`, `event`, `timestamp`, `input`, `output`, and `properties`. `target` and `evaluation_events` also work on generations, so code that uses them runs on any target.
 
 ### Creating a code-based evaluation
 
