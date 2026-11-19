@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The AppSignal connector syncs the monitoring data of one AppSignal app into the PostHog Data Warehouse: incidents, error and performance samples, deploy markers and deploy stats, log lines, metrics, distributed traces, and per-action performance aggregates. You can then join application health to how people use your product, and see the release or the slow action that a drop in usage follows.
+The AppSignal connector syncs the monitoring data of one AppSignal app into the PostHog Data Warehouse: incidents, error and performance samples, deploy markers and deploy stats, log lines, metrics, distributed traces and error traces, per-action performance aggregates, Kubernetes node and pod resource usage, uptime monitors, and check-in triggers. You can then join application health to how people use your product, and see the release or the slow action that a drop in usage follows.
 
 ## Prerequisites
 
@@ -40,11 +40,11 @@ The app ID is part of the connection. If you change it, you must enter the token
 
 The **Supported tables** section below shows the sync method for each table. In short:
 
-- Tables of records that never change after AppSignal writes them (samples, log lines, traces, spans) are append-only.
-- Tables of records that AppSignal keeps updating (deploy markers, metric buckets, deploy stats) merge on their key.
-- Incident tables are aggregates whose count, state, and last occurrence keep changing, and the GraphQL API that serves them cannot filter by time, so they are full refresh only. The small lookup tables (`apps`, `metric_names`) are full refresh too.
+- Tables of records that never change after AppSignal writes them (samples, log lines, traces, error traces, spans) are append-only.
+- Tables of records that AppSignal keeps updating (deploy markers, metric buckets, deploy stats, Kubernetes node and pod snapshots) merge on their key.
+- Incident tables are aggregates whose count, state, and last occurrence keep changing, and the GraphQL API that serves them cannot filter by time, so they are full refresh only. The small lookup tables (`apps`, `metric_names`, `uptime_monitors`, `check_in_triggers`) are full refresh too.
 
-AppSignal does not report how much history your plan keeps, so the first sync of each metrics, tracing, and deploy-stats table starts from a fixed lookback (7 to 90 days, depending on the table) instead of asking for all of it. The other tables walk your full history, which AppSignal limits to your plan's retention period.
+AppSignal does not report how much history your plan keeps, so the first sync of each metrics, tracing, Kubernetes, and deploy-stats table starts from a fixed lookback (7 to 90 days, depending on the table) instead of asking for all of it. The other tables walk your full history, which AppSignal limits to your plan's retention period.
 
 Tables that cost one AppSignal request per item (`trace_spans`, `slow_event_actions`, `deploy_stats`) are capped per run. If your app has more items than the cap, run the sync again and it continues from where it stopped.
 
@@ -57,6 +57,14 @@ Tables that cost one AppSignal request per item (`trace_spans`, `slow_event_acti
 <SourceTables />
 
 `metric_timeseries` holds one row per metric series per hour, for both custom and platform metrics. Read it together with `metric_names`, which lists each metric name, its type, and the tag keys it carries.
+
+`uptime_monitors` holds the configuration of each uptime monitor. The check results are the `uptime_monitor_*` metrics in `metric_timeseries`, tagged with the monitor `id`.
+
+`check_in_triggers` holds each cron and heartbeat check-in trigger with the state and time of its latest run. The connector does not sync the history of earlier runs.
+
+`kubernetes_nodes` and `kubernetes_pods` hold one row per node or pod per hour: the latest resource snapshot that AppSignal recorded in that hour. `snapshot_timestamp` is the time of the snapshot.
+
+`error_traces` holds one row per trace and exception incident. `digest` identifies the incident. A trace with errors from two incidents has a row for each incident.
 
 ## Troubleshooting
 
