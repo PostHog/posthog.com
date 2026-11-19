@@ -23,7 +23,7 @@ OpenID Connect (OIDC) enables users to access multiple systems with a single set
 
 1. If you are using PostHog cloud, your organization must be subscribed to a platform package that offers OIDC. If you are self-hosting PostHog, your instance must have an enterprise license that supports OIDC.
 
-2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to login with. For example, if you want to allow users with an `@example.com` email address to login, like `john@example.com`, you need to add and verify `example.com` as an authentication domain.
+2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to login with. For example, if you want to allow users with an `@example.com` email address to login, like `john@example.com`, you need to add and verify `example.com` as an authentication domain. PostHog rejects an OIDC login if the email address from your IdP is not in a verified domain of your OIDC configuration.
 
 3. If you are self-hosting PostHog, make sure you have properly set up your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables) configuration.
 
@@ -108,7 +108,7 @@ OpenID Connect (OIDC) enables users to access multiple systems with a single set
 
 9. Select **Save configuration** in PostHog.
 
-The next time you enter your email address during login, you will see an option to login using OIDC.
+The next time you enter your email address during login, you will see an option to login using OIDC. The first time you log in with OIDC, you must also enter a code that PostHog sends to your email address. See [First login](#first-login).
 
 ### Example: OneLogin
 
@@ -224,7 +224,20 @@ The next time you enter your email address during login, you will see an option 
       />
 
 
-The next time you enter your email address during login, you will see an option to login using OIDC.
+The next time you enter your email address during login, you will see an option to login using OIDC. The first time you log in with OIDC, you must also enter a code that PostHog sends to your email address. See [First login](#first-login).
+
+## First login
+
+The first time a user logs in with OIDC, PostHog holds the login and sends a 6-digit code to the email address of the user's PostHog account. The user must enter this code to complete the login. This proves that the user gets email at that address. If the user does not enter the code within 30 minutes, they must log in again.
+
+After the user enters the code, later logins through the same identity provider do not need a code. PostHog asks for a new code if one of these items changes:
+
+- The identity provider's issuer URL
+- The user's identity (subject) at the identity provider
+- The email address that the identity provider sends
+- The email address of the user's PostHog account
+
+If PostHog cannot send the code, the login fails. If you are self-hosting PostHog, make sure that you [configure email](/docs/self-host/configure/email).
 
 ## Warnings
 

@@ -150,7 +150,7 @@ You can quickly connect OneLogin and PostHog by using the prebuilt integration.
     classes="rounded"
   />
 
-The next time you enter your email address during login, you will see an option to login using SAML.
+The next time you enter your email address during login, you will see an option to login using SAML. The first time you log in with SAML, you must also enter a code that PostHog sends to your email address. See [First login](#first-login).
 
 #### OneLogin advanced
 
@@ -235,7 +235,7 @@ Use a custom SAML connector if you need app configurations that the prebuilt int
     classes="rounded"
    />
 
-The next time you enter your email address during login, you will see an option to log in using SAML.
+The next time you enter your email address during login, you will see an option to log in using SAML. The first time you log in with SAML, you must also enter a code that PostHog sends to your email address. See [First login](#first-login).
 
 ### Example: Okta
 
@@ -340,7 +340,20 @@ The next time you enter your email address during login, you will see an option 
     classes="rounded"
    />
 
-The next time you enter your email address during login, you will see an option to login using SAML.
+The next time you enter your email address during login, you will see an option to login using SAML. The first time you log in with SAML, you must also enter a code that PostHog sends to your email address. See [First login](#first-login).
+
+## First login
+
+The first time a user logs in with SAML, PostHog holds the login and sends a 6-digit code to the email address of the user's PostHog account. The user must enter this code to complete the login. This proves that the user gets email at that address. If the user does not enter the code within 30 minutes, they must log in again.
+
+After the user enters the code, later logins through the same identity provider do not need a code. PostHog asks for a new code if one of these items changes:
+
+- The identity provider's entity ID or X.509 certificate
+- The user's identity (subject) at the identity provider
+- The email address that the identity provider sends
+- The email address of the user's PostHog account
+
+If PostHog cannot send the code, the login fails. If you are self-hosting PostHog, make sure that you [configure email](/docs/self-host/configure/email).
 
 ## Warnings
 
