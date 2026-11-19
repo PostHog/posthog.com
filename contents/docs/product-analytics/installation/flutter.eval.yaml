@@ -162,7 +162,7 @@ checks:
                   use automatic setup.
               apple-deployment-targets: >-
                   The iOS deployment target is 15.0 or higher and the macOS deployment
-                  target is 11.0 or higher: `IPHONEOS_DEPLOYMENT_TARGET` and
+                  target is 12.0 or higher: `IPHONEOS_DEPLOYMENT_TARGET` and
                   `MACOSX_DEPLOYMENT_TARGET` in the Runner Xcode projects, and any
                   `platform :ios` or `platform :osx` line in ios/Podfile and
                   macos/Podfile. Fails if the agent lowers either target below that.
