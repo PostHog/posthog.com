@@ -18,9 +18,6 @@ crosspost:
   - Blog
 ---
 
-
-# What is real user monitoring (and how to set it up)
-
 Your app works locally, but then someone tries to check out on a five-year-old phone over terrible WiFi, and the “Purchase” button does absolutely nothing.
 
 The problem here is that you can only test for things you expect to happen. You can't account for every browser, device, internet connection, agent, or other creative way someone might break your product. Luckily, your users are pretty good at finding the things you might miss.
@@ -67,7 +64,7 @@ In PostHog, open Web Analytics then nav to Web Vitals to see how your pages are 
 
 The dashboard shows performance over time and breaks it down by page. You can also filter by properties like device and browser to find out whether a problem affects everyone or just a particular group.
 
-![PostHog Web Analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_11_19_at_7_26_38_AM_b644676023.png)
+![PostHog Web Vitals](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_11_19_at_10_01_48_AM_95374ae7e4.png)
 
 For example, you might discover that your checkout page has poor INP scores on mobile devices. That suggests users experience delays when they interact with it, even if the page still technically loads.
 
