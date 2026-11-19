@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-Sync your Flagsmith projects, environments, feature flags, flag states, segments, organization members, and audit log into the PostHog data warehouse, so you can correlate rollouts with product metrics and track who changed what, when.
+Sync your Flagsmith projects, environments, feature flags, flag states, identity overrides, multivariate options, segments, change requests, organization members, API usage, and audit log into the PostHog data warehouse, so you can correlate rollouts with product metrics and track who changed what, when.
 
 ## Prerequisites
 
@@ -45,6 +45,12 @@ Flagsmith's Admin API exposes no server-side timestamp filter on these resources
 ## Troubleshooting
 
 If a sync fails with an authentication error, the organization API key was likely revoked or entered incorrectly. Create a new key under **Organisation Settings > API Keys** and reconnect the source.
+
+Change requests are a paid Flagsmith feature. If your plan doesn't include them, the `change_requests` table fails to sync, but your other tables still sync.
+
+The `identity_feature_states` table only includes overrides for identities stored in Flagsmith's core database. Flagsmith keeps overrides for Edge identities elsewhere, so they don't appear in this table.
+
+Each sync of the `usage_data` table reloads the last 90 days of API usage.
 
 Retention of the `audit_logs` table on Flagsmith SaaS depends on your plan, so it reflects the history Flagsmith currently retains for your organization.
 
