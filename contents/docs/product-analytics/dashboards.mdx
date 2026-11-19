@@ -609,6 +609,27 @@ After the analysis completes, you can rate it with a thumbs up or thumbs down.
 
 > **Note:** AI-powered refresh analysis isn't available when dashboard filter overrides, URL filters, or URL variables are applied.
 
+### Exporting dashboards
+
+You can export a dashboard as a **PNG** image or a **PDF** document. Both options are available from the **File** menu under **Export** (or from the export button in the dashboard panel).
+
+1. Open the dashboard you want to export.
+2. Click **File** > **Export**.
+3. Select **PNG** or **PDF**.
+
+**PNG** captures the entire dashboard as a single image.
+
+**PDF** produces a paginated, landscape A4 document. Tiles stack across pages in their visual order, preserving chart labels, group labels, and experiment badges at page boundaries. The dashboard title appears on the first page.
+
+PDF exports have the following limits:
+
+- Maximum of 20 tiles per dashboard
+- Maximum tile height of 50 grid units
+
+If a dashboard exceeds either limit, the export fails with an error message before any queries run. Reduce the number of tiles or the height of oversized tiles and try again.
+
+> **Note:** Exporting requires editor access to the dashboard.
+
 ## Managing dashboards with Terraform
 
 For teams practicing infrastructure-as-code, you can manage PostHog dashboards and insights using the [PostHog Terraform provider](/docs/terraform).
