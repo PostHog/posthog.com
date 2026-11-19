@@ -9,7 +9,7 @@ availability:
 sourceId: NewsBreak
 ---
 
-The NewsBreak Ads connector syncs your advertising data from the NewsBreak Ads API into PostHog, including ad accounts, campaigns, ad sets, ads, and daily performance reports. This source is currently in **Beta**.
+The NewsBreak Ads connector syncs your advertising data from the NewsBreak Ads API into PostHog, including ad accounts, campaigns, ad sets, ads, and daily performance reports.
 
 ## Adding a data source
 
