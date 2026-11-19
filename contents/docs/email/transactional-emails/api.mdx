@@ -11,11 +11,11 @@ You need a [transactional email](/docs/email/transactional-emails#create-a-trans
 ## Send an email
 
 ```
-POST https://us.posthog.com/api/projects/@current/messaging/send/email/
+POST https://us.posthog.com/api/messaging/send/email/
 ```
 
 - **Host** – Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project** – `@current` is the project that the key belongs to. You can use your project ID instead.
+- **Project** – The path has no project, because the key names it. PostHog uses the project that the key belongs to.
 
 ### Request
 
@@ -62,7 +62,7 @@ A `202` means that PostHog queued the email. It doesn't mean that the email was 
 <MultiLanguage selector="tabs">
 
 ```bash file=cURL
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: password-reset-8f14e45f" \
@@ -166,8 +166,6 @@ $result = PostHog::emails()->send([
 
 Each SDK page shows how to set up the client and handle errors.
 
-The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
-
 When a send fails, the response carries a `code`. See [errors](/docs/email/transactional-emails#errors), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files).
 
 ### `delivery_unavailable`
@@ -208,7 +206,7 @@ The response is the same `202` as for a template send. A retry with the same `Id
 <MultiLanguage selector="tabs">
 
 ```bash file=cURL
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: password-reset-8f14e45f" \
@@ -442,7 +440,7 @@ Ask where to upload before each send, also for a file that you sent before. Post
 #### Ask where to upload
 
 ```
-POST https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/
+POST https://us.posthog.com/api/messaging/attachments/uploads/
 ```
 
 Send the `Authorization` and `Content-Type` headers of a [send](#request). The key needs the `transactional_email:write` scope. Send a JSON body with a `files` list of 1 to 10 files, all for one email:
@@ -453,7 +451,7 @@ Send the `Authorization` and `Content-Type` headers of a [send](#request). The k
 | `size` | Yes | The size of the file in bytes, at least 1. |
 
 ```bash
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
+curl -X POST "https://us.posthog.com/api/messaging/attachments/uploads/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -515,7 +513,7 @@ The upload goes to Amazon S3, not to the PostHog host. The SDKs upload there too
 #### Send the email with its files
 
 ```bash
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: receipt-1042" \
@@ -568,7 +566,7 @@ These checks apply to content from your code, in addition to the [errors](/docs/
 To find out what happened to an email, read its status with the `message_id` from the send:
 
 ```
-GET https://us.posthog.com/api/projects/@current/messaging/emails/:message_id/
+GET https://us.posthog.com/api/messaging/emails/:message_id/
 ```
 
 Send the same `Authorization` header as for a send. The key needs the `transactional_email:read` or `transactional_email:write` scope. A key with a `hog_flow` scope still works. Only a project secret API key can read a status.
@@ -596,7 +594,7 @@ Each project secret API key can read 600 statuses per minute and 20,000 per hour
 <MultiLanguage selector="tabs">
 
 ```bash file=cURL
-curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>/" \
+curl "https://us.posthog.com/api/messaging/emails/<message_id>/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
 ```
 

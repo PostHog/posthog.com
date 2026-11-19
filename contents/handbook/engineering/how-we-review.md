@@ -28,6 +28,8 @@ Stamphog is off for a repo until someone turns it on. Repos opt in one at a time
 
 Repo-level policy is optional. Stamphog reads `.stamphog/policy.yml` and `.stamphog/review-guidance.md` from the repo's default branch and layers them over hosted defaults, so a repo with no `.stamphog/` directory gets the defaults. Stamphog can never approve a change to those files. It reads them from the default branch and never from the PR head, and every edit to them routes to a human reviewer.
 
+[Developer Experience](/handbook/engineering/developer-experience) owns Stamphog and PostHog Review. Questions go to #team-devex, including a Stamphog decline that looks wrong.
+
 ## What reviews are for
 
 Automated reviewers are useful for cheap, repetitive checks: obvious bugs, missing tests, typo-level mistakes, suspicious edge cases, and things that look like lint or static analysis. They reduce noise for humans, but they don't replace human judgment.

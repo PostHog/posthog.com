@@ -40,6 +40,8 @@ PostHog can also show a `_amazonses.yourdomain.com` TXT record and, if another o
 
 DNS changes can take a few minutes to propagate. PostHog checks the records when you open the sender, and checks pending senders again every day. Once the domain is verified, you see a green check mark.
 
+A new project starts with a small daily sending allowance, which grows as it sends with low bounce and spam complaint rates. [Sending reputation and allowance](/docs/email/sending-reputation) explains the tiers and how to keep marketing and transactional email apart. If your domain already sends through another provider, you can add PostHog's records next to the old ones, as [move from another provider](/docs/email/sending-reputation#move-from-another-provider) explains.
+
 ## The default sender
 
 When the first sender in a project is verified, it becomes the project's default sender, unless the project already has one. A [transactional email](/docs/email/transactional-emails) sent from code without a `from` address uses the default sender.

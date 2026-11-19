@@ -77,7 +77,7 @@ To convert to PostHog's schema, we need to:
 
 5. Do the same conversion with person properties. These are then added to the `$set` property.
 
-Once this is done, you can capture events into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) with `historical_migration` set to `true`.
+Once this is done, you can capture events into PostHog using the [Python SDK](/docs/libraries/python/reference#client) with `historical_migration` set to `true`.
 
 Here's an example version of a full Python script that gets data from BigQuery, converts it to PostHog's schema, and captures it in PostHog.
 

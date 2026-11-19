@@ -171,7 +171,7 @@ On custom dispatchers, use `mcp_exception_autocapture=False` on Python's `PostHo
 
 ## Anonymous sessions and person profiles
 
-Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions don't each create a person profile. When your identify callback resolves an identity, events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
+Events for sessions with no resolved identity are sent with person processing turned off, so anonymous MCP sessions don't each create a person profile. When your identify callback resolves an identity, events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
 
 ## Buffering
 

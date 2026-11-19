@@ -31,6 +31,8 @@ These don't move:
 
 [Verify your sending domain](/docs/email/verify-domain) and add a sender for each from-address your Customer.io emails use. The automation import matches each email to the PostHog sender with the same address. When there's no match, the draft gets a note that asks you for a sender.
 
+If your domain still sends through Customer.io, follow the [migration steps](/docs/email/sending-reputation#move-from-another-provider) on sending reputation and allowance.
+
 ## 2. Import opt-outs and suppressions
 
 Do this before you import automations. The opt-out import creates the message categories that the automation import maps Customer.io topics to, and it stores the App API key that lets PostHog read your email content.

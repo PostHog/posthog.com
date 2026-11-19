@@ -5,16 +5,20 @@ const YAML = require('yaml')
 // pages are never MDX: gatsby-config.js blocks them from MDX, gatsby/onCreateNode.ts turns them
 // into SdkMarkdownReference nodes, and src/templates/sdk/SdkMarkdownReference.tsx renders them.
 
+/**
+ * The SDKs whose rows become pages. Strapi also syncs the web and mobile SDKs, but their pages aren't ready,
+ * so the build skips them. Add an SDK here to publish it.
+ */
+const PUBLISHED_SDK_REFERENCES = ['posthog-python', 'posthog-go', 'posthog-rust', 'posthog-node']
+
 /** The pages a row can write: reference, migration, and one per major version, such as 7.x.x.md. */
 const isSdkReferencePage = (file) => file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
 
 /**
- * Whether a page answers noindex (see vercel.json), so it stays out of the sitemap and site search: a past or
- * next major, the migration guides, and the Python reference until #21973 links it.
+ * Whether a page answers noindex (see vercel.json), so it stays out of the sitemap and site search: a page for
+ * one major version, which repeats a reference page.
  */
-const isNoindexSdkReference = (slug) =>
-    slug.startsWith('/docs/libraries/') &&
-    (slug.endsWith('.x.x') || slug.endsWith('/migration') || slug === '/docs/libraries/python/reference')
+const isNoindexSdkReference = (slug) => slug.startsWith('/docs/libraries/') && slug.endsWith('.x.x')
 
 /** Whether a gatsby-source-filesystem File node is one of those pages. */
 const isSdkReferenceFile = (node) => {
@@ -30,4 +34,10 @@ const splitFrontmatter = (raw) => {
     return { frontmatter: YAML.parse(raw.slice(4, end)) || {}, body: raw.slice(end + 5) }
 }
 
-module.exports = { isSdkReferencePage, isNoindexSdkReference, isSdkReferenceFile, splitFrontmatter }
+module.exports = {
+    PUBLISHED_SDK_REFERENCES,
+    isSdkReferencePage,
+    isNoindexSdkReference,
+    isSdkReferenceFile,
+    splitFrontmatter,
+}
