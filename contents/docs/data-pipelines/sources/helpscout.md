@@ -47,5 +47,6 @@ All Help Scout tables are full refresh. Each sync replaces the contents of the t
 
 - If the connection fails with an authorization error, the help Scout account is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If the `happiness_ratings` or `user_conversation_history` table fails with a forbidden error, your Help Scout plan doesn't include reports. Help Scout reports are only available on the Plus and Pro plans. Upgrade your Help Scout plan or deselect these tables.
 
 <TroubleshootingLink />
