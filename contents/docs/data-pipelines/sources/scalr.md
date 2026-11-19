@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Scalr connector syncs your Terraform and OpenTofu infrastructure data – environments, workspaces, and runs – into PostHog, so you can analyze infrastructure-as-code activity alongside your product data.
+The Scalr connector syncs your Terraform and OpenTofu infrastructure data – environments, workspaces, runs, tags, cost estimates, and policy checks – into PostHog, so you can analyze infrastructure-as-code activity alongside your product data.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ When linking Scalr, you'll need:
 
 The `workspaces` table supports incremental sync using the `updated_at` field. The `environments` and `runs` tables use full refresh only.
 
-Runs use full refresh because their status changes over time and the Scalr API doesn't expose an update filter for this resource.
+The `tags`, `cost_estimates`, and `policy_checks` tables also use full refresh. Cost estimates and policy checks are extracted from the run list because the Scalr API only exposes them per-run, not as standalone list endpoints. Each row includes a `run_id` column linking it back to the parent run.
 
 ## Configuration
 
