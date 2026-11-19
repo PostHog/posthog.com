@@ -6,7 +6,7 @@ export default function MessagingPricing(): JSX.Element {
         <ProductReaderView
             productHandle="messaging"
             surface="pricing"
-            seoOverrides={{ title: 'Email & Messaging pricing – PostHog' }}
+            seoOverrides={{ title: 'Messaging pricing – PostHog' }}
         />
     )
 }

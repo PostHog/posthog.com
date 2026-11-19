@@ -159,7 +159,7 @@ export const tools = [
     },
     {
         handle: 'messaging',
-        name: 'Email & Messaging',
+        name: 'Messaging',
         description: 'Send transactional email, broadcasts, and drip campaigns from your product data',
         slug: 'messaging',
         category: 'communication',

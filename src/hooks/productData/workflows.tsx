@@ -127,7 +127,7 @@ export const workflows = {
                 <p>
                     Want to send transactional email, broadcasts, or drip campaigns?{' '}
                     <Link to="/messaging" className="font-bold underline">
-                        Email & Messaging
+                        Messaging
                     </Link>{' '}
                     now has its own home.
                 </p>

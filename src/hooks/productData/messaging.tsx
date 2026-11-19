@@ -39,7 +39,7 @@ export const messaging = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Email & Messaging – Send email from your product data',
+        title: 'Messaging – Send email from your product data',
         description:
             'Send transactional email from the PostHog SDK, broadcasts to cohorts, and drip campaigns triggered by events. 10,000 emails a month free.',
     },
@@ -172,10 +172,10 @@ export const messaging = {
         eli5: (
             <>
                 <p>
-                    Email & Messaging sends email, SMS, and push notifications to your users, using the events and
-                    cohorts you have in PostHog. Build a welcome drip campaign in the visual editor, send a launch email
-                    to a cohort, or send a password reset from your backend with the PostHog SDK. Every send, open, and
-                    click is an event on the person, so you check if an email worked in the same funnels and replays as
+                    Messaging sends email, SMS, and push notifications to your users, using the events and cohorts you
+                    have in PostHog. Build a welcome drip campaign in the visual editor, send a launch email to a
+                    cohort, or send a password reset from your backend with the PostHog SDK. Every send, open, and click
+                    is an event on the person, so you check if an email worked in the same funnels and replays as
                     everything else. The first 10,000 emails each month are free. After that, 1,000 emails cost $3, with
                     lower rates at higher volume.
                 </p>
