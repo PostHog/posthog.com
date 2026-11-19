@@ -45,7 +45,7 @@ The share of dashboards built with AI is roughly flat since April 2026 (up from 
 - Experiments is up from 19.9% to 45.8%
 - Feature flags is up from 14.3% to 36.1%
 
-![Creation trends](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_27_at_13_38_45_2x_721bddafcc.png)
+![Creation trends](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/ai_share_of_objects_created_b70aa0ef7d.png)
 
 ## The UI is not dead, even for agent users
 
@@ -66,13 +66,13 @@ People who start using agents kept the same number of days with a UI pageview (m
 
 74% of MCP queries are SQL (as opposed to trend, funnel, or schema queries), while in the UI only 43% are. Overall, `execute-sql` is our most popular MCP tool at 52.3% of all tool calls. It's used 4x more than any other tool.
 
-![Tools](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_27_at_13_39_05_2x_ad8dc052f1.png)
+![Tools](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/mcp_vs_web_query_types_334d64284e.png)
 
 Interestingly, across people who use both, Claude calls `execute-sql` a lot more than Codex (66% to 38%). Codex relies more on schema lookups (21% to 8%), while Claude is willing to fail and try again. 
 
 5.2% of Claude's SQL calls fail compared to only 3.6% of Codex's.
 
-![SQL vs data schema](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_27_at_13_39_21_2x_cbffba521e.png)
+![SQL vs data schema](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/claude_vs_openai_sql_vs_schema_de74d1a742.png)
 
 ## Agents and humans prefer different products
 
@@ -83,12 +83,14 @@ If you compare MCP tool calls with UI pageviews, you get a sense of what product
 
 Although this undercounts unassignable SQL tool calls, the split is clear. Watching and browsing happens in the UI, investigating and debugging happen with AI.
 
+![Humans watch, agents dig](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/humans_watch_agents_dig_7e1a278eb5.png)
+
 ## The surface shapes the work
 
 - Cursor is a leader for error tracking usage. 5.8% of its calls are related to error tracking, compared to 2.9% of Codex's and 2.1% of Claude's.
 - OpenAI reads the docs. `docs-search` is 5.5% of Codex's calls, but only 0.7% of Claude Code's.
 
-![Error tracking and docs search](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_27_at_13_42_51_2x_6561f9d105.png)
+![Error tracking and docs search](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/error_tracking_docs_search_by_client_e43e58b889.png)
 
 - The wizard is for setup. 64% of its tool calls are for writing (creating or updating objects), much higher than the next largest write source (WebMCP at 22%).
 - Slack is almost the opposite: 78% is SQL and schema lookups, only 5% writes.
@@ -112,7 +114,7 @@ At an individual level, usage across PostHog is up too. Usage across PostHog is 
 
 AI is a big part of what's driving it. Among people who created something in both September 2025 and September 2026, those who started using agents went from a median of 5 objects created to 11. Those who didn't went from 4 to 3.
 
-![Agent vs non-agent creation](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_10_27_at_13_49_11_2x_6c34ba217e.png)
+![Agent vs non-agent creation](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/agent_vs_non_agent_creation_4bbf9d9b39.png)
 
 ## Most free orgs don't use AI. Most paying orgs do.
 
@@ -120,7 +122,7 @@ AI is a big part of what's driving it. Among people who created something in bot
 
 86% of Enterprise, Scale, and Teams orgs used AI. Only 9% of "big spenders" used no AI, making an average of 4,004 calls per month. Free orgs that use the MCP average 136 calls a month, but most free orgs make zero.
 
-![MCP usage by org size](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_27_at_13_46_08_2x_8688b2d4c7.png)
+![MCP usage by org size](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/mcp_calls_by_plan_69ffaae989.png)
 
 Our new ICP of "[AI-pilled software teams](/handbook/who-we-build-for)" is looking pretty good right about now.
 
