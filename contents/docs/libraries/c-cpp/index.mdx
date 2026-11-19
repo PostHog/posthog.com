@@ -353,9 +353,3 @@ if (flags.is_enabled("new-onboarding")) {
 ```
 
 For a full C program, see [`capture.c`](https://github.com/PostHog/posthog-rs/blob/main/crates/posthog-rs-ffi/examples/capture.c).
-
-## Limitations
-
-- **Error Tracking:** the SDK does not capture C or C++ crashes. To send errors, capture your own `$exception` events with `posthog_capture`, or use a crash reporter.
-- **Not available yet:** the `before_send` and `on_error` hooks, AI events, and transactional email.
-- **No automatic capture:** the SDK does not capture events, such as app opens or screen views, automatically.
