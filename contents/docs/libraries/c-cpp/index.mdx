@@ -23,8 +23,6 @@ The PostHog C/C++ SDK (`posthog-rs-ffi`) is a C API for the [PostHog Rust SDK](/
 - **Capture** adds events to a queue and returns immediately. A background thread batches, retries, and sends them.
 - **Feature flag evaluation** blocks the calling thread while it gets flags, or evaluates them locally when you enable local evaluation.
 
-Events report `$lib` as `posthog-rs-ffi` and `$lib_version` as the `posthog-rs-ffi` version. This version is independent of the `posthog` Rust crate version.
-
 ## Installation
 
 Download the archive for your platform from the [`posthog-rs-ffi` GitHub Releases](https://github.com/PostHog/posthog-rs/releases?q=posthog-rs-ffi). Each release has the tag `posthog-rs-ffi-v<version>` and these archives:
