@@ -89,6 +89,8 @@ CSP limits which resources the browser can load and which scripts it can execute
 
 Keep `script-src` and `connect-src` separate in your review: permitting event ingestion doesn't require permitting remote JavaScript. From `posthog-js` 1.451.0, the SDK fetches project configuration from the assets host as JSON, so `connect-src` must allow the assets host. The SDK loads executable `config.js` through `script-src` only when `opt_in_site_apps` is `true`. Bundling the SDK doesn't remove the need to permit its API requests. Test the features you enable before enforcing your policy, and use browser console reports to find blocked resources rather than broadly adding `unsafe-inline` or `unsafe-eval`.
 
+CSP limits where code can load from and send data to. It doesn't stop code that already runs on your page from changing the page, for example by swapping a payment detail or a wallet address. `connect-src` also doesn't cover every way data can leave the page, such as navigation or image requests. Treat CSP as one layer, alongside SRI and pinned versions.
+
 Use [CSP tracking](/docs/csp-tracking) to test your policy in report-only mode before enforcement and monitor violations after deployment.
 
 A [reverse proxy](/docs/advanced/proxy) changes where requests go. It doesn't verify script contents or reduce the privileges of code running on your page.

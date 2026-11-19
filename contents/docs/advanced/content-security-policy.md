@@ -99,6 +99,8 @@ This will modify the script/stylesheet to be loaded before they are inserted to 
 
 Make sure you return the script/stylesheet or else we won't append it to the DOM.
 
+If your `script-src` allows scripts only by nonce, without listing PostHog hosts or using `'strict-dynamic'`, you must set the nonce in this hook. Otherwise the browser blocks the scripts the SDK loads for features such as session replay and surveys.
+
 If you set `require_subresource_integrity: true` (`posthog-js` 1.452.0 or later), the hook must keep the script's `integrity` and `crossOrigin` values and a non-empty `src`. It can still set a nonce or change the URL. See [require integrity for extension scripts](/docs/libraries/js/security#require-integrity-for-extension-scripts).
 
 ## Domains used by PostHog clients
