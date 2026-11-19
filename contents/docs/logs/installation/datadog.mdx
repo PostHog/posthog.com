@@ -64,13 +64,13 @@ logs_config:
       is_reliable: true
 ```
 
-```bash file=Environment variables
+```bash file=Environment
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 # Use eu.i.posthog.com for EU Cloud
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS='[{"api_key": "<ph_project_token>", "Host": "us.i.posthog.com", "Port": 443, "path_prefix": "/i/v1/logs/datadog/<ph_project_token>", "is_reliable": true}]'
 ```
 
-```yaml file=Helm
+```yml file=Helm
 # values.yaml for the Datadog Agent Helm chart
 datadog:
   env:
