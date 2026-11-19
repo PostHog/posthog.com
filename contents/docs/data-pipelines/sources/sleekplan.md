@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Sleekplan API key to sync feedback posts, comments, votes, changelog updates, end users, and survey responses.
+Enter your Sleekplan API key to sync feedback posts, comments, votes, changelog updates, end users, groups, documents, and survey responses.
 
 Create a key in Sleekplan under **Settings > Developer**. A key inherits the permissions of the member who created it, so create it from an account that can see every board you want to sync.
 
@@ -49,5 +49,6 @@ All Sleekplan tables are full refresh. Each sync replaces the contents of the ta
 
 - If the connection fails with an authorization error, the API key is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If the `Groups`, `GroupMembers`, or `Documents` table fails with an `upgrade_required` error, your Sleekplan plan does not include that feature. Upgrade your Sleekplan plan, or turn the table off.
 
 <TroubleshootingLink />
