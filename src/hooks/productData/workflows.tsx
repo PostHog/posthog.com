@@ -35,9 +35,9 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Automate emails and messages from user behavior',
+        title: 'Workflows – Automate your product from user behavior',
         description:
-            'Trigger emails, push notifications, Slack messages, and webhooks from live user behavior. Build automations in PostHog with 10K emails free monthly.',
+            'Trigger Slack messages, webhooks, PostHog actions, and AI tasks from live user behavior. Build automations in PostHog on the events you already track.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -115,14 +115,14 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
-        description: '"Create an onboarding email series for trial users"',
+        description: '"Post in #sales when someone upgrades to a paid plan"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>
                 <p>
-                    Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
-                    your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
-                    triggers, delays, audience splits, message sends, and PostHog actions.
+                    Workflows is PostHog's no-code, drag-and-drop tool for automating processes. You decide when a
+                    workflow is triggered, who it runs for, and what happens at each step - delays, branches, Slack
+                    messages, webhooks, AI tasks, and PostHog actions.
                 </p>
                 <p>
                     Want to send transactional email, broadcasts, or drip campaigns?{' '}
@@ -178,15 +178,11 @@ export const workflows = {
         rows: [
             [
                 'Product Leads / Technical PMs',
-                'Consolidate Zapier or Customer.io into PostHog – activation, retention, and lifecycle flows on the same events you already track',
+                'Replace Zapier with automations that run on the same events you already track',
             ],
             [
-                'Product Marketers',
-                'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
-            ],
-            [
-                'Growth Engineers',
-                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
+                'Sales and Success Teams',
+                'Post in Slack or update a CRM when an account signs up, upgrades, or goes quiet',
             ],
             [
                 'Product Engineers',
@@ -215,28 +211,24 @@ export const workflows = {
     },
     questions: [
         {
-            question: 'How do I set up an email drip campaign?',
-            url: '/docs/workflows/email-drip-campaign',
+            question: 'How do I build a workflow?',
+            url: '/docs/workflows/workflow-builder',
         },
         {
-            question: 'How do I create emails with PostHog AI?',
-            url: '/docs/workflows/create-emails-ai',
-        },
-        {
-            question: 'How do I configure email, Slack, or other channels?',
+            question: 'How do I connect Slack, webhooks, or other destinations?',
             url: '/docs/workflows/configure-channels',
         },
         {
-            question: 'How do I run A/B tests inside workflows?',
-            url: '/tutorials/workflows-ab-testing',
+            question: 'How do I run an AI task from a workflow?',
+            url: '/docs/workflows/ai-tasks',
         },
         {
-            question: 'How do teams use Workflows for customer journeys?',
-            url: '/tutorials/complete-workflows-guide',
+            question: 'How do I use Replay Vision in a workflow?',
+            url: '/docs/workflows/replay-vision',
         },
         {
-            question: 'How do I manage opt-outs and suppressions?',
-            url: '/docs/workflows/opt-outs',
+            question: 'How do I edit a live workflow?',
+            url: '/docs/workflows/editing-live-workflows',
         },
     ],
     comparison: {
@@ -246,7 +238,7 @@ export const workflows = {
                     title: 'You only need workflows without the product data',
                 },
                 {
-                    title: 'You only want simple marketing automations',
+                    title: 'You need thousands of app integrations',
                 },
                 {
                     title: 'You need granular permissioning and audit logs for a large org',
@@ -281,19 +273,24 @@ export const workflows = {
                 key: 'make',
             },
             {
-                name: 'Customer.io',
-                key: 'customer_io',
-            },
-            {
-                name: 'Brevo',
-                key: 'brevo',
-            },
-            {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        rows: ['workflows'],
+        // Automation rows only. The email rows are on /messaging.
+        rows: [
+            'workflows.features.visual_builder',
+            'workflows.features.ai_assistant',
+            'workflows.features.real_time_triggers',
+            'workflows.features.native_event_triggers',
+            'workflows.features.user_properties',
+            'workflows.features.branching_logic',
+            'workflows.features.no_data_syncing',
+            'workflows.features.unified_analytics',
+            'workflows.features.experiment_triggers',
+            'workflows.features.webhook_actions',
+            'workflows.features.run_based_pricing',
+        ],
         excluded_sections: ['platform'],
     },
     pairsWith: [
@@ -310,7 +307,7 @@ export const workflows = {
         {
             slug: 'feature-flags',
             description:
-                'React when a feature is turned on, off, or rolled out to a specific segment. Target messages or follow-ups based on flag variations.',
+                'React when a feature is turned on, off, or rolled out to a specific segment, and branch on flag variants.',
         },
         {
             slug: 'error-tracking',
@@ -325,10 +322,9 @@ export const workflows = {
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
         // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
-        intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
+        intro: 'Ask PostHog AI to set up multi-step workflows from the triggers, conditions, and actions you describe.',
         mcpFeatures: ['workflows'],
         skills: [
-            'Generates email templates for your content library',
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
             'Recommends which workflows to build and when to run them based on your product metrics',
         ],
@@ -339,31 +335,10 @@ export const workflows = {
                 title: 'Create workflows',
                 tool: 'workflows-create',
                 prompts: [
-                    'Build an onboarding email sequence to help new users get started',
                     'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
-                    'Generate a SMS sequence to encourage users to complete a survey',
+                    'Send a webhook to our CRM when an account goes quiet for 14 days',
+                    'Tag a person as a power user once they create their tenth dashboard',
                 ],
-            },
-            {
-                title: 'Create email templates',
-                tool: 'workflows-create-email-template',
-                prompts: [
-                    'Create a welcome email for new users who just signed up',
-                    "Write a re-engagement email for users who haven't logged in for 30 days",
-                    'Generate an email template for announcing a new feature',
-                    'Create an onboarding drip email series for trial users',
-                    "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button",
-                ],
-            },
-            {
-                title: 'Inspect templates',
-                tool: 'workflows-show-email-template',
-                prompts: ['Show me the current welcome email template'],
-            },
-            {
-                title: 'Update templates',
-                tool: 'workflows-update-email-template',
-                prompts: ['Update the onboarding template to include their company name in the subject'],
             },
         ],
     },

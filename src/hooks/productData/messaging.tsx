@@ -114,7 +114,7 @@ export const messaging = {
                 intro: (
                     <p>
                         Build a drip campaign that starts from an event, a cohort, or a schedule. Each step can wait,
-                        branch on what the person did, or send an email, Slack message, push notification, or webhook.
+                        branch on what the person did, or send an email, SMS, or push notification.
                     </p>
                 ),
             },
@@ -194,18 +194,6 @@ export const messaging = {
             alt: 'How to create a workflow in PostHog',
         },
     },
-    customers: {
-        grantable: {
-            headline: 'replaced Zapier with PostHog Workflows and cut setup time by ~90%',
-            description:
-                'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
-        },
-        croissant: {
-            headline: 'uses Workflows instead of Zapier, next to Product Analytics, Web Analytics, and Surveys',
-            description:
-                'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
-        },
-    },
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
     useCases: {
         rows: [
@@ -252,7 +240,7 @@ export const messaging = {
             url: '/docs/workflows/opt-outs',
         },
         {
-            question: 'How do I configure email, Slack, or other channels?',
+            question: 'How do I set up email, SMS, and push?',
             url: '/docs/workflows/configure-channels',
         },
         {
@@ -275,7 +263,7 @@ export const messaging = {
                     title: "You send email that doesn't depend on product data",
                 },
                 {
-                    title: 'You only want simple marketing automations',
+                    title: 'You only need a newsletter tool',
                 },
                 {
                     title: 'You need granular permissioning and audit logs for a large org',
@@ -322,7 +310,19 @@ export const messaging = {
                 key: 'posthog',
             },
         ],
-        rows: ['workflows'],
+        // Email rows only. The automation rows are on /workflows.
+        rows: [
+            'workflows.features.visual_builder',
+            'workflows.features.ai_assistant',
+            'workflows.features.email_editor',
+            'workflows.features.campaign_tracking',
+            'workflows.features.cohort_targeting',
+            'workflows.features.native_event_triggers',
+            'workflows.features.user_identity',
+            'workflows.channels.features.email',
+            'workflows.channels.features.sms',
+            'workflows.channels.features.push',
+        ],
         excluded_sections: ['platform'],
     },
     pairsWith: [
@@ -379,7 +379,7 @@ export const messaging = {
                 tool: 'building-workflows, migrating-from-customer-io',
                 prompts: [
                     "Build an onboarding drip campaign: a welcome email at sign-up, and a nudge two days later if they haven't created a project",
-                    'Post in #sales when someone upgrades to a paid plan',
+                    "Send a win-back email to people who haven't logged in for 30 days",
                     'Move our Customer.io campaigns into PostHog',
                 ],
             },

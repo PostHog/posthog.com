@@ -1,6 +1,5 @@
 import React from 'react'
 import { IconBrackets, IconBrowser, IconClock, IconDecisionTree, IconLaptop, IconPlug, IconSend } from '@posthog/icons'
-import { IconEnvelope } from 'components/OSIcons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -64,14 +63,13 @@ export const applications: CarouselSlide[] = [
                 <p>
                     The{' '}
                     <Link
-                        to="/docs/workflows/surfaces/web-app"
+                        to="/docs/workflows/workflow-builder"
                         state={{ newWindow: true }}
                         className="underline font-semibold"
                     >
                         PostHog web app
                     </Link>{' '}
-                    is where workflows are built – the drag-and-drop builder, the content library where message
-                    templates live, your channels, and your opt-out and suppression lists.
+                    is where workflows are built - the drag-and-drop builder and the destinations each step can send to.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -84,17 +82,12 @@ export const applications: CarouselSlide[] = [
                             {
                                 label: 'Work in drafts, then publish',
                                 description:
-                                    'A workflow stays a draft until you enable it, so you can build and test without anyone receiving a message.',
+                                    'A workflow stays a draft until you enable it, so you can build and test it before it runs for anyone.',
                             },
                             {
-                                label: 'Design message templates',
+                                label: 'Connect destinations',
                                 description:
-                                    'Compose emails and other messages in the content library, personalize them with person properties, and reuse them across workflows.',
-                            },
-                            {
-                                label: 'Manage channels & opt-outs',
-                                description:
-                                    'Verify a sending domain and connect email, Slack, or any real-time destination. Review message categories, recipient preferences, and the suppression list.',
+                                    'Connect Slack, a webhook, or any real-time destination, and use it from any step.',
                             },
                         ]}
                     />
@@ -191,33 +184,6 @@ export const keyFeatures: CarouselSlide[] = [
         image: {
             src: f.workflow_builder.images[0].src,
             alt: f.workflow_builder.images[0].alt,
-        },
-    },
-    {
-        slug: 'messaging',
-        label: 'Messaging',
-        icon: <IconEnvelope className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-blue',
-        layout: 'float',
-        heading: f.messaging.headline,
-        description: (
-            <>
-                <p>{f.messaging.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.messaging.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            src: f.messaging.images[0].src,
-            alt: f.messaging.images[0].alt,
         },
     },
     {

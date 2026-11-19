@@ -2,7 +2,6 @@ import React from 'react'
 import { IconBolt, IconDecisionTree } from '@posthog/icons'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
-import { keyFeatures } from '../workflows/slides'
 
 /**
  * Copy on these slides is checked against contents/docs/workflows/{email-drip-campaign,workflow-builder}.mdx.
@@ -100,5 +99,4 @@ export const automation: CarouselSlide[] = [
             </>
         ),
     },
-    ...keyFeatures.filter((slide) => slide.slug === 'channels'),
 ]
