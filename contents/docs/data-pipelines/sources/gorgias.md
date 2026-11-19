@@ -37,6 +37,7 @@ Once the syncs are complete, you can start using Gorgias data in PostHog.
 | `satisfaction_surveys` | Customer satisfaction surveys | Full refresh |
 | `tags` | Tags | Full refresh |
 | `views` | Views | Full refresh |
+| `view_items` | Tickets in each saved ticket view (deactivated views and customer views are not included) | Full refresh |
 | `teams` | Teams | Full refresh |
 | `macros` | Macros | Full refresh |
 
