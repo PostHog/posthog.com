@@ -2953,7 +2953,7 @@ export const docsMenu = {
                             name: 'Electron',
                             url: '/docs/libraries/electron',
                             badge: {
-                                title: 'Alpha',
+                                title: 'Beta',
                                 className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                             },
                         },

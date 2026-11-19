@@ -16,7 +16,7 @@ features:
   errorTracking: true
 ---
 
-> **Note:** This SDK is in alpha. APIs and behavior can change in minor version releases. Test your packaged app on each operating system and Electron version that you ship.
+> **Note:** This SDK is currently in **beta**. APIs and behavior can change in minor version releases. Test your packaged app on each operating system and Electron version that you ship.
 
 The PostHog Electron SDK (`@posthog/electron`) captures data from your Electron desktop app. It supports Electron 41 and later.
 
@@ -34,13 +34,11 @@ The SDK supports:
 
 ## Installation
 
-The SDK is published with the `alpha` tag. Install it with your package manager:
+Install `@posthog/electron` with your package manager:
 
 ```bash
-npm install @posthog/electron@alpha
+npm install @posthog/electron
 ```
-
-For reproducible builds, pin the exact version in your `package.json`, for example `"@posthog/electron": "0.1.0-alpha.0"`.
 
 Keep `electron` as a development dependency of your app. Do not bundle Electron into your app's JavaScript.
 
