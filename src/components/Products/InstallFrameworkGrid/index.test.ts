@@ -9,57 +9,56 @@ const React = requireDependency('react')
 const { renderToStaticMarkup } = requireDependency('react-dom/server')
 const ts = requireDependency('typescript')
 
-const TAXONOMY = [
-    {
-        id: 'backend-languages',
-        title: 'Backend languages',
-        items: [
-            { slug: 'nodejs', name: 'Node.js', librarySlug: 'node' },
-            { slug: 'ruby', name: 'Ruby', librarySlug: 'ruby' },
-            { slug: 'tanstack-router', name: 'TanStack Router', librarySlug: 'tanstack-router' },
-        ],
-    },
-]
-
-function renderGrid(data: unknown, productSlug?: string) {
-    const source = ts.transpileModule(readFileSync(new URL('./index.tsx', import.meta.url), 'utf8'), {
+function load(path: string, modules: Record<string, unknown>) {
+    const source = ts.transpileModule(readFileSync(new URL(path, import.meta.url), 'utf8'), {
         compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React, esModuleInterop: true },
     }).outputText
-    const exports: { default?: unknown } = {}
-    runInNewContext(source, {
-        exports,
-        require: (name: string) =>
-            ({
-                react: React,
-                gatsby: { graphql: () => null, useStaticQuery: () => data },
-                'components/Link': ({ to, children }: { to: string; children: unknown }) =>
-                    React.createElement('a', { href: to }, children),
-                'components/OSForm/input': () => null,
-                '../../../constants/logos': { getLogo: (key: string) => `logo-${key}` },
-                '../../../constants/installation-taxonomy': { TAXONOMY },
-            }[name]),
-    })
-    return renderToStaticMarkup(React.createElement(exports.default, { productSlug, searchable: false }))
+    const exports: Record<string, any> = {}
+    runInNewContext(source, { exports, require: (name: string) => modules[name] })
+    return exports
 }
 
-const data = {
-    libraries: { nodes: [{ fields: { slug: '/docs/libraries/ruby' }, frontmatter: { platformLogo: 'ruby' } }] },
-    productInstalls: { nodes: [{ fields: { slug: '/docs/error-tracking/installation/node' } }] },
-    sdkReferences: { nodes: [{ slug: '/docs/libraries/node/reference' }] },
+const logos = load('../../../constants/logos.ts', {})
+const taxonomy = load('../../../constants/installation-taxonomy.ts', { './logos': logos })
+
+function renderGrid(productInstalls: string[], productSlug?: string) {
+    const data = {
+        libraries: { nodes: [{ fields: { slug: '/docs/libraries/ruby' }, frontmatter: { platformLogo: 'ruby' } }] },
+        productInstalls: { nodes: productInstalls.map((slug) => ({ fields: { slug } })) },
+        sdkReferences: { nodes: [{ slug: '/docs/libraries/node/reference' }] },
+    }
+    const { default: InstallFrameworkGrid } = load('./index.tsx', {
+        react: React,
+        gatsby: { graphql: () => null, useStaticQuery: () => data },
+        'components/Link': ({ to, children }: { to: string; children: unknown }) =>
+            React.createElement('a', { href: to }, children),
+        'components/OSForm/input': () => null,
+        '../../../constants/logos': logos,
+        '../../../constants/installation-taxonomy': taxonomy,
+    })
+    const html = renderToStaticMarkup(
+        React.createElement(InstallFrameworkGrid, { categories: ['backend-languages'], productSlug, searchable: false })
+    )
+    return (name: string) =>
+        html.match(new RegExp(`<a href="([^"]+)"><img src="([^"]+)"[^>]*/><span[^>]*>${name}</span>`))
 }
 
 test('an SDK with only a generated reference links to that reference, and an SDK with no page is hidden', () => {
-    const html = renderGrid(data)
+    const tile = renderGrid([])
 
-    assert.match(html, /href="\/docs\/libraries\/node\/reference"/)
-    assert.match(html, /src="logo-node"/)
-    assert.match(html, /href="\/docs\/libraries\/ruby"/)
-    assert.doesNotMatch(html, /TanStack Router/)
+    assert.equal(tile('Node.js')?.[1], '/docs/libraries/node/reference')
+    assert.equal(tile('Node.js')?.[2], logos.getLogo('nodejs'))
+    assert.equal(tile('Ruby')?.[1], '/docs/libraries/ruby')
+    assert.equal(tile('Go'), null)
 })
 
-test('a product guide named after the library wins over the generic SDK page', () => {
-    const html = renderGrid(data, 'error-tracking')
-
-    assert.match(html, /href="\/docs\/error-tracking\/installation\/node"/)
-    assert.doesNotMatch(html, /href="\/docs\/libraries\/node\/reference"/)
+test('a product guide named after the tile wins, then one named after the library', () => {
+    assert.equal(
+        renderGrid(['/docs/error-tracking/installation/node'], 'error-tracking')('Node.js')?.[1],
+        '/docs/error-tracking/installation/node'
+    )
+    assert.equal(
+        renderGrid(['/docs/logs/installation/node', '/docs/logs/installation/nodejs'], 'logs')('Node.js')?.[1],
+        '/docs/logs/installation/nodejs'
+    )
 })
