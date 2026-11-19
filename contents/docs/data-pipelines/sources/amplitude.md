@@ -9,7 +9,7 @@ availability:
 sourceId: Amplitude
 ---
 
-The Amplitude connector syncs your raw events, cohorts, and annotations into PostHog. It authenticates against Amplitude's Export API, Cohorts API, and Annotations API using your project's API key and secret key.
+The Amplitude connector syncs your raw events, cohorts, annotations, retention data, user composition, and revenue LTV into PostHog. It authenticates against Amplitude's Export API, Cohorts API, Annotations API, Taxonomy API, and Dashboard REST API using your project's API key and secret key.
 
 ## Adding a data source
 
@@ -23,11 +23,14 @@ Once the syncs are complete, you can start using Amplitude data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `events` | Raw events from Amplitude's Export API (only the last 30 days are pulled on the initial sync) | Incremental |
-| `cohorts` | Behavioral cohorts from the Cohorts API | Full refresh |
-| `annotations` | Dashboard annotations from the Annotations API | Full refresh |
+| Table         | Description                                                                                                                                 | Sync method  |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `events`      | Raw events from Amplitude's Export API (only the last 30 days are pulled on the initial sync)                                               | Incremental  |
+| `cohorts`     | Behavioral cohorts from the Cohorts API                                                                                                     | Full refresh |
+| `annotations` | Dashboard annotations from the Annotations API                                                                                              | Full refresh |
+| `retention`   | Daily N-day retention of new users who return with any event, from the Dashboard REST API. Covers the last 90 days.                         | Full refresh |
+| `composition` | Unique users per value of built-in user properties (e.g. platform, country, version), from the Dashboard REST API. Covers the last 90 days. | Full refresh |
+| `revenue_ltv` | Lifetime value of new users per cohort date, from the Dashboard REST API. Covers the last 90 days.                                          | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

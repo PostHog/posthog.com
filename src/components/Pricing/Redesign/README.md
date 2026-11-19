@@ -124,7 +124,7 @@ Unlike `components/Home/Customers`, there's no shuffle button or breakdown label
 
 James's pricing note is a section of `/pricing`. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
 
-The copy is intentionally limited to four commitments: no loss leaders, cheapest-at-scale pricing, financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
+The copy is intentionally limited to five commitments: no loss leaders, cheapest-at-scale pricing, no extra charge to store or query events (linked to [what you actually get when you pay for an event](/docs/billing/what-you-pay-for-per-event)), financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
 
 The note is a company position, not a design.
 

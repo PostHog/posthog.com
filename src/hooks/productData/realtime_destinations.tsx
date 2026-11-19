@@ -1,11 +1,12 @@
 import { IconDecisionTree } from '@posthog/icons'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const realtimeDestinations = {
     handle: 'realtime_destinations',
     name: 'Realtime destinations',
     Icon: IconDecisionTree,
     type: 'realtime_destinations',
-    color: 'seagreen',
+    color: PRODUCT_COLORS.realtime_destinations,
     colorSecondary: 'green-2',
     // category: 'data', // Not set on purpose - this ensures it's hidden from navigation and products
     includeAddonRates: true,

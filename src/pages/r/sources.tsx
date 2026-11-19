@@ -622,9 +622,8 @@ export default function SourcesLanding(): JSX.Element {
                                 plan, unlimited on paid plans), so the backfill costs nothing while you check it.
                             </p>
 
-                            {/* Placeholder – point at the migration docs once they exist */}
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to={SIGNUP_URL}>
+                                <CallToAction type="primary" size="md" to="/docs/data-pipelines/migrate-off-fivetran">
                                     Start your migration
                                 </CallToAction>
                             </div>

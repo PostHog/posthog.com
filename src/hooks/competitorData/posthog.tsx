@@ -270,7 +270,7 @@ export const posthog = {
                 cohorts: true,
                 conversion_funnels: true,
                 conversion_windows: true,
-                correlation_analysis: true,
+                correlation_analysis: 'Via PostHog AI',
                 custom_events: true,
                 custom_properties: true,
                 define_number_of_users_on_path: true,
@@ -284,7 +284,7 @@ export const posthog = {
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
                 monetization_analytics: true,
-                predictive_insights: false,
+                predictive_insights: true,
                 private_insights: true,
                 project_level_permissions: true,
                 ready_made_insight_types: true,
@@ -307,7 +307,7 @@ export const posthog = {
                     features: {
                         conversion_funnels: true,
                         conversion_windows: true,
-                        correlation_analysis: true,
+                        correlation_analysis: 'Via PostHog AI',
                         exclusion_events: true,
                         filter_by_cohort: true,
                         filter_by_events_or_person_property: true,
@@ -637,8 +637,8 @@ export const posthog = {
                 human_annotation: true,
                 // Beta per /docs/ai-observability/collect-user-feedback.
                 user_feedback: 'Beta',
-                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR (open beta).
-                agent_reports: 'Beta',
+                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR.
+                agent_reports: true,
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -910,7 +910,7 @@ export const posthog = {
             cross_domain_tracking: true,
             mobile_sdks: true,
             native_data_sources: true,
-            sdks: '14',
+            sdks: '19',
             server_side_sdks: true,
             sql: true,
             terraform: true,

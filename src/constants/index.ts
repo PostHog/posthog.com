@@ -10,6 +10,7 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/changelog',
     '/learn',
     '/pricing',
+    '/compare',
 ] as const
 
 // Section index pages have no scraped `.md`. generateRawMarkdownPages only sees nodes

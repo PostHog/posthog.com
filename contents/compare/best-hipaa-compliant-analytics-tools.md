@@ -143,7 +143,7 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 
 ![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
 
-[Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, A/B testing, and Guides & Surveys. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."
+[Amplitude](/compare/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, A/B testing, and Guides & Surveys. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."
 
 #### Amplitude and HIPAA compliance
 

@@ -257,6 +257,9 @@ export const heap = {
         workflows: {
             available: false,
         },
+        ai_observability: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

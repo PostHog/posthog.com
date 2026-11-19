@@ -50,13 +50,15 @@ With our bucket setup and `.csv` upload, we are ready to connect it to PostHog.
 With these, we can add the bucket to PostHog:
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
-2. Click [**New source**](https://us.posthog.com/project/52792/pipeline/new/source) and under self managed, look for **Cloudflare R2** and click **Link.**
-3. Fill the table name for use in PostHog (like `csv_users`), then use the data from Cloudflare to fill out the rest of the fields:
-   - For files URL pattern, use the jurisdiction-specific endpoint URL with your bucket and file name like `https://b27344y7bd543c.r2.cloudflarestorage.com/posthog-warehouse/my_users.csv`.
-   - Choose the **CSV with headers** format.
-   - For the access key, use your Access Key ID.
-   - For the secret key, use your Secret Access Key.
-4. Finally, click **Next** to link the bucket to PostHog.
+2. Click [**New source**](https://us.posthog.com/project/52792/pipeline/new/source), look for **Cloudflare R2**, and click **Link.**
+3. Use the data from Cloudflare to fill out the fields:
+   - For **Files URL**, use the jurisdiction-specific endpoint URL with your bucket and file name like `https://b27344y7bd543c.r2.cloudflarestorage.com/posthog-warehouse/my_users.csv`.
+   - For **Access key ID**, use your Access Key ID.
+   - For **Secret access key**, use your Secret Access Key.
+   - For **File format**, choose **CSV with a header row**.
+4. Click **Next**, select the `my_users` table, choose a sync method and frequency, and click **Import**.
+
+PostHog imports the CSV data and keeps it up to date on the schedule you chose. Synced rows count toward your data warehouse usage. If you only need to query a CSV file once, you can also [upload the file](/docs/data-pipelines/sources/file-upload) to PostHog without a bucket.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_23_at_11_23_44_2x_982f1f4214.png"
@@ -67,7 +69,7 @@ With these, we can add the bucket to PostHog:
 
 ## Querying CSV data in PostHog
 
-Once linked, we can query the data in PostHog by creating a [new SQL insight](https://us.posthog.com/insights/new) and querying the newly created table like this:
+Once the sync completes, we can query the data in PostHog by creating a [new SQL insight](https://us.posthog.com/insights/new) and querying the new table. The SQL editor lists the table under the R2 source. Replace `csv_users` with the name of your table:
 
 ```sql
 SELECT * FROM csv_users

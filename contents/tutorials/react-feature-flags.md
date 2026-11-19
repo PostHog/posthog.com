@@ -47,7 +47,7 @@ Finally, run `npm run dev` and go to `http://localhost:5173` to see our new home
 Since PostHog handles the management and evaluation of feature flags, we must set it up in our app. To do this, start by installing the `posthog-js` and `@posthog/react` libraries to get access to the [React SDK](/docs/libraries/react).
 
 ```bash
-npm install posthog-js @posthog/react
+npm install posthog-js@1 @posthog/react@1
 ```
 
 Once installed, import PostHog into `src/main.jsx` and set it up using your project token and host from [your project settings](https://us.posthog.com/settings/project). Wrap your app in the React `PostHogProvider` to access PostHog in any component.

@@ -20,7 +20,7 @@ To follow this guide along, you need:
 
 Start by installing the `posthog-node` package using your package manager.
 ```bash
-npm install --save posthog-node
+npm install --save posthog-node@6
 ```
 
 Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to **export** your [project token](https://us.posthog.com/settings/project#variables) as an environment variable.
@@ -74,10 +74,12 @@ Reuse the existing client in your application's error handler:
 
 ```ts file=index.ts
 app.onError(async (err, c) => {
-  await posthog.captureExceptionImmediate(err, undefined, {
-    path: c.req.path,
-    method: c.req.method,
-    // ... other properties
+  await posthog.captureExceptionImmediate(err, {
+    properties: {
+      path: c.req.path,
+      method: c.req.method,
+      // ... other properties
+    },
   })
   await posthog.flush() // TIP: On program exit, call flush to send any remaining events
   // other error handling logic
@@ -123,5 +125,5 @@ This automatic context setup requires the Node.js entry point. The SDK's edge en
 ## Next steps
 
 To read more about how to integrate specific PostHog features into Hono, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:
-- [Capturing custom events, setting properties, and more.](/docs/libraries/node#capturing-events)
-- [Setting up feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
+- [Capturing custom events, setting properties, and more.](/docs/libraries/node/reference#capture)
+- [Setting up feature flags including variants and payloads.](/docs/libraries/node/reference#get-feature-flag)

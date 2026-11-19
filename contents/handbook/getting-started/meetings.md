@@ -15,12 +15,12 @@ You should have been invited to any relevant meetings as part of your [onboardin
 ## Weekly schedule
 
 - **Monday** - [PostHog all-hands meeting](https://posthog.com/handbook/exec/all-hands-topics). Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the notes and recording are shared weekly in the <PrivateLink url="https://posthog.slack.com/archives/CSPHFDZH8">#general</PrivateLink> Slack channel. We protect time for Q&As and demos at the end. _The content of these meetings is always confidential._
-- **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
-- **Wednesday** - A few things happen on wednesdays:
+- **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-meeting-days-tuesdays--thursdays).
+- **Wednesday** - A few things happen on Wednesdays:
     - some teams do sprint planning here as well
     - [Engineering tech talks/brown bags](/handbook/engineering/tech-talks) and a Marketing brown bag alternate every other week
     - There's a reserved slot for cross-team meetings every other week - avoid scheduling recurring meetings (standups, 1:1s, sprint planning) so you can use the slot when necessary
-- **Thursday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
+- **Thursday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-meeting-days-tuesdays--thursdays).
 - **Friday** - extracurricular type meetings like [BookHog](/handbook/people/bookhog) often end up here!
 
 ## The all-hands

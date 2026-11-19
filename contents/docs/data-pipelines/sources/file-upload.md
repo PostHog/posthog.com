@@ -8,55 +8,66 @@ availability:
   enterprise: full
 ---
 
-You can upload CSV, JSON, or Parquet files directly to the data warehouse without setting up your own S3 or GCS bucket. PostHog stores the file and reads it in place on every query — there's no sync pipeline or recurring import.
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-This is ideal for one-off data like spreadsheet exports, lookup tables, or static datasets. For files larger than 50MB or data that updates regularly, [link an S3](/docs/data-pipelines/sources/s3) or [GCS](/docs/data-pipelines/sources/gcs) bucket instead.
+You can upload a CSV, JSON, or Parquet file to the data warehouse. You don't need a bucket of your own. Each upload creates a file upload source with one table, which you can query with SQL like any other table.
+
+Use a file upload for one-off data such as spreadsheet exports, lookup tables, or static datasets. For files larger than 50MB, or for data that changes regularly, put the files in a bucket and connect it with the [Amazon S3](/docs/data-pipelines/sources/s3), [Google Cloud Storage](/docs/data-pipelines/sources/gcs), [Azure Blob Storage](/docs/data-pipelines/sources/azure-blob), or [Cloudflare R2](/docs/data-pipelines/sources/r2) source.
+
+Rows that PostHog imports from an uploaded file count toward your data warehouse rows synced.
+
+<CalloutBox icon="IconInfo" title="Tables you uploaded before" type="fyi">
+
+PostHog moved each table that you made from an uploaded file into a file upload source. The table keeps its name, so your queries continue to work. The table continues to read its current file at no charge until you [replace the file](#replace-the-file). When you replace the file, PostHog imports the new file, and the rows count toward your data warehouse rows synced.
+
+</CalloutBox>
 
 ## Supported file formats
 
 ### CSV
 
-- The first row is treated as the header (column names).
-- Columns should not contain spaces.
-- Avoid commas inside cell values unless properly quoted.
+- The first row must contain the column names.
+- Put values that contain commas in double quotes.
 
 ### JSON
 
-Three shapes are accepted:
-
-- **JSON array** — a top-level array of objects (e.g. `[{"name": "Alice"}, {"name": "Bob"}]`).
-- **Single JSON object** — one object becomes one row.
-- **Newline-delimited JSON (NDJSON)** — one JSON object per line.
+- The file must be newline-delimited JSON (NDJSON), with one JSON object on each line. A single JSON array isn't supported.
+- PostHog accepts `.json` and `.ndjson` files.
 
 ### Parquet
 
-Standard Apache Parquet files are supported.
+PostHog supports standard Apache Parquet files.
 
-## How to upload a file
+## Upload a file
 
-### Step 1: Choose your file type
+1. Go to the [Sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section.
+2. Click **+ New source** and select **File upload**.
+3. Select the **File format**: **CSV**, **JSON**, or **Parquet**.
+4. Select the file from your computer. The maximum file size is **50MB**.
+5. Enter a **Table name**. You use this name in SQL queries. Use only letters, numbers, and underscores, and start with a letter or an underscore.
+6. Click **Upload and create table**.
 
-1. Go to the [Data pipeline sources tab](https://app.posthog.com/data-management/sources).
-2. Click **New source**.
-3. Under self managed, select **CSV**, **JSON**, or **Parquet** depending on your file format.
+PostHog uploads the file, detects the columns, and imports the rows into the table.
 
-### Step 2: Upload and create the table
+## Query your data
 
-1. Select the file from your computer. The maximum file size is **50MB**.
-2. Enter a **table name** — this is the name you'll use in SQL queries.
-3. Click **Create**.
-
-PostHog uploads the file, detects the columns, and creates a table you can query immediately.
-
-### Step 3: Query your data
-
-Your table appears under **self-managed sources** on the sources page. Query it with SQL like any other table:
+When the import is complete, query the table with SQL:
 
 ```sql
 SELECT * FROM your_table_name
 ```
 
-See [querying the data warehouse](/docs/data-warehouse/query) for more on writing SQL queries.
+See [querying the data warehouse](/docs/data-warehouse/query) for more about SQL queries.
+
+## Replace the file
+
+A file upload source has no sync schedule. To update the data, upload a new file:
+
+1. Go to the [Sources tab](https://app.posthog.com/data-management/sources) and open the file upload source.
+2. In the **Schemas** tab, click **Replace file**.
+3. Select the new file and confirm.
+
+PostHog replaces all the rows in the table with the rows from the new file. The table keeps its name, so your queries continue to work.
 
 ## Joining uploaded data to persons
 
@@ -79,14 +90,14 @@ WHERE properties.email = 'user@example.com'
 
 ## Limitations
 
-- **50MB maximum file size.** For larger files, upload them to your own bucket and [link it as a source](/docs/data-pipelines/sources/s3).
-- **Static data.** Uploaded files are not synced or updated automatically. To update the data, delete the table and upload a new file.
-- **No recurring sync.** Unlike managed sources, there is no sync schedule — the file is read directly from storage on each query.
+- **50MB maximum file size.** For larger files, put the files in a bucket and connect it with a storage source, such as [Amazon S3](/docs/data-pipelines/sources/s3).
+- **No sync schedule.** PostHog imports the data only when you upload a file. To update the data, [replace the file](#replace-the-file).
+- **Spreadsheet files aren't supported.** Export Excel or Numbers files to CSV, JSON, or Parquet before you upload them.
 
 ## Troubleshooting
 
-- **Table creation failed — could not detect columns:** Check that your file is valid. For CSV files, ensure the first row contains column headers and columns don't have spaces in their names. For JSON, ensure the file contains valid JSON objects.
+- **The file doesn't parse:** Make sure the file is valid. For CSV files, make sure the first row contains the column names. For JSON files, make sure each line holds one JSON object, not a single JSON array.
+- **The file is too large:** The upload limit is 50MB. For larger datasets, put the files in [Amazon S3](/docs/data-pipelines/sources/s3), [Google Cloud Storage](/docs/data-pipelines/sources/gcs), [Azure Blob Storage](/docs/data-pipelines/sources/azure-blob), or [Cloudflare R2](/docs/data-pipelines/sources/r2) and connect the bucket instead.
+- **Uploaded file not found:** The upload may have expired. Upload the file again.
 
-- **File too large:** The upload limit is 50MB. For larger datasets, upload the file to [S3](/docs/data-pipelines/sources/s3), [GCS](/docs/data-pipelines/sources/gcs), or [Cloudflare R2](/docs/data-pipelines/sources/r2) and link the bucket instead.
-
-- **Uploaded file not found:** If you see this error when creating a table, the upload may have expired. Try uploading the file again.
+<TroubleshootingLink />

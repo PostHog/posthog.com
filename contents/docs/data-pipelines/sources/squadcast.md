@@ -32,7 +32,7 @@ When linking Squadcast, you'll need:
 
 <SyncModes />
 
-Incidents and postmortems support incremental sync windowed on their creation date. Changes to incidents created before the incremental cursor (for example a later status change) are only picked up by a full refresh.
+Incidents and postmortems support incremental sync windowed on their creation date, and audit logs support incremental sync on their `timestamp`. Changes to incidents created before the incremental cursor (for example a later status change) are only picked up by a full refresh.
 
 ## Configuration
 

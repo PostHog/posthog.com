@@ -30,7 +30,12 @@ Endpoints provide a more stable, purpose-built solution for production use cases
 | Use case | Recommendation |
 |----------|----------------|
 | Ad-hoc and explorative queries | Query API |
+| Questions about your data from an AI agent | [PostHog MCP](/docs/model-context-protocol) |
 | Production application | Endpoints |
+| Scheduled jobs and backend services | Endpoints, with [materialization](/docs/endpoints/materialization) for heavy aggregates |
+| Per-user or per-customer lookups | Endpoints, with [variables](/docs/endpoints/variables) |
 | Customer-facing analytics | Endpoints |
 | High traffic | Endpoints |
 | Data exports to a third-party (i.e. S3 or Snowflake) | [Batch exports](/docs/data-pipelines/batch-exports) |
+
+To move code that calls `/query` today, see [move a /query call to an endpoint](/docs/endpoints#move-a-query-call-to-an-endpoint).

@@ -202,7 +202,6 @@ function GetStarted(): JSX.Element {
 function SelfDriving(): JSX.Element {
     return (
         <div className="not-prose border border-border rounded-md p-5 bg-accent/40 my-6">
-            <p className="text-sm font-semibold mb-2 opacity-70">Open beta</p>
             <p className="mb-3">
                 Once PostHog is installed and capturing events, the wizard can turn on{' '}
                 <Link to="/docs/self-driving" state={{ newWindow: true }} className="font-bold hover:opacity-75">

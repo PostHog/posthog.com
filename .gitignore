@@ -50,3 +50,8 @@ __pycache__
 
 # Local design reference exports (not part of the site)
 design-refs/
+
+# SDK references written from Strapi at build time (gatsby/onPreBootstrap.ts)
+contents/docs/libraries/*/reference.md
+contents/docs/libraries/*/migration.md
+contents/docs/libraries/*/*.x.x.md

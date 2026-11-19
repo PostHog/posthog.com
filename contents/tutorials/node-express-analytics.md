@@ -230,7 +230,7 @@ Reload the page, click around, and you should start to see some events in your P
 The snippet is great for autocapture, session recordings, and the basics. If you want all the features PostHog provides and more customizability, install the PostHog Node library. To do this, run:
 
 ```bash
-npm i posthog-node
+npm i posthog-node@6
 ```
 
 Next, add PostHog to the `server.js` file.

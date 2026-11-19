@@ -125,3 +125,33 @@ Find this setting under [**Settings** > **Organization** > **Security**](https:/
 When disabled, members only see themselves and other members in their projects.
 
 > **Note:** This feature requires the [Boost, Scale, or Enterprise plan](/platform-packages).
+
+### IP restrictions
+
+IP restrictions let you limit management access to your organization to a set of approved IP addresses or CIDR blocks. When enabled, only requests from an allowed network can access PostHog on behalf of your organization.
+
+Find this setting under [**Settings** > **Organization** > **Security** > **IP restrictions**](https://app.posthog.com/settings/organization-security).
+
+To configure IP restrictions:
+
+1. Add up to 100 IP addresses or CIDR blocks to the allowlist (e.g., `10.0.0.0/8`, `192.168.1.1`).
+2. Use the **Enabled** toggle to activate or deactivate enforcement. Disabling restrictions keeps your allowlist saved but unenforced.
+
+IP restrictions apply to:
+
+- Browser sessions
+- Personal API keys
+- OAuth access tokens
+- SCIM provisioning
+- Livestream connections
+
+The following are **exempt** and remain accessible regardless of IP restrictions:
+
+- SDK endpoints (event capture, feature flag evaluation)
+- Public survey pages
+- Shared and embedded dashboards
+- Email preference pages
+
+When a request is denied, the caller receives an HTTP 403 response with the code `ip_not_allowed`.
+
+> **Note:** IP restrictions require the [Enterprise plan](/platform-packages).
