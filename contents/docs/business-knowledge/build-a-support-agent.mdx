@@ -12,7 +12,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 This tutorial builds a small support agent in Python. The agent answers customer questions from your public docs, names its source, and says so when it doesn't know. It reads only the library you choose, so your internal policies stay out of its answers.
 
-The example uses the [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python), which connects to an MCP server in one request. Any agent framework that supports MCP servers works the same way. See [connect your own agent](/docs/business-knowledge/connect-your-agent) for other clients and the REST API.
+The agent works with any model provider or agent framework that can call an MCP server. The examples show OpenAI and Anthropic. See [connect your own agent](/docs/business-knowledge/connect-your-agent) for other clients and the REST API.
 
 ## Before you start
 
@@ -20,7 +20,7 @@ You need:
 
 - A project with Business Knowledge and [AI data processing](/docs/business-knowledge/ai-data-processing) turned on
 - Project admin access, to create a key
-- Python 3.10 or later, and an Anthropic API key
+- Python 3.10 or later, and an API key for your model provider
 
 <Steps>
 
@@ -44,26 +44,81 @@ See [libraries](/docs/business-knowledge/libraries).
 
 Open the `Public docs` library. Under **Connect an agent**, name the key `support-agent` and click **Create key**.
 
-Copy the key and store it as an environment variable on the machine that runs the agent:
+Copy the key and store it as an environment variable on the machine that runs the agent, next to the API key for your model provider:
 
-```bash
+<MultiLanguage selector="tabs">
+
+```bash file=OpenAI
+export POSTHOG_BUSINESS_KNOWLEDGE_KEY="<your project secret API key>"
+export OPENAI_API_KEY="<your OpenAI API key>"
+```
+
+```bash file=Anthropic
 export POSTHOG_BUSINESS_KNOWLEDGE_KEY="<your project secret API key>"
 export ANTHROPIC_API_KEY="<your Anthropic API key>"
 ```
+
+</MultiLanguage>
 
 </Step>
 
 <Step title="Write the agent" badge="required">
 
-Install the SDK:
+Install the SDK for your model provider:
 
-```bash
+<MultiLanguage selector="tabs">
+
+```bash file=OpenAI
+pip install openai
+```
+
+```bash file=Anthropic
 pip install anthropic
 ```
 
+</MultiLanguage>
+
 Create `support_agent.py`:
 
-```python
+<MultiLanguage selector="tabs">
+
+```python file=OpenAI
+import os
+
+from openai import OpenAI
+
+client = OpenAI()
+
+SYSTEM_PROMPT = """You are the support agent for Acme.
+
+Search business knowledge before you answer a question about Acme's product, pricing, or policies.
+Answer only from what the search returns, and name the source you used.
+If the search finds nothing, say that you don't know and offer to pass the question to a person."""
+
+
+def answer(question: str) -> str:
+    response = client.responses.create(
+        model="gpt-6.2-astra",
+        instructions=SYSTEM_PROMPT,
+        tools=[
+            {
+                "type": "mcp",
+                "server_label": "business_knowledge",
+                "server_url": "https://mcp.posthog.com/mcp/business-knowledge",
+                "authorization": os.environ["POSTHOG_BUSINESS_KNOWLEDGE_KEY"],
+                "require_approval": "never",
+            }
+        ],
+        input=question,
+    )
+    return response.output_text
+
+
+if __name__ == "__main__":
+    print(answer("How long does a refund take?"))
+```
+
+```python file=Anthropic
 import os
 
 import anthropic
@@ -118,7 +173,13 @@ if __name__ == "__main__":
     print(answer("How long does a refund take?"))
 ```
 
-The `mcp_servers` entry gives the model the six [Business Knowledge tools](/docs/business-knowledge/connect-your-agent#what-the-agent-can-do). The model decides when to search, reads more of a document when one passage isn't enough, and writes the answer. The loop resumes a turn that the API paused in the middle of a long run of searches, and keeps what the model found before the pause.
+</MultiLanguage>
+
+Both examples give the model the six [Business Knowledge tools](/docs/business-knowledge/connect-your-agent#what-the-agent-can-do) through the MCP server. The model decides when to search, reads more of a document when one passage isn't enough, and writes the answer.
+
+The provider connects to the MCP server for you and sends the key in the `Authorization` header. In the Anthropic example, the loop resumes a turn that the API paused in the middle of a long run of searches.
+
+With another provider or framework, add the server with the [JSON configuration](/docs/business-knowledge/connect-your-agent#connect-with-mcp), or call the [REST API](/docs/business-knowledge/connect-your-agent#call-the-rest-api) from a tool you define.
 
 </Step>
 
