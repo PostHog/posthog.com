@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
 import CloudinaryImage from 'components/CloudinaryImage'
-import BrandLogo from 'components/MCPLeaderboard/BrandLogo'
-import { modelVendor } from 'components/MCPLeaderboard/data'
-import { getLogo, getDarkClassForLogo } from '../../constants/logos'
-import langchainMark from '../../../contents/images/docs/llms/langchain.svg'
+import { rowLogo } from './rowLogo'
 
 const sections = {
     model: [
@@ -79,19 +76,6 @@ const chartConfig = {
     legend: { show: true },
     yTickFormatter: (v: number) => `${v}%`,
     tooltip: { valueFormatter: percent },
-}
-
-function rowLogo(section: Section, key: string, label: string) {
-    if (section === 'provider_diversity') return null
-    const family = section === 'model' ? key.split('-')[0] : key
-    const logo = family === 'langchain' ? langchainMark : getLogo(family)
-    if (logo) {
-        const darkClass = family === 'langchain' || family === 'vercel' ? 'dark:invert' : getDarkClassForLogo(logo)
-        return (
-            <img src={logo} className={`size-4 shrink-0 object-contain ${darkClass}`} width={16} height={16} alt="" />
-        )
-    }
-    return <BrandLogo name={label} fallback={modelVendor(key)} />
 }
 
 export default function AIAdoptionReport({
@@ -272,7 +256,7 @@ export default function AIAdoptionReport({
                                                         aria-expanded={expanded === row.key}
                                                         onClick={() => setExpanded(expanded === row.key ? '' : row.key)}
                                                     >
-                                                        {rowLogo(section, row.key, row.label)}
+                                                        {rowLogo(section, row.key)}
                                                         <span className="min-w-0">{row.label}</span>
                                                     </button>
                                                 </th>
