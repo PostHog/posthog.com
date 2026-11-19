@@ -2946,7 +2946,7 @@ export const docsMenu = {
                             name: 'C/C++',
                             url: '/docs/libraries/c-cpp',
                             badge: {
-                                title: 'Experimental',
+                                title: 'Beta',
                                 className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                             },
                         },
