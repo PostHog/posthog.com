@@ -870,7 +870,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
 | `throttleDelayMs` | `Long` | `1000` | Minimum delay in milliseconds between replay snapshots (Android and iOS). Replaces the deprecated `debouncerDelayMs`. |
 | `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshots. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
-| `iosCaptureMethod` | `IosCaptureMethod` | `STANDARD` | How iOS captures each replay screenshot (iOS only, 0.12.0 and later). `STANDARD` draws the window on the main thread. `BACKGROUND` draws it on a background queue, which can briefly freeze the app on the first capture. `GPU` (experimental) renders a copy of the window's layers on the GPU and doesn't capture web view pages or Metal content. |
+| `iosCaptureMethod` | `IosCaptureMethod` | `STANDARD` | How iOS captures each replay screenshot (iOS only, 0.12.0 and later). `STANDARD` draws the window on the main thread. `GPU` (experimental) renders a copy of the window's layers on the GPU and doesn't capture web view pages or Metal content. |
 
 ## Platform support
 
