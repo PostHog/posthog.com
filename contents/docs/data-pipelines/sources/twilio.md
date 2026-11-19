@@ -33,21 +33,27 @@ Once the syncs are complete, you can start using Twilio data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `messages` | SMS, MMS, and other messages | Incremental |
-| `calls` | Voice calls | Incremental |
-| `recordings` | Call recordings | Incremental |
-| `conferences` | Conference calls | Incremental |
-| `addresses` | Addresses on the account | Full refresh |
-| `applications` | TwiML applications | Full refresh |
-| `incoming_phone_numbers` | Phone numbers owned by the account | Full refresh |
-| `keys` | API keys on the account. Needs your Auth token or a Main API key | Full refresh |
-| `outgoing_caller_ids` | Verified outgoing caller IDs | Full refresh |
-| `queues` | Call queues | Full refresh |
-| `transcriptions` | Recording transcriptions | Full refresh |
+| Table                    | Description                                                      | Sync method                               |
+| ------------------------ | ---------------------------------------------------------------- | ----------------------------------------- |
+| `messages`               | SMS, MMS, and other messages                                     | Incremental                               |
+| `calls`                  | Voice calls                                                      | Incremental                               |
+| `recordings`             | Call recordings                                                  | Incremental                               |
+| `conferences`            | Conference calls                                                 | Incremental                               |
+| `message_media`          | Media attachments for messages                                   | Incremental, append only, or full refresh |
+| `alerts`                 | Account errors and warnings from the Monitor API                 | Incremental, append only, or full refresh |
+| `addresses`              | Addresses on the account                                         | Full refresh                              |
+| `applications`           | TwiML applications                                               | Full refresh                              |
+| `incoming_phone_numbers` | Phone numbers owned by the account                               | Full refresh                              |
+| `keys`                   | API keys on the account. Needs your Auth token or a Main API key | Full refresh                              |
+| `outgoing_caller_ids`    | Verified outgoing caller IDs                                     | Full refresh                              |
+| `queues`                 | Call queues                                                      | Full refresh                              |
+| `transcriptions`         | Recording transcriptions                                         | Full refresh                              |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
+
+For `message_media` and `alerts`, incremental and append-only syncs use `date_created`. Media syncs fetch attachments from messages sent since the cursor day.
+
+The `alerts` table replaces Twilio's deprecated Notifications log. Twilio retains alerts for only 30 days, so the connector cannot import older alerts. Use incremental sync to keep imported history across runs; a full refresh only includes alerts still available from Twilio.
 
 ## Configuration
 
