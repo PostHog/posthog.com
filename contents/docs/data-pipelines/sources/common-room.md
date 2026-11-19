@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Note:** This source is currently in **beta**.
-
 The Common Room connector syncs your community and signal data – contacts, organizations, activities, website visits, segments, tags, custom objects, and more – into PostHog, so you can analyze community engagement alongside your product data.
 
 ## Prerequisites
