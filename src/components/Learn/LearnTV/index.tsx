@@ -27,6 +27,7 @@ export default function LearnTV({ video }: { video: LearnVideo }): JSX.Element {
                         ref={player}
                         videoId={video.wistiaId}
                         source="wistia"
+                        borderRadius={false}
                         captions
                         onTimeUpdate={setCurrentTime}
                     />

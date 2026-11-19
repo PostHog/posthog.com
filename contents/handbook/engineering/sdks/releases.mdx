@@ -106,6 +106,16 @@ The GitHub App needs to bypass certain protections to push release commits direc
 
 ![CodeQL bypass exemption](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_29_04_157_Z_a403522dbe.png)
 
+#### Security Audit bypass
+
+The org-wide Security Audit ruleset requires the Semgrep workflow on the default branch of every repository. The release commits must bypass it too.
+
+1. Access the [Security Audit ruleset](https://github.com/organizations/PostHog/settings/rules/13791474)
+2. Under **Bypass list**, click **Add bypass**
+3. Select your GitHub App (`Releaser (<sdk_name>)`)
+4. Keep the bypass mode as **Always allow**, which is the mode that the other release apps use
+5. Save the ruleset
+
 #### Repository PR bypass
 
 1. Go back to your SDK repository settings

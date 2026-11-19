@@ -48,7 +48,7 @@ If this is a big feature which will need an announcement, content, or other mark
 
 ### Break up goals
 
-The owner turns the ambiguous milestone into a roadmap of ambitious, meaningful, sprint-sized goals, thinking 2 - 3 sprints ahead to give other functions time. [Goal principles](/handbook/engineering/development-process#set-some-milestones) still apply.
+The owner turns the ambiguous milestone into a roadmap of ambitious, meaningful, sprint-sized goals, thinking 2 - 3 sprints ahead to give other functions time. [Goal principles](/handbook/engineering/development-process#set-milestones) still apply.
 
 ### Iterate through the work
 

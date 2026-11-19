@@ -184,6 +184,38 @@ There are two ways to start a live query:
 - **Live queries** are best for ad-hoc exploration, querying data that changes frequently, or when you want to query your database without waiting for a sync.
 - **Scheduled syncs only** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
 
+### Querying unsynced tables live
+
+On a synced Postgres source with live queries enabled, you can also make individual unsynced tables queryable live without syncing them. This is useful when you want to query a table directly but don't need it synced into PostHog.
+
+To enable live queries on an unsynced table:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Schemas** tab.
+3. Click **Configure** next to the table you want to query live.
+4. Toggle **Live query** on.
+5. Click **Save**.
+
+Live queries on individual tables are unavailable when:
+
+- The table has **row filters** — live queries read every row directly and can't apply filters.
+- The table has **masked columns** — live queries read original values and can't apply masks.
+- The table has **no column metadata** — run **Pull new schemas** on the source first.
+- The source doesn't have **live queries enabled** at the source level.
+
+The live query setting is cleared automatically when you:
+
+- Add row filters or masked columns to the table
+- Delete the synced data for the table
+- Delete the schema
+- The upstream table is dropped or removed from discovery
+
+<CalloutBox icon="IconInfo" title="Access control for live-only tables" type="fyi">
+
+Live-only tables (tables with live queries enabled but not synced) use the source's access rules, then the all-tables default. They don't have their own per-table access rules like synced tables do.
+
+</CalloutBox>
+
 ## Sync methods
 
 Postgres tables support full table, incremental, append-only, xmin, and CDC sync methods.

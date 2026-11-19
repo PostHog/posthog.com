@@ -5,7 +5,6 @@ Product Analytics,autocapture,/docs/product-analytics/autocapture,Docs,Autocaptu
 Product Analytics,best practices,/docs/product-analytics/best-practices,Docs,Best practices and tips
 Product Analytics,capture events,/docs/product-analytics/capture-events,Docs,Capture Events feature or configuration
 Product Analytics,color themes,/docs/product-analytics/color-themes,Docs,Color Themes feature or configuration
-Product Analytics,correlation,/docs/product-analytics/correlation,Docs,Correlation feature or configuration
 Product Analytics,cutting costs,/docs/product-analytics/cutting-costs,Docs,"Reducing costs, optimizing spend"
 Product Analytics,dashboards,/docs/product-analytics/dashboards,Docs,Dashboards feature or configuration
 Product Analytics,funnels,/docs/product-analytics/funnels,Docs,Funnels feature or configuration
@@ -39,7 +38,6 @@ Product Analytics,stickiness,/stickiness,Product page,Stickiness feature page
 Product Analytics,trends,/trends,Product page,Trends feature page
 Product Analytics,user paths,/user-paths,Product page,User Paths feature page
 Product Analytics,group analytics,/group-analytics,Product page,Group Analytics feature page
-Product Analytics,correlation analysis,/correlation-analysis,Product page,Correlation Analysis feature page
 Product Analytics,dashboards,/dashboards,Product page,Dashboards feature page
 Product Analytics,sql,/sql,Product page,Sql feature page
 Product Analytics,notebooks,/notebooks,Product page,Notebooks feature page

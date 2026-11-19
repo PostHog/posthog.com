@@ -9,11 +9,18 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <PrivateBeta />
 
-An agent you build can answer from the same sources PostHog AI and Support use. A support agent, a help desk, a coding agent, or an internal tool connects to Business Knowledge through the PostHog [MCP](/docs/model-context-protocol) server and searches your sources when it needs a fact.
+An agent you build can answer from the same sources PostHog AI and Support use. A support agent, a help desk, a coding agent, or an internal tool connects to Business Knowledge and searches your sources when it needs a fact.
 
-The agent signs in with a project secret API key and not as a PostHog user. It can read the Business Knowledge the key covers. It can't change anything, and it can't read other PostHog data.
+The agent signs in with a project secret API key, not as a PostHog user. It can read the Business Knowledge the key covers. It can't change anything, and it can't read other PostHog data.
 
-## How to connect an agent
+There are two ways to connect:
+
+- **[MCP](/docs/model-context-protocol)** – For an agent or framework that supports MCP servers. The agent gets search tools and decides when to use them.
+- **[REST API](#call-the-rest-api)** – For code that calls search itself and puts the results into a prompt.
+
+Both use the same key.
+
+## Connect with MCP
 
 You need to be a project admin to create a key.
 
@@ -21,7 +28,7 @@ You need to be a project admin to create a key.
 
 <Step title="Choose what the agent can read" badge="required">
 
-A key covers either one library or all the Business Knowledge in the project. A [library](/docs/business-knowledge/sources#group-sources-into-libraries) is a group of sources and repositories.
+A key covers either one [library](/docs/business-knowledge/libraries) or all the Business Knowledge in the project.
 
 Give each agent the smallest set it needs. For example, put your public docs in one library for a customer-facing agent, and keep internal policies in another.
 
@@ -35,15 +42,19 @@ Open [**Business Knowledge** settings](https://app.posthog.com/business-knowledg
 2. Enter a name for the key, such as the name of the agent
 3. Click **Create key**
 
+For a key that reads one library, you can also open the library on the **Libraries** tab and create the key under **Connect an agent**.
+
 PostHog shows the new key once, inside a ready-to-copy configuration. Copy it before you leave the page.
 
 </Step>
 
 <Step title="Add the MCP server to your agent" badge="required">
 
-Add this server to your agent's MCP configuration. Most agents and agent frameworks accept this format:
+The server URL is `https://mcp.posthog.com/mcp/business-knowledge`. Send the key in the `Authorization` header.
 
-```json
+<MultiLanguage selector="tabs">
+
+```json file=JSON config
 {
     "mcpServers": {
         "business-knowledge": {
@@ -56,7 +67,15 @@ Add this server to your agent's MCP configuration. Most agents and agent framewo
 }
 ```
 
-The URL is the same for every project, in both the US and EU regions. PostHog finds your project and region from the key.
+```bash file=Claude Code
+claude mcp add --transport http business-knowledge \
+    https://mcp.posthog.com/mcp/business-knowledge \
+    --header "Authorization: Bearer <your project secret API key>"
+```
+
+</MultiLanguage>
+
+Most agents and agent frameworks accept the JSON format, including Cursor in `.cursor/mcp.json`. The URL is the same for every project, in both the US and EU regions. PostHog finds your project and region from the key.
 
 </Step>
 
@@ -64,7 +83,7 @@ The URL is the same for every project, in both the US and EU regions. PostHog fi
 
 Ask your agent something only your sources can answer, such as your refund policy. The agent searches Business Knowledge and answers from the result.
 
-If the agent finds nothing, check that the source is [ready](/docs/business-knowledge/ai-data-processing) and that it's in the library the key covers.
+If the agent finds nothing, see [troubleshooting](#troubleshooting).
 
 </Step>
 
@@ -72,9 +91,11 @@ If the agent finds nothing, check that the source is [ready](/docs/business-know
 
 <CalloutBox icon="IconLock" title="Keep the key on your server" type="caution">
 
-Anyone who has the key can read the Business Knowledge it covers. Don't put it in a website or a mobile app.
+Anyone who has the key can read the Business Knowledge it covers. Don't put it in a website, a mobile app, or a public repository. Store it as a secret in the environment where your agent runs.
 
 </CalloutBox>
+
+For a complete example, see [build a support agent](/docs/business-knowledge/build-a-support-agent).
 
 ## What the agent can do
 
@@ -91,6 +112,101 @@ The connection gives the agent six read-only tools.
 
 The agent can't add, edit, or delete sources, and it has no access to events, persons, insights, or any other PostHog data.
 
+An agent searches more reliably when its system prompt says when to search. For example:
+
+```text
+Search business knowledge before you answer a question about our product, pricing, or policies.
+Answer only from what the search returns, and name the source.
+If the search finds nothing, say that you don't know.
+```
+
+## Call the REST API
+
+Call the API when your code runs the search itself. The API has the same read-only operations as the MCP tools.
+
+Use the host for your region, `us.posthog.com` or `eu.posthog.com`. With a project secret API key you can use `@current` in place of the project ID.
+
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
+curl -G "https://us.posthog.com/api/projects/@current/business_knowledge/documents/search/" \
+    -H "Authorization: Bearer $POSTHOG_BUSINESS_KNOWLEDGE_KEY" \
+    --data-urlencode "query=How long do refunds take?" \
+    --data-urlencode "limit=5"
+```
+
+```python file=Python
+import os
+
+import requests
+
+response = requests.get(
+    "https://us.posthog.com/api/projects/@current/business_knowledge/documents/search/",
+    headers={"Authorization": f"Bearer {os.environ['POSTHOG_BUSINESS_KNOWLEDGE_KEY']}"},
+    params={"query": "How long do refunds take?", "limit": 5},
+    timeout=30,
+)
+response.raise_for_status()
+
+for chunk in response.json():
+    print(chunk["source_name"], chunk["content"][:80])
+```
+
+```js file=Node.js
+const params = new URLSearchParams({ query: 'How long do refunds take?', limit: '5' })
+
+const response = await fetch(
+    `https://us.posthog.com/api/projects/@current/business_knowledge/documents/search/?${params}`,
+    { headers: { Authorization: `Bearer ${process.env.POSTHOG_BUSINESS_KNOWLEDGE_KEY}` } }
+)
+if (!response.ok) {
+    throw new Error(`Search failed: ${response.status}`)
+}
+
+for (const chunk of await response.json()) {
+    console.log(chunk.source_name, chunk.content.slice(0, 80))
+}
+```
+
+</MultiLanguage>
+
+### Endpoints
+
+Every endpoint is a `GET` under `/api/projects/@current/business_knowledge/`.
+
+| Endpoint | Parameters | Returns |
+| --- | --- | --- |
+| `documents/search/` | `query` (required), `limit` (default 10, maximum 20), `rerank` (default `false`), `library_id` | A list of chunks, best match first |
+| `documents/{id}/window/` | `around_ordinal` (required), `radius` (default 5, maximum 15) | The chunks around one chunk of a document |
+| `libraries/` | None | The libraries the key covers |
+| `libraries/{id}/` | None | One library |
+| `repositories/search/` | `query` (required), `repo`, `library_id` | Matching file paths and README excerpts |
+| `repositories/file/` | `repo` (required), `path` (required), `library_id` | The text of one file |
+| `access/` | None | The project ID, and the library the key is limited to |
+
+### Search results
+
+Each search result is one chunk.
+
+| Field | Meaning |
+| --- | --- |
+| `content` | The text of the chunk |
+| `source_name`, `source_type`, `source_id` | The source the chunk comes from |
+| `document_id`, `document_title`, `url` | The document, and the page URL for a URL source |
+| `ordinal` | The position of the chunk in its document, starting at zero |
+| `matched_by` | `keyword`, `semantic`, `both`, or `context`. See [how search works](/docs/business-knowledge/how-it-works#how-search-works). |
+| `similarity` | How close the chunk is to the query in meaning, from 0 to 1. `null` when only the keyword lookup found it. |
+| `is_generated` | `true` for a source [learned from support](/docs/business-knowledge/learn-from-support) |
+
+To read more of a document, pass `document_id` and `ordinal` to the window endpoint:
+
+```bash
+curl -G "https://us.posthog.com/api/projects/@current/business_knowledge/documents/<document_id>/window/" \
+    -H "Authorization: Bearer $POSTHOG_BUSINESS_KNOWLEDGE_KEY" \
+    --data-urlencode "around_ordinal=4" \
+    --data-urlencode "radius=3"
+```
+
 ## What a key covers
 
 | Choice | What the agent reads |
@@ -98,15 +214,42 @@ The agent can't add, edit, or delete sources, and it has no access to events, pe
 | **All business knowledge** | Every source and selected repository in the project, in a library or not |
 | One library | The sources and repositories in that library |
 
+A key for one library behaves as if nothing else exists:
+
+- A search with no `library_id` reads that library
+- A search that passes the ID of another library returns `404`. Leave `library_id` out, or pass the key's own library ID.
+- The list of libraries holds that library only
+- A request to get another library, or to read a document outside the library, also returns `404`
+
 A [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) that you create in project settings with the `business_knowledge:read` scope also reads all your Business Knowledge.
 
 The table under **Connect your agent** lists each key, what it reads, and when an agent last used it.
 
-If you delete a library, a key limited to that library reads nothing. Create a new key for another library.
-
 ## Roll or delete a key
 
 Roll or delete a key under **Project secret API keys** in [project settings](https://app.posthog.com/settings/environment-secret-api-keys). An agent that uses a deleted key loses access immediately.
+
+If you delete a library, a key limited to that library stops working. Create a new key for another library.
+
+## Rate limits
+
+| Limit | Value |
+| --- | --- |
+| One key | 480 requests per minute and 4,800 per hour |
+| All keys in a project, combined | 480 requests per minute and 4,800 per hour |
+
+A request over the limit returns `429`. Wait and retry.
+
+## Troubleshooting
+
+| What you see | What to check |
+| --- | --- |
+| `401` from the MCP URL, with `This URL needs a project secret API key` | The `Authorization` header is missing, or it holds a personal API key. Send `Bearer` followed by a key that starts with `phs_`. |
+| `400` with `A project secret API key connects to .../mcp/business-knowledge` | The agent uses the main MCP URL. Change it to `https://mcp.posthog.com/mcp/business-knowledge`. |
+| `This project secret API key cannot read business knowledge` | The key has no `business_knowledge:read` scope, or Business Knowledge isn't available in the project. Create a key under **Connect your agent**. |
+| `The library this project secret API key was limited to no longer exists` | Someone deleted the library. Create a new key for another library. |
+| `Business knowledge belongs to project ID ...` | The key comes from another environment of the project. Create the key in the project's main environment. |
+| The search returns nothing | The source hasn't passed its [content check](/docs/business-knowledge/sources#source-status) yet, or it isn't in the library the key covers. Check the same query in the [Playground](/docs/business-knowledge/playground). |
 
 ## How this differs from the main PostHog MCP server
 

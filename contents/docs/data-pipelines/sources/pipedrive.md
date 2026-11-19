@@ -9,7 +9,7 @@ availability:
 sourceId: Pipedrive
 ---
 
-The Pipedrive connector syncs your CRM data – deals, deal products, deal history, persons, organizations, products, pipelines, stages, activities, notes, leads, users, field metadata, mailbox data, and projects – into PostHog.
+The Pipedrive connector syncs your CRM data – deals, deal products, deal history, persons, organizations, products, pipelines, stages, activities, notes, leads, users, field metadata, mailbox data, projects, currencies, call logs, and goals – into PostHog.
 
 ## Adding a data source
 
@@ -39,6 +39,8 @@ Once the syncs are complete, you can start using Pipedrive data in PostHog.
 | `stages`              | Stages within pipelines                              | Full refresh |
 | `activities`          | Activities like calls, meetings, and tasks           | Full refresh |
 | `activity_types`      | Activity types like call, meeting, and email         | Full refresh |
+| `call_logs`           | Logged phone calls with duration and outcome         | Full refresh |
+| `currencies`          | Currencies available in the Pipedrive account        | Full refresh |
 | `notes`               | Notes attached to deals, persons, or organizations   | Full refresh |
 | `leads`               | Sales leads                                          | Full refresh |
 | `lead_labels`         | Labels for categorizing leads                        | Full refresh |
@@ -46,6 +48,7 @@ Once the syncs are complete, you can start using Pipedrive data in PostHog.
 | `deal_fields`         | Custom field definitions for deals                   | Full refresh |
 | `deal_changelog`      | Per-field deal history including stage moves         | Full refresh |
 | `deal_products`       | Product line items attached to deals                 | Full refresh |
+| `goals`               | Sales goals with type, assignee, and target          | Full refresh |
 | `person_fields`       | Custom field definitions for persons                 | Full refresh |
 | `organization_fields` | Custom field definitions for organizations           | Full refresh |
 | `archived_deals`      | Archived sales deals (excluded from the deals table) | Full refresh |
