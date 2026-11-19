@@ -88,7 +88,17 @@ On Windows, link the import library of the DLL, `posthog_ffi.dll.lib`. Do not li
 cl app.c /Ipath\to\include path\to\lib\posthog_ffi.dll.lib
 ```
 
-To link the static library, add the flags from `lib/native-static-libs.txt`. For example, on Linux: `-lgcc_s -lutil -lrt -lpthread -lm -ldl -lc`.
+To link the static library, add the flags from `lib/native-static-libs.txt`. For example, on Linux:
+
+```bash
+cc app.c -Ipath/to/include path/to/lib/libposthog_ffi.a -lgcc_s -lutil -lrt -lpthread -lm -ldl -lc
+```
+
+On Windows, compile with `/MD`, because the static library uses the DLL C runtime. Put the library and the flags from `native-static-libs.txt` after `/link`, because the flags include linker options such as `/defaultlib`:
+
+```bat
+cl /MD app.c /Ipath\to\include /link path\to\lib\posthog_ffi.lib <flags from native-static-libs.txt>
+```
 
 ### Ship the shared library
 
