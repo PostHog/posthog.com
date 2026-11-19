@@ -108,18 +108,6 @@ Your app must find the shared library at run time. Ship the library with your ap
 
 If you link the static library, you do not need to ship a shared library, but your binary is larger.
 
-### Build from source
-
-To build for a different platform or toolchain, you need Rust 1.78 or newer. In the root of the [posthog-rs repository](https://github.com/PostHog/posthog-rs), run:
-
-```bash
-cargo build --release -p posthog-rs-ffi
-```
-
-The build writes the libraries to `target/release`. The header is at `crates/posthog-rs-ffi/include/posthog.h`. To build for a different target, add `--target`, for example `--target x86_64-pc-windows-msvc`.
-
-> **Note:** Always build with `-p posthog-rs-ffi`, not `--workspace`. A workspace build enables the `async-client` feature of the Rust SDK, which replaces the blocking client that the C API uses.
-
 ## Initialization
 
 Create options with your [project token](https://app.posthog.com/settings/project), then create a client:
