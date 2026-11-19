@@ -193,7 +193,7 @@ On the same account, also set the **Churn competitive solution** property. It re
 
 Each option has a reason attached: **cost**, **data residency**, or **other security/privacy**. If you don't know the full answer yet, make your best guess and update it as you learn more. Confirm it when the account churns.
 
-We use this property to see which alternatives we lose customers to and why, across all at-risk and churned accounts. A single note tells us about one account. This property lets us spot patterns, for example a rise in data residency churn to self-built solutions, and feed them to product and leadership.
+We use this property to see which alternatives we lose customers to and why, across all at-risk and churned accounts. A single note tells us about one account. This property lets us spot patterns and share those with the wider PostHog.
 
 **2. Weekly at-risk account review**
 
