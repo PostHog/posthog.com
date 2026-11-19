@@ -305,15 +305,26 @@ You can manually delete persons and their events in the PostHog UI:
 
 ### Deleting events without a person profile
 
-Person deletion removes events by person. Events captured without a [person profile](/docs/data/persons), such as [anonymous events](/docs/data/anonymous-vs-identified-events), have no person to delete, so the person deletion tools can't remove them.
+Person deletion removes events by person. Events captured without a [person profile](/docs/data/persons), such as [anonymous events](/docs/data/anonymous-vs-identified-events), have no person to delete, so the person deletion tools can't remove them on their own.
 
-To delete these events, [contact support](https://app.posthog.com/#panel=support) and include:
+To delete all the events for one distinct ID, give the distinct ID a person profile first, then delete that person:
+
+1. Send a `$set` event for the distinct ID with the [capture API](/docs/api/capture). This creates a person profile for the distinct ID, and its existing events and recordings are linked to that person. Send it from your server or with `curl`, because the [JavaScript Web SDK](/docs/libraries/js) ignores person calls when `person_profiles` is set to `'never'`.
+2. Check that the person exists by calling `GET /api/projects/:project_id/persons/?distinct_id=<distinct_id>` with a [personal API key](/docs/api#authentication). If `results` is empty, the `$set` event hasn't been processed yet, so wait a minute and check again.
+3. Call the [bulk delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete) with the distinct ID in `distinct_ids`, `delete_events: true`, and `delete_recordings: true`. This deletes the person you just created, along with its events and recordings.
+4. [Check the deletion status](#checking-deletion-status). The events are deleted once `delete_verified_at` has a value.
+
+Like other event deletions, the events are deleted [asynchronously](#asynchronous-data-deletion).
+
+### Deleting specific events
+
+To delete events that match more specific criteria, such as events from a specific date range or events with specific properties, [contact support](https://app.posthog.com/#panel=support) and include:
 
 - Your project ID
 - How to find the events, such as an event name, property filters, a date range, or a [SQL query](/docs/sql)
 - How many events you expect the deletion to match
 
-Support can run the deletion for you, or turn on event deletion in the PostHog app for your organization. Like other event deletions, it runs [asynchronously](#asynchronous-data-deletion).
+Support can request the deletion for you, or turn on event deletion in the PostHog app for your organization. Like other event deletions, it runs [asynchronously](#asynchronous-data-deletion).
 
 ### What deleting a person doesn't remove
 
@@ -326,13 +337,17 @@ Deleting a person, along with their events and recordings, doesn't remove every 
 - **Backups:** deleted data stays in [backups](#backups) until they expire.
 - **Data you've sent elsewhere:** data that [batch exports](/docs/data-pipelines/batch-exports) or destinations already sent to other tools stays there. Delete it in those tools.
 
+### When expired events are deleted
+
+PostHog doesn't delete events as soon as they pass your [retention period](/docs/data/events-retention). A cleanup runs once a month and deletes a whole calendar month of events at a time, once every event in that month has expired. This means events from early in a month stay longer than events from late in the month, and an event can stay for up to about two months past your retention period.
+
+Deleted events also stay in [backups](#backups) for about two weeks.
+
 ### Asynchronous data deletion
 
-PostHog deletes data in stages. Person records are removed during the request or within a few minutes of it. Event data takes longer: PostHog deletes events in a weekly batch that runs during non-peak usage times (weekends on PostHog Cloud). The cutoff for each batch is two days before it runs, so a request that misses the cutoff goes into the following week's batch. Small deletions can sometimes run sooner.
+While most data in PostHog is deleted instantly, event data is not. Instead, event data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud). The request cutoff time for each batch deletion is two days before the batch runs. Deletion requests that miss the cutoff time will be included in the batch after next.
 
-There's no guaranteed maximum time for event deletion. To confirm a deletion has finished, check `delete_verified_at` with the [deletion status endpoint](#checking-deletion-status).
-
-PostHog batches event deletions because deleting data in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and can affect performance for other users.
+This is done because data deletion in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and it can impact performance for other users.
 
 ## Data access control
 
