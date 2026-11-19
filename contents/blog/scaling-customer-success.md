@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - magda-olszewska
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/image1_c00bd37bf0.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/replacing_our_csp_with_customer_analytics_and_workflows_1_ea953da8a0.png
 featuredImageType: full
 ogImage: generated
 category: Inside PostHog
@@ -31,15 +31,15 @@ Now PostHog is our customer success platform, thanks to [Customer Analytics](/do
 
 ## Scaling customer success is about signals
 
-When you think of “onboarding”, you probably imagine a kickoff call after a closed deal, an implementation plan, and a series of training sessions. Ours looked quite different, and we’re also not quite a typical Customer Success team.
+When you think of “onboarding”, you probably imagine a kickoff call after a closed deal, an implementation plan, and a series of training sessions. Ours looked different.
 
 PostHog is self-serve, so a customer signs up, starts sending data, and explores products without talking to us. By the time we reach them, they may have already implemented several products and be approaching their first real bill. Very often, they haven’t asked for help. They may not even know our team exists.
 
-By using signals from product usage, billing, and customer activity, we can identify moments when customers might be struggling, missing out on value, or at risk of churning. That results in us optimizing a customer’s setup and billing, exploring their data and identifying gaps, finding better ways to answer business questions, guiding them to discover other useful aspects of PostHog, and making sure that they will stay with us for longer.
+Signals from product usage, billing, and customer activity help us identify moments when customers might be struggling, missing out on value, or a churn risk. We then optimize a customer’s setup and billing, explore their data and identify gaps, find better ways to answer business questions, guide them to discover other useful aspects of PostHog, and make sure they will stay with us longer.
 
-Additionally, we're the first customer-facing team at PostHog to operate at scale: just four people supporting around 700 customers through one shared program. We don’t have individual books of business; instead, we rely on a pretty intricate automation system to make sure nobody falls through the cracks and that we don’t step on each others’ toes while still being responsive and available.
+Additionally, we're the first customer-facing team at PostHog to operate at scale: four people support around 700 customers through one shared program. We don’t have individual books of business; instead, we rely on a pretty intricate automation system to make sure nobody falls through the cracks and that we don’t step on each others’ toes while still being responsive and available.
 
-Since our customer “queue” never stands still (forecasted spending changes with usage, accounts become eligible or drop out, some get handed over to Sales team, etc.), our processes need to keep up. We need to figure out who needs our attention, understand customer context, and coordinate our work so we can help as many customers as possible, without turning our “help” into an impersonal email campaign or spending half our day managing a CSP.
+Our processes need to keep up with our customer “queue” which never stands still (forecasted spend changes with usage, accounts become eligible or drop out, some get handed over to Sales team, etc.). We need to figure out who needs our attention, understand customer context, and coordinate our work so we can help as many customers as possible, without turning our “help” into an impersonal email campaign or spending half our day managing a CSP.
 
 That's why a successful migration to PostHog was so vital for our team.
 
@@ -51,13 +51,13 @@ We wanted the flexibility to make decisions based on billing, product usage, eng
 
 When PostHog started building Customer Analytics, we saw an opportunity to simplify things. Instead of sending our own customer data to an external CSP, why not run our processes directly where that data already lived?
 
-<TeamMember name="Daniel Danilov" photo /> built the entire data layer himself - a [SQL model](/docs/data-warehouse/views) in [PostHog's data warehouse](/docs/data-warehouse) that calculates account eligibility, a priority score based on billing forecasts, upcoming bills, recent engagement, and other signals. The advantage is that when we need to adjust our prioritization or eligibility conditions, we can change them in one centralized place rather than update multiple integrations one by one.
+The entire data layer was built by <TeamMember name="Daniel Danilov" photo /> - a [SQL model](/docs/data-warehouse/views) in [PostHog's data warehouse](/docs/data-warehouse) that calculates account eligibility, a priority score based on billing forecasts, upcoming bills, recent engagement, and other signals. The advantage is that when we need to adjust our prioritization or eligibility conditions, we can change them in one centralized place rather than update multiple integrations one by one.
 
-![SQL model in the PostHog data warehouse calculating account eligibility and priority](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_customer_analytics_sql_model_3789b8955a.png)
+![SQL model in the PostHog data warehouse calculating account eligibility and priority](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_11_18_at_13_41_26_2x_033accd629.png)
 
 Customer Analytics pulls from this and offers a single shared view, sorted by that priority score. It helps us identify which customers need attention first, while giving us access to their usage, spending, conversations, meetings, and progress through our program.
 
-![Customer Analytics accounts view sorted by priority score](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_customer_analytics_accounts_90bc4d5107.png)
+![Customer Analytics accounts view sorted by priority score](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_11_18_at_13_46_24_2x_581da972d8.png)
 
 Knowing which customers need help is only half the challenge - we also need to act on that information, and that's where Workflows come in handy.
 
@@ -65,9 +65,9 @@ Knowing which customers need help is only half the challenge - we also need to a
 
 On the surface, Workflows might seem to be for marketing-related automations, but we quickly proved that they could do much more than send emails and could help us launch our operations at scale.
 
-We needed a system that could act on customer data, coordinate our team's work, reduce manual work and cognitive load, and adapt when circumstances changed. Instead of recreating every old CSP automation separately, we consolidated much of our logic into a few core workflows, and supporting ones focused on specific tasks.
+We needed a system that could act on customer data, coordinate our team's work, automate, and adapt when circumstances changed. Instead of recreating every old CSP automation separately, we consolidated much of our logic into a few core workflows, and supporting ones focused on specific tasks.
 
-A lot of that happened through conversations with AI agents, e.g., [PostHog AI](/docs/posthog-ai), [MCP](/docs/model-context-protocol), and the [Slack app](/docs/posthog-ai/surfaces/slack). Usually we describe in plain language what we want to automate, review what the agent builds, test the logic, and switch it on once we're happy with how it works.
+A lot of this happened through conversations with AI agents, e.g., [PostHog AI](/docs/posthog-ai), [MCP](/docs/model-context-protocol), and the [Slack app](/docs/posthog-ai/surfaces/slack). Usually we described in plain language what we want to automate, review what the agent builds, test the logic, and enable it once we're happy with how it works.
 
 Here are few specific examples:
 
@@ -81,11 +81,9 @@ Every day, an “Enter queue” workflow adds newly eligible accounts to our onb
 
 Both groups then continue through the onboarding sequence, including a "last chance to get our help" message timed around their upcoming bill.
 
-Workflows then handle the rest of the journey: flagging check-ins for the team, adding tasks to Customer Analytics, sending follow-ups where appropriate, and finally, completing the onboarding by setting a person property.
+Workflows then handle the rest of the journey: flagging check-ins for the team, adding tasks to Customer Analytics, sending follow-ups where appropriate, and finally, completing the onboarding by setting a person property. Our main email sequence is currently on version 70, which is a great depiction of the number of edge cases we've worked through.
 
 It’s important to note that no workflow sends emails just because they're scheduled. Before every send, it checks the customer's current situation. Has someone recently contacted the customer? Has another team taken ownership? If the situation has changed, the message is skipped.
-
-Our main email sequence is currently on version 70, which is a great depiction of the number of edge cases we've worked through.
 
 ### 2. Billing optimization and proactive help
 
@@ -99,13 +97,13 @@ We also developed a system of proactive interventions, based on specific spend a
 
 ![Proactive intervention workflow based on spend and usage signals](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_proactive_intervention_workflow_0bad7b55b7.png)
 
-Combining customer data with [Scouts](/docs/self-driving/scouts) and automation allows us to offer this kind of proactive help to far more people than we could reach out to manually.
+Combining customer data with [Scouts](/docs/self-driving/scouts) and automation enables us to offer this kind of proactive help to far more people than we could reach out to manually.
 
 ### 3. Automating the work behind the scenes
 
 Some of our favorite workflows don't send emails at all - they save time and reduce manual effort.
 
-For example, automation creates follow-up tasks after onboarding meetings, adds [Gong](/docs/data-pipelines/sources/gong) call summaries to customer notes using [AI tasks](/docs/workflows/ai-tasks), and generates tasks from customer research reports.
+For example, Workflows creates follow-up tasks after onboarding meetings, add [Gong](/docs/data-pipelines/sources/gong) call summaries to customer notes using [AI tasks](/docs/workflows/ai-tasks), and generate tasks from customer research reports.
 
 ![Workflow creating follow-up tasks and adding call summaries to customer notes](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_meeting_followup_tasks_workflow_0b27dfc540.png)
 
@@ -133,7 +131,7 @@ Some of these features didn't exist when we started; others needed adjustments t
 
 For example, we asked for round-robin email sending, which let us distribute automated outreach across our team while maintaining a consistent relationship with each customer. Next, we requested automated workflow emails to appear in the same account conversation history as messages we send by hand. This sounds like a small detail, but when anyone on the team can pick up an account, having a complete picture of previous communication is crucial.
 
-![Workflow email step with round-robin sending across four team members](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_round_robin_email_senders_20f7061a5e.png)
+![Workflow email step with round-robin sending across four team members](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_11_19_at_14_05_19_2x_30b0fe326c.png)
 
 What made the whole process particularly enjoyable was working closely with <TeamMember name="Arthur Moreira de Deus" photo />, who’s the sole builder of Customer Analytics (that's an achievement for a product that is designed to serve multiple teams with very different ways of working). He treats us as equal partners in this journey, and never gets tired of our backlog (or so he says).
 
@@ -151,4 +149,4 @@ And we're only getting started. We can now experiment with better ways to identi
 
 Our goal was never to automate the humans out of our process. It was to automate enough of the operational complexity that we could bring human attention to many more customers. For a small team supporting hundreds of customers, that's a pretty big deal.
 
-I’d like to give a shout-out to the entire Scaled CS team for ~~surviving~~ making this migration happen, to Arthur for building Customer Analytics and turning our wishlist into features week after week, and to the <SmallTeam slug="workflows" /> for working alongside us to bring our processes to life!
+I’d like to give a shout-out to the entire <SmallTeam slug="scaled-customer-success" /> for ~~surviving~~ making this migration happen, to Arthur for building Customer Analytics and turning our wishlist into features week after week, and to the <SmallTeam slug="workflows" /> for working alongside us to bring our processes to life!
