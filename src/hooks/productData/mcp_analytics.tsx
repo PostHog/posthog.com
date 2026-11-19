@@ -104,7 +104,8 @@ export const mcpAnalytics = {
         // class that hides the other color mode's image, so both would show.
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_light_f4327f4709.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_dark_aa82abfd74.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_dark_aa82abfd74.png',
             alt: 'MCP Analytics dashboard showing tool calls, error rates, and latency',
         },
     },
