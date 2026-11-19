@@ -138,11 +138,11 @@ Sampling reduces the number of sessions you record, but you cannot control which
 ### URL triggers
 
 You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.
-The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
+On the web, the client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
 
 URL trigger patterns are regular expressions and are automatically anchored: PostHog wraps your pattern in `^` and `$`, so it must match the full URL including the path. A bare domain like `https://example.com` won't match `https://example.com/` or any subpage.
 
-On mobile, URL triggers match the screen name, for example `CheckoutScreen`. The same full-match rule applies: PostHog wraps your pattern in `^` and `$`, so `Checkout` does not match `CheckoutScreen`. Use `Checkout.*`.
+On mobile, URL triggers match the screen name, for example `CheckoutScreen`. The same full-match rule applies: PostHog wraps your pattern in `^` and `$`, so `Checkout` does not match `CheckoutScreen`. Use `Checkout.*`. Mobile recording starts when the screen matches, with no footage from before the match.
 
 To record on a domain, all of its subdomains, and every path:
 
@@ -175,7 +175,7 @@ Event triggers are supported on the following SDKs:
 
 <CalloutBox icon="IconInfo" title="Mobile platforms have no pre-buffer" type="fyi">
 
-On mobile platforms, there's no URL or in-memory pre-buffer. Recording starts when the matching event is captured and continues for the rest of the session. A new session re-arms the trigger and requires a fresh matching event.
+On mobile platforms, there's no pre-buffer. Recording starts when a screen or event trigger matches, with no footage from before the match, and continues for the rest of the session. A new session re-arms the trigger and requires a fresh match.
 
 </CalloutBox>
 
@@ -342,7 +342,13 @@ When your legacy settings use "ANY" match type with both trigger conditions (URL
 1. A group with your trigger conditions at a 100% sample rate
 2. A group with no conditions at your legacy sample rate
 
-This preserves the original behavior where recording starts if **any** condition matches **or** the session was sampled.
+On the web, this preserves the original behavior where recording starts if **any** condition matches **or** the session was sampled.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Migration can change what mobile records" type="caution">
+
+Mobile SDKs always combined legacy controls with all matching, even when your project selected "ANY". Trigger groups honor "ANY", so after migration mobile can record more sessions than before. For example, with an event trigger and 20% sampling, mobile used to record only sampled sessions that sent the event. The migrated groups record every session that sends the event, plus 20% of all other sessions. Review the generated groups before you click **Create**.
 
 </CalloutBox>
 
