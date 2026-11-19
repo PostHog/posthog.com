@@ -36,15 +36,18 @@ const CompanyHandbook: React.FC = () => {
                     </li>
                     <li>If you join us, you will be expected to take a stance on if pineapple belongs on pizza</li>
                 </ul>
-                <CallToAction
-                    href="/handbook"
-                    type="secondary"
-                    size="sm"
-                    state={{ newWindow: true }}
-                    className="mx-[0.5px]"
-                >
-                    Visit the handbook
-                </CallToAction>
+                {/* Flex wrapper so the block-level CTA sizes to its label instead of spanning the full width */}
+                <div className="flex">
+                    <CallToAction
+                        href="/handbook"
+                        type="secondary"
+                        size="sm"
+                        state={{ newWindow: true }}
+                        className="mx-[0.5px]"
+                    >
+                        Visit the handbook
+                    </CallToAction>
+                </div>
             </div>
             <aside>
                 <div className="not-prose bg-white dark:bg-dark rounded p-4 @3xl:px-6 xl:py-6 xl:px-8 @3xl:w-auto border border-primary">
