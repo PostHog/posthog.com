@@ -327,11 +327,36 @@ Example for Cursor (add to `.cursor/mcp.json`):
 }
 ```
 
-## Prompts and resources
+## Resources
 
-The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
+The MCP server provides **resources**: skills with setup guides and example code for PostHog products and frameworks, a few docs pages, and the UI apps that render MCP tool results.
 
-Currently we support Next.js, with more frameworks in progress.
+Some clients, such as Claude Code, add every resource to their `@` file picker.
+To list fewer resources, set the `resources` query parameter or the `x-posthog-mcp-resources` header. The header takes precedence if you set both.
+
+```text
+https://mcp.posthog.com/mcp?resources=none
+https://mcp.posthog.com/mcp?resources=feature-flags,docs
+```
+
+| Value              | Lists                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| `none`             | No resources                                                                                |
+| `skills`           | Every skill (`posthog://skills/...`)                                                        |
+| `<skill category>` | The skills in one category, such as `feature-flags` for `posthog://skills/feature-flags/...` |
+| `docs`             | Docs pages (`posthog://docs/...`)                                                           |
+| `apps`             | UI apps that render MCP tool results (`ui://posthog/...`)                                   |
+
+Values are comma-separated, and a resource is listed if it matches any of them. Hyphens and underscores are treated as equivalent.
+If you don't set the parameter, every resource is listed.
+The filter only changes the list: MCP tools that render UI apps keep working with `resources=none`.
+
+Example for Claude Code:
+
+```bash
+claude mcp add --transport http posthog "https://mcp.posthog.com/mcp?resources=none" \
+  --header "Authorization: Bearer phx_your_api_key_here"
+```
 
 ## Privacy and support
 
