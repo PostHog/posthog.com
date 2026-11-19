@@ -6610,6 +6610,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'How it works',
+                    url: '/docs/business-knowledge/how-it-works',
+                    icon: 'IconGear',
+                    color: 'blue',
+                },
+                {
                     name: 'AI data processing',
                     url: '/docs/business-knowledge/ai-data-processing',
                     icon: 'IconListCheck',
@@ -6634,6 +6640,12 @@ export const docsMenu = {
                     name: 'Connect your agent',
                     url: '/docs/business-knowledge/connect-your-agent',
                     icon: 'IconPlug',
+                    color: 'green',
+                },
+                {
+                    name: 'Build a support agent',
+                    url: '/docs/business-knowledge/build-a-support-agent',
+                    icon: 'IconCode',
                     color: 'green',
                 },
                 {
