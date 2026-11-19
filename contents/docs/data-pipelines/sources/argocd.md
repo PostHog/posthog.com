@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Argo CD connector syncs your GitOps delivery data – applications, deployment history, projects, repositories, and clusters – into PostHog, so you can analyze deployment frequency, rollback rates, and other delivery metrics alongside your product data.
+The Argo CD connector syncs your GitOps delivery data – applications, ApplicationSets, deployment history, application and project events, managed resources, commit and Helm chart metadata, projects, repositories with their branches and tags, and clusters – into PostHog, so you can analyze deployment frequency, rollback rates, and other delivery metrics alongside your product data.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ You also need an Argo CD account with the `apiKey` capability enabled so it can 
 When linking Argo CD, you'll need:
 
 - **Argo CD server URL** – the base URL of your Argo CD API server, for example `https://argocd.example.com`.
-- **API token** – generate one with `argocd account generate-token --account <account>`. The account's [RBAC policy](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/) needs read access to the resources you want to sync, for example `applications, get`, `projects, get`, `repositories, get`, and `clusters, get`.
+- **API token** – generate one with `argocd account generate-token --account <account>`. The account's [RBAC policy](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/) needs read access to the resources you want to sync, for example `applications, get`, `applicationsets, get`, `projects, get`, `repositories, get`, and `clusters, get`.
 - **Project** (optional) – an Argo CD project name to limit which applications are synced. Leave blank to sync all applications the token can see.
 
 ## Sync modes
