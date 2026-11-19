@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { DefaultTooltip } from '@posthog/quill-charts'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { rowLogo } from './rowLogo'
@@ -71,20 +72,15 @@ const displayNames: Record<string, string> = {
 }
 const dateFormat = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
 const monthName = (month: string) => dateFormat.format(new Date(month + 'T00:00:00Z'))
-const percent = (share: number | null | undefined) => (share == null ? '—' : `${share.toFixed(1)}%`)
+const percent = (share: number | null | undefined) =>
+    share != null && Number.isFinite(share) ? `${share.toFixed(1)}%` : '—'
 const chartConfig = {
     legend: { show: true },
     yTickFormatter: (v: number) => `${v}%`,
     tooltip: { valueFormatter: percent },
 }
 
-export default function AIAdoptionReport({
-    series,
-    isPreview,
-}: {
-    series: AdoptionSeries[]
-    isPreview?: boolean
-}): JSX.Element {
+export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] }): JSX.Element {
     const months = Array.from(new Set(series.flatMap((row) => row.points.map((point) => point.month)))).sort()
     const [selected, setSelected] = useState('')
     const [section, setSection] = useState<Section>('model')
@@ -131,7 +127,6 @@ export default function AIAdoptionReport({
                 <div>
                     <p className="m-0 font-mono text-xs">AI Observability · Monthly report</p>
                     <h1 className="my-2 text-4xl @lg:text-5xl tracking-tight">How teams use AI</h1>
-                    {isPreview && <p className="mb-2 font-semibold">Design preview with synthetic data</p>}
                     <p className="m-0 max-w-prose">
                         Which models, labs, and tools show up in the AI events teams send to PostHog? Each team counts
                         once, whether it sends a hundred events or a million.
@@ -176,7 +171,7 @@ export default function AIAdoptionReport({
                             <label className="flex items-center gap-2 text-sm font-semibold">
                                 Month{' '}
                                 <select
-                                    className="rounded border border-input bg-primary px-2 py-1 text-primary"
+                                    className="rounded border border-input bg-primary py-1 pl-2 pr-10 text-primary"
                                     value={month}
                                     onChange={(event) => {
                                         setSelected(event.target.value)
@@ -261,7 +256,18 @@ export default function AIAdoptionReport({
                                                     </button>
                                                 </th>
                                                 <td className="hidden w-24 pr-4 @md:table-cell">
-                                                    <Sparkline data={row.data} height={24} labels={dates} />
+                                                    <Sparkline
+                                                        data={row.data}
+                                                        height={24}
+                                                        labels={dates}
+                                                        tooltip={(point) => (
+                                                            <DefaultTooltip
+                                                                {...point}
+                                                                labelRenderer={() => row.label}
+                                                                valueFormatter={percent}
+                                                            />
+                                                        )}
+                                                    />
                                                 </td>
                                                 <td className="text-right">{percent(row.share)}</td>
                                                 <td className="text-right">
@@ -277,11 +283,7 @@ export default function AIAdoptionReport({
                                                             {history.map((date, i) => (
                                                                 <div key={date}>
                                                                     <dt className="text-xs">{monthName(date)}</dt>
-                                                                    <dd className="m-0">
-                                                                        {Number.isFinite(row.data[i])
-                                                                            ? percent(row.data[i])
-                                                                            : '—'}
-                                                                    </dd>
+                                                                    <dd className="m-0">{percent(row.data[i])}</dd>
                                                                 </div>
                                                             ))}
                                                         </dl>
