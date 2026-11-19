@@ -8,7 +8,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/the_real_data_of_ai_usage_in_posthog_1_28dcacbfbc.png
 featuredImageType: full
 category: General
 tags:
@@ -49,9 +49,9 @@ The share of dashboards built with AI is roughly flat since April 2026 (up from 
 
 ## The UI is not dead, even for agent users
 
-Do people come back to what AI creates? To check, we counted an object as "viewed" if someone opened it at least a day after it was created, and within 30 days. The gap between AI-created and UI-created objects is biggest for insights:
+Do people come back to what AI creates? To check, we counted an object as "viewed" if someone opened it at least a day after it was created, and within 30 days. The viewing gap between AI-created and UI-created objects is biggest for insights:
 
-| Product     | Viewed in UI (AI) | Viewed in UI (UI) | Still viewed day 15–30 (AI / UI) |
+| Product     | AI created, UI viewed | UI created and viewed | Still viewed day 15–30 (AI / UI) |
 | :---------- | ----------------: | ----------------: | -------------------------------: |
 | Insights    |            **7%** |           **24%** |                          2% / 9% |
 | Dashboards  |           **52%** |           **54%** |                        28% / 30% |
@@ -81,7 +81,7 @@ If you compare MCP tool calls with UI pageviews, you get a sense of what product
 - UI-dominant products include: replay (0.04 MCP tool calls per UI pageview), dashboards (0.06), web analytics (0.07), and surveys (0.07).
 - Agent-heavy products include [logs](/logs) (1.10), [error tracking](/error-tracking) (0.61), insights (0.50), and [warehouse](/context-warehouse)/[CDP](/cdp) (0.49).
 
-Although this undercounts unassignable SQL tool calls, the split is clear. Watching and browsing happens in the UI, investigating and debugging happen with AI.
+Although this undercounts unassignable SQL tool calls, the split is clear: watching and browsing happens in the UI; investigating and debugging happen with AI.
 
 ![Humans watch, agents dig](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/humans_watch_agents_dig_7e1a278eb5.png)
 
@@ -98,7 +98,7 @@ Although this undercounts unassignable SQL tool calls, the split is clear. Watch
 
 ## AI users adopt and use PostHog more
 
-AI is drives adoption. Our AI installation wizard is the first way that happens. 14.2% of orgs who use it to install PostHog convert to paid against 2.6% for manual installs. They average 0.88 extra products adopted in their second month against 0.36 for manual installs.
+AI is drives adoption. Our AI installation wizard is the first way that happens. 14.2% of orgs who use it to install PostHog convert to paid against 2.6% for manual installs. They adopt an average 0.88 extra products in their second month against 0.36 for manual installs.
 
 Our MCP also helps. After the first month of using it, 28–37% of orgs added a product within two months, against 4–8% of non-adopting controls, depending on their start month and size. 
 
@@ -110,13 +110,11 @@ AI users expand beyond product analytics more often into products like [session 
 | 100+ MCP calls | 3.46                  | 68%                         |
 
 
-At an individual level, usage across PostHog is up too. Usage across PostHog is up. Between July 2025 and September 2026, the median PostHog creator went from 3 objects a month to 6. 
-
-AI is a big part of what's driving it. Among people who created something in both September 2025 and September 2026, those who started using agents went from a median of 5 objects created to 11. Those who didn't went from 4 to 3.
+At an individual level, usage across PostHog is up too. Between July 2025 and September 2026, the median PostHog creator went from 3 objects a month to 6. AI is a big part of what's driving it. Among people who created something in both September 2025 and September 2026, those who started using agents went from a median of 5 objects created to 11. Those who didn't went from 4 to 3.
 
 ![Agent vs non-agent creation](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/agent_vs_non_agent_creation_4bbf9d9b39.png)
 
-## Most free orgs don't use AI. Most paying orgs do.
+## Most free orgs don't use AI. Most paying orgs do
 
 77.6% of free organizations don't use AI, but that's only 22.3% for paying orgs. 
 
