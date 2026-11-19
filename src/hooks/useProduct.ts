@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import {
-    IconThoughtBubble,
     IconCoffee,
     IconDashboard,
     IconDownload,
@@ -16,7 +15,6 @@ import {
     IconTerminal,
     IconFunnels,
     IconUserPaths,
-    IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
     IconAsterisk,
@@ -65,12 +63,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconTrends,
             color: 'green',
             colorSecondary: 'green',
-        },
-        {
-            ...getTool('user_interviews'),
-            Icon: IconThoughtBubble,
-            color: 'purple',
-            colorSecondary: 'purple',
         },
         support,
         {
@@ -804,49 +796,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     title: 'Granular controls',
                     headline: 'Granular controls',
                     description: 'Visualize any sequence of page views, screen views or events, with up to 20 steps.',
-                },
-            ],
-        },
-        {
-            ...getTool('correlation_analysis'),
-            Icon: IconCorrelationAnalysis,
-            color: 'purple',
-            colorSecondary: 'lilac',
-            overview: {
-                title: 'Discover what events correlate with conversion or churn',
-                description:
-                    'When analyzing funnels, correlation analysis highlights significant events or properties that may be useful in determining how likely someone is to converting or churning.',
-                textColor: 'text-black',
-            },
-            screenshots: {
-                overview: {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-correlation-analysis.png',
-                    alt: 'Correlation analysis',
-                    classes: '',
-                },
-            },
-            features: [
-                {
-                    title: 'Event correlation',
-                    headline: 'Event correlation',
-                    description: 'Identify which events are most strongly correlated with successful conversion.',
-                },
-                {
-                    title: 'Property analysis',
-                    headline: 'Property analysis',
-                    description: 'Discover which user or event properties correlate with conversion or churn.',
-                },
-                {
-                    title: 'Automatic significance testing',
-                    headline: 'Automatic significance testing',
-                    description:
-                        'Statistical significance is automatically calculated to surface meaningful correlations.',
-                },
-                {
-                    title: 'Funnel integration',
-                    headline: 'Funnel integration',
-                    description:
-                        'Works seamlessly with funnel analysis to provide deeper insights into conversion factors.',
                 },
             ],
         },
@@ -2500,17 +2449,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 title: 'PostHog AI - PostHog data stack',
                 description:
                     "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
-            },
-        },
-        {
-            ...getTool('data_modeling'),
-            parentIcon: 'dataBlender',
-            Icon: IconAsterisk,
-            color: 'red',
-            colorSecondary: 'red',
-            seo: {
-                title: 'Transform, enrich, and model your data',
-                description: 'Get your data in the exact shape you need it.',
             },
         },
         // {

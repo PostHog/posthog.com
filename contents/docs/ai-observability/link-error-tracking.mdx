@@ -45,11 +45,13 @@ app.post('/api/chat', async (req, res) => {
   } catch (error) {
     // Capture the exception with the same trace ID
     posthog.captureException(error, {
-      $ai_trace_id: traceId,  // Links exception to the LLM trace
-      endpoint: '/api/chat',
-      user_id: req.userId,
-      llm_model: 'gpt-5',
-      error_type: 'llm_api_error'
+      properties: {
+        $ai_trace_id: traceId,  // Links exception to the LLM trace
+        endpoint: '/api/chat',
+        user_id: req.userId,
+        llm_model: 'gpt-5',
+        error_type: 'llm_api_error'
+      }
     })
     
     res.status(500).json({ error: 'Failed to generate response' })
@@ -118,9 +120,11 @@ async function processLLMResponse(response, traceId) {
   } catch (error) {
     // Capture processing errors with context
     posthog.captureException(error, {
-      $ai_trace_id: traceId,
-      stage: 'response_processing',
-      error_details: error.message
+      properties: {
+        $ai_trace_id: traceId,
+        stage: 'response_processing',
+        error_details: error.message
+      }
     })
     
     throw error

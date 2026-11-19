@@ -87,9 +87,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                   devtool: false,
               }
             : null),
-        cache: process.env.NODE_ENV === 'development' || {
-            compression: 'gzip',
-        },
+        cache: process.env.NODE_ENV === 'development',
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
             modules: [
@@ -148,8 +146,25 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         })
     }
 
+    if (stage === 'build-javascript' || stage === 'build-html') {
+        const config = getConfig()
+        config.resolve.plugins = config.resolve.plugins.filter(
+            (plugin) => plugin.constructor.name !== 'GatsbyThemeComponentShadowingResolverPlugin'
+        )
+        actions.replaceWebpackConfig(config)
+    }
+
     if (stage === 'build-html') {
         actions.setWebpackConfig({
+            optimization: {
+                concatenateModules: false,
+                splitChunks: {
+                    chunks: 'all',
+                    cacheGroups: {
+                        default: { minChunks: 2, reuseExistingChunk: true },
+                    },
+                },
+            },
             externals: [
                 ({ request }: { request?: string }, callback: (err?: Error | null, result?: string) => void) =>
                     request?.startsWith('node:') ? callback(null, `commonjs ${request}`) : callback(),

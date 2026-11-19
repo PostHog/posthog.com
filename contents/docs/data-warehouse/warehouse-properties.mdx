@@ -9,21 +9,11 @@ availability:
   enterprise: full
 ---
 
-import { CalloutBox } from "components/Docs/CalloutBox";
-
 Warehouse properties copy columns from a synced [data warehouse](/docs/data-warehouse) table onto your [person properties](/docs/product-analytics/person-properties) and [group properties](/docs/product-analytics/group-analytics). Each row is matched to a person or a group by a key column. The mapped columns then stay up to date on every sync.
 
 Use it when the truth about a customer lives in another system. Plan tier, seat count, MRR, contract renewal date, and lifecycle stage usually live in Stripe, Salesforce, HubSpot, or your own Postgres, not in your product events.
 
 Once a column is mapped, it behaves like any other person or group property. You can filter insights with it, build [cohorts](/docs/data/cohorts) from it, target [feature flags](/docs/feature-flags) and [experiments](/docs/experiments) with it, and use it in [surveys](/docs/surveys).
-
-<CalloutBox icon="IconWarning" title="Beta feature" type="action">
-
-Warehouse properties are currently in beta. Contact support if you don't see **Warehouse properties** in the **Data** menu.
-
-Self-hosted instances have this feature enabled by default. Set `WAREHOUSE_PERSON_PROPERTIES_ENABLED_SELF_HOSTED` to `False` to disable it. See [environment variables](/docs/self-host/configure/environment-variables) for more.
-
-</CalloutBox>
 
 ## Warehouse properties or a join?
 
@@ -151,3 +141,7 @@ The warehouse sync itself is billed by rows synced. See [Sources pricing](/prici
 **A run failed.** The status tag carries the error. A property sync that rode a failing import fails with it, so check the table's sync history first.
 
 **The mapping turned itself off.** Five failed runs in a row disable a mapping, so a broken table does not retry forever. Fix the underlying sync, then toggle it back on. The failure count resets after a run succeeds.
+
+## Self-hosting
+
+Self-hosted instances have this feature enabled by default. Set `WAREHOUSE_PERSON_PROPERTIES_ENABLED_SELF_HOSTED` to `False` to disable it. See [environment variables](/docs/self-host/configure/environment-variables) for more.

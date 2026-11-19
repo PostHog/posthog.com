@@ -86,13 +86,7 @@ export default function ComparePage({ data }: { data: { posts: { nodes: PostSumm
                 title="Compare - PostHog"
                 description="Head-to-head comparisons, alternatives, and best-of roundups. See how PostHog stacks up against other product and analytics tools."
             />
-            <ReaderView
-                hideLeftSidebar
-                hideRightSidebar
-                showQuestions={false}
-                hideMobileTableOfContents
-                hideMarkdownActions
-            >
+            <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMarkdownActions>
                 <div className="@container not-prose text-pretty text-primary">
                     <CompareHeader placement="compare-header" includeCTA={false} asHeading />
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">

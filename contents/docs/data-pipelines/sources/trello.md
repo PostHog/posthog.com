@@ -21,21 +21,6 @@ Enter your Trello API key and token to sync your boards, cards, lists and more i
 
 Once the syncs are complete, you can start using Trello data in PostHog.
 
-## Available tables
-
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `boards` | Boards for the authenticated member | Full refresh |
-| `organizations` | Trello workspaces (organizations) | Full refresh |
-| `lists` | Lists across your boards | Full refresh |
-| `cards` | Cards across your boards (open cards only by default) | Full refresh |
-| `checklists` | Checklists across your boards | Full refresh |
-| `labels` | Labels across your boards | Full refresh |
-| `members` | Board members (deduplicated across boards) | Full refresh |
-| `actions` | Board activity actions | Incremental |
-
-**Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
-
 ## Configuration
 
 <SourceParameters />

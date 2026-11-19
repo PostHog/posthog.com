@@ -5,7 +5,6 @@ Product Analytics,autocapture,/docs/product-analytics/autocapture,Docs,Autocaptu
 Product Analytics,best practices,/docs/product-analytics/best-practices,Docs,Best practices and tips
 Product Analytics,capture events,/docs/product-analytics/capture-events,Docs,Capture Events feature or configuration
 Product Analytics,color themes,/docs/product-analytics/color-themes,Docs,Color Themes feature or configuration
-Product Analytics,correlation,/docs/product-analytics/correlation,Docs,Correlation feature or configuration
 Product Analytics,cutting costs,/docs/product-analytics/cutting-costs,Docs,"Reducing costs, optimizing spend"
 Product Analytics,dashboards,/docs/product-analytics/dashboards,Docs,Dashboards feature or configuration
 Product Analytics,funnels,/docs/product-analytics/funnels,Docs,Funnels feature or configuration
@@ -39,7 +38,6 @@ Product Analytics,stickiness,/stickiness,Product page,Stickiness feature page
 Product Analytics,trends,/trends,Product page,Trends feature page
 Product Analytics,user paths,/user-paths,Product page,User Paths feature page
 Product Analytics,group analytics,/group-analytics,Product page,Group Analytics feature page
-Product Analytics,correlation analysis,/correlation-analysis,Product page,Correlation Analysis feature page
 Product Analytics,dashboards,/dashboards,Product page,Dashboards feature page
 Product Analytics,sql,/sql,Product page,Sql feature page
 Product Analytics,notebooks,/notebooks,Product page,Notebooks feature page
@@ -184,7 +182,7 @@ Session Replay,mobile session replay,/blog/mobile-session-replay,Blog,Blog: mobi
 Session Replay,session recording performance,/blog/session-recording-performance,Blog,Blog: session recording performance
 Session Replay,session replay pricing,/blog/session-replay-pricing,Blog,Blog: session replay pricing
 Session Replay,best session replay tools,/blog/best-session-replay-tools,Blog,Blog: best session replay tools
-Session Replay,best open source session replay tools,/blog/best-open-source-session-replay-tools,Blog,Blog: best open source session replay tools
+Session Replay,best open source session replay tools,/compare/best-open-source-session-replay-tools,Compare,Competitor comparison
 Session Replay,best hotjar alternatives,/blog/best-hotjar-alternatives,Blog,Blog: best hotjar alternatives
 Session Replay,best fullstory alternatives,/blog/best-fullstory-alternatives,Blog,Blog: best fullstory alternatives
 Session Replay,best logrocket alternatives,/blog/best-logrocket-alternatives,Blog,Blog: best logrocket alternatives
@@ -321,7 +319,7 @@ Experiments,posthog vs growthbook,/blog/posthog-vs-growthbook,Blog,Blog: posthog
 Experiments,posthog vs statsig,/blog/posthog-vs-statsig,Blog,Blog: posthog vs statsig
 Experiments,google optimize alternatives,/blog/google-optimize-alternatives,Blog,Blog: google optimize alternatives
 Experiments,best mobile app ab testing tools,/blog/best-mobile-app-ab-testing-tools,Blog,Competitor comparison
-Experiments,best open source ab testing tools,/blog/best-open-source-ab-testing-tools,Blog,Competitor comparison
+Experiments,best open source ab testing tools,/compare/best-open-source-ab-testing-tools,Compare,Competitor comparison
 Experiments,best hipaa compliant ab testing tools,/blog/best-hipaa-compliant-ab-testing-tools,Blog,Competitor comparison
 Experiments,experiments,/newsletter/experiments,Newsletter,Newsletter: experiments
 Experiments,ab testing,/newsletter/ab-testing,Newsletter,Newsletter: ab testing
@@ -659,7 +657,7 @@ LLM Analytics,optimizing agent cost,/blog/optimizing-agent-cost,Blog,Blog: optim
 LLM Analytics,ai community answers,/blog/ai-community-answers,Blog,Blog: ai community answers
 LLM Analytics,stop ai slop,/blog/stop-ai-slop,Blog,Blog: stop ai slop
 LLM Analytics,best ai observability tools,/blog/best-ai-observability-tools,Blog,Competitor comparison
-LLM Analytics,best open source llm observability tools,/blog/best-open-source-llm-observability-tools,Blog,Competitor comparison
+LLM Analytics,best open source llm observability tools,/compare/best-open-source-llm-observability-tools,Compare,Competitor comparison
 LLM Analytics,best langfuse alternatives,/blog/best-langfuse-alternatives,Blog,Competitor comparison
 LLM Analytics,best langsmith alternatives,/blog/best-langsmith-alternatives,Blog,Competitor comparison
 LLM Analytics,best braintrust alternatives,/blog/best-braintrust-alternatives,Blog,Competitor comparison

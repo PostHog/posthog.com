@@ -9,11 +9,11 @@ availability:
 sourceId: Veracode
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Veracode connector syncs applications, sandboxes, findings, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Veracode connector syncs applications, sandboxes, findings, compliance reports, CWE and category lookups, and scan history into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Veracode tables are full refresh. Each sync replaces the contents of the table.
+Most Veracode tables are full refresh. Each sync replaces the contents of the table. The `scans` table syncs incrementally on `last_updated_date`, going back at most 180 days.
 
 ## Configuration
 
@@ -51,5 +51,6 @@ All Veracode tables are full refresh. Each sync replaces the contents of the tab
 
 - If the connection fails with an authorization error, the API ID is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If the `scans` table fails to sync, verify that Veracode support has enabled the Reporting API for your account. This table is off by default because it requires the Reporting API.
 
 <TroubleshootingLink />
