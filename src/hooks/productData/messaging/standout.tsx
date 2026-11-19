@@ -51,6 +51,12 @@ export const standout: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_recipient_activity_light_228eeaada5.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_recipient_activity_dark_93b1987f6e.png',
+            alt: "One send of a transactional email, with the recipient's events before and after it",
+        },
     },
     {
         ...slideStyle,
@@ -83,6 +89,12 @@ export const standout: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_workflow_suggestions_light_d19e4b909a.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_workflow_suggestions_dark_cac81e45da.png',
+            alt: 'A change that PostHog suggests for a drip campaign subject line, waiting for review',
+        },
     },
     {
         ...slideStyle,
@@ -114,5 +126,11 @@ export const standout: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_error_resolved_page_light_b0c88aa41f.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_error_resolved_page_dark_37edd7009a.png',
+            alt: "A resolved error tracking issue with the Tell them it's fixed button",
+        },
     },
 ]

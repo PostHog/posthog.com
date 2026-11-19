@@ -18,8 +18,6 @@ const list = (items: { label: string; description: React.ReactNode }[]) => (
     </div>
 )
 
-const cloudinary = (name: string) => `https://res.cloudinary.com/dmukukwp6/image/upload/${name}.png`
-
 export const automation: CarouselSlide[] = [
     {
         ...slideStyle,
@@ -55,9 +53,10 @@ export const automation: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: cloudinary('email_drip_overview_light_a84567a8f9'),
-            srcDark: cloudinary('email_drip_overview_dark_2bb57406d6'),
-            alt: 'A drip campaign on the workflow canvas',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_drip_overview_light_74796bb39a.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_drip_overview_dark_384b529650.png',
+            alt: 'A drip campaign that sends a welcome email, waits for an upload, then sends a nudge',
         },
     },
     {
@@ -93,5 +92,12 @@ export const automation: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_trigger_panel_light_65045a7652.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_trigger_panel_dark_bf54d41ffd.png',
+            alt: 'The trigger panel of a drip campaign, set to the signed_up event',
+            maxWidth: 'max-w-lg',
+        },
     },
 ]

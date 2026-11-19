@@ -25,8 +25,6 @@ const docsLink = (to: string, children: React.ReactNode) => (
     </Link>
 )
 
-const cloudinary = (name: string) => `https://res.cloudinary.com/dmukukwp6/image/upload/${name}.png`
-
 export const broadcasts: CarouselSlide[] = [
     {
         ...slideStyle,
@@ -57,8 +55,9 @@ export const broadcasts: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: cloudinary('broadcasts_docs_schedule_light_d4b64d361c'),
-            srcDark: cloudinary('broadcasts_docs_schedule_dark_92d125a904'),
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_schedule_light_5a2d626aff.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_schedule_dark_d66e222027.png',
             alt: 'The Schedule step of a broadcast with a weekly recurring schedule',
         },
     },
@@ -100,8 +99,9 @@ export const broadcasts: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: cloudinary('broadcasts_docs_content_light_44734105fd'),
-            srcDark: cloudinary('broadcasts_docs_content_dark_a59e59442c'),
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_content_light_cd1d4ba1a1.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_content_dark_6b6f0f6e94.png',
             alt: 'The email editor inside a broadcast',
         },
     },
@@ -148,6 +148,12 @@ export const broadcasts: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/opt_outs_categories_light_8ffe0244a4.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/opt_outs_categories_dark_f0182f29ef.png',
+            alt: 'Message categories and the marketing opt-out list',
+        },
     },
     {
         ...slideStyle,
@@ -188,8 +194,9 @@ export const broadcasts: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: cloudinary('broadcasts_docs_results_light_9a00756ef5'),
-            srcDark: cloudinary('broadcasts_docs_results_dark_5aba53c8ef'),
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_results_light_3c9d91807b.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_results_dark_d76c887897.png',
             alt: 'A sent broadcast with delivery, open, click, and conversion numbers',
         },
     },

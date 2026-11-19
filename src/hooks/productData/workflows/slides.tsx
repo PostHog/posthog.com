@@ -191,8 +191,10 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.workflow_builder.images[0].src,
-            alt: f.workflow_builder.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_complex_canvas_light_6ffea9518c.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_complex_canvas_dark_b696c34697.png',
+            alt: 'A workflow with branches and steps on the canvas',
         },
     },
     {
@@ -257,7 +259,9 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_edb58a27f2.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_workflow_canvas_dark_c31893e45c.png',
             alt: "A workflow that scores each signup's first session with Replay Vision, then branches on the score",
         },
     },
@@ -284,8 +288,11 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.channels.images[0].src,
-            alt: f.channels.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_destinations_picker_light_663523e7cc.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_destinations_picker_dark_9bb8f235ea.png',
+            alt: 'The step picker with email, SMS, Slack, webhook, push, and more destinations',
+            maxWidth: 'max-w-lg',
         },
     },
     {

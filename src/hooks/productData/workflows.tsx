@@ -146,18 +146,18 @@ export const workflows = {
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_light_1_7afd43fd88.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_dark_1_9ebe26d46e.png',
-            alt: 'Workflows screenshot',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_automation_canvas_light_a7fb73fb79.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_automation_canvas_dark_22901c69b7.png',
+            alt: 'A workflow that posts new business signups to Slack and sends them to a CRM',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
         },
-        // From contents/docs/workflows/start-here.mdx
         builder: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_light_a9f00e201e.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_list_light_c6075ccaf8.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_dark_83291e0b1c.png',
-            alt: 'How to create a workflow in PostHog',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_list_dark_0d5c406369.png',
+            alt: 'The list of workflows in PostHog',
         },
     },
     customers: {

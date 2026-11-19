@@ -194,18 +194,12 @@ export const messaging = {
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_light_1_7afd43fd88.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_dark_1_9ebe26d46e.png',
-            alt: 'Workflows screenshot',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_list_light_50450977b5.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/broadcasts_list_dark_c3d1d672e8.png',
+            alt: 'Broadcasts in PostHog with sent, delivered, opened, clicked, and converted counts',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
-        },
-        // From contents/docs/workflows/start-here.mdx
-        builder: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_light_a9f00e201e.png',
-            srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_dark_83291e0b1c.png',
-            alt: 'How to create a workflow in PostHog',
         },
     },
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.

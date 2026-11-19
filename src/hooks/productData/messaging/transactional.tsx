@@ -265,6 +265,12 @@ export const transactional: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_transactional_design_light_f68b361139.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_transactional_design_dark_5ca3d36e60.png',
+            alt: 'A transactional email template in the PostHog email editor',
+        },
     },
     {
         ...slideStyle,
@@ -298,5 +304,11 @@ export const transactional: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_template_sensitive_v2_light_a84930bb3c.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pp_template_sensitive_v2_dark_a7bc65b1c0.png',
+            alt: 'The Protect sensitive data setting, switched on for a transactional email',
+        },
     },
 ]
