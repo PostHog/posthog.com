@@ -50,6 +50,30 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
+### Mask or un-mask specific selects
+
+You can use `selectMaskingFn` to decide for each `<select>` element if its selection is masked. The function receives the select element and returns `'masked'` or `'unmasked'`. This option overrides the `select` setting in `maskInputOptions`.
+
+```ts
+posthog.init('<ph_project_token>', {
+    session_recording: {
+        selectMaskingFn: (element) => {
+            // Only show selections for selects marked as safe
+            return element.dataset['record'] === 'true' ? 'unmasked' : 'masked'
+        },
+    }
+})
+```
+
+- Masked selects use `maskInputFn` for replacement text but omit selection identity metadata. If `maskInputFn` returns the original text, that text is still recorded.
+- Unmasked selects keep their selected choices.
+- Option labels stay visible. To hide the choices of a select, block it with `ph-no-capture` (see [other elements](#other-elements)).
+- Clicks on options in list-style selects (`multiple`, `size` larger than 1, or a customizable picker) still record the clicked option.
+- If the function throws an error or returns a different value, the select is masked.
+- Keep the function pure and its reference stable. If you replace the function, recording restarts and the queued data is discarded.
+- If you omit this option, `maskInputFn` keeps its previous behavior for selects.
+- Recording does not start if the loaded recorder does not support this option.
+
 ## Text elements
 
 General text is not masked by default, but we provide multiple options for masking text:
