@@ -39,7 +39,7 @@ FDEs never own the commercial relationship. The account owner (the customer's CS
 2. The customer agrees to the scope and the proposal.
 3. The account owner sends the customer the order form.
 4. The customer signs the order form.
-5. The account owner creates an FDE opportunity in Salesforce and moves it to **Successfully Closed**. This notifies RevOps to send the invoice.
+5. The account owner creates an FDE opportunity in Salesforce and moves it to **Closed - Won**. This notifies RevOps to send the invoice.
 
 How we bill depends on the total fee and how the customer pays:
 
