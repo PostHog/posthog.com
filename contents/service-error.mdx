@@ -1,24 +1,21 @@
 ---
 title: Something went wrong
 noindex: true
-images:
-  - >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/service-message/worker-hog.png
 isInFrame: true
 ---
 
-import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import hedgehogAsleepPng from 'brand-hoggie-pngs/asleep.png'
 
 
 <div className="block mb-8 -mt-8 mx-auto" style={{ maxWidth: '370px' }}>
-  <GatsbyImage image={getImage(props.images[0])} alt="Worker hog" />
+  <img src={hedgehogAsleepPng} alt="A hedgehog asleep on the job" />
 </div>
 
 <h1 className="text-center px-2 md:px-8 text-4xl sm:text-5xl relative">
   <span className='text-red'>Oops!</span> Things went south
 </h1>
 
-<Hero subtitle="Our hedgehog wasn't able to handle this request. We're on it." />
+<Hero subtitle="Our hedgehog dozed off on this request. We're waking it up." />
 
 <p className='-mt-4 flex flex-col items-center justify-center text-center sm:block'>
     <a href="https://status.posthog.com/">Check PostHog Status</a>
