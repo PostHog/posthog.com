@@ -168,7 +168,7 @@ These settings allow you to control who can view and edit all resources of a giv
 
 You can set default access levels for all resources of a given type in a project. This allows you to set it once and apply it to all resources of that type in the project (past and future).
 
-Individual resource object access controls for specific users or roles take precedence over resource-level access controls.
+Explicit object access controls – where you share an object with a specific member or role – take precedence over resource-level access controls. However, an object's default access level does not override resource-level "No access". To grant access to someone who has "No access" at the resource level, you must explicitly share the object with them.
 
 You cannot set resource-level access controls for organization admins, as they always have full access.
 
@@ -193,11 +193,19 @@ When a property is restricted, explicit reads return `NULL`, and results that in
 
 When determining what a user can access for a specific resource object, PostHog checks permissions in this order (highest priority first):
 
-1. **Specific object permissions** - Direct access granted to a specific resource object (e.g., Amy can edit Dashboard X)
+1. **Specific object permissions** - Direct access granted to a specific resource object (e.g., Amy can edit Dashboard X). These can override resource-level "No access".
 2. **Resource type permissions** - Access set for all resources of a type (e.g., Customer Support role can view all Notebooks)
-3. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default)
+3. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default). These cannot override resource-level "No access".
 
 **Note**: Resource creators and organization admins always have full access, regardless of these precedence rules.
+
+<CalloutBox icon="IconInfo" title="Object defaults respect resource-level access" type="info">
+
+If a member or role has "No access" at the resource level (e.g., no access to dashboards), an object's default access level won't grant them access. For example, setting a dashboard's default to "Viewer" does not give access to members with resource-level "No access" to dashboards. You must explicitly share the object with the member or role instead.
+
+Object defaults can still elevate existing access – e.g., raising "Viewer" to "Editor" for someone who already has resource-level access.
+
+</CalloutBox>
 
 ## Common use cases
 
