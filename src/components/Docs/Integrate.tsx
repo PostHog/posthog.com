@@ -58,6 +58,7 @@ const REFERENCE_SDKS = [
     { label: 'Python', url: '/docs/libraries/python/reference', image: getLogo('python') },
     { label: 'Go', url: '/docs/libraries/go/reference', image: getLogo('go') },
     { label: 'Rust', url: '/docs/libraries/rust/reference', image: getLogo('rust') },
+    { label: 'Flutter', url: '/docs/libraries/flutter/reference', image: getLogo('flutter') },
 ]
 
 export const SDKs = () => {
@@ -105,7 +106,6 @@ const query = graphql`
                             "/docs/libraries/js"
                             "/docs/libraries/android"
                             "/docs/libraries/elixir"
-                            "/docs/libraries/flutter"
                             "/docs/libraries/ios"
                             "/docs/libraries/java"
                             "/docs/libraries/kmp"
