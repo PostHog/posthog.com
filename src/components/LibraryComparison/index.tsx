@@ -41,8 +41,10 @@ const server = {
     groupAnalytics: true,
     errorTracking: true,
 }
+const client = { ...server, autoCapture: true, sessionRecording: true, surveys: true, logs: true }
 const REFERENCE_SDKS: LibraryNode[] = [
     referenceSdk('node', 'Node.js', { ...server, tracing: true }),
+    referenceSdk('react-native', 'React Native', client),
     referenceSdk('python', 'Python', { ...server, tracing: true }),
     referenceSdk('go', 'Go', server),
     referenceSdk('rust', 'Rust', server),

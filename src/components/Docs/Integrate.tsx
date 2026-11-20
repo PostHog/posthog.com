@@ -58,6 +58,7 @@ const REFERENCE_SDKS = [
     { label: 'Python', url: '/docs/libraries/python/reference', image: getLogo('python') },
     { label: 'Go', url: '/docs/libraries/go/reference', image: getLogo('go') },
     { label: 'Rust', url: '/docs/libraries/rust/reference', image: getLogo('rust') },
+    { label: 'React Native', url: '/docs/libraries/react-native/reference', image: getLogo('reactNative') },
 ]
 
 export const SDKs = () => {
@@ -111,7 +112,6 @@ const query = graphql`
                             "/docs/libraries/kmp"
                             "/docs/libraries/php"
                             "/docs/libraries/react"
-                            "/docs/libraries/react-native"
                             "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
                             "/docs/libraries/unity"

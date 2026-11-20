@@ -171,6 +171,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/libraries/python:ext(\\.md)?",
             "destination": "/docs/libraries/python/reference:ext?",
             "statusCode": 301
@@ -229,6 +234,26 @@
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
+        },
+        {
+            "source": "/docs/references/posthog-react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
         },
         {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations.md",
@@ -1974,7 +1999,7 @@
         },
         {
             "source": "/docs/integrations/react-native-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native:ext?"
+            "destination": "/docs/libraries/react-native/reference:ext?"
         },
         {
             "source": "/docs/integrations/ruby-integration:ext(\\.md)?",
@@ -3511,7 +3536,7 @@
         },
         {
             "source": "/docs/integrate/react-native:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native:ext?"
+            "destination": "/docs/libraries/react-native/reference:ext?"
         },
         {
             "source": "/docs/integrate/ruby:ext(\\.md)?",

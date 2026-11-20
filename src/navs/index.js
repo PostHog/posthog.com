@@ -3071,19 +3071,23 @@ export const docsMenu = {
                         },
                         {
                             name: 'React Native',
-                            url: '/docs/libraries/react-native',
+                            url: '/docs/libraries/react-native/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: 'Setup and usage',
-                                    url: '/docs/libraries/react-native',
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/react-native/5.x.x',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/references/posthog-react-native',
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/react-native/4.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/react-native/migration',
                                 },
                             ],
                         },
