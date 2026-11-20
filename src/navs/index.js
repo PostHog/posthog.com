@@ -1831,6 +1831,10 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/churn-reasons',
                     },
                     {
+                        name: 'When a champion leaves',
+                        url: '/handbook/customer-success/champion-leaves',
+                    },
+                    {
                         name: 'Tracking feature requests',
                         url: '/handbook/customer-success/feature-requests',
                     },
@@ -2940,6 +2944,14 @@ export const docsMenu = {
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'C/C++',
+                            url: '/docs/libraries/c-cpp',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                             },
                         },
                         {
@@ -4460,7 +4472,7 @@ export const docsMenu = {
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
-            description: 'Funnels, graphs, user paths, correlation analysis, retention, stickiness, lifecycle, SQL',
+            description: 'Funnels, graphs, user paths, retention, stickiness, lifecycle, SQL',
             children: [
                 {
                     name: 'Product Analytics',
@@ -4651,12 +4663,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/lifecycle',
                     icon: 'IconLifecycle',
                     color: 'yellow',
-                },
-                {
-                    name: 'Correlation analysis',
-                    url: '/docs/product-analytics/correlation',
-                    icon: 'IconArrowUpRight',
-                    color: 'blue',
                 },
                 {
                     name: 'SQL',
@@ -6616,6 +6622,18 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Libraries',
+                    url: '/docs/business-knowledge/libraries',
+                    icon: 'IconFolder',
+                    color: 'blue',
+                },
+                {
+                    name: 'How it works',
+                    url: '/docs/business-knowledge/how-it-works',
+                    icon: 'IconGear',
+                    color: 'blue',
+                },
+                {
                     name: 'AI data processing',
                     url: '/docs/business-knowledge/ai-data-processing',
                     icon: 'IconListCheck',
@@ -6643,6 +6661,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Build a support agent',
+                    url: '/docs/business-knowledge/build-a-support-agent',
+                    icon: 'IconCode',
+                    color: 'green',
+                },
+                {
                     name: 'Learn from support',
                     url: '/docs/business-knowledge/learn-from-support',
                     icon: 'IconSupport',
@@ -6653,6 +6677,18 @@ export const docsMenu = {
                     url: '/docs/business-knowledge/playground',
                     icon: 'IconSparkles',
                     color: 'purple',
+                },
+                {
+                    name: 'Usage',
+                    url: '/docs/business-knowledge/usage',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/business-knowledge/troubleshooting',
+                    icon: 'IconWrench',
+                    color: 'orange',
                 },
             ],
         },
