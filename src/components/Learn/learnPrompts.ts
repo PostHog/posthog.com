@@ -17,9 +17,12 @@ export interface LearnPromptSet {
     focus: string
     /** One prompt per topic. The shared exercise and safety instructions are appended. */
     chapterPrompts: AuthoredPrompt[]
-    /** Ready-to-run prompts, shown as written after the teaching prompts. */
+    /** Ready-to-run prompts, shown after the teaching prompts. Shown as written unless `askFirst` appends its line. */
     examplePrompts?: AuthoredPrompt[]
-    /** Teach by asking: one question at a time, predict before explaining, hints instead of answers. Applies to every prompt in the set. */
+    /**
+     * Teach by asking. Topic and example prompts get `ASK_FIRST`: one question at a time, predict before
+     * explaining, and hints instead of answers. The starter asks what the reader knows and has them predict.
+     */
     askFirst?: boolean
 }
 

@@ -11,7 +11,14 @@ import {
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
-import { isSelfDrivingPage, learnHubFor, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import {
+    hasLearnTab,
+    isSelfDrivingPage,
+    learnHubFor,
+    learnTrackingVolume,
+    pocketGuideUrl,
+    volumeById,
+} from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
@@ -360,7 +367,7 @@ export function buildProductMenuTabs({
         })
     }
 
-    if (pocketGuideVolume || learnHubPages) {
+    if (hasLearnTab({ pocketGuideVolume, learnHubPages })) {
         tabs.push({
             label: 'Learn',
             value: 'learn',
@@ -371,7 +378,7 @@ export function buildProductMenuTabs({
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     hubPages={learnHubPages}
-                    trackingVolume={pocketGuideVolume ?? productSlug}
+                    trackingVolume={learnTrackingVolume({ pocketGuideVolume, slug: productSlug })}
                     section={pocketGuideSection}
                     fullTitles={learnNavFullTitles}
                     basePath={surfaceBasePath(productSlug, 'learn')}
