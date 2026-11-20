@@ -4,7 +4,6 @@ import {
     IconCheckCircle,
     IconCode,
     IconConfetti,
-    IconCursorClick,
     IconDecisionTree,
     IconEye,
     IconInfo,
@@ -13,19 +12,22 @@ import {
     IconMessage,
     IconPieChart,
     IconRocket,
-    IconSparkles,
+    IconSend,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { applications, keyFeatures } from './workflows/slides'
+import { transactional } from './workflows/transactional'
+import { build } from './workflows/build'
+import { campaigns } from './workflows/campaigns'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const workflows = {
     ...getTool('workflows_emails'),
-    productVariantName: 'Emails',
+    productVariantName: 'Messaging',
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
+    docsSlug: 'workflows',
     forumTag: 'workflows',
     color: PRODUCT_COLORS.workflows_emails,
     colorSecondary: 'green-2',
@@ -34,9 +36,9 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Automate emails and messages from user behavior',
+        title: 'Messaging – Send email from your product data',
         description:
-            'Trigger emails, push notifications, Slack messages, and webhooks from live user behavior. Build automations in PostHog with 10K emails free monthly.',
+            'Send transactional email from the PostHog SDK, broadcasts to cohorts, and workflows triggered by events. 10,000 emails a month free.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -66,18 +68,50 @@ export const workflows = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'applications',
-            name: 'How do I use it?',
+            slug: 'build',
+            name: 'Build',
             group: 'divided',
-            icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            template: 'key-features',
+            icon: <IconDecisionTree className="size-4" />,
+            props: {
+                slides: build,
+                heading: 'Build by hand, or with PostHog AI',
+                intro: <p>Create campaigns, broadcasts, or transactional messages using your existing product data.</p>,
+            },
         },
         {
-            slug: 'key-features',
-            name: 'Key features',
+            slug: 'campaigns',
+            name: 'Campaigns and broadcasts',
             group: 'divided',
-            icon: <IconSparkles className="size-4" />,
-            props: { slides: keyFeatures },
+            template: 'key-features',
+            icon: <IconSend className="size-4" />,
+            props: {
+                slides: campaigns,
+                heading: 'Build campaigns and broadcasts for anything',
+                intro: (
+                    <p>
+                        Send a product update, changelog, or event invite to a cohort in PostHog. There's no list to
+                        upload and no sync job to keep running.
+                    </p>
+                ),
+            },
+        },
+        {
+            slug: 'transactional',
+            name: 'Transactional email',
+            group: 'divided',
+            template: 'key-features',
+            icon: <IconCode className="size-4" />,
+            props: {
+                slides: transactional,
+                heading: 'Send transactional emails securely',
+                intro: (
+                    <p>
+                        Send password resets, sign-in codes, receipts, and invites from your backend with one call on
+                        the PostHog client.
+                    </p>
+                ),
+            },
         },
         {
             slug: 'ask-anything',
@@ -113,15 +147,15 @@ export const workflows = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Automate workflows with product data',
-        description: '"Create an onboarding email series for trial users"',
-        // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
+        title: 'Send emails using product data',
+        description:
+            'Build marketing campaigns that convert, newsletters that grow audiences, and transactional emails that boost revenue.',
         eli5: (
             <>
                 <p>
-                    Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
-                    your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
-                    triggers, delays, audience splits, message sends, and PostHog actions.
+                    Messaging enables you to trigger emails, SMS, and push notifications using the product data you have
+                    in PostHog. Build onboarding flows, launch announcements, send transactional updates – and track
+                    every send, open, and click alongside your product data so you can find out what really works.
                 </p>
             </>
         ),
@@ -159,8 +193,7 @@ export const workflows = {
                 'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
         },
         croissant: {
-            headline:
-                'paired Workflows with Product Analytics, Web Analytics, and Surveys to power up their B2B motion',
+            headline: 'uses Workflows instead of Zapier, next to Product Analytics, Web Analytics, and Surveys',
             description:
                 'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
         },
@@ -168,25 +201,18 @@ export const workflows = {
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
     useCases: {
         rows: [
-            [
-                'Product Leads / Technical PMs',
-                'Consolidate Zapier or Customer.io into PostHog – activation, retention, and lifecycle flows on the same events you already track',
-            ],
+            ['Founders', 'Build welcome flows quickly, without signing up for separate tools and bloating your stack.'],
             [
                 'Product Marketers',
-                'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
+                'Create launch emails, newsletters, nurture flows, and more by triggering off of actual user data and events.',
             ],
             [
                 'Growth Engineers',
-                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
+                'Trigger feedback requests, churn prevention, and reactivation campaigns using dynamic cohorts of your existing users.',
             ],
             [
-                'Product Engineers',
-                'Event-triggered automations – Slack alerts, property updates, and follow-ups without a separate automation vendor',
-            ],
-            [
-                'Automation-minded teams',
-                'Zapier/n8n-style flows triggered by product events, with destinations and basic workflow logic in one place',
+                'Backend Engineers',
+                'Send password resets, sign-in codes, and receipts from the PostHog SDK, without a separate Resend or Postmark account',
             ],
         ],
     },
@@ -201,7 +227,7 @@ export const workflows = {
         title: 'Install',
         headline: 'Install',
         description:
-            "Workflows is a no-code product – you can create and launch Workflows without installing any SDK. However, installing a PostHog SDK unlocks event-based triggers, letting you start Workflows when users perform specific actions in your app. These are the same SDKs used for Product Analytics – if you already have PostHog installed, you're good to go.",
+            "You can build broadcasts and workflows in PostHog without an SDK. Install a PostHog SDK to send transactional email from your backend and to start workflows from events. It's the same SDK as Product Analytics, so if PostHog is installed already, you're set.",
         productSlug: 'workflows',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },
@@ -211,8 +237,8 @@ export const workflows = {
             url: '/docs/workflows/email-drip-campaign',
         },
         {
-            question: 'How do I create emails with PostHog AI?',
-            url: '/docs/workflows/create-emails-ai',
+            question: 'How do I manage opt-outs and suppressions?',
+            url: '/docs/workflows/opt-outs',
         },
         {
             question: 'How do I configure email, Slack, or other channels?',
@@ -223,19 +249,19 @@ export const workflows = {
             url: '/tutorials/workflows-ab-testing',
         },
         {
-            question: 'How do teams use Workflows for customer journeys?',
-            url: '/tutorials/complete-workflows-guide',
+            question: 'How do I create emails with PostHog AI?',
+            url: '/docs/workflows/create-emails-ai',
         },
         {
-            question: 'How do I manage opt-outs and suppressions?',
-            url: '/docs/workflows/opt-outs',
+            question: 'How do teams use Workflows for customer journeys?',
+            url: '/tutorials/complete-workflows-guide',
         },
     ],
     comparison: {
         summary: {
             them: [
                 {
-                    title: 'You only need workflows without the product data',
+                    title: "You send email that doesn't depend on product data",
                 },
                 {
                     title: 'You only want simple marketing automations',
@@ -246,20 +272,20 @@ export const workflows = {
             ],
             us: [
                 {
-                    title: 'Agents can build automations that act on your product data – the actions that close the self-driving loop',
+                    title: 'You want an agent to build and test workflows from Claude Code or Cursor',
                 },
                 {
-                    title: 'You want automations that run on top of your live product data',
+                    title: 'You want workflows that run on your live product data',
                 },
                 {
                     title: 'You want to trigger actions from real user behavior',
                 },
                 {
-                    title: 'You want usage-based pricing that grows with you',
+                    title: 'You want 10,000 free emails each month, then $3 per 1,000',
                 },
                 {
                     title: 'You already use PostHog for analytics, feature flags, or experiments',
-                    subtitle: '– Workflows connects everything on top of the PostHog product stack',
+                    subtitle: 'and want sends to use the same events and cohorts',
                 },
             ],
         },
@@ -291,71 +317,65 @@ export const workflows = {
     pairsWith: [
         {
             slug: 'experiments',
-            description:
-                'Automatically follow up with users from test variants: send feedback surveys, activate successful groups, or roll out winning experiences.',
+            description: 'Send a different follow-up email, or a survey, to each experiment variant.',
         },
         {
             slug: 'product-analytics',
-            description:
-                'Trigger automations from real user behavior. Every click, session, or conversion can start a workflow.',
+            description: 'Start a workflow from any event you track, and check the result in a funnel.',
         },
         {
             slug: 'feature-flags',
-            description:
-                'React when a feature is turned on, off, or rolled out to a specific segment. Target messages or follow-ups based on flag variations.',
-        },
-        {
-            slug: 'error-tracking',
-            description:
-                'Trigger alerts or messages when errors spike, or notify engineering teams directly in Slack when exceptions occur.',
+            description: 'Send a different message to each flag variant, or message the people in a new rollout group.',
         },
     ],
-    worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
+    worksWith: ['experiments', 'product-analytics', 'feature-flags'],
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png',
         imageAlt: 'A robot hedgehog running a workflow',
         imageClasses: 'max-w-[360px]',
-        description: 'build the automation and ship it on your behalf',
-        // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
-        intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
+        description: 'build the workflow and ship it for you',
+        intro: 'Install the PostHog AI plugin in Claude Code, Codex, or Cursor, and your agent loads the right skill from what you ask.',
+        // Skills run in a coding agent, and transactional setup edits backend code, so prompts copy instead of opening PostHog AI.
+        copyPrompts: true,
+        hideSurfaces: true,
         mcpFeatures: ['workflows'],
         skills: [
             'Generates email templates for your content library',
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
             'Recommends which workflows to build and when to run them based on your product metrics',
         ],
-        // Prompts reshaped from previous ai.prompts + contents/docs/workflows/create-emails-ai.mdx.
-        // Tool names verified against src/data/mcp-tools.json (feature: workflows).
+        // Skill names from products/{messaging,workflows}/skills in the PostHog monorepo.
         groups: [
             {
-                title: 'Create workflows',
-                tool: 'workflows-create',
+                title: 'Workflows',
+                tool: 'building-workflows, migrating-from-customer-io',
                 prompts: [
-                    'Build an onboarding email sequence to help new users get started',
-                    'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
-                    'Generate a SMS sequence to encourage users to complete a survey',
+                    'Build an onboarding workflow: a welcome email at sign-up, and a nudge two days later',
+                    'Post in #sales when someone upgrades to a paid plan',
+                    'Move our Customer.io campaigns into PostHog',
                 ],
             },
             {
-                title: 'Create email templates',
-                tool: 'workflows-create-email-template',
+                title: 'Broadcasts',
+                tool: 'designing-email-templates, building-workflows',
                 prompts: [
-                    'Create a welcome email for new users who just signed up',
-                    "Write a re-engagement email for users who haven't logged in for 30 days",
-                    'Generate an email template for announcing a new feature',
-                    'Create an onboarding drip email series for trial users',
-                    "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button",
+                    'Design a launch email for the new editor in our brand colors',
+                    'Send it Tuesday at 9am to everyone on the old editor',
                 ],
             },
             {
-                title: 'Inspect templates',
-                tool: 'workflows-show-email-template',
-                prompts: ['Show me the current welcome email template'],
+                title: 'Transactional email',
+                tool: 'sending-transactional-emails',
+                prompts: [
+                    'Send password resets from our Node backend with PostHog',
+                    'Send sign-in codes without PostHog logging them',
+                    'Move our receipts from Postmark to PostHog',
+                ],
             },
             {
-                title: 'Update templates',
-                tool: 'workflows-update-email-template',
-                prompts: ['Update the onboarding template to include their company name in the subject'],
+                title: 'Results',
+                tool: 'measuring-email-performance',
+                prompts: ["How did last week's product update do, and who upgraded after opening it?"],
             },
         ],
     },
