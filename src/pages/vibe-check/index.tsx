@@ -13,7 +13,7 @@ import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 
 const FinalSlide = () => (
     <div className="flex-1 px-4">
-        <div className="text-primary flex-1 w-full h-full flex flex-col items-center justify-center">
+        <div className="text-primary flex-1 w-full h-full @2xl:h-96 @2xl:my-6 flex flex-col items-center justify-center">
             <div className="max-w-2xl text-center">
                 <h2 className="text-4xl font-bold mb-6">Congrats, you survived!</h2>
                 <p className="text-secondary">
@@ -35,7 +35,7 @@ function Slide({ card, slideIndex }: { card: any; slideIndex: number }) {
                 {slideIndex + 1} / {HomepageCards.length}
             </div>
             <div
-                className="text-primary flex-1 w-full h-full flex flex-col items-center justify-center p-8 rounded"
+                className="text-primary flex-1 w-full h-full @2xl:h-96 flex flex-col items-center justify-center p-8 rounded"
                 style={{ backgroundColor: card.color }}
             >
                 <div className="max-w-2xl flex flex-col @md:flex-row items-center text-center gap-8">
