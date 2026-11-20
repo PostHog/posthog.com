@@ -1,6 +1,6 @@
 ---
 title: Scaling customer success with PostHog
-date: 2026-11-19
+date: 2026-11-20
 rootPage: /blog
 sidebar: Blog
 showTitle: true
