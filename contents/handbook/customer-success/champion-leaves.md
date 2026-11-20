@@ -4,24 +4,21 @@ sidebar: Handbook
 showTitle: true
 ---
 
-A [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) who leaves is one of the most [common churn reasons](/handbook/customer-success/churn-reasons#champion-leaves). The account rarely churns on the day they leave. It churns later, when an API key stops working, invoices go to an inbox that nobody reads, or nobody at the company remembers why they pay for PostHog.
-
-The best defense is still to [multi-thread](/handbook/growth/sales/risk-mitigation-and-churn-prevention#de-risking-common-churn-scenarios) before it happens. This page is what to do when it happens anyway.
+Use this when a [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) leaves one of your accounts. To lower the risk before it happens, [multi-thread](/handbook/growth/sales/risk-mitigation-and-churn-prevention#de-risking-common-churn-scenarios) your accounts.
 
 ## How you find out
 
 - The **People changes** [scout](/handbook/customer-success/how-we-use-automation#managed-customer-scouts) sends you a weekly digest of the people who left your accounts.
 - The **Churn risk** scout creates a task when it finds a champion who left.
 - Your email bounces, or the champion goes quiet in your shared Slack channel.
-- They tell you, or they change their job on LinkedIn.
-
-If the champion tells you before they leave, that is the best case. Do the handover checklist below with them, and ask them to introduce you to the person who takes over their work.
+- They change their job on LinkedIn. Make sure you are connected to your champions on LinkedIn, so you see it.
+- They tell you. Do the handover checklist below with them before they leave, and ask them to introduce you to the person who takes over their work.
 
 ## 1. Flag the account
 
 Do this as soon as you find out:
 
-- If the account has no other champion, add the **Churn Risk** tag in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. See [when to flag an account as at risk](/handbook/growth/sales/risk-mitigation-and-churn-prevention#when-to-flag-an-account-as-at-risk).
+- If the champion was the only person you talked to at the customer, add the **Churn Risk** tag in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. See [when to flag an account as at risk](/handbook/growth/sales/risk-mitigation-and-churn-prevention#when-to-flag-an-account-as-at-risk).
 - Add a note on the account that says who left and when, so that the next person on the account has the context.
 
 ## 2. Run the handover checklist
