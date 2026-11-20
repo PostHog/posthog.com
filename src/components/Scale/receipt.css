@@ -1,0 +1,56 @@
+.scale-receipt {
+    --text-primary: 17 17 17;
+    --text-secondary: 101 103 94;
+    --text-muted: 158 160 150;
+    --primary: var(--text-primary);
+    --secondary: var(--text-secondary);
+    --muted: var(--text-muted);
+    color: rgb(var(--text-primary));
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.12)) drop-shadow(0 10px 18px rgb(0 0 0 / 0.14));
+}
+
+.scale-receipt-paper {
+    --tooth: 14px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: calc(var(--tooth) + 14px);
+    padding-bottom: calc(var(--tooth) + 14px);
+    -webkit-mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / var(--tooth) 51%
+            repeat-x,
+        conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) 51% repeat-x;
+    mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / var(--tooth) 51% repeat-x,
+        conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) 51% repeat-x;
+}
+
+.scale-receipt-scrawl {
+    font-family: 'Reenie Beanie', cursive;
+    opacity: 0.75;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.2 0 0 0 -0.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.2 0 0 0 -0.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.scale-receipt-progress {
+    transform-origin: left;
+    animation: scale-receipt-progress linear;
+}
+
+.scale-stage:hover .scale-receipt-progress,
+.scale-stage:focus-within .scale-receipt-progress {
+    animation-play-state: paused;
+}
+
+@keyframes scale-receipt-progress {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scale-receipt-progress {
+        display: none;
+    }
+}

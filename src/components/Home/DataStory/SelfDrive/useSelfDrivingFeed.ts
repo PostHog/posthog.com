@@ -59,7 +59,12 @@ export const timeAgo = (mergedAt: string, now: number | null): string => {
     return `${Math.floor(elapsed / DAY_MS)} d ago`
 }
 
-const CONVENTIONAL_COMMIT_PREFIX = /^\w+(?:\([^)]+\))?!?:\s*/
+const CONVENTIONAL_COMMIT_PREFIX = /^(\w+)(?:\(([^)]+)\))?!?:\s*/
+
+export function commitParts(title: string | null): { type: string | null; scope: string | null } {
+    const match = title?.match(CONVENTIONAL_COMMIT_PREFIX)
+    return { type: match?.[1].toLowerCase() ?? null, scope: match?.[2] ?? null }
+}
 
 export const titleSummary = (title: string | null, number: number): string =>
     title?.replace(CONVENTIONAL_COMMIT_PREFIX, '').trim() || `Pull request #${number}`

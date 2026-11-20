@@ -111,9 +111,9 @@ const PILLARS: Pillar[] = [
                 href: '/docs/data-pipelines/batch-exports',
             },
             {
-                title: 'No rate limit on capture',
-                detail: 'Public capture endpoints are not rate limited, and every official SDK batches and sends asynchronously.',
-                href: '/docs/api',
+                title: 'See our daily scale',
+                detail: 'A receipt of what PostHog Cloud handled yesterday: rows read, events ingested, and our uptime.',
+                href: '/scale',
             },
             {
                 title: 'Managed migrations',

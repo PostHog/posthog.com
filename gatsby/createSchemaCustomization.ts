@@ -809,6 +809,50 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         rows: [McpLeaderboardRow!]!
         fetchedAt: Date @dateformat
     }
+    type ScaleTotals {
+        rowsRead: Float!
+        events: Float!
+        logs: Float!
+        flags: Float!
+        mcp: Float!
+        reports: Float!
+        salesCalls: Float!
+    }
+    type ScaleQueryDurations {
+        queries: Float!
+        medianMs: Float!
+        shareUnderOneSecond: Float!
+        counts: [Float!]!
+    }
+    type ScaleLogOrgSizes {
+        orgs: Float!
+        shares: [Float!]!
+    }
+    type ScaleMcpClient {
+        label: String!
+        share: Float!
+    }
+    type ScaleLatency {
+        hours: [String!]!
+        median: [Float!]!
+        p99: [Float!]!
+    }
+    type ScaleStatus {
+        polledAt: String!
+        captureErrorPeakPercent: Float!
+        eventLag: ScaleLatency!
+        flagResponse: ScaleLatency!
+    }
+    type ScaleData implements Node @dontInfer {
+        dayLabel: String!
+        relativeDay: String!
+        totals: ScaleTotals!
+        rowsReadSeries: [Float!]!
+        queryDurations: ScaleQueryDurations!
+        logOrgSizes: ScaleLogOrgSizes!
+        mcpClients: [ScaleMcpClient!]!
+        status: ScaleStatus
+    }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
     # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.
     type SitePage implements Node {
