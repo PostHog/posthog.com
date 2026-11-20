@@ -870,5 +870,13 @@
         "name": "Magda Olszewska",
         "role": "Scaled CSM",
         "profile_id": 33065
+    },
+    {
+        "handle": "adlet-smykov",
+        "name": "Adlet Smykov",
+        "role": "Influence Wrangler",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/adletsmykov/",
+        "profile_id": 42800
     }
 ]
