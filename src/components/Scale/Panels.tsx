@@ -9,7 +9,7 @@ import { Card } from 'components/UI/Card'
 import type { ColorName } from 'components/UI/colors'
 import { Emphasis } from 'components/UI/Emphasis'
 import BrandLogo from 'components/MCPLeaderboard/BrandLogo'
-import { ShareBars } from 'components/MCPLeaderboard/charts'
+import { ShareBars } from 'components/MCPLeaderboard/ShareBars'
 import { clientMaker, displayLabel } from 'components/MCPLeaderboard/data'
 import {
     commitParts,

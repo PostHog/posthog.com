@@ -430,9 +430,9 @@ function LatestIncidents({ status }: { status: ScaleStatus | null }): JSX.Elemen
 }
 
 const HedgehogError = lazy(() =>
-    import(/* webpackExports: ["HedgehogError"] */ '@posthog/brand/hoggies').then((hoggies) => ({
-        default: hoggies.HedgehogError,
-    }))
+    import(/* webpackExports: ["HedgehogError"] */ '@posthog/brand/hoggies')
+        .then((hoggies) => ({ default: hoggies.HedgehogError }))
+        .catch(() => ({ default: () => null }))
 )
 
 function StatusFailed(): JSX.Element {
