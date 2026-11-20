@@ -1,0 +1,355 @@
+---
+title: C and C++
+sidebarTitle: C/C++
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-rs/tree/main/crates/posthog-rs-ffi'
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
+  surveys: false
+  aiObservability: false
+  errorTracking: false
+---
+
+> **Note:** This SDK is in beta. Before version 1.0, a minor version can change the API.
+
+The PostHog C/C++ SDK (`posthog-rs-ffi`) is a C API for the [PostHog Rust SDK](/docs/libraries/rust/reference). You can use it from C and C++ applications, such as servers, desktop apps, CLIs, and games. It uses the same code as the Rust SDK for batching, retries, Feature Flags, and local evaluation.
+
+- **Capture** adds events to a queue and returns immediately. A background thread batches, retries, and sends them.
+- **Feature flag evaluation** blocks the calling thread while it gets flags, or evaluates them locally when you enable local evaluation.
+
+## Installation
+
+Download the archive for your platform from the [`posthog-rs-ffi` GitHub Releases](https://github.com/PostHog/posthog-rs/releases?q=posthog-rs-ffi). Each release has the tag `posthog-rs-ffi-v<version>` and these archives:
+
+| Platform | Targets |
+| --- | --- |
+| Linux (glibc 2.35 or newer) | x86_64, arm64 |
+| macOS | Intel, Apple silicon |
+| Windows (MSVC) | x86_64 |
+
+Each archive has the name `posthog-rs-ffi-<version>-<target>` and a `.sha256` checksum file. It contains:
+
+```
+include/posthog.h
+lib/libposthog_ffi.so, .dylib, or posthog_ffi.dll (+ posthog_ffi.dll.lib)   shared library
+lib/libposthog_ffi.a or posthog_ffi.lib                                     static library
+lib/native-static-libs.txt          system libraries that the static library needs
+lib/cmake/posthog-rs-ffi/           CMake package
+lib/pkgconfig/                      pkg-config files (Linux and macOS)
+examples/capture.c, capture.cpp
+```
+
+### CMake
+
+Unpack the archive, set `CMAKE_PREFIX_PATH` to its directory, and link the imported target:
+
+```cmake
+find_package(posthog-rs-ffi 0.1 CONFIG REQUIRED)
+target_link_libraries(app PRIVATE posthog-rs-ffi::posthog-rs-ffi)
+```
+
+```bash
+cmake -S . -B build -DCMAKE_PREFIX_PATH=/path/to/posthog-rs-ffi-0.1.0-x86_64-unknown-linux-gnu
+```
+
+`posthog-rs-ffi::posthog-rs-ffi` links the shared library. To link the static library and the system libraries that it needs, set `POSTHOG_RS_FFI_STATIC=ON` before `find_package`. You can also link `posthog-rs-ffi::shared` or `posthog-rs-ffi::static` directly.
+
+`find_package(posthog-rs-ffi 0.1)` accepts 0.1.x and rejects 0.2, because a minor version can change the API before 1.0.
+
+### pkg-config
+
+On Linux and macOS, add the `lib/pkgconfig` directory of the archive to `PKG_CONFIG_PATH`:
+
+```bash
+export PKG_CONFIG_PATH=/path/to/posthog-rs-ffi-0.1.0-x86_64-unknown-linux-gnu/lib/pkgconfig
+cc app.c $(pkg-config --cflags --libs posthog-rs-ffi)          # shared
+cc app.c $(pkg-config --cflags --libs posthog-rs-ffi-static)   # static
+```
+
+### Manual linking
+
+To link the shared library on Linux or macOS:
+
+```bash
+cc app.c -Ipath/to/include -Lpath/to/lib -lposthog_ffi
+```
+
+On Windows, link the import library of the DLL, `posthog_ffi.dll.lib`. Do not link `posthog_ffi.lib`, because that is the static library:
+
+```bat
+cl app.c /Ipath\to\include path\to\lib\posthog_ffi.dll.lib
+```
+
+To link the static library, add the flags from `lib/native-static-libs.txt`. For example, on Linux:
+
+```bash
+cc app.c -Ipath/to/include path/to/lib/libposthog_ffi.a -lgcc_s -lutil -lrt -lpthread -lm -ldl -lc
+```
+
+On Windows, compile with `/MD`, because the static library uses the DLL C runtime. Put the library and the flags from `native-static-libs.txt` after `/link`, because the flags include linker options such as `/defaultlib`:
+
+```bat
+cl /MD app.c /Ipath\to\include /link path\to\lib\posthog_ffi.lib <flags from native-static-libs.txt>
+```
+
+### Ship the shared library
+
+Your app must find the shared library at run time. Ship the library with your app and tell the loader where it is:
+
+- **Linux:** link with an rpath, such as `-Wl,-rpath,'$ORIGIN'`, or install the library in a system library directory.
+- **macOS:** the install name of the library is `@rpath/libposthog_ffi.dylib`. Link with an rpath, such as `-Wl,-rpath,@executable_path`.
+- **Windows:** put `posthog_ffi.dll` in the same directory as your executable, or in a directory on `PATH`.
+
+If you link the static library, you do not need to ship a shared library, but your binary is larger.
+
+## Initialization
+
+Create options with your [project token](https://app.posthog.com/settings/project), then create a client:
+
+```c
+#include "posthog.h"
+
+PostHogOptions *options = posthog_options_new("<ph_project_token>");
+posthog_options_set_host(options, "<ph_client_api_host>");
+posthog_options_set_is_server(options, false); // For desktop and CLI apps
+PostHogClient *client = posthog_client_new(options);
+posthog_options_free(options);
+```
+
+`posthog_client_new` copies the options, so you can free them after you create the client. Create one client and use it for the full life of your app.
+
+Before your app exits, free the client. This sends the events in the queue, then frees the client:
+
+```c
+posthog_client_free(client);
+```
+
+### Configuration options
+
+Set these options on `PostHogOptions` before you call `posthog_client_new`:
+
+| Function | Default | Description |
+| --- | --- | --- |
+| `posthog_options_set_host` | `https://us.i.posthog.com` | PostHog host, such as `https://eu.i.posthog.com` or your [reverse proxy](/docs/advanced/proxy). |
+| `posthog_options_set_is_server` | `true` | Set to `false` for desktop and CLI apps. |
+| `posthog_options_set_disabled` | `false` | Stops all capture and feature flag requests. A blank API key also disables the client. |
+| `posthog_options_set_disable_geoip` | `false` | Disables GeoIP enrichment of events and feature flag requests. |
+| `posthog_options_set_flush_at` | `100` | Number of events in the queue that starts a flush. |
+| `posthog_options_set_flush_interval_ms` | `5000` | Time between automatic flushes, in milliseconds. |
+| `posthog_options_set_max_batch_size` | `100` | Maximum number of events in one request. |
+| `posthog_options_set_max_queue_size` | `10000` | Maximum number of events in the queue. When the queue is full, the SDK drops new events. |
+| `posthog_options_set_max_capture_attempts` | `4` | Attempts for each capture batch, including the first attempt. |
+| `posthog_options_set_request_timeout_seconds` | `30` | Timeout for capture and flag definition requests. |
+| `posthog_options_set_feature_flags_request_timeout_seconds` | `3` | Timeout for remote `/flags` requests. |
+| `posthog_options_set_feature_flags_request_max_retries` | `1` | Retries after a temporary `/flags` failure. |
+| `posthog_options_set_shutdown_timeout_ms` | `30000` | Maximum time that shutdown uses to send the events in the queue, in milliseconds. |
+| `posthog_options_set_secret_key` | None | Project secret API key (`phs_...`) for [local evaluation](#local-evaluation). |
+| `posthog_options_set_enable_local_evaluation` | `false` | Evaluates Feature Flags locally. Requires a secret API key. |
+| `posthog_options_set_local_evaluation_only` | `false` | Never uses remote `/flags` when local evaluation cannot give a result. |
+| `posthog_options_set_poll_interval_seconds` | `30` | Time between requests for local evaluation flag definitions. |
+
+## Capturing events
+
+Create an event, set its properties, and capture it. `posthog_capture` adds a copy of the event to the queue, so you must free the event after you capture it:
+
+```c
+PostHogEvent *event = posthog_event_new("file_exported", "user-123");
+posthog_event_set_property_string(event, "format", "pdf");
+posthog_event_set_property_int(event, "pages", 12);
+posthog_event_set_property_double(event, "size_mb", 1.5);
+posthog_event_set_property_bool(event, "watermark", false);
+posthog_event_set_property_json(event, "tags", "[\"report\",\"monthly\"]");
+posthog_capture(client, event);
+posthog_event_free(event);
+```
+
+You can also set these values on an event:
+
+- `posthog_event_set_timestamp_ms(event, unix_ms)` sets the time of the event, in milliseconds since the Unix epoch.
+- `posthog_event_set_uuid(event, uuid)` sets the event UUID. PostHog uses it to remove duplicate events.
+- `posthog_event_set_option_json(event, key, json)` sets a capture option, such as `process_person_profile`.
+
+### Anonymous events
+
+To capture an event that does not create a person profile, use `posthog_event_new_anon`:
+
+```c
+PostHogEvent *event = posthog_event_new_anon("page_viewed");
+```
+
+For more information, see [anonymous vs identified events](/docs/data/anonymous-vs-identified-events).
+
+### Flush and shutdown
+
+The SDK sends events in the background. To send the events in the queue immediately, call `posthog_flush`. It blocks until the SDK sends the events or the requests fail:
+
+```c
+posthog_flush(client);
+```
+
+`posthog_shutdown` sends the events in the queue within the shutdown timeout and stops the client. The client drops events that you capture after shutdown. `posthog_client_free` also does a shutdown.
+
+## Identifying users
+
+To set [person properties](/docs/product-analytics/person-properties), add `$set` or `$set_once` to an event:
+
+```c
+PostHogEvent *event = posthog_event_new("plan_upgraded", "user-123");
+posthog_event_set_property_json(event, "$set", "{\"plan\":\"pro\"}");
+posthog_event_set_property_json(event, "$set_once", "{\"first_plan\":\"free\"}");
+posthog_capture(client, event);
+posthog_event_free(event);
+```
+
+### Alias
+
+To link a previous ID, such as an anonymous ID, to a distinct ID, use `posthog_alias`:
+
+```c
+posthog_alias(client, "anonymous-device-id", "user-123");
+```
+
+## Group analytics
+
+To associate an event with a [group](/docs/product-analytics/group-analytics), use `posthog_event_add_group`:
+
+```c
+posthog_event_add_group(event, "company", "acme");
+```
+
+To set properties on a group, use `posthog_group_identify`. The properties must be a JSON object or `NULL`:
+
+```c
+posthog_group_identify(client, "company", "acme", "{\"name\":\"Acme Inc.\",\"employees\":50}");
+```
+
+## Feature Flags
+
+`posthog_evaluate_flags` evaluates the [Feature Flags](/docs/feature-flags) for a user and gives a snapshot. The snapshot does not send more requests when you read flags from it. Free the snapshot with `posthog_flags_free`:
+
+```c
+PostHogFlags *flags = NULL;
+if (posthog_evaluate_flags(client, "user-123", NULL, &flags) == POSTHOG_STATUS_OK) {
+    bool enabled = false;
+    posthog_flags_is_enabled(flags, "new-export-dialog", &enabled);
+
+    PostHogFlagState state = POSTHOG_FLAG_STATE_NOT_FOUND;
+    char *variant = NULL;
+    posthog_flags_get_flag(flags, "checkout-experiment", &state, &variant);
+    if (state == POSTHOG_FLAG_STATE_VARIANT) {
+        // Use variant, such as "control" or "test"
+    }
+    posthog_string_free(variant);
+
+    char *payload_json = NULL;
+    posthog_flags_get_payload(flags, "new-export-dialog", &payload_json);
+    posthog_string_free(payload_json);
+
+    posthog_flags_free(flags);
+}
+```
+
+| Function | Description |
+| --- | --- |
+| `posthog_flags_is_enabled` | Writes if the flag is enabled. Captures a `$feature_flag_called` event. |
+| `posthog_flags_get_flag` | Writes the flag state: `NOT_FOUND`, `DISABLED`, `ENABLED`, or `VARIANT`. For `VARIANT`, it also writes the variant. Captures a `$feature_flag_called` event. |
+| `posthog_flags_get_payload` | Writes the JSON payload of the flag, or `NULL` if the flag has no payload. Does not capture an event. |
+| `posthog_flags_keys` | Writes the flag keys in the snapshot as a JSON array. |
+| `posthog_flags_only_accessed` | Gives a new snapshot with only the flags that you read. |
+
+### Evaluation options
+
+The third argument of `posthog_evaluate_flags` is `NULL` or a JSON object. Each field is optional. The SDK rejects `null` values and unknown fields:
+
+```json
+{
+  "groups": { "company": "acme" },
+  "person_properties": { "plan": "pro" },
+  "group_properties": { "company": { "size": 50 } },
+  "only_evaluate_locally": false,
+  "disable_geoip": true,
+  "flag_keys": ["new-export-dialog"]
+}
+```
+
+### Add flags to events
+
+To add `$feature/<key>` and `$active_feature_flags` properties to an event, use `posthog_event_set_flags`. This uses the snapshot and does not send a `/flags` request. To add only the flags that you read, use `posthog_flags_only_accessed`:
+
+```c
+PostHogFlags *accessed = posthog_flags_only_accessed(flags);
+posthog_event_set_flags(event, accessed);
+posthog_flags_free(accessed);
+```
+
+### Experiments
+
+Use `posthog_flags_get_flag` to get the variant for a user in an [Experiment](/docs/experiments). This captures the `$feature_flag_called` event that Experiments use for exposures.
+
+### Local evaluation
+
+[Local evaluation](/docs/feature-flags/local-evaluation) is for servers that you control. Set a [project secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key) and enable local evaluation:
+
+```c
+posthog_options_set_secret_key(options, "phs_your_secret_api_key");
+posthog_options_set_enable_local_evaluation(options, true);
+```
+
+The SDK gets flag definitions at the poll interval. To get them immediately, call `posthog_reload_feature_flags(client)`.
+
+> **Warning:** Do not put a secret API key in an app that you distribute, such as a desktop app or CLI. Anyone with the binary or its configuration can extract the key and read your flag definitions. Distributed apps must use only the project token, which evaluates flags remotely.
+
+## Errors
+
+Functions return a `PostHogStatus`. Constructors, such as `posthog_client_new`, return `NULL` when they fail. `posthog_last_error()` gives a description of the last error on the calling thread:
+
+```c
+if (posthog_capture(client, event) != POSTHOG_STATUS_OK) {
+    const char *message = posthog_last_error();
+    fprintf(stderr, "PostHog error: %s\n", message ? message : "unknown error");
+}
+```
+
+| Status | Description |
+| --- | --- |
+| `POSTHOG_STATUS_OK` | The call was successful. |
+| `POSTHOG_STATUS_NULL_ARGUMENT` | A required argument is `NULL`. |
+| `POSTHOG_STATUS_INVALID_UTF8` | A string is not valid UTF-8. |
+| `POSTHOG_STATUS_INVALID_JSON` | A JSON argument is not valid. |
+| `POSTHOG_STATUS_INVALID_ARGUMENT` | An argument is not valid. |
+| `POSTHOG_STATUS_REQUEST` | A request to PostHog failed. |
+| `POSTHOG_STATUS_PANIC` | The SDK had an internal error. The call possibly did only part of its work. |
+
+The SDK never unwinds into your code.
+
+## Memory and threads
+
+- **Handles:** free each handle from a `*_new` function with the related `*_free` function. The `*_free` functions ignore `NULL`.
+- **Strings:** free each `char *` that the SDK writes to an `_out` argument with `posthog_string_free`. Do not change the string before you free it.
+- **Inputs:** the SDK borrows input strings only during the call. They must be NUL-terminated UTF-8.
+- **Threads:** you can share a `PostHogClient` or `PostHogFlags` between threads. Use each `PostHogOptions` and `PostHogEvent` from only one thread at a time.
+
+## C++
+
+The SDK has a C API. You can call it from C++ directly. The [`capture.cpp` example](https://github.com/PostHog/posthog-rs/blob/main/crates/posthog-rs-ffi/examples/capture.cpp) shows a C++17 wrapper that puts the handles in `std::unique_ptr` and changes error statuses into exceptions. You can copy this pattern into your app:
+
+```cpp
+posthog::Client client("<ph_project_token>", "<ph_client_api_host>", false);
+
+posthog::Event event("app_started", "user-123");
+event.set("edition", "community").set("plugins", 3).set("beta_user", true);
+client.capture(event);
+
+posthog::Flags flags = client.evaluate_flags("user-123");
+if (flags.is_enabled("new-onboarding")) {
+    // Show the new onboarding
+}
+```
+
+For a full C program, see [`capture.c`](https://github.com/PostHog/posthog-rs/blob/main/crates/posthog-rs-ffi/examples/capture.c).

@@ -1831,6 +1831,10 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/churn-reasons',
                     },
                     {
+                        name: 'When a champion leaves',
+                        url: '/handbook/customer-success/champion-leaves',
+                    },
+                    {
                         name: 'Tracking feature requests',
                         url: '/handbook/customer-success/feature-requests',
                     },
@@ -2940,6 +2944,14 @@ export const docsMenu = {
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'C/C++',
+                            url: '/docs/libraries/c-cpp',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                             },
                         },
                         {
