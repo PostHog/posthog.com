@@ -55,9 +55,9 @@ GA4's core product is free, but once you hit the limits of the free tier you'll 
 <details>
 <summary>PostHog vs Google Analytics: the short version</summary>
 
-- **Choose GA4** if marketing owns your analytics and your budget goes through Google. It's free, and it links natively to Google Ads, Search Console, AdSense, and Ad Manager, so ad costs, attribution, and audience demographics show up in the same reports as your traffic. It also predicts purchase and churn for properties with enough data, and it's the default most marketing teams and agencies already work in.
+- **Choose GA4** if marketing owns your analytics and your budget goes through Google. It's free, and it links natively to Google Ads, Search Console, AdSense, and Ad Manager, so ad costs and attribution show up next to your traffic reports. It also predicts purchase and churn for properties with enough data, and it's the default most marketing teams and agencies already work in.
 
-- **Choose PostHog** if you need to know what people do after they land. Every visit is tied to the same user's [session replays](/session-replay), [funnels](/docs/product-analytics/funnels), [errors](/error-tracking), and [feature flags](/feature-flags), so you can go from a traffic source to what those users did in your product. You can query the raw events [with SQL](/docs/data-warehouse/sql) without exporting them, choose [EU hosting](/blog/posthog-cloud-eu), and sign a [BAA for HIPAA](/docs/privacy/hipaa-compliance), and each product has its own [free tier](/pricing).
+- **Choose PostHog** if you need to know what people do after they land. Every visit is tied to the same user's [session replays](/session-replay), [funnels](/docs/product-analytics/funnels), [errors](/error-tracking), and [feature flags](/feature-flags), so you can go from a traffic source to what those users did in your product. You can query the raw events [with SQL](/docs/data-warehouse/sql) without exporting them, choose [EU hosting](/blog/posthog-cloud-eu), and sign a [BAA for HIPAA](/docs/privacy/hipaa-compliance), and most products have their own [free tier](/pricing).
 
 Both are free to start, cover the core web analytics reports, export to BigQuery, and have an MCP server for your agents. You can also run them side by side, with GA4 for ad reporting and PostHog for product.
 
@@ -95,7 +95,7 @@ GA4 is primarily built for web analytics, so this is where the comparison matter
 />
 </p>
 
-PostHog goes significantly deeper on product analytics. [Group analytics](/docs/product-analytics/group-analytics) lets you analyze behavior at the account or company level (ideal for B2B SaaS), which GA4 can't do. [Person profiles](/docs/data/persons) tie every event, [session replay](/docs/session-replay), and [feature flag](/docs/feature-flags) to the same user. You can also write [SQL](/docs/data-warehouse/sql) against the raw events behind any [funnel](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), or [user paths](/docs/product-analytics/paths) insight, and ask [PostHog AI](/docs/posthog-ai/start-here) what correlates with conversion or drop-off.
+PostHog goes significantly deeper on product analytics. [Group analytics](/docs/product-analytics/group-analytics) lets you analyze behavior at the account or company level (ideal for B2B SaaS), which GA4 has no built-in way to do. [Person profiles](/docs/data/persons) tie an identified user's events, [session replays](/docs/session-replay), and [feature flags](/docs/feature-flags) together. You can also write [SQL](/docs/data-warehouse/sql) against the raw events behind any [funnel](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), or [user paths](/docs/product-analytics/paths) insight, and ask [PostHog AI](/docs/posthog-ai/start-here) what correlates with conversion or drop-off.
 
 <p>
 <ProductComparisonTable
@@ -165,7 +165,7 @@ Both tools now have built-in AI and an MCP server, so the question is what your 
  
 - **GA4** has Ask Advisor, a Gemini-powered assistant in beta for English-language properties, AI overviews that summarize what changed on the Home page and in reports, Analytics Intelligence for automated insights and anomaly detection, and predictive metrics for properties with enough purchase or churn data. Its [MCP server](https://github.com/googleanalytics/google-analytics-mcp) is open source and left experimental status in November 2026. You run it yourself, and it's read-only by default.
 
-- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents open PRs.
+- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) (in beta) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents can open PRs.
 
 The difference is what's behind them. GA4's AI and MCP server work from your traffic and conversion reports. PostHog's work from those plus your replays, errors, logs, flags, and external data in the warehouse.
 
@@ -279,7 +279,7 @@ Google also offers various [privacy controls](https://support.google.com/analyti
 
 GA4 can tell you where your visitors came from and which pages they viewed; PostHog knows that too, as well as what they did in your product, what they saw, what broke, which flags they were in, and what they pay you. That's because [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), and [AI observability](/ai-observability) all share one model of users and sessions.
  
-The [data warehouse](/warehouse) and [data pipelines](/data-pipelines) bring in the business data that lives elsewhere, like Stripe, HubSpot, Postgres, or Google Ads, and push data back out, so your agents can read across all of it. They can work from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) and your whole product, not just your traffic.
+The [data warehouse](/warehouse) and [data pipelines](/data-pipelines) bring in the business data that lives elsewhere, like Stripe, HubSpot, Postgres, or Google Ads, and push data back out, so your agents can read across all of it. They can work from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp), and they see your whole product, not just your traffic.
  
 </details>
 
