@@ -30,7 +30,11 @@ Use `https://us.i.posthog.com` for US Cloud and `https://eu.i.posthog.com` for E
 
 Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. [Upgrade your instance](/docs/self-host#upgrading) before you move an SDK to capture v1. An older instance doesn't serve one or both endpoints. Server SDKs on capture v1 drop events that still get a `404` after their retries.
 
-If you send through a reverse proxy, it must forward both paths and pass the request headers through unchanged. See the [proxy reference](/docs/advanced/proxy/proxy-reference).
+If you send through a reverse proxy, update it before you move an SDK to capture v1. See the [proxy reference](/docs/advanced/proxy/proxy-reference) for the full checklist. The proxy must:
+
+- Forward both paths.
+- Pass the request headers through unchanged, including `Authorization`. If your proxy uses `Authorization` for its own credentials, move them to a separate header, such as `X-Proxy-Token`.
+- Return PostHog's status code and response body unchanged. SDKs use the [per-event results](#per-event-results) to retry only the events that need it. An empty `200` drops the events instead of retrying them.
 
 ### Send each event to its own endpoint
 
