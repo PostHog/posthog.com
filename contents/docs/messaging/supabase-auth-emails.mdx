@@ -3,12 +3,6 @@ title: "Send Supabase auth emails with PostHog"
 showStepsToc: true
 ---
 
-<CalloutBox icon="IconFlask" title="Private beta" type="action">
-
-Supabase auth emails are in private beta and not enabled for every project. If you don't see an **Auth emails** section on the [**Channels** tab](https://app.posthog.com/workflows/channels), your project isn't in the beta yet. [Send feedback in the app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
-
-</CalloutBox>
-
 If you use [Supabase Auth](https://supabase.com/docs/guides/auth), you can send its emails through PostHog instead of Supabase's built-in mailer. Supabase's [Send Email Hook](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook) calls PostHog each time it needs to send an auth email, and PostHog sends it with a transactional email template from your [library](/docs/messaging/library).
 
 Supabase's built-in mailer is for testing. It sends [2 emails an hour](https://supabase.com/docs/guides/auth/rate-limits) for your whole project, and only to [members of your Supabase team](https://supabase.com/docs/guides/auth/auth-smtp). With PostHog, your auth emails reach every user, use your own templates and sending domain, and get the same stats as your other emails. You don't have to set up an SMTP server.

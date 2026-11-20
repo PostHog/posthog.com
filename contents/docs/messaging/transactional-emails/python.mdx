@@ -110,7 +110,7 @@ async def send_password_reset(user_id: str, email: str, first_name: str, reset_l
 
 </MultiLanguage>
 
-`send` returns a `SendEmailResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `EmailError`, and its `code` is one of the codes in the [errors table](/docs/messaging/transactional-emails#errors). A wrong argument raises `TypeError` or `ValueError` before any request.
+`send` returns a `SendEmailResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `EmailError`, and its `code` is one of the codes in the [errors table](/docs/messaging/transactional-emails/api#errors). A wrong argument raises `TypeError` or `ValueError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -281,7 +281,7 @@ def email_bounced(message_id: str) -> bool | None:
     return status.status == "bounced"
 ```
 
-`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. The two times are `datetime` objects. See [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status) for what each value means.
+`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. The two times are `datetime` objects. See [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status) for what each value means.
 
 A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 

@@ -8445,6 +8445,10 @@ export const docsMenu = {
                             name: 'Examples',
                             url: '/docs/messaging/transactional-emails/examples',
                         },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/messaging/transactional-emails/troubleshooting',
+                        },
                     ],
                 },
                 {
@@ -8452,10 +8456,6 @@ export const docsMenu = {
                     url: '/docs/messaging/supabase-auth-emails',
                     icon: 'IconLock',
                     color: 'green',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Broadcasts',

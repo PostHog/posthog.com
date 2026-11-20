@@ -84,7 +84,7 @@ async fn send_password_reset(
 }
 ```
 
-`send` returns `Result<SendEmailResult, EmailError>`. `result.id` is the message ID. Branch on `error.code()`, one of the codes in the [errors table](/docs/messaging/transactional-emails#errors). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
+`send` returns `Result<SendEmailResult, EmailError>`. `result.id` is the message ID. Branch on `error.code()`, one of the codes in the [errors table](/docs/messaging/transactional-emails/api#errors). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -254,7 +254,7 @@ async fn email_bounced(
 }
 ```
 
-`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. `status` is an `EmailDeliveryStatus`, and `as_str()` gives the value from [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status). A status that this SDK version doesn't know arrives as `EmailDeliveryStatus::Other`.
+`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. `status` is an `EmailDeliveryStatus`, and `as_str()` gives the value from [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status). A status that this SDK version doesn't know arrives as `EmailDeliveryStatus::Other`.
 
 A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 

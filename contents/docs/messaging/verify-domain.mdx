@@ -12,9 +12,12 @@ Verification applies to the domain, not to the address. When a domain is verifie
 
 Only project admins and higher can add a sender. If your access level is member, ask a project admin to add it for you.
 
-1. Go to workflows > [**Channels** tab](https://app.posthog.com/workflows/channels), click **+ New channel**, and select **Email**.
-2. Enter the **from name**, such as `PostHog Team`, and the **from email**, such as `team@yourdomain.com`. This is what recipients see in their inbox.
-3. PostHog shows the DNS records for the domain. Copy them into your domain host, such as Cloudflare or GoDaddy.
+1. Go to the [**Channels** tab](https://app.posthog.com/workflows/channels), click **+ New channel**, and select **Email**.
+2. Answer "Which domain should your emails come from?", then enter the sender name and address. This is what recipients see in their inbox.
+3. PostHog shows the DNS records to add, and walks you through verifying them:
+   - **Cloudflare or Vercel** - Click the button to add the records at your host for you, and approve the change there.
+   - **Any other host** - Copy each record into your domain host, such as Route 53, Namecheap, or GoDaddy.
+   - **Let an agent add the settings** - Hand the setup to your coding agent. It adds the records and checks PostHog until the domain is ready.
 
 Each sender is a separate channel. Only a sender that exists shows in the **From** dropdown of an email step. To add another sender later, use the **Channels** tab again.
 

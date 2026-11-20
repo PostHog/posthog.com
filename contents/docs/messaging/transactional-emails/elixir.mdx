@@ -82,7 +82,7 @@ def send_password_reset(user, reset_link, reset_request_id) do
 end
 ```
 
-`send/2` doesn't raise. It returns `{:ok, %PostHog.Emails.SendResult{}}` or `{:error, %PostHog.Emails.Error{}}`. `result.id` is the message ID. The error's `code` is one of the codes in the [errors table](/docs/messaging/transactional-emails#errors). An option that the SDK refuses returns an `invalid_*` code before any request.
+`send/2` doesn't raise. It returns `{:ok, %PostHog.Emails.SendResult{}}` or `{:error, %PostHog.Emails.Error{}}`. `result.id` is the message ID. The error's `code` is one of the codes in the [errors table](/docs/messaging/transactional-emails/api#errors). An option that the SDK refuses returns an `invalid_*` code before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -260,7 +260,7 @@ def email_bounced(message_id) do
 end
 ```
 
-`get/2` returns `{:ok, %PostHog.Emails.Status{}}` or `{:error, %PostHog.Emails.Error{}}`. The status has `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status) for what each value means.
+`get/2` returns `{:ok, %PostHog.Emails.Status{}}` or `{:error, %PostHog.Emails.Error{}}`. The status has `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status) for what each value means.
 
 A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The SDK doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 

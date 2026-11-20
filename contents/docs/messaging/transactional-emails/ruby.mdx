@@ -90,7 +90,7 @@ def send_password_reset(user, reset_link, reset_request_id)
 end
 ```
 
-`send` returns a `SendResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/messaging/transactional-emails#errors). A wrong argument raises `ArgumentError` before any request.
+`send` returns a `SendResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/messaging/transactional-emails/api#errors). A wrong argument raises `ArgumentError` before any request.
 
 A successful result means the email was queued, not delivered. Use [status checks](#check-an-emails-status) to confirm delivery.
 
@@ -243,7 +243,7 @@ rescue PostHog::EmailError => e
 end
 ```
 
-`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status) for what each value means. The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced".
+`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status) for what each value means. The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced".
 
 Statuses are available for 30 days. The key needs **Transactional email** read or write access.
 

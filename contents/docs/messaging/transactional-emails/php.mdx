@@ -80,7 +80,7 @@ function sendPasswordReset(User $user, string $resetLink, string $resetRequestId
 }
 ```
 
-`send()` returns a `SendEmailResult`, and `getId()` is the message ID. When PostHog doesn't queue the email, `send()` throws a `PostHog\EmailError`, and its `getErrorCode()` is one of the codes in the [errors table](/docs/messaging/transactional-emails#errors). A wrong argument throws `EmailError` with an `invalid_*` code before any request.
+`send()` returns a `SendEmailResult`, and `getId()` is the message ID. When PostHog doesn't queue the email, `send()` throws a `PostHog\EmailError`, and its `getErrorCode()` is one of the codes in the [errors table](/docs/messaging/transactional-emails/api#errors). A wrong argument throws `EmailError` with an `invalid_*` code before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -259,7 +259,7 @@ function emailBounced(string $messageId): ?bool
 }
 ```
 
-`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects. See [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status) for what each value means.
+`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects. See [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status) for what each value means.
 
 The helper returns `null` while the status isn't there yet, so check for `null` before you read the result as "not bounced". A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 

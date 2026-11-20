@@ -14,8 +14,8 @@ You need a [transactional email](/docs/messaging/transactional-emails?tab=Editor
 POST https://us.posthog.com/api/messaging/send/email/
 ```
 
-- **Host** – Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project** – The path has no project, because the key names it. PostHog uses the project that the key belongs to.
+- **Host** - Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project** - The path has no project, because the key names it. PostHog uses the project that the key belongs to.
 
 ### Request
 
@@ -25,7 +25,7 @@ Send these headers:
 | --- | --- |
 | `Authorization` | `Bearer` followed by your project secret API key |
 | `Content-Type` | `application/json` |
-| `Idempotency-Key` | Optional. A unique key for this email. See [retry safely](/docs/messaging/transactional-emails#retry-safely-with-an-idempotency-key). |
+| `Idempotency-Key` | Optional. A unique key for this email. See [retry safely](#retry-safely-with-an-idempotency-key). |
 
 Send a JSON body with these fields:
 
@@ -166,7 +166,7 @@ $result = PostHog::emails()->send([
 
 Each SDK page shows how to set up the client and handle errors.
 
-When a send fails, the response carries a `code`. See [errors](/docs/messaging/transactional-emails#errors), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files).
+When a send fails, the response carries a `code`. See [errors](#errors), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files).
 
 ### `delivery_unavailable`
 
@@ -176,8 +176,29 @@ A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/messaging/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinct_id` out.
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+
+## Retry safely with an idempotency key
+
+Without an `Idempotency-Key`, a retry after a timeout or a `503` can send the email twice. Send a key that identifies this one email, and send the same key on every retry.
+
+Build the key from the record that caused the email. A random value or a timestamp makes each retry look like a new email.
+
+| Email | Key |
+| --- | --- |
+| Password reset | `password-reset-{reset_request_id}` |
+| Sign-in code | `sign-in-code-{code_id}` |
+| Email address check | `verify-email-{verification_id}` |
+| Team invite | `invite-{invite_id}` |
+| Receipt | `receipt-{order_id}` |
+
+A key is 1 to 255 visible ASCII characters, with no spaces. Keys are separate for each project.
+
+- **Same key, same request** - PostHog sends no new email. It returns `202` with the `message_id` of the first send and `"replayed": true`. PostHog remembers a key for 24 hours after it queues the email.
+- **Same key, different request** - PostHog returns `422` with the code `idempotency_key_reused`. Two requests are the same when they have the same template, `to`, `distinct_id`, and `message_data`.
+- **First request not finished** - PostHog returns `409` with the code `idempotency_key_in_flight`. Wait a few seconds, then retry with the same key.
+- **Refused request** - When PostHog refuses a send, for example with `recipient_suppressed` or `quota_limited`, the key stays unused. You can send the same key again later.
 
 ## Send content from your code
 
@@ -201,7 +222,7 @@ A request has `template_id` or `template_key`, not both. Content from your code 
 
 If the `to` address is on the [suppression list](/docs/messaging/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
-The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` is the [same request](/docs/messaging/transactional-emails#retry-safely-with-an-idempotency-key) when every field in the table above has the same value as in the first request. PostHog also compares the sender that it chose: if you leave out `from` and the project's default sender changes before the retry, PostHog returns `idempotency_key_reused`.
+The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` is the [same request](#retry-safely-with-an-idempotency-key) when every field in the table above has the same value as in the first request. PostHog also compares the sender that it chose: if you leave out `from` and the project's default sender changes before the retry, PostHog returns `idempotency_key_reused`.
 
 <MultiLanguage selector="tabs">
 
@@ -325,14 +346,14 @@ $result = PostHog::emails()->send([
 
 Mark the email as sensitive when it carries login links, reset tokens, or codes. For a sensitive email, PostHog:
 
-- **Keeps links unchanged** – PostHog doesn't rewrite the email's links to count clicks, so a token in a link never goes through a tracking redirect. [`tracking`](#open-and-click-tracking) can still turn clicks on.
-- **Leaves the subject off engagement events** – The email's [engagement events](/docs/messaging/engagement-events) don't carry its subject.
-- **Keeps no copy of the content** – PostHog doesn't keep the email's subject or body.
+- **Keeps links unchanged** - PostHog doesn't rewrite the email's links to count clicks, so a token in a link never goes through a tracking redirect. [`tracking`](#open-and-click-tracking) can still turn clicks on.
+- **Leaves the subject off engagement events** - The email's [engagement events](/docs/messaging/engagement-events) don't carry its subject.
+- **Keeps no copy of the content** - PostHog doesn't keep the email's subject or body.
 
 `sensitive` takes `true` or `false`. If you leave it out:
 
-- **A template has the same key** – When a template in your project has the key that you send as `template_key`, the email takes that template's [**Protect sensitive data**](/docs/messaging/transactional-emails#protect-sensitive-data) setting.
-- **No template has the key** – The email is sensitive.
+- **A template has the same key** - When a template in your project has the key that you send as `template_key`, the email takes that template's [**Protect sensitive data**](/docs/messaging/transactional-emails#protect-sensitive-data) setting.
+- **No template has the key** - The email is sensitive.
 
 Send `"sensitive": false` for an email that carries no secrets, such as an order confirmation. PostHog then tracks its clicks too, as it does for a template without **Protect sensitive data**. `sensitive` doesn't change opens or engagement events.
 
@@ -357,9 +378,9 @@ Send `"sensitive": false` for an email that carries no secrets, such as an order
 | `false` | Off | Off | Off |
 | An object | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
 
-- **Opens** – PostHog adds an open pixel to the email, so it can count opens.
-- **Clicks** – PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
-- **Engagement events** – PostHog captures the email's [engagement events](/docs/messaging/engagement-events), such as sent, opened, and clicked, on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send.
+- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** - PostHog captures the email's [engagement events](/docs/messaging/engagement-events), such as sent, opened, and clicked, on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send.
 
 A key that you leave out of the object keeps its default, so `{}` is the same as leaving out `tracking`.
 
@@ -367,9 +388,9 @@ A key that you leave out of the object keeps its default, so `{}` is the same as
 
 When you leave out `clicks`, PostHog tracks clicks only for an email that isn't [sensitive](#sensitive-emails). A tracked link goes through a redirect, so a login link or a reset token in it would go through the redirect too.
 
-- **An email without secrets** – Send `"sensitive": false`, and PostHog tracks its clicks.
-- **A sensitive email with safe links** – Send `"tracking": {"clicks": true}`, or `"tracking": true`. PostHog tracks its clicks, and keeps the email's other protections.
-- **An email that isn't sensitive** – Send `"tracking": {"clicks": false}` to keep its links unchanged.
+- **An email without secrets** - Send `"sensitive": false`, and PostHog tracks its clicks.
+- **A sensitive email with safe links** - Send `"tracking": {"clicks": true}`, or `"tracking": true`. PostHog tracks its clicks, and keeps the email's other protections.
+- **An email that isn't sensitive** - Send `"tracking": {"clicks": false}` to keep its links unchanged.
 
 A `clicks` value that you send wins over `sensitive`. To keep one link as it is, add `data-ph-no-track` or `clicktracking="off"` to its `<a>` tag, as for [workflow emails](/docs/messaging/library#disabling-link-click-tracking).
 
@@ -393,10 +414,10 @@ In a form-encoded request, `tracking` and `sensitive` take `true` or `false`. Se
 
 PostHog returns a `400` and sends nothing when:
 
-- **An unknown key** – The object has a key other than `opens`, `clicks`, and `engagement`.
-- **Clicks without opens** – `opens` is `false` and `clicks` is `true`. Click tracking needs open tracking. Turn on `opens`, or turn off `clicks`. With `opens` set to `false` and `clicks` left out, PostHog tracks no clicks, whatever `sensitive` says.
-- **Both fields** – The request has `tracking` and `capture_engagement`. Move the value of `capture_engagement` to `tracking.engagement`.
-- **A template send** – The request has `template_id` and `tracking` or `sensitive`. A template uses its own settings.
+- **An unknown key** - The object has a key other than `opens`, `clicks`, and `engagement`.
+- **Clicks without opens** - `opens` is `false` and `clicks` is `true`. Click tracking needs open tracking. Turn on `opens`, or turn off `clicks`. With `opens` set to `false` and `clicks` left out, PostHog tracks no clicks, whatever `sensitive` says.
+- **Both fields** - The request has `tracking` and `capture_engagement`. Move the value of `capture_engagement` to `tracking.engagement`.
+- **A template send** - The request has `template_id` and `tracking` or `sensitive`. A template uses its own settings.
 
 ### Copies and attachments
 
@@ -408,9 +429,9 @@ Content from your code also takes these fields. A template send takes none of th
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
 | `attachments` | No | A list of up to 10 files that you [uploaded first](#send-files). Each file is an object with `sha256`, `filename`, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
-- **Size** – An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
-- **Inline images** – Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
-- **Content type parameters** – `content_type` can have parameters after the type. For a calendar invite, add `method=REQUEST`, so that mail apps can show the file as an invitation, not as a plain file:
+- **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
+- **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Content type parameters** - `content_type` can have parameters after the type. For a calendar invite, add `method=REQUEST`, so that mail apps can show the file as an invitation, not as a plain file:
 
   ```json
   {
@@ -421,10 +442,10 @@ Content from your code also takes these fields. A template send takes none of th
   ```
 
   PostHog refuses a `name` or `filename` parameter, because the file name comes from `filename`.
-- **Blocked files** – PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
-- **Viruses** – PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
-- **SDKs** – The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
-- **Older PostHog versions** – A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+- **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **Viruses** - PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
+- **SDKs** - The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
+- **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
 
 ### Send files
 
@@ -487,8 +508,8 @@ A successful request returns `200`, with one answer for each file, in the order 
 }
 ```
 
-- **`present`** – PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
-- **`upload`** – Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes. The bytes of each `upload` file count toward your project's daily upload limit when PostHog gives you the URL, even if you don't upload the file. Upload each file soon after you ask.
+- **`present`** - PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
+- **`upload`** - Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes. The bytes of each `upload` file count toward your project's daily upload limit when PostHog gives you the URL, even if you don't upload the file. Upload each file soon after you ask.
 
 #### Upload a file
 
@@ -533,7 +554,7 @@ For a complete script, see the [receipt with a PDF](/docs/messaging/transactiona
 
 ### Checks for files
 
-These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/messaging/transactional-emails#errors) of every send. After a `400`, a `404`, or a `429`, PostHog sends nothing. The body of a `400` or a `429` has `why` and `fix` in addition to `code` and `attr`, which tell you the cause and what to do.
+These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](#errors) of every send. After a `400`, a `404`, or a `429`, PostHog sends nothing. The body of a `400` or a `429` has `why` and `fix` in addition to `code` and `attr`, which tell you the cause and what to do.
 
 | Status | Code | Route | Cause | What to do |
 | --- | --- | --- | --- | --- |
@@ -554,7 +575,7 @@ Other problems with `attachments` or `files`, such as a hash that isn't 64 lower
 
 ### Checks for content from your code
 
-These checks apply to content from your code, in addition to the [errors](/docs/messaging/transactional-emails#errors) of every send. PostHog sends nothing when a check fails.
+These checks apply to content from your code, in addition to the [errors](#errors) of every send. PostHog sends nothing when a check fails.
 
 | Status | Code | Cause | What to do |
 | --- | --- | --- | --- |
@@ -583,11 +604,40 @@ A found email returns `200`:
 }
 ```
 
-See [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status) for what each value means.
+You can read a status for 30 days after the send.
 
-A `404` with the code `not_found` right after a send means the status isn't there yet: a new send can take a few seconds to get its first status, so retry after a short wait. Later, a `404` means the email is older than 30 days or the ID is wrong. See [when a status isn't found](/docs/messaging/transactional-emails#when-a-status-isnt-found). It returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
+| `status` | What it means |
+| --- | --- |
+| `queued` | The email waits to go out. |
+| `sent` | PostHog handed the email to the email provider. |
+| `failed` | The email wasn't sent. `reason` says why. |
+| `delivered` | The recipient's mail server accepted the email. |
+| `bounced` | The recipient's mail server refused the email. `reason` is `hard`, `soft`, or `unknown`. |
+| `complained` | The recipient marked the email as spam. |
+
+A status only moves forward. For example, a `delivered` email never goes back to `sent`. New statuses can appear in the future, so handle a value that you don't know.
+
+`reason` is `null` unless the email failed or bounced. A failed email has one of these reasons:
+
+- `provider_error` or `provider_rejected` - The email provider refused the email.
+- `recipient_suppressed`, `recipient_unreachable`, or `missing_recipient` - PostHog skipped the email because of the recipient.
+- `sending_paused` or `sending_suspended` - Sending is paused for the template or suspended for the project. Check the **Reputation** tab in Workflows.
+- `canceled` or `workflow_unavailable` - The send stopped before the email went out.
+- Another value, such as `timeout` - The send failed with this kind of error. New values can appear.
+
+A `failed` email can still change to `sent` if PostHog retries the send.
+
+The lookup returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
 
 Each project secret API key can read 600 statuses per minute and 20,000 per hour. All the keys of one project share the same limits in total. Reads have their own limits, so they don't use up the limits for sends.
+
+### When a status isn't found
+
+The lookup returns `404` with the code `not_found` when:
+
+- The email was sent in the last few seconds. Its first status takes a moment to arrive, so retry after a short wait.
+- The email is older than 30 days. PostHog keeps each status for 30 days after the send.
+- No email of this project has the ID.
 
 ### Example
 
@@ -631,3 +681,48 @@ $status = PostHog::emails()->get('<message_id>');
 ```
 
 </MultiLanguage>
+
+## Errors
+
+An error response has this shape:
+
+```json
+{
+  "type": "invalid_request",
+  "code": "recipient_suppressed",
+  "detail": "The recipient is on this project's suppression list after a hard bounce or a spam complaint, so the email can't be sent. Remove the address from the suppression list if it can receive email again.",
+  "attr": null
+}
+```
+
+Use `code` in your error handling. The text in `detail` can change.
+
+| Status | `code` | What it means | Retry? | What to do |
+| --- | --- | --- | --- | --- |
+| `400` | Varies, with `"type": "validation_error"` | The body isn't valid. For example, `to` is missing or isn't an email address. `attr` names the field. | No | Fix the request. |
+| `400` | `invalid_recipient` | The `to` address contains `{` or `}`. | No | Send a plain email address. |
+| `400` | `invalid_idempotency_key` | The `Idempotency-Key` header isn't 1 to 255 visible ASCII characters. | No | Use a valid key. |
+| `400` | `template_not_transactional` | The template isn't transactional. | No | [Make the template transactional](/docs/messaging/transactional-emails?tab=Editor#use-an-existing-template). |
+| `400` | `template_not_sendable` | The template has no subject or no body. | No | Add them and publish the template. |
+| `400` | `marketing_template` | The template is in a marketing category. | No | Move the template to a transactional category, or remove its category. |
+| `400` | `transactional_email_paused` | The workflow that sends this template isn't active, or it was deleted. | No | A retry gets the same error. |
+| `401` | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid. | No | Send a valid project secret API key. |
+| `403` | `permission_denied` | The key doesn't have the `transactional_email:write` scope, or the key belongs to a different project. | No | Use a key from this project with the correct scope. |
+| `404` | `not_found` | The template doesn't exist in this project, or transactional emails aren't turned on for the project. | No | Check the template ID and the project. |
+| `409` | `idempotency_key_in_flight` | A request with the same `Idempotency-Key` is still in progress. | Yes | Retry with the same key after a few seconds. |
+| `422` | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. | No | Use a new key for a new email. |
+| `422` | `recipient_suppressed` | The address is on your project's [suppression list](/docs/messaging/opt-outs#the-suppression-list) after a hard bounce or a spam complaint. | No | Remove the address from the suppression list only if you know that it can receive email again. |
+| `422` | `recipient_unreachable` | The address isn't valid, or its domain has no mail servers, so the email would bounce. | No | Check the address for a typo. |
+| `422` | `sending_paused` | Sending is paused for this transactional email because of its bounce or complaint rate. | No | Check the **Reputation** tab in Workflows. |
+| `422` | `sending_suspended` | Email sending is suspended for your project. | No | Check the **Reputation** tab in Workflows. |
+| `429` | `throttled` | You sent too many requests. | Yes | Wait for the number of seconds in the `Retry-After` header, then retry. |
+| `429` | `quota_limited` | Your project is over its email quota. | No | Check your usage and [billing limits](/docs/billing/limits-alerts). A retry gets the same error until the project is under its quota. |
+| `503` | `delivery_unavailable` | PostHog couldn't confirm that it queued the email. | Yes | Retry with backoff and the same `Idempotency-Key`, so that the email doesn't go out twice. |
+
+The SDKs also return the code `network_error` when they get no answer from PostHog. Treat it like a `503`: PostHog can still have queued the email, so retry with the same key.
+
+If you make a template transactional or save it without a verified sender, PostHog returns `400` with the code `sender_unavailable`.
+
+### Rate limits
+
+Each project secret API key can send 600 requests per minute and 20,000 requests per hour. All the keys of one project share the same limits in total. A request over a limit gets a `429` with the code `throttled`.

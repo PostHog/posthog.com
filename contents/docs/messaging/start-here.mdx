@@ -41,15 +41,8 @@ Your agent sets up a sender, writes the email in your code, adds the send, and c
 
 Transactional emails are the one-off emails your code sends to one person, such as password resets, sign-in codes, and receipts. You write each one as code, and your backend sends it with a [server SDK](/docs/messaging/installation#send-email-from-your-backend) or the API.
 
-You don't need to set up DNS first. The [sandbox sender](/docs/messaging/sandbox-sender) sends from a PostHog address to members of your PostHog organization, so you can try it now.
+You don't need to set up DNS to try it. The [sandbox sender](/docs/messaging/sandbox-sender) sends from a PostHog address to members of your PostHog organization:
 
-To add your first send to your app, run the PostHog wizard in your project:
-
-```bash
-npx @posthog/wizard@latest email
-```
-
-It writes the email in your code, adds a project secret API key to your env file, and adds the send with the SDK for your backend. To do it by hand:
 
 ```js
 await posthog.emails.send({
@@ -60,6 +53,14 @@ await posthog.emails.send({
   idempotencyKey: "my-first-email",
 })
 ```
+
+Once your domain is verified, the PostHog wizard adds the send to your app for you. Run it in your project:
+
+```bash
+npx @posthog/wizard@latest email
+```
+
+It writes the email in your code, adds a project secret API key to your env file, and adds the send with the SDK for your backend.
 
 ---
 
@@ -93,12 +94,19 @@ An [automation](/docs/messaging/automations) reacts to what each person does. Fo
   icon="IconGraph"
 >
 
-Each workflow, broadcast, and transactional email shows its sends, deliveries, opens, clicks, and bounces. Turn on engagement events, and PostHog also captures each send, open, and click as an event on the person who got it. Use them in insights, funnels, and dashboards, next to your product events.
+Each workflow, broadcast, and transactional email shows its sends, deliveries, opens, clicks, and bounces. PostHog also captures each send, open, and click as an event on the person who got it, so you can see what they did before and after the email. Use these events in insights, funnels, and dashboards, next to your product events.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_light_228eeaada5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_dark_93b1987f6e.png"
+  alt="What a person did around an email, with their events before and after the send"
+  classes="rounded"
+/>
 
 ---
 
 <OSButton variant="primary" asLink to="/docs/messaging/engagement-events">
-  Capture workflow events
+  See email events
 </OSButton>
 
 </QuestLogItem>

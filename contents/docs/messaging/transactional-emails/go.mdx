@@ -82,7 +82,7 @@ func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email
 }
 ```
 
-`Send` returns a `*SendEmailResult` and an error. `result.ID` is the message ID. Every error is a `*posthog.EmailError`. Read it with `errors.As`, and branch on its `Code`, one of the codes in the [errors table](/docs/messaging/transactional-emails#errors). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
+`Send` returns a `*SendEmailResult` and an error. `result.ID` is the message ID. Every error is a `*posthog.EmailError`. Read it with `errors.As`, and branch on its `Code`, one of the codes in the [errors table](/docs/messaging/transactional-emails/api#errors). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -257,7 +257,7 @@ func emailBounced(ctx context.Context, client posthog.Client, messageID string) 
 }
 ```
 
-`Get` returns an `*EmailStatus` with `ID`, `Status`, `CreatedAt`, `StatusAt`, and `Reason`. See [statuses and reasons](/docs/messaging/transactional-emails#check-an-emails-status) for what each value means.
+`Get` returns an `*EmailStatus` with `ID`, `Status`, `CreatedAt`, `StatusAt`, and `Reason`. See [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status) for what each value means.
 
 A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 

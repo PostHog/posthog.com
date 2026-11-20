@@ -1,0 +1,26 @@
+---
+title: Troubleshoot transactional emails
+sidebar: Docs
+showTitle: true
+---
+
+This page helps you find out why a [transactional email](/docs/messaging/transactional-emails) didn't arrive, and explains how transactional emails differ from other email.
+
+## An email didn't arrive
+
+Work down this list. Each step rules out one cause.
+
+1. **Did the send return a message ID?** If it returned an error, its `code` says why. See [errors](/docs/messaging/transactional-emails/api#errors).
+2. **Is the send on the email's Sends tab?** If it isn't, check that you used a key from the right project. A key belongs to one project, and PostHog sends the email from that project.
+3. **Is the status `queued`?** The email waits on the email queue to go out. Transactional emails never wait for your [sending allowance](/docs/messaging/sending-reputation) and go out ahead of marketing emails, so this status is usually short. If it lasts more than a few minutes, [contact support](https://app.posthog.com/#panel=support).
+4. **Is the status `failed` or `bounced`?** `reason` says why. See [statuses and reasons](/docs/messaging/transactional-emails/api#check-an-emails-status). A suppressed or unreachable address gets no email until you fix the address.
+5. **Is the status `delivered`?** The recipient's mail server accepted the email. Check the spam folder, and check that your domain's DNS records are still in place. See [verify your sending domain](/docs/messaging/verify-domain).
+
+## How transactional emails behave
+
+- **No opt-outs or frequency caps** - Transactional emails ignore marketing [opt-outs](/docs/messaging/opt-outs) and the [frequency cap](/docs/messaging/frequency-cap). Use them only for emails that a person needs, never for marketing.
+- **Only hard bounces block them** - PostHog doesn't send to an address on your [suppression list](/docs/messaging/opt-outs#the-suppression-list) that hard-bounced. An address suppressed for a spam complaint, soft bounces, or by hand still gets transactional emails.
+- **Billing and quotas** - Transactional emails are billed and limited by quota like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
+- **Sending allowance** - Transactional emails count toward your project's [sending allowance](/docs/messaging/sending-reputation), but they never wait for it. When the allowance is empty, they still go out at once, ahead of queued marketing emails. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
+- **Engagement events** - If you [capture email engagement events](/docs/messaging/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send. An email from your code tracks clicks only when it isn't [sensitive](/docs/messaging/transactional-emails/api#sensitive-emails), or when [`tracking`](/docs/messaging/transactional-emails/api#open-and-click-tracking) turns them on.
+- **Where to see sends** - [Read the status](/docs/messaging/transactional-emails/api#check-an-emails-status) of an email with its `message_id`. The email's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.
