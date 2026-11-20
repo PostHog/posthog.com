@@ -44,10 +44,6 @@ So if a Python cell reshapes data, the next SQL cell can query the result direct
 
 Here I pulled errors for one MCP tool with SQL, broke them down in Python, and charted them with matplotlib.
 
-PostHog also tracks which cells depend on which. Change an upstream cell and everything downstream is marked stale, so you know what to re-run.
-
-![An upstream SQL cell warning that a downstream cell may be showing outdated data, and the downstream Python cell flagged as out of date](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_3_5e230758cf.png)
-
 ## The decisions behind it
 
 ### Why a persistent kernel instead of stateless cells?
