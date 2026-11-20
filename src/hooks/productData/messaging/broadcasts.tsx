@@ -138,7 +138,7 @@ export const broadcasts: CarouselSlide[] = [
                         description: (
                             <>
                                 Moving from Customer.io, Braze, Brevo, or anywhere else?{' '}
-                                {docsLink('/docs/workflows/opt-outs', 'Import your opt-out and suppression lists')} and
+                                {docsLink('/docs/messaging/opt-outs', 'Import your opt-out and suppression lists')} and
                                 keep them in sync, so nobody hears from you twice after you switch.
                             </>
                         ),
@@ -177,7 +177,7 @@ export const broadcasts: CarouselSlide[] = [
                         description: (
                             <>
                                 Sent, delivered, opened, clicked, bounced, and unsubscribed as{' '}
-                                {docsLink('/docs/workflows/engagement-events', 'standard PostHog events')}, for funnels,
+                                {docsLink('/docs/messaging/engagement-events', 'standard PostHog events')}, for funnels,
                                 cohorts, and dashboards.
                             </>
                         ),

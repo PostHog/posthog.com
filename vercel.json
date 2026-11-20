@@ -5502,7 +5502,7 @@
         },
         {
             "source": "/workflows/documentation",
-            "destination": "/docs/workflows"
+            "destination": "/docs/messaging"
         },
         {
             "source": "/workflows/tutorials",

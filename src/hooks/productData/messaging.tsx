@@ -250,15 +250,15 @@ export const messaging = {
     questions: [
         {
             question: 'How do I set up an email drip campaign?',
-            url: '/docs/workflows/email-drip-campaign',
+            url: '/docs/messaging/email-drip-campaign',
         },
         {
             question: 'How do I manage opt-outs and suppressions?',
-            url: '/docs/workflows/opt-outs',
+            url: '/docs/messaging/opt-outs',
         },
         {
             question: 'How do I set up email, SMS, and push?',
-            url: '/docs/workflows/configure-channels',
+            url: '/docs/messaging/automations/workflow-builder',
         },
         {
             question: 'How do I run A/B tests inside workflows?',
@@ -266,7 +266,7 @@ export const messaging = {
         },
         {
             question: 'How do I create emails with PostHog AI?',
-            url: '/docs/workflows/create-emails-ai',
+            url: '/docs/messaging/create-emails-ai',
         },
         {
             question: 'How do teams use Workflows for customer journeys?',
