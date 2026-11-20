@@ -1,10 +1,10 @@
 import React from 'react'
-import { IconBolt, IconDecisionTree } from '@posthog/icons'
+import { IconDecisionTree, IconSend, IconSparkles } from '@posthog/icons'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 
 /**
- * Copy on these slides is checked against contents/docs/workflows/{email-drip-campaign,workflow-builder}.mdx.
+ * Copy on these slides is checked against contents/docs/workflows/{email-drip-campaign,workflow-builder,ai-tasks,configure-channels}.mdx.
  * Keep it in line with them when either changes.
  */
 const slideStyle = {
@@ -18,7 +18,7 @@ const list = (items: { label: string; description: React.ReactNode }[]) => (
     </div>
 )
 
-export const automation: CarouselSlide[] = [
+export const automations: CarouselSlide[] = [
     {
         ...slideStyle,
         slug: 'drip-campaigns',
@@ -35,9 +35,9 @@ export const automation: CarouselSlide[] = [
                 </p>
                 {list([
                     {
-                        label: 'Trigger on an event',
+                        label: 'Start from what PostHog knows',
                         description:
-                            'Start the drip campaign from any event PostHog captures, once per person or every time, with a conversion goal and exit conditions.',
+                            'Start from an event, a cohort, or a schedule, once per person or every time, with a conversion goal and exit conditions.',
                     },
                     {
                         label: 'Wait for the right moment',
@@ -60,41 +60,77 @@ export const automation: CarouselSlide[] = [
     },
     {
         ...slideStyle,
-        slug: 'triggers',
-        label: 'Triggers',
-        icon: <IconBolt className="size-5" />,
-        progressBar: 'bg-yellow',
+        slug: 'complex-automations',
+        label: 'Complex automations',
+        icon: <IconSparkles className="size-5" />,
+        progressBar: 'bg-purple',
         layout: 'stack',
-        heading: 'Start from an event, a cohort, or a schedule',
+        heading: 'Build automations as complex as you need',
         description: (
             <>
                 <p>
-                    A drip campaign starts from something PostHog already knows: an event someone just did, a cohort
-                    they joined, or a schedule you set.
+                    The same canvas runs more than email. Chain branches, waits, and actions, and hand a step to an
+                    agent when it needs judgment instead of a rule.
                 </p>
                 {list([
                     {
-                        label: 'Events',
+                        label: 'Branch and wait',
                         description:
-                            'Any event from any PostHog SDK, filtered by its properties. The person enters the moment it happens.',
+                            'Branch on properties, events, or a random split, and wait until a person does something before you continue.',
                     },
                     {
-                        label: 'Audiences',
+                        label: 'AI steps',
                         description:
-                            'Run a drip campaign for everyone who matches person properties, cohorts, or distinct IDs, with a live estimate of the reach.',
+                            'Start an AI task, or have Replay Vision watch the session behind the event and score it. Branch on the result.',
                     },
                     {
-                        label: 'Schedules',
+                        label: 'Draft, test, then publish',
                         description:
-                            'Daily, weekly, monthly, or yearly, in a timezone you pick, with the next occurrences shown before you enable it.',
+                            'A workflow stays a draft until you enable it. Test it against a real person and read the logs of each run.',
                     },
                 ])}
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_trigger_panel_light_65045a7652.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_trigger_panel_dark_bf54d41ffd.png',
-            alt: 'The trigger panel of a drip campaign, set to the signed_up event',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_complex_canvas_light_6ffea9518c.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_complex_canvas_dark_b696c34697.png',
+            alt: 'A workflow with branches and steps on the canvas',
+        },
+    },
+    {
+        ...slideStyle,
+        slug: 'any-destination',
+        label: 'Any destination',
+        icon: <IconSend className="size-5" />,
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'Send to any destination from any step',
+        description: (
+            <>
+                <p>
+                    A step can send an email, or post to Slack, call a webhook, or update another tool. All of it uses
+                    the same person and event data.
+                </p>
+                {list([
+                    {
+                        label: 'Email, SMS, and push',
+                        description: 'Reach a person on the channel that fits the message.',
+                    },
+                    {
+                        label: 'Slack and webhooks',
+                        description: 'Tell your team about a signup, or call your own API with the event.',
+                    },
+                    {
+                        label: '35+ integrations',
+                        description: 'ClickUp, Discord, GitHub, GitLab, Google Ads, Google Cloud Storage, and more.',
+                    },
+                ])}
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_destinations_picker_light_663523e7cc.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_destinations_picker_dark_9bb8f235ea.png',
+            alt: 'The step picker with email, SMS, Slack, webhook, push, and more destinations',
             maxWidth: 'max-w-lg',
         },
     },

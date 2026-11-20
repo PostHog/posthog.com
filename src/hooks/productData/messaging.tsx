@@ -18,7 +18,7 @@ import {
 import { features } from './workflows/features'
 import { transactional } from './messaging/transactional'
 import { broadcasts } from './messaging/broadcasts'
-import { automation } from './messaging/automation'
+import { automations } from './messaging/automation'
 import { standout } from './messaging/standout'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
@@ -28,7 +28,7 @@ export const messaging = {
     Icon: IconSend,
     type: 'messaging',
     teamSlug: 'workflows',
-    docsSlug: 'email',
+    docsSlug: 'messaging',
     forumTag: 'workflows',
     color: PRODUCT_COLORS.messaging,
     colorSecondary: 'green-2',
@@ -71,18 +71,18 @@ export const messaging = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'transactional',
-            name: 'Transactional email',
+            slug: 'email-as-code',
+            name: 'Email as code',
             group: 'divided',
             template: 'key-features',
             icon: <IconCode className="size-4" />,
             props: {
                 slides: transactional,
-                heading: 'Transactional email',
+                heading: 'Email as code',
                 intro: (
                     <p>
-                        Send password resets, sign-in codes, receipts, and invites from your backend with one call on
-                        the PostHog client.
+                        Write password resets, sign-in codes, receipts, and invites in your codebase, and send them from
+                        your backend with one call on the PostHog client.
                     </p>
                 ),
             },
@@ -105,23 +105,6 @@ export const messaging = {
             },
         },
         {
-            slug: 'drip-campaigns',
-            name: 'Drip campaigns',
-            group: 'divided',
-            template: 'key-features',
-            icon: <IconDecisionTree className="size-4" />,
-            props: {
-                slides: automation,
-                heading: 'Drip campaigns',
-                intro: (
-                    <p>
-                        Build a drip campaign that starts from an event, a cohort, or a schedule. Each step can wait,
-                        branch on what the person did, or send an email, SMS, or push notification.
-                    </p>
-                ),
-            },
-        },
-        {
             slug: 'why-posthog',
             name: 'Why PostHog',
             group: 'divided',
@@ -131,6 +114,23 @@ export const messaging = {
                 slides: standout,
                 heading: 'Why PostHog',
                 intro: <p>Your email runs on the same data as the rest of your product, so it can do more.</p>,
+            },
+        },
+        {
+            slug: 'automations',
+            name: 'Automations',
+            group: 'divided',
+            template: 'key-features',
+            icon: <IconDecisionTree className="size-4" />,
+            props: {
+                slides: automations,
+                heading: 'Automations',
+                intro: (
+                    <p>
+                        Build a drip campaign, or any automation that starts from an event, a cohort, or a schedule.
+                        Each step can wait, branch on what the person did, or send to any destination.
+                    </p>
+                ),
             },
         },
         {
@@ -173,11 +173,11 @@ export const messaging = {
             <>
                 <p>
                     Messaging sends email, SMS, and push notifications to your users, using the events and cohorts you
-                    have in PostHog. Build a welcome drip campaign in the visual editor, send a launch email to a
-                    cohort, or send a password reset from your backend with the PostHog SDK. Every send, open, and click
-                    is an event on the person, so you check if an email worked in the same funnels and replays as
-                    everything else. The first 10,000 emails each month are free. After that, 1,000 emails cost $3, with
-                    lower rates at higher volume.
+                    have in PostHog. Write a password reset as code and send it from your backend, send a launch email
+                    to a cohort, or build a drip campaign or a larger automation that also posts to Slack or calls a
+                    webhook. Every send, open, and click is an event on the person, so you check if an email worked in
+                    the same funnels and replays as everything else. The first 10,000 emails each month are free. After
+                    that, 1,000 emails cost $3, with lower rates at higher volume.
                 </p>
             </>
         ),
@@ -238,13 +238,13 @@ export const messaging = {
         categories: ['backend-languages'],
         // The server SDKs with an email send method, each linked to its send guide.
         hrefs: {
-            nodejs: '/docs/email/transactional-emails/node',
-            python: '/docs/email/transactional-emails/python',
-            go: '/docs/email/transactional-emails/go',
-            ruby: '/docs/email/transactional-emails/ruby',
-            php: '/docs/email/transactional-emails/php',
-            rust: '/docs/email/transactional-emails/rust',
-            elixir: '/docs/email/transactional-emails/elixir',
+            nodejs: '/docs/messaging/transactional-emails/node',
+            python: '/docs/messaging/transactional-emails/python',
+            go: '/docs/messaging/transactional-emails/go',
+            ruby: '/docs/messaging/transactional-emails/ruby',
+            php: '/docs/messaging/transactional-emails/php',
+            rust: '/docs/messaging/transactional-emails/rust',
+            elixir: '/docs/messaging/transactional-emails/elixir',
         },
     },
     questions: [
@@ -327,7 +327,6 @@ export const messaging = {
                 key: 'posthog',
             },
         ],
-        // Email rows only. The automation rows are on /workflows.
         rows: [
             'workflows.features.visual_builder',
             'workflows.features.ai_assistant',
@@ -339,6 +338,8 @@ export const messaging = {
             'workflows.channels.features.email',
             'workflows.channels.features.sms',
             'workflows.channels.features.push',
+            'workflows.features.branching_logic',
+            'workflows.features.webhook_actions',
         ],
         excluded_sections: ['platform'],
     },

@@ -22,8 +22,10 @@ const list = (items: { label: string; description: React.ReactNode }[]) => (
 const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Node.js',
-        language: 'js',
-        code: `const posthog = new PostHog("<ph_project_api_key>", {
+        language: 'jsx',
+        code: `import { PasswordResetEmail } from "./emails/password-reset"
+
+const posthog = new PostHog("<ph_project_api_key>", {
     host: "https://us.i.posthog.com",
     secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
 })
@@ -32,7 +34,7 @@ const { data, error } = await posthog.emails.send({
     to: email,
     from: "Hedgebox <security@example.com>",
     subject: "Reset your password",
-    html: "<p>Hello world</p>",
+    react: <PasswordResetEmail firstName={firstName} resetLink={resetLink} />,
     templateKey: "password-reset",
 })`,
     },
@@ -192,26 +194,27 @@ export const transactional: CarouselSlide[] = [
     {
         ...slideStyle,
         slug: 'in-your-code',
-        label: 'In your code',
+        label: 'Code',
         icon: <IconCode className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'Send from the PostHog SDK',
+        heading: 'Write email as code, send it from your backend',
         description: (
             <>
                 <p>
-                    Add a project secret API key to your PostHog client and call send. Node.js, Python, Go, Ruby, PHP,
-                    .NET, Rust, and Elixir all support it, and the REST API covers everything else. The client retries,
-                    sets the idempotency key, and returns a message ID.
+                    Keep your emails in your repo as React Email components or HTML, and review them like the rest of
+                    your code. Then call send on the PostHog client. Node.js, Python, Go, Ruby, PHP, .NET, Rust, and
+                    Elixir all support it, and the REST API covers everything else.
                 </p>
                 <SendCode />
                 {list([
                     {
-                        label: 'Your templates or ours',
+                        label: 'React Email built in',
                         description: (
                             <>
-                                Render the email yourself (React Email, MJML, a string) and send the{' '}
-                                <InlineCode>html</InlineCode>, or send a template you designed in PostHog by its ID.
+                                Pass a React Email component to the Node.js SDK as <InlineCode>react</InlineCode>, and
+                                it renders the HTML and plain text. Any other renderer works too: send its{' '}
+                                <InlineCode>html</InlineCode>.
                             </>
                         ),
                     },
@@ -232,16 +235,16 @@ export const transactional: CarouselSlide[] = [
     {
         ...slideStyle,
         slug: 'in-posthog',
-        label: 'In PostHog',
+        label: 'Editor',
         icon: <IconLaptop className="size-5" />,
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'Design and publish templates in PostHog',
+        heading: 'Or design templates in the PostHog editor',
         description: (
             <>
                 <p>
-                    Each transactional email gets its own page in PostHog, where you write it, publish versions, and see
-                    every send.
+                    When someone outside engineering owns the copy, write the email in PostHog instead. Your code sends
+                    it by its ID, and each email gets its own page where you publish versions and see every send.
                 </p>
                 {list([
                     {

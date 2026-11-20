@@ -22,7 +22,7 @@ export const BROWSE_TOOLS_HANDLES = [
     'traces',
     'data_warehouse',
     'endpoints',
-    'workflows_emails',
+    'messaging',
     'surveys',
     'support',
 ] as const
@@ -38,7 +38,7 @@ export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
     },
     { label: 'Sync', handles: ['data_warehouse', 'data_pipelines'] },
     { label: 'Deploy', handles: ['feature_flags', 'experiments', 'endpoints'] },
-    { label: 'Manage', handles: ['surveys', 'support', 'messaging', 'workflows_emails'] },
+    { label: 'Manage', handles: ['surveys', 'support', 'messaging'] },
 ]
 
 // Non-product pages that appear in the product navigation
