@@ -191,6 +191,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/android:ext(\\.md)?",
+            "destination": "/docs/libraries/android/reference:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
             "destination": "/docs/libraries/node/reference:ext?",
             "statusCode": 301
@@ -1886,7 +1891,7 @@
         },
         {
             "source": "/docs/integrations/android-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/android:ext?"
+            "destination": "/docs/libraries/android/reference:ext?"
         },
         {
             "source": "/docs/integrations/community:ext(\\.md)?",
@@ -3459,7 +3464,7 @@
         },
         {
             "source": "/docs/integrate/android:ext(\\.md)?",
-            "destination": "/docs/libraries/android:ext?"
+            "destination": "/docs/libraries/android/reference:ext?"
         },
         {
             "source": "/docs/integrate/api:ext(\\.md)?",

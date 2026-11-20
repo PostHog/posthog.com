@@ -198,7 +198,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 
 To implement the feature flag, we: 
 
-1. Fetch the `my-cool-flag` flag using [`PostHog.isFeatureEnabled()`](/docs/libraries/android#feature-flags).
+1. Fetch the `my-cool-flag` flag using [`PostHog.isFeatureEnabled()`](/docs/libraries/android/reference#is-feature-enabled).
 2. Change the background color of `SecondScreen` based on the value of the flag.
 
 To do this, update the code in `MainActivity.kt` with the following:

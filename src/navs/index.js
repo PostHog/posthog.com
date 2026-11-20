@@ -2940,11 +2940,25 @@ export const docsMenu = {
                         },
                         {
                             name: 'Android',
-                            url: '/docs/libraries/android',
+                            url: '/docs/libraries/android/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/android/4.x.x',
+                                },
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/android/3.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/android/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'C/C++',

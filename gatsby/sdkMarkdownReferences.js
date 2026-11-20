@@ -9,7 +9,7 @@ const YAML = require('yaml')
  * The SDKs whose rows become pages. Strapi also syncs the web and mobile SDKs, but their pages aren't ready,
  * so the build skips them. Add an SDK here to publish it.
  */
-const PUBLISHED_SDK_REFERENCES = ['posthog-python', 'posthog-go', 'posthog-rust', 'posthog-node']
+const PUBLISHED_SDK_REFERENCES = ['posthog-python', 'posthog-go', 'posthog-rust', 'posthog-node', 'posthog-android']
 
 /** The pages a row can write: reference, migration, and one per major version, such as 7.x.x.md. */
 const isSdkReferencePage = (file) => file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
