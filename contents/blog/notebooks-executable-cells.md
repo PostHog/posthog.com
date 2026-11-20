@@ -40,7 +40,7 @@ Cells share data, so they can work together to tell the story you want. Every ce
 
 So if a Python cell reshapes data, the next SQL cell can query the result directly. PostHog spots the reference and runs that query locally instead of in the warehouse. You can bounce between SQL and Python as many times as the analysis needs.
 
-![A SQL cell pulling execute-sql MCP calls, a Python cell breaking them down, and a matplotlib chart of the daily error rate by error type](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_2_sql_python_matplotlib_34df27aef4.png)
+![A Python cell breaking down execute-sql MCP errors, and a matplotlib chart of the daily error rate by error type](https://res.cloudinary.com/dmukukwp6/image/upload/matplotlib1_28e8d1f858.png)
 
 Here I pulled errors for one MCP tool with SQL, broke them down in Python, and charted them with matplotlib.
 
