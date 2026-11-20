@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Bland AI connector syncs your AI phone call data – calls, per-call transcripts, event logs, conversational pathways, web agents, and eval results – into the PostHog Data warehouse, so you can analyze your voice agents' performance alongside your product data.
+The Bland AI connector syncs your AI phone call data – calls, per-call transcripts, event logs, conversational pathways, web agents, eval results, agent test runs, widget conversations, audit logs, and knowledge bases – into the PostHog Data warehouse, so you can analyze your voice agents' performance alongside your product data.
 
 ## Prerequisites
 
@@ -34,6 +34,8 @@ When linking Bland AI, you'll need:
 The `call_transcripts` and `call_events` tables fetch data for each call individually, so they make one extra API request per call. Both are disabled by default – enable them only if you need utterance-level transcript data or per-call event streams.
 
 The `eval_runs` and `eval_call_results` tables are also disabled by default because Evals must be enabled on your Bland AI organization. Enable these tables only if your organization uses Bland AI Evals.
+
+The `audit_logs` table is also disabled by default because the endpoint requires an API key with an admin or owner role.
 
 Incremental syncs on the call tables track the call creation time. Post-call analysis added to older calls after a sync won't be picked up incrementally – run a full refresh if you need to re-sync updated analysis fields.
 
