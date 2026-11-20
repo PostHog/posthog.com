@@ -89,7 +89,7 @@ app.whenReady().then(async () => {
   posthog.registerWindow(window, { allowedUrls: [pathToFileURL(page).href] })
   await window.loadFile(page)
 
-  await posthog.capture("application_ready")
+  posthog.capture("application_ready")
 })
 ```
 
@@ -128,19 +128,21 @@ import { init } from "@posthog/electron/renderer"
 
 const posthog = await init()
 
-await posthog.capture("button_clicked", { button: "save" })
+posthog.capture("button_clicked", { button: "save" })
 ```
 
 `init()` gets the current state from the main process. If you call `init()` more than one time, you get the same client, and only the options from the first call apply.
 
-Renderer and main methods that change data return promises. A capture promise resolves when the main process writes the event to disk, not when PostHog receives it. Await identity, reset, and consent changes before you capture events that depend on them.
+`capture()`, `screen()`, and `captureException()` do not return a value, and they do not throw. They queue the event and return immediately. If the SDK cannot queue the event, it reports the error through `onError`.
+
+Other methods that change data, such as `identify()`, `reset()`, and `optIn()`, return promises. Await identity, reset, and consent changes before you capture events that depend on them. The SDK runs commands in the order that you call them.
 
 ## Capturing events
 
 You can capture events in the main process, in a renderer, or in a utility process:
 
 ```js
-await posthog.capture("user_signed_up", {
+posthog.capture("user_signed_up", {
   login_type: "email",
   is_free_trial: true,
 })
@@ -149,7 +151,7 @@ await posthog.capture("user_signed_up", {
 To capture a screen view, use `screen()`. This captures a `$screen` event:
 
 ```js
-await posthog.screen("Settings", { section: "billing" })
+posthog.screen("Settings", { section: "billing" })
 ```
 
 The SDK adds the `$electron_process` property to each event. Its value is `main`, `renderer`, or `utility`.
@@ -181,7 +183,7 @@ When a user logs out, call `reset()` before you identify a different user:
 await posthog.reset()
 ```
 
-If a renderer sends a command for the previous user after an identity change, the SDK rejects the command. Do not replay a rejected capture for the new user.
+If a renderer sends a command for the previous user after an identity change, the SDK rejects the command. A rejected capture is dropped and reported through `onError`. Do not capture it again for the new user.
 
 To link the current distinct ID to an alias, use `alias()`:
 
@@ -297,7 +299,7 @@ To capture an error that your code handles, use `captureException()` in main, in
 try {
   // Code that can throw
 } catch (error) {
-  await posthog.captureException(error, { context: "save" })
+  posthog.captureException(error, { context: "save" })
 }
 ```
 
@@ -324,15 +326,32 @@ const posthog = await init({ enableExceptionAutocapture: true })
 
 In the renderer, the SDK captures `error` and `unhandledrejection` events. It does not capture errors when a resource does not load.
 
-In the main process, the SDK captures uncaught exceptions. It does not capture unhandled promise rejections, because Electron only shows a warning for them. To report them, call `captureException()` in your own handler:
+In the main process, the SDK captures uncaught exceptions. By default, it does not capture unhandled promise rejections, because Electron only shows a warning for them. To capture them, set `captureUnhandledRejections: true`. This option also needs `enableExceptionAutocapture: true`:
 
 ```js
-process.on("unhandledRejection", (reason) => {
-  posthog.captureException(reason)
+import { init } from "@posthog/electron/main"
+
+const posthog = init({
+  projectToken: "<ph_project_token>",
+  enableExceptionAutocapture: true,
+  captureUnhandledRejections: true,
 })
 ```
 
-> **Note:** When you add an `unhandledRejection` listener, Node.js does not show its default warning for unhandled rejections.
+This option adds a `process.on("unhandledRejection")` listener until shutdown. While the listener is installed, Node.js does not show the `UnhandledPromiseRejectionWarning` and does not set `process.exitCode` to `1`. If your app uses `process.exitCode` to find failed runs, set it yourself.
+
+You can also capture unhandled rejections in your own handler instead. Your listener has the same effect on the warning and on `process.exitCode`:
+
+```js
+const onUnhandledRejection = (reason) => {
+  posthog.captureException(reason)
+}
+
+process.on("unhandledRejection", onUnhandledRejection)
+
+// When your app shuts down
+process.removeListener("unhandledRejection", onUnhandledRejection)
+```
 
 The SDK does not replace your error handlers, and it does not stop your app from exiting. It cannot guarantee that it sends an error before the app exits.
 
@@ -405,7 +424,7 @@ function App() {
   return (
     <button
       disabled={!enabled}
-      onClick={() => void client.capture("new_ui_clicked", { variant: variant ?? null })}
+      onClick={() => client.capture("new_ui_clicked", { variant: variant ?? null })}
     >
       Try the new UI
     </button>
@@ -446,14 +465,14 @@ const { init } = require("@posthog/electron/utility")
 
 async function run() {
   const posthog = await init()
-  await posthog.capture("background_work_completed", { task: "thumbnail" })
+  posthog.capture("background_work_completed", { task: "thumbnail" })
   await posthog.flush()
 }
 
 run().catch(console.error)
 ```
 
-The utility client has the same methods as the renderer client. It sends all calls to the main process. Each call waits a maximum of 10 seconds for the main process. If a call times out, do not retry it automatically, because the main process can have accepted it.
+The utility client has the same methods as the renderer client. It sends all calls to the main process. To get errors for failed calls, such as a capture over the rate limit, pass an `onError` function to `init()`. Each call waits a maximum of 10 seconds for the main process. If a call times out, do not retry it automatically, because the main process can have accepted it.
 
 > **Important:** A registered utility process can change the identity and consent of the app. Do not register a process that runs code that you do not trust.
 
@@ -559,8 +578,9 @@ These are the options for `init()` in the main process:
 | `disabled` | Set to `true` to disable the SDK. |
 | `captureAppLifecycleEvents` | Captures [lifecycle events](#lifecycle-events). Default is `true`. |
 | `enableExceptionAutocapture` | Captures uncaught errors in the main process. Default is `false`. |
+| `captureUnhandledRejections` | Captures unhandled promise rejections in the main process. Needs `enableExceptionAutocapture: true`. Default is `false`. See [error tracking](#error-tracking). |
 | `appBuild` | Your app's build number. The SDK uses it to find app updates. |
-| `personProfiles` | Set to `"identified_only"` or `"never"` to limit [person profiles](/docs/data/persons). |
+| `personProfiles` | Default is `"identified_only"`, which creates [person profiles](/docs/data/persons) only for identified users. Set to `"always"` to also create them for anonymous users, or `"never"` to disable them. |
 | `before_send` | A function that can change or drop events before the SDK queues them. |
 | `bootstrap` | Initial distinct ID and feature flag values. |
 | `preloadFeatureFlags` | Loads flags when the SDK starts. |
@@ -579,4 +599,4 @@ The options for `init()` in a renderer are `autocapture`, `enableExceptionAutoca
 
 ## Limitations
 
-- In the main process, the SDK does not capture unhandled promise rejections. To report them, use [`captureException()` in your own handler](#error-tracking).
+- In the main process, the SDK does not capture unhandled promise rejections by default. To capture them, set [`captureUnhandledRejections: true`](#error-tracking).
