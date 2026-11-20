@@ -169,7 +169,7 @@ Events queue in the PostHog client you pass in. If the queue overflows or fails 
 
 ## Logging
 
-The SDKs write nothing to stdout, because stdio servers use it for the protocol. Pass a logger during development to see callback errors and warnings:
+The SDKs write nothing to stdout, because stdio servers use it for the protocol. During development, pass `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go, to see callback errors and warnings. Rust logs through `tracing`, so point your subscriber at stderr:
 
 ```ts
 instrument(server, posthog, {
