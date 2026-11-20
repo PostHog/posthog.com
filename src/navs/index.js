@@ -2962,6 +2962,14 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Electron',
+                            url: '/docs/libraries/electron',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'Elixir',
                             url: '/docs/libraries/elixir',
                         },
@@ -2991,7 +2999,7 @@ export const docsMenu = {
                             name: 'Godot',
                             url: '/docs/libraries/godot',
                             badge: {
-                                title: 'Experimental',
+                                title: 'Beta',
                                 className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                             },
                         },
@@ -3020,10 +3028,6 @@ export const docsMenu = {
                         {
                             name: 'Java',
                             url: '/docs/libraries/java',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'Kotlin Multiplatform',
