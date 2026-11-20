@@ -9,9 +9,13 @@ Supabase auth emails are in private beta and not enabled for every project. If y
 
 </CalloutBox>
 
-[Supabase Auth](https://supabase.com/docs/guides/auth)'s built-in mailer is for testing. It sends [2 emails an hour](https://supabase.com/docs/guides/auth/rate-limits) for your whole project, and only to [members of your Supabase team](https://supabase.com/docs/guides/auth/auth-smtp). To reach your users, Supabase needs your own SMTP server or a Send Email Hook.
+[Supabase Auth](https://supabase.com/docs/guides/auth)'s built-in sender is for testing. It sends [2 emails an hour](https://supabase.com/docs/guides/auth/rate-limits) for your whole project, and only to [members of your Supabase team](https://supabase.com/docs/guides/auth/auth-smtp). To reach your users, Supabase sends through an email provider you connect over SMTP, or through a Send Email Hook. Supabase's email templates only set what the emails say. They don't change who sends them.
 
-PostHog can send these emails for you. Supabase's [Send Email Hook](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook) calls PostHog each time it needs to send an auth email, and PostHog sends it with a transactional email template from your [library](/docs/workflows/library). Your auth emails reach every user from your own sending domain, with no SMTP server to run, and get the same stats as your other emails.
+If you already use PostHog, it can send these emails for you. Supabase's [Send Email Hook](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook) calls PostHog each time it needs to send an auth email, and PostHog sends it with a transactional email template from your [library](/docs/workflows/library). This means:
+
+- You don't need a separate email provider.
+- PostHog records each email against the Supabase user's ID, next to the rest of your product data. For example, you can see who got a confirmation email and never came back.
+- Your auth, onboarding and marketing emails share one editor and library, so they look the same.
 
 This covers the emails Supabase sends during sign up and sign in:
 
@@ -23,8 +27,6 @@ This covers the emails Supabase sends during sign up and sign in:
 - Reauthentication
 
 It also covers Supabase's security notifications: password changed, email address changed, phone number changed, sign-in method linked or removed, and MFA method added or removed.
-
-PostHog records each email against the Supabase user's ID.
 
 <CalloutBox icon="IconLightBulb" title="Tip: Set it up with the MCP server" type="fyi">
 
