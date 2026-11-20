@@ -237,4 +237,4 @@ By keeping communication asynchronous and transparent, this is made much easier 
 
 ### Can a small team "own" another small team?
 
-Not for now, no. Perhaps when we're much larger this is something to think about.
+Not for now, no. Perhaps when we're much larger this is something to think about. A person can look after a group of related teams, though – see [group leads](/handbook/company/management#group-leads).
