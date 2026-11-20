@@ -27,11 +27,11 @@ You can pass override options to `startSessionRecording` to change this.
 ```
 posthog.startSessionRecording(true) // start ignoring all ingestion controls
 posthog.startSessionRecording({
-  // you don't have to send all of these
-  sampling: true || false; 
-  linked_flag: true || false; 
-  url_trigger: true || false; 
-  event_trigger: true || false 
+  // each option is true or false, and you don't have to send all of them
+  sampling: true,
+  linked_flag: true,
+  url_trigger: true,
+  event_trigger: true,
 })
 ```
 

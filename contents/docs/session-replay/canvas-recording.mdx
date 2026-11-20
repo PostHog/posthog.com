@@ -12,9 +12,9 @@ export const ImgReplayCanvasLight = "https://res.cloudinary.com/dmukukwp6/image/
 
 PostHog can capture canvas elements from your application. It works in both 2D and WebGL environments. 
 
-As canvas elements can contain sensitive information and are **not covered by DOM-based masking**, we do not capture these automatically. Once you are sure they are free of PII (or you have set up [canvas masking](#masking-canvas-content)), you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay).
+As canvas elements can contain sensitive information and are **not covered by DOM-based masking**, we do not capture these automatically. Once you are sure they are free of PII (or you have set up [canvas masking](#masking-canvas-content)), you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay), or in code with `session_recording.captureCanvas.recordCanvas: true`.
 
-Canvas elements are recorded at a rate of **4 frames per second** which may lead to some perceptual differences during playback.
+Canvas elements are recorded at a rate of **3 frames per second** which may lead to some perceptual differences during playback.
 
 ## Masking canvas content
 
@@ -34,7 +34,7 @@ An application that knows where sensitive content sits inside its canvas can sup
 
 Canvas recording normally has no impact on your site, but it does need to capture the canvas as an image which can have a performance impact on some sites.
 
-You can override the frequency the image is captured and the quality of the captured image when initializing PostHog on your site:
+You can override the capture frequency, image quality, and resolution when initializing PostHog on your site:
 
 ```
 posthog.init('<ph_project_token>', {
@@ -43,11 +43,16 @@ posthog.init('<ph_project_token>', {
   session_recording: {
     captureCanvas: {
       // accepts a number between 0 and 12
-      // if not set locally, when canvas recording is enabled, remote config sets this to 4
+      // if not set locally, when canvas recording is enabled, remote config sets this to 3
       canvasFps: 2,
       // accepts a decimal number between 0 and 1 as a string
       // if not set locally, when canvas recording is enabled, remote config sets this to "0.4"
       canvasQuality: "0.2",
+    },
+    canvasCapture: {
+      // capture frames at a fraction of display resolution, between 0 and 1
+      // lowering this cuts the most bytes, since size scales with pixel area
+      resolutionScale: 0.6,
     }
   }
 })

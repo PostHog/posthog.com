@@ -1,4 +1,4 @@
-As console logs can contain sensitive information, we do not capture these logs automatically. You can enable this feature globally _either_ from your [project settings](https://us.posthog.com/settings/project-replay#replay) **or** client-side by setting `enable_recording_console_log: true` in our [JavaScript Web SDK config](/docs/libraries/js/config).
+Console log capture is on by default for new projects. Console logs can contain sensitive information, so review what your app logs before you leave this on. You can turn it on or off in your [project settings](https://us.posthog.com/settings/project-replay#replay). To control it client-side, set `enable_recording_console_log` in the [JavaScript Web SDK config](/docs/libraries/js/config).
 
 ```js-web
 posthog.init('<ph_project_token>', {
