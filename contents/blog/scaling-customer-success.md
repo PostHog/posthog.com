@@ -57,7 +57,7 @@ The entire data layer was built by <TeamMember name="Daniel Danilov" photo /> - 
 
 Customer Analytics pulls from this and offers a single shared view, sorted by that priority score. It helps us identify which customers need attention first, while giving us access to their usage, spending, conversations, meetings, and progress through our program.
 
-![Customer Analytics accounts view sorted by priority score](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_11_18_at_13_46_24_2x_581da972d8.png)
+![Customer Analytics accounts view sorted by priority score](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_11_20_at_09_15_20_2x_6493dfdb3c.png)
 
 Knowing which customers need help is only half the challenge - we also need to act on that information, and that's where Workflows come in handy.
 
