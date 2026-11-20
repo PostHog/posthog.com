@@ -33,7 +33,7 @@ Both sources are unverified. See [model capture](/docs/mcp-analytics/events#mode
 
 ## MCP Apps
 
-MCP App tools are captured like any other tool call, and resource reads never include the body.
+MCP App tools are captured like any other tool call. Instrumenting doesn't change what the App returns: `ui://` resources, structured output, and metadata pass through unchanged. Resource reads never include the body.
 
 ## Not instrumented yet
 
