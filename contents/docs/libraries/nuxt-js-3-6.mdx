@@ -102,13 +102,13 @@ export default defineEventHandler(async (event) => {
 > **Note**: Make sure to _always_ call `posthog.shutdown()` after capturing events from the server-side.
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
-See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:
+See the [Node SDK docs](/docs/libraries/node/reference) for all usable functions, such as:
 - [Capture custom event capture, identify users, and more.](/docs/libraries/node/reference#capture)
 - [Feature flags including variants and payloads.](/docs/libraries/node/reference#get-feature-flag)
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Nuxt (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDK docs.
+For any technical questions for how to integrate specific PostHog features into Nuxt (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node/reference) SDK docs.
 
 Alternatively, the following tutorials can help you get started:
 

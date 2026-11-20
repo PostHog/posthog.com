@@ -36,13 +36,13 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[PostHog](https://posthog.com/) is a comprehensive [Google Optimize](/blog/optimize-to-posthog) and [GA4 alternative](/compare/ga4-alternatives) that integrates A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) with event-based analytics, session recording, and feature flags.
+[PostHog](https://posthog.com/) is a comprehensive [Google Optimize](/blog/optimize-to-posthog) and [GA4 alternative](/compare/best-ga4-alternatives) that integrates A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) with event-based analytics, session recording, and feature flags.
 
 PostHog supports A/B and multivariate experiments that target by geography, device, source, cohort, or limitless other person properties. It tracks metric improvement goals for success, secondary goals, and estimates how long it takes to get a statistically significant result. PostHog's experimentation suite is built on its feature flag functionality, making it easy to rollout winning variants.
 
 As an all-in-one platform, PostHog simplifies your data and analytics stack by replacing multiple tools. This makes it easy to quickly create experiments using existing data and cohorts in your product analytics, rather than connecting an external data source.
 
-PostHog has a range of [libraries and SDKs](/docs/getting-started/install), from [JavaScript](/docs/libraries/js) to [Python](/docs/libraries/python) to [iOS](/docs/libraries/ios), to help integrate into your website or apps' codebase. It has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
+PostHog has a range of [libraries and SDKs](/docs/getting-started/install), from [JavaScript](/docs/libraries/js) to [Python](/docs/libraries/python/reference) to [iOS](/docs/libraries/ios), to help integrate into your website or apps' codebase. It has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
 
 ### How much does PostHog cost?
 

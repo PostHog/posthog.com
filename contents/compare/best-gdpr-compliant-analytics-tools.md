@@ -41,7 +41,7 @@ There are numerous ways to achieve GDPR compliance, which you can broadly catego
 - **Better:** Data is stored in EU cloud servers
 - **Best:** You self-host and control all data / no personal data is collected
 
-All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source [Google Analytics alternatives](/compare/ga4-alternatives).
+All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source [Google Analytics alternatives](/compare/best-ga4-alternatives).
 
 | Tool | Best for | EU hosting | Self-host | Cookieless | Free tier |
 |------|----------|------------|-----------|------------|-----------|
@@ -95,7 +95,7 @@ PostHog Cloud is [free to use up to 1 million events per month](/pricing), plus 
 
 ![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-[Plausible](/compare/posthog-vs-plausible) is a lightweight alternative to tools such as [Google Analytics](/compare/ga4-alternatives). It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform. 
+[Plausible](/compare/posthog-vs-plausible) is a lightweight alternative to tools such as [Google Analytics](/compare/best-ga4-alternatives). It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 

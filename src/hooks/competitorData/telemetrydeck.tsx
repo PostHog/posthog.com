@@ -42,7 +42,7 @@ export const telemetrydeck = {
             available: 'Basic analysis only',
         },
         error_tracking: {
-            available: false,
+            available: 'Partial',
         },
         surveys: {
             available: false,
