@@ -1,4 +1,3 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -6,6 +5,7 @@ import Stickers from 'components/ProfileStickers'
 import slugify from 'slugify'
 import Link from 'components/Link'
 import Masonry from 'react-masonry-css'
+import hogProfile from '../../../images/hog-profile.png'
 
 const TeamMemberLink = (person) => {
     const {
@@ -54,12 +54,7 @@ const TeamMemberLink = (person) => {
                             className={`size-20 ${color ? `bg-${color}` : 'bg-orange'}`}
                         />
                     ) : (
-                        <CloudinaryImage
-                            alt=""
-                            width={20}
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                            className="size-20 bg-orange"
-                        />
+                        <img src={hogProfile} alt="" className="size-20 bg-orange" />
                     )}
                 </Link>
             </div>
