@@ -7700,6 +7700,14 @@ export const docsMenu = {
                             url: '/docs/ai-evals',
                         },
                         {
+                            name: 'Backfills',
+                            url: '/docs/ai-evals/backfills',
+                        },
+                        {
+                            name: 'Evaluation reports',
+                            url: '/docs/ai-evals/reports',
+                        },
+                        {
                             name: 'Trace reviews',
                             url: '/docs/ai-observability/trace-reviews',
                         },
@@ -7712,8 +7720,12 @@ export const docsMenu = {
                             url: '/docs/ai-evals/offline-evals',
                         },
                         {
-                            name: 'Taggers',
-                            url: '/docs/ai-evals/taggers',
+                            name: 'Review and compare experiments',
+                            url: '/docs/ai-evals/experiments',
+                        },
+                        {
+                            name: 'Scorers',
+                            url: '/docs/ai-evals/scorers',
                         },
                     ],
                 },
