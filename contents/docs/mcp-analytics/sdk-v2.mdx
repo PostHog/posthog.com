@@ -33,24 +33,15 @@ Both sources are unverified. See [model capture](/docs/mcp-analytics/events#mode
 
 ## MCP Apps
 
-`@posthog/mcp` preserves MCP App tool metadata, `ui://` resources, structured tool output, result metadata, HTML, and content security policy metadata on both supported revisions. On the tested high-level `McpServer` path, injected `context` and `llm_model` arguments don't reach the App handler.
-
-The SDK captures App tool calls with intent, self-reported model, and protocol version. Resource listing and read requests emit `$mcp_resources_list` and `$mcp_resource_read` on both server paths. Resource payloads pass through unchanged. The SDK never captures a resource read body.
+MCP App tools are captured like any other tool call, and resource reads never include the body.
 
 ## Not instrumented yet
 
-These gaps apply to the TypeScript and Python SDKs alike. For Go, see the note after the table.
+These gaps apply to the TypeScript and Python SDKs alike. For Go and Rust, see the note after the table.
 
 | `2026-07-28` feature | What you get today |
 | --- | --- |
 | **Tasks** (`io.modelcontextprotocol/tasks`) | A tool returning a task handle records an instant success, so task-based tools look fast and always-succeeding. |
 | **Multi round-trip** (`resultType: "input_required"`) | Each round counts as its own `$mcp_tool_call`, inflating call counts and durations. |
-| `server/discover` | Not captured – no session-start event on this revision. |
-| `Mcp-Method` / `Mcp-Name` headers | Not read. |
-| `clientCapabilities` in `_meta` | Not captured. `clientInfo` and protocol version are. |
 
-The Go SDK handles multi round-trip differently. It sends each `input_required` round as `$mcp_input_required`, and the retry that completes the call is the `$mcp_tool_call`. A round never carries a conversation handle. Rounds need go-sdk v1.8.0 or later, and the adapter needs v1.6.1 or later. The Go SDK doesn't handle tasks.
-
-The Rust SDK handles multi round-trip the same way as the Go SDK. A tool that returns a task handle sends no event.
-
-Task-based tools and multi-round-trip tools can produce misleading counts and durations. Check these limitations before using their dashboard metrics.
+Go and Rust send each `input_required` round as `$mcp_input_required`, and the retry is the `$mcp_tool_call`. They don't handle tasks.
