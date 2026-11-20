@@ -264,7 +264,7 @@ icon="IconAIText"
 
 [Model capture](/docs/mcp-analytics/events#model-capture) is on by default. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
-Use it to compare quality, latency, and errors across models. Don't use it for billing or security decisions. Clients may report an exact model or a model family.
+The model is unverified client input. Use it to compare quality, latency, and errors across models, not for billing or security decisions. Clients may report an exact model or a model family.
 
 </QuestLogItem>
 
