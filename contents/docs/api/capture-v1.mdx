@@ -33,7 +33,7 @@ Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0`
 If you send through a reverse proxy, update it before you move an SDK to capture v1. See the [proxy reference](/docs/advanced/proxy/proxy-reference) for the full checklist. The proxy must:
 
 - Forward both paths.
-- Pass the request headers through unchanged, including `Authorization`. If your proxy uses `Authorization` for its own credentials, move them to a separate header, such as `X-Proxy-Token`, and remove that header before you forward the request.
+- Set `Host` to the PostHog domain. Forward the PostHog `Authorization` value, `Content-Type`, `Content-Encoding`, `User-Agent`, and every `PostHog-*` header unchanged. If your proxy uses `Authorization` for its own credentials, move them to a separate header, such as `X-Proxy-Token`, and remove that header before you forward the request.
 - Return PostHog's status code and response body unchanged. SDKs use the [per-event results](#per-event-results) to retry only the events that need it. An empty `200` drops the events instead of retrying them.
 
 ### Send each event to its own endpoint
