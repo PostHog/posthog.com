@@ -39,7 +39,7 @@ You can also use `posthog.identify()` to add properties to the user, such as the
 
 ## Identifying and setting user IDs for every other library
 
-Every library that isn’t JavaScript (such as [Python](/docs/libraries/python/reference), [Go](/docs/libraries/go), [PHP](/docs/libraries/php), and more) requires you to pass the distinct user ID on every `posthog.capture()` call.
+Every library that isn’t JavaScript (such as [Python](/docs/libraries/python), [Go](/docs/libraries/go), [PHP](/docs/libraries/php), and more) requires you to pass the distinct user ID on every `posthog.capture()` call.
 
 Ideally, the user is authorized to make requests to the backend, and you can use a unique ID used in the authorization. Like the JavaScript library, email is the preferred choice for many, but a username or another type of ID also work.
 

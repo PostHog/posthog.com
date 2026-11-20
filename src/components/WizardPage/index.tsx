@@ -109,7 +109,7 @@ const frameworkCategories = [
             { name: 'Laravel', logo: 'laravel', url: '/docs/libraries/laravel' },
             { name: 'Django', logo: 'django', url: '/docs/libraries/django' },
             { name: 'Flask', logo: 'flask', url: '/docs/libraries/flask' },
-            { name: 'FastAPI', logo: 'python', url: '/docs/libraries/python/reference' },
+            { name: 'FastAPI', logo: 'python', url: '/docs/libraries/python' },
         ],
     },
     {

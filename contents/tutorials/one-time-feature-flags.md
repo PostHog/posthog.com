@@ -48,7 +48,7 @@ This is the basic app set up to showcase one-time feature flags.
 
 ## Setting up PostHog
 
-Next, install PostHog through the [Node SDK](/docs/libraries/node/reference) as Express is a Node framework.
+Next, install PostHog through the [Node SDK](/docs/libraries/node) as Express is a Node framework.
 
 ```bash
 npm i posthog-node@6
