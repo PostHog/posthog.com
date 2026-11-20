@@ -195,7 +195,7 @@ export default function SpotTheHog(): JSX.Element {
     const found = foundIn !== null
 
     return (
-        <div className="@container flex h-full min-h-0 flex-col gap-3 p-3 text-primary">
+        <div className="@container flex h-full min-h-0 flex-col gap-3 overflow-y-auto p-3 text-primary">
             <header className="flex flex-wrap items-center justify-between gap-2 pr-16">
                 <div className="flex gap-1">
                     <OSButton
@@ -228,10 +228,11 @@ export default function SpotTheHog(): JSX.Element {
                 </p>
             </header>
 
-            <div className="flex min-h-0 flex-1 flex-col gap-3 @2xl:flex-row">
+            {/* In a short window, such as a phone on its side, the game keeps this height and scrolls. */}
+            <div className="flex min-h-80 flex-1 flex-col gap-3 @2xl:flex-row">
                 <aside className="flex shrink-0 items-center gap-3 rounded border border-primary bg-accent p-3 @2xl:w-44 @2xl:flex-col @2xl:items-stretch">
                     <p className="!m-0 text-center text-lg font-bold tracking-widest">WANTED</p>
-                    <div className="mx-auto size-20 @2xl:size-32">
+                    <div className="mx-auto size-20 shrink-0 @2xl:size-32">
                         <HogSprite module={module} look={target.look} id="wanted" />
                     </div>
                     <p className="!m-0 text-sm text-secondary">Last seen {board.crime}.</p>
@@ -248,6 +249,7 @@ export default function SpotTheHog(): JSX.Element {
                     >
                         <Crowd module={module} board={board} disabled={found} onPick={onPick} />
                         {hint &&
+                            !found &&
                             [0, 1, 2, 3]
                                 .filter((q) => q !== (target.x >= 50 ? 1 : 0) + (target.y >= 50 ? 2 : 0))
                                 .map((q) => (

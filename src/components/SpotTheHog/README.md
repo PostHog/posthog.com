@@ -21,7 +21,7 @@ It lives at `/sparks-joy/spot-the-hog` (`src/pages/sparks-joy/spot-the-hog/index
 - `generateBoard(seed, level, options)` builds a board from a seed with a small seeded PRNG (mulberry32). The same seed always builds the same board.
 - Hogs sit in rows that overlap, like a pile of stickers. Each row covers the bodies of the row above it, so every head stays in view. No hog is easier or harder to see than its neighbors.
 - A click lands on a hog's body, which is an ellipse (`BODY`). The tests check that a click on any hog's head always lands on that hog, on 700 boards.
-- Positions and sizes are percentages of a 4:3 board, so the board works at any window size.
+- Positions and sizes are percentages of a 4:3 board, so the board works at any window size. In a short window, such as a phone on its side, the game keeps a minimum height and scrolls.
 
 `index.tsx` owns the UI. It loads `@posthog/hedgehog-mode` with a dynamic import on the client, because the package includes pixi.js, which does not render on the server.
 
