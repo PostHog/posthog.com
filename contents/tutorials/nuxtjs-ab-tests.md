@@ -158,7 +158,7 @@ Once created, set the primary metric to a trend of `home_button_clicked` and the
 When it comes to implementing our experiment code, there are two options:
 
 1. Client-side rendering in `app.vue`.
-2. Server-side rendering in `app.vue` using [`posthog-node`](/docs/libraries/node).
+2. Server-side rendering in `app.vue` using [`posthog-node`](/docs/libraries/node/reference).
 
 We'll show you how to implement both options.
 
@@ -224,7 +224,7 @@ Notice that when you refresh the page, the button text flickers between `No vari
 
 Server-side rendering is a way to avoid this. This fetches the feature flag before the page loads on the client.
 
-To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
+To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node/reference) (because we are making server-side requests).
 
 ```bash
 npm install posthog-node@6

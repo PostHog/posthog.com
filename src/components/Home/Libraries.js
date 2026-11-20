@@ -64,7 +64,7 @@ const librariesData = {
         items: [
             {
                 name: 'Node.js',
-                url: '/docs/libraries/node',
+                url: '/docs/libraries/node/reference',
                 icon: (
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg"
@@ -74,7 +74,7 @@ const librariesData = {
             },
             {
                 name: 'Python',
-                url: '/docs/libraries/python',
+                url: '/docs/libraries/python/reference',
                 icon: (
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg"
