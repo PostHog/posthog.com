@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Langfuse connector syncs your LLM observability data – observations, evaluation scores, prompts, models, and datasets – into PostHog, so you can analyze your AI application's behavior, cost, and quality alongside your product data.
+The Langfuse connector syncs your LLM observability data – observations, evaluation scores, prompts, models, datasets, and skills – into PostHog, so you can analyze your AI application's behavior, cost, and quality alongside your product data.
 It works with Langfuse Cloud (all regions) and self-hosted Langfuse instances.
 
 > **Note:** New Langfuse sources use API version v3, which doesn't include the `traces` and `sessions` tables. Trace and session data is available through the `observations` table, which includes `traceId`, `sessionId`, `userId`, `traceName`, `tags`, and `release` fields. Existing sources on v1/v2 that sync these tables continue to work until November 16, 2026. See [API versions](#api-versions) for details.
@@ -40,7 +40,7 @@ When linking Langfuse, you'll need:
 Observations, scores, and prompts support incremental sync using Langfuse's creation/start-time filters.
 Each incremental run re-reads a trailing one-hour window to pick up late-arriving updates.
 Prompts also sync incrementally, using the last-updated filter.
-Datasets, dataset items, and models are full refresh only.
+Datasets, dataset items, models, and skills are full refresh only.
 
 On legacy v1/v2 sources, `traces` and `sessions` also support incremental sync.
 
@@ -48,7 +48,7 @@ On legacy v1/v2 sources, `traces` and `sessions` also support incremental sync.
 
 New Langfuse sources use API version **v3** by default.
 
-- **v3** syncs observations, scores, prompts, datasets, dataset items, models, score configs, annotation queues, and annotation queue items. It doesn't include the `traces` or `sessions` tables.
+- **v3** syncs observations, scores, prompts, datasets, dataset items, models, score configs, annotation queues, annotation queue items, and skills. It doesn't include the `traces` or `sessions` tables.
 - **v1** and **v2** are deprecated and sunset on **November 16, 2026**. After that date, Langfuse Cloud stops serving the `traces` and `sessions` endpoints, and syncs for those tables fail.
 
 Trace and session data is available on v3 through the `observations` table, which includes `traceId`, `sessionId`, `userId`, `traceName`, `tags`, and `release` fields. You can reconstruct trace- or session-level views by grouping observation rows by `traceId` or `sessionId` in a [SQL insight](/docs/product-analytics/sql).
