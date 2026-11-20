@@ -9,7 +9,7 @@ availability:
 sourceId: Appcues
 ---
 
-The Appcues connector syncs your experience settings, segments, and tags from [Appcues](https://www.appcues.com) into the PostHog [data warehouse](/docs/data-warehouse). Appcues is a user onboarding and product adoption platform.
+The Appcues connector syncs your experience settings, segments, tags, events, and segment membership from [Appcues](https://www.appcues.com) into the PostHog [data warehouse](/docs/data-warehouse). Appcues is a user onboarding and product adoption platform.
 
 ## Prerequisites
 
@@ -43,6 +43,6 @@ The data warehouse then starts syncing your Appcues data. You can see details an
 
 ## Sync limitations
 
-- All tables use **full refresh** syncing. Incremental sync isn't supported because the Appcues API doesn't expose timestamp filters or pagination on its list endpoints.
-- **Event exports** aren't available. The Appcues API docs don't define the completed job result field needed to retrieve event data.
+- Most tables use **full refresh** syncing. The `events` table supports **incremental sync** using the `timestamp` field.
+- The `events` and `segment_membership` tables are not synced by default. Enable them when selecting tables during setup.
 - **User and group profiles** aren't available. The Appcues API has no list endpoints for profiles.
