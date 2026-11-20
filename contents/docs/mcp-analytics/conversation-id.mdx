@@ -8,12 +8,6 @@ A PostHog `$session_id` normally follows the MCP protocol session. The handshake
 
 `$mcp_conversation_id` groups those calls by conversation. The SDK also derives `$session_id` from an accepted conversation handle, so PostHog session queries group the same calls.
 
-<CalloutBox icon="IconInfo" title="Enabled by default" type="fyi">
-
-Conversation IDs are enabled by default. Calls stay correlated when the agent echoes the handle returned in tool results.
-
-</CalloutBox>
-
 ## Enabling
 
 Conversation IDs are on by default in every SDK, with no configuration.
@@ -23,10 +17,6 @@ The SDK does three things:
 1. **Injects an optional `conversation_id` argument** into compatible tool schemas, with a description telling the agent to reuse the value the server returns.
 2. **Creates a handle** when needed and returns it on eligible tool responses as a `{"conversation_id":"…"}` text block.
 3. **Captures the handle** as `$mcp_conversation_id`. When the agent echoes a valid handle, the SDK derives a stable `$session_id` from it. Until then, existing protocol sessions remain in use.
-
-The SDK reuses an echoed UUIDv7 that matches the handles it creates. It replaces missing or arbitrary values with a new handle to avoid merging unrelated conversations.
-
-The Go SDK mints a handle only when the call has no transport session. When there is one, it ignores an invalid value instead. It never mints a handle for an unknown tool, a handler error, or an `input_required` round.
 
 <a id="how-it-lands-in-events" />
 
@@ -66,27 +56,17 @@ LIMIT 50
 
 The SDK cannot add `conversation_id` to schemas that use `oneOf`, `allOf`, `anyOf`, or `$ref`. It also skips a tool that already declares `conversation_id`. The SDK logs a warning and returns no handle for these tools. Use [`identify`](/docs/mcp-analytics/identifying-users) to group their calls by user. In TypeScript, Python, and Ruby, a tool without an input schema gets one that holds only `conversation_id`.
 
-A client with a stale cached tool listing does not know about the new parameter. The `ttlMs` setting on `tools/list` can extend this period.
-
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="The handle is visible in tool output" type="fyi">
 
-The SDK returns the handle as a `{"conversation_id":"…"}` text block. Clients that display raw tool results also display this JSON. The block contains data rather than an instruction because hardened clients can treat instructions in tool results as prompt injection.
-
-The SDK preserves structured output and result metadata. Clients that only consume structured output may never see the text block, so they may not echo the handle.
+The handle appears as a `{"conversation_id":"…"}` text block in tool results. Clients that only read structured output may never echo it.
 
 </CalloutBox>
 
 <CalloutBox icon="IconWarning" title="Agent-controlled values" type="caution">
 
 The SDK only reuses UUIDv7 values that match the shape of handles it can create. It replaces other values with a new handle. A client can still reuse a valid-looking handle across users, so don't use `$mcp_conversation_id` as a security boundary.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="It also anchors the PostHog session" type="fyi">
-
-PostHog's session-level joins use `$session_id`. When conversation IDs are enabled, the SDK hashes the accepted `conversation_id` into a deterministic `$session_id`. Separate server instances derive the same value without shared storage.
 
 </CalloutBox>
 
