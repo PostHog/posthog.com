@@ -10,7 +10,7 @@ const Landing = (props: LearnLandingProps): JSX.Element => (
         {...props}
         storyLead="The Data Pipelines pocket guide is on its way."
         storyText="Until then, Start here walks through the three parts of a pipeline – sources, transformations, and destinations – and how to test one before you turn it on."
-        upcomingGuide={{ token: 'blue', readUrl: '/docs/data-pipelines/start-here', readLabel: 'Read Start here' }}
+        upcomingGuide={{ readUrl: '/docs/data-pipelines/start-here', readLabel: 'Read Start here' }}
     />
 )
 

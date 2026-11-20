@@ -14,12 +14,10 @@ import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from '
 import {
     hasLearnTab,
     isSelfDrivingPage,
-    learnHubFor,
     learnTrackingVolume,
     pocketGuideUrl,
     volumeById,
 } from '../../../constants/pocketGuides'
-import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
@@ -101,17 +99,13 @@ const DocsTreeMenu = ({
 /** The same Learn tree is shown on the hub, agent page, and every chapter. */
 const LearnNav = ({
     volumeId,
-    hubPages,
     trackingVolume,
     basePath,
     currentPath,
     section,
     fullTitles,
 }: {
-    /** Omitted for a hub whose pocket guide isn't written yet. */
     volumeId?: string
-    /** The product's `learnHubPages`, used when there is no volume. */
-    hubPages?: LearnHubPage[]
     /** The `volume` property on sidebar clicks. */
     trackingVolume?: string
     basePath: string
@@ -136,15 +130,14 @@ const LearnNav = ({
         // Full titles are questions, often longer than the sidebar is wide.
         wrap: fullTitles,
     }))
-    const hub = learnHubFor({ pocketGuideVolume: volumeId, learnHubPages: hubPages })
+    const hub = volume?.learnHub
     const isSelfDriving = (index: number) => Boolean(volumeId) && isSelfDrivingPage(volumeId as string, pages[index])
     // Only the Self-driving introduction is numbered, so the scout pages come through unnumbered.
     const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
-              // A hub without a volume lists its guide as coming soon, like Videos on the Learn home.
-              !volume
+              volume?.comingSoon
                   ? {
                         name: 'Pocket guide',
                         icon: <IconBook className="size-4" />,
@@ -236,8 +229,6 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** Hub pages for a Learn tab whose pocket guide isn't written yet. Also opts in. */
-              learnHubPages?: LearnHubPage[]
               /** Limits the Learn tab to the volume's pages with this `section:` frontmatter. */
               pocketGuideSection?: string
               /** Labels the Learn sidebar with each page's full title instead of its `shortTitle`. */
@@ -296,7 +287,6 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        learnHubPages,
         pocketGuideSection,
         learnNavFullTitles,
         docsSlug,
@@ -367,7 +357,7 @@ export function buildProductMenuTabs({
         })
     }
 
-    if (hasLearnTab({ pocketGuideVolume, learnHubPages })) {
+    if (hasLearnTab({ pocketGuideVolume })) {
         tabs.push({
             label: 'Learn',
             value: 'learn',
@@ -377,7 +367,6 @@ export function buildProductMenuTabs({
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
-                    hubPages={learnHubPages}
                     trackingVolume={learnTrackingVolume({ pocketGuideVolume, slug: productSlug })}
                     section={pocketGuideSection}
                     fullTitles={learnNavFullTitles}

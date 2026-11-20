@@ -45,7 +45,7 @@ Each volume with `learnHub` in `src/constants/pocketGuides.ts` has an overview p
 
 ## Learn hub pages
 
-A product can have a Learn hub before its pocket guide exists. Set `learnHubPages` in its product data instead of `pocketGuideVolume`. The sidebar then lists Pocket guide grayed out with a Coming soon badge, and the overview passes `upcomingGuide` to `LearnLanding`, which draws a coming-soon cover in the product's spine color and links to a docs page to read in the meantime. Learn events report the product slug as `volume`, the ID the volume will take. Data Pipelines works this way. When its guide ships, add the volume, set `pocketGuideVolume`, and remove `learnHubPages` and `upcomingGuide`.
+A product can have a Learn hub before its pocket guide exists. Register the volume with `comingSoon: true` and set `pocketGuideVolume` in the product data. The sidebar disables Pocket guide and shows a Coming soon badge. The overview passes `upcomingGuide` to `LearnLanding` so readers can open a docs page while they wait. Coming-soon volumes stay off the shared shelves. Data Pipelines already uses `data-pipelines` as the `volume` on Learn events. When the guide ships, keep that ID, add the guide content, and remove `comingSoon` and `upcomingGuide`.
 
 
 - `LearnLanding.tsx` renders every hub overview: the product name, an intro line, a Learn through a story section with the cover, a Learn with your agent preview when the hub lists `agent-prompts-and-mcp`, and a Learn by doing preview when the page passes `playground`. The intro defaults to the page description, and the story text defaults to the volume description.

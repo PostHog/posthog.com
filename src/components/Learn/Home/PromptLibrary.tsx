@@ -26,7 +26,7 @@ export default function PromptLibrary(): JSX.Element {
         return LEARN_PROMPT_SETS.filter((set) => product === ALL || set.productHandle === product)
             .map((set) => ({
                 set,
-                // A product without a guide yet reports its slug, the same as its own Learn pages.
+                // Use the registered ID for published and coming-soon volumes.
                 volume:
                     POCKET_GUIDE_VOLUMES.find((v) => v.productHandle === set.productHandle)?.id ??
                     learnTrackingVolume(products.find((p) => p.handle === set.productHandle)),

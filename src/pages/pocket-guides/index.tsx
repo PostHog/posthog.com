@@ -5,12 +5,11 @@ import React from 'react'
 
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { PUBLISHED_POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 
 export default function PocketGuidesPage(): JSX.Element {
     const counts = usePocketGuideCounts()
-    // The shelf follows POCKET_GUIDE_VOLUMES order: Product Analytics first, Self-driving last.
-    const volumes = POCKET_GUIDE_VOLUMES
+    const volumes = PUBLISHED_POCKET_GUIDE_VOLUMES
 
     return (
         <>

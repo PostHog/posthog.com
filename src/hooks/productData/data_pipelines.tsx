@@ -20,7 +20,6 @@ import { applications, GetStarted, PricingIntro, topFeatures } from './data_pipe
 import { dataWarehouse } from './data_warehouse'
 import { realtimeDestinations } from './realtime_destinations'
 import { PRODUCT_COLORS } from 'constants/productColors'
-import type { LearnHubPage } from 'constants/pocketGuides'
 
 // this data powers the data pipelines page. It reuses the CDP tool entry (whose aliases include "Data pipelines").
 
@@ -50,8 +49,7 @@ export const dataPipelines = {
     forumTag: 'cdp-and-pipelines',
     teamSlug: 'warehouse-sources',
     wizardCommand: 'warehouse',
-    // Learn hub without a pocket guide yet: Overview and Agent prompts and MCP, with the guide listed as coming soon.
-    learnHubPages: ['agent-prompts-and-mcp'] as LearnHubPage[],
+    pocketGuideVolume: 'data-pipelines',
     seo: {
         title: 'Data pipelines – Move your data anywhere | PostHog',
         description:

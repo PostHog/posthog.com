@@ -29,13 +29,9 @@ export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; cla
     'session-replay': HedgehogDirector,
     'error-tracking': HedgehogPanic,
     'feature-flags': HedgehogTrafficController,
-}
-
-/** Art for volumes that aren't written yet, keyed by the id they will take. Drawn on their coming-soon covers. */
-const UPCOMING_VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
     'data-pipelines': HedgehogCarryingPipe,
 }
 
 export function volumeArt(id?: string): React.ComponentType<{ size?: number; className?: string }> | undefined {
-    return id ? VOLUME_ART[id] ?? UPCOMING_VOLUME_ART[id] : undefined
+    return id ? VOLUME_ART[id] : undefined
 }

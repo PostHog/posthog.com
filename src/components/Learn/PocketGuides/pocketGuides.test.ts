@@ -3,7 +3,11 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, test } from 'node:test'
 
-import { isSelfDrivingPage, POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides.ts'
+import {
+    isSelfDrivingPage,
+    POCKET_GUIDE_VOLUMES,
+    PUBLISHED_POCKET_GUIDE_VOLUMES,
+} from '../../../constants/pocketGuides.ts'
 import { PRODUCT_COLORS } from '../../../constants/productColors.ts'
 
 const repoRoot = path.resolve(import.meta.dirname, '../../../..')
@@ -57,9 +61,9 @@ describe('pocket guide pages', () => {
 })
 
 describe('pocket guide volumes', () => {
-    test('each has a content directory', () => {
-        const missing = [...volumeIds].filter(
-            (id) => !existsSync(path.join(guidesDir, id, 'pocket-guide', 'index.mdx'))
+    test('each published volume has a content directory', () => {
+        const missing = PUBLISHED_POCKET_GUIDE_VOLUMES.filter(
+            ({ id }) => !existsSync(path.join(guidesDir, id, 'pocket-guide', 'index.mdx'))
         )
         assert.deepEqual(missing, [])
     })

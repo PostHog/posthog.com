@@ -140,41 +140,47 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         learnPath: '/learn/error-tracking/pocket-guide',
         learnHub: { pages: ['agent-prompts-and-mcp'], selfDrivingSection: 'Self-drive' },
     },
+    {
+        id: 'data-pipelines',
+        title: 'Data Pipelines',
+        description: 'Move data from sources through transformations to destinations.',
+        token: 'blue',
+        volume: 8,
+        docsProduct: 'data-pipelines',
+        productHandle: 'data_pipelines',
+        learnPath: '/learn/data-pipelines/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp'] },
+        comingSoon: true,
+    },
 ]
+
+export const PUBLISHED_POCKET_GUIDE_VOLUMES = POCKET_GUIDE_VOLUMES.filter((volume) => !volume.comingSoon)
 
 /** The Learn fields a product's data can set. */
 export interface LearnProduct {
     slug?: string
     /** Volume id; the volume's `learnHub` decides the hub pages. */
     pocketGuideVolume?: string
-    /** Hub pages for a product whose pocket guide isn't written yet. Its Learn tab lists the guide as coming soon. */
-    learnHubPages?: LearnHubPage[]
 }
 
-/** The hub a product's Learn tab shows: its volume's, or the product's own while its guide is unwritten. */
+/** The hub a product's Learn tab shows, including hubs for coming-soon guides. */
 export function learnHubFor(product?: LearnProduct | null): PocketGuideVolume['learnHub'] | undefined {
-    if (!product) return undefined
-    const volume = product.pocketGuideVolume ? volumeById(product.pocketGuideVolume) : undefined
-    if (volume) return volume.learnHub
-    return product.learnHubPages ? { pages: product.learnHubPages } : undefined
+    return product?.pocketGuideVolume ? volumeById(product.pocketGuideVolume)?.learnHub : undefined
 }
 
-/** True when a product has a Learn tab: it has a pocket guide, or a hub whose guide is coming soon. */
+/** True when a product has a Learn tab for a published or coming-soon guide. */
 export function hasLearnTab(product?: LearnProduct | null): boolean {
-    return Boolean(product?.pocketGuideVolume || product?.learnHubPages)
+    return Boolean(product?.pocketGuideVolume)
 }
 
-/**
- * The `volume` property on Learn events. A product without a guide yet reports its slug, which is the
- * id its volume will take, so its events line up once the guide ships.
- */
+/** The `volume` property on Learn events uses the registered ID, including for coming-soon guides. */
 export function learnTrackingVolume(product?: LearnProduct | null): string | undefined {
     return product?.pocketGuideVolume ?? product?.slug
 }
 
 /** The volume that teaches a product, if one does. Drives `GuidesForProduct` on tool docs pages. */
 export function volumeForProduct(docsProduct: string): PocketGuideVolume | undefined {
-    return POCKET_GUIDE_VOLUMES.find((v) => v.docsProduct === docsProduct && !v.comingSoon)
+    return PUBLISHED_POCKET_GUIDE_VOLUMES.find((v) => v.docsProduct === docsProduct)
 }
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
@@ -221,7 +227,13 @@ export function pocketGuideSourceVolume(sourceSlug: string): PocketGuideVolume |
 /** Shared by full and preview builds. Skills, starters, and unordered drafts aren't pages. */
 export function pocketGuidePageContext(sourceSlug: string, order?: number | null) {
     const volume = pocketGuideSourceVolume(sourceSlug)
-    if (!volume || typeof order !== 'number' || sourceSlug.endsWith('/SKILL') || /\/_/.test(sourceSlug))
+    if (
+        !volume ||
+        volume.comingSoon ||
+        typeof order !== 'number' ||
+        sourceSlug.endsWith('/SKILL') ||
+        /\/_/.test(sourceSlug)
+    )
         return undefined
     const publicPath = pocketGuideDestination(sourceSlug).replace(/\/$/, '')
     return {

@@ -69,14 +69,15 @@ export default function LearnPage({
         trackingVolume: learnTrackingVolume(productData),
     } as LearnLandingProps
 
-    const guide = volumeId ? (
-        <LearnSurface
-            volumeId={volumeId}
-            chapter={chapter}
-            basePath={guideBasePath}
-            section={productData?.pocketGuideSection}
-        />
-    ) : null
+    const guide =
+        volumeId && !volume?.comingSoon ? (
+            <LearnSurface
+                volumeId={volumeId}
+                chapter={chapter}
+                basePath={guideBasePath}
+                section={productData?.pocketGuideSection}
+            />
+        ) : null
 
     const content = (
         <>

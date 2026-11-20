@@ -5,7 +5,6 @@ import OSButton from 'components/OSButton'
 import { PRODUCT_SURFACE_H1 } from 'components/Products/ReaderViewProduct'
 import { TWIG_URL } from '../../constants'
 import { volumeById } from '../../constants/pocketGuides'
-import type { PocketGuideToken, PocketGuideVolume } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import usePostHog from '../../hooks/usePostHog'
 import Cover from './PocketGuides/Cover'
@@ -109,7 +108,7 @@ interface LearnLandingContent {
      * For a hub whose pocket guide isn't written yet: the story section shows a coming-soon cover in the
      * product's spine color, and links to something to read in the meantime.
      */
-    upcomingGuide?: { token: PocketGuideToken; readUrl: string; readLabel: string }
+    upcomingGuide?: { readUrl: string; readLabel: string }
 }
 
 /** A Learn hub overview: the product, its pocket guide, and the agent and Twig previews when the hub has them. */
@@ -128,18 +127,7 @@ export default function LearnLanding({
     upcomingGuide,
 }: LearnLandingProps & LearnLandingContent): JSX.Element {
     const volume = volumeId ? volumeById(volumeId) : undefined
-    // Cover draws an unwritten volume with a sash, grayed art, and no link.
-    const upcomingVolume: PocketGuideVolume | undefined =
-        !volume && upcomingGuide
-            ? {
-                  id: trackingVolume ?? '',
-                  title: productName,
-                  description: storyText ?? '',
-                  token: upcomingGuide.token,
-                  volume: 0,
-                  comingSoon: true,
-              }
-            : undefined
+    const comingSoon = volume?.comingSoon
     // Like the agent preview, the hub's pages decide: a hub that lists 'videos' shows its first video here.
     const video =
         hub?.pages?.includes('videos') && volume
@@ -152,11 +140,7 @@ export default function LearnLanding({
     const selectResource = (resource: string, option: string) =>
         posthog?.capture('learn_resource_selected', { volume: trackingVolume, resource, option })
     const firstChapter = useBookPages(volumeId ?? '').find((page) => !page.isFrontMatter)
-    const readUrl = upcomingVolume
-        ? upcomingGuide?.readUrl ?? storyUrl
-        : firstChapter
-        ? learnChapterPath(storyUrl, firstChapter)
-        : storyUrl
+    const readUrl = firstChapter ? learnChapterPath(storyUrl, firstChapter) : storyUrl
     // Start reading skips the introduction and opens the book on the first chapter.
     const startReading = (event: React.MouseEvent) => {
         selectResource('story', 'start_reading')
@@ -195,31 +179,23 @@ export default function LearnLanding({
                         </div>
                         {storyLead && <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">{storyLead}</p>}
                         <p className="mt-0 mb-5 leading-relaxed text-secondary">{storyText ?? volume?.description}</p>
-                        {upcomingVolume ? (
+                        {comingSoon && upcomingGuide && (
                             <OSButton
                                 asLink
-                                to={readUrl}
+                                to={upcomingGuide.readUrl}
                                 onClick={() => selectResource('story', 'read_docs')}
                                 variant="primary"
                                 size="md"
                             >
-                                {upcomingGuide?.readLabel}
+                                {upcomingGuide.readLabel}
                             </OSButton>
-                        ) : (
+                        )}
+                        {!comingSoon && (
                             <OSButton asLink to={readUrl} onClick={startReading} variant="primary" size="md">
                                 Start reading
                             </OSButton>
                         )}
                     </div>
-                    {upcomingVolume && (
-                        <div className="relative isolate mx-auto w-full max-w-[160px] @2xl/reader-content:max-w-[180px]">
-                            <div
-                                aria-hidden="true"
-                                className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-blue/10 blur-2xl"
-                            />
-                            <Cover volume={upcomingVolume} count={0} placement="product_docs" />
-                        </div>
-                    )}
                     {volume && (
                         <div
                             ref={coverRef}
