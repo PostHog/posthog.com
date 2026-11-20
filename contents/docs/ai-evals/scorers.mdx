@@ -26,19 +26,6 @@ Use `value=False` / `value: false` for a failed check. The default status, `ok`,
 
 If the evaluator can't produce a score, upload `status="error"` / `status: "error"`, omit `value`, and include an `error_message` / `errorMessage`. Use `skipped` for a check you didn't run, or `not_applicable` when a scorer doesn't apply to an item.
 
-## Correct a reported score
-
-If **Correct arguments** marked the wrong order ID as a pass, change the reported value to `false`. PostHog recalculates any composite that uses that score.
-
-With [result read and write access](/docs/ai-evals/experiments#correct-an-experiment-item), pass the result ID from the upload receipt to `get_result_revision()` / `getResultRevision()` on the experiment handle. Use that ID and revision for the update.
-
-| Action | Python | TypeScript |
-| --- | --- | --- |
-| Correct the status, value, or error code | `update_result` | `updateResult` |
-| Replace reasoning, error message, or metadata | `update_result_payload` | `updateResultPayload` |
-| Remove the payload and keep the score | `delete_result_payload` | `deleteResultPayload` |
-| Delete the score, its payload, and dependent composites | `delete_result` | `deleteResult` |
-
 ## Combine scores with a composite scorer
 
 A composite scorer combines reported scores for one item into a boolean, numeric, or categorical result.

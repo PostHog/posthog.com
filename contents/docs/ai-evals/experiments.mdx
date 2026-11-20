@@ -52,18 +52,24 @@ Expand **Coverage** beside each scorer summary to check errors, skipped checks, 
 
 Numeric scorers show their mean. Numeric and categorical scorers need a passing rule to show a pass rate. Repeated trials each count as an item, so keep trial counts consistent when comparing runs.
 
-## Correct an experiment item
+## Edit experiment items and results
 
-You can correct an item even after the run finishes. On the experiment handle, pass the item ID from the upload receipt to `get_item_revision()` / `getItemRevision()`. Pass that ID and revision to the method you need.
+Each reported result belongs to one item in one experiment and uses a specific scorer version. You can edit the item or its results even after the run finishes. When you change a reported value or status, PostHog recalculates dependent composite scores for that item.
+
+On the experiment handle, use the ID from the upload receipt to read the current revision. Call `get_item_revision()` / `getItemRevision()` for an item or `get_result_revision()` / `getResultRevision()` for a result. Pass that ID and revision with the edit or deletion.
 
 | Action | Python | TypeScript |
 | --- | --- | --- |
 | Fix the case key, trial, model version, or trace ID | `update_item` | `updateItem` |
-| Replace input, output, expected output, or metadata | `update_item_payload` | `updateItemPayload` |
-| Remove the payload and keep the scores | `delete_item_payload` | `deleteItemPayload` |
+| Replace item input, output, expected output, or metadata | `update_item_payload` | `updateItemPayload` |
+| Remove the item payload and keep its scores | `delete_item_payload` | `deleteItemPayload` |
 | Delete the item and all its scores and payloads | `delete_item` | `deleteItem` |
+| Correct a reported result's status, value, or error code | `update_result` | `updateResult` |
+| Replace result reasoning, error message, or metadata | `update_result_payload` | `updateResultPayload` |
+| Remove the result payload and keep the score | `delete_result_payload` | `deleteResultPayload` |
+| Delete the result, its payload, and dependent composite scores | `delete_result` | `deleteResult` |
 
-If you change the input or either output, rerun the affected checks and [correct their scores](/docs/ai-evals/scorers#correct-a-reported-score). A `revision_conflict` means the record changed. Review it before retrying with the latest revision.
+If you change the input or either output, rerun the affected checks and update their scores. A `revision_conflict` means the record changed. Review it before retrying with the latest revision.
 
 Use a [personal API key](/docs/api/personal-api-keys) with `evaluation:read` to read revisions and `evaluation:write` plus evaluation editor access to make changes. Working with results or deleting an entire item also requires `llm_analytics:read` and access to the affected scorers and composite inputs.
 
