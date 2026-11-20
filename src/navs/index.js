@@ -1831,6 +1831,10 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/churn-reasons',
                     },
                     {
+                        name: 'When a champion leaves',
+                        url: '/handbook/customer-success/champion-leaves',
+                    },
+                    {
                         name: 'Tracking feature requests',
                         url: '/handbook/customer-success/feature-requests',
                     },
