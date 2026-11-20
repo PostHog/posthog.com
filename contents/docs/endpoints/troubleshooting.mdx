@@ -43,6 +43,13 @@ If you get `"Version X not found for endpoint"`:
 - SQL endpoints only accept variables explicitly defined in the query
 - Insight endpoints accept the breakdown property name and `date_from`/`date_to` (non-materialized only)
 
+`"Required variable(s) '$browser' not provided"`
+
+- Your endpoint has a breakdown variable that the caller must supply on every `/run` request
+- Pass the variable: `{"variables": {"$browser": "Chrome"}}`
+- OR mark the breakdown as optional in the endpoint configuration if you genuinely want callers to be able to omit it. An optional breakdown returns data aggregated across every value of that dimension.
+- This applies to both inline and materialized insight endpoints — the requirement protects against accidentally returning data that hasn't been filtered to a single customer / segment / etc.
+
 `"Query references undefined variable(s): X, Y"`
 
 - Your query uses `{variables.X}` placeholder(s) that don't have matching variable definitions
