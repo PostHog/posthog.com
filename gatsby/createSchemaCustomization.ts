@@ -851,7 +851,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         queryDurations: ScaleQueryDurations!
         logOrgSizes: ScaleLogOrgSizes!
         mcpClients: [ScaleMcpClient!]!
-        status: ScaleStatus!
+        status: ScaleStatus
     }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
     # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.

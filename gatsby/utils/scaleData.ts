@@ -3,6 +3,7 @@ import type { EndpointRow as Row } from './runEndpoint'
 
 const STATUS_URL = 'https://www.posthogstatus.com/api/metrics/us'
 const ROW_LIMIT = 1000
+const STATUS_TIMEOUT_MS = 15_000
 const SERIES_DAYS = 30
 const DAY_MS = 86_400_000
 
@@ -18,7 +19,7 @@ const round1 = (value: number): number => Math.round(value * 10) / 10
 
 function statusSeries(charts: StatusChart[], name: string, label: string): StatusPoint[] {
     const series = charts.find((chart) => chart.name === name)?.windows['24h']?.series.find((s) => s.label === label)
-    if (!series) throw new Error(`Status page has no ${name} ${label} series`)
+    if (!series?.data.length) throw new Error(`Status page has no ${name} ${label} data`)
     return series.data
 }
 
@@ -33,7 +34,7 @@ function latency(charts: StatusChart[], name: string) {
 }
 
 async function fetchStatus() {
-    const response = await fetch(STATUS_URL)
+    const response = await fetch(STATUS_URL, { signal: AbortSignal.timeout(STATUS_TIMEOUT_MS) })
     if (response.status !== 200) throw new Error(`Status page returned ${response.status}`)
     const { charts, polled_at }: { charts: StatusChart[]; polled_at: string } = await response.json()
     return {
@@ -50,7 +51,10 @@ export async function fetchScaleData(apiKey: string) {
         runEndpoint('scale_query_durations', apiKey, ROW_LIMIT),
         runEndpoint('scale_log_org_sizes', apiKey, ROW_LIMIT),
         runEndpoint('scale_mcp_clients_daily', apiKey, ROW_LIMIT),
-        fetchStatus(),
+        fetchStatus().catch((error) => {
+            console.error('Error fetching the status page metrics for /scale:', error)
+            return null
+        }),
     ])
 
     const daysIn = (rows: Row[]) => new Set(rows.map((row) => String(row.day)))

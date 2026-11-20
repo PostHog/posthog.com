@@ -1,4 +1,5 @@
 const ENDPOINTS_URL = 'https://us.posthog.com/api/environments/2/endpoints'
+const ENDPOINT_TIMEOUT_MS = 90_000
 
 export type EndpointRow = Record<string, unknown>
 
@@ -7,6 +8,7 @@ export async function runEndpoint(name: string, apiKey: string, limit: number): 
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
         body: JSON.stringify({ limit }),
+        signal: AbortSignal.timeout(ENDPOINT_TIMEOUT_MS),
     })
     if (response.status !== 200) throw new Error(`${name} returned ${response.status}`)
     const body: { columns?: string[]; results?: unknown[][]; hasMore?: boolean } = await response.json()

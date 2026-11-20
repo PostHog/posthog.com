@@ -20,7 +20,7 @@ export type ScaleData = {
     queryDurations: { queries: number; medianMs: number; shareUnderOneSecond: number; counts: number[] }
     logOrgSizes: { orgs: number; shares: number[] }
     mcpClients: { label: string; share: number }[]
-    status: { polledAt: string; eventLag: Latency; flagResponse: Latency; captureErrorPeakPercent: number }
+    status: { polledAt: string; eventLag: Latency; flagResponse: Latency; captureErrorPeakPercent: number } | null
 }
 
 const SECONDS_PER_DAY = 86_400

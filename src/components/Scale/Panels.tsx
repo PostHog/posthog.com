@@ -82,7 +82,7 @@ function RowsReadPanel(): JSX.Element {
     return (
         <div className="flex h-full flex-col gap-4">
             <PanelHeader title={`Half of ${formatCount(queries)} queries finished in ${medianMs}\u00a0ms`}>
-                Every database query we ran {inSentence(relativeDay)}, sorted by how long it took.{' '}
+                Every successful database query we ran {inSentence(relativeDay)}, sorted by how long it took.{' '}
                 {Math.round(underOneSecond * 10)} in 10 finished in under a second.
             </PanelHeader>
             <div
@@ -184,6 +184,11 @@ function LogsPanel(): JSX.Element {
     )
 }
 
+function ceilToOneDigit(value: number): number {
+    const magnitude = 10 ** Math.floor(Math.log10(value))
+    return Number((Math.ceil(value / magnitude) * magnitude).toPrecision(1))
+}
+
 function average(values: number[]): number {
     return values.reduce((sum, value) => sum + value, 0) / values.length
 }
@@ -195,6 +200,7 @@ function LatencyPanel({
     unit,
     median,
     p99,
+    polledAt,
 }: {
     title: string
     children: React.ReactNode
@@ -202,8 +208,8 @@ function LatencyPanel({
     unit: string
     median: number[]
     p99: number[]
+    polledAt: string
 }): JSX.Element {
-    const { polledAt } = useScaleData().status
     return (
         <div className="flex h-full flex-col gap-4">
             <PanelHeader title={title}>{children}</PanelHeader>
@@ -222,10 +228,23 @@ function LatencyPanel({
     )
 }
 
+function StatusUnavailable({ title }: { title: string }): JSX.Element {
+    return (
+        <PanelHeader title={title}>
+            The <SourceLink to={STATUS_PAGE_URL}>PostHog status page</SourceLink> was not available for this build.
+        </PanelHeader>
+    )
+}
+
 function EventsPanel(): JSX.Element {
-    const { eventLag, captureErrorPeakPercent } = useScaleData().status
+    const { status } = useScaleData()
+    if (!status) {
+        return <StatusUnavailable title="Time to query an event" />
+    }
+    const { eventLag, captureErrorPeakPercent, polledAt } = status
     return (
         <LatencyPanel
+            polledAt={polledAt}
             title={`Median time to query an event: about ${Math.round(average(eventLag.median))} seconds`}
             labels={eventLag.hours}
             unit="seconds"
@@ -235,16 +254,23 @@ function EventsPanel(): JSX.Element {
             The average of the hourly medians of the time from capture to queryable, over the last 24 hours on US Cloud.
             The chart also shows the hourly 99th percentile.{' '}
             {captureErrorPeakPercent === 0
-                ? 'Capture had no errors in the same 24 hours.'
-                : `Capture errors in the same 24 hours never went above ${captureErrorPeakPercent.toPrecision(1)}%.`}
+                ? 'Capture returned no server errors (HTTP 5xx) in the same 24 hours.'
+                : `Capture's server error rate (HTTP 5xx) stayed at or under ${ceilToOneDigit(
+                      captureErrorPeakPercent
+                  )}% in the same 24 hours.`}
         </LatencyPanel>
     )
 }
 
 function FlagsPanel(): JSX.Element {
-    const { flagResponse } = useScaleData().status
+    const { status } = useScaleData()
+    if (!status) {
+        return <StatusUnavailable title="Flag response time" />
+    }
+    const { flagResponse, polledAt } = status
     return (
         <LatencyPanel
+            polledAt={polledAt}
             title={`Median flag response: about ${Math.round(average(flagResponse.median))} ms`}
             labels={flagResponse.hours}
             unit="ms"
@@ -476,13 +502,11 @@ export default function Panels({
     next,
     swapClass,
     onNext,
-    className = '',
 }: {
     shown: LineKey
     next: LineKey
     swapClass: string
     onNext: () => void
-    className?: string
 }): JSX.Element {
     const { totals } = useScaleData()
     const { headingRef, stacked } = useStackedLayout()
@@ -492,7 +516,7 @@ export default function Panels({
         <div
             {...tabpanel}
             id={PANEL_ID}
-            className={`relative grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr] gap-y-4 @3xl:gap-y-0 ${className}`}
+            className={`relative grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr] gap-y-4 @3xl:gap-y-0`}
         >
             {panelEntries.map(([key, Panel]) => {
                 const active = key === shown

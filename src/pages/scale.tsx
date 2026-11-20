@@ -7,10 +7,15 @@ import { Emphasis } from 'components/UI/Emphasis'
 import Panels from 'components/Scale/Panels'
 import Receipt from 'components/Scale/Receipt'
 import Reliability from 'components/Scale/Reliability'
+import { SignupCTA } from 'components/SignupCTA'
+import { RoughAnnotation } from 'components/UI/RoughAnnotation'
+import OSButton from 'components/OSButton'
+import Link from 'components/Link'
 import { ScaleDataContext, formatCount, inSentence, lines, useScaleData } from 'components/Scale/data'
 import { useSwap } from 'components/Scale/useSwap'
 import type { LineKey, ScaleData } from 'components/Scale/data'
 
+const LOGIN_URL = 'https://app.posthog.com/login'
 const FIRST_TURN_SECONDS = 10
 const TURN_SECONDS = 5
 
@@ -68,13 +73,15 @@ function ScaleContent(): JSX.Element {
                 }}
                 className="relative z-10 hidden @3xl:col-start-1 @3xl:block @3xl:row-span-2 @3xl:row-start-1"
             />
-            <Panels
-                shown={shown}
-                next={next}
-                swapClass={swapClass}
-                onNext={() => select(next)}
-                className="@3xl:col-span-2 @3xl:col-start-1 @3xl:row-start-2 @3xl:ml-48 @3xl:self-start"
-            />
+            <div className="flex flex-col gap-3 @3xl:col-span-2 @3xl:col-start-1 @3xl:row-start-2 @3xl:ml-48 @3xl:self-start">
+                <Panels shown={shown} next={next} swapClass={swapClass} onNext={() => select(next)} />
+                <p className="m-0 text-sm text-secondary @3xl:pl-48">
+                    Running PostHog at serious scale?{' '}
+                    <Link to="/enterprise" state={{ newWindow: true }} className="font-semibold">
+                        Talk to us about enterprise
+                    </Link>
+                </p>
+            </div>
         </div>
     )
 }
@@ -107,6 +114,22 @@ export default function ScalePage({ data }: { data: { scaleData: ScaleData | nul
                         </p>
                     )}
                     <Reliability />
+                    <section className="mx-auto mt-32 flex max-w-6xl flex-col gap-3">
+                        <h2 className="m-0 text-2xl font-bold @3xl:text-4xl">
+                            Want to be{' '}
+                            <RoughAnnotation type="highlight" color="yellow" animateOnScroll>
+                                <em>extra</em>
+                            </RoughAnnotation>{' '}
+                            sure we’re still online?
+                        </h2>
+                        <p className="m-0 text-secondary">Click one of these buttons to find out.</p>
+                        <div className="mt-4 flex flex-wrap items-center gap-3">
+                            <SignupCTA size="lg" />
+                            <OSButton asLink external variant="secondary" size="lg" to={LOGIN_URL}>
+                                Sign in
+                            </OSButton>
+                        </div>
+                    </section>
                 </div>
             </ReaderView>
         </>

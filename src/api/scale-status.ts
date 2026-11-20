@@ -2,7 +2,6 @@ import type { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
 const STATUS_SITE = 'https://www.posthogstatus.com'
 const EDGE_CACHE = 'public, s-maxage=60, stale-while-revalidate=300'
-const FAILURE_CACHE = 'public, s-maxage=30'
 const STATUS_TIMEOUT_MS = 8000
 const CALENDAR_MONTHS = 4
 const DOWNTIME_DAYS = 90
@@ -10,7 +9,7 @@ const LATEST_INCIDENTS = 7
 const MINUTE_MS = 60_000
 const DAY_MS = 86_400_000
 
-export type DayLevel = 'partial' | 'full'
+export type DayLevel = 'reported' | 'partial' | 'full'
 
 export interface StatusIncidentLink {
     name: string
@@ -42,6 +41,8 @@ type StatusResponse = {
     recent_incidents: Incident[]
     component_impacts: Record<string, Impact[]>
 }
+
+const dayRank: DayLevel[] = ['reported', 'partial', 'full']
 
 const dayLevels: Record<string, DayLevel> = {
     degraded_performance: 'partial',
@@ -93,6 +94,12 @@ export function summarizeStatus(status: StatusResponse, now: number): ScaleStatu
     )
 
     const days = new Map<string, { level: DayLevel; incidents: Map<string, StatusIncidentLink> }>()
+    const markDay = (date: string, level: DayLevel, incidentId: string, incidentName: string) => {
+        const entry = days.get(date) ?? { level, incidents: new Map() }
+        if (dayRank.indexOf(level) > dayRank.indexOf(entry.level)) entry.level = level
+        entry.incidents.set(incidentId, { name: incidentName, url: incidentUrl(incidentId) })
+        days.set(date, entry)
+    }
     const downtimeWindows = new Map<string, { us: [number, number][]; eu: [number, number][] }>()
     for (const { name } of Array.from(components.values())) {
         downtimeWindows.set(name, { us: [], eu: [] })
@@ -106,15 +113,9 @@ export function summarizeStatus(status: StatusResponse, now: number): ScaleStatu
             const end = impact.end_at ? Date.parse(impact.end_at) : now
             const level = dayLevels[impact.status]
             if (level && end >= calendarStart) {
-                for (let day = Date.parse(utcDay(Math.max(start, calendarStart))); day <= end; day += DAY_MS) {
-                    const date = utcDay(day)
-                    const entry = days.get(date) ?? { level, incidents: new Map() }
-                    if (level === 'full') entry.level = 'full'
-                    entry.incidents.set(impact.incident_id, {
-                        name: impact.incident_name,
-                        url: incidentUrl(impact.incident_id),
-                    })
-                    days.set(date, entry)
+                const lastMoment = Math.max(end, start + 1)
+                for (let day = Date.parse(utcDay(Math.max(start, calendarStart))); day < lastMoment; day += DAY_MS) {
+                    markDay(utcDay(day), level, impact.incident_id, impact.incident_name)
                 }
             }
             if (downtimeStatuses.has(impact.status) && end > downtimeStart) {
@@ -122,6 +123,13 @@ export function summarizeStatus(status: StatusResponse, now: number): ScaleStatu
                     .get(component.name)
                     ?.[component.region as 'us' | 'eu'].push([Math.max(start, downtimeStart), Math.min(end, now)])
             }
+        }
+    }
+
+    for (const incident of [...status.active_incidents, ...status.recent_incidents]) {
+        const published = Date.parse(incident.published_at)
+        if (incident.affected_components.length === 0 && published >= calendarStart) {
+            markDay(utcDay(published), 'reported', incident.id, incident.name)
         }
     }
 
@@ -170,11 +178,11 @@ const handler = async (_req: GatsbyFunctionRequest, res: GatsbyFunctionResponse)
         if (!response.ok) {
             throw new Error(`Status page returned ${response.status}`)
         }
+        const summary = summarizeStatus(await response.json(), Date.now())
         res.setHeader('Cache-Control', EDGE_CACHE)
-        return res.status(200).json(summarizeStatus(await response.json(), Date.now()))
+        return res.status(200).json(summary)
     } catch (error) {
         console.error('Failed to load the PostHog status page:', error)
-        res.setHeader('Cache-Control', FAILURE_CACHE)
         return res.status(502).json({ error: 'Status page unavailable' })
     }
 }

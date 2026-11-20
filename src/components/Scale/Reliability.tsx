@@ -12,6 +12,7 @@ import type { DayLevel, ScaleStatus } from '../../api/scale-status'
 const STATUS_API = '/api/scale-status'
 const STATUS_SITE = 'https://www.posthogstatus.com'
 const REFRESH_MS = 60_000
+const FRESH_MS = 10 * 60_000
 const FETCH_TIMEOUT_MS = 10_000
 const WEEK_ROWS = 6
 const LATEST_INCIDENTS = 7
@@ -97,10 +98,14 @@ function StatusBadge({ status, failed }: { status: ScaleStatus | null; failed: b
             <Skeleton width="13rem" className="text-sm" />
         )
     }
+    const fresh = !failed && Date.now() - Date.parse(status.generatedAt) < FRESH_MS
+    const live = fresh
+        ? ' · live'
+        : ` · as of ${new Date(status.generatedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
     if (status.active.length === 0) {
         return (
             <Badge href={STATUS_SITE} size="md" color="lime" appearance="solid">
-                All systems operational · live
+                All systems operational{live}
             </Badge>
         )
     }
@@ -113,12 +118,19 @@ function StatusBadge({ status, failed }: { status: ScaleStatus | null; failed: b
             color={impactColors[worst.impact] ?? 'yellow'}
             appearance="solid"
         >
-            {single ? worst.name : `${status.active.length} active incidents`} · live
+            {single ? worst.name : `${status.active.length} active incidents`}
+            {live}
         </Badge>
     )
 }
 
 type DayState = 'future' | 'ok' | DayLevel
+
+const dayLabels: Record<DayLevel, string> = {
+    reported: 'Incident reported',
+    partial: 'Partial outage or slowdown',
+    full: 'Full outage',
+}
 
 const isoDay = (time: number): string => new Date(time).toISOString().slice(0, 10)
 
@@ -162,6 +174,7 @@ function MonthGrid({
                                 className="flex items-center justify-center text-secondary"
                             >
                                 {day}
+                                <span className="sr-only">: upcoming</span>
                             </span>
                         )
                     }
@@ -177,11 +190,12 @@ function MonthGrid({
                                 } ${joinsNext ? '' : 'rounded-r-full'}`}
                             >
                                 {day}
+                                <span className="sr-only">: no incidents</span>
                             </span>
                         )
                     }
                     const entry = days[date]
-                    const label = state === 'full' ? 'Full outage' : 'Partial outage or slowdown'
+                    const label = dayLabels[state]
                     return (
                         <span key={date} style={position} className="flex items-center justify-center">
                             <Popover.Root>
@@ -296,17 +310,29 @@ function StatsTable({
             <Collapsible.Root defaultOpen={defaultOpen}>
                 <div className={statsRow}>
                     <Collapsible.Trigger>{title}</Collapsible.Trigger>
-                    <span className="text-right text-xs font-semibold text-secondary">US</span>
-                    <span className="text-right text-xs font-semibold text-secondary">EU</span>
+                    <span aria-hidden className="text-right text-xs font-semibold text-secondary">
+                        US
+                    </span>
+                    <span aria-hidden className="text-right text-xs font-semibold text-secondary">
+                        EU
+                    </span>
                 </div>
                 <Collapsible.Panel>
-                    <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
+                    <div role="table" aria-label={title} className="flex flex-col gap-1.5">
+                        <div role="row" className="sr-only">
+                            <span role="columnheader">Component</span>
+                            <span role="columnheader">US</span>
+                            <span role="columnheader">EU</span>
+                        </div>
                         {rows.map((row) => (
-                            <li key={row.name} className={`m-0 ${statsRow}`}>
-                                <span className="truncate">{row.name}</span>
+                            <div key={row.name} role="row" className={statsRow}>
+                                <span role="rowheader" className="truncate">
+                                    {row.name}
+                                </span>
                                 {[row.us, row.eu].map((minutes, region) => (
                                     <span
                                         key={region}
+                                        role="cell"
                                         className={`text-right tabular-nums ${
                                             minutes > 0 ? 'text-[color:var(--uptime-downtime)]' : 'text-secondary'
                                         }`}
@@ -314,9 +340,9 @@ function StatsTable({
                                         {formatMinutes(minutes)}
                                     </span>
                                 ))}
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </Collapsible.Panel>
             </Collapsible.Root>
         </Card.Root>
@@ -415,11 +441,31 @@ export default function Reliability(): JSX.Element {
                     <StatusBadge status={status} failed={failed} />
                 </div>
             </header>
-            <UptimeCalendar status={status} />
-            <div className="grid grid-cols-[minmax(0,1fr)] gap-10 @3xl:grid-cols-2">
-                <DowntimeStats status={status} />
-                <LatestIncidents status={status} />
-            </div>
+            {failed && !status ? (
+                <p className="m-0 text-sm text-secondary">
+                    Could not load our status right now. See{' '}
+                    <a href={STATUS_SITE} target="_blank" rel="noopener noreferrer" className={incidentLink}>
+                        posthogstatus.com
+                    </a>
+                    .
+                </p>
+            ) : (
+                <>
+                    <UptimeCalendar status={status} />
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-10 @3xl:grid-cols-2">
+                        <DowntimeStats status={status} />
+                        <LatestIncidents status={status} />
+                    </div>
+                    <a
+                        href={STATUS_SITE}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`self-start text-sm ${incidentLink}`}
+                    >
+                        See the full status page
+                    </a>
+                </>
+            )}
         </section>
     )
 }
