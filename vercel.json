@@ -166,8 +166,23 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/:sdk(node|python|go|rust)/reference:ext(\\.md)?",
-            "destination": "/docs/libraries/:sdk:ext?",
+            "source": "/docs/libraries/node/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/python/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/go/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/rust/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
             "statusCode": 301
         },
         {
@@ -211,23 +226,43 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-:sdk(go|rust):ext(\\.md)?",
-            "destination": "/docs/libraries/:sdk:ext?",
+            "source": "/docs/references/posthog-go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-:sdk(go|rust)/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/:sdk:ext?",
+            "source": "/docs/references/posthog-go/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-:sdk(go|rust)-:version([^/]+?):ext(\\.md)?",
-            "destination": "/docs/libraries/:sdk:ext?",
+            "source": "/docs/references/posthog-go-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-:sdk(go|rust)-:version/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/:sdk:ext?",
+            "source": "/docs/references/posthog-go-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
             "statusCode": 301
         },
         {
@@ -1851,8 +1886,23 @@
             "destination": "/manual/:path*"
         },
         {
-            "source": "/docs/integrate/:side(client|server)/:sdk(node|python|go|rust):ext(\\.md)?",
-            "destination": "/docs/libraries/:sdk:ext?",
+            "source": "/docs/integrate/:side(client|server)/node:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/python:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
             "statusCode": 301
         },
         {

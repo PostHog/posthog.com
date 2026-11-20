@@ -49,6 +49,9 @@ function isPagePath(filename) {
 function contentPathToUrl(filename, pocketGuides = {}) {
     let url = filename.replace(/^contents/, '').replace(PAGE_EXTENSIONS, '')
     url = url.replace(/\/index$/, '')
+    if (/^\/docs\/libraries\/[^/]+\/reference$/.test(url)) {
+        url = url.replace(/\/reference$/, '')
+    }
     const guide = /^\/learn\/([^/]+)\/pocket-guide(\/.*)?$/.exec(url)
     if (guide && pocketGuides[guide[1]]) {
         url = `${pocketGuides[guide[1]]}${guide[2] || ''}`

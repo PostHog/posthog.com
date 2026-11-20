@@ -1,5 +1,3 @@
-const YAML = require('yaml')
-
 // Strapi stores each SDK reference as Markdown, and gatsby/onPreBootstrap.ts writes it to
 // contents/docs/libraries/<sdk>/<page>.md. A row must never run code in the build, so these
 // pages are never MDX: gatsby-config.js blocks them from MDX, gatsby/onCreateNode.ts turns them
@@ -30,12 +28,9 @@ const isSdkReferenceFile = (node) => {
 /** Public URL for a generated SDK reference file: reference.md serves /docs/libraries/<sdk>, others keep their name. */
 const sdkReferenceSlug = (relativePath) => `/${relativePath.slice(0, -'.md'.length).replace(/\/reference$/, '')}`
 
-/** Splits a page into its YAML front matter and its Markdown body. */
-const splitFrontmatter = (raw) => {
-    const end = raw.startsWith('---\n') ? raw.indexOf('\n---\n', 3) : -1
-    if (end === -1) return { frontmatter: {}, body: raw }
-    return { frontmatter: YAML.parse(raw.slice(4, end)) || {}, body: raw.slice(end + 5) }
-}
+/** HogRef SDK IDs that still need legacy sourcing (everything not migrated to Markdown references). */
+const getLegacyHogRefSdkIds = (supportedSdkIds) =>
+    supportedSdkIds.filter((id) => !PUBLISHED_SDK_REFERENCES.includes(id))
 
 module.exports = {
     PUBLISHED_SDK_REFERENCES,
@@ -43,5 +38,5 @@ module.exports = {
     isNoindexSdkReference,
     isSdkReferenceFile,
     sdkReferenceSlug,
-    splitFrontmatter,
+    getLegacyHogRefSdkIds,
 }

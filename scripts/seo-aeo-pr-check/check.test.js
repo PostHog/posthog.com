@@ -14,6 +14,8 @@ const {
 test('maps content files to page URLs', () => {
     assert.equal(contentPathToUrl('contents/docs/product-analytics/index.mdx'), '/docs/product-analytics')
     assert.equal(contentPathToUrl('contents/blog/some-post.md'), '/blog/some-post')
+    assert.equal(contentPathToUrl('contents/docs/libraries/python/reference.md'), '/docs/libraries/python')
+    assert.equal(contentPathToUrl('contents/docs/libraries/python/8.x.x.md'), '/docs/libraries/python/8.x.x')
 })
 
 test('matches Vercel redirect patterns', () => {
