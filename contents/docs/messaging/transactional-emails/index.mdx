@@ -41,7 +41,15 @@ You can send content that your code renders, or write the email in PostHog. Both
 
 ## Send email from your code
 
-You need a [verified sending domain](#verify-your-sending-domain) and a [project secret API key](#create-an-api-key) first.
+The fastest way to add your first send is the PostHog wizard. Run it in your project:
+
+```bash
+npx @posthog/wizard@latest email
+```
+
+It checks that you have a sender, writes the email in your code, adds a [project secret API key](#create-an-api-key) to your env file, and adds the send with the SDK for your backend.
+
+To do it by hand, you need a sender and a [project secret API key](#create-an-api-key) first. To test before you [verify your sending domain](#verify-your-sending-domain), use the [sandbox sender](/docs/messaging/sandbox-sender).
 
 Keep your emails in your codebase, next to the code that sends them. Write each one with [React Email](/docs/messaging/transactional-emails/react-email) or the templates that you already have. Your code renders the content, and the SDK sends it with one call. You don't need a template in PostHog.
 
