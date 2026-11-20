@@ -166,63 +166,108 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/node:ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?",
+            "source": "/docs/libraries/node/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/python:ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?",
+            "source": "/docs/libraries/python/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/go:ext(\\.md)?",
-            "destination": "/docs/libraries/go/reference:ext?",
+            "source": "/docs/libraries/go/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/rust:ext(\\.md)?",
-            "destination": "/docs/libraries/rust/reference:ext?",
+            "source": "/docs/libraries/rust/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-node:ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?",
+            "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?",
+            "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-node-:version([^/]+?):ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?",
+            "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-node-:version/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?",
+            "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python:ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?",
+            "destination": "/docs/libraries/python:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?",
+            "destination": "/docs/libraries/python:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python-:version([^/]+?):ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?",
+            "destination": "/docs/libraries/python:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python-:version/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/:sdk(node|python|go|rust)/:major(\\d+):ext(\\.md)?",
+            "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
             "statusCode": 301
         },
         {
@@ -1841,6 +1886,26 @@
             "destination": "/manual/:path*"
         },
         {
+            "source": "/docs/integrate/:side(client|server)/node:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/python:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/integrate/(client|server)/:path*",
             "destination": "/docs/integrate/:path*"
         },
@@ -1914,7 +1979,7 @@
         },
         {
             "source": "/docs/integrations/go-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/go/reference:ext?"
+            "destination": "/docs/libraries/go:ext?"
         },
         {
             "source": "/docs/integrations/ios-integration:ext(\\.md)?",
@@ -1966,7 +2031,7 @@
         },
         {
             "source": "/docs/integrations/node-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?"
+            "destination": "/docs/libraries/node:ext?"
         },
         {
             "source": "/docs/integrations/php-integration:ext(\\.md)?",
@@ -1974,7 +2039,7 @@
         },
         {
             "source": "/docs/integrations/python-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?"
+            "destination": "/docs/libraries/python:ext?"
         },
         {
             "source": "/docs/integrations/react-native-integration:ext(\\.md)?",
@@ -3483,7 +3548,7 @@
         },
         {
             "source": "/docs/integrate/go:ext(\\.md)?",
-            "destination": "/docs/libraries/go/reference:ext?"
+            "destination": "/docs/libraries/go:ext?"
         },
         {
             "source": "/docs/integrate/ios:ext(\\.md)?",
@@ -3499,7 +3564,7 @@
         },
         {
             "source": "/docs/integrate/node:ext(\\.md)?",
-            "destination": "/docs/libraries/node/reference:ext?"
+            "destination": "/docs/libraries/node:ext?"
         },
         {
             "source": "/docs/integrate/php:ext(\\.md)?",
@@ -3507,7 +3572,7 @@
         },
         {
             "source": "/docs/integrate/python:ext(\\.md)?",
-            "destination": "/docs/libraries/python/reference:ext?"
+            "destination": "/docs/libraries/python:ext?"
         },
         {
             "source": "/docs/integrate/react:ext(\\.md)?",
@@ -3523,7 +3588,7 @@
         },
         {
             "source": "/docs/integrate/rust:ext(\\.md)?",
-            "destination": "/docs/libraries/rust/reference:ext?"
+            "destination": "/docs/libraries/rust:ext?"
         },
         {
             "source": "/docs/integrate/identifying-users:ext(\\.md)?",

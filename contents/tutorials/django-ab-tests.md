@@ -65,7 +65,7 @@ Run `python3 manage.py migrate` to migrate the database (you only need to run th
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `pip install "posthog>=8,<9"` to install [PostHog’s Python SDK](/docs/libraries/python/reference).
+To start, run `pip install "posthog>=8,<9"` to install [PostHog’s Python SDK](/docs/libraries/python).
 
 Then, set the PostHog token and host in your `AppConfig` in `basic_app/apps.py` so that's it's available everywhere:
 
@@ -152,7 +152,7 @@ Once created, set the primary metric to a trend of `pageview` and then click **L
 
 To implement the A/B test, we: 
 
-1. Fetch the `my-cool-experiment` flag using [`posthog.get_feature_flag()`](/docs/libraries/python/reference#get-feature-flag). 
+1. Fetch the `my-cool-experiment` flag using [`posthog.get_feature_flag()`](/docs/libraries/python#get-feature-flag). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```python file=views.py
@@ -184,7 +184,7 @@ When you restart your app and refresh the page, you should see the text updated 
 
 To ensure our goal metric is correctly calculated for each experiment variant, we need to include our feature flag information when capturing our `$pageview` event.
 
-To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/python/reference#capture) key to our event properties:
+To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/python#capture) key to our event properties:
 
 ```python file=views.py
 

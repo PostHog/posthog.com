@@ -13,7 +13,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 > If you're just looking for instructions to upgrade to `6.x`, skip directly to the [migration guide](#migrating-from-v5-to-v6).
 
-Version `6.x` of the PostHog Python SDK introduces a new [`context()`](/docs/libraries/python/reference#posthognew_context) API for scope-based state sharing across captures along with a series of breaking changes. This guide walks through changes introduced and how to migrate from `5.x` to `6.x`.
+Version `6.x` of the PostHog Python SDK introduces a new [`context()`](/docs/libraries/python#posthognew_context) API for scope-based state sharing across captures along with a series of breaking changes. This guide walks through changes introduced and how to migrate from `5.x` to `6.x`.
 
 ## Overview
 
@@ -106,7 +106,7 @@ with new_context():
     posthog.capture("order_processed")
 ```
 
-Learn more about contexts in the [Python SDK docs](/docs/libraries/python/reference#posthognew_context).
+Learn more about contexts in the [Python SDK docs](/docs/libraries/python#posthognew_context).
 
 ## New: Django contexts middleware
 
@@ -178,7 +178,7 @@ You can still capture events with an explicit `distinct_id` like before, but it 
 # You can also capture events with a specific distinct_id
 posthog.capture('some-custom-action', distinct_id='distinct_id_of_the_user')
 ```
-Capture methods also now return the event UUID instead of the full event object. You can find the exact function signature in the [Python SDK reference](/docs/references/posthog-python#capture).
+Capture methods also now return the event UUID instead of the full event object. You can find the exact function signature in the [Python SDK reference](/docs/libraries/python#capture).
 
 ## Breaking change: Django error tracking integration
 
@@ -316,12 +316,11 @@ POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 
 ### 5. Adopt contexts
 
-Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](/docs/libraries/python/reference) to learn more.
+Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](/docs/libraries/python) to learn more.
 
 ## Further reading
 
-- [Python SDK docs](/docs/libraries/python/reference)
-- [Full Python SDK reference](/docs/references/posthog-python)
+- [Python SDK docs](/docs/libraries/python)
 - [Django contexts middleware docs](/docs/libraries/django#django-contexts-middleware)
-- [Contexts docs](/docs/libraries/python/reference#posthognew_context)
+- [Contexts docs](/docs/libraries/python#posthognew_context)
 - [Identification](/docs/product-analytics/identify)

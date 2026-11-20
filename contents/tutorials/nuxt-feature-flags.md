@@ -173,7 +173,7 @@ You may notice the text flickers when you load your app. This is because PostHog
 1. Fetch the flag on the server side.
 2. [Bootstrap](/docs/feature-flags/bootstrapping) flags on the client side (not covered in this tutorial).
 
-We'll show you how to fetch the flag on the server side. First, install the [`posthog-node` SDK](/docs/libraries/node/reference):
+We'll show you how to fetch the flag on the server side. First, install the [`posthog-node` SDK](/docs/libraries/node):
 
 ```bash
 npm install posthog-node@6

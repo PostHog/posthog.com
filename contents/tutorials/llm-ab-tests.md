@@ -11,7 +11,7 @@ A/B tests enable you to compare how changes to LLM models and prompts affect you
 
 We set up a basic Next.js app, add PostHog, create A/B tests, and implement the code for them.
 
-> While this tutorial focuses on [Next.js](/docs/libraries/next-js) and [Node](/docs/libraries/node/reference), PostHog supports many different [SDKs](/docs/libraries) and [frameworks](/docs/frameworks). The concepts in this tutorial apply to all our supported SDKs and frameworks. 
+> While this tutorial focuses on [Next.js](/docs/libraries/next-js) and [Node](/docs/libraries/node), PostHog supports many different [SDKs](/docs/libraries) and [frameworks](/docs/frameworks). The concepts in this tutorial apply to all our supported SDKs and frameworks. 
 
 ## 1. Download the sample app
 
@@ -47,7 +47,7 @@ Run `npm run dev` and go to `http://localhost:3000` to everything in action. The
 
 ## 2. Add PostHog to your app
 
-With our app set up, it’s time to install and set up PostHog. We install both the [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node/reference) SDKs:
+With our app set up, it’s time to install and set up PostHog. We install both the [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDKs:
 
 - The **JavaScript Web SDK** runs client-side. We use this to capture user evaluations for the helpfulness of the recipes.
 - The **Node SDK** runs server-side. We use this to implement our A/B test code since our LLM requests run in the backend.
@@ -247,7 +247,7 @@ To do this, go to the [A/B testing tab](https://us.posthog.com/experiments) and 
 
 To implement the A/B test, we:
 
-1. Fetch the `llm-experiment` flag in `api/generate-recipe/route.js` using [`posthog.getFeatureFlag()`](/docs/libraries/node/reference#get-feature-flag)
+1. Fetch the `llm-experiment` flag in `api/generate-recipe/route.js` using [`posthog.getFeatureFlag()`](/docs/libraries/node#get-feature-flag)
 2. Update the model or prompt depending on the flag value.
 3. Call `await posthog.shutdown()` at the end of our request to flush and send all pending events.
 

@@ -1,3 +1,5 @@
+import sdkMarkdownReferences from '../../../gatsby/sdkMarkdownReferences.js'
+
 export const SDK_LANGUAGE_BY_ID = {
     'posthog-js': 'ts',
     'posthog-python': 'python',
@@ -15,6 +17,14 @@ export const SDK_LANGUAGE_BY_ID = {
 export type SupportedSdkId = keyof typeof SDK_LANGUAGE_BY_ID
 
 export const SUPPORTED_SDK_IDS = Object.keys(SDK_LANGUAGE_BY_ID) as SupportedSdkId[]
+
+/** SDKs whose reference is served at `/docs/libraries/<slug>` instead of `/docs/references/<id>`. */
+export const LIBRARY_REFERENCE_SDK_IDS: readonly string[] = sdkMarkdownReferences.PUBLISHED_SDK_REFERENCES
+
+export const getSdkReferenceUrl = (sdkId: string): string =>
+    LIBRARY_REFERENCE_SDK_IDS.includes(sdkId)
+        ? `/docs/libraries/${sdkId.replace(/^posthog-/, '')}`
+        : `/docs/references/${sdkId}`
 
 export const getLanguageFromSdkId = (sdkId: string): string =>
     (SDK_LANGUAGE_BY_ID as Record<string, string>)[sdkId] ?? 'ts'
@@ -46,7 +56,8 @@ export const typeHasPage = (type?: { id?: string; properties?: unknown; example?
 export const parseVersionedReferenceSlug = (slug: string): { sdk: string; version: string } | null => {
     const trimmed = slug.replace(/^\/docs\/references\//, '').replace(/\.md$/, '')
     // Longest id first, or `posthog-react-native-1.2.3` resolves to `posthog-react`.
-    const sdk = [...SUPPORTED_SDK_IDS].sort((a, b) => b.length - a.length).find((id) => trimmed.startsWith(`${id}-`))
+    const knownSdkIds = Array.from(new Set([...SUPPORTED_SDK_IDS, ...LIBRARY_REFERENCE_SDK_IDS]))
+    const sdk = knownSdkIds.sort((a, b) => b.length - a.length).find((id) => trimmed.startsWith(`${id}-`))
     if (!sdk) return null
     const version = trimmed.slice(sdk.length + 1).split('/')[0]
     return version ? { sdk, version } : null

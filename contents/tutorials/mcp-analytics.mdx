@@ -39,7 +39,7 @@ The fastest way to set it up is our wizard, which installs the package, adds you
 
 <WizardCommand command="mcp-analytics" />
 
-Prefer to do it by hand, or want to see exactly what the wizard wires up? Install the SDK alongside the [PostHog Node.js SDK](/docs/libraries/node/reference):
+Prefer to do it by hand, or want to see exactly what the wizard wires up? Install the SDK alongside the [PostHog Node.js SDK](/docs/libraries/node):
 
 ```bash
 npm install @posthog/mcp@1 posthog-node@6
@@ -338,7 +338,7 @@ export async function withAnalytics<T>(
 
 Now let's send those analytics somewhere useful. In the `posthog.ts` file, we initialize the PostHog client that implements the `AnalyticsProvider` interface and extends it with the necessary calls to capture data and send it to PostHog.
 
-The `PostHogAnalyticsProvider` class leverages the PostHog [Node.js SDK](/docs/libraries/node/reference) to capture [custom events](/docs/product-analytics/capture-events) for product analytics and exceptions for built-in [error tracking](/docs/error-tracking).
+The `PostHogAnalyticsProvider` class leverages the PostHog [Node.js SDK](/docs/libraries/node) to capture [custom events](/docs/product-analytics/capture-events) for product analytics and exceptions for built-in [error tracking](/docs/error-tracking).
 
 
 ```typescript file=./src/posthog.ts
