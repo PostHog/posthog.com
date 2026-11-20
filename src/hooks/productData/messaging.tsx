@@ -340,7 +340,8 @@ export const messaging = {
             { label: 'CLI', values: ['Via MCP tools', true, true, true] },
             { label: 'Pricing' },
             { label: 'Free emails each month', values: ['10,000', '3,000', '4,000', 'None'] },
-            { label: 'Price at 100k emails a month', values: ['$210', '$35', '$49', 'About $145'] },
+            // $36 is the proposed transactional price (billing#2760). Change it if that price doesn't ship.
+            { label: 'Price at 100k transactional emails a month', values: ['$36', '$35', '$49', 'About $145'] },
         ],
         excluded_sections: ['platform'],
     },
