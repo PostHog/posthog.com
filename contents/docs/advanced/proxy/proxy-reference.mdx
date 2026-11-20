@@ -26,7 +26,7 @@ If you set up your proxy from an older version of these guides, check it against
 - If your proxy checks its own credentials in `Authorization`, move them to a separate header, such as `X-Proxy-Token`, and remove that header before you forward the request. Capture v1 SDKs always send the PostHog project token in `Authorization`, so a value set in the SDK's custom headers isn't sent on capture requests.
 - Forward every `PostHog-*` header, plus `Content-Type`, `Content-Encoding`, and `User-Agent`, unchanged. Capture v1 SDKs need them, and their request bodies can be compressed with `gzip`, `deflate`, `br`, or `zstd`.
 - Route `/i/v1/*` paths to the regional ingestion host, `us.i.posthog.com` or `eu.i.posthog.com`.
-- Return PostHog's status code and response body unchanged. Capture v1 SDKs read a result for each event from the response, and treat a `2xx` response without one as a failed request.
+- Return PostHog's status code and response body unchanged. Capture v1 SDKs read a result for each event from the response, and treat a `2xx` response without one as a failed request. PostHog compresses the response with `gzip` when the request has `Accept-Encoding: gzip`. If your proxy decodes the response body, also remove the `Content-Encoding` and `Content-Length` response headers.
 - Allow `GET` and `POST`** on all paths.
 - Support 64MB request bodies, session recordings can be large.
 - Forward `X-Forwarded-For` to preserve client IPs for geolocation.

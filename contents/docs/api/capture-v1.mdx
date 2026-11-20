@@ -34,7 +34,7 @@ If you send through a reverse proxy, update it before you move an SDK to capture
 
 - Forward both paths.
 - Set `Host` to the PostHog domain. Forward the PostHog `Authorization` value, `Content-Type`, `Content-Encoding`, `User-Agent`, and every `PostHog-*` header unchanged. If your proxy uses `Authorization` for its own credentials, move them to a separate header, such as `X-Proxy-Token`, and remove that header before you forward the request.
-- Return PostHog's status code and response body unchanged. SDKs use the [per-event results](#per-event-results) to retry only the events that need it. An empty `200` drops the events instead of retrying them.
+- Return PostHog's status code and response body unchanged. SDKs use the [per-event results](#per-event-results) to retry only the events that need it. An empty `200` drops the events instead of retrying them. PostHog compresses the response with `gzip` when the request has `Accept-Encoding: gzip`. If your proxy decodes the response body, also remove the `Content-Encoding` and `Content-Length` response headers.
 
 ### Send each event to its own endpoint
 
