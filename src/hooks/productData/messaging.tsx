@@ -337,7 +337,7 @@ export const messaging = {
             { label: 'Replay Vision on the session behind a send', values: [true, false, false, false] },
             { label: 'Developer tools' },
             { label: 'MCP server and agent skills', values: [true, true, true, true] },
-            { label: 'CLI', values: [false, true, true, true] },
+            { label: 'CLI', values: ['Via MCP tools', true, true, true] },
             { label: 'Pricing' },
             { label: 'Free emails each month', values: ['10,000', '3,000', '4,000', 'None'] },
             { label: 'Price at 100k emails a month', values: ['$210', '$35', '$49', 'About $145'] },
