@@ -62,8 +62,9 @@ These aren't emergencies yet, but they should make you pay closer attention. Man
 | Product turned off because of cost | Contraction often comes before churn |
 | Champion changed roles or left | Your internal advocate is gone |
 | Support tickets spiking | Something is broken or frustrating |
-| Single product usage | Low switching cost, easy to replace |
-| Data exported to external warehouse only | PostHog becomes a pipe, not a destination |
+| Single product usage, especially 85%+ of MRR in one product on a B2C account | Low switching cost; a cost review only has to beat the one thing |
+| Data exported to external warehouse only, or a third-party CDP (Rudderstack, Segment, mParticle, Hightouch) in front of ingestion | PostHog becomes a pipe, not a destination. Nobody owns the CDP mapping, so our numbers drift and we lose the source-of-truth argument before the renewal |
+| Replay (or any product) trial ran but never converted to paid | A trial that failed tells us the platform ceiling is lower than we thought. Treat it as a whole-account signal, not a product-adoption miss |
 
 When you notice any of these, don't wait. Reach out, dig in, and address it before it compounds.
 
@@ -138,11 +139,12 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cu
 |----------------|---------------------|
 | **Champion leaves** | Multi-thread relationships across teams. The more users actively in PostHog, the less one departure matters. When it happens, follow the [champion leaves playbook](/handbook/customer-success/champion-leaves). |
 | **Your contact is a coach, not a champion** | Identify and build a relationship with a [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) who can make change happen. Your coach can help with introductions. |
-| **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
+| **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. A narrow footprint is the highest-risk shape: a B2C account that pays mostly for one product is one cost review from a cut, because the replacement calculation only has to beat the one thing. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |
+| **Product trial that didn't convert** | A customer who tried a product (replay most commonly) and walked away has told us the platform's ceiling is lower than we thought. Treat it as a whole-account signal, not a product-adoption miss. Pull the thread on what the trial missed, and factor the lower ceiling into the renewal conversation. |
 | **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Customer Analytics](/handbook/customer-success/feature-requests) |
-| **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. |
+| **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. Watch for a third-party CDP (Rudderstack, Segment, mParticle, Hightouch) sitting in front of PostHog: nobody at the customer owns the mapping, numbers drift, and we lose the source-of-truth argument before the renewal conversation starts. |
 | **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](https://posthog.com/docs/data-pipelines/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
 
 For scenarios outside our control (acquisition, company shuts down, not ICP fit), document what happened and share learnings with the team. There's usually something we can learn even when we couldn't have changed the outcome.
@@ -165,6 +167,9 @@ Add the **Churn Risk** tag to the account in PostHog Customer Analytics if any o
 - Health score has been "Poor" for 4+ consecutive weeks
 - Contract is up for renewal in <90 days with negative engagement signals
 - They're not using PostHog as source of truth (all analysis happens externally)
+- A product trial (replay most commonly) ran during their tenure and didn't convert to paid
+- A third-party CDP (Rudderstack, Segment, mParticle, Hightouch) sits in front of PostHog on a narrow-footprint account
+- A single product accounts for 85%+ of their MRR on a B2C account with 2 or fewer billable products
 
 **When in doubt, flag it.** It's easier to remove a flag than to explain why we didn't see a churn coming.
 
