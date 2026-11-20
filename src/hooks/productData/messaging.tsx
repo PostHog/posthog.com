@@ -37,7 +37,7 @@ export const messaging = {
     includeAddonRates: true,
     // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).
     pricingDescription:
-        'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
+        'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.0004/transactional email, $0.003/marketing email, and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
         title: 'Messaging – Send email from your product data',
         description:
@@ -177,7 +177,8 @@ export const messaging = {
                     to a cohort, or build a drip campaign or a larger automation that also posts to Slack or calls a
                     webhook. Every send, open, and click is an event on the person, so you check if an email worked in
                     the same funnels and replays as everything else. The first 10,000 emails each month are free. After
-                    that, 1,000 emails cost $3, with lower rates at higher volume.
+                    that, 1,000 transactional emails cost $0.40 and 1,000 marketing emails cost $3, with lower rates at
+                    higher volume.
                 </p>
             </>
         ),
@@ -297,7 +298,7 @@ export const messaging = {
                     title: 'You want to see what each person did after your email',
                 },
                 {
-                    title: 'You want 10,000 free emails each month, then $3 per 1,000',
+                    title: 'You want 10,000 free emails each month, then $0.40 per 1,000 transactional emails',
                 },
                 {
                     title: 'You already use PostHog for analytics, feature flags, or experiments',
