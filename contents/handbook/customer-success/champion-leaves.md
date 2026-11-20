@@ -18,7 +18,7 @@ Use this when a [champion](/handbook/growth/sales/customer-journey#champions-and
 
 Do this as soon as you find out:
 
-- If the champion was the only person you talked to at the customer, add the **Churn Risk** tag in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. See [when to flag an account as at risk](/handbook/growth/sales/risk-mitigation-and-churn-prevention#when-to-flag-an-account-as-at-risk).
+- If no other champion is left at the customer, add the **Churn Risk** tag in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. Coaches do not count. See [when to flag an account as at risk](/handbook/growth/sales/risk-mitigation-and-churn-prevention#when-to-flag-an-account-as-at-risk).
 - Add a note on the account that says who left and when, so that the next person on the account has the context.
 
 ## 2. Run the handover checklist
@@ -89,5 +89,5 @@ When you find them, record them as a champion or a coach, with what they can and
 
 ## 4. Close the loop
 
-- Remove the **Churn Risk** tag when you have a relationship with a new champion and nothing from the checklist is still open.
+- Remove the **Churn Risk** tag when you have a relationship with a new champion, nothing from the checklist is still open, and no other reason on the [at-risk list](/handbook/growth/sales/risk-mitigation-and-churn-prevention#when-to-flag-an-account-as-at-risk) applies.
 - If the account churns anyway, do a [churn retro](/handbook/customer-success/customer-churn-retros) and record which part of this process came too late.
