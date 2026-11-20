@@ -861,7 +861,11 @@
         },
         {
             "source": "/blog/ga4-alternatives",
-            "destination": "/compare/ga4-alternatives"
+            "destination": "/compare/best-ga4-alternatives"
+        },
+        {
+            "source": "/compare/ga4-alternatives",
+            "destination": "/compare/best-ga4-alternatives"
         },
         {
             "source": "/blog/hotjar-for-mobile-ios-android-react-native-flutter",
