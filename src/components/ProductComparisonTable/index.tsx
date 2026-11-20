@@ -115,6 +115,8 @@ import { zendesk } from '../../hooks/competitorData/zendesk'
 import { intercom } from '../../hooks/competitorData/intercom'
 import { make } from '../../hooks/competitorData/make'
 import { customer_io } from '../../hooks/competitorData/customer_io'
+import { loops } from '../../hooks/competitorData/loops'
+import { resend } from '../../hooks/competitorData/resend'
 import { brevo } from '../../hooks/competitorData/brevo'
 
 // Feature definition imports
@@ -742,6 +744,8 @@ export default function ProductComparisonTable({
         intercom,
         make,
         customer_io,
+        loops,
+        resend,
         brevo,
     }
 
