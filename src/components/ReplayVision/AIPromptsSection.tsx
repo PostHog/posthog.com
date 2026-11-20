@@ -4,14 +4,14 @@ import Link from 'components/Link'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { LabeledList, SECTION_H2 } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
+import hedgehogNoir5Png from 'brand-hoggie-pngs/noir-5.png'
 
 const INTRO =
     'Ask your AI agent to author scanners, scan a session, or read what Replay Vision found – without leaving your editor. Works in any MCP client via the PostHog MCP: Cursor, Claude Code, Codex, VS Code, and more.'
 
 // Detective hedgehog surveilling a wall of monitors – sits where Session
 // Replay's "AI prompts" section floats its hog.
-const IMAGE =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/noir_desk_relax_surveillance_computer_63a434c398.png' as const
+const IMAGE = hedgehogNoir5Png
 
 interface PromptGroup {
     title: string

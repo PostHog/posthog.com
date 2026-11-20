@@ -14,6 +14,9 @@ import OSButton from 'components/OSButton'
 import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
+import hedgehogDrakeYahMirroredPng from 'images/hogs/hedgehog-drake-yah-mirrored.png'
+import hedgehogPhoneCallPng from 'brand-hoggie-pngs/phone-call.png'
+import hedgehogShockedPng from 'brand-hoggie-pngs/shocked.png'
 
 const them = [
     {
@@ -231,12 +234,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
-                        width={200}
-                    />
+                    <CloudinaryImage quality={90} placeholder="blurred" src={hedgehogShockedPng} width={200} />
                 </div>
             </>
         ),
@@ -286,7 +284,7 @@ const us = [
                         quality={90}
                         placeholder="blurred"
                         loading="eager"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/drake-hog-yes.png"
+                        src={hedgehogDrakeYahMirroredPng}
                         width={234}
                         imgClassName="max-w-full"
                     />
@@ -344,12 +342,7 @@ const us = [
                 </div>
 
                 <div className="col-span-4">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-follow-up.png"
-                        width={600}
-                    />
+                    <CloudinaryImage quality={90} placeholder="blurred" src={hedgehogPhoneCallPng} width={600} />
                 </div>
             </>
         ),
@@ -663,7 +656,7 @@ export default function Sales() {
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
+                                    src={hedgehogPhoneCallPng}
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -673,7 +666,7 @@ export default function Sales() {
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
+                                    src={hedgehogPhoneCallPng}
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"

@@ -2,6 +2,7 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { INK, PAPER } from './heroData'
+import hedgehogSafariPng from 'brand-hoggie-pngs/safari.png'
 
 const CORAL = '#E1554E'
 
@@ -59,7 +60,7 @@ export default function NaturalistIntro(): JSX.Element {
                 </p>
                 <p className="ni-sig">– Sir Bartholomew Hogworth, F.R.S. First Edition, 2026</p>
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144532_e9e68b845b.png"
+                    src={hedgehogSafariPng}
                     alt="The naturalist watching from the long grass"
                     width={1120}
                     className="ni-grass"

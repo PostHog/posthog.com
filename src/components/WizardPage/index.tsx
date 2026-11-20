@@ -13,6 +13,7 @@ import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
+import hedgehogWizard1Png from 'brand-hoggie-pngs/wizard-1.png'
 
 function WizardHeader(): JSX.Element {
     return (
@@ -42,11 +43,7 @@ function WizardHeader(): JSX.Element {
                     <WizardCommand slim />
                 </div>
                 <div className="shrink-0">
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
-                        alt="PostHog Wizard hedgehog"
-                        className="w-40 @lg:w-56"
-                    />
+                    <img src={hedgehogWizard1Png} alt="PostHog Wizard hedgehog" className="w-40 @lg:w-56" />
                 </div>
             </div>
         </header>

@@ -2,8 +2,9 @@ import React from 'react'
 import { IconX, IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import WizardCommand from 'components/WizardCommand'
+import hedgehogWizard1Png from 'brand-hoggie-pngs/wizard-1.png'
 
-const HEDGEHOG_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png'
+const HEDGEHOG_SRC = hedgehogWizard1Png
 
 /**
  * Collapsible agent-flavored nudge that pushes a `npx @posthog/wizard <command>` CLI flow as the

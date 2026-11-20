@@ -10,6 +10,7 @@ import { Logo } from '@posthog/brand/logo'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogCommuterPng from 'brand-hoggie-pngs/commuter.png'
 
 interface TransparencyFeatureProps {
     Image: any
@@ -125,7 +126,7 @@ export const Transparency = () => {
                     <div className="absolute bottom-2 right-2">
                         <CloudinaryImage
                             width={260}
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png"
+                            src={hedgehogCommuterPng}
                             alt="This hog's presenting in a suit and tie"
                             className="w-32 xs:w-32 sm:w-48 @2xl:w-64"
                         />

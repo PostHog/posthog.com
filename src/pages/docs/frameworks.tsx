@@ -6,6 +6,7 @@ import Link from 'components/Link'
 import List from 'components/List'
 import ReaderView from 'components/ReaderView'
 import useFrameworkList from 'hooks/docs/useFrameworkList'
+import hedgehogChartPng from 'brand-hoggie-pngs/chart.png'
 
 const Frameworks: React.FC = () => {
     const frameworks = useFrameworkList()
@@ -16,7 +17,7 @@ const Frameworks: React.FC = () => {
             <CloudinaryImage
                 alt=""
                 className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+                src={hedgehogChartPng}
             />
             <h1 className="text-4xl mt-0 mb-2">Framework guides</h1>
             <h3 className="text-lg font-semibold text-secondary leading-tight">

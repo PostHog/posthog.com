@@ -58,6 +58,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { navigate } from 'gatsby'
+import hedgehogReadingIsMagicPng from 'brand-hoggie-pngs/reading-is-magic.png'
 
 dayjs.extend(relativeTime)
 
@@ -924,7 +925,7 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
                 className="not-prose bg-primary border border-primary rounded px-4 pb-4 text-center"
             >
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
+                    src={hedgehogReadingIsMagicPng}
                     alt="This hog has an answer"
                     width={400}
                     placeholder="blurred"

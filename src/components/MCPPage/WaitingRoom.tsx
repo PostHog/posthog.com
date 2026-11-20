@@ -4,6 +4,7 @@ import OSButton from 'components/OSButton'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogBookPileMirroredCroppedPng from 'images/hogs/hedgehog-book-pile-mirrored-cropped.png'
 
 interface Magazine {
     title: string
@@ -152,7 +153,7 @@ export default function WaitingRoom(): JSX.Element {
             <div className="flex items-end gap-4 border-b border-primary @2xl/reader-content:gap-6">
                 {/* The hog's seat is at 90% of the image height. The shift puts it on the line and lets the feet hang below. */}
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/sitting_reading_hog_abeb5be4fe.png"
+                    src={hedgehogBookPileMirroredCroppedPng}
                     alt=""
                     loading="lazy"
                     width={300}

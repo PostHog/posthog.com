@@ -17,6 +17,8 @@ import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion
 import { StickerCoffee } from 'components/Stickers/Stickers'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight, IconChevronLeft, IconChevronRight } from '@posthog/icons'
+import hedgehogReadingPng from 'brand-hoggie-pngs/reading.png'
+import hedgehogWillSmithMirroredPng from 'images/hogs/hedgehog-will-smith-mirrored.png'
 
 // Same lookup as OSQuote: a product quote when `product` is set, otherwise `quotes[quote]`
 interface QuoteSource {
@@ -177,8 +179,8 @@ const HERO_QUOTES: QuoteSource[] = [
 const TOOLS_SHOWN = 5
 const TABLE_ROWS_STEP = 10
 const HERO_ROTATE_MS = 8000
-const HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/will_smith_hog_0248c8f94c.png'
-const NEWSPAPER_HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/newspaper_hog_f0dd8cda48.png'
+const HOG_IMAGE = hedgehogWillSmithMirroredPng
+const NEWSPAPER_HOG_IMAGE = hedgehogReadingPng
 
 const HogCard = ({
     image,

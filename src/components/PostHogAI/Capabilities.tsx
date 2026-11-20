@@ -5,6 +5,7 @@ import { StickerRobot } from 'components/Stickers/Stickers'
 import { IconMagic } from '@posthog/icons'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogTransformerCroppedPng from 'images/hogs/hedgehog-transformer-cropped.png'
 
 const engineeringTools: {
     handle?: string
@@ -74,7 +75,7 @@ export function AIEngineering(): JSX.Element | null {
                     </ul>
                 </div>
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png"
+                    src={hedgehogTransformerCroppedPng}
                     alt=""
                     title="More than meets the AI"
                     loading="lazy"

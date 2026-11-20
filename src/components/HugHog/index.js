@@ -1,8 +1,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import hedgehogHeartPng from 'brand-hoggie-pngs/heart.png'
 
 const HugHogImage = () => {
-    return <img src="https://res.cloudinary.com/dmukukwp6/image/upload/max_hug_2139d9320c.png" />
+    return <img src={hedgehogHeartPng} />
 }
 
 export default function HugHog({ onClick, className, active }) {

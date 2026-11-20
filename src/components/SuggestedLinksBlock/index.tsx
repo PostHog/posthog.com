@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogMoneyPng from 'brand-hoggie-pngs/money.png'
+import hedgehogPhoneCallPng from 'brand-hoggie-pngs/phone-call.png'
 
 interface SuggestedLink {
   title: string
@@ -22,7 +24,7 @@ interface SuggestedLinksBlockProps {
 const SUGGESTED_LINKS: Record<string, SuggestedLink> = {
   sales: {
     title: "How we (don't) do sales",
-    image: "https://res.cloudinary.com/dmukukwp6/image/upload/hog_phone_638d7d1ae4.png",
+    image: hedgehogPhoneCallPng,
     imageAlt: "Hog on the phone",
     buttonText: "Take the tour",
     buttonLink: "/sales",
@@ -31,7 +33,7 @@ const SUGGESTED_LINKS: Record<string, SuggestedLink> = {
   },
   pricing: {
     title: "Usage-based pricing",
-    image: "https://res.cloudinary.com/dmukukwp6/image/upload/hog_cash_64f561fac6.png",
+    image: hedgehogMoneyPng,
     imageAlt: "Hog with cash",
     buttonText: "Explore pricing",
     buttonLink: "/pricing",

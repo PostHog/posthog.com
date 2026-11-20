@@ -7,6 +7,7 @@ import { SEO } from 'components/seo'
 import { navigate } from 'gatsby'
 import Link from 'components/Link'
 import List from 'components/List'
+import hedgehogConstruction1Png from 'brand-hoggie-pngs/construction-1.png'
 
 const filters = [
     {
@@ -116,7 +117,7 @@ function AppsPage({ location }) {
                     {
                         label: <>Build your own &rarr;</>,
                         url: '/docs/data-pipelines/destinations',
-                        image: '/images/builder-hog.png',
+                        image: hedgehogConstruction1Png,
                     },
                 ]}
             />

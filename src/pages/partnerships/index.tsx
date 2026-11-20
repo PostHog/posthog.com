@@ -2,6 +2,7 @@ import React from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import PartnershipsSurvey from 'components/PartnershipsSurvey'
+import hedgehogTwoPlayerPng from 'brand-hoggie-pngs/two-player.png'
 
 export default function Partnerships(): JSX.Element {
     return (
@@ -14,7 +15,7 @@ export default function Partnerships(): JSX.Element {
             <Editor title="Partnerships">
                 {/* TODO: swap this illustration for a more on-brand partnerships image */}
                 <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
+                    src={hedgehogTwoPlayerPng}
                     alt="PostHog hedgehog"
                     className="float-right max-w-[300px] max-h-48 -mt-2 -mr-2"
                 />

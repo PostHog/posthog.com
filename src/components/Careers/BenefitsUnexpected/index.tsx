@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogFloatMirroredPng from 'images/hogs/hedgehog-float-mirrored.png'
 
 const BenefitsUnexpected: React.FC = () => {
     return (
@@ -33,7 +34,7 @@ const BenefitsUnexpected: React.FC = () => {
                             className="w-[194px] absolute ml-24 -mt-8"
                         />
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png"
+                            src={hedgehogFloatMirroredPng}
                             alt="Police hog sez..."
                             className="w-[106px] -scale-x-1"
                         />
@@ -59,7 +60,7 @@ const BenefitsUnexpected: React.FC = () => {
                             className="w-[194px] -mb-4 -ml-2 absolute left-24"
                         />
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png"
+                            src={hedgehogFloatMirroredPng}
                             alt="Police hog sez..."
                             className="w-[106px] mt-12"
                         />

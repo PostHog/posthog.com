@@ -37,6 +37,9 @@ import {
     IconTerminal,
     IconWarning,
 } from '@posthog/icons'
+import hedgehog996MirroredCroppedPng from 'images/hogs/hedgehog-996-mirrored-cropped.png'
+import hedgehogHotPopcornCroppedPng from 'images/hogs/hedgehog-hot-popcorn-cropped.png'
+import hedgehogTransformerCroppedPng from 'images/hogs/hedgehog-transformer-cropped.png'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 type CloudinarySrc = `https://res.cloudinary.com/${string}`
@@ -704,13 +707,13 @@ const humanRoles: HumanRole[] = [
     {
         heading: 'Skip to the good part',
         copy: "Somebody's gotta clean up around here. Turns out it doesn't have to be you. Bug fixes and maintenance work land in your inbox. Hit merge and move on with your day.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png',
+        image: hedgehogHotPopcornCroppedPng,
         alt: 'A hedgehog eating popcorn',
     },
     {
         heading: 'Outship everyone',
         copy: "Product capability used to scale with headcount. Now it's handled (without adding any). A small team with self-driving can outship companies 10x the size.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png',
+        image: hedgehog996MirroredCroppedPng,
         alt: 'A hedgehog working at a laptop',
     },
 ]
@@ -887,7 +890,7 @@ export default function SelfDrivingPage({
 
                         {/* PostHog agents run on their own, but don't run wild */}
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png"
+                            src={hedgehogTransformerCroppedPng}
                             alt="A hedgehog transforming into a self-driving machine"
                             className="@lg/reader-content:float-right @lg/reader-content:max-w-[220px] @lg/reader-content:ml-6 mb-4 mt-2"
                             imgClassName="w-full"

@@ -27,9 +27,11 @@ import {
 import OSButton from 'components/OSButton'
 import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import { Logo } from '@posthog/brand/logo'
+import hedgehogCampfireCowboyPng from 'brand-hoggie-pngs/campfire-cowboy.png'
+import hedgehogDrivingHogzillaPng from 'brand-hoggie-pngs/driving-hogzilla.png'
 
-const CAMPFIRE_HOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_campfire_hog_853bb11d39.png'
-const HOGZILLA = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_hogzilla_fbfda8c4db.png'
+const CAMPFIRE_HOG = hedgehogCampfireCowboyPng
+const HOGZILLA = hedgehogDrivingHogzillaPng
 const LENNY_FIRE = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_fire_62d09256e1.png'
 
 type IconComponent = React.ComponentType<{ className?: string }>

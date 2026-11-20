@@ -15,8 +15,9 @@ import { StepDefinition } from 'onboarding/steps'
 import { Logo } from '@posthog/brand/logo'
 import { getCookie } from 'lib/utils'
 import TraceExplorerCallout from './trace-explorer-callout'
+import hedgehogExplorerPng from 'brand-hoggie-pngs/explorer.png'
 
-const EXPLORER_HOG = '/images/docs/ai-observability/explorer-hedgehog.png'
+const EXPLORER_HOG = hedgehogExplorerPng
 const PROJECT_TOKEN_URL = 'https://app.posthog.com/settings/project#variables'
 
 const LOGIN_URL = 'https://app.posthog.com/login'

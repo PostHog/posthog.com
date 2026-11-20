@@ -15,6 +15,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
+import hedgehogDrivingHogzillaPng from 'brand-hoggie-pngs/driving-hogzilla.png'
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
     alpha: 'bg-orange',
@@ -347,7 +348,7 @@ export default function ProductsTest(): JSX.Element {
                     <header className="grid gap-4 py-8 text-center @xl:text-left @3xl:grid-cols-[minmax(0,1.25fr)_minmax(15rem,1fr)] @3xl:items-center @3xl:gap-8">
                         <div className="order-1 flex justify-center @3xl:order-2">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_self_driving_486ef58706.png"
+                                src={hedgehogDrivingHogzillaPng}
                                 imgClassName="w-72 max-w-full @xl:w-56 @3xl:w-80"
                             />
                         </div>

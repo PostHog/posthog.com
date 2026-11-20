@@ -37,6 +37,10 @@ import {
     IconLetter,
     IconPlug,
 } from '@posthog/icons'
+import hedgehog996MirroredCroppedPng from 'images/hogs/hedgehog-996-mirrored-cropped.png'
+import hedgehogHotPopcornCroppedPng from 'images/hogs/hedgehog-hot-popcorn-cropped.png'
+import hedgehogRobotMirroredPng from 'images/hogs/hedgehog-robot-mirrored.png'
+import hedgehogSwirlPng from 'brand-hoggie-pngs/swirl.png'
 
 // The sources box for the integration section, same component as the "Signals" box on /desktop.
 const INTEGRATION_SOURCES: CalloutItem[] = [
@@ -517,7 +521,7 @@ export const ProfessionalServices = () => {
                             totalLabel="YOU PAY TWICE"
                         />
                     }
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/hog_screens_965070a722.png"
+                    image={hedgehogSwirlPng}
                     imageAlt="A hedgehog carrying dashboards and charts"
                     imageClassName="w-32"
                     imagePosition="-bottom-2 left-0"
@@ -562,7 +566,7 @@ export const ProfessionalServices = () => {
                     title="Instrumentation"
                     sticker={StickerTerminal}
                     stickerClassName="rotate-2"
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/w_520,c_scale,q_auto,f_auto/hog_engineer_0eebaf7af1.png"
+                    image={hedgehogRobotMirroredPng}
                     imageAlt="A hedgehog engineer repairing a robot"
                     lead={
                         <>
@@ -723,13 +727,13 @@ export const ProfessionalServices = () => {
                     <HogCard
                         heading="2. We do the work"
                         copy="A dedicated engineer owns it end to end, with a weekly sync and a written update. You review, we iterate."
-                        image="https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png"
+                        image={hedgehog996MirroredCroppedPng}
                         alt="A hedgehog working at a laptop"
                     />
                     <HogCard
                         heading="3. You take it from here"
                         copy="Approved by a named person on your side, follow-ups written down, and your team able to run it without us."
-                        image="https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png"
+                        image={hedgehogHotPopcornCroppedPng}
                         alt="A hedgehog eating popcorn"
                     />
                 </div>

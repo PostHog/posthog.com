@@ -29,6 +29,8 @@ import {
     IconVideoCamera,
     IconWarning,
 } from '@posthog/icons'
+import hedgehogNoir4Png from 'brand-hoggie-pngs/noir-4.png'
+import hedgehogNoir5Png from 'brand-hoggie-pngs/noir-5.png'
 
 // Paid-search landing page for "session replay" ads that point at Replay Vision.
 // Built on the /slack page template (centered ReaderView column, highlighted
@@ -43,9 +45,9 @@ const SIGNUP_URL = 'https://app.posthog.com/signup'
 const CUSTOMER_SLUGS = ['elevenlabs', 'kilocode', 'juicebox', 'exa']
 
 const IMAGES = {
-    projectorHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/projector_movie_noir_b2dd613e79.png',
+    projectorHog: hedgehogNoir4Png,
     monitorsHog:
-        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/noir_desk_relax_surveillance_computer_4d8e09a4f0.png',
+        hedgehogNoir5Png,
 } as const
 
 // ─────────────────────────────────────────────

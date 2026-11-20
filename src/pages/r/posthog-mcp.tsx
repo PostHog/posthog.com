@@ -13,6 +13,7 @@ import WizardCTA from 'components/WizardCTA'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import HeygenLogo from 'components/CustomerLogos/HeygenLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import hedgehogCodeBubblePng from 'brand-hoggie-pngs/code-bubble.png'
 
 export default function PostHogMCPLanding(): JSX.Element {
     const [isIdle, setIsIdle] = useState(false)
@@ -97,7 +98,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                     </div>
                     <div className="flex justify-center">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_143773_7436a145da_622d666c76.png"
+                            src={hedgehogCodeBubblePng}
                             alt="PostHog MCP in your editor"
                             className="w-full max-w-[350px] mx-auto"
                         />

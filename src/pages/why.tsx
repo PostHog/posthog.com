@@ -2,6 +2,7 @@ import React from 'react'
 import SEO from 'components/seo'
 import WhyPostHogViewer from 'components/WhyPostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogWizard1MirroredPng from 'images/hogs/hedgehog-wizard-1-mirrored.png'
 
 export default function Why(): JSX.Element {
     return (
@@ -63,10 +64,7 @@ export default function Why(): JSX.Element {
 
                     <div className="flex flex-row-reverse @2xl:flex-col gap-8 @2xl:gap-0">
                         <div className="@2xl:flex-[0_0_160px] flex justify-end @2xl:justify-start @2xl:items-end mb-4">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_89e1cf3a73.png"
-                                imgClassName="h-40"
-                            />
+                            <CloudinaryImage src={hedgehogWizard1MirroredPng} imgClassName="h-40" />
                         </div>
 
                         <div className="flex-1 relative pl-8 @2xl:pl-0 @2xl:pt-4">

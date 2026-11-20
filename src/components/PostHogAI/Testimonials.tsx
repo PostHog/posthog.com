@@ -2,6 +2,7 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { CardStackCarousel } from 'components/CardStackCarousel'
+import hedgehogTrenchcoatPng from 'brand-hoggie-pngs/trenchcoat.png'
 
 const quotes = [
     {
@@ -90,7 +91,7 @@ export default function Testimonials(): JSX.Element {
         <section id="testimonials" className="my-12">
             <div className="flex items-center gap-4 @2xl/reader-content:gap-5">
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/trenchcoat_hog_a3b8775b73.png"
+                    src={hedgehogTrenchcoatPng}
                     alt=""
                     loading="lazy"
                     width={200}

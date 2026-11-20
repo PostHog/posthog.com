@@ -4,6 +4,7 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
+import hedgehogMoneyPng from 'brand-hoggie-pngs/money.png'
 
 const SideProjectInsurance: React.FC = () => {
     return (
@@ -31,7 +32,7 @@ const SideProjectInsurance: React.FC = () => {
                         <strong>(Rest assured, we'll get this worked out.)</strong>
                     </p>
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/money_f6cb7907a3.png"
+                        src={hedgehogMoneyPng}
                         width={600}
                         className="w-full @xl:w-80 @2xl:w-96 @xl:float-right @xl:ml-4"
                     />

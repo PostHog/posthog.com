@@ -6,6 +6,7 @@ import Link from 'components/Link'
 import List from 'components/List'
 import ReaderView from 'components/ReaderView'
 import useServicesList from 'hooks/docs/useServicesList'
+import hedgehogChartPng from 'brand-hoggie-pngs/chart.png'
 
 const Services: React.FC = () => {
     const services = useServicesList()
@@ -16,7 +17,7 @@ const Services: React.FC = () => {
             <CloudinaryImage
                 alt=""
                 className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+                src={hedgehogChartPng}
             />
             <h1 className="text-4xl mt-0 mb-2">Service integrations</h1>
             <h3 className="text-lg font-semibold text-secondary leading-tight">

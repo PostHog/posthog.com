@@ -6,7 +6,7 @@ import { useWindow } from '../../../../context/Window'
 import Wizard from 'components/Wizard'
 import { SQUEAK_HOST } from 'lib/strapi'
 
-import TrafficPoliceHog from '../../../../images/traffic-police-hog.png'
+import TrafficPoliceHog from 'brand-hoggie-pngs/traffic-police.png'
 import { IconSpinner } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 

@@ -34,6 +34,9 @@ import {
     IconTelescope,
 } from '@posthog/icons'
 import posthogIcon from '../../images/posthog-icon-white.svg'
+import hedgehogPeekOverPng from 'brand-hoggie-pngs/peek-over.png'
+import hedgehogSwirlPng from 'brand-hoggie-pngs/swirl.png'
+import hedgehogWizard2Png from 'brand-hoggie-pngs/wizard-2.png'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const APP_AI_URL = 'https://app.posthog.com/ai'
@@ -168,7 +171,7 @@ const HeroSection = () => {
                     transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
                 >
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/context_hog_32f1181f4a.png"
+                        src={hedgehogSwirlPng}
                         alt="A hedgehog floating in a ring of dashboards, charts, maps, and logs"
                         width={800}
                         className="w-full"
@@ -376,7 +379,7 @@ const PromptsSection = (): JSX.Element => {
                         Prompts for the work PostHog AI can take off your plate.
                     </p>
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/curious_hog_d91b1a8b89.png"
+                        src={hedgehogPeekOverPng}
                         alt=""
                         loading="lazy"
                         width={224}
@@ -749,7 +752,7 @@ export default function PostHogAIPage(): JSX.Element {
                     >
                         <div className="grid @lg/reader-content:grid-cols-[180px_minmax(0,1fr)] gap-6 items-center">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_indigo_hog_d7099863ad.png"
+                                src={hedgehogWizard2Png}
                                 alt=""
                                 loading="lazy"
                                 width={360}

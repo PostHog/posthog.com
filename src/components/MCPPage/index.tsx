@@ -44,6 +44,8 @@ import WaitingRoom from './WaitingRoom'
 import PromptDemo from './PromptDemo'
 import Highlight from './Highlight'
 import mcpToolsData from '../../data/mcp-tools.json'
+import hedgehogIchabodPng from 'brand-hoggie-pngs/ichabod.png'
+import hedgehogMrPotatoHead1Png from 'brand-hoggie-pngs/mr-potato-head-1.png'
 
 // The tool schema is fetched from the main repo at build time, so the exact totals move
 // between builds. Round down to the nearest hundred to keep the claim true either way.
@@ -129,7 +131,7 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
                         transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
                     >
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/headless_horsehog_17d1541713.png"
+                            src={hedgehogIchabodPng}
                             alt="A hedgehog dressed as the headless horseman, riding a toy horse and holding a flaming pumpkin"
                             width={800}
                             className="w-full"
@@ -635,7 +637,7 @@ function MCPSetupCTA(): JSX.Element {
             </div>
             <figure className="m-0 flex min-w-0 flex-col items-center gap-3">
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144404_d649bc516c.png"
+                    src={hedgehogMrPotatoHead1Png}
                     alt="A hedgehog toy with its arm, ear, shoe, and hat in pieces on the floor around it"
                     title="Mr. Potato Hog, now with context included."
                     loading="lazy"

@@ -8,6 +8,7 @@ import { useApp } from '../../context/App'
 import usePostHog from '../../hooks/usePostHog'
 import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 import { useUser } from 'hooks/useUser'
+import hedgehogMailboxPng from 'brand-hoggie-pngs/mailbox.png'
 
 interface SurveySignupProps {
     /** PostHog Survey id to record the response against. If omitted, no survey event fires. */
@@ -144,11 +145,7 @@ export function SurveySignup({
                             </Link>
                         )}
                     </div>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png"
-                        alt="A hedgehog holding a letter"
-                        className="max-h-14 shrink-0"
-                    />
+                    <img src={hedgehogMailboxPng} alt="A hedgehog holding a letter" className="max-h-14 shrink-0" />
                 </div>
             </div>
         )

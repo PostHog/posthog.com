@@ -4,6 +4,7 @@ import Link from 'components/Link'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CloudinaryImage from 'components/CloudinaryImage'
+import hedgehogPhoneCallPng from 'brand-hoggie-pngs/phone-call.png'
 
 export default function QuickCallsScript(): JSX.Element {
     return (
@@ -16,7 +17,7 @@ export default function QuickCallsScript(): JSX.Element {
                             <CloudinaryImage
                                 quality={100}
                                 placeholder="none"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
+                                src={hedgehogPhoneCallPng}
                                 className=""
                                 loading="eager"
                                 objectPosition="left top"
@@ -27,7 +28,7 @@ export default function QuickCallsScript(): JSX.Element {
                             <CloudinaryImage
                                 quality={100}
                                 placeholder="none"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
+                                src={hedgehogPhoneCallPng}
                                 className=""
                                 loading="eager"
                                 objectPosition="left top"
