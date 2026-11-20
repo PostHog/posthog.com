@@ -283,7 +283,7 @@ The SDK doesn't send a request for every `capture` call. This is what it does on
 
 | Behavior | Default | Option |
 |----------|---------|--------|
-| Batching | Events are queued and sent together every 3 seconds, starting as soon as `posthog.init` returns. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` sends each event on its own. Pass `send_instantly: true` to `capture` for a single event. |
+| Batching | Events are queued and sent together on a 3-second flush interval. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` skips the queue for every event, and `send_instantly: true` on a `capture` call skips it for that event. |
 | Page unload | The queue is sent with [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon), events before Session Replay data, so it doesn't delay navigation. | `disable_beacon` |
 | Compression | Payloads are compressed with `gzip` when your project's remote config allows it. Where the browser supports [`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream), compression runs asynchronously instead of on the main thread. | `disable_compression` |
 | Retries | Network failures and `5xx` responses are retried with exponential backoff and jitter, starting at about 3 seconds and capped at 30 minutes, up to 10 times (3 times when no response arrives). A `Retry-After` header is respected. `4xx` responses, including `429`, aren't retried. | – |
