@@ -278,6 +278,27 @@ posthog.init('<ph_project_token>', {
 
 `posthog-js` doesn't create spans. To link backend traces to browser sessions, set [`tracing_headers`](#tracing-headers). To send spans from the server, see [Node.js](/docs/distributed-tracing/installation/nodejs) or [Python](/docs/distributed-tracing/installation/python).
 
+## How the SDK sends data
+
+The SDK doesn't send a request for every `capture` call. This is what it does on the network, and the options that change it.
+
+| Behavior | Default | Option |
+|----------|---------|--------|
+| Batching | Events are queued and sent together on a 3-second flush interval. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` skips the queue for every event, and `send_instantly: true` on a `capture` call skips it for that event. |
+| Page unload | The SDK tries to send what's still queued, using [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) when available so it doesn't delay navigation. Delivery isn't guaranteed, and events aren't sent ahead of Session Replay data. | `disable_beacon` |
+| Compression | Payloads are compressed with `gzip` from the start, and your project's remote config can turn it off once it arrives. Where the browser supports [`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream), most requests compress asynchronously instead of on the main thread. Page-unload beacons and `send_instantly` captures, including the initial pageview, still compress synchronously. | `disable_compression` |
+| Retries | Event requests that fail with a network error or `5xx` response are retried up to 10 times after the first attempt (3 times when no response arrives), with exponential backoff and jitter starting at about 3 seconds. Later retries can wait more than 30 minutes. A readable `Retry-After` header sets a minimum wait of up to 30 seconds. `4xx` responses, including `429`, aren't retried. Remote config and `/flags` requests don't use these retries. | – |
+| Startup | The SDK fetches your project's remote config, unless it's already on the page, and evaluates Feature Flags with `/flags`. Session Replay and Surveys may load extra scripts, depending on your project settings and the bundle you use. `capture` calls made after `init` don't wait for these responses. | [`advanced_disable_flags`](#disable-flags-endpoint), `advanced_disable_feature_flags_on_first_load`, `disable_surveys` |
+| Flag refresh | Feature Flags are re-evaluated in the background every 5 minutes, less often on pages without user interaction. | `remote_config_refresh_interval_ms` (`0` turns it off) |
+
+To check what a page sends, filter your browser's network tab by your `api_host`. Without a reverse proxy, scripts and remote config load from the assets host (for example `us-assets.i.posthog.com`), and `/flags` uses `flags_api_host` if you set it.
+
+### Initializing after page load
+
+You can call `posthog.init` later, for example after login, but attribution is read from the page when the SDK captures an event. UTM and other campaign parameters come from the URL at that moment, and the initial URL is stored with the first event captured for a user. If your app has already navigated away from the landing URL, those values are lost. Client-side navigation doesn't change the referrer.
+
+To keep attribution, initialize on page load and let the first event, such as the automatic pageview, be captured before the URL changes. If you've turned off `capture_pageview`, capture your own event on landing. Features you don't need yet can start turned off (for example `disable_session_recording: true`) and be turned on later with methods such as [`posthog.startSessionRecording()`](/docs/libraries/js/usage#session-replay). This only postpones Session Replay. Your project settings and consent still apply.
+
 ## Advanced configuration
 
 These are features for advanced users and may lead to unintended side effects if not reviewed carefully.
