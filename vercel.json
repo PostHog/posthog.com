@@ -920,6 +920,10 @@
             "destination": "/compare/best-mobile-app-ab-testing-tools"
         },
         {
+            "source": "/blog/best-open-source-session-replay-tools",
+            "destination": "/compare/best-open-source-session-replay-tools"
+        },
+        {
             "source": "/blog/best-open-source-ab-testing-tools",
             "destination": "/compare/best-open-source-ab-testing-tools"
         },
@@ -2691,7 +2695,7 @@
         },
         {
             "source": "/tutorials/free-hotjar-alternative",
-            "destination": "/blog/best-open-source-session-replay-tools"
+            "destination": "/compare/best-open-source-session-replay-tools"
         },
         {
             "source": "/docs/plugins/build/reference:ext(\\.md)?",

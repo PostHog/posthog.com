@@ -6610,6 +6610,18 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Libraries',
+                    url: '/docs/business-knowledge/libraries',
+                    icon: 'IconFolder',
+                    color: 'blue',
+                },
+                {
+                    name: 'How it works',
+                    url: '/docs/business-knowledge/how-it-works',
+                    icon: 'IconGear',
+                    color: 'blue',
+                },
+                {
                     name: 'AI data processing',
                     url: '/docs/business-knowledge/ai-data-processing',
                     icon: 'IconListCheck',
@@ -6637,6 +6649,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Build a support agent',
+                    url: '/docs/business-knowledge/build-a-support-agent',
+                    icon: 'IconCode',
+                    color: 'green',
+                },
+                {
                     name: 'Learn from support',
                     url: '/docs/business-knowledge/learn-from-support',
                     icon: 'IconSupport',
@@ -6647,6 +6665,18 @@ export const docsMenu = {
                     url: '/docs/business-knowledge/playground',
                     icon: 'IconSparkles',
                     color: 'purple',
+                },
+                {
+                    name: 'Usage',
+                    url: '/docs/business-knowledge/usage',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/business-knowledge/troubleshooting',
+                    icon: 'IconWrench',
+                    color: 'orange',
                 },
             ],
         },

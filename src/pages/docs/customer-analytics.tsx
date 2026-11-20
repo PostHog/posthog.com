@@ -58,8 +58,8 @@ const phFeatures = [
 ]
 
 const customerAnalyticsFeatures = [
-    { text: 'Dashboard with pre-built insights', url: '/docs/customer-analytics/dashboard-insights' },
-    { text: 'Usage metrics', url: '/docs/customer-analytics/customer-profiles' },
+    { text: 'Dashboard with pre-built insights', url: '/docs/customer-analytics/dashboard-metrics' },
+    { text: 'Usage metrics', url: '/docs/customer-analytics/usage-metrics' },
     { text: 'Session feed in person profiles', url: '/docs/customer-analytics/customer-profiles' },
     { text: 'Error tracking issues in customer profiles', url: '/docs/customer-analytics/customer-profiles' },
     { text: 'LLM traces in customer profiles', url: '/docs/customer-analytics/customer-profiles' },
