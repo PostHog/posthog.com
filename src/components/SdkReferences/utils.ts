@@ -16,6 +16,17 @@ export type SupportedSdkId = keyof typeof SDK_LANGUAGE_BY_ID
 
 export const SUPPORTED_SDK_IDS = Object.keys(SDK_LANGUAGE_BY_ID) as SupportedSdkId[]
 
+/**
+ * SDKs whose reference is served at `/docs/libraries/<slug>` instead of `/docs/references/<id>`.
+ * Kept in sync with `PUBLISHED_SDK_REFERENCES` in `gatsby/sdkMarkdownReferences.js` (checked by utils.test.ts).
+ */
+export const LIBRARY_REFERENCE_SDK_IDS = ['posthog-python', 'posthog-go', 'posthog-rust', 'posthog-node'] as const
+
+export const getSdkReferenceUrl = (sdkId: string): string =>
+    (LIBRARY_REFERENCE_SDK_IDS as readonly string[]).includes(sdkId)
+        ? `/docs/libraries/${sdkId.replace(/^posthog-/, '')}`
+        : `/docs/references/${sdkId}`
+
 export const getLanguageFromSdkId = (sdkId: string): string =>
     (SDK_LANGUAGE_BY_ID as Record<string, string>)[sdkId] ?? 'ts'
 

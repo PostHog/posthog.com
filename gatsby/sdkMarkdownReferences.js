@@ -27,6 +27,9 @@ const isSdkReferenceFile = (node) => {
     return docs === 'docs' && libraries === 'libraries' && !!sdk && !!file && !rest.length && isSdkReferencePage(file)
 }
 
+/** Public URL for a generated SDK reference file: reference.md serves /docs/libraries/<sdk>, others keep their name. */
+const sdkReferenceSlug = (relativePath) => `/${relativePath.slice(0, -'.md'.length).replace(/\/reference$/, '')}`
+
 /** Splits a page into its YAML front matter and its Markdown body. */
 const splitFrontmatter = (raw) => {
     const end = raw.startsWith('---\n') ? raw.indexOf('\n---\n', 3) : -1
@@ -39,5 +42,6 @@ module.exports = {
     isSdkReferencePage,
     isNoindexSdkReference,
     isSdkReferenceFile,
+    sdkReferenceSlug,
     splitFrontmatter,
 }

@@ -2979,7 +2979,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Go',
-                            url: '/docs/libraries/go/reference',
+                            url: '/docs/libraries/go',
                             children: [
                                 {
                                     name: '2.x.x',
@@ -3039,7 +3039,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Node.js',
-                            url: '/docs/libraries/node/reference',
+                            url: '/docs/libraries/node',
                             children: [
                                 {
                                     name: '6.x.x',
@@ -3061,7 +3061,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Python',
-                            url: '/docs/libraries/python/reference',
+                            url: '/docs/libraries/python',
                             children: [
                                 {
                                     name: '8.x.x',
@@ -3117,7 +3117,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Rust',
-                            url: '/docs/libraries/rust/reference',
+                            url: '/docs/libraries/rust',
                             children: [
                                 {
                                     name: '1.x.x',
@@ -6401,11 +6401,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Node.js SDK',
-                            url: '/docs/libraries/node/reference#capture-exception',
+                            url: '/docs/libraries/node#capture-exception',
                         },
                         {
                             name: 'Python SDK',
-                            url: '/docs/libraries/python/reference#capture-exception',
+                            url: '/docs/libraries/python#capture-exception',
                         },
                         {
                             name: 'Error tracking API',

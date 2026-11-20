@@ -8,6 +8,7 @@ import type {
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
+import { PUBLISHED_SDK_REFERENCES } from './sdkMarkdownReferences'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
@@ -1193,8 +1194,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             } as unknown as Parameters<typeof createNode>[0])
         }
 
+        const legacyHogRefSdkIds = SUPPORTED_SDK_IDS.filter((id) => !PUBLISHED_SDK_REFERENCES.includes(id))
+
         await Promise.all(
-            SUPPORTED_SDK_IDS.flatMap((referenceId) => [
+            legacyHogRefSdkIds.flatMap((referenceId) => [
                 fetchRows({ referenceId: { $eq: referenceId }, version: { $containsi: 'latest' } }, 1),
                 fetchRows(
                     { referenceId: { $eq: referenceId }, version: { $notContainsi: 'latest' } },

@@ -9,7 +9,7 @@ import fs from 'fs'
 import path from 'path'
 import DataLoader from 'dataloader'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
-import { isSdkReferenceFile, splitFrontmatter } from './sdkMarkdownReferences'
+import { isSdkReferenceFile, sdkReferenceSlug, splitFrontmatter } from './sdkMarkdownReferences'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -163,7 +163,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             id: createNodeId(`sdk-markdown-reference-${file.id}`),
             parent: file.id,
             children: [],
-            slug: `/${file.relativePath.slice(0, -'.md'.length)}`,
+            slug: sdkReferenceSlug(file.relativePath),
             title: frontmatter.title || '',
             contentMaxWidthClass: frontmatter.contentMaxWidthClass,
             tableOfContents: frontmatter.tableOfContents,
