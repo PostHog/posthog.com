@@ -49,6 +49,7 @@ Since alerts work on [trends](/docs/product-analytics/trends/overview), [funnels
    - **Monthly** checks once a month.
 
    The form shows the next planned evaluation.
+
 10. Select the users to notify. Subscribed users get in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs in the alert form. See [notifications](#notifications).
 11. Click **Create alert**. Open **Monitor** > **Alerts** on the insight to review or edit its alerts. Open **Alerts** from the sidebar to manage alerts across insights.
 
@@ -211,10 +212,10 @@ Each check and each preview uses your organization's [AI credits](/docs/posthog-
 
 Statistical and machine learning detectors use these core parameters:
 
-| Parameter                   | Description                                                                  | Default                         |
-| --------------------------- | ---------------------------------------------------------------------------- | ------------------------------- |
-| **Sensitivity** (threshold) | Anomaly score cutoff between 0 and 1. Higher values mean fewer alerts.       | 0.9                             |
-| **Window**                  | Number of historical data points used for training.                          | Depends on interval (see below) |
+| Parameter                   | Description                                                            | Default                         |
+| --------------------------- | ---------------------------------------------------------------------- | ------------------------------- |
+| **Sensitivity** (threshold) | Anomaly score cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9                             |
+| **Window**                  | Number of historical data points used for training.                    | Depends on interval (see below) |
 
 Default window sizes based on your alert's check interval:
 
@@ -413,12 +414,21 @@ Common reasons an alert may be auto-disabled:
 - An absolute value alert was configured with a percentage threshold
 - The alert has a missing or invalid check frequency (calculation interval)
 - A threshold alert has no bounds set (neither a lower nor upper value was configured)
+- The alert owner left the organization or lost access to the data the alert monitors
 
 <CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
 
 Disabled alerts don't re-enable themselves. After fixing the configuration issue, open the saved insight, click **Monitor** > **Alerts**, and manually re-enable the alert.
 
 </CalloutBox>
+
+### Alert ownership
+
+Alerts run with the access permissions of their creator (owner). If the owner leaves the organization or loses access to the data the alert reads, PostHog automatically disables the alert.
+
+When you try to re-enable such an alert — either from the alert list toggle or the edit form — a dialog appears explaining that the alert can no longer run with its current owner's access. You can click **Take ownership and enable** to become the new owner. The alert then runs with your access permissions going forward.
+
+Taking ownership is logged in the alert's activity log as "took ownership of the alert."
 
 ## Further reading
 

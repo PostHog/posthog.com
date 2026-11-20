@@ -260,6 +260,7 @@ PostHog automatically disables subscriptions when delivery can't succeed. This h
 - **Slack integration disconnected** – The Slack integration was removed or disconnected from your PostHog organization.
 - **Unsupported delivery channel** – The subscription targets a delivery channel that's no longer supported.
 - **Slack channel access issues** – PostHog can't post to the Slack channel. This includes archived channels, channels the PostHog bot was removed from, channels that no longer exist, or a revoked Slack token.
+- **Owner left or lost access** – The subscription's creator left the organization or lost access to the data the subscription reads. See [subscription ownership](#subscription-ownership) below.
 
 When a subscription is auto-disabled, the subscription owner receives an email notification explaining the reason. Disabled subscriptions display a **Disabled** tag in the subscriptions list and on the subscriptions page.
 
@@ -275,3 +276,9 @@ To re-enable a disabled subscription:
 PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
 
 When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.
+
+### Subscription ownership
+
+Subscriptions run with the access permissions of their creator (the owner). When the owner leaves the organization or loses access to the data the subscription reads, PostHog automatically disables the subscription.
+
+To re-enable a subscription disabled for this reason, you need to take ownership of it. When you attempt to re-enable the subscription, a dialog appears explaining why it was disabled and offering a **Take ownership and enable** button. Confirming makes you the new owner and enables the subscription, so it runs with your access from that point on.
