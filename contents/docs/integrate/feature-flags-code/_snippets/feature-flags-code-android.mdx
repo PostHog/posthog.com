@@ -44,29 +44,40 @@ Every time a user opens the app, we send a request in the background to fetch th
 
 This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
 
-To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
+To handle this, register a listener with `PostHog.onFeatureFlags()` before you set up the SDK, so it also gets the first load:
 
 ```kotlin
 import com.posthog.PostHog
+import com.posthog.android.PostHogAndroid
 import com.posthog.android.PostHogAndroidConfig
-import com.posthog.PostHogOnFeatureFlags
 
-// During SDK initialization
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
-    onFeatureFlags = PostHogOnFeatureFlags {
-        if (PostHog.isFeatureEnabled("flag-key")) {
-            // do something
-        }
+// Before setup
+val subscription = PostHog.onFeatureFlags { loaded ->
+    if (!loaded.errorsLoading && PostHog.getFeatureFlag("flag-key") == "test") {
+        // do something
     }
 }
 
+PostHogAndroid.setup(context, PostHogAndroidConfig(projectToken = "<ph_project_token>"))
+
+// Later, stop listening
+subscription.unsubscribe()
+
 // And/or after the SDK is initialized
-PostHog.reloadFeatureFlags {
-    if (PostHog.isFeatureEnabled("flag-key")) {
+PostHog.reloadFeatureFlags { loaded ->
+    if (!loaded.errorsLoading && PostHog.isFeatureEnabled("flag-key")) {
         // do something
     }
 }
 ```
+
+Both callbacks also run when loading fails. `loaded` is a `PostHogFeatureFlagsLoaded` with `flags` (the keys of the enabled flags), `variants` (their values), and `errorsLoading` (whether the load failed, in which case the values are the last known ones).
+
+The listener runs on the main thread after every flag load, and it also gets the current values if flags have already loaded. The `reloadFeatureFlags()` callback runs on a background thread, so switch to the main thread before touching UI.
+
+Read the value with `getFeatureFlag` when you act on it. It captures `$feature_flag_called`, which experiments use to record exposure, and reading `loaded.variants` doesn't.
+
+`PostHog.onFeatureFlags()` and the `loaded` argument require version 4.0 or later. On 3.x, set `onFeatureFlags = PostHogOnFeatureFlags { … }` on the config instead, and the callbacks take no arguments.
 
 ### Reloading feature flags
 

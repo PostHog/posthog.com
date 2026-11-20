@@ -44,7 +44,7 @@ Some services enable HIPAA compliance through the creation of a [Business Associ
 
 It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license.
 
-Some analytics tools, such as [Google Analytics](/compare/ga4-alternatives), don't offer BAAs and are therefore not HIPAA-compliant.
+Some analytics tools, such as [Google Analytics](/compare/best-ga4-alternatives), don't offer BAAs and are therefore not HIPAA-compliant.
 
 ## The best HIPAA-compliant analytics tools
 
@@ -115,7 +115,7 @@ This makes Countly a flexible option whether you want a managed BAA-backed deplo
 
 **Freshpaint** isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies.
 
-Freshpaint sits between data sources (e.g. data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as [Google Analytics](/compare/ga4-alternatives), safe in the knowledge you're not accidentally passing PHI into them.
+Freshpaint sits between data sources (e.g. data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as [Google Analytics](/compare/best-ga4-alternatives), safe in the knowledge you're not accidentally passing PHI into them.
 
 #### Freshpaint and HIPAA compliance
 
