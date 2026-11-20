@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import { IconCheckCircle, IconEye, IconSearch, IconWarning, IconWrench } from '@posthog/icons'
 import { Badge } from 'components/UI/Badge'
+import OSButton from 'components/OSButton'
 import { Card } from 'components/UI/Card'
 import { Collapsible } from 'components/UI/Collapsible'
 import { Popover } from 'components/UI/Popover'
@@ -428,6 +429,31 @@ function LatestIncidents({ status }: { status: ScaleStatus | null }): JSX.Elemen
     )
 }
 
+const HedgehogError = lazy(() =>
+    import(/* webpackExports: ["HedgehogError"] */ '@posthog/brand/hoggies').then((hoggies) => ({
+        default: hoggies.HedgehogError,
+    }))
+)
+
+function StatusFailed(): JSX.Element {
+    return (
+        <div className="flex flex-col items-center gap-4 py-8 text-center">
+            <div aria-hidden className="size-40">
+                <Suspense fallback={null}>
+                    <HedgehogError className="size-full" />
+                </Suspense>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+                <h3 className="m-0 text-xl font-bold">Uh oh – it looks like we couldn’t fetch status info.</h3>
+                <p className="m-0 text-secondary">The status page always has the latest on our uptime and incidents.</p>
+                <OSButton asLink external variant="secondary" size="md" to={STATUS_SITE}>
+                    Open the status page
+                </OSButton>
+            </div>
+        </div>
+    )
+}
+
 export default function Reliability(): JSX.Element {
     const { status, failed } = useScaleStatus()
     return (
@@ -442,13 +468,7 @@ export default function Reliability(): JSX.Element {
                 </div>
             </header>
             {failed && !status ? (
-                <p className="m-0 text-sm text-secondary">
-                    Could not load our status right now. See{' '}
-                    <a href={STATUS_SITE} target="_blank" rel="noopener noreferrer" className={incidentLink}>
-                        posthogstatus.com
-                    </a>
-                    .
-                </p>
+                <StatusFailed />
             ) : (
                 <>
                     <UptimeCalendar status={status} />
