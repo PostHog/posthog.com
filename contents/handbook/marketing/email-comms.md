@@ -79,7 +79,7 @@ If you're sending the email and are happy to receive replies, feel free to set y
 
 A couple of changes that impact who we send our emails to.
 
-Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/email/sending-reputation) and our emails end up in spam.
+Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/messaging/sending-reputation) and our emails end up in spam.
 
 The way users interact with PostHog is also changing. Previously, we relied on a `user has logged in` property to check if they were active. Now, users don't need to login at all to interact with their PostHog data, if they use our MCP, for example.
 
@@ -101,7 +101,7 @@ If you want to notify a specific group of users about a breaking change, inciden
 ## After you send
 
 - **Watch bounces and complaints.** Check them after every large send. If Workflows pauses a broadcast, find out why before you resume it. The cause is usually the audience.
-- **Measure the result.** Add an <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">annotation</PrivateLink> on the send date. About a week later, check the [engagement events](/docs/email/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
+- **Measure the result.** Add an <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">annotation</PrivateLink> on the send date. About a week later, check the [engagement events](/docs/messaging/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
 
 ## Linking to the PostHog app or PostHog AI
 

@@ -1,0 +1,79 @@
+---
+title: Messaging MCP tools
+sidebar: Docs
+showTitle: true
+---
+
+The PostHog [MCP server](/docs/model-context-protocol) brings Messaging into Claude Code, Cursor, and other AI tools. Your agent can set up a sender, send transactional email, design templates, create broadcasts, manage opt-outs, import from other tools, and read the results, without leaving your editor. The [agent skills](/docs/messaging/skills) teach your agent how to use these tools.
+
+Drip campaigns are workflows, so your agent builds, tests, and publishes them with the [workflow tools](#build-and-run-workflows) below.
+
+## Before you start
+
+1. **Set up Messaging** - You can create broadcasts and drip campaigns without any SDK. [Install a PostHog SDK](/docs/messaging/installation) if you want event-based triggers or to send transactional email from your backend.
+2. **Connect the MCP server** - [install it in your AI tool](#set-up) and give it access to your project.
+
+Some tools are still rolling out, so your project might not have every tool below yet.
+
+## Set up sending
+
+- **Check setup.** `workflows-setup-status` shows which messaging setup steps the project has done: email sender, verified sending domain, opt-out categories, frequency cap, email template, and first workflow.
+- **Add and verify a sender.** `integrations-email-create` adds an email sender, `integrations-email-status-retrieve` lists the DNS records to publish with the status of each, and `integrations-email-verify-create` marks the domain verified once the records resolve. Verifying needs a project admin. See [verify your sending domain](/docs/messaging/verify-domain).
+- **Set sending rules.** `workflows-sending-rules-get` and `workflows-sending-rules-update` read and change the project-wide [frequency cap](/docs/messaging/frequency-cap), email tracking consent, and whether [engagement events](/docs/messaging/engagement-events) are captured.
+- **Check your allowance.** `workflows-reputation-get` reports the project's email health over the last 30 days and its [sending allowance](/docs/messaging/sending-reputation).
+
+## Send transactional email
+
+- **Make a template transactional.** `workflows-make-email-template-transactional-prepare` and `workflows-make-email-template-transactional-execute` turn a template into a [transactional email](/docs/messaging/transactional-emails). This can't be undone.
+- **Send a test.** `workflows-send-email-template-prepare` and `workflows-send-email-template-execute` send a transactional template to one recipient. `workflows-send-email-prepare` and `workflows-send-email-execute` send content that your agent passes, with no template. Each send needs you to reply `confirm`.
+- **Read the sends.** `workflows-transactional-emails-list` lists sends, `workflows-transactional-email-get` reads one send and its status, and `workflows-transactional-email-stats` reports delivery stats.
+- **See what recipients did.** `workflows-transactional-email-activity` shows what one recipient did around a send, and `workflows-transactional-email-results` shows what people did after an email.
+
+## Design email templates
+
+`workflows-create-email-template`, `workflows-get-email-template`, `workflows-list-email-templates`, `workflows-update-email-template`, `workflows-patch-email-template`, and `workflows-show-email-template` create, read, edit, and preview templates in the [content library](/docs/messaging/library#create-templates-with-mcp). Templates that your agent creates stay editable in the drag-and-drop builder.
+
+## Create broadcasts
+
+`broadcasts-create` creates a [broadcast](/docs/messaging/broadcasts) as a draft, which you review and launch in the broadcast editor. `workflows-convert-to-broadcast` moves a workflow that sends one email to a batch audience over to broadcasts. This can't be undone.
+
+## Manage opt-outs and suppressions
+
+- **Message categories.** `message-categories-list`, `message-categories-get`, `message-categories-create`, and `message-categories-update` manage the [message categories](/docs/messaging/opt-outs#message-categories) that email steps reference. Recipients can opt out of marketing categories. Transactional categories ignore opt-outs.
+- **Opt-outs.** `opt-outs-list` lists who opted out of a category, `opt-outs-add` opts up to 1,000 recipients out in one call, and `opt-outs-remove` opts a recipient back in.
+- **Suppressions.** `suppressions-list` lists the [suppression list](/docs/messaging/opt-outs#the-suppression-list), `suppressions-add` adds up to 1,000 addresses in one call, and `suppressions-remove` removes up to 100.
+
+## Import from other tools
+
+- **Customer.io automations.** `workflows-import-customerio` turns Customer.io automations into draft workflows, and `workflows-import-notes` shows what the import changed or left out. See [migrate from Customer.io](/docs/messaging/migrate-from-customer-io).
+- **Opt-outs, suppressions, templates, and more.** `provider-imports-providers` lists the tools your project can import from and what each one brings over. `provider-imports-create` starts an import, and `provider-imports-list` and `provider-imports-get` show its progress and results. See [migrate from Resend](/docs/messaging/migrate-from-resend).
+- **Push devices.** `integrations-push-tokens-create` imports existing device tokens into a push channel. See [import device tokens](/docs/messaging/push-notifications/import-device-tokens).
+
+## Connect Supabase auth emails
+
+`supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, and `supabase-auth-emails-starter-templates-create` connect a Supabase project and map its [auth emails](/docs/messaging/supabase-auth-emails) to templates. These tools are in private beta.
+
+For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
+
+## Build and run workflows
+
+- **Create and edit.** `workflows-create` makes a draft [workflow](/docs/messaging/automations), `workflows-patch-graph` and `workflows-update` change it, `workflows-patch-action-email` edits one email step, and `workflows-discard-draft` throws the draft away.
+- **Start from your data.** `workflows-data-suggestions-list` suggests up to three workflows from your project's events, and `workflows-data-suggestions-create` builds one as a draft.
+- **Test and publish.** `workflows-test-run` runs a workflow without sending to real recipients, and `workflows-publish` makes the draft live.
+- **Read results.** `workflows-stats`, `workflows-global-stats`, and `workflows-version-stats` report performance. `workflows-list-invocations`, `workflows-get-invocation`, and `workflows-logs` show what happened on a run.
+- **Roll back.** `workflows-list-revisions`, `workflows-get-revision`, and `workflows-restore-revision` inspect history and restore an earlier version.
+
+## Drafts are the safety net
+
+A workflow or broadcast created over MCP is a draft. Nobody receives a message until you launch it, so an agent can build the whole thing and hand it to you for review. Tools that send an email or make a template transactional ask you to reply `confirm` first.
+
+## Set up
+
+Connect the PostHog MCP server to your AI tool of choice, then grant it access to your project. The [MCP overview](/docs/model-context-protocol) covers install and authentication for each client.
+
+## Related
+
+- [MCP overview](/docs/model-context-protocol) - install and authentication
+- [Agent skills for Messaging](/docs/messaging/skills) - what your agent loads to use these tools
+- [Automations](/docs/messaging/automations) - what a workflow is and how to launch one
+- [Content library and message templates](/docs/messaging/library#create-templates-with-mcp) - creating templates over MCP

@@ -1,0 +1,233 @@
+---
+title: Workflow builder
+---
+
+import Tab from "components/Tab";
+import AddSlackToWorkspace from "./_snippets/add-posthog-to-slack-workspace.mdx";
+import AddSlackToChannel from "./_snippets/add-posthog-to-slack-channel.mdx";
+
+A workflow is a set of steps that runs when a trigger fires. You build it in the no-code workflow builder.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_new_light_472b06f16c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_new_dark_25b7dc249a.png"
+  classes="rounded"
+  alt="Fresh workflow with trigger block"
+/>
+
+| Component                                                    | Description                                                                                     |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| [Triggers](#triggers)                                        | What starts the workflow: an event, a batch audience, a webhook, a Slack message, or a schedule. |
+| [Dispatches](#dispatches)                                    | Messages and calls: email, push, Slack, SMS, webhooks, and real-time destinations.              |
+| [Delays](#delays)                                            | Wait for a time, a condition, an event, or a time window.                                       |
+| [Audience splits](#audience-splits)                          | Branch on properties, or split people at random.                                                |
+| [PostHog actions](#posthog-actions)                          | Capture an event or update person properties.                                                   |
+| [Output variables](#output-variables)                        | Store a step's result for later steps.                                                          |
+| [AI tasks and Replay Vision](/docs/messaging/automations/ai-tasks) | Hand work to an AI agent, or have Replay Vision watch the session, then continue with the result. |
+
+## Draft and enabled workflows
+
+A workflow is a **draft** until you enable it. You can save a draft at any time, even when it is incomplete or invalid, and you can archive it. PostHog checks every step only when you click **Enable**, and lists anything you need to fix.
+
+You can edit an enabled workflow, and your changes reach people already in it. See [editing a live workflow](/docs/messaging/automations/editing-live-workflows). Disabling a workflow stops new runs but doesn't cancel runs in flight. See [stopping runs](/docs/messaging/automations/editing-live-workflows#stopping-runs).
+
+To group workflows, add tags in the **Tags** column of the workflows list, then filter the list by tag. Tags are shared with dashboards, insights, and feature flags in your project.
+
+## Triggers
+
+| Trigger type           | Description                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| Event trigger          | A captured [PostHog event](/docs/data/events), such as `signed up`                        |
+| Webhook trigger        | An HTTP request to a URL that PostHog generates                                           |
+| Batch trigger          | Each person in an audience, once or on a recurring schedule                               |
+| Schedule trigger       | Once or on a recurring schedule, with no person or event                                  |
+| Manual trigger         | A click on **Trigger** in the workflow editor                                             |
+| Tracking pixel trigger | A 1x1 image loaded, for example in an email                                               |
+| Slack trigger          | A message posted in a connected Slack channel                                             |
+
+### Event triggers
+
+Any PostHog event can start a workflow, including [autocaptured](/docs/product-analytics/autocapture) events. To filter on event, person, or [group](/docs/product-analytics/group-analytics) properties, click the three lines icon next to the event and select **Add filter**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_trigger_filters_light_3c1a5c851d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_trigger_filters_dark_a71b160d19.png"
+  classes="rounded"
+  alt="Event trigger filter"
+/>
+
+### Webhook triggers
+
+A webhook trigger starts a workflow from any system that can make an HTTP request. Copy the URL from the trigger step. This is the recommended way to turn an external webhook into PostHog events: add a **Capture event** [action](#posthog-actions) after the trigger.
+
+To stop retries from starting duplicate runs, send an `Idempotency-Key` header:
+
+```bash
+curl -X POST '<your-webhook-url>' \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: your-unique-key-here' \
+  -d '{"your": "payload"}'
+```
+
+| Scenario                                        | Response                      |
+| ----------------------------------------------- | ----------------------------- |
+| First call with a key, or no key                | `201 {"status": "queued"}`    |
+| Same key again within 24 hours                  | `200 {"status": "duplicate"}` |
+| Same key while the first call is still queueing | `409 {"status": "in_flight"}` |
+| Key longer than 255 characters                  | `400`                         |
+
+Keys are scoped to one workflow and expire after 24 hours.
+
+### Batch triggers
+
+A batch trigger runs the workflow once for each person in an audience. See [choose an audience](/docs/messaging/audiences) for the filters and for how PostHog sends one email per address. To send one email with no other steps, a [broadcast](/docs/messaging/broadcasts) is quicker.
+
+By default, the batch runs once when you click **Trigger** and then **Run workflow**. To stop a batch run, see [stop a batch run](/docs/messaging/automations/editing-live-workflows#stop-a-batch-run).
+
+#### Recurring schedule
+
+Add a schedule to run the batch again, such as "every Monday at 9am" for a weekly digest:
+
+| Setting   | Options                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------- |
+| Frequency | Daily, weekly, monthly, or yearly, with an interval, such as every 2 weeks                  |
+| Weekly    | The days of the week to run on                                                              |
+| Monthly   | A day of the month, an ordinal weekday such as the 3rd Wednesday, or the last day           |
+| Start     | The date and time the schedule begins, in a timezone you select                             |
+| Ends      | Never, on a date, or after a number of occurrences                                          |
+
+You can also type the schedule in plain English and check the next occurrences before you enable the workflow.
+
+### Schedule triggers
+
+A schedule trigger runs the workflow once per occurrence, with no person or event. Use it for jobs such as AI tasks. It uses the same picker as a [recurring schedule](#recurring-schedule). To run once, turn off repeating.
+
+### Manual and tracking pixel triggers
+
+A manual trigger runs the workflow when you click **Trigger** in the workflow editor, with no person or event. A tracking pixel trigger gives you an image URL to embed in an email or page. Query parameters on the URL map to event properties.
+
+### Slack triggers
+
+A Slack trigger starts a workflow when someone posts in a channel. [Connect Slack](#connect-slack-and-sms) and invite the PostHog bot to the channels you want to watch.
+
+| Setting                       | Description                                                                         |
+| ----------------------------- | ----------------------------------------------------------------------------------- |
+| Channels                      | The Slack channels to watch                                                         |
+| Who can start a run           | Anyone, people only, apps only, specific people, or specific apps                   |
+| Ignore replies inside threads | Only top-level messages start a run                                                 |
+| Additional filters            | Message properties such as `text`, `subtype`, or `channel_type`                     |
+
+A Slack-triggered run has no person, so person steps are not available. Messages that PostHog posts never start a run.
+
+### Trigger frequency
+
+**Frequency** on the trigger step controls how often one person can enter the workflow:
+
+| Option                       | What it does                                                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Every time the trigger fires | Default. Each matching event starts a new run.                                                         |
+| One time                     | A person enters once, then not again for a window from 5 minutes to 365 days, or ever.                 |
+| Once per calendar day        | A person enters at most once a day.                                                                    |
+
+Use **One time** when the same event can arrive twice, for example from a server retry. To limit marketing messages across all workflows and broadcasts, use the [frequency cap](/docs/messaging/frequency-cap) instead.
+
+### Conversion goals
+
+A conversion goal is an event, such as `purchase_completed`, or a person property condition, such as `plan` is `growth`. Set it on the trigger step. When a person meets it, PostHog records a `$workflows_conversion` [event](/docs/messaging/engagement-events#conversion-events), and the **Metrics** tab shows **Converted** and **Conversion rate**. Conversions count whether or not the workflow exits on conversion. Each conversion event counts toward your event usage.
+
+### Email sending rate limit
+
+To spread a large send over time, click the trigger step, select **Limit sending rate**, and set a maximum number of emails per minute or hour for the whole workflow. Emails over the limit wait in a queue, they are not dropped. This is separate from your project's [sending allowance](/docs/messaging/sending-reputation#sending-allowance-tiers).
+
+## Dispatches
+
+| Dispatch type    | Description                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- |
+| Email            | Needs a [verified sender](/docs/messaging/verify-domain). See [templates](/docs/messaging/library).        |
+| Push             | Needs a [push channel](/docs/messaging/push-notifications#set-up-a-push-channel).                          |
+| Slack            | Needs a [Slack channel](#connect-slack-and-sms).                                                           |
+| SMS              | Needs a [Twilio channel](#connect-slack-and-sms).                                                          |
+| Webhook          | Calls any URL. Configured on the step.                                                                     |
+| CDP destinations | Any [real-time destination](/docs/data-pipelines/destinations). Configured on the step.                    |
+
+Email steps track opens and clicks by default. To turn that off, see [email tracking controls](/docs/messaging/engagement-events#email-tracking-controls).
+
+### Connect Slack and SMS
+
+Go to the [**Channels** tab](https://app.posthog.com/workflows/channels), click **+ New channel**, and pick the channel. Only project admins and higher can add a channel.
+
+<Tab.Group tabs={["Slack", "Twilio"]}>
+<Tab.List>
+  <Tab>Slack</Tab>
+  <Tab>Twilio</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+<AddSlackToWorkspace />
+
+<AddSlackToChannel />
+
+In the Slack step, pick the workspace and channel, and write the message. You can use templating, such as `{{ event.event }}`, and Slack [blocks](https://docs.slack.dev/block-kit/).
+
+</Tab.Panel>
+<Tab.Panel>
+
+To send SMS, add your Twilio **Account SID** and **Auth Token**. See the Twilio docs for where to find your [Account SID](https://help.twilio.com/articles/14726256820123-What-is-a-Twilio-Account-SID-and-where-can-I-find-it-) and [Auth Token](https://help.twilio.com/articles/223136027-Auth-Tokens-and-How-to-Change-Them).
+
+In the SMS step, pick a from number, set the recipient, such as `{{ person.properties.phone }}`, and write the message.
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+## Delays
+
+| Delay type             | Description                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| Fixed wait             | Wait a number of minutes, hours, or days.                                   |
+| Wait until condition   | Wait until a property condition is true, or an event arrives.               |
+| Wait until time window | Wait until a time window, such as weekdays 9 to 5.                          |
+
+For an example, see the [email drip campaign](/docs/messaging/email-drip-campaign) tutorial.
+
+### Waiting for events
+
+A **wait until condition** step can wait for an event from the person in the run. If no event matches before the maximum wait, the run takes the timeout branch.
+
+- **Filters use fixed values.** A filter can't reference the trigger event. `{{event.properties.order_id}}` in a filter value is compared as text, so it never matches.
+- **Each run waits on its own.** If one person has several runs waiting, one matching event resumes all of them.
+
+## Audience splits
+
+| Audience split type | Description                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------- |
+| Conditional branch  | Branch on [event](/docs/data/events) or [person](/docs/product-analytics/identify) properties.      |
+| Random branch       | Split people at random to [test](/docs/experiments) two paths.                                      |
+
+## PostHog actions
+
+PostHog actions send data back to your project, so you can chain workflows and measure them in insights.
+
+| PostHog action type      | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| Capture event            | Capture a PostHog event, which can also trigger another workflow. |
+| Update person properties | Set or create a person property.                               |
+
+With [Support](/docs/support) on, **Get ticket** and **Update ticket** steps and ticket trigger events are also available. See [Support workflows](/docs/support/workflows).
+
+## Output variables
+
+Output variables store data from a step's result, such as an ID from a webhook response, for later steps.
+
+1. Click a step, such as a webhook, and expand **Output variables**.
+2. Click **Add mapping** and pick a workflow variable.
+3. Set a result path, or click **Pick from response** to make a real request and click a key in the JSON response.
+
+| Example path         | Description                            |
+| -------------------- | -------------------------------------- |
+| `body`               | The entire response body               |
+| `body.user.email`    | A nested property                      |
+| `body.results[0].id` | A property from the first array item   |
+
+Leave the path blank to store the entire result. All variables together are limited to 5KB.

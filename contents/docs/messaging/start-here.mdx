@@ -1,0 +1,140 @@
+---
+title: Getting started with Messaging
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
+import OSButton from "components/OSButton";
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to send your first email!">
+
+<QuestLogItem
+  title="Set up a sender"
+  subtitle="Required"
+  icon="IconLetter"
+>
+
+Every email comes from a sender. To try Messaging right away, use the [sandbox sender](/docs/messaging/sandbox-sender). It sends from a PostHog address before you verify a domain, but it only delivers to members of your PostHog organization.
+
+To email your users, add your own sender on the [**Channels** tab](https://app.posthog.com/workflows/channels) and verify its domain. You add a few DNS records, and verification usually takes a few minutes.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/channels_light_d59f7881bc.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/channels_dark_ad5b25bed0.png"
+  alt="How to create a channel in PostHog"
+  classes="rounded"
+/>
+
+You can also send [push notifications](/docs/messaging/push-notifications). To send Slack messages and SMS from a workflow, see [Slack, SMS, and webhooks](/docs/messaging/automations/workflow-builder).
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/verify-domain">
+  Verify your sending domain
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Send a transactional email"
+  subtitle="Recommended"
+  icon="IconCode"
+>
+
+Transactional emails are the one-off emails your code sends to one person, such as password resets, sign-in codes, and receipts. Write each one as code, such as a React Email component, and your backend sends it with one call to a [server SDK](/docs/messaging/installation#send-email-from-your-backend) or the API. You can also write it in the PostHog editor.
+
+```js
+await posthog.emails.send({
+  to: "you@example.com",
+  templateKey: "welcome",
+  subject: "Welcome",
+  html: "<p>Hi Ada</p>",
+  idempotencyKey: "my-first-email",
+})
+```
+
+The guide sets up an API key and sends a test email to you in a few minutes.
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/transactional-emails">
+  Send your first transactional email
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Send a broadcast"
+  subtitle="Recommended"
+  icon="IconSend"
+>
+
+A broadcast sends one email to many people, once or on a schedule, such as a product update or a weekly newsletter. Choose the recipients with person properties and cohorts, write the email, and schedule it. PostHog saves your progress as a draft until you send.
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/broadcasts">
+  Send a broadcast
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Build an onboarding sequence"
+  subtitle="Recommended"
+  icon="IconDecisionTree"
+>
+
+A drip campaign is a series of emails that reacts to what each person does, such as an onboarding sequence. Drip campaigns use the [workflow builder](/docs/messaging/automations/workflow-builder), which starts a workflow from a trigger, such as a sign-up event, then waits, splits the audience, and sends messages at each step.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_dark_8fe8f4567b.png"
+  alt="How to create a workflow in PostHog"
+  classes="rounded"
+/>
+
+To trigger a workflow from what people do in your product, [install a PostHog SDK](/docs/messaging/installation#trigger-broadcasts-and-automations-from-events) in your app. Then follow [how to create an email drip campaign](/docs/messaging/email-drip-campaign) to send a welcome email at sign-up and a follow-up a few days later. For a tour of the builder, see [launch your first workflow](/docs/messaging/automations).
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/email-drip-campaign">
+  Set up a drip campaign
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="See the results"
+  subtitle="Recommended"
+  icon="IconGraph"
+>
+
+Each workflow, broadcast, and transactional email shows its sends, deliveries, opens, clicks, and bounces. Turn on engagement events, and PostHog also captures each send, open, and click as an event on the person who got it. Use them in insights, funnels, and dashboards, next to your product events.
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/engagement-events">
+  Capture workflow events
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Know what you'll pay"
+  subtitle="Optional"
+  icon="IconPiggyBank"
+>
+
+Pricing is based on how many real-time destinations you use and how many messages you send each month. You get 10,000 destinations or messages free every month, with discounts as your usage grows.
+
+---
+
+<OSButton variant="primary" asLink to="/pricing">
+  See pricing
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

@@ -1,0 +1,167 @@
+---
+title: AI tasks and Replay Vision
+---
+
+Two workflow steps hand work to AI, then continue with the result:
+
+- **Create AI task** starts an AI agent with the tools you give it, such as GitHub repositories, connectors, skills, and your PostHog project.
+- **Replay Vision** has [Replay Vision](/docs/replay-vision) watch the session recording behind the triggering event, and answer a question about it.
+
+Both steps park the run until the answer is ready. Use [output variables](/docs/messaging/automations/workflow-builder#output-variables) to keep parts of the result, then branch on them, message someone, or write them back to PostHog.
+
+## AI tasks
+
+Use an AI task when an event, webhook, or schedule should start work, not only a message. The agent can investigate a support ticket and tag it, open a pull request from a webhook, or review every trial account once a week.
+
+### Add an AI task step
+
+1. Open a workflow in the [workflow builder](/docs/messaging/automations/workflow-builder) and add a step.
+2. Choose **Create AI task**.
+3. Write the **Instructions**. You can reference the triggering event and person: `A user with email {person.properties.email} hit {event.properties.error_message}`.
+4. Pick what the agent can use. All of these are optional:
+
+| Field                         | What it does                                                                                                                       |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Task title**                | Name shown in the task list. Leave empty to name the task from the instructions.                                                   |
+| **Model**                     | Model and reasoning effort. Leave empty for the default.                                                                           |
+| **Repositories**              | GitHub repositories the agent can work in, up to 20, in `org/repo` format.                                                         |
+| **Connectors**                | MCP servers the agent can call. Only servers shared with everyone in the project appear.                                           |
+| **Skills**                    | Skills from your skills store.                                                                                                     |
+| **PostHog access**            | **Read only** (default) lets the agent query your project. **Full access** lets it change things, such as person properties.       |
+| **Maximum parallel tasks**    | New runs are skipped while this many tasks from the workflow are still running. Default 5.                                         |
+| **Reply in the Slack thread** | On a Slack-triggered workflow, the agent replies in the thread that started the workflow, and replies in that thread go back to it. |
+
+Each task shows up in **Tasks**, where you can follow the agent's progress.
+
+### What happens while the agent works
+
+The run waits at the step until the task finishes, for up to about 3 hours. Then the next step can use its result:
+
+| Result path     | What it holds                                                         |
+| --------------- | --------------------------------------------------------------------- |
+| `status`        | `completed`                                                           |
+| `final_message` | The agent's final message, cut to fit the step result                 |
+| `pr_urls`       | Pull requests the agent opened, when it had a repository              |
+| `output.<name>` | Fields you asked for, see [structured output](#get-structured-output) |
+
+If the task fails, is canceled, or runs out of time, the step fails and its **On error** setting decides what happens next. With **Continue**, the next step sees `status` (`failed` or `cancelled`) and `error_message`.
+
+### Get structured output
+
+1. On the **Create AI task** step, add an output variable.
+2. Set the result path to `output.<name>`, for example `output.verdict` into a variable called `verdict`.
+3. Ask for the field in the instructions: "Set `verdict` to `spam` or `legitimate`."
+
+The variable's type (string, number, or boolean) tells the agent what to return. You can ask for up to 20 fields, and each text field holds up to 1,500 characters. If the agent leaves a field empty, the step still completes and the run log shows a warning.
+
+### Limits
+
+A workflow can create 100 tasks in a rolling 24 hours, and a project 500 across all its workflows. A project admin can raise either in **Settings > Workflows > AI task limits**, up to 500 per workflow and 2,500 per project, or set a limit to zero to pause new tasks. When a limit blocks a task, the step fails with the reason.
+
+### Use cases
+
+- **Triage a new support ticket.** Trigger on a [new ticket](/docs/support/workflows#trigger-events). Ask the agent to check the customer's recent errors and sessions, then set `team` and `priority`. An **Update ticket** step assigns it, and a **Slack** step posts the summary.
+- **Reply to an alert in its Slack thread.** Trigger on a Slack message in your alerts channel. Add your runbooks repository, and leave **Reply in the Slack thread** on so on-call can ask follow-up questions in the thread.
+- **Open a pull request from a webhook.** Trigger on a webhook from a notes tool or form. Add the target repository and the tool's connector, map `pr_urls` to a variable, and post it to Slack.
+- **Review each trial account every week.** Use a batch trigger on a trials cohort with a weekly schedule. Ask for `plan_fit`, branch on it, and store the agent's note with an **Update person properties** step.
+
+### Tips for better instructions
+
+- **Pass the event in.** `{event.properties.ticket_id}` or `{person.properties.email}` gives the agent the record to work on.
+- **Say what done looks like.** "Reply in the thread with severity and likely cause" beats "investigate the alert."
+- **Name the fields you want back** when a later step branches on them.
+- **Fence off side effects.** "Do not send email or start another workflow" keeps a full-access agent inside its job.
+
+## Replay Vision
+
+Use a Replay Vision step when the next step depends on what happened in the session, which event properties alone can't tell you. Add what a customer did before a support ticket to the Slack alert, score how smoothly a new signup got started, or route a low survey rating by what went wrong.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png"
+  classes="rounded"
+  alt="A workflow that scores each signup's first session with Replay Vision, then branches on the score"
+/>
+
+### Add a Replay Vision step
+
+1. Open a workflow in the [workflow builder](/docs/messaging/automations/workflow-builder) and add a step.
+2. Choose **Replay Vision** from the **AI** section of the step list.
+3. Under **What should Replay Vision do?**, pick an option and fill in its fields:
+
+| Option                  | What you get back                                    | Fields                     |
+| ----------------------- | ---------------------------------------------------- | -------------------------- |
+| **Ask a question**      | A yes or no verdict                                  | Question                   |
+| **Categorize**          | The categories from your list that fit the session   | Question, categories       |
+| **Score**               | A score on a scale you set                           | Question, from and to      |
+| **Summarize**           | A title, a summary, and chapters                     | What to focus on           |
+| **Use a saved scanner** | The answer of a [scanner](/docs/replay-vision/creating-scanners) you already have | Scanner |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/rv_workflow_step_setup_light_61eaa755ce.png"
+  classes="rounded"
+  alt="The Replay Vision step's settings, with the five options for what Replay Vision should do"
+/>
+
+Ask one visible thing per step, and say what counts as proof. [Scanner prompts](/docs/replay-vision/scanner-prompts) has worked examples. The question is fixed text, so it can't include `{event...}` or `{person...}` values.
+
+- **Session ID** is the recording to analyze. It defaults to the triggering event's `$session_id`.
+- **Wait for the session to end** is on by default. Replay Vision waits until the session has been quiet for 35 minutes. Turn it off when the trigger comes after the session is over.
+
+The run waits up to 6 hours for the session to end, then a few minutes for the scan. The step gives up after 8 hours. If Replay Vision already answered the same question about the same session, the step gets that answer at once, at no charge.
+
+### Use the result
+
+| Field      | What it holds                                             |
+| ---------- | --------------------------------------------------------- |
+| `state`    | `succeeded`, `skipped`, `ineligible`, `failed`, or `lost` |
+| `output`   | The answer, when `state` is `succeeded`                   |
+| `warnings` | Why there is no answer, when there isn't one              |
+
+| Option         | `output` fields                              |
+| -------------- | -------------------------------------------- |
+| Ask a question | `verdict`, `reasoning`, `confidence`         |
+| Categorize     | `tags`, `reasoning`, `confidence`            |
+| Score          | `score`, `reasoning`, `confidence`           |
+| Summarize      | `title`, `summary`, `chapters`, `confidence` |
+
+For example, store `output.score` in a `friction_score` variable, and a [conditional branch](/docs/messaging/automations/workflow-builder#audience-splits) can send scores of 2 or lower one way.
+
+When there is no answer, the workflow still continues, so branch on `state` if a missing answer needs another path. `skipped` means a scan limit or credit limit was reached. `ineligible` means the session can't be scanned, for example it has no recording (see [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions)). `failed` means the scan failed (see [failed observations](/docs/replay-vision/troubleshooting#failed-observations)). `lost` means the scan ran out of time.
+
+### Requirements
+
+- The project records sessions with [Session Replay](/docs/session-replay).
+- The triggering event carries a `$session_id`. Events the [JavaScript Web SDK](/docs/libraries/js) captures do. For events you send from your server, pass the session ID along.
+- Your organization has allowed AI data processing.
+- The workflow is in your project's main environment, not a child environment.
+- You need access to session recordings to add or change the step. For the first four options you also need edit access to the project's scanners, and for **Use a saved scanner**, edit access to that scanner.
+
+The workflow scans as its owner, so the owner needs the same access when the step runs. Experiment scanners can't run from a workflow.
+
+### Limits and credits
+
+Each scan spends [Replay Vision credits](/docs/replay-vision/quota-and-limits). A question, category, score, or summary set up in the step costs 5 credits. A saved scanner costs whatever its model costs.
+
+Workflows also have daily scan limits in a rolling 24 hours: 100 per workflow and 500 across the project by default. Change them in [**Settings > Workflows > Replay Vision scan limits**](https://app.posthog.com/settings/project-workflows#workflows-replay-vision-limits), up to 500 per workflow and 2,500 per project, or set a limit to zero to pause scans. When a limit is reached, the step returns `skipped`. The trigger's volume estimate in the builder shows how many scans a day it would start.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_scan_limits_1ffeb5db08.png"
+  classes="rounded"
+  alt="The Replay Vision scan limits in the project's workflow settings"
+/>
+
+### Templates
+
+Three [workflow templates](/docs/messaging/library#workflow-templates) start with a Replay Vision step. Pick a Slack channel, and change the trigger event to one your product sends:
+
+| Template                                          | Trigger                                    | What Replay Vision does                                       |
+| ------------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------- |
+| **Negative survey feedback with session context** | A survey rating of 2 or lower              | Summarizes what led to the low rating                         |
+| **Support tickets with session context**          | A new [support](/docs/support) ticket      | Summarizes what the customer tried and where they got stuck   |
+| **Onboarding friction alerts**                    | `user signed up`                           | Scores from 1 to 5 how smoothly they got started              |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_templates_1039fd7269.png"
+  classes="rounded"
+  alt="The three Replay Vision workflow templates"
+/>

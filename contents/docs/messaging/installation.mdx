@@ -1,0 +1,70 @@
+---
+title: Install PostHog SDKs for Messaging
+---
+
+import { WorkflowsInstallationPlatforms, WorkflowsInstallationFrameworks } from './_snippets/workflows-installation-platforms'
+import WizardCommand from 'components/WizardCommand'
+
+You install a PostHog SDK for two different jobs. Your backend uses one to send [transactional emails](/docs/messaging/transactional-emails), such as password resets and receipts. Your app uses one to capture the events that trigger broadcasts and automations. You can create and launch broadcasts and automations without any SDK.
+
+## Send email from your backend
+
+These server SDKs send transactional email. Each one needs a [project secret API key](/docs/messaging/transactional-emails#create-an-api-key) with the `transactional_email:write` scope.
+
+| SDK | Method | From version | Guide |
+| --- | --- | --- | --- |
+| Node.js | `posthog.emails.send` | 5.61.2 | [Node.js](/docs/messaging/transactional-emails/node) |
+| Python | `posthog.emails.send` | 7.81.2 | [Python](/docs/messaging/transactional-emails/python) |
+| Go | `client.Emails().Send` | 1.40.0 | [Go](/docs/messaging/transactional-emails/go) |
+| Ruby | `posthog.emails.send` | 3.30.0 | [Ruby](/docs/messaging/transactional-emails/ruby) |
+| PHP | `PostHog::emails()->send` | 4.22.0 | [PHP](/docs/messaging/transactional-emails/php) |
+| .NET | `emails.SendAsync` | 2.20.0 | [.NET](/docs/messaging/transactional-emails/dotnet) |
+| Rust | `posthog.emails().send` | 0.31.0 | [Rust](/docs/messaging/transactional-emails/rust) |
+| Elixir | `PostHog.Emails.send` | 2.20.0 | [Elixir](/docs/messaging/transactional-emails/elixir) |
+
+Some options need a later version, such as sending content from your code, copies, and attachments. Each SDK's guide lists them.
+
+For any other language, such as Java, send a request to `POST /api/projects/@current/messaging/send/email/` with your key as a bearer token. See [the API](/docs/messaging/transactional-emails/api).
+
+<CalloutBox icon="IconInfo" title="Browser and mobile SDKs can't send email" type="fyi">
+
+The web, iOS, Android, React Native, and Flutter SDKs can't send email. A send needs your project secret API key, and that key must stay on your server. To email a person from your app, call your backend, and send the email from there.
+
+</CalloutBox>
+
+## Trigger broadcasts and automations from events
+
+Install a PostHog SDK in your app or site to capture events. Any captured or custom event can then [trigger a workflow](/docs/messaging/automations/workflow-builder#triggers) that sends an email, a Slack message, an SMS, or a push notification, or calls a webhook. Person properties that your SDK sets can also choose who gets a [broadcast](/docs/messaging/broadcasts).
+
+These are the same SDKs used for [Product Analytics](/docs/product-analytics). If you already have PostHog installed, you're good to go.
+
+### Install with the AI wizard
+
+The fastest way to get started is with our installation wizard. Run this command in your project directory:
+
+<WizardCommand />
+
+It also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt.
+
+### Platforms
+
+<WorkflowsInstallationPlatforms />
+
+### Frameworks
+
+<WorkflowsInstallationFrameworks />
+
+<CalloutBox type="fyi" title="Do I need an SDK?">
+
+Without an SDK, you can still trigger workflows programmatically using [webhooks](/docs/messaging/automations/workflow-builder#triggers). With an SDK installed, you can also trigger workflows when:
+
+- A user performs any autocaptured event, such as pageviews, clicks, and form submissions
+- You send custom events from your app like `signed_up`, `purchase_completed`, or `onboarding_finished`
+
+</CalloutBox>
+
+## Next steps
+
+1. [Verify your sending domain](/docs/messaging/verify-domain), or try email first with the [sandbox sender](/docs/messaging/sandbox-sender).
+2. To send Slack messages or SMS, [connect those channels](/docs/messaging/automations/workflow-builder).
+3. Send a [transactional email](/docs/messaging/transactional-emails), or head to the [workflow builder](/docs/messaging/automations/workflow-builder) to create your first automation.

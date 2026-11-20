@@ -1,0 +1,50 @@
+---
+title: Self-driving workflows
+sidebar: Docs
+showTitle: true
+---
+
+Self-driving looks at how the emails in a live workflow perform, and suggests changes to the ones that underperform. For example, if a step has a low open rate and a long subject line, it suggests a shorter subject line. You review each suggestion before anything changes.
+
+Self-driving is in beta.
+
+## Turn it on
+
+1. Open a workflow and go to its **Self-driving** tab.
+2. Turn on **Suggest improvements**. The same switch is also in the workflow's menu.
+
+To turn it on, you need:
+
+- **Editor access** to the workflow.
+- **A live workflow** with at least one published email step.
+- **AI data processing approved** for your organization. If the **Self-driving** tab does not show, ask an organization admin to approve it in your organization settings.
+
+The first workflow you turn on in a project also turns on the workflows [scout](/docs/self-driving/scouts) for that project. This needs editor access to skills and a free scout slot in the project.
+
+## How it works
+
+Once a day, self-driving reads the email metrics of each workflow that has it turned on. It files at most one suggestion per workflow each day.
+
+It only looks at an email step when:
+
+- The step has at least 20 tracked sends in the last 7 days.
+- The current version of the workflow has been live for at least 2 days.
+- The step does not have a high bounce or complaint rate. Fix deliverability first. See [sending reputation](/docs/messaging/sending-reputation).
+
+Self-driving does not review transactional emails, and it only reviews email steps for now.
+
+## Review a suggestion
+
+When there is a suggestion, the workflow shows a "PostHog suggests a change to this workflow" banner, and the workflows list shows a count next to it.
+
+On the **Self-driving** tab, each suggestion under **Waiting for you** shows:
+
+- A before and after of each field it wants to change.
+- The evidence that led to it, such as the open or click rate of the step.
+
+You can:
+
+- **Approve** a suggestion. This saves the change as a draft. Nothing goes out until you [publish the workflow](/docs/messaging/automations/editing-live-workflows).
+- **Reject** a suggestion, with an optional reason. Self-driving does not suggest the same change again.
+
+After you publish an approved change, the **Applied** section compares the results before and after the change.

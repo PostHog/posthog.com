@@ -1,0 +1,71 @@
+---
+title: Opt-outs and suppression
+sidebar: Docs
+showTitle: true
+---
+
+Before a workflow sends anything, PostHog checks two lists: the recipient's **opt-out preferences** and the project's **suppression list**. Both live under **Workflows** in [PostHog](https://app.posthog.com), and no workflow step can switch either one off. The message category decides which rules apply: transactional email skips opt-outs, and only a hard bounce on the [suppression list](#the-suppression-list) blocks it.
+
+The difference matters. An opt-out is a choice the recipient made – they don't want this kind of message. A suppression is a delivery fact – mail to this address bounced, the recipient reported it as spam, or you added it by hand, so PostHog stops trying.
+
+## Message categories
+
+Opt-outs are organized into **message categories**, so someone can decline your product newsletter and still get a password reset. Each category has a name, an internal description, a public description shown to recipients on the preferences page, and a type – **marketing** or **transactional**.
+
+Create the categories you actually send against, then pick one on each message step in the [workflow builder](/docs/messaging/automations/workflow-builder). Recipients who have opted out of that category are skipped. You can also manage categories over the [API](/docs/messaging/api) or [MCP](/docs/messaging/mcp).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_light_8ffe0244a4.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_dark_f0182f29ef.png"
+    alt="Message categories and the opt-out list in PostHog"
+    classes="rounded"
+/>
+
+## The opt-out list
+
+The opt-out list shows who has opted out of which category. Recipients land on it in a few ways: a one-click unsubscribe from an email client, the preferences page behind `{{unsubscribe_url}}` in your [email templates](/docs/messaging/library#email-merge-tags), an import from another tool, or you adding them directly.
+
+Every genuine transition from opted-in to opted-out also writes a `$workflows_email_unsubscribed` event, carrying the `category` and the `source` (`one_click` or `preferences_page`). See [workflow events](/docs/messaging/engagement-events#properties-on-unsubscribe-events) for the full property list, and note that repeated unsubscribe requests do not emit duplicate events.
+
+Coming from another tool? Import your opt-out lists from [Customer.io](/docs/messaging/migrate-from-customer-io#2-import-opt-outs-and-suppressions), and keep them in sync with a reporting webhook, or from [Resend](/docs/messaging/migrate-from-resend).
+
+## The suppression list
+
+The suppression list is address-level and category-independent. Each entry records the recipient, how it got there (a bounce, a spam complaint, or a manual entry), the reason or last bounce diagnostic, and when it was suppressed.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_light_0f0f19a931.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_dark_3ede49aca0.png"
+    alt="The suppression list in PostHog"
+    classes="rounded"
+/>
+
+PostHog adds addresses automatically, which is what protects your sending domain's [reputation](/docs/messaging/sending-reputation):
+
+- **Hard bounce** – the address doesn't exist or refuses mail. PostHog suppresses it after the first hard bounce.
+- **Soft bounces** – the mailbox is full or temporarily unavailable. PostHog suppresses it after several soft bounces in a row, with no delivery between them.
+- **Spam complaint** – the recipient marked an email as spam. PostHog suppresses it after the first complaint.
+
+You can add an address by hand, and you can remove an entry if you believe the bounce was a one-off – but removing a genuine hard bounce means you'll bounce again.
+
+A suppressed address gets no email outside a transactional category. [Transactional email](/docs/messaging/transactional-emails) is blocked only by a hard bounce, because only a hard bounce proves the address is dead. A complaint, a manual entry, or soft bounces still let a password reset or a receipt through.
+
+## Managing the lists over the API
+
+Both lists are available over the [REST API](/docs/api), so your own product can honor an unsubscribe or a resubscribe without anyone opening PostHog. If you move from another provider, import its bounces and unsubscribes before your first send, as [move from another provider](/docs/messaging/sending-reputation#move-from-another-provider) explains.
+
+The [messaging preferences API](/docs/api/messaging-preferences) manages the opt-out list: list a category's opt-outs, add them one at a time or up to 1,000 in bulk, remove one when a recipient opts back in, and export a category's list as CSV. Leave out the category to work with the global opt-out that covers all marketing messages.
+
+Sends check the message's category and the global opt-out together, so opting someone back in to one marketing category also lifts a global opt-out if they have one. Their other marketing categories stay opted out, which keeps the resubscribe scoped to the category you named.
+
+The [messaging suppressions API](/docs/api/messaging-suppressions) manages the suppression list: list entries, add them one at a time or in bulk, and remove them. A bulk add takes a `reason` for each address. `bounce` blocks every email, transactional included, and `complaint` and `manual` block all email outside a transactional category. Use `bounce` when you import hard bounces from another provider.
+
+Authenticate with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:read` scope for reads or `hog_flow:write` for writes. Listing and removing suppressions also need the `person:read` scope.
+
+## Related
+
+- [Frequency cap](/docs/messaging/frequency-cap) - limiting how many marketing messages one person gets
+- [Migrate from Customer.io](/docs/messaging/migrate-from-customer-io) - importing opt-out lists and keeping them in sync
+- [Migrate from Resend](/docs/messaging/migrate-from-resend) - importing suppressions, unsubscribes, and topics
+- [Content library and message templates](/docs/messaging/library) – adding unsubscribe links to emails
+- [Workflow events](/docs/messaging/engagement-events) – unsubscribe and bounce events in your project
