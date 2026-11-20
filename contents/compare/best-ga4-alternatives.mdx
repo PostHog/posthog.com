@@ -36,9 +36,7 @@ Whether you're leaving GA4 for privacy reasons, because you don't like it, or be
 If event-based tracking is more powerful, why do so many people complain about GA4? Users tend to fall into one of three camps:
 
 1. **Users who miss pre-defined reports** – GA4 launched without many of the reports teams relied on. Google has added some back, including annotations in 2025 and dashboards in 2026, but things are still harder to find.
-
 2. **Teams without data science support** – GA4 caters more to large enterprises and app developers. Its reliance on Data Studio (formerly Looker Studio) and BigQuery exports is a barrier for small business and marketing teams who don't have analytics engineers.
-
 3. **App developers who need more** – Despite courting app developers, GA4 still falls short of alternatives that pulled users away from Universal Analytics in the first place. For many, it's too little, too late.
 
 Some teams also avoid GA4 for privacy reasons. GA4 is not GDPR-compliant by default – it requires additional configuration including consent banners and Consent Mode v2. The 2023 EU-U.S. Data Privacy Framework gave those data transfers a legal basis. The EU General Court upheld it in September 2025, though an appeal was filed the following month.
@@ -296,7 +294,7 @@ One of its key features is the Populations report, which groups users into key c
 - **Person-based tracking:** Every event is tied to a person, so you can see everything one customer did.
 - **Populations:** Groups defined by behavior, like trials at risk or recently churned customers, that keep themselves up to date.
 - **Funnels and paths:** Funnels and activity reports are on the free plan; revenue, paths, and A/B test reports are on Growth.
-- **Campaign reporting:** Performance by campaign, source, and medium, with a UTM builder.
+- **Campaign reporting:** Performance by source, and medium with UTM capture. Campaign reports are on the paid Growth plan.
 
 ### How does Kissmetrics compare to GA4?
 
@@ -362,7 +360,7 @@ Kissmetrics and GA4 serve different masters. GA4 is built for traffic and market
 
 ## 4. TelemetryDeck
 
-- **Founded:** 2021
+- **Founded:** 2020
 - **Who it's for:** Indie developers and app teams who want privacy-safe analytics for iOS, Android, and Flutter apps.
 - **Who it isn't for:** Teams that need user profiles, ad attribution, or website-first analytics.
 - **GA4 data import:** No
@@ -370,7 +368,7 @@ Kissmetrics and GA4 serve different masters. GA4 is built for traffic and market
 
 ![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_19_T19_20_44_169_Z_4b2ac82b01.png)
 
-While it can be used on websites, **TelemetryDeck** is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model – TelemetryDeck calls them signals. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), Flutter, and JavaScript (Node and web apps).
+While it can be used on websites, **TelemetryDeck** is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), Flutter, and JavaScript (Node and web apps).
 
 TelemetryDeck makes it easy for app developers to track things like active users, OS version, app version, and basic user metadata like user location. It also supports basic retention and conversion funnel insights. TelemetryDeck doesn't collect any personally identifiable metadata, so you don't need tracking consent banners.
 
@@ -631,7 +629,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
  
 - **Four modules:** Analytics, Tag Manager, Consent Management, and Data Activation (its customer data platform), on both plans.
 - **Google integrations:** Connects to Google Ads and Search Console.
-- **Hosting choices:** Public cloud regions in Europe, the US, and Hong Kong, with private cloud on Enterprise.
+- **Hosting choices:** Business plan hosted in Sweden. Choose other European countries, the US, and Hong Kong, or the UAE with private cloud on Enterprise.
 - **Compliance:** ISO 27001 and SOC 2 Type II, with a HIPAA BAA on the Enterprise plan.
 - **Agent access:** An MCP server, in beta since May 2026.
 
@@ -670,7 +668,7 @@ Piwik PRO is particularly strong for regulated industries and enterprise teams t
 - Piwik PRO offers private cloud hosting and a choice of data center region; GA4 doesn't. Neither can be self-hosted.
 - GA4 is free; Piwik PRO no longer has a free plan, and its paid plans start at €36 a month.
 - Piwik PRO is session-based like Universal Analytics; GA4 is event-based.
-- Piwik PRO requires a sales conversation for enterprise features; GA4 is entirely self-serve.
+- Piwik PRO requires a sales conversation for enterprise features; GA4 is self-serve.
 
 </details>
 
