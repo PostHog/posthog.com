@@ -290,6 +290,8 @@ await analytics.capture({ event: "report_exported", eventOptions: { cookieless_m
 posthog.captureToolCall({ toolName: "search_docs", sessionId, eventOptions: { cookieless_mode: true } })
 ```
 
+On `posthog-node` 5, `eventOptions` supports only `process_person_profile`, `cookieless_mode`, `disable_skew_correction`, and `product_tour_id`, and drops other keys.
+
 ## Custom dispatchers
 
 `instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes its constructor arguments, plus `serverBuild`, `captureModel`, `enableConversationId`, and `missingCapabilityToolName`:
