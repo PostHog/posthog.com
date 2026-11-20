@@ -1,9 +1,16 @@
 import { IconNotification } from '@posthog/icons'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogGreekPng from 'brand-hoggie-pngs/greek.png'
 
 export const inbox = {
     ...getTool('inbox'),
+    hog: {
+        src: hedgehogGreekPng,
+        alt: 'A hedgehog reading a very long scroll',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
     Icon: IconNotification,
     type: 'inbox',
     billingType: 'inbox_usage',

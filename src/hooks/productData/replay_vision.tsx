@@ -26,6 +26,8 @@ import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
 import { sessionReplay } from './session_replay'
 import { keyFeatures } from './replay_vision/slides'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogHotPopcornPng from 'brand-hoggie-pngs/popcorn.png'
+import hedgehogDirectorPng from 'brand-hoggie-pngs/director.png'
 
 // Feature-comparison rows. Header rows group the table; feature rows carry the
 // row label and pull each competitor's value from `products.replay_vision.features`
@@ -186,6 +188,12 @@ export const replayVision = {
     name: 'Replay Vision',
     description: 'AI-powered session replay analysis that watches recordings for you',
     handle: 'replay_vision',
+    hog: {
+        src: hedgehogDirectorPng,
+        alt: 'A hedgehog film director with a clapperboard',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
     type: 'replay_vision',
     slug: 'replay-vision',
     // Built by the same team as Session Replay, so changelog / questions pull
@@ -317,7 +325,7 @@ export const replayVision = {
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+            src: hedgehogHotPopcornPng,
             alt: 'A hedgehog directing a session replay',
         },
     },

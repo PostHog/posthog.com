@@ -20,6 +20,8 @@ import { applications, keyFeatures } from './session_replay/slides'
 import { getTool } from '../../data/tools'
 import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogHotPopcornPng from 'brand-hoggie-pngs/popcorn.png'
+import hedgehogDirectorPng from 'brand-hoggie-pngs/director.png'
 
 export const sessionReplay = {
     ...getTool('session_replay'),
@@ -282,14 +284,14 @@ export const sessionReplay = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/FooterCTA/images/surprised-hog.png',
-        alt: 'A surprised hedgehog',
+        src: hedgehogDirectorPng,
+        alt: 'A hedgehog film director with a clapperboard',
         footerClasses: 'max-w-[240px]',
         classes: 'absolute bottom-0 right-0 max-w-[698px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+            src: hedgehogHotPopcornPng,
         },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',

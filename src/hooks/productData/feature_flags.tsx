@@ -19,6 +19,9 @@ import { features } from './feature_flags/features'
 import { applications, keyFeatures } from './feature_flags/slides'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogCardPng from 'brand-hoggie-pngs/card.png'
+import hedgehogDrManhattanPng from 'brand-hoggie-pngs/dr-manhattan.png'
+import hedgehogTrafficControllerPng from 'brand-hoggie-pngs/traffic-controller.png'
 
 export const featureFlags = {
     ...getTool('feature_flags'),
@@ -150,18 +153,18 @@ export const featureFlags = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogmillionaire_6a6c2c958d.png',
-        alt: 'A hedgehog holding an enormous banknote',
+        src: hedgehogTrafficControllerPng,
+        alt: 'A hedgehog directing traffic',
         footerClasses: 'max-w-[240px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
+            src: hedgehogDrManhattanPng,
             alt: 'A hedgehog toggling a feature flag',
         },
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
+            src: hedgehogTrafficControllerPng,
             alt: 'A hedgehog toggling a feature flag',
         },
     },
@@ -393,7 +396,7 @@ export const featureFlags = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png',
+        image: hedgehogCardPng,
         imageAlt: 'A hedgehog in a suit deciding who gets the flag',
         description: 'roll a change out, watch the impact, and roll it back',
         intro: 'Ask PostHog AI to create flags, explain targeting, and clean up stale ones.',

@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconMegaphone } from '@posthog/icons'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogHighlighterPng from 'brand-hoggie-pngs/highlighter.png'
 
 // Marketing analytics lives inside web analytics and has no product page of its own. Its ad
 // platform data comes in through Sources, so usage is billed as rows synced. Listed here so the
@@ -11,6 +12,12 @@ export const marketingAnalytics = {
     Icon: IconMegaphone,
     description: 'Measure ad spend and ROAS across your marketing channels.',
     handle: 'marketing_analytics',
+    hog: {
+        src: hedgehogHighlighterPng,
+        alt: 'A hedgehog juggling highlighters',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
     type: 'marketing_analytics',
     color: PRODUCT_COLORS.marketing_analytics,
     colorSecondary: 'orange',

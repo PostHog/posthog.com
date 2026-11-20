@@ -16,6 +16,8 @@ import Link from 'components/Link'
 import { getTool } from '../../data/tools'
 import { applications, GetAccess, keyFeatures } from './data_warehouse/slides'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogDollHousePng from 'brand-hoggie-pngs/doll-house.png'
+import hedgehogBookPilePng from 'brand-hoggie-pngs/book-pile.png'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
@@ -120,11 +122,11 @@ export const dataWarehouse = {
     ],
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
-            alt: 'A hedgehog tending the warehouse',
+            src: hedgehogBookPilePng,
+            alt: 'A hedgehog reading on a stack of books',
         },
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
+            src: hedgehogDollHousePng,
             alt: 'A hedgehog tending the warehouse',
         },
     },
@@ -264,8 +266,8 @@ export const dataWarehouse = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
-        alt: 'Just another hedgehog',
+        src: hedgehogDollHousePng,
+        alt: 'A hedgehog peeking out of a little house',
         classes: 'absolute bottom-0 right-0 max-w-[140px]',
     },
     slider: {

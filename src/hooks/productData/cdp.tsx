@@ -2,11 +2,18 @@ import React from 'react'
 import { IconPlug } from '@posthog/icons'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogConstruction2Png from 'brand-hoggie-pngs/construction-2.png'
 
 // this data powers the CDP page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'integrations' handle.
 
 export const cdp = {
     ...getTool('cdp'),
+    hog: {
+        src: hedgehogConstruction2Png,
+        alt: 'A hedgehog carrying a pipe',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
     parentIcon: 'spreadsheetSearch',
     Icon: IconPlug,
     type: 'cdp', // integrations
