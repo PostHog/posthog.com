@@ -35,6 +35,7 @@
         "test:bundle": "node --test scripts/bundle/check-eager-graph.test.mjs",
         "test:markdown": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/turndownService.test.ts",
         "test:tier-list": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/TierList/catalog.test.ts src/components/TierList/state.test.ts",
+        "test:spot-the-hog": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/SpotTheHog/generator.test.ts",
         "test:middleware": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test middleware.test.ts",
         "test:gatsby-functions": "node --test scripts/gatsby-functions.test.cjs",
         "test:posthog-loader": "node --test scripts/posthog-loader.test.cjs scripts/early-access-features.test.cjs",
