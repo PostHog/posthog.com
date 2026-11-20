@@ -236,6 +236,11 @@
             "permanent": true
         },
         {
+            "source": "/learn/ai-observability/live-playground",
+            "destination": "/learn/ai-observability/live-playground/twig",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/ai-observability/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
@@ -994,6 +999,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/session-replay/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
             "destination": "/docs/replay-vision:ext?",
             "statusCode": 301
@@ -1503,6 +1513,16 @@
         {
             "source": "/handbook/marketing/how-we-position-and-sell/workflows",
             "destination": "/handbook/growth/sales/workflows-positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/workflows.md",
+            "destination": "/handbook/growth/sales/workflows-positioning.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/sales/inbound-sales:ext(\\.md)?",
+            "destination": "/handbook/growth/sales/new-sales:ext?",
             "statusCode": 301
         },
         {
@@ -3528,6 +3548,11 @@
         {
             "source": "/docs/integrate/user-properties:ext(\\.md)?",
             "destination": "/docs/product-analytics/user-properties:ext?"
+        },
+        {
+            "source": "/docs/data/properties:ext(\\.md)?",
+            "destination": "/docs/data/events:ext?",
+            "statusCode": 301
         },
         {
             "source": "/docs/data/user-properties:ext(\\.md)?",
