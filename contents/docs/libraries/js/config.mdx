@@ -294,9 +294,9 @@ To check what a page sends, filter your browser's network tab by your `api_host`
 
 ### Initializing after page load
 
-You can call `posthog.init` later, for example after login, but attribution is read from the page when the SDK runs. UTM and other campaign parameters come from the current URL, and the initial URL and referrer are stored the first time the SDK loads for a user. If your app has already navigated away from the landing URL, those values are lost.
+You can call `posthog.init` later, for example after login, but attribution is read from the page when the SDK captures an event. UTM and other campaign parameters come from the URL at that moment, and the initial URL is stored with the first event captured for a user. If your app has already navigated away from the landing URL, those values are lost. Client-side navigation doesn't change the referrer.
 
-To keep attribution, initialize on page load with the features you don't need yet turned off (for example `disable_session_recording: true`), then turn them on later with methods such as [`posthog.startSessionRecording()`](/docs/libraries/js/usage#session-replay).
+To keep attribution, initialize on page load and let the first event, such as the automatic pageview, be captured before the URL changes. If you've turned off `capture_pageview`, capture your own event on landing. Features you don't need yet can start turned off (for example `disable_session_recording: true`) and be turned on later with methods such as [`posthog.startSessionRecording()`](/docs/libraries/js/usage#session-replay). This only postpones Session Replay. Your project settings and consent still apply.
 
 ## Advanced configuration
 
