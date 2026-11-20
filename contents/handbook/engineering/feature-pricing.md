@@ -85,7 +85,7 @@ Each product should be usable on its own. For example, session replay can be ena
 
 - We should always ask ourselves how newly released features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 
-- For products we are expecting to have high costs or low margins (e.g. AI products), we should consider launching them with pricing even during beta, to not have our costs spiral out of control.
+- For products we are expecting to have high costs or low margins (e.g. AI products), we should consider launching them with pricing even during beta, to not have our costs spiral out of control. See [pricing considerations during a beta](/handbook/product/releasing-new-products-and-features#pricing-considerations-during-a-beta) for how to set expectations with beta customers.
 
 - Our default assumption for new features is that full usage is only available on the paid plans.
 
