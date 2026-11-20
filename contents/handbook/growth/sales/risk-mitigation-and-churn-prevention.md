@@ -39,6 +39,7 @@ Add the plan as an account note in PostHog Customer Analytics on the account's p
 7. **Who are the key players?** List the stakeholders – champions, budget holders, technical evaluators, and end-users – and where you stand with each.
 
 #### Ongoing updates
+
 1. What did you do with them last week.
 2. Any risks to flag or opportunities you are working
 3. Who are you talking to
@@ -135,7 +136,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cu
 
 | Churn scenario | De-risking strategy |
 |----------------|---------------------|
-| **Champion leaves** | Multi-thread relationships across teams. The more users actively in PostHog, the less one departure matters. |
+| **Champion leaves** | Multi-thread relationships across teams. The more users actively in PostHog, the less one departure matters. When it happens, follow the [champion leaves playbook](/handbook/customer-success/champion-leaves). |
 | **Your contact is a coach, not a champion** | Identify and build a relationship with a [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) who can make change happen. Your coach can help with introductions. |
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
@@ -251,5 +252,3 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 | Churn retros in #customer-churn | Within 1 week of churn |
 
 The best churn prevention is never needing to prevent churn. Build the habits, check implementation health, drive behavioral product adoption, and catch problems early.
-
-
