@@ -13,6 +13,7 @@ import {
 } from 'chart.js'
 import Link from 'components/Link'
 import { Series, Share, Theme, formatDay, formatPct } from './data'
+import './charts.css'
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
@@ -143,6 +144,8 @@ export function LineChart({
 }
 
 // Horizontal share bars. Bars scale to the largest value so small shares stay readable.
+const SHARE_BAR_STAGGER_MS = 40
+
 export function ShareBars({
     items,
     detail,
@@ -163,7 +166,7 @@ export function ShareBars({
     const max = Math.max(...items.map((item) => item.value), 0.0001)
     return (
         <ul className="list-none m-0 p-0 flex flex-col gap-1.5">
-            {items.map((item) => (
+            {items.map((item, index) => (
                 <li key={item.label} className="grid grid-cols-[minmax(0,10rem)_1fr_auto] items-center gap-2 text-sm">
                     <span className="flex items-center gap-1.5 min-w-0 text-primary" title={item.label}>
                         {icon && <span className="size-4 shrink-0 flex items-center justify-center">{icon(item)}</span>}
@@ -181,10 +184,11 @@ export function ShareBars({
                     </span>
                     <span className="h-3 rounded-sm bg-accent overflow-hidden">
                         <span
-                            className="block h-full rounded-sm"
+                            className="share-bar-fill block h-full rounded-sm"
                             style={{
                                 width: `${Math.max((item.value / max) * 100, 0.5)}%`,
                                 backgroundColor: item.color,
+                                animationDelay: `${index * SHARE_BAR_STAGGER_MS}ms`,
                             }}
                         />
                     </span>

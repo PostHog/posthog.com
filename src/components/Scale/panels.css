@@ -1,0 +1,23 @@
+.scale-bar {
+    transform-origin: bottom;
+}
+
+[data-active] .scale-bar {
+    animation: scale-bar-grow 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+#scale-panel section:not([data-active]) .share-bar-fill {
+    animation: none;
+}
+
+@keyframes scale-bar-grow {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-active] .scale-bar {
+        animation: none;
+    }
+}

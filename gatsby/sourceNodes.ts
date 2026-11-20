@@ -11,6 +11,8 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { fetchScaleData } from './utils/scaleData'
+import { runEndpoint } from './utils/runEndpoint'
 import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -292,26 +294,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const sourceMCPLeaderboard = async () => {
         if (!process.env.POSTHOG_APP_API_KEY) return
 
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
-        }
         const fetchEndpoint = async (name: string) => {
-            const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
             // OFFSET is not allowed with a personal API key, so fetch every row in one request.
-            const res = await fetch(`${endpointUrl}/run`, {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({ limit: 50000 }),
-            })
-            if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
-            const body: any = await res.json()
-            if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
-            const columns: string[] = body.columns || []
-            const rows = (body.results || [])
-                .map((row: unknown[]) => Object.fromEntries(columns.map((column, i) => [column, row[i]])))
-                .filter((row: Record<string, unknown>) => row.week && row.facet && row.label)
-            return rows
+            const rows = await runEndpoint(name, process.env.POSTHOG_APP_API_KEY as string, 50000)
+            return rows.filter((row) => row.week && row.facet && row.label)
         }
 
         // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
@@ -351,6 +337,25 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             })
         } catch (err) {
             console.error('Error fetching the MCP leaderboard endpoints:', err)
+        }
+    }
+
+    const sourceScaleData = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+        try {
+            const data = await fetchScaleData(process.env.POSTHOG_APP_API_KEY)
+            createNode({
+                id: createNodeId('scale-data'),
+                parent: null,
+                children: [],
+                internal: {
+                    type: 'ScaleData',
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            })
+        } catch (err) {
+            console.error('Error fetching the /scale data:', err)
         }
     }
 
@@ -1614,6 +1619,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourcePostCategories(),
         sourceCommunityStats(),
         sourceMCPLeaderboard(),
+        sourceScaleData(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),

@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { Card } from 'components/UI/Card'
 import { Emphasis } from 'components/UI/Emphasis'
-import { SNAPSHOT_DAY, formatCount, lines, rowsReadSeries } from './data'
+import { formatCount, lines, useScaleData } from './data'
 import type { LineKey } from './data'
 import Odometer from './Odometer'
 import './receipt.css'
 
 const SECONDS_PER_DAY = 86400
+const ROW_GAP = '0.25rem'
 
 export const PANEL_ID = 'scale-panel'
 
@@ -23,12 +24,9 @@ const KEY_STEPS: Record<string, number | 'first' | 'last'> = {
 
 const rule = 'border-t border-dashed border-[rgb(var(--text-primary)/0.4)]'
 
-const happenedPerSecond = lines.reduce((sum, line) => sum + line.yesterday, 0) / SECONDS_PER_DAY
-
-function happenedToday(): number {
+function secondsSinceMidnightUtc(): number {
     const now = new Date()
-    const midnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
-    return ((now.getTime() - midnight) / 1000) * happenedPerSecond
+    return (now.getTime() - Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())) / 1000
 }
 
 function Barcode({ values }: { values: number[] }): JSX.Element {
@@ -37,7 +35,7 @@ function Barcode({ values }: { values: number[] }): JSX.Element {
         <div className="flex h-11 items-stretch gap-[3px]" aria-hidden>
             {values.map((value, index) => (
                 <div key={index} className="flex flex-1 flex-col justify-end bg-[rgb(var(--text-primary)/0.12)]">
-                    <div className="bg-brand-blue" style={{ height: `${(value / max) * 100}%` }} />
+                    <div className="bg-[color:var(--scale-accent)]" style={{ height: `${(value / max) * 100}%` }} />
                 </div>
             ))}
         </div>
@@ -59,6 +57,10 @@ export default function Receipt({
     onAdvance: () => void
     className?: string
 }): JSX.Element {
+    const { dayLabel, totals, rowsReadSeries } = useScaleData()
+    const happenedPerSecond = lines.reduce((sum, line) => sum + totals[line.key], 0) / SECONDS_PER_DAY
+    const happenedToday = useCallback(() => secondsSinceMidnightUtc() * happenedPerSecond, [happenedPerSecond])
+    const selectedIndex = lines.findIndex((line) => line.key === selected)
     const rows = useRef<Partial<Record<LineKey, HTMLButtonElement | null>>>({})
 
     const moveWithKeys = (event: React.KeyboardEvent) => {
@@ -67,22 +69,16 @@ export default function Receipt({
             return
         }
         event.preventDefault()
-        const current = lines.findIndex((line) => line.key === selected)
         const target =
-            step === 'first' ? 0 : step === 'last' ? lines.length - 1 : (current + step + lines.length) % lines.length
+            step === 'first'
+                ? 0
+                : step === 'last'
+                ? lines.length - 1
+                : (selectedIndex + step + lines.length) % lines.length
         const key = lines[target].key
         onSelect(key)
         rows.current[key]?.focus()
     }
-    const [highlight, setHighlight] = useState<{ top: number; height: number } | null>(null)
-
-    useEffect(() => {
-        const row = rows.current[selected]
-        if (row) {
-            setHighlight({ top: row.offsetTop, height: row.offsetHeight })
-        }
-    }, [selected])
-
     return (
         <div className={`scale-receipt w-full max-w-sm ${className}`}>
             <Card.Root
@@ -93,23 +89,25 @@ export default function Receipt({
                 <div className="text-center">
                     <div className="font-sans text-3xl font-semibold text-secondary">PostHog Cloud</div>
                     <div className="text-13 text-secondary">US + EU · open 24 hours</div>
-                    <div className="text-13 text-secondary">{SNAPSHOT_DAY}</div>
+                    <div className="text-13 text-secondary">{dayLabel}</div>
                 </div>
                 <div className={rule} />
                 <div
                     role="tablist"
-                    aria-label="Yesterday on PostHog Cloud"
+                    aria-label={`${dayLabel} on PostHog Cloud`}
                     aria-orientation="vertical"
                     onKeyDown={moveWithKeys}
-                    className="relative -mx-3 flex flex-col gap-1"
+                    className="relative -mx-3 grid auto-rows-fr"
+                    style={{ gap: ROW_GAP }}
                 >
-                    {highlight && (
-                        <div
-                            aria-hidden
-                            className="pointer-events-none absolute inset-x-0 top-0 rounded bg-[rgb(var(--text-primary)/0.08)] transition-[transform,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-                            style={{ transform: `translateY(${highlight.top}px)`, height: highlight.height }}
-                        />
-                    )}
+                    <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-x-0 top-0 rounded bg-[rgb(var(--text-primary)/0.08)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+                        style={{
+                            height: `calc((100% - ${lines.length - 1} * ${ROW_GAP}) / ${lines.length})`,
+                            transform: `translateY(calc(${selectedIndex} * (100% + ${ROW_GAP})))`,
+                        }}
+                    />
                     {lines.map((line) => {
                         const active = line.key === selected
                         return (
@@ -132,10 +130,10 @@ export default function Receipt({
                                 <span className="flex w-full items-baseline gap-2">
                                     <span className="min-w-0 flex-1 truncate uppercase">{line.item}</span>
                                     <span className="shrink-0 font-bold tabular-nums">
-                                        {formatCount(line.yesterday)}
+                                        {formatCount(totals[line.key])}
                                     </span>
                                 </span>
-                                <span className="truncate text-13 text-secondary">{line.note}</span>
+                                <span className="truncate text-13 text-secondary">{line.note(totals[line.key])}</span>
                                 {active && rotating && (
                                     <span
                                         key={line.key}
@@ -161,8 +159,10 @@ export default function Receipt({
                 </div>
                 <div className={rule} />
                 <Barcode values={rowsReadSeries} />
-                <div className="text-center text-13 text-secondary">30 days of rows read, as a barcode</div>
-                <div className="scale-receipt-scrawl -rotate-3 text-center text-3xl leading-none text-primary">
+                <div className="text-center text-13 text-secondary">
+                    {rowsReadSeries.length} days of rows read, as a barcode
+                </div>
+                <div className="scale-receipt-scrawl -rotate-3 whitespace-nowrap text-center text-3xl leading-none text-primary">
                     Thank you for your data
                 </div>
             </Card.Root>
