@@ -7608,6 +7608,11 @@
             "source": "/docs/ai-observability/user-feedback/manual-event-capture",
             "destination": "/docs/ai-observability/collect-user-feedback#capture-feedback-events-manually",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/manual-event-capture.md",
+            "destination": "/docs/ai-observability/collect-user-feedback.md",
+            "statusCode": 301
         }
     ]
 }
