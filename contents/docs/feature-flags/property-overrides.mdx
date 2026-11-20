@@ -754,21 +754,30 @@ The SDK still returns the flag's value on every page, but your code uses it only
 
 ### Pass the URL in the browser
 
-Set `$current_url` and `$pathname` as flag properties on each page load and each client-side route change:
+Set `$current_url` and `$pathname` as flag properties in the `loaded` callback and on each client-side route change:
 
 ```js
-posthog.setPersonPropertiesForFlags({
-    $current_url: window.location.href,
-    $pathname: window.location.pathname,
+function setUrlForFlags() {
+    posthog.setPersonPropertiesForFlags({
+        $current_url: window.location.href,
+        $pathname: window.location.pathname,
+    })
+}
+
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: () => setUrlForFlags(),
 })
+
+// Call setUrlForFlags() again after each client-side route change
 ```
 
 Then add a release condition on the person property `$pathname` (for example, `$pathname` equals `/pricing`) or `$current_url`.
 
-- Each call [reloads flags](#controlling-automatic-flag-reload), and each reload is a billed `/flags` request. This adds one request for each navigation. See [cutting costs](/docs/feature-flags/cutting-costs).
-- The reload is async. Read the flag in an `onFeatureFlags()` callback to get the value for the new page.
+- The `loaded` callback runs before the SDK's first flag request, so that request sends the current URL. If you call `setPersonPropertiesForFlags()` later in the page load, the first request sends the URL from the previous page, and your call adds a second billed request.
+- Each later call [reloads flags](#controlling-automatic-flag-reload), and each reload is a billed `/flags` request. This adds one request for each client-side route change. See [cutting costs](/docs/feature-flags/cutting-costs).
+- The reload is async. Until it responds, the flag returns the value for the previous page. `onFeatureFlags()` doesn't wait for the reload: if flags have already loaded, it runs your callback right away with the previous values. If your code must have the value for the new page, [check the URL in your code](#check-the-url-in-your-code) instead.
 - The values persist in storage until the next call, `resetPersonPropertiesForFlags()`, or `reset()`. If you don't call it on a navigation, the flag uses the last URL you set.
-- On a full page load, the SDK's first flag request sends the URL from the previous page. Until your call reloads flags, the flag can return the value for that page. This page load makes two billed requests.
 
 The [`setAllPersonProfilePropertiesAsPersonPropertiesForFlags`](#including-browser-and-device-properties) customization also sets `$current_url` and `$pathname`, but only when you call it. It doesn't update them on client-side route changes.
 
