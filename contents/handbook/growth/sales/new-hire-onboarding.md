@@ -185,7 +185,11 @@ We have certain automations in Vitally that your team lead needs to add you to. 
 
 ### How does my quota work during my ramp period?
 
-Your first three months of commission are paid at 100% fixed OTE. This will be calculated based on the date you start. If you start before the 15th of a month, you will get 100% fixed OTE for that month and two of the subsequent months. For example, if you start on Jan 13th, you will get 100% fixed OTE for Jan, Feb & Mar. If you start _on_ Jan 17th, you would get two months of 100% fixed OTE for Q1 and one month of 100% fixed OTE for Q2 in addition to two months of your quota'ed commission.
+Your first three months are covered by a floor: you're guaranteed 100% fixed OTE for each month you're still ramping, so a slow start won't cost you. This isn't paid on top of your commission — in each ramp quarter you're paid the higher of the floor or the commission you earn on net new business you personally close.
+
+Which months count as floor months is calculated based on the date you start. If you start before the 15th of a month, you get the floor for that month and the next two. If you start on or after the 15th, you get the floor for that month and the next one, plus one more floor month in the following quarter. For example, if you start on Jan 13th, your floor months are Jan, Feb & Mar. If you start on Jan 17th, your floor months are Jan & Feb, plus one floor month in Q2, alongside two months of your quota'ed commission in Q1.
+
+> Spike starts on September 9th. His floor months are October and November ($8,300 each, based on his OTE), and December isn't a floor month. If Spike closes 200% of his full Q4 quota, he earns $50,000 in commission for the quarter — more than his $16,600 combined floor for October and November, so he's paid the $50,000.
 
 <img
     src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/shapes_at_26_01_14_12_45_06_b0c13c36a5.png"
