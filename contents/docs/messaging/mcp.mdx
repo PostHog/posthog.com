@@ -17,68 +17,68 @@ Some tools are still rolling out, so your project might not have every tool belo
 
 ## Set up sending
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Check setup | `workflows-setup-status` | Shows which messaging setup steps the project has done: email sender, verified sending domain, opt-out categories, frequency cap, email template, and first workflow. |
-| Add and verify a sender | `integrations-email-create`, `integrations-email-status-retrieve`, `integrations-email-verify-create` | Adds an email sender, lists the DNS records to publish with the status of each, and marks the domain verified once the records resolve. Verifying needs a project admin. See [verify your sending domain](/docs/messaging/verify-domain). |
-| Set sending rules | `workflows-sending-rules-get`, `workflows-sending-rules-update` | Read and change the project-wide [frequency cap](/docs/messaging/frequency-cap), email tracking consent, and whether [engagement events](/docs/messaging/engagement-events) are captured. |
-| Check your allowance | `workflows-reputation-get` | Reports the project's email health over the last 30 days and its [sending allowance](/docs/messaging/sending-reputation). |
+| Task | What it does |
+| --- | --- |
+| Check setup | Shows which messaging setup steps the project has done: email sender, verified sending domain, opt-out categories, frequency cap, email template, and first workflow. Tools: `workflows-setup-status`. |
+| Add and verify a sender | Adds an email sender, lists the DNS records to publish with the status of each, and marks the domain verified once the records resolve. Verifying needs a project admin. See [verify your sending domain](/docs/messaging/verify-domain). Tools: `integrations-email-create`, `integrations-email-status-retrieve`, `integrations-email-verify-create`. |
+| Set sending rules | Read and change the project-wide [frequency cap](/docs/messaging/frequency-cap), email tracking consent, and whether [engagement events](/docs/messaging/engagement-events) are captured. Tools: `workflows-sending-rules-get`, `workflows-sending-rules-update`. |
+| Check your allowance | Reports the project's email health over the last 30 days and its [sending allowance](/docs/messaging/sending-reputation). Tools: `workflows-reputation-get`. |
 
 ## Send transactional email
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Make a template transactional | `workflows-make-email-template-transactional-prepare`, `workflows-make-email-template-transactional-execute` | Turns a template into a [transactional email](/docs/messaging/transactional-emails). This can't be undone. |
-| Send a test | `workflows-send-email-template-prepare`, `workflows-send-email-template-execute` | Sends a transactional template to one recipient. Each send needs you to reply `confirm`. |
-| Send content | `workflows-send-email-prepare`, `workflows-send-email-execute` | Sends content that your agent passes, with no template. Each send needs you to reply `confirm`. |
-| Read the sends | `workflows-transactional-emails-list`, `workflows-transactional-email-get`, `workflows-transactional-email-stats` | Lists sends, reads one send and its status, and reports delivery stats. |
-| See what recipients did | `workflows-transactional-email-activity`, `workflows-transactional-email-results` | Shows what one recipient did around a send, and what people did after an email. |
+| Task | What it does |
+| --- | --- |
+| Make a template transactional | Turns a template into a [transactional email](/docs/messaging/transactional-emails). This can't be undone. Tools: `workflows-make-email-template-transactional-prepare`, `workflows-make-email-template-transactional-execute`. |
+| Send a test | Sends a transactional template to one recipient. Each send needs you to reply `confirm`. Tools: `workflows-send-email-template-prepare`, `workflows-send-email-template-execute`. |
+| Send content | Sends content that your agent passes, with no template. Each send needs you to reply `confirm`. Tools: `workflows-send-email-prepare`, `workflows-send-email-execute`. |
+| Read the sends | Lists sends, reads one send and its status, and reports delivery stats. Tools: `workflows-transactional-emails-list`, `workflows-transactional-email-get`, `workflows-transactional-email-stats`. |
+| See what recipients did | Shows what one recipient did around a send, and what people did after an email. Tools: `workflows-transactional-email-activity`, `workflows-transactional-email-results`. |
 
 ## Design email templates
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Create and read | `workflows-create-email-template`, `workflows-get-email-template`, `workflows-list-email-templates` | Create a template in the [content library](/docs/messaging/library#create-templates-with-mcp), and read one or all of them. |
-| Edit and preview | `workflows-update-email-template`, `workflows-patch-email-template`, `workflows-show-email-template` | Edit a template and preview it. Templates that your agent creates stay editable in the drag-and-drop builder. |
+| Task | What it does |
+| --- | --- |
+| Create and read | Create a template in the [content library](/docs/messaging/library#create-templates-with-mcp), and read one or all of them. Tools: `workflows-create-email-template`, `workflows-get-email-template`, `workflows-list-email-templates`. |
+| Edit and preview | Edit a template and preview it. Templates that your agent creates stay editable in the drag-and-drop builder. Tools: `workflows-update-email-template`, `workflows-patch-email-template`, `workflows-show-email-template`. |
 
 ## Create broadcasts
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Create a broadcast | `broadcasts-create` | Creates a [broadcast](/docs/messaging/broadcasts) as a draft, which you review and launch in the broadcast editor. |
-| Convert a workflow | `workflows-convert-to-broadcast` | Moves a workflow that sends one email to a batch audience over to broadcasts. This can't be undone. |
+| Task | What it does |
+| --- | --- |
+| Create a broadcast | Creates a [broadcast](/docs/messaging/broadcasts) as a draft, which you review and launch in the broadcast editor. Tools: `broadcasts-create`. |
+| Convert a workflow | Moves a workflow that sends one email to a batch audience over to broadcasts. This can't be undone. Tools: `workflows-convert-to-broadcast`. |
 
 ## Manage opt-outs and suppressions
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Message categories | `message-categories-list`, `message-categories-get`, `message-categories-create`, `message-categories-update` | Manage the [message categories](/docs/messaging/opt-outs#message-categories) that email steps reference. Recipients can opt out of marketing categories. Transactional categories ignore opt-outs. |
-| Opt-outs | `opt-outs-list`, `opt-outs-add`, `opt-outs-remove` | List who opted out of a category, opt up to 1,000 recipients out in one call, and opt a recipient back in. |
-| Suppressions | `suppressions-list`, `suppressions-add`, `suppressions-remove` | List the [suppression list](/docs/messaging/opt-outs#the-suppression-list), add up to 1,000 addresses in one call, and remove up to 100. |
+| Task | What it does |
+| --- | --- |
+| Message categories | Manage the [message categories](/docs/messaging/opt-outs#message-categories) that email steps reference. Recipients can opt out of marketing categories. Transactional categories ignore opt-outs. Tools: `message-categories-list`, `message-categories-get`, `message-categories-create`, `message-categories-update`. |
+| Opt-outs | List who opted out of a category, opt up to 1,000 recipients out in one call, and opt a recipient back in. Tools: `opt-outs-list`, `opt-outs-add`, `opt-outs-remove`. |
+| Suppressions | List the [suppression list](/docs/messaging/opt-outs#the-suppression-list), add up to 1,000 addresses in one call, and remove up to 100. Tools: `suppressions-list`, `suppressions-add`, `suppressions-remove`. |
 
 ## Import from other tools
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Customer.io automations | `workflows-import-customerio`, `workflows-import-notes` | Turn Customer.io automations into draft workflows, and show what the import changed or left out. See [migrate from Customer.io](/docs/messaging/migrate-from-customer-io). |
-| Opt-outs, suppressions, templates, and more | `provider-imports-providers`, `provider-imports-create`, `provider-imports-list`, `provider-imports-get` | List the tools your project can import from and what each one brings over, start an import, and show its progress and results. See [migrate from Resend](/docs/messaging/migrate-from-resend). |
-| Push devices | `integrations-push-tokens-create` | Imports existing device tokens into a push channel. See [import device tokens](/docs/messaging/push-notifications/import-device-tokens). |
+| Task | What it does |
+| --- | --- |
+| Customer.io automations | Turn Customer.io automations into draft workflows, and show what the import changed or left out. See [migrate from Customer.io](/docs/messaging/migrate-from-customer-io). Tools: `workflows-import-customerio`, `workflows-import-notes`. |
+| Opt-outs, suppressions, templates, and more | List the tools your project can import from and what each one brings over, start an import, and show its progress and results. See [migrate from Resend](/docs/messaging/migrate-from-resend). Tools: `provider-imports-providers`, `provider-imports-create`, `provider-imports-list`, `provider-imports-get`. |
+| Push devices | Imports existing device tokens into a push channel. See [import device tokens](/docs/messaging/push-notifications/import-device-tokens). Tools: `integrations-push-tokens-create`. |
 
 ## Connect Supabase auth emails
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Connect Supabase | `supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, `supabase-auth-emails-starter-templates-create` | Connect a Supabase project and map its [auth emails](/docs/messaging/supabase-auth-emails) to templates. |
+| Task | What it does |
+| --- | --- |
+| Connect Supabase | Connect a Supabase project and map its [auth emails](/docs/messaging/supabase-auth-emails) to templates. Tools: `supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, `supabase-auth-emails-starter-templates-create`. |
 
 ## Build and run workflows
 
-| Task | Tools | What it does |
-| --- | --- | --- |
-| Create and edit | `workflows-create`, `workflows-patch-graph`, `workflows-update`, `workflows-patch-action-email`, `workflows-discard-draft` | Make a draft [workflow](/docs/messaging/automations), change it, edit one email step, and throw the draft away. |
-| Start from your data | `workflows-data-suggestions-list`, `workflows-data-suggestions-create` | Suggest up to three workflows from your project's events, and build one as a draft. |
-| Test and publish | `workflows-test-run`, `workflows-publish` | Run a workflow without sending to real recipients, and make the draft live. |
-| Read results | `workflows-stats`, `workflows-global-stats`, `workflows-version-stats`, `workflows-list-invocations`, `workflows-get-invocation`, `workflows-logs` | Report performance, and show what happened on a run. |
-| Roll back | `workflows-list-revisions`, `workflows-get-revision`, `workflows-restore-revision` | Inspect history and restore an earlier version. |
+| Task | What it does |
+| --- | --- |
+| Create and edit | Make a draft [workflow](/docs/messaging/automations), change it, edit one email step, and throw the draft away. Tools: `workflows-create`, `workflows-patch-graph`, `workflows-update`, `workflows-patch-action-email`, `workflows-discard-draft`. |
+| Start from your data | Suggest up to three workflows from your project's events, and build one as a draft. Tools: `workflows-data-suggestions-list`, `workflows-data-suggestions-create`. |
+| Test and publish | Run a workflow without sending to real recipients, and make the draft live. Tools: `workflows-test-run`, `workflows-publish`. |
+| Read results | Report performance, and show what happened on a run. Tools: `workflows-stats`, `workflows-global-stats`, `workflows-version-stats`, `workflows-list-invocations`, `workflows-get-invocation`, `workflows-logs`. |
+| Roll back | Inspect history and restore an earlier version. Tools: `workflows-list-revisions`, `workflows-get-revision`, `workflows-restore-revision`. |
 
 For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
 
