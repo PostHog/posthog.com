@@ -59,6 +59,7 @@ Beyond standard object types, these additional `is:` values search their own API
 | `is:destination`  | Data pipeline destinations (server and browser)   | `is:destination slack`              |
 | `is:workflow`     | Workflows                                         | `is:workflow welcome`               |
 | `is:endpoint`     | API endpoints                                     | `is:endpoint`                       |
+| `is:person`       | Persons (by email, name, or ID)                   | `is:person alice@example.com`       |
 | `is:product_tour` | Product tours                                     | `is:product_tour`                   |
 
 > **Note:** These types search their own API and don't support `createdBy:`, `in:`, or word exclusions with `-`. Queries combining these filters return no results. `is:alert` covers insight alerts only — log alerts are not yet searchable.
