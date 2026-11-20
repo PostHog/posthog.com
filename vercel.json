@@ -7583,6 +7583,16 @@
             "source": "/docs/business-knowledge/start:ext(\\.md)?",
             "destination": "/docs/business-knowledge/start-here:ext?",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-evals/taggers",
+            "destination": "/docs/ai-evals#categories",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-evals/taggers.md",
+            "destination": "/docs/ai-evals.md#categories",
+            "statusCode": 301
         }
     ]
 }
