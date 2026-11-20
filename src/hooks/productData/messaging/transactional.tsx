@@ -22,10 +22,8 @@ const list = (items: { label: string; description: React.ReactNode }[]) => (
 const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Node.js',
-        language: 'jsx',
-        code: `import { PasswordResetEmail } from "./emails/password-reset"
-
-const posthog = new PostHog("<ph_project_api_key>", {
+        language: 'js',
+        code: `const posthog = new PostHog("<ph_project_api_key>", {
     host: "https://us.i.posthog.com",
     secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
 })
@@ -34,7 +32,7 @@ const { data, error } = await posthog.emails.send({
     to: email,
     from: "Hedgebox <security@example.com>",
     subject: "Reset your password",
-    react: <PasswordResetEmail firstName={firstName} resetLink={resetLink} />,
+    html: "<p>Hello world</p>",
     templateKey: "password-reset",
 })`,
     },
@@ -202,7 +200,7 @@ export const transactional: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Keep your emails in your repo as React Email components or HTML, and review them like the rest of
+                    Keep your emails in your repo as HTML or React Email components, and review them like the rest of
                     your code. Then call send on the PostHog client. Node.js, Python, Go, Ruby, PHP, .NET, Rust, and
                     Elixir all support it, and the REST API covers everything else.
                 </p>

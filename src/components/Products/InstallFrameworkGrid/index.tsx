@@ -125,14 +125,15 @@ const InstallFrameworkGrid = ({
 
     const renderTile = (item: ResolvedItem, keyPrefix: string) => {
         const meta = libraryMeta.get(item.librarySlug)
+        const logo = meta?.logo ?? getLogo(item.wizardLogoKey ?? item.librarySlug)
         return (
             <li key={`${keyPrefix}-${item.slug}`} className="m-0 list-none break-inside-avoid">
                 <Link
                     to={item.url}
                     className="group flex items-center gap-2 py-1.5 px-1 rounded hover:bg-accent text-primary no-underline"
                 >
-                    {meta?.logo ? (
-                        <img src={meta.logo} alt="" className="w-5 h-5 object-contain shrink-0" />
+                    {logo ? (
+                        <img src={logo} alt="" className="w-5 h-5 object-contain shrink-0" />
                     ) : (
                         <span className="w-5 h-5 shrink-0 inline-block rounded bg-accent" aria-hidden />
                     )}
