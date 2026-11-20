@@ -279,40 +279,46 @@ export const transactional: CarouselSlide[] = [
     },
     {
         ...slideStyle,
-        slug: 'sensitive-data',
-        label: 'Security',
+        slug: 'reliable-sends',
+        label: 'Reliable sends',
         icon: <IconShieldLock className="size-5" />,
         progressBar: 'bg-red',
         layout: 'stack',
-        heading: 'Keep sign-in codes out of logs',
+        heading: 'Know what happened to every email',
         description: (
             <>
                 <p>
-                    Turn on <strong>Protect sensitive data</strong> for emails with codes or reset links, in the
-                    template or per send from code. PostHog then keeps no copy of the content and skips link tracking.
+                    Each send returns a message ID. Read its status from your code, or find it on the email's Sends tab
+                    with its opens and clicks.
                 </p>
                 {list([
                     {
-                        label: 'No copy kept',
+                        label: 'Status by message ID',
                         description:
-                            'PostHog keeps no copy of the subject or body, so a one-time code never sits in a log.',
+                            'Queued, sent, delivered, bounced, complained, or failed with a reason, for 30 days after the send.',
                     },
                     {
-                        label: 'No tracking redirects',
+                        label: 'Safe retries',
                         description:
-                            "Link clicks aren't tracked, so a token in a reset link never passes through a redirect.",
+                            'Send an idempotency key, and a retry after a timeout never sends the same email twice.',
                     },
                     {
-                        label: 'Still observable',
-                        description: "Deliveries, opens, bounces, and the email's status are still recorded.",
+                        label: 'Suppression built in',
+                        description:
+                            'An address that hard bounces or marks you as spam goes on the suppression list, and later sends to it stop.',
+                    },
+                    {
+                        label: 'Sensitive sends',
+                        description:
+                            'For sign-in codes and reset links, PostHog keeps no copy of the content and skips link tracking.',
                     },
                 ])}
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_template_sensitive_v2_light_a84930bb3c.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_template_sensitive_v2_dark_a7bc65b1c0.png',
-            alt: 'The Protect sensitive data setting, switched on for a transactional email',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_sends_light_930879a223.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_sends_dark_4adc54f69d.png',
+            alt: 'The Sends tab of a transactional email, with the status and opens and clicks of each send',
         },
     },
 ]
