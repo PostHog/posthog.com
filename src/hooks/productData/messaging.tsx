@@ -338,6 +338,7 @@ export const messaging = {
             'workflows.channels.features.email',
             'workflows.channels.features.sms',
             'workflows.channels.features.push',
+            'workflows.channels.features.whatsapp',
             'workflows.features.branching_logic',
             'workflows.features.webhook_actions',
         ],

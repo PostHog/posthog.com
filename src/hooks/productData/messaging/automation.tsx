@@ -74,6 +74,11 @@ export const automations: CarouselSlide[] = [
                 </p>
                 {list([
                     {
+                        label: 'Build it with your agent',
+                        description:
+                            'Describe the automation in Claude Code, Cursor, or another AI tool. Over the PostHog MCP, it makes a draft, tests it without real recipients, and publishes it.',
+                    },
+                    {
                         label: 'Branch and wait',
                         description:
                             'Branch on properties, events, or a random split, and wait until a person does something before you continue.',
@@ -113,8 +118,13 @@ export const automations: CarouselSlide[] = [
                 </p>
                 {list([
                     {
-                        label: 'Email, SMS, and push',
+                        label: 'Email, SMS, push, and WhatsApp',
                         description: 'Reach a person on the channel that fits the message.',
+                    },
+                    {
+                        label: 'In-app messages',
+                        description:
+                            'Set a person property, then target a feature flag or a popover survey at it to show a banner or a pop-up the next time they open your app.',
                     },
                     {
                         label: 'Slack and webhooks',

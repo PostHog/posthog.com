@@ -722,7 +722,7 @@ export const posthog = {
                     sms: true,
                     push: true,
                     webhooks: true,
-                    whatsapp: false,
+                    whatsapp: true,
                 },
             },
         },

@@ -219,6 +219,11 @@ export const transactional: CarouselSlide[] = [
                         ),
                     },
                     {
+                        label: 'Write it with your agent',
+                        description:
+                            'Ask Claude Code or Cursor to "send password resets from our Node backend with PostHog". The sending-transactional-emails skill writes the email and the send call.',
+                    },
+                    {
                         label: 'Scoped key',
                         description:
                             'A project secret API key with the Workflow scope can send email and read statuses, and nothing else.',
