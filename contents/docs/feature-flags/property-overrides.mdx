@@ -731,7 +731,7 @@ For geolocation-based flags, evaluate them on the client side where the user's a
 
 ## Targeting a specific URL
 
-Feature flags don't have a setting that limits them to a page. PostHog evaluates flags when the SDK requests them, not when the user opens a page. To make a flag apply only on a specific page, use one of these options:
+Flags are evaluated when the SDK makes a request, not when the user opens a page, so they don't have a setting that limits them to a page. To make a flag apply only on a specific page, use one of these options:
 
 - [Check the URL in your code](#check-the-url-in-your-code) before you read the flag. This is the most reliable option.
 - [Pass the URL in the browser](#pass-the-url-in-the-browser) with `setPersonPropertiesForFlags()`.
@@ -794,6 +794,8 @@ const flags = await client.evaluateFlags('user-distinct-id', {
         $pathname: pathname,
     },
 })
+
+const flagValue = flags.getFlag('pricing-test')
 ```
 
 ```python
@@ -804,6 +806,8 @@ flags = posthog.evaluate_flags(
         "$pathname": pathname,
     },
 )
+
+flag_value = flags.get_flag("pricing-test")
 ```
 
 </MultiLanguage>

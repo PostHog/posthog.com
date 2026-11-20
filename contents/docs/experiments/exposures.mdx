@@ -104,6 +104,8 @@ For example, if your flag key is "new-checkout" and you're using a custom "viewe
 
 ### Exposing users on a specific page
 
+If your code reads the flag only on the target page, the default exposure already works. The SDK sends `$feature_flag_called` from that page. If other pages also read the flag, a user's first read can happen elsewhere, so use a `$pageview` exposure instead.
+
 To include only users who visit a specific page, set the exposure event to `$pageview` and add a property filter on `$pathname` (for example, `$pathname` equals `/pricing`) or `$current_url`.
 
 The web SDK adds `$feature/<flag-key>` to each event after flags load, so the pageview carries the variant. If the first pageview goes out before flags load, it has no variant. See [exposure fired before the flag was ready](/docs/experiments/troubleshooting#my-exposure-event-has-the-wrong-variant-because-the-flag-wasnt-ready-when-it-fired).
