@@ -104,6 +104,19 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                 constants: path.resolve(__dirname, 'src', 'constants'),
                 logic: path.resolve(__dirname, 'src', 'logic'),
                 hooks: path.resolve(__dirname, 'src', 'hooks'),
+                // Brand hoggie PNGs as plain files, so Gatsby's image loader returns a bundled URL:
+                // import hedgehogStopPng from 'brand-hoggie-pngs/stop.png'
+                // The package's own `@posthog/brand/hoggies/png/*` modules resolve to a JS module here.
+                'brand-hoggie-pngs': path.resolve(
+                    __dirname,
+                    'node_modules',
+                    '@posthog',
+                    'brand',
+                    'dist',
+                    'generated',
+                    'hoggies',
+                    'png'
+                ),
                 // Mapping
                 docs: path.resolve(__dirname, '.cache', 'gatsby-source-git', 'posthog-main-repo', 'docs'),
                 onboarding: path.resolve(

@@ -23,28 +23,40 @@ export default function CloudinaryImage({
     objectPosition,
     ...other
 }: {
-    src: `https://res.cloudinary.com/${string}`
+    /** A Cloudinary URL, or a bundled image URL (an imported file). */
+    src: string
     width?: number
     className?: string
     imgClassName?: string
     objectFit?: 'cover' | 'contain'
     objectPosition?: 'top' | 'bottom' | 'left' | 'right' | 'center'
 } & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
-    const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
+    const isCloudinary = isCloudinaryImage(src)
+    const cloudinaryPublicId = isCloudinary && getCloudinaryPublicId(src)
     const hasCommas = src?.includes(',')
-    return cloudinaryPublicId && !hasCommas ? (
-        <div className={`inline-block ${className}`}>
-            <Image
-                {...other}
-                publicId={cloudinaryPublicId}
-                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
-                className={imgClassName}
-                secure
-            >
-                {width && <Transformation width={width} crop="scale" />}
-            </Image>
-        </div>
-    ) : (
-        <img src={src} width={width} className={`inline-block ${imgClassName}`} {...other} />
-    )
+    if (cloudinaryPublicId && !hasCommas) {
+        return (
+            <div className={`inline-block ${className}`}>
+                <Image
+                    {...other}
+                    publicId={cloudinaryPublicId}
+                    cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                    className={imgClassName}
+                    secure
+                >
+                    {width && <Transformation width={width} crop="scale" />}
+                </Image>
+            </div>
+        )
+    }
+    // A bundled file (for example a brand hoggie PNG) lays out like a Cloudinary image: the same
+    // wrapper and classes, with `width` as the display width Cloudinary would have scaled to.
+    if (!isCloudinary) {
+        return (
+            <div className={`inline-block ${className}`}>
+                <img src={src} width={width} className={imgClassName} {...other} />
+            </div>
+        )
+    }
+    return <img src={src} width={width} className={`inline-block ${imgClassName}`} {...other} />
 }
