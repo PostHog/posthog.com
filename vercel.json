@@ -1511,13 +1511,8 @@
             "statusCode": 301
         },
         {
-            "source": "/handbook/marketing/how-we-position-and-sell/workflows",
-            "destination": "/handbook/growth/sales/workflows-positioning",
-            "statusCode": 301
-        },
-        {
-            "source": "/handbook/marketing/how-we-position-and-sell/workflows.md",
-            "destination": "/handbook/growth/sales/workflows-positioning.md",
+            "source": "/handbook/marketing/how-we-position-and-sell/workflows:ext(\\.md)?",
+            "destination": "/handbook/growth/sales/workflows-positioning:ext?",
             "statusCode": 301
         },
         {
