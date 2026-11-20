@@ -12,7 +12,7 @@ sourceId: Postgres
 import { CalloutBox } from "components/Docs/CalloutBox";
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
-The Postgres connector can link your database tables to PostHog. You can use it for regular scheduled syncs, or enable change data capture (CDC) for near real-time syncs that capture inserts, updates, and deletes.
+The Postgres connector can link your database tables to PostHog. You can use regular scheduled syncs, or enable change data capture (CDC) to capture inserts, updates, and deletes through logical replication. CDC changes load into each table on its sync schedule, every 5 minutes by default.
 
 To link Postgres:
 
@@ -219,6 +219,8 @@ Live-only tables (tables with live queries enabled but not synced) use the sourc
 ## Sync methods
 
 Postgres tables support full table, incremental, append-only, xmin, and CDC sync methods.
+
+On a CDC-capable source, the sync-method page shows CDC even when you cannot select it. If CDC is off for the source, the option is disabled with **Turn on CDC for this source first** and a link to the source's **Configuration** tab. If CDC is on but the table has no primary key, the option is disabled with **This table needs a primary key on the source to use CDC**.
 
 Use CDC when you need PostHog to stay close to your source database and you care about deletes. It is especially useful when:
 
