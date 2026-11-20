@@ -8333,7 +8333,8 @@ export const docsMenu = {
             icon: 'IconLetter',
             color: 'red',
             url: '/docs/messaging',
-            description: 'Send transactional email, broadcasts, push notifications, and drip campaigns.',
+            description:
+                'Send transactional email, broadcasts, and push notifications, and automate them from product data.',
             children: [
                 {
                     name: 'Messaging',
@@ -8484,15 +8485,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Drip campaigns',
-                },
-                {
-                    name: 'Create a drip campaign',
-                    url: '/docs/messaging/email-drip-campaign',
-                    icon: 'IconLetter',
-                    color: 'orange',
-                },
-                {
                     name: 'Push notifications',
                 },
                 {
@@ -8605,6 +8597,12 @@ export const docsMenu = {
                     url: '/docs/messaging/automations/workflow-builder',
                     icon: 'IconDecisionTree',
                     color: 'blue',
+                },
+                {
+                    name: 'Build an email drip campaign',
+                    url: '/docs/messaging/email-drip-campaign',
+                    icon: 'IconLetter',
+                    color: 'orange',
                 },
                 {
                     name: 'Editing a live workflow',

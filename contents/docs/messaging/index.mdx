@@ -8,7 +8,7 @@ contentMaxWidthClass: max-w-5xl
 import { IconCode, IconLaptop, IconMagic, IconBrackets, IconMegaphone, IconPalette, IconShieldLock } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
-Messaging sends email and push notifications to your users from the events and person data already in PostHog. It does three jobs: transactional email that your code sends to one person, broadcasts to an audience, and drip campaigns that react to what each person does. Every send, open, and click comes back as an event on the person who got it.
+Messaging sends email and push notifications to your users from the events and person data already in PostHog. It does three jobs: transactional email that your code sends to one person, broadcasts to an audience, and automations that react to what each person does, such as a drip campaign. Every send, open, and click comes back as an event on the person who got it.
 
 Because it runs on the same events and person properties you already send to PostHog, you act on real product behavior instead of a separate marketing dataset. To automate more than messages, such as Slack alerts, webhooks, and AI tasks, use [automations](/docs/messaging/automations).
 
@@ -18,15 +18,15 @@ Because it runs on the same events and person properties you already send to Pos
 | --- | --- | --- |
 | Send one email to one person when your code says so, such as a password reset, a sign-in code, a receipt, or an invite | Transactional email | [Send transactional emails](/docs/messaging/transactional-emails) |
 | Send one email to many people, once or on a schedule, such as a product update, a changelog, or an event invite | Broadcasts | [Send a broadcast](/docs/messaging/broadcasts) |
-| Send a series of emails that react to what each person does, such as an onboarding sequence or a re-engagement email | Drip campaigns | [Set up an email drip campaign](/docs/messaging/email-drip-campaign) |
+| Send a series of emails that react to what each person does, such as an onboarding sequence or a re-engagement email | Automations | [Build an email drip campaign](/docs/messaging/email-drip-campaign) |
 
-Drip campaigns are built in the drag-and-drop [workflow builder](/docs/messaging/automations/workflow-builder). You decide when a campaign is triggered, who it reaches, and what happens at each step: triggers, delays, audience splits, message sends, and PostHog actions.
+You build [automations](/docs/messaging/automations) in the drag-and-drop [workflow builder](/docs/messaging/automations/workflow-builder). A drip campaign is one kind of automation. You decide when an automation is triggered, who it reaches, and what happens at each step: triggers, delays, audience splits, message sends, and PostHog actions.
 
 <OSButton variant="primary" asLink to="/docs/messaging/start-here">Get started</OSButton>
 
 ## Where you can use it
 
-Send transactional email from your own code. Build broadcasts and drip campaigns in the PostHog app, or have an agent build them for you. Script any of it over the API.
+Send transactional email from your own code. Build broadcasts and automations in the PostHog app, or have an agent build them for you. Script any of it over the API.
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
 
@@ -43,7 +43,7 @@ Send transactional email from your own code. Build broadcasts and drip campaigns
     <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
     <div>
       <p className="m-0 font-bold text-primary">PostHog app</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Send broadcasts, build drip campaigns in the drag-and-drop builder, and design email templates.</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Send broadcasts, build automations in the drag-and-drop builder, and design email templates.</p>
       <a href="/docs/messaging/start-here" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Get started →</a>
     </div>
   </div>
@@ -52,7 +52,7 @@ Send transactional email from your own code. Build broadcasts and drip campaigns
     <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
     <div>
       <p className="m-0 font-bold text-primary">Agents and MCP</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Agent skills and MCP tools that write templates, send email, build broadcasts and drip campaigns, and report on results.</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Agent skills and MCP tools that write templates, send email, build broadcasts and automations, and report on results.</p>
       <a href="/docs/messaging/skills" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use agent skills →</a>
     </div>
   </div>
