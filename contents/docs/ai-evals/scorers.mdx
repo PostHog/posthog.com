@@ -28,40 +28,16 @@ If the evaluator can't produce a score, upload `status="error"` / `status: "erro
 
 ## Correct a reported score
 
-Suppose **Correct arguments** timed out on the `refund_other_order` case. You check the trace and see that the agent sent order ID `1001` for a refund on order `1004`. Change the result from `error` to `ok` with a value of `false`, then record why the check failed.
+If **Correct arguments** marked the wrong order ID as a pass, change the reported value to `false`. PostHog recalculates any composite that uses that score.
 
-Use the [SDK and personal key described in the experiments guide](/docs/ai-evals/experiments#correct-an-experiment-item). Take the result ID from the receipt for that check's `upload_result()` / `uploadResult()` call.
+With [result read and write access](/docs/ai-evals/experiments#correct-an-experiment-item), pass the result ID from the upload receipt to `get_result_revision()` / `getResultRevision()` on the experiment handle. Use that ID and revision for the update.
 
-<MultiLanguage selector="tabs">
-
-```python file=Python
-experiment = evaluations.resume_experiment(experiment_id)
-result_id = receipt.results[0].id
-revision = experiment.get_result_revision(result_id)
-revision = experiment.update_result(result_id, revision=revision, status="ok", value=False)
-experiment.update_result_payload(
-    result_id,
-    revision=revision,
-    payload={"reasoning": "Expected order 1004, but the agent sent 1001.", "error_message": None},
-)
-```
-
-```typescript file=TypeScript
-const experiment = evaluations.resumeExperiment(experimentId)
-const resultId = receipt.results[0].id
-const revision = await experiment.getResultRevision(resultId)
-const updatedRevision = await experiment.updateResult(resultId, { revision, status: "ok", value: false })
-await experiment.updateResultPayload(resultId, {
-    revision: updatedRevision,
-    payload: { reasoning: "Expected order 1004, but the agent sent 1001.", errorMessage: null },
-})
-```
-
-</MultiLanguage>
-
-You can update the status, value, or error code of a reported result. The value must match the result's original scorer version. When the status or value changes, PostHog recalculates any dependent composite with its original formula. To correct a composite score, edit the reported input that was wrong.
-
-Retrying the original upload preserves your correction. To remove a score or its reasoning, see [Delete an item, a result, or a payload](/docs/ai-evals/experiments#delete-an-item-a-result-or-a-payload).
+| Action | Python | TypeScript |
+| --- | --- | --- |
+| Correct the status, value, or error code | `update_result` | `updateResult` |
+| Replace reasoning, error message, or metadata | `update_result_payload` | `updateResultPayload` |
+| Remove the payload and keep the score | `delete_result_payload` | `deleteResultPayload` |
+| Delete the score, its payload, and dependent composites | `delete_result` | `deleteResult` |
 
 ## Combine scores with a composite scorer
 

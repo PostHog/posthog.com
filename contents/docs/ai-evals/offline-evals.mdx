@@ -436,12 +436,10 @@ Call `complete()` after the uploads succeed, or `fail()` if the run stops early.
 
 ## Review and compare experiments
 
-Use [Experiments](/docs/ai-evals/experiments) to compare runs. If you find a mistake in an upload, you can [correct the experiment item](/docs/ai-evals/experiments#correct-an-experiment-item) or [update a reported score](/docs/ai-evals/scorers#correct-a-reported-score) after the run finishes.
-
 <a id="read-scores-alongside-coverage"></a>
 <a id="use-results-in-your-ci"></a>
 
-To read scores alongside coverage, see [Read scores alongside coverage](/docs/ai-evals/experiments#read-scores-alongside-coverage). To use results in your CI, see [Use results in your CI](/docs/ai-evals/experiments#use-results-in-your-ci).
+See [Experiments](/docs/ai-evals/experiments) to compare runs, check coverage, and use results in CI. After upload, you can [correct an item](/docs/ai-evals/experiments#correct-an-experiment-item) or [change a reported score](/docs/ai-evals/scorers#correct-a-reported-score).
 
 ## Use a PostHog dataset (optional)
 
@@ -472,7 +470,7 @@ Use the [PostHog MCP server](/docs/model-context-protocol) to create scorers, ma
 
 ## Data retention
 
-PostHog deletes payloads 30 days after it first accepts the item or result. Adding or editing a payload later keeps the original deadline.
+PostHog deletes payloads 30 days after it first accepts the item or result. Edits keep the original deadline.
 
 | Data                                                                                    | Retention             |
 | --------------------------------------------------------------------------------------- | --------------------- |
@@ -480,11 +478,11 @@ PostHog deletes payloads 30 days after it first accepts the item or result. Addi
 | Result reasoning, error messages, and payload metadata                                  | Deleted after 30 days |
 | Experiment, item, and result records, including scores, statuses, summaries, and trends | Kept                  |
 
-Keep your own copy of payloads you need after 30 days. You can [delete a payload early](/docs/ai-evals/experiments#delete-an-item-a-result-or-a-payload) and keep the scores. Once a payload expires or you delete it, attempts to restore it on that record return HTTP 409 `payload_unavailable`. You can still correct the score. Source datasets have their own [retention policy](/docs/ai-evals/datasets#data-retention).
+Keep your own copy of any payload you need later. You can't restore a deleted or expired payload. Source datasets have their own [retention policy](/docs/ai-evals/datasets#data-retention).
 
 ## Pricing
 
-Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Edits, deletions, and repeat uploads of results that still exist add no events. If you delete a reported result and upload it again while the experiment is open, the recreated result counts as a new event.
+Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Retries, edits, and deletes add no events. Uploading a deleted result again in an open experiment counts as a new event.
 
 Calculated composite results don't add billed events. For example, the six support-agent cases with two reported scorers and one composite produce 18 results and count as 12 events.
 

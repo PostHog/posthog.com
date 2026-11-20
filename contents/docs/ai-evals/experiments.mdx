@@ -54,63 +54,18 @@ Numeric scorers show their mean. Numeric and categorical scorers need a passing 
 
 ## Correct an experiment item
 
-If you uploaded a case under the wrong key or recorded the wrong expected output, you can correct the item even after the experiment completes or fails. If you ran the agent again and got a different answer, upload that execution as a new item in an open experiment.
+You can correct an item even after the run finishes. On the experiment handle, pass the item ID from the upload receipt to `get_item_revision()` / `getItemRevision()`. Pass that ID and revision to the method you need.
 
-The following examples use methods from the upcoming [Python SDK](https://github.com/PostHog/posthog-python/pull/1285) and [TypeScript SDK](https://github.com/PostHog/posthog-js/pull/5835) releases.
-
-Use a [personal API key](/docs/api/personal-api-keys) with `evaluation:read` to read revisions and `evaluation:write` plus evaluation editor access to make changes. To read a result revision, change a result or its payload, or delete an entire item, you also need `llm_analytics:read` and access to the affected scorers and their composite inputs.
-
-Suppose your upload labeled the refund request for order `1004` as `refund_eligibility` and saved the expected tool call for order `1001`. To fix both fields, resume the experiment with its ID. Here, `receipt` is what `upload_result()` / `uploadResult()` returned for that case.
-
-<MultiLanguage selector="tabs">
-
-```python file=Python
-experiment = evaluations.resume_experiment(experiment_id)
-item_id = receipt.items[0].id
-revision = experiment.get_item_revision(item_id)
-revision = experiment.update_item(item_id, revision=revision, case_key="refund_other_order")
-experiment.update_item_payload(
-    item_id,
-    revision=revision,
-    payload={"expected_output": {"tool": "check_refund_policy", "arguments": {"order_id": "1004"}}},
-)
-```
-
-```typescript file=TypeScript
-const experiment = evaluations.resumeExperiment(experimentId)
-const itemId = receipt.items[0].id
-const revision = await experiment.getItemRevision(itemId)
-const updatedRevision = await experiment.updateItem(itemId, { revision, caseKey: "refund_other_order" })
-await experiment.updateItemPayload(itemId, {
-    revision: updatedRevision,
-    payload: { expectedOutput: { tool: "check_refund_policy", arguments: { order_id: "1004" } } },
-})
-```
-
-</MultiLanguage>
-
-You can edit an item's case key, trial, model version, or application trace ID. Pass `None` / `null` to clear one. Clearing the model override makes the item use the experiment's model. In the payload, you can replace the input, output, expected output, or metadata. Each field you supply replaces its entire value. Omitted fields keep their values.
-
-Changing the input, output, or expected output can mark existing scores as stale. Rerun the affected checks against the corrected data, then [update the reported scores](/docs/ai-evals/scorers#correct-a-reported-score).
-
-### Handle a revision conflict
-
-An item and its payload share a revision. Each update returns the current revision for the next edit. Changing a result or its payload also advances the parent item's revision.
-
-If someone else edits the record first, PostHog rejects your change with HTTP 409 `revision_conflict`. Inspect the current item or result before submitting a change with its latest revision. If you lose the response, check whether your change took effect first. The SDK sends each write only once.
-
-### Delete an item, a result, or a payload
-
-To remove the text of a test case but keep its scores, call `experiment.delete_item_payload(item_id, revision=revision)` or `await experiment.deleteItemPayload(itemId, { revision })`. You can't restore a deleted payload on that record. All four delete methods take the stored ID and current revision. A successful delete returns no value.
-
-| Python | TypeScript | What gets deleted |
+| Action | Python | TypeScript |
 | --- | --- | --- |
-| `delete_item_payload` | `deleteItemPayload` | The item's stored input, output, expected output, and metadata. Its scores remain available. |
-| `delete_result_payload` | `deleteResultPayload` | The result's reasoning, error message, and metadata. Its score remains available. |
-| `delete_result` | `deleteResult` | The result, its payload, and any composite scores that depend on it. Deleting a composite keeps its inputs. |
-| `delete_item` | `deleteItem` | The item, all its results, and all their payloads. |
+| Fix the case key, trial, model version, or trace ID | `update_item` | `updateItem` |
+| Replace input, output, expected output, or metadata | `update_item_payload` | `updateItemPayload` |
+| Remove the payload and keep the scores | `delete_item_payload` | `deleteItemPayload` |
+| Delete the item and all its scores and payloads | `delete_item` | `deleteItem` |
 
-While an experiment is uploading, replaying an upload can recreate a deleted item or result. Completed and failed experiments reject uploads that would recreate deleted records. Their summaries reflect the remaining scores, and their counts at closure stay the same.
+If you change the input or either output, rerun the affected checks and [correct their scores](/docs/ai-evals/scorers#correct-a-reported-score). A `revision_conflict` means the record changed. Review it before retrying with the latest revision.
+
+Use a [personal API key](/docs/api/personal-api-keys) with `evaluation:read` to read revisions and `evaluation:write` plus evaluation editor access to make changes. Working with results or deleting an entire item also requires `llm_analytics:read` and access to the affected scorers and composite inputs.
 
 ## Use results in your CI
 
