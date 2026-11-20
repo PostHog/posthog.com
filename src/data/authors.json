@@ -870,5 +870,11 @@
         "name": "Magda Olszewska",
         "role": "Scaled CSM",
         "profile_id": 33065
+    },
+    {
+        "handle": "tom-owers",
+        "name": "Tom Owers",
+        "role": "Full Stack Engineer",
+        "profile_id": 29577
     }
 ]
