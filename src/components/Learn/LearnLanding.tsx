@@ -104,6 +104,11 @@ interface LearnLandingContent {
     storyText?: string
     /** Shows the Learn by doing preview, which links to Twig. */
     playground?: LearnLandingPlayground
+    /**
+     * For a hub whose pocket guide isn't written yet: the story section shows a coming-soon cover in the
+     * product's spine color, and links to something to read in the meantime.
+     */
+    upcomingGuide?: { readUrl: string; readLabel: string }
 }
 
 /** A Learn hub overview: the product, its pocket guide, and the agent and Twig previews when the hub has them. */
@@ -113,23 +118,28 @@ export default function LearnLanding({
     storyUrl,
     learnUrl,
     volumeId,
+    hub,
+    trackingVolume,
     intro = description,
     storyLead,
     storyText,
     playground,
+    upcomingGuide,
 }: LearnLandingProps & LearnLandingContent): JSX.Element {
-    const volume = volumeById(volumeId)
+    const volume = volumeId ? volumeById(volumeId) : undefined
+    const comingSoon = volume?.comingSoon
     // Like the agent preview, the hub's pages decide: a hub that lists 'videos' shows its first video here.
-    const video = volume?.learnHub?.pages?.includes('videos')
-        ? LEARN_VIDEOS.find((v) => v.productHandle === volume.productHandle)
-        : undefined
+    const video =
+        hub?.pages?.includes('videos') && volume
+            ? LEARN_VIDEOS.find((v) => v.productHandle === volume.productHandle)
+            : undefined
     const counts = usePocketGuideCounts()
     const coverRef = React.useRef<HTMLDivElement>(null)
     const posthog = usePostHog()
     // Records the choice to open a resource, not what happens inside it.
     const selectResource = (resource: string, option: string) =>
-        posthog?.capture('learn_resource_selected', { volume: volumeId, resource, option })
-    const firstChapter = useBookPages(volumeId).find((page) => !page.isFrontMatter)
+        posthog?.capture('learn_resource_selected', { volume: trackingVolume, resource, option })
+    const firstChapter = useBookPages(volumeId ?? '').find((page) => !page.isFrontMatter)
     const readUrl = firstChapter ? learnChapterPath(storyUrl, firstChapter) : storyUrl
     // Start reading skips the introduction and opens the book on the first chapter.
     const startReading = (event: React.MouseEvent) => {
@@ -169,9 +179,22 @@ export default function LearnLanding({
                         </div>
                         {storyLead && <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">{storyLead}</p>}
                         <p className="mt-0 mb-5 leading-relaxed text-secondary">{storyText ?? volume?.description}</p>
-                        <OSButton asLink to={readUrl} onClick={startReading} variant="primary" size="md">
-                            Start reading
-                        </OSButton>
+                        {comingSoon && upcomingGuide && (
+                            <OSButton
+                                asLink
+                                to={upcomingGuide.readUrl}
+                                onClick={() => selectResource('story', 'read_docs')}
+                                variant="primary"
+                                size="md"
+                            >
+                                {upcomingGuide.readLabel}
+                            </OSButton>
+                        )}
+                        {!comingSoon && (
+                            <OSButton asLink to={readUrl} onClick={startReading} variant="primary" size="md">
+                                Start reading
+                            </OSButton>
+                        )}
                     </div>
                     {volume && (
                         <div
@@ -222,7 +245,7 @@ export default function LearnLanding({
                 </section>
             )}
 
-            {volume?.learnHub?.pages?.includes('agent-prompts-and-mcp') && (
+            {hub?.pages?.includes('agent-prompts-and-mcp') && (
                 <section
                     id="agent-teacher"
                     className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
@@ -244,7 +267,7 @@ export default function LearnLanding({
                         onExploreTwig={(event) => {
                             selectResource('twig', 'explore_twig')
                             // Read the live SDK: it may load after this page renders.
-                            handOffToTwig(event, window.posthog, TWIG_URL, volumeId)
+                            handOffToTwig(event, window.posthog, TWIG_URL, trackingVolume ?? '')
                         }}
                     />
                 </section>

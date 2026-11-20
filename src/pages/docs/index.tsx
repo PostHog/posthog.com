@@ -7,7 +7,7 @@ import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
 import Book, { BookShelf } from 'components/Learn/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { PUBLISHED_POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 import { TWIG_URL } from '../../constants'
 import usePostHog from '../../hooks/usePostHog'
 import { useApp } from '../../context/App'
@@ -138,7 +138,7 @@ export const DocsIndex = () => {
     const { openSearch } = useApp()
     const guideCounts = usePocketGuideCounts()
     // Reading order: Vol. 1 at the top of the shelf, the way a series is shelved.
-    const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
+    const volumes = [...PUBLISHED_POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
 
     // ReaderView is the shell every other docs page uses – see `src/templates/Handbook.tsx`.
     return (

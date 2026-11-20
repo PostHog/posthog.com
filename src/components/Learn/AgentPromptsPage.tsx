@@ -4,6 +4,7 @@ import { SingleCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import useProduct from 'hooks/useProduct'
+import { learnTrackingVolume } from '../../constants/pocketGuides'
 import usePostHog from 'hooks/usePostHog'
 import AgentTeachingActions from './AgentTeachingActions'
 import LearnPage from './LearnPage'
@@ -22,11 +23,20 @@ export default function AgentPromptsPage({
     focus,
     chapterPrompts,
     examplePrompts,
+    askFirst,
     children,
 }: AgentPromptsPageProps): JSX.Element {
     const posthog = usePostHog()
-    const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
-    const prompts = learnPrompts({ productHandle, productName, docsSlug, focus, chapterPrompts, examplePrompts })
+    const volume = learnTrackingVolume(useProduct({ handle: productHandle }) as any)
+    const prompts = learnPrompts({
+        productHandle,
+        productName,
+        docsSlug,
+        focus,
+        chapterPrompts,
+        examplePrompts,
+        askFirst,
+    })
 
     return (
         <LearnPage

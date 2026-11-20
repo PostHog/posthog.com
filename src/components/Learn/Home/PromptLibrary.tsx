@@ -4,7 +4,7 @@ import { SearchInput } from 'components/UI/SearchInput'
 import PromptSnippet from 'components/Learn/PromptSnippet'
 import usePostHog from 'hooks/usePostHog'
 import useProduct from 'hooks/useProduct'
-import { POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides'
+import { POCKET_GUIDE_VOLUMES, learnTrackingVolume } from '../../../constants/pocketGuides'
 import { LEARN_PROMPT_SETS, learnPrompts } from '../learnPrompts'
 
 const ALL = 'all'
@@ -26,13 +26,16 @@ export default function PromptLibrary(): JSX.Element {
         return LEARN_PROMPT_SETS.filter((set) => product === ALL || set.productHandle === product)
             .map((set) => ({
                 set,
-                volume: POCKET_GUIDE_VOLUMES.find((v) => v.productHandle === set.productHandle)?.id,
+                // Use the registered ID for published and coming-soon volumes.
+                volume:
+                    POCKET_GUIDE_VOLUMES.find((v) => v.productHandle === set.productHandle)?.id ??
+                    learnTrackingVolume(products.find((p) => p.handle === set.productHandle)),
                 prompts: learnPrompts(set).filter(
                     ({ title, prompt }) => !q || `${set.productName} ${title} ${prompt}`.toLowerCase().includes(q)
                 ),
             }))
             .filter((group) => group.prompts.length > 0)
-    }, [query, product])
+    }, [query, product, products])
 
     return (
         <section>

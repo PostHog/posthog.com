@@ -4,10 +4,14 @@ import { IconClaudeCode, LogomarkCodex } from 'components/OSIcons'
 import usePostHog from 'hooks/usePostHog'
 
 /** The starter prompt: a learning path built from what the project already has. */
-export const agentTeachingPrompt = (productName: string, docsSlug: string, focus: string): string =>
+export const agentTeachingPrompt = (productName: string, docsSlug: string, focus: string, askFirst = false): string =>
     `Teach me PostHog ${productName} using my own product and PostHog project.
 
-Inspect its existing PostHog instrumentation, then create a custom learning path based on its real ${focus}. Teach one concept at a time and give me small, safe exercises.
+Inspect its existing PostHog instrumentation, then create a custom learning path based on its real ${focus}. ${
+        askFirst
+            ? 'Teach one concept at a time: ask what I already know first, and have me predict before you explain. Give me small, safe exercises.'
+            : 'Teach one concept at a time and give me small, safe exercises.'
+    }
 
 Use the PostHog ${productName} docs at https://posthog.com/docs/${docsSlug}.md as the source of truth.
 

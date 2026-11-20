@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconVideoCamera } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
+import { learnTrackingVolume } from '../../constants/pocketGuides'
 import usePostHog from 'hooks/usePostHog'
 import LearnPage from './LearnPage'
 import VideoCard from './LearnTV/VideoCard'
@@ -17,7 +18,7 @@ interface LearnVideosPageProps {
 /** A Learn hub's Videos page: the header, then a card for each of the product's videos. Each card opens Learn TV. */
 export default function LearnVideosPage({ productHandle, productName, intro }: LearnVideosPageProps): JSX.Element {
     const posthog = usePostHog()
-    const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
+    const volume = learnTrackingVolume(useProduct({ handle: productHandle }) as any)
     const videos = LEARN_VIDEOS.filter((video) => video.productHandle === productHandle)
     return (
         <LearnPage

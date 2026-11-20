@@ -49,6 +49,7 @@ export const dataPipelines = {
     forumTag: 'cdp-and-pipelines',
     teamSlug: 'warehouse-sources',
     wizardCommand: 'warehouse',
+    pocketGuideVolume: 'data-pipelines',
     seo: {
         title: 'Data pipelines – Move your data anywhere | PostHog',
         description:
