@@ -102,7 +102,7 @@ PostHog::MCP.instrument(
 
 </MultiLanguage>
 
-Each example reads the request headers its own way. See your language's [installation page](/docs/mcp-analytics/installation) for details. In TypeScript and Python, use the header helper rather than reading `extra` directly, which can return nothing and cause anonymous attribution.
+Each example reads the request headers its own way. See your language's [installation page](/docs/mcp-analytics/installation) for details. In TypeScript and Python, use `getRequestHeaders` or `get_request_headers`. Reading `extra` directly can return nothing, and every call goes anonymous.
 
 An identity has three fields, named in each language's style:
 
