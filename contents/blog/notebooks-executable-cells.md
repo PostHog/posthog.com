@@ -40,7 +40,7 @@ Cells share data, so they can work together to tell the story you want. Every ce
 
 So if a Python cell reshapes data, the next SQL cell can query the result directly. PostHog spots the reference and runs that query locally instead of in the warehouse. You can bounce between SQL and Python as many times as the analysis needs.
 
-![A SQL cell pulling execute-sql MCP calls, followed by a Python cell charting the daily error rate by error type](https://res.cloudinary.com/dmukukwp6/image/upload/notbooks_2_a373539c83.png)
+![A SQL cell pulling execute-sql MCP calls, a Python cell breaking them down, and a matplotlib chart of the daily error rate by error type](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_2_sql_python_matplotlib_34df27aef4.png)
 
 Here I pulled errors for one MCP tool with SQL, broke them down in Python, and charted them with matplotlib.
 
@@ -76,13 +76,13 @@ The answer: firmographics barely matter. All 68 company fields together explain 
 
 After an outage, we want a record of what happened, when, and who it impacted. Each incident gets a notebook with a write-up, timeline, diagram, and a live query counting the errors. Because the query is live, if you reopen the notebook next week it shows the real numbers instead of a screenshot that's now out of date.
 
-![An investigation notebook with a verdict, a live SQL cell charting CI failure rate, and hypotheses written in markdown](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_5_4b0a0d7562.png)
+![An incident notebook with a TL;DR write-up and a timeline of the outage](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_5_incident_writeup_timeline_f6d8b5a6ee.png)
 
 ### Build a monthly growth report that updates itself
 
 Every month we review how our data products are growing. That used to mean rebuilding a slide deck. Now it's a notebook with live charts. We add commentary each month, so data insights and our own take live side by side as the data changes.
 
-![A monthly report notebook with commentary on a spike in endpoints created, above a live insight charting endpoints created per day](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_6_aeee57a07e.png)
+![A monthly growth review notebook with commentary on usage above a live insight charting data warehouse product usage](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_6_growth_review_ce3216a6c3.png)
 
 ## Where this is going
 
