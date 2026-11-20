@@ -11,9 +11,11 @@ import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxo
  * page so the framework list is never duplicated.
  *
  * Tiles resolve their URL by preferring a product-specific install guide at
- * `/docs/{productSlug}/installation/{slug}` (looked up from MDX at build time),
- * falling back to the generic `/docs/libraries/{librarySlug}`. Items with
- * neither page (wizard-only stacks) are not shown, so no tile links to a 404.
+ * `/docs/{productSlug}/installation/{slug}` or `.../{librarySlug}` (looked up
+ * from MDX at build time),
+ * falling back to the generic `/docs/libraries/{librarySlug}` page or its
+ * generated `reference`. Items with neither page (wizard-only stacks) are not
+ * shown, so no tile links to a 404.
  */
 
 interface InstallFrameworkGridProps {
@@ -39,6 +41,7 @@ type LibraryNode = {
 type ResolvedItem = InstallItem & { url: string }
 
 const sortByName = (a: InstallItem, b: InstallItem) => a.name.localeCompare(b.name)
+const tileSlugs = new Set(TAXONOMY.flatMap((category) => category.items.map((item) => item.slug)))
 
 const subheading = 'text-[11px] font-semibold text-secondary m-0 mb-1'
 const tileGrid = 'grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-4 gap-y-1 p-0 m-0'
@@ -56,6 +59,7 @@ const InstallFrameworkGrid = ({
     const data = useStaticQuery<{
         libraries: { nodes: LibraryNode[] }
         productInstalls: { nodes: MdxSlugNode[] }
+        sdkReferences: { nodes: { slug: string }[] }
     }>(graphql`
         query InstallFrameworkGridQuery {
             libraries: allMdx(filter: { fields: { slug: { regex: "/^/docs/libraries/[^/]+$/" } } }) {
@@ -79,17 +83,27 @@ const InstallFrameworkGrid = ({
                     }
                 }
             }
+            sdkReferences: allSdkMarkdownReference(filter: { slug: { regex: "/^/docs/libraries/[^/]+/reference$/" } }) {
+                nodes {
+                    slug
+                }
+            }
         }
     `)
 
     const libraryMeta = useMemo(() => {
-        const map = new Map<string, { logo?: string; title?: string }>()
+        const map = new Map<string, { logo?: string; title?: string; url: string }>()
         data?.libraries?.nodes?.forEach((node) => {
             const match = node.fields.slug.match(/^\/docs\/libraries\/([^/]+)/)
             if (!match) return
             const fm = node.frontmatter || {}
             const logo = fm.platformLogo ? getLogo(fm.platformLogo) : fm.icon?.publicURL
-            map.set(match[1], { logo, title: fm.title })
+            map.set(match[1], { logo, title: fm.title, url: node.fields.slug })
+        })
+        // Some SDKs have only a generated Markdown reference, with no index page.
+        data?.sdkReferences?.nodes?.forEach(({ slug }) => {
+            const sdk = slug.split('/')[3]
+            if (!map.has(sdk)) map.set(sdk, { url: slug })
         })
         return map
     }, [data])
@@ -102,10 +116,15 @@ const InstallFrameworkGrid = ({
 
     const resolveUrl = (item: InstallItem): string | null => {
         if (productSlug) {
-            const candidate = `/docs/${productSlug}/installation/${item.slug}`
-            if (productInstallUrls.has(candidate)) return candidate
+            // Some guides use the library name, such as `installation/node` for the `nodejs` tile,
+            // unless another tile owns that name (FastAPI must not take the Python guide).
+            const slugs = tileSlugs.has(item.librarySlug) ? [item.slug] : [item.slug, item.librarySlug]
+            for (const slug of slugs) {
+                const candidate = `/docs/${productSlug}/installation/${slug}`
+                if (productInstallUrls.has(candidate)) return candidate
+            }
         }
-        return libraryMeta.has(item.librarySlug) ? `/docs/libraries/${item.librarySlug}` : null
+        return libraryMeta.get(item.librarySlug)?.url ?? null
     }
 
     const visibleCategories = useMemo(
@@ -121,14 +140,15 @@ const InstallFrameworkGrid = ({
 
     const renderTile = (item: ResolvedItem, keyPrefix: string) => {
         const meta = libraryMeta.get(item.librarySlug)
+        const logo = meta?.logo ?? getLogo(item.wizardLogoKey ?? item.librarySlug)
         return (
             <li key={`${keyPrefix}-${item.slug}`} className="m-0 list-none break-inside-avoid">
                 <Link
                     to={item.url}
                     className="group flex items-center gap-2 py-1.5 px-1 rounded hover:bg-accent text-primary no-underline"
                 >
-                    {meta?.logo ? (
-                        <img src={meta.logo} alt="" className="w-5 h-5 object-contain shrink-0" />
+                    {logo ? (
+                        <img src={logo} alt="" className="w-5 h-5 object-contain shrink-0" />
                     ) : (
                         <span className="w-5 h-5 shrink-0 inline-block rounded bg-accent" aria-hidden />
                     )}
