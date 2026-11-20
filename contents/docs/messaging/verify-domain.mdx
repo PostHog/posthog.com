@@ -1,0 +1,70 @@
+---
+title: Verify your sending domain
+sidebar: Docs
+showTitle: true
+---
+
+PostHog sends email to your users only from a domain you verified. You add a sender on the [**Channels** tab](https://app.posthog.com/workflows/channels), add the DNS records PostHog shows to your domain, and PostHog checks them. Transactional emails, broadcasts, drip campaigns, and workflow email steps all use the same verified senders. To try email before your domain is verified, use the [sandbox sender](/docs/messaging/sandbox-sender).
+
+Verification applies to the domain, not to the address. When a domain is verified for one sender in a project, every other sender on that domain in the same project is verified too, and you don't add the DNS records again.
+
+## Add a sender
+
+Only project admins and higher can add a sender. If your access level is member, ask a project admin to add it for you.
+
+1. Go to the [**Channels** tab](https://app.posthog.com/workflows/channels), click **+ New channel**, and select **Email**.
+2. Answer "Which domain should your emails come from?", then enter the sender name and address. This is what recipients see in their inbox.
+3. PostHog shows the DNS records to add, and walks you through verifying them:
+   - **Cloudflare or Vercel** - Click the button to add the records at your host for you, and approve the change there.
+   - **Any other host** - Copy each record into your domain host, such as Route 53, Namecheap, or GoDaddy.
+   - **Let an agent add the settings** - Hand the setup to your coding agent. It adds the records and checks PostHog until the domain is ready.
+
+Each sender is a separate channel. Only a sender that exists shows in the **From** dropdown of an email step. To add another sender later, use the **Channels** tab again.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/channels_verified_sender_light_40b68e9f2e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/channels_verified_sender_dark_9772de6b18.png"
+    alt="How to verify your domain in PostHog"
+    classes="rounded"
+/>
+
+## The DNS records
+
+Copy each value from PostHog, not from this page. The tokens are unique to your domain.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/verify_domain_dns_light_71b3304c20.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/verify_domain_dns_dark_c94b366c92.png"
+    alt="DNS records for a new email sender in PostHog"
+    classes="rounded"
+/>
+
+| Record | Type | What it does |
+| --- | --- | --- |
+| DKIM, `<token>._domainkey.yourdomain.com` | CNAME | Signs your email, so inboxes can check that it came from your domain. |
+| SPF, `yourdomain.com` | TXT | `v=spf1 include:amazonses.com ~all`. Lists the servers that can send for your domain. |
+| Custom MAIL FROM, usually `feedback.yourdomain.com` | MX and TXT | Routes bounces back to PostHog, and aligns SPF with your domain. |
+| DMARC, `_dmarc.yourdomain.com` | TXT | `v=DMARC1; p=none;`. Tells inboxes what to do with email that fails the checks. |
+
+PostHog can also show a `_amazonses.yourdomain.com` TXT record and, if another organization already claimed the domain, a `_posthog-verification.yourdomain.com` TXT record that proves you own it. Add them when PostHog shows them.
+
+DNS changes can take a few minutes to propagate. PostHog checks the records when you open the sender, and checks pending senders again every day. Once the domain is verified, you see a green check mark.
+
+A new project starts with a small daily sending allowance, which grows as it sends with low bounce and spam complaint rates. [Sending reputation and allowance](/docs/messaging/sending-reputation) explains the tiers and how to keep marketing and transactional email apart. If your domain already sends through another provider, you can add PostHog's records next to the old ones, as [move from another provider](/docs/messaging/sending-reputation#move-from-another-provider) explains.
+
+## The default sender
+
+When the first sender in a project is verified, it becomes the project's default sender, unless the project already has one. A [transactional email](/docs/messaging/transactional-emails) sent from code without a `from` address uses the default sender.
+
+## Before your domain is verified
+
+Until your domain is verified, you can send test emails with the [sandbox sender](/docs/messaging/sandbox-sender), a PostHog-managed sender that is rolling out to projects. It delivers only to active members of your organization whose PostHog email address is verified, and it has daily caps. To send to anyone else, verify the domain, then select your sender in each email step.
+
+## Troubleshooting
+
+| Issue | Solution |
+| --- | --- |
+| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. Only project admins and higher can add a sender. |
+| Domain still pending? | Check that each record is on the right host name. Some DNS hosts add your domain to the end of the name, so `feedback.yourdomain.com` becomes `feedback.yourdomain.com.yourdomain.com`. Enter only the part before your domain in those hosts. |
+| Emails going to spam? | Check that DKIM and SPF pass, add the DMARC record, and read [sending reputation and allowance](/docs/messaging/sending-reputation). |
+| A send fails with `sender_not_verified`? | The `from` address isn't on a verified domain, or the project has no verified default sender. See [the API errors](/docs/messaging/transactional-emails/api). |

@@ -1145,12 +1145,162 @@
         },
         {
             "source": "/docs/workflows/customerio-import:ext(\\.md)?",
-            "destination": "/docs/workflows/import-customerio-optouts:ext?",
+            "destination": "/docs/messaging/migrate-from-customer-io:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/messaging:ext(\\.md)?",
-            "destination": "/docs/workflows:ext?",
+            "source": "/docs/workflows/import-customerio-optouts",
+            "destination": "/docs/messaging/migrate-from-customer-io#2-import-opt-outs-and-suppressions",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/import-customerio-optouts.md",
+            "destination": "/docs/messaging/migrate-from-customer-io.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/installation:ext(\\.md)?",
+            "destination": "/docs/messaging/installation:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/supabase-auth-emails:ext(\\.md)?",
+            "destination": "/docs/messaging/supabase-auth-emails:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/broadcasts:ext(\\.md)?",
+            "destination": "/docs/messaging/broadcasts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/library:ext(\\.md)?",
+            "destination": "/docs/messaging/library:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/create-emails-ai:ext(\\.md)?",
+            "destination": "/docs/messaging/create-emails-ai:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/email-drip-campaign:ext(\\.md)?",
+            "destination": "/docs/messaging/email-drip-campaign:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/opt-outs:ext(\\.md)?",
+            "destination": "/docs/messaging/opt-outs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/frequency-cap:ext(\\.md)?",
+            "destination": "/docs/messaging/frequency-cap:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/sending-reputation:ext(\\.md)?",
+            "destination": "/docs/messaging/sending-reputation:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/engagement-events:ext(\\.md)?",
+            "destination": "/docs/messaging/engagement-events:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails:ext(\\.md)?",
+            "destination": "/docs/messaging/transactional-emails:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/:path*",
+            "destination": "/docs/messaging/transactional-emails/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications:ext(\\.md)?",
+            "destination": "/docs/messaging/push-notifications:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/:path*",
+            "destination": "/docs/messaging/push-notifications/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows:ext(\\.md)?",
+            "destination": "/docs/messaging/automations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/start-here:ext(\\.md)?",
+            "destination": "/docs/messaging/automations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/launch-workflow:ext(\\.md)?",
+            "destination": "/docs/messaging/automations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/surfaces/web-app:ext(\\.md)?",
+            "destination": "/docs/messaging/automations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/surfaces/mcp:ext(\\.md)?",
+            "destination": "/docs/messaging/mcp:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/surfaces/api:ext(\\.md)?",
+            "destination": "/docs/messaging/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/workflow-builder:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/workflow-builder:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/configure-channels:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/workflow-builder:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/editing-live-workflows:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/editing-live-workflows:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/ai-tasks:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/ai-tasks:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/replay-vision:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/ai-tasks:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/best-practices:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/troubleshooting:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/troubleshooting:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/troubleshooting:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/changelog:ext(\\.md)?",
+            "destination": "/docs/messaging/changelog:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/suggestions:ext(\\.md)?",
+            "destination": "/docs/messaging/automations/suggestions:ext?",
             "statusCode": 301
         },
         {
@@ -5498,7 +5648,7 @@
         },
         {
             "source": "/workflows/documentation",
-            "destination": "/docs/workflows"
+            "destination": "/docs/messaging/automations"
         },
         {
             "source": "/workflows/tutorials",

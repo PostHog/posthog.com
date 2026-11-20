@@ -1,0 +1,155 @@
+---
+title: Getting started with Messaging
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
+import OSButton from "components/OSButton";
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to send your first email!">
+
+<QuestLogItem
+  title="Let your agent set it up"
+  subtitle="Recommended"
+  icon="IconMagic"
+>
+
+The fastest way to start is to ask your coding agent. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin), which connects the [PostHog MCP server](/docs/messaging/mcp) and adds the [Messaging skills](/docs/messaging/skills). Then ask:
+
+```
+Send me a test email from PostHog.
+Then add a welcome email to our app
+that goes out when someone signs up.
+```
+
+Your agent sets up a sender, writes the email in your code, adds the send, and can build broadcasts and automations for you. It asks before it sends anything to real people.
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/skills">
+  See the agent skills
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Send your first email"
+  subtitle="Recommended"
+  icon="IconCode"
+>
+
+Transactional emails are the one-off emails your code sends to one person, such as password resets, sign-in codes, and receipts. You write each one as code, and your backend sends it with a [server SDK](/docs/messaging/installation#send-email-from-your-backend) or the API.
+
+You don't need to set up DNS to try it. The [sandbox sender](/docs/messaging/sandbox-sender) sends from a PostHog address to members of your PostHog organization:
+
+
+```js
+await posthog.emails.send({
+  to: "you@example.com",
+  templateKey: "welcome",
+  subject: "Welcome",
+  html: "<p>Hi Ada</p>",
+  idempotencyKey: "my-first-email",
+})
+```
+
+Once your domain is verified, the PostHog wizard adds the send to your app for you. Run it in your project:
+
+```bash
+npx @posthog/wizard@latest email
+```
+
+It writes the email in your code, adds a project secret API key to your env file, and adds the send with the SDK for your backend.
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/transactional-emails">
+  Send your first transactional email
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Send a broadcast or build an automation"
+  subtitle="Recommended"
+  icon="IconDecisionTree"
+>
+
+A [broadcast](/docs/messaging/broadcasts) sends one email to many people, once or on a schedule, such as a product update. Choose the recipients with person properties and cohorts, write the email, and schedule it.
+
+An [automation](/docs/messaging/automations) reacts to what each person does. For example, a drip campaign sends a welcome email at sign-up and a follow-up a few days later if the person has not finished onboarding. To trigger it from product events, [install a PostHog SDK](/docs/messaging/installation#trigger-broadcasts-and-automations-from-events) in your app.
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/email-drip-campaign">
+  Build an email drip campaign
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="See the results"
+  subtitle="Recommended"
+  icon="IconGraph"
+>
+
+Each workflow, broadcast, and transactional email shows its sends, deliveries, opens, clicks, and bounces. PostHog also captures each send, open, and click as an event on the person who got it, so you can see what they did before and after the email. Use these events in insights, funnels, and dashboards, next to your product events.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_light_228eeaada5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_dark_93b1987f6e.png"
+  alt="What a person did around an email, with their events before and after the send"
+  classes="rounded"
+/>
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/engagement-events">
+  See email events
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Verify your domain"
+  subtitle="Before you email your users"
+  icon="IconLetter"
+>
+
+The sandbox sender only delivers to members of your PostHog organization. Before you email your users, add your own sender on the [**Channels** tab](https://app.posthog.com/workflows/channels) and verify its domain. You add a few DNS records, and verification usually takes a few minutes.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/channels_light_d59f7881bc.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/channels_dark_ad5b25bed0.png"
+  alt="How to create a channel in PostHog"
+  classes="rounded"
+/>
+
+You can also send [push notifications](/docs/messaging/push-notifications), and Slack messages and SMS from an [automation](/docs/messaging/automations/workflow-builder).
+
+---
+
+<OSButton variant="primary" asLink to="/docs/messaging/verify-domain">
+  Verify your sending domain
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Know what you'll pay"
+  subtitle="Optional"
+  icon="IconPiggyBank"
+>
+
+Pricing is based on how many real-time destinations you use and how many messages you send each month. You get 10,000 destinations or messages free every month, with discounts as your usage grows.
+
+---
+
+<OSButton variant="primary" asLink to="/pricing">
+  See pricing
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

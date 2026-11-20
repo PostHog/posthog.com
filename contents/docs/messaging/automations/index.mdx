@@ -1,0 +1,120 @@
+---
+title: Automations
+showStepsToc: true
+---
+
+import ChannelPlatforms from "./_snippets/channel-platforms";
+
+An automation in Messaging is a **workflow**: a trigger, the steps that follow it, and an exit. A workflow reacts to your product data, messages the right people, and sends the results back to PostHog as events.
+
+- **React to product data.** Start a workflow from any PostHog event, a batch audience, a webhook, a Slack message, or a schedule. Filter and split on the event, person, and group properties you already capture.
+- **Message people.** Send email, push, Slack, or SMS, or call a webhook or any [real-time destination](/docs/data-pipelines/destinations). Messages use your [templates](/docs/messaging/library) and respect [opt-outs](/docs/messaging/opt-outs).
+- **Send results back as events.** Sends, opens, clicks, and [conversions](/docs/messaging/engagement-events) come back as events on the person. A **Capture event** step records anything else, so you can measure a workflow in insights, funnels, and cohorts.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_dark_8fe8f4567b.png"
+  alt="How to create a workflow in PostHog"
+  classes="rounded"
+/>
+
+To send one email to many people with no other steps, a [broadcast](/docs/messaging/broadcasts) is quicker. For a full example, see [build an email drip campaign](/docs/messaging/email-drip-campaign).
+
+## Launch your first workflow
+
+This example sends an email to people who perform an event in your app or site.
+
+<Steps>
+
+<Step title="Set up a channel" badge="required">
+
+To send email, [verify a sending domain](/docs/messaging/verify-domain) first. To send to Slack or SMS, [connect a channel](/docs/messaging/automations/workflow-builder#connect-slack-and-sms). Webhooks and other destinations need no channel.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/channels_light_d59f7881bc.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/channels_dark_ad5b25bed0.png"
+  alt="How to create a channel in PostHog"
+  classes="rounded"
+/>
+
+<ChannelPlatforms />
+
+</Step>
+
+<Step title="Create a workflow" badge="required">
+
+Go to [Workflows](https://app.posthog.com/workflows) and click **+ New workflow**. A new workflow has a trigger step and an exit step. The panel on the right lists the steps you can add.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_list_light_c6075ccaf8.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_list_dark_0d5c406369.png"
+  classes="rounded"
+  alt="Click the New Workflow button"
+/>
+
+</Step>
+
+<Step title="Configure the trigger" badge="required">
+
+Click the trigger step, then click **+ Add trigger event** and pick the event that starts the workflow, such as `user signed up`. Set **Frequency** to **One time** so a person enters the workflow only once. See [triggers](/docs/messaging/automations/workflow-builder#triggers) for the other trigger types.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_trigger_panel_light_65045a7652.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_trigger_panel_dark_bf54d41ffd.png"
+  classes="rounded"
+  alt="Trigger warning that event is required"
+/>
+
+</Step>
+
+<Step title="Add a message step" badge="required">
+
+Drag an **Email** step below the trigger and click it. Pick a **From** address, and write the subject and body, or start from a [template](/docs/messaging/library). **To** defaults to the person who triggered the workflow. While you test, put your own address in **To**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_email_step_light_ee7fc76477.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_email_step_dark_eea63f4945.png"
+  classes="rounded"
+  alt="Configure email template"
+/>
+
+To send to Slack, SMS, or a webhook instead, see [dispatches](/docs/messaging/automations/workflow-builder#dispatches).
+
+</Step>
+
+<Step checkpoint title="Test the workflow" subtitle="Confirm you can trigger the workflow">
+
+Click **Test**. PostHog makes an example trigger event, or click **Load new event** to use a real one. With **Make a real request to PostHog** off, sends are mocked and logged. With it on, real messages go out. Click **Run test**, and the path the run takes lights up green.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_test_light_1d317768fd.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_test_dark_516c970a99.png"
+  classes="rounded"
+  alt="Test workflow"
+/>
+
+Test sends don't appear in the **Metrics** tab.
+
+</Step>
+
+<Step title="Enable the workflow" badge="required">
+
+You can save a draft at any time, even when it is incomplete. PostHog checks the workflow only when you click **Enable**. Once enabled, the workflow runs each time the trigger fires.
+
+</Step>
+
+<Step checkpoint title="Monitor the workflow" subtitle="Confirm messages are being delivered">
+
+The **Metrics** tab shows how many runs were triggered and succeeded, and conversions if you set a [conversion goal](/docs/messaging/automations/workflow-builder#conversion-goals). The **Logs** tab shows each run and any errors. If something is wrong, see [troubleshooting](/docs/messaging/automations/troubleshooting).
+
+</Step>
+
+</Steps>
+
+## Next steps
+
+- [Workflow builder](/docs/messaging/automations/workflow-builder): every trigger, step, and channel
+- [Editing a live workflow](/docs/messaging/automations/editing-live-workflows): what happens to people already in a workflow when you change it
+- [AI tasks and Replay Vision](/docs/messaging/automations/ai-tasks): steps that hand work to an AI agent or watch a session recording
+- [MCP](/docs/messaging/mcp) and [API](/docs/messaging/api): build and manage workflows from code or an AI tool
+- [Pricing](/pricing): based on the destinations and messages you use each month, with a free tier

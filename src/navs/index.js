@@ -7176,7 +7176,7 @@ export const docsMenu = {
                     name: 'Reference',
                 },
                 {
-                    name: 'MCP tools',
+                    name: 'MCP',
                     url: '/docs/semantic-layer/mcp-tools',
                     icon: 'IconSparkles',
                     color: 'purple',
@@ -8341,258 +8341,298 @@ export const docsMenu = {
             },
         },
         {
-            name: 'Workflows',
-            icon: 'IconMegaphone',
+            name: 'Messaging',
+            icon: 'IconLetter',
             color: 'red',
-            url: '/docs/workflows',
-            description: 'Create automations or campaigns to send messages to your users.',
+            url: '/docs/messaging',
+            description:
+                'Send transactional email, broadcasts, and push notifications, and automate them from product data.',
             children: [
                 {
-                    name: 'Workflows',
+                    name: 'Messaging',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/workflows',
+                    url: '/docs/messaging',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Setup',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/workflows/start-here',
+                    url: '/docs/messaging/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Install PostHog SDK',
-                    url: '/docs/workflows/installation',
+                    url: '/docs/messaging/installation',
                     icon: 'IconTerminal',
                     color: 'blue',
                 },
                 {
-                    name: 'Launch your first workflow',
-                    url: '/docs/workflows/launch-workflow',
-                    icon: 'IconMegaphone',
-                    color: 'blue',
-                    featured: true,
+                    name: 'Sandbox sender',
+                    url: '/docs/messaging/sandbox-sender',
+                    icon: 'IconFlask',
+                    color: 'purple',
                 },
                 {
-                    name: 'Where to use',
+                    name: 'Verify your sending domain',
+                    url: '/docs/messaging/verify-domain',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
                 },
                 {
-                    name: 'PostHog Web',
-                    url: '/docs/workflows/surfaces/web-app',
-                    icon: 'IconLaptop',
-                    color: 'yellow',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/workflows/surfaces/web-app',
-                        },
-                        {
-                            name: 'Workflow builder',
-                            url: '/docs/workflows/workflow-builder',
-                        },
-                        {
-                            name: 'Editing a live workflow',
-                            url: '/docs/workflows/editing-live-workflows',
-                        },
-                        {
-                            name: 'Content library and message templates',
-                            url: '/docs/workflows/library',
-                        },
-                        {
-                            name: 'Create emails with PostHog AI',
-                            url: '/docs/workflows/create-emails-ai',
-                        },
-                        {
-                            name: 'Run AI tasks from a workflow',
-                            url: '/docs/workflows/ai-tasks',
-                        },
-                        {
-                            name: 'Watch sessions with Replay Vision',
-                            url: '/docs/workflows/replay-vision',
-                        },
-                    ],
+                    name: 'Agents and MCP',
                 },
                 {
-                    name: 'PostHog MCP',
-                    url: '/docs/workflows/surfaces/mcp',
+                    name: 'Agent skills',
+                    url: '/docs/messaging/skills',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/messaging/mcp',
                     icon: 'IconMagic',
                     color: 'purple',
                 },
                 {
-                    name: 'API',
-                    url: '/docs/workflows/surfaces/api',
-                    icon: 'IconBrackets',
+                    name: 'Transactional email',
+                },
+                {
+                    name: 'Send transactional emails',
+                    url: '/docs/messaging/transactional-emails',
+                    icon: 'IconLetter',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/messaging/transactional-emails',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/messaging/transactional-emails/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/messaging/transactional-emails/python',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/messaging/transactional-emails/go',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/messaging/transactional-emails/dotnet',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/messaging/transactional-emails/rust',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/messaging/transactional-emails/ruby',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/messaging/transactional-emails/elixir',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/messaging/transactional-emails/php',
+                        },
+                        {
+                            name: 'API',
+                            url: '/docs/messaging/transactional-emails/api',
+                        },
+                        {
+                            name: 'React Email',
+                            url: '/docs/messaging/transactional-emails/react-email',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/messaging/transactional-emails/examples',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/messaging/transactional-emails/troubleshooting',
+                        },
+                    ],
+                },
+                {
+                    name: 'Supabase auth emails',
+                    url: '/docs/messaging/supabase-auth-emails',
+                    icon: 'IconLock',
+                    color: 'green',
                 },
                 {
                     name: 'Broadcasts',
                 },
                 {
                     name: 'Send a broadcast',
-                    url: '/docs/workflows/broadcasts',
+                    url: '/docs/messaging/broadcasts',
                     icon: 'IconSend',
                     color: 'orange',
                 },
                 {
-                    name: 'Transactional emails',
-                },
-                {
-                    name: 'Send transactional emails',
-                    url: '/docs/workflows/transactional-emails',
-                    icon: 'IconLetter',
+                    name: 'Choose an audience',
+                    url: '/docs/messaging/audiences',
+                    icon: 'IconPeople',
                     color: 'blue',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/workflows/transactional-emails',
-                        },
-                        {
-                            name: 'Node.js',
-                            url: '/docs/workflows/transactional-emails/node',
-                        },
-                        {
-                            name: 'Python',
-                            url: '/docs/workflows/transactional-emails/python',
-                        },
-                        {
-                            name: 'Go',
-                            url: '/docs/workflows/transactional-emails/go',
-                        },
-                        {
-                            name: '.NET',
-                            url: '/docs/workflows/transactional-emails/dotnet',
-                        },
-                        {
-                            name: 'Rust',
-                            url: '/docs/workflows/transactional-emails/rust',
-                        },
-                        {
-                            name: 'Ruby',
-                            url: '/docs/workflows/transactional-emails/ruby',
-                        },
-                        {
-                            name: 'Elixir',
-                            url: '/docs/workflows/transactional-emails/elixir',
-                        },
-                        {
-                            name: 'PHP',
-                            url: '/docs/workflows/transactional-emails/php',
-                        },
-                        {
-                            name: 'API',
-                            url: '/docs/workflows/transactional-emails/api',
-                        },
-                        {
-                            name: 'React Email',
-                            url: '/docs/workflows/transactional-emails/react-email',
-                        },
-                        {
-                            name: 'Examples',
-                            url: '/docs/workflows/transactional-emails/examples',
-                        },
-                    ],
                 },
                 {
-                    name: 'Channels',
-                },
-                {
-                    name: 'Configure a channel',
-                    url: '/docs/workflows/configure-channels',
-                    icon: 'IconMegaphone',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Push notifications',
-                    url: '/docs/workflows/push-notifications',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/workflows/push-notifications',
-                        },
-                        {
-                            name: 'Import device tokens',
-                            url: '/docs/workflows/push-notifications/import-device-tokens',
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/workflows/push-notifications/ios',
-                        },
-                        {
-                            name: 'Android',
-                            url: '/docs/workflows/push-notifications/android',
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/workflows/push-notifications/react-native',
-                        },
-                        {
-                            name: 'Flutter',
-                            url: '/docs/workflows/push-notifications/flutter',
-                        },
-                        {
-                            name: 'Push step settings',
-                            url: '/docs/workflows/push-notifications/push-step-options',
-                        },
-                    ],
-                },
-                {
-                    name: 'Supabase auth emails',
-                    url: '/docs/workflows/supabase-auth-emails',
-                    icon: 'IconLock',
-                    color: 'green',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Workflow events',
-                    url: '/docs/workflows/engagement-events',
-                    icon: 'IconGraph',
+                    name: 'Content library and message templates',
+                    url: '/docs/messaging/library',
+                    icon: 'IconPalette',
                     color: 'yellow',
                 },
                 {
-                    name: 'Opt-outs',
+                    name: 'Create emails with PostHog AI',
+                    url: '/docs/messaging/create-emails-ai',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                },
+                {
+                    name: 'Push notifications',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/messaging/push-notifications',
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
+                    name: 'iOS',
+                    url: '/docs/messaging/push-notifications/ios',
+                    icon: 'IconApple',
+                    color: 'blue',
+                },
+                {
+                    name: 'Android',
+                    url: '/docs/messaging/push-notifications/android',
+                    icon: 'IconAndroid',
+                    color: 'green',
+                },
+                {
+                    name: 'Flutter',
+                    url: '/docs/messaging/push-notifications/flutter',
+                    icon: 'IconFlutter',
+                    color: 'blue',
+                },
+                {
+                    name: 'React Native',
+                    url: '/docs/messaging/push-notifications/react-native',
+                    icon: 'IconReact',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import device tokens',
+                    url: '/docs/messaging/push-notifications/import-device-tokens',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Push step settings',
+                    url: '/docs/messaging/push-notifications/push-step-options',
+                    icon: 'IconGear',
+                    color: 'purple',
+                },
+                {
+                    name: 'Deliverability',
                 },
                 {
                     name: 'Opt-outs and suppression',
-                    url: '/docs/workflows/opt-outs',
+                    url: '/docs/messaging/opt-outs',
                     icon: 'IconShieldLock',
                     color: 'green',
                 },
                 {
                     name: 'Frequency cap',
-                    url: '/docs/workflows/frequency-cap',
+                    url: '/docs/messaging/frequency-cap',
                     icon: 'IconClock',
                     color: 'purple',
                 },
                 {
                     name: 'Sending reputation and allowance',
-                    url: '/docs/workflows/sending-reputation',
+                    url: '/docs/messaging/sending-reputation',
                     icon: 'IconShield',
                     color: 'orange',
                 },
                 {
-                    name: 'Import opt-out lists from Customer.io',
-                    url: '/docs/workflows/import-customerio-optouts',
-                    icon: 'IconUpload',
+                    name: 'Measure',
+                },
+                {
+                    name: 'Email events',
+                    url: '/docs/messaging/engagement-events',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Migrate',
+                },
+                {
+                    name: 'Migrate from Customer.io',
+                    url: '/docs/messaging/migrate-from-customer-io',
+                    icon: 'IconArrowRight',
+                    color: 'orange',
+                },
+                {
+                    name: 'Migrate from Resend',
+                    url: '/docs/messaging/migrate-from-resend',
+                    icon: 'IconArrowRight',
                     color: 'blue',
                 },
                 {
-                    name: 'Resources',
+                    name: 'API',
                 },
                 {
-                    name: 'Create a drip campaign',
-                    url: '/docs/workflows/email-drip-campaign',
+                    name: 'Messaging API',
+                    url: '/docs/messaging/api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
+                    name: 'Automations',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/messaging/automations',
+                    icon: 'IconDecisionTree',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Workflow builder',
+                    url: '/docs/messaging/automations/workflow-builder',
+                    icon: 'IconDecisionTree',
+                    color: 'blue',
+                },
+                {
+                    name: 'Build an email drip campaign',
+                    url: '/docs/messaging/email-drip-campaign',
                     icon: 'IconLetter',
                     color: 'orange',
+                },
+                {
+                    name: 'Editing a live workflow',
+                    url: '/docs/messaging/automations/editing-live-workflows',
+                    icon: 'IconPencil',
+                    color: 'orange',
+                },
+                {
+                    name: 'Self-driving workflows',
+                    url: '/docs/messaging/automations/suggestions',
+                    icon: 'IconRocket',
+                    color: 'green',
+                },
+                {
+                    name: 'AI tasks and Replay vision',
+                    url: '/docs/messaging/automations/ai-tasks',
+                    icon: 'IconMagic',
+                    color: 'purple',
                 },
                 {
                     name: 'A/B testing in workflows',
@@ -8601,20 +8641,14 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Best practices',
-                    url: '/docs/workflows/best-practices',
-                    icon: 'IconStar',
-                    color: 'red',
-                },
-                {
                     name: 'Troubleshooting',
-                    url: '/docs/workflows/troubleshooting',
+                    url: '/docs/messaging/automations/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },
                 {
                     name: 'Changelog',
-                    url: '/docs/workflows/changelog',
+                    url: '/docs/messaging/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
                 },

@@ -60,7 +60,7 @@ Recordings the scanner has already observed are skipped rather than scanned agai
 
 The step's `state` and `warnings` say why. `skipped` means a limit stopped the scan before it started: the workflow's or project's [daily scan limit](/docs/replay-vision/quota-and-limits#workflow-scan-limits), your organization's credits, or the scanner's credit limit. `ineligible` and `failed` mean the same as for any observation: see [I'm getting a lot of ineligible observations](#im-getting-a-lot-of-ineligible-observations) and [failed observations](#failed-observations).
 
-If the step errors with "The triggering event has no session recording to analyze", the event has no `$session_id`. Send it with the event, or point the step's **Session ID** at the property that holds it. See the [workflow step requirements](/docs/workflows/replay-vision#requirements).
+If the step errors with "The triggering event has no session recording to analyze", the event has no `$session_id`. Send it with the event, or point the step's **Session ID** at the property that holds it. See the [workflow step requirements](/docs/messaging/automations/ai-tasks#requirements).
 
 ## I'm getting a lot of ineligible observations
 
