@@ -1,5 +1,5 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
+import readingIsMagic from '@posthog/brand/hoggies/png/reading-is-magic'
 import { SEO } from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -20,12 +20,12 @@ export const Handbook: React.FC = () => {
                 <section className="max-w-4xl">
                     <div className="flex flex-col @md:items-center @md:justify-end @md:flex-row-reverse gap-8 @md:gap-2 mb-8">
                         <div>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
-                                alt="This hog has an answer"
-                                width={400}
-                                placeholder="blurred"
-                                className="max-w-[300px] @xl:max-w-[300px]"
+                            <img
+                                src={readingIsMagic}
+                                alt="A hedgehog reading a glowing book"
+                                width={1000}
+                                height={1000}
+                                className="w-full max-w-[300px] h-auto"
                             />
                         </div>
                         <div className="md:flex-1">
