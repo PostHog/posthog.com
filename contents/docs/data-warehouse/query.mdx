@@ -128,6 +128,18 @@ For example, with tables, you can add conditional formatting rules. These enable
   classes="rounded"
 />
 
+### Moving averages for line and area charts
+
+For line and area charts, you can overlay a trailing moving average on each series to smooth out fluctuations and spot trends:
+
+1. Select **Line chart** or **Area chart** as your visualization type.
+2. Click on the **Display** tab.
+3. Enable **Show moving average**.
+
+The moving average uses a trailing window that defaults to 3 data points. Each point averages the available numeric values in its window, including the current point. The calculation follows result order and skips gaps. For earlier points without enough history, it averages all available values.
+
+You can adjust the window size by changing the **Intervals** value. The minimum is 2. A larger window produces a smoother line.
+
 ## Querying multiple sources together
 
 Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands.
