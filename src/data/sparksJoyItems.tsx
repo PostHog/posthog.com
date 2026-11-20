@@ -18,6 +18,7 @@ import {
     HedgehogOrganized,
     HedgehogSelfie,
     HedgehogSuperhero,
+    HedgehogTrafficPolice,
     HedgehogWizard,
 } from '@posthog/brand/hoggies'
 
@@ -57,6 +58,11 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             label: 'HogPatch: The Game',
             link: '/sparks-joy/hogpatch',
             icon: <HedgehogHogpatch className="size-12" />,
+        },
+        {
+            label: 'Spot the Hog',
+            link: '/sparks-joy/spot-the-hog',
+            icon: <HedgehogTrafficPolice className="size-12" />,
         },
         {
             label: 'PostHog Farm',
