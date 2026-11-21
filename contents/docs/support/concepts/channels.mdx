@@ -4,22 +4,45 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
+
 A channel is a way a customer conversation reaches Support. Whatever channel a message arrives on, it becomes a [ticket](/docs/support/inbox) in the same inbox, so your team works from one place.
 
 Channels are your support context. In [Self-driving](/docs/self-driving) terms, the conversations they bring in are a signal source: recurring issues across your tickets become reports and actionable reports become pull requests.
 
-## The channels
+## Connect a channel
 
-| Channel | How tickets arrive | Guide |
-| --- | --- | --- |
-| **Widget** | An in-app chat button. Auto-attaches the session, replay, URL, and identity | [Set up the widget](/docs/support/widget) |
-| **Email** | Forward `support@` mail in. Replies thread back to the customer's inbox | [Connect email](/docs/support/email) |
-| **Slack** | SupportHog turns messages, mentions, or a `:ticket:` reaction into tickets | [Connect Slack](/docs/support/slack) |
-| **Microsoft Teams** | Beta. SupportHog turns channel messages or an `@SupportHog` mention into tickets. There is no emoji trigger | [Connect Teams](/docs/support/teams) |
-| **GitHub** | Issues in monitored repos become tickets. Replies post back as comments | [Connect GitHub](/docs/support/github) |
-| **API** | Your code creates the ticket. See below for which `channel_source` you get | [JavaScript API](/docs/support/javascript-api) |
+<SurfaceCards columns={2}>
+
+<SurfaceCard icon="IconChat" color="blue" title="Widget" url="/docs/support/widget" cta="Set up the widget">
+In-app chat. Attaches the session, replay, URL, and identity to every ticket.
+</SurfaceCard>
+
+<SurfaceCard icon="IconAtSign" color="teal" title="Email" url="/docs/support/email" cta="Connect email">
+Forward your <code>support@</code> mail in. Replies go back as threaded emails.
+</SurfaceCard>
+
+<SurfaceCard icon="IconMessage" color="red" title="Slack" url="/docs/support/slack" cta="Connect Slack">
+SupportHog turns messages, mentions, or a <code>:ticket:</code> reaction into tickets.
+</SurfaceCard>
+
+<SurfaceCard icon="IconMessage" color="purple" title="Microsoft Teams" badge="Beta" url="/docs/support/teams" cta="Connect Teams">
+SupportHog turns channel messages and <code>@SupportHog</code> mentions into tickets. There's no emoji trigger.
+</SurfaceCard>
+
+<SurfaceCard icon="IconGithub" color="primary" title="GitHub" url="/docs/support/github" cta="Connect GitHub">
+New issues in monitored repos become tickets. Replies post back as comments.
+</SurfaceCard>
+
+<SurfaceCard icon="IconBrackets" color="seagreen" title="API" url="/docs/support/javascript-api" cta="Use the API">
+Your code creates the ticket, such as from a custom chat UI. It shows up as a widget or email ticket.
+</SurfaceCard>
+
+</SurfaceCards>
 
 Every connected channel syncs both ways. A reply you send in PostHog reaches the customer on the channel they used, and their responses sync back to the ticket.
+
+Not sure which you need? Start from a [use case](/docs/support/use-cases).
 
 ## Create tickets from your code
 

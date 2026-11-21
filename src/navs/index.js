@@ -6745,16 +6745,16 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Use cases',
-                    url: '/docs/support/use-cases',
-                    icon: 'IconBook',
-                    color: 'teal',
-                },
-                {
-                    name: 'Set up the widget',
+                    name: 'Widget',
                     url: '/docs/support/widget',
                     icon: 'IconMessage',
                     color: 'orange',
+                },
+                {
+                    name: 'AI agent',
+                    url: '/docs/support/ai-agent',
+                    icon: 'IconMagic',
+                    color: 'purple',
                 },
                 {
                     name: 'Where to use',
@@ -6766,7 +6766,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Slack (SupportHog)',
+                    name: 'Work in Slack',
                     url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',
                     color: 'purple',
@@ -6778,16 +6778,10 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'API',
-                    url: '/docs/support/javascript-api',
-                    icon: 'IconBrackets',
-                    color: 'blue',
-                },
-                {
                     name: 'Channels',
                 },
                 {
-                    name: 'How channels work',
+                    name: 'Connect a channel',
                     url: '/docs/support/concepts/channels',
                     icon: 'IconMessage',
                     color: 'blue',
@@ -6815,6 +6809,12 @@ export const docsMenu = {
                     url: '/docs/support/github',
                     icon: 'IconGithub',
                     color: 'seagreen',
+                },
+                {
+                    name: 'API',
+                    url: '/docs/support/javascript-api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
                 },
                 {
                     name: 'Imports',
@@ -6853,13 +6853,13 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'AI agent',
-                    url: '/docs/support/ai-agent',
-                    icon: 'IconMagic',
-                    color: 'purple',
+                    name: 'Resources',
                 },
                 {
-                    name: 'Resources',
+                    name: 'Use cases',
+                    url: '/docs/support/use-cases',
+                    icon: 'IconBook',
+                    color: 'teal',
                 },
                 {
                     name: 'Pricing',
