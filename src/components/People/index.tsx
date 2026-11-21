@@ -21,6 +21,7 @@ import {
     useGeocodedArea,
     useCoordsByQuery,
     buildMemberQuery,
+    buildMemberGeocode,
     isWithinBbox,
     findEmployeeByName,
 } from 'components/HogMap/usePeopleGeo'
@@ -398,9 +399,9 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
         [activeTab, baseMembers, searchQuery]
     )
 
-    const geoQuery =
-        activeTab === 'map' && mapMatchedEmployee ? buildMemberQuery(mapMatchedEmployee as any) || '' : searchQuery
-    const geoArea = useGeocodedArea(geoQuery, token)
+    const matchedEmployeeGeocode = mapMatchedEmployee ? buildMemberGeocode(mapMatchedEmployee as any) : null
+    const geoQuery = mapMatchedEmployee ? matchedEmployeeGeocode?.query || '' : searchQuery
+    const geoArea = useGeocodedArea(geoQuery, token, matchedEmployeeGeocode?.countryFilter)
 
     // Only geocode members during a geo search, to avoid Mapbox calls on the list view
     const memberCoords = useCoordsByQuery(isClient, token, geoArea ? baseMembers : [])
@@ -570,6 +571,7 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
                     <div className="h-[70vh] min-h-[480px] mt-2">
                         <PeopleMap
                             members={baseMembers}
+                            focusedMember={mapMatchedEmployee}
                             focusArea={geoArea}
                             focusNonce={focusNonce}
                             coordsByQuery={hasMemberCoords ? memberCoords : undefined}
