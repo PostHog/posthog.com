@@ -31,7 +31,11 @@ When linking Travis CI, you'll need:
 
 <SyncModes />
 
-Builds and jobs sync incrementally: each sync pages newest-first and stops at the last synced ID. Builds or jobs that were still running when a sync last saw them keep the state from that sync – run a full refresh to re-pull final states. Repositories and branches are full refresh only.
+Builds and requests sync incrementally on `id`, while jobs and stages sync incrementally on `build_id`. Each sync pages newest-first and stops at the last synced ID. Stages come from the stages embedded in the builds list, without a separate API request per build.
+
+Builds, jobs, stages, or requests that were still running when a sync last saw them keep the state from that sync – run a full refresh to re-pull final states.
+
+Repositories, branches, and `crons` are full refresh only. Branches are off by default to avoid the API cost of walking every accessible repository's branch list each sync. The `crons` table is also off by default and walks every accessible repository's cron list each sync.
 
 ## Configuration
 
