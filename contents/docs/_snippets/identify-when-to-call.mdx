@@ -6,4 +6,4 @@ This ensures that events sent during your users' sessions are correctly associat
 
 You only need to call `identify` once per session, and you should avoid calling it multiple times unnecessarily.
 
-If you call `identify` multiple times with the same data without reloading the page in between, PostHog will ignore the subsequent calls.
+If you call `identify` multiple times with the same data without reloading the page in between, PostHog will ignore the subsequent calls. After a page reload, a repeat call that passes person properties sends a `$set` event, which is billed as an identified event. On a multi-page site, pass person properties only when they change. See [cutting costs](/docs/product-analytics/cutting-costs#only-call-identify-once-per-session).
