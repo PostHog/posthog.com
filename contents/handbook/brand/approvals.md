@@ -42,3 +42,16 @@ This is who owns what on #team-graphics:
 - **Illustration (Heidi)** – Newsletter and blog images, email artwork, hedgehog illustrations (used across the website, events, etc.), animating hogs, team crests, and merch design.
 - **Graphic design (Lottie)** – Website art (e.g. icons, backgrounds), paid ads, billboards and OOH, event graphics, and doing more weird. Also owns YouTube thumbnails and video assets temporarily, until the rebrand is done (then → Daniel).
 - **Production design (Daniel)** – Design ops (cleaning up and componentizing Figma), social media (repurposing existing assets only, no net new), merch file formatting, event flyers (soon to be self-serve on the web), and moving off Pitch and into Figma Slides.
+
+## Weekly design crit
+
+We do a weekly design crit, and it is fully async. Anyone who does creative work at PostHog can join – you don't need to be a designer.
+
+**Why async?** We do most other things at PostHog async, so why not this? Time zones make a live call hard – it can be very early for some people, or clash with school pick-up. Async lets everyone give feedback in their own time, and gives people time to think about the work before they comment.
+
+**How it works:**
+
+1. Open the [PostHog Design Weekly](https://www.figma.com/design/DMlLaRhJcgafUNzL9Q97x5/PostHog-Design-Weekly?node-id=1-9) Figma file. Read the "start here" page first (and meet the buff bee).
+2. Go to the page for this week and add what you're working on. Include images and a short explanation of why you made the choices you did.
+3. Add links so people can dive deeper – website links, videos, or other Figma pages.
+4. Leave feedback on other people's work with Figma comments.
