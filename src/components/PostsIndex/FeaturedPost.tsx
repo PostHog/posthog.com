@@ -12,11 +12,13 @@ export default function FeaturedPost({
     post,
     annotation = 'Hot off the press',
     accent = 'red',
+    hideReadingTime = false,
 }: {
     calloutPosition?: 'left' | 'right'
     post: PostSummary
     annotation?: string
     accent?: Accent
+    hideReadingTime?: boolean
 }): JSX.Element {
     const annotationColor = accents[accent].annotation
     return (
@@ -62,7 +64,7 @@ export default function FeaturedPost({
                     </h2>
                     <p className="m-0 mt-2 text-base text-secondary @2xl:mt-3 @2xl:text-lg">{getSubtitle(post)}</p>
                     <p className="m-0 mt-2 text-sm font-medium uppercase tracking-wide text-muted @2xl:mt-4">
-                        {getByline(post, post.frontmatter.shortDate)}
+                        {getByline(post, post.frontmatter.shortDate, { hideReadingTime })}
                     </p>
                 </div>
             </Link>
