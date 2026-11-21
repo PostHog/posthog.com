@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Yotpo connector syncs your review and email marketing data – product reviews, email analytics, raw email delivery records, and unsubscribers – into PostHog, so you can analyze customer feedback and email engagement alongside your product data.
+The Yotpo connector syncs your review, e-commerce, and email marketing data – including product reviews, orders, products, customers, customer segments, email analytics, and unsubscribers – into PostHog. Analyze customer feedback, track purchases, and measure email engagement alongside your product data.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ When linking Yotpo, you'll need:
 
 - **App key (store ID)** – your Yotpo app key, found in your Yotpo account settings under **General Settings**.
 - **API secret** – your Yotpo API secret, found in the same settings page.
-- **Start date for email data** – a date in `YYYY-MM-DD` format. Email tables (`email_analytics` and `raw_data`) sync data from this date onward. Reviews and unsubscribers sync all available records regardless of this setting.
+- **Start date for email data** – a date in `YYYY-MM-DD` format. Email tables (`email_analytics` and `raw_data`) sync data from this date onward. All other tables sync all available records regardless of this setting.
 
 ## Sync modes
 
