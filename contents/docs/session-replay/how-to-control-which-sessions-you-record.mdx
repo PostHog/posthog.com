@@ -38,7 +38,7 @@ In most cases, you can initialize the PostHog SDK with the default settings and 
 
 ## Trigger groups
 
-A trigger group is one rule for starting a recording. Each group carries its own conditions — URL triggers, event triggers, and a feature flag — plus its own sample rate, minimum duration, and match type (ANY/ALL).
+A trigger group is one rule for starting a recording. Each group carries its own conditions — URL triggers, event triggers, and a feature flag — plus its own sample rate, minimum duration, and match type (ANY/ALL). On mobile, URL triggers match screen names.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_group_light_062209f6b0.png"
@@ -49,7 +49,24 @@ A trigger group is one rule for starting a recording. Each group carries its own
 
 Multiple trigger groups can be active at the same time. A session is recorded if it matches **any** of your trigger groups. Within a group, conditions are combined based on that group's match type.
 
-Trigger groups are configured on the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers), and are supported on posthog-js 1.369.0+. Earlier versions, and projects with no trigger groups configured, fall back to the [legacy controls](#legacy-controls) below. You should aim to upgrade to the latest version of `posthog-js` to use trigger groups as soon as possible.
+Trigger groups are configured on the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers). They apply to every platform in your project. Trigger groups are supported on the following SDKs:
+
+| Platform | Minimum version |
+| --- | --- |
+| [Web](/docs/libraries/js) | posthog-js 1.369.0+ |
+| [iOS](/docs/libraries/ios) | 3.99.0+ |
+| [Android](/docs/libraries/android) | 3.78.0+ |
+| [React Native](/docs/libraries/react-native) | TBD |
+| [Flutter](/docs/libraries/flutter) | TBD |
+| [Kotlin Multiplatform](/docs/libraries/kmp) | TBD |
+
+Earlier versions, and projects with no trigger groups configured, fall back to the [legacy controls](#legacy-controls) below. You should aim to upgrade your SDKs to use trigger groups as soon as possible.
+
+<CalloutBox icon="IconInfo" title="Trigger groups apply to your whole project" type="fyi">
+
+A trigger group applies to every platform, not to one app. A group you create for your web app also applies to your mobile apps. Mobile SDKs older than the versions above ignore trigger groups and keep using the [legacy controls](#legacy-controls).
+
+</CalloutBox>
 
 <CalloutBox icon="IconInfo" title="Admin permissions required" type="fyi">
 
@@ -78,7 +95,7 @@ A trigger group with no conditions matches every session, so its sample rate bec
 | Control | What it does |
 | --- | --- |
 | [Sampling](#sampling) | Records a percentage of the sessions that matched this group. |
-| [URL triggers](#url-triggers) | Starts recording when the user visits a matching URL. |
+| [URL triggers](#url-triggers) | Starts recording when the user visits a matching URL (web) or screen (mobile). |
 | [Event triggers](#event-triggers) | Starts recording when a matching event is captured. |
 | [Feature flag triggers](#feature-flag-triggers) | Records only the users who have the flag enabled. |
 | [Minimum duration](#minimum-duration) | Discards sessions shorter than the threshold you set. |
@@ -121,9 +138,11 @@ Sampling reduces the number of sessions you record, but you cannot control which
 ### URL triggers
 
 You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.
-The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
+On the web, the client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
 
 URL trigger patterns are regular expressions and are automatically anchored: PostHog wraps your pattern in `^` and `$`, so it must match the full URL including the path. A bare domain like `https://example.com` won't match `https://example.com/` or any subpage.
+
+On mobile, URL triggers match the screen name, for example `CheckoutScreen`. The same full-match rule applies: PostHog wraps your pattern in `^` and `$`, so `Checkout` does not match `CheckoutScreen`. Use `Checkout.*`. Mobile recording starts when the screen matches, with no footage from before the match.
 
 To record on a domain, all of its subdomains, and every path:
 
@@ -156,7 +175,7 @@ Event triggers are supported on the following SDKs:
 
 <CalloutBox icon="IconInfo" title="Mobile platforms have no pre-buffer" type="fyi">
 
-On mobile platforms, there's no URL or in-memory pre-buffer. Recording starts when the matching event is captured and continues for the rest of the session. A new session re-arms the trigger and requires a fresh matching event.
+On mobile platforms, there's no pre-buffer. Recording starts when a screen or event trigger matches, with no footage from before the match, and continues for the rest of the session. A new session re-arms the trigger and requires a fresh match.
 
 </CalloutBox>
 
@@ -296,12 +315,12 @@ To record both patterns independently at different rates, use two groups rather 
 
 ## Legacy controls
 
-Since posthog-js 1.369.0, all of these controls live in [trigger groups](#trigger-groups). The settings below are kept for backward compatibility. You get them in either of these cases:
+Once your SDK supports [trigger groups](#trigger-groups), all of these controls live in trigger groups. The settings below are kept for backward compatibility. You get them in either of these cases:
 
 | Your SDK | What you get |
 | --- | --- |
-| posthog-js before 1.369.0 | Always the legacy controls below |
-| posthog-js 1.369.0 or later | Trigger groups, unless your project has no groups configured |
+| An SDK older than the [trigger group versions](#trigger-groups) | Always the legacy controls below |
+| An SDK at or after those versions | Trigger groups, unless your project has no groups configured |
 
 If you are using the controls below, upgrade to a current SDK and migrate your configuration to trigger groups.
 
@@ -323,14 +342,20 @@ When your legacy settings use "ANY" match type with both trigger conditions (URL
 1. A group with your trigger conditions at a 100% sample rate
 2. A group with no conditions at your legacy sample rate
 
-This preserves the original behavior where recording starts if **any** condition matches **or** the session was sampled.
+On the web, this preserves the original behavior where recording starts if **any** condition matches **or** the session was sampled.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Migration can change what mobile records" type="caution">
+
+Mobile SDKs always combined legacy controls with all matching, even when your project selected "ANY". Trigger groups honor "ANY", so after migration mobile can record more sessions than before. For example, with an event trigger and 20% sampling, mobile used to record only sampled sessions that sent the event. The migrated groups record every session that sends the event, plus 20% of all other sessions. Review the generated groups before you click **Create**.
 
 </CalloutBox>
 
 
 ### Project-wide match type and sampling
 
-**Applies to posthog-js 1.238.0 through 1.368.x, and to 1.369.0 or later when no trigger groups are configured.** Match type arrived in 1.238.0. Before that, you could not choose how triggers combined.
+**Applies to posthog-js 1.238.0 through 1.368.x, and to 1.369.0 or later when no trigger groups are configured.** Match type arrived in 1.238.0. Before that, you could not choose how triggers combined. Mobile SDKs always use all matching in this configuration.
 
 In this configuration, match type and sampling apply to the project as a whole rather than per group. You choose whether recording starts when all triggers match, or when any trigger matches.
 
