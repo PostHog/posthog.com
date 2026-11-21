@@ -93,7 +93,12 @@ export default function ComparePage({ data }: { data: { posts: { nodes: PostSumm
                         <div className="mt-2 @lg:mt-10 flex @2xl:flex-row flex-col items-center gap-8 @2xl:gap-16">
                             {featured && (
                                 <header className="mt-12 @2xl:mt-0">
-                                    <FeaturedPost calloutPosition="right" post={featured} accent="purple" />
+                                    <FeaturedPost
+                                        calloutPosition="right"
+                                        post={featured}
+                                        accent="purple"
+                                        hideReadingTime
+                                    />
                                 </header>
                             )}
                         </div>
@@ -102,6 +107,7 @@ export default function ComparePage({ data }: { data: { posts: { nodes: PostSumm
                                 posts={posts.slice(1)}
                                 accent="purple"
                                 tagOrderOverride={TAG_ORDER_OVERRIDE}
+                                hideReadingTime
                             />
                         </div>
                         <hr className="my-10 h-px border-none bg-purple/40 @2xl:my-16" />
