@@ -24,26 +24,25 @@ A ticket's status tells you where it is in your workflow:
 
 Each ticket carries a set of properties you can filter, sort, and act on.
 
-| Property          | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
-| **Ticket number** | Auto-incremented unique number, for example #1, #2, #3              |
-| **Status**        | `new`, `open`, `pending`, `on_hold`, or `resolved`                  |
-| **Priority**      | `low`, `medium`, or `high`. Unset by default                        |
+| Property          | Description                                                                  |
+| ----------------- | ---------------------------------------------------------------------------- |
+| **Ticket number** | Auto-incremented unique number, for example #1, #2, #3                       |
+| **Status**        | `new`, `open`, `pending`, `on_hold`, or `resolved`                           |
+| **Priority**      | `low`, `medium`, or `high`. Unset by default                                 |
 | **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, `teams`, or `github` |
-| **Assignee**      | The user or role responsible for the ticket                         |
-| **Session ID**    | The PostHog session used to load events and exceptions              |
-| **Distinct ID**   | The `distinct_id` used to link the ticket to a person               |
+| **Assignee**      | The user or role responsible for the ticket                                  |
+| **Session ID**    | The PostHog session used to load events and exceptions                       |
+| **Distinct ID**   | The `distinct_id` used to link the ticket to a person                        |
 
 ## Reply with full context
 
 Open a ticket and the customer's story sits next to the conversation, so you resolve issues without asking anyone to reproduce them.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_45_56_037ee7a709.png"
-    alt="Reply with full context"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_45_56_037ee7a709.png"
+  alt="Reply with full context"
+  classes="rounded"
 />
-
 
 Each ticket detail page can show:
 
@@ -72,18 +71,15 @@ You can mark any message as a private note. Private notes are visible only to yo
 Use the **Send** button's dropdown to reply and update the ticket status in one step. Click the arrow next to **Send** to choose **Send and set pending**, **Send and set on hold**, or **Send and set resolved**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_41_59_da1d50d0af.png"
-    alt="Reply and update status"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_41_59_da1d50d0af.png"
+  alt="Reply and update status"
+  classes="rounded"
 />
 
 When you use one of these options:
 
 - Your reply is sent first, then the ticket status is updated.
 - If the ticket is unassigned or assigned to a role, it's reassigned to you automatically.
-- If there are unsaved changes to priority, assignee, tags, or snooze, a confirmation dialog lists exactly what else will be saved along with your reply.
-
-The confirmation dialog gives you two choices: **Send and save** commits all changes, while **Cancel** aborts everything – nothing is sent and nothing is saved.
 
 ## Reply macros
 
@@ -109,14 +105,14 @@ Shortcuts are unique within their scope: shared shortcuts are unique across the 
 
 Macro bodies use markdown and can include variables in double braces. You can type them or click the variable buttons below the editor:
 
-| Variable | Fills in with |
-| --- | --- |
-| `{{customer.first_name}}` | First word of the customer's name |
-| `{{customer.name}}` | Customer's name, or their email address when no name is set |
-| `{{customer.email}}` | Customer's email address |
-| `{{agent.first_name}}` | Your first name |
-| `{{agent.name}}` | Your full name, or your email address when no name is set |
-| `{{ticket.number}}` | Ticket number |
+| Variable                  | Fills in with                                               |
+| ------------------------- | ----------------------------------------------------------- |
+| `{{customer.first_name}}` | First word of the customer's name                           |
+| `{{customer.name}}`       | Customer's name, or their email address when no name is set |
+| `{{customer.email}}`      | Customer's email address                                    |
+| `{{agent.first_name}}`    | Your first name                                             |
+| `{{agent.name}}`          | Your full name, or your email address when no name is set   |
+| `{{ticket.number}}`       | Ticket number                                               |
 
 Variables fill in when you insert the macro. If a variable has no value on the ticket (for example, `{{customer.first_name}}` when the ticket only has an email address), the `{{...}}` token stays in the text so you can see the gap before sending.
 
@@ -135,9 +131,11 @@ The **Macros** menu lists your most-used macros first. When you type a query or 
 
 Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. You can also auto-assign with [Workflows](/docs/support/workflows). Each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
 
+Changes to status, priority, assignee, tags, and snooze save automatically. A spinner appears beside **Ticket info** while saving, and a "Ticket saved" toast confirms each save. If a save fails, the field rolls back to its last saved value. Each save sends only the fields you changed, so your edits won't overwrite a teammate's recent changes to other fields.
+
 ## Delete a ticket
 
-Delete a ticket when it holds information that shouldn't stay in PostHog, such as sensitive details a customer shared by mistake. Open the ticket, click **Delete ticket** at the bottom of the sidebar, and confirm.
+Delete a ticket when it holds information that shouldn't stay in PostHog, such as sensitive details a customer shared by mistake. Open the ticket, click the **…** menu beside **Ticket info**, select **Delete ticket**, and confirm.
 
 - The ticket and its messages disappear for your team and the customer right away.
 - PostHog permanently deletes the ticket 14 days later, along with its messages, attachments, and analytics events.
