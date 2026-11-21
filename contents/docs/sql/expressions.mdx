@@ -71,6 +71,17 @@ Expressions can use operators to filter and combine data. These include:
 - Logical operators like `AND`, `OR`, `IS` or `NOT`
 - Arithmetic operators like `+`, `-`, `*`, `/`
 
+HogQL treats missing properties as `NULL`. A filter such as `properties.plan != ''` also matches events where `plan` is missing.
+
+To keep only events with a non-empty `plan` string, check for both `NULL` and an empty string:
+
+```sql
+SELECT event
+FROM events
+WHERE properties.plan IS NOT NULL
+  AND properties.plan != ''
+```
+
 ## Functions and aggregations
 
 You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/sql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
