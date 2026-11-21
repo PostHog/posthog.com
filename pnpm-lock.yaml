@@ -72,8 +72,8 @@ importers:
         specifier: ^2.11.2
         version: 2.11.8
       '@posthog/brand':
-        specifier: 0.13.0
-        version: 0.13.0(react@18.3.1)
+        specifier: 0.17.5
+        version: 0.17.5(react@18.3.1)
       '@posthog/hedgehog-mode':
         specifier: ^0.0.63
         version: 0.0.63(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3664,8 +3664,8 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@posthog/brand@0.13.0':
-    resolution: {integrity: sha512-9QP+SIqv9xmVph/kr3EnCEkth8MX5EC2y0+e13i1emeJjFflTnBLKB7HOt500f9aPAIOEUXlHWMk2PJscdaCuA==}
+  '@posthog/brand@0.17.5':
+    resolution: {integrity: sha512-Nr8gJiP/vgbJHlwvarAwv8spKw3cAdaYE6XsChOBQlIEeiE727g+pCT/CqMqCgksMIwPQEBqnjJSXupPirX1og==}
     engines: {node: '>=22.18'}
     peerDependencies:
       react: '>=18'
@@ -21740,7 +21740,7 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@posthog/brand@0.13.0(react@18.3.1)':
+  '@posthog/brand@0.17.5(react@18.3.1)':
     optionalDependencies:
       react: 18.3.1
 

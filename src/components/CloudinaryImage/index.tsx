@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Transformation } from 'cloudinary-react'
 
-const isCloudinaryImage = (url: string): boolean => {
+export const isCloudinaryImage = (url: string): boolean => {
     const cloudinaryUrlPattern = new RegExp(`https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/`)
     return cloudinaryUrlPattern.test(url)
 }
