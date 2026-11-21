@@ -9,9 +9,13 @@ Supabase auth emails are in private beta and not enabled for every project. If y
 
 </CalloutBox>
 
-If you use [Supabase Auth](https://supabase.com/docs/guides/auth), you can send its emails through PostHog instead of Supabase's built-in mailer. Supabase's [Send Email Hook](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook) calls PostHog each time it needs to send an auth email, and PostHog sends it with a transactional email template from your [library](/docs/workflows/library).
+[Supabase Auth](https://supabase.com/docs/guides/auth)'s built-in sender is for testing. It sends [2 emails an hour](https://supabase.com/docs/guides/auth/rate-limits) for your whole project, and only to [members of your Supabase team](https://supabase.com/docs/guides/auth/auth-smtp). To reach your users, Supabase sends through an email provider you connect over SMTP, or through a Send Email Hook. Supabase's email templates only set what the emails say. They don't change who sends them.
 
-Supabase's built-in mailer is for testing. It sends [2 emails an hour](https://supabase.com/docs/guides/auth/rate-limits) for your whole project, and only to [members of your Supabase team](https://supabase.com/docs/guides/auth/auth-smtp). With PostHog, your auth emails reach every user, use your own templates and sending domain, and get the same stats as your other emails. You don't have to set up an SMTP server.
+If you already use PostHog, it can send these emails for you. Supabase's [Send Email Hook](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook) calls PostHog each time it needs to send an auth email, and PostHog sends it with a transactional email template from your [library](/docs/workflows/library). This means:
+
+- You don't need a separate email provider.
+- PostHog records each email against the Supabase user's ID, next to the rest of your product data. For example, you can see who got a confirmation email and never came back.
+- Your auth, onboarding and marketing emails share one editor and library, so they look the same.
 
 This covers the emails Supabase sends during sign up and sign in:
 
@@ -23,8 +27,6 @@ This covers the emails Supabase sends during sign up and sign in:
 - Reauthentication
 
 It also covers Supabase's security notifications: password changed, email address changed, phone number changed, sign-in method linked or removed, and MFA method added or removed.
-
-PostHog records each email against the Supabase user's ID.
 
 <CalloutBox icon="IconLightBulb" title="Tip: Set it up with the MCP server" type="fyi">
 
@@ -102,7 +104,38 @@ Each email gets these variables from the hook:
 | `{{ variables.user_metadata }}` | The user's metadata from Supabase. |
 | `{{ variables.email_action_type }}` | The Supabase email type, such as `signup` or `recovery`. |
 
+The security notifications also get details of what changed. Each variable is empty in the other emails.
+
+| Variable | Notification | What it contains |
+| --- | --- | --- |
+| `{{ variables.old_email }}` | Email address changed | The address the user changed away from. |
+| `{{ variables.phone }}` | Phone number changed | The user's new phone number. |
+| `{{ variables.old_phone }}` | Phone number changed | The phone number the user changed away from. |
+| `{{ variables.provider }}` | Sign-in method linked or removed | The sign-in method that was linked or removed. |
+| `{{ variables.factor_type }}` | MFA method added or removed | The MFA method, such as `totp`. |
+
 When a user changes their email address with secure email change turned on in Supabase, PostHog sends the change email twice: once to the current address and once to the new one. Each email gets its own link and code. The email address changed notification goes to the old address.
+
+#### Moving from Supabase's email templates
+
+Once the Send Email Hook is on, Supabase doesn't use the templates on its **Email Templates** page. If you changed them there, rebuild them in PostHog. Supabase templates use Go template syntax, so swap each variable for its PostHog version:
+
+| Supabase | PostHog |
+| --- | --- |
+| `{{ .ConfirmationURL }}` | `{{ variables.confirmation_url }}` |
+| `{{ .Token }}` | `{{ variables.token }}` |
+| `{{ .TokenHash }}` | `{{ variables.token_hash }}` |
+| `{{ .RedirectTo }}` | `{{ variables.redirect_to }}` |
+| `{{ .Email }}` | `{{ variables.email }}` |
+| `{{ .NewEmail }}` | `{{ variables.new_email }}` |
+| `{{ .Data }}` | `{{ variables.user_metadata }}` |
+| `{{ .OldEmail }}` | `{{ variables.old_email }}` |
+| `{{ .Phone }}` | `{{ variables.phone }}` |
+| `{{ .OldPhone }}` | `{{ variables.old_phone }}` |
+| `{{ .Provider }}` | `{{ variables.provider }}` |
+| `{{ .FactorType }}` | `{{ variables.factor_type }}` |
+
+`{{ .SiteURL }}` has no PostHog variable. Type your site's URL into the template instead. Go template logic such as `{{ if ... }}` needs rewriting in Liquid, which PostHog templates use.
 
 </Step>
 
