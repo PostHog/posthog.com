@@ -12,6 +12,7 @@ import { getLegacyHogRefSdkIds } from './sdkMarkdownReferences'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { aiAdoptionPreviewRows } from './aiAdoptionPreview'
 import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -288,32 +289,78 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
-    // MCP usage shares for /mcp/leaderboard. The endpoints return percentages only, never raw counts,
-    // because everything sourced here ships in public page data.
+    const fetchLeaderboardRows = async (name: string): Promise<Record<string, unknown>[]> => {
+        const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
+        // OFFSET is not allowed with a personal API key, so fetch every row in one request.
+        const res = await fetch(`${endpointUrl}/run`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+            },
+            body: JSON.stringify({ limit: 50000 }),
+        })
+        if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
+        const body: { hasMore?: boolean; columns?: string[]; results?: unknown[][] } = await res.json()
+        if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
+        const columns: string[] = body.columns || []
+        return (body.results || []).map((row: unknown[]) =>
+            Object.fromEntries(columns.map((column, i) => [column, row[i]]))
+        )
+    }
+
+    const sourceAIAdoption = async () => {
+        const isPreview = process.env.AI_ADOPTION_PREVIEW_DATA === 'true'
+        if (!isPreview && !process.env.POSTHOG_APP_API_KEY) return
+        try {
+            const rows = isPreview
+                ? aiAdoptionPreviewRows()
+                : await fetchLeaderboardRows('ai_adoption_public_leaderboard_monthly')
+            const series = rows.map(({ facet, label, points }) => {
+                if (
+                    !['model', 'lab', 'framework', 'provider_diversity', 'coverage'].includes(String(facet)) ||
+                    typeof label !== 'string' ||
+                    !label.trim() ||
+                    !Array.isArray(points)
+                ) {
+                    throw new Error('Invalid monthly leaderboard series')
+                }
+                return {
+                    facet,
+                    label,
+                    points: points.map((point) => {
+                        if (!Array.isArray(point) || point.length !== 2)
+                            throw new Error('Invalid monthly leaderboard point')
+                        const [month, share] = point
+                        if (
+                            typeof month !== 'string' ||
+                            !/^\d{4}-(0[1-9]|1[0-2])-01$/.test(month) ||
+                            !(
+                                share === null ||
+                                (typeof share === 'number' && Number.isFinite(share) && share >= 0 && share <= 100)
+                            )
+                        ) {
+                            throw new Error('Invalid monthly leaderboard value')
+                        }
+                        return { month, share }
+                    }),
+                }
+            })
+            createNode({
+                id: createNodeId('ai-adoption-leaderboard'),
+                parent: null,
+                children: [],
+                isPreview,
+                series,
+                internal: { type: 'AIAdoptionReport', contentDigest: createContentDigest({ isPreview, series }) },
+            })
+        } catch (err) {
+            console.warn('Could not load the AI adoption leaderboard:', err)
+        }
+    }
+
     const sourceMCPLeaderboard = async () => {
         if (!process.env.POSTHOG_APP_API_KEY) return
-
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
-        }
-        const fetchEndpoint = async (name: string) => {
-            const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
-            // OFFSET is not allowed with a personal API key, so fetch every row in one request.
-            const res = await fetch(`${endpointUrl}/run`, {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({ limit: 50000 }),
-            })
-            if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
-            const body: any = await res.json()
-            if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
-            const columns: string[] = body.columns || []
-            const rows = (body.results || [])
-                .map((row: unknown[]) => Object.fromEntries(columns.map((column, i) => [column, row[i]])))
-                .filter((row: Record<string, unknown>) => row.week && row.facet && row.label)
-            return rows
-        }
 
         // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
         // facet for the latest week only, so older weeks of those facets would only add weight to the page data.
@@ -323,9 +370,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         try {
             const results = await Promise.all(
-                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
+                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchLeaderboardRows)
             )
-            const rows = results.flat()
+            const rows = results.flat().filter((row) => row.week && row.facet && row.label)
             const weeks = Array.from(
                 new Set(rows.filter((row: any) => row.facet === 'total').map((row: any) => row.week as string))
             ).sort()
@@ -1617,6 +1664,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourcePostCategories(),
         sourceCommunityStats(),
         sourceMCPLeaderboard(),
+        sourceAIAdoption(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),

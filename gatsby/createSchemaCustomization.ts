@@ -809,6 +809,19 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         rows: [McpLeaderboardRow!]!
         fetchedAt: Date @dateformat
     }
+    type AIAdoptionPoint {
+        month: String!
+        share: Float
+    }
+    type AIAdoptionSeries {
+        facet: String!
+        label: String!
+        points: [AIAdoptionPoint!]!
+    }
+    type AIAdoptionReport implements Node @dontInfer {
+        isPreview: Boolean!
+        series: [AIAdoptionSeries!]!
+    }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
     # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.
     type SitePage implements Node {

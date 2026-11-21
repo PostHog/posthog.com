@@ -99,6 +99,7 @@ jobs:
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
+                  AI_ADOPTION_PREVIEW_DATA: ${{ github.event.pull_request.number == 22534 }}
                   # Emit the static/dynamic module graph so the eager-graph check below can
                   # measure the app shell. Reuses this single PR build — no second build.
                   EMIT_WEBPACK_STATS: 'true'
