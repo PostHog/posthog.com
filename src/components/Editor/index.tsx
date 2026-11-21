@@ -1,42 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {
-    IconSearch,
-    IconMessage,
-    IconFilter,
-    IconGear,
-    IconTextWidthFixed,
-    IconTextWidth,
-    IconRefresh,
-    IconPlus,
-} from '@posthog/icons'
-import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
-import {
-    StrikethroughIcon,
-    TextAlignLeftIcon,
-    TextAlignCenterIcon,
-    TextAlignRightIcon,
-    FontBoldIcon,
-    FontItalicIcon,
-    ReloadIcon,
-} from '@radix-ui/react-icons'
-import { IconLink } from '../OSIcons/Icons'
-import useProduct from 'hooks/useProduct'
 import { SearchProvider } from './SearchProvider'
 import { SearchBar } from './SearchBar'
 import { getProseClasses } from '../../constants/index'
 import { useApp } from '../../context/App'
-import Share from 'components/Share'
 import { useWindow } from '../../context/Window'
-import Cher from 'components/Cher'
-import BookmarkButton from 'components/BookmarkButton'
-import MediaPlayer from 'components/MediaPlayer'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import { Popover } from 'components/RadixUI/Popover'
-import Slider from 'components/RadixUI/Slider'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
 
 interface EditorProps {
@@ -119,96 +87,6 @@ const ScrollWrapper = ({
     children: React.ReactNode
 }) => (scrollable ? <ScrollArea isScrollRoot={isScrollRoot}>{children}</ScrollArea> : <>{children}</>)
 
-const contentWidthOptions: ToggleOption[] = [
-    {
-        label: 'Fixed',
-        value: 'fixed',
-        icon: <IconTextWidthFixed className="size-5 inline-block" />,
-        default: true,
-    },
-    {
-        label: 'Full',
-        value: 'full',
-        icon: <IconTextWidth className="size-5" />,
-    },
-]
-
-const Options = ({
-    fullWidthContent,
-    maxWidth,
-    setMaxWidth,
-    ...other
-}: {
-    fullWidthContent: boolean
-    maxWidth: number | string
-    setMaxWidth: (value: number | string) => void
-    initialMaxWidth: number | string
-}) => {
-    const { appWindow } = useWindow()
-    const initialMaxWidth =
-        typeof other.initialMaxWidth === 'number' ? other.initialMaxWidth : appWindow?.size?.width || 1000
-    const [preferredMaxWidth, setPreferredMaxWidth] = useState(initialMaxWidth)
-
-    useEffect(() => {
-        const stored = Number(localStorage.getItem('preferredMaxWidth'))
-        if (stored) setPreferredMaxWidth(stored)
-    }, [])
-
-    useEffect(() => {
-        if (!fullWidthContent) {
-            setMaxWidth(preferredMaxWidth)
-            localStorage.setItem('preferredMaxWidth', preferredMaxWidth.toString())
-        }
-    }, [preferredMaxWidth, fullWidthContent])
-
-    return (
-        <Popover
-            title="Options"
-            dataScheme="secondary"
-            trigger={
-                <span>
-                    <OSButton icon={<IconGear />} size="md" />
-                </span>
-            }
-            contentClassName="w-80 p-2"
-        >
-            <ToggleGroup
-                title="Content width"
-                options={contentWidthOptions}
-                value={fullWidthContent ? 'full' : 'fixed'}
-                onValueChange={(value) => {
-                    setMaxWidth(
-                        value === 'full'
-                            ? '100%'
-                            : typeof preferredMaxWidth === 'number'
-                            ? preferredMaxWidth
-                            : appWindow?.size?.width || 1000
-                    )
-                }}
-            />
-            {typeof preferredMaxWidth === 'number' && typeof maxWidth === 'number' && (
-                <div className="flex items-center space-x-1">
-                    <div className="flex-grow">
-                        <Slider
-                            defaultValue={preferredMaxWidth}
-                            max={appWindow?.size?.width}
-                            step={1}
-                            min={400}
-                            value={[preferredMaxWidth]}
-                            label="Line height"
-                            onValueChange={(value) => setPreferredMaxWidth(value[0])}
-                        />
-                    </div>
-                    <OSButton
-                        onClick={() => setPreferredMaxWidth(initialMaxWidth)}
-                        icon={<IconRefresh className="size-5" />}
-                    />
-                </div>
-            )}
-        </Popover>
-    )
-}
-
 export function Editor({
     title,
     type,
@@ -218,12 +96,10 @@ export function Editor({
     availableFilters,
     maxWidth: initialMaxWidth,
     onSearchChange,
-    showFilters: initialShowFilters = false,
     disableFilterChange = false,
     dataToFilter,
     onFilterChange,
     handleFilterChange,
-    actionButtons,
     availableGroups,
     onGroupChange,
     sortOptions,
@@ -231,279 +107,20 @@ export function Editor({
     defaultSortValue,
     proseSize = 'sm',
     hasPadding = true,
-    cta,
-    bookmark,
-    extraMenuOptions,
     articleRef,
-    hideToolbar = false,
-    disableFormatting = false,
     scrollable = true,
     className = '',
 }: EditorProps) {
-    const [showCher, setShowCher] = useState(false)
-    const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
-    const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
-    const [isHovering, setIsHovering] = useState(false)
-    const products = useProduct() as { slug: string; name: string; type: string }[]
-    // take the product name passed in and check the useProduct hook to get the product's display name
-    const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
-    // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
-    const { addWindow, focusedWindow } = useApp()
-    const hasShareButton = !cta?.url || !cta?.label
+    const { focusedWindow } = useApp()
     const { appWindow } = useWindow()
-    const [maxWidth, setMaxWidth] = useState(initialMaxWidth ?? 768)
+    const [maxWidth] = useState(initialMaxWidth ?? 768)
     const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
-
-    const toggleSearch = () => {
-        setShowSearch(!showSearch)
-    }
 
     const closeSearch = () => {
         setShowSearch(false)
     }
-
-    const toolbarElements: ToolbarElement[] = [
-        {
-            type: 'button',
-            label: 'Undo',
-            icon: <ReloadIcon className="scale-x-[-1]" />,
-            hideLabel: true,
-            onClick: actionButtons?.undo?.onClick,
-            active: actionButtons?.undo?.active,
-            disabled: disableFormatting || actionButtons?.undo?.disabled,
-        },
-        {
-            type: 'button',
-            label: 'Redo',
-            icon: <ReloadIcon />,
-            hideLabel: true,
-            onClick: actionButtons?.redo?.onClick,
-            active: actionButtons?.redo?.active,
-            disabled: disableFormatting || actionButtons?.redo?.disabled,
-        },
-        { type: 'separator', className: 'hidden @2xl:block' },
-        {
-            type: 'select',
-            placeholder: 'Zoom',
-            className: '!text-[13px] !pr-0 !py-0.5 hidden @2xl:inline-flex',
-            disabled: true,
-            groups: [
-                {
-                    label: 'Zoom Levels',
-                    items: [
-                        { value: '50', label: '50%', disabled: true },
-                        { value: '75', label: '75%', disabled: true },
-                        { value: '100', label: '100%', disabled: true },
-                        { value: '150', label: '150%', disabled: true },
-                        { value: '200', label: '200%', disabled: true },
-                    ],
-                },
-            ],
-        },
-        { type: 'separator' },
-        {
-            type: 'button',
-            label: 'Bold',
-            icon: <FontBoldIcon />,
-            hideLabel: true,
-            onClick: actionButtons?.bold?.onClick,
-            active: actionButtons?.bold?.active,
-            disabled: disableFormatting || actionButtons?.bold?.disabled,
-        },
-        {
-            type: 'button',
-            label: 'Italic',
-            icon: <FontItalicIcon />,
-            hideLabel: true,
-            onClick: actionButtons?.italic?.onClick,
-            active: actionButtons?.italic?.active,
-            disabled: disableFormatting || actionButtons?.italic?.disabled,
-        },
-        {
-            type: 'button',
-            label: 'Strikethrough',
-            icon: <StrikethroughIcon />,
-            hideLabel: true,
-            onClick: actionButtons?.strikethrough?.onClick,
-            active: actionButtons?.strikethrough?.active,
-            disabled: disableFormatting || actionButtons?.strikethrough?.disabled,
-            className: 'hidden @md:inline-flex',
-        },
-        { type: 'separator', className: 'hidden @3xl:block' },
-        {
-            type: 'select',
-            placeholder: 'Font',
-            className: '!text-[13px] !pr-0 !py-0.5 hidden @3xl:inline-flex',
-            disabled: true,
-            groups: [
-                {
-                    label: 'Fonts',
-                    items: [
-                        { value: 'arial', label: 'Arial', disabled: true },
-                        { value: 'times', label: 'Times New Roman', disabled: true },
-                        { value: 'courier', label: 'Courier New', disabled: true },
-                    ],
-                },
-            ],
-        },
-        { type: 'separator', className: 'hidden @lg:block' },
-        {
-            type: 'button',
-            label: 'Left',
-            icon: <TextAlignLeftIcon />,
-            onClick: actionButtons?.leftAlign?.onClick,
-            active: actionButtons?.leftAlign?.active,
-            hideLabel: true,
-            disabled: disableFormatting || actionButtons?.leftAlign?.disabled,
-            className: 'hidden @lg:inline-flex',
-        },
-        {
-            type: 'button',
-            label: 'Center',
-            icon: <TextAlignCenterIcon />,
-            onClick: actionButtons?.centerAlign?.onClick,
-            active: actionButtons?.centerAlign?.active,
-            hideLabel: true,
-            disabled: disableFormatting || actionButtons?.centerAlign?.disabled,
-            className: 'hidden @lg:inline-flex',
-        },
-        {
-            type: 'button',
-            label: 'Right',
-            icon: <TextAlignRightIcon />,
-            onClick: actionButtons?.rightAlign?.onClick,
-            active: actionButtons?.rightAlign?.active,
-            hideLabel: true,
-            disabled: disableFormatting || actionButtons?.rightAlign?.disabled,
-            className: 'hidden @lg:inline-flex',
-        },
-
-        { type: 'separator', className: 'hidden @xl:block' },
-        {
-            type: 'button',
-            icon: <IconLink />,
-            label: 'Link',
-            hideLabel: true,
-            disabled: true,
-            className: 'hidden @xl:inline-flex',
-        },
-        {
-            type: 'button',
-            icon: <IconMessage />,
-            label: 'Comment',
-            hideLabel: true,
-            disabled: true,
-            className: 'hidden @xl:inline-flex',
-        },
-        {
-            type: 'container' as const,
-            className: 'ml-auto flex items-center gap-px',
-            children: (
-                <>
-                    <OSButton size="md" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
-                    {availableFilters && availableFilters.length > 0 && (
-                        <OSButton
-                            size="md"
-                            active={showFilters}
-                            icon={<IconFilter />}
-                            onClick={() => setShowFilters(!showFilters)}
-                        />
-                    )}
-                    {extraMenuOptions}
-                    {bookmark && <BookmarkButton bookmark={bookmark} />}
-                    <Options
-                        fullWidthContent={fullWidthContent}
-                        maxWidth={maxWidth}
-                        setMaxWidth={setMaxWidth}
-                        initialMaxWidth={initialMaxWidth}
-                    />
-                    <div
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
-                        className="relative z-10"
-                    >
-                        <OSButton
-                            variant="primary"
-                            size="md"
-                            {...(hasShareButton
-                                ? showCher
-                                    ? {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <MediaPlayer
-                                                      newWindow
-                                                      location={{ pathname: `cher` }}
-                                                      key={`cher`}
-                                                      videoId="nZXRV4MezEw"
-                                                  />
-                                              )
-                                          },
-                                      }
-                                    : {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <Share
-                                                      title={appWindow?.meta?.title}
-                                                      location={{ pathname: `share` }}
-                                                      key={`share`}
-                                                      newWindow
-                                                      url={`${window.location.origin}${appWindow?.path}`}
-                                                  />
-                                              )
-                                          },
-                                      }
-                                : {
-                                      to: cta?.url,
-                                  })}
-                            state={{ newWindow: true }}
-                            asLink
-                            className="ml-1 -my-0.5"
-                        >
-                            {hasShareButton ? (
-                                showCher ? (
-                                    <span className="relative">
-                                        <CloudinaryImage
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cher_hog_5cdafbe899.png"
-                                            className="w-[38px] absolute left-0 translate-x-[-25%] translate-y-[-25%]"
-                                        />
-                                        <span className="inline-block ml-6">Cher</span>
-                                    </span>
-                                ) : (
-                                    'Share'
-                                )
-                            ) : (
-                                cta?.label
-                            )}
-                        </OSButton>
-                    </div>
-                </>
-            ),
-        },
-    ]
-
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.ctrlKey || event.metaKey) {
-                setIsModifierKeyPressed(true)
-            }
-        }
-
-        const handleKeyUp = (event: KeyboardEvent) => {
-            if (!event.ctrlKey && !event.metaKey) {
-                setIsModifierKeyPressed(false)
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown)
-        window.addEventListener('keyup', handleKeyUp)
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-            window.removeEventListener('keyup', handleKeyUp)
-        }
-    }, [])
 
     // Add Shift+F keyboard shortcut for search
     useEffect(() => {
@@ -529,10 +146,6 @@ export function Editor({
             document.removeEventListener('keydown', handleSearchKeyDown)
         }
     }, [focusedWindow, appWindow])
-
-    useEffect(() => {
-        setShowCher(isHovering && isModifierKeyPressed)
-    }, [isHovering, isModifierKeyPressed])
 
     return (
         <SearchProvider onSearchChange={onSearchChange}>
