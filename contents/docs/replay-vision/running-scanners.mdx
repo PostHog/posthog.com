@@ -59,15 +59,15 @@ Every scanner has a **Run** tab with three panels:
 
 ### From the replay player
 
-Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), go to the **Observations** tab in the player sidebar, and use **Scan this recording**. Pick the scanner you want to run, and PostHog queues a single observation against that recording.
+Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), open the **Observations** section in the watch panel, and use **Scan this recording**. Pick the scanner you want to run, and PostHog queues a single observation against that recording.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_player_observations_sidebar_3966500ea9.png"
-  alt="The Observations tab in the replay player sidebar: the Scan this recording action, a chapter timeline, and the recording's observations"
+  alt="The Observations section in the watch panel: the Scan this recording action, a chapter timeline, and the recording's observations"
   classes="rounded"
 />
 
-The button in the bar below the player writes a summary of the recording you're watching. If your project has exactly one summarizer scanner, the button reads **Summarize with** and the scanner's name. Otherwise it reads **Summarize this recording** and uses a built-in prompt. Use the menu next to the button to pick a different summarizer, and PostHog remembers your choice. The summary appears in the **Observations** tab in the player sidebar, and after a run the button reads **Summarize again**. A summary from the built-in prompt isn't saved as a scanner, so there is nothing to open or edit.
+The **Summarize** button on the title row writes a summary of the recording you're watching. If your project has exactly one summarizer scanner, the button reads **Summarize with** and the scanner's name. Otherwise it reads **Summarize this recording** and uses a built-in prompt. Use the menu next to the button to pick a different summarizer, and PostHog remembers your choice. The summary appears in the **Observations** section in the watch panel, and after a run the button reads **Summarize again**. A summary from the built-in prompt isn't saved as a scanner, so there is nothing to open or edit.
 
 ### From the recordings list
 
@@ -136,16 +136,16 @@ Only succeeded observations cost credits, at the price of the scanner's model wh
 
 Some recordings can't be analyzed – there's no recording data, nothing to play back, or no events. Rather than fail noisily, these come back marked **ineligible**, with the reason in the status tooltip and on the observation page.
 
-| Reason | What it means |
-| --- | --- |
-| **No recording** | No recording was found for the session. It may have expired or never been captured. |
-| **Nothing to play back** | The recording has no screen data to play back. Screen data may still be ingesting. |
-| **Too short** | The recording is shorter than 15 seconds. |
-| **Too inactive** | The recording has fewer than 10 seconds of activity. |
-| **Too long** | The recording has more than an hour of activity. |
-| **Too large** | The recording is too large to render as a video. |
-| **No events** | The session has no analytics events. |
-| **AI analysis not allowed** | AI data processing was turned off for your organization when the scan ran. |
+| Reason                      | What it means                                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------- |
+| **No recording**            | No recording was found for the session. It may have expired or never been captured. |
+| **Nothing to play back**    | The recording has no screen data to play back. Screen data may still be ingesting.  |
+| **Too short**               | The recording is shorter than 15 seconds.                                           |
+| **Too inactive**            | The recording has fewer than 10 seconds of activity.                                |
+| **Too long**                | The recording has more than an hour of activity.                                    |
+| **Too large**               | The recording is too large to render as a video.                                    |
+| **No events**               | The session has no analytics events.                                                |
+| **AI analysis not allowed** | AI data processing was turned off for your organization when the scan ran.          |
 
 Ineligible observations:
 
