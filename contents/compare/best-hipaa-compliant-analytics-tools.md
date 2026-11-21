@@ -200,7 +200,7 @@ But self-hosting also presents additional risks. You're wholly liable for ensuri
 <details>
   <summary>Does Google Analytics support HIPAA compliance?</summary>
 
-No. [Google Analytics](/blog/posthog-vs-ga4) does not offer a BAA and is not suitable for use with protected health information. 
+No. [Google Analytics](/compare/posthog-vs-ga4) does not offer a BAA and is not suitable for use with protected health information. 
 
 If you're in healthcare, you'll need to either use a HIPAA-compliant analytics tool or route your data through a healthcare-specific CDP like Freshpaint that filters out PHI before it reaches non-compliant destinations.
 
