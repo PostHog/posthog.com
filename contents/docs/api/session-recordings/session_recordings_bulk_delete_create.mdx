@@ -1,0 +1,3 @@
+> **Personal API keys aren't supported.** This endpoint requires a logged-in PostHog session. Personal API keys return `403` with `This action does not support personal API key access`, even with `session_recording:write`.
+
+To delete recordings with a personal API key, use the [single-recording delete endpoint](/docs/api/session-recordings#delete-api-projects-project_id-session_recordings-id) with `session_recording:write`.
