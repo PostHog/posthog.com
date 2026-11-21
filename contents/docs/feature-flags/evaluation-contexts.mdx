@@ -252,6 +252,24 @@ posthog.init('KEY', { evaluation_contexts: ['main-app', 'onboarding'] })
 posthog.init('KEY', { evaluation_contexts: ['admin-panel', 'web'] })
 ```
 
+### Pages on a site with full page loads
+
+If each page on your site is a full page load, you can set an evaluation context from the page path when you initialize PostHog. Then a flag with that context evaluates only on those pages:
+
+```javascript
+const pageContexts = window.location.pathname.startsWith('/pricing') ? ['pricing-page'] : []
+
+posthog.init('KEY', { evaluation_contexts: ['main-app', ...pageContexts] })
+```
+
+Add `pricing-page` as an evaluation context on the flag. Keep your other contexts in the array, or flags that use them stop evaluating.
+
+- This works only because each page load calls `posthog.init` again. It doesn't update on client-side route changes in a single-page app.
+- Until the `/flags` request responds, the SDK can return the value it stored on the last matching page.
+- This rarely lowers your bill. Flags with no evaluation contexts always evaluate, and a `/flags` request is billed if it evaluates any active, billable flag. See [cutting costs](/docs/feature-flags/cutting-costs).
+
+For other ways to limit a flag to a page, see [targeting a specific URL](/docs/feature-flags/property-overrides#targeting-a-specific-url).
+
 ## Troubleshooting
 
 ### Flags not evaluating
