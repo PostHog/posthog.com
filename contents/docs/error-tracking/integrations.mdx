@@ -8,7 +8,7 @@ PostHog integrates with GitHub, GitLab, Linear, and Jira to enhance error tracki
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | [GitHub](#github-integration) | Pinpoint Git commits that cause issues, open files in GitHub directly from stack traces, and create GitHub issues from errors |
 | [GitLab](#gitlab-integration) | Pinpoint Git commits that cause issues, open files in GitLab directly from stack traces, and create GitLab issues from errors |
-| [Linear](#linear-integration) | Create Linear issues directly from errors and track fixes in your existing Linear workflows                                   |
+| [Linear](#linear-integration) | Create Linear issues directly from errors, track fixes in your existing Linear workflows, and automatically sync issue status |
 | [Jira](#jira-integration)     | Create Jira issues directly from errors and track fixes in your existing Jira workflows                                       |
 
 ## GitHub integration
@@ -58,6 +58,8 @@ PostHog connects to Linear using a [third-party app](https://linear.app/docs/thi
 
 - Create issues for your workspace
 - Read access to your workspace
+
+Once connected, linked issues automatically sync their status. When all linked Linear tickets are closed (with at least one marked done), the PostHog issue resolves. When a linked ticket reopens, the PostHog issue reopens.
 
 ## Jira integration
 
