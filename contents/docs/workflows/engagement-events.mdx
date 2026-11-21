@@ -103,15 +103,20 @@ Each email engagement event carries properties so you can filter and break down 
 
 The `$workflows_email_unsubscribed` event differs from other email engagement events in a few important ways:
 
-| Property   | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `$email`   | The recipient's email address                                                      |
-| `category` | The message category the recipient unsubscribed from, or `$all` for all categories |
-| `source`   | How the recipient unsubscribed: `one_click` or `preferences_page`                  |
+| Property                  | Description                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| `$email`                  | The recipient's email address                                                      |
+| `category`                | The message category the recipient unsubscribed from, or `$all` for all categories |
+| `source`                  | How the recipient unsubscribed: `one_click` or `preferences_page`                  |
+| `$workflow_id`            | The workflow that sent the email                                                   |
+| `$workflow_action_id`     | The email step within the workflow                                                 |
+| `$workflow_invocation_id` | The run ID for this workflow invocation                                            |
+| `$workflow_version`       | The version of the workflow at send time                                           |
+
+The four `$workflow_*` properties are only present when the unsubscribe link was generated after workflow attribution was enabled. Links from older emails still work, but their unsubscribe events carry only `$email`, `category`, and `source`.
 
 **Key differences from other email engagement events:**
 
-- **No workflow or action ID**: The unsubscribe event is captured at the email-level, not per-send. It does not include `$workflow_id` or `$workflow_action_id` properties because the unsubscribe token only carries the team and recipient identifier.
 - **Distinct ID is the email address**: The `distinct_id` on unsubscribe events is the recipient's email address, which may differ from the tracked distinct ID on other events like opens and clicks.
 - **Transition-only**: The event only fires when a recipient genuinely transitions from opted-in to opted-out. Replayed unsubscribe requests or repeated saves do not emit duplicate events.
 
