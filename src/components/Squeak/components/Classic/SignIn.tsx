@@ -7,7 +7,7 @@ import { User, useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 import Input from '../../../../components/OSForm/input'
 
-import TrafficPoliceHog from '../../../../images/traffic-police-hog.png'
+import TrafficPoliceHog from 'hoggies/traffic-police.png'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
 import Link from 'components/Link'

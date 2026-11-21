@@ -20,6 +20,8 @@ import { features } from './product_analytics/features'
 import { applications, keyFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogChartPng from 'hoggies/chart.png'
+import hedgehogIpadPng from 'hoggies/ipad.png'
 
 export const productAnalytics = {
     ...getTool('product_analytics'),
@@ -174,8 +176,8 @@ export const productAnalytics = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-hog.png',
-        alt: 'A hedgehog wearing a chart apron',
+        src: hedgehogChartPng,
+        alt: 'A hedgehog presenting a chart',
         footerClasses: 'max-w-[220px]',
         classes: 'absolute bottom-0 right-4 max-w-lg',
     },
@@ -185,7 +187,8 @@ export const productAnalytics = {
             alt: 'A hedgehog presenting a chart on stage',
         },
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
+            src: hedgehogChartPng,
+            crop: [11, 139, 978, 722],
             alt: 'A hedgehog presenting product analytics findings',
         },
     },
@@ -385,8 +388,8 @@ export const productAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png',
-        imageAlt: 'A hedgehog presenting some shocking findings',
+        image: hedgehogIpadPng,
+        imageAlt: 'A hedgehog reading insights on an iPad',
         intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL.',
         mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
         groups: [

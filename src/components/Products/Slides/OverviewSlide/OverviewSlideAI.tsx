@@ -2,7 +2,8 @@ import React from 'react'
 import { OverviewSlideProps } from './types'
 import { IconSparkles } from '@posthog/icons'
 import { AppIcon } from 'components/OSIcons/AppIcon'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import useProduct from 'hooks/useProduct'
 
 interface Skill {
@@ -84,7 +85,16 @@ export default function OverviewSlideAI({ productName, overview, screenshots, co
                 <div className="@2xl:grid grid-cols-5 items-start">
                     {hog && (
                         <div className="float-right @2xl:float-none max-w-xs @2xl:max-w-none @2xl:order-2 relative col-span-2 -mt-4">
-                            <CloudinaryImage src={hog.src as any} alt={hog.alt} className={`${hog.classes}`} />
+                            {isCloudinaryImage(hog.src) ? (
+                                <CloudinaryImage src={hog.src as any} alt={hog.alt} className={`${hog.classes}`} />
+                            ) : (
+                                <HoggieImage
+                                    src={hog.src}
+                                    mirror={hog.mirror}
+                                    alt={hog.alt}
+                                    className={`${hog.classes}`}
+                                />
+                            )}
                             <span
                                 className={`absolute top-[calc(100%-5rem)] @2xl:top-[calc(100%-5.5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange ${
                                     productName === 'Raquel' || productName === 'Marius'

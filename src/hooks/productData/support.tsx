@@ -17,6 +17,7 @@ import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { applications, keyFeatures } from './support/slides'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogLifeguardPng from 'hoggies/lifeguard.png'
 
 const SupportTweet = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
@@ -128,8 +129,9 @@ export const support = {
     },
     hogs: {
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png',
-            alt: 'A support team of hedgehogs at their desks',
+            src: hedgehogLifeguardPng,
+            crop: [127, 60, 745, 911],
+            alt: 'A lifeguard hedgehog with binoculars and a life ring',
         },
     },
     useCases: {
@@ -148,8 +150,8 @@ export const support = {
         ],
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/support_hog_f7ed8447c9.png',
-        imageAlt: 'A lifeguard hedgehog with binoculars and a life ring',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png',
+        imageAlt: 'A support team of hedgehogs at their desks',
         intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Desktop, Slack, and your product editor (using the MCP).',
         mcpFeatures: ['conversations'],
         groups: [

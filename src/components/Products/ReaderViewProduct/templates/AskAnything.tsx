@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
@@ -152,8 +153,14 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                                             className="w-full h-auto"
                                             title={ai.imageAlt || 'Ask PostHog anything'}
                                         />
-                                    ) : (
+                                    ) : isCloudinaryImage(ai.image) ? (
                                         <CloudinaryImage
+                                            src={ai.image}
+                                            alt={ai.imageAlt || 'Ask PostHog anything'}
+                                            className="w-full"
+                                        />
+                                    ) : (
+                                        <HoggieImage
                                             src={ai.image}
                                             alt={ai.imageAlt || 'Ask PostHog anything'}
                                             className="w-full"
