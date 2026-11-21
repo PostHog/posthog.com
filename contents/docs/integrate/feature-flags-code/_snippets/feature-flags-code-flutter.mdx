@@ -24,24 +24,29 @@ if (result != null && result.variant == 'variant-key') { // replace 'variant-key
 
 ### Ensuring flags are loaded before usage
 
-> To use the `onFeatureFlags` callback, you must [set up the SDK manually](#installation). On Android and iOS, disable `com.posthog.posthog.AUTO_INIT` first.
-
 Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
 
 This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
 
-To handle this, you can use the `onFeatureFlags` callback in your config to be notified when flags are loaded:
+To handle this, register a listener with `Posthog().onFeatureFlags()` before you set up the SDK, so it also gets the first load:
 
 ```dart
-final config = PostHogConfig('<ph_project_token>');
-config.host = '<ph_client_api_host>';
-config.onFeatureFlags = () async {
-  if (await Posthog().isFeatureEnabled('flag-key')) {
+// Before setup
+final subscription = Posthog().onFeatureFlags((loaded) async {
+  if (!loaded.errorsLoading && await Posthog().isFeatureEnabled('flag-key')) {
     // do something
   }
-};
+});
+
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
 await Posthog().setup(config);
+
+// Later, stop listening
+subscription.unsubscribe();
 ```
+
+`Posthog().onFeatureFlags()` and the `loaded` argument require version 6.0 or later. On 5.x, set `config.onFeatureFlags = () { … }` on the config instead, which takes no arguments and needs a [manual setup](#installation), with `com.posthog.posthog.AUTO_INIT` disabled on Android and iOS.
 
 ### Reloading feature flags
 
