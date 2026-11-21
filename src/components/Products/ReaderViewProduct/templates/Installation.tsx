@@ -16,6 +16,7 @@ const Installation = ({ id, productData }: SectionComponentProps) => {
 
     const productSlug: string | undefined = installation.productSlug || productData?.slug
     const enabledCategories: string[] | undefined = installation.categories
+    const hrefs: Record<string, string> | undefined = installation.hrefs
 
     const heading = installation.headline || installation.title || 'Install'
     const description: React.ReactNode | undefined = installation.description
@@ -27,7 +28,7 @@ const Installation = ({ id, productData }: SectionComponentProps) => {
 
             <div className="bg-primary rounded border border-primary p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
                 {installation.children || (
-                    <InstallFrameworkGrid categories={enabledCategories} productSlug={productSlug} />
+                    <InstallFrameworkGrid categories={enabledCategories} hrefs={hrefs} productSlug={productSlug} />
                 )}
             </div>
         </section>

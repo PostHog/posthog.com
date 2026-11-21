@@ -158,6 +158,14 @@ export const tools = [
         aliases: ['Customer messaging'],
     },
     {
+        handle: 'messaging',
+        name: 'Messaging',
+        description: 'Send transactional email, broadcasts, and drip campaigns from your product data',
+        slug: 'messaging',
+        category: 'communication',
+        aliases: ['Email', 'Transactional email', 'Broadcasts'],
+    },
+    {
         handle: 'support',
         name: 'Support',
         description: 'Built-in customer support with chat widget and unified inbox.',

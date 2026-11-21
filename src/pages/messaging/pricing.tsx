@@ -1,12 +1,12 @@
 import React from 'react'
 import ProductReaderView from 'components/Products/ReaderViewProduct'
 
-export default function WorkflowsPricing(): JSX.Element {
+export default function MessagingPricing(): JSX.Element {
     return (
         <ProductReaderView
-            productHandle="workflows_emails"
+            productHandle="messaging"
             surface="pricing"
-            seoOverrides={{ title: 'Workflows pricing – PostHog' }}
+            seoOverrides={{ title: 'Messaging pricing – PostHog' }}
         />
     )
 }

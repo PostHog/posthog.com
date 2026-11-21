@@ -24,7 +24,7 @@ export const features = {
         features: [
             {
                 title: 'Drag-and-drop steps',
-                description: 'Build onboarding, activation, and retention flows in minutes',
+                description: 'Build automations in minutes',
             },
             {
                 title: 'Event and cohort triggers',
