@@ -1,83 +1,74 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import CloudinaryImage from 'components/CloudinaryImage'
 
 type Layer = {
-    src: `https://res.cloudinary.com/${string}`
-    /** Natural image size in px. Sets the layer's size relative to the others. */
-    naturalWidth: number
-    naturalHeight: number
-    /** Left edge when open, as a percent of the container width. */
-    openLeft: number
-    /** How far left of the front hog it sits when closed, in percent. Small gaps keep it looking sliced. */
-    tuck: number
+    /** First and last path index in the brand art, which paints its paths back to front. */
+    paths: [number, number]
+    /** Paths from the art's translucent shade group that belong to this layer. */
+    shade?: number[]
+    /** Moves the clip line. Each slice's fur reaches left over the previous slice, which looks right
+     * when stacked but floats loose when the layers fan out, so the layer is clipped just left of its edge. */
+    clip?: number
+    /** Left edge of the visible art, in SVG units. */
+    artLeft: number
 }
 
-// Back to front, so later layers paint on top. Spacing traced from the reference artwork.
+// Back to front, cut from the @posthog/brand "slices" hoggie. The art shows the open state. Path 239
+// is the shared ground shadow, which can't follow layers that move apart, so no layer uses it.
 const LAYERS: Layer[] = [
-    {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/back_hog_203f4b58bd.png',
-        naturalWidth: 1111,
-        naturalHeight: 1321,
-        openLeft: 0,
-        tuck: 19.5,
-    },
-    {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/4_slice_17f56d54c6.png',
-        naturalWidth: 1012,
-        naturalHeight: 1224,
-        openLeft: 14,
-        tuck: 14,
-    },
-    {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/3_slice_a5fde2abfa.png',
-        naturalWidth: 1027,
-        naturalHeight: 1233,
-        openLeft: 27,
-        tuck: 10.5,
-    },
-    {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/2_slice_ef37167f3a.png',
-        naturalWidth: 1037,
-        naturalHeight: 1255,
-        openLeft: 40,
-        tuck: 7,
-    },
-    {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/1_slice_80f9cf3a3b.png',
-        naturalWidth: 1023,
-        naturalHeight: 1234,
-        openLeft: 53,
-        tuck: 3.5,
-    },
-    {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/front_hog_b2e22c2f66.png',
-        naturalWidth: 1103,
-        naturalHeight: 1299,
-        openLeft: 65.5,
-        tuck: 0,
-    },
+    { paths: [0, 56], shade: [240], artLeft: 25 },
+    { paths: [57, 76], clip: -100, artLeft: 180 },
+    { paths: [77, 96], clip: 0, artLeft: 282 },
+    { paths: [97, 134], clip: 107, artLeft: 390 },
+    { paths: [135, 167], clip: 220, artLeft: 513 },
+    { paths: [168, 236], shade: [237, 238], clip: 340, artLeft: 640 },
 ]
+// The box around the whole art, in SVG units. Every layer uses it, so the layers line up.
+const VIEW_BOX = { x: 25, y: 312, width: 943, height: 421 }
+const FRONT_ART_WIDTH = 328
 
-// The front hog spans the last 34.5% of the container when open, and sits in the middle when closed
-const FRONT_WIDTH = 34.5
-const SCALE = FRONT_WIDTH / LAYERS[LAYERS.length - 1].naturalWidth
+const FRONT = LAYERS[LAYERS.length - 1]
+const toPercent = (units: number) => (units / VIEW_BOX.width) * 100
+// The front hog spans the last third of the container when open, and sits in the middle when closed
+const FRONT_WIDTH = toPercent(FRONT_ART_WIDTH)
 const FRONT_CLOSED_LEFT = (100 - FRONT_WIDTH) / 2
+// How much of the open spacing each layer keeps when closed. Small gaps keep it looking sliced.
+const CLOSED_TUCK = 0.3
 // Widens the gaps in the closed stack, so a sliver of each slice stays visible
 const CLOSED_SPREAD = 1.5
+const OFFSETS = LAYERS.map(({ artLeft }) => {
+    // How far left of the front hog the layer sits in the art, as a percent of the container
+    const tuck = toPercent(FRONT.artLeft - artLeft) * CLOSED_TUCK
+    return { openLeft: toPercent(artLeft - VIEW_BOX.x), tuck }
+})
 // Shifts the closed stack right by half its spread, so it sits in the middle of the container
-const CLOSED_CENTERING = (Math.max(...LAYERS.map(({ tuck }) => tuck)) * CLOSED_SPREAD) / 2
-// Requested from Cloudinary in place of the ~1,100px originals. Enough for a 2x screen at max-w-3xl.
-const IMAGE_WIDTH = 600
-// How far each step from the middle moves when it breathes, as a percent of the layer's width
-const BREATH = 2.5
-// The container is as tall as the tallest layer
-const ASPECT_RATIO = 100 / (Math.max(...LAYERS.map(({ naturalHeight }) => naturalHeight)) * SCALE)
+const CLOSED_CENTERING = (Math.max(...OFFSETS.map(({ tuck }) => tuck)) * CLOSED_SPREAD) / 2
+// How far each step from the middle moves when it breathes: 2.5% of a slice's width. Each layer
+// is as wide as the container, so the value is in container percent.
+const BREATH = 2.5 * (FRONT_WIDTH / 100)
+
+let instanceCount = 0
+
+// Splits the brand art into one SVG body per layer, with a clip path for each layer that needs one.
+const buildLayers = (body: string, idPrefix: string): string[] => {
+    const paths = body.match(/<path\b[^>]*?\/?>(?:<\/path>)?/g) ?? []
+    const shadeTag = body.match(/<g\b[^>]*>/)?.[0] ?? '<g>'
+    return LAYERS.map(({ paths: [first, last], shade = [], clip }, index) => {
+        const inner =
+            paths.slice(first, last + 1).join('') +
+            (shade.length ? `${shadeTag}${shade.map((i) => paths[i]).join('')}</g>` : '')
+        if (clip === undefined) return inner
+        // The line runs along the edge of the code slice: x = 399 + clip - 0.213 * y
+        const id = `${idPrefix}-${index}`
+        const polygon = `${399 + clip},0 1000,0 1000,1000 ${399 + clip - 213},1000`
+        return `<defs><clipPath id="${id}"><polygon points="${polygon}"/></clipPath></defs><g clip-path="url(#${id})">${inner}</g>`
+    })
+}
 
 interface SlicedHogProps {
     className?: string
-    /** Read by assistive tech in place of the images. */
+    /** Read by assistive tech in place of the art. */
     label?: string
     /** Shown as a tooltip on hover. */
     title?: string
@@ -104,13 +95,28 @@ export default function SlicedHog({
         [revealRef, visibleRef]
     )
     const [open, setOpen] = useState(false)
+    const [layers, setLayers] = useState<string[] | null>(null)
+    // Clip path ids must be unique on the page
+    const [idPrefix] = useState(() => `sliced-hog-${++instanceCount}`)
 
-    // With reduced motion there is no reveal to wait for, so it starts open
+    // The art is about 260 KB of gzipped path data, so it loads in its own chunk after hydration,
+    // not in the page bundle or the server HTML
     useEffect(() => {
-        if (inView || shouldReduceMotion) {
+        let cancelled = false
+        import('@posthog/brand/hoggies/svg/slices').then(({ body }: { body: string }) => {
+            if (!cancelled) setLayers(buildLayers(body, idPrefix))
+        })
+        return () => {
+            cancelled = true
+        }
+    }, [idPrefix])
+
+    // With reduced motion there is no reveal to wait for, so it starts open. Either way it waits for the art.
+    useEffect(() => {
+        if (layers && (inView || shouldReduceMotion)) {
             setOpen(true)
         }
-    }, [inView, shouldReduceMotion])
+    }, [layers, inView, shouldReduceMotion])
 
     // Once open and on screen, the slices float and breathe
     const floating = open && onScreen && !shouldReduceMotion
@@ -124,22 +130,23 @@ export default function SlicedHog({
             aria-label={label}
             title={title}
             className={`relative block w-full cursor-pointer select-none ${className}`}
-            style={{ aspectRatio: ASPECT_RATIO }}
+            style={{ aspectRatio: VIEW_BOX.width / VIEW_BOX.height }}
         >
-            {LAYERS.map(({ src, naturalWidth, openLeft, tuck }, index) => {
-                const width = naturalWidth * SCALE
+            {layers?.map((markup, index) => {
+                const { openLeft, tuck } = OFFSETS[index]
                 const closedLeft = FRONT_CLOSED_LEFT + CLOSED_CENTERING - tuck * CLOSED_SPREAD
-                // Percent of the layer's own width, which is what a translateX percentage resolves against
-                const closedOffset = ((closedLeft - openLeft) / width) * 100
+                // Each layer is as wide as the container, so the shift in container percent is also
+                // the translateX percent
+                const closedOffset = closedLeft - openLeft
                 // Signed distance from the middle of the stack: the outer layers lead the reveal and move most when it breathes
                 const spread = index - (LAYERS.length - 1) / 2
                 const delay = 0.18 - Math.abs(spread) * 0.06
 
                 return (
                     <motion.div
-                        key={src}
-                        className="absolute top-0"
-                        style={{ left: `${openLeft}%`, width: `${width}%`, zIndex: index }}
+                        key={index}
+                        className="absolute inset-0"
+                        style={{ zIndex: index }}
                         initial={false}
                         animate={{ x: open ? '0%' : `${closedOffset}%` }}
                         transition={
@@ -150,6 +157,7 @@ export default function SlicedHog({
                     >
                         {/* A separate element, so the idle motion never fights the open/close spring */}
                         <motion.div
+                            className="size-full"
                             initial={false}
                             animate={
                                 floating
@@ -182,12 +190,12 @@ export default function SlicedHog({
                                     : { duration: 0.3 }
                             }
                         >
-                            <CloudinaryImage
-                                src={src}
-                                width={IMAGE_WIDTH}
-                                alt=""
-                                className="w-full"
-                                imgClassName="w-full"
+                            <svg
+                                viewBox={`${VIEW_BOX.x} ${VIEW_BOX.y} ${VIEW_BOX.width} ${VIEW_BOX.height}`}
+                                fill="none"
+                                aria-hidden="true"
+                                className="block size-full"
+                                dangerouslySetInnerHTML={{ __html: markup }}
                             />
                         </motion.div>
                     </motion.div>
