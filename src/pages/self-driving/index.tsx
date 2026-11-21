@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage, { HoggieCrop } from 'components/HoggieImage'
 import { CallToAction } from 'components/CallToAction'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
@@ -37,6 +38,10 @@ import {
     IconTerminal,
     IconWarning,
 } from '@posthog/icons'
+import hedgehog996Png from 'hoggies/9-9-6.png'
+import hedgehogFingerGunsPng from 'hoggies/finger-guns.png'
+import hedgehogHotPopcornPng from 'hoggies/popcorn.png'
+import hedgehogTransformerPng from 'hoggies/transformer.png'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 type CloudinarySrc = `https://res.cloudinary.com/${string}`
@@ -690,7 +695,12 @@ const ContextWarehouseSection = (): JSX.Element => (
 type HumanRole = {
     heading: string
     copy: string
-    image: CloudinarySrc
+    /** A bundled hoggie PNG. */
+    image: string
+    /** Flips the hoggie to face the other way. */
+    mirror?: boolean
+    /** Shows only this box of the hoggie. */
+    crop?: HoggieCrop
     alt: string
 }
 
@@ -698,19 +708,23 @@ const humanRoles: HumanRole[] = [
     {
         heading: "You're (still) the driver",
         copy: "Like a Waymo, a self-driving product doesn't decide where you're going (it just makes getting there easier). You choose where the product goes next.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/hog_head_point_b6a2ffb400.png',
+        image: hedgehogFingerGunsPng,
+        crop: [70, 35, 860, 595],
         alt: 'A hedgehog pointing to the side',
     },
     {
         heading: 'Skip to the good part',
         copy: "Somebody's gotta clean up around here. Turns out it doesn't have to be you. Bug fixes and maintenance work land in your inbox. Hit merge and move on with your day.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png',
+        image: hedgehogHotPopcornPng,
+        crop: [50, 40, 900, 600],
         alt: 'A hedgehog eating popcorn',
     },
     {
         heading: 'Outship everyone',
         copy: "Product capability used to scale with headcount. Now it's handled (without adding any). A small team with self-driving can outship companies 10x the size.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png',
+        image: hedgehog996Png,
+        mirror: true,
+        crop: [60, 30, 880, 660],
         alt: 'A hedgehog working at a laptop',
     },
 ]
@@ -886,8 +900,9 @@ export default function SelfDrivingPage({
                         </div>
 
                         {/* PostHog agents run on their own, but don't run wild */}
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png"
+                        <HoggieImage
+                            src={hedgehogTransformerPng}
+                            crop={[170, 20, 670, 930]}
                             alt="A hedgehog transforming into a self-driving machine"
                             className="@lg/reader-content:float-right @lg/reader-content:max-w-[220px] @lg/reader-content:ml-6 mb-4 mt-2"
                             imgClassName="w-full"
@@ -1019,7 +1034,7 @@ export default function SelfDrivingPage({
                             <em>Then what?</em>
                         </p>
                         <div className="not-prose grid grid-cols-1 @md/reader-content:grid-cols-3 gap-3 my-6">
-                            {humanRoles.map(({ heading, copy, image, alt }) => (
+                            {humanRoles.map(({ heading, copy, image, mirror, crop, alt }) => (
                                 <div
                                     key={heading}
                                     className={`flex flex-col overflow-hidden rounded-md border border-primary ${humanRoleCardBackground}`}
@@ -1029,11 +1044,12 @@ export default function SelfDrivingPage({
                                         <p className="m-0 mt-1 text-base text-secondary">{copy}</p>
                                     </div>
                                     <div className="mt-auto px-6 @md/reader-content:px-8">
-                                        <CloudinaryImage
+                                        <HoggieImage
                                             src={image}
+                                            mirror={mirror}
+                                            crop={crop}
                                             alt={alt}
                                             className="w-full !block"
-                                            imgClassName="w-full !block"
                                         />
                                     </div>
                                 </div>

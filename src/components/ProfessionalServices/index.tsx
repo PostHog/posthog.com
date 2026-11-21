@@ -3,7 +3,8 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import { SEO } from 'components/seo'
 import Tooltip from 'components/RadixUI/Tooltip'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage, { HoggieCrop } from 'components/HoggieImage'
 import Editor from 'components/Editor'
 import { graphql, useStaticQuery } from 'gatsby'
 import { ScrollToElement } from 'components/ScrollToElement'
@@ -37,6 +38,11 @@ import {
     IconLetter,
     IconPlug,
 } from '@posthog/icons'
+import hedgehog996Png from 'hoggies/9-9-6.png'
+import hedgehogFingerGunsPng from 'hoggies/finger-guns.png'
+import hedgehogHotPopcornPng from 'hoggies/popcorn.png'
+import hedgehogRobotPng from 'hoggies/robot.png'
+import hedgehogSwirlPng from 'hoggies/swirl.png'
 
 // The sources box for the integration section, same component as the "Signals" box on /desktop.
 const INTEGRATION_SOURCES: CalloutItem[] = [
@@ -187,6 +193,7 @@ const ServiceSection = ({
     lead,
     card,
     image,
+    imageMirror,
     imageAlt = '',
     imageClassName = '',
     imagePosition = '-bottom-4 right-0',
@@ -200,7 +207,10 @@ const ServiceSection = ({
     lead: React.ReactNode
     /** The object floated right of the text. Without one, the hog itself floats there. */
     card?: React.ReactNode
-    image?: `https://res.cloudinary.com/${string}`
+    /** A Cloudinary URL, or a bundled hoggie PNG. */
+    image?: string
+    /** Flips a hoggie to face the other way. */
+    imageMirror?: boolean
     imageAlt?: string
     /** Width and any decoration for the hog (rotation, rounding). Position is set per layout below. */
     imageClassName?: string
@@ -213,15 +223,23 @@ const ServiceSection = ({
     const sectionRef = useRef<HTMLElement>(null)
     const cardRef = useRef<HTMLDivElement>(null)
     const hog = (position: string) =>
-        image ? (
+        !image ? null : isCloudinaryImage(image) ? (
             <CloudinaryImage
-                src={image}
+                src={image as `https://res.cloudinary.com/${string}`}
                 alt={imageAlt}
                 width={320}
                 className={`absolute z-0 pointer-events-none ${imageClassName} ${position}`}
                 imgClassName="w-full h-auto"
             />
-        ) : null
+        ) : (
+            <HoggieImage
+                src={image}
+                mirror={imageMirror}
+                alt={imageAlt}
+                className={`absolute z-0 pointer-events-none ${imageClassName} ${position}`}
+                imgClassName="w-full h-auto"
+            />
+        )
     return (
         <section
             id={id}
@@ -240,6 +258,14 @@ const ServiceSection = ({
                     </div>
                     {hog(imagePosition)}
                 </div>
+            ) : image && !isCloudinaryImage(image) ? (
+                <HoggieImage
+                    src={image}
+                    mirror={imageMirror}
+                    alt={imageAlt}
+                    className={`float-right ml-6 mb-2 w-28 @xl:w-44 ${imageClassName}`}
+                    imgClassName="w-full h-auto"
+                />
             ) : image ? (
                 /* A plain img: CloudinaryImage drops the layout classes when the URL carries transformations. */
                 <img
@@ -281,11 +307,18 @@ const HogCard = ({
     heading,
     copy,
     image,
+    mirror,
+    crop,
     alt,
 }: {
     heading: string
     copy: React.ReactNode
-    image: `https://res.cloudinary.com/${string}`
+    /** A bundled hoggie PNG. */
+    image: string
+    /** Flips the hoggie to face the other way. */
+    mirror?: boolean
+    /** Shows only this box of the hoggie. */
+    crop?: HoggieCrop
     alt: string
 }) => (
     <div className={`flex flex-col overflow-hidden rounded-md border border-primary ${WINDOW_BG}`}>
@@ -294,7 +327,7 @@ const HogCard = ({
             <p className="m-0 mt-1 text-[15px] text-secondary">{copy}</p>
         </div>
         <div className="mt-auto px-6 pt-2">
-            <CloudinaryImage src={image} alt={alt} width={400} className="w-full !block" imgClassName="w-full !block" />
+            <HoggieImage src={image} mirror={mirror} crop={crop} alt={alt} className="w-full !block" />
         </div>
     </div>
 )
@@ -517,7 +550,7 @@ export const ProfessionalServices = () => {
                             totalLabel="YOU PAY TWICE"
                         />
                     }
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/hog_screens_965070a722.png"
+                    image={hedgehogSwirlPng}
                     imageAlt="A hedgehog carrying dashboards and charts"
                     imageClassName="w-32"
                     imagePosition="-bottom-2 left-0"
@@ -562,7 +595,8 @@ export const ProfessionalServices = () => {
                     title="Instrumentation"
                     sticker={StickerTerminal}
                     stickerClassName="rotate-2"
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/w_520,c_scale,q_auto,f_auto/hog_engineer_0eebaf7af1.png"
+                    image={hedgehogRobotPng}
+                    imageMirror
                     imageAlt="A hedgehog engineer repairing a robot"
                     lead={
                         <>
@@ -717,19 +751,23 @@ export const ProfessionalServices = () => {
                     <HogCard
                         heading="1. Tell us what you need"
                         copy="A quick call or an email thread. You tell us what's going on, we come back with a detailed scope and a quote. Free."
-                        image="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/hog_head_point_b6a2ffb400.png"
+                        image={hedgehogFingerGunsPng}
+                        crop={[70, 35, 860, 595]}
                         alt="A hedgehog pointing to the side"
                     />
                     <HogCard
                         heading="2. We do the work"
                         copy="A dedicated engineer owns it end to end, with a weekly sync and a written update. You review, we iterate."
-                        image="https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png"
+                        image={hedgehog996Png}
+                        mirror
+                        crop={[60, 30, 880, 660]}
                         alt="A hedgehog working at a laptop"
                     />
                     <HogCard
                         heading="3. You take it from here"
                         copy="Approved by a named person on your side, follow-ups written down, and your team able to run it without us."
-                        image="https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png"
+                        image={hedgehogHotPopcornPng}
+                        crop={[50, 40, 900, 600]}
                         alt="A hedgehog eating popcorn"
                     />
                 </div>

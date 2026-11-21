@@ -17,6 +17,8 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { useAppActions } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
+import hedgehogDjPng from 'hoggies/dj.png'
+import hedgehogPitViperPng from 'hoggies/pit-viper.png'
 
 const posts: {
     author: string
@@ -98,7 +100,7 @@ type TeamMember = {
 }
 
 const radarHoggies = [
-    { name: 'Hoggie radar', src: '/images/sparks-joy/hoglr/hoggie-radar.webp' },
+    { name: 'Hoggie radar', src: hedgehogPitViperPng },
     { name: 'Chef Hoggie', Icon: HedgehogChef },
     { name: 'Reading Hoggie', Icon: HedgehogReading },
     { name: 'Sailor Hoggie', Icon: HedgehogSailor },
@@ -476,7 +478,7 @@ export default function Hoglr(): JSX.Element {
                                         <article key={update.url} className="flex items-start gap-2 @lg:gap-4">
                                             <div className="size-10 shrink-0 overflow-hidden rounded-[3px] bg-white @lg:size-14 @3xl:size-16">
                                                 <img
-                                                    src={avatar || '/images/sparks-joy/hoglr/dj-hoggie.webp'}
+                                                    src={avatar || hedgehogDjPng}
                                                     alt=""
                                                     className={`size-full ${
                                                         avatar ? 'object-cover' : 'object-contain'
@@ -647,7 +649,7 @@ export default function Hoglr(): JSX.Element {
                                 className="flex w-full cursor-pointer items-center gap-2 text-left text-[#bac9d5] hover:underline"
                             >
                                 <img
-                                    src="/images/sparks-joy/hoglr/dj-hoggie.webp"
+                                    src={hedgehogDjPng}
                                     alt=""
                                     className="size-5 rounded-sm bg-white object-contain"
                                     width="20"

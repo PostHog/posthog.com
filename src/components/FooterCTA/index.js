@@ -1,10 +1,11 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import AnimateIntoView from 'components/AnimateIntoView'
 import { CallToAction } from 'components/CallToAction'
 import { SignupCTA } from 'components/SignupCTA'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import blurb from './images/blurb.svg'
+import hedgehogShockedPng from 'hoggies/shocked.png'
 
 export default function FooterCTA() {
     return (
@@ -23,10 +24,7 @@ export default function FooterCTA() {
                 <AnimateIntoView className="absolute -left-20">
                     <img src={blurb} />
                 </AnimateIntoView>
-                <CloudinaryImage
-                    width={252}
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/FooterCTA/images/surprised-hog.png"
-                />
+                <HoggieImage width={252} src={hedgehogShockedPng} />
             </div>
         </div>
     )

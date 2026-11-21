@@ -1,8 +1,15 @@
 import { IconDecisionTree } from '@posthog/icons'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogNeuralPng from 'hoggies/neural.png'
 
 export const realtimeDestinations = {
     handle: 'realtime_destinations',
+    hog: {
+        src: hedgehogNeuralPng,
+        alt: 'A hedgehog at a wall of live data screens',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
     name: 'Realtime destinations',
     Icon: IconDecisionTree,
     type: 'realtime_destinations',

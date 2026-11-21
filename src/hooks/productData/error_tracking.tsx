@@ -19,6 +19,9 @@ import { features } from './error_tracking/features'
 import { applications, keyFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogErrorPng from 'hoggies/error.png'
+import hedgehogMagnifyingGlassPng from 'hoggies/magnifying-glass.png'
+import hedgehogStopPng from 'hoggies/stop.png'
 
 export const errorTracking = {
     ...getTool('error_tracking'),
@@ -153,19 +156,19 @@ export const errorTracking = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png',
-        alt: 'A hedgehog police officer on the case',
+        src: hedgehogErrorPng,
+        alt: 'A hedgehog wrapped in caution tape',
         footerClasses: 'max-w-[200px]',
         classes: 'absolute bottom-0 right-0 max-w-[250px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
+            src: hedgehogErrorPng,
             alt: 'Just another hedgehog',
         },
         // Reuses the Error Tracking AI hog art (same pattern as feature flags / product analytics).
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
+            src: hedgehogStopPng,
             alt: 'A hedgehog investigating an error',
         },
     },
@@ -356,7 +359,7 @@ export const errorTracking = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_9514_d562b785cc.png',
+        image: hedgehogMagnifyingGlassPng,
         imageAlt: 'A hedgehog inspecting a stack trace with a magnifying glass',
         description: 'investigate the exception and ship the fix',
         intro: 'Ask PostHog AI to find issues, inspect stack traces, and help ship the fix.',

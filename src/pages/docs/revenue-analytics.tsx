@@ -8,6 +8,7 @@ import Intro from 'components/Docs/Intro'
 import { docsMenu } from '../../navs'
 import QuickLinks from 'components/QuickLinks'
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import hedgehogMoneyPng from 'hoggies/money.png'
 
 type RevenueAnalyticsProps = {
     data: {
@@ -29,7 +30,7 @@ export const Content = ({ quickLinks = true }) => {
                 description="Track and analyze your revenue metrics to understand your business performance and growth."
                 buttonText="Setup guide"
                 buttonLink="/docs/revenue-analytics/start-here"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/money_dollars_rich_5a7f1bf7ce.png"
+                imageUrl={hedgehogMoneyPng}
             />
 
             <CalloutBox icon="IconInfo" title="The Revenue analytics dashboard has been removed" type="info">

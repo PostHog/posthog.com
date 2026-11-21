@@ -9,6 +9,9 @@ import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { EXTRA_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
+import hedgehogConstruction1Png from 'hoggies/construction-1.png'
+import hedgehogFloatPng from 'hoggies/float.png'
 
 const pickedSourceSlugs = [
     'postgres',
@@ -136,8 +139,9 @@ export const OnePlaceSlide = () => {
     return (
         <div className="rounded p-4 flex flex-col h-full">
             <div className="relative mb-6 @3xl:mb-0 @3xl:min-h-[184px]">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/construction_hog_80a362973d.png"
+                <HoggieImage
+                    src={hedgehogConstruction1Png}
+                    mirror
                     alt="A construction hedgehog carrying a pipe"
                     imgClassName="mx-auto mb-4 w-48 @lg:float-right @lg:mb-0 @lg:ml-6 @3xl:absolute @3xl:right-0 @3xl:top-0 @3xl:z-0 @3xl:m-0 @3xl:w-64 @4xl:w-72"
                 />
@@ -542,8 +546,9 @@ export const TestRolloutSlide = () => {
 
     return (
         <div className="rounded p-4 pb-6">
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/coastal_hog_79dc4dff47.png"
+            <HoggieImage
+                src={hedgehogFloatPng}
+                mirror
                 imgClassName="@lg:float-right mb-4 @lg:!ml-2 @lg:!mt-4 @lg:!mr-0 @lg:mb-0 w-48"
             />
             <h2 className="mt-0 text-xl @2xl:text-2xl">Ship features safely & get feedback</h2>

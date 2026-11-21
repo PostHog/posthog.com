@@ -1,6 +1,7 @@
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-import CloudinaryImage from '../CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from '../CloudinaryImage'
+import HoggieImage from '../HoggieImage'
 
 export default function Intro({
     subheader,
@@ -40,14 +41,23 @@ export default function Intro({
 
             {imageUrl && (
                 <figure className="m-0 mt-auto px-4 pb-4 md:px-8 md:pb-6 flex items-end justify-center">
-                    <CloudinaryImage
-                        alt=""
-                        placeholder="none"
-                        quality={100}
-                        className={imageColumnClasses}
-                        imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
-                        src={imageUrl}
-                    />
+                    {isCloudinaryImage(imageUrl) ? (
+                        <CloudinaryImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className={imageColumnClasses}
+                            imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
+                            src={imageUrl}
+                        />
+                    ) : (
+                        <HoggieImage
+                            alt=""
+                            className={imageColumnClasses}
+                            imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
+                            src={imageUrl}
+                        />
+                    )}
                 </figure>
             )}
         </div>

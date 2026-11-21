@@ -4,7 +4,8 @@ import useProduct from 'hooks/useProduct'
 import { StickerRobot } from 'components/Stickers/Stickers'
 import { IconMagic } from '@posthog/icons'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
+import hedgehogTransformerPng from 'hoggies/transformer.png'
 
 const engineeringTools: {
     handle?: string
@@ -73,14 +74,15 @@ export function AIEngineering(): JSX.Element | null {
                         })}
                     </ul>
                 </div>
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png"
+                <HoggieImage
+                    src={hedgehogTransformerPng}
+                    crop={[170, 20, 670, 930]}
                     alt=""
                     title="More than meets the AI"
                     loading="lazy"
                     width={360}
                     className="hidden @3xl/reader-content:block"
-                    imgClassName="mx-auto max-h-56 w-auto"
+                    imgClassName="mx-auto h-56"
                 />
             </div>
         </section>
