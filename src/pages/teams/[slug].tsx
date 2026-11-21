@@ -41,6 +41,7 @@ import {
 } from 'components/Stickers/Index'
 import TeamFeatures from 'components/TeamFeatures'
 import SpiritAnimal from 'components/Team/SpiritAnimal'
+import { Combobox } from 'components/OSForm'
 import SmallTeam from 'components/SmallTeam'
 import { normalizeSlug } from 'components/Team/utils'
 import NotFoundPage from 'components/NotFoundPage'
@@ -172,6 +173,7 @@ export default function TeamPage(props: TeamPageProps) {
         teamImage,
         miniCrest,
         slackChannel,
+        emojis,
     } = (team as any)?.attributes || {}
 
     const data = useStaticQuery(graphql`
@@ -239,8 +241,11 @@ export default function TeamPage(props: TeamPageProps) {
                     }
                 }
             }
-            allSlackEmoji {
-                totalCount
+            allSlackEmoji(sort: { fields: name, order: ASC }) {
+                nodes {
+                    name
+                    url
+                }
             }
             allTeamsData: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
                 nodes {
@@ -279,7 +284,6 @@ export default function TeamPage(props: TeamPageProps) {
         (node: any) => node?.fields?.slug === `/teams/${slug}/objectives`
     )?.body
     const teamData = data?.allSqueakTeam?.nodes?.find((node: any) => node?.slug === slug)
-    const { totalCount: totalSlackEmojis } = data?.allSlackEmoji || {}
     const allTeams = data?.allTeamsData || { nodes: [] }
     const allAshbyJobPosting = data?.allAshbyJobPosting || { nodes: [] }
     const hasTeam = Boolean((team as any)?.id || teamData || body || objectives)
@@ -335,6 +339,7 @@ export default function TeamPage(props: TeamPageProps) {
             miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
             spiritAnimal: team?.attributes?.spiritAnimal,
             slackChannel: slackChannel ?? '',
+            emojis: emojis || [],
         },
         onSubmit: async ({
             name,
@@ -349,6 +354,7 @@ export default function TeamPage(props: TeamPageProps) {
             miniCrest,
             spiritAnimal,
             slackChannel: submittedSlackChannel,
+            emojis,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -397,6 +403,7 @@ export default function TeamPage(props: TeamPageProps) {
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }: any) => ({ id })) } : {}),
                 ...(uploadedMiniCrestImage ? { miniCrest: uploadedMiniCrestImage.id } : {}),
                 slackChannel: submittedSlackChannel.trim() || null,
+                emojis: emojis || [],
             }
             if (!team) {
                 await createTeam(updatedTeam)
@@ -777,21 +784,39 @@ export default function TeamPage(props: TeamPageProps) {
                                 />
 
                                 <div>
-                                    {teamEmojis?.length > 0 && (
-                                        <Fieldset legend="Custom emojis">
-                                            <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
-                                                {teamEmojis?.map(({ name, localFile }) => (
-                                                    <li key={name}>
-                                                        <Tooltip
-                                                            trigger={<img className="h-8" src={localFile?.publicURL} />}
-                                                            delay={0}
-                                                        >
-                                                            :{name}:
-                                                        </Tooltip>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </Fieldset>
+                                    {editing && isModerator ? (
+                                        <Combobox
+                                            label="Custom emojis"
+                                            description="Emoji updates will appear on the next build."
+                                            placeholder="Search emojis"
+                                            options={(data?.allSlackEmoji?.nodes || []).map((emoji) => ({
+                                                label: emoji.name,
+                                                value: emoji.name,
+                                                image: emoji.url,
+                                            }))}
+                                            value={values.emojis}
+                                            onChange={(emojis) => setFieldValue('emojis', emojis)}
+                                            allowCreate={false}
+                                        />
+                                    ) : (
+                                        teamEmojis?.length > 0 && (
+                                            <Fieldset legend="Custom emojis">
+                                                <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                                    {teamEmojis.map(({ name, localFile }) => (
+                                                        <li key={name}>
+                                                            <Tooltip
+                                                                trigger={
+                                                                    <img className="h-8" src={localFile?.publicURL} />
+                                                                }
+                                                                delay={0}
+                                                            >
+                                                                :{name}:
+                                                            </Tooltip>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </Fieldset>
+                                        )
                                     )}
                                 </div>
                             </div>
