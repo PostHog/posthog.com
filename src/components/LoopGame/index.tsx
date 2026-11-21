@@ -2,7 +2,7 @@ import { render3d } from './render3d'
 import React, { useEffect, useRef, useState } from 'react'
 import OSButton from 'components/OSButton'
 import { Select } from 'components/RadixUI/Select'
-import maxImage from '../../images/max.png'
+import maxImage from 'hoggies/superhero.png'
 import {
     buildTrack,
     distance,

@@ -6,7 +6,7 @@ import { useWindow } from '../../../../context/Window'
 import { useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 
-import TrafficPoliceHog from '../../../../images/traffic-police-hog.png'
+import TrafficPoliceHog from 'hoggies/traffic-police.png'
 import { IconSpinner } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import PostHogButton from './PostHogButton'

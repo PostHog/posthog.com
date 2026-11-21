@@ -7,7 +7,7 @@ import TabbedCarousel from 'components/TabbedCarousel'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import CustomerLogo from 'components/CustomerLogo'
 import SlotMachineText from 'components/SlotMachineText'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -29,6 +29,8 @@ import {
     IconVideoCamera,
     IconWarning,
 } from '@posthog/icons'
+import hedgehogNoir4Png from 'hoggies/noir-4.png'
+import hedgehogNoir5Png from 'hoggies/noir-5.png'
 
 // Paid-search landing page for "session replay" ads that point at Replay Vision.
 // Built on the /slack page template (centered ReaderView column, highlighted
@@ -43,9 +45,8 @@ const SIGNUP_URL = 'https://app.posthog.com/signup'
 const CUSTOMER_SLUGS = ['elevenlabs', 'kilocode', 'juicebox', 'exa']
 
 const IMAGES = {
-    projectorHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/projector_movie_noir_b2dd613e79.png',
-    monitorsHog:
-        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/noir_desk_relax_surveillance_computer_4d8e09a4f0.png',
+    projectorHog: hedgehogNoir4Png,
+    monitorsHog: hedgehogNoir5Png,
 } as const
 
 // ─────────────────────────────────────────────
@@ -121,7 +122,7 @@ const HeroSection = () => {
                     <p className="text-sm text-secondary mt-3 mb-0">5,000 recordings free every month, forever.</p>
                 </div>
                 <div className="w-full max-w-xs mx-auto @md/reader-content:mx-0 @md/reader-content:w-[32%] @md/reader-content:max-w-none @4xl/reader-content:w-[38%]">
-                    <CloudinaryImage
+                    <HoggieImage
                         src={IMAGES.monitorsHog}
                         alt="A detective relaxing at a desk while watching three product monitors"
                         className="w-full"
@@ -717,7 +718,7 @@ export default function ReplayVisionLanding(): JSX.Element {
                                 </p>
                                 <CTAButtons />
                             </div>
-                            <CloudinaryImage
+                            <HoggieImage
                                 src={IMAGES.projectorHog}
                                 alt=""
                                 className="hidden @lg/reader-content:block pointer-events-none select-none"

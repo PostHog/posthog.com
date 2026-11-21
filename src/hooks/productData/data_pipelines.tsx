@@ -20,6 +20,7 @@ import { applications, GetStarted, PricingIntro, topFeatures } from './data_pipe
 import { dataWarehouse } from './data_warehouse'
 import { realtimeDestinations } from './realtime_destinations'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogConstruction1Png from 'hoggies/construction-1.png'
 
 // this data powers the data pipelines page. It reuses the CDP tool entry (whose aliases include "Data pipelines").
 
@@ -168,13 +169,15 @@ export const dataPipelines = {
     ],
     // Shown in the "Still here?" box at the bottom of the Pricing page.
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/construction_hog_80a362973d.png',
+        src: hedgehogConstruction1Png,
+        mirror: true,
         alt: 'A hedgehog in a hard hat building a pipeline',
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/construction_hog_80a362973d.png',
+            src: hedgehogConstruction1Png,
+            mirror: true,
             alt: 'A hedgehog in a hard hat building a pipeline',
         },
         // `mobileHog` renders on the Overview hero screenshot.

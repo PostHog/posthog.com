@@ -1,11 +1,11 @@
 import React from 'react'
 import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
+import hedgehogNoir5Png from 'hoggies/noir-5.png'
 
 // Detective hedgehog watching a wall of monitors.
-const IMAGE =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/noir_desk_relax_surveillance_computer_63a434c398.png' as const
+const IMAGE = hedgehogNoir5Png
 
 // Same look as the shared PricingFooterCTA, but laid out as two columns so the
 // image sits beside the copy on the right instead of overlapping it.
@@ -34,7 +34,7 @@ const PricingFooterCTASection = ({ id }: SectionComponentProps) => {
                         <p className="text-xs text-primary/30 mt-4">No sales call. No "tailored demo." No expiry.</p>
                     </div>
                     <div className="hidden @2xl:block justify-self-end pointer-events-none select-none">
-                        <CloudinaryImage
+                        <HoggieImage
                             src={IMAGE}
                             alt="Replay Vision watching your sessions"
                             className="w-64 @4xl:w-80"

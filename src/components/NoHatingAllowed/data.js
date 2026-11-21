@@ -2,6 +2,8 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
+import hedgehogMoneyPng from 'hoggies/money.png'
 
 export const HomepageCards = [
     {
@@ -29,12 +31,7 @@ export const HomepageCards = [
             </>
         ),
         color: '#DCE7D0',
-        Image: (
-            <CloudinaryImage
-                width={250}
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/wasting_money_decf55197a.png"
-            />
-        ),
+        Image: <HoggieImage width={250} src={hedgehogMoneyPng} />,
         // ImageSize: 'w-full mt-8',
     },
     {

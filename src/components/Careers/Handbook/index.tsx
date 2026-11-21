@@ -1,9 +1,10 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import React from 'react'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import chapters from '../../../navs/handbook.json'
 import { StaticImage } from 'gatsby-plugin-image'
+import hedgehogReadingIsMagicPng from 'hoggies/reading-is-magic.png'
 
 const CompanyHandbook: React.FC = () => {
     return (
@@ -12,12 +13,11 @@ const CompanyHandbook: React.FC = () => {
                 <h2>Get to know us in our company handbook</h2>
 
                 <div className="@xl:float-right @xl:ml-4 @xl:-mt-8 @4xl:-mt-14 @5xl:-mt-20">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
+                    <HoggieImage
+                        src={hedgehogReadingIsMagicPng}
                         alt="This hog has an answer"
                         height={250}
                         width={330}
-                        placeholder="blurred"
                         imgClassName="w-48 @xl:w-64 @2xl:w-80"
                     />
                 </div>

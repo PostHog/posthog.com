@@ -1,7 +1,10 @@
 import React from 'react'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
+import hedgehogMoneyPng from 'hoggies/money.png'
+import hedgehogPhoneCallPng from 'hoggies/phone-call.png'
 
 interface SuggestedLink {
   title: string
@@ -22,7 +25,7 @@ interface SuggestedLinksBlockProps {
 const SUGGESTED_LINKS: Record<string, SuggestedLink> = {
   sales: {
     title: "How we (don't) do sales",
-    image: "https://res.cloudinary.com/dmukukwp6/image/upload/hog_phone_638d7d1ae4.png",
+    image: hedgehogPhoneCallPng,
     imageAlt: "Hog on the phone",
     buttonText: "Take the tour",
     buttonLink: "/sales",
@@ -31,7 +34,7 @@ const SUGGESTED_LINKS: Record<string, SuggestedLink> = {
   },
   pricing: {
     title: "Usage-based pricing",
-    image: "https://res.cloudinary.com/dmukukwp6/image/upload/hog_cash_64f561fac6.png",
+    image: hedgehogMoneyPng,
     imageAlt: "Hog with cash",
     buttonText: "Explore pricing",
     buttonLink: "/pricing",
@@ -71,11 +74,19 @@ export default function SuggestedLinksBlock({ links, className = '' }: Suggested
           <h3>{link.title}</h3>
           <div className="relative w-24 h-24">
             <div className="absolute inset-0 rounded-full bg-accent" />
-            <CloudinaryImage
-              src={link.image}
-              alt={link.imageAlt}
-              className={`${link.imageSize} relative ${link.imagePosition}`}
-            />
+            {isCloudinaryImage(link.image) ? (
+              <CloudinaryImage
+                src={link.image as `https://res.cloudinary.com/${string}`}
+                alt={link.imageAlt}
+                className={`${link.imageSize} relative ${link.imagePosition}`}
+              />
+            ) : (
+              <HoggieImage
+                src={link.image}
+                alt={link.imageAlt}
+                className={`${link.imageSize} relative ${link.imagePosition}`}
+              />
+            )}
           </div>
           <OSButton
             asLink
