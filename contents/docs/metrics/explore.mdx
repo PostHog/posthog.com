@@ -24,7 +24,7 @@ Click a service to jump into the viewer scoped to that service. If nothing has a
 The **Viewer** tab is where you explore a single metric without writing any queries.
 
 - **Pick a metric** by name to chart it over time.
-- **Choose an aggregation** — sum, average, series count, min, max, p95, rate, or increase. The viewer recommends one based on the metric's type: `increase` for counters, `avg` for gauges, `p95` for histograms and summaries.
+- **Choose an aggregation** — sum, average, series count, min, max, p95, rate, increase, count rate, or count increase. The viewer recommends one based on the metric's type: `increase` for counters, `avg` for gauges, `p95` for histograms and summaries. For histograms, `count rate` and `count increase` measure throughput (observations per second or total observations) instead of the value sum.
 - **Group by** an attribute to break the metric into one line per value, for example request rate per route or queue depth per worker.
 - **Filter** with `key=value` chips to focus on one service, environment, or status, and adjust the date range.
 
@@ -39,6 +39,19 @@ From there you can shape the chart itself:
 When the metric you're charting moves, the viewer does the first pass of the investigation for you. If the most recent slice of the selected window is statistically different from the rest, an **anomaly badge** appears on the chart showing the percent change against the baseline and when the shift started. Click it to see the **biggest movers** — the label values that drove the change — and pick one to narrow the chart to it.
 
 This is investigation, not alerting. The badge is computed when you open a chart — it helps you spot and explain a change you're already looking at. It doesn't watch your metrics around the clock or notify you; for that, set up an [alert](#alerting).
+
+### Chart request rate from histograms
+
+A latency histogram like `http.server.duration` stores two things: the sum of observed durations (in `value`) and the number of observations (in `count`). The `rate` and `increase` aggregations read `value`, so on a histogram they chart latency per second. To chart requests per second instead, use `count rate` or `count increase`:
+
+- **Count rate (/s)** — observations per second, equivalent to PromQL `sum(rate(<name>_count))`
+- **Count increase** — total observations per time bucket
+
+These aggregations are only available for histogram and summary metrics. Use them to build request rate and error rate charts from latency histograms. For example, to chart error rate per service:
+
+1. Create a clause with `count rate` on your latency histogram filtered to `http.response.status_code =~ ^5\d\d$` (5xx errors).
+2. Create a second clause with `count rate` on the same histogram without the status filter (all requests).
+3. Divide the first by the second using a formula.
 
 ### Pivot into logs and traces
 
