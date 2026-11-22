@@ -101,13 +101,7 @@ export default function BlogPage({
                 title="Blog - PostHog"
                 description="Lessons, opinions, and updates from the team behind PostHog. How we build products, what we get wrong, and what we're shipping next."
             />
-            <ReaderView
-                hideLeftSidebar
-                hideRightSidebar
-                showQuestions={false}
-                hideMobileTableOfContents
-                hideMarkdownActions
-            >
+            <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMarkdownActions>
                 <div className="@container not-prose text-pretty text-primary">
                     <BlogHeader placement="blog-header" includeCTA={false} asHeading />
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">

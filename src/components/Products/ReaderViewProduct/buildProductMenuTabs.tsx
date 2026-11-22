@@ -7,6 +7,7 @@ import {
     IconPiggyBank,
     IconPresent,
     IconTerminal,
+    IconVideoCamera,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
@@ -20,6 +21,7 @@ import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
 
 const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    videos: { name: 'Videos', icon: <IconVideoCamera className="size-4" /> },
     'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
     'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
 }

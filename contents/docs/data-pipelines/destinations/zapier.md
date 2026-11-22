@@ -25,6 +25,8 @@ You'll also need access to the relevant Zapier account.
 
 Note that the PostHog app in Zapier only supports receiving events from [actions](/docs/data/actions), so you may need to create an action for the event that you want to trigger the zap.
 
+Zaps from the PostHog app don't receive `$feature_flag_called` events. To trigger a Zap on flag calls, use [option 2](#option-2-via-posthogs-data-pipelines).
+
 ### Option 2: Via PostHog's Data pipelines
 
 1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.

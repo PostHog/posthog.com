@@ -64,6 +64,34 @@ describe('getActiveMenuSection', () => {
 })
 
 describe('the real docs nav', () => {
+    test('the Python reference pages use the Python sidebar', () => {
+        const expected = sectionFor('/docs/libraries/python')
+        assert.ok(expected)
+        for (const path of [
+            '/docs/libraries/python',
+            '/docs/libraries/python/7.x.x',
+            '/docs/libraries/python/8.x.x',
+            '/docs/libraries/python/migration',
+        ]) {
+            assert.equal(sectionFor(path), expected)
+        }
+    })
+
+    test('the other SDK reference pages use their SDK sidebar', () => {
+        const pages = {
+            go: ['1.x.x', '2.x.x', 'migration'],
+            rust: ['0.x.x', '1.x.x', 'migration'],
+            node: ['5.x.x', '6.x.x', 'migration'],
+        }
+        for (const [sdk, names] of Object.entries(pages)) {
+            const expected = sectionFor(`/docs/libraries/${sdk}`)
+            assert.ok(expected)
+            for (const suffix of ['', ...names.map((name) => `/${name}`)]) {
+                assert.equal(sectionFor(`/docs/libraries/${sdk}${suffix}`), expected)
+            }
+        }
+    })
+
     // Self-driving is the single home for its products (Slack, MCP, CLI, Web) — the
     // standalone sections for those products are flat drop-down links with no sidebar of their own.
     test('product pages always use the Self-driving sidebar', () => {

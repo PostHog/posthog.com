@@ -856,5 +856,19 @@
         "link_type": "twitter",
         "link_url": "https://x.com/mikejwarren3",
         "profile_id": 43163
+    },
+    {
+        "handle": "sara-verdi",
+        "name": "Sara Verdi",
+        "role": "Technical Staff Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/sara-verdi-a61677135/",
+        "profile_id": 49660
+    },
+    {
+        "handle": "magda-olszewska",
+        "name": "Magda Olszewska",
+        "role": "Scaled CSM",
+        "profile_id": 33065
     }
 ]

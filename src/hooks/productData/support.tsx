@@ -16,6 +16,7 @@ import { Tweet } from 'components/Tweet'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { applications, keyFeatures } from './support/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 const SupportTweet = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
@@ -41,7 +42,7 @@ export const support = {
     handle: 'support',
     slug: 'support',
     teamSlug: 'conversations',
-    color: 'blue',
+    color: PRODUCT_COLORS.support,
     colorSecondary: 'blue',
     category: 'communication',
     description: 'Built-in customer support with chat widget and unified helpdesk.',
