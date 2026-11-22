@@ -35,7 +35,7 @@ Then it rates how hard the fix is:
 - **Medium:** Several files in one product, or a change in behavior other customers rely on. Ask the owning team about your approach before you write any code, then ship it or hand it over.
 - **High:** Spans products, or touches ingestion, billing, the query engine, permissions, migrations, or an SDK's public API. This is a fix for the owning team, not a first PR. Hand it off with a GitHub issue the customer can follow.
 
-A low rating on a real customer problem is your cue to pick it up. If a workaround already solves it for the customer, the fix is optional. Ship it if you have the time, or log it as a [feature request](/handbook/customer-success/feature-requests). This approach comes from Kyle on the support team, who uses the same check to decide which tickets he fixes himself.
+A low rating on a real customer problem is your cue to pick it up. If a workaround already solves it for the customer, the fix is optional. Ship it if you have the time, or log it as a [feature request](/handbook/customer-success/feature-requests).
 
 ## Best practices
 
