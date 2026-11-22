@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion, useReducedMotion, type TargetAndTransition } from 'framer-motion'
 import ReaderView from 'components/ReaderView'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -8,41 +9,43 @@ import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import Highlight from 'components/MCPPage/Highlight'
+import IconChipRows, { type IconItem as RowItem } from 'components/MCPPage/IconChipRows'
+import IconChipRow, { type IconItem as ChipItem } from 'components/PostHogAI/IconChipRow'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
+import ModelDemo from 'components/SlackApp/ModelDemo'
 import ThreadDemo from 'components/SlackApp/ThreadDemo'
 import ThreadStarters from 'components/SlackApp/ThreadStarters'
+import { WORKSPACE_NOTE } from 'components/SlackApp/SlackWindow'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
-import { StickerRobot } from 'components/Stickers/Stickers'
+import { StickerAi, StickerRobot } from 'components/Stickers/Stickers'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { LOGOS } from 'constants/logos'
 import useProduct from 'hooks/useProduct'
 import {
-    IconBolt,
     IconBrain,
     IconBug,
-    IconChat,
     IconCheck,
     IconCode,
-    IconComment,
     IconCursorClick,
-    IconDocument,
     IconDownload,
-    IconFlag,
+    IconGithub,
     IconGraph,
-    IconHome,
+    IconLightBulb,
     IconLock,
+    IconPeople,
     IconPlug,
-    IconPullRequest,
+    IconReceipt,
     IconSparkles,
     IconSupport,
     IconTarget,
+    IconTelescope,
     IconTerminal,
 } from '@posthog/icons'
 
 const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
 const SLACK_MARKETPLACE_URL = 'https://slack.com/marketplace/A03M3FN0RSQ-posthog'
 
-// Stand-in art until the commissioned Slack app illustrations arrive. Swap an entry here to replace one.
+// Stand-in art. Swap an entry to replace an image.
 const ART = {
     jobs: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_loves_slack_edb7d087cc.png',
@@ -66,146 +69,73 @@ const h2ClassName = 'm-0 text-2xl font-bold leading-tight tracking-tight @xl/rea
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
-const Badge = ({ children }: { children: React.ReactNode }) => (
-    <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">{children}</span>
-)
-
-const Mention = () => <strong className="font-semibold text-blue">@PostHog</strong>
-
 const CardLink = ({ to, label }: { to: string; label: string }) => (
     <Link to={to} state={{ newWindow: true }} className="mt-auto text-sm font-semibold underline">
         {label} →
     </Link>
 )
 
-type Feature = {
-    Icon: IconComponent
-    color: string
-    name: string
-    description: React.ReactNode
-}
-
-// Pairs divided by rules, like `IconChipRow` on /mcp
-const FeatureRows = ({ items }: { items: Feature[] }) => {
-    const rows = Array.from({ length: Math.ceil(items.length / 2) }, (_, i) => items.slice(i * 2, i * 2 + 2))
-    return (
-        <div className="divide-y divide-primary">
-            {rows.map((row) => (
-                <div
-                    key={row[0].name}
-                    className="grid grid-cols-1 divide-y divide-primary py-5 first:pt-0 last:pb-0 @sm:grid-cols-2 @sm:gap-x-10 @sm:divide-y-0"
-                >
-                    {row.map(({ Icon, color, name, description }) => (
-                        <div key={name} className="py-5 first:pt-0 last:pb-0 @sm:py-0">
-                            <div className="flex items-center gap-2 text-base font-semibold text-primary">
-                                <Icon className={`size-5 shrink-0 ${color}`} />
-                                <span>{name}</span>
-                            </div>
-                            <p className="mb-0 mt-1 text-sm leading-relaxed text-secondary">{description}</p>
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </div>
-    )
-}
-
-// Like `IconChipRow` on /ai: two columns when the card is wide enough, one when it isn't
-const FeatureChips = ({ items }: { items: Feature[] }) => (
-    <div className="grid grid-cols-1 gap-x-6 gap-y-4 @sm:grid-cols-2">
-        {items.map(({ Icon, color, name, description }) => (
-            <div key={name}>
-                <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-                    <Icon className={`size-4 shrink-0 ${color}`} />
-                    <span>{name}</span>
-                </div>
-                <p className="mb-0 mt-0.5 text-sm text-secondary">{description}</p>
-            </div>
-        ))}
-    </div>
-)
-
-// The "Also in Slack" block at the bottom of a card on /ai
-const CardFooter = ({
-    title,
-    children,
-    link,
-}: {
-    title: string
-    children: React.ReactNode
-    link: { label: string; to: string }
-}) => (
-    <div className="mt-6 border-t border-primary pt-4">
-        <h4 className="m-0 text-base font-bold">{title}</h4>
-        <p className="mb-0 mt-0.5 text-sm text-secondary">{children}</p>
-        <Link to={link.to} state={{ newWindow: true }} className="mt-4 inline-block text-sm font-semibold underline">
-            {link.label} →
-        </Link>
-    </div>
-)
-
-const sendsBack: Feature[] = [
+const codeFeatures: ChipItem[] = [
     {
-        Icon: IconDocument,
+        Icon: IconSparkles,
         color: 'text-blue',
-        name: 'Canvases it keeps editing',
-        description:
-            'Ask for a report and get a Slack canvas. Ask for changes in the thread, and it updates the same one.',
+        name: 'One-click follow-ups',
+        description: 'Buttons under each answer suggest what to ask next. Click one, and it asks for you.',
+    },
+    {
+        Icon: IconTarget,
+        color: 'text-brown dark:text-brown-dark',
+        name: 'Routing rules',
+        description: 'Rules decide which repo gets each task. Add one with /posthog rules add.',
+        to: '/docs/slack/commands#routing-rules',
+    },
+    {
+        Icon: IconGithub,
+        color: 'text-seagreen',
+        name: 'Your name on the PR',
+        description: "Connect your GitHub, and the commits and the PR carry your name (not a bot's).",
+        to: '/docs/slack/setup#connect-your-personal-github',
+    },
+    {
+        Icon: IconReceipt,
+        color: 'text-orange',
+        name: 'See the cost as you go',
+        description: "Every reply's footer names the model and what the thread has cost so far.",
+    },
+]
+
+const analyticsFeatures: ChipItem[] = [
+    {
+        Icon: IconGraph,
+        color: 'text-sky-blue',
+        name: 'Paste a link',
+        description: 'Paste a PostHog link, and Slack unfurls it into a preview.',
     },
     {
         Icon: IconDownload,
-        color: 'text-green',
-        name: 'Spreadsheets, PDFs, and docs',
-        description: 'It uploads the file to the thread: XLSX, CSV, PDF, a Word doc, an HTML page, or a ZIP.',
-    },
-    {
-        Icon: IconCheck,
         color: 'text-yellow',
-        name: 'Status you can scan',
+        name: 'More than text',
         description:
-            'It reacts to your message as it works: queued, picking a repo, working, or failed. Scan a busy channel without opening every thread.',
+            'Send it screenshots, PDFs, and logs. It replies with charts, HTML pages, Slack canvases, and PostHog notebooks.',
+        to: '/docs/slack#attachments-files-and-canvases',
     },
     {
-        Icon: IconBolt,
-        color: 'text-red',
-        name: 'The cost, in the footer',
-        description: "Each reply shows what the thread has cost so far. You'll know before finance does.",
-    },
-]
-
-const reachesPast: Feature[] = [
-    {
-        Icon: IconPlug,
-        color: 'text-blue',
-        name: 'Your MCP servers',
-        description:
-            'It uses the MCP servers you connected, like Linear and Notion, with your own access. File the ticket or read the spec from the thread.',
+        Icon: IconLock,
+        color: 'text-teal',
+        name: 'Ask in private',
+        description: "DM it the (embarrassing) prompts you don't want in a public channel.",
     },
     {
-        Icon: IconBrain,
-        color: 'text-green',
-        name: 'Business Knowledge',
-        description: 'It reads what you saved about your product and your customers before it answers.',
-    },
-    {
-        Icon: IconChat,
+        Icon: IconPeople,
         color: 'text-purple',
-        name: 'Other Slack channels',
+        name: 'Who can join your threads',
         description:
-            'It only reads the thread it is in. Sync a channel with the Slack source and name the table in your agent instructions, and it can read that channel too.',
+            'Anyone who tags @PostHog in your thread can steer it. Want a guest list? Make people ask first, or keep it just you.',
+        to: '/docs/slack#follow-ups-in-a-thread',
     },
 ]
 
-// Smaller than the features: you set these once
-const settings: { Icon: IconComponent; color: string; name: string; to: string }[] = [
-    { Icon: IconHome, color: 'text-green', name: 'Default project', to: '/docs/slack#pick-a-project' },
-    { Icon: IconLock, color: 'text-red', name: 'Who can join your threads', to: '/docs/slack#follow-ups-in-a-thread' },
-    { Icon: IconComment, color: 'text-purple', name: 'Agent instructions', to: '/docs/slack#customize-replies' },
-    { Icon: IconTarget, color: 'text-yellow', name: 'Routing rules', to: '/docs/slack/commands#routing-rules' },
-]
-
-// Ideas, not prompts: each one is a habit a team can start
-const jobs: Feature[] = [
+const jobs: RowItem[] = [
     {
         Icon: IconBug,
         color: 'text-red',
@@ -215,14 +145,14 @@ const jobs: Feature[] = [
     {
         Icon: IconCursorClick,
         color: 'text-salmon',
-        name: 'Fix the website with a prompt',
-        description: 'Tag the bot on a typo someone spotted.',
+        name: 'Fix typos where you spot them',
+        description: 'Tag the bot on the page with the typo.',
     },
     {
-        Icon: IconFlag,
+        Icon: IconGraph,
         color: 'text-blue',
-        name: 'Ship it behind a flag',
-        description: 'Ask for the change and the rollout together.',
+        name: 'Find out why a metric moved',
+        description: "Tag the bot in an alert's thread and ask why.",
     },
     {
         Icon: IconCode,
@@ -233,18 +163,17 @@ const jobs: Feature[] = [
     {
         Icon: IconSupport,
         color: 'text-green',
-        name: 'Walk into every call prepared',
-        description: 'DM the bot for an account brief before a call.',
+        name: 'Read up on a customer before a call',
+        description: 'DM the bot for an account brief.',
     },
     {
-        Icon: IconTarget,
+        Icon: IconLightBulb,
         color: 'text-purple',
         name: 'Turn interviews into themes',
         description: 'Attach transcripts and ask the bot for themes.',
     },
 ]
 
-// Under the ship box, like the resources under "Your agent gets the full spread" on /mcp
 const moreCards: {
     title: string
     Icon: IconComponent
@@ -253,34 +182,34 @@ const moreCards: {
     link: { label: string; to: string }
 }[] = [
     {
-        title: 'Auto model choice',
-        Icon: IconSparkles,
+        title: 'Warehouse sources',
+        Icon: IconPlug,
         color: 'text-blue',
         description:
-            'Turn it on, and it picks the cheapest model that can do the job. Name a model to override it, even halfway through a thread.',
-        link: { label: 'Pick a model', to: '/docs/slack#auto-model-choice' },
+            'Sync Stripe, Postgres, HubSpot, and hundreds more into PostHog. The bot queries them with your product data.',
+        link: { label: 'Hook up your data', to: '/docs/data-pipelines/sources' },
     },
     {
-        title: 'One-click replies',
-        Icon: IconComment,
-        color: 'text-red',
-        description: 'When an answer needs a decision, it adds the likely replies as buttons. One click sends yours.',
-        link: { label: 'Start a task', to: '/docs/slack#start-a-task' },
+        title: 'Business Knowledge',
+        Icon: IconBrain,
+        color: 'text-green',
+        description:
+            'Add your docs, pricing, and policies once. Ask about a refund or a plan limit in Slack, and the bot answers from them.',
+        link: { label: 'Teach it your business', to: '/docs/business-knowledge' },
     },
     {
-        title: 'Previews for PostHog links',
-        Icon: IconGraph,
+        title: 'Self-driving reports',
+        Icon: IconTelescope,
         color: 'text-purple',
         description:
-            'Paste a link to an insight, dashboard, flag, experiment, error, or Self-driving report, and Slack shows a preview. Insights show the chart.',
-        link: { label: 'Link unfurling', to: '/docs/slack#link-unfurling' },
+            'Point PostHog Self-driving at your errors and session replays. Reply to a report, and the bot opens a pull request.',
+        link: { label: 'Let it find the work', to: '/self-driving' },
     },
 ]
 
 const SlackLogo = ({ className }: { className?: string }) => <img src={LOGOS.slack} alt="" className={className} />
 
-// The ways in to PostHog's agent. They all use the PostHog MCP, so the choice is where you talk to it. A fighter with no
-// product data has an inline `product`, like Skills on /ai.
+// A fighter without product data has an inline `product`
 type Fighter = {
     handle?: string
     product?: { name: string; Icon: IconComponent; color: string }
@@ -466,11 +395,7 @@ const faqItems = [
     },
 ]
 
-const heroBullets = [
-    'Ask why a number moved, and get the answer in the thread',
-    'Turn a bug report into a draft PR',
-    'Get a brief on a customer before the call',
-]
+const heroBullets = ['Ask anything about your product data', "Fix what's broken", "Ship what's next"]
 
 const SignupCTAs = () => (
     <div className="flex flex-wrap items-center gap-3">
@@ -490,9 +415,7 @@ const HeroSection = () => (
     <section className="w-full border-b border-primary pb-8">
         <div className="grid items-start gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-10">
             <div className="order-2 min-w-0 @3xl/reader-content:order-1">
-                {/* Cross out the first @, then highlight the second – "not this, this".
-                    show is set explicitly because the scroll trigger's -15% rootMargin never
-                    fires for a heading this close to the top of the pane. */}
+                {/* `show` is set because the scroll trigger never fires this close to the top of the pane */}
                 <h1 className="!mt-0 mb-4 text-3xl font-bold leading-tight @xl/reader-content:text-4xl">
                     Don't{' '}
                     <RoughAnnotation type="strike-through" color="#F54E00" strokeWidth={2} delay={300} show>
@@ -534,122 +457,79 @@ const HeroSection = () => (
 )
 
 const jobCards: {
-    Icon: IconComponent
-    color: string
-    tileColor: string
     title: React.ReactNode
-    badge: string
     description: string
-    examples: string[]
     link: { label: string; to: string }
 }[] = [
     {
-        Icon: IconGraph,
-        color: 'text-blue',
-        tileColor: 'bg-blue/10',
-        title: (
-            <>
-                Ask <Highlight>analytics questions</Highlight>
-            </>
-        ),
-        badge: 'No repo needed',
-        description:
-            'Dig into your data. It reads your insights, SQL, replays, errors, and flags, then answers in the thread with charts.',
-        examples: [
-            'why did EU signups drop last week?',
-            'which channels brought in the most activated users this month?',
-            'brief me on Acme before my call',
-        ],
-        link: { label: 'Ask about your product data', to: '/docs/slack#ask-about-your-product-data' },
-    },
-    {
-        Icon: IconPullRequest,
-        color: 'text-green',
-        tileColor: 'bg-green/10',
         title: (
             <>
                 Ship <Highlight red>code</Highlight>
             </>
         ),
-        badge: 'Sandboxed',
         description:
-            'Hand it the fix. It plans in a sandbox, edits files, runs your checks, and opens a draft PR. Then it babysits CI and tells the thread when the PR merges.',
-        examples: [
-            'fix the flaky billing CI job',
-            'add a feature flag to the new checkout page',
-            'resolve the merge conflicts on #1234',
-        ],
+            'Got a bug to squash or a feature to build? Tag @PostHog. It reads the thread, writes the code, and opens a draft pull request. Keep iterating in the thread while it babysits CI.',
         link: { label: 'Start a task', to: '/docs/slack#start-a-task' },
+    },
+    {
+        title: (
+            <>
+                Query <Highlight>data</Highlight>
+            </>
+        ),
+        description:
+            'Got a hunch? Tag @PostHog. It reads the thread, digs through your data, and brings back an answer everyone can see.',
+        link: { label: 'Ask about your product data', to: '/docs/slack#ask-about-your-product-data' },
     },
 ]
 
-const TwoJobsSection = () => (
-    <section id="two-jobs" className="my-12">
-        <header className="mb-6">
-            <h2 className={h2ClassName}>
-                One hog, <Highlight>two jobs</Highlight>
-            </h2>
-            <p className="mb-0 mt-3 text-base text-secondary">
-                Use it two ways. Ask analytics questions and dig into your data, or hand it code to ship. It decides
-                from your message.
-            </p>
-        </header>
-        <div className="grid gap-4 @2xl/reader-content:grid-cols-2">
-            {jobCards.map(({ Icon, color, tileColor, title, badge, description, examples, link }) => (
-                <div key={link.to} className="flex min-w-0 flex-col rounded border border-primary bg-primary p-5">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                        <h3 className="m-0 flex items-center gap-3 text-xl font-bold leading-tight">
-                            <span className={`flex size-10 shrink-0 items-center justify-center rounded ${tileColor}`}>
-                                <Icon className={`size-6 ${color}`} />
-                            </span>
-                            <span>{title}</span>
-                        </h3>
-                        <Badge>{badge}</Badge>
-                    </div>
-                    <p className="mb-3 mt-2 text-sm text-secondary">{description}</p>
-                    <ul className="m-0 mb-4 list-none space-y-1.5 p-0 text-sm">
-                        {examples.map((example) => (
-                            <li key={example}>
-                                <Mention /> {example}
-                            </li>
-                        ))}
-                    </ul>
-                    <CardLink {...link} />
-                </div>
-            ))}
-        </div>
-    </section>
+const Job = ({ job }: { job: (typeof jobCards)[number] }) => (
+    <>
+        <h3 className="m-0 text-2xl font-bold leading-tight">{job.title}</h3>
+        <p className="mb-4 mt-3 text-sm text-secondary">{job.description}</p>
+        <Link to={job.link.to} state={{ newWindow: true }} className="self-start text-sm font-semibold underline">
+            {job.link.label} →
+        </Link>
+    </>
 )
 
-// Easter egg: say please and the bot adds an orange heart to its eyes reaction. Sways softly on hover.
-const PoliteHog = ({ className = '' }: { className?: string }) => (
-    <div className={`group ${className}`}>
-        <Tooltip
-            delay={0}
-            side="right"
-            className="block"
-            contentClassName="whitespace-nowrap"
-            trigger={
-                <CloudinaryImage
-                    src={ART.please.src}
-                    alt={ART.please.alt}
-                    loading="lazy"
-                    width={240}
-                    imgClassName="w-full origin-bottom group-hover:motion-safe:animate-[polite-hog-sway_2.5s_ease-in-out_infinite]"
-                />
-            }
-        >
-            Say please in your prompt for some mutual appreciation.
-        </Tooltip>
-        <style>{`
-            @keyframes polite-hog-sway {
-                0%, 100% { transform: translateY(0) rotate(0deg); }
-                25% { transform: translateY(-2px) rotate(-3deg); }
-                75% { transform: translateY(-2px) rotate(3deg); }
-            }
-        `}</style>
-    </div>
-)
+const [codeJob, analyticsJob] = jobCards
+
+// Easter egg: say please, and the bot adds a heart reaction
+const SWAY: TargetAndTransition = {
+    y: [0, -2, -2, 0],
+    rotate: [0, -3, 3, 0],
+    transition: { duration: 2.5, times: [0, 0.25, 0.75, 1], ease: 'easeInOut', repeat: Infinity },
+}
+
+const PoliteHog = ({ className = '' }: { className?: string }) => {
+    const reducedMotion = useReducedMotion()
+    return (
+        <div className={className}>
+            <Tooltip
+                delay={0}
+                side="left"
+                className="block"
+                contentClassName="whitespace-nowrap leading-snug"
+                trigger={
+                    <motion.div className="origin-bottom" whileHover={reducedMotion ? undefined : SWAY}>
+                        <CloudinaryImage
+                            src={ART.please.src}
+                            alt={ART.please.alt}
+                            loading="lazy"
+                            width={240}
+                            imgClassName="w-full"
+                        />
+                    </motion.div>
+                }
+            >
+                Say please in your prompt
+                <br />
+                for some mutual appreciation.
+            </Tooltip>
+        </div>
+    )
+}
 
 const WorkspaceSection = () => (
     <section id="workspace" className="my-12">
@@ -657,9 +537,7 @@ const WorkspaceSection = () => (
             <h2 className={h2ClassName}>
                 Real things we're prompting that <Highlight>turn into PRs</Highlight>
             </h2>
-            <p className="mb-0 mt-3 text-base text-secondary @lg/reader-content:hidden">
-                Actual things happening in the PostHog Slack workspace.
-            </p>
+            <p className="mb-0 mt-3 text-base text-secondary @lg/reader-content:hidden">{WORKSPACE_NOTE}</p>
         </header>
         <ThreadDemo />
     </section>
@@ -677,9 +555,8 @@ const StartersSection = () => (
 )
 
 const repliesCardClassName =
-    '@container flex min-w-0 flex-col overflow-hidden rounded border border-primary bg-primary p-4 @xl:p-6'
+    '@container flex min-w-0 flex-col overflow-hidden rounded-md border border-primary bg-primary p-5 @xl:p-7'
 
-// Laid out like "Your product data wherever you work" on /ai: a wide card, a narrow card, then the settings
 const RepliesSection = () => (
     <section id="replies" className="my-12">
         <header className="mb-6">
@@ -691,63 +568,55 @@ const RepliesSection = () => (
             <div className={repliesCardClassName}>
                 <div className="flow-root">
                     <PoliteHog className="float-right mb-3 ml-4 w-20 @sm:w-24" />
-                    <h3 className="mb-3 mt-0 text-2xl font-bold">
-                        Hands you the <Highlight>finished thing</Highlight>
-                    </h3>
-                    <p className="mb-3 mt-0 text-sm text-secondary">
-                        Ask for a report, a spreadsheet, or a plan, and the file lands in the thread.
-                    </p>
+                    <Job job={codeJob} />
                 </div>
-                <FeatureChips items={sendsBack} />
-                <CardFooter
-                    title="Send it screenshots and logs"
-                    link={{ label: 'Attachments', to: '/docs/slack#attachments-files-and-canvases' }}
-                >
-                    Attach a screenshot, PDF, log, or CSV to your message, and the agent reads it. Paste the broken
-                    page, then say what to fix.
-                </CardFooter>
+                <div className="mt-5 border-t border-primary pt-5">
+                    <IconChipRow items={codeFeatures} />
+                </div>
+                <div className="-mb-5 mt-auto pt-6 leading-[0] @xl:-mb-7">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/slack_app_ship_a_fix_82a4003b3a.png"
+                        alt="Pull requests that the PostHog bot opened from Slack threads, shown as merged and draft on GitHub"
+                        loading="lazy"
+                        imgClassName="w-full rounded-t"
+                    />
+                </div>
             </div>
             <div className={repliesCardClassName}>
-                <h3 className="mb-3 mt-0 text-2xl font-bold">
-                    Reaches <Highlight red>past PostHog</Highlight>
-                </h3>
-                <p className="mb-3 mt-0 text-sm text-secondary">
-                    Your product data is the start. It also uses the tools and context you give it.
-                </p>
-                <FeatureChips items={reachesPast} />
+                <Job job={analyticsJob} />
+                <div className="mt-5 border-t border-primary pt-5">
+                    <IconChipRow items={analyticsFeatures} />
+                </div>
             </div>
         </div>
-        <div className="@container mt-4 rounded border border-primary bg-primary p-4 @xl/reader-content:px-6">
-            <div>
-                <div className="min-w-0">
-                    <h3 className="m-0 text-base font-bold">Set it once</h3>
-                    <p className="mb-3 mt-0.5 text-sm text-secondary">
-                        Set your defaults in the Home tab. Say something different in a message, and the message wins.
-                    </p>
-                    <ul className="m-0 grid list-none grid-cols-1 gap-x-6 gap-y-1.5 p-0 @sm:grid-cols-2 @2xl:grid-cols-3">
-                        {settings.map(({ Icon, color, name, to }) => (
-                            <li key={name}>
-                                <Link
-                                    to={to}
-                                    state={{ newWindow: true }}
-                                    className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-                                >
-                                    <Icon className={`size-4 shrink-0 ${color}`} />
-                                    {name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+        <div
+            id="models"
+            className="mt-8 grid items-center gap-6 rounded-md border border-blue bg-blue/10 p-5 shadow-xl @xl/reader-content:p-7 @2xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] @3xl/reader-content:gap-8"
+        >
+            <div className="min-w-0">
+                <h3 className="m-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
+                    <StickerAi className="size-8 shrink-0 -rotate-6" />
+                    We're not model monogamous
+                </h3>
+                <p className="mb-0 mt-3 text-sm text-secondary">
+                    Every current frontier model from Anthropic and OpenAI, through one interface. Pick a default you
+                    trust in the Home tab. Name another in a prompt if a task needs more horsepower.
+                </p>
+                <p className="mb-0 mt-3 text-sm text-secondary">
+                    Or turn on <strong className="font-bold text-primary">auto model choice</strong>. A fast model reads
+                    your first message and picks the cheapest model that should get it right.
+                </p>
+            </div>
+            <div className="min-w-0">
+                <ModelDemo />
             </div>
         </div>
     </section>
 )
 
-// Like "Your agent gets the full spread" on /mcp: a box with the art beside it, then three cards
 const JobsSection = () => (
     <section id="jobs" className="my-12">
-        <div className="@container rounded border border-primary bg-primary p-6 @xl:p-8">
+        <div className="@container rounded-md border border-primary bg-primary p-5 @xl:p-7">
             <div className="grid items-center gap-x-10 gap-y-8 @3xl:grid-cols-[minmax(0,1fr)_12rem]">
                 <figure className="m-0 flex flex-col items-center @3xl:col-start-2 @3xl:row-start-1">
                     <CloudinaryImage
@@ -771,10 +640,10 @@ const JobsSection = () => (
                     </figcaption>
                 </figure>
                 <div className="min-w-0 @3xl:col-start-1 @3xl:row-start-1">
-                    <h2 className="mb-2 mt-0 text-3xl font-bold leading-tight">
+                    <h2 className={h2ClassName}>
                         <Highlight red>Everyone</Highlight> can ship now
                     </h2>
-                    <p className="mb-6 mt-0 text-base text-secondary">
+                    <p className="mb-6 mt-3 text-base text-secondary">
                         It's a Slack message, so you don't need to be an engineer to be in{' '}
                         <Link
                             to="/blog/everything-is-build-mode"
@@ -785,7 +654,7 @@ const JobsSection = () => (
                         </Link>
                         .
                     </p>
-                    <FeatureRows items={jobs} />
+                    <IconChipRows items={jobs} />
                 </div>
             </div>
         </div>
@@ -804,10 +673,8 @@ const JobsSection = () => (
     </section>
 )
 
-// Like `AIEngineering` on /ai: a box with the art beside it, and only each name is a link
 const FightersSection = () => {
     const products = useProduct()
-    if (!Array.isArray(products)) return null
     return (
         <section
             id="fighters"
@@ -816,14 +683,16 @@ const FightersSection = () => {
             <div className="grid items-center gap-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_20rem]">
                 <div className="min-w-0">
                     <header className="mb-5">
-                        <h2 className={`${h2ClassName} flex items-center gap-3`}>
+                        <h2 className="m-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
                             <StickerRobot className="size-8 shrink-0 -rotate-6" />
                             Choose your fighter
                         </h2>
                     </header>
                     <ul className="m-0 flex list-none flex-col gap-4 p-0">
                         {fighters.map(({ handle, product: inlineProduct, to, description }) => {
-                            const product = inlineProduct ?? products.find((item) => item.handle === handle)
+                            const product =
+                                inlineProduct ??
+                                (Array.isArray(products) ? products.find((item) => item.handle === handle) : undefined)
                             if (!product) return null
                             return (
                                 <li key={to} className="border-t border-blue/30 pt-4 first:border-t-0 first:pt-0">
@@ -860,7 +729,7 @@ const FightersSection = () => {
 const TrySection = () => (
     <section
         id="try"
-        className="my-12 rounded-md border border-purple bg-purple/10 p-5 shadow-xl @md/reader-content:p-7"
+        className="my-12 rounded-md border border-purple bg-purple/10 p-5 shadow-xl @xl/reader-content:p-7"
     >
         <div className="grid items-center gap-6 @lg/reader-content:grid-cols-[180px_minmax(0,1fr)]">
             <CloudinaryImage
@@ -912,22 +781,14 @@ export default function SlackAppPage(): JSX.Element {
                 structuredData={buildProductStructuredData({
                     name: 'PostHog Slack app',
                     description: seoDescription,
-                    slug: 'slack-app',
+                    slug: 'slack',
                 })}
             />
-            <ReaderView
-                hideLeftSidebar
-                hideRightSidebar
-                hideMobileTableOfContents
-                showQuestions={false}
-                title="posthog-slack-app.md"
-                hideTitle
-            >
+            <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} title="posthog-slack-app.md" hideTitle>
                 <div className="@container/reader-content not-prose max-w-5xl mx-auto font-rounded">
                     <HeroSection />
-                    <TwoJobsSection />
-                    <StartersSection />
                     <RepliesSection />
+                    <StartersSection />
                     <JobsSection />
                     <hr className="my-0 border-0 border-t border-primary" />
                     <WorkspaceSection />

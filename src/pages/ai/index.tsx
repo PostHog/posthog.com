@@ -11,6 +11,7 @@ import SlicedHog from 'components/SlicedHog'
 import SlotMachineText from 'components/SlotMachineText'
 import ContextDiagram from 'components/PostHogAI/ContextDiagram'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
+import IconChipRow, { type IconItem } from 'components/PostHogAI/IconChipRow'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
 import { StickerCoffee, StickerMicroscope } from 'components/Stickers/Stickers'
 import { AIEngineering } from 'components/PostHogAI/Capabilities'
@@ -38,46 +39,11 @@ import posthogIcon from '../../images/posthog-icon-white.svg'
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const APP_AI_URL = 'https://app.posthog.com/ai'
 
-type IconComponent = React.ComponentType<{ className?: string }>
-
 // Opens the PostHog AI side panel in the app with the prompt already filled in
 const askUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
 
 const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="whitespace-nowrap bg-blue/10 p-0.5 font-bold text-blue">{children}</span>
-)
-
-type IconItem = {
-    Icon: IconComponent
-    color: string
-    name: string
-    description?: string
-    to?: string
-}
-
-const IconChipRow = ({ items }: { items: IconItem[] }) => (
-    <div className="grid grid-cols-1 gap-x-6 gap-y-4 @sm:grid-cols-2">
-        {items.map(({ Icon, color, name, description, to }) => {
-            const title = (
-                <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-                    <Icon className={`size-4 shrink-0 ${color}`} />
-                    <span className={to ? 'group-hover:underline' : undefined}>{name}</span>
-                </div>
-            )
-            return (
-                <div key={name}>
-                    {to ? (
-                        <Link to={to} state={{ newWindow: true }} className="group block !no-underline">
-                            {title}
-                        </Link>
-                    ) : (
-                        title
-                    )}
-                    {description && <p className="mb-0 mt-0.5 text-sm text-secondary">{description}</p>}
-                </div>
-            )
-        })}
-    </div>
 )
 
 const CheckList = ({ items, className = '' }: { items: string[]; className?: string }) => (

@@ -2,13 +2,13 @@ import React from 'react'
 import { IconBell, IconComment, IconFlag, IconTelescope } from '@posthog/icons'
 import ThreadDemo, { type Demo } from './ThreadDemo'
 
-// The four ways a thread with PostHog starts. Paul's scout thread is based on his real one. Each thread has a short `title` for analytics. Every number is sample data.
+// Sample data, except Paul's scout thread, which is based on a real one
 const starters: Demo[] = [
     {
         Icon: IconComment,
         color: 'text-blue',
         title: 'Start: Ask anything',
-        label: 'Ask anything, or pull it into a thread',
+        label: 'From any thread',
         detail: 'Tag @PostHog anywhere. It reads the thread, so skip the recap.',
         scene: {
             channel: 'team-surfaces',
@@ -58,7 +58,7 @@ const starters: Demo[] = [
         Icon: IconBell,
         color: 'text-yellow',
         title: 'Start: Reply to an alert',
-        label: 'Reply to an alert or subscription',
+        label: 'From an alert or subscription',
         detail: "Tag @PostHog in a report's thread to ask why the numbers moved.",
         scene: {
             channel: 'marketing-reports',
@@ -117,7 +117,7 @@ const starters: Demo[] = [
         Icon: IconTelescope,
         color: 'text-red',
         title: 'Start: Reply to a scout report',
-        label: 'Reply to a scout report',
+        label: 'From a scout report',
         detail: "Reply to a scout's post to change the scout, like when it runs.",
         scene: {
             channel: 'papercuts',
@@ -166,8 +166,8 @@ const starters: Demo[] = [
         Icon: IconFlag,
         color: 'text-blue',
         title: 'Start: Reply to a Self-driving report',
-        label: 'Reply to a Self-driving report',
-        detail: 'One click on the report opens a PR that fixes the problem.',
+        label: 'From a Self-driving report',
+        detail: 'Reply to the report to prompt a PR that fixes the problem.',
         scene: {
             channel: 'posthog-inbox',
             endAt: 7800,

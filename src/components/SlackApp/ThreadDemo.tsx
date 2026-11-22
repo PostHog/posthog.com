@@ -6,20 +6,17 @@ import { cn } from '../../utils'
 import SlackWindow, { type SlackScene } from './SlackWindow'
 
 export interface Demo {
-    /** Names the demo in analytics */
+    /** For analytics */
     title: string
-    /** The bold line of the button, and the prompt in analytics. For a prompt, match the first message of the scene. */
+    /** The button text. Match the scene's first message. */
     label: string
-    /** The line under the label */
     detail?: string
     Icon?: React.ComponentType<{ className?: string }>
-    /** A text color token for the icon */
     color?: string
     scene: SlackScene
 }
 
-// Times are in ms from when the window scrolls into view. Real requests from PostHog's Slack, cut short, each with the PR
-// it shipped. The words come from the PR descriptions, not the threads, so check a change with the person first.
+// Real threads, cut short. Check a change with the person first.
 const prompts: Demo[] = [
     {
         title: 'Fix a dead-end screen',
@@ -464,16 +461,14 @@ export default function ThreadDemo({
         const { title, label } = demos[index]
         setPicked(true)
         play(index)
-        // In one column the window is below the prompts, so bring it into view if it isn't already.
+        // In one column, the window is below the prompts
         windowRef.current?.scrollIntoView({ block: 'nearest', behavior: shouldReduceMotion ? 'auto' : 'smooth' })
         posthog?.capture('ai_prompt_selected', { group: title, prompt: label, placement, trigger })
     }
 
     const nextIndex = (activeIndex + 1) % demos.length
     const { scene } = demos[activeIndex]
-    // The full window picks its thread from the sidebar channels, like Slack. The thread variant uses a list of prompts.
     const channels = variant === 'thread' ? undefined : demos.map((demo) => demo.scene.channel)
-    // Everyone who starts a thread gets a DM in the sidebar
     const people = Array.from(
         new Set(
             demos.flatMap(
@@ -485,7 +480,7 @@ export default function ThreadDemo({
             )
         )
     ).sort()
-    // The PR links in the window are hidden from screen readers and the keyboard, so repeat the last one here
+    // The window is hidden from screen readers, so repeat the last PR link here
     const pr = scene.messages
         .flatMap((message) => (message.from === 'bot' ? message.blocks : []))
         .flatMap((block) => (block.type === 'pr' && block.url ? [block] : []))
@@ -493,7 +488,7 @@ export default function ThreadDemo({
 
     const slackWindow = (
         <div ref={windowRef} className={cn('min-w-0 scroll-mt-4', !channels && 'relative')}>
-            {/* In two columns, the thread fills its column and doesn't make the row taller, like `PromptDemo` on /mcp */}
+            {/* In two columns, the thread fills its column and doesn't make the row taller */}
             <div className={cn(!channels && '@2xl/reader-content:absolute @2xl/reader-content:inset-0')}>
                 <SlackWindow
                     key={runId}
@@ -513,7 +508,6 @@ export default function ThreadDemo({
             {channels ? (
                 slackWindow
             ) : (
-                // Prompts on the left and the thread on the right, like `PromptDemo` on /mcp
                 <div className="grid gap-x-8 gap-y-4 @2xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
                     <ul className="m-0 list-none p-0">
                         {demos.map(({ title, label, detail, Icon, color }, index) => {

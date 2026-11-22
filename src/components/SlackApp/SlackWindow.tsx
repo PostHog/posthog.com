@@ -26,38 +26,37 @@ import { PostHogMark, ScrollToLatest } from '../Home/DataStory/sceneParts'
 import { SCENE_SIZE, SCENE_TEXT } from '../Home/DataStory/sceneScale'
 import { useEventClock, wordStream } from '../Home/DataStory/timeline'
 
-// Scenes are written at a brisk pace, and the window plays them this much slower, so there's time to read
-const PACE = 1.35
-const STREAM_MS_PER_CHAR = ANSWER_MS_PER_CHAR * PACE
-// How long the finished thread stays up before `onDone`
-const HOLD_MS = 8000
+// `pace` stretches the written times so there's time to read. `hold` is how long the last frame stays before `onDone`.
+const PLAYBACK = {
+    window: { pace: 1.35, hold: 8000 },
+    thread: { pace: 1, hold: 5000 },
+}
+const StreamContext = React.createContext(ANSWER_MS_PER_CHAR * PLAYBACK.window.pace)
 
 export type SlackBlock = { at: number } & (
     | { type: 'text'; text: string }
     | { type: 'bullets'; items: string[] }
     | { type: 'plan'; steps: { label: string; doneAt: number }[] }
-    /** An insight as PostHog renders it for Slack. With `subscription`, it's a scheduled report, with its buttons and reply hint. */
+    /** With `subscription`, it adds the report buttons and the reply hint */
     | {
           type: 'insight'
-          /** The insight type and date range, like "Trends • Last 14 days" */
+          /** Like "Trends • Last 14 days" */
           label: string
           title: string
           description?: string
           series: { label: string; values: number[] }[]
-          /** Dates under the x-axis: the first, the middle, and the last */
+          /** First, middle, and last */
           dates: string[]
           subscription?: boolean
       }
-    /** Set `number` and `url` only in a real thread, so a sample thread doesn't point at someone else's PR */
+    /** Set `number` and `url` only in a real thread */
     | { type: 'pr'; state: 'opened' | 'merged'; repo: string; number?: number; url?: string }
-    /** Something PostHog posts to a channel on its own: a scout report or a Self-driving report */
+    /** Something PostHog posts on its own */
     | {
           type: 'report'
           kind: 'scout' | 'self-driving'
-          /** The scout or report name, after the kind */
           label: string
           title: string
-          /** Suggested replies on the post itself */
           buttons?: string[]
       }
 )
@@ -65,18 +64,17 @@ export type SlackBlock = { at: number } & (
 export type SlackMessage = { at: number; time: string } & (
     | {
           from: 'person'
-          /** A full name from the team profiles. The photo and color come from there. */
+          /** A full name from the team profiles */
           name: string
           text: string
           attachment?: string
-          /** When the bot adds the eyes reaction. It stays, like in Slack. */
+          /** When the bot adds the eyes reaction */
           reactedAt?: number
-          /** When the bot adds the orange heart, for a polite message. It shows with the eyes reaction. */
+          /** When the bot adds the heart, for a message that says please */
           heartAt?: number
       }
     | {
           from: 'bot'
-          /** The bot shows "is thinking" until its first block. */
           blocks: SlackBlock[]
           replies?: { at: number; labels: string[] }
       }
@@ -85,16 +83,16 @@ export type SlackMessage = { at: number; time: string } & (
 export interface SlackScene {
     channel: string
     messages: SlackMessage[]
-    /** When the scene stops. It holds its last frame after that. */
+    /** When the scene stops and holds its last frame */
     endAt: number
-    /** Screen reader summary of the whole thread. */
+    /** For screen readers */
     summary: string
-    /** The tag in the thread header. Defaults to "Sample data". */
+    /** The tag in the thread header. Defaults to "Sample data" */
     label?: string
 }
 
 const WORKSPACE = 'PostHog'
-const WORKSPACE_NOTE = 'Actual things happening in the PostHog Slack workspace.'
+export const WORKSPACE_NOTE = 'Actual things happening in the PostHog Slack workspace.'
 const SAMPLE_LABEL = 'Sample data'
 
 type Profile = {
@@ -105,8 +103,8 @@ type Profile = {
     avatar: { formats: { thumbnail: { url: string } } } | null
 }
 
-// The same profiles as `TeamMember`, so the photos and colors stay in step with the team pages
-const useProfile = (name: string): Profile | undefined => {
+// The same profiles as `TeamMember`
+export const useProfile = (name: string): Profile | undefined => {
     const {
         profiles: { nodes },
     } = useStaticQuery(graphql`
@@ -133,71 +131,80 @@ const useProfile = (name: string): Profile | undefined => {
     )
 }
 
-const pace = (ms: number) => Math.round(ms * PACE)
+const pacedScene = (scene: SlackScene, factor: number): SlackScene => {
+    const pace = (ms: number) => Math.round(ms * factor)
+    const pacedBlock = (block: SlackBlock): SlackBlock =>
+        block.type === 'plan'
+            ? {
+                  ...block,
+                  at: pace(block.at),
+                  steps: block.steps.map((step) => ({ ...step, doneAt: pace(step.doneAt) })),
+              }
+            : { ...block, at: pace(block.at) }
+    return {
+        ...scene,
+        endAt: pace(scene.endAt),
+        messages: scene.messages.map(
+            (message): SlackMessage =>
+                message.from === 'person'
+                    ? {
+                          ...message,
+                          at: pace(message.at),
+                          reactedAt: message.reactedAt && pace(message.reactedAt),
+                          heartAt: message.heartAt && pace(message.heartAt),
+                      }
+                    : {
+                          ...message,
+                          at: pace(message.at),
+                          blocks: message.blocks.map(pacedBlock),
+                          replies: message.replies && { ...message.replies, at: pace(message.replies.at) },
+                      }
+        ),
+    }
+}
 
-const pacedBlock = (block: SlackBlock): SlackBlock =>
-    block.type === 'plan'
-        ? { ...block, at: pace(block.at), steps: block.steps.map((step) => ({ ...step, doneAt: pace(step.doneAt) })) }
-        : { ...block, at: pace(block.at) }
-
-// Every time in the scene, stretched by PACE
-const pacedScene = (scene: SlackScene): SlackScene => ({
-    ...scene,
-    endAt: pace(scene.endAt),
-    messages: scene.messages.map(
-        (message): SlackMessage =>
-            message.from === 'person'
-                ? {
-                      ...message,
-                      at: pace(message.at),
-                      reactedAt: message.reactedAt && pace(message.reactedAt),
-                      heartAt: message.heartAt && pace(message.heartAt),
-                  }
-                : {
-                      ...message,
-                      at: pace(message.at),
-                      blocks: message.blocks.map(pacedBlock),
-                      replies: message.replies && { ...message.replies, at: pace(message.replies.at) },
-                  }
-    ),
-})
-
-// The text a block streams word by word
 const streamText = (block: SlackBlock): string | undefined =>
     block.type === 'text' ? block.text : block.type === 'bullets' ? block.items.join('\n') : undefined
 
-const blockBoundaries = (block: SlackBlock): number[] => {
+const blockBoundaries = (block: SlackBlock, msPerChar: number): number[] => {
     const text = streamText(block)
     return [
         block.at,
         ...(block.type === 'plan' ? block.steps.map(({ doneAt }) => doneAt) : []),
-        ...(text ? wordStream(text, block.at, STREAM_MS_PER_CHAR).stops : []),
+        ...(text ? wordStream(text, block.at, msPerChar).stops : []),
     ]
 }
 
-// Every moment the picture changes, so the clock only re-renders then
-const sceneBoundaries = ({ messages, endAt }: SlackScene): number[] =>
+// The clock only re-renders at these times
+const sceneBoundaries = ({ messages, endAt }: SlackScene, msPerChar: number, hold: number): number[] =>
     [
         endAt,
-        endAt + HOLD_MS,
+        endAt + hold,
         ...messages.flatMap((message) =>
             message.from === 'person'
                 ? [message.at, message.reactedAt, message.heartAt]
-                : [message.at, message.replies?.at, ...message.blocks.flatMap(blockBoundaries)]
+                : [
+                      message.at,
+                      message.replies?.at,
+                      ...message.blocks.flatMap((block) => blockBoundaries(block, msPerChar)),
+                  ]
         ),
     ].filter((at): at is number => at !== undefined)
 
-const MUTED = 'text-[#616061] dark:text-[#ABABAD]'
-const BORDER = 'border-[#DDDDDD] dark:border-[#35373B]'
-const LINK = 'text-[#1264A3] dark:text-[#1D9BD1]'
+export const MUTED = 'text-[#616061] dark:text-[#ABABAD]'
+export const BORDER = 'border-[#DDDDDD] dark:border-[#35373B]'
+export const LINK = 'text-[#1264A3] dark:text-[#1D9BD1]'
 const CARD = `rounded border ${BORDER} bg-white dark:bg-[#222529]`
-// The white pane that holds the channel and the thread
-const PANE = 'bg-white text-[#1D1C1D] dark:bg-[#1A1D21] dark:text-[#D1D2D3]'
+const SURFACE = 'bg-[#F8F8F8] dark:bg-[#222529]'
+const RULE = 'bg-[#DDDDDD] dark:bg-[#35373B]'
+const ACTIVE_CHANNEL = '!bg-[#1164A3] font-bold text-white'
+const REACTION = 'flex items-center gap-1 rounded-full border border-[#1D9BD1] bg-[#1D9BD1]/10 px-2 py-0.5'
+export const PANE = 'bg-white text-[#1D1C1D] dark:bg-[#1A1D21] dark:text-[#D1D2D3]'
 
 const RICH = /(@[A-Z][A-Za-z]+|`[^`]+`|\*[^*]+\*)/
 
-// Mentions, inline code, and italics, styled the way Slack shows them. `split` puts each match at an odd index.
-const Rich = ({ text }: { text: string }) => (
+// Mentions, inline code, and italics. `split` puts each match at an odd index.
+export const Rich = ({ text }: { text: string }): JSX.Element => (
     <>
         {text.split(RICH).map((part, index) =>
             index % 2 === 0 ? (
@@ -209,7 +216,7 @@ const Rich = ({ text }: { text: string }) => (
             ) : part.startsWith('`') ? (
                 <code
                     key={index}
-                    className={`rounded-sm border ${BORDER} bg-[#F8F8F8] px-1 font-code !text-[0.85em] text-[#E01E5A] dark:bg-[#222529] dark:text-[#E8912D]`}
+                    className={`rounded-sm border ${BORDER} ${SURFACE} px-1 font-code !text-[0.85em] text-[#E01E5A] dark:text-[#E8912D]`}
                 >
                     {part.slice(1, -1)}
                 </code>
@@ -220,9 +227,9 @@ const Rich = ({ text }: { text: string }) => (
     </>
 )
 
-const streamed = (text: string, at: number, elapsed: number) => wordStream(text, at, STREAM_MS_PER_CHAR).textAt(elapsed)
+const streamed = (text: string, at: number, elapsed: number, msPerChar: number) =>
+    wordStream(text, at, msPerChar).textAt(elapsed)
 
-// Slack's buttons under a message
 const Buttons = ({ labels, className }: { labels: string[]; className?: string }) => (
     <span className={cn('flex flex-wrap gap-1.5', className)}>
         {labels.map((label) => (
@@ -241,12 +248,12 @@ const REPORT_KINDS = {
 const SERIES_COLORS = ['#1D4AFF', '#CD0F74', '#43827E']
 const seriesColor = (index: number) => SERIES_COLORS[index % SERIES_COLORS.length]
 
-// PostHog sends the insight to Slack as an image, so the card stays white in dark mode, like the real one
+// Stays white in dark mode, because Slack shows the real one as an image
 const InsightCard = ({ block }: { block: Extract<SlackBlock, { type: 'insight' }> }) => {
     const top = Math.ceil(Math.max(...block.series.flatMap(({ values }) => values)) / 20) * 20
     const y = (value: number) => 2 + (1 - value / top) * 96
     return (
-        <div className={`max-w-md rounded-lg border ${BORDER} bg-[#F8F8F8] p-1.5 dark:bg-[#222529]`}>
+        <div className={`max-w-md rounded-lg border ${BORDER} ${SURFACE} p-1.5`}>
             <div className="rounded border border-[#DDDDDD] bg-white text-[#1D1C1D]">
                 <div className="border-b border-[#DDDDDD] px-3 py-2">
                     <p
@@ -320,17 +327,18 @@ const InsightCard = ({ block }: { block: Extract<SlackBlock, { type: 'insight' }
 }
 
 const Block = ({ block, elapsed }: { block: SlackBlock; elapsed: number }) => {
+    const msPerChar = React.useContext(StreamContext)
     switch (block.type) {
         case 'text':
             return (
                 <p className="m-0">
-                    <Rich text={streamed(block.text, block.at, elapsed)} />
+                    <Rich text={streamed(block.text, block.at, elapsed, msPerChar)} />
                 </p>
             )
         case 'bullets':
             return (
                 <ul className="m-0 list-disc pl-5">
-                    {streamed(block.items.join('\n'), block.at, elapsed)
+                    {streamed(block.items.join('\n'), block.at, elapsed, msPerChar)
                         .split('\n')
                         .map((item, index) => (
                             <li key={index}>
@@ -437,7 +445,7 @@ const Block = ({ block, elapsed }: { block: SlackBlock; elapsed: number }) => {
     }
 }
 
-const Header = ({ name, time, bot }: { name: string; time: string; bot?: boolean }) => (
+export const Header = ({ name, time, bot }: { name: string; time: string; bot?: boolean }): JSX.Element => (
     <p className="m-0 flex items-baseline gap-1.5 leading-tight">
         <strong>{name}</strong>
         {bot && (
@@ -455,8 +463,7 @@ const Header = ({ name, time, bot }: { name: string; time: string; bot?: boolean
     </p>
 )
 
-// Avatar on the left, then the name row, then the body, the way Slack lays out a message
-const MessageRow = ({
+export const MessageRow = ({
     avatar,
     header,
     children,
@@ -464,7 +471,7 @@ const MessageRow = ({
     avatar: React.ReactNode
     header: React.ReactNode
     children: React.ReactNode
-}) => (
+}): JSX.Element => (
     <motion.div {...LINE_ENTER} className="flex items-start gap-2.5">
         {avatar}
         <div className="flex min-w-0 flex-1 flex-col">
@@ -474,8 +481,7 @@ const MessageRow = ({
     </motion.div>
 )
 
-// The PostHog app icon: a square, like every Slack app icon
-const BotAvatar = ({ size = 28 }: { size?: 12 | 16 | 28 }) => (
+export const BotAvatar = ({ size = 28 }: { size?: 12 | 16 | 28 }): JSX.Element => (
     <span
         className={cn(
             SCENE_SIZE[size],
@@ -488,7 +494,7 @@ const BotAvatar = ({ size = 28 }: { size?: 12 | 16 | 28 }) => (
     </span>
 )
 
-const PersonAvatar = ({ name, size = 28 }: { name: string; size?: 12 | 28 }) => {
+export const PersonAvatar = ({ name, size = 28 }: { name: string; size?: 12 | 28 }): JSX.Element => {
     const profile = useProfile(name)
     const url = profile?.avatar?.formats?.thumbnail?.url
     const box = cn(SCENE_SIZE[size], 'shrink-0 overflow-hidden', size === 12 ? 'rounded-sm' : 'rounded-md')
@@ -501,11 +507,11 @@ const PersonAvatar = ({ name, size = 28 }: { name: string; size?: 12 | 28 }) => 
 
 const Reaction = ({ heart }: { heart: boolean }) => (
     <span className={cn(SCENE_TEXT[11], 'flex gap-1')}>
-        <span className="flex items-center gap-1 rounded-full border border-[#1D9BD1] bg-[#1D9BD1]/10 px-2 py-0.5">
+        <span className={REACTION}>
             <span className="leading-none">👀</span> 1
         </span>
         {heart && (
-            <span className="flex items-center gap-1 rounded-full border border-[#1D9BD1] bg-[#1D9BD1]/10 px-2 py-0.5">
+            <span className={REACTION}>
                 <span className="leading-none">🧡</span> 1
             </span>
         )}
@@ -554,20 +560,13 @@ const Message = ({ message, elapsed }: { message: SlackMessage; elapsed: number 
     )
 }
 
-// Every message in a scene arrives already sent, so the message box only shows its placeholder
 const Composer = ({ placeholder }: { placeholder: string }) => (
     <div className="shrink-0 px-3 pb-3">
         <div
             aria-hidden
             className="w-full overflow-hidden rounded border border-[#BBBBBB] text-left dark:border-[#565856] [&_svg]:shrink-0"
         >
-            <span
-                className={cn(
-                    'flex items-center gap-3 bg-[#F8F8F8] px-2.5 py-1 dark:bg-[#222529]',
-                    SCENE_TEXT[12],
-                    MUTED
-                )}
-            >
+            <span className={cn('flex items-center gap-3 px-2.5 py-1', SURFACE, SCENE_TEXT[12], MUTED)}>
                 <strong>B</strong>
                 <em>I</em>
                 <span className="underline">U</span>
@@ -591,8 +590,7 @@ const Composer = ({ placeholder }: { placeholder: string }) => (
     </div>
 )
 
-// A `collapsible` section starts closed, like a collapsed section in Slack, and a click on the title opens it. Not a
-// <details>, because the site styles those globally.
+// Not a <details>, because the site styles those globally
 const SidebarSection = ({
     title,
     collapsible,
@@ -645,7 +643,6 @@ const NewTabLink = ({ href, children }: { href: string; children: React.ReactNod
     </a>
 )
 
-// A DM opens the person's team profile
 const PersonLink = ({ name }: { name: string }) => {
     const profile = useProfile(name)
     const content = (
@@ -663,7 +660,6 @@ const PersonLink = ({ name }: { name: string }) => {
     )
 }
 
-// With `onSelect`, the channel is a button that opens its thread
 const ChannelButton = ({
     name,
     active,
@@ -719,10 +715,7 @@ const Sidebar = ({ channel, channels, onSelectChannel, people }: ChannelPicker &
                     name={name}
                     active={name === channel}
                     onSelect={onSelectChannel}
-                    className={cn(
-                        SIDEBAR_ROW,
-                        name === channel ? '!bg-[#1164A3] font-bold text-white' : 'text-inherit hover:bg-white/10'
-                    )}
+                    className={cn(SIDEBAR_ROW, name === channel ? ACTIVE_CHANNEL : 'text-inherit hover:bg-white/10')}
                 />
             ))}
         </SidebarSection>
@@ -755,7 +748,6 @@ const Sidebar = ({ channel, channels, onSelectChannel, people }: ChannelPicker &
     </div>
 )
 
-// The channel beside the thread, shown at full width. It holds the message that starts the thread.
 const ChannelPane = ({ scene, elapsed, replies }: { scene: SlackScene; elapsed: number; replies: number }) => {
     const [starter] = scene.messages
     return (
@@ -772,9 +764,9 @@ const ChannelPane = ({ scene, elapsed, replies }: { scene: SlackScene; elapsed: 
             </div>
             <div aria-hidden className="flex min-h-0 flex-1 flex-col justify-end gap-4 overflow-hidden px-4 pb-3">
                 <p className={cn('m-0 flex items-center gap-2', SCENE_TEXT[11], MUTED)}>
-                    <span className="h-px flex-1 bg-[#DDDDDD] dark:bg-[#35373B]" />
+                    <span className={cn('h-px flex-1', RULE)} />
                     <span className={cn('rounded-full border px-2.5 py-0.5 font-bold', BORDER)}>Today</span>
-                    <span className="h-px flex-1 bg-[#DDDDDD] dark:bg-[#35373B]" />
+                    <span className={cn('h-px flex-1', RULE)} />
                 </p>
                 {starter && elapsed >= starter.at && (
                     <div className="flex flex-col gap-1.5">
@@ -798,7 +790,6 @@ const ChannelPane = ({ scene, elapsed, replies }: { scene: SlackScene; elapsed: 
     )
 }
 
-// In the full window, the label moves to the channel pane at full width, and the thread can close, like in Slack
 const ThreadHeader = ({ scene, closable }: { scene: SlackScene; closable?: boolean }) => (
     <p aria-hidden className={cn('m-0 flex shrink-0 items-baseline gap-2 border-b px-3 py-2', BORDER)}>
         <strong>Thread</strong>
@@ -810,11 +801,7 @@ const ThreadHeader = ({ scene, closable }: { scene: SlackScene; closable?: boole
     </p>
 )
 
-/**
- * An animated picture of a PostHog Slack app thread, like the agent windows on the homepage. It shows sample data or a
- * real thread, cut short (see `label`).
- * It plays once when it scrolls into view, holds the answer, then calls `onDone`.
- */
+// Plays once when it scrolls into view, holds the last frame, then calls `onDone`
 export default function SlackWindow({
     scene: written,
     variant = 'window',
@@ -824,27 +811,26 @@ export default function SlackWindow({
     onDone,
 }: {
     scene: SlackScene
-    /** `thread` drops the window, sidebar, channel, and composer, and shows only the thread */
+    /** `thread` shows only the thread */
     variant?: 'window' | 'thread'
-    /** The channels in the sidebar. Defaults to the scene's channel. */
     channels?: string[]
-    /** The DMs in the sidebar. Each one links to the person's team profile. */
     people?: string[]
-    /** Makes each channel a button. In a narrow window, the channels show as tabs above the thread. */
+    /** Makes each channel a button */
     onSelectChannel?: (channel: string) => void
     onDone?: () => void
 }): JSX.Element {
     const ref = useRef<HTMLDivElement>(null)
-    const scene = useMemo(() => pacedScene(written), [written])
-    const boundaries = useMemo(() => sceneBoundaries(scene), [scene])
-    const doneAt = scene.endAt + HOLD_MS
+    const { pace, hold } = PLAYBACK[variant]
+    const msPerChar = ANSWER_MS_PER_CHAR * pace
+    const scene = useMemo(() => pacedScene(written, pace), [written, pace])
+    const boundaries = useMemo(() => sceneBoundaries(scene, msPerChar, hold), [scene, msPerChar, hold])
+    const doneAt = scene.endAt + hold
     const elapsed = useEventClock(ref, { loopMs: doneAt + 1, restingMs: scene.endAt, boundaries, loop: false })
     const done = elapsed >= doneAt
     useEffect(() => {
         if (done) onDone?.()
     }, [done, onDone])
 
-    // At full width the thread pane opens with its first reply, the way you open a thread in Slack
     const replies = scene.messages.slice(1).filter(({ at }) => elapsed >= at).length
     const thread = (
         <ScrollToLatest className="px-3 pt-3">
@@ -859,91 +845,93 @@ export default function SlackWindow({
     )
 
     return (
-        <div
-            ref={ref}
-            className={cn('@container not-prose', variant === 'thread' && 'h-full')}
-            role="group"
-            aria-label="PostHog Slack app thread"
-        >
-            <p className="sr-only">{scene.summary}</p>
-            {variant === 'thread' ? (
-                // Beside the prompt list in `ThreadDemo`, the thread is as tall as the list
-                <div
-                    className={cn(
-                        SCENE_TEXT[12],
-                        'flex h-96 flex-col overflow-hidden rounded-md border leading-snug @2xl/reader-content:h-full',
-                        BORDER,
-                        PANE
-                    )}
-                >
-                    <ThreadHeader scene={scene} />
-                    {thread}
-                </div>
-            ) : (
-                <WindowFrame
-                    title={
-                        <span
-                            aria-hidden
-                            className="flex w-1/2 items-center gap-1.5 rounded bg-white/20 px-3 py-0.5 font-normal text-white"
-                        >
-                            <IconSearch className={cn(SCENE_SIZE[12], 'shrink-0')} />
-                            Search {WORKSPACE}
-                        </span>
-                    }
-                    className={cn(SCENE_TEXT[12], 'rounded-md border-[#3F0E40] bg-[#3F0E40] leading-snug')}
-                >
-                    <div className="flex min-h-0 flex-1">
-                        <Sidebar
-                            channel={scene.channel}
-                            channels={channels}
-                            people={people}
-                            onSelectChannel={onSelectChannel}
-                        />
-                        <div
-                            className={cn(
-                                'mb-1.5 ml-1.5 mr-1.5 flex min-w-0 flex-1 overflow-hidden rounded @lg:ml-0',
-                                PANE
-                            )}
-                        >
-                            <ChannelPane scene={scene} elapsed={elapsed} replies={replies} />
+        <StreamContext.Provider value={msPerChar}>
+            <div
+                ref={ref}
+                className={cn('@container not-prose', variant === 'thread' && 'h-full')}
+                role="group"
+                aria-label="PostHog Slack app thread"
+            >
+                <p className="sr-only">{scene.summary}</p>
+                {variant === 'thread' ? (
+                    <div
+                        className={cn(
+                            SCENE_TEXT[12],
+                            'flex h-96 flex-col overflow-hidden rounded-md border leading-snug @2xl/reader-content:h-full',
+                            BORDER,
+                            PANE
+                        )}
+                    >
+                        <ThreadHeader scene={scene} />
+                        {thread}
+                    </div>
+                ) : (
+                    <WindowFrame
+                        title={
+                            <span
+                                aria-hidden
+                                className="flex w-1/2 items-center gap-1.5 rounded bg-white/20 px-3 py-0.5 font-normal text-white"
+                            >
+                                <IconSearch className={cn(SCENE_SIZE[12], 'shrink-0')} />
+                                Search {WORKSPACE}
+                            </span>
+                        }
+                        className={cn(SCENE_TEXT[12], 'rounded-md border-[#3F0E40] bg-[#3F0E40] leading-snug')}
+                    >
+                        <div className="flex min-h-0 flex-1">
+                            <Sidebar
+                                channel={scene.channel}
+                                channels={channels}
+                                people={people}
+                                onSelectChannel={onSelectChannel}
+                            />
                             <div
                                 className={cn(
-                                    'flex min-w-0 flex-1 flex-col @3xl:w-1/2 @3xl:flex-none @3xl:border-l @3xl:border-[#DDDDDD] @3xl:dark:border-[#35373B]',
-                                    replies === 0 && '@3xl:hidden'
+                                    'mb-1.5 ml-1.5 mr-1.5 flex min-w-0 flex-1 overflow-hidden rounded @lg:ml-0',
+                                    PANE
                                 )}
                             >
-                                {onSelectChannel && (
-                                    <div
-                                        className={cn(
-                                            SCENE_TEXT[12],
-                                            'scrollbar-hide flex shrink-0 gap-1 overflow-x-auto border-b px-2 py-1.5 @lg:hidden',
-                                            BORDER
-                                        )}
-                                    >
-                                        {channels.map((name) => (
-                                            <ChannelButton
-                                                key={name}
-                                                name={name}
-                                                active={name === scene.channel}
-                                                onSelect={onSelectChannel}
-                                                className={cn(
-                                                    'flex shrink-0 items-center gap-0.5 rounded px-2 py-0.5',
-                                                    name === scene.channel
-                                                        ? '!bg-[#1164A3] font-bold text-white'
-                                                        : cn(MUTED, 'hover:bg-[#F8F8F8] dark:hover:bg-[#222529]')
-                                                )}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                                <ThreadHeader scene={scene} closable />
-                                {thread}
-                                <Composer placeholder="Reply…" />
+                                <ChannelPane scene={scene} elapsed={elapsed} replies={replies} />
+                                <div
+                                    className={cn(
+                                        'flex min-w-0 flex-1 flex-col @3xl:w-1/2 @3xl:flex-none @3xl:border-l',
+                                        BORDER,
+                                        replies === 0 && '@3xl:hidden'
+                                    )}
+                                >
+                                    {onSelectChannel && (
+                                        <div
+                                            className={cn(
+                                                SCENE_TEXT[12],
+                                                'scrollbar-hide flex shrink-0 gap-1 overflow-x-auto border-b px-2 py-1.5 @lg:hidden',
+                                                BORDER
+                                            )}
+                                        >
+                                            {channels.map((name) => (
+                                                <ChannelButton
+                                                    key={name}
+                                                    name={name}
+                                                    active={name === scene.channel}
+                                                    onSelect={onSelectChannel}
+                                                    className={cn(
+                                                        'flex shrink-0 items-center gap-0.5 rounded px-2 py-0.5',
+                                                        name === scene.channel
+                                                            ? ACTIVE_CHANNEL
+                                                            : cn(MUTED, 'hover:bg-[#F8F8F8] dark:hover:bg-[#222529]')
+                                                    )}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                    <ThreadHeader scene={scene} closable />
+                                    {thread}
+                                    <Composer placeholder="Reply…" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </WindowFrame>
-            )}
-        </div>
+                    </WindowFrame>
+                )}
+            </div>
+        </StreamContext.Provider>
     )
 }
