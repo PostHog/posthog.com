@@ -33,7 +33,7 @@ Then it rates how hard the fix is:
 
 - **Low:** One file or one self-contained module, a blast radius you can describe in one sentence, and existing tests cover it. Ship it yourself.
 - **Medium:** Several files in one product, or a change in behavior other customers rely on. Ask the owning team about your approach before you write any code, then ship it or hand it over.
-- **High:** Spans products, or touches ingestion, billing, the query engine, permissions, migrations, or an SDK's public API. This is a fix for the owning team, not a first PR. Hand it off with a GitHub issue the customer can follow.
+- **High:** Spans multiple products, or touches ingestion, billing, the query engine, permissions, migrations, or an SDK's public API. This is better suited for the relevant product team. In this case, feel free to escalate it with your findings and initial hypothesis and let the product team give you feedback on the fix, or advise on next steps. If you feel up for it, by all means propose a fix and share it with the team for feedback. But remember your book is still your main job, so time-box it accordingly.
 
 A low rating on a real customer problem is your cue to pick it up. If a workaround already solves it for the customer, the fix is optional. Ship it if you have the time, or log it as a [feature request](/handbook/customer-success/feature-requests).
 
