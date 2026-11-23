@@ -113,12 +113,13 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
         assert.equal(getSdkReferenceUrl('posthog-node'), '/docs/libraries/node')
         assert.equal(getSdkReferenceUrl('posthog-go'), '/docs/libraries/go')
         assert.equal(getSdkReferenceUrl('posthog-rust'), '/docs/libraries/rust')
+        assert.equal(getSdkReferenceUrl('posthog-ios'), '/docs/libraries/ios')
         assert.equal(getSdkReferenceUrl('posthog-flutter'), '/docs/libraries/flutter')
     })
 
     test('routes remaining HogRef SDKs to /docs/references/<id>', () => {
         assert.equal(getSdkReferenceUrl('posthog-js'), '/docs/references/posthog-js')
-        assert.equal(getSdkReferenceUrl('posthog-ios'), '/docs/references/posthog-ios')
+        assert.equal(getSdkReferenceUrl('posthog-android'), '/docs/references/posthog-android')
         assert.equal(getSdkReferenceUrl('posthog-react-native'), '/docs/references/posthog-react-native')
     })
 
@@ -128,7 +129,7 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
             assert.equal(legacyIds.includes(migratedId), false, `${migratedId} must not be sourced from HogRef`)
         }
         assert.ok(legacyIds.includes('posthog-js'))
-        assert.ok(legacyIds.includes('posthog-ios'))
+        assert.ok(legacyIds.includes('posthog-android'))
     })
 
     test('PUBLISHED_SDK_METADATA matches PUBLISHED_SDK_REFERENCES and resolves known logos', () => {
@@ -205,6 +206,19 @@ describe('vercel.json SDK reference redirects', () => {
                 assert.equal(hit.statusCode, 301, `Expected 301 for ${source}`)
                 assert.equal(resolveFirstRedirect(hit.destination), null, `Multi-hop redirect for ${source}`)
             }
+        }
+
+        for (const [source, expectedDest] of [
+            ['/docs/libraries/ios/usage', '/docs/libraries/ios'],
+            ['/docs/libraries/ios/usage.md', '/docs/libraries/ios.md'],
+            ['/docs/libraries/ios/configuration', '/docs/libraries/ios'],
+            ['/docs/libraries/ios/configuration.md', '/docs/libraries/ios.md'],
+        ] as const) {
+            const hit = resolveFirstRedirect(source)
+            assert.ok(hit, `Expected redirect for ${source}`)
+            assert.equal(hit.destination, expectedDest, `Wrong destination for ${source}`)
+            assert.equal(hit.statusCode, 301, `Expected 301 for ${source}`)
+            assert.equal(resolveFirstRedirect(hit.destination), null, `Multi-hop redirect for ${source}`)
         }
     })
 })

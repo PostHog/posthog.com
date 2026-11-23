@@ -74,7 +74,7 @@ The quickest and easiest way to ask these questions is with an [in-product surve
 
 ![Example of in-product survey to create a user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/survey-personas.png)
 
-If you need to go more in-depth, you can also interview your users. Good questions to dig into in these interviews are:
+If you need to go more in-depth, you can also [interview your users](/newsletter/user-interviews). Good questions to dig into in these interviews are:
 
 - What are your main responsibilities in your current role?
 - How do you define success in your role?

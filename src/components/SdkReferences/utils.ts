@@ -76,6 +76,7 @@ export const PUBLISHED_SDK_METADATA: Record<string, PublishedSdkMeta> = {
     },
     'posthog-go': { slug: 'go', label: 'Go', logoKey: 'go', features: SERVER_FEATURES },
     'posthog-rust': { slug: 'rust', label: 'Rust', logoKey: 'rust', features: SERVER_FEATURES },
+    'posthog-ios': { slug: 'ios', label: 'iOS', logoKey: 'ios', features: CLIENT_FEATURES },
     'posthog-flutter': {
         slug: 'flutter',
         label: 'Flutter',

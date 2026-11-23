@@ -85,7 +85,7 @@ The second is **solution validation**. This works best when someone is already u
 - What is confusing?
 - Can you show me how you are using X?
 
-**Follow-up questions** are critical to get the depth needed to build a good solution, too. Remember, this is an opportunity to solve your information bottleneck. Do this by asking questions like:
+[**Follow-up questions**](/newsletter/user-interviews#what-do-they-really-mean) are critical to get the depth needed to build a good solution, too. Remember, this is an opportunity to solve your information bottleneck. Do this by asking questions like:
 
 - What do you mean by that?
 - Why is that important to you?
