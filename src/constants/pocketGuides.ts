@@ -10,7 +10,7 @@
 export type PocketGuideToken = 'blue' | 'purple' | 'yellow' | 'seagreen' | 'orange' | 'red'
 
 /** Optional pages under a Learn hub, at /learn/<product>/<page>. */
-export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
+export type LearnHubPage = 'videos' | 'agent-prompts-and-mcp' | 'live-playground'
 
 /** A page nested under a hub page, at /learn/<product>/<page>/<slug>. Its src/pages file must exist. The hub page link opens the first one. */
 export interface LearnHubSubpage {
@@ -78,7 +78,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         productHandle: 'ai_observability',
         learnPath: '/learn/ai-observability/pocket-guide',
         learnHub: {
-            pages: ['agent-prompts-and-mcp', 'live-playground'],
+            pages: ['videos', 'agent-prompts-and-mcp', 'live-playground'],
             subpages: {
                 'live-playground': [
                     { slug: 'twig', name: 'Twig.com' },

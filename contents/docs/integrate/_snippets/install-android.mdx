@@ -7,13 +7,13 @@ All you need to do is add the `posthog-android` module to your App's `build.grad
 
 ```gradle file=app/build.gradle
 dependencies {
-  implementation 'com.posthog:posthog-android:3.+'
+  implementation 'com.posthog:posthog-android:4.+'
 }
 ```
 
 ```kotlin file=app/build.gradle.kts
 dependencies {
-  implementation("com.posthog:posthog-android:3.+")
+  implementation("com.posthog:posthog-android:4.+")
 }
 ```
 
@@ -31,7 +31,7 @@ import com.posthog.android.PostHogAndroidConfig
 class SampleApp : Application() {
 
     companion object {
-        const val POSTHOG_API_KEY = "<ph_project_token>"
+        const val POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
         // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         const val POSTHOG_HOST = "<ph_client_api_host>"
     }
@@ -40,7 +40,7 @@ class SampleApp : Application() {
         super.onCreate()
 
         val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
+            projectToken = POSTHOG_PROJECT_TOKEN,
             host = POSTHOG_HOST // TIP: host is optional if you use https://us.i.posthog.com
         )
         PostHogAndroid.setup(this, config)

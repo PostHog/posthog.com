@@ -39,7 +39,7 @@ When linking Automox, you'll need:
 
 <SyncModes />
 
-The `policy_runs` table (policy execution history) and `events` table (console activity log) support **incremental** sync using Automox's server-side time filters, so they only fetch new rows on each run. All other tables (`devices`, `organizations`, `packages`, `policies`, `server_groups`, `users`) sync as **full refresh** because the Automox API doesn't expose an "updated since" filter for those endpoints.
+The `policy_runs` table (policy execution history), `events` table (console activity log), and `audit_events` table (console audit trail) support **incremental** sync using Automox's server-side time filters, so they only fetch new rows on each run. A full refresh of `audit_events` reads the last 365 days of audit data. All other tables (`devices`, `needs_attention_devices`, `organizations`, `packages`, `policies`, `prepatch_devices`, `server_groups`, `users`) sync as **full refresh** because the Automox API doesn't expose an "updated since" filter for those endpoints.
 
 ## Configuration
 

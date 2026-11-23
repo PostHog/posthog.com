@@ -31,9 +31,17 @@ Leave the **Host** field blank if your account is on the US cloud (`api.smith.la
 
 <SyncModes />
 
-The `runs` table can be large. Use incremental sync for it: runs are filtered server-side by `start_time`, and the first incremental sync only pulls the last 365 days. Each incremental sync also re-reads a short trailing window so runs that finish (or receive feedback) after they were first synced get updated.
+The `runs` and `feedback` tables support incremental sync using `start_time` and `created_at`, respectively. The first incremental sync pulls the last 365 days. Later incremental syncs continue from the last synced timestamp and re-read a trailing hour to pick up recent changes.
+
+The `threads` table uses full refresh only. Each sync replaces the table with conversation threads and statistics over traces that started in the last 365 days. This is a rolling window: a thread with no traces in that window drops out on the next refresh. The other tables use full refresh without this fixed window.
 
 LangSmith rate-limits its run query API, so very large workspaces may see the initial `runs` backfill take a while.
+
+## History and retention
+
+LangSmith data is imported into warehouse tables. PostHog's [events retention periods](/docs/data/events-retention) do not apply to these imports. The 365-day initial lookback for incremental `runs` and `feedback` syncs does not expire imported rows when they become older than 365 days.
+
+PostHog can only import data that LangSmith still makes available through its API. [LangSmith's own retention settings](https://docs.langchain.com/langsmith/data-purging-compliance) can therefore limit the history available to sync. A full refresh replaces the table with what the API returns, so previously imported rows can disappear if LangSmith no longer returns them. Insights that query these tables reflect the data currently in them.
 
 ## Configuration
 

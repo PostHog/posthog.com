@@ -34,7 +34,11 @@ When linking Metabase, you'll need:
 
 <SyncModes />
 
-This source is full refresh only.
+The `query_executions` table supports incremental sync on the `started_at` field. Each incremental sync also fetches the month before the last synced row, so it captures rows near the timezone boundary between months. A full refresh of this table fetches the last 24 months.
+
+All other tables are full refresh only.
+
+The `query_executions` table uses the Metabase query log, which is only available on Metabase Pro and Enterprise. The API key or user must also have superuser access.
 
 ## Configuration
 

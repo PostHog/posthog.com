@@ -65,10 +65,10 @@ describe('getActiveMenuSection', () => {
 
 describe('the real docs nav', () => {
     test('the Python reference pages use the Python sidebar', () => {
-        const expected = sectionFor('/docs/libraries/python/reference')
+        const expected = sectionFor('/docs/libraries/python')
         assert.ok(expected)
         for (const path of [
-            '/docs/libraries/python/reference',
+            '/docs/libraries/python',
             '/docs/libraries/python/7.x.x',
             '/docs/libraries/python/8.x.x',
             '/docs/libraries/python/migration',
@@ -85,10 +85,10 @@ describe('the real docs nav', () => {
             node: ['5.x.x', '6.x.x', 'migration'],
         }
         for (const [sdk, names] of Object.entries(pages)) {
-            const expected = sectionFor(`/docs/libraries/${sdk}/reference`)
+            const expected = sectionFor(`/docs/libraries/${sdk}`)
             assert.ok(expected)
-            for (const name of ['reference', ...names]) {
-                assert.equal(sectionFor(`/docs/libraries/${sdk}/${name}`), expected)
+            for (const suffix of ['', ...names.map((name) => `/${name}`)]) {
+                assert.equal(sectionFor(`/docs/libraries/${sdk}${suffix}`), expected)
             }
         }
     })

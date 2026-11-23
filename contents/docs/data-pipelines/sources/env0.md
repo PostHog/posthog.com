@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The env0 connector syncs your infrastructure-as-code data into PostHog: organizations, projects, teams, templates, organization members, roles and role assignments, environments, deployment history, the steps and resources behind each deployment, drift causes, audit logs, project budgets, and cloud cost at the environment, project, and organization level. You can attribute cloud spend to teams and projects, compare it against budgets, and analyze deployment and drift activity alongside your product data.
+The env0 connector syncs your infrastructure-as-code data into PostHog: organizations, projects, teams, templates, modules from the private registry, organization members, roles and role assignments, environments, deployment history, the steps and resources behind each deployment, drift causes, audit logs, project budgets, and cloud cost at the environment, project, and organization level. You can attribute cloud spend to teams and projects, compare it against budgets, and analyze deployment and drift activity alongside your product data.
 
 ## Prerequisites
 
@@ -45,6 +45,8 @@ The `audit_logs` table supports incremental sync on `timestamp`.
 
 The cost tables always sync the last year of daily cost records, so full refresh is the right mode for them. The same goes for `drift_causes` and `organization_users`, which env0 returns in full on every request.
 
+The `modules`, `module_versions`, and `module_test_runs` tables use full refresh because the env0 API does not offer server-side date filtering for these endpoints.
+
 ## Configuration
 
 <SourceParameters />
@@ -57,7 +59,7 @@ The cost tables always sync the last year of daily cost records, so full refresh
 
 **Missing cost data:** the cost tables only have rows for environments and projects where env0 cost monitoring is configured. Those without it are skipped. The budget tables only have rows for projects with a budget.
 
-**Rate limits:** env0 limits API usage to 1,000 requests per 60 seconds. Deployments and costs are fetched per environment, and `deployment_resources` and `deployment_steps` are fetched per deployment, so accounts with very many environments or deployments may sync these tables slowly. The connector backs off and retries automatically.
+**Rate limits:** env0 limits API usage to 1,000 requests per 60 seconds. Deployments and costs are fetched per environment, `deployment_resources` and `deployment_steps` are fetched per deployment, and `module_versions` and `module_test_runs` are fetched per module, so accounts with very many environments, deployments, or modules may sync these tables slowly. The connector backs off and retries automatically.
 
 **Audit logs:** reading audit logs needs the `VIEW_AUDIT_LOGS` permission in env0.
 

@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Naver Ads connector syncs your [Naver Search Ads](https://searchad.naver.com) campaigns, ad groups, ads, keywords, and daily performance into the PostHog data warehouse. Use it to compare search ad spend and clicks with what those visitors do in your product.
+The Naver Ads connector syncs your [Naver Search Ads](https://searchad.naver.com) campaigns, ad groups, ads, keywords, channels, ad extensions, and daily performance into the PostHog data warehouse. Use it to compare search ad spend and clicks with what those visitors do in your product.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ To get these:
 
 <SyncModes />
 
-`campaigns`, `adgroups`, `ads`, and `keywords` use full refresh. Each sync replaces the table.
+`campaigns`, `adgroups`, `ads`, `keywords`, `channels`, and `ad_extensions` use full refresh. Each sync replaces the table.
 
 `campaign_stats`, `adgroup_stats`, and `keyword_stats` hold one row per entity per day, in Korea Standard Time. They support incremental sync on `date`. Each incremental sync reads the last two days again, because Naver can update metrics for up to 48 hours.
 

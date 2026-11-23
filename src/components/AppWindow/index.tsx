@@ -73,7 +73,8 @@ const Router = (props) => {
         return React.cloneElement(children, { key: 'components-ui' })
     }
     // Learn pages share one shell, so the sidebar stays mounted between them.
-    if (/^\/learn\/[^/]+/.test(path)) {
+    // A Learn page with a modal window (a Learn TV video) opens like /demo instead.
+    if (/^\/learn\/[^/]+/.test(path) && !appWindow?.modal) {
         return (
             <React.Suspense fallback={<>{children}</>}>
                 <LearnShell path={path}>{children}</LearnShell>
