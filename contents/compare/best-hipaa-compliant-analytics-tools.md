@@ -127,7 +127,7 @@ Freshpaint is a cloud-only product specifically designed for healthcare companie
 
 ### 5. Piwik PRO
 
-![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/compare/ga4-alternatives/piwik-pro.png)
+![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
 
 **Piwik PRO** is a commercial analytics and customer data platform spun out of the open-source analytics tool, [Matomo](/compare/best-matomo-alternatives). As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, Piwik PRO is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this, too.
 
