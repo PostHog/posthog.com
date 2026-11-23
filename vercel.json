@@ -170,6 +170,11 @@
     ],
     "redirects": [
         {
+            "source": "/vibe-check",
+            "destination": "/sales",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/libraries/capture-v1:ext(\\.md)?",
             "destination": "/docs/libraries:ext?",
             "statusCode": 301
