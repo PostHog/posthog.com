@@ -9,11 +9,11 @@ availability:
 sourceId: Campfire
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Campfire connector syncs your accounting data from [Campfire](https://www.meetcampfire.com/) into PostHog: general ledger transactions, journal entries, invoices, bills, payments, bank activity, revenue recognition contracts, and company objects like vendors and the chart of accounts. This lets you analyze your financial data alongside your product data.
+The Campfire connector syncs your accounting data from [Campfire](https://www.meetcampfire.com/) into PostHog: general ledger transactions, journal entries, intercompany journal entries, invoices, bills, payments, bank activity, revenue recognition contracts, prepaid commits, usage-based revenue, and company objects like vendors and the chart of accounts. This lets you analyze your financial data alongside your product data.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ When linking Campfire, you'll need an API key:
 
 <SyncModes />
 
-Tables where Campfire supports server-side filtering by modification time (like GL transactions, bills, payments, vendors, and contracts) can sync incrementally on `last_modified_at`. The other tables sync with a full refresh.
+Tables where Campfire supports server-side filtering by modification time (like GL transactions, bills, payments, vendors, contracts, and intercompany journal entries) can sync incrementally on `last_modified_at`. The other tables sync with a full refresh.
 
 ## Configuration
 

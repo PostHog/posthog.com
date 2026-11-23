@@ -564,6 +564,7 @@ export const query = graphql`
         post: mdx(id: { eq: $id }) {
             id
             body
+            timeToRead
             excerpt(pruneLength: 150)
             fields {
                 slug

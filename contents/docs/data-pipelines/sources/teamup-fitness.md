@@ -18,6 +18,8 @@ The TeamUp Fitness connector syncs your customer, membership, attendance, and bi
 
 You need access to your TeamUp business dashboard to create a machine-to-machine (M2M) token, and the numeric provider ID for your business. The token must have access to that provider and the tables you want to sync.
 
+To sync `membership_payment_plans` and `crm_status_changes`, your provider token must have the `super_admin` permission.
+
 See [TeamUp's authentication guide](https://docs.goteamup.com/api-reference/authentication#m2m-tokens) for details about M2M tokens.
 
 ## Adding a data source

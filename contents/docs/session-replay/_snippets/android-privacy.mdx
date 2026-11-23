@@ -53,9 +53,22 @@ Text(
 )
 ```
 
+### Automatic masking in Jetpack Compose
+
+From version 4.0:
+
+- Nodes that use `Modifier.clearAndSetSemantics` are masked while text or image masking is on. Use `postHogUnmask()` to show them.
+- Masked text that draws past its layout box is masked in full, not only the part inside the box.
+
+### Web views and custom-drawn views
+
+A `WebView` is masked whole while `maskAllTextInputs` or `maskAllImages` is on, and recorded in full when both are off. Views that PostHog doesn't recognize as text or images, such as custom-drawn views, aren't masked automatically. Mask them with `ph-no-capture` or `postHogMask()`.
+
 ### Precedence and propagation
 
 Both mask and unmask controls apply to all children of the view or composable they are set on. The unmask option (`ph-no-mask` / `postHogUnmask()`) always takes precedence over the mask option (`ph-no-capture` / `postHogMask()`). This applies to the whole subtree: a child marked `ph-no-capture` inside an unmasked view is **not** masked, and neither are views that PostHog would otherwise mask automatically. Only unmask a subtree you know contains no sensitive data.
+
+From version 4.0, `postHogMask()` and `postHogUnmask()` apply only to the composable they're set on and its children, not to siblings merged into the same clickable row.
 
 Both `postHogMask()` and `postHogUnmask()` accept an `isEnabled` parameter. When set to `false`, the modifier has no effect (as if it was never applied), allowing dynamic control via global settings or remote config:
 

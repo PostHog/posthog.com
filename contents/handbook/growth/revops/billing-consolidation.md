@@ -38,8 +38,9 @@ The billing team runs these steps for option 2, once the customer confirms the p
 1. **Invoice the partial periods.** For each account that pays today, other than the target account, cancel the current subscription and invoice its accrued usage for the partial period. Send these before you link.
 2. **Link the accounts to the target Stripe customer.** Confirm that ongoing usage is reported through the shared subscription and uses the shared credit pool.
 3. **Align billing periods.** Once the old subscriptions are canceled and all organizations point to the shared subscription, update each organization's stored billing period to match the actual period on that subscription. Then refresh each organization's billing status and check its usage totals. See the <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#billing-periods-and-forecasts">period and forecast caveats</PrivateLink> (PostHog team only).
-4. **Set the invoice email** on the consolidated customer (the confirmed email, or the placeholder).
-5. **Tell the customer that access does not change.** The organizations stay separate, so each organization's users keep their own access.
+4. **Sync the plans map on each linked organization.** An add-on bills one time on the shared subscription, but only the organization that buys it gets the features, because only its plans map changes. In Billing admin, click **Sync plans map from Stripe** on each linked organization. Do this again each time the customer adds an add-on later.
+5. **Set the invoice email** on the consolidated customer (the confirmed email, or the placeholder).
+6. **Tell the customer that access does not change.** The organizations stay separate, so each organization's users keep their own access.
 
 ## Merge paying accounts into one organization
 

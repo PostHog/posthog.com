@@ -9,9 +9,9 @@ availability:
 sourceId: Harvest
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Harvest connector syncs clients, contacts, estimate item categories, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -36,7 +36,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Harvest tables are full refresh. Each sync replaces the contents of the table.
+Most Harvest tables are full refresh. Each sync replaces the contents of the table. The `estimate_messages` and `invoice_messages` tables support incremental sync and only fetch rows updated since the last sync.
 
 ## Configuration
 

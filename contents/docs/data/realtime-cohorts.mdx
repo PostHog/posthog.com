@@ -1,32 +1,32 @@
 ---
-title: Realtime cohorts
+title: Real-time cohorts
 sidebar: Docs
 showTitle: true
 ---
 
-<CalloutBox icon="IconFlask" title="Realtime cohorts are in early beta" type="action">
+<CalloutBox icon="IconFlask" title="Real-time cohorts are in early beta" type="action">
 
-Realtime cohorts are rolling out gradually and aren't switched on in most projects yet. To get access, [join the waitlist](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts) in your feature previews. Behavior and limits on this page can change before general availability.
+Real-time cohorts are rolling out gradually and aren't switched on in most projects yet. To get access, [join the waitlist](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts) in your feature previews. Behavior and limits on this page can change before general availability.
 
 </CalloutBox>
 
-## What is a realtime cohort?
+## What is a real-time cohort?
 
-A [dynamic cohort](/docs/data/cohorts#dynamic-cohorts) is a list of people that PostHog rebuilds for you on a schedule. A **realtime cohort** is a dynamic cohort that PostHog also keeps up to date as events arrive, instead of waiting for the next rebuild.
+A [dynamic cohort](/docs/data/cohorts#dynamic-cohorts) is a list of people that PostHog rebuilds for you on a schedule. A **real-time cohort** is a dynamic cohort that PostHog also keeps up to date as events arrive, instead of waiting for the next rebuild.
 
 It solves one problem. You can target a [feature flag](/docs/feature-flags) at a cohort built from events.
 
 Cohorts built from person properties, like "email ends with @acme.com", have always worked in feature flags, because PostHog can check a person property while it evaluates the flag. Cohorts built from events, like "completed `signed up` in the last 30 days", have not. Answering "has this person done that?" means reading their event history, which is too slow to do on every flag request.
 
-A realtime cohort answers the question in advance. PostHog keeps a record of who is in the cohort and updates it as events come in, so a flag only has to look it up.
+A real-time cohort answers the question in advance. PostHog keeps a record of who is in the cohort and updates it as events come in, so a flag only has to look it up.
 
 ## What changes, and what doesn't
 
-Realtime cohorts change feature flag targeting. [Experiments](/docs/experiments) and [surveys](/docs/surveys) pick their audience through feature flags, so they can target realtime cohorts too.
+Real-time cohorts change feature flag targeting. [Experiments](/docs/experiments) and [surveys](/docs/surveys) pick their audience through feature flags, so they can target real-time cohorts too.
 
 Everything else is unchanged. Insights, dashboards, and the person list and count on the cohort page still come from the standard cohort calculation, on its [normal schedule](/docs/data/cohorts#how-often-are-dynamic-cohorts-updated).
 
-Realtime cohorts are evaluated on PostHog's servers. A server-side SDK can't evaluate a flag that targets one [locally](/docs/feature-flags/local-evaluation#dynamic-cohort-restrictions). Checks of that flag fall back to a `/flags` request, and return no value if you have told the SDK to evaluate only locally.
+Real-time cohorts are evaluated on PostHog's servers. A server-side SDK can't evaluate a flag that targets one [locally](/docs/feature-flags/local-evaluation#dynamic-cohort-restrictions). Checks of that flag fall back to a `/flags` request, and return no value if you have told the SDK to evaluate only locally.
 
 ## Which cohorts qualify
 
@@ -59,9 +59,9 @@ A single criterion from this list makes the whole cohort fall back to the standa
 - "Filter out internal and test users" turned on for the cohort.
 - More than 20 million people in the cohort.
 
-[Static cohorts](/docs/data/cohorts#static-cohorts) are never realtime. They don't change on their own, and they already work in feature flags.
+[Static cohorts](/docs/data/cohorts#static-cohorts) are never real-time. They don't change on their own, and they already work in feature flags.
 
-## Using a realtime cohort in a feature flag
+## Using a real-time cohort in a feature flag
 
 1. Create the cohort, or edit its criteria, as you normally would.
 2. Wait while PostHog works through the cohort's history. The errors below call this the backfill. However small the cohort, it takes about 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events.
@@ -70,7 +70,7 @@ A single criterion from this list makes the whole cohort fall back to the standa
 If the flag won't save, the error tells you which step you're on:
 
 - "Cohort 'X' is still being backfilled and cannot be used in feature flags yet" means step 2 hasn't finished. Wait and save again. If it doesn't clear, [tell us](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue).
-- "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or realtime cohorts aren't switched on for the project. Compare its criteria against the list above first.
+- "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or real-time cohorts aren't switched on for the project. Compare its criteria against the list above first.
 
 ## Editing a cohort a flag uses
 
@@ -88,17 +88,17 @@ The same error blocks a rename from the cohort page, because saving there sends 
 
 - People join and leave as their events arrive. Expect the change to reach feature flags in a minute or two.
 - Time ranges expire on their own. Someone who matched "completed `signed up` in the last 30 days" drops out once their last matching event is older than 30 days, even if they send nothing new.
-- The person count and person list on the cohort page are not realtime. They come from the standard calculation.
+- The person count and person list on the cohort page are not real-time. They come from the standard calculation.
 
 ## FAQ
 
-### How do I tell whether a cohort is realtime?
+### How do I tell whether a cohort is real-time?
 
-Fetch it from the [cohorts API](/docs/api/cohorts) and read `cohort_type`. Qualifying cohorts have `"cohort_type": "realtime"`. The field reads the criteria and nothing else. It doesn't tell you whether realtime cohorts are switched on for the project, or whether PostHog has finished working through the history, so saving the flag is still the test for both.
+Fetch it from the [cohorts API](/docs/api/cohorts) and read `cohort_type`. Qualifying cohorts have `"cohort_type": "realtime"`. The field reads the criteria and nothing else. It doesn't tell you whether real-time cohorts are switched on for the project, or whether PostHog has finished working through the history, so saving the flag is still the test for both.
 
 ### Do I still need the static cohort workaround?
 
-Only in projects where realtime cohorts aren't switched on. There, [duplicating a dynamic cohort as a static one](/docs/feature-flags/troubleshooting#how-do-i-create-a-flag-that-targets-users-who-completed-an-event) is still the way to target people who completed an event.
+Only in projects where real-time cohorts aren't switched on. There, [duplicating a dynamic cohort as a static one](/docs/feature-flags/troubleshooting#how-do-i-create-a-flag-that-targets-users-who-completed-an-event) is still the way to target people who completed an event.
 
 ### Why did my cohort stop qualifying?
 

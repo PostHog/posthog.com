@@ -9,13 +9,13 @@ availability:
 sourceId: ClickhouseCloud
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The ClickHouse Cloud connector syncs your organization's data from the [ClickHouse Cloud API](https://clickhouse.com/docs/cloud/manage/api/swagger) – daily usage costs, service inventory, backups, members, API keys, and the audit log – into PostHog, so you can build cost, chargeback, and capacity dashboards alongside your product data.
+The ClickHouse Cloud connector syncs your organization's data from the [ClickHouse Cloud API](https://clickhouse.com/docs/cloud/manage/api/swagger) – daily usage costs, service inventory, backups, members, API keys, the audit log, ClickPipes, managed Postgres services, and roles – into PostHog, so you can build cost, chargeback, and capacity dashboards alongside your product data.
 
-This connector reads from ClickHouse Cloud's management API. To sync data stored *inside* a ClickHouse database, use the [ClickHouse source](/docs/data-pipelines/sources/clickhouse) instead.
+This connector reads from ClickHouse Cloud's management API. To sync data stored _inside_ a ClickHouse database, use the [ClickHouse source](/docs/data-pipelines/sources/clickhouse) instead.
 
 ## Prerequisites
 

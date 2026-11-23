@@ -55,30 +55,76 @@ The MCP server also provides tools for managing [data warehouse views](/docs/dat
 
 These tools manage [data warehouse](/docs/data-warehouse) import sources – external databases and services that sync data into PostHog:
 
-| Tool                                    | Description                                                                                                                      |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `external-data-sources-list`            | List all configured import sources in the project with connection status and sync details.                                       |
-| `external-data-sources-retrieve`        | Get a single source by ID with full details including all table schemas.                                                         |
-| `external-data-sources-create`          | Create a new source connection. Use `external-data-sources-wizard` first to discover available source types and required fields. |
-| `external-data-sources-partial-update`  | Update a source's prefix, description, or connection credentials.                                                                |
-| `external-data-sources-destroy`         | Delete a source and all its synced data. This can't be undone.                                                                   |
-| `external-data-sources-reload`          | Trigger a sync for all enabled tables in a source.                                                                               |
-| `external-data-sources-refresh-schemas` | Fetch the latest table list from the remote database and add any new tables.                                                     |
-| `external-data-sources-wizard`          | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                  |
+| Tool                                          | Description                                                                                                                                                                         |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-sources-list`                  | List configured import sources with source health and a summary per table by default.                                                                                               |
+| `external-data-sources-retrieve`              | Get one source by ID with source health and a summary per table by default.                                                                                                         |
+| `external-data-sources-create`                | Create a new source connection. Use `external-data-sources-wizard` first to discover available source types and required fields.                                                    |
+| `external-data-sources-partial-update`        | Update a source's prefix, description, or connection credentials.                                                                                                                   |
+| `external-data-sources-destroy`               | Delete a source and all its synced data. This can't be undone.                                                                                                                      |
+| `external-data-sources-reload`                | Trigger a sync for all enabled tables in a source.                                                                                                                                  |
+| `external-data-sources-refresh-schemas`       | Fetch the latest table list from the remote database and add any new tables.                                                                                                        |
+| `external-data-sources-wizard`                | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                                                                     |
+| `external-data-sources-revenue-config-update` | Update `enabled` or `include_invoiceless_charges` for a source's Revenue Analytics configuration. Rebuilds managed revenue views without changing synced source tables.             |
+| `external-data-sources-draft-custom-manifest` | Draft and validate a Custom REST source manifest from `docs_url` or `docs_text`. Creates no source and needs no credentials. Review and test the manifest before creating a source. |
+| `external-data-sources-preview-resource`      | Read up to 50 sample rows from one table of a Custom REST source before you create it. Returns the rows, column types, and any live read error.                                     |
+
+### Compact responses
+
+The `external-data-sources-list` and `external-data-sources-retrieve` MCP tools default to `compact: true`. They return source health and one summary per table, without connection settings or full sync configuration. Pass `include_schemas: false` to omit tables entirely. Pass `compact: false` for source configuration with secrets redacted. Retrieve also returns full per-table sync configuration. Per-table column definitions are omitted from these MCP responses. Use `external-data-schemas-retrieve` for a table's columns.
+
+The `external-data-schemas-list` MCP tool also defaults to `compact: true`. Each row contains `id`, `name`, `source_id`, `should_sync`, `sync_type`, `status`, `last_synced_at`, and `latest_error`. Pass `compact: false` for full sync configuration. Compact responses truncate long errors after 500 characters and add a truncation marker.
+
+These are MCP defaults. The REST API defaults remain `compact=false` and, for source list/retrieve, `include_schemas=true`.
+
+### CDC management tools
+
+These tools manage [Postgres change data capture (CDC)](/docs/data-pipelines/sources/postgres#how-posthog-cdc-works):
+
+| Tool                                               | Description                                                                                                                                                                |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-sources-cdc-status-retrieve`        | Read live CDC health, including replication slot and publication existence, lag, and whether extraction is paused. Connects to the source database and changes nothing.    |
+| `external-data-sources-enable-cdc-create`          | Enable CDC on an existing source using its stored credentials. Checks prerequisites and provisions replication resources. Switch each table to `sync_type=cdc` separately. |
+| `external-data-sources-disable-cdc-create`         | Disable CDC for the entire source and reset all its CDC tables. Destructive: requires confirmation.                                                                        |
+| `external-data-sources-resume-cdc-create`          | Resume paused extraction after fixing the cause, when the slot and publication still exist. Continues from the saved position without a new snapshot.                      |
+| `external-data-sources-update-cdc-settings-create` | Update `cdc_auto_drop_slot`, `cdc_lag_warning_threshold_mb`, or `cdc_lag_critical_threshold_mb`. Does not change management mode or replication resource names.            |
+
+The agent checks `external-data-sources-cdc-status-retrieve` first. If extraction is paused and the slot and publication exist, fix the cause and resume. If replication resources are missing, use repair instead of disable. Enabling CDC does not change any table's sync method or start a table sync.
+
+<CalloutBox icon="IconWarning" title="Disabling CDC is destructive" type="caution">
+
+Before disabling CDC, the agent must get your confirmation for the entire source. Disable cancels running CDC jobs, removes the extraction schedule, drops the replication slot (and the publication in PostHog-managed mode), deletes buffered changes, clears CDC settings, and soft-deletes CDC history tables. It clears the sync type and turns syncing off for every CDC table. Choose a new sync method and enable syncing for each table to resume. Re-enabling CDC requires a full resync and cannot recover changes missed while it was off.
+
+</CalloutBox>
 
 ## Schema management tools
 
 These tools manage individual table schemas within a data warehouse source:
 
-| Tool                                   | Description                                                                                          |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `external-data-schemas-list`           | List all table schemas across all sources with sync status and configuration.                        |
-| `external-data-schemas-retrieve`       | Get a single table schema by ID with full sync details.                                              |
-| `external-data-schemas-partial-update` | Update a table's sync type, frequency, incremental field, column masking, or enable/disable syncing. |
-| `external-data-schemas-reload`         | Trigger a sync for a single table using its configured sync method.                                  |
-| `external-data-schemas-resync`         | Discard all synced data and re-import a table from scratch.                                          |
-| `external-data-schemas-cancel`         | Cancel a currently running sync job for a table.                                                     |
-| `external-data-schemas-delete-data`    | Delete synced table data from PostHog but keep the schema entry for re-syncing.                      |
+| Tool                                         | Description                                                                                                                                                                                                    |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-schemas-list`                 | List table schemas across sources with compact health rows by default. Pass `compact: false` for full sync configuration.                                                                                      |
+| `external-data-schemas-retrieve`             | Get a single table schema by ID with full sync details.                                                                                                                                                        |
+| `external-data-schemas-partial-update`       | Update a table's sync type, frequency, incremental field, column masking, or enable/disable syncing.                                                                                                           |
+| `external-data-schemas-reload`               | Trigger a sync for a single table using its configured sync method.                                                                                                                                            |
+| `external-data-schemas-resync`               | Discard all synced data and re-import a table from scratch.                                                                                                                                                    |
+| `external-data-schemas-cancel`               | Cancel a currently running sync job for a table.                                                                                                                                                               |
+| `external-data-schemas-delete-data`          | Delete synced table data from PostHog but keep the schema entry for re-syncing.                                                                                                                                |
+| `external-data-schemas-delete-history-table` | Permanently delete a table's CDC history after it stops writing history and no sync is running. Keeps the live synced table and settings. Requires confirmation because past row versions cannot be recovered. |
+| `external-data-schemas-destinations-update`  | Set a table's full `destination_ids` override, or pass `null` to inherit its source's destinations. Omitted destinations are detached. An empty list is rejected.                                              |
+
+## Destination management tools
+
+These tools manage warehouse destinations:
+
+| Tool                                | Description                                                                                                                                                                                           |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-destinations-update` | Rename a destination or change non-target settings. Configuration merges with saved values. The integration and target cannot change. A successful update also resumes a paused destination.          |
+| `external-data-destinations-delete` | Delete a destination and detach all linked sources and tables. Rows already written to the external system stay there, and running syncs finish. The PostHog warehouse destination cannot be deleted. |
+
+Before changing a table's destinations, read its current override with `external-data-schemas-destinations-retrieve`. Do not update while a destination is paused: hidden links can be lost, and selecting a paused destination resumes it. New destinations receive future rows; resync the table to copy history.
+
+Before deleting a destination, the agent must list the affected sources and tables and get your confirmation. If a source loses its last destination, it falls back to the PostHog warehouse.
 
 ## Column annotation tools
 

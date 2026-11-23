@@ -5,21 +5,11 @@ import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import useProduct from 'hooks/useProduct'
 import usePostHog from 'hooks/usePostHog'
-import AgentTeachingActions, { agentTeachingPrompt } from './AgentTeachingActions'
+import AgentTeachingActions from './AgentTeachingActions'
 import LearnPage from './LearnPage'
+import { learnPrompts, type LearnPromptSet } from './learnPrompts'
 
-interface AgentPromptsPageProps {
-    /** `handle` from `src/hooks/productData/*`. */
-    productHandle: string
-    productName: string
-    /** Docs slug for the source-of-truth link, e.g. `feature-flags`. */
-    docsSlug: string
-    /** What the starter prompt builds the learning path from, e.g. "flags, rollouts, payloads, and gaps". */
-    focus: string
-    /** One prompt per topic. The shared exercise and safety instructions are appended. */
-    chapterPrompts: { title: string; prompt: string }[]
-    /** Ready-to-run prompts, shown as written after the teaching prompts. */
-    examplePrompts?: { title: string; prompt: string }[]
+interface AgentPromptsPageProps extends LearnPromptSet {
     /** Product-specific sections after the prompts, such as the product's MCP tools. */
     children?: React.ReactNode
 }
@@ -31,26 +21,12 @@ export default function AgentPromptsPage({
     docsSlug,
     focus,
     chapterPrompts,
-    examplePrompts = [],
+    examplePrompts,
     children,
 }: AgentPromptsPageProps): JSX.Element {
     const posthog = usePostHog()
     const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
-    const teachingPrompts = [
-        { title: 'Start with your product', prompt: agentTeachingPrompt(productName, docsSlug, focus) },
-        ...chapterPrompts.map(({ title, prompt }) => ({
-            title,
-            prompt: `${prompt}
-
-Use my code and PostHog data. Teach one concept at a time with a small exercise, and review my answer before continuing. Use https://posthog.com/docs/${docsSlug}.md as the source of truth.
-
-Don’t change my project without asking. If context is missing, ask for it.`,
-        })),
-    ]
-    const prompts = [
-        ...teachingPrompts.map((entry) => ({ ...entry, label: 'Your teaching prompt', resource: 'agent_teacher' })),
-        ...examplePrompts.map((entry) => ({ ...entry, label: 'Example prompt', resource: 'agent_example' })),
-    ]
+    const prompts = learnPrompts({ productHandle, productName, docsSlug, focus, chapterPrompts, examplePrompts })
 
     return (
         <LearnPage

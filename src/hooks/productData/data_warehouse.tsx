@@ -15,6 +15,7 @@ import {
 import Link from 'components/Link'
 import { getTool } from '../../data/tools'
 import { applications, GetAccess, keyFeatures } from './data_warehouse/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
@@ -26,7 +27,7 @@ export const dataWarehouse = {
     Icon: IconDatabase,
     type: 'data_warehouse',
     categoryName: 'Sources',
-    color: 'purple',
+    color: PRODUCT_COLORS.data_warehouse,
     colorSecondary: 'lilac',
     // The product lives at /warehouse, but its docs live at /docs/data-warehouse.
     docsSlug: 'data-warehouse',

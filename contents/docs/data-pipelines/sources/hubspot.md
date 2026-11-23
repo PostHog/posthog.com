@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The HubSpot connector syncs your CRM data – contacts, companies, deals, tickets, quotes, emails, meetings, forecasts, and conversation threads – into PostHog, so you can analyze your sales and marketing data alongside your product data.
+The HubSpot connector syncs your CRM data – contacts, companies, deals, tickets, quotes, emails, meetings, users, teams, forecasts, marketing campaigns, and conversation threads – into PostHog, so you can analyze your sales and marketing data alongside your product data.
 
 ## Prerequisites
 
@@ -91,6 +91,9 @@ Some HubSpot tables require optional OAuth scopes that may not be present on you
 | `leads`                | `crm.objects.leads.read`     | Sales Hub Professional+            |
 | `forecasts`            | `crm.objects.forecasts.read` | Sales or Service Hub Professional+ |
 | `conversation_threads` | `conversations.read`         | —                                  |
+| `users`                | `crm.objects.users.read`     | —                                  |
+| `teams`                | `settings.users.teams.read`  | —                                  |
+| `marketing_campaigns`  | `marketing.campaigns.read`   | Marketing Hub Professional+        |
 
 If you connected HubSpot before these tables were available, you need to reconnect your HubSpot account to grant the new scopes. Go to the [sources tab](https://app.posthog.com/data-management/sources), delete the existing HubSpot connection, and create a new one.
 
