@@ -1,6 +1,6 @@
 ---
 title: We rebuilt Notebooks around executable cells
-date: 2026-11-17
+date: 2026-11-23
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/how_we_use_posthog_s_new_and_improved_notebooks_46891050a3.png
 rootPage: /blog
