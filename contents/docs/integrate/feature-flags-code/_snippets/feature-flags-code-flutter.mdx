@@ -41,8 +41,11 @@ final subscription = Posthog().onFeatureFlags((loaded) async {
 final config = PostHogConfig('<ph_project_token>');
 config.host = '<ph_client_api_host>';
 await Posthog().setup(config);
+```
 
-// Later, stop listening
+Keep the returned subscription for as long as you need the listener. When you're done with it, for example in a widget's `dispose()`, stop listening:
+
+```dart
 subscription.unsubscribe();
 ```
 
