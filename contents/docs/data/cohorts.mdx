@@ -149,6 +149,16 @@ The cohort is a dated snapshot: it captures the users matched in the trailing wi
 
 > **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support cohorts.
 
+### Method 5: Create a cohort from SQL query results
+
+You can save the results of a SQL query as a static cohort directly from the [SQL editor](/docs/data-warehouse/query).
+
+1. Write a single SQL query that returns a person identifier column: `person_id`, `actor_id`, `distinct_id`, or `id` (when querying the `persons` table).
+2. Run the query using the PostHog (ClickHouse) connection – direct external connections don't support cohort creation.
+3. Click **Save as cohort** and name your cohort.
+
+The cohort is a static snapshot of the people matched at the time you save it. It does not update automatically.
+
 ## Static and dynamic cohorts
 
 You have two options when creating a cohort:
@@ -159,7 +169,7 @@ You have two options when creating a cohort:
 
 ### Static cohorts
 
-Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, by defining criteria for a one-time snapshot, or from [Replay Vision](/docs/replay-vision) scanner results.
+Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, by defining criteria for a one-time snapshot, from [Replay Vision](/docs/replay-vision) scanner results, or from [SQL query results](/docs/data-warehouse/query).
 
 When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog.
 
