@@ -81,6 +81,7 @@ describe('the real docs nav', () => {
         const pages = {
             go: ['1.x.x', '2.x.x', 'migration'],
             rust: ['0.x.x', '1.x.x', 'migration'],
+            ios: ['3.x.x', '4.x.x', 'migration'],
             android: ['3.x.x', '4.x.x', 'migration'],
             node: ['5.x.x', '6.x.x', 'migration'],
         }

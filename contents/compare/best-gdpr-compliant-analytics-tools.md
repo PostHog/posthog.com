@@ -221,7 +221,7 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 ### 6. Vercel Web Analytics
 
-![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/compare/ga4-alternatives/vercel.png)
+![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/vercel.png)
 
 Vercel includes a lightweight, privacy-compliant analytics tool in all its front-end-as-a-service plans. Like most privacy-first tools, it tracks basic website metrics like pageviews, unique users, time on page, and referrers. You can also set up custom events you want to track (e.g. clicking a call to action). It records no personally identifiable information, so you can use it without cookie permission banners. It also includes a useful Speed Insights tool for keeping track of your website's Web Vitals.
 
@@ -285,7 +285,7 @@ Its open source Community Edition is free to self-host, but it excludes most of 
 
 ### 8. TelemetryDeck
 
-![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/compare/ga4-alternatives/telemetrydeck.png)
+![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/telemetrydeck.png)
 
 [TelemetryDeck](https://telemetrydeck.com/) is to app analytics what Plausible and Fathom are to website analytics – a lightweight tool that collects minimal personal information. Consequently, TelemetryDeck says developers can use it without tracking permission banners.
 
