@@ -200,11 +200,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-node:ext(\\.md)?",
-            "destination": "/docs/libraries/node:ext?",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/libraries/ios/usage:ext(\\.md)?",
             "destination": "/docs/libraries/ios:ext?",
             "statusCode": 301
@@ -212,6 +207,11 @@
         {
             "source": "/docs/libraries/ios/configuration:ext(\\.md)?",
             "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
         },
         {

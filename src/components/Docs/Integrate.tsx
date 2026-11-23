@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import List from 'components/List'
 import { getLogo } from '../../constants/logos'
+import { PUBLISHED_SDK_LIST } from '../SdkReferences/utils'
 
 type LibraryNode = {
     fields: {
@@ -53,13 +54,11 @@ type LibraryData = {
 }
 
 // These SDKs' docs are their generated references, which carry no frontmatter, so they're listed here.
-const REFERENCE_SDKS = [
-    { label: 'Node.js', url: '/docs/libraries/node', image: getLogo('nodejs') },
-    { label: 'Python', url: '/docs/libraries/python', image: getLogo('python') },
-    { label: 'Go', url: '/docs/libraries/go', image: getLogo('go') },
-    { label: 'Rust', url: '/docs/libraries/rust', image: getLogo('rust') },
-    { label: 'iOS', url: '/docs/libraries/ios', image: getLogo('ios') },
-]
+const REFERENCE_SDKS = PUBLISHED_SDK_LIST.map((sdk) => ({
+    label: sdk.label,
+    url: `/docs/libraries/${sdk.slug}`,
+    image: getLogo(sdk.logoKey),
+}))
 
 export const SDKs = () => {
     const { sdks } = useStaticQuery<LibraryData>(query)

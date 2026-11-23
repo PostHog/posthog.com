@@ -4,7 +4,7 @@
 // into SdkMarkdownReference nodes, and src/templates/sdk/SdkMarkdownReference.tsx renders them.
 
 /**
- * The SDKs whose rows become pages. Strapi also syncs the web and mobile SDKs, but their pages aren't ready,
+ * The SDKs whose rows become pages. Strapi also syncs the web and remaining mobile SDKs, but their pages aren't ready,
  * so the build skips them. Add an SDK here to publish it.
  */
 const PUBLISHED_SDK_REFERENCES = ['posthog-python', 'posthog-go', 'posthog-rust', 'posthog-node', 'posthog-ios']

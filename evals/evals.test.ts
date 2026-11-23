@@ -5,6 +5,9 @@
  * Run: pnpm test:evals
  */
 import assert from 'node:assert/strict'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { describe, test } from 'node:test'
 
 import { toGaugeSpecs, toSessionResults } from './gauge/send-to-gauge.ts'
@@ -17,6 +20,7 @@ import {
     pageForEvalFile,
     pageForSourceFile,
     pageIndex,
+    pageSourceFile,
     parseEvalFile,
     type EvalFile,
 } from './load-eval-files.ts'
@@ -182,10 +186,30 @@ describe('eval file validation', () => {
                 shared
             )
             assert.deepEqual(
-                result.problems.filter((p) => p.message.includes('pages')),
+                result.problems.filter((p) => p.message.includes('no page at') || p.message.includes('should look like')),
                 [],
                 page
             )
+        }
+    })
+
+    test('dots are rejected outside a trailing <N>.x.x version segment', () => {
+        const result = parseEvalFile(
+            'contents/docs/a.eval.yaml',
+            { ...answerOnly, checks: [{ ...answerOnly.checks[0], pages: ['docs/../tutorials/ios-analytics'] }] },
+            shared
+        )
+        assert.ok(result.problems.some((p) => p.message.includes('should look like')))
+    })
+
+    test('pageSourceFile ignores build-generated SDK reference files written on disk', () => {
+        const dir = mkdtempSync(join(tmpdir(), 'evals-ref-'))
+        try {
+            mkdirSync(join(dir, 'contents/docs/libraries/node'), { recursive: true })
+            writeFileSync(join(dir, 'contents/docs/libraries/node/reference.md'), '# Node')
+            assert.equal(pageSourceFile('docs/libraries/node/reference', dir), null)
+        } finally {
+            rmSync(dir, { recursive: true, force: true })
         }
     })
 

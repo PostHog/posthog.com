@@ -118,15 +118,21 @@ export function pageForEvalFile(path: string): string | null {
         .replace(/\/index$/, '')
 }
 
-export function pageSourceFile(page: string): string | null {
+const isGeneratedSdkReferenceFile = (candidate: string): boolean =>
+    /^contents\/docs\/libraries\/[^/]+\/(?:reference|migration|\d+\.x\.x)\.md$/.test(candidate)
+
+export function pageSourceFile(page: string, root: string = repoRoot): string | null {
     const candidates = ['.mdx', '.md', '/index.mdx', '/index.md'].map((ending) => `contents/${page}${ending}`)
-    return candidates.find((candidate) => existsSync(join(repoRoot, candidate))) ?? null
+    return (
+        candidates.find((candidate) => !isGeneratedSdkReferenceFile(candidate) && existsSync(join(root, candidate))) ??
+        null
+    )
 }
 
 // gatsby/onPreBootstrap.ts writes these pages from Strapi at build time, so they are not on disk:
 // docs/libraries/<sdk>, docs/libraries/<sdk>/migration and docs/libraries/<sdk>/<N>.x.x,
 // for the SDKs in PUBLISHED_SDK_REFERENCES.
-export function isGeneratedSdkReferencePage(page: string): boolean {
+function isGeneratedSdkReferencePage(page: string): boolean {
     return LIBRARY_REFERENCE_SDK_IDS.some((id) => {
         const base = getSdkReferenceUrl(id).slice(1)
         if (page === base) return true
@@ -202,7 +208,8 @@ export function parseEvalFile(
     else if (e2e && filePages.length === 0) problem('files in evals/e2e-evals/ need at least one page in pages')
     const validatePages = (list: string[], where: string) => {
         for (const listed of list) {
-            if (!/^docs\/[a-z0-9/_.-]+$/.test(listed))
+            const segments = listed.split('/')
+            if (!/^docs\/[a-z0-9/_.-]+$/.test(listed) || segments.some((s) => !s || s === '.' || s === '..'))
                 problem(`${where}: "${listed}" should look like docs/product-analytics/identify`)
             else if (!pageExists(listed)) problem(`${where}: no page at contents/${listed}.mdx or .md`)
         }
