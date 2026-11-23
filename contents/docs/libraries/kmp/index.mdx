@@ -603,7 +603,7 @@ PostHog.screen(
 )
 ```
 
-To automatically capture screen views, set `captureScreenViews = true` in your config. On Android and iOS, the SDK captures a `$screen` event for each activity or view controller, so a Compose Multiplatform app with a single one records a single screen. Call `screen()` for your Compose screens instead. On the web target, it captures `$pageview` and `$pageleave` events.
+From `posthog-kmp` 1.0.0, the SDK captures screen views automatically, as `captureScreenViews` defaults to `true`. On Android and iOS, it captures a `$screen` event for each activity or view controller, so a Compose Multiplatform app with a single one records a single screen. Call `screen()` for your Compose screens, and set `captureScreenViews = false` to send only those. On the web target, it captures `$pageview` and `$pageleave` events. Before 1.0.0, set `captureScreenViews = true` to turn it on.
 
 ## Error tracking
 
@@ -819,7 +819,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `host` | `String` | `HOST_US` | PostHog instance URL. Use `PostHogConfig.HOST_US` (`https://us.i.posthog.com`) or `PostHogConfig.HOST_EU` (`https://eu.i.posthog.com`). |
 | `debug` | `Boolean` | `false` | Enables verbose SDK logging. |
 | `captureApplicationLifecycleEvents` | `Boolean` | `true` | Captures app open/close lifecycle events (mobile). |
-| `captureScreenViews` | `Boolean` | `false` | Automatically captures `$screen` events for activities (Android) and view controllers (iOS), and `$pageview` and `$pageleave` events on the web. |
+| `captureScreenViews` | `Boolean` | `true` | Automatically captures `$screen` events for activities (Android) and view controllers (iOS), and `$pageview` and `$pageleave` events on the web. Defaulted to `false` before 1.0.0. |
 | `captureDeepLinks` | `Boolean` | `true` | Captures deep link opens (Android). |
 | `sendFeatureFlagEvent` | `Boolean` | `true` | Sends `$feature_flag_called` when a flag is evaluated. |
 | `preloadFeatureFlags` | `Boolean` | `true` | Fetches feature flags automatically during setup. |
@@ -886,8 +886,9 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 
 ## Upgrade to 1.0.0
 
-Version 1.0.0 removes the `PostHogConfig` API that was kept only for compatibility. Nothing else changes. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
+Version 1.0.0 removes the `PostHogConfig` API that was kept only for compatibility, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
 
+- **Screen views on by default:** `captureScreenViews` defaults to `true`, as in the Android and iOS SDKs, so Android and iOS send `$screen` events and the web sends `$pageview` and `$pageleave` events. In a Compose Multiplatform app, the automatic screen view names the single activity or view controller, not a screen. Set `captureScreenViews = false` to keep only the [screen views](#screen-views) you send yourself.
 - **`apiKey` removed:** the `apiKey` alias, deprecated since 0.8.0, is gone. Use `projectToken` to build a `PostHogConfig` and to read the token from it.
 - **Constructor and `copy()` overloads removed:** `PostHogConfig` has one constructor and one `copy()`, which take every option. Kotlin code that passes named arguments compiles unchanged. Java code that calls `new PostHogConfig(...)` or `copy(...)` with the 0.11 or earlier argument list, without `evaluationContexts` and the `captureAi*` options, must pass every argument, and libraries built against those overloads must be recompiled.
 
