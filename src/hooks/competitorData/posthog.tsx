@@ -771,7 +771,7 @@ export const posthog = {
                 real_time_reporting: false,
                 revenue_tracking: false,
                 script_size: '56.8 kb',
-                search_tools: false,
+                search_tools: 'Partial',
                 session_and_duration_tracking: false,
                 sessions: true,
                 snippet_install: true,
