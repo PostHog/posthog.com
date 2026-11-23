@@ -134,6 +134,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Billing',
         owner: ['billing'],
     },
+    'business-knowledge': {
+        feature: 'Business Knowledge',
+        owner: ['conversations'],
+    },
     'cache-warming': {
         feature: 'Cache warming',
         owner: ['query-performance'],
