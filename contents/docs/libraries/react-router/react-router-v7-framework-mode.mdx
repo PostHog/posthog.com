@@ -295,8 +295,12 @@ export const handleError: HandleErrorFunction = (error, { request, context }) =>
     distinctId: saved?.distinctId,
     properties: saved?.sessionId ? { $session_id: saved.sessionId } : undefined,
   });
+  // Exporting handleError replaces React Router's own error logging.
+  console.error(error);
 };
 ```
+
+The [React Router error tracking guide](/docs/error-tracking/installation/react-router) also links page loads that send only the PostHog cookie, and captures errors thrown while the page streams.
 
 ### Optional server span context
 

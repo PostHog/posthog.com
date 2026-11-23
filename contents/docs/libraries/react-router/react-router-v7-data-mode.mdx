@@ -175,7 +175,7 @@ const onError: ClientOnErrorFunction = (error) => {
 <RouterProvider router={router} onError={onError} />
 ```
 
-`onError` needs React Router 7.11 or later. Do not also call `captureException` in your `ErrorBoundary`, and do not rely on a `PostHogErrorBoundary` around the router: React Router's boundaries catch these errors first. See the [React Router error tracking guide](/docs/error-tracking/installation/react-router).
+`onError` needs React Router 7.11 or later. On 7.8.2 to 7.10, pass the same handler as `unstable_onError` and type it with `unstable_ClientOnErrorFunction`. Do not also call `captureException` in your `ErrorBoundary`, and do not rely on a `PostHogErrorBoundary` around the router: React Router's boundaries catch these errors first. See the [React Router error tracking guide](/docs/error-tracking/installation/react-router).
 
 </Step>
 
