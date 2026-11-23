@@ -74,7 +74,7 @@ PostHogSDK.shared.setup(config)
 ```
 
 ```kotlin
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>")
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>", host = "<ph_client_api_host>")
 config.bootstrap = PostHogBootstrapConfig(
     distinctId = "distinct_id_of_your_user",
     isIdentifiedId = true

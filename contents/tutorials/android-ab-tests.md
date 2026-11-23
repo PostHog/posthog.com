@@ -121,7 +121,7 @@ First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in
 
 ```gradle_kotlin file=app/build.gradle
 dependencies {
-    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android:4.+")
     //... other dependencies
 }
 ```
@@ -140,14 +140,14 @@ import com.posthog.android.PostHogAndroidConfig
 
 class MyABTestApplication : Application() {
     companion object {
-        private const val POSTHOG_API_KEY = "<ph_project_token>"
+        private const val POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
         private const val POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     }
 
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
+            projectToken = POSTHOG_PROJECT_TOKEN,
             host = POSTHOG_HOST
         )
         PostHogAndroid.setup(this, config)
@@ -170,7 +170,7 @@ We now need to register our custom application class. Go to `AndroidManifest.xml
 </manifest>
 ```
 
-Finally, we [capture a custom event](/docs/libraries/android/reference#capture) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
+Finally, we [capture a custom event](/docs/libraries/android#capture) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
 
 Update the `SecondScreen` function in `MainActivity.kt` to the following:
 

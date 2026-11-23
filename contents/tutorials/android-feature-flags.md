@@ -123,7 +123,7 @@ First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in
 
 ```gradle_kotlin file=app/build.gradle
 dependencies {
-    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android:4.+")
     //... other dependencies
 }
 ```
@@ -141,14 +141,14 @@ import com.posthog.android.PostHogAndroidConfig
 
 class MyFeatureFlagsApplication : Application() {
     companion object {
-        private const val POSTHOG_API_KEY = "<ph_project_token>"
+        private const val POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
         private const val POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     }
 
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
+            projectToken = POSTHOG_PROJECT_TOKEN,
             host = POSTHOG_HOST // TIP: host is optional if you use https://us.i.posthog.com
         )
         PostHogAndroid.setup(this, config)
@@ -198,7 +198,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 
 To implement the feature flag, we: 
 
-1. Fetch the `my-cool-flag` flag using [`PostHog.isFeatureEnabled()`](/docs/libraries/android/reference#is-feature-enabled).
+1. Fetch the `my-cool-flag` flag using [`PostHog.isFeatureEnabled()`](/docs/libraries/android#is-feature-enabled).
 2. Change the background color of `SecondScreen` based on the value of the flag.
 
 To do this, update the code in `MainActivity.kt` with the following:

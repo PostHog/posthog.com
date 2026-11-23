@@ -27,7 +27,7 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 ## Public by default
 
-We make things public by default because [transparency](/handbook/company/culture#transparency) is core to our culture. The kinds of information we share falls into one of three buckets:
+We make things public by default because [transparency](/handbook/company/culture#were-extremely-transparent) is core to our culture. The kinds of information we share falls into one of three buckets:
 
 -   _Public_ - most things, including our product, roadmap, handbook and strategy.
 -   _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
@@ -322,3 +322,11 @@ By email: Only trust `@posthog.com` senders. Verify via the company directory. B
 Phone/SMS/WhatsApp: **Never** used for initiating requests, approvals, or asking for sensitive info.
 
 If something feels off, it probably is. When in doubt, slow down and verify in Slack.
+
+## Disaster recovery
+
+### If Slack is down
+
+If Slack has an outage, we use [Google Chat](https://chat.google.com/app/home) as our backup. Sign in with your `@posthog.com` Google account. We'll also send an email to everyone to say that we've moved to Google Chat.
+
+Google Chat is only a temporary fallback. Move back to Slack when it is up again.

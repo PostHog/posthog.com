@@ -8,11 +8,17 @@ showTitle: true
 
 Every engagement moves from opportunity through scoping and delivery to close. For each stage, see the [engagement lifecycle](/handbook/forward-deployed-engineering/fde-engagement-lifecycle).
 
-## Scoping engagements
+### Scoping engagements
 
-Before delivery starts, every engagement needs a measurable outcome, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to confirm before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
+Before delivery starts, every engagement needs a measurable outcome, milestones, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to confirm before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
 
 While scoping, we always ask: **Is the described problem indicating a deeper pattern?** Understanding the real problem space and our ability to identify structure problems that may cause long-term problems matters more than anything else in making an engagement succeed.
+
+### Milestones
+
+When we define each milestone, we set its definition of "done" and, for billable engagements, its billable amount. The customer signs off on each milestone before kickoff, whether the engagement is billable or non-billable.
+
+When we complete a milestone, we send the deliverable to the customer to review against that definition. If we don't hear back within ten working days, we treat the milestone as approved.
 
 ### What it costs
 
@@ -23,7 +29,25 @@ Pricing depends on shape, effort, and commercial context, so exact numbers live 
 
 Never invent an exact number on the spot. If a customer asks, say you'll get them a quote within a day and route it through the account owner.
 
-Customers can also apply their prepaid credits toward an FDE engagement on a discretionary basis, provided there is justifiable account-level upside.  This needs approval from Simon (Ben B as backup).
+Customers can also apply their prepaid credits toward an FDE engagement on a discretionary basis, provided there is justifiable account-level upside. This needs approval from Simon (Ben B as backup).
+
+### How we invoice customers
+
+FDEs never own the commercial relationship. The account owner (the customer's CSM, TAM, or TAE) handles the order form and the deal in Salesforce:
+
+1. The FDE scopes and prices the engagement, and writes the proposal.
+2. The customer agrees to the scope and the proposal.
+3. The account owner sends the customer the order form.
+4. The customer signs the order form.
+5. The account owner creates an FDE opportunity in Salesforce and moves it to **Closed - Won**. This notifies RevOps to send the invoice.
+
+How we bill depends on the total fee and how the customer pays:
+
+- **Billable, 10,000 USD or more:** We invoice half the fee when the order form is signed, with payment due Net 30 from the term start date. As we complete each milestone, we draw its billable amount down from that upfront payment. Once the upfront payment is used up, we invoice the rest as we complete each milestone.
+
+- **Billable, under 10,000 USD:** We invoice the entire fee when the order form is signed, with payment due Net 30 from the term start date.
+
+- **Paid with prepaid credits:** We deduct the entire fee from the customer's credits before kickoff.
 
 ## Principles
 

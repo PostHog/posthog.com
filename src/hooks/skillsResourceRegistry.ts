@@ -79,7 +79,7 @@ export const SKILL_RESOURCE_ALIASES: Record<string, AliasTarget> = {
     'Replay Vision': { handle: 'session_replay', label: 'Replay Vision' },
     Persons: { handle: 'profiles', label: 'Persons', href: '/docs/data/persons' },
     Events: { handle: 'product_analytics', label: 'Events', href: '/docs/getting-started/send-events' },
-    Properties: { handle: 'product_analytics', label: 'Properties', href: '/docs/data/properties' },
+    Properties: { handle: 'product_analytics', label: 'Properties', href: '/docs/data/events#event-properties' },
     SQL: { handle: 'sql_editor', label: 'SQL' },
     'Platform Features': { handle: 'platform_packages', label: 'Platform features' },
     'Reverse Proxy': { handle: 'api', label: 'Reverse proxy', href: '/docs/advanced/proxy' },

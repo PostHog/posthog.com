@@ -13,7 +13,7 @@ This guide walks you through integrating PostHog into your Django app using the 
 
 <AgentIntegrationSection framework="Django" />
 
-> These docs cover version `7.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
+> These docs cover version `8.x.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
 
 ## Installation
 
@@ -60,7 +60,7 @@ def some_request(request):
         posthog.capture('event_name')
 ```
 
-Events captured without a context or explicit `distinct_id` are sent as [anonymous events](/docs/data/anonymous-vs-identified-events) with an auto-generated `distinct_id`. See the [Python SDK docs](/docs/libraries/python/reference#identify) for more details.
+Events captured without a context or explicit `distinct_id` are sent as [anonymous events](/docs/data/anonymous-vs-identified-events) with an auto-generated `distinct_id`. See the [Python SDK docs](/docs/libraries/python#identify) for more details.
 
 ## Identifying users
 
