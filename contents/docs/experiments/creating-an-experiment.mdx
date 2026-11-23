@@ -8,15 +8,21 @@ availability:
   enterprise: full
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const CreateExperimentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png"
-export const CreateExperimentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png"
+import { ProductScreenshot } from "components/ProductScreenshot";
+export const CreateExperimentLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png";
+export const CreateExperimentDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png";
 
-import { ProductVideo} from 'components/ProductVideo'
-export const SetExperimentLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-light-mode.mp4"
-export const SetExperimentDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-dark-mode.mp4"
-export const ImprovementCalculatorLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-light-mode.mp4"
-export const ImprovementCalculatorDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-dark-mode.mp4"
+import { ProductVideo } from "components/ProductVideo";
+export const SetExperimentLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-light-mode.mp4";
+export const SetExperimentDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-dark-mode.mp4";
+export const ImprovementCalculatorLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-light-mode.mp4";
+export const ImprovementCalculatorDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-dark-mode.mp4";
 
 To create a new experiment, go to the [Experiments](https://app.posthog.com/experiments) section in the PostHog app, and click on the **New experiment** button in the top right.
 
@@ -31,10 +37,10 @@ A Guide panel on the right provides contextual tips for each step.
 When you're done, click **Save as draft** on the final step. You can launch the experiment from its detail page after saving.
 
 <ProductScreenshot
-    imageLight={CreateExperimentLight}
-    imageDark={CreateExperimentDark}
-    alt="How to create an experiment in PostHog"
-    classes="rounded"
+  imageLight={CreateExperimentLight}
+  imageDark={CreateExperimentDark}
+  alt="How to create an experiment in PostHog"
+  classes="rounded"
 />
 
 ## Step 1: Description
@@ -57,7 +63,7 @@ Experiments require at least 2 variants: a baseline and one or more test variant
 
 ### Experiment variants
 
-By default, all experiments have a `control` and `test` variant. You can add more variants in this step. Participants are automatically split equally between variants.
+By default, all experiments have a `control` and `test` variant. You can add more variants in this step. Participants are automatically split equally between variants. The variant keys `"true"`, `"false"`, and `"null"` are reserved and cannot be used.
 
 If you link an existing feature flag, this step becomes read-only. You can adjust the flag's variants from the feature flag page after saving the experiment.
 
