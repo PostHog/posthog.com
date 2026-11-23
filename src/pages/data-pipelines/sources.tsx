@@ -10,7 +10,7 @@ import SourcesCTA from 'components/DataPipelines/SourcesCTA'
 export default function DataPipelineSources(): JSX.Element {
     return (
         <>
-            <SEO title="Sources" />
+            <SEO title="Sources – Sync 1,400+ tools and databases | PostHog" />
             <ReaderView
                 title="Sources"
                 hideTitle
