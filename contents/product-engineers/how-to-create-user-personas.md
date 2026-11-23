@@ -48,9 +48,9 @@ Here are three, real-world user persona examples from well-known companies:
 
 ![Vercel user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/vercel-persona.png)
 
-2. **Github's** primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
+2. **GitHub's** primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
 
-![Github user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/github-persona.png)
+![GitHub user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/github-persona.png)
 
 3. **Asana's** primary user persona is a project manager who wants to track tasks and deliver successful projects.
 
