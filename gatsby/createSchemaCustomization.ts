@@ -819,7 +819,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         points: [AIAdoptionPoint!]!
     }
     type AIAdoptionReport implements Node @dontInfer {
-        isPreview: Boolean!
         series: [AIAdoptionSeries!]!
     }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it

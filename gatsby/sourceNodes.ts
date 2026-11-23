@@ -11,7 +11,6 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
-import { aiAdoptionPreviewRows } from './aiAdoptionPreview'
 import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -288,20 +287,19 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
-    const fetchLeaderboardRows = async (name: string): Promise<Record<string, unknown>[]> => {
+    const fetchLeaderboardRows = async (name: string, limit?: number): Promise<Record<string, unknown>[]> => {
         const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
-        // OFFSET is not allowed with a personal API key, so fetch every row in one request.
         const res = await fetch(`${endpointUrl}/run`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
             },
-            body: JSON.stringify({ limit: 50000 }),
+            body: JSON.stringify({ limit }),
         })
         if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
         const body: { hasMore?: boolean; columns?: string[]; results?: unknown[][] } = await res.json()
-        if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
+        if (body.hasMore) throw new Error(`${name} returned an incomplete result`)
         const columns: string[] = body.columns || []
         return (body.results || []).map((row: unknown[]) =>
             Object.fromEntries(columns.map((column, i) => [column, row[i]]))
@@ -309,12 +307,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const sourceAIAdoption = async () => {
-        const isPreview = process.env.AI_ADOPTION_PREVIEW_DATA === 'true'
-        if (!isPreview && !process.env.POSTHOG_APP_API_KEY) return
+        if (!process.env.POSTHOG_APP_API_KEY) return
         try {
-            const rows = isPreview
-                ? aiAdoptionPreviewRows()
-                : await fetchLeaderboardRows('ai_adoption_public_leaderboard_monthly')
+            // The saved query sets its own LIMIT. An Endpoint limit override fails to parse this query.
+            const rows = await fetchLeaderboardRows('ai_adoption_public_leaderboard_monthly')
             const series = rows.map(({ facet, label, points }) => {
                 if (
                     !['model', 'lab', 'framework', 'provider_diversity', 'coverage'].includes(String(facet)) ||
@@ -349,9 +345,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 id: createNodeId('ai-adoption-leaderboard'),
                 parent: null,
                 children: [],
-                isPreview,
                 series,
-                internal: { type: 'AIAdoptionReport', contentDigest: createContentDigest({ isPreview, series }) },
+                internal: { type: 'AIAdoptionReport', contentDigest: createContentDigest(series) },
             })
         } catch (err) {
             console.warn('Could not load the AI adoption leaderboard:', err)
@@ -369,7 +364,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         try {
             const results = await Promise.all(
-                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchLeaderboardRows)
+                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map((name) =>
+                    fetchLeaderboardRows(name, 50000)
+                )
             )
             const rows = results.flat().filter((row) => row.week && row.facet && row.label)
             const weeks = Array.from(
