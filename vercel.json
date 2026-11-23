@@ -7525,6 +7525,11 @@
             "statusCode": 301
         },
         {
+            "source": "/product-analytics-explorer/:path*",
+            "destination": "/product-analytics",
+            "statusCode": 301
+        },
+        {
             "source": "/about-us",
             "destination": "/about",
             "statusCode": 301
