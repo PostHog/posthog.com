@@ -19,7 +19,7 @@ export interface LearnHubSubpage {
 }
 
 export interface PocketGuideVolume {
-    /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
+    /** Topic directory: contents/learn/<id>/pocket-guide/. Saved reading progress keys on it, so never rename. */
     id: string
     title: string
     /** One line on the shelf. What the volume gets you, not what's in it. */

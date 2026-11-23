@@ -1,71 +1,51 @@
 import React, { useMemo } from 'react'
 
 import { pocketGuideDestination } from '../../../constants/pocketGuides'
+import { useUser } from '../../../hooks/useUser'
+import {
+    READ_CHAPTERS_STORAGE_KEY,
+    parseProgress,
+    readChapterIds,
+    readLocalProgress,
+    readStoredProgress,
+    writeLocalProgress,
+} from '../../../lib/learnProgress'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, type BookPageEntry } from './bookModel'
 
-const READ_CHAPTERS_STORAGE_KEY = 'pocket-guide-chapters-read'
-
-type ReadChapterSlugsByVolume = Record<string, string[]>
-
-function readStoredProgress(): string | null {
-    try {
-        return window.localStorage.getItem(READ_CHAPTERS_STORAGE_KEY)
-    } catch {
-        return null
-    }
-}
-
-function parseProgress(storedProgress: string | null): ReadChapterSlugsByVolume {
-    if (!storedProgress) return {}
-    try {
-        const parsedProgress = JSON.parse(storedProgress)
-        return parsedProgress && typeof parsedProgress === 'object' ? parsedProgress : {}
-    } catch {
-        return {}
-    }
-}
-
-function readChapterSlugs(progress: ReadChapterSlugsByVolume, volumeId: string): string[] {
-    const chapterSlugs = progress[volumeId]
-    return Array.isArray(chapterSlugs) ? chapterSlugs : []
-}
-
-function markChapterRead(volumeId: string, chapterSlug: string): void {
-    const progress = parseProgress(readStoredProgress())
-    const chapterSlugs = readChapterSlugs(progress, volumeId)
-    if (chapterSlugs.includes(chapterSlug)) return
-    try {
-        window.localStorage.setItem(
-            READ_CHAPTERS_STORAGE_KEY,
-            JSON.stringify({ ...progress, [volumeId]: [...chapterSlugs, chapterSlug] })
-        )
-    } catch {
-        return
-    }
-}
-
-export function markChapterReadOnMove({
-    volumeId,
-    pages,
-    basePath,
-    currentSlug,
-    targetHref,
-}: {
+type ChapterMove = {
     volumeId: string
     pages: BookPageEntry[]
     basePath: string
     currentSlug: string
     targetHref: string
-}): void {
+}
+
+function markChapterRead(volumeId: string, chapterId: string): void {
+    const progress = readLocalProgress()
+    const chapterIds = readChapterIds(progress, volumeId)
+    if (chapterIds.includes(chapterId)) return
+    writeLocalProgress({ ...progress, [volumeId]: [...chapterIds, chapterId] })
+}
+
+function markChapterReadOnMove({ volumeId, pages, basePath, currentSlug, targetHref }: ChapterMove): void {
     const chapters = pages.filter((page) => page.page)
     const currentIndex = chapters.findIndex((page) => learnChapterSlug(page) === currentSlug)
+    const currentChapterId = chapters[currentIndex]?.chapterId
     const nextChapter = currentIndex >= 0 ? chapters[currentIndex + 1] : undefined
-    if (!nextChapter) return
+    if (!currentChapterId || !nextChapter) return
     const targetPath = normalizeUrl(pocketGuideDestination(targetHref.split(/[?#]/)[0]))
     const isNextChapter =
         targetPath === learnChapterPath(basePath, nextChapter) || targetPath === normalizeUrl(nextChapter.url)
     if (!isNextChapter) return
-    markChapterRead(volumeId, currentSlug)
+    markChapterRead(volumeId, currentChapterId)
+}
+
+export function useMarkChapterReadOnMove(): (move: ChapterMove) => void {
+    const { user, syncLocalLearnProgress } = useUser()
+    return (move) => {
+        markChapterReadOnMove(move)
+        if (user) syncLocalLearnProgress(user)
+    }
 }
 
 function subscribeToProgressInOtherTabs(onProgressChange: () => void): () => void {
@@ -87,7 +67,15 @@ const useSyncExternalStore = (
     }
 ).useSyncExternalStore
 
-export function useReadChapterSlugs(volumeId: string): Set<string> {
+export function useReadChapterIds(volumeId: string): Set<string> {
     const storedProgress = useSyncExternalStore(subscribeToProgressInOtherTabs, readStoredProgress, () => null)
-    return useMemo(() => new Set(readChapterSlugs(parseProgress(storedProgress), volumeId)), [storedProgress, volumeId])
+    const profileProgress = useUser().user?.learnProgress
+    return useMemo(
+        () =>
+            new Set([
+                ...readChapterIds(parseProgress(storedProgress), volumeId),
+                ...readChapterIds(profileProgress, volumeId),
+            ]),
+        [storedProgress, profileProgress, volumeId]
+    )
 }

@@ -35,6 +35,8 @@ export interface BookPageEntry {
     shortTitle: string
     /** Reading order from frontmatter. 0 is the front matter. */
     order: number
+    /** `pocketGuideChapterId:` frontmatter; saved progress keys on it, so it must never change. */
+    chapterId?: string
     /** Arabic page number. Front matter is unnumbered, the way print leaves it. */
     page?: number
     isFrontMatter: boolean
@@ -77,6 +79,7 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                         title
                         shortTitle
                         pocketGuideOrder
+                        pocketGuideChapterId
                         section
                         pocketGuideCta {
                             kind
@@ -117,6 +120,7 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                     title: node.frontmatter.title,
                     shortTitle: node.frontmatter.shortTitle || node.frontmatter.title,
                     order,
+                    chapterId: node.frontmatter.pocketGuideChapterId || undefined,
                     isFrontMatter: order === 0,
                     section: node.frontmatter.section || undefined,
                     template: byUrl.get(url),

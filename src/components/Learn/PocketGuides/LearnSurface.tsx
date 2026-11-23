@@ -15,7 +15,7 @@ import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { useEntry } from './bookContext'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, sectionPages, useBookPages } from './bookModel'
-import { markChapterReadOnMove, useReadChapterSlugs } from './chapterProgress'
+import { useMarkChapterReadOnMove, useReadChapterIds } from './chapterProgress'
 import { isReaderWindowActive } from '../learnTracking'
 
 interface LearnBodyNode {
@@ -217,7 +217,8 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     const bookPages = useBookPages(volumeId)
     const bodies = useBookBodies()
     const counts = usePocketGuideCounts()
-    const readChapterSlugs = useReadChapterSlugs(volumeId)
+    const readChapterIds = useReadChapterIds(volumeId)
+    const markChapterReadOnMove = useMarkChapterReadOnMove()
     const coverRef = React.useRef<HTMLDivElement>(null)
 
     const entry = React.useMemo(() => {
@@ -274,7 +275,7 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
                                     className="group flex items-baseline gap-2 py-1.5 text-base font-normal text-secondary no-underline transition-colors hover:text-primary"
                                 >
                                     <span className="w-4 shrink-0 self-center">
-                                        {readChapterSlugs.has(learnChapterSlug(page)) ? (
+                                        {page.chapterId && readChapterIds.has(page.chapterId) ? (
                                             <>
                                                 <Check
                                                     className="size-4 text-green"
