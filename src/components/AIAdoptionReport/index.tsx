@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { HedgehogChart } from '@posthog/brand/hoggies'
 import { DefaultTooltip } from '@posthog/quill-charts'
+import { Accordion } from 'components/UI/Accordion'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { rowLogo } from './rowLogo'
 
 const sections = {
@@ -9,19 +10,19 @@ const sections = {
         'Models',
         'Which models are teams using?',
         'Model',
-        'Share of qualifying organizations that used each model. A team can use several models.',
+        'Share of qualifying organizations that used each model. An organization can use several models in a month, so the percentages can add up to more than 100%.',
     ],
     lab: [
         'Labs',
         'Which labs do teams use?',
         'Lab',
-        'Share of qualifying organizations that used a model from each lab. Each team counts once per lab.',
+        'Share of qualifying organizations that used a model from each lab. An organization can use models from several labs in a month, so the percentages can add up to more than 100%.',
     ],
     provider_diversity: [
         'Provider diversity',
         'How many providers does one team use?',
         'Providers',
-        'Share of organizations that reported a provider. A router counts as one provider.',
+        'Each organization that reported a provider falls into one group. A router counts as one provider.',
     ],
     framework: [
         'Frameworks & tools',
@@ -80,14 +81,18 @@ const chartConfig = {
     tooltip: { valueFormatter: percent },
 }
 
-export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] }): JSX.Element {
-    const months = Array.from(new Set(series.flatMap((row) => row.points.map((point) => point.month)))).sort()
-    const [selected, setSelected] = useState('')
-    const [section, setSection] = useState<Section>('model')
+function ReportSection({
+    section,
+    series,
+    history,
+}: {
+    section: Section
+    series: AdoptionSeries[]
+    history: string[]
+}) {
     const [showAll, setShowAll] = useState(false)
     const [expanded, setExpanded] = useState('')
-    const month = months.includes(selected) ? selected : months[months.length - 1]
-    const history = months.filter((value) => value <= month)
+    const month = history[history.length - 1]
     const previous =
         month &&
         new Date(Date.UTC(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 2, 1)).toISOString().slice(0, 10)
@@ -122,201 +127,206 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
     const dates = history.map(monthName)
 
     return (
-        <div className="@container mx-auto max-w-4xl text-primary">
-            <header className="flex items-center justify-between gap-4 rounded-t-lg border border-primary bg-gradient-to-r from-primary to-light-purple dark:to-purple-2-dark p-5 @lg:p-8">
-                <div>
+        <section
+            aria-labelledby={`ai-adoption-${section}`}
+            className="border-t border-primary px-1 py-8 @lg:px-4 @lg:py-12"
+        >
+            <h2 id={`ai-adoption-${section}`} className="m-0 text-2xl @lg:text-3xl">
+                {question}
+            </h2>
+            <p className="my-2 text-sm text-secondary">
+                {description}{' '}
+                {coverage != null && `Reporting coverage: ${percent(coverage)} of qualifying organizations.`}
+            </p>
+            {chartRows.length > 0 && (
+                <figure className="my-4 rounded-md border border-primary p-3 @lg:p-5">
+                    <figcaption className="mb-2 font-semibold">
+                        {sections[section][0]} by month{' '}
+                        <span className="text-sm font-normal text-secondary">
+                            {' '}
+                            · {dates[0]}
+                            {dates.length > 1 && ` – ${dates[dates.length - 1]}`}
+                        </span>
+                    </figcaption>
+                    {section === 'provider_diversity' ? (
+                        <BarChart
+                            className="h-64"
+                            labels={dates}
+                            series={chartRows}
+                            config={{
+                                ...chartConfig,
+                                barLayout: 'stacked',
+                                bars: { valueDomain: { min: 0, max: 100 } },
+                            }}
+                        />
+                    ) : (
+                        <LineChart className="h-64" labels={dates} series={chartRows} config={chartConfig} />
+                    )}
+                </figure>
+            )}
+            {rows.length > 0 ? (
+                <table
+                    aria-label={`${sections[section][0]} in ${monthName(month)}`}
+                    className="w-full text-sm tabular-nums"
+                >
+                    <thead className="border-b border-primary text-right">
+                        <tr>
+                            <th scope="col" className="py-2 text-left">
+                                {heading}
+                            </th>
+                            <th scope="col" className="hidden text-left @md:table-cell">
+                                Trend
+                            </th>
+                            <th scope="col">Org share</th>
+                            <th scope="col">
+                                <abbr title="Change from the previous month, in percentage points">Change</abbr>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(showAll ? rows : rows.slice(0, 5)).map((row) => (
+                            <React.Fragment key={row.key}>
+                                <tr className="border-b border-primary">
+                                    <th scope="row" className="max-w-36 break-words py-2 text-left">
+                                        <button
+                                            type="button"
+                                            className="inline-flex max-w-full items-center gap-2 text-left hover:underline"
+                                            aria-expanded={expanded === row.key}
+                                            onClick={() => setExpanded(expanded === row.key ? '' : row.key)}
+                                        >
+                                            {rowLogo(section, row.key)}
+                                            <span className="min-w-0">{row.label}</span>
+                                        </button>
+                                    </th>
+                                    <td className="hidden w-24 pr-4 @md:table-cell">
+                                        <Sparkline
+                                            data={row.data}
+                                            height={24}
+                                            labels={dates}
+                                            tooltip={(point) => (
+                                                <DefaultTooltip
+                                                    {...point}
+                                                    labelRenderer={() => row.label}
+                                                    valueFormatter={percent}
+                                                />
+                                            )}
+                                        />
+                                    </td>
+                                    <td className="text-right">{percent(row.share)}</td>
+                                    <td className="text-right">
+                                        {row.change === null
+                                            ? '—'
+                                            : `${row.change > 0 ? '+' : ''}${row.change.toFixed(1)} pp`}
+                                    </td>
+                                </tr>
+                                {expanded === row.key && (
+                                    <tr>
+                                        <td colSpan={4}>
+                                            <dl className="my-1 flex flex-wrap gap-3 rounded bg-accent p-3">
+                                                {history.map((date, i) => (
+                                                    <div key={date}>
+                                                        <dt className="text-xs">{monthName(date)}</dt>
+                                                        <dd className="m-0">{percent(row.data[i])}</dd>
+                                                    </div>
+                                                ))}
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No data for this section.</p>
+            )}
+            {rows.length > 5 && (
+                <button
+                    className="my-3 text-sm font-semibold underline"
+                    type="button"
+                    onClick={() => setShowAll(!showAll)}
+                >
+                    {showAll ? 'Show top 5' : `Show all ${rows.length} rows`}
+                </button>
+            )}
+        </section>
+    )
+}
+
+const questions = [
+    {
+        question: 'Which organizations are included?',
+        answer: 'We count organizations that send at least 100 AI generation or embedding events to PostHog Cloud in a calendar month. Months use UTC.',
+    },
+    {
+        question: 'How are models and labs counted?',
+        answer: 'Each organization counts once per model it uses in a month. We infer the lab from the model name. If an organization uses two models from the same lab, it counts once for that lab.',
+    },
+    {
+        question: 'What does the change column show?',
+        answer: 'It shows the difference from the previous month in percentage points. A rise from 10% to 12% is a change of +2 percentage points.',
+    },
+]
+
+export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] }): JSX.Element {
+    const months = Array.from(new Set(series.flatMap((row) => row.points.map((point) => point.month)))).sort()
+    const [selected, setSelected] = useState('')
+    const month = months.includes(selected) ? selected : months[months.length - 1]
+    const history = months.filter((value) => value <= month)
+
+    return (
+        <article className="@container mx-auto max-w-4xl text-primary">
+            <header className="flex items-center justify-between gap-3 rounded-lg border border-primary bg-gradient-to-r from-primary to-light-purple p-4 dark:to-purple-2-dark @lg:p-8">
+                <div className="min-w-0">
                     <p className="m-0 font-mono text-xs">AI Observability · Monthly report</p>
-                    <h1 className="my-2 text-4xl @lg:text-5xl tracking-tight">How teams use AI</h1>
+                    <h1 className="my-2 text-4xl tracking-tight @lg:text-5xl">How teams use AI</h1>
                     <p className="m-0 max-w-prose">
                         Which models, labs, and tools show up in the AI events teams send to PostHog? Each team counts
-                        once, whether it sends a hundred events or a million.
+                        once per model, lab, or tool, whether it sends a hundred events or a million.
                     </p>
                 </div>
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
-                    alt=""
-                    className="hidden @md:block w-28 shrink-0"
-                />
+                <HedgehogChart aria-hidden="true" className="size-20 shrink-0 @md:size-32 @lg:size-40" />
             </header>
-            {!month ? (
-                <p role="status" className="rounded-b-lg border border-t-0 border-primary p-5">
+            {month ? (
+                <>
+                    <label className="my-5 flex items-center gap-2 text-sm font-semibold @lg:mx-4">
+                        Report month
+                        <select
+                            className="rounded border border-input bg-primary py-1 pl-2 pr-10 text-primary"
+                            value={month}
+                            onChange={(event) => setSelected(event.target.value)}
+                        >
+                            {[...months].reverse().map((value) => (
+                                <option key={value} value={value}>
+                                    {monthName(value)}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                    {(Object.keys(sections) as Section[]).map((section) => (
+                        <ReportSection key={section} section={section} series={series} history={history} />
+                    ))}
+                </>
+            ) : (
+                <p role="status" className="py-5">
                     The monthly report is not available yet.
                 </p>
-            ) : (
-                <>
-                    <div
-                        role="group"
-                        aria-label="Report section"
-                        className="flex flex-wrap gap-1 border-x border-b border-primary p-2"
-                    >
-                        {(Object.keys(sections) as Section[]).map((key) => (
-                            <button
-                                key={key}
-                                type="button"
-                                aria-pressed={key === section}
-                                className="rounded px-3 py-2 text-sm font-semibold hover:bg-accent aria-pressed:bg-accent aria-pressed:underline"
-                                onClick={() => {
-                                    setSection(key)
-                                    setExpanded('')
-                                    setShowAll(false)
-                                }}
-                            >
-                                {sections[key][0]}
-                            </button>
-                        ))}
-                    </div>
-                    <section className="px-1 py-5 @lg:px-4">
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                            <h2 className="m-0 text-2xl">{question}</h2>
-                            <label className="flex items-center gap-2 text-sm font-semibold">
-                                Month{' '}
-                                <select
-                                    className="rounded border border-input bg-primary py-1 pl-2 pr-10 text-primary"
-                                    value={month}
-                                    onChange={(event) => {
-                                        setSelected(event.target.value)
-                                        setExpanded('')
-                                    }}
-                                >
-                                    {[...months].reverse().map((value) => (
-                                        <option key={value} value={value}>
-                                            {monthName(value)}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                        </div>
-                        <p className="my-2 text-sm text-secondary">
-                            {description}{' '}
-                            {coverage != null &&
-                                `Reporting coverage: ${percent(coverage)} of qualifying organizations.`}
-                        </p>
-                        {chartRows.length > 0 && (
-                            <figure className="my-4 rounded-md border border-primary p-3 @lg:p-5">
-                                <figcaption className="mb-2 font-semibold">
-                                    {sections[section][0]} by month{' '}
-                                    <span className="text-sm font-normal text-secondary">
-                                        {' '}
-                                        · {dates[0]}
-                                        {dates.length > 1 && ` – ${dates[dates.length - 1]}`}
-                                    </span>
-                                </figcaption>
-                                {section === 'provider_diversity' ? (
-                                    <BarChart
-                                        className="h-64"
-                                        labels={dates}
-                                        series={chartRows}
-                                        config={{
-                                            ...chartConfig,
-                                            barLayout: 'stacked',
-                                            bars: { valueDomain: { min: 0, max: 100 } },
-                                        }}
-                                    />
-                                ) : (
-                                    <LineChart
-                                        className="h-64"
-                                        labels={dates}
-                                        series={chartRows}
-                                        config={chartConfig}
-                                    />
-                                )}
-                            </figure>
-                        )}
-                        {rows.length > 0 ? (
-                            <table className="w-full text-sm tabular-nums">
-                                <thead className="border-b border-primary text-right">
-                                    <tr>
-                                        <th scope="col" className="py-2 text-left">
-                                            {heading}
-                                        </th>
-                                        <th scope="col" className="hidden text-left @md:table-cell">
-                                            Trend
-                                        </th>
-                                        <th scope="col">Org share</th>
-                                        <th scope="col">
-                                            <abbr title="Change from the previous month, in percentage points">
-                                                Change
-                                            </abbr>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {(showAll ? rows : rows.slice(0, 5)).map((row) => (
-                                        <React.Fragment key={row.key}>
-                                            <tr className="border-b border-primary">
-                                                <th scope="row" className="max-w-36 break-words py-2 text-left">
-                                                    <button
-                                                        type="button"
-                                                        className="inline-flex max-w-full items-center gap-2 text-left hover:underline"
-                                                        aria-expanded={expanded === row.key}
-                                                        onClick={() => setExpanded(expanded === row.key ? '' : row.key)}
-                                                    >
-                                                        {rowLogo(section, row.key)}
-                                                        <span className="min-w-0">{row.label}</span>
-                                                    </button>
-                                                </th>
-                                                <td className="hidden w-24 pr-4 @md:table-cell">
-                                                    <Sparkline
-                                                        data={row.data}
-                                                        height={24}
-                                                        labels={dates}
-                                                        tooltip={(point) => (
-                                                            <DefaultTooltip
-                                                                {...point}
-                                                                labelRenderer={() => row.label}
-                                                                valueFormatter={percent}
-                                                            />
-                                                        )}
-                                                    />
-                                                </td>
-                                                <td className="text-right">{percent(row.share)}</td>
-                                                <td className="text-right">
-                                                    {row.change === null
-                                                        ? '—'
-                                                        : `${row.change > 0 ? '+' : ''}${row.change.toFixed(1)} pp`}
-                                                </td>
-                                            </tr>
-                                            {expanded === row.key && (
-                                                <tr>
-                                                    <td colSpan={4}>
-                                                        <dl className="my-1 flex flex-wrap gap-3 rounded bg-accent p-3">
-                                                            {history.map((date, i) => (
-                                                                <div key={date}>
-                                                                    <dt className="text-xs">{monthName(date)}</dt>
-                                                                    <dd className="m-0">{percent(row.data[i])}</dd>
-                                                                </div>
-                                                            ))}
-                                                        </dl>
-                                                    </td>
-                                                </tr>
-                                            )}
-                                        </React.Fragment>
-                                    ))}
-                                </tbody>
-                            </table>
-                        ) : (
-                            <p>No data for this section.</p>
-                        )}
-                        {rows.length > 5 && (
-                            <button
-                                className="my-3 text-sm font-semibold underline"
-                                type="button"
-                                onClick={() => setShowAll(!showAll)}
-                            >
-                                {showAll ? 'Show top 5' : `Show all ${rows.length} rows`}
-                            </button>
-                        )}
-                    </section>
-                </>
             )}
-            <details className="border-t border-primary py-3 text-sm">
-                <summary className="cursor-pointer font-semibold">How we count</summary>
-                <p className="mt-2">
-                    We count organizations that send at least 100 AI generation or embedding events to PostHog Cloud in
-                    a calendar month. Months use UTC. Each organization counts once per model, lab, or tool it reports.
-                    We infer labs from model names.
-                </p>
-            </details>
-        </div>
+            <section aria-labelledby="ai-adoption-faq" className="border-t border-primary px-1 py-8 @lg:px-4 @lg:py-12">
+                <h2 id="ai-adoption-faq" className="m-0 mb-4 text-2xl @lg:text-3xl">
+                    Frequently asked questions
+                </h2>
+                <Accordion.Root>
+                    {questions.map(({ question, answer }) => (
+                        <Accordion.Item key={question} value={question}>
+                            <Accordion.Header>
+                                <Accordion.Trigger>{question}</Accordion.Trigger>
+                            </Accordion.Header>
+                            <Accordion.Panel>{answer}</Accordion.Panel>
+                        </Accordion.Item>
+                    ))}
+                </Accordion.Root>
+            </section>
+        </article>
     )
 }

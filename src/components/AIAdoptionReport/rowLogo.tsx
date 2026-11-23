@@ -36,7 +36,6 @@ const sharedMarks: Record<string, string> = {
     google: 'Google',
     openai: 'OpenAI',
     'openai-agents': 'OpenAI',
-    openclaw: 'OpenClaw',
     xai: 'xAI',
 }
 
@@ -52,6 +51,7 @@ const bundledMarks = new Set([
     'liquid',
     'minimax',
     'nvidia',
+    'openclaw',
     'pi',
     'qwen',
     'stepfun',
@@ -60,10 +60,17 @@ const bundledMarks = new Set([
     'zai',
 ])
 
-export function rowLogo(section: string, key: string): React.ReactElement | null {
-    if (section === 'provider_diversity') return null
-    const model = key.toLowerCase().split('/').pop() ?? ''
-    const brand = section === 'model' ? modelFamilies.find(([pattern]) => pattern.test(model))?.[1] : key
+const frameworkTiles: Record<string, string> = {
+    langchain: 'bg-lime-green',
+    vercel: 'bg-pale-blue',
+    'claude-code': 'bg-primary',
+    'claude-agent-sdk': 'bg-primary',
+    'openai-agents': 'bg-teal-2',
+    openclaw: 'bg-primary',
+    pi: 'bg-light-purple',
+}
+
+function brandLogo(brand: string | undefined): React.ReactElement {
     if (brand && typeof sharedMarks[brand] === 'string') {
         return (
             <span className="shrink-0" aria-hidden="true">
@@ -80,7 +87,7 @@ export function rowLogo(section: string, key: string): React.ReactElement | null
     }
     const logo = brand === 'langchain' ? langchainMark : getLogo(brand === 'meta' ? 'metaAds' : brand ?? '')
     if (typeof logo === 'string') {
-        const invert = brand === 'langchain' || brand === 'vercel' || brand === 'perplexity'
+        const invert = brand === 'perplexity'
         return (
             <img
                 src={logo}
@@ -92,4 +99,21 @@ export function rowLogo(section: string, key: string): React.ReactElement | null
         )
     }
     return <IconApps className="size-4 shrink-0 text-secondary" aria-hidden="true" />
+}
+
+export function rowLogo(section: string, key: string): React.ReactElement | null {
+    if (section === 'provider_diversity') return null
+    if (section === 'model') {
+        const model = key.toLowerCase().split('/').pop() ?? ''
+        return brandLogo(modelFamilies.find(([pattern]) => pattern.test(model))?.[1])
+    }
+    if (section === 'framework') {
+        const tile = frameworkTiles[key] ?? 'bg-accent'
+        return (
+            <span className={`inline-flex size-6 shrink-0 items-center justify-center rounded text-navy ${tile}`}>
+                {brandLogo(key)}
+            </span>
+        )
+    }
+    return brandLogo(key)
 }
