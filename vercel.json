@@ -215,6 +215,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/android/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node:ext(\\.md)?",
             "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
@@ -315,7 +320,27 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/:sdk(node|python|go|rust|ios)/:major(\\d+):ext(\\.md)?",
+            "source": "/docs/references/posthog-android:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-android/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-android-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-android-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/:sdk(node|python|go|rust|ios|android)/:major(\\d+):ext(\\.md)?",
             "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
             "statusCode": 301
         },
@@ -1992,6 +2017,11 @@
         {
             "source": "/docs/integrate/:side(client|server)/ios:ext(\\.md)?",
             "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/android:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
             "statusCode": 301
         },
         {
