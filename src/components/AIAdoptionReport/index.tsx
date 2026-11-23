@@ -7,30 +7,38 @@ import { Table } from 'components/UI/Table'
 import { rowLogo } from './rowLogo'
 
 const sections = {
-    model: [
-        'Models',
-        'Which models are teams using?',
-        'Model',
-        'Share of qualifying organizations that used each model. An organization can use several models in a month, so the percentages can add up to more than 100%.',
-    ],
-    lab: [
-        'Labs',
-        'Which labs do teams use?',
-        'Lab',
-        'Share of qualifying organizations that used a model from each lab. An organization can use models from several labs in a month, so the percentages can add up to more than 100%.',
-    ],
-    provider_diversity: [
-        'Provider diversity',
-        'How many providers does one team use?',
-        'Providers',
-        'Each organization that reported a provider falls into one group. A router counts as one provider.',
-    ],
-    framework: [
-        'Frameworks & tools',
-        'Which frameworks and agent tools show up?',
-        'Framework or tool',
-        'Share of organizations that reported a framework or agent tool. A team can use several tools.',
-    ],
+    model: {
+        question: 'Which AI models do teams use?',
+        heading: 'Model',
+        plural: 'models',
+        caption: 'Model adoption',
+        description:
+            'Each percentage is the share of organizations in the report that used that model that month. An organization can use several models, so the percentages can add up to more than 100%.',
+    },
+    lab: {
+        question: 'Who makes the models teams use?',
+        heading: 'Lab',
+        plural: 'labs',
+        caption: 'Model adoption by lab',
+        description:
+            'Each percentage is the share of organizations in the report that used at least one model from that lab that month. An organization can use models from several labs, so the percentages can add up to more than 100%.',
+    },
+    provider_diversity: {
+        question: 'How many model providers do teams use?',
+        heading: 'Providers',
+        plural: 'provider groups',
+        caption: 'Number of providers per organization',
+        description:
+            'We count providers for organizations whose events named at least one that month. A routing service counts as one provider, even if a team uses it to access several models.',
+    },
+    framework: {
+        question: 'Which frameworks and agent tools do teams use?',
+        heading: 'Framework or tool',
+        plural: 'frameworks and tools',
+        caption: 'Framework and agent tool adoption',
+        description:
+            'We calculate each month’s percentages using only organizations that named a tool. An organization that named two tools counts toward both.',
+    },
 } as const
 type Section = keyof typeof sections
 export interface AdoptionSeries {
@@ -63,7 +71,8 @@ const displayNames: Record<string, string> = {
     voyage: 'Voyage AI',
     inception: 'Inception',
     stepfun: 'StepFun',
-    other: 'Unmatched model names',
+    other: 'Models we couldn’t match to a lab',
+    'Other reported integrations': 'Other frameworks and tools',
     vercel: 'Vercel AI SDK',
     langchain: 'LangChain',
     'claude-code': 'Claude Code',
@@ -73,7 +82,8 @@ const displayNames: Record<string, string> = {
     'claude-agent-sdk': 'Claude Agent SDK',
 }
 const dateFormat = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
-const monthName = (month: string) => dateFormat.format(new Date(month + 'T00:00:00Z'))
+const longDateFormat = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+const monthName = (month: string, format = dateFormat) => format.format(new Date(month + 'T00:00:00Z'))
 const percent = (share: number | null | undefined) =>
     share != null && Number.isFinite(share) ? `${share.toFixed(1)}%` : '—'
 const chartConfig = {
@@ -97,7 +107,7 @@ function ReportSection({
     const previous =
         month &&
         new Date(Date.UTC(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 2, 1)).toISOString().slice(0, 10)
-    const [, question, heading, description] = sections[section]
+    const { question, heading, plural, caption, description } = sections[section]
     const rows = series
         .filter((row) => row.facet === section && row.label !== 'Other models' && row.label !== 'Not reported')
         .map((row) => {
@@ -125,7 +135,7 @@ function ReportSection({
     const coverage = series
         .find((row) => row.facet === 'coverage' && row.label === coverageLabel)
         ?.points.find((point) => point.month === month)?.share
-    const dates = history.map(monthName)
+    const dates = history.map((value) => monthName(value))
 
     return (
         <section
@@ -136,13 +146,18 @@ function ReportSection({
                 {question}
             </h2>
             <p className="my-2 text-sm text-secondary">
-                {description}{' '}
-                {coverage != null && `Reporting coverage: ${percent(coverage)} of qualifying organizations.`}
+                {coverage != null &&
+                    `In ${monthName(month, longDateFormat)}, ${Number(
+                        coverage.toFixed(1)
+                    )}% of organizations in the report sent events that named ${
+                        section === 'framework' ? 'a framework or agent tool' : 'a model provider'
+                    }. `}
+                {description}
             </p>
             {chartRows.length > 0 && (
                 <figure className="my-4 rounded-md border border-primary p-3 @lg:p-5">
                     <figcaption className="mb-2 font-semibold">
-                        {sections[section][0]} by month{' '}
+                        {caption}{' '}
                         <span className="text-sm font-normal text-secondary">
                             {' '}
                             · {dates[0]}
@@ -168,7 +183,7 @@ function ReportSection({
             {rows.length > 0 ? (
                 <Table.Root
                     appearance="plain"
-                    aria-label={`${sections[section][0]} in ${monthName(month)}`}
+                    aria-label={`${caption} in ${monthName(month)}`}
                     className="not-prose table-fixed tabular-nums"
                 >
                     <Table.Header>
@@ -179,7 +194,7 @@ function ReportSection({
                                 <span className="hidden @md:inline">Trend</span>
                             </Table.Head>
                             <Table.Head align="end" className="w-[5.5rem] whitespace-nowrap @md:w-24 @2xl:w-1/6">
-                                Org share
+                                Share
                             </Table.Head>
                             <Table.Head align="end" className="w-20 whitespace-nowrap @md:w-24 @2xl:w-1/6">
                                 <abbr title="Change from the previous month, in percentage points">Change</abbr>
@@ -242,7 +257,9 @@ function ReportSection({
                     </Table.Body>
                 </Table.Root>
             ) : (
-                <p>No data for this section.</p>
+                <p>
+                    No data available for {plural} in {monthName(month)}.
+                </p>
             )}
             {rows.length > 5 && (
                 <button
@@ -250,7 +267,7 @@ function ReportSection({
                     type="button"
                     onClick={() => setShowAll(!showAll)}
                 >
-                    {showAll ? 'Show top 5' : `Show all ${rows.length} rows`}
+                    {showAll ? 'Show fewer' : `Show all ${rows.length} ${plural}`}
                 </button>
             )}
         </section>
@@ -259,16 +276,20 @@ function ReportSection({
 
 const questions = [
     {
-        question: 'Which organizations are included?',
-        answer: 'We count organizations that send at least 100 AI generation or embedding events to PostHog Cloud in a calendar month. Months use UTC.',
+        question: 'Which months does the report cover?',
+        answer: 'We use complete calendar months in UTC. Choose a month to see its rankings and the trends up to that month.',
     },
     {
-        question: 'How are models and labs counted?',
-        answer: 'Each organization counts once per model it uses in a month. We infer the lab from the model name. If an organization uses two models from the same lab, it counts once for that lab.',
+        question: 'What’s the difference between a lab and a provider?',
+        answer: 'A lab makes the model. A provider gives you access to it. If you use Claude through Amazon Bedrock, Anthropic is the lab and Amazon Bedrock is the provider. We identify the lab from the model name and the provider from the events.',
     },
     {
-        question: 'What does the change column show?',
-        answer: 'It shows the difference from the previous month in percentage points. A rise from 10% to 12% is a change of +2 percentage points.',
+        question: 'Which models, labs, and tools appear on the line charts?',
+        answer: 'Each chart starts with the top five in the selected month and shows their shares over time. Select another name in the table to see its monthly shares on the chart.',
+    },
+    {
+        question: 'What does “pp” mean in the Change column?',
+        answer: 'It stands for percentage points. If a model’s share rises from 10% in one month to 12% the next, the table shows +2.0 pp. A dash means we don’t have enough data to compare the two months.',
     },
 ]
 
@@ -285,8 +306,9 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     <p className="m-0 font-mono text-xs">AI Observability · Monthly report</p>
                     <h1 className="my-2 text-4xl tracking-tight @lg:text-5xl">How teams use AI</h1>
                     <p className="m-0 max-w-prose">
-                        Which models, labs, and tools show up in the AI events teams send to PostHog? Each team counts
-                        once per model, lab, or tool, whether it sends a hundred events or a million.
+                        Each month, we look at organizations that sent at least 100 AI generation or embedding events to
+                        PostHog Cloud. An organization that sends a million events counts just as much as one that sends
+                        100.
                     </p>
                 </div>
                 <HedgehogChart aria-hidden="true" className="size-20 shrink-0 @md:size-32 @lg:size-40" />

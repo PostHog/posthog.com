@@ -13,7 +13,7 @@ export default function Leaderboard({
         <>
             <SEO
                 title="How teams use AI – PostHog"
-                description="Monthly adoption trends for AI models, labs, providers, and developer tools."
+                description="See which AI models, labs, providers, and developer tools teams use each month, based on the events they send to PostHog Cloud."
             />
             <ReaderView
                 title="How teams use AI"
