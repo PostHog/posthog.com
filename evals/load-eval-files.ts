@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { globSync } from 'glob'
 import { parse } from 'yaml'
+import { LIBRARY_REFERENCE_SDK_IDS, getSdkReferenceUrl } from '../src/components/SdkReferences/utils.ts'
 
 // Finds, parses and checks eval files. Nothing in here knows about Gauge.
 
@@ -122,6 +123,19 @@ export function pageSourceFile(page: string): string | null {
     return candidates.find((candidate) => existsSync(join(repoRoot, candidate))) ?? null
 }
 
+// gatsby/onPreBootstrap.ts writes these pages from Strapi at build time, so they are not on disk:
+// docs/libraries/<sdk>, docs/libraries/<sdk>/migration and docs/libraries/<sdk>/<N>.x.x,
+// for the SDKs in PUBLISHED_SDK_REFERENCES.
+export function isGeneratedSdkReferencePage(page: string): boolean {
+    return LIBRARY_REFERENCE_SDK_IDS.some((id) => {
+        const base = getSdkReferenceUrl(id).slice(1)
+        if (page === base) return true
+        return page.startsWith(`${base}/`) && /^(migration|\d+\.x\.x)$/.test(page.slice(base.length + 1))
+    })
+}
+
+const defaultPageExists = (page: string): boolean => pageSourceFile(page) !== null || isGeneratedSdkReferencePage(page)
+
 // A changed docs source file → the page it builds, or null if it isn't a page.
 export function pageForSourceFile(path: string): string | null {
     const match = path.match(/^contents\/(.+?)(?:\/index)?\.mdx?$/)
@@ -157,7 +171,7 @@ export function parseEvalFile(
     path: string,
     raw: unknown,
     shared: Shared,
-    pageExists: (page: string) => boolean = (page) => pageSourceFile(page) !== null
+    pageExists: (page: string) => boolean = defaultPageExists
 ): { file: EvalFile | null; problems: Problem[] } {
     const problems: Problem[] = []
     const problem = (message: string) => problems.push({ path, message })
@@ -188,7 +202,7 @@ export function parseEvalFile(
     else if (e2e && filePages.length === 0) problem('files in evals/e2e-evals/ need at least one page in pages')
     const validatePages = (list: string[], where: string) => {
         for (const listed of list) {
-            if (!/^docs\/[a-z0-9/_-]+$/.test(listed))
+            if (!/^docs\/[a-z0-9/_.-]+$/.test(listed))
                 problem(`${where}: "${listed}" should look like docs/product-analytics/identify`)
             else if (!pageExists(listed)) problem(`${where}: no page at contents/${listed}.mdx or .md`)
         }

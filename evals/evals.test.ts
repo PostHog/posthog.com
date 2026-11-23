@@ -173,6 +173,42 @@ describe('eval file validation', () => {
         )
         assert.ok(result.problems.some((p) => p.message.includes('no page at contents/docs/gone')))
     })
+
+    test('a generated page of a published SDK counts as a page', () => {
+        for (const page of ['docs/libraries/node', 'docs/libraries/node/migration', 'docs/libraries/python/7.x.x']) {
+            const result = parseEvalFile(
+                'contents/docs/a.eval.yaml',
+                { ...answerOnly, checks: [{ ...answerOnly.checks[0], pages: [page] }] },
+                shared
+            )
+            assert.deepEqual(
+                result.problems.filter((p) => p.message.includes('pages')),
+                [],
+                page
+            )
+        }
+    })
+
+    test('a generated page of an unpublished SDK, or a non-reference path, still fails', () => {
+        for (const page of [
+            'docs/libraries/swift',
+            'docs/libraries/swift/migration',
+            'docs/libraries/node/reference',
+            'docs/libraries/node/other',
+            'docs/libraries/node/x.x.x',
+            'docs/other/node',
+        ]) {
+            const result = parseEvalFile(
+                'contents/docs/a.eval.yaml',
+                { ...answerOnly, checks: [{ ...answerOnly.checks[0], pages: [page] }] },
+                shared
+            )
+            assert.ok(
+                result.problems.some((p) => p.message.includes(`no page at contents/${page}`)),
+                page
+            )
+        }
+    })
 })
 
 describe('what a check attaches', () => {
