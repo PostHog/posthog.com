@@ -7694,8 +7694,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/api/taggers",
-            "destination": "/docs/api/evaluations",
+            "source": "/docs/api/taggers:ext(\\.md)?",
+            "destination": "/docs/api/evaluations:ext?",
             "statusCode": 301
         },
         {
