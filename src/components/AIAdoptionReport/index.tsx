@@ -176,12 +176,12 @@ function ReportSection({
                             <Table.Head>{heading}</Table.Head>
                             {/* Keep all four columns in the grid so an expanded row spans the same width on mobile. */}
                             <Table.Head className="invisible w-0 !px-0 @md:visible @md:w-24 @md:!px-3 @2xl:w-1/5">
-                                Trend
+                                <span className="hidden @md:inline">Trend</span>
                             </Table.Head>
-                            <Table.Head align="end" className="w-24 whitespace-nowrap @2xl:w-1/6">
+                            <Table.Head align="end" className="w-[5.5rem] whitespace-nowrap @md:w-24 @2xl:w-1/6">
                                 Org share
                             </Table.Head>
-                            <Table.Head align="end" className="w-24 whitespace-nowrap @2xl:w-1/6">
+                            <Table.Head align="end" className="w-20 whitespace-nowrap @md:w-24 @2xl:w-1/6">
                                 <abbr title="Change from the previous month, in percentage points">Change</abbr>
                             </Table.Head>
                         </Table.Row>
