@@ -633,7 +633,7 @@ try {
 } catch (error: Exception) {
     PostHog.captureException(
         throwable = error,
-        additionalProperties = mapOf("context" to "checkout_flow"),
+        properties = mapOf("context" to "checkout_flow"),
     )
 }
 ```
@@ -642,15 +642,15 @@ Follow the [Kotlin Multiplatform Error Tracking guide](/docs/error-tracking/inst
 
 ## Session replay
 
-[Session replay](/docs/session-replay/mobile) is available on Android and iOS. To enable it, turn on "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and pass a `SessionRecordingConfig`:
+[Session replay](/docs/session-replay/mobile) is available on Android and iOS. To enable it, turn on "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and pass a `SessionReplayConfig`:
 
 ```kotlin
-import com.posthog.kmp.SessionRecordingConfig
+import com.posthog.kmp.SessionReplayConfig
 
 PostHog.setup(
     config = PostHogConfig(
         projectToken = "<ph_project_token>",
-        sessionRecording = SessionRecordingConfig(
+        sessionReplay = SessionReplayConfig(
             enabled = true,
             maskAllTextInputs = true, // mask sensitive text (default)
             maskAllImages = true,     // mask images (default)
@@ -660,7 +660,7 @@ PostHog.setup(
 )
 ```
 
-Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.12.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionRecordingConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
+Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.12.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionReplayConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
 
 ### Compose Multiplatform screens on iOS
 
@@ -678,12 +678,12 @@ func makeUIViewController(context: Context) -> UIViewController {
 }
 ```
 
-To leave out iOS altogether, enable `sessionRecording` only on Android.
+To leave out iOS altogether, enable `sessionReplay` only on Android.
 
 On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
 
 ```kotlin
-sessionRecording = SessionRecordingConfig(
+sessionReplay = SessionReplayConfig(
     enabled = true,
     verifyScreenshotMaskAlignment = true,
 )
@@ -829,7 +829,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `maxBatchSize` | `Int` | `50` | Maximum number of events sent in one batch. |
 | `optOut` | `Boolean` | `false` | Starts with analytics opted out. |
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
-| `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android and iOS). |
+| `sessionReplay` | `SessionReplayConfig?` | `null` | Enables and configures session replay (Android and iOS). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
 | `beforeSend` | `List<PostHogBeforeSend>` | `emptyList()` | Modifies or drops events before the SDK queues them. |
 | `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
@@ -856,7 +856,7 @@ Pass an `ErrorTrackingConfig` to `PostHogConfig.errorTracking`.
 
 ### Session recording options
 
-Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults match the native Android and iOS SDKs.
+Pass a `SessionReplayConfig` to `PostHogConfig.sessionReplay`. Defaults match the native Android and iOS SDKs.
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -882,15 +882,18 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 
 Because the SDK delegates to the native library on each platform, feature availability and behavior follow the underlying SDK. Session replay is available on Android and iOS; the web target inherits PostHog.js behavior.
 
-On the JVM, event capture, identification, feature flags, groups, error tracking, and super properties are all supported. Mobile and browser-only concepts don't apply, so `sessionRecording`, `captureApplicationLifecycleEvents`, `captureScreenViews`, `captureDeepLinks`, and `autocapture` are ignored. The JVM also has no standard app-manifest source, so `$app_version`, `$app_build`, and `$app_namespace` person properties aren't set – feature flags targeting those won't match desktop users.
+On the JVM, event capture, identification, feature flags, groups, error tracking, and super properties are all supported. Mobile and browser-only concepts don't apply, so `sessionReplay`, `captureApplicationLifecycleEvents`, `captureScreenViews`, `captureDeepLinks`, and `autocapture` are ignored. The JVM also has no standard app-manifest source, so `$app_version`, `$app_build`, and `$app_namespace` person properties aren't set – feature flags targeting those won't match desktop users.
 
 ## Upgrade to 1.0.0
 
-Version 1.0.0 makes the config classes regular classes, removes the deprecated `apiKey` alias, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
+Version 1.0.0 makes the config classes regular classes, renames session recording to session replay, removes the deprecated `apiKey` alias, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
 
 - **Screen views on by default:** `captureScreenViews` defaults to `true`, as in the Android and iOS SDKs, so Android and iOS send `$screen` events and the web sends `$pageview` and `$pageleave` events. In a Compose Multiplatform app, the automatic screen view names the single activity or view controller, not a screen. Set `captureScreenViews = false` to keep only the [screen views](#screen-views) you send yourself.
+- **Session replay naming:** `sessionRecording` is now `sessionReplay`, and `SessionRecordingConfig` is now `SessionReplayConfig`, as in the Android and iOS SDKs.
+- **`captureException`:** the `additionalProperties` parameter is now `properties`, as in `capture()`. Calls that pass it by position compile unchanged.
+- **`PostHogContext()` on Android:** it no longer throws. `PostHog.setup()` with it leaves the SDK disabled and logs a warning, so pass `PostHogContext(application)`. `PostHogContext.application` is no longer public.
 - **`apiKey` removed:** the `apiKey` alias, deprecated since 0.8.0, is gone. Use `projectToken` to build a `PostHogConfig` and to read the token from it.
-- **Config classes:** `PostHogConfig`, `SessionRecordingConfig`, and `ErrorTrackingConfig` are regular classes instead of data classes, so they no longer have `copy()`, destructuring, or value-based equality. Build a new config where you called `copy()`. Kotlin code that passes named arguments compiles unchanged. In Java, you can pass any leading part of the constructor arguments, such as `new PostHogConfig("<ph_project_token>")`, and new options in later releases won't break those calls. Recompile any library built against an earlier version that calls `copy()` on these classes.
+- **Config classes:** `PostHogConfig`, `SessionReplayConfig`, `ErrorTrackingConfig`, and `CaptureOptions` are regular classes instead of data classes, so they no longer have `copy()`, destructuring, or value-based equality. Build a new one where you called `copy()`. `FeatureFlagResult` has an internal constructor and no `copy()`, but results still compare by value. Kotlin code that passes named arguments compiles unchanged. In Java, you can pass any leading part of the constructor arguments, such as `new PostHogConfig("<ph_project_token>")`, and new options in later releases won't break those calls. Recompile any library built against an earlier version that calls `copy()` on these classes.
 
 ## Upgrade to 0.12.0
 
