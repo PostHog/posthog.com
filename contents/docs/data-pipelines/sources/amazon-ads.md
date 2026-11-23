@@ -9,9 +9,9 @@ availability:
 sourceId: AmazonAds
 ---
 
-The Amazon Ads connector pulls your Amazon advertising entity data – profiles, Sponsored Products campaigns, and ad groups – into the PostHog data warehouse.
+The Amazon Ads connector pulls your Amazon advertising data into the PostHog data warehouse. This includes entities for Sponsored Products, Sponsored Brands, Sponsored Display, and Sponsored TV, daily performance reports, budget rules, invoices, and change history.
 
-You need a Login with Amazon (LWA) application with Advertising API access. PostHog uses your LWA credentials to authenticate with Amazon's Advertising API and sync entity data from every advertising profile your token can access.
+You need a Login with Amazon (LWA) application with Advertising API access. PostHog uses your LWA credentials to authenticate with Amazon's Advertising API and sync data from every advertising profile your token can access.
 
 ## Adding a data source
 
@@ -34,17 +34,15 @@ PostHog validates your credentials at connect time by minting an access token an
 
 Once the syncs are complete, you can start using Amazon Ads data in PostHog.
 
-## Available tables
+## Sync methods
 
-| Table          | Description                                              | Sync method  |
-| -------------- | -------------------------------------------------------- | ------------ |
-| `profiles`     | Amazon Advertising profiles associated with your account | Full refresh |
-| `sp_campaigns` | Sponsored Products campaigns across all profiles         | Full refresh |
-| `sp_ad_groups` | Sponsored Products ad groups across all profiles         | Full refresh |
+The sync method depends on the type of table:
 
-All tables use **full refresh** sync because the Amazon Ads API doesn't expose an updated-since filter for entity lists. Each sync reloads all data.
+- **Report tables** (tables that end in `_reports`, such as `sp_campaign_reports`) support **incremental** sync on the `date` field. Each sync reloads a lookback window, because Amazon can update recent report data after it first appears.
+- **Change history** (`change_history`) supports **incremental** sync on the `timestamp` field. Each sync reloads the last 24 hours, because Amazon can record an event after a sync has run.
+- **Entity tables** (all other tables, such as `profiles`, `sp_campaigns`, and `sp_ad_groups`) use **full refresh** sync, because the Amazon Ads API doesn't expose an updated-since filter for entity lists. Each sync reloads all data.
 
-Sponsored Products rows (`sp_campaigns` and `sp_ad_groups`) include a `_profile_id` field identifying which advertising profile they belong to. Data is synced from every profile your token can access.
+Rows from profile-level tables include a `_profile_id` field that identifies the advertising profile they belong to. Data is synced from every profile your token can access.
 
 ## Configuration
 
