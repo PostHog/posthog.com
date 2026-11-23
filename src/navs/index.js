@@ -2626,6 +2626,10 @@ const posthogMcpNav = [
         url: '/docs/integrations/replit',
     },
     {
+        name: 'Superhuman',
+        url: '/docs/integrations/superhuman',
+    },
+    {
         name: 'v0',
         url: '/docs/integrations/v0',
     },
