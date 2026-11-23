@@ -27,7 +27,7 @@ Before you can evaluate a feature flag in your application code, you need to cre
 | 2    | [The key in your code used to evaluate the feature flag](#step-2-add-feature-flag-key-and-description-required)   | Required  |
 | 3    | [The type of feature flag – boolean, multivariate, or remote config](#step-3-choose-a-feature-flag-type-required) | Required  |
 | 4    | [Additional feature flag behaviors](#step-4-configure-feature-flag-behavior-optional)                             | Optional  |
-| 5    | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-contexts-optional)             | Optional  |
+| 5    | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-contexts-optional)                 | Optional  |
 
 ## Step 1. Create a new feature flag (required)
 
@@ -78,6 +78,12 @@ In the **Served value** section, you can configure the type of feature flag you 
 | **Release toggle** <br/> <br/> (boolean)                                | These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches.                                                                                                                                                                                                      |
 | **Multiple variants with rollout percentages** <br/> <br/> (A/B/n test) | Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`.<br/><br/>You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.                                            |
 | **Remote config** <br/> <br/>(single payload)                           | While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload.<br/><br/>You can use remote config flags to tweak application configs on the fly without deploying code changes. |
+
+<CalloutBox icon="IconInfo" title="Reserved variant keys" type="fyi">
+
+Variant keys `"true"`, `"false"`, `"null"`, and empty strings (`""`) are reserved and cannot be used when creating new multivariate flags. The check is case-sensitive, so keys like `"True"` or `"FALSE"` are allowed. Existing flags that already use reserved keys can still be edited or disabled.
+
+</CalloutBox>
 
 You can select the type of feature flag by toggling between the selectors. Then, configure the payload and release conditions for the flag if applicable.
 
@@ -160,11 +166,11 @@ Condition sets are evaluated top to bottom, in the order they appear in the UI.
 
 Say a flag has three condition sets, and your test user matches the property filters on all three:
 
-| # | Condition set | Rollout |
-| --- | --- | --- |
-| 1 | `email` contains `@example.com` | 25% |
-| 2 | `plan` equals `enterprise` | 25% |
-| 3 | Everyone | 100% |
+| #   | Condition set                   | Rollout |
+| --- | ------------------------------- | ------- |
+| 1   | `email` contains `@example.com` | 25%     |
+| 2   | `plan` equals `enterprise`      | 25%     |
+| 3   | Everyone                        | 100%    |
 
 **Off (default):** the user is evaluated against set 1, where there's a 25% chance they fall inside the rollout. If they're in the 75% that don't, they move on to set 2, then to set 3 – where they match the 100% rollout and the flag returns `true`.
 
