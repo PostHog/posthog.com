@@ -136,6 +136,19 @@ See the [list of all small teams](/small-teams).
 
 ## Forming new small teams
 
+When deciding whether to split, merge, or close a team, use these principles:
+
+-   **Improve focus and reduce accidental collaboration.** This is the most important test. Teams should need less coordination to do their work.
+-   **Give the new team full ownership of its area.** We usually avoid horizontal teams that own one layer across many products.
+-   **Be clear about the team's type.** Teams have a few useful shapes, as described in [Team Topologies](https://teamtopologies.com/key-concepts). Ignoring these shapes leads to unclear responsibilities:
+    -   Product teams, such as Session Replay. Team Topologies calls these stream-aligned teams.
+    -   Enabling teams, such as DevEx, which help other teams build capabilities.
+    -   Platform teams, such as Infrastructure, which provide internal services that help other teams deliver.
+    -   Complicated subsystem teams, such as HogQL, which own work that needs specialist technical knowledge.
+-   **Account for the cost of change.** Closing or merging teams, or hiring people, takes effort. People need to learn how to work together, which reduces the time available for other work. Choosing not to change teams or hire can be the right decision.
+-   **Consider moving ownership instead.** We can move an area between existing teams without creating a new team.
+-   **Compare the team's stated purpose with its actual work.** A team name can hide a much wider scope. For example, we called a team "Web Analytics" while it worked on at least five other things.
+
 We have a defined [process for proposing changes to teams](/handbook/company/team-changes), or creating a new team.
 
 Once a decision is made, the following happens:
