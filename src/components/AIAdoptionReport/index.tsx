@@ -84,6 +84,8 @@ const displayNames: Record<string, string> = {
 const dateFormat = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
 const longDateFormat = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
 const monthName = (month: string, format = dateFormat) => format.format(new Date(month + 'T00:00:00Z'))
+const previousMonth = (month: string) =>
+    new Date(Date.UTC(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 2, 1)).toISOString().slice(0, 10)
 const percent = (share: number | null | undefined) =>
     share != null && Number.isFinite(share) ? `${share.toFixed(1)}%` : '—'
 const chartConfig = {
@@ -104,9 +106,7 @@ function ReportSection({
     const [showAll, setShowAll] = useState(false)
     const [expanded, setExpanded] = useState('')
     const month = history[history.length - 1]
-    const previous =
-        month &&
-        new Date(Date.UTC(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 2, 1)).toISOString().slice(0, 10)
+    const previous = month && previousMonth(month)
     const { question, heading, plural, caption, description } = sections[section]
     const rows = series
         .filter((row) => row.facet === section && row.label !== 'Other models' && row.label !== 'Not reported')
@@ -274,10 +274,22 @@ function ReportSection({
     )
 }
 
-const questions = [
+function describeMonths(months: string[]): string {
+    const labels = months.map((value) => monthName(value, longDateFormat))
+    if (labels.length < 2) return labels[0] ?? ''
+    const last = labels.pop()
+    if (months.every((value, i) => i === 0 || previousMonth(value) === months[i - 1])) {
+        return `${labels[0]} through ${last}`
+    }
+    return `${labels.join(', ')}${labels.length > 1 ? ',' : ''} and ${last}`
+}
+
+const reportQuestions = (period: string) => [
     {
         question: 'Which months does the report cover?',
-        answer: 'We use complete calendar months in UTC. Choose a month to see its rankings and the trends up to that month.',
+        answer: period
+            ? `The report covers ${period}. We include only complete calendar months in UTC.`
+            : 'No monthly data is available yet.',
     },
     {
         question: 'What’s the difference between a lab and a provider?',
@@ -343,7 +355,7 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     Frequently asked questions
                 </h2>
                 <Accordion.Root>
-                    {questions.map(({ question, answer }) => (
+                    {reportQuestions(describeMonths(months)).map(({ question, answer }) => (
                         <Accordion.Item key={question} value={question}>
                             <Accordion.Header>
                                 <Accordion.Trigger>{question}</Accordion.Trigger>
