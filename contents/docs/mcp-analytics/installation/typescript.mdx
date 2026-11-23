@@ -129,33 +129,49 @@ Connect an agent to your server and call a tool. Then open the [activity feed](h
 
 ### Next.js and Vercel (`mcp-handler`)
 
-[`mcp-handler`](https://github.com/vercel/mcp-handler) gives you an `McpServer` in its setup callback. Call `instrument()` there:
+[`mcp-handler`](https://github.com/vercel/mcp-handler) builds a new `McpServer` for every request and passes it to your setup callback. Call `instrument()` there, then wrap the route in `withMcpSessionHeader`. `withMcpSessionHeader` needs `@posthog/mcp` 1.5.0 or later.
 
 ```ts
-import { createMcpHandler } from "mcp-handler"
-import { PostHog, instrument } from "@posthog/mcp"
+// app/api/mcp/route.ts
+import { createMcpHandler, withMcpAuth } from "mcp-handler"
+import { PostHog, instrument, withMcpSessionHeader } from "@posthog/mcp"
+import { z } from "zod"
+import { verifyToken } from "./auth" // your token check, returning mcp-handler's AuthInfo
 
 // Create the client once at module scope, not per request.
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
-const handler = createMcpHandler(
-  (server) => {
-    instrument(server, posthog)
-    server.registerTool("roll_dice", { /* ... */ }, async ({ sides }) => { /* ... */ })
-  },
-  {},
-  { basePath: "/api" },
-)
+const handler = createMcpHandler((server) => {
+  instrument(server, posthog, {
+    // withMcpAuth puts the verified token on extra.authInfo (mcp-handler 1.x) or extra.http.authInfo (2.x)
+    identify: async (_request, extra) => {
+      type Auth = { authInfo?: { clientId: string } }
+      const auth = (extra as Auth | undefined)?.authInfo ?? (extra?.http as Auth | undefined)?.authInfo
+      return auth ? { distinctId: auth.clientId } : null
+    },
+  })
+  server.registerTool("echo", { inputSchema: z.object({ text: z.string() }) }, async ({ text }) => ({
+    content: [{ type: "text", text }],
+  }))
+})
 
-export { handler as GET, handler as POST }
+// Auth goes outermost and is required, so a request without a valid token is rejected before anything reads its body.
+const route = withMcpAuth(withMcpSessionHeader(handler), verifyToken, { required: true })
+export { route as GET, route as POST }
 ```
 
-`mcp-handler` creates a new server for each request and sends no `Mcp-Session-Id` header. Without another signal, each request gets its own `$session_id`. To group a client's calls:
+This is `mcp-handler` 2.x. On 1.x, mount the route at `app/api/[transport]/route.ts` and pass `{}, { basePath: "/api" }` after the setup callback.
 
-- Return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users), such as the OAuth subject. This needs no client changes.
+`instrument()` can run before or after you register tools. The `identify` callback is optional. Drop it, and `withMcpAuth`, if your server has no auth.
+
+On `2025-11-25`, the client sends its name and version only at `initialize`, and every later request reaches a new server. `mcp-handler` streams the `initialize` response, so `instrument()` can't add the [session token](#stateless-and-multi-pod-servers) to it. `withMcpSessionHeader` adds the token at the route instead. The client replays it, so its calls share one `$session_id` and keep `$mcp_client_name` and `$mcp_client_version`.
+
+`2026-07-28` has no `initialize` and no session header. `withMcpSessionHeader` passes those requests through unchanged. To group a client's calls on that revision:
+
 - Keep [conversation IDs](/docs/mcp-analytics/conversation-id) on (the default). Calls group when the agent echoes the handle.
+- Return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users), such as the authenticated user's ID. This groups calls by user, not by session.
 
 Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
 
