@@ -9,7 +9,7 @@ availability:
 sourceId: AppsFlyer
 ---
 
-Enter your AppsFlyer credentials to pull aggregate reports, raw data reports, and the Master API report into the PostHog Data Warehouse. Each source connects to a single AppsFlyer app.
+Enter your AppsFlyer credentials to pull aggregate reports, raw data reports, reinstall reports, postback reports, the Master API report, and the SKAN performance report into the PostHog Data Warehouse. Each source connects to a single AppsFlyer app.
 
 ## Adding a data source
 
@@ -22,7 +22,7 @@ Enter your AppsFlyer credentials to pull aggregate reports, raw data reports, an
 
 Once the syncs are complete, you can start using AppsFlyer data in PostHog.
 
-The raw data tables and the `master_report` table need an AppsFlyer subscription that includes them. The Protect360 tables (`blocked_installs`, `blocked_in_app_events`, and `post_attribution_installs`) also need the Protect360 add-on, so they start unselected.
+The raw data tables and the `master_report` table need an AppsFlyer subscription that includes them. The Protect360 tables (`blocked_installs`, `blocked_in_app_events`, and `post_attribution_installs`) need the Protect360 add-on. The `skan_performance_report` table needs the SKAN add-on and is only available for iOS apps. All of these tables start unselected.
 
 ## Sync behavior
 
@@ -37,13 +37,26 @@ The `daily_report`, `geo_report`, and `partners_report` tables sync incrementall
 
 ### Raw data reports
 
-The install, in-app event, uninstall, and ad revenue tables sync incrementally on the `event_time` field. This includes their organic and retargeting versions, and the `blocked_installs` and `blocked_in_app_events` tables.
+The install, in-app event, uninstall, reinstall, and ad revenue tables sync incrementally on the `event_time` field. This includes their organic and retargeting versions, and the `blocked_installs` and `blocked_in_app_events` tables.
 
 - AppsFlyer limits raw data to the last 90 days, so the first sync reads the last 90 days.
 - The connector requests raw data in 7-day windows. Each incremental sync fetches the last 7 days again.
 - AppsFlyer returns a maximum of 1,000,000 rows for each request and drops the rest without an error. If a 7-day window has more rows than this, the table is missing rows for that window.
 
 The `post_attribution_installs` table has no incremental field. AppsFlyer adds a row to this report when it detects fraud, which can occur after the install date. Each sync reads the full 90-day window again.
+
+### Postback reports
+
+The `install_postbacks`, `in_app_event_postbacks`, `retargeting_install_postbacks`, and `retargeting_in_app_event_postbacks` tables have no incremental field. One event can be sent to several partners, and a failed postback is sent again, so the same event key can appear in multiple rows. An incremental merge would collapse these rows, so the postback tables sync the full 90-day window each time.
+
+### SKAN performance report
+
+The `skan_performance_report` table syncs Apple SKAdNetwork (SKAN) postback data for iOS apps. It syncs incrementally in 30-day windows.
+
+- The first sync can pull up to 365 days of history.
+- AppsFlyer finalizes SKAN data about 3 days after the UTC day, so the sync window ends 3 days before today.
+- SKAN postbacks can arrive up to 45 days after install. Each incremental sync re-reads the last 45 days.
+- AppsFlyer returns a maximum of 250,000 rows per request. If a 30-day window exceeds this, the table is missing rows for that window.
 
 ### Master API report
 
