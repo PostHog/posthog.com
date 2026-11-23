@@ -137,7 +137,7 @@ Removing `$mcp_parameters` and `$mcp_response` keeps tool arguments and results 
 
 In Python, `MCPAnalyticsOptions.before_send` can be sync or async.
 
-Dropping a tool call event doesn't drop its `$exception` event. Check for `$exception` too if you want both gone.
+In Rust, dropping a tool call event also drops its `$exception` event. Elsewhere it doesn't, so check for `$exception` too if you want both gone.
 
 ## Turn off exception events
 
