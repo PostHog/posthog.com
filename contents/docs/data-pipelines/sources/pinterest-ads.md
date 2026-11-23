@@ -36,6 +36,17 @@ Connect PostHog to your Pinterest Ads account using a Pinterest account. The Pin
 4. Connect your Pinterest account by selecting an existing integration or creating a new one.
 5. Select the **Ad Account** you want to sync from the dropdown. Each account displays your permission level (Owner, Campaign Manager, etc.).
 6. (Optional) Add a prefix for the table name.
+7. (Optional) Select a **Reporting time zone** for analytics tables. The default is **Pinterest default (UTC)**. Choose **Ad account time zone** to report analytics days in the time zone configured on the ad account in Pinterest.
+
+### Reporting time zone
+
+By default, Pinterest reports analytics days in UTC. If your ad account uses a non-UTC time zone, spend near midnight can appear on the neighboring day in daily charts.
+
+To align analytics rows with your ad account's time zone, change **Reporting time zone** to **Ad account time zone**. This requires a time zone to be set on the ad account in Pinterest.
+
+This is a sync setting, so you can change it after the source is created. A change applies to new syncs only. To move past rows to the new time zone, run a full resync on the analytics tables.
+
+> **Warning:** A full resync replaces each analytics table with the last 89 days of data and deletes older rows.
 
 ## Configuration
 

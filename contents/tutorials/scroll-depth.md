@@ -120,7 +120,7 @@ useEffect(() => {
 }, [])
 ```
 
-With this set up., we can set up the capture calls. For this, we need an initialization of PostHog. Run `npm i posthog-js`, and then add a `posthog.init` call with your project token and instance address. You can get both from your project settings. 
+With this set up., we can set up the capture calls. For this, we need an initialization of PostHog. Run `npm i posthog-js@1`, and then add a `posthog.init` call with your project token and instance address. You can get both from your project settings. 
 
 In the `handleRouteChange` function, call `posthog.capture()` with a `left page` event with all the properties we want. Altogether, this looks like this.
 

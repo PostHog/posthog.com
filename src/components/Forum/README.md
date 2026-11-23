@@ -1,6 +1,6 @@
 # Forum
 
-The `/forum` app. Forum posts are Squeak questions with a `forumTopic`, so the forum reuses the question and reply APIs and components. The full API contract lives in `docs/forum-api.md` in [squeak-strapi](https://github.com/PostHog/squeak-strapi).
+The `/forum` app. Forum posts are Squeak questions with a `forumTopic`, so the forum reuses the question and reply APIs and components. The full API contract lives in `docs/forum-api.md` in <PrivateLink url="https://github.com/PostHog/squeak-strapi">squeak-strapi</PrivateLink>.
 
 ## Routes
 
@@ -31,7 +31,7 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | `GettingStarted.tsx` | A hedgehog that peeks up from the bottom right of the feed views. A signed-out visitor gets a welcome with Join and Sign in. A member gets a chat of first steps, checked by `useForumProgress`, and a confetti burst on the first visit. Each has its own "don't show again" key in localStorage (`forum-welcome-dismissed`, `forum-getting-started-dismissed`). `index.tsx` loads it with `React.lazy`, so its SVG stays out of the shared bundle |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
 | `FilterMenu.tsx` | The feed filters: a "No replies yet" checkbox (`numReplies: 0`), then the tags, with a subscribe bell for each tag. On All posts it groups the tags by topic |
-| `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |
+| `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where members unsubscribe |
 | `TopicForm.tsx`, `DeleteTopicDialog.tsx` | Staff tools for topics |
 | `TopicTags.tsx` | Staff page for one topic's tags: search, add, edit the name and description, and delete or move to another tag |
 | `ForumAlerts.tsx` | Staff page that sets which teams get a Slack message for each topic and tag. Saves with `PUT /api/teams/:id` |
@@ -53,7 +53,7 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | --- | --- |
 | Anyone | Read, search, and filter |
 | Signed in | Post, save drafts, delete their own posts, comment, upvote, follow a post, and subscribe to topics and tags (daily digest) |
-| Community moderator (`isForumModerator`) | Also pin, lock, archive, move posts, edit their tags, and choose "Every post" emails |
+| Community moderator (`isForumModerator`) | Also pin, lock, archive, move posts, and edit their tags |
 | Staff moderator (`isModerator`) | Also delete or edit any post or comment, create, edit, and delete topics and tags, and ask Max to reply |
 
 The server enforces every rule. The UI only hides controls that a role cannot use. Deleting a post also deletes every comment on it.

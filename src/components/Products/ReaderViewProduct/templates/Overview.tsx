@@ -4,9 +4,10 @@ import { SectionComponentProps } from '../types'
 import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { PRODUCT_SURFACE_H1 } from '../helpers'
+import Label from 'components/Label'
 
-const Overview = ({ id, productData }: SectionComponentProps) => {
-    const { name, overview, screenshots, hogs } = productData ?? {}
+const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & { showStatusLabel?: boolean }) => {
+    const { name, overview, screenshots, hogs, status } = productData ?? {}
     // Sized by height, not width: the art ranges from wide to tall portraits, and
     // a fixed width makes the tall ones swamp the screenshot. It grows with the
     // screenshot's side column at `@3xl` and `@6xl`.
@@ -69,6 +70,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
 
                 <div className="space-y-4">
                     <div>
+                        {showStatusLabel && status === 'beta' && <Label text="Beta" className="uppercase mb-2" />}
                         <h1 className={PRODUCT_SURFACE_H1}>{overview?.title || name}</h1>
                         {overview?.description && <p className="leading-relaxed">{overview.description}</p>}
                     </div>

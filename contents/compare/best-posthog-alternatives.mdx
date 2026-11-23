@@ -69,7 +69,7 @@ PostHog isn't the right fit for everyone. You might want an alternative if:
 - **You need a no-code builder for product tours or in-app guides** – A coding agent can add tooltips, walkthroughs, and banners to your app with PostHog's [product tours skill](/changelog?id=2956) (`npx @posthog/wizard@latest skill creating-product-tours`), but there's no UI for building them. If your CS or product team needs to ship guides without an engineer, [Pendo](/compare/posthog-vs-pendo) is a good alternative here.
 - **You need multi-touch attribution** – PostHog's [marketing analytics](/docs/web-analytics/marketing-analytics) (beta) imports ad spend and reports cost per conversion, but has no attribution models. [Amplitude](/compare/posthog-vs-amplitude) is stronger for growth and marketing teams who need this.
 - **You only need one specific tool for a lightweight use case** – For example, if you just want cookieless, privacy-friendly traffic stats with a minimal script and no consent banners, a focused tool like [Plausible](/compare/posthog-vs-plausible) or [Fathom](/compare/best-fathom-alternatives) might be simpler and cheaper than a full platform.
-- **You prefer to fully self-host** – PostHog can be self-hosted, but it's operationally complex at scale. Tools like [Matomo](/compare/posthog-vs-matomo) or [OpenReplay](/blog/best-open-source-session-replay-tools) are designed with self-hosting as the primary deployment model.
+- **You prefer to fully self-host** – PostHog can be self-hosted, but it's operationally complex at scale. Tools like [Matomo](/compare/posthog-vs-matomo) or [OpenReplay](/compare/best-open-source-session-replay-tools) are designed with self-hosting as the primary deployment model.
 
 </details>
 
@@ -692,7 +692,7 @@ The [data warehouse](/warehouse) and [CDP](/cdp) extends that power to all your 
 
 It means PostHog can dig through your product data, find what's worth fixing, and have agents do the work for you.
 
-It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 

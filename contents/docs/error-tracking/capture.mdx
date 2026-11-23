@@ -72,9 +72,12 @@ posthog.captureException(error, {
 ```
 
 ```javascript file=Node.js
-posthog.captureException(e, 'user_distinct_id', {
-  custom_property: "custom_value",
-  custom_list: ["custom_value_1", "custom_value_2"],
+posthog.captureException(e, {
+  distinctId: 'user_distinct_id',
+  properties: {
+    custom_property: "custom_value",
+    custom_list: ["custom_value_1", "custom_value_2"],
+  },
 })
 ```
 
@@ -299,7 +302,7 @@ PostHogSDK.shared.setup(config)
 ```
 
 ```kotlin file=Android
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>").apply {
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>", host = "<ph_client_api_host>").apply {
     errorTrackingConfig.exceptionSteps.enabled = true
     errorTrackingConfig.exceptionSteps.maxBytes = 32768
 }
@@ -373,10 +376,13 @@ try {
 try {
   // ...
 } catch (error) {
- posthog.captureException(error, 'user_123', { 
-      "custom_property": "custom_value",
-      // Optional: you can also override generated properties like fingerprint
-      "$exception_fingerprint": "CustomExceptionGroup",
+ posthog.captureException(error, {
+      distinctId: 'user_123',
+      properties: {
+        "custom_property": "custom_value",
+        // Optional: you can also override generated properties like fingerprint
+        "$exception_fingerprint": "CustomExceptionGroup",
+      },
     });
 }
 ```
@@ -464,9 +470,9 @@ The process is slightly different depending on the SDK you're using.
 <Tab.Panels>
   <Tab.Panel>
 
-  In [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
+  In the [JavaScript Web](/docs/libraries/js) SDK, you can override the default properties by passing a `before_send` callback. In the [Node.js](/docs/libraries/node) SDK 6.x.x, pass a `beforeSend` callback to `new PostHog()` instead. This callback is called before any exception is captured.
 
-  ```javascript 
+  ```javascript file=Web
   posthog.init('<ph_project_token>', {
   api_host:'<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
@@ -484,6 +490,23 @@ The process is slightly different depending on the SDK you're using.
     }
     return event
     }
+  })
+  ```
+
+  ```javascript file=Node.js
+  const posthog = new PostHog('<ph_project_token>', {
+    host: '<ph_client_api_host>',
+    beforeSend: (event) => {
+      if (event.event === '$exception') {
+        event.properties = {
+          ...event.properties,
+          custom_property: 'custom_value',
+          // Optional: you can also override generated properties like fingerprint
+          $exception_fingerprint: 'MyCustomGroup',
+        }
+      }
+      return event
+    },
   })
   ```
   
@@ -515,7 +538,7 @@ The process is slightly different depending on the SDK you're using.
   </Tab.Panel>
   <Tab.Panel>
 
-  In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#contexts) and tags. 
+  In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#posthognew_context) and tags. 
 
   ```python
   import posthog

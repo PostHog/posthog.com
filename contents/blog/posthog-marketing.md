@@ -166,7 +166,7 @@ Beyond this top-level metric, the Content Marketing Effectiveness dashboard (yes
 
 ![session funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/os-session-recording.png)
 
-Above is a funnel analysis for one of our most successful blog posts, a guide to [open-source session recording tools](/blog/best-open-source-session-replay-tools). It converts to intent at nearly 23%, which is awesome.
+Above is a funnel analysis for one of our most successful blog posts, a guide to [open-source session recording tools](/compare/best-open-source-session-replay-tools). It converts to intent at nearly 23%, which is awesome.
 
 At other end of the spectrum, we have our guide to [GDPR-compliant analytics tools](/compare/best-gdpr-compliant-analytics-tools). It only converts 6.3% of the time – perhaps the launch of [PostHog Cloud EU](https://eu.posthog.com/signup) will increase that figure? 🤔
 

@@ -141,6 +141,57 @@ Make it explicit in your outreach that if we can't agree a pre-commitment, the a
 
 RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
+### Disputes and chargebacks
+
+A dispute (chargeback) occurs when a customer asks their bank to reverse a charge. While the dispute is open, the card network holds the funds, so we cannot refund the charge through Stripe. This process is handled by Finance.
+
+#### 1. Review the dispute
+
+Before you contact the customer, check:
+
+- The dispute reason and the "respond by" date in Stripe. We must submit evidence before this date, whatever else is happening.
+- What the charge was for.
+- The customer's PostHog activity: when they signed up, when they subscribed, and how much they have used the product.
+
+Most disputes come from customers who wanted to cancel and went to their bank instead. Some are mistakes, such as the wrong card being added and charged. If it looks like genuine fraud, raise it in #team-billing in Slack.
+
+#### 2. Email the customer
+
+Email all admins on the account. There is no template. Write a custom email that:
+
+- Acknowledges the dispute and explains what the charge was for.
+- Points them to our [refund policy](https://posthog.com/handbook/growth/sales/refunds) and says we are generally happy to refund if they withdraw the dispute with their bank.
+- Explains that we cannot refund while the dispute is open, because the card network holds the funds.
+- Gives them one week to withdraw the dispute.
+- Tells them that if they do not, we will contest the dispute, cancel their subscription, and block their access to PostHog.
+
+If they withdraw, process the refund when Stripe shows the dispute as closed. Cancel their subscription, and block their access to PostHog once done.
+
+#### 3. Counter the dispute
+
+If the customer does not respond or does not withdraw within one week, submit evidence in Stripe. If the "respond by" date is sooner than one week, submit evidence before that date.
+
+The evidence must show that the customer signed up, subscribed, and used PostHog, and that we only charged them for what they used. Include:
+
+- Screenshots from Customer.io.
+- Our logs that show their product usage.
+- The invoice, and the dates they signed up and subscribed.
+
+Stripe sends the evidence to the bank, and the bank makes the decision. This usually takes 1–2 months, and the decision can go either way.
+
+#### 4. Block access
+
+When you counter the dispute:
+
+1. Cancel their subscription in Stripe.
+2. Block access to PostHog. In Django admin, set the organization's "Active" field to "No". In the "De-activated reason" field, type an explanation, for example "Access revoked due to a disputed payment." Users see this text in the app, so keep it short and factual.
+3. Set `is_blocked_from_subscribing` to `true` in their Stripe customer metadata, so they cannot subscribe again.
+4. Email the admins to tell them about these steps.
+
+#### Restoring access
+
+We decide case by case whether to restore access or let the customer subscribe again. About 99% of the time, we do neither. If you think a customer should get an exception, ask billing support and finance.
+
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
 - 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
@@ -152,7 +203,9 @@ PostHog Inc is a US incorporated company and a US tax resident and we do not cla
 - Our no PE (Permanent Establishment) Certificate
 These documents are available in the <PrivateLink url="https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing">shared Finance drive</PrivateLink>. You can share them with the customer on request.
  
-The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
+The full invoice amount is due. Our terms say that taxes shall not be deducted from or set off against the fees owed to PostHog.
+
+If a customer withholds tax, we treat it as a short payment. The unpaid balance stays open on the invoice and goes through the [failed/late payments process](#failedlate-payments).
 
 
 ### Stripe Products & Prices

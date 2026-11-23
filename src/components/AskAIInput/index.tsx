@@ -45,29 +45,34 @@ export default function AskAIInput({ placeholder = DEFAULT_PLACEHOLDER, classNam
     if (compact) return null
 
     return (
-        <div className={`flex gap-2 items-center ${className}`}>
-            <input
-                type="text"
-                value={question}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                    if (e.key === 'Enter') {
-                        handleSubmit()
-                    }
-                }}
-                placeholder={placeholder}
-                className="flex-1 bg-primary border border-primary rounded px-2 py-2 ring-0 focus:ring-0"
-            />
-            <OSButton
-                variant="secondary"
-                size="md"
-                onClick={handleSubmit}
-                icon={<IconSparkles />}
-                iconPosition="right"
-                disabled={!question.trim()}
-            >
-                Ask PostHog AI
-            </OSButton>
+        <div className={`@container ${className}`}>
+            <div className="flex flex-col gap-2 @sm:flex-row @sm:items-center">
+                <input
+                    type="text"
+                    value={question}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                        if (e.key === 'Enter') {
+                            handleSubmit()
+                        }
+                    }}
+                    placeholder={placeholder}
+                    className="flex-1 min-w-0 bg-primary border border-primary rounded px-2 py-2 ring-0 focus:ring-0"
+                />
+                <div className="whitespace-nowrap">
+                    <OSButton
+                        variant="secondary"
+                        size="md"
+                        width="full"
+                        onClick={handleSubmit}
+                        icon={<IconSparkles />}
+                        iconPosition="right"
+                        disabled={!question.trim()}
+                    >
+                        Ask PostHog AI
+                    </OSButton>
+                </div>
+            </div>
         </div>
     )
 }

@@ -9,21 +9,11 @@ availability:
   enterprise: full
 ---
 
-import { CalloutBox } from "components/Docs/CalloutBox";
-
-Warehouse properties copy columns from a synced [data warehouse](/docs/data-warehouse) table onto your [person properties](/docs/product-analytics/person-properties) and [group properties](/docs/product-analytics/group-analytics). Each row is matched to a person or a group by a key column. The mapped columns then stay up to date on every sync.
+Warehouse properties copy columns from a synced [Data Warehouse](/docs/data-warehouse) table or a [materialized view](/docs/data-warehouse/views/materialize) onto your [person properties](/docs/product-analytics/person-properties) and [group properties](/docs/product-analytics/group-analytics). Each row is matched to a person or a group by a key column. The mapped columns then stay up to date on every sync.
 
 Use it when the truth about a customer lives in another system. Plan tier, seat count, MRR, contract renewal date, and lifecycle stage usually live in Stripe, Salesforce, HubSpot, or your own Postgres, not in your product events.
 
 Once a column is mapped, it behaves like any other person or group property. You can filter insights with it, build [cohorts](/docs/data/cohorts) from it, target [feature flags](/docs/feature-flags) and [experiments](/docs/experiments) with it, and use it in [surveys](/docs/surveys).
-
-<CalloutBox icon="IconWarning" title="Beta feature" type="action">
-
-Warehouse properties are currently in beta. Contact support if you don't see **Warehouse properties** in the **Data** menu.
-
-Self-hosted instances have this feature enabled by default. Set `WAREHOUSE_PERSON_PROPERTIES_ENABLED_SELF_HOSTED` to `False` to disable it. See [environment variables](/docs/self-host/configure/environment-variables) for more.
-
-</CalloutBox>
 
 ## Warehouse properties or a join?
 
@@ -45,8 +35,8 @@ Choose a join when you only need the data in insights and SQL. A join adds no wr
 
 You need three things:
 
-1. A [linked source](/docs/data-pipelines/sources) that syncs the table you want to read.
-2. A column in that table holding each row's distinct ID, for person properties. For group properties, you need the column holding each row's group key.
+1. A [linked source](/docs/data-pipelines/sources) that syncs the table you want to read, or a materialized view.
+2. A column in that table or view holding each row's distinct ID, for person properties. For group properties, you need the column holding each row's group key.
 3. People or groups that already exist in PostHog.
 
 The last point is the one that catches people out. A sync only updates a person who is already in PostHog. It never creates one. If your warehouse holds 50,000 customers and only 12,000 of them have used your product, the other 38,000 rows are skipped.
@@ -60,14 +50,14 @@ Group properties also need [group analytics](/docs/product-analytics/group-analy
 3. Click **Add person property**, or **Add group property**.
 4. Give the mapping a name, and a description if it helps the next person to read it.
 5. For groups, select the **Group type** it attaches to.
-6. Select the **Warehouse table** to read from. You can search the whole synced catalog.
+6. Select the synced table or materialized view to read from.
 7. Select the **Distinct ID column**, or the **Group key column** for groups. This is how a row finds the person or group to update.
 8. Map each warehouse column to the property name to write it to. Add one row per column. Each mapped column takes its own optional description.
 9. Save.
 
 PostHog starts a backfill as soon as you save, so the first values arrive without another sync.
 
-You need project admin access, plus edit access on the warehouse source behind the table. Mapping a table drives its billable sync, so viewing the source is not enough.
+You need project admin access, plus edit access on the warehouse source behind the table, or on the materialized view. Mapping a table drives its billable sync, so viewing the source is not enough.
 
 ### What you can change later
 
@@ -83,13 +73,48 @@ The property name is what you see in filters, so write it the way you want to re
 
 The value itself is copied as it stands. PostHog does not convert units or reformat it, so a column holding cents arrives as cents.
 
-You can only map a table a source syncs. A [view](/docs/data-warehouse/views) or a saved query is not selectable, so a value that needs SQL to derive has to be computed upstream, in the system you sync from.
+You can map a synced table or a materialized view. A view or saved query that has not been materialized is not selectable. Use a materialized view to join tables or compute values before copying them to properties.
 
 Map a column once. Two sources that write the same property name fight each other, and the last sync wins.
 
+### When your key is a person property
+
+For person properties, the key column must contain an existing person's distinct ID. It cannot match directly on a person property such as `customer_id`, or on PostHog's internal person UUID (`persons.id`). Rows whose key does not resolve to a distinct ID are counted as **Skipped (no person)**.
+
+If your warehouse uses another identifier, create a materialized view that joins it to `persons` through the matching person property, then to `person_distinct_ids` through `person_id`. Output the resolved `distinct_id` as the key column.
+
+For example, suppose `warehouse_customers` has one row per customer, with string columns `customer_id` and `plan`, and each matching person has the same string in `properties.customer_id`:
+
+```sql
+SELECT
+    ids.distinct_id AS distinct_id,
+    customers.plan AS plan
+FROM warehouse_customers AS customers
+INNER JOIN persons AS p
+    ON customers.customer_id = p.properties.customer_id
+INNER JOIN (
+    SELECT person_id, min(distinct_id) AS distinct_id
+    FROM person_distinct_ids
+    GROUP BY person_id
+) AS ids ON p.id = ids.person_id
+WHERE customers.customer_id IS NOT NULL
+    AND customers.customer_id != ''
+```
+
+Replace the table, property, and column names with your own. Confirm that the customer IDs have the same type and format on both sides, are nonempty, and identify only the intended person. If several people share a customer ID, this join updates all of them.
+
+Resolve duplicate warehouse rows before using the view so each person receives one set of values. The inner query uses `min(distinct_id)` to pick one existing distinct ID per person, avoiding duplicate updates for people with multiple IDs.
+
+1. Run the query in the SQL editor and check that each returned distinct ID belongs to the intended person.
+2. [Save and materialize the view](/docs/data-warehouse/views/materialize#materializing-a-view). Use full refresh so changes to person properties and identity mappings are picked up on the next refresh.
+3. Add a person property mapping, select the materialized view, and choose `distinct_id` as the **Distinct ID column**.
+4. Map `plan` to the person property you want to write. Keep the `customer_id` property used by the join separate from the properties this mapping writes.
+
+The inner joins exclude customers with no matching person or distinct ID. Those rows never reach the property sync, so they do not appear in its skipped count. This does not create people or change how PostHog matches warehouse property keys.
+
 ## How syncing works
 
-A warehouse property sync rides on the table's own warehouse sync. It does not run on its own schedule. When the import for the table finishes, the sync runs for every enabled mapping on that table, in this order:
+A warehouse property sync runs after its table's warehouse import or its view's materialization. It does not run on its own schedule. For a synced table, every enabled mapping runs in this order:
 
 1. It reads the rows the import staged. An incremental import stages only the rows it added or changed, so a quiet table reads zero rows.
 2. It builds a bundle of the mapped values for each row, keyed by the distinct ID or group key.
@@ -100,6 +125,8 @@ A warehouse property sync rides on the table's own warehouse sync. It does not r
 Step 3 means a full refresh does not resend everything. It only sends what actually differs from the last send.
 
 Step 4 is where rows go missing. The run history reports that count separately, under **Skipped (no person)**.
+
+Materialized views use the same property sync steps after refreshing. **Sync now** refreshes the view, and **Backfill** reads its stored results. Views on the older data modeling schedule do not update properties automatically; **Sync now** reports this limitation. Refresh the view, then use **Backfill** to update its properties.
 
 A person update arrives as a `$set` event. A group update arrives as a `$groupidentify` event. PostHog sends them at a controlled rate, so a large backfill lands over time rather than all at once.
 
@@ -151,3 +178,7 @@ The warehouse sync itself is billed by rows synced. See [Sources pricing](/prici
 **A run failed.** The status tag carries the error. A property sync that rode a failing import fails with it, so check the table's sync history first.
 
 **The mapping turned itself off.** Five failed runs in a row disable a mapping, so a broken table does not retry forever. Fix the underlying sync, then toggle it back on. The failure count resets after a run succeeds.
+
+## Self-hosting
+
+Self-hosted instances have this feature enabled by default. Set `WAREHOUSE_PERSON_PROPERTIES_ENABLED_SELF_HOSTED` to `False` to disable it. See [environment variables](/docs/self-host/configure/environment-variables) for more.

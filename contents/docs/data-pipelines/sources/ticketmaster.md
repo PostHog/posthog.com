@@ -9,7 +9,7 @@ availability:
 sourceId: Ticketmaster
 ---
 
-Sync public events, attractions, and venues from the [Ticketmaster Discovery API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) into the PostHog data warehouse.
+Sync public events, attractions, venues, and classifications from the [Ticketmaster Discovery API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) into the PostHog data warehouse.
 
 This source uses the public Discovery API v2. Private data like ticket orders, sales transactions, and attendee information is not available through this source.
 
@@ -22,23 +22,24 @@ You need an API key from the [Ticketmaster Developer Portal](https://developer.t
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click **+ New source** and then click **Link** next to Ticketmaster.
 3. Enter your **API key** from the Ticketmaster Developer Portal.
-4. Enter a **search keyword**. This keyword filters which events, attractions, and venues are synced. It applies independently to all three tables.
+4. Enter a **search keyword**. This keyword filters which events, attractions, and venues are synced. The keyword does not apply to the `classifications` table.
 5. Click **Next**.
 6. Select the tables you want to sync, set the sync frequency, then click **Import**.
 
 ## Available tables
 
-| Table         | Description                                                  | Sync method  |
-| ------------- | ------------------------------------------------------------ | ------------ |
-| `events`      | Public events that match the configured search keyword       | Full refresh |
-| `attractions` | Artists, teams, and other attractions that match the keyword | Full refresh |
-| `venues`      | Event venues that match the keyword                          | Full refresh |
+| Table             | Description                                                                | Sync method  |
+| ----------------- | -------------------------------------------------------------------------- | ------------ |
+| `events`          | Public events that match the configured search keyword                     | Full refresh |
+| `attractions`     | Artists, teams, and other attractions that match the keyword               | Full refresh |
+| `venues`          | Event venues that match the keyword                                        | Full refresh |
+| `classifications` | The full classification taxonomy used to categorize events and attractions | Full refresh |
 
-All tables use **full refresh** sync only – the entire dataset is reloaded on every sync.
+All tables use **full refresh** sync only – the entire dataset is reloaded on every sync. The `classifications` table syncs the complete taxonomy regardless of keyword.
 
 ## Limitations
 
-- **1,000 result limit** – Each table can return a maximum of 1,000 results per sync. If a search keyword returns more than 1,000 results, the sync fails. Use a more specific keyword to narrow results.
+- **1,000 result limit** – The `events`, `attractions`, and `venues` tables can return a maximum of 1,000 results each per sync. If a search keyword returns more than 1,000 results for any of these tables, the sync fails. Use a more specific keyword to narrow results. This limit does not apply to the `classifications` table.
 
 - **Public data only** – This source uses the public Discovery API. Private ticket orders, sales transactions, and attendee data are not available.
 

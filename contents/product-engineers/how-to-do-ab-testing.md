@@ -71,7 +71,7 @@ First, if you don't have it already, you need tracking. An A/B test without trac
 
 Second, you need a system to manage A/B tests. This system needs to store information related to the test, split users into test and control groups, control what variant each group sees in-app, track related behavior, report metrics, and calculate impact.
 
-There are numerous [A/B testing tools that do both](/blog/best-open-source-ab-testing-tools), but we think [PostHog](https://us.posthog.com/signup) is a great option because it combines tracking and A/B testing in [one snippet or SDK installation](/docs/getting-started/install), automatically captures events like pageviews and button clicks, splits users into test and control groups, calculate statistical significance, and more.
+There are numerous [A/B testing tools that do both](/compare/best-open-source-ab-testing-tools), but we think [PostHog](https://us.posthog.com/signup) is a great option because it combines tracking and A/B testing in [one snippet or SDK installation](/docs/getting-started/install), automatically captures events like pageviews and button clicks, splits users into test and control groups, calculate statistical significance, and more.
 
 Once tracking and an A/B testing system are in place, you should [run an A/A test](/tutorials/aa-testing) to ensure they are set up properly. An A/A test is the same as an A/B test, but both groups get the same functionality. Your goal is to **not** see a statistically significant difference between the groups. If you do, you know your setup is wrong.
 

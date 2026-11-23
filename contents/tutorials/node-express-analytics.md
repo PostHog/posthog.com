@@ -230,7 +230,7 @@ Reload the page, click around, and you should start to see some events in your P
 The snippet is great for autocapture, session recordings, and the basics. If you want all the features PostHog provides and more customizability, install the PostHog Node library. To do this, run:
 
 ```bash
-npm i posthog-node
+npm i posthog-node@6
 ```
 
 Next, add PostHog to the `server.js` file.
@@ -269,7 +269,7 @@ You can install the Node library alongside the snippet to capture the most amoun
 
 ## 4. Setting up event capture, identification, and feature flags
 
-Now that we’ve installed the library, we have access to all the features of PostHog. This section shows you how to set up custom event capture, user identification, and feature flags. For more features, see our [Node.js documentation](/docs/integrate/server/node).
+Now that we’ve installed the library, we have access to all the features of PostHog. This section shows you how to set up custom event capture, user identification, and feature flags. For more features, see our [Node.js documentation](/docs/libraries/node).
 
 ### Custom event capture
 
@@ -409,7 +409,7 @@ Once confirming this works, you’ve got a basic Express app working with the ke
 
 ## Further reading
 
-- [PostHog Node.js docs](/docs/integrate/server/node)
+- [PostHog Node.js docs](/docs/libraries/node)
 - [How to set up A/B tests in Node.js (Express)](/tutorials/frontend-vs-backend-group-analytics)
 - [What to do after installing PostHog](/tutorials/next-steps-after-installing)
 

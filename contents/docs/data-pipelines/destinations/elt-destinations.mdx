@@ -12,16 +12,17 @@ A source doesn't have to stop at PostHog. Point a table at your own database or 
 
 ## Where you can write
 
-| Destination | Notes |
-| --- | --- |
-| PostHog warehouse | The default. A source with no destinations set writes here. |
-| Postgres | Your own instance, reachable from PostHog's IP addresses. |
-| Snowflake | |
-| BigQuery | |
-| Redshift | |
-| Databricks | |
-| S3 | Files, not tables. |
-| Azure Blob | Files, not tables. |
+| Destination                                                | Notes                                                                                         |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| PostHog warehouse                                          | The default. A source with no destinations set writes here.                                   |
+| Postgres                                                   | Your own instance, reachable from PostHog's IP addresses.                                     |
+| Snowflake                                                  |                                                                                               |
+| BigQuery                                                   |                                                                                               |
+| Redshift                                                   |                                                                                               |
+| Databricks                                                 |                                                                                               |
+| [MotherDuck](/docs/data-pipelines/destinations/motherduck) | Requires a read-write token and a database you own. Available where enabled for your project. |
+| S3                                                         | Files, not tables.                                                                            |
+| Azure Blob                                                 | Files, not tables.                                                                            |
 
 The PostHog warehouse is one of this list rather than a special case. When a table has no destinations set, PostHog resolves it to your warehouse, which is why sources you configured before destinations existed carry on unchanged.
 
@@ -40,7 +41,7 @@ Both write to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure
 - **ELT destinations** move rows PostHog imported from a source: your Stripe charges, your HubSpot contacts, your own Postgres tables.
 - **[Batch exports](/docs/data-pipelines/batch-exports)** move the events, persons, and sessions PostHog captured.
 
-If you want your Stripe data in Snowflake, that's a destination. If you want your product analytics events in Snowflake, that's a batch export. Teams often run both.
+If you want your Stripe data in Snowflake, that's a destination. If you want your Product Analytics events in Snowflake, that's a batch export. Teams often run both.
 
 ## Checking what lands
 

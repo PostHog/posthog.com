@@ -732,14 +732,7 @@ export default function PostHogAIPage(): JSX.Element {
                     faq: faq.map(({ question, answer }) => ({ question, answer })),
                 })}
             />
-            <ReaderView
-                hideLeftSidebar
-                hideRightSidebar
-                hideMobileTableOfContents
-                showQuestions={false}
-                title="posthog-ai.md"
-                hideTitle
-            >
+            <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} title="posthog-ai.md" hideTitle>
                 <div className="@container/reader-content not-prose max-w-5xl mx-auto font-rounded">
                     <HeroSection />
                     <ContextLayerSection />

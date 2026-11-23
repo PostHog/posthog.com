@@ -133,7 +133,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Google Analytics 4?
 
-[Google Analytics 4 (GA4)](/blog/posthog-vs-ga4) is a marketing and product analytics tool that's tightly integrated with other Google products, such as Ads, BigQuery, Looker Studio, and Firebase.
+[Google Analytics 4 (GA4)](/compare/posthog-vs-ga4) is a marketing and product analytics tool that's tightly integrated with other Google products, such as Ads, BigQuery, Looker Studio, and Firebase.
 
 Unlike its predecessor, Universal Analytics (GA3), it's event-based. It also introduces new report types, such as conversion funnels and retention tables. This makes it more useful to product teams than before.
 
@@ -407,7 +407,7 @@ This guide focuses on the most popular Mixpanel alternatives, but these aren't t
 
 - **Kissmetrics** is more focused on marketing and e-commerce use cases than Mixpanel. It's worth considering if you want to focus on channel attribution and revenue tracking, but don't want to use GA4.
 
-- **Snowplow** is a powerful, open-source behavioral data platform. It can replace tools like Mixpanel, but requires significant data engineering resources to set up and maintain. Best for large enterprises with well-staffed data teams who want full control over their data pipeline.
+- **Snowplow** is a powerful behavioral data platform. Its trackers are open source, but its core pipeline is now source-available under the Snowplow Limited Use License. It can replace tools like Mixpanel, but requires significant data engineering resources to set up and maintain. Best for large enterprises with well-staffed data teams who want full control over their data pipeline.
 
 - **Countly** is an open-source analytics platform with strong mobile app support, push notifications, and crash analytics. It offers both self-hosted and cloud options, making it a good choice for teams who need data sovereignty.
 
@@ -446,7 +446,7 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
 
-It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
@@ -478,14 +478,14 @@ For most teams, **PostHog** is the best alternative. It includes everything Mixp
 <details>
 <summary>Which Mixpanel alternatives are open source?</summary>
 
-**PostHog** is the only major open-source alternative on this list (it's open core under the MIT license). **Snowplow** is also open source but requires significant data engineering resources. See our guide to the [best open-source product analytics tools](/compare/best-open-source-analytics-tools) for more options.
+**PostHog** is the only major open-source alternative on this list (it's open core under the MIT license). **Snowplow** used to be open source, but its core pipeline now uses the source-available Snowplow Limited Use License – only its trackers remain open source. See our guide to the [best open-source product analytics tools](/compare/best-open-source-analytics-tools) for more options.
 
 </details>
 
 <details>
 <summary>Which Mixpanel alternative has the best free tier?</summary>
 
-**PostHog** offers the most generous free tier: 1 million events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests, and 1,500 survey responses per month. **[GA4](/blog/posthog-vs-ga4)** is free for up to 10M events/month but lacks session replay and experimentation. **Mixpanel** is free for up to 1M events/month, with no credit card required.
+**PostHog** offers the most generous free tier: 1 million events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests, and 1,500 survey responses per month. **[GA4](/compare/posthog-vs-ga4)** is free for up to 10M events/month but lacks session replay and experimentation. **Mixpanel** is free for up to 1M events/month, with no credit card required.
 
 </details>
 
@@ -561,7 +561,7 @@ Yes. **PostHog** has a [managed migration tool](/docs/migrate/managed-migrations
 <details>
 <summary>What other analytics tools are available?</summary>
 
-Beyond the tools in this guide, there are many other options worth considering. See our guides to [Amplitude alternatives](/compare/best-amplitude-alternatives), [Heap alternatives](/compare/best-heap-alternatives), [Google Analytics alternatives](/compare/ga4-alternatives), and [open-source product analytics tools](/compare/best-open-source-analytics-tools) for broader comparisons.
+Beyond the tools in this guide, there are many other options worth considering. See our guides to [Amplitude alternatives](/compare/best-amplitude-alternatives), [Heap alternatives](/compare/best-heap-alternatives), [Google Analytics alternatives](/compare/best-ga4-alternatives), and [open-source product analytics tools](/compare/best-open-source-analytics-tools) for broader comparisons.
 
 </details>
 

@@ -68,7 +68,7 @@ The side panel has these tools:
 - **Inspect** – Hover an element to see its selector, its click and rage-click counts, and its actions. Then [create an action](/docs/toolbar/create-toolbar-actions) from it.
 - **Heatmap** – View clickmaps, [heatmaps](/docs/toolbar/heatmaps), and scroll depth. Set a date range, filter to an area of the page, and click **Save to PostHog**.
 - **Actions** – View and edit [actions](/docs/data/actions), and pick elements.
-- **Feature flags** – [Override a flag](/docs/toolbar/override-feature-flags) on or off, pick a variant, edit the payload, and clear overrides.
+- **Feature flags** – [Override a flag](/docs/toolbar/override-feature-flags) on or off, pick a variant, edit the payload, clear overrides, and visually compare the page with a flag off and on using the camera button.
 - **Events** – A live [debugger](/docs/toolbar#debugging-events) of the events that posthog-js sends from the page, with search, pause, and export.
 - **Web vitals** – The project's P90 [web vitals](/docs/web-analytics/web-vitals) metrics, and the metrics for this page load.
 - **Experiments** – [No-code web experiments](/docs/experiments/no-code-web-experiments). Edit a variant and preview it on the page.
@@ -78,12 +78,12 @@ The side panel has these tools:
 
 The extension asks Chrome for these permissions:
 
-| Permission | Why the extension needs it |
-|---|---|
+| Permission                          | Why the extension needs it                 |
+| ----------------------------------- | ------------------------------------------ |
 | Site access to http and https pages | To read the active tab's URL and run on it |
-| `scripting` | To inject its content script |
-| `storage` | To store the host and sign-in tokens |
-| `sidePanel` | To show the side panel |
+| `scripting`                         | To inject its content script               |
+| `storage`                           | To store the host and sign-in tokens       |
+| `sidePanel`                         | To show the side panel                     |
 
 ## Data the extension sends
 

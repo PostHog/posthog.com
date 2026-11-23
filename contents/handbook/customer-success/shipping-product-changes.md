@@ -23,6 +23,20 @@ Start small! It should be impactful, ideally tied to a customer request or an ou
 
 Skip anything already on a team's roadmap, or anything that spans products. Warehouse sources are a good place to start. Each source is its own module, so the blast radius is small and easy to see, and the repo has agent skills for them in `.agents/skills/`.
 
+### Is it worth shipping, or too complex?
+
+Most good first PRs start as a customer issue. When you're working one, the `cs-issue-response` skill in our <PrivateLink url="https://us.posthog.com/project/2/llm-analytics/skills/cs-issue-response">skills store</PrivateLink> can make this call for you. Once it decides the issue is a bug on our side, it does two things before it drafts a reply.
+
+First, it checks whether someone is already on it: open and merged PRs, assigned issues, the owning team's channel, and the [roadmap](/roadmap). If a fix is already in flight, don't open a competing PR. Point the customer at the issue instead.
+
+Then it rates how hard the fix is:
+
+- **Low:** One file or one self-contained module, a blast radius you can describe in one sentence, and existing tests cover it. Ship it yourself.
+- **Medium:** Several files in one product, or a change in behavior other customers rely on. Ask the owning team about your approach before you write any code, then ship it or hand it over.
+- **High:** Spans multiple products, or touches ingestion, billing, the query engine, permissions, migrations, or an SDK's public API. This is better suited for the relevant product team. In this case, feel free to escalate it with your findings and initial hypothesis and let the product team give you feedback on the fix, or advise on next steps. If you feel up for it, by all means propose a fix and share it with the team for feedback. But remember your book is still your main job, so time-box it accordingly.
+
+A low rating on a real customer problem is your cue to pick it up. If a workaround already solves it for the customer, the fix is optional. Ship it if you have the time, or log it as a [feature request](/handbook/customer-success/feature-requests).
+
 ## Best practices
 
 - Be absolutely sure of the ask. Fixing the wrong thing fast is still fixing the wrong thing.
@@ -39,7 +53,7 @@ Skip anything already on a team's roadmap, or anything that spans products. Ware
 ## Getting it merged
 
 - A merge needs green CI and one review. Learn what each check does, and whether a failure is yours or already broken on `master`. That one review should come from someone on the team that owns the part of the platform you're working on.
-- For right now, Greptile and Veria review everything. Read what they flagged on recent PRs in the same product, and fix it before they find it in yours.
+- For right now, Greptile and Veria review everything. Read what they flagged on recent PRs in the same product, and fix it before they find it in yours. You can also use <PrivateLink url="https://us.posthog.com/project/2/code-review">Code Review</PrivateLink> to review your PRs.
 - Drafts are fine early. When it's done, mark it ready and ask the owning team for a review. See [how we review PRs](/handbook/engineering/how-we-review).
 - The stale bot labels a PR after 7 quiet days and closes it 7 days later. Do not be afraid if you get a few bot comments that your PR is now stale. Removing the label, commenting or pushing restarts the 7-day clock. Removing the label doesn't re-run your checks, so push a commit when you need a fresh CI run before another review.
 - Once you've been blessed with a review, comment `/trunk merge` on your PR. A bot then comments as it reaches dev, prod-us and prod-eu, and #platform-bots shows the progress.

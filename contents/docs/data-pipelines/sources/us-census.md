@@ -9,11 +9,11 @@ availability:
 sourceId: USCensus
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The US Census connector syncs acs demographics by state, acs demographics by county, decennial population by state, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The US Census connector syncs ACS demographics by state, county, and ZIP Code Tabulation Area (ZCTA), county business patterns, decennial population counts, county geography reference data, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 

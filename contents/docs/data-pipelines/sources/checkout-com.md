@@ -9,7 +9,7 @@ availability:
 sourceId: CheckoutCom
 ---
 
-The Checkout.com connector syncs your payments, payment actions, customers, instruments, and disputes into the PostHog data warehouse. It also syncs your financial reporting data, where each report type your account generates becomes its own table.
+The Checkout.com connector syncs your payments, payment actions, financial actions, customers, instruments, and disputes into the PostHog data warehouse. It also syncs your financial reporting data, where each report type your account generates becomes its own table.
 
 ## Adding a data source
 
@@ -26,13 +26,14 @@ Once the syncs are complete, you can start using Checkout.com data in PostHog.
 
 Checkout.com grants scopes per endpoint, so a key that reads one table often cannot read another. Grant only the scopes for the tables you want.
 
-| Table                           | Checkout.com scope |
-| ------------------------------- | ------------------ |
-| `payments`                      | `payments`         |
-| `payment_actions`               | `gateway`          |
-| `customers` and `instruments`   | `vault`            |
-| `disputes`                      | `disputes`         |
-| `reports` and each report table | `reports`          |
+| Table                           | Checkout.com scope                 |
+| ------------------------------- | ---------------------------------- |
+| `payments`                      | `payments`                         |
+| `payment_actions`               | `gateway`                          |
+| `financial_actions`             | `payments` and `financial-actions` |
+| `customers` and `instruments`    | `vault`                            |
+| `disputes`                      | `disputes`                         |
+| `reports` and each report table  | `reports`                          |
 
 ## Configuration
 
@@ -50,9 +51,19 @@ Payments search covers about the last 90 days. Set a **Start date** to reach fur
 
 A large backfill can use up the API budget that PostHog allows a single sync run. The sync then stops with an error, keeps every window it finished, and continues from there on the next run. Repeated runs work through the full range.
 
+### Financial actions
+
+The `financial_actions` table reads settlement ledger entries directly from Checkout.com's [financial actions API](https://api-reference.checkout.com/tag/Financial-actions#operation/getFinancialActions). It includes captures, refunds, chargebacks, and fee breakdowns, with one row per action and a nested `breakdown` field. It does not require scheduled reports.
+
+PostHog searches for payments, then fetches each payment's financial actions. The table uses the same 90-day default payment search range and **Start date** setting as the payment tables above.
+
+Incremental syncs use `payment_requested_on`, the parent payment's request time. Actions added after that payment syncs, such as later refunds or chargebacks, need a full refresh to appear. The refresh must cover the original payment's request date. The `financial_actions_report` table syncs by `report_created_on`, so newly generated reports can supply later adjustments without a full refresh.
+
+If the financial actions API is unavailable for your account, sync `financial_actions_report` instead, or contact Checkout.com support about API access.
+
 ### Report tables
 
-Financial reporting data – financial actions, payouts, and balances – comes from the report files your account generates, not from an API you can query directly. Each report type becomes its own table, named after the type. The `FinancialActions` report type becomes `financial_actions_report`, for example.
+Report tables read CSV files your account generates for financial actions, payouts, and balances. Each report type becomes its own table, named after the type. The `FinancialActions` report type becomes `financial_actions_report`, for example. This is separate from the direct `financial_actions` API table above and requires the `reports` scope.
 
 Every report row carries the report and file it came from in its `report_id`, `report_created_on`, `report_from`, `report_to`, `report_entity_id`, `file_id`, and `file_row_index` columns. The remaining columns come from the report template, which you configure in Checkout.com.
 
