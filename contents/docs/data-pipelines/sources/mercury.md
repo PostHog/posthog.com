@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Mercury tables are full refresh. Each sync replaces the contents of the table.
+The `Transactions` table supports incremental sync on `createdAt`. Each incremental sync also reads the last 30 days again, so it picks up changes to pending transactions, such as a new status or `postedAt` value. All other tables are full refresh only, because the Mercury API does not have a timestamp filter for them.
 
 ## Configuration
 
