@@ -95,6 +95,85 @@ Numeric or decimal columns with values exceeding a precision of 76 or scale of 3
 
 </CalloutBox>
 
+## Change data capture (CDC)
+
+<CalloutBox icon="IconInfo" title="CDC for MySQL is in beta" type="fyi">
+
+CDC for MySQL sources is rolling out gradually. If you don't see the **Change data capture (CDC)** option on your MySQL source, [contact us](https://app.posthog.com/home#supportModal) to request access.
+
+</CalloutBox>
+
+CDC streams inserts, updates, and deletes from your MySQL binary log. Use it when you care about deletes, don't have a reliable `updated_at` column, or want a [history table](/docs/data-pipelines/sources/postgres#output-table-modes) of every change. CDC tables support the same output table modes as Postgres: a consolidated table, a history table, or both.
+
+### How PostHog reads the binary log
+
+MySQL keeps no replication slot for its readers, so PostHog stores the binary log position it has read up to. When you turn on CDC, PostHog records the current end of the binary log as its starting point.
+
+1. Each CDC table first runs an initial snapshot through the normal MySQL import.
+2. A source-level schedule reads the binary log from the stored position, writes the changes to PostHog's storage, then saves the new position.
+3. Each table loads its changes on its sync schedule, every 5 minutes by default.
+
+PostHog connects to MySQL as a replica with its own server ID, using the same connection details, SSL settings, and SSH tunnel as the source. A `TRUNCATE` on the source re-snapshots that table. A schema change such as an added column reaches the changes after it without any action from you.
+
+### Requirements
+
+PostHog checks these when you click **Check database prerequisites**:
+
+- **MySQL 8.0.1 or later.** MariaDB, PlanetScale, and other servers without a MySQL-compatible binary log aren't supported yet.
+- **Row-based binary logging with full row images and column names:**
+
+  ```ini
+  log_bin = ON
+  binlog_format = ROW
+  binlog_row_image = FULL
+  binlog_row_metadata = FULL
+  binlog_transaction_compression = OFF
+  ```
+
+  On Amazon RDS and Aurora, set these in the DB parameter group, and turn on automated backups, which turns on binary logging.
+
+- **Binary log retention of at least 24 hours.** We recommend 7 days, so a paused or failing sync can catch up without losing changes. On a self-managed server, set `binlog_expire_logs_seconds`. On Amazon RDS and Aurora, binary logs are deleted as soon as possible by default, so set the retention with:
+
+  ```sql
+  CALL mysql.rds_set_configuration('binlog retention hours', 168);
+  ```
+
+- **A database user with replication grants**, plus `SELECT` on the tables you sync:
+
+  ```sql
+  GRANT REPLICATION SLAVE, REPLICATION CLIENT, PROCESS ON *.* TO 'posthog'@'%';
+  GRANT SELECT ON your_database.* TO 'posthog'@'%';
+  ```
+
+  `PROCESS` lets PostHog wait for open transactions before it starts a snapshot, so no change falls between the snapshot and the binary log.
+
+- **A primary key on every table** you sync with CDC.
+
+### Enabling CDC
+
+When you create a MySQL source, turn on **Change data capture (CDC)** in the connection step. For an existing source, open the **Configuration** tab, click **Check database prerequisites**, then **Enable CDC**.
+
+Enabling CDC doesn't change how any table syncs. Switch each table to the CDC sync type on the **Schemas** tab.
+
+### Lag and retention
+
+The **Configuration** tab shows how far PostHog has read and how many binary log bytes it hasn't read yet. MySQL deletes binary log files when they reach the retention age, whether or not PostHog has read them. If a sync stays paused or failing for longer than your retention, the changes in between are gone, and CDC needs a repair.
+
+### Repairing CDC
+
+PostHog needs a repair when:
+
+- MySQL deleted the binary log file PostHog was reading before PostHog read it.
+- Your source now connects to a different MySQL server, for example after a failover to a replica. Each server numbers its own binary log, so the stored position no longer applies.
+
+Open the **Configuration** tab and click **Repair CDC**. PostHog starts reading from the current end of the binary log and re-syncs every CDC table from a fresh snapshot. Changes made between the lost position and the repair can't be recovered, so history tables miss them.
+
+If CDC is paused after an error that retrying can't fix, such as wrong credentials, fix the cause and click **Resume CDC**. The stored position is kept, so nothing re-syncs.
+
+### Disabling CDC
+
+Click **Disable CDC** on the **Configuration** tab. Every CDC table stops syncing and needs a new sync method. PostHog creates nothing on your server, so there is nothing to clean up there. If you turn CDC on again, it starts from the current end of the binary log.
+
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />
