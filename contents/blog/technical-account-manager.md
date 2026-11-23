@@ -13,6 +13,9 @@ featuredImageType: full
 category: Engineering
 tags:
   - Explainers
+seo:
+  metaTitle: "What is a technical account manager (TAM)? Role and skills"
+  metaDescription: "A technical account manager (TAM) helps customers set up, optimize, and maintain a technical product. Learn what TAMs do and why startups hire them."
 ---
 
 On the surface, a technical account manager (or TAM) is simple to define: They are responsible for helping customers set up, optimize, and maintain the product their company provides.
