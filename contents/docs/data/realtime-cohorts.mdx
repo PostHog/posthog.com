@@ -6,7 +6,7 @@ showTitle: true
 
 <CalloutBox icon="IconFlask" title="Real-time cohorts are in early beta" type="action">
 
-To try real-time cohorts, opt in from your [feature previews](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts). Unlike most feature previews, this one applies to the whole project. Once the project joins, every member sees real-time cohorts. Behavior and limits on this page can change before general availability.
+To try real-time cohorts, [join the beta](#join-the-beta). Behavior and limits on this page can change before general availability.
 
 </CalloutBox>
 
@@ -41,7 +41,11 @@ Joining doesn't turn real-time on for any cohort. Every cohort in the project st
 
 A project can't leave the beta. If you turn the feature preview off, your other projects stop joining, but a project that has joined keeps real-time cohorts. To stop using them, turn real-time off for each cohort.
 
-If the cohorts page says "Realtime cohorts couldn't be turned on for this project automatically", [contact support](https://app.posthog.com/#panel=support). If it says setup didn't finish, PostHog tries again the next time a member who opted in opens the project, an hour or more later.
+If the project doesn't join, the cohorts page says why:
+
+- "Realtime cohorts aren't open to new projects yet" means PostHog isn't taking new projects at the moment. You don't need to do anything. Once joining opens, the project joins the next time a member who opted in opens it.
+- "Realtime cohorts couldn't be turned on for this project automatically" means PostHog can't add the project by itself. [Contact support](https://app.posthog.com/#panel=support).
+- "Setting up realtime cohorts for this project didn't finish" means the setup failed. PostHog tries again the next time a member who opted in opens the project, an hour or more later.
 
 ## Which cohorts qualify
 
@@ -77,11 +81,11 @@ A single criterion from this list makes the whole cohort fall back to the standa
 
 ### Cohorts that include other cohorts
 
-A real-time cohort can include another cohort that qualifies. When you turn real-time on for a cohort, PostHog turns it on for every cohort it includes too.
+A real-time cohort can include another cohort that qualifies. [Turn real-time on for a cohort](#turn-real-time-on-for-a-cohort) explains what turning real-time on does to the cohorts it includes.
 
-The cohort a flag targets needs at least one person property or event criterion of its own. A cohort whose only criterion is a reference to another cohort never becomes usable in a flag.
+During the beta, event criteria have to be in the cohort that a flag targets. Say a flag targets cohort A, which has no event criteria of its own and includes cohort B, which has event criteria. The flag can't read B's real-time membership yet, so it counts nobody as a member of B. An "In cohort B" criterion in A then matches nobody, and "Not in cohort B" matches everybody. To avoid this, add B's event criteria to A directly. Or take B out of A's criteria, and add both A and B to the flag's release condition.
 
-During the beta, keep the event criteria in the cohort that the flag targets. Say a flag targets cohort A, which has only person property criteria and includes cohort B, which has event criteria. The flag can't read B's real-time membership yet, so it counts nobody as a member of B. An "In cohort B" criterion in A then matches nobody, and "Not in cohort B" matches everybody. To avoid this, add B's event criteria to A directly. Or take B out of A's criteria, and add both A and B to the flag's release condition.
+Included cohorts without event criteria work as before. A flag can target a cohort whose only criterion is "In cohort B" when B is a static cohort or has only person property criteria.
 
 ## Turn real-time on for a cohort
 
@@ -162,7 +166,7 @@ Before general availability, plans will get limits on how many cohorts can have 
 
 Open the cohort and read the **Flag targeting** row, or check its tag in the cohort list. The [table above](#what-the-cohort-page-and-the-tags-tell-you) explains each one.
 
-Through the [cohorts API](/docs/api/cohorts), read `realtime.state`. It is `ready` when flags can target the cohort. `realtime_enabled` says whether real-time is on, and `cohort_type` reads `"realtime"` when the criteria qualify. `realtime` is `null` in a project that hasn't joined the beta.
+Through the [cohorts API](/docs/api/cohorts), read `realtime.state`. It is `ready` when flags can target the cohort. `realtime_enabled` says whether real-time is on, and `cohort_type` reads `"realtime"` when the criteria qualify. `realtime` is `null` in a project that hasn't joined the beta, and for a cohort with neither event nor person property criteria, such as one that only includes another cohort.
 
 ### Can I turn real-time on through the API?
 
