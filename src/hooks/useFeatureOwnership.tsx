@@ -520,7 +520,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: false,
     },
     'realtime-cohort-calculations': {
-        feature: 'Realtime cohort calculations',
+        feature: 'Real-time cohort calculations',
         owner: ['feature-flags'],
         label: false,
     },
