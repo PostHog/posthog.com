@@ -439,7 +439,7 @@ If you're doing this as part of a user logging out, you can instead call `PostHo
 
 ## Setting the app language
 
-Events carry `$app_language`, the language your app displays. On Android 13 and later, the SDK detects it from the app's `localeConfig`, and on iOS and macOS from the localizations the app bundle declares. Compose Multiplatform resources declare neither, so on iOS and macOS list your languages under `CFBundleLocalizations` in `Info.plist`. Android 6 to 12 and the JVM send no `$app_language` until you set it.
+Events carry `$app_language`, the language your app displays. On Android 13 and later, the SDK detects it from the app's `localeConfig` or a per-app language the user picked, and on iOS and macOS from the localizations the app bundle declares. Compose Multiplatform resources declare neither, so list your languages in a `localeConfig` on Android, and under `CFBundleLocalizations` in `Info.plist` on iOS and macOS. Without them, Android sends no `$app_language` and iOS and macOS send the development language, such as `en`. Android 6 to 12 and the JVM send no `$app_language` until you set it.
 
 If your app picks its language some other way, such as an in-app setting, call `setAppLanguage()` with a BCP 47 language tag at startup and whenever the language changes:
 
@@ -448,7 +448,7 @@ PostHog.setAppLanguage("pt-BR")
 PostHog.setAppLanguage(null) // back to the detected language
 ```
 
-Call `setAppLanguage()` after `PostHog.setup()`: on Android and the JVM, a call before setup is dropped. The value is kept in memory only and survives `reset()`. A `$app_language` super property set with `register()` takes precedence. On JavaScript and Wasm, `setAppLanguage()` does nothing yet, because PostHog.js doesn't support `$app_language`. To send it there now, call `PostHog.register("\$app_language", "pt-BR")`.
+You can call `setAppLanguage()` before or after `PostHog.setup()`. The value is kept in memory only, survives `reset()`, and is cleared by `close()`. A `$app_language` super property set with `register()` takes precedence. On JavaScript and Wasm, `setAppLanguage()` does nothing yet, because PostHog.js doesn't support `$app_language`. To send it there now, call `PostHog.register("\$app_language", "pt-BR")`.
 
 `$locale` is the device's language. On Android, iOS, and macOS it includes the region, such as `de-CH`. On the JVM it's a BCP 47 tag that keeps the script, such as `zh-Hant-TW`.
 
@@ -498,7 +498,7 @@ Get every evaluated flag at once as a map of `FeatureFlagResult`:
 val allFlags = PostHog.getAllFeatureFlags()
 ```
 
-Feature flags are fetched on setup and cached. If a user's properties change (for example, after `identify`), reload them so they reflect the latest state. The optional callback runs once when the reload finishes and receives a `PostHogFeatureFlagsLoaded` with the enabled flags (`flags`), their values (`variants`), and `errorsLoading`, which is `true` when the reload failed and the values are the last known flags:
+Feature flags are fetched on setup and cached. If a user's properties change (for example, after `identify`), reload them so they reflect the latest state. The optional callback runs once when the reload finishes (on JavaScript and Wasm, if the flags quota is used up or the request fails with no cached flags, it waits for the next successful load) and receives a `PostHogFeatureFlagsLoaded` with the enabled flags (`flags`), their values (`variants`), and `errorsLoading`, which is `true` when the reload failed and the values are the last known flags:
 
 ```kotlin
 PostHog.reloadFeatureFlags { loaded ->
@@ -510,7 +510,7 @@ PostHog.reloadFeatureFlags { loaded ->
 
 On Android, iOS, macOS, and the JVM, the callback can run on a background thread. Switch to the main thread before you update UI.
 
-To react every time flags load or change, such as at startup, after `identify`, `group`, or `reset`, and after a reload, register a listener with `onFeatureFlags()`. If flags have already loaded, it also runs with the current values. You can register before `setup`, and the listener stays active until you unsubscribe. On Android, iOS, and macOS it runs on the main thread:
+To react every time flags load or change, such as at startup, after `identify`, `group`, or `reset`, and after a reload, register a listener with `onFeatureFlags()`. If flags have already loaded, it also runs with the current values. You can register before `setup`, and the listener stays active until you unsubscribe. On Android, iOS, macOS, and the JVM it also survives `close()` and a later `setup()`; on JavaScript and Wasm, `close()` ends it. On Android, iOS, and macOS it runs on the main thread:
 
 ```kotlin
 val subscription = PostHog.onFeatureFlags { loaded ->
@@ -868,7 +868,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `captureNetworkTelemetry` | `Boolean` | `true` | Includes network requests in the recording. |
 | `captureLogs` | `Boolean` | `false` | Captures console and system logs (iOS and web). |
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
-| `throttleDelayMs` | `Long` | `1000` | Minimum delay in milliseconds between replay snapshots (Android and iOS). Replaces the deprecated `debouncerDelayMs`. |
+| `throttleDelayMs` | `Long` | `1000` | Minimum delay in milliseconds between replay snapshots (Android and iOS). Replaces `debouncerDelayMs`, removed in 0.12.0. |
 | `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshots. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
 | `iosCaptureMethod` | `IosCaptureMethod` | `STANDARD` | How iOS captures each replay screenshot (iOS only, 0.12.0 and later). `STANDARD` draws the window on the main thread. `GPU` (experimental) renders a copy of the window's layers on the GPU, which takes less main-thread time, but doesn't capture web view pages and records Metal content, including Compose Multiplatform screens, as a placeholder. |
 
@@ -905,7 +905,7 @@ Version 0.12.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The 
 - **Event options:** `$process_person_profile`, `$cookieless_mode`, `$ignore_sent_at`, and `$product_tour_id` have [event options](#event-options) that replace them. The properties still work.
 - **Event changes:** events with an empty name, or whose distinct ID `beforeSend` blanks, are dropped. `$feature_flag_called` for a missing flag leaves out `$feature_flag_response` – filter on *is not set*. `Application Installed`, `Application Updated`, and `Application Opened` no longer have `version` and `build` on iOS and macOS – use `$app_version` and `$app_build`. `$locale` is now the device's preferred language and region on Android, iOS, and macOS, such as `de-CH`, and a BCP 47 tag that keeps the script on the JVM, such as `zh-Hant-TW`. PostHog drops events whose name or distinct ID is over 200 bytes. On iOS and macOS, a `null` value inside a nested map is left out. On Android and the JVM, a `null` list element is sent as `null` at its position instead of being removed. `$sdk_debug_replay_capture_mode` is always `screenshot`. Android's `Deep Link Opened` leaves out query parameters whose name starts with `$`. Refer to the [migration guide](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md#event-changes) for the full list.
 - **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. On Android, Compose screens, including Compose Multiplatform UI, are now recorded, which can count against your replay quota. On iOS, Compose Multiplatform screens are now recorded too, as one masked block while `maskAllTextInputs` or `maskAllImages` is on. Refer to [Compose Multiplatform screens on iOS](#compose-multiplatform-screens-on-ios). Because `screenshot` is gone, `SessionRecordingConfig` positional arguments and destructuring shift, so use named arguments. Refer to [Session replay](#session-replay).
-- **Replay throttling:** use `throttleDelayMs` instead of the deprecated `debouncerDelayMs`. The constructor still accepts `debouncerDelayMs`, but `copy(debouncerDelayMs = ...)` no longer compiles.
+- **Replay throttling:** `debouncerDelayMs` is removed. Use `throttleDelayMs`, which now applies on iOS as well as Android.
 - **Payloads:** `FeatureFlagResult.payload` is `null` for a payload that isn't valid JSON, instead of the raw string. On Android and the JVM, a JSON `null` payload is `null` instead of the string `"null"`. On the web target it's still the raw string.
 
 These feature flag changes also apply to the web target:
