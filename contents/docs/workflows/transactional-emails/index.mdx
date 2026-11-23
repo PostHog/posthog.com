@@ -18,6 +18,8 @@ Transactional emails are the one-off emails that a person triggers in your produ
 
 You need a verified sending domain first. If your project doesn't have one yet, [configure an email channel](/docs/workflows/configure-channels) and add its DNS records to your domain. Verification usually takes a few minutes.
 
+If you move from another provider, you can add PostHog's records next to the old ones while it still sends. Transactional email never waits for your sending allowance, so you can move it on day one. Your other email grows with your sending tier. [Sending reputation and allowance](/docs/workflows/sending-reputation#move-from-another-provider) explains how.
+
 <Steps>
 
 <Step title="Create the email">
@@ -45,7 +47,7 @@ Put your key in the shell, then send the email:
 ```bash
 export POSTHOG_PROJECT_SECRET_API_KEY="phs_..."
 
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: my-first-email" \
@@ -88,9 +90,9 @@ You can write the email in PostHog, or send content that your code renders. Both
 | | Write it in PostHog | Send content from your code |
 | --- | --- | --- |
 | Who edits it | Anyone on your team, in the PostHog editor, with no deploy | Engineers, in your codebase |
-| Best for | Copy that changes often, and teams that want drafts, versions, and a preview | [React Email](https://react.email) or other templates that you already have, and a move from another email provider |
+| Best for | Copy that changes often, and teams that want drafts, versions, and a preview | [React Email](/docs/workflows/transactional-emails/react-email) or other templates that you already have, and a move from another email provider |
 | What a send carries | `template_id` and the template's variables | `template_key`, `subject`, and `html` or `text` |
-| Copies and attachments | Not on the send | `cc` and `bcc`, on the API. Attachments are [temporarily unavailable](/docs/workflows/transactional-emails/api#copies-and-attachments). |
+| Copies and attachments | Not on the send | `cc`, `bcc`, and [`attachments`](/docs/workflows/transactional-emails/api#copies-and-attachments) |
 
 The rest of this page covers emails that you write in PostHog. For content from your code, see your SDK's page or [the API](/docs/workflows/transactional-emails/api#send-content-from-your-code).
 
@@ -110,11 +112,11 @@ Each SDK page also has a prompt that you can paste into your agent. The prompt s
 
 Each transactional email has its own page in **Transactional**, with these tabs:
 
-- **Design** - Edit the email and its sender
-- **Metrics** - See the metrics for its sends
-- **Sends** - See each send, with its log messages
-- **Versions** - See each version that you published
-- **API** - Copy the template ID and an example send
+- **Design** – Edit the email and its sender
+- **Metrics** – See the metrics for its sends
+- **Sends** – See each send, with its log messages
+- **Versions** – See each version that you published
+- **API** – Copy the template ID and an example send
 
 <CalloutBox icon="IconWarning" title="An email stays transactional" type="caution">
 
@@ -130,13 +132,15 @@ You can also make a template transactional with the API. Call `POST /api/project
 
 ### Edit a transactional email
 
-- **Sender** - The **Design** tab shows who the email comes from. Click **Edit sender** to choose a different verified sender, or to set a display name, a from address, or a reply-to address. The from address must be on the sender's verified domain. To use more than one reply-to address, separate them with commas.
-- **Drafts** - Your edits save as a draft. Sends use the live version of the email until you click **Publish**. Each publish adds a version on the **Versions** tab. To throw away your edits, click **Discard draft**.
-- **Checks** - PostHog doesn't publish a change that would stop the email from sending, such as an empty subject or body, or a marketing category.
+- **Sender** – The **Design** tab shows who the email comes from. Click **Edit sender** to choose a different verified sender, or to set a display name, a from address, or a reply-to address. The from address must be on the sender's verified domain. To use more than one reply-to address, separate them with commas.
+- **Drafts** – Your edits save as a draft. Sends use the live version of the email until you click **Publish**. Each publish adds a version on the **Versions** tab. To throw away your edits, click **Discard draft**.
+- **Checks** – PostHog doesn't publish a change that would stop the email from sending, such as an empty subject or body, or a marketing category.
 
 ### Protect sensitive data
 
 For emails with sign-in codes, reset links, or other secrets, turn on **Protect sensitive data**. It's in the first step of a new email, and on the email's **API** tab. PostHog then keeps no copy of what each email contained, and doesn't track link clicks, so a code or a token in a link never goes through a tracking redirect. PostHog still tracks deliveries, opens, bounces, and the email's status. You can turn this setting on or off at any time.
+
+An email that you send from your code takes this setting from the template with the same key. With no such template, it's sensitive. Set [`sensitive`](/docs/workflows/transactional-emails/api#sensitive-emails) on the send to choose.
 
 ## Create an API key
 
@@ -153,11 +157,11 @@ To give a service a key that can read statuses but not send, set **Transactional
 
 ## What a send needs
 
-- **Template ID** - The email's **API** tab shows it.
-- **Recipient** - One email address for each send.
-- **Template data** - The values for the template's `{{ variables.* }}` placeholders. The template can't read person properties, so pass all the data that the email needs.
-- **Distinct ID** - The distinct ID that you pass to `identify()`. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) on this person. Without it, PostHog records the email on a person whose distinct ID is the email address, which is a different person from your user, unless you identify users by their email address. Leave it out for someone who isn't a user yet, such as an invitee.
-- **Idempotency key** - It makes a retry safe. See [retry safely](#retry-safely-with-an-idempotency-key).
+- **Template ID** – The email's **API** tab shows it.
+- **Recipient** – One email address for each send.
+- **Template data** – The values for the template's `{{ variables.* }}` placeholders. The template can't read person properties, so pass all the data that the email needs.
+- **Distinct ID** – The distinct ID that you pass to `identify()`. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) on this person. Without it, PostHog records the email on a person whose distinct ID is the email address, which is a different person from your user, unless you identify users by their email address. Leave it out for someone who isn't a user yet, such as an invitee.
+- **Idempotency key** – It makes a retry safe. See [retry safely](#retry-safely-with-an-idempotency-key).
 
 In the template, use the same names that you send in the template data:
 
@@ -183,10 +187,10 @@ Build the key from the record that caused the email. A random value or a timesta
 
 A key is 1 to 255 visible ASCII characters, with no spaces. Keys are separate for each project.
 
-- **Same key, same request** - PostHog sends no new email. It returns `202` with the `message_id` of the first send and `"replayed": true`. PostHog remembers a key for 24 hours after it queues the email.
-- **Same key, different request** - PostHog returns `422` with the code `idempotency_key_reused`. Two requests are the same when they have the same template, `to`, `distinct_id`, and `message_data`.
-- **First request not finished** - PostHog returns `409` with the code `idempotency_key_in_flight`. Wait a few seconds, then retry with the same key.
-- **Refused request** - When PostHog refuses a send, for example with `recipient_suppressed` or `quota_limited`, the key stays unused. You can send the same key again later.
+- **Same key, same request** – PostHog sends no new email. It returns `202` with the `message_id` of the first send and `"replayed": true`. PostHog remembers a key for 24 hours after it queues the email.
+- **Same key, different request** – PostHog returns `422` with the code `idempotency_key_reused`. Two requests are the same when they have the same template, `to`, `distinct_id`, and `message_data`.
+- **First request not finished** – PostHog returns `409` with the code `idempotency_key_in_flight`. Wait a few seconds, then retry with the same key.
+- **Refused request** – When PostHog refuses a send, for example with `recipient_suppressed` or `quota_limited`, the key stays unused. You can send the same key again later.
 
 ## Errors
 
@@ -250,11 +254,11 @@ A status only moves forward. For example, a `delivered` email never goes back to
 
 `reason` is `null` unless the email failed or bounced. A failed email has one of these reasons:
 
-- `provider_error` or `provider_rejected` - The email provider refused the email.
-- `recipient_suppressed`, `recipient_unreachable`, or `missing_recipient` - PostHog skipped the email because of the recipient.
-- `sending_paused` or `sending_suspended` - Sending is paused for the template or suspended for the project. Check the **Reputation** tab in Workflows.
-- `canceled` or `workflow_unavailable` - The send stopped before the email went out.
-- Another value, such as `timeout` - The send failed with this kind of error. New values can appear.
+- `provider_error` or `provider_rejected` – The email provider refused the email.
+- `recipient_suppressed`, `recipient_unreachable`, or `missing_recipient` – PostHog skipped the email because of the recipient.
+- `sending_paused` or `sending_suspended` – Sending is paused for the template or suspended for the project. Check the **Reputation** tab in Workflows.
+- `canceled` or `workflow_unavailable` – The send stopped before the email went out.
+- Another value, such as `timeout` – The send failed with this kind of error. New values can appear.
 
 A `failed` email can still change to `sent` if PostHog retries the send.
 
@@ -271,16 +275,16 @@ The lookup returns `404` with the code `not_found` when:
 Work down this list. Each step rules out one cause.
 
 1. **Did the send return a message ID?** If it returned an error, its `code` says why. See [errors](#errors).
-2. **Is the send on the email's Sends tab?** If it isn't, check that you used a key from the right project. A key belongs to one project, and `@current` is that project.
-3. **Is the status `queued`?** The email waits to go out. This happens when your project reaches its hourly or daily [sending allowance](/docs/workflows/sending-reputation). The email goes out when the allowance frees up.
+2. **Is the send on the email's Sends tab?** If it isn't, check that you used a key from the right project. A key belongs to one project, and PostHog sends the email from that project.
+3. **Is the status `queued`?** The email waits on the email queue to go out. Transactional emails never wait for your [sending allowance](/docs/workflows/sending-reputation) and go out ahead of marketing emails, so this status is usually short. If it lasts more than a few minutes, [contact support](https://app.posthog.com/#panel=support).
 4. **Is the status `failed` or `bounced`?** `reason` says why. A suppressed or unreachable address gets no email until you fix the address.
 5. **Is the status `delivered`?** The recipient's mail server accepted the email. Check the spam folder, and check that your domain's DNS records are still in place in [configure channels](/docs/workflows/configure-channels).
 
 ## How transactional emails behave
 
-- **No opt-outs or frequency caps** - Transactional emails ignore marketing [opt-outs](/docs/workflows/opt-outs) and frequency caps. Use them only for emails that a person needs, never for marketing.
-- **Suppression still applies** - PostHog doesn't send to an address on your suppression list.
-- **Billing and quotas** - Transactional emails are billed and limited by quota like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
-- **Sending allowance** - Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
-- **Engagement events** - If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send.
-- **Where to see sends** - [Read the status](#check-an-emails-status) of an email with its `message_id`. The email's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.
+- **No opt-outs or frequency caps** – Transactional emails ignore marketing [opt-outs](/docs/workflows/opt-outs) and the [frequency cap](/docs/workflows/frequency-cap). Use them only for emails that a person needs, never for marketing.
+- **Only hard bounces block them** – PostHog doesn't send to an address on your [suppression list](/docs/workflows/opt-outs#the-suppression-list) that hard-bounced. An address suppressed for a spam complaint, soft bounces, or by hand still gets transactional emails.
+- **Billing and quotas** – Transactional emails are billed and limited by quota like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
+- **Sending allowance** – Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation), but they never wait for it. When the allowance is empty, they still go out at once, ahead of queued marketing emails. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
+- **Engagement events** – If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send. An email from your code tracks clicks only when it isn't [sensitive](/docs/workflows/transactional-emails/api#sensitive-emails), or when [`tracking`](/docs/workflows/transactional-emails/api#open-and-click-tracking) turns them on.
+- **Where to see sends** – [Read the status](#check-an-emails-status) of an email with its `message_id`. The email's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.

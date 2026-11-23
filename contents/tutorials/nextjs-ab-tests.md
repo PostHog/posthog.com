@@ -130,7 +130,7 @@ Set up a function in `layout.js` that:
 Start by installing `uuidv7` and `posthog-node`:
 
 ```bash
-npm i uuidv7 posthog-node@5
+npm i uuidv7 posthog-node@6
 ```
 
 Next, create a `utils` folder and create a folder named `genId.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.

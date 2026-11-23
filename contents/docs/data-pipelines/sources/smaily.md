@@ -37,7 +37,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Smaily tables are full refresh. Each sync replaces the contents of the table.
+**Subscriber actions** and **message actions** support incremental and append sync on `seq_id`. Smaily keeps only the last 30 days of actions, so use incremental or append sync to keep older actions in PostHog. All other Smaily tables are full refresh. Each sync replaces the contents of the table.
 
 ## Configuration
 

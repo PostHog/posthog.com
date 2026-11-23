@@ -61,7 +61,7 @@ Events that a [transformation](/docs/data-pipelines/transformations/drop-events)
 | --- | --- |
 | `/flags` requests | Yes |
 | Local evaluation polls that return new definitions, 10 requests each | Yes |
-| Local evaluation polls that return `304` | No |
+| Local evaluation polls that return `304`, 1 request each | Yes |
 | `$feature_flag_called` | No |
 
 | [Experiments](/experiments/pricing), billed through Feature Flags | Billed |

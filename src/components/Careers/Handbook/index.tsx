@@ -11,7 +11,7 @@ const CompanyHandbook: React.FC = () => {
             <div className="relative mb-12">
                 <h2>Get to know us in our company handbook</h2>
 
-                <div className="@xl:float-right @xl:ml-4 @xl:-mt-8">
+                <div className="@xl:float-right @xl:ml-4 @xl:-mt-8 @4xl:-mt-14 @5xl:-mt-20">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                         alt="This hog has an answer"
@@ -26,7 +26,7 @@ const CompanyHandbook: React.FC = () => {
                     Almost any question you'll have about working here is answered in our public handbook. But here are
                     some highlights you might be interested to know:
                 </p>
-                <ul className="mb-4 pl-4">
+                <ul className="mb-4">
                     <li>Our revenue is over $50 million a year</li>
                     <li>
                         We're{' '}
@@ -36,9 +36,18 @@ const CompanyHandbook: React.FC = () => {
                     </li>
                     <li>If you join us, you will be expected to take a stance on if pineapple belongs on pizza</li>
                 </ul>
-                <CallToAction href="/handbook" type="secondary" size="sm" state={{ newWindow: true }}>
-                    Visit the handbook
-                </CallToAction>
+                {/* Flex wrapper so the block-level CTA sizes to its label instead of spanning the full width */}
+                <div className="flex">
+                    <CallToAction
+                        href="/handbook"
+                        type="secondary"
+                        size="sm"
+                        state={{ newWindow: true }}
+                        className="mx-px"
+                    >
+                        Visit the handbook
+                    </CallToAction>
+                </div>
             </div>
             <aside>
                 <div className="not-prose bg-white dark:bg-dark rounded p-4 @3xl:px-6 xl:py-6 xl:px-8 @3xl:w-auto border border-primary">

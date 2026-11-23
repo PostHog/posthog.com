@@ -22,7 +22,7 @@ AI agents are causing teams to consider whether they should build their own vers
 The complication comes from everything that must happen to return that value reliably, accurately, and fast. Teams deciding on building versus buying quickly run into a bunch of obvious things to consider:
 
 - It costs time and money to create, host, and maintain. 
-- [Lots of feature flag software already exists](/blog/best-feature-flag-software-for-developers), is free, and can fit into your compliance requirements if needed.
+- [Lots of feature flag software already exists](/compare/best-feature-flag-tools-for-developers), is free, and can fit into your compliance requirements if needed.
 - Having fewer flags, users, SDKs, and use cases makes it easier to manage.
 - Making flags usable requires more than just the core functionality; you need features like admin UIs too.
 
@@ -38,7 +38,7 @@ Some examples:
 
 - **Experimentation.** Flags can be used to [run experiments](/experiments), but this requires usage analytics, exposure logging, and statistical analysis to determine the impact of different flag values.
 
-- **Realtime cohorts.** Calculating cohorts often has nothing to do with flags themselves. Membership can change in a completely different part of the codebase. Race conditions can cause members to be added or removed at the wrong time. Recomputing constantly can be expensive.
+- **Real-time cohorts.** Calculating cohorts often has nothing to do with flags themselves. Membership can change in a completely different part of the codebase. Race conditions can cause members to be added or removed at the wrong time. Recomputing constantly can be expensive.
 
 - **Data warehouses.** For many companies, the source of truth is the [data warehouse](/docs/data-warehouse), but almost never is this warehouse optimized for the queries flags need to make.
 

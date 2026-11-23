@@ -17,8 +17,6 @@ The X Ads connector syncs one X ad account's campaigns, line items, promoted pos
 
 For organic account data such as posts, mentions and followers, use the Twitter (X) source instead.
 
-This source is rolling out gradually. If you do not see X Ads in the source list, [contact support](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) to be enabled.
-
 ## Prerequisites
 
 - An X ad account you can log into.

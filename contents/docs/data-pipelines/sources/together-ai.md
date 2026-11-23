@@ -9,11 +9,11 @@ availability:
 sourceId: TogetherAI
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Together AI connector syncs your fine-tuning jobs, batch inference jobs, uploaded files, dedicated endpoints, evaluations, and the model catalog into the PostHog Data warehouse, so you can analyze your AI training and inference operations alongside your product data.
+The Together AI connector syncs your fine-tuning jobs with their events and checkpoints, batch inference jobs, uploaded files, dedicated endpoints, evaluations, GPU clusters, and inference instance types into the PostHog Data warehouse, so you can analyze your AI training and inference operations alongside your product data.
 
 ## Prerequisites
 

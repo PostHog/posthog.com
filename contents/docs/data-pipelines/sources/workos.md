@@ -23,14 +23,16 @@ Once the syncs are complete, you can start using WorkOS data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `organizations` | Organizations in your WorkOS account | Full refresh |
-| `users` | Users managed via WorkOS User Management | Full refresh |
-| `connections` | SSO connections | Full refresh |
-| `directories` | Directory Sync directories | Full refresh |
-| `directory_users` | Users synced from connected directories | Full refresh |
-| `directory_groups` | Groups synced from connected directories | Full refresh |
+| Table                      | Description                                                   | Sync method  |
+| -------------------------- | ------------------------------------------------------------- | ------------ |
+| `organizations`            | Organizations in your WorkOS account                          | Full refresh |
+| `users`                    | Users managed via WorkOS User Management                      | Full refresh |
+| `connections`              | SSO connections                                               | Full refresh |
+| `directories`              | Directory Sync directories                                    | Full refresh |
+| `directory_users`          | Users synced from connected directories                       | Full refresh |
+| `directory_groups`         | Groups synced from connected directories                      | Full refresh |
+| `waitlist_entries`         | Email addresses on AuthKit waitlists with approval states     | Full refresh |
+| `organization_memberships` | User memberships in organizations, including roles and status | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

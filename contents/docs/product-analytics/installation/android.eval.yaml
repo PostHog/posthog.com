@@ -4,10 +4,11 @@ status: active
 
 # One check for each flow the Android docs teach. Every check is a baseline: a short
 # prompt in a user's words, no docs added. The prompt names PostHog and the kind of
-# analytics, and no API. The rubrics describe the correct result for posthog-android 3,
-# the major the docs show. `install` runs in an app with no PostHog code. The other
-# checks run in the Tasks.org app, which already uses posthog-android 3 in its Google
-# Play flavor through a wrapper class (Firebase.kt) that the shared code calls.
+# analytics, and no API. `install` runs in an app with no PostHog code and is graded
+# for posthog-android 4, the major the docs show. The other checks run in the Tasks.org
+# app, which already uses posthog-android 3 in its Google Play flavor through a wrapper
+# class (Firebase.kt) that the shared code calls, and their rubrics describe the correct
+# result for that major.
 checks:
     - id: install
       description: >-
@@ -23,14 +24,14 @@ checks:
           rubrics:
               sdk-installed: >-
                   {folder}/app/build.gradle.kts declares com.posthog:posthog-android at
-                  3.x (a 3.x version or `3.+`), directly or through an entry in the
+                  4.x (a 4.x version or `4.+`), directly or through an entry in the
                   [libraries] table of {folder}/gradle/libs.versions.toml. Fails if the
                   catalog entry sits in another table, so the alias does not resolve.
               initialized: >-
                   The app's Application subclass (App, which extends FossifyApp) builds
-                  PostHogAndroidConfig with the project token as apiKey (or projectToken)
-                  and host, then calls PostHogAndroid.setup(this, config) in onCreate.
-                  Cite the file and line(s).
+                  PostHogAndroidConfig with projectToken (the project token) and host,
+                  then calls PostHogAndroid.setup(this, config) in onCreate. Fails if it
+                  passes the token as apiKey. Cite the file and line(s).
 
     - id: event-by-user
       description: >-
@@ -155,24 +156,3 @@ checks:
                   reaches PostHog.captureException(throwable, properties), directly or
                   through the app's wrapper (reportException in the Google Play
                   Firebase.kt). Cite the file and line(s).
-
-    # Next major: the same tasks for a project on posthog-android 4. Expected to fail until the docs show that major.
-    - id: install-next
-      description: >-
-          The same task as install, for a project that gets posthog-android 4. Expected
-          to fail until the docs show that major.
-      codebase_to_test: oss-fossify-calendar
-      prompt: *install-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  {folder}/app/build.gradle.kts declares com.posthog:posthog-android at
-                  4.x (a 4.x version or `4.+`), directly or through an entry in the
-                  [libraries] table of {folder}/gradle/libs.versions.toml. Fails if the
-                  catalog entry sits in another table, so the alias does not resolve.
-              initialized: >-
-                  The app's Application subclass (App, which extends FossifyApp) builds
-                  PostHogAndroidConfig with projectToken (the project token) and host,
-                  then calls PostHogAndroid.setup(this, config) in onCreate. Fails if it
-                  passes the token as apiKey. Cite the file and line(s).

@@ -28,13 +28,13 @@ This is our standard culture interview with the People & Ops team. We will at th
 
 #### 2. Technical interview and portfolio review
 
-The [technical interview](/handbook/people/hiring-process#interview-2) round usually lasts 45-60 minutes and usually involves two of our team members. They will ask questions around background and previous experience, as well as some scenario-based questions. At the end, they will leave time to answer any open questions. 
+The [technical interview](/handbook/people/hiring-process#2-technical-interview-with-the-hiring-manager) round usually lasts 45-60 minutes and usually involves two of our team members. They will ask questions around background and previous experience, as well as some scenario-based questions. At the end, they will leave time to answer any open questions. 
 
 If relevant, we'll go through a candidate's portfolio. 
 
 #### 3. Marketing SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule. 
 
 The task will usually be actual marketing work, involving creating a piece of content or talking to customers, though we don't actually publish the work. We usually give a fairly open-ended task, where it is up to you to decide how you want to prioritize and tackle it. 
 

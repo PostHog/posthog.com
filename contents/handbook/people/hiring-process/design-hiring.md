@@ -29,7 +29,7 @@ This is our standard first round culture interview with the People & Ops team.
 
 #### 2. Technical interview and portfolio review
 
-The [technical interview](/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
+The [technical interview](/handbook/people/hiring-process#2-technical-interview-with-the-hiring-manager) round is a 2-part interview, lasting up to 90 minutes in total.
 
 The first half of the interview will be with the team lead and 1 or 2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
 
@@ -37,7 +37,7 @@ The second part of the interview will be a portfolio interview, where you will m
 
 #### 3. Design SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
 
 A Design SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
 

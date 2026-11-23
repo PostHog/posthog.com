@@ -9,7 +9,7 @@ showTitle: true
 ## Roles
 
 We have three types of roles:
-- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
+- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/new-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
 - Business Development Reps, aka BDRs - generating leads for new business, including via [cold outbound](/handbook/growth/sales/outbound-sales)
 
@@ -76,7 +76,12 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
   - Invoices that are issued in the final period of the current quarter, but are due at a date beyond the 14th of the calendar month following the quarter (January, April, July, and October), will be paid on the good faith assumption that the customer will pay on time and you will assist in securing timely payment. If the invoice becomes overdue in a future quarter, it will be subject to a clawback in that quarter. 
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis or via clawback.
   - Commission payments are made at the end of January, April, July, and October. Fraser will send you an email that breaks down your commission and explains how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+
+**During ramp**
+
+For your first three months you carry a full quota, not a reduced ramp quota. You are guaranteed 100% of your OTE as a floor, so a slow start won't cost you. In each ramp period you are paid the higher of that floor or the commission you earn on net new business you personally close. You do not get the floor and commission on top of it.
+
+See the [new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions) for how the floor is prorated by start date.
 
 ### Performance expectations for Technical Account Executives
 
@@ -159,3 +164,7 @@ We share channels via [Slack Connect](https://slack.com/resources/using-slack/ge
 See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+## Customer calls on Zoom
+
+We run all customer calls on Zoom. See [sales & CS tools](/handbook/growth/sales/sales-and-cs-tools#connecting-them-together) for how to set up Zoom, Gong, and Granola. You can also [add a PostHog video to your Zoom waiting room](/handbook/growth/sales/sales-and-cs-tools#customize-your-zoom-waiting-room) for customers who join early.
