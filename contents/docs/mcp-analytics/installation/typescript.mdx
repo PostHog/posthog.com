@@ -145,9 +145,10 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
 
 const handler = createMcpHandler((server) => {
   instrument(server, posthog, {
-    // withMcpAuth puts the verified token on extra.http.authInfo
+    // withMcpAuth puts the verified token on extra.authInfo (mcp-handler 1.x) or extra.http.authInfo (2.x)
     identify: async (_request, extra) => {
-      const auth = (extra?.http as { authInfo?: { clientId: string } } | undefined)?.authInfo
+      type Auth = { authInfo?: { clientId: string } }
+      const auth = (extra as Auth | undefined)?.authInfo ?? (extra?.http as Auth | undefined)?.authInfo
       return auth ? { distinctId: auth.clientId } : null
     },
   })
