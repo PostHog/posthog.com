@@ -886,11 +886,11 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 
 ## Upgrade to 1.0.0
 
-Version 1.0.0 removes the `PostHogConfig` API that was kept only for compatibility, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
+Version 1.0.0 makes the config classes regular classes, removes the deprecated `apiKey` alias, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
 
 - **Screen views on by default:** `captureScreenViews` defaults to `true`, as in the Android and iOS SDKs, so Android and iOS send `$screen` events and the web sends `$pageview` and `$pageleave` events. In a Compose Multiplatform app, the automatic screen view names the single activity or view controller, not a screen. Set `captureScreenViews = false` to keep only the [screen views](#screen-views) you send yourself.
 - **`apiKey` removed:** the `apiKey` alias, deprecated since 0.8.0, is gone. Use `projectToken` to build a `PostHogConfig` and to read the token from it.
-- **Constructor and `copy()` overloads removed:** `PostHogConfig` has one constructor and one `copy()`, which take every option. Kotlin code that passes named arguments compiles unchanged. Java code that calls `new PostHogConfig(...)` or `copy(...)` with the 0.11 or earlier argument list, without `evaluationContexts` and the `captureAi*` options, must pass every argument, and libraries built against those overloads must be recompiled.
+- **Config classes:** `PostHogConfig`, `SessionRecordingConfig`, and `ErrorTrackingConfig` are regular classes instead of data classes, so they no longer have `copy()`, destructuring, or value-based equality. Build a new config where you called `copy()`. Kotlin code that passes named arguments compiles unchanged. In Java, you can pass any leading part of the constructor arguments, such as `new PostHogConfig("<ph_project_token>")`, and new options in later releases won't break those calls. Recompile any library built against an earlier version that calls `copy()` on these classes.
 
 ## Upgrade to 0.12.0
 
