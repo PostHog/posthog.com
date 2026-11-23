@@ -40,7 +40,7 @@ You'll be asked for:
 
 <SyncModes />
 
-The performance and content tables (`performance_summary`, `performance_prompts`, `performance_answers`, `content_citations`, `content_keywords`) are exported one UTC day at a time and sync incrementally by date — the first sync backfills up to the last 365 days, and each later sync picks up from the last synced day. The configuration tables (`topics`, `platforms`, `websites`, `prompts`) are small and sync as full refresh. The content optimization tables (`content_optimize_pages`, `content_optimize_issues`, `content_optimize_recommendations`, `content_optimize_issues_summary`) sync as full refresh. The issues and recommendations tables make one request for each page in the content optimization pages list.
+The performance and content tables (`performance_summary`, `performance_prompts`, `performance_answers`, `content_citations`, `content_keywords`) are exported one UTC day at a time and support incremental sync by date when you select it — the first sync backfills up to the last 365 days, and each later sync picks up from the last synced day. In full refresh mode, each sync fetches the last 365 days again. The configuration tables (`topics`, `platforms`, `websites`, `prompts`) are small and sync as full refresh. The content optimization tables (`content_optimize_pages`, `content_optimize_issues`, `content_optimize_recommendations`, `content_optimize_issues_summary`) sync as full refresh. The issues and recommendations tables make one request for each page in the content optimization pages list.
 
 ## Configuration
 

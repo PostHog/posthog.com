@@ -252,6 +252,24 @@ posthog.init('KEY', { evaluation_contexts: ['main-app', 'onboarding'] })
 posthog.init('KEY', { evaluation_contexts: ['admin-panel', 'web'] })
 ```
 
+### Pages on a site with full page loads
+
+If each page on your site is a full page load, you can set an evaluation context from the page path when you initialize PostHog. Then a flag with that context evaluates only on those pages:
+
+```javascript
+const pageContexts = window.location.pathname.startsWith('/pricing') ? ['pricing-page'] : []
+
+posthog.init('KEY', { evaluation_contexts: ['main-app', ...pageContexts] })
+```
+
+Add `pricing-page` as an evaluation context on the flag. Keep your other contexts in the array, or flags that use them stop evaluating.
+
+- This works only because each page load calls `posthog.init` again. It doesn't update on client-side route changes in a single-page app.
+- Until the `/flags` request responds, the SDK can return the value it stored on the last matching page.
+- This rarely lowers your bill. Flags with no evaluation contexts always evaluate, and a `/flags` request is billed if it evaluates any active, billable flag. See [cutting costs](/docs/feature-flags/cutting-costs).
+
+For other ways to limit a flag to a page, see [targeting a specific URL](/docs/feature-flags/property-overrides#targeting-a-specific-url).
+
 ## Troubleshooting
 
 ### Flags not evaluating
@@ -297,7 +315,7 @@ Evaluation contexts are supported as first-class SDK configuration in the follow
 |-----|----------------|---------------|
 | [JavaScript Web](/docs/references/posthog-js/types/PostHogConfig#evaluation_contexts-param) | `evaluation_contexts` in 1.331.0+ | `evaluation_environments` in 1.269.0+ |
 | [React Native](/docs/libraries/react-native/) | `evaluationContexts` in 4.21.0+ | `evaluationEnvironments` in 4.10.0+ |
-| [Node.js](/docs/libraries/node/) | `evaluationContexts` in 5.23.0+ | `evaluationEnvironments` in 5.10.0+ |
+| [Node.js](/docs/libraries/node) | `evaluationContexts` in 5.23.0+ | `evaluationEnvironments` in 5.10.0+ |
 | [Android](/docs/libraries/android) | `evaluationContexts` in 3.29.1+ | `evaluationEnvironments` in 3.24.0+, removed in 4.0.0 |
 | [iOS](/docs/libraries/ios) | `evaluationContexts` in 3.38.0+ | `evaluationEnvironments` in 3.33.0+, removed in 4.0.0 |
 | [.NET](/docs/libraries/dotnet#evaluation-contexts) | `EvaluationContexts` in `PostHog` 2.8.0+ and `PostHog.AspNetCore` 2.7.0+ | Not supported |
@@ -308,7 +326,7 @@ The versions above are for remote evaluation. Local evaluation is filtered by th
 
 | SDK | Local evaluation support |
 |-----|--------------------------|
-| [Node.js](/docs/libraries/node/) | 5.51.4+ |
+| [Node.js](/docs/libraries/node) | 5.51.4+ |
 | [.NET](/docs/libraries/dotnet#evaluation-contexts) | Not yet supported |
 
 The other SDKs in the table above evaluate flags remotely, so this doesn't apply to them.

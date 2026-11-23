@@ -61,7 +61,7 @@ Run `node server.js` and navigate to `http://localhost:3000` to see your app in 
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, install [PostHog’s Node library](/docs/libraries/node/reference):
+To start, install [PostHog’s Node library](/docs/libraries/node):
 
 ```bash
 npm install posthog-node@6
@@ -136,7 +136,7 @@ Once created, set the primary metric to a trend of `endpoint_called` and then cl
 To implement the A/B test, we: 
 
 1. Change our request handler to `async`.
-2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node/reference#get-feature-flag). 
+2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node#get-feature-flag). 
 3. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 

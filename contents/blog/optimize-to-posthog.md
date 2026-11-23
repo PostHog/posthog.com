@@ -66,7 +66,7 @@ After signing up for PostHog, you can get your script snippet in [your project s
 </script>
 ```
 
-You can also install and initialize PostHog using one of our [13 SDKs](/docs/getting-started/install?tab=sdks) like [React](/docs/libraries/react), [Python](/docs/libraries/python/reference), [Flutter](/docs/libraries/flutter), [Android](/docs/libraries/android), [Node](/docs/libraries/node/reference), and more.
+You can also install and initialize PostHog using one of our [13 SDKs](/docs/getting-started/install?tab=sdks) like [React](/docs/libraries/react), [Python](/docs/libraries/python), [Flutter](/docs/libraries/flutter), [Android](/docs/libraries/android), [Node](/docs/libraries/node), and more.
 
 Once you install and initialize PostHog, it automatically starts autocapturing usage of your app and is ready for A/B tests. You don’t need more set up or link with other tools. 
 

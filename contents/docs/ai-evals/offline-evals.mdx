@@ -436,12 +436,10 @@ Call `complete()` after the uploads succeed, or `fail()` if the run stops early.
 
 ## Review and compare experiments
 
-To read results, compare runs, and use them in CI, see [Review and compare experiments](/docs/ai-evals/experiments).
-
 <a id="read-scores-alongside-coverage"></a>
 <a id="use-results-in-your-ci"></a>
 
-To read scores alongside coverage, see [Read scores alongside coverage](/docs/ai-evals/experiments#read-scores-alongside-coverage). To use results in your CI, see [Use results in your CI](/docs/ai-evals/experiments#use-results-in-your-ci).
+See [Experiments](/docs/ai-evals/experiments) to compare runs, check coverage, and use results in your CI. After upload, you can [edit an experiment item or its reported scores](/docs/ai-evals/experiments#edit-experiment-items-and-results).
 
 ## Use a PostHog dataset (optional)
 
@@ -472,7 +470,7 @@ Use the [PostHog MCP server](/docs/model-context-protocol) to create scorers, ma
 
 ## Data retention
 
-PostHog deletes evaluation payloads 30 days after first accepting them:
+PostHog deletes payloads 30 days after it first accepts the item or result. Edits keep the original deadline.
 
 | Data                                                                                    | Retention             |
 | --------------------------------------------------------------------------------------- | --------------------- |
@@ -480,11 +478,11 @@ PostHog deletes evaluation payloads 30 days after first accepting them:
 | Result reasoning, error messages, and payload metadata                                  | Deleted after 30 days |
 | Experiment, item, and result records, including scores, statuses, summaries, and trends | Kept                  |
 
-Keep your own copy of payloads you need after 30 days. Source datasets have their own [retention policy](/docs/ai-evals/datasets#data-retention).
+Keep your own copy of any payload you need later. You can't restore a deleted or expired payload. Source datasets have their own [retention policy](/docs/ai-evals/datasets#data-retention).
 
 ## Pricing
 
-Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Retrying the same result doesn't add another event.
+Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Retries, edits, and deletes add no events. Uploading a deleted result again in an open experiment counts as a new event.
 
 Calculated composite results don't add billed events. For example, the six support-agent cases with two reported scorers and one composite produce 18 results and count as 12 events.
 

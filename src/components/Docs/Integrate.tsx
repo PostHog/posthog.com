@@ -54,10 +54,10 @@ type LibraryData = {
 
 // These SDKs' docs are their generated references, which carry no frontmatter, so they're listed here.
 const REFERENCE_SDKS = [
-    { label: 'Node.js', url: '/docs/libraries/node/reference', image: getLogo('nodejs') },
-    { label: 'Python', url: '/docs/libraries/python/reference', image: getLogo('python') },
-    { label: 'Go', url: '/docs/libraries/go/reference', image: getLogo('go') },
-    { label: 'Rust', url: '/docs/libraries/rust/reference', image: getLogo('rust') },
+    { label: 'Node.js', url: '/docs/libraries/node', image: getLogo('nodejs') },
+    { label: 'Python', url: '/docs/libraries/python', image: getLogo('python') },
+    { label: 'Go', url: '/docs/libraries/go', image: getLogo('go') },
+    { label: 'Rust', url: '/docs/libraries/rust', image: getLogo('rust') },
 ]
 
 export const SDKs = () => {

@@ -21,7 +21,7 @@ seo:
   metaDescription: How we bought, designed, got approval for, and measured a billboard campaign aimed at developers in London.
 ---
 
-As a mostly normal person, I always figured billboard campaigns were a huge waste of money for whatever company did them. That was until my comrade Charles came to me and said “I’m gonna be off for a month, so someone needs to take over our London billboard campaign”.
+As a mostly normal person, I always figured billboard campaigns were a huge waste of money for whatever company did them. That was until my comrade [Charles](/community/profiles/28625) came to me and said “I’m gonna be off for a month, so someone needs to take over our London billboard campaign”.
 
 Suddenly, I was thrust into the role of managing how we executed a campaign that cost us approximately $400,000. I felt no pressure, since money is fake, but it was a lot to sort out.
 
@@ -45,7 +45,7 @@ We have a small, invite-only Slack channel for billboard campaigns, where feedba
 
 I began by throwing out some very bad ideas for what we could go with. I think our name is hilarious and that we should lean into its colloquial meaning. Smarter people than I in the group, however, disagree and think it’s a bad idea.
 
-A few failed word docs with copy headlines and healthy disagreements later, it was settled that Lottie, our lead designer extraordinaire, and I would work on an idea that was already proposed weeks earlier by the exec team: a mock newspaper campaign. We’d draft inflammatory, fictitious news bits which our [ICP would chuckle at](https://x.com/camjodev/status/2105592791690809351).
+A few failed word docs with copy headlines and healthy disagreements later, it was settled that [Lottie](/community/profiles/27881), our lead designer extraordinaire, and I would work on an idea that was already proposed weeks earlier by the exec team: a mock newspaper campaign. We’d draft inflammatory, fictitious news bits which our [ICP would chuckle at](https://x.com/camjodev/status/2105592791690809351).
 
 Because the format is so copy-heavy, we were able to stuff several developer/builder culture inside jokes into every single asset. Since we didn’t care if the [average person understood](https://www.linkedin.com/feed/update/urn:li:activity:7516988578447675392/) the ads, only our ICP, that’s who we aggressively [tailored them for](https://x.com/tubeadcritic/status/2109902120568627394).
 

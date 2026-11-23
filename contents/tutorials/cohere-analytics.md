@@ -31,7 +31,7 @@ First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-
 npx create-next-app@latest cohere-analytics
 ```
 
-After creating your app, go into the newly created `cohere-analytics` directory and install the PostHog [Node SDK](/docs/libraries/node/reference) as well as the Vercel AI SDK and Cohere provider:
+After creating your app, go into the newly created `cohere-analytics` directory and install the PostHog [Node SDK](/docs/libraries/node) as well as the Vercel AI SDK and Cohere provider:
 
 ```bash
 cd cohere-analytics

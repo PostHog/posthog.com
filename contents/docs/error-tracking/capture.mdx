@@ -470,7 +470,7 @@ The process is slightly different depending on the SDK you're using.
 <Tab.Panels>
   <Tab.Panel>
 
-  In the [JavaScript Web](/docs/libraries/js) SDK, you can override the default properties by passing a `before_send` callback. In the [Node.js](/docs/libraries/node/reference) SDK 6.x.x, pass a `beforeSend` callback to `new PostHog()` instead. This callback is called before any exception is captured.
+  In the [JavaScript Web](/docs/libraries/js) SDK, you can override the default properties by passing a `before_send` callback. In the [Node.js](/docs/libraries/node) SDK 6.x.x, pass a `beforeSend` callback to `new PostHog()` instead. This callback is called before any exception is captured.
 
   ```javascript file=Web
   posthog.init('<ph_project_token>', {
@@ -538,7 +538,7 @@ The process is slightly different depending on the SDK you're using.
   </Tab.Panel>
   <Tab.Panel>
 
-  In Python, you can override the default properties through the use of [contexts](/docs/libraries/python/reference#posthognew_context) and tags. 
+  In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#posthognew_context) and tags. 
 
   ```python
   import posthog

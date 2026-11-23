@@ -175,7 +175,7 @@ For bug reports from normal and high priority users (assuming you've confirmed i
 4. Reply to the user to thank\* them for alerting us to the bug. Let them know you've opened a bug report and provide a link to it.
 5. Let them know they can follow the bug report on GitHub for updates.
 6. When sending the reply, change the ticket from `Open` to `Pending`
-7. In Slack, go to the team channel for the team that handles the feature that the bug report applies to (e.g. `#team-product-analytics`) and alert them with a post like "New bug report from a high priority customer: `https://github.com/PostHog/posthog/issues/nnnnnn`"
+7. In Slack, go to the team channel for the team that handles the feature that the bug report applies to (e.g. `#team-analytics`) and alert them with a post like "New bug report from a high priority customer: `https://github.com/PostHog/posthog/issues/nnnnnn`"
 
 `*` consider sparking additional joy with a [credit for merch](/handbook/company/merch-store#merch-giveaways)
 

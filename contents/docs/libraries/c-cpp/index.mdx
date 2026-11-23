@@ -18,7 +18,7 @@ features:
 
 > **Note:** This SDK is in beta. Before version 1.0, a minor version can change the API.
 
-The PostHog C/C++ SDK (`posthog-rs-ffi`) is a C API for the [PostHog Rust SDK](/docs/libraries/rust/reference). You can use it from C and C++ applications, such as servers, desktop apps, CLIs, and games. It uses the same code as the Rust SDK for batching, retries, Feature Flags, and local evaluation.
+The PostHog C/C++ SDK (`posthog-rs-ffi`) is a C API for the [PostHog Rust SDK](/docs/libraries/rust). You can use it from C and C++ applications, such as servers, desktop apps, CLIs, and games. It uses the same code as the Rust SDK for batching, retries, Feature Flags, and local evaluation.
 
 - **Capture** adds events to a queue and returns immediately. A background thread batches, retries, and sends them.
 - **Feature flag evaluation** blocks the calling thread while it gets flags, or evaluates them locally when you enable local evaluation.
