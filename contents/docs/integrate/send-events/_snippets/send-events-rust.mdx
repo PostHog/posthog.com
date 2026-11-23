@@ -46,3 +46,9 @@ client.shutdown().await;
 ```
 
 With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`.
+
+With `default-features = false`, the Rust SDK 1.x.x has no TLS. Add the `tls` feature:
+
+```toml
+posthog = { version = "1", default-features = false, features = ["tls"] }
+```

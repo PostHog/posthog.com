@@ -17,15 +17,31 @@ The Oura connector syncs your Oura Ring health data into PostHog, so you can ana
 
 ## Prerequisites
 
-You need an Oura account with access to create a personal access token.
+You need an Oura account with access to the data you want to sync. A PostHog project admin must connect the Oura account before other project members can select it.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-When linking Oura, you'll need:
+When you reach the credentials step, use the **Oura account** field:
 
-- **Personal access token** – create one in the [Oura developer portal](https://cloud.ouraring.com/personal-access-tokens). Grant the scopes needed for the data you want to sync.
+1. Click **Choose Oura connection**, then **Connect to Oura**. If your project already has an Oura connection, you can select it instead.
+2. Sign in to Oura and authorize PostHog to access your data.
+3. After you return to PostHog, confirm the Oura connection is selected, then click **Next** to choose your tables.
+
+PostHog requests the `email`, `personal`, `daily`, `heartrate`, `workout`, `tag`, `session`, `spo2`, and `heart_health` scopes. The `email` and `personal` scopes identify your connected account. The remaining scopes provide access to your health and activity data. Grant access to the data types you want to sync.
+
+PostHog refreshes expired access tokens automatically.
+
+## Reconnecting an existing source
+
+Oura retired personal access tokens in December 2025. If you previously connected with a personal access token, reconnect using OAuth:
+
+1. In the [Sources tab](https://app.posthog.com/data-management/sources), open your existing Oura source and select **Configuration**.
+2. Under **Oura account**, use **Choose Oura connection** (or **Change** if a connection is already selected) to connect your Oura account. Sign in to Oura and authorize access.
+3. Return to your existing source's **Configuration** tab, select the authorized Oura connection under **Oura account**, and click **Save**.
+
+Existing sources do not switch to OAuth automatically. If your source reports **Reconnect your Oura account**, follow these steps to update its connection.
 
 ## Sync modes
 
@@ -41,7 +57,8 @@ When linking Oura, you'll need:
 
 ## Troubleshooting
 
-- If you see an authentication error, your access token may be invalid or revoked. Create a new personal access token in the Oura developer portal, then reconnect.
-- If you see a permission error, your token may be missing the scopes needed to sync this data. Grant the required scopes, then reconnect.
+- **Authentication error or missing connection:** [Reconnect your Oura account](#reconnecting-an-existing-source) if access has been revoked or the connection was deleted.
+- **Permission error:** Reconnect your Oura account and grant access to the data type you want to sync. Also check that your Oura membership is active.
+- **Oura app not configured:** [Contact PostHog support](/support).
 
 <TroubleshootingLink />

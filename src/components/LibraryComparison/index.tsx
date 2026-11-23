@@ -31,7 +31,7 @@ type LibraryFeatures = {
 
 // These SDKs' docs are their generated references, which carry no frontmatter, so their features live here.
 const referenceSdk = (sdk: string, title: string, features: LibraryFeatures): LibraryNode => ({
-    fields: { slug: `/docs/libraries/${sdk}/reference` },
+    fields: { slug: `/docs/libraries/${sdk}` },
     frontmatter: { title, features },
 })
 const server = {

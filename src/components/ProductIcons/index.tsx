@@ -160,32 +160,6 @@ export const Cohorts = ({ className = '', ...other }: { className?: string }): J
         />
     </svg>
 )
-export const CorrelationAnalysis = ({ className = '', ...other }: { className?: string }): JSX.Element => (
-    <svg
-        width="100%"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className={`fill-current ${className}`}
-        {...other}
-    >
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M4.884 18.884a1.25 1.25 0 0 1 0-1.768L16.116 5.884a1.25 1.25 0 0 1 1.768 1.768L6.652 18.884a1.25 1.25 0 0 1-1.768 0Z"
-        />
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8 6.25C8 5.56 8.56 5 9.25 5h8.5a1.25 1.25 0 1 1 0 2.5h-8.5C8.56 7.5 8 6.94 8 6.25Z"
-        />
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M17.75 16c-.69 0-1.25-.56-1.25-1.25v-8.5a1.25 1.25 0 1 1 2.5 0v8.5c0 .69-.56 1.25-1.25 1.25Z"
-        />
-    </svg>
-)
 export const Dashboards = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"

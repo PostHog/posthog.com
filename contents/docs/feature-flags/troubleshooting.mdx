@@ -240,7 +240,7 @@ We'll email you before your organization moves. PostHog won't stop writing flag 
 
 ### What you can do now
 
-- If you write [SQL](/docs/sql) that reads `$feature_flag_called`, list the columns you need instead of `*`, and don't use `SAMPLE` or `FINAL`. After the move, these queries return an error.
+- If you write [SQL](/docs/sql) that reads `$feature_flag_called`, list the columns you need instead of `*`, and write `SAMPLE` as a ratio, such as `SAMPLE 0.1`. After the move, a query that reads `$feature_flag_called` with `SELECT *`, `COLUMNS(...)`, a `SAMPLE` with an `OFFSET`, or a `SAMPLE` of a row count returns an error.
 - The SQL editor warns you when a query reads `$feature_flag_called` from the `events` table.
 
 ### What shows flag calls after the move
@@ -258,6 +258,14 @@ After the move, queries on flag calls return at most the last 90 days.
 ### What stops showing new flag calls after the move
 
 - [Batch exports](/docs/data-pipelines/batch-exports) of the `events` table
+- Trends, stickiness, and lifecycle series on **All events**
+- Retention steps on **All events**
+- Funnel steps on **All events**, unless the funnel also has a `$feature_flag_called` step
+- [SQL](/docs/sql) and [API](/docs/api/queries) queries that read every event and don't name `$feature_flag_called`, such as `SELECT count() FROM events` or `SELECT event, count() FROM events GROUP BY event`
+
+An insight or SQL query that reads every event without naming `$feature_flag_called` reads only the `events` table. Its totals drop by the number of flag calls you send. Unique-user counts, such as daily active users, also drop if you evaluate flags for users who send no other events. Server-side flag evaluation often does this.
+
+Queries that name `$feature_flag_called` still return flag calls, from at most the last 90 days.
 
 [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, don't include `$feature_flag_called` events.
 
@@ -265,7 +273,7 @@ After the move, queries on flag calls return at most the last 90 days.
 
 ### Async compatibility (Python / FastAPI)
 
-Version `7.45.0` and later of the Python SDK includes the asyncio-native `AsyncPosthog` client. Use it in FastAPI, Starlette, and other asyncio apps to capture events, evaluate flags, and fetch remote config without blocking the event loop. See the [Python asyncio client guide](/docs/libraries/python/reference#asyncclient) for installation and lifecycle examples.
+Version `7.45.0` and later of the Python SDK includes the asyncio-native `AsyncPosthog` client. Use it in FastAPI, Starlette, and other asyncio apps to capture events, evaluate flags, and fetch remote config without blocking the event loop. See the [Python asyncio client guide](/docs/libraries/python#asyncclient) for installation and lifecycle examples.
 
 The synchronous `Posthog` client remains supported. If you keep it in an asyncio app, run network-bound calls in a worker thread with `asyncio.to_thread()` instead of calling them on the event loop.
 
