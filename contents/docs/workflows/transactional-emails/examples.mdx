@@ -176,7 +176,7 @@ SHA256=$(shasum -a 256 "$FILE" | cut -d " " -f 1)
 SIZE=$(wc -c < "$FILE" | tr -d " ")
 
 # 1. Ask where to upload the file
-ANSWER=$(curl -sS --fail-with-body -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
+ANSWER=$(curl -sS --fail-with-body -X POST "https://us.posthog.com/api/messaging/attachments/uploads/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -d "{\"files\": [{\"sha256\": \"$SHA256\", \"size\": $SIZE}]}") || { echo "$ANSWER" >&2; exit 1; }
@@ -192,7 +192,7 @@ if [ "$(jq -r .status <<< "$SLOT")" = "upload" ]; then
 fi
 
 # 3. Send the email with the file
-curl -sS --fail-with-body -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+curl -sS --fail-with-body -X POST "https://us.posthog.com/api/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: receipt-ord_1042" \

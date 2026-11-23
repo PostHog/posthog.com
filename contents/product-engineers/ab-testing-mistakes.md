@@ -166,7 +166,7 @@ Not everything that can be measured matters. Not everything that matters can be 
 
 [Raquel](/raquel), one of our growth engineers here at PostHog, shares an example:
 
-> "We ran an experiment on our sign-up page to make our social login buttons more prominent (e.g., "Sign up with Google" and "Sign up with GitHub") instead of signing up with email and password. While more people signed up using Google and Github, overall sign-ups didn't increase, and nor did activation. Ultimately, we decided to ship the change since we felt that social login lowers friction, and provides a better user experience."
+> "We ran an experiment on our sign-up page to make our social login buttons more prominent (e.g., "Sign up with Google" and "Sign up with GitHub") instead of signing up with email and password. While more people signed up using Google and GitHub, overall sign-ups didn't increase, and nor did activation. Ultimately, we decided to ship the change since we felt that social login lowers friction, and provides a better user experience."
 
 ## Conclusion
 

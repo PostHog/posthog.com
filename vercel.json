@@ -7,16 +7,7 @@
     },
     "headers": [
         {
-            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x|migration):ext(\\.md)?",
-            "headers": [
-                {
-                    "key": "X-Robots-Tag",
-                    "value": "noindex"
-                }
-            ]
-        },
-        {
-            "source": "/docs/libraries/python/reference:ext(\\.md)?",
+            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x):ext(\\.md)?",
             "headers": [
                 {
                     "key": "X-Robots-Tag",
@@ -88,6 +79,15 @@
                 {
                     "key": "Cache-Control",
                     "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/mcp-registry-auth",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
                 }
             ]
         },
@@ -170,6 +170,116 @@
     ],
     "redirects": [
         {
+            "source": "/docs/libraries/capture-v1:ext(\\.md)?",
+            "destination": "/docs/libraries:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/node/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/python/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/go/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/rust/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-go-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-rust-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/:sdk(node|python|go|rust)/:major(\\d+):ext(\\.md)?",
+            "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
@@ -178,6 +288,11 @@
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations.md",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
             "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/live-playground",
+            "destination": "/learn/ai-observability/live-playground/twig",
+            "statusCode": 301
         },
         {
             "source": "/pocket-guides/ai-observability/prompts-and-offline-evaluations",
@@ -752,6 +867,10 @@
             "destination": "/compare/best-mouseflow-alternatives"
         },
         {
+            "source": "/blog/best-open-source-llm-observability-tools",
+            "destination": "/compare/best-open-source-llm-observability-tools"
+        },
+        {
             "source": "/blog/best-optimizely-alternatives",
             "destination": "/compare/best-optimizely-alternatives"
         },
@@ -801,7 +920,11 @@
         },
         {
             "source": "/blog/ga4-alternatives",
-            "destination": "/compare/ga4-alternatives"
+            "destination": "/compare/best-ga4-alternatives"
+        },
+        {
+            "source": "/compare/ga4-alternatives",
+            "destination": "/compare/best-ga4-alternatives"
         },
         {
             "source": "/blog/hotjar-for-mobile-ios-android-react-native-flutter",
@@ -858,6 +981,14 @@
         {
             "source": "/blog/best-mobile-app-ab-testing-tools",
             "destination": "/compare/best-mobile-app-ab-testing-tools"
+        },
+        {
+            "source": "/blog/best-open-source-session-replay-tools",
+            "destination": "/compare/best-open-source-session-replay-tools"
+        },
+        {
+            "source": "/blog/best-open-source-ab-testing-tools",
+            "destination": "/compare/best-open-source-ab-testing-tools"
         },
         {
             "source": "/blog/best-mobile-app-session-replay-tools",
@@ -923,6 +1054,11 @@
         {
             "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
             "destination": "/docs/self-driving:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
             "statusCode": 301
         },
         {
@@ -1433,6 +1569,16 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/marketing/how-we-position-and-sell/workflows:ext(\\.md)?",
+            "destination": "/handbook/growth/sales/workflows-positioning:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/sales/inbound-sales:ext(\\.md)?",
+            "destination": "/handbook/growth/sales/new-sales:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
             "statusCode": 301
@@ -1762,6 +1908,26 @@
         {
             "source": "/docs/user-guides/:path*",
             "destination": "/manual/:path*"
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/node:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/python:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
         },
         {
             "source": "/docs/integrate/(client|server)/:path*",
@@ -2622,7 +2788,7 @@
         },
         {
             "source": "/tutorials/free-hotjar-alternative",
-            "destination": "/blog/best-open-source-session-replay-tools"
+            "destination": "/compare/best-open-source-session-replay-tools"
         },
         {
             "source": "/docs/plugins/build/reference:ext(\\.md)?",
@@ -3455,6 +3621,11 @@
         {
             "source": "/docs/integrate/user-properties:ext(\\.md)?",
             "destination": "/docs/product-analytics/user-properties:ext?"
+        },
+        {
+            "source": "/docs/data/properties:ext(\\.md)?",
+            "destination": "/docs/data/events:ext?",
+            "statusCode": 301
         },
         {
             "source": "/docs/data/user-properties:ext(\\.md)?",
@@ -4802,6 +4973,10 @@
         {
             "source": "/docs/billing/annual-plans:ext(\\.md)?",
             "destination": "/docs/billing/pre-paid-plans:ext?"
+        },
+        {
+            "source": "/docs/billing/limits:ext(\\.md)?",
+            "destination": "/docs/billing/limits-alerts:ext?"
         },
         {
             "source": "/legal",
@@ -6592,7 +6767,15 @@
         },
         {
             "source": "/manual/correlation",
-            "destination": "/docs/product-analytics/correlation"
+            "destination": "/docs/product-analytics/funnels"
+        },
+        {
+            "source": "/docs/product-analytics/correlation:ext(\\.md)?",
+            "destination": "/docs/product-analytics/funnels:ext?"
+        },
+        {
+            "source": "/correlation-analysis",
+            "destination": "/product-analytics"
         },
         {
             "source": "/manual/experimentation",
@@ -6668,19 +6851,39 @@
         },
         {
             "source": "/docs/ai-engineering/langfuse-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/langfuse-posthog:ext?"
+            "destination": "/compare/posthog-vs-langfuse"
         },
         {
             "source": "/docs/ai-engineering/helicone-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/helicone-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
         },
         {
             "source": "/docs/ai-engineering/keywords-ai-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog:ext?"
+            "destination": "/docs/ai-observability/start-here:ext?"
         },
         {
             "source": "/docs/ai-engineering/traceloop-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/traceloop-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/langfuse-posthog:ext(\\.md)?",
+            "destination": "/compare/posthog-vs-langfuse"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/helicone-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/keywords-ai-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/traceloop-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
         },
         {
             "source": "/docs/llm-analytics/manual-capture:ext(\\.md)?",
@@ -7322,6 +7525,11 @@
             "statusCode": 301
         },
         {
+            "source": "/product-analytics-explorer/:path*",
+            "destination": "/product-analytics",
+            "statusCode": 301
+        },
+        {
             "source": "/about-us",
             "destination": "/about",
             "statusCode": 301
@@ -7473,6 +7681,41 @@
         {
             "source": "/docs/business-knowledge/start:ext(\\.md)?",
             "destination": "/docs/business-knowledge/start-here:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-evals/taggers",
+            "destination": "/docs/ai-evals#categories",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-evals/taggers.md",
+            "destination": "/docs/ai-evals.md#categories",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/use-thumb-survey",
+            "destination": "/docs/ai-observability/collect-user-feedback#react-use-the-usethumbsurvey-hook",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/use-thumb-survey.md",
+            "destination": "/docs/ai-observability/collect-user-feedback.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/manual-event-capture",
+            "destination": "/docs/ai-observability/collect-user-feedback#capture-feedback-events-manually",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/user-feedback/manual-event-capture.md",
+            "destination": "/docs/ai-observability/collect-user-feedback.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/playground:ext(\\.md)?",
+            "destination": "/docs/experiments/playground:ext?",
             "statusCode": 301
         }
     ]

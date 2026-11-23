@@ -28,7 +28,7 @@ You also need an Argo CD account with the `apiKey` capability enabled so it can 
 When linking Argo CD, you'll need:
 
 - **Argo CD server URL** – the base URL of your Argo CD API server, for example `https://argocd.example.com`.
-- **API token** – generate one with `argocd account generate-token --account <account>`. The account's [RBAC policy](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/) needs read access to the resources you want to sync, for example `applications, get`, `projects, get`, `repositories, get`, and `clusters, get`.
+- **API token** – generate one with `argocd account generate-token --account <account>`. The account's [RBAC policy](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/) needs read access to the resources you want to sync, for example `applications, get`, `applicationsets, get`, `projects, get`, `repositories, get`, and `clusters, get`.
 - **Project** (optional) – an Argo CD project name to limit which applications are synced. Leave blank to sync all applications the token can see.
 
 ## Sync modes

@@ -22,7 +22,7 @@ Prefer to watch how it works? Follow the instruction video below:
 You need:
 
 - An MCP client (like Claude Code, Cursor, or Claude Desktop) with the [PostHog MCP server](/docs/model-context-protocol) installed
-- The `migrating-from-fivetran` agent skill. It ships with the [PostHog MCP server](/docs/model-context-protocol), so there's nothing extra to install: ask your agent to move your Fivetran setup and it loads the skill. You can also get it from the [PostHog AI plugin](https://github.com/PostHog/ai-plugin), or download `skills.zip` from the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest). See [Skills](/docs/skills) for more.
+- The `migrating-from-fivetran` agent skill. It ships with the [PostHog MCP server](/docs/model-context-protocol), so there's nothing extra to install: ask your agent to move your Fivetran setup and it loads the skill. You can also download `skills.zip` from the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest). See [Skills](/docs/skills) for more.
 - A way to read your Fivetran account, using either:
   - A Fivetran API key and secret (recommended). The key can be read-only. You can generate these in Fivetran under your user settings ([Fivetran docs](https://fivetran.com/docs/rest-api/getting-started))
   - The Fivetran MCP server. All of your Fivetran setup goes through the model, so this uses more tokens, especially if your setup is large

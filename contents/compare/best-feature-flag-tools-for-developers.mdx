@@ -414,7 +414,7 @@ The [data warehouse](/context-warehouse) and [CDP](/cdp) extend that to your Str
 
 It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
 
-It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
@@ -453,7 +453,7 @@ Your pick might change if one of these needs outweigh the rest:
 <details>
   <summary>What's the difference between PostHog and LaunchDarkly?</summary>
 
-**LaunchDarkly** is a dedicated feature management platform built for enterprise-scale flag operations. It has the most sophisticated targeting rules, governance workflows, and SDK coverage, but doesn't include analytics, session replay, or error tracking.
+**LaunchDarkly** is a dedicated feature management platform built for enterprise-scale flag operations. It has the most sophisticated targeting rules, governance workflows, and SDK coverage. It now includes session replay, errors, logs, and traces, but doesn't include product analytics.
 
 **PostHog** takes a different approach by embedding feature flags into an all-in-one developer platform. You can roll out a flag, watch session replays of affected users, check analytics for impact, and catch errors – all without switching tools. It's more affordable for most teams but doesn't match LaunchDarkly's depth in terms of enterprise-grade governance and managament.
 

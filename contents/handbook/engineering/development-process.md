@@ -48,7 +48,7 @@ If this is a big feature which will need an announcement, content, or other mark
 
 ### Break up goals
 
-The owner turns the ambiguous milestone into a roadmap of ambitious, meaningful, sprint-sized goals, thinking 2 - 3 sprints ahead to give other functions time. [Goal principles](/handbook/engineering/development-process#set-some-milestones) still apply.
+The owner turns the ambiguous milestone into a roadmap of ambitious, meaningful, sprint-sized goals, thinking 2 - 3 sprints ahead to give other functions time. [Goal principles](/handbook/engineering/development-process#set-milestones) still apply.
 
 ### Iterate through the work
 
@@ -176,7 +176,7 @@ pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
 
 It happens often that your PR will show conflics with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
 
-Github does not allow for conflict resolution inside their website, so you must do it manually.
+GitHub does not allow for conflict resolution inside their website, so you must do it manually.
 
 > The following is done on your branch in question.
 
@@ -198,7 +198,7 @@ Github does not allow for conflict resolution inside their website, so you must 
     git pull --rebase <your branch>
     ```
 
-In your terminal, it should show you the conflicts mimicking what you see in your Github PR.
+In your terminal, it should show you the conflicts mimicking what you see in your GitHub PR.
 
 ```bash
 warning: Cannot merge binary files: frontend/__snapshots__/<conflicted_file_1>.png (HEAD vs. xxx (Update UI snapshots for `chromium` (1)))

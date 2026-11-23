@@ -25,8 +25,6 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect Gainsight PX with your project's **API key**. Generate a key with **Read** access under **Administration → REST API** in Gainsight PX, then pick the region your subscription is hosted in.
 
-All tables are synced as full refresh - Gainsight PX's list endpoints don't expose an "updated since" filter.
-
 You'll be asked for:
 
 - **API key**
@@ -36,7 +34,21 @@ You'll be asked for:
 
 <SyncModes />
 
-All Gainsight PX tables are full refresh. Each sync replaces the contents of the table.
+The event tables support incremental and append-only sync on `date`. Gainsight PX events don't change after capture, so each sync fetches only the events that are newer than the last sync. The first sync and each full refresh of an event table fetch the last 2 years of events. The event tables are:
+
+- `page_view_events`
+- `session_events`
+- `engagement_view_events`
+- `feature_match_events`
+- `segment_match_events`
+- `custom_events`
+- `identify_events`
+- `form_submit_events`
+- `email_events`
+- `lead_events`
+- `survey_responses`
+
+The other tables (`accounts`, `users`, `features`, `segments`, `engagements`, `articles`, and `kc_bots`) use full refresh, because their Gainsight PX endpoints don't have an "updated since" filter. Each sync replaces the contents of these tables.
 
 ## Configuration
 

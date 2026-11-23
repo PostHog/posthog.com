@@ -121,7 +121,7 @@ Each tool needs the same access as the matching action in the app: read tools ne
 
 ## Agent skills
 
-PostHog also publishes three Replay Vision [agent skills](https://github.com/PostHog/skills): instructions that teach an agent how to use these tools well. They ship in the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) for Claude Code, Codex, Cursor, and Gemini CLI, so an agent with the plugin installed picks them up when the task calls for them.
+PostHog also publishes three Replay Vision [agent skills](https://github.com/PostHog/skills): instructions that teach an agent how to use these tools well. They ship with the [PostHog MCP server](/docs/model-context-protocol), so a connected agent loads them when the task calls for them.
 
 - `designing-replay-vision-scanners` – designs a scanner that produces trustworthy observations: one visible question, the right type, a query that selects only sessions able to answer it, and a prompt that asks for on-screen proof.
 - `creating-replay-vision-scanners` – creates a scanner and sizes it safely, estimating its spend and checking the budget before it goes live.
