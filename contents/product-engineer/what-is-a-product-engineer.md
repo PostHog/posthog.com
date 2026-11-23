@@ -1,6 +1,9 @@
 ---
 title: What is a product engineer?
 showTitle: true
+seo:
+    metaTitle: "What is a product engineer? Definition and responsibilities"
+    metaDescription: "A product engineer is a full stack developer who builds for real users. They talk to users, decide what to build, and own the outcome – not just the code."
 ---
 
 Welcome to the Product Engineer Handbook. Just like our [public company handbook](/handbook), we made this to share how we work, how we think, and ultimately help engineers prepare for the future. Why? Let's start with something obvious. 
