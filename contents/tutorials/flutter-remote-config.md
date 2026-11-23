@@ -138,7 +138,7 @@ For iOS, `posthog_flutter` version 6 installs through [Swift Package Manager](ht
 </plist>
 ```
 
-Then set the minimum platform version to iOS 15.0 in Xcode (**Runner > General > Minimum Deployments**).
+Then set the minimum platform version to iOS 15.0 in Xcode (**Runner > General > Minimum Deployments**). Building for iOS requires Xcode 26 or later.
 
 ### Web setup
 
