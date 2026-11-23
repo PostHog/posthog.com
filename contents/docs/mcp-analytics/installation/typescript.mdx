@@ -132,7 +132,7 @@ Connect an agent to your server and call a tool. Then open the [activity feed](h
 [`mcp-handler`](https://github.com/vercel/mcp-handler) builds a new `McpServer` for every request and passes it to your setup callback. Call `instrument()` there, then wrap the route in `withMcpSessionHeader`. `withMcpSessionHeader` needs `@posthog/mcp` 1.5.0 or later.
 
 ```ts
-// app/api/[transport]/route.ts
+// app/api/mcp/route.ts
 import { createMcpHandler, withMcpAuth } from "mcp-handler"
 import { PostHog, instrument, withMcpSessionHeader } from "@posthog/mcp"
 import { z } from "zod"
@@ -155,12 +155,14 @@ const handler = createMcpHandler((server) => {
   server.registerTool("echo", { inputSchema: z.object({ text: z.string() }) }, async ({ text }) => ({
     content: [{ type: "text", text }],
   }))
-}, {}, { basePath: "/api" })
+})
 
 // Auth goes outermost and is required, so a request without a valid token is rejected before anything reads its body.
 const route = withMcpAuth(withMcpSessionHeader(handler), verifyToken, { required: true })
 export { route as GET, route as POST }
 ```
+
+This is `mcp-handler` 2.x. On 1.x, mount the route at `app/api/[transport]/route.ts` and pass `{}, { basePath: "/api" }` after the setup callback.
 
 `instrument()` can run before or after you register tools. The `identify` callback is optional. Drop it, and `withMcpAuth`, if your server has no auth.
 
@@ -169,7 +171,7 @@ On `2025-11-25`, the client sends its name and version only at `initialize`, and
 `2026-07-28` has no `initialize` and no session header. `withMcpSessionHeader` passes those requests through unchanged. To group a client's calls on that revision:
 
 - Keep [conversation IDs](/docs/mcp-analytics/conversation-id) on (the default). Calls group when the agent echoes the handle.
-- Return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users), such as the OAuth client ID. This groups calls by person, not by session.
+- Return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users), such as the authenticated user's ID. This groups calls by user, not by session.
 
 Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
 
