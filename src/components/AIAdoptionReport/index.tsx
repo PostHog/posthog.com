@@ -127,7 +127,7 @@ function ReportSection({
                 ? a.label.localeCompare(b.label)
                 : (b.share ?? -1) - (a.share ?? -1) || a.label.localeCompare(b.label)
         )
-    const chartRows = rows.filter((row) => row.share != null).slice(0, 5)
+    const chartRows = rows.filter((row) => row.share != null).slice(0, section === 'model' ? 10 : 5)
     const expandedRow = rows.find((row) => row.key === expanded)
     if (expandedRow && !chartRows.includes(expandedRow)) chartRows.push(expandedRow)
     const coverageLabel =
@@ -176,7 +176,12 @@ function ReportSection({
                             }}
                         />
                     ) : (
-                        <LineChart className="h-64" labels={dates} series={chartRows} config={chartConfig} />
+                        <LineChart
+                            className={section === 'model' ? 'h-96 @md:h-80' : 'h-64'}
+                            labels={dates}
+                            series={chartRows}
+                            config={chartConfig}
+                        />
                     )}
                 </figure>
             )}
@@ -297,7 +302,7 @@ const reportQuestions = (period: string) => [
     },
     {
         question: 'Which models, labs, and tools appear on the line charts?',
-        answer: 'Each chart starts with the top five in the selected month and shows their shares over time. Select another name in the table to see its monthly shares on the chart.',
+        answer: 'The model chart follows the ten models with the highest shares in the selected month. The lab and tool charts each follow the top five. Select another name in a table to add its line.',
     },
     {
         question: 'What does “pp” mean in the Change column?',
