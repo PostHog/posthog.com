@@ -3,6 +3,7 @@ import { IconPlay } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import useProduct from 'hooks/useProduct'
+import { learnTrackingVolume } from '../../constants/pocketGuides'
 import usePostHog from 'hooks/usePostHog'
 import { TWIG_URL } from '../../constants'
 import LearnPage from './LearnPage'
@@ -36,11 +37,11 @@ export default function LivePlaygroundPage({
     children,
 }: LivePlaygroundPageProps): JSX.Element {
     const posthog = usePostHog()
-    const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
+    const volume = learnTrackingVolume(useProduct({ handle: productHandle }) as any)
     const exploreTwig = (event: React.MouseEvent) => {
         posthog?.capture('learn_resource_selected', { volume, resource: 'twig', option: 'explore_twig' })
         // Read the live SDK: it may load after this page renders.
-        handOffToTwig(event, window.posthog, TWIG_URL, volume)
+        handOffToTwig(event, window.posthog, TWIG_URL, volume ?? '')
     }
     return (
         <LearnPage

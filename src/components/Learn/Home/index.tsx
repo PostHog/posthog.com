@@ -8,7 +8,7 @@ import SEO from 'components/seo'
 import { SearchInput } from 'components/UI/SearchInput'
 import ShelfCover from 'components/Learn/PocketGuides/ShelfCover'
 import usePocketGuideCounts from '../../../hooks/usePocketGuideCounts'
-import { POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides'
+import { PUBLISHED_POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides'
 import PlaygroundPreview from './PlaygroundPreview'
 import PromptLibrary from './PromptLibrary'
 import VideoLibrary from '../LearnTV/VideoLibrary'
@@ -113,7 +113,7 @@ function PocketGuideCollection(): JSX.Element {
     const counts = usePocketGuideCounts()
     const [query, setQuery] = useState('')
     const q = query.trim().toLowerCase()
-    const volumes = POCKET_GUIDE_VOLUMES.filter(
+    const volumes = PUBLISHED_POCKET_GUIDE_VOLUMES.filter(
         (volume) => !q || `${volume.title} ${volume.description}`.toLowerCase().includes(q)
     )
     return (

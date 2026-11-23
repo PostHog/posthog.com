@@ -6,7 +6,7 @@ The Learn home at `/learn`. It uses the Reader template: a docs-style sidebar on
 
 | Route | Page file | Section |
 | --- | --- | --- |
-| `/learn` | `src/pages/learn/index.tsx` | Pocket guides: one collection of every volume in `POCKET_GUIDE_VOLUMES` |
+| `/learn` | `src/pages/learn/index.tsx` | Pocket guides: one collection of every published volume |
 | `/learn/videos` | `src/pages/learn/videos/index.tsx` | Videos: `LearnTV/VideoLibrary` with every Learn TV video, grouped by product. Each card opens the video in its own window. See [`LearnTV`](../LearnTV/README.md) |
 | `/learn/prompts` | `src/pages/learn/prompts.tsx` | Prompt library: every prompt from `learnPrompts.ts`, with search and a product filter |
 | `/learn/playground` | `src/pages/learn/playground.tsx` | Tinker with Twig: an Explore Twig link and a preview of Twig with its PostHog panel |

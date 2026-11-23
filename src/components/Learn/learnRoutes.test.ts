@@ -4,11 +4,15 @@ import test from 'node:test'
 
 import {
     POCKET_GUIDE_VOLUMES,
+    PUBLISHED_POCKET_GUIDE_VOLUMES,
+    learnHubFor,
+    learnTrackingVolume,
     pocketGuideDestination,
     pocketGuidePageContext,
     pocketGuideSourceVolume,
     pocketGuideUrl,
     volumeById,
+    volumeForProduct,
 } from '../../constants/pocketGuides.ts'
 import { docsMenu } from '../../navs/index.js'
 
@@ -80,7 +84,7 @@ test('all published chapters have unique static public routes and source identit
             )
         }
     }
-    for (const volume of POCKET_GUIDE_VOLUMES) {
+    for (const volume of PUBLISHED_POCKET_GUIDE_VOLUMES) {
         walk(
             new URL(`../../../contents/learn/${volume.id}/pocket-guide/`, import.meta.url),
             `/learn/${volume.id}/pocket-guide`
@@ -289,5 +293,25 @@ test('a Learn hub root shows a landing page exactly when its volume has a learnH
         const index = new URL(`../../pages/learn/${hubSlug}/index.tsx`, import.meta.url)
         assert.ok(existsSync(index), `${volume.id} needs src/pages/learn/${hubSlug}/index.tsx`)
         assert.equal(/\blanding=\{/.test(readFileSync(index, 'utf8')), Boolean(volume.learnHub), volume.id)
+    }
+})
+
+test('Data Pipelines uses its reserved volume for Learn and tracking before the guide ships', () => {
+    const productSource = readFileSync(new URL('../../hooks/productData/data_pipelines.tsx', import.meta.url), 'utf8')
+    const pocketGuideVolume = productSource.match(/pocketGuideVolume: '([^']+)'/)?.[1]
+    const product = { pocketGuideVolume, slug: 'different-slug' }
+    const volume = volumeById('data-pipelines')
+
+    assert.ok(volume?.comingSoon)
+    assert.equal(volume.productHandle, 'data_pipelines')
+    assert.equal(learnTrackingVolume(product), volume.id)
+    assert.equal(PUBLISHED_POCKET_GUIDE_VOLUMES.includes(volume), false)
+    assert.equal(volumeForProduct('data-pipelines'), undefined)
+    assert.equal(pocketGuidePageContext('/learn/data-pipelines/pocket-guide', 0), undefined)
+
+    const hub = learnHubFor(product)
+    assert.deepEqual(hub?.pages, ['agent-prompts-and-mcp'])
+    for (const page of hub?.pages ?? []) {
+        assert.ok(existsSync(new URL(`../../pages/learn/data-pipelines/${page}.tsx`, import.meta.url)))
     }
 })

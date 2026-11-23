@@ -11,8 +11,13 @@ import {
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
-import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
-import type { LearnHubPage } from '../../../constants/pocketGuides'
+import {
+    hasLearnTab,
+    isSelfDrivingPage,
+    learnTrackingVolume,
+    pocketGuideUrl,
+    volumeById,
+} from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
@@ -94,12 +99,15 @@ const DocsTreeMenu = ({
 /** The same Learn tree is shown on the hub, agent page, and every chapter. */
 const LearnNav = ({
     volumeId,
+    trackingVolume,
     basePath,
     currentPath,
     section,
     fullTitles,
 }: {
-    volumeId: string
+    volumeId?: string
+    /** The `volume` property on sidebar clicks. */
+    trackingVolume?: string
     basePath: string
     currentPath?: string
     /** Only list the pages with this `section:` frontmatter. */
@@ -107,9 +115,9 @@ const LearnNav = ({
     /** Label pages with their full title instead of their `shortTitle`. */
     fullTitles?: boolean
 }) => {
-    const pages = sectionPages(useBookPages(volumeId), section)
+    const pages = sectionPages(useBookPages(volumeId ?? ''), section)
     const posthog = usePostHog()
-    const volume = volumeById(volumeId)
+    const volume = volumeId ? volumeById(volumeId) : undefined
     const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
     const chapters = pages.map((page) => ({
@@ -123,23 +131,32 @@ const LearnNav = ({
         wrap: fullTitles,
     }))
     const hub = volume?.learnHub
-    const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
+    const isSelfDriving = (index: number) => Boolean(volumeId) && isSelfDrivingPage(volumeId as string, pages[index])
     // Only the Self-driving introduction is numbered, so the scout pages come through unnumbered.
     const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
-              {
-                  name: 'Pocket guide',
-                  url: guideBasePath,
-                  icon: <IconBook className="size-4" />,
-                  children: [
-                      ...chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
-                      // The story ends in Self-driving, the guide's last numbered chapter. Its first
-                      // page is the introduction, so the label opens it and the chevron lists the scouts.
-                      ...(scoutChapters.length ? [{ ...scoutChapters[0], children: scoutChapters.slice(1) }] : []),
-                  ],
-              },
+              volume?.comingSoon
+                  ? {
+                        name: 'Pocket guide',
+                        icon: <IconBook className="size-4" />,
+                        disabled: true,
+                        badge: { title: 'Coming soon' },
+                    }
+                  : {
+                        name: 'Pocket guide',
+                        url: guideBasePath,
+                        icon: <IconBook className="size-4" />,
+                        children: [
+                            ...chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
+                            // The story ends in Self-driving, the guide's last numbered chapter. Its first
+                            // page is the introduction, so the label opens it and the chevron lists the scouts.
+                            ...(scoutChapters.length
+                                ? [{ ...scoutChapters[0], children: scoutChapters.slice(1) }]
+                                : []),
+                        ],
+                    },
               // Only the hub pages this volume has, so a smaller hub has no dead links.
               ...(hub.pages ?? []).map((page) => {
                   const children = hub.subpages?.[page]?.map(({ slug, name }) => ({
@@ -162,12 +179,17 @@ const LearnNav = ({
     const trackClick = ({ url }: { url?: string }) => {
         const chapter = url && chapterByUrl.get(url)
         if (chapter) {
-            posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })
+            posthog?.capture('learn_chapter_selected', { volume: trackingVolume, chapter, placement: 'sidebar' })
         } else if (url === basePath) {
-            posthog?.capture('learn_section_selected', { volume: volumeId, section: 'overview', placement: 'sidebar' })
+            posthog?.capture('learn_section_selected', {
+                volume: trackingVolume,
+                section: 'overview',
+                placement: 'sidebar',
+            })
         } else {
             const section = hub?.pages?.find((page) => url?.startsWith(`${basePath}/${page}`))
-            if (section) posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
+            if (section)
+                posthog?.capture('learn_section_selected', { volume: trackingVolume, section, placement: 'sidebar' })
         }
     }
 
@@ -335,7 +357,7 @@ export function buildProductMenuTabs({
         })
     }
 
-    if (pocketGuideVolume) {
+    if (hasLearnTab({ pocketGuideVolume })) {
         tabs.push({
             label: 'Learn',
             value: 'learn',
@@ -345,6 +367,7 @@ export function buildProductMenuTabs({
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
+                    trackingVolume={learnTrackingVolume({ pocketGuideVolume, slug: productSlug })}
                     section={pocketGuideSection}
                     fullTitles={learnNavFullTitles}
                     basePath={surfaceBasePath(productSlug, 'learn')}
