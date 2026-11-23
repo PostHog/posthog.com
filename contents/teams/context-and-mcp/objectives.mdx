@@ -1,33 +1,33 @@
 ### Q4 2026 objectives
 
-We formed in September 2026. Our first objectives are temporary and focus on investigation. We will update them with specific delivery plans once we understand each problem and choose a direction.
+We formed in September 2026. Customer interviews showed that people often miss capabilities PostHog already offers. We're focusing the rest of Q4 on helping agents find and use those capabilities, making MCP lighter, and measuring customer adoption. We've deferred a standalone context product while we test what agents can do with the context we already have.
 
-#### Goal 1: Prove or disprove the context layer's value (Driver: <TeamMember name="Adam Bowker" />)
+#### Goal 1: Help agents find the right context and next step (Driver: <TeamMember name="Adam Bowker" />)
 
-Before we invest in a context layer, we need evidence that it improves agent outcomes and solves a problem people care about.
-
-What we'll ship:
-
-- Interview 20 external users and five internal users, then synthesize what we learn
-- Write a high-level request for comments (RFC) for the context layer
-- Document how the context layer could unify Business Knowledge, the semantic layer, and PostHog's other context systems
-
-#### Goal 2: Choose the right MCP architecture (Driver: <TeamMember name="Jake Ruth" />)
-
-We need evidence that our Model Context Protocol (MCP) architecture offers the best experience for customers and agents.
+Agents should use what a company already knows and help users discover what they can do with PostHog.
 
 What we'll ship:
 
-- Prototype and compare promising approaches, including code execution and the current tool-based architecture
-- Recommend an architecture based on what we learn
-- If the current architecture remains the best option, update this objective to focus on improving it
+- Improve the speed and relevance of context selection in PostHog AI web and Slack before expanding external testing. Compare task outcomes and latency with and without context from skills, Business Knowledge, and the semantic layer
+- Extend MCP guidance to more empty results and bring over relevant next steps from the PostHog UI. Measure whether agents take the suggested action with each rule on and off
+- Track when Claude agents in PostHog AI cloud sandboxes read memories saved in earlier sessions
+- Write an RFC on memory infrastructure that PostHog products could share after talking to the teams that have built their own memory systems (Driver: <TeamMember name="Jake Ruth" />)
 
-#### Goal 3: Define metrics to measure the team's impact (Driver: <TeamMember name="Richard Solomou" />)
+#### Goal 2: Make MCP lighter and more reliable across clients (Driver: <TeamMember name="Jake Ruth" />)
 
-We need a set of metrics we can track to understand the team's impact on revenue, usage, or both.
+Agents spend tokens loading skills and tool schemas and wait between tool calls. We want them to get useful answers with less overhead.
 
 What we'll ship:
 
-- Define a small set of revenue and/or usage metrics that reflect the team's impact
-- Document how each metric is calculated and establish a baseline
-- Set up a dashboard and a regular review cadence to track progress against these metrics
+- Finish the on-demand skills rollout as client approvals come through, and use an explicit list to control which skills MCP serves
+- Reduce the size of tool schemas and responses, and add checks that catch them growing again
+- Explore whether code execution can reduce tool round trips on representative tasks and record what we learn
+
+#### Goal 3: Establish a baseline for MCP adoption and tool health (Driver: <TeamMember name="Richard Solomou" />)
+
+We want to know how many customers use MCP, how many come back, and which tools need attention.
+
+What we'll ship:
+
+- Track the share of active customer organizations that use MCP each week, including a breakdown for paying customers. Use the November baseline and add baselines for the number of organizations using MCP and how many come back
+- Review adoption in sprint planning and use weekly tool health reports to route failures to the teams that own those tools
