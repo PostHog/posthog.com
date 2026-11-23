@@ -26,7 +26,7 @@ export const productAnalytics = {
     Icon: IconGraph,
     type: 'product_analytics',
     categoryName: 'Analytics',
-    teamSlug: 'product-analytics',
+    teamSlug: 'analytics',
     forumTag: 'product-analytics',
     pocketGuideVolume: 'product-analytics',
     // Product Analytics has a learning hub, separate from the story reader.
