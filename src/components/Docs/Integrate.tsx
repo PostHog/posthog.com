@@ -104,7 +104,6 @@ const query = graphql`
                         in: [
                             "/docs/libraries/js"
                             "/docs/libraries/elixir"
-                            "/docs/libraries/flutter"
                             "/docs/libraries/java"
                             "/docs/libraries/kmp"
                             "/docs/libraries/php"
