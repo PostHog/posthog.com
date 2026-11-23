@@ -889,7 +889,7 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 Version 1.0.0 removes the `PostHogConfig` API that was kept only for compatibility. Nothing else changes. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
 
 - **`apiKey` removed:** the `apiKey` alias, deprecated since 0.8.0, is gone. Use `projectToken` to build a `PostHogConfig` and to read the token from it.
-- **Older constructors removed:** `PostHogConfig` has one constructor and one `copy()`, which take every option. Kotlin code that passes named arguments compiles unchanged. Java code that calls `new PostHogConfig(...)` or `copy(...)` with an older, shorter argument list must pass every argument, and libraries built against those overloads must be recompiled.
+- **Constructor and `copy()` overloads removed:** `PostHogConfig` has one constructor and one `copy()`, which take every option. Kotlin code that passes named arguments compiles unchanged. Java code that calls `new PostHogConfig(...)` or `copy(...)` with the 0.11 or earlier argument list, without `evaluationContexts` and the `captureAi*` options, must pass every argument, and libraries built against those overloads must be recompiled.
 
 ## Upgrade to 0.12.0
 
