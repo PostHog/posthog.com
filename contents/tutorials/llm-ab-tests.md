@@ -15,7 +15,7 @@ We set up a basic Next.js app, add PostHog, create A/B tests, and implement the 
 
 ## 1. Download the sample app
 
-We've created a basic recipe builder app for this tutorial. You can download it from [Github](https://github.com/PostHog/llm-ab-tests-sample-app). 
+We've created a basic recipe builder app for this tutorial. You can download it from [GitHub](https://github.com/PostHog/llm-ab-tests-sample-app). 
 
 ```bash
 git clone https://github.com/PostHog/llm-ab-tests-sample-app

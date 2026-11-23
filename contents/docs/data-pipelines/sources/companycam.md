@@ -33,7 +33,13 @@ You'll be asked for:
 
 <SyncModes />
 
-All CompanyCam tables are full refresh. Each sync replaces the contents of the table.
+These CompanyCam tables support incremental sync:
+
+- **Projects** – Incremental on `updated_at`
+- **Photos** – Incremental on `captured_at`
+- **Videos** – Incremental on `captured_at`
+
+All other tables use full refresh. Each sync replaces the contents of the table.
 
 ## Configuration
 

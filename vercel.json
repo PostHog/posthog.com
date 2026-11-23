@@ -1493,6 +1493,22 @@
             "destination": "/self-driving"
         },
         {
+            "source": "/teams/product-analytics",
+            "destination": "/teams/analytics"
+        },
+        {
+            "source": "/teams/product-analytics/:path*",
+            "destination": "/teams/analytics/:path*"
+        },
+        {
+            "source": "/teams/web-analytics",
+            "destination": "/teams/analytics"
+        },
+        {
+            "source": "/teams/web-analytics/:path*",
+            "destination": "/teams/analytics/:path*"
+        },
+        {
             "source": "/teams/logs",
             "destination": "/teams/apm"
         },
@@ -6022,7 +6038,7 @@
         },
         {
             "source": "/handbook/small-teams/product-analytics",
-            "destination": "/teams/product-analytics"
+            "destination": "/teams/analytics"
         },
         {
             "source": "/handbook/small-teams/replay",
@@ -6074,7 +6090,7 @@
         },
         {
             "source": "/handbook/small-teams/web-analytics",
-            "destination": "/teams/web-analytics"
+            "destination": "/teams/analytics"
         },
         {
             "source": "/handbook/small-teams/people-ops",
@@ -6400,7 +6416,7 @@
         },
         {
             "source": "/teams/customer-analytics",
-            "destination": "/teams/web-analytics"
+            "destination": "/teams/analytics"
         },
         {
             "source": "/apps",
@@ -7552,6 +7568,11 @@
         {
             "source": "/product-analytics-explorer/pricing",
             "destination": "/product-analytics/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/product-analytics-explorer/:path*",
+            "destination": "/product-analytics",
             "statusCode": 301
         },
         {

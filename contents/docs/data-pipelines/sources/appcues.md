@@ -51,4 +51,5 @@ The Data Warehouse then starts syncing your Appcues data. You can see details an
 - **Segment membership:** PostHog exports each segment's current members using full refresh. Use `segment_id` to join membership to the `segments` table. This table contains segment and user IDs, not user profile properties or a history of membership changes.
 - **Ingestion filtering rules:** This table uses full refresh and contains your account's allow or deny rules for event names and profile or group properties. Check these rules when investigating missing Appcues data. The table is empty if your account has no rules.
 - **Other tables:** Experience settings, segments, and tags use full refresh. Incremental sync isn't supported for these tables because the Appcues API doesn't expose timestamp filters or pagination on its list endpoints.
+- The `events` and `segment_membership` tables are not synced by default. Enable them when selecting tables during setup.
 - **User and group profiles** aren't available. The Appcues API has no list endpoints for profiles.

@@ -3455,7 +3455,7 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
-                            name: 'Realtime cohorts',
+                            name: 'Real-time cohorts',
                             url: '/docs/data/realtime-cohorts',
                             badge: {
                                 title: 'Beta',
