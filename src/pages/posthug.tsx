@@ -1,65 +1,68 @@
-import React, { useCallback, useState } from 'react'
-import HugHog from 'components/HugHog'
-import Layout from 'components/Layout'
+import React, { useCallback } from 'react'
+import Explorer from 'components/Explorer'
+import Link from 'components/Link'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SEO } from 'components/seo'
-import { motion } from 'framer-motion'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
 import { Logo } from '@posthog/brand/logo'
 
-const PostHugPage = () => {
-    const [active, setActive] = useState(false)
+const PostHugPage = (): JSX.Element => {
     const particlesInit = useCallback(async (engine) => {
         await loadStarsPreset(engine)
     }, [])
 
     return (
-        <Layout>
+        <>
             <SEO title="PostHug" description="Free hedgehugs." image={`/images/about.png`} />
-
-            <div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                    <Particles
-                        init={particlesInit}
-                        className="w-full h-full absolute inset-0 -z-10"
-                        options={{
-                            preset: 'stars',
-                            fullScreen: false,
-                            background: { color: 'transparent' },
-                            interactivity: { enable: false },
-                            particles: {
-                                color: { value: '#FF0000' },
-                                move: { speed: 5 },
-                                number: { value: 200 },
-                            },
-                        }}
-                    />
-                </motion.div>
-
-                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8 z-10">
-                    <h1 className="text-4xl text-center">
-                        You were probably looking for
-                        <a href="/" aria-label="PostHog home">
-                            <div className="text-center my-8">
-                                <Logo className="dark:hidden w-full" />
-                                <Logo variant="mono" color="white" className="hidden dark:block w-full" />
-                            </div>
-                        </a>
-                    </h1>
-
-                    <div className="flex flex-col my-16 text-center">
-                        <p className="font-semibold">Even engineers need hugs every now and again. 🥺</p>
-
-                        <p>Seeing as how we can't literally give you a hug, here is the next best thing:</p>
-
+            <Explorer
+                template="generic"
+                slug="posthug"
+                title="PostHug"
+                showAddressBar={false}
+                headerBarOptions={[]}
+                fullScreen
+            >
+                {/* The stars fill the whole window, behind the content */}
+                <Particles
+                    id="posthug-stars"
+                    init={particlesInit}
+                    className="absolute inset-0"
+                    options={{
+                        preset: 'stars',
+                        fullScreen: false,
+                        background: { color: 'transparent' },
+                        interactivity: { enable: false },
+                        particles: {
+                            color: { value: '#FF0000' },
+                            move: { speed: 5 },
+                            number: { value: 200 },
+                        },
+                    }}
+                />
+                <ScrollArea className="relative h-full" viewportClasses="[&>div]:h-full">
+                    <div className="flex min-h-full flex-col items-center justify-center px-4 py-8 text-center text-primary">
+                        <h1 className="m-0 text-2xl @md:text-3xl">You were probably looking for</h1>
+                        <Link to="/" aria-label="PostHog home" className="my-6 block w-full max-w-xs @md:max-w-sm">
+                            <Logo className="w-full dark:hidden" />
+                            <Logo variant="mono" color="white" className="hidden w-full dark:block" />
+                        </Link>
+                        <p className="m-0 font-semibold">Even engineers need hugs every now and again. 🥺</p>
+                        <p className="mt-1 mb-4">
+                            Seeing as how we can't literally give you a hug, here is the next best thing:
+                        </p>
+                        {/* Shown at its own size at most, so the GIF does not blur */}
                         <img
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/max_hug_animated_e7732738d5.gif"
-                            alt="Hugging hedgehogs"
+                            alt="Two hedgehogs hugging"
+                            width={500}
+                            height={281}
+                            className="h-auto w-full max-w-[500px]"
                         />
                     </div>
-                </div>
-            </div>
-        </Layout>
+                </ScrollArea>
+            </Explorer>
+        </>
     )
 }
 
