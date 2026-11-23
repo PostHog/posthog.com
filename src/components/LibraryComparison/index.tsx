@@ -4,6 +4,7 @@ import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 import Link from '../Link'
 import OSTable from '../OSTable'
+import { PUBLISHED_SDK_LIST } from '../SdkReferences/utils'
 
 type LibraryNode = {
     fields: {
@@ -34,21 +35,9 @@ const referenceSdk = (sdk: string, title: string, features: LibraryFeatures): Li
     fields: { slug: `/docs/libraries/${sdk}` },
     frontmatter: { title, features },
 })
-const server = {
-    eventCapture: true,
-    userIdentification: true,
-    featureFlags: true,
-    groupAnalytics: true,
-    errorTracking: true,
-}
-const client = { ...server, autoCapture: true, sessionRecording: true, surveys: true, logs: true }
-const REFERENCE_SDKS: LibraryNode[] = [
-    referenceSdk('node', 'Node.js', { ...server, tracing: true }),
-    referenceSdk('python', 'Python', { ...server, tracing: true }),
-    referenceSdk('go', 'Go', server),
-    referenceSdk('rust', 'Rust', server),
-    referenceSdk('android', 'Android', client),
-]
+const REFERENCE_SDKS: LibraryNode[] = PUBLISHED_SDK_LIST.map((sdk) =>
+    referenceSdk(sdk.slug, sdk.label, sdk.features)
+)
 
 export const LibraryComparison = () => {
     const {

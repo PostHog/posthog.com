@@ -9,8 +9,10 @@ import { describe, test } from 'node:test'
 import { compile, pathToRegexp } from 'path-to-regexp'
 
 import sdkMarkdownReferences from '../../../gatsby/sdkMarkdownReferences.js'
+import { LOGOS } from '../../constants/logos.ts'
 import {
     LIBRARY_REFERENCE_SDK_IDS,
+    PUBLISHED_SDK_METADATA,
     SUPPORTED_SDK_IDS,
     getSdkReferenceUrl,
     parseVersionedReferenceSlug,
@@ -128,6 +130,15 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
         assert.ok(legacyIds.includes('posthog-js'))
         assert.ok(legacyIds.includes('posthog-ios'))
     })
+
+    test('PUBLISHED_SDK_METADATA matches PUBLISHED_SDK_REFERENCES and resolves known logos', () => {
+        assert.deepEqual(Object.keys(PUBLISHED_SDK_METADATA).sort(), [...PUBLISHED_SDK_REFERENCES].sort())
+        for (const sdkId of PUBLISHED_SDK_REFERENCES) {
+            const meta = PUBLISHED_SDK_METADATA[sdkId]
+            assert.equal(meta.slug, sdkId.replace(/^posthog-/, ''))
+            assert.ok(meta.logoKey in LOGOS, `Unknown logoKey ${meta.logoKey} for ${sdkId}`)
+        }
+    })
 })
 
 describe('vercel.json SDK reference redirects', () => {
@@ -178,8 +189,11 @@ describe('vercel.json SDK reference redirects', () => {
                 [`/docs/references/${sdkId}`, `/docs/libraries/${slug}`],
                 [`/docs/references/${sdkId}.md`, `/docs/libraries/${slug}.md`],
                 [`/docs/references/${sdkId}/types/Config`, `/docs/libraries/${slug}`],
+                [`/docs/references/${sdkId}/types/Config.md`, `/docs/libraries/${slug}.md`],
                 [`/docs/references/${sdkId}-1.0.0`, `/docs/libraries/${slug}`],
+                [`/docs/references/${sdkId}-1.0.0.md`, `/docs/libraries/${slug}.md`],
                 [`/docs/references/${sdkId}-1.0.0-beta.1/types/Config`, `/docs/libraries/${slug}`],
+                [`/docs/references/${sdkId}-1.0.0-beta.1/types/Config.md`, `/docs/libraries/${slug}.md`],
                 [`/docs/integrate/server/${slug}`, `/docs/libraries/${slug}`],
                 [`/docs/integrate/client/${slug}.md`, `/docs/libraries/${slug}.md`],
             ]
