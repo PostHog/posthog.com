@@ -3138,6 +3138,14 @@ export const docsMenu = {
                             url: '/docs/libraries/unity',
                         },
                         {
+                            name: 'Unreal Engine',
+                            url: '/docs/libraries/unreal',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
                         },

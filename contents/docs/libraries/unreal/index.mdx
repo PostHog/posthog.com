@@ -1,0 +1,647 @@
+---
+title: Unreal Engine
+sidebarTitle: Unreal Engine
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-unreal'
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
+  surveys: false
+  aiObservability: false
+  errorTracking: false
+---
+
+> **Note:** This SDK is in **beta** and isn't production-ready yet. Releases are GitHub prereleases, and APIs and behavior can change across minor versions.
+
+The PostHog Unreal Engine SDK is a plugin for Unreal Engine 5.8 C++ projects. It supports custom events, user identification, Feature Flags, Experiments, group analytics, and experimental screenshot replay.
+
+The plugin is a thin Unreal adapter over the stateful client of the [PostHog Rust SDK](/docs/libraries/rust):
+
+- **Rust SDK** – Owns identity, properties, consent, sessions, Feature Flags, remote configuration, persistence, and delivery.
+- **Unreal plugin** – Owns engine signals such as foreground and background transitions, Unreal value conversion, game-instance lifetime, and delegates on the game thread.
+
+The SDK requires a C++ project. A Blueprint-only project must first add a C++ class (**Tools > New C++ Class**) so that Unreal can compile the plugin.
+
+## Installation
+
+1. Download `posthog-unreal-<version>.zip` and `SHA256SUMS` from [GitHub Releases](https://github.com/PostHog/posthog-unreal/releases). Use the plugin ZIP, not the automatically generated source archives.
+2. Verify the ZIP. In the download directory, run `shasum -a 256 --check SHA256SUMS` on macOS or `sha256sum --check SHA256SUMS` on Linux. On Windows, compare the output of `Get-FileHash posthog-unreal-<version>.zip` with the value in `SHA256SUMS`.
+3. Extract the ZIP and copy its `PostHog/` directory into your project's `Plugins/` directory, so that the plugin descriptor is at `<Project>/Plugins/PostHog/PostHog.uplugin`.
+4. Add `PostHog` to the dependencies of each module that calls the SDK, as shown below.
+5. Make sure that the plugin is enabled in **Edit > Plugins**, then rebuild your project with the Unreal Engine 5.8 toolchain for your platform.
+
+```csharp
+// MyGame.Build.cs
+PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "PostHog" });
+```
+
+The ZIP contains the Unreal C++ source and prebuilt Rust static libraries for these platforms. Unreal links only the library for the platform that you build. You don't need Rust or Cargo.
+
+| Platform | Bundled library |
+| --- | --- |
+| macOS (Apple silicon) | `libposthog_unreal_ffi.a` |
+| Linux x64 | `libposthog_unreal_ffi.a` |
+| Windows x64 | `posthog_unreal_ffi.lib` |
+
+A bundled platform isn't necessarily validated in Unreal yet. The [status section of the SDK README](https://github.com/PostHog/posthog-unreal#status) lists the platforms and configurations that still need validation.
+
+The SDK isn't available on Fab. GitHub Releases is the only distribution.
+
+## Configuration
+
+### Editor configuration
+
+Open **Edit > Project Settings > Plugins > PostHog** and set **Project Token** and **Host** under **Options**.
+
+Use your [project token](https://app.posthog.com/settings/project), not a personal API key. The ingestion host is usually `https://us.i.posthog.com` (the default) or `https://eu.i.posthog.com`, depending on your region. You can also set the host to your [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) URL, such as `https://analytics.example.com`.
+
+With **Auto Initialize** enabled (the default), the `UPostHogSubsystem` game-instance subsystem starts one client for each game instance when the project token isn't empty. A missing or invalid project token disables the client.
+
+Project Settings saves these options to `Config/DefaultGame.ini`. To keep your project token out of source control, disable automatic setup and call `Setup` with options from your own configuration. See [game-instance setup](#game-instance-setup).
+
+> **Important:** By default, the SDK doesn't start in the editor, including Play In Editor (PIE), or on a dedicated server. Set `bEnableInEditor` or `bEnableOnDedicatedServer` to `true` to enable it there. Use a separate PostHog project for development.
+
+### Configuration options
+
+These are the fields of `FPostHogOptions`. **Project Settings > Plugins > PostHog > Options** shows the same fields.
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `ProjectToken` | Empty | Your project token. |
+| `Host` | `"https://us.i.posthog.com"` | Ingestion host or reverse proxy. |
+| `ClientName` | `"default"` | Separates the storage of clients. Concurrent game instances need different names. |
+| `bEnableInEditor` | `false` | Allows setup in the editor, including PIE. |
+| `bEnableOnDedicatedServer` | `false` | Allows setup on a dedicated server. |
+| `PersonProfiles` | `IdentifiedOnly` | When to process [person profiles](#anonymous-vs-identified-events): `Never`, `IdentifiedOnly`, or `Always`. |
+| `bInitiallyOptedOut` | `false` | Starts opted out when there's no saved consent choice. |
+| `SessionMode` | `Automatic` | `Automatic` or `Manual` [sessions](#sessions). |
+| `bPersistSessions` | `false` | Continues a session across client initializations. |
+| `bCaptureApplicationLifecycleEvents` | `true` | Captures [application lifecycle events](#application-lifecycle-events). |
+| `AppVersion` | Empty | `$app_version`. Empty uses **Project Settings > Description > Project Version**. |
+| `AppBuild` | Empty | `$app_build`, a build identifier that you supply. |
+| `bPreloadFeatureFlags` | `true` | Loads flags when the client starts. |
+| `bSendFeatureFlagEvents` | `true` | Captures `$feature_flag_called` when you read a flag. |
+| `FlushAt` | `20` | Number of queued events that starts a flush. |
+| `FlushIntervalMilliseconds` | `30000` | Time between automatic flushes. |
+| `MaxQueueSize` | `1000` | Maximum queued events. When the queue is full, the SDK drops the oldest events. |
+| `MaxBatchSize` | `50` | Maximum events in one request. |
+| `RequestTimeoutSeconds` | `10` | Timeout for each request. |
+| `ShutdownTimeoutMilliseconds` | `3000` | Maximum time that shutdown waits for SDK work. |
+| `Replay` | See [screenshot replay](#screenshot-replay) | Screenshot replay settings. |
+
+The subsystem stores SDK state and queued events in `Saved/PostHogStateful`. If the SDK can't use storage, it continues in memory.
+
+### Game-instance setup
+
+To configure the client in code, disable automatic setup in `Config/DefaultGame.ini`:
+
+```ini
+[/Script/PostHog.PostHogSettings]
+bAutoInitialize=False
+```
+
+Then call `Setup` from your game instance. `Setup` copies the options, and it doesn't use the credentials from Project Settings:
+
+```cpp
+// MyGameInstance.h
+UCLASS()
+class UMyGameInstance : public UGameInstance
+{
+    GENERATED_BODY()
+public:
+    virtual void Init() override;
+
+private:
+    UFUNCTION()
+    void HandlePostHogSetup(bool bSuccess);
+};
+
+// MyGameInstance.cpp
+#include "PostHogSubsystem.h"
+
+void UMyGameInstance::Init()
+{
+    Super::Init();
+    UPostHogSubsystem* PostHog = GetSubsystem<UPostHogSubsystem>();
+    PostHog->OnSetupCompleted.AddDynamic(this, &UMyGameInstance::HandlePostHogSetup);
+
+    FPostHogOptions Options;
+    Options.ProjectToken = TEXT("<ph_project_token>");
+    Options.Host = TEXT("<ph_client_api_host>");
+    PostHog->Setup(Options);
+}
+
+void UMyGameInstance::HandlePostHogSetup(bool bSuccess)
+{
+    UPostHogSubsystem* PostHog = GetSubsystem<UPostHogSubsystem>();
+    if (bSuccess && !PostHog->IsDisabled())
+    {
+        PostHog->Capture(TEXT("game_started"), FPostHogProperties());
+    }
+}
+```
+
+Bind **On Setup Completed** before you call `Setup`. Initialization is asynchronous and doesn't block the game thread:
+
+- `Setup` returns `false` if it can't start. For example, the client already exists, the call isn't on the game thread, or the editor or dedicated-server guard applies.
+- **On Setup Completed** with `true` means that a client exists. It doesn't wait for network access.
+- Check `IsDisabled()` separately. The Rust SDK can start disabled after an invalid configuration or a local startup failure.
+
+Before setup completes and after shutdown, SDK calls return `Closed`, and the SDK doesn't keep the events. If you capture events during startup, keep them until **On Setup Completed**, as the [example project](https://github.com/PostHog/posthog-unreal/tree/main/Examples/PostHogExample) does.
+
+The client survives level and world changes because it belongs to the game instance. The subsystem shuts the client down when the game instance shuts down.
+
+### Results
+
+Most calls return an `EPostHogResult`. A result reports what happened locally, not ingestion:
+
+| Result | Meaning |
+| --- | --- |
+| `Accepted` | The SDK added the event to its bounded queue. This doesn't mean that the event is persisted or ingested. |
+| `Ok` | The SDK ran the operation. The operation can still do nothing, such as a duplicate identify. |
+| `Closed` | There's no client, because setup hasn't completed or the client has shut down. |
+| `OptedOut` | The player opted out, so the SDK didn't capture the event. |
+| `Disabled` | The client is disabled. |
+| `InvalidInput` | An argument isn't valid. |
+
+## Capturing events
+
+Use `FPostHogProperties` for typed event properties, then call `Capture`:
+
+```cpp
+#include "PostHogSubsystem.h"
+
+FPostHogProperties Properties;
+Properties.SetString(TEXT("level_id"), TEXT("forest_01"));
+Properties.SetNumber(TEXT("score"), 1250);
+Properties.SetBoolean(TEXT("used_hint"), false);
+
+UPostHogSubsystem* PostHog = GetGameInstance()->GetSubsystem<UPostHogSubsystem>();
+PostHog->Capture(TEXT("level_completed"), Properties);
+```
+
+Use `snake_case` event and property names that describe the action, such as `level_completed`, `item_purchased`, or `quest_started`.
+
+For nested values, use `Set` with an `FPostHogValue`, or parse a JSON object:
+
+```cpp
+Properties.Set(TEXT("loadout"), FPostHogValue::Array({
+    FPostHogValue::String(TEXT("sword")),
+    FPostHogValue::String(TEXT("shield")),
+}));
+
+FPostHogProperties Parsed;
+if (FPostHogProperties::TryParse(TEXT("{\"difficulty\":\"hard\",\"lives\":3}"), Parsed))
+{
+    PostHog->Capture(TEXT("run_started"), Parsed);
+}
+```
+
+Property objects copy their values, so later changes to your properties don't change captured events. JSON `null` stays distinct from an invalid value.
+
+### The native client
+
+The subsystem exposes the most common operations. For the full API, get the native client after setup completes:
+
+```cpp
+if (FPostHogClient::FPtr Client = PostHog->GetClient())
+{
+    Client->Capture(TEXT("level_completed"), Properties);
+}
+```
+
+`GetClient()` returns `nullptr` until setup completes. The examples below use `Client` for this pointer and `PostHog` for the subsystem.
+
+### Capturing screen views
+
+Record navigation explicitly with `Screen`. It captures a `$screen` event with a `$screen_name` property:
+
+```cpp
+Client->Screen(TEXT("main_menu"));
+```
+
+Later events include the last screen name as `$screen_name`, unless they set their own value.
+
+## Identifying users
+
+Read our [identifying users guide](/docs/product-analytics/identify) before adding identification.
+
+The SDK starts with a persistent anonymous distinct ID. When a player logs in, call `Identify` with a stable player ID. The second argument sets person properties (`$set`), and the third sets person properties only if they don't have a value yet (`$set_once`):
+
+```cpp
+FPostHogProperties Set;
+Set.SetString(TEXT("plan"), TEXT("premium"));
+
+FPostHogProperties SetOnce;
+SetOnce.SetString(TEXT("first_game_version"), TEXT("1.0"));
+
+PostHog->Identify(TEXT("player_123"), Set, SetOnce);
+```
+
+The first identification links the player's anonymous events to the identified user. If the client is already identified with a different ID, the SDK ignores the call. Call `Reset` before you identify another player.
+
+`Client->GetDistinctId()` returns the current distinct ID. To link another ID to the current user, call `Client->Alias(TEXT("other-id"))`.
+
+To set person properties without identifying the player:
+
+```cpp
+Client->SetPersonProperties(Set, SetOnce);
+```
+
+### Reset on logout
+
+Call `Reset` when a player logs out:
+
+```cpp
+PostHog->Reset();
+```
+
+`Reset` creates a new anonymous distinct ID and keeps the device ID. It clears registered properties, groups, and the saved consent choice, and it ends the current session. Consent returns to the configured default, so don't use `Reset` to opt out. Events that the SDK already queued keep their original identity.
+
+## Anonymous vs identified events
+
+By default, events captured before `Identify` don't create a [person profile](/docs/data/persons). See [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for the distinction. Set `PersonProfiles` in the options:
+
+- `IdentifiedOnly` (default) – Processes person profiles after `Identify`.
+- `Always` – Processes person profiles for anonymous events too.
+- `Never` – Doesn't process person profiles.
+
+`Never` doesn't stop event collection. Use [opt-out](#opt-out-of-data-capture) to stop collection.
+
+## Registered properties
+
+Register properties once to include them with all future events. With storage available, registered properties persist across game restarts:
+
+```cpp
+FPostHogProperties Registered;
+Registered.SetString(TEXT("game_mode"), TEXT("ranked"));
+Client->Register(Registered);
+
+Client->Unregister(TEXT("game_mode"));
+```
+
+Event properties override registered properties with the same key. `Reset` clears all registered properties.
+
+The subsystem also adds platform properties to events, such as `$os`, `$os_version`, `$engine_version`, `$app_name`, `$app_version`, and `$locale`. Event and registered properties override these.
+
+## Group analytics
+
+Associate the current player's events with a group, such as a guild or team. See [Group Analytics](/docs/product-analytics/group-analytics) for setup and [pricing](/pricing) for availability.
+
+```cpp
+FPostHogProperties GuildProperties;
+GuildProperties.SetString(TEXT("name"), TEXT("The Hedgehogs"));
+GuildProperties.SetNumber(TEXT("member_count"), 42);
+
+Client->Group(TEXT("guild"), TEXT("guild_123"), GuildProperties);
+```
+
+`Group` remembers the membership, adds it to later events, and sends a `$groupidentify` event with the properties. To update a group's properties without changing membership, use `GroupIdentify` with the same arguments. To remove a membership, call `Client->RemoveGroup(TEXT("guild"))`. `Reset` clears all memberships.
+
+## Opt out of data capture
+
+To start without collecting events until the player gives consent, set `bInitiallyOptedOut` to `true` in the options.
+
+Opt in or out at runtime:
+
+```cpp
+PostHog->OptIn();
+PostHog->OptOut();
+
+if (Client->IsOptedOut())
+{
+    // Analytics collection is disabled
+}
+```
+
+Consent changes affect new collection immediately. The SDK saves the choice, and a saved choice takes precedence over `bInitiallyOptedOut`. Events that the SDK accepted before an opt-out can still persist, retry, and deliver.
+
+## Sessions
+
+In `Automatic` mode (the default), the SDK creates sessions from foreground activity. A session ends after 30 minutes without activity or 24 hours after it started. In `Manual` mode, only your calls change sessions, and sessions don't expire.
+
+The native client has these session methods:
+
+| Method | Description |
+| --- | --- |
+| `GetSessionId()` | Returns the current session ID. In `Automatic` mode, this can create a session. |
+| `StartSession()` | Creates a session if there isn't one. |
+| `EndSession()` | Ends the current session. |
+| `ResetSession()` | Starts a new session ID without capturing an event. |
+| `SessionActivity()` | Reports foreground player activity. In `Automatic` mode, this keeps the session active. |
+
+With `bPersistSessions = false` (the default), each initialization starts without a session.
+
+## Analytics provider interface
+
+The plugin's `PostHogAnalytics` module adapts Unreal's `IAnalyticsProvider` interface to a subsystem client. Use it to send events from existing Analytics code or the stock Analytics Blueprint nodes.
+
+The provider doesn't create a client. Set up the subsystem first, then get the provider:
+
+```cpp
+TSharedPtr<IAnalyticsProvider> Provider = PostHog->GetAnalyticsProvider();
+// Or, from any object in the game world:
+TSharedPtr<IAnalyticsProvider> WorldProvider = FPostHogAnalyticsProvider::GetForWorld(this);
+```
+
+To use PostHog for the engine's configured provider, call **Bind Analytics Provider** (`BindAnalyticsProvider()`) after setup completes. Then set the provider module in `Config/DefaultEngine.ini`:
+
+```ini
+[Analytics]
+ProviderModuleName=PostHogAnalytics
+```
+
+`FAnalytics::Get().GetDefaultConfiguredProvider()`, the stock Analytics Blueprint nodes (the **AnalyticsBlueprintLibrary** plugin), and `AnalyticsMulticast` (`ProviderModuleNames=PostHogAnalytics`) then use the bound client. Only one game instance can hold the binding. Another instance can't take it until you call `UnbindAnalyticsProvider()` or shut down the bound instance.
+
+Keep the project token and other client options on subsystem setup. If the Analytics configuration sets `ProjectToken`, `Host`, or `ClientName`, provider creation fails with a warning.
+
+The provider maps Analytics calls to the client:
+
+| Analytics call | PostHog behavior |
+| --- | --- |
+| `RecordEvent` | Captures the event. Attribute strings stay strings, and JSON fragment attributes stay typed. |
+| `RecordEvent` with `Immediate` mode | Captures the event and requests a flush. |
+| `SetUserID` | Identifies the player. |
+| `FlushEvents` | Flushes the client. |
+| `StartSession` | Uses the SDK session and captures `SessionStart` once for each SDK session. |
+| `EndSession` | Captures `SessionEnd` for the SDK session, then ends it. |
+| `SetSessionID` | Unsupported. Always returns `false`. |
+
+### Default event attributes
+
+Default event attributes (`SetDefaultEventAttributes`) belong to the provider, not to the SDK's registered properties. On each provider capture, the provider merges them under the event's attributes and sends the result as event properties:
+
+1. Event attributes win over default attributes with the same key.
+2. Default attributes win over the SDK's registered, platform, and generated properties.
+
+Attribute names that differ only by case are the same key. Defaults don't apply to events that you capture directly on the client. A `BeforeSend` hook receives the merged properties.
+
+## Feature Flags
+
+Use [Feature Flags](/docs/feature-flags) to roll out features to selected players.
+
+### Boolean flags
+
+```cpp
+const FPostHogFeatureFlagResult Flag = PostHog->GetFeatureFlag(TEXT("new-game-mode"));
+if (Flag.Status == EPostHogResult::Ok && Flag.bFound && Flag.bEnabled)
+{
+    // Show the new game mode
+}
+```
+
+Flag reads use cached values and don't make a request. With `bPreloadFeatureFlags = true` (the default), the SDK loads flags in the background at startup. Until flags load, `bFound` is `false`.
+
+`FPostHogFeatureFlagResult` has these fields:
+
+| Field | Description |
+| --- | --- |
+| `Status` | The result of the read. |
+| `bFound` | Whether the flag is known. A known `false` flag is different from a missing flag. |
+| `bEnabled` | Whether the flag is enabled. |
+| `Value` | A boolean, or the variant string of a multivariate flag. |
+| `bHasPayload` | Whether the flag has a payload. A JSON `null` payload counts as a payload. |
+| `Payload` | The JSON payload. |
+| `Record` | The complete SDK record, including evaluation metadata. |
+
+### Multivariate flags
+
+Read the variant from `Value`:
+
+```cpp
+#include "PostHogBlueprintLibrary.h"
+
+const FPostHogFeatureFlagResult Flag = PostHog->GetFeatureFlag(TEXT("shop-layout"));
+FString Variant;
+if (Flag.bFound && UPostHogBlueprintLibrary::TryGetString(Flag.Value, Variant) && Variant == TEXT("compact"))
+{
+    // Use the compact shop layout
+}
+```
+
+### Flag payloads
+
+```cpp
+if (Flag.bHasPayload)
+{
+    TSharedPtr<FJsonValue> Payload = Flag.Payload.ToNative();
+    FString PayloadJson = Flag.Payload.ToJson();
+}
+```
+
+### Exposure events
+
+By default, reading a flag captures a `$feature_flag_called` event. The Rust SDK deduplicates these events. Reading a missing flag records `$feature_flag_called` with `$feature_flag_error` set to `flag_missing`.
+
+The second argument of `GetFeatureFlag` controls this for one read:
+
+- `Default` – Uses `bSendFeatureFlagEvents`.
+- `Send` – Captures the event.
+- `Silent` – Doesn't capture the event.
+
+`GetFeatureFlags()` returns all cached flags, including known `false` flags, and doesn't capture exposure events.
+
+### Reloading flags
+
+```cpp
+PostHog->ReloadFeatureFlags();
+```
+
+`ReloadFeatureFlags` requests a refresh. It doesn't return a result for that request, and flushes don't wait for flag loads. To update your game when flags change, bind **On Feature Flags Changed**:
+
+```cpp
+// In your class declaration:
+UFUNCTION()
+void HandleFlagsChanged(const FPostHogFeatureFlagsUpdate& Update);
+
+// After setup:
+PostHog->OnFeatureFlagsChanged.AddDynamic(this, &UMyGameInstance::HandleFlagsChanged);
+```
+
+The subsystem delivers updates on the game thread for automatic (including startup), restored, and manual loads. If several updates arrive between deliveries, you receive only the latest. An update includes only enabled flags. Use `GetFeatureFlags()` for all cached results. `bErrorsLoading` and `bPartial` report a load that had errors or returned only some flags.
+
+### Properties for flag evaluation
+
+Override person and group properties used to evaluate flags. These methods don't update the stored person or group profiles in PostHog:
+
+```cpp
+FPostHogProperties PersonOverrides;
+PersonOverrides.SetString(TEXT("plan"), TEXT("premium"));
+Client->SetPersonPropertiesForFlags(PersonOverrides, false);
+
+FPostHogProperties GroupOverrides;
+GroupOverrides.SetNumber(TEXT("member_count"), 42);
+Client->SetGroupPropertiesForFlags(TEXT("guild"), GroupOverrides, false);
+
+Client->ReloadFeatureFlags();
+```
+
+The setters reload flags by default. Pass `false` as the last argument to make several changes and reload once. To clear overrides, call `ResetPersonPropertiesForFlags()` or `ResetGroupPropertiesForFlags(TEXT("guild"))`. An empty group type clears the overrides of all groups.
+
+## Experiments
+
+[Experiments](/docs/experiments/start-here) use Feature Flags to assign variants. Read the variant with `GetFeatureFlag`, as in [multivariate flags](#multivariate-flags). The read captures the `$feature_flag_called` exposure event that Experiments use. Keep `bSendFeatureFlagEvents = true`, or pass `EPostHogFlagReporting::Send` for experiment reads.
+
+## Modifying events before sending
+
+`FPostHogConfig::BeforeSend` receives each complete event as an `FJsonObject` after the SDK assembles it. Return `false` to drop the event. Set it on the native configuration and call `SetupWithConfig`, which is available only in C++:
+
+```cpp
+FPostHogOptions Options;
+Options.ProjectToken = TEXT("<ph_project_token>");
+Options.Host = TEXT("<ph_client_api_host>");
+
+FPostHogConfig Config = Options.ToNative();
+Config.BeforeSend = [](FJsonObject& Event)
+{
+    Event.GetObjectField(TEXT("properties"))->RemoveField(TEXT("player_email"));
+    return true; // Return false to drop the event
+};
+PostHog->SetupWithConfig(MoveTemp(Config), Options.bEnableInEditor, Options.bEnableOnDedicatedServer);
+```
+
+The object includes `event`, `distinct_id`, `properties`, `options`, `groups`, `timestamp`, and `uuid`. Keep every field that you don't change.
+
+> **Warning:** Never block on the game thread in a `BeforeSend` hook. Shutdown waits for a running hook, and the engine closes clients on the game thread at exit. A hook that waits for the game thread, or for any thread that can shut down the client, can deadlock your game.
+
+The hook also must follow these rules:
+
+- Event hooks run on the thread that captures the event. Screenshot hooks run on a Rust encoder thread. Make the hook thread-safe, and don't throw exceptions.
+- Don't access UObjects outside the game thread.
+- Don't capture events or wait for another capture from a hook. The SDK rejects a capture on the same client from its hook.
+- Use weak references if the hook refers back to the client.
+
+## Flush and shutdown
+
+Events flush after 20 queued events or 30 seconds by default. To request delivery now, call `FlushAsync`. It returns a future. Don't wait for it on the game thread:
+
+```cpp
+TSharedFuture<FPostHogDrainResult> Flush = Client->FlushAsync();
+
+// Later, for example in a tick:
+if (Flush.IsReady() && Flush.Get().Status == EPostHogResult::Ok)
+{
+    // The SDK finished this flush attempt
+}
+```
+
+`FPostHogDrainResult` reports persistence (`State`) and delivery (`Delivery`) separately. A completed flush can leave retries pending. It doesn't confirm ingestion.
+
+The subsystem shuts down its client when the game instance shuts down or the engine exits. To shut down earlier, call `Shutdown` and bind **On Shutdown Completed**:
+
+```cpp
+PostHog->Shutdown();
+```
+
+Shutdown stops new events immediately, then waits up to `ShutdownTimeoutMilliseconds` (three seconds by default) for SDK work. If the deadline stops delivery, the result reports `Delivery` as `TimedOut`. Network requests that are already in progress can finish in the background. `bJoined` is `true` after all SDK callbacks are done. You can call `Setup` again after shutdown completes.
+
+Live Coding and other dynamic module reloads aren't supported. Restart the editor after you rebuild C++ code.
+
+## Application lifecycle events
+
+With `bCaptureApplicationLifecycleEvents = true` (the default), the subsystem captures:
+
+| Event | When it fires |
+| --- | --- |
+| `Application Opened` | Setup completes while the game is in the foreground (`from_background` is `false`), or the game returns to the foreground (`from_background` is `true`). |
+| `Application Backgrounded` | The game goes to the background. On desktop, this includes when the game window loses focus. |
+
+If setup completes in the background, `Application Opened` waits for the game to come to the foreground. The subsystem ignores duplicate engine notifications. These events use normal capture, so consent and `BeforeSend` apply.
+
+The SDK doesn't capture `Application Installed` or `Application Updated`. Unreal has no reliable install or update signal, so this SDK differs from the iOS and Android SDKs.
+
+If you disable lifecycle events, the subsystem still reports foreground and background changes to the SDK for sessions and screenshot replay.
+
+## Screenshot replay
+
+> **Warning:** Screenshot replay is experimental. Automatic captures aren't redacted or masked. They include all readable UI and other content in the game viewport. Start recording only for content that you're allowed to collect.
+
+Screenshot replay sends periodic JPEG screenshots of the game viewport to [Session Replay](/docs/session-replay). It isn't a DOM or wireframe recording, and it doesn't support masking.
+
+Recording is stopped by default. Start it explicitly:
+
+```cpp
+PostHog->StartSessionReplay();
+
+if (PostHog->IsSessionReplayActive())
+{
+    // The SDK is recording
+}
+
+PostHog->StopSessionReplay();
+```
+
+Before recording starts, these conditions must be true:
+
+- Session Replay is enabled for your project. The SDK loads these settings asynchronously after setup, so check `IsSessionReplayActive()` before you expect frames.
+- The project's replay settings don't use sampling below 100%, a linked flag, a minimum duration, or event triggers. The SDK doesn't support these settings, so recording stays off.
+- The player hasn't opted out. The SDK ignores a start while opted out. Start again after `OptIn`.
+
+After `StopSessionReplay`, frames that the SDK has already started to capture can still complete. The SDK keeps replay frames only in memory, so frames can be lost when the game exits or shuts down.
+
+### Replay settings
+
+Set these fields on `Options.Replay` (`FPostHogReplaySettings`):
+
+| Field | Default | Description |
+| --- | --- | --- |
+| `IntervalMs` | `1000` | Minimum time between frames, in milliseconds, for all frame sources. `0` disables the limit for manual frames. Automatic capture never polls more often than every 100 ms. |
+| `MaxDimension` | `960` | Maximum width or height of a frame, in pixels. The minimum is `64`. |
+| `JpegQuality` | `65` | JPEG quality, from `1` to `100`. |
+| `MaxFramesInFlight` | `2` | Maximum frames that the SDK processes at the same time. |
+
+### Manual frames
+
+To send your own pixels, for example after you apply your own redaction, reserve a frame immediately before you get the pixels:
+
+```cpp
+UPostHogReplayFrame* Frame = nullptr;
+const EPostHogResult Result = PostHog->BeginReplayFrame(Width, Height, Width * 4, Frame);
+if (Result == EPostHogResult::Ok)
+{
+    // Pixels must be complete, top-down BGRA8888 with Frame->GetRequiredBytes() bytes
+    Frame->Submit(Pixels);
+}
+```
+
+The pixels must already be composited and downscaled, and the SDK ignores alpha. Each frame is single-use: call `Submit` or `Abandon` once. A submit uses the frame even if it fails. If `BeginReplayFrame` returns `Throttled`, the previous frame started less than `IntervalMs` ago, so skip this frame and try again on a later one. Other refusals, such as when recording isn't active, return `Inactive`.
+
+## Blueprint usage
+
+Get the **PostHog Game Instance Subsystem** node, then call these nodes on it:
+
+| Category | Nodes |
+| --- | --- |
+| Setup | **Setup**, **Shutdown**, **Is Initialized**, **Is Disabled**, **Get State**, **On Setup Completed**, **On Shutdown Completed** |
+| Analytics | **Capture**, **Identify**, **Reset**, **Opt In**, **Opt Out** |
+| Feature Flags | **Get Feature Flag**, **Get Feature Flags**, **Reload Feature Flags**, **On Feature Flags Changed** |
+| Screenshot replay | **Start Session Replay**, **Stop Session Replay**, **Is Session Replay Active**, **Begin Replay Frame** |
+| Unreal Analytics | **Bind Analytics Provider**, **Unbind Analytics Provider** |
+
+To build properties, use **Make String Value**, **Make Boolean Value**, **Make Number Value**, **Make Object Value**, **Make Array Value**, or **Make Null Value** with **Set Property**. You can also use **Parse Properties** with a JSON object. To read flag values, use **Try Get Boolean**, **Try Get String**, and **Value To JSON**.
+
+Screen views, registered properties, groups, sessions, flush, and `BeforeSend` are available only in C++ through the [native client](#the-native-client).
+
+## Troubleshooting
+
+### Events not appearing in PostHog
+
+1. Check that `Setup` returned `true`, **On Setup Completed** fired with `true`, and `IsDisabled()` is `false`.
+2. In the editor, set `bEnableInEditor = true`. Setup doesn't start in the editor or PIE by default.
+3. Check that `Capture` returns `Accepted`. `Closed` means that setup hasn't completed or the client has shut down.
+4. Verify that your project token and host match your PostHog project and region.
+5. Check whether the player opted out.
+6. Call `FlushAsync` to request delivery instead of waiting for the automatic interval.
+
+### Flags aren't found
+
+Flags load asynchronously after setup. Bind **On Feature Flags Changed**, or read the flag again later. Confirm that the flag exists, that its targeting matches the current player, and that the player hasn't opted out.
+
+### Screenshot replay doesn't record
+
+Check that you called `StartSessionReplay` after any opt-in, that `IsSessionReplayActive()` returns `true`, and that your project's replay settings don't use sampling, a linked flag, a minimum duration, or event triggers.
