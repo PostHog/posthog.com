@@ -184,28 +184,24 @@ To help PostHog track your user sessions across the client and server, you'll ne
 
 </Step>
 
-<Step title="Create an error boundary" badge="recommended">
+<Step title="Capture router errors" badge="recommended">
 
-PostHog can capture exceptions thrown in your app through an error boundary. React Router in framework mode has a built-in error boundary that you can use to capture exceptions. You can create an error boundary by exporting `ErrorBoundary` from your `app/root.tsx` file.
+React Router catches every error thrown while rendering a route or running a loader, action or fetcher, and shows your `ErrorBoundary`, so these errors never reach PostHog's exception autocapture. Turn on `capture_exceptions: true` and pass an `onError` handler to `<HydratedRouter>` in `app/entry.client.tsx`. Skip responses you throw on purpose (404s) and the browser's copy of a server error, which React Router renames to "Unexpected Server Error": the server captures that one with its stack.
 
-```tsx file=app/root.tsx
-import { usePostHog } from '@posthog/react'
+```tsx file=app/entry.client.tsx
+import { isRouteErrorResponse, type ClientOnErrorFunction } from 'react-router';
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  const posthog = usePostHog();
-  posthog?.captureException(error);
+const onError: ClientOnErrorFunction = (error) => {
+  if (isRouteErrorResponse(error)) return;
+  if (error instanceof Error && error.message === 'Unexpected Server Error') return;
+  posthog.captureException(error);
+};
 
-  // other error handling code...
-  return (
-    <div>
-      <h1>Something went wrong</h1>
-      <p>{error.message}</p>
-    </div>
-  );
-}
+// ...
+<HydratedRouter onError={onError} />
 ```
 
-This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
+Do not also call `captureException` in your `ErrorBoundary`: each error would arrive twice. The [React Router error tracking guide](/docs/error-tracking/installation/react-router) covers server errors and source maps.
 
 </Step>
 
@@ -287,11 +283,13 @@ Work that the request starts keeps its IDs after `next()` settles. Pass explicit
 To capture server errors, add the capture call to your existing `handleError` export in `app/entry.server.tsx`. The saved IDs remain available when a middleware error reaches this hook outside the scope. Errors before this middleware runs have no saved request identity.
 
 ```ts file=app/entry.server.tsx
-import type { HandleErrorFunction } from 'react-router';
+import { isRouteErrorResponse, type HandleErrorFunction } from 'react-router';
 import { posthog } from './lib/posthog.server';
 import { posthogErrorContext } from './lib/posthog-middleware.server';
 
-export const handleError: HandleErrorFunction = (error, { context }) => {
+export const handleError: HandleErrorFunction = (error, { request, context }) => {
+  // Cancelled requests and the 404/405 responses React Router creates are not errors to track.
+  if (request.signal.aborted || isRouteErrorResponse(error)) return;
   const saved = context.get(posthogErrorContext);
   posthog.captureException(error, {
     distinctId: saved?.distinctId,
