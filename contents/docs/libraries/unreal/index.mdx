@@ -559,7 +559,7 @@ If you disable lifecycle events, the subsystem still reports foreground and back
 
 ## Screenshot replay
 
-> **Warning:** Screenshot replay is experimental. Automatic captures aren't redacted or masked. They include all readable UI and other content in the game viewport. Start recording only for content that you're allowed to collect.
+> **Warning:** Screenshot replay is experimental. Captures aren't redacted or masked. They include all readable UI and other content in the game viewport. Start recording only for content that you're allowed to collect.
 
 Screenshot replay sends periodic JPEG screenshots of the game viewport to [Session Replay](/docs/session-replay). It isn't a DOM or wireframe recording, and it doesn't support masking.
 
@@ -590,26 +590,10 @@ Set these fields on `Options.Replay` (`FPostHogReplaySettings`):
 
 | Field | Default | Description |
 | --- | --- | --- |
-| `IntervalMs` | `1000` | Minimum time between frames, in milliseconds, for all frame sources. `0` disables the limit for manual frames. Automatic capture never polls more often than every 100 ms. |
+| `IntervalMs` | `1000` | Minimum time between frames, in milliseconds. The SDK never captures more often than every 100 ms, even at `0`. |
 | `MaxDimension` | `960` | Maximum width or height of a frame, in pixels. The minimum is `64`. |
 | `JpegQuality` | `65` | JPEG quality, from `1` to `100`. |
 | `MaxFramesInFlight` | `2` | Maximum frames that the SDK processes at the same time. |
-
-### Manual frames
-
-To send your own pixels, for example after you apply your own redaction, reserve a frame immediately before you get the pixels:
-
-```cpp
-UPostHogReplayFrame* Frame = nullptr;
-const EPostHogResult Result = PostHog->BeginReplayFrame(Width, Height, Width * 4, Frame);
-if (Result == EPostHogResult::Ok)
-{
-    // Pixels must be complete, top-down BGRA8888 with Frame->GetRequiredBytes() bytes
-    Frame->Submit(Pixels);
-}
-```
-
-The pixels must already be composited and downscaled, and the SDK ignores alpha. Each frame is single-use: call `Submit` or `Abandon` once. A submit uses the frame even if it fails. If `BeginReplayFrame` returns `Throttled`, the previous frame started less than `IntervalMs` ago, so skip this frame and try again on a later one. Other refusals, such as when recording isn't active, return `Inactive`.
 
 ## Blueprint usage
 
@@ -620,7 +604,7 @@ Get the **PostHog Game Instance Subsystem** node, then call these nodes on it:
 | Setup | **Setup**, **Shutdown**, **Is Initialized**, **Is Disabled**, **Get State**, **On Setup Completed**, **On Shutdown Completed** |
 | Analytics | **Capture**, **Identify**, **Reset**, **Opt In**, **Opt Out** |
 | Feature Flags | **Get Feature Flag**, **Get Feature Flags**, **Reload Feature Flags**, **On Feature Flags Changed** |
-| Screenshot replay | **Start Session Replay**, **Stop Session Replay**, **Is Session Replay Active**, **Begin Replay Frame** |
+| Screenshot replay | **Start Session Replay**, **Stop Session Replay**, **Is Session Replay Active** |
 | Unreal Analytics | **Bind Analytics Provider**, **Unbind Analytics Provider** |
 
 To build properties, use **Make String Value**, **Make Boolean Value**, **Make Number Value**, **Make Object Value**, **Make Array Value**, or **Make Null Value** with **Set Property**. You can also use **Parse Properties** with a JSON object. To read flag values, use **Try Get Boolean**, **Try Get String**, and **Value To JSON**.
@@ -637,6 +621,7 @@ Screen views, registered properties, groups, sessions, flush, and `BeforeSend` a
 4. Verify that your project token and host match your PostHog project and region.
 5. Check whether the player opted out.
 6. Call `FlushAsync` to request delivery instead of waiting for the automatic interval.
+7. Check the Output Log for `LogPostHog` warnings and errors. The SDK logs why it disabled a client, failed deliveries, and storage errors there.
 
 ### Flags aren't found
 
