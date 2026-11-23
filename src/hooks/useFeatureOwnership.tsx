@@ -137,6 +137,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'business-knowledge': {
         feature: 'Business Knowledge',
         owner: ['conversations'],
+        label: false,
     },
     'cache-warming': {
         feature: 'Cache warming',
