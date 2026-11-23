@@ -7694,6 +7694,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/api/taggers",
+            "destination": "/docs/api/evaluations",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-observability/user-feedback/use-thumb-survey",
             "destination": "/docs/ai-observability/collect-user-feedback#react-use-the-usethumbsurvey-hook",
             "statusCode": 301
