@@ -23,13 +23,16 @@ Once the syncs are complete, you can start using Short.io data in PostHog.
 
 ## Available tables
 
-| Table              | Description                                                               | Sync method  |
-| ------------------ | ------------------------------------------------------------------------- | ------------ |
-| `domains`          | Branded short-link domains configured in your Short.io account            | Full refresh |
-| `links`            | Short links in a Short.io domain, including changes to existing links     | Full refresh |
-| `link_clicks`      | Total click count for each link within the account's available history    | Full refresh |
-| `last_clicks`      | Raw click events in the account's available history                       | Full refresh |
-| `link_by_interval` | Daily click counts per link in UTC within the account's available history | Full refresh |
+| Table                | Description                                                                       | Sync method  |
+| -------------------- | --------------------------------------------------------------------------------- | ------------ |
+| `domains`            | Branded short-link domains configured in your Short.io account                    | Full refresh |
+| `links`              | Short links in a Short.io domain, including changes to existing links             | Full refresh |
+| `link_clicks`        | Total click count for each link within the account's available history            | Full refresh |
+| `last_clicks`        | Raw click events in the account's available history                               | Full refresh |
+| `link_by_interval`   | Daily click counts per link in UTC within the account's available history         | Full refresh |
+| `domain_by_interval` | Daily click counts per domain in UTC within the account's available history       | Full refresh |
+| `domain_top`         | Top click dimension values (country, browser, referrer, UTM tags) for each domain | Full refresh |
+| `link_top`           | Top click dimension values (country, browser, referrer, UTM tags) for each link   | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 
