@@ -79,10 +79,7 @@ import com.posthog.kmp.PostHogConfig
 import com.posthog.kmp.PostHogContext
 
 PostHog.setup(
-    config = PostHogConfig(
-        projectToken = "<ph_project_token>",
-        host = "<ph_client_api_host>",
-    ),
+    config = PostHogConfig("<ph_project_token>") { host = "<ph_client_api_host>" },
     context = PostHogContext(), // platform-specific, see below
 )
 ```
@@ -109,7 +106,7 @@ class MyApplication : Application() {
         super.onCreate()
 
         PostHog.setup(
-            config = PostHogConfig(projectToken = "<ph_project_token>"),
+            config = PostHogConfig("<ph_project_token>"),
             context = PostHogContext(this),
         )
     }
@@ -131,7 +128,7 @@ On iOS, use the no-argument `PostHogContext()`:
 fun MainViewController() = ComposeUIViewController {
     LaunchedEffect(Unit) {
         PostHog.setup(
-            config = PostHogConfig(projectToken = "<ph_project_token>"),
+            config = PostHogConfig("<ph_project_token>"),
             context = PostHogContext(),
         )
     }
@@ -147,7 +144,7 @@ On the web, use the no-argument `PostHogContext()`:
 // main.kt
 fun main() {
     PostHog.setup(
-        config = PostHogConfig(projectToken = "<ph_project_token>"),
+        config = PostHogConfig("<ph_project_token>"),
         context = PostHogContext(),
     )
 }
@@ -161,7 +158,7 @@ On the JVM – for example, a Compose Multiplatform desktop app – use the no-a
 // main.kt
 fun main() = application {
     PostHog.setup(
-        config = PostHogConfig(projectToken = "<ph_project_token>"),
+        config = PostHogConfig("<ph_project_token>"),
         context = PostHogContext(),
     )
     Window(onCloseRequest = ::exitApplication) { App() }
@@ -247,7 +244,7 @@ import com.posthog.kmp.CaptureOptions
 PostHog.capture(
     event = "feature_used",
     properties = mapOf("feature_name" to "export"),
-    options = CaptureOptions(groups = mapOf("company" to "acme_corp")),
+    options = CaptureOptions { groups = mapOf("company" to "acme_corp") },
 )
 ```
 
@@ -269,7 +266,7 @@ import com.posthog.kmp.PostHogEventOptions
 
 PostHog.capture(
     event = "checkout",
-    options = CaptureOptions(eventOptions = mapOf(PostHogEventOptions.COOKIELESS_MODE to true)),
+    options = CaptureOptions { eventOptions = mapOf(PostHogEventOptions.COOKIELESS_MODE to true) },
 )
 
 // Send an option with every later event, until you unregister it or call reset()
@@ -326,8 +323,7 @@ import com.posthog.kmp.PostHogBeforeSend
 import com.posthog.kmp.PostHogConfig
 import com.posthog.kmp.PostHogContext
 
-val config = PostHogConfig(
-    projectToken = "<ph_project_token>",
+val config = PostHogConfig("<ph_project_token>") {
     beforeSend = listOf(
         PostHogBeforeSend { event ->
             event.copy(properties = event.properties - "email")
@@ -335,8 +331,8 @@ val config = PostHogConfig(
         PostHogBeforeSend { event ->
             if (event.event == "internal_debug_event") null else event
         },
-    ),
-)
+    )
+}
 
 PostHog.setup(
     config = config,
@@ -537,10 +533,7 @@ PostHog.resetGroupPropertiesForFlags("company") // or no argument for every grou
 To evaluate only the flags tagged for part of your app, set `evaluationContexts` in `PostHogConfig`. PostHog then evaluates the flags with at least one of these [evaluation tags](/docs/feature-flags/evaluation-contexts), plus flags with no evaluation tags:
 
 ```kotlin
-PostHogConfig(
-    projectToken = "<ph_project_token>",
-    evaluationContexts = listOf("production", "checkout"),
-)
+PostHogConfig("<ph_project_token>") { evaluationContexts = listOf("production", "checkout") }
 ```
 
 ## Experiments (A/B tests)
@@ -609,18 +602,15 @@ From `posthog-kmp` 1.0.0, the SDK captures screen views automatically, as `captu
 
 The PostHog Kotlin Multiplatform SDK 0.4.0 and higher can automatically capture unhandled exceptions. First, turn on **Enable exception autocapture** in your project's [Error Tracking settings](https://app.posthog.com/settings/project-error-tracking#error-tracking-exception-autocapture). This server-side option acts as a kill switch, so the SDK does not automatically capture exceptions when it is disabled.
 
-Then, pass an `ErrorTrackingConfig` when you initialize PostHog:
+Then, add an `errorTracking` block to your config:
 
 ```kotlin
-import com.posthog.kmp.ErrorTrackingConfig
-
-val config = PostHogConfig(
-    projectToken = "<ph_project_token>",
-    errorTracking = ErrorTrackingConfig(
-        autoCapture = true,
-        inAppIncludes = listOf("com.example"),
-    ),
-)
+val config = PostHogConfig("<ph_project_token>") {
+    errorTracking {
+        autoCapture = true
+        inAppIncludes = listOf("com.example")
+    }
+}
 ```
 
 On Android, iOS, and JVM, this captures unhandled exceptions. On Kotlin/JS and Kotlin/Wasm, it captures unhandled errors and unhandled promise rejections. It does not capture browser console errors.
@@ -642,25 +632,21 @@ Follow the [Kotlin Multiplatform Error Tracking guide](/docs/error-tracking/inst
 
 ## Session replay
 
-[Session replay](/docs/session-replay/mobile) is available on Android and iOS. To enable it, turn on "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and pass a `SessionReplayConfig`:
+[Session replay](/docs/session-replay/mobile) is available on Android and iOS. To enable it, turn on "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and add a `sessionReplay` block to your config:
 
 ```kotlin
-import com.posthog.kmp.SessionReplayConfig
-
 PostHog.setup(
-    config = PostHogConfig(
-        projectToken = "<ph_project_token>",
-        sessionReplay = SessionReplayConfig(
-            enabled = true,
-            maskAllTextInputs = true, // mask sensitive text (default)
-            maskAllImages = true,     // mask images (default)
-        ),
-    ),
+    config = PostHogConfig("<ph_project_token>") {
+        sessionReplay {
+            maskAllTextInputs = true // mask sensitive text (default)
+            maskAllImages = true     // mask images (default)
+        }
+    },
     context = PostHogContext(),
 )
 ```
 
-Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.12.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionReplayConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
+Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.12.0 removed wireframe recording and the `screenshot` option. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
 
 ### Compose Multiplatform screens on iOS
 
@@ -678,15 +664,14 @@ func makeUIViewController(context: Context) -> UIViewController {
 }
 ```
 
-To leave out iOS altogether, enable `sessionReplay` only on Android.
+To leave out iOS altogether, call `sessionReplay { }` only in your Android setup.
 
 On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
 
 ```kotlin
-sessionReplay = SessionReplayConfig(
-    enabled = true,
-    verifyScreenshotMaskAlignment = true,
-)
+sessionReplay {
+    verifyScreenshotMaskAlignment = true
+}
 ```
 
 `verifyScreenshotMaskAlignment` defaults to `false` and only affects Android. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
@@ -717,10 +702,7 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 To keep the SDK from loading or showing surveys, set `surveys = false` (0.11.0 and later):
 
 ```kotlin
-PostHogConfig(
-    projectToken = "<ph_project_token>",
-    surveys = false,
-)
+PostHogConfig("<ph_project_token>") { surveys = false }
 ```
 
 ## Opt out of data capture
@@ -731,7 +713,7 @@ Opt users out by default by setting `optOut` to `true` in your config:
 
 ```kotlin
 PostHog.setup(
-    config = PostHogConfig(projectToken = "<ph_project_token>", optOut = true),
+    config = PostHogConfig("<ph_project_token>") { optOut = true },
     context = PostHogContext(),
 )
 ```
@@ -801,7 +783,7 @@ If you're not seeing the events, feature flags, or session replay behavior you e
 
 ```kotlin
 PostHog.setup(
-    config = PostHogConfig(projectToken = "<ph_project_token>", debug = true),
+    config = PostHogConfig("<ph_project_token>") { debug = true },
     context = PostHogContext(),
 )
 
@@ -811,11 +793,10 @@ PostHog.setDebug(true)
 
 ## All configuration options
 
-Pass these to `PostHogConfig` when calling `setup`.
+Set these in the `PostHogConfig` block, such as `PostHogConfig("<ph_project_token>") { debug = true }`. The project token is the first argument.
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `projectToken` | `String` | **Required** | Your PostHog project token. |
 | `host` | `String` | `HOST_US` | PostHog instance URL. Use `PostHogConfig.HOST_US` (`https://us.i.posthog.com`) or `PostHogConfig.HOST_EU` (`https://eu.i.posthog.com`). |
 | `debug` | `Boolean` | `false` | Enables verbose SDK logging. |
 | `captureApplicationLifecycleEvents` | `Boolean` | `true` | Captures app open/close lifecycle events (mobile). |
@@ -829,10 +810,10 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `maxBatchSize` | `Int` | `50` | Maximum number of events sent in one batch. |
 | `optOut` | `Boolean` | `false` | Starts with analytics opted out. |
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
-| `sessionReplay` | `SessionReplayConfig?` | `null` | Enables and configures session replay (Android and iOS). |
+| `sessionReplay { }` | Block | Off | Turns on and configures session replay (Android and iOS). See [Session replay options](#session-replay-options). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
 | `beforeSend` | `List<PostHogBeforeSend>` | `emptyList()` | Modifies or drops events before the SDK queues them. |
-| `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
+| `errorTracking { }` | Block | Off | Configures Error Tracking. See [Error Tracking options](#error-tracking-options). |
 | `capturePushNotificationSubscriptions` | `Boolean` | `true` | Registers the FCM token at startup when Firebase Messaging is available (Android only). |
 | `capturePushNotificationOpened` | `Boolean` | `true` | Captures push notification opens automatically (Android only). |
 | `surveys` | `Boolean` | `true` | Loads surveys and shows the ones that match. `false` keeps the SDK from loading or showing them. Applies on iOS 15+ and the web. On Android, surveys display only when the app also depends on `com.posthog:posthog-android-surveys-compose`. Ignored on macOS and the JVM. Available from 0.11.0. |
@@ -844,7 +825,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 
 ### Error Tracking options
 
-Pass an `ErrorTrackingConfig` to `PostHogConfig.errorTracking`.
+Set these in the `errorTracking { }` block.
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -854,9 +835,9 @@ Pass an `ErrorTrackingConfig` to `PostHogConfig.errorTracking`.
 | `inAppExcludes` | `List<String>` | `emptyList()` | Package or bundle prefixes to mark as external frames (iOS and macOS only). |
 | `inAppByDefault` | `Boolean` | `true` | Marks unmatched stack frames as in-app frames (iOS and macOS only). |
 
-### Session recording options
+### Session replay options
 
-Pass a `SessionReplayConfig` to `PostHogConfig.sessionReplay`. Defaults match the native Android and iOS SDKs.
+Set these in the `sessionReplay { }` block. Defaults match the native Android and iOS SDKs.
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -886,14 +867,32 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 
 ## Upgrade to 1.0.0
 
-Version 1.0.0 makes the config classes regular classes, renames session recording to session replay, removes the deprecated `apiKey` alias, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
+Version 1.0.0 replaces the config constructors with builders, renames session recording to session replay, removes the deprecated `apiKey` alias, and captures screen views by default. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) has the details.
 
+- **Builders:** pass the project token to `PostHogConfig` and set the other options in its block. Session replay and error tracking have their own blocks, and `CaptureOptions` takes a block too:
+
+  ```kotlin
+  // 0.12
+  PostHogConfig(
+      projectToken = "<ph_project_token>",
+      debug = true,
+      sessionRecording = SessionRecordingConfig(maskAllImages = false),
+  )
+  CaptureOptions(groups = mapOf("company" to "acme"))
+
+  // 1.0
+  PostHogConfig("<ph_project_token>") {
+      debug = true
+      sessionReplay { maskAllImages = false }
+  }
+  CaptureOptions { groups = mapOf("company" to "acme") }
+  ```
+
+  Options keep their names, except `sessionRecording`, which is now the `sessionReplay { }` block, as in the Android and iOS SDKs. The config classes, `CaptureOptions`, and `FeatureFlagResult` no longer have `copy()` or destructuring. Later 1.x releases add options as builder properties, so code and libraries built against 1.0 keep working. Recompile any library built against an earlier version.
 - **Screen views on by default:** `captureScreenViews` defaults to `true`, as in the Android and iOS SDKs, so Android and iOS send `$screen` events and the web sends `$pageview` and `$pageleave` events. In a Compose Multiplatform app, the automatic screen view names the single activity or view controller, not a screen. Set `captureScreenViews = false` to keep only the [screen views](#screen-views) you send yourself.
-- **Session replay naming:** `sessionRecording` is now `sessionReplay`, and `SessionRecordingConfig` is now `SessionReplayConfig`, as in the Android and iOS SDKs.
 - **`captureException`:** the `additionalProperties` parameter is now `properties`, as in `capture()`. Calls that pass it by position compile unchanged.
 - **`PostHogContext()` on Android:** it no longer throws. `PostHog.setup()` with it leaves the SDK disabled and logs a warning, so pass `PostHogContext(application)`. `PostHogContext.application` is no longer public.
-- **`apiKey` removed:** the `apiKey` alias, deprecated since 0.8.0, is gone. Use `projectToken` to build a `PostHogConfig` and to read the token from it.
-- **Config classes:** `PostHogConfig`, `SessionReplayConfig`, `ErrorTrackingConfig`, and `CaptureOptions` are regular classes instead of data classes, so they no longer have `copy()`, destructuring, or value-based equality. Build a new one where you called `copy()`. `FeatureFlagResult` has an internal constructor and no `copy()`, but results still compare by value. Kotlin code that passes named arguments compiles unchanged. In Java, you can pass any leading part of the constructor arguments, such as `new PostHogConfig("<ph_project_token>")`, and new options in later releases won't break those calls. Recompile any library built against an earlier version of posthog-kmp, because the session replay rename changes the `PostHogConfig` constructor.
+- **`apiKey` removed:** the `apiKey` alias, deprecated since 0.8.0, is gone. Pass the token as the first argument of `PostHogConfig`, and read it from `projectToken`.
 
 ## Upgrade to 0.12.0
 
