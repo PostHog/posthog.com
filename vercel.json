@@ -195,6 +195,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/ios/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/usage:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/configuration:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node:ext(\\.md)?",
             "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
@@ -275,7 +290,27 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/:sdk(node|python|go|rust)/:major(\\d+):ext(\\.md)?",
+            "source": "/docs/references/posthog-ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-ios/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-ios-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-ios-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/:sdk(node|python|go|rust|ios)/:major(\\d+):ext(\\.md)?",
             "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
             "statusCode": 301
         },
@@ -1947,6 +1982,11 @@
         {
             "source": "/docs/integrate/:side(client|server)/rust:ext(\\.md)?",
             "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
             "statusCode": 301
         },
         {
