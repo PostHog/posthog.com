@@ -29,8 +29,8 @@ export default function SourcesCTA(): JSX.Element {
                         </p>
                     </div>
                 </div>
-                <figure className="m-0 flex min-w-0 justify-center @3xl:-mt-24 @3xl:-mb-12">
-                    <HedgehogDeskWizard aria-hidden="true" className="h-auto w-full max-w-48 @3xl:max-w-72" />
+                <figure className="order-first mx-0 -mb-4 -mt-24 flex min-w-0 justify-start @md:-mt-24 @3xl:order-none @3xl:-mb-12 @3xl:-mt-24 @3xl:justify-center">
+                    <HedgehogDeskWizard aria-hidden="true" className="h-auto w-full max-w-56 @3xl:max-w-72" />
                 </figure>
             </div>
         </section>

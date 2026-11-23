@@ -8,7 +8,7 @@ const SIGNUP_URL = 'https://app.posthog.com/signup'
 export default function SourcesHero(): JSX.Element {
     return (
         <section className="not-prose @container/hero">
-            <div className="grid items-center gap-8 @2xl:grid-cols-[1.7fr_1fr]">
+            <div className="grid items-center gap-6 @2xl:grid-cols-[1.7fr_1fr] @2xl:gap-8">
                 <div className="min-w-0">
                     <h1 className="m-0 text-balance !text-4xl font-bold !leading-tight text-primary @2xl:text-4xl">
                         <span className="rounded-md bg-blue/10 px-1 text-blue dark:bg-blue/20">Sources</span>, the ELT
@@ -30,8 +30,8 @@ export default function SourcesHero(): JSX.Element {
                         .
                     </p>
                 </div>
-                <div className="flex min-w-0 justify-center">
-                    <div className="flex items-end justify-center">
+                <div className="order-first flex min-w-0 justify-start @2xl:order-none @2xl:justify-center">
+                    <div className="flex w-full max-w-72 items-end justify-center @2xl:max-w-none">
                         <HedgehogConstruction variant="1" size={260} className="h-auto w-1/2 max-w-[260px]" />
                         <HedgehogConstruction variant="2" size={260} className="h-auto w-1/2 max-w-[260px]" />
                     </div>
