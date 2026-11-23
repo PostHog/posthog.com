@@ -103,7 +103,6 @@ const query = graphql`
                     slug: {
                         in: [
                             "/docs/libraries/js"
-                            "/docs/libraries/android"
                             "/docs/libraries/elixir"
                             "/docs/libraries/java"
                             "/docs/libraries/kmp"

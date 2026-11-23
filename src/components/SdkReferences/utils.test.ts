@@ -114,12 +114,12 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
         assert.equal(getSdkReferenceUrl('posthog-go'), '/docs/libraries/go')
         assert.equal(getSdkReferenceUrl('posthog-rust'), '/docs/libraries/rust')
         assert.equal(getSdkReferenceUrl('posthog-ios'), '/docs/libraries/ios')
+        assert.equal(getSdkReferenceUrl('posthog-android'), '/docs/libraries/android')
         assert.equal(getSdkReferenceUrl('posthog-flutter'), '/docs/libraries/flutter')
     })
 
     test('routes remaining HogRef SDKs to /docs/references/<id>', () => {
         assert.equal(getSdkReferenceUrl('posthog-js'), '/docs/references/posthog-js')
-        assert.equal(getSdkReferenceUrl('posthog-android'), '/docs/references/posthog-android')
         assert.equal(getSdkReferenceUrl('posthog-react-native'), '/docs/references/posthog-react-native')
     })
 
@@ -129,7 +129,7 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
             assert.equal(legacyIds.includes(migratedId), false, `${migratedId} must not be sourced from HogRef`)
         }
         assert.ok(legacyIds.includes('posthog-js'))
-        assert.ok(legacyIds.includes('posthog-android'))
+        assert.ok(legacyIds.includes('posthog-react-native'))
     })
 
     test('PUBLISHED_SDK_METADATA matches PUBLISHED_SDK_REFERENCES and resolves known logos', () => {
