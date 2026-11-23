@@ -191,6 +191,12 @@ Omitting the SDK-injected `context` argument doesn't fail validation. Your tool'
 
 </CalloutBox>
 
+<CalloutBox icon="IconInfo" title="Resumed agent sessions may omit `context`" type="fyi">
+
+A resumed agent session can keep using the tool definitions it had before you added intent capture. Its calls to those tools may then arrive without `context`. This can happen in clients including Claude Code, the Claude Agent SDK, and Codex. Start a new session instead of resuming the old one. In Claude Code and the Claude Agent SDK, compacting the session also works. If you set an `intentFallback`, it still runs for these calls.
+
+</CalloutBox>
+
 <CalloutBox icon="IconInfo" title="Skip `intentFallback` for tight internal servers" type="fyi">
 
 You do not need a fallback if your internal client always supplies `context`. Add one if clients can omit this argument.
