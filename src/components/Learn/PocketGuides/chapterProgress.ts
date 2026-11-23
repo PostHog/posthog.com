@@ -68,8 +68,13 @@ export function markChapterReadOnMove({
     markChapterRead(volumeId, currentSlug)
 }
 
-// Ticks show only on the front matter and marking happens only on chapters, so nothing needs a live update.
-const subscribeToNothing = () => () => undefined
+function subscribeToProgressInOtherTabs(onProgressChange: () => void): () => void {
+    const handleStorageChange = (event: StorageEvent) => {
+        if (event.key === null || event.key === READ_CHAPTERS_STORAGE_KEY) onProgressChange()
+    }
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
+}
 
 // @types/react 16 lacks useSyncExternalStore; importing the components/UI/utils shim would cycle modules.
 const useSyncExternalStore = (
@@ -83,6 +88,6 @@ const useSyncExternalStore = (
 ).useSyncExternalStore
 
 export function useReadChapterSlugs(volumeId: string): Set<string> {
-    const storedProgress = useSyncExternalStore(subscribeToNothing, readStoredProgress, () => null)
+    const storedProgress = useSyncExternalStore(subscribeToProgressInOtherTabs, readStoredProgress, () => null)
     return useMemo(() => new Set(readChapterSlugs(parseProgress(storedProgress), volumeId)), [storedProgress, volumeId])
 }
