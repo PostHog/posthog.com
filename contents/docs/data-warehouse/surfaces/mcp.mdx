@@ -67,6 +67,7 @@ These tools manage [data warehouse](/docs/data-warehouse) import sources – ext
 | `external-data-sources-wizard`                | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                                                                     |
 | `external-data-sources-revenue-config-update` | Update `enabled` or `include_invoiceless_charges` for a source's Revenue Analytics configuration. Rebuilds managed revenue views without changing synced source tables.             |
 | `external-data-sources-draft-custom-manifest` | Draft and validate a Custom REST source manifest from `docs_url` or `docs_text`. Creates no source and needs no credentials. Review and test the manifest before creating a source. |
+| `external-data-sources-preview-resource`      | Read up to 50 sample rows from one table of a Custom REST source before you create it. Returns the rows, column types, and any live read error.                                     |
 
 ### Compact responses
 
