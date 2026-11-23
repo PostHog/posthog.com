@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { colors } from '@posthog/brand/colors'
 import { HedgehogChart } from '@posthog/brand/hoggies'
 import { DefaultTooltip } from '@posthog/quill-charts'
 import { Accordion } from 'components/UI/Accordion'
@@ -93,6 +94,14 @@ const chartConfig = {
     yTickFormatter: (v: number) => `${v}%`,
     tooltip: { valueFormatter: percent },
 }
+const modelChartLimit = 15
+// Extend the site's 12-color palette through the optional comparison line.
+const extraLineColors: Partial<Record<number, string>> = {
+    13: colors.purple.darker,
+    14: colors.blue.darker,
+    15: colors.tangerine.lighter,
+    16: colors.lemon.darker,
+}
 
 function ReportSection({
     section,
@@ -127,7 +136,7 @@ function ReportSection({
                 ? a.label.localeCompare(b.label)
                 : (b.share ?? -1) - (a.share ?? -1) || a.label.localeCompare(b.label)
         )
-    const chartRows = rows.filter((row) => row.share != null).slice(0, section === 'model' ? 10 : 5)
+    const chartRows = rows.filter((row) => row.share != null).slice(0, section === 'model' ? modelChartLimit : 5)
     const expandedRow = rows.find((row) => row.key === expanded)
     if (expandedRow && !chartRows.includes(expandedRow)) chartRows.push(expandedRow)
     const coverageLabel =
@@ -177,9 +186,9 @@ function ReportSection({
                         />
                     ) : (
                         <LineChart
-                            className={section === 'model' ? 'h-96 @md:h-80' : 'h-64'}
+                            className={section === 'model' ? 'h-[28rem] @md:h-96' : 'h-64'}
                             labels={dates}
-                            series={chartRows}
+                            series={chartRows.map((row, index) => ({ ...row, color: extraLineColors[index + 1] }))}
                             config={chartConfig}
                         />
                     )}
@@ -302,7 +311,7 @@ const reportQuestions = (period: string) => [
     },
     {
         question: 'Which models, labs, and tools appear on the line charts?',
-        answer: 'The model chart follows the ten models with the highest shares in the selected month. The lab and tool charts each follow the top five. Select another name in a table to add its line.',
+        answer: `The model chart follows the ${modelChartLimit} models with the highest shares in the selected month. The lab and tool charts each follow the top five. Select another name in a table to add its line.`,
     },
     {
         question: 'What does “pp” mean in the Change column?',
