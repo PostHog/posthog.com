@@ -55,13 +55,13 @@ Trace and session data is available on v3 through the `observations` table, whic
 
 ### Migrating from v1/v2
 
-If your source syncs `traces` or `sessions`, you need to migrate before November 16, 2026:
+Most Langfuse Cloud sources on v1/v2 have been automatically migrated to v3. After Langfuse Cloud retired the `traces` and `sessions` endpoints on November 16, 2026, syncs for those tables were disabled, and sources with no remaining legacy tables syncing were repinned to v3.
+
+If your source still syncs `traces` or `sessions` (e.g. a self-hosted Langfuse instance that still serves those routes), you need to migrate manually:
 
 1. Make sure the `observations` table is syncing.
 2. Update queries that use the `traces` or `sessions` table to use `observations` instead, grouping by `traceId` or `sessionId`.
 3. Contact support to repin your source to v3. On the next sync, the `traces` and `sessions` schemas show as disabled and existing warehouse tables keep their data.
-
-Sources on v1/v2 that don't sync `traces` or `sessions` are automatically migrated to v3.
 
 ## Configuration
 
