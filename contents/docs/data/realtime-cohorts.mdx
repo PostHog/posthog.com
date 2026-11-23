@@ -45,7 +45,7 @@ If the cohorts page says "Realtime cohorts couldn't be turned on for this projec
 
 ## Which cohorts qualify
 
-PostHog works out from the criteria you choose whether a cohort can be realtime. A cohort that qualifies still needs realtime turned on before a feature flag can target it.
+PostHog works out from the criteria you choose whether a cohort can be realtime. A cohort with event criteria that qualifies still needs realtime turned on before a feature flag can target it. A cohort with only person property criteria needs nothing, because flags read those properties from the person as they evaluate.
 
 A cohort qualifies when every one of its criteria is one of these:
 
@@ -85,7 +85,9 @@ During the beta, keep the event criteria in the cohort that the flag targets. Sa
 
 ## Turn realtime on for a cohort
 
-In a project that has joined the beta, each cohort that qualifies has its own realtime switch, and it starts off. While it's off, PostHog doesn't keep the cohort's membership up to date, and feature flags can't target it.
+In a project that has joined the beta, each cohort with event criteria that qualifies has its own realtime switch, and it starts off. While it's off, PostHog doesn't keep the cohort's membership up to date, and feature flags can't target it.
+
+A cohort with only person property criteria doesn't need the switch, and its page usually doesn't show one. Feature flags can always target it.
 
 To turn it on, open the cohort and click **Turn on realtime** next to **Flag targeting**. When you create a cohort with event criteria, you can check **Turn on realtime** before you save it instead.
 
@@ -108,7 +110,7 @@ The **Flag targeting** row on the cohort page, and the tag next to the cohort in
 
 ### Turn realtime off
 
-Click **Turn off realtime** on the cohort's page. PostHog stops keeping the cohort up to date, and flags can't target it anymore. If you turn realtime on again later, PostHog prepares the cohort from its past events again.
+Click **Turn off realtime** on the cohort's page. PostHog stops keeping the cohort up to date. If the cohort has event criteria, flags can't target it anymore. Flags keep targeting a cohort with only person property criteria. If you turn realtime on again later, PostHog prepares the cohort from its past events again.
 
 PostHog refuses to turn realtime off while something still reads the cohort's realtime membership:
 
@@ -119,14 +121,13 @@ PostHog refuses to turn realtime off while something still reads the cohort's re
 ## Using a realtime cohort in a feature flag
 
 1. Create the cohort, or edit its criteria, as you normally would.
-2. [Turn realtime on](#turn-realtime-on-for-a-cohort) for the cohort, if it isn't on yet.
-3. Wait until the **Flag targeting** row reads **Available**.
-4. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
+2. If the cohort has event criteria, [turn realtime on](#turn-realtime-on-for-a-cohort) for it, and wait until the **Flag targeting** row reads **Available**. A cohort with only person property criteria skips this step.
+3. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
 
-PostHog saves the flag only once the cohort is ready. If the flag won't save, the error tells you which step you're on:
+PostHog saves the flag only once the cohort is ready. If the flag won't save, the error tells you what's missing:
 
-- "Realtime is off for cohort 'X'. Turn it on from the cohort's page, and feature flags can target the cohort once it's ready." means step 2 hasn't happened.
-- "Cohort 'X' isn't ready for feature flags yet" means step 3 hasn't finished. Open the cohort to check its progress, and save again once it reads **Available**. If it reads **Unavailable**, [contact support](https://app.posthog.com/#panel=support).
+- "Realtime is off for cohort 'X'. Turn it on from the cohort's page, and feature flags can target the cohort once it's ready." means realtime isn't on for the cohort yet.
+- "Cohort 'X' isn't ready for feature flags yet" means PostHog is still preparing the cohort. Open the cohort to check its progress, and save again once it reads **Available**. If it reads **Unavailable**, [contact support](https://app.posthog.com/#panel=support).
 - "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or the project hasn't joined the beta. Compare its criteria against the [list above](#which-cohorts-qualify) first.
 
 ## Editing a cohort a flag uses
