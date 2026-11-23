@@ -19,8 +19,8 @@ The Omni Analytics connector syncs your [Omni](https://omni.co/) workspace data 
 
 You need an Omni Analytics account with API access. You can use either an **Organization API key** or a **Personal Access Token**, but Organization API keys provide broader coverage:
 
-- **Organization API key** – access all tables, including Users and User groups (SCIM endpoints). Create one under **Settings > API access** in Omni.
-- **Personal Access Token** – access most tables, but can't read Users or User groups. Only sees content the token owner can access.
+- **Organization API key** – access all tables, including Users, User groups, User model roles, and User group model roles (SCIM endpoints). Create one under **Settings > API access** in Omni.
+- **Personal Access Token** – access most tables, but can't read Users, User groups, User model roles, or User group model roles. Only sees content the token owner can access.
 
 ## Adding a data source
 
@@ -49,7 +49,7 @@ The Documents table supports incremental sync via the `updatedAt` field. All oth
 
 - If you get an authorization error, your API key is invalid or expired. Generate a new key in Omni under **Settings > API access** and reconnect.
 - If you get a permission error, your API key doesn't have access to the requested data. Check the key's permissions and try again.
-- If the Users or User groups tables fail, make sure you're using an Organization API key. Personal Access Tokens can't access SCIM user and group endpoints.
+- If the Users, User groups, User model roles, or User group model roles tables fail, make sure you're using an Organization API key. Personal Access Tokens can't access SCIM user and group endpoints.
 - If PostHog can't reach your Omni instance, check that the Instance URL is correct and points to your Omni deployment.
 
 <TroubleshootingLink />
