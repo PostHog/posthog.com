@@ -43,7 +43,7 @@ checks:
           name only.
       codebase_to_test: oss-element-x-ios
       pages:
-          - docs/libraries/ios/usage
+          - docs/libraries/ios
           - docs/product-analytics/identify
       prompt: >-
           Track when a user reacts to a message in the iOS app, by user, with PostHog
@@ -73,7 +73,7 @@ checks:
           The prompt names neither.
       codebase_to_test: oss-bouncer-ios
       pages:
-          - docs/libraries/ios/usage
+          - docs/libraries/ios
       prompt: >-
           Track which screens people view in this iOS app with PostHog product analytics.
       criteria:
@@ -95,7 +95,7 @@ checks:
           off.
       codebase_to_test: oss-element-x-ios
       pages:
-          - docs/libraries/ios/usage
+          - docs/libraries/ios
           - docs/feature-flags/installation/ios
       prompt: >-
           Put creating polls in the iOS app behind a PostHog feature flag.
@@ -123,7 +123,7 @@ checks:
           captureException? The prompt does not name the method.
       codebase_to_test: oss-element-x-ios
       pages:
-          - docs/libraries/ios/usage
+          - docs/libraries/ios
           - docs/error-tracking/installation/ios
       prompt: >-
           Track errors when creating a room fails in the iOS app, with PostHog error

@@ -43,8 +43,8 @@ const IdealEmployeeProfile: React.FC = () => {
 
                     <p className="text-[15px] border-l-3 border-primary pl-4 mb-6">
                         <TeamMember name="Thomas Obermüller" photo /> was CTO for his previous company of 120 people
-                        before joining PostHog as a software engineer on the <SmallTeam slug="product-analytics" />,
-                        which he – surprise! – leads.
+                        before joining PostHog as a software engineer on the product analytics team, which he –
+                        surprise! – went on to lead.
                     </p>
                 </div>
 

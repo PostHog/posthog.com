@@ -2626,6 +2626,10 @@ const posthogMcpNav = [
         url: '/docs/integrations/replit',
     },
     {
+        name: 'Superhuman',
+        url: '/docs/integrations/superhuman',
+    },
+    {
         name: 'v0',
         url: '/docs/integrations/v0',
     },
@@ -3012,16 +3016,16 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Installation',
-                                    url: '/docs/libraries/ios',
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/ios/4.x.x',
                                 },
                                 {
-                                    name: 'Usage',
-                                    url: '/docs/libraries/ios/usage',
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/ios/3.x.x',
                                 },
                                 {
-                                    name: 'Configuration',
-                                    url: '/docs/libraries/ios/configuration',
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/ios/migration',
                                 },
                             ],
                         },

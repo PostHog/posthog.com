@@ -195,6 +195,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/ios/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/usage:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/configuration:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node:ext(\\.md)?",
             "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
@@ -275,7 +290,27 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/:sdk(node|python|go|rust)/:major(\\d+):ext(\\.md)?",
+            "source": "/docs/references/posthog-ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-ios/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-ios-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-ios-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/:sdk(node|python|go|rust|ios)/:major(\\d+):ext(\\.md)?",
             "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
             "statusCode": 301
         },
@@ -713,6 +748,10 @@
         {
             "source": "/blog/posthog-vs-fullstory",
             "destination": "/compare/posthog-vs-fullstory"
+        },
+        {
+            "source": "/blog/posthog-vs-ga4",
+            "destination": "/compare/posthog-vs-ga4"
         },
         {
             "source": "/blog/posthog-vs-sentry",
@@ -1468,6 +1507,22 @@
             "destination": "/self-driving"
         },
         {
+            "source": "/teams/product-analytics",
+            "destination": "/teams/analytics"
+        },
+        {
+            "source": "/teams/product-analytics/:path*",
+            "destination": "/teams/analytics/:path*"
+        },
+        {
+            "source": "/teams/web-analytics",
+            "destination": "/teams/analytics"
+        },
+        {
+            "source": "/teams/web-analytics/:path*",
+            "destination": "/teams/analytics/:path*"
+        },
+        {
             "source": "/teams/logs",
             "destination": "/teams/apm"
         },
@@ -1927,6 +1982,11 @@
         {
             "source": "/docs/integrate/:side(client|server)/rust:ext(\\.md)?",
             "destination": "/docs/libraries/rust:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
             "statusCode": 301
         },
         {
@@ -5992,7 +6052,7 @@
         },
         {
             "source": "/handbook/small-teams/product-analytics",
-            "destination": "/teams/product-analytics"
+            "destination": "/teams/analytics"
         },
         {
             "source": "/handbook/small-teams/replay",
@@ -6044,7 +6104,7 @@
         },
         {
             "source": "/handbook/small-teams/web-analytics",
-            "destination": "/teams/web-analytics"
+            "destination": "/teams/analytics"
         },
         {
             "source": "/handbook/small-teams/people-ops",
@@ -6370,7 +6430,7 @@
         },
         {
             "source": "/teams/customer-analytics",
-            "destination": "/teams/web-analytics"
+            "destination": "/teams/analytics"
         },
         {
             "source": "/apps",
