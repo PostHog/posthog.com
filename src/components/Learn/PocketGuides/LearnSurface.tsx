@@ -1,7 +1,7 @@
 import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, Check } from 'lucide-react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
@@ -15,6 +15,7 @@ import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { useEntry } from './bookContext'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, sectionPages, useBookPages } from './bookModel'
+import { markChapterReadOnMove, useReadChapterSlugs } from './chapterProgress'
 import { isReaderWindowActive } from '../learnTracking'
 
 interface LearnBodyNode {
@@ -216,6 +217,7 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     const bookPages = useBookPages(volumeId)
     const bodies = useBookBodies()
     const counts = usePocketGuideCounts()
+    const readChapterSlugs = useReadChapterSlugs(volumeId)
     const coverRef = React.useRef<HTMLDivElement>(null)
 
     const entry = React.useMemo(() => {
@@ -245,10 +247,12 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     const firstChapter = chapters[0]
     const firstChapterPath = firstChapter ? learnChapterPath(basePath, firstChapter) : undefined
     const chapterPaths = new Set(chapters.map((page) => learnChapterPath(basePath, page)))
-    // Any chapter link opens the book, then lands on that chapter.
-    const openBook = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleLinkClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const href = (event.target as Element).closest('a')?.getAttribute('href')?.replace(/\/$/, '')
-        if (!href || !chapterPaths.has(href)) return
+        if (!href) return
+        markChapterReadOnMove({ volumeId, pages, basePath, currentSlug: learnChapterSlug(entry), targetHref: href })
+        // Any chapter link on the front matter opens the book, then lands on that chapter.
+        if (!entry.isFrontMatter || !chapterPaths.has(href)) return
         const cover = coverRef.current?.querySelector<HTMLElement>('[data-pocket-guide-cover]') ?? null
         void openPocketGuide(event, cover, href)
     }
@@ -269,6 +273,18 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
                                     to={learnChapterPath(basePath, page)}
                                     className="group flex items-baseline gap-2 py-1.5 text-base font-normal text-secondary no-underline transition-colors hover:text-primary"
                                 >
+                                    <span className="w-4 shrink-0 self-center">
+                                        {readChapterSlugs.has(learnChapterSlug(page)) ? (
+                                            <>
+                                                <Check
+                                                    className="size-4 text-green"
+                                                    strokeWidth={2.5}
+                                                    aria-hidden="true"
+                                                />
+                                                <span className="sr-only">Read: </span>
+                                            </>
+                                        ) : null}
+                                    </span>
                                     <span className="min-w-0 underline-offset-4 group-hover:underline">
                                         {page.shortTitle}
                                     </span>
@@ -302,7 +318,7 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
         // Introductions end on the setup wizard; the padding keeps it off the window's bottom edge.
         <div
             className={`@container [&>div]:!p-0 ${entry.isFrontMatter ? 'pb-12' : ''}`}
-            onClickCapture={entry.isFrontMatter ? openBook : undefined}
+            onClickCapture={handleLinkClick}
         >
             <EntryProvider value={{ entry, pages, basePath }}>
                 <IntroContext.Provider value={intro}>
