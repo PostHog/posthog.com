@@ -41,9 +41,18 @@ PostHog creates a table for each repository and endpoint combination. Table name
 
 <SyncModes />
 
+<CalloutBox icon="IconWarning" title="Some tables have no historical backfill" type="caution">
+
+The `reviews`, `workflow_runs`, `workflow_jobs`, `deployments`, and `deployment_statuses` tables are webhook-only.
+PostHog does not backfill historical data for these tables.
+They only capture activity from the time you set up the webhook.
+Set up the webhook before you need to capture this activity.
+
+</CalloutBox>
+
 ## Webhooks
 
-The workflow runs, workflow jobs, deployments, and deployment statuses tables can be kept up to date in real time using GitHub webhooks, rather than re-polling. PostHog creates one webhook per repository, all sharing the same signing secret. If automatic creation fails, your token needs webhook permissions – the **admin:repo_hook** scope on a classic token, or **Repository webhooks: read and write** on a fine-grained token – or you can set the webhooks up manually.
+The reviews, workflow runs, workflow jobs, deployments, and deployment statuses tables get their data from GitHub webhooks, not from polling. PostHog creates one webhook per repository, all sharing the same signing secret. If automatic creation fails, your token needs webhook permissions – the **admin:repo_hook** scope on a classic token, or **Repository webhooks: read and write** on a fine-grained token – or you can set the webhooks up manually.
 
 Repeat the following steps for each repository, using the **same Secret** every time:
 
@@ -52,7 +61,7 @@ Repeat the following steps for each repository, using the **same Secret** every 
 3. Paste the webhook URL shown during setup into the **Payload URL** field
 4. Set **Content type** to **application/json**
 5. Enter a **Secret** and add the same value to the **Signing secret** field in PostHog
-6. Under **Which events would you like to trigger this webhook?**, choose **Let me select individual events** and tick **Deployments**, **Deployment statuses**, **Workflow jobs**, and **Workflow runs**
+6. Under **Which events would you like to trigger this webhook?**, choose **Let me select individual events** and tick **Deployments**, **Deployment statuses**, **Pull request reviews**, **Workflow jobs**, and **Workflow runs**
 7. Click **Add webhook**
 
 ## Configuration
