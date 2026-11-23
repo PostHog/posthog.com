@@ -1038,22 +1038,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/vibe-check': {
-        size: {
-            min: {
-                width: 750,
-                height: 575,
-            },
-            max: {
-                width: 750,
-                height: 575,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
     'research-talk': {
         size: {
             min: {
