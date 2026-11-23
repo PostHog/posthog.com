@@ -791,7 +791,11 @@ If native code in your app, or a native library it uses, calls `posthog-ios` or 
 
 Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so recordings keep the same mode. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
 
-Masking also changes on iOS. It covers content a masked view draws outside its bounds, such as unclipped images, layer shadows and button titles, and secure text inputs stay masked inside a `ph-no-mask` view. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame. Fast scrolling on such a screen may also drop replay frames.
+On iOS, secure text inputs stay masked inside a `ph-no-mask` view. On Android, touches inside a `ph-no-capture` view are no longer recorded, as on iOS since plugin 2.13.2. If you upgrade from plugin 2.13.1 or earlier, iOS masking also covers content a masked view draws outside its bounds, such as unclipped images, layer shadows and button titles. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame, and fast scrolling on such a screen may drop replay frames.
+
+The plugin ignores `sessionReplayConfig.screenshotModeBackgroundCapture`, because `posthog-ios` 4.0 removed background screenshot capture, and `posthog-react-native` logs a warning if you set it. Remove it, or try the experimental `iOSCaptureMethod: 'gpu'` (see [Troubleshooting](/docs/session-replay/installation/react-native#troubleshooting)).
+
+In iOS native crash reports, only frames from your app's executable are in-app. Frames from dynamic frameworks, such as Hermes, are no longer marked as your code, so some existing native crash issues may be grouped again once.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
