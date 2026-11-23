@@ -1,0 +1,90 @@
+---
+title: Analytics
+sidebar: Handbook
+showTitle: true
+hideAnchor: false
+template: team
+---
+
+We own all of PostHog's analytics products: web analytics, product analytics, marketing analytics, revenue analytics, customer analytics, and AEO. Dashboards and charts are owned by the <SmallTeam slug="dashboards-and-charts" />.
+
+## Who are we building for?
+
+### Personas
+
+-   Primary personas:
+    -   **Product engineer**
+        -   These are the engineers building the product. Normally full-stack engineers skewing frontend or frontend engineers.
+        -   Product engineers have more limited time. Need to quickly get high-quality insights to inform what they are building and assess what they've shipped.
+    -   **Technical founder**
+        -   First technical person at the company, responsible for setting up the initial landing page.
+        -   At an early stage, wants tools that initially cost little to nothing, but won't need to be replaced as the company grows.
+    -   **Product manager** (ex-engineer type)
+        -   Supports the product teams (engineers, PMs, designers) to build the best products. They guide the product roadmap by speaking to customers and diving into the data.
+        -   Product managers are the power-users of analytics (further evidence in the data analysis of paying users). They have desire and the time to go significantly deeper into the data.
+-   Limited focus:
+    -   Growth engineer
+-   Not a focus, but should be usable by:
+    -   Other engineers
+    -   Marketing
+    -   Everyone in the product team (less technical PMs, designers)
+    -   Non-technical leadership
+
+### What types of companies?
+
+The highest-performing product teams building the most loved products at **high-growth startups**. Our products should be useful for them right from the start. For more context on the company read about the [ideal customer persona](/handbook/strategy/ideal-customer-persona).
+
+### Jobs to be done
+
+**Web analytics** is an _opinionated_ tool that helps people:
+
+-   Measure and improve the effectiveness of their acquisition strategy
+-   Measure and improve the effectiveness of their conversion funnels
+-   Understand who is using their website
+-   Understand how their website is being used
+-   Create simple-to-medium complexity combinations of these (e.g. how likely are people who came in from this ad to convert, compared to everyone else)
+
+It should be easy to set up and easy to use. It's ok if that means we don't cover every use case, as people who need more can use product analytics.
+
+**Product analytics** is a _wide_ tool that fulfills many jobs to be done (non-exhaustive list):
+
+-   Monitoring KPIs - how are the specific KPIs (product/team/company) doing? Are there any big changes, is everything going roughly in the right direction?
+-   Insights into a new feature you've built - I've created a new feature and I want to make sure that it's being used successfully
+-   Watching for errors and debugging - something went wrong (error gets trigger, product regression, drop in conversion), getting told it went wrong, debugging it, shipping a solution and making sure that fixes it
+-   Conversion optimization - the <SmallTeam slug="growth" /> is monitoring how particular KPIs are doing, trying to come up with experiments, shipping features to try and improve these
+-   Answering product strategy questions - which customers should we focus on, what are our most used/valued features. e.g. should we increase the pricing from X to Y? Which customers should we focus on?
+
+You can broadly group the jobs to be done of product analytics in PostHog as:
+
+-   **Creating**: You have a specific query/dashboard in mind, you open PostHog to view it. E.g. creating a dashboard to Monitor KPIs, or creating the funnel for your onboarding flow
+-   **Consuming**: you or someone else has made something in PostHog that you refer back to. E.g. Checking the dashboard you made to Monitor KPIs
+-   **Exploring**: you're answering a broader open-ended question. E.g. If you're monitoring your KPIs and you see something not right - you then want to dive into understanding why
+
+## Roadmap
+
+### Web analytics: 5-year vision
+
+**Web analytics as the command center**
+Web analytics becomes the central command hub for everything that happens on the web. It unites acquisition, performance, and behavior data in one intelligent view. It is the 80/20 dashboard for all related PostHog products, connecting directly to experiments, sessions, and insights. No longer a passive reporting tool, it’s where teams take action.
+
+**From reactive to proactive**
+Analysis turns into action. Web analytics doesn’t just highlight regressions; it solves them. When conversion rates drop or core web vitals slip, it can open a GitHub PR, create a task, or launch a follow-up experiment automatically.
+
+**A self-optimizing web**
+Everything related to the web lives here: marketing spend, attribution, churn risk, SEO/AEO/GEO, and performance metrics, all in one continuous feedback loop. PostHog AI connects the dots across marketing, performance, and behavior, finding opportunities for improvement, generating new assets or variants, and running experiments autonomously.
+
+**From chart-drilling to conversations**
+Instead of drilling into dashboards, users simply chat with web analytics. They ask questions, get clear explanations, and receive ready-to-apply actions, all in natural language. The focus shifts from just analyzing data to acting on insights.
+
+**Analytics for the agent era**
+As AI agents and LLMs become real web users, PostHog helps teams measure, understand, and optimize for them. Web analytics will distinguish between agent traffic and human traffic, paving the way for the area and empowering teams to tailor their experiences for both human and AI audiences.
+
+### Product analytics: 3-year goals
+
+-   You can explore data across all insights and dimensions
+-   You can trivially share any insight anywhere
+-   Onboarding is as easy as a video game
+-   Tight integration with developer workflows
+-   No more complex than it is today
+-   Using PostHog sparks joy
+-   We support trillion event querying
