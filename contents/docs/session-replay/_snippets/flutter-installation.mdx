@@ -88,7 +88,6 @@ config.sessionReplayConfig.maskAllImages = false;
 /// This is used for capturing the view as a screenshot.
 /// The lower the number, the more snapshots will be captured but higher the performance impact.
 /// Defaults to 1s.
-/// Ps: it was called [debouncerDelay] until version 4.7.1
 config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 /// Optional session replay sample rate between 0 and 1.
 config.sessionReplayConfig.sampleRate = 1.0;
@@ -97,7 +96,7 @@ config.sessionReplayConfig.sampleRate = 1.0;
 ## Limitations for mobile session replay
 
 - On Android, requires API >= 26.
-- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
+- On iOS, minimum deployment target is [iOS 15](/docs/libraries/ios).
 - Wireframe mode isn't supported, only screenshot mode.
 - [Network performance recording](/docs/session-replay/network-recording) isn't supported yet.
 
@@ -107,8 +106,8 @@ config.sessionReplayConfig.sampleRate = 1.0;
 
 ## Troubleshooting
 
-- Update your SDK and iOS Pods.
-- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`, or, for Swift Package Manager projects, in the `Runner` target's **Minimum Deployments** in Xcode.
+- Update your SDK.
+- Make sure to set the minimum platform version to iOS 15.0 in the `Runner` target's **Minimum Deployments** in Xcode, and in your `Podfile` if your project has one.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
 - For blank recordings for mobile session replay, be sure to set up the [Widget and observer](/docs/session-replay/installation/flutter#wrap-your-app-with-posthogwidget).
