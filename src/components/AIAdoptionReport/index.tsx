@@ -3,6 +3,7 @@ import { HedgehogChart } from '@posthog/brand/hoggies'
 import { DefaultTooltip } from '@posthog/quill-charts'
 import { Accordion } from 'components/UI/Accordion'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
+import { Table } from 'components/UI/Table'
 import { rowLogo } from './rowLogo'
 
 const sections = {
@@ -165,41 +166,44 @@ function ReportSection({
                 </figure>
             )}
             {rows.length > 0 ? (
-                <table
+                <Table.Root
+                    appearance="plain"
                     aria-label={`${sections[section][0]} in ${monthName(month)}`}
-                    className="w-full text-sm tabular-nums"
+                    className="not-prose table-fixed tabular-nums"
                 >
-                    <thead className="border-b border-primary text-right">
-                        <tr>
-                            <th scope="col" className="py-2 text-left">
-                                {heading}
-                            </th>
-                            <th scope="col" className="hidden text-left @md:table-cell">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.Head>{heading}</Table.Head>
+                            {/* Keep all four columns in the grid so an expanded row spans the same width on mobile. */}
+                            <Table.Head className="invisible w-0 !px-0 @md:visible @md:w-24 @md:!px-3 @2xl:w-1/5">
                                 Trend
-                            </th>
-                            <th scope="col">Org share</th>
-                            <th scope="col">
+                            </Table.Head>
+                            <Table.Head align="end" className="w-24 whitespace-nowrap @2xl:w-1/6">
+                                Org share
+                            </Table.Head>
+                            <Table.Head align="end" className="w-24 whitespace-nowrap @2xl:w-1/6">
                                 <abbr title="Change from the previous month, in percentage points">Change</abbr>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                            </Table.Head>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
                         {(showAll ? rows : rows.slice(0, 5)).map((row) => (
                             <React.Fragment key={row.key}>
-                                <tr className="border-b border-primary">
-                                    <th scope="row" className="max-w-36 break-words py-2 text-left">
+                                <Table.Row>
+                                    <Table.Head scope="row">
                                         <button
                                             type="button"
-                                            className="inline-flex max-w-full items-center gap-2 text-left hover:underline"
+                                            className="flex max-w-full items-center gap-2 text-start hover:underline"
                                             aria-expanded={expanded === row.key}
                                             onClick={() => setExpanded(expanded === row.key ? '' : row.key)}
                                         >
                                             {rowLogo(section, row.key)}
-                                            <span className="min-w-0">{row.label}</span>
+                                            <span className="min-w-0 break-words">{row.label}</span>
                                         </button>
-                                    </th>
-                                    <td className="hidden w-24 pr-4 @md:table-cell">
+                                    </Table.Head>
+                                    <Table.Cell className="invisible !px-0 @md:visible @md:!px-3">
                                         <Sparkline
+                                            className="hidden max-w-24 @md:flex"
                                             data={row.data}
                                             height={24}
                                             labels={dates}
@@ -211,17 +215,17 @@ function ReportSection({
                                                 />
                                             )}
                                         />
-                                    </td>
-                                    <td className="text-right">{percent(row.share)}</td>
-                                    <td className="text-right">
+                                    </Table.Cell>
+                                    <Table.Cell align="end">{percent(row.share)}</Table.Cell>
+                                    <Table.Cell align="end" className="whitespace-nowrap">
                                         {row.change === null
                                             ? '—'
                                             : `${row.change > 0 ? '+' : ''}${row.change.toFixed(1)} pp`}
-                                    </td>
-                                </tr>
+                                    </Table.Cell>
+                                </Table.Row>
                                 {expanded === row.key && (
-                                    <tr>
-                                        <td colSpan={4}>
+                                    <Table.Row>
+                                        <Table.Cell colSpan={4}>
                                             <dl className="my-1 flex flex-wrap gap-3 rounded bg-accent p-3">
                                                 {history.map((date, i) => (
                                                     <div key={date}>
@@ -230,13 +234,13 @@ function ReportSection({
                                                     </div>
                                                 ))}
                                             </dl>
-                                        </td>
-                                    </tr>
+                                        </Table.Cell>
+                                    </Table.Row>
                                 )}
                             </React.Fragment>
                         ))}
-                    </tbody>
-                </table>
+                    </Table.Body>
+                </Table.Root>
             ) : (
                 <p>No data for this section.</p>
             )}
