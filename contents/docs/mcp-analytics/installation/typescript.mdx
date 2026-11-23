@@ -231,6 +231,23 @@ new StreamableHTTPServerTransport({
 
 With `@rekog/mcp-nest`, set `streamableHttp: { statelessMode: true, enableJsonResponse: true }` on the module. The legacy path in `createMcpHandler` can't send the token, so `$mcp_client_name` and `$mcp_client_version` are absent there.
 
+If you must stream (SSE), wrap a fetch-style route in `withMcpSessionHeader`, as in [Next.js and Vercel](#nextjs-and-vercel-mcp-handler). On a Node response, set the header yourself before the response headers go out:
+
+```ts
+import { MCP_SESSION_HEADER, encodeSessionId, newSessionId } from "@posthog/mcp"
+
+if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
+  res.setHeader(
+    MCP_SESSION_HEADER,
+    encodeSessionId({
+      sessionId: newSessionId(),
+      clientName: body.params?.clientInfo?.name,
+      clientVersion: body.params?.clientInfo?.version,
+    })
+  )
+}
+```
+
 ### Resolve tool arguments on fresh low-level servers
 
 A fresh low-level `Server` has not served `tools/list`, so it does not know which `context` and `llm_model` arguments the SDK added. A strict input schema can reject these arguments before the tool runs.
