@@ -73,7 +73,7 @@ To create a cohort, go to the [cohorts tab](https://app.posthog.com/cohorts) and
 
 Once created, repeat for the rest of your phases. You can then use the cohorts as the release conditions in feature flags and swap them out as the phased rollout progresses.
 
-> **Note:** You cannot use dynamic behavioral or lifecycle cohorts (based on completed events) with feature flags. Read more details in the [feature flag documentation](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag). [Realtime cohorts](/docs/data/realtime-cohorts) lift this limit for cohorts built from simple event criteria. They're in early beta, and any project can [join from feature previews](/docs/data/realtime-cohorts#join-the-beta).
+> **Note:** You cannot use dynamic behavioral or lifecycle cohorts (based on completed events) with feature flags. Read more details in the [feature flag documentation](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag). [Real-time cohorts](/docs/data/realtime-cohorts) lift this limit for cohorts built from simple event criteria. They're in early beta, and any project can [join from feature previews](/docs/data/realtime-cohorts#join-the-beta).
 
 ## Further reading
 

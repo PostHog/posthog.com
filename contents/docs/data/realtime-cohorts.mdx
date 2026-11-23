@@ -6,7 +6,7 @@ showTitle: true
 
 <CalloutBox icon="IconFlask" title="Real-time cohorts are in early beta" type="action">
 
-To try realtime cohorts, turn on **Realtime cohorts** in your [feature previews](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts). Unlike most feature previews, this one applies to the whole project. Once the project joins, every member sees realtime cohorts. Behavior and limits on this page can change before general availability.
+To try real-time cohorts, opt in from your [feature previews](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts). Unlike most feature previews, this one applies to the whole project. Once the project joins, every member sees real-time cohorts. Behavior and limits on this page can change before general availability.
 
 </CalloutBox>
 
@@ -30,22 +30,22 @@ Real-time cohorts are evaluated on PostHog's servers. A server-side SDK can't ev
 
 ## Join the beta
 
-1. Open your [feature previews](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts) and turn on **Realtime cohorts**.
+1. Open your [feature previews](https://app.posthog.com/settings/user-feature-previews#realtime-cohorts) and turn on real-time cohorts.
 2. PostHog sets up the project you're in. This takes about a minute. While it runs, the cohorts page says "Setting up realtime cohorts for this project", and when it finishes, PostHog shows "Realtime cohorts are on for this project."
 
-Feature previews usually change PostHog for you alone. This one works per project. When you opt in, the project you're in joins the beta, and so does each project you open while you stay opted in. Once a project joins, every member sees realtime cohorts, whether or not they opted in themselves. Any member who can view the project's cohorts can opt the project in.
+Feature previews usually change PostHog for you alone. This one works per project. When you opt in, the project you're in joins the beta, and so does each project you open while you stay opted in. Once a project joins, every member sees real-time cohorts, whether or not they opted in themselves. Any member who can view the project's cohorts can opt the project in.
 
 If you joined the waitlist before the beta opened, you're already opted in. Your projects join the next time you open them in PostHog.
 
-Joining doesn't turn realtime on for any cohort. Every cohort in the project starts with realtime off, so your flags, cohorts, and insights work as before until you [turn realtime on for a cohort](#turn-realtime-on-for-a-cohort).
+Joining doesn't turn real-time on for any cohort. Every cohort in the project starts with real-time off, so your flags, cohorts, and insights work as before until you [turn real-time on for a cohort](#turn-real-time-on-for-a-cohort).
 
-A project can't leave the beta. If you turn the feature preview off, your other projects stop joining, but a project that has joined keeps realtime cohorts. To stop using them, turn realtime off for each cohort.
+A project can't leave the beta. If you turn the feature preview off, your other projects stop joining, but a project that has joined keeps real-time cohorts. To stop using them, turn real-time off for each cohort.
 
 If the cohorts page says "Realtime cohorts couldn't be turned on for this project automatically", [contact support](https://app.posthog.com/#panel=support). If it says setup didn't finish, PostHog tries again the next time a member who opted in opens the project, an hour or more later.
 
 ## Which cohorts qualify
 
-PostHog works out from the criteria you choose whether a cohort can be realtime. A cohort with event criteria that qualifies still needs realtime turned on before a feature flag can target it. A cohort with only person property criteria needs nothing, because flags read those properties from the person as they evaluate.
+PostHog works out from the criteria you choose whether a cohort can be real-time. A cohort with event criteria that qualifies still needs real-time turned on before a feature flag can target it. A cohort with only person property criteria needs nothing, because flags read those properties from the person as they evaluate.
 
 A cohort qualifies when every one of its criteria is one of these:
 
@@ -77,15 +77,15 @@ A single criterion from this list makes the whole cohort fall back to the standa
 
 ### Cohorts that include other cohorts
 
-A realtime cohort can include another cohort that qualifies. When you turn realtime on for a cohort, PostHog turns it on for every cohort it includes too.
+A real-time cohort can include another cohort that qualifies. When you turn real-time on for a cohort, PostHog turns it on for every cohort it includes too.
 
 The cohort a flag targets needs at least one person property or event criterion of its own. A cohort whose only criterion is a reference to another cohort never becomes usable in a flag.
 
-During the beta, keep the event criteria in the cohort that the flag targets. Say a flag targets cohort A, which has only person property criteria and includes cohort B, which has event criteria. The flag can't read B's realtime membership yet, so it counts nobody as a member of B. An "In cohort B" criterion in A then matches nobody, and "Not in cohort B" matches everybody. To avoid this, add B's event criteria to A directly. Or take B out of A's criteria, and add both A and B to the flag's release condition.
+During the beta, keep the event criteria in the cohort that the flag targets. Say a flag targets cohort A, which has only person property criteria and includes cohort B, which has event criteria. The flag can't read B's real-time membership yet, so it counts nobody as a member of B. An "In cohort B" criterion in A then matches nobody, and "Not in cohort B" matches everybody. To avoid this, add B's event criteria to A directly. Or take B out of A's criteria, and add both A and B to the flag's release condition.
 
-## Turn realtime on for a cohort
+## Turn real-time on for a cohort
 
-In a project that has joined the beta, each cohort with event criteria that qualifies has its own realtime switch, and it starts off. While it's off, PostHog doesn't keep the cohort's membership up to date, and feature flags can't target it.
+In a project that has joined the beta, each cohort with event criteria that qualifies has its own real-time switch, and it starts off. While it's off, PostHog doesn't keep the cohort's membership up to date, and feature flags can't target it.
 
 A cohort with only person property criteria doesn't need the switch, and its page usually doesn't show one. Feature flags can always target it.
 
@@ -93,7 +93,7 @@ To turn it on, open the cohort and click **Turn on realtime** next to **Flag tar
 
 PostHog then works through the cohort's past events to find out who is in it now. The app calls this preparing the cohort. However small the cohort, it takes about 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events. The **Flag targeting** row on the cohort page shows the progress, and reads **Available** once flags can target the cohort.
 
-Turning realtime on for a cohort also turns it on for the realtime cohorts it includes, and PostHog prepares those too. You need edit access to each of them.
+Turning real-time on for a cohort also turns it on for the real-time cohorts it includes, and PostHog prepares those too. You need edit access to each of them.
 
 ### What the cohort page and the tags tell you
 
@@ -101,32 +101,32 @@ The **Flag targeting** row on the cohort page, and the tag next to the cohort in
 
 | Flag targeting row | Tag | What it means |
 | --- | --- | --- |
-| **Available**, with a lightning bolt | **Realtime** | Realtime is on and the cohort is ready. Flags can target it. |
+| **Available**, with a lightning bolt | **Realtime** | Real-time is on and the cohort is ready. Flags can target it. |
 | **Preparing** | **Realtime · preparing** | PostHog is working through the cohort's past events. Flags can target it once this finishes. |
-| **Off** | **Realtime off** | The cohort qualifies, but realtime is off. Click **Turn on realtime**. |
-| **Unavailable** | **Realtime · unavailable** | Realtime is on, but nothing is preparing the cohort. Hover the info icon for the reason, and [contact support](https://app.posthog.com/#panel=support). |
+| **Off** | **Realtime off** | The cohort qualifies, but real-time is off. Click **Turn on realtime**. |
+| **Unavailable** | **Realtime · unavailable** | Real-time is on, but nothing is preparing the cohort. Hover the info icon for the reason, and [contact support](https://app.posthog.com/#panel=support). |
 | **Unavailable** | **No flag targeting** | The cohort doesn't [qualify](#which-cohorts-qualify), so only the standard calculation runs for it. |
 | **Available**, without a bolt | No tag | The cohort has only person property criteria. Flags read those from the person as they evaluate, so they can always target it. |
 
-### Turn realtime off
+### Turn real-time off
 
-Click **Turn off realtime** on the cohort's page. PostHog stops keeping the cohort up to date. If the cohort has event criteria, flags can't target it anymore. Flags keep targeting a cohort with only person property criteria. If you turn realtime on again later, PostHog prepares the cohort from its past events again.
+Click **Turn off realtime** on the cohort's page. PostHog stops keeping the cohort up to date. If the cohort has event criteria, flags can't target it anymore. Flags keep targeting a cohort with only person property criteria. If you turn real-time on again later, PostHog prepares the cohort from its past events again.
 
-PostHog refuses to turn realtime off while something still reads the cohort's realtime membership:
+PostHog refuses to turn real-time off while something still reads the cohort's real-time membership:
 
 - A feature flag that targets the cohort, even a disabled one, when the cohort has event criteria. Remove the cohort from the flag, or archive the flag.
 - An active [workflow](/docs/workflows) that uses the cohort.
-- Another cohort with realtime on that includes the cohort.
+- Another cohort with real-time on that includes the cohort.
 
-## Using a realtime cohort in a feature flag
+## Using a real-time cohort in a feature flag
 
 1. Create the cohort, or edit its criteria, as you normally would.
-2. If the cohort has event criteria, [turn realtime on](#turn-realtime-on-for-a-cohort) for it, and wait until the **Flag targeting** row reads **Available**. A cohort with only person property criteria skips this step.
+2. If the cohort has event criteria, [turn real-time on](#turn-real-time-on-for-a-cohort) for it, and wait until the **Flag targeting** row reads **Available**. A cohort with only person property criteria skips this step.
 3. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
 
 PostHog saves the flag only once the cohort is ready. If the flag won't save, the error tells you what's missing:
 
-- "Realtime is off for cohort 'X'. Turn it on from the cohort's page, and feature flags can target the cohort once it's ready." means realtime isn't on for the cohort yet.
+- "Realtime is off for cohort 'X'. Turn it on from the cohort's page, and feature flags can target the cohort once it's ready." means real-time isn't on for the cohort yet.
 - "Cohort 'X' isn't ready for feature flags yet" means PostHog is still preparing the cohort. Open the cohort to check its progress, and save again once it reads **Available**. If it reads **Unavailable**, [contact support](https://app.posthog.com/#panel=support).
 - "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or the project hasn't joined the beta. Compare its criteria against the [list above](#which-cohorts-qualify) first.
 
@@ -150,11 +150,11 @@ The same error blocks a rename from the cohort page, because saving there sends 
 
 ## Pricing
 
-Realtime cohorts are part of [Feature Flags](/feature-flags), and they cost nothing extra during the beta. A flag that targets a realtime cohort is billed like any other flag, per `/flags` request.
+Real-time cohorts are part of [Feature Flags](/feature-flags), and they cost nothing extra during the beta. A flag that targets a real-time cohort is billed like any other flag, per `/flags` request.
 
-[Local evaluation](/docs/feature-flags/local-evaluation) can't resolve a flag that targets a realtime cohort. If you use it, each check of that flag still makes a `/flags` request, and PostHog bills that request. See [cutting feature flag costs](/docs/feature-flags/cutting-costs) for how requests are counted.
+[Local evaluation](/docs/feature-flags/local-evaluation) can't resolve a flag that targets a real-time cohort. If you use it, each check of that flag still makes a `/flags` request, and PostHog bills that request. See [cutting feature flag costs](/docs/feature-flags/cutting-costs) for how requests are counted.
 
-Before general availability, plans will get limits on how many cohorts can have realtime on and on how far back their criteria can look.
+Before general availability, plans will get limits on how many cohorts can have real-time on and on how far back their criteria can look.
 
 ## FAQ
 
@@ -162,11 +162,11 @@ Before general availability, plans will get limits on how many cohorts can have 
 
 Open the cohort and read the **Flag targeting** row, or check its tag in the cohort list. The [table above](#what-the-cohort-page-and-the-tags-tell-you) explains each one.
 
-Through the [cohorts API](/docs/api/cohorts), read `realtime.state`. It is `ready` when flags can target the cohort. `realtime_enabled` says whether realtime is on, and `cohort_type` reads `"realtime"` when the criteria qualify. `realtime` is `null` in a project that hasn't joined the beta.
+Through the [cohorts API](/docs/api/cohorts), read `realtime.state`. It is `ready` when flags can target the cohort. `realtime_enabled` says whether real-time is on, and `cohort_type` reads `"realtime"` when the criteria qualify. `realtime` is `null` in a project that hasn't joined the beta.
 
-### Can I turn realtime on through the API?
+### Can I turn real-time on through the API?
 
-Yes, for a project that has joined. Send `"realtime_enabled": true` when you create a cohort. If PostHog can't turn realtime on for it, the cohort still saves, and `realtime_enabled` comes back `false`. For an existing cohort, `POST` `{"enabled": true}` to `/api/projects/:project_id/cohorts/:id/realtime/`, or `{"enabled": false}` to turn it off. A refused turn-on or turn-off returns an error that says why.
+Yes, for a project that has joined. Send `"realtime_enabled": true` when you create a cohort. If PostHog can't turn real-time on for it, the cohort still saves, and `realtime_enabled` comes back `false`. For an existing cohort, `POST` `{"enabled": true}` to `/api/projects/:project_id/cohorts/:id/realtime/`, or `{"enabled": false}` to turn it off. A refused turn-on or turn-off returns an error that says why.
 
 To join the beta, opt in from the PostHog app. API keys can't join a project.
 
