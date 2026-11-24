@@ -5,7 +5,7 @@ import { IconArrowUpRight, IconPieChart } from '@posthog/icons'
 import { Card } from 'components/UI/Card'
 import { Section as UISection } from 'components/UI/Section'
 import SEO from 'components/seo'
-import Editor from 'components/Editor'
+import ReaderView from 'components/ReaderView'
 import SourceConnect from 'components/DataPipelines/SourceConnect'
 import GuideCardActions from 'components/DataPipelines/GuideCardActions'
 
@@ -52,11 +52,6 @@ export interface SourcePageProps {
         title: string
         description: string
         image: string
-    }
-    slug: string
-    bookmark: {
-        title: string
-        description: string
     }
     hero: {
         before: string
@@ -123,8 +118,6 @@ function Section({
 
 export default function SourcePage({
     seo,
-    slug,
-    bookmark,
     hero,
     whatSyncs,
     connect,
@@ -135,8 +128,16 @@ export default function SourcePage({
     return (
         <>
             <SEO title={seo.title} description={seo.description} image={seo.image} />
-            <Editor slug={slug} maxWidth="100%" hasPadding={false} disableFormatting bookmark={bookmark}>
-                <div className="@container not-prose mx-auto max-w-7xl p-4 pb-16 text-primary @xl:p-8">
+            <ReaderView
+                title={seo.title}
+                hideTitle
+                hideLeftSidebar
+                hideRightSidebar
+                hideMarkdownActions
+                proseSize="lg"
+                showQuestions={false}
+            >
+                <div className="@container not-prose mx-auto w-full max-w-7xl pb-16 text-primary">
                     <header className="grid items-center gap-6 @2xl:grid-cols-[1.7fr_1fr] @2xl:gap-8">
                         <div className="min-w-0">
                             <h1 className="m-0 text-balance text-4xl font-bold leading-tight text-primary">
@@ -153,7 +154,7 @@ export default function SourcePage({
                                     to={hero.ctaTo}
                                     state={{ newWindow: true }}
                                     variant="primary"
-                                    size="xl"
+                                    size="lg"
                                 >
                                     {hero.ctaLabel}
                                 </OSButton>
@@ -244,10 +245,10 @@ export default function SourcePage({
                                         <Link
                                             to={maxPromptUrl(use.prompt)}
                                             externalNoIcon
-                                            className="inline-flex items-center font-semibold text-primary"
+                                            className="inline-flex items-center text-sm font-semibold text-primary"
                                         >
                                             Try it in PostHog AI
-                                            <IconArrowUpRight className="size-4 text-muted group-hover:text-secondary" />
+                                            <IconArrowUpRight className="size-3.5 text-muted group-hover:text-secondary" />
                                         </Link>
                                     </Card.Footer>
                                 </Card.Root>
@@ -263,7 +264,7 @@ export default function SourcePage({
                                 <Link
                                     to="/docs/product-analytics/cohorts"
                                     state={{ newWindow: true }}
-                                    className="font-semibold text-primary"
+                                    className="text-sm font-semibold text-primary"
                                 >
                                     Read about cohorts →
                                 </Link>
@@ -284,7 +285,7 @@ export default function SourcePage({
                                         to={closing.ctaTo}
                                         state={{ newWindow: true }}
                                         variant="primary"
-                                        size="xl"
+                                        size="lg"
                                     >
                                         {closing.ctaLabel}
                                     </OSButton>
@@ -304,7 +305,7 @@ export default function SourcePage({
                         </div>
                     </UISection.Root>
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }

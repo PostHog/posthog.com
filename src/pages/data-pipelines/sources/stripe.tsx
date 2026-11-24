@@ -176,11 +176,6 @@ export default function StripeSource(): JSX.Element {
                     'Connect Stripe to PostHog and answer revenue questions like which features drive revenue, or what customers do before they cancel.',
                 image: 'images/og/cdp.jpg',
             }}
-            slug="/data-pipelines/sources/stripe"
-            bookmark={{
-                title: 'Query your Stripe data in PostHog',
-                description: 'Connect Stripe to PostHog and answer revenue questions with product data.',
-            }}
             hero={{
                 before: 'Query your',
                 highlight: 'Stripe data',
