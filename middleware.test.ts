@@ -101,16 +101,36 @@ interface CapturedEvent {
     properties: Record<string, unknown>
 }
 
-function mockFetches(t: TestContext, { markdownStatus = 200, captureStatuses = [200] } = {}) {
+function mockFetches(
+    t: TestContext,
+    { markdownStatus = 200, captureStatuses = [200], retryAfter = '' }: MockOptions = {}
+) {
     const captures: CapturedEvent[] = []
     t.mock.method(globalThis, 'fetch', async (input: unknown, init?: RequestInit) => {
         if (String(input) === CAPTURE_URL) {
             captures.push(JSON.parse(String(init?.body)))
-            return new Response('{}', { status: captureStatuses[captures.length - 1] ?? 200 })
+            const headers: Record<string, string> = retryAfter ? { 'retry-after': retryAfter } : {}
+            return new Response('{}', { status: captureStatuses[captures.length - 1] ?? 200, headers })
         }
         return new Response('# Product analytics', { status: markdownStatus })
     })
     return captures
+}
+
+interface MockOptions {
+    markdownStatus?: number
+    captureStatuses?: number[]
+    retryAfter?: string
+}
+
+// Runs each retry wait at once and records how long it asked for.
+function recordDelays(t: TestContext): number[] {
+    const delays: number[] = []
+    t.mock.method(globalThis, 'setTimeout', (callback: () => void, ms: number) => {
+        delays.push(ms)
+        callback()
+    })
+    return delays
 }
 
 async function handle(url: string, headers: Record<string, string>) {
@@ -187,12 +207,31 @@ test('records HTML for browsers and for pages without a Markdown sibling', async
 test('resends the same event after a server error so a retry cannot count twice', async (t) => {
     enableCapture(t)
     const captures = mockFetches(t, { captureStatuses: [503, 200] })
+    const delays = recordDelays(t)
 
     await handle(page, { 'x-vercel-id': 'iad1::test2-1700000000000-000000000002' })
 
     assert.equal(captures.length, 2)
     assert.deepEqual(captures[1], captures[0])
+    assert.equal(delays.length, 1)
+    assert.ok(delays[0] >= 250 && delays[0] < 500, `backoff ${delays[0]}`)
 })
+
+for (const [retryAfter, expectedDelays] of [
+    ['1', [1000]],
+    ['30', []],
+] as const) {
+    test(`waits out a 429 with Retry-After ${retryAfter}, or gives up when it outlasts the request`, async (t) => {
+        enableCapture(t)
+        const captures = mockFetches(t, { captureStatuses: [429, 200], retryAfter })
+        const delays = recordDelays(t)
+
+        await handle(page, { 'x-vercel-id': 'iad1::test2-1700000000000-000000000002' })
+
+        assert.deepEqual(delays, expectedDelays)
+        assert.equal(captures.length, expectedDelays.length + 1)
+    })
+}
 
 test('samples on the request id', async (t) => {
     enableCapture(t, { MIDDLEWARE_CAPTURE_SAMPLE_RATE: '0.5' })

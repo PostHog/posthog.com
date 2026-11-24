@@ -20,6 +20,9 @@ const DEFAULT_TOKEN = 'sTMFPsFhdP1Ssg'
 const UUID_NAMESPACE = '3b9c78a8-39be-49bf-950e-04a247c76119'
 const SEND_ATTEMPTS = 2
 const SEND_TIMEOUT_MS = 3000
+const RETRY_BASE_DELAY_MS = 250
+// `waitUntil` work runs on borrowed time after the response, so a longer Retry-After drops the event.
+const MAX_RETRY_DELAY_MS = 2000
 // The user agent of the middleware's own `fetch` for a page's `.md` sibling.
 const SUBREQUEST_USER_AGENT = 'Vercel Edge Functions'
 // Only the docs to start with. The middleware's matcher covers more paths than this.
@@ -164,6 +167,7 @@ async function send(event: Record<string, unknown>, config: CaptureConfig, reque
     const body = JSON.stringify(event)
     let failure = ''
     for (let attempt = 1; attempt <= SEND_ATTEMPTS; attempt++) {
+        let delay: number | undefined
         try {
             const response = await fetch(`${config.host}/i/v0/e/`, {
                 method: 'POST',
@@ -174,12 +178,28 @@ async function send(event: Record<string, unknown>, config: CaptureConfig, reque
             if (response.ok) return
             failure = `status ${response.status}`
             if (response.status < 500 && response.status !== 429) break
+            delay = retryDelay(response.headers.get('retry-after'))
         } catch (error) {
             failure = error instanceof Error ? error.name : 'unknown'
+            delay = retryDelay(null)
         }
+        if (attempt === SEND_ATTEMPTS || delay === undefined) break
+        await new Promise((resolve) => setTimeout(resolve, delay))
     }
     // Lands in Logs as an edge line with this request's id, which is how lost events get counted.
     console.error(JSON.stringify({ middleware_capture: 'failed', reason: failure, vercel_request_id: requestId }))
+}
+
+// Retry-After is seconds or an HTTP date. Without one, wait a jittered backoff so retries from many
+// requests failing together spread out.
+function retryDelay(retryAfter: string | null): number | undefined {
+    if (retryAfter) {
+        const seconds = Number(retryAfter)
+        const ms = Number.isFinite(seconds) ? seconds * 1000 : Date.parse(retryAfter) - Date.now()
+        if (ms > MAX_RETRY_DELAY_MS) return undefined
+        if (ms >= 0) return ms
+    }
+    return RETRY_BASE_DELAY_MS * (1 + Math.random())
 }
 
 // x-vercel-id is the request id behind one or more region prefixes, as in "fra1::iad1::<id>".
