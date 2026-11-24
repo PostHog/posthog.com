@@ -34,13 +34,13 @@ PostHog works this out from the criteria you choose. There is no setting to turn
 
 A cohort qualifies when every one of its criteria is one of these:
 
-| Criteria | Example |
-| --- | --- |
-| Any person property criteria | `email` does not end with "@gmail.com" |
-| Completed an event | Completed `signed up` in the last 30 days |
-| Did not complete an event | Did not complete `signed up` in the last 30 days |
-| Completed an event multiple times | Completed `watched video` at least 5 times in the last 2 weeks |
-| Another cohort, if that cohort also qualifies | In cohort "Power users" |
+| Criteria                                      | Example                                                        |
+| --------------------------------------------- | -------------------------------------------------------------- |
+| Any person property criteria                  | `email` does not end with "@gmail.com"                         |
+| Completed an event                            | Completed `signed up` in the last 30 days                      |
+| Did not complete an event                     | Did not complete `signed up` in the last 30 days               |
+| Completed an event multiple times             | Completed `watched video` at least 5 times in the last 2 weeks |
+| Another cohort, if that cohort also qualifies | In cohort "Power users"                                        |
 
 You can narrow the event criteria by event property, such as completed `purchase` where `plan` equals "pro".
 
@@ -82,7 +82,7 @@ This is on purpose. New criteria make the existing record wrong, and PostHog has
 2. Edit and save the cohort.
 3. Wait for PostHog to work through the history again, then add the cohort back to the flags.
 
-The same error blocks a rename from the cohort page, because saving there sends the criteria too. To rename a cohort a flag is using, PATCH only the `name` field through the [cohorts API](/docs/api/cohorts).
+Renaming a cohort or updating its description doesn't change the criteria, so those edits work directly from the cohort page without removing it from any flags.
 
 ## How up to date is it?
 
