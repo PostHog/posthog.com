@@ -36,8 +36,8 @@ tableOfContents: [
         depth: 1,
     },
     {
-        url: 'create-an-error-boundary',
-        value: 'Create an error boundary',
+        url: 'capture-router-errors',
+        value: 'Capture router errors',
         depth: 1,
     },
     {
@@ -201,7 +201,11 @@ const onError: ClientOnErrorFunction = (error) => {
 <HydratedRouter onError={onError} />
 ```
 
-Do not also call `captureException` in your `ErrorBoundary`: each error would arrive twice. The [React Router error tracking guide](/docs/error-tracking/installation/react-router) covers server errors and source maps.
+Skip "Unexpected Server Error" only if you also capture server errors, as below. Without server capture, it is the only report of a server error.
+
+`onError` needs React Router 7.11 or later. On 7.8.2 to 7.10, pass the same handler as `unstable_onError` and type it with `unstable_ClientOnErrorFunction`. On earlier versions, capture inside a `useEffect` in every `ErrorBoundary` your routes export, with the same two checks. Do not also call `captureException` in your `ErrorBoundary`: each error would arrive twice.
+
+The [React Router error tracking guide](/docs/error-tracking/installation/react-router) covers server errors. To read minified stack traces, [upload source maps](/docs/error-tracking/upload-source-maps/vite).
 
 </Step>
 
@@ -226,10 +230,12 @@ Use one PostHog client for a long-running Node server. Create it in a server-onl
 ```ts file=app/lib/posthog.server.ts
 import { PostHog } from 'posthog-node';
 
-export const posthog = new PostHog(process.env.VITE_POSTHOG_PROJECT_TOKEN!, {
-  host: process.env.VITE_POSTHOG_HOST!,
+export const posthog = new PostHog(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN, {
+  host: import.meta.env.VITE_POSTHOG_HOST,
 });
 ```
+
+Vite replaces `import.meta.env.VITE_*` in the server build too, so the server gets the same values as the browser at build time. `process.env` would need the variables again at run time, and `react-router-serve` does not load `.env`.
 
 In React Router 7, enable server middleware in `react-router.config.ts`:
 
@@ -280,27 +286,30 @@ export const middleware: Route.MiddlewareFunction[] = [
 
 Work that the request starts keeps its IDs after `next()` settles. Pass explicit context to separate jobs that need their own IDs. Flush queued events before your platform can stop server work. Call `posthog.shutdown()` once when the server stops.
 
-To capture server errors, add the capture call to your existing `handleError` export in `app/entry.server.tsx`. The saved IDs remain available when a middleware error reaches this hook outside the scope. Errors before this middleware runs have no saved request identity.
+To capture server errors, add the capture call to your `handleError` export in `app/entry.server.tsx`. Page loads send no tracing headers, only the PostHog cookie, so take the request's page URL and the cookie's IDs from `posthogExceptionContext` in the [React Router error tracking guide](/docs/error-tracking/installation/react-router#link-server-errors-to-the-user). The IDs the middleware saved take priority: they include an application identity set before it. Errors before this middleware runs have no saved IDs.
 
 ```ts file=app/entry.server.tsx
 import { isRouteErrorResponse, type HandleErrorFunction } from 'react-router';
 import { posthog } from './lib/posthog.server';
 import { posthogErrorContext } from './lib/posthog-middleware.server';
+import { posthogExceptionContext } from './lib/posthog-request.server';
 
 export const handleError: HandleErrorFunction = (error, { request, context }) => {
-  // Cancelled requests and the 404/405 responses React Router creates are not errors to track.
-  if (request.signal.aborted || isRouteErrorResponse(error)) return;
-  const saved = context.get(posthogErrorContext);
-  posthog.captureException(error, {
-    distinctId: saved?.distinctId,
-    properties: saved?.sessionId ? { $session_id: saved.sessionId } : undefined,
-  });
-  // Exporting handleError replaces React Router's own error logging.
+  if (request.signal.aborted) return;
+  // Exporting handleError replaces React Router's own error log.
   console.error(error);
+  // The 404 and 405 responses React Router creates are not errors to track.
+  if (isRouteErrorResponse(error)) return;
+  const saved = context.get(posthogErrorContext);
+  const { distinctId, properties } = posthogExceptionContext(request);
+  posthog.captureException(error, {
+    distinctId: saved?.distinctId ?? distinctId,
+    properties: saved?.sessionId ? { ...properties, $session_id: saved.sessionId } : properties,
+  });
 };
 ```
 
-The [React Router error tracking guide](/docs/error-tracking/installation/react-router) also links page loads that send only the PostHog cookie, and captures errors thrown while the page streams.
+The guide also captures errors thrown while the page streams, and rejections of promises rendered with `<Await>`.
 
 ### Optional server span context
 

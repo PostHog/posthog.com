@@ -190,7 +190,24 @@ ReactDOM.createRoot(root).render(
 
 This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
 
-This works with `<BrowserRouter>`, which has no error boundary of its own. If you use `createBrowserRouter` and `<RouterProvider>`, React Router's route boundaries catch render, loader and action errors before `PostHogErrorBoundary` sees them: follow the [React Router error tracking guide](/docs/error-tracking/installation/react-router) instead.
+This works with `<BrowserRouter>`, which has no error boundary of its own. If you use `createBrowserRouter` and `<RouterProvider>`, React Router's route boundaries catch render, loader and action errors before `PostHogErrorBoundary` sees them. React Router 6 has no `onError`, so capture in each route's `errorElement`:
+
+```tsx
+import { useEffect } from 'react';
+import { isRouteErrorResponse, useRouteError } from 'react-router';
+import { usePostHog } from '@posthog/react';
+
+function RouteError() {
+  const error = useRouteError();
+  const posthog = usePostHog();
+  useEffect(() => {
+    if (!isRouteErrorResponse(error)) posthog.captureException(error);
+  }, [error, posthog]);
+  return <p>Something went wrong.</p>;
+}
+```
+
+Pass it as `errorElement: <RouteError />` on each route that can fail. A route without one shows its parent's, so the root route's covers the rest.
 
 </Step>
 
