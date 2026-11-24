@@ -115,6 +115,7 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
         assert.equal(getSdkReferenceUrl('posthog-rust'), '/docs/libraries/rust')
         assert.equal(getSdkReferenceUrl('posthog-ios'), '/docs/libraries/ios')
         assert.equal(getSdkReferenceUrl('posthog-android'), '/docs/libraries/android')
+        assert.equal(getSdkReferenceUrl('posthog-flutter'), '/docs/libraries/flutter')
     })
 
     test('routes remaining HogRef SDKs to /docs/references/<id>', () => {

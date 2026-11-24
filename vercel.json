@@ -220,6 +220,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/flutter/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-node:ext(\\.md)?",
             "destination": "/docs/libraries/node:ext?",
             "statusCode": 301
@@ -340,7 +345,27 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/:sdk(node|python|go|rust|ios|android)/:major(\\d+):ext(\\.md)?",
+            "source": "/docs/references/posthog-flutter:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-flutter/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-flutter-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-flutter-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/:sdk(node|python|go|rust|ios|android|flutter)/:major(\\d+):ext(\\.md)?",
             "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
             "statusCode": 301
         },
@@ -2022,6 +2047,11 @@
         {
             "source": "/docs/integrate/:side(client|server)/android:ext(\\.md)?",
             "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/flutter:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
             "statusCode": 301
         },
         {
@@ -7786,6 +7816,11 @@
         {
             "source": "/docs/ai-evals/taggers.md",
             "destination": "/docs/ai-evals.md#categories",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/taggers:ext(\\.md)?",
+            "destination": "/docs/api/evaluations:ext?",
             "statusCode": 301
         },
         {

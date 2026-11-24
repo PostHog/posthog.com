@@ -321,7 +321,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [Posthog().capture()](/docs/libraries/flutter#capturing-events):
+To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [Posthog().capture()](/docs/libraries/flutter#capture):
 
 ```dart file=main.dart
 import 'package:flutter/material.dart';
@@ -376,7 +376,7 @@ class _HomePageState extends State<HomePage> {
 
 ### Identifying users
 
-Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identifying-users) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identify) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
 
 To show you an example, update the code for the login button to the following:
 
@@ -406,7 +406,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#removing-stored-super-properties). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...
@@ -423,7 +423,7 @@ class _HomePageState extends State<HomePage> {
 
 To enable group analytics, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include them. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million events per month – so you won't be charged anything yet.
 
-To create groups in PostHog, simply include them in your code by calling [`Posthog().group()`](/docs/libraries/flutter#group-analytics):
+To create groups in PostHog, simply include them in your code by calling [`Posthog().group()`](/docs/libraries/flutter#group):
 
 ```dart file=main.dart
 class LoginPage extends StatelessWidget {

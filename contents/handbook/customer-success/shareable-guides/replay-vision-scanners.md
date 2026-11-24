@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-A field guide for customer-facing roles who set up [Replay Vision](/docs/replay-vision/start-here) scanners with a customer. A scanner applies one prompt to one session recording at a time, and each result is an observation. The [docs](/docs/replay-vision/creating-scanners) explain every setting in the editor. This guide tells you which settings to choose for a customer's first scanners, and it lists the mistakes we made when we set them up.
+A field guide for customer-facing roles who set up [Replay Vision](/docs/replay-vision/start-here) scanners with a customer. A scanner applies one prompt to one session recording at a time, and each result is an observation. The [docs](/docs/replay-vision/creating-scanners) explain every setting in the editor. This guide tells you which settings to choose for a customer's first scanners, and it lists the mistakes we made when we set them up. The last section lists scanners to suggest after the first set works.
 
 ## Build the first scanners with the customer
 
@@ -135,11 +135,46 @@ Two notes on this query:
 
 Then let PostHog watch the results for the customer:
 
-- Add a [scout](/docs/replay-vision/scouts) from the scanner's **Scouts** tab. A scanner judges one recording at a time. A scout compares observations over time and reports when a pattern changes.
+- Add a [scout](/docs/replay-vision/scouts) from the scanner's **Scouts** tab. A scanner judges one recording at a time. A scout compares observations over time and reports when a pattern changes. A scout does not restate an unchanged problem on each run. To stop a finding that the customer calls noise, write in the scout's **Instructions** that it is not worth reporting.
 - Add an [alert](/docs/replay-vision/alerts) on each match, or on a threshold such as a rise in sessions that did not reach the end.
 - If the customer uses [self-driving](/docs/self-driving), turn on the **Self-driving** setting for one scanner of the set, such as the outcome monitor. Findings then go to the inbox. Scanners that watch the same sessions can report the same problem more than once, and the copies then confirm each other in the inbox. The setting is off by default.
+- If the customer works with an AI agent, connect the [PostHog MCP server](/docs/model-context-protocol). Its [Replay Vision tools](/docs/replay-vision/mcp) let the agent read observations next to data from Experiments, Error Tracking, and Logs in one pass.
 
 For more on scanner design, read [a scanner that watches everything sees nothing](/blog/a-scanner-that-watches-everything-sees-nothing) and the [scanner prompts](/docs/replay-vision/scanner-prompts) library.
+
+## After the first set: More scanners to suggest
+
+When the first set works, customers ask what else a scanner can answer. These patterns worked with customers. Each pattern still follows the rules above: one question, a narrow scope, and a way to say no.
+
+### Compare friction with converted sessions
+
+The friction in sessions that did not convert is only half of the answer. In the join query above, delete the `WHERE` line. Then add `outcome.verdict` to the `SELECT` and `GROUP BY` clauses. Compare the share of sessions with each tag, not the raw counts, because the groups differ in size.
+
+Start with the friction that shows up much more often in sessions that did not convert. Friction at the same rate in both groups is not proof that the friction is harmless, because it can slow every user. This comparison shows an association, not a cause. To find out if a fix helps, test it in an [experiment](/docs/experiments).
+
+### Check if an error reached the screen
+
+Scope a monitor to sessions that contain an `$exception` event. Ask whether anything visibly broke on screen. Many exceptions have no visible effect, so this monitor sorts a noisy error spike into the errors that users noticed.
+
+### Match an exit survey answer to the screen
+
+Scope a summarizer to sessions that contain a `survey sent` event, and filter on the response property. For example, pick the people who answered that the page looked broken. Ask what was on screen before the user answered. A person reads each observation, so a summarizer fits here (see Rule 3).
+
+### Audit error messages
+
+Make one scanner for each failure case, such as a declined payment or a failed form validation. Scope it to the event or the page that marks the failure. Ask which message appeared, where it was on the page, and what the user did next. Use a summarizer, because the answer is a description.
+
+### Check a release
+
+After a large release, create a monitor scoped to the changed pages. Ask whether anything on those pages failed or looked broken. A new scanner scans only new recordings, so [backfill](/docs/replay-vision/running-scanners#backfill-a-date-range) it from the time of the deploy. Backfill presets start at the last 3 hours. Read the **Estimated cost** before you start the backfill.
+
+### Find options that users skip
+
+Ask whether an option was on screen and the user moved past it without using it. A click event shows what the user chose. It cannot show an option that the user passed over. Use a monitor, and turn on **Allow inconclusive verdicts** for sessions where the option never appeared.
+
+### Review an experiment blind
+
+Use an [experiment scanner](/docs/replay-vision/scanner-types#experiment), which is in beta. PostHog does not tell the model which variant the user is in, so each summary describes only what the recording shows. PostHog then adds the variant to each observation and shows the variants side by side. Name each variant by what users see, because the model uses the names to tell the versions apart. If summaries of control sessions describe the new design, ask the customer to check how their code reads the feature flag.
 
 ## Checklist
 

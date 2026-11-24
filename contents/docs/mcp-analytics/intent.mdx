@@ -11,13 +11,13 @@ The SDK captures intent as a single property – `$mcp_intent` – that can come
 1. **A `context` argument** the agent passes on every tool call. Captured with `$mcp_intent_source = "context_parameter"`.
 2. **A fallback callback** you supply on `instrument()`. Captured with `$mcp_intent_source = "inferred"`.
 
-Explicit context always wins. If the agent passes a non-empty `context`, the fallback is not invoked. The Rust SDK also reads a third source first: `userIntent` from the client's `io.modelcontextprotocol/aiInvocation` request metadata, captured with `$mcp_intent_source = "client_metadata"`.
+Explicit context always wins, except in Rust, where `userIntent` in the request's `io.modelcontextprotocol/aiInvocation` metadata overrides it and is captured with `$mcp_intent_source = "client_metadata"`. If the agent passes a non-empty `context`, the fallback is not invoked.
 
 ## The `context` argument
 
 Intent capture is on by default. The SDK adds a `context` string to compatible tool schemas and removes it before your handler runs when it can confirm it injected the field. An application-owned `context` argument is preserved.
 
-Every SDK adds the `context` argument by default. TypeScript, Go, Ruby, and Rust advertise it as required. Python makes it optional on raw low-level servers and standalone FastMCP. Calls can omit it without failing validation.
+Calls can omit it without failing validation.
 
 What the agent sees in the schema:
 
@@ -82,19 +82,17 @@ PostHog::MCP.instrument(
 
 </MultiLanguage>
 
-The Go SDK uses a fixed prompt.
-
 ### Disabling the injected argument
 
-Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, `posthogmcpsdk.WithContextParameter(false)` in Go, or `.context(false)` on `McpOptionsBuilder` in Rust. Use an intent fallback if you still want to capture intent. In Go, with `WithContextParameter(false)`, only `WithIntentFallback` supplies intent. The SDK doesn't read a tool's own `context` argument. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes. Submitting your server to the ChatGPT or Claude directory? See [Listing your MCP server in ChatGPT and Claude](/docs/mcp-analytics/directory-review).
+Set the `context` option to false to turn off the injected argument. See your language's [installation page](/docs/mcp-analytics/installation) for the option name. Use an intent fallback if you still want intent. Model capture and conversation IDs have their own options, which you can [disable separately](/docs/mcp-analytics/events#model-capture). Submitting your server to the ChatGPT or Claude directory? See [Listing your MCP server in ChatGPT and Claude](/docs/mcp-analytics/directory-review).
 
 ## The intent fallback callback
 
 A client can omit the SDK-injected `context` argument. Without a fallback, the event has no `$mcp_intent`.
 
-The SDK calls the fallback (`intentFallback` in TypeScript, `intent_fallback` in Python, Ruby, and Rust, `WithIntentFallback` in Go) when the agent provides no context. It captures a non-empty result as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
+The SDK calls the fallback when the agent provides no context. It captures a non-empty result as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
 
-The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect your tool arguments. It doesn't cache results. Whatever logic you want goes in your callback.
+The SDK does no inference of its own. Your callback supplies the intent.
 
 ### Deterministic, per-tool
 
@@ -142,8 +140,6 @@ intentFallback: (request, extra) => {
 }
 ```
 
-In TypeScript, `getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors).
-
 ### LLM-derived intent
 
 An LLM call in `intentFallback` adds latency to each tool call that lacks context. Cache results where possible. Handle failures in the callback:
@@ -181,18 +177,6 @@ A high share of `inferred` means most clients do not supply context. Review `con
 
 <CalloutBox icon="IconWarning" title="`get_more_tools` reports its source as `context_parameter`" type="caution">
 
-The virtual `get_more_tools` tool always reports `$mcp_intent_source = "context_parameter"`, even though the SDK is what defined the schema. Defensible – the agent did type a string – but filter it out of source-attribution queries if the number matters.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="The schema `required` field isn't enforced" type="fyi">
-
-Omitting the SDK-injected `context` argument doesn't fail validation. Your tool's own required arguments still apply. Use `intentFallback` to capture intent when the agent omits context.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="Skip `intentFallback` for tight internal servers" type="fyi">
-
-You do not need a fallback if your internal client always supplies `context`. Add one if clients can omit this argument.
+`get_more_tools` always reports `$mcp_intent_source = "context_parameter"`. Filter it out of source-attribution queries.
 
 </CalloutBox>

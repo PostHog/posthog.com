@@ -149,7 +149,7 @@ posthog.shutdown().await;
 
 </MultiLanguage>
 
-Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The [Ruby](/docs/mcp-analytics/installation/ruby) and [Rust](/docs/mcp-analytics/installation/rust) SDKs are experimental. If you plan to list your server in the ChatGPT or Claude directory, see [Listing your MCP server in ChatGPT and Claude](/docs/mcp-analytics/directory-review) before submitting.
+Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. If you plan to list your server in the ChatGPT or Claude directory, see [Listing your MCP server in ChatGPT and Claude](/docs/mcp-analytics/directory-review) before submitting.
 
 For TypeScript, Python, Go, Ruby, and Rust servers, the wizard does the setup for you:
 
@@ -169,7 +169,7 @@ subtitle="Required"
 icon="IconGraph"
 >
 
-Run your MCP server. Connect an agent, such as Claude Desktop, Cursor, Codex, or your own client. PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events when the agent calls tools and requests their listing. Clients on `2025-11-25` also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision has no initialize event. The Go SDK sends `$mcp_tool_call`, `$exception`, `$mcp_unknown_tool`, and `$mcp_input_required`. It sends neither `$mcp_tools_list` nor `$mcp_initialize`.
+Run your server and connect an agent, such as Claude Desktop, Cursor, or Codex. PostHog receives a `$mcp_tool_call` event for each tool call.
 
 Open the [activity feed](https://app.posthog.com/activity/explore) in your project. Filter for `event = $mcp_tool_call`. Each row represents a tool invocation and includes `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
@@ -246,7 +246,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(server);
 
 </MultiLanguage>
 
-In Go and Rust, turning off response capture still sends a failed call's error text, as `$mcp_error_message` and in `$exception`. In Go, a full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
+In Go and Rust, turning off response capture still sends a failed call's error text, as `$mcp_error_message` and in `$exception`. Go also supports a full before-send hook. See [Privacy](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
@@ -264,7 +264,7 @@ icon="IconAIText"
 
 [Model capture](/docs/mcp-analytics/events#model-capture) is on by default. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
-Use this unverified client input to compare quality, latency, and errors across models, not for billing or security decisions. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted.
+The model is unverified client input. Use it to compare quality, latency, and errors across models, not for billing or security decisions. Clients may report an exact model or a model family.
 
 </QuestLogItem>
 
@@ -276,7 +276,7 @@ icon="IconAIText"
 
 **Intent** is the user goal that led the agent to call a tool. The SDK adds a `context` argument to compatible tool schemas and captures it as `$mcp_intent`. It removes the argument before your handler runs.
 
-You can change the prompt the agent sees, and supply a fallback for agents that skip the argument. The Go SDK has a fixed prompt.
+You can change the prompt the agent sees (not in Go), and supply a fallback for agents that skip the argument.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/intent">
 
@@ -304,7 +304,7 @@ Which tools fail most often? Use `$exception` events to investigate errors.
 How much of your traffic supplies explicit context, and how much uses the intent fallback?
 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
-Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call. The Go SDK sends no `$mcp_tools_list`, so this query returns nothing for Go servers.
+Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call.
 
 The tool quality tab shows error rates and latency percentiles for each tool. Select a tool to inspect its calls:
 

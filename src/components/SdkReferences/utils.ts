@@ -78,6 +78,12 @@ export const PUBLISHED_SDK_METADATA: Record<string, PublishedSdkMeta> = {
     'posthog-rust': { slug: 'rust', label: 'Rust', logoKey: 'rust', features: SERVER_FEATURES },
     'posthog-ios': { slug: 'ios', label: 'iOS', logoKey: 'ios', features: CLIENT_FEATURES },
     'posthog-android': { slug: 'android', label: 'Android', logoKey: 'android', features: CLIENT_FEATURES },
+    'posthog-flutter': {
+        slug: 'flutter',
+        label: 'Flutter',
+        logoKey: 'flutter',
+        features: { ...CLIENT_FEATURES, autoCapture: false, surveys: true },
+    },
 }
 
 export const PUBLISHED_SDK_LIST: PublishedSdkMeta[] = Object.values(PUBLISHED_SDK_METADATA)

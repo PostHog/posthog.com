@@ -2994,6 +2994,20 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/libraries/flutter',
+                            children: [
+                                {
+                                    name: '6.x.x',
+                                    url: '/docs/libraries/flutter/6.x.x',
+                                },
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/flutter/5.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/flutter/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Go',
