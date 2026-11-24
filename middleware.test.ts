@@ -115,7 +115,7 @@ test('logs the request headers and the Markdown served, leaving out credentials 
     }
 
     const response = await middleware(
-        new Request(`${page}?ref=example`, {
+        new Request(page, {
             headers: {
                 ...headers,
                 cookie: 'ph_phc_test_posthog=%7B%7D',
@@ -135,7 +135,6 @@ test('logs the request headers and the Markdown served, leaving out credentials 
         served_format: 'markdown',
         negotiation: 'served',
         markdown_reason: 'agent_fetcher',
-        query: '?ref=example',
         request_headers: headers,
     })
 })

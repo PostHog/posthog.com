@@ -39,7 +39,6 @@ export function logRequest(request: Request, result: NegotiationResult): void {
             negotiation: result.negotiation,
             markdown_reason: result.reason,
             markdown_fetch_ms: result.markdownFetchMs,
-            query: url.search || undefined,
             request_headers: loggedHeaders(request.headers),
         })
     )
