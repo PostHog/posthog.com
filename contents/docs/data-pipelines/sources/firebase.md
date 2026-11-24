@@ -45,7 +45,7 @@ All Firebase tables are full refresh. Each sync replaces the contents of the tab
 
 <SourceTables />
 
-> **Note:** The `auth_tenant_users` table only appears in the schema picker if your Firebase project has at least one Identity Platform tenant configured. Most Firebase projects don't use tenants, so you may not see this table.
+> **Note:** The `auth_tenants` and `auth_tenant_users` tables only appear in the schema picker if your Firebase project has at least one Identity Platform tenant configured. The `auth_tenants` table contains tenant metadata (display name, sign-in and MFA settings) while `auth_tenant_users` contains users belonging to each tenant. Use the `tenantId` column to join the two tables. Most Firebase projects don't use tenants, so you may not see these tables.
 
 ## Troubleshooting
 
