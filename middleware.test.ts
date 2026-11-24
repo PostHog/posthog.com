@@ -102,7 +102,7 @@ function mockSiblingAndLog(t: TestContext, markdownStatus = 200): Record<string,
     return lines
 }
 
-test('logs the request headers and the Markdown served, leaving out credentials and the client IP', async (t) => {
+test('logs the request and the Markdown served, leaving out credentials and secrets', async (t) => {
     enableLog(t)
     const lines = mockSiblingAndLog(t)
     const headers = {
@@ -112,16 +112,15 @@ test('logs the request headers and the Markdown served, leaving out credentials 
         'signature-agent': '"https://agent.example.com"',
         'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
         'x-vercel-ip-country': 'DE',
+        'x-forwarded-for': '203.0.113.7',
     }
 
     const response = await middleware(
-        new Request(page, {
+        new Request(`${page}?utm_source=example`, {
             headers: {
                 ...headers,
                 cookie: 'ph_phc_test_posthog=%7B%7D',
                 authorization: 'Bearer test-token',
-                'x-forwarded-for': '203.0.113.7',
-                'x-real-ip': '203.0.113.7',
                 'x-vercel-oidc-token': 'test-oidc',
                 'x-vercel-protection-bypass': 'test-bypass',
                 'x-vercel-sc-headers': '{"Authorization":"Bearer test"}',
@@ -135,6 +134,8 @@ test('logs the request headers and the Markdown served, leaving out credentials 
     assert.equal(typeof markdown_fetch_ms, 'number')
     assert.deepEqual(line, {
         type: 'docs_request',
+        method: 'GET',
+        url: `${page}?utm_source=example`,
         served_format: 'markdown',
         negotiation: 'served',
         markdown_reason: 'agent_fetcher',
