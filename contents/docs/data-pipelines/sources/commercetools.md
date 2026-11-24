@@ -9,7 +9,7 @@ availability:
 sourceId: Commercetools
 ---
 
-The commercetools connector syncs your commerce data into PostHog, including orders, customers, payments, carts, product projections, categories, discount codes, and inventory.
+The commercetools connector syncs your commerce data into PostHog, including orders, customers, payments, carts, products, product projections, categories, discount codes, cart discounts, product discounts, shipping methods, and inventory.
 
 ## Adding a data source
 
@@ -41,16 +41,20 @@ To connect commercetools to PostHog, create a dedicated API client with read-onl
 3. Give it a descriptive name (e.g., "PostHog sync").
 4. Grant the following **view** scopes depending on which tables you want to sync:
 
-| Table                 | Required scope        |
-| --------------------- | --------------------- |
-| `orders`              | `view_orders`         |
-| `customers`           | `view_customers`      |
-| `payments`            | `view_payments`       |
-| `carts`               | `view_orders`         |
-| `product_projections` | `view_products`       |
-| `categories`          | `view_categories`     |
-| `discount_codes`      | `view_discount_codes` |
-| `inventory`           | `view_products`       |
+| Table                 | Required scope           |
+| --------------------- | ------------------------ |
+| `orders`              | `view_orders`            |
+| `customers`           | `view_customers`         |
+| `payments`            | `view_payments`          |
+| `carts`               | `view_orders`            |
+| `product_projections` | `view_products`          |
+| `categories`          | `view_categories`        |
+| `discount_codes`      | `view_discount_codes`    |
+| `inventory`           | `view_products`          |
+| `products`            | `view_products`          |
+| `cart_discounts`      | `view_cart_discounts`    |
+| `product_discounts`   | `view_product_discounts` |
+| `shipping_methods`    | `view_shipping_methods`  |
 
 5. Click **Create API client**.
 6. Copy the **Client ID**, **Client secret**, **Project key**, and **Region** – you'll need all four when linking the source in PostHog.
@@ -84,13 +88,17 @@ When you enable incremental sync for a table, the first sync performs a full imp
 
 All tables use `id` as the primary key and partition data by `createdAt` (monthly).
 
-| Table                 | Description                           |
-| --------------------- | ------------------------------------- |
-| `orders`              | Customer orders and their line items  |
-| `customers`           | Customer accounts and profiles        |
-| `payments`            | Payment transactions                  |
-| `carts`               | Active and inactive shopping carts    |
-| `product_projections` | Product catalog data (projected view) |
-| `categories`          | Product category hierarchy            |
-| `discount_codes`      | Promotional discount codes            |
-| `inventory`           | Stock levels across supply channels   |
+| Table                 | Description                                        |
+| --------------------- | -------------------------------------------------- |
+| `orders`              | Customer orders and their line items               |
+| `customers`           | Customer accounts and profiles                     |
+| `payments`            | Payment transactions                               |
+| `carts`               | Active and inactive shopping carts                 |
+| `product_projections` | Product catalog data (projected view)              |
+| `categories`          | Product category hierarchy                         |
+| `discount_codes`      | Promotional discount codes                         |
+| `inventory`           | Stock levels across supply channels                |
+| `products`            | Full product data with current and staged versions |
+| `cart_discounts`      | Discounts applied to carts and orders              |
+| `product_discounts`   | Discounts applied to product prices                |
+| `shipping_methods`    | Shipping methods with rates per shipping zone      |
