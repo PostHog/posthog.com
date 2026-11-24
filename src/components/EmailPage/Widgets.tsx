@@ -4,6 +4,7 @@ import {
     IconBolt,
     IconCheck,
     IconCheckCircle,
+    IconChevronDown,
     IconCursor,
     IconEye,
     IconSend,
@@ -197,7 +198,7 @@ function TimelineEvent({ event }: { event: FeedEvent }): JSX.Element {
 const fakeId = (n: number) =>
     `${(0x5a6e6328 + n * 7919).toString(16)}-ffd8-45bb-8dae-${(0x6ccd4de7 + n * 104729).toString(16)}`
 
-export function SendBlock({ title }: { title: (about: string) => React.ReactNode }): JSX.Element {
+export function SendBlock({ title }: { title: (about: React.ReactNode) => React.ReactNode }): JSX.Element {
     const [storyIndex, setStoryIndex] = useState(0)
     const [language, setLanguage] = useState<string>('Node.js')
     const [shown, setShown] = useState(0)
@@ -228,33 +229,43 @@ export function SendBlock({ title }: { title: (about: string) => React.ReactNode
 
     return (
         <div className={blockClassName}>
-            <h2 className="m-0 mb-1 text-2xl font-bold leading-tight @xl/reader-content:text-3xl">
-                {title(story.about)}
-            </h2>
-            <p className="m-0 mb-4 text-secondary">Hit send, then see what the user does next.</p>
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+                <div>
+                    <h2 className="m-0 mb-1 text-2xl font-bold leading-tight @xl/reader-content:text-3xl">
+                        {title(
+                            // The highlighted words are the picker: a transparent native select sits on top of them.
+                            <span className="relative inline-flex cursor-pointer items-center gap-1">
+                                {story.about}
+                                <IconChevronDown className="size-6 shrink-0 @xl/reader-content:size-7" />
+                                <select
+                                    aria-label="Email to send"
+                                    value={storyIndex}
+                                    onChange={(e) => {
+                                        reset()
+                                        setStoryIndex(Number(e.target.value))
+                                    }}
+                                    className="absolute inset-0 cursor-pointer opacity-0"
+                                >
+                                    {stories.map((s, i) => (
+                                        <option key={s.label} value={i}>
+                                            {s.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </span>
+                        )}{' '}
+                        <span className="inline-block align-middle">
+                            <OSButton variant="primary" size="lg" disabled={running} onClick={send} icon={<IconSend />}>
+                                Send
+                            </OSButton>
+                        </span>
+                    </h2>
+                    <p className="m-0 text-secondary">Hit send, then see what the user does next.</p>
+                </div>
+            </div>
             <div className="grid gap-4 @3xl/reader-content:grid-cols-[3fr_2fr]">
                 {/* On a narrow window the column dissolves into the grid: send bar, events, then only the send call. */}
                 <div className="contents @3xl/reader-content:flex @3xl/reader-content:min-w-0 @3xl/reader-content:flex-col @3xl/reader-content:gap-3">
-                    <div className="flex items-center gap-2 rounded-xl border border-primary py-1.5 pl-3 pr-1.5">
-                        <select
-                            aria-label="Email to send"
-                            value={storyIndex}
-                            onChange={(e) => {
-                                reset()
-                                setStoryIndex(Number(e.target.value))
-                            }}
-                            className="min-w-0 flex-1 cursor-pointer border-0 bg-transparent text-sm font-semibold text-primary outline-none"
-                        >
-                            {stories.map((s, i) => (
-                                <option key={s.label} value={i}>
-                                    {s.label}
-                                </option>
-                            ))}
-                        </select>
-                        <OSButton variant="primary" size="md" disabled={running} onClick={send} icon={<IconSend />}>
-                            Send
-                        </OSButton>
-                    </div>
                     <div className="order-3 min-w-0 @3xl/reader-content:order-none">
                         <div className="hidden @3xl/reader-content:block">
                             <CodeBlock

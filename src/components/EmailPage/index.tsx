@@ -280,7 +280,7 @@ function Testimonials(): JSX.Element {
     return (
         <section className="not-prose flex flex-col gap-8">
             <h2 className="m-0 text-balance text-2xl font-bold leading-tight text-primary @xl/reader-content:text-3xl">
-                One tool for your <Highlight red>analytics and your email</Highlight>
+                One tool for your analytics and your email
             </h2>
             <div className="grid gap-x-5 gap-y-8 @xl/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-5">
                 {quotes.map((quote) => (
@@ -410,7 +410,7 @@ export default function EmailPage(): JSX.Element {
                         <SendBlock
                             title={(about) => (
                                 <>
-                                    Send an email about <Highlight>{about}</Highlight>
+                                    Email a user about <Highlight>{about}</Highlight>
                                 </>
                             )}
                         />
@@ -418,13 +418,7 @@ export default function EmailPage(): JSX.Element {
 
                     <section className="flex flex-col gap-8">
                         <div className="grid items-end gap-6 @3xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-                            <Intro
-                                title={
-                                    <>
-                                        Or just <Highlight red>ask your agent</Highlight>
-                                    </>
-                                }
-                            >
+                            <Intro title={<>Or just ask your agent</>}>
                                 The PostHog MCP and its email skills let Claude Code, Cursor, or Codex move you off
                                 another provider, build automations, and tell you what an email actually did. Pick a
                                 prompt to watch the tool calls.
@@ -439,13 +433,7 @@ export default function EmailPage(): JSX.Element {
                     <Testimonials />
 
                     <section className="flex flex-col gap-6">
-                        <Intro
-                            title={
-                                <>
-                                    Broadcasts that <Highlight red>know who they’re for</Highlight>
-                                </>
-                            }
-                        >
+                        <Intro title={<>Broadcasts that know who they’re for</>}>
                             Write a newsletter or an announcement, pull in anything you know about the person, and send
                             it to an audience built from your product data. Type / to add a block.
                         </Intro>
@@ -453,13 +441,7 @@ export default function EmailPage(): JSX.Element {
                     </section>
 
                     <section className="flex flex-col gap-6">
-                        <Intro
-                            title={
-                                <>
-                                    Plan every send on <Highlight red>one calendar</Highlight>
-                                </>
-                            }
-                        >
+                        <Intro title={<>Plan every send on one calendar</>}>
                             See every broadcast and automated email next to each other. PostHog stops you before the
                             same people get two marketing emails in two days, and finds the next day that works.
                         </Intro>
@@ -467,13 +449,7 @@ export default function EmailPage(): JSX.Element {
                     </section>
 
                     <section className="flex flex-col gap-6">
-                        <Intro
-                            title={
-                                <>
-                                    Automations that <Highlight red>improve themselves</Highlight>
-                                </>
-                            }
-                        >
+                        <Intro title={<>Automations that improve themselves</>}>
                             An automation starts when someone does something, then waits, branches, and sends email,
                             SMS, push, or Slack messages. PostHog watches how each one performs and suggests changes.
                             You approve one as a draft, publish it, and see whether it worked.
@@ -498,13 +474,7 @@ export default function EmailPage(): JSX.Element {
                     </section>
 
                     <section className="flex flex-col gap-6">
-                        <Intro
-                            title={
-                                <>
-                                    See how every send <Highlight>actually did</Highlight>
-                                </>
-                            }
-                        >
+                        <Intro title={<>See how every send actually did</>}>
                             Sends, opens, clicks, bounces, and complaints for each automation and broadcast, next to
                             what people did in your product afterwards. Hover a chart, or change the date range.
                         </Intro>
@@ -532,13 +502,7 @@ export default function EmailPage(): JSX.Element {
                     </section>
 
                     <section className="not-prose flex flex-col gap-8">
-                        <Intro
-                            title={
-                                <>
-                                    Built to <Highlight>land in the inbox</Highlight>
-                                </>
-                            }
-                        >
+                        <Intro title={<>Built to land in the inbox</>}>
                             Password resets, receipts, and launch emails for teams of every size, sent from the US or
                             the EU.
                         </Intro>
