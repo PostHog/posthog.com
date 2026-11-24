@@ -146,9 +146,11 @@ For more on scanner design, read [a scanner that watches everything sees nothing
 
 When the first set works, customers ask what else a scanner can answer. These patterns worked with customers. Each pattern still follows the rules above: one question, a narrow scope, and a way to say no.
 
-### Use converted sessions as a control
+### Compare friction with converted sessions
 
-The friction in sessions that did not convert is only half of the answer. If sessions that converted show the same friction at the same rate, that friction is not what stops users. In the join query above, delete the `WHERE` line. Then add `outcome.verdict` to the `SELECT` and `GROUP BY` clauses. Compare the share of sessions with each tag, not the raw counts, because the groups differ in size.
+The friction in sessions that did not convert is only half of the answer. In the join query above, delete the `WHERE` line. Then add `outcome.verdict` to the `SELECT` and `GROUP BY` clauses. Compare the share of sessions with each tag, not the raw counts, because the groups differ in size.
+
+Start with the friction that shows up much more often in sessions that did not convert. Friction at the same rate in both groups is not proof that the friction is harmless, because it can slow every user. This comparison shows an association, not a cause. To find out if a fix helps, test it in an [experiment](/docs/experiments).
 
 ### Check if an error reached the screen
 
