@@ -66,8 +66,8 @@ Most of the provisioning API is self-serve. The rest needs PostHog to turn it on
 | Capability                                                                     | How to get it                                                                                                                                                                      |
 | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Create accounts and organizations for your users                               | Self-serve. [Register your app](#register-your-app), pass the [review](#how-posthog-reviews-your-app), and [sign your requests](#sign-requests-with-a-key).                        |
-| Provision projects and [rotate their credentials](#rotate-project-credentials) | Self-serve, once you register.                                                                                                                                                     |
-| Higher [rate limits](#rate-limits)                                             | Self-serve. Signing your requests gives you 5x the base limits, and [linking your app to an organization](#link-your-partner-app-to-a-posthog-organization) doubles that.          |
+| Provision projects and [rotate their credentials](#rotate-project-credentials) | Self-serve, once you register and [sign your requests](#sign-requests-with-a-key).                                                                                                 |
+| Higher [rate limits](#rate-limits)                                             | Self-serve. [Linking your app to an organization](#link-your-partner-app-to-a-posthog-organization) doubles your limits.                                                           |
 | [Deep links](#deep-linking) that log users into their project                  | Ask PostHog. Your app must also sign its requests.                                                                                                                                 |
 | Paying for your users' PostHog usage                                           | Needs a partner agreement. See [pay for your users' usage](#pay-for-your-users-usage).                                                                                             |
 | Custom rate limits                                                             | Ask PostHog, if the top [tier](#your-tier) isn't enough.                                                                                                                           |
@@ -230,11 +230,11 @@ While a client that PostHog accepted stays active, another client whose metadata
 
 ### Sign requests with a key
 
-With `private_key_jwt`, your app signs a short-lived JWT, called a client assertion, with a private key that only you hold. You send it on each request that identifies your app, and PostHog checks the signature against the public keys you publish at your `jwks_uri`. Nothing secret is shared with PostHog, and you rotate keys on your own schedule. Signing is required for apps that create accounts, and for [deep links](#requires-a-trusted-partner-record).
+With `private_key_jwt`, your app signs a short-lived JWT, called a client assertion, with a private key that only you hold. You send it on each request that identifies your app, and PostHog checks the signature against the public keys you publish at your `jwks_uri`. Nothing secret is shared with PostHog, and you rotate keys on your own schedule. Every provisioning app must sign its requests.
 
 #### When signing is required
 
-If your app can create accounts, it must sign its account requests and token calls. The [registration](#register-your-app) response shows this as `"can_create_accounts": true`. Unsigned requests get a 401.
+Every app that provisions must sign its account requests and token calls, whether it creates accounts or only provisions resources. An unsigned request gets a 401. An app with no key to sign with gets a 401 on every provisioning request, including `Bearer` requests with tokens it already holds, and its page in **Organization settings → OAuth applications** says so. The [registration](#register-your-app) response shows it as a failed `jwks` check.
 
 #### Turn on key signing
 
@@ -349,11 +349,9 @@ To rotate keys without downtime:
 
 If a private key leaks, remove it from your JWKS, then call the registration endpoint in each region you use. Otherwise PostHog can keep accepting the removed key for up to an hour.
 
-#### Switch back to a public client
+#### Public clients can't provision
 
-An app that creates accounts can't be a public client, because its unsigned account requests and token calls get a 401.
-
-Set `token_endpoint_auth_method` to `"none"`, call the registration endpoint in each region you use, then stop sending assertions, because a public client's account requests fail if they carry one. Your [tier](#your-tier) drops to public: 1x, or 2x if your app is linked to an org via a [verification token](#link-your-partner-app-to-a-posthog-organization). Deep links stop working, with `/deep_links` returning a 403 `forbidden`. Access and refresh tokens you already hold keep working. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
+A provisioning app can't be a public client. Once your metadata document sets `token_endpoint_auth_method` to `"none"`, every provisioning request gets a 401, including requests with access tokens you already hold. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
 
 #### Sign a request in Python or Node.js
 
@@ -561,7 +559,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | `id`                              | string | Yes      | Your unique request ID (for idempotency)                                                                                                                     |
 | `email`                           | string | Yes      | User's email address. Must be a valid address of at most 254 characters                                                                                      |
 | `name`                            | string | No       | User's full name                                                                                                                                             |
-| `client_id`                       | string | No       | Your CIMD metadata URL. PostHog reads it from the assertion's `sub` if you leave it out. If you send it, it must match. An unsigned request must include it. |
+| `client_id`                       | string | No       | Your CIMD metadata URL. PostHog reads it from the assertion's `sub` if you leave it out. If you send it, it must match.                              |
 | `client_assertion_type`           | string | Yes      | Always `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. See [when signing is required](#when-signing-is-required).                                  |
 | `client_assertion`                | string | Yes      | A new signed JWT for each request. See [build the assertion](#build-the-assertion).                                                                          |
 | `code_challenge`                  | string | Yes      | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars)                                                                                          |
@@ -899,30 +897,25 @@ Requests that fail validation (4xx errors like `invalid_request`) are refunded, 
 
 Budgets scale with how strongly your app identifies itself, on two axes:
 
-| Client authentication | Not linked to an org | Linked via a [verification token](#link-your-partner-app-to-a-posthog-organization) |
-| --------------------- | -------------------- | -------------------------------------------------------------------------------------------- |
-| `none` (public, PKCE) | 1x                   | 2x                                                                                           |
-| `private_key_jwt`     | 5x                   | 10x                                                                                          |
+Every provisioning app [signs its requests](#when-signing-is-required), which gives it 5x the base budgets. [Linking your app to an organization](#link-your-partner-app-to-a-posthog-organization) with a verification token doubles that to 10x.
 
-An app that creates accounts must sign, so it can't use the `none` row. See [when signing is required](#when-signing-is-required).
-
-Both upgrades are self-serve: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. They apply the next time PostHog reads your metadata document, and you can make that happen right away by calling the [registration endpoint](#register-your-app). Nobody to ask.
+Linking is self-serve: add a verification token to your metadata document. It applies the next time PostHog reads your document, and you can make that happen right away by calling the [registration endpoint](#register-your-app). Nobody to ask.
 
 ### Budgets
 
-At the 1x tier:
+The base budgets, which your [tier](#your-tier) multiplies:
 
 | Endpoints                                                   | Burst   | Refill   |
 | ----------------------------------------------------------- | ------- | -------- |
 | Account requests                                            | 5       | 10/hour  |
 | Token exchange                                              | 10      | 20/hour  |
 | Project provisioning (`/resources`)                         | 10      | 30/hour  |
-| Deep links                                                  | Blocked | Blocked  |
+| Deep links                                                  | 30      | 120/hour |
 | Everything else (token refresh, reads, credential rotation) | 30      | 120/hour |
 
-So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers, and token exchanges at 20/40/100/200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+So account requests, the tightest budget, run at 50 per hour, or 100 when your app is linked to an organization, and token exchanges at 100 or 200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
 
-Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x.
+Deep links run at 150 burst and 600/hour, or 300 burst and 1,200/hour when your app is linked.
 
 Limits are per region: US and EU count separately.
 
@@ -945,7 +938,7 @@ To see everything at once, call the limits endpoint. It returns your tier, why y
 The endpoint is `POST` only, and you have to prove the request is yours. Send an access token, or authenticate as your client the same way you do at the token endpoint:
 
 ```bash
-# With an access token. Public clients use this after their first token exchange.
+# With an access token, after your first token exchange.
 curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
   -H "Authorization: Bearer pha_abc123..."
 
