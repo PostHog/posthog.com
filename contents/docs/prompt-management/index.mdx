@@ -602,7 +602,7 @@ Once linked, you can:
 
 ## Prompt usage
 
-Every Python and JavaScript SDK fetch of a prompt by name captures a `$llm_prompt_fetched` event. The .NET SDK does not capture it yet, so fetches from .NET do not appear here. The **Usage** tab on a prompt shows these events in two views:
+Every SDK fetch of a prompt by name, including from .NET, captures a `$llm_prompt_fetched` event. The **Usage** tab on a prompt shows these events in two views:
 
 - **Trend**: a graph of prompt fetches over time
 - **Log**: the individual fetch events, including the version each fetch resolved to
