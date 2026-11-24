@@ -7,6 +7,8 @@
  * Off unless MIDDLEWARE_LOG_ENABLED is "true".
  */
 
+// Queries find the line by parsing each line of the entry body and matching `type` exactly, so this
+// value must stay distinct from the other `type` values in PostHog Logs.
 const LOG_TYPE = 'docs_request'
 // Set by the middleware on its own fetch of a page's `.md` sibling, which passes through the
 // middleware again and would otherwise be logged as a second request.
