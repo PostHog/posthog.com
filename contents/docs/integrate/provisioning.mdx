@@ -173,19 +173,23 @@ Until your app is registered, the other endpoints return HTTP 401 with a message
 
 After you register a client that declares `com.posthog.provisioning`, PostHog reviews it before it can provision. Until the review accepts your app, provisioning stays inactive: your app can't create accounts or provision resources. Most reviews finish within minutes. Some go to PostHog staff and take longer.
 
-To check the status, call the [registration endpoint](#register-your-app) again. While your app is under review or blocked, registration fails, and its `provisioning_enabled` check fails with one of these details:
+To check the status, call the [registration endpoint](#register-your-app) again. Until your app is accepted, registration fails, and its `provisioning_enabled` check fails with one of these details:
 
 | Detail                                                                                                | What it means                                                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PostHog is reviewing this client before it can provision. Register again in a few minutes to check.` | The review is in progress. Call the registration endpoint again in a few minutes.                                                              |
-| `PostHog staff are reviewing this client before it can provision. Register again later to check.`     | PostHog staff are reviewing your app. Call the registration endpoint again later.                                                              |
-| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.`             | PostHog blocked provisioning for your app, because the review rejected it or staff blocked it later. Registering again doesn't lift the block. |
+| `PostHog staff are reviewing this client before it can provision. Register again later to check.` | PostHog staff are reviewing your app. Call the registration endpoint again later. |
+| `PostHog declined this client for provisioning. ...` | The review didn't approve your app. Change what the review found, then [ask for another review](#follow-your-review). |
+| `PostHog needs changes or more information before this client can provision. ...` | PostHog staff sent your app back. Read their message and [answer it](#follow-your-review). |
+| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.` | PostHog staff blocked provisioning for your app. Neither registering again nor asking for another review lifts the block. |
 
 Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
 
-PostHog staff can change the decision later. They can block an accepted app, for example after reports of abuse, and they can accept an app that was blocked. If your app is blocked and you think that is a mistake, contact PostHog support. When staff lift a block, call the registration endpoint again to check, and have your users connect again: blocking signs out every connection your app had.
+A declined app keeps the connections it already has, and it can ask for another review as often as it needs. Only PostHog staff block an app, for example after reports of abuse. Blocking signs out every connection your app had.
 
-The review reads your metadata document and researches your app on the web. PostHog loads the homepage at your `client_uri` and searches the web for your product, your domain, and reports of abuse. A model then judges three things from that evidence: whether your app is a real product of the organization that owns the domain, whether it shows signs of abuse, and whether the metadata document is on your own site. When the model isn't sure, PostHog staff decide.
+PostHog staff can change the decision later. They can block an accepted app, and they can accept an app that was declined or blocked. If your app is blocked and you think that is a mistake, contact PostHog support. When staff lift a block, call the registration endpoint again to check, and have your users connect again.
+
+The review reads your metadata document and researches your app on the web. PostHog loads the homepage at your `client_uri` and searches the web for your product, your domain, and reports of abuse. A model then judges three things from that evidence: whether your app is a real product of the organization that owns the domain, whether it shows signs of abuse, and whether the metadata document is on your own site. The model accepts your app or declines it. When it isn't sure, PostHog staff decide.
 
 To pass:
 
@@ -198,11 +202,12 @@ PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP
 
 #### Follow your review
 
-Link your app to a PostHog organization with a [verification token](#link-your-partner-app-to-a-posthog-organization) to follow the review from PostHog:
+Link your app to a PostHog organization with a [verification token](#link-your-partner-app-to-a-posthog-organization) to follow and answer the review from PostHog. Without a linked organization, PostHog has nobody to tell about the decision, and your app can't answer it.
 
-- The organization's admins and owners get an email when the review accepts your app, rejects it, or hands it to PostHog staff, and again whenever staff change the decision. The email carries any message staff left for you.
+- The organization's admins and owners get an email when the review accepts your app, declines it, or hands it to PostHog staff, and again whenever staff change the decision. Staff can also ask for changes or more information. The email carries any message staff left for you.
 - In PostHog, go to **Organization settings → OAuth applications** and expand your app. It shows the provisioning status, when your app registered, when the review was decided, and any message from PostHog.
-- While your app waits for PostHog staff or is blocked, the same row has **Contact support about this review**. It opens a support request with your app's details filled in, on every plan. Use it to send PostHog information the review missed.
+- When your app is declined, staff asked for changes, or your app waits for staff, the same row has a **Note to PostHog staff** box. Say what your app does, why it creates accounts or provisions resources, and what you changed. Sending the note puts your app back in front of PostHog staff.
+- A blocked app can't send a note. Its row has **Contact support about this review** instead, which opens a support request with your app's details filled in, on every plan.
 - An agent connected to the [PostHog MCP server](/docs/model-context-protocol) can read the same status with the `oauth-applications-list` tool.
 
 Only organization admins and owners see this page. An app that isn't linked to an organization gets no email, so call the [registration endpoint](#register-your-app) to check its status.
