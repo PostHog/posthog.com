@@ -3,57 +3,38 @@ title: Sign up with the wizard
 sidebarTitle: Sign up with the wizard
 ---
 
-You don't need to fill out a signup form to start using PostHog. The [AI wizard](/docs/ai-engineering/ai-wizard) can create a brand-new PostHog account, spin up a project, and wire up the SDK in your codebase, all from one command.
+If you don't have a PostHog account yet, the [AI wizard](/docs/ai-engineering/ai-wizard) can start from sign-up. The setup agent opens PostHog's sign-up page in your browser. Once you've created your account, it installs the SDK in your codebase, all from one command.
 
-This is the fastest way to go from zero to sending events. It's a good fit if you're starting a new project, trying PostHog for the first time, or you'd rather stay in your terminal than click through a browser.
-
-If you already have a PostHog account, run the wizard without `--signup` and it'll authenticate against your existing account instead. If you're a partner provisioning accounts for your own users programmatically, use the [provisioning API](/docs/integrate/provisioning) directly.
+If you already have a PostHog account, run the wizard without `--signup` and it logs in to your existing account instead.
 
 ## Run it
 
 ```bash
-npx @posthog/wizard@latest --signup --email you@example.com --region us
+npx @posthog/wizard@latest --signup
 ```
 
-That's everything. The wizard creates the account tied to `you@example.com`, provisions a project in the region you pick, drops the project credentials into your codebase, and installs the SDK.
+The wizard opens PostHog's sign-up page in your browser. Create your account there, then approve the wizard's access to your new project. The setup agent takes it from there: it writes the project token and host into your code, installs the SDK, and instruments your code, exactly as it does for an existing account. See [how the wizard works](/docs/ai-engineering/ai-wizard#how-it-works) for what it changes in your project.
 
 ### Flags
 
 | Flag | Required | Description |
 | --- | --- | --- |
-| `--signup` | Yes | Creates a new account instead of authenticating against an existing one. |
-| `--email` | Yes | The email address for the new account. The welcome email goes here. |
-| `--region` | Yes | Where your data lives. Use `us` ([us.posthog.com](https://us.posthog.com)) or `eu` ([eu.posthog.com](https://eu.posthog.com)). |
-
-## What happens when you sign up
-
-The wizard handles account creation for you, so you never touch a signup form. Behind the scenes it talks to PostHog's [provisioning API](/docs/integrate/provisioning) over OAuth 2.0 with PKCE, which means there are no secrets to copy around. There are three steps:
-
-1. **Request the account.** The wizard sends your email and region to PostHog and gets back a short-lived authorization code.
-2. **Exchange the code for a token.** The wizard trades that code for an access token, proving it started the request.
-3. **Provision the project.** Using the token, the wizard creates a project and gets back the project API key and host.
-
-From there the wizard installs the relevant SDK, writes the project API key and host into your config, and instruments your code, exactly like it would for an existing account. See [how the wizard works](/docs/ai-engineering/ai-wizard#how-it-works) for the full rundown of what it changes in your project.
-
-## Set your password to log in later
-
-The account exists the moment the wizard finishes, but the session it uses is short-lived. To log in to the PostHog app in your browser, check your inbox for the welcome email and follow the link to set a password.
-
-Once you've set a password, sign in at [us.posthog.com](https://us.posthog.com) or [eu.posthog.com](https://eu.posthog.com) (whichever region you chose) to see your events, build insights, and explore the rest of PostHog.
+| `--signup` | Yes | Starts at PostHog's sign-up page instead of the login page. |
+| `--region` | No | Where your data lives. Use `us` ([us.posthog.com](https://us.posthog.com)) or `eu` ([eu.posthog.com](https://eu.posthog.com)). |
 
 ## Things to know
 
+### You need a browser on the same machine
+
+Sign-up happens in your browser, so the wizard has to be able to open one. If it can't, for example over SSH or in a container, it stops and asks you to sign up in a browser first. Create your account at [us.posthog.com/signup](https://us.posthog.com/signup) or [eu.posthog.com/signup](https://eu.posthog.com/signup), then run the wizard again without `--signup`.
+
 ### Pick the right region up front
 
-Your region is fixed when the account is created, and `us` and `eu` are separate. You can't move data between them later, so choose the one that matches where you want your data to live before you run the command.
-
-### No personal API key by default
-
-The wizard authenticates with an OAuth access token, not a [personal API key](/docs/api/personal-api-keys). Signing up this way doesn't mint a personal API key, so if you need one for scripts or the REST API, create it from your project settings after you've set a password and logged in.
+Your region is fixed when the account is created, and `us` and `eu` are separate. You can't move data between them later, so choose the one that matches where you want your data to live.
 
 ### The interactive wizard is the supported path
 
-The wizard has a `--ci` mode, but it's turned off in published builds. Run the wizard interactively, which is the default.
+The wizard has a `--ci` mode, but it's turned off in published builds, and it can't sign up because it has no browser. Run the wizard interactively, which is the default.
 
 ## Feedback
 
