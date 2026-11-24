@@ -200,6 +200,8 @@ Luckily, [I didn't have to look far for an alternative](/workflows).
 
 Onboarding 10.0 is the first flow I built entirely in [PostHog Workflows](/workflows), and the first one I built mostly by talking to an agent.
 
+Before I started, I [asked three lifecycle marketers to roast our lifecycle marketing](/blog/lifecycle-marketing). The clearest advice was to swap our tree of roughly 100 emails for one simple trunk with one goal, so that's what I built.
+
 9.0 pointed people at our agentic tools, but it was still a product tour with extra steps. For 10.0, I picked one north star: get new users to set up [the MCP](/mcp) or use [PostHog AI](/ai). Everything else in the flow exists to get them there, or to make their org a bit healthier along the way.
 
 So, instead of a forest of product paths, every new signup now goes down one trunk. It only branches on a handful of things we actually know about them:
