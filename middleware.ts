@@ -18,6 +18,9 @@
  * Returning `undefined` continues to the normal static response, so anything
  * this function declines to handle behaves exactly as it does today.
  */
+import { captureRequest } from './middleware-capture.ts'
+import type { NegotiationResult } from './middleware-capture.ts'
+
 export const config = {
     matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog', '/mcp'],
 }
@@ -25,27 +28,39 @@ export const config = {
 const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']
 const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('|')})\\b`, 'i')
 
-export default async function middleware(request: Request): Promise<Response | undefined> {
+export default async function middleware(
+    request: Request,
+    context?: { waitUntil(promise: Promise<unknown>): void }
+): Promise<Response | undefined> {
+    const result = await negotiate(request)
+    captureRequest(request, result, context && ((promise) => context.waitUntil(promise)))
+    return result.response
+}
+
+async function negotiate(request: Request): Promise<NegotiationResult> {
     const accept = request.headers.get('accept') || ''
     const acceptsMarkdown = accept.includes('text/markdown')
     const isAgentFetch =
         USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') && !accept.includes('text/html')
-    if (!acceptsMarkdown && !isAgentFetch) return
 
     const url = new URL(request.url)
     const pathname = url.pathname.replace(/\/$/, '')
-    if (!pathname || pathname.endsWith('.md')) return
+    if (pathname.endsWith('.md')) return { response: undefined, negotiation: 'markdown_url' }
+    if ((!acceptsMarkdown && !isAgentFetch) || !pathname) return { response: undefined, negotiation: 'not_requested' }
+    const reason = acceptsMarkdown ? 'accept' : 'agent_fetcher'
 
     // Not every path under these prefixes has a generated `.md` sibling — the
     // section index pages (/docs, /blog, /handbook, /newsletter) don't. Ask for
     // it and fall through to the HTML when it isn't there, rather than keeping a
     // hand-maintained list of exceptions that silently rots.
+    const started = Date.now()
     const markdown = await fetch(new URL(`${pathname}.md`, url.origin), {
         headers: { accept: 'text/plain' },
     })
-    if (!markdown.ok) return
+    const markdownFetchMs = Date.now() - started
+    if (!markdown.ok) return { response: undefined, negotiation: 'no_sibling', reason, markdownFetchMs }
 
-    return new Response(markdown.body, {
+    const response = new Response(markdown.body, {
         status: 200,
         headers: {
             'content-type': 'text/markdown; charset=utf-8',
@@ -53,4 +68,5 @@ export default async function middleware(request: Request): Promise<Response | u
             vary: 'Accept, User-Agent',
         },
     })
+    return { response, negotiation: 'served', reason, markdownFetchMs }
 }

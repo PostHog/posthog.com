@@ -84,3 +84,131 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
     assert.equal(await response?.text(), '# PostHog MCP server')
     assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })
+
+const CAPTURE_URL = 'https://us.i.posthog.com/i/v0/e/'
+
+function enableCapture(t: { after(fn: () => void): void }, env: Record<string, string> = {}) {
+    const vars = { MIDDLEWARE_CAPTURE_ENABLED: 'true', ...env }
+    for (const [key, value] of Object.entries(vars)) process.env[key] = value
+    t.after(() => {
+        for (const key of Object.keys(vars)) delete process.env[key]
+    })
+}
+
+function mockFetches(t: any, { markdownStatus = 200, captureStatuses = [200] } = {}) {
+    const captures: any[] = []
+    t.mock.method(globalThis, 'fetch', async (input: unknown, init?: RequestInit) => {
+        if (String(input) === CAPTURE_URL) {
+            captures.push(JSON.parse(String(init?.body)))
+            return new Response('{}', { status: captureStatuses[captures.length - 1] ?? 200 })
+        }
+        return new Response('# Product analytics', { status: markdownStatus })
+    })
+    return captures
+}
+
+async function handle(url: string, headers: Record<string, string>) {
+    const pending: Promise<unknown>[] = []
+    const response = await middleware(new Request(url, { headers }), { waitUntil: (p) => pending.push(p) })
+    await Promise.all(pending)
+    return response
+}
+
+test('records the request headers and the Markdown served, keyed on the Vercel request id', async (t) => {
+    enableCapture(t)
+    const captures = mockFetches(t)
+
+    const response = await handle(page, {
+        'user-agent': 'Claude-User (claude-code/2.1.0; +https://support.anthropic.com/)',
+        accept: '*/*',
+        'sec-fetch-site': 'none',
+        'signature-agent': '"https://agent.example.com"',
+        'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
+    })
+
+    assert.equal(await response?.text(), '# Product analytics')
+    assert.equal(captures.length, 1)
+    const [event] = captures
+    assert.equal(event.event, 'middleware_request')
+    assert.equal(event.uuid, 'f250a31f-f9e1-5dae-8ed3-305625543a58')
+    assert.equal(event.properties.$process_person_profile, false)
+    assert.deepEqual(
+        {
+            path: event.properties.$pathname,
+            served: event.properties.served_format,
+            negotiation: event.properties.negotiation,
+            reason: event.properties.markdown_reason,
+            accept: event.properties.accept,
+            site: event.properties.sec_fetch_site,
+            signatureAgent: event.properties.signature_agent,
+            agent: event.properties.agent_name,
+            category: event.properties.agent_category,
+            requestId: event.properties.vercel_request_id,
+        },
+        {
+            path: '/docs/product-analytics',
+            served: 'markdown',
+            negotiation: 'served',
+            reason: 'agent_fetcher',
+            accept: '*/*',
+            site: 'none',
+            signatureAgent: '"https://agent.example.com"',
+            agent: 'Claude User',
+            category: 'ai_assistant',
+            requestId: 'test1-1700000000000-000000000001',
+        }
+    )
+})
+
+test('records HTML for browsers and for pages without a Markdown sibling', async (t) => {
+    enableCapture(t)
+    const captures = mockFetches(t, { markdownStatus: 404 })
+
+    await handle(page, { 'user-agent': 'Mozilla/5.0', accept: 'text/html' })
+    await handle(page, { 'user-agent': 'ChatGPT-User/1.0' })
+    await handle(`${page}.md`, { 'user-agent': 'curl/8.0' })
+
+    assert.deepEqual(
+        captures.map((e) => [e.properties.served_format, e.properties.negotiation, e.properties.agent_category]),
+        [
+            ['html', 'not_requested', 'regular'],
+            ['html', 'no_sibling', 'ai_assistant'],
+            ['markdown', 'markdown_url', 'http_client'],
+        ]
+    )
+})
+
+test('resends the same event after a server error so a retry cannot count twice', async (t) => {
+    enableCapture(t)
+    const captures = mockFetches(t, { captureStatuses: [503, 200] })
+
+    await handle(page, { 'x-vercel-id': 'iad1::test2-1700000000000-000000000002' })
+
+    assert.equal(captures.length, 2)
+    assert.deepEqual(captures[1], captures[0])
+})
+
+test('samples on the request id', async (t) => {
+    enableCapture(t, { MIDDLEWARE_CAPTURE_SAMPLE_RATE: '0.5' })
+    const captures = mockFetches(t)
+
+    for (let i = 0; i < 2; i++) {
+        await handle(page, { 'x-vercel-id': 'iad1::test1-1700000000000-000000000001' })
+        await handle(page, { 'x-vercel-id': 'iad1::test2-1700000000000-000000000002' })
+    }
+
+    assert.deepEqual(
+        captures.map((e) => e.properties.vercel_request_id),
+        ['test2-1700000000000-000000000002', 'test2-1700000000000-000000000002']
+    )
+})
+
+test("records nothing when capture is off, or for the middleware's own Markdown fetch", async (t) => {
+    const captures = mockFetches(t)
+    await handle(page, { 'user-agent': 'Claude-User' })
+    assert.equal(captures.length, 0)
+
+    enableCapture(t)
+    await handle(`${page}.md`, { 'user-agent': 'Vercel Edge Functions' })
+    assert.equal(captures.length, 0)
+})
