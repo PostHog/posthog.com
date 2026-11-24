@@ -184,6 +184,7 @@ module.exports = {
                 'light-purple-dark': '#78689D',
                 'light-yellow': '#FFCE5C',
                 'light-yellow-dark': '#C7982B',
+                'lemon-lighter': '#FFEBA3', // @posthog/brand --posthog-lemon-lighter
                 'lime-green': '#96E5B6',
                 navy: '#1E2F46',
                 'navy-dark': '#0F233D',

@@ -73,6 +73,7 @@ import TeamMember from './components/TeamMember'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { CalloutBox } from './components/Docs/CalloutBox'
+import HoggieCallout from './components/HoggieCallout'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
 import WizardCommand from './components/WizardCommand'
@@ -86,6 +87,7 @@ export const shortcodes = {
     BrandLogos,
     CallToAction,
     CalloutBox,
+    HoggieCallout,
     Caption,
     HearAboutUsCarousel,
     CloudinaryImage,

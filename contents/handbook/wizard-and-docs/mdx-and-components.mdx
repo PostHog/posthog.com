@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+import { HedgehogBasketballCoach } from "@posthog/brand/hoggies"
+
 <CalloutBox icon="IconInfo" title="Website components" type="fyi">
 
 The website's core technical architecture is built and maintained by the <SmallTeam slug="website" />. See their handbook pages on the [website](/handbook/engineering/posthog-com/how-posthog-website-works) and [MDX components](/handbook/engineering/posthog-com/markdown) for more information.
@@ -48,7 +50,7 @@ import EventProperties from './_snippets/event-properties.mdx'
 
 #### TSX snippets
 
-Create a TSX snippet for dynamic content for lightweight components or React hooks. 
+Create a TSX snippet for dynamic content for lightweight components or React hooks.
 
 ```tsx
 // _snippets/installation-platforms.tsx
@@ -72,7 +74,7 @@ If the TSX snippet contains substantial logic, create a reusable component or ho
 
 ### Frontmatter
 
-All `.mdx` pages support frontmatter, which Gatsby uses to configure page metadata. 
+All `.mdx` pages support frontmatter, which Gatsby uses to configure page metadata.
 
 ```mdx file=install-react.MDX
 
@@ -167,6 +169,7 @@ For code examples in multiple programming languages:
 
 ```python
 # Python example
+
 ```
 
 </MultiLanguage>
@@ -210,6 +213,59 @@ Provide detail here. You can go on at length if necessary.
 
 Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
 
+### Hoggie callouts
+
+Use a `<HoggieCallout>` with `variant="yellow"` to send readers to a marketing asset, a tool, a playground, a leaderboard, or a weird, fun, or sparks-joy page. A hog stands next to the copy. Readers can poke it, and it says a short line in a speech bubble.
+
+Don't use it for warnings or required steps – use a [callout box](#callout-boxes) for those. Use one per page at most.
+
+```mdx
+import { HedgehogBasketballCoach } from "@posthog/brand/hoggies"
+
+<HoggieCallout
+    variant="yellow"
+    hoggie={HedgehogBasketballCoach}
+    hoggieTitle="A hedgehog basketball coach spinning a ball, holding a clipboard"
+    ariaLabel="[Add callout label]"
+    title="[Add title - max 45 characters]"
+    description="[Add description - max 160 characters]"
+    buttonLabel="[Add button label - max 24 characters]"
+    to="/relative/link"
+    hoggieLines={["[Optional line for this hog - max 24 characters]"]}
+/>
+```
+
+It looks like this. Poke the hog:
+
+<HoggieCallout
+variant="yellow"
+hoggie={HedgehogBasketballCoach}
+hoggieTitle="A hedgehog basketball coach spinning a ball, holding a clipboard"
+ariaLabel="[Add callout label]"
+title="[Add title - max 45 characters]"
+description="[Add description - max 160 characters]"
+buttonLabel="[Add button label - max 24 characters]"
+to="/handbook/wizard-and-docs/mdx-and-components"
+hoggieLines={["[Optional line for this hog - max 24 characters]"]}
+/>
+
+When you add one:
+
+1. **Change the copy.** Replace the title, description, button label, link, and `ariaLabel`. Keep the title to 45 characters or fewer (about 36 fit on one line in the docs column), the description to 160, and the button label to 24.
+2. **Pick a hog** that fits the topic from the [hoggies library](https://brand.posthog.com/hoggies). It shows the import line for each hog. Put the import at the top of the `.mdx` file, under the frontmatter. Write a `hoggieTitle` that describes the art. Never draw or generate a hog.
+3. **Review the speech bubble lines.** Read the [12 standard lines](https://github.com/PostHog/posthog.com/blob/master/src/components/HoggieCallout/lines.ts) and check that they suit the page. You can add your own `hoggieLines` that fit the hog. Follow the rules for new lines below.
+4. **Turn off the hog on sensitive pages.** On pages about incidents, billing errors, or data deletion, add `interactive={false}`. The hog stays, but it doesn't move or talk.
+
+Rules for new lines:
+
+- Keep each line to 24 characters or fewer.
+- The hog talks about itself or is warm to the reader. It never tells the reader to stop, go away, or do better.
+- No escalation, innuendo, or jokes about bodies, death, money, politics, or AI replacing people.
+- No links.
+- If a line would be awkward on the most serious docs page, cut it.
+
+See the [`HoggieCallout` README](https://github.com/PostHog/posthog.com/blob/master/src/components/HoggieCallout/README.md) for all the props and layouts.
+
 ### Steps
 
 Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
@@ -247,7 +303,6 @@ Our mdx parser does not play nice with certain whitespace. When using the compon
 
 </CalloutBox>
 
-
 ### Decision tree
 
 Use decision trees to help users choose between 2-6 options:
@@ -272,12 +327,11 @@ Use decision trees to help users choose between 2-6 options:
 
 ### PostHog AI components
 
-You can also link to PostHog AI which used to be called Max AI. 
+You can also link to PostHog AI which used to be called Max AI.
 
 Use `<AskMax>` to provide in-context help:
 
 The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
-
 
 ```jsx
 <AskMax
@@ -339,4 +393,3 @@ Run the formatter to catch issues:
 ```bash
 pnpm format:docs
 ```
-

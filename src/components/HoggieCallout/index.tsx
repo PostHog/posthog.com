@@ -1,9 +1,11 @@
 /**
  * Callout with a hoggie breaking out of the top border, copy on the left, and a button on the right.
  * The wrapper is a size container, so the row stacks on the callout's width.
+ * `variant="yellow"` renders `YellowHoggieCallout` instead.
  */
 import React from 'react'
 import OSButton from 'components/OSButton'
+import YellowHoggieCallout from './YellowHoggieCallout'
 
 type Hoggie = React.ComponentType<{ title?: string; className?: string }>
 
@@ -31,9 +33,24 @@ export interface HoggieCalloutProps {
     buttonLabel: string
     to: string
     className?: string
+    /** `yellow` turns on the yellow layout and the hog interactions. Defaults to `default`. */
+    variant?: 'default' | 'yellow'
+    /** Yellow only. The side the hog sits on in a medium or wide container. Defaults to `left`. */
+    hoggieSide?: 'left' | 'right'
+    /** Yellow only. Turns on the hover nudge and the poke. Defaults to `true` for `yellow`. */
+    interactive?: boolean
+    /** Yellow only. Extra speech bubble lines, added to the standard lines. */
+    hoggieLines?: string[]
 }
 
-export default function HoggieCallout({
+export default function HoggieCallout(props: HoggieCalloutProps): JSX.Element {
+    if (props.variant === 'yellow') {
+        return <YellowHoggieCallout {...props} />
+    }
+    return <DefaultHoggieCallout {...props} />
+}
+
+function DefaultHoggieCallout({
     hoggie: Hoggie,
     hoggieTitle,
     hoggiePlacement = 'breakout',
