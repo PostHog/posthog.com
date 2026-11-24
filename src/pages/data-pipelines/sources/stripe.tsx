@@ -1,11 +1,10 @@
 import React from 'react'
-import Link from 'components/Link'
-import OSButton from 'components/OSButton'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import SEO from 'components/seo'
-import Editor from 'components/Editor'
-import WarehouseWizardHint from 'components/WarehouseWizardHint'
-import GuideCardActions from 'components/DataPipelines/GuideCardActions'
+import SourcePage, {
+    SourceFeature,
+    SourceProductUse,
+    SourceQuestionGroup,
+    SourceSyncMode,
+} from 'components/DataPipelines/SourcePage'
 import {
     IconBell,
     IconBug,
@@ -28,31 +27,7 @@ import {
 } from '@posthog/icons'
 import { HedgehogHahaBizzniss, HedgehogMoney } from '@posthog/brand/hoggies'
 
-type IconComponent = React.ComponentType<{ className?: string }>
-
-/** Opens PostHog AI with the prompt pre-filled but not sent, so the reader can fill in the [placeholders] first. */
-const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:${encodeURIComponent(prompt)}`
-
-// Same highlight as the /enterprise hero.
-const HIGHLIGHT_COLOR = 'rgba(247, 165, 1, 0.15)'
-
-const CARD = 'flex h-full flex-col rounded border border-primary bg-primary p-5'
-const SECTION = 'mt-12 border-t border-primary pt-10'
-
-interface Question {
-    Icon: IconComponent
-    iconColor: string
-    question: string
-    answer: string
-    href: string
-}
-
-interface QuestionGroup {
-    role: string
-    questions: Question[]
-}
-
-const questionGroups: QuestionGroup[] = [
+const questionGroups: SourceQuestionGroup[] = [
     {
         role: 'Product',
         questions: [
@@ -112,15 +87,7 @@ const questionGroups: QuestionGroup[] = [
     },
 ]
 
-interface ProductUse {
-    product: string
-    Icon: IconComponent
-    iconColor: string
-    description: string
-    prompt: string
-}
-
-const productUses: ProductUse[] = [
+const productUses: SourceProductUse[] = [
     {
         product: 'Surveys',
         Icon: IconMessage,
@@ -163,34 +130,30 @@ const productUses: ProductUse[] = [
     },
 ]
 
-interface SyncedTableGroup {
-    group: string
-    Icon: IconComponent
-    tables: string
-}
-
-const syncedTables: SyncedTableGroup[] = [
+const syncedTables: SourceFeature[] = [
     {
-        group: 'Billing core',
+        title: 'Billing core',
         Icon: IconReceipt,
-        tables: 'Customers, charges, invoices, subscriptions, and subscription schedules.',
+        description: 'Customers, charges, invoices, subscriptions, and subscription schedules.',
     },
-    { group: 'Catalog', Icon: IconStack, tables: 'Products, prices, coupons, discounts, and tax rates.' },
     {
-        group: 'Money movement',
-        Icon: IconHandMoney,
-        tables: 'Refunds, credit notes, payment intents, payouts, balance transactions, and disputes.',
+        title: 'Catalog',
+        Icon: IconStack,
+        description: 'Products, prices, coupons, discounts, and tax rates.',
     },
-    { group: 'Checkout', Icon: IconCart, tables: 'Checkout sessions, payment links, setup intents, and quotes.' },
+    {
+        title: 'Money movement',
+        Icon: IconHandMoney,
+        description: 'Refunds, credit notes, payment intents, payouts, balance transactions, and disputes.',
+    },
+    {
+        title: 'Checkout',
+        Icon: IconCart,
+        description: 'Checkout sessions, payment links, setup intents, and quotes.',
+    },
 ]
 
-interface SyncMode {
-    mode: string
-    Icon: IconComponent
-    description: string
-}
-
-const syncModes: SyncMode[] = [
+const syncModes: SourceSyncMode[] = [
     {
         mode: 'Webhook sync',
         Icon: IconWebhooks,
@@ -204,272 +167,70 @@ const syncModes: SyncMode[] = [
     },
 ]
 
-function Section({
-    id,
-    title,
-    intro,
-    aside,
-    children,
-}: {
-    id: string
-    title: string
-    intro?: React.ReactNode
-    aside?: React.ReactNode
-    children: React.ReactNode
-}) {
-    return (
-        <section id={id} className={`${SECTION} scroll-mt-4`}>
-            <div className="mb-6 grid items-end gap-6 @3xl:grid-cols-[minmax(0,1fr)_auto]">
-                <div className="min-w-0">
-                    <h2 className="m-0 text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">{title}</h2>
-                    {intro && <p className="m-0 mt-2 max-w-2xl text-pretty text-base text-secondary">{intro}</p>}
-                </div>
-                {aside && <div className="hidden @3xl:block">{aside}</div>}
-            </div>
-            {children}
-        </section>
-    )
-}
-
-const jumpLinks = [
-    { id: 'what-syncs', label: 'What syncs' },
-    { id: 'connect', label: 'How to connect' },
-    { id: 'questions', label: 'Questions you can answer' },
-    { id: 'across-posthog', label: 'Use it across PostHog' },
-]
-
-// Resolve targets inside this page, not the whole document: another open window can have a
-// section with the same id (like /mcp's "connect").
-function JumpLinks({ pageRef }: { pageRef: React.RefObject<HTMLDivElement> }) {
-    return (
-        <nav aria-label="On this page" className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-            <span className="font-semibold text-muted">On this page:</span>
-            {jumpLinks.map((link) => (
-                <button
-                    key={link.id}
-                    type="button"
-                    onClick={() =>
-                        pageRef.current?.querySelector(`[id="${link.id}"]`)?.scrollIntoView({ behavior: 'smooth' })
-                    }
-                    className="font-semibold text-red dark:text-yellow"
-                >
-                    {link.label}
-                </button>
-            ))}
-        </nav>
-    )
-}
-
 export default function StripeSource(): JSX.Element {
-    const pageRef = React.useRef<HTMLDivElement>(null)
-
     return (
-        <>
-            <SEO
-                title="Query your Stripe data in PostHog"
-                description="Connect Stripe to PostHog and answer revenue questions like which features drive revenue, or what customers do before they cancel."
-                image="images/og/cdp.jpg"
-            />
-            <Editor
-                slug="/data-pipelines/sources/stripe"
-                maxWidth="100%"
-                hasPadding={false}
-                disableFormatting
-                bookmark={{
-                    title: 'Query your Stripe data in PostHog',
-                    description: 'Connect Stripe to PostHog and answer revenue questions with product data.',
-                }}
-            >
-                <div ref={pageRef} className="@container not-prose mx-auto max-w-7xl p-4 pb-16 text-primary @xl:p-8">
-                    <header className="grid gap-6 @3xl:grid-cols-[minmax(0,1fr)_minmax(12rem,15rem)] @3xl:items-center @3xl:gap-10">
-                        <div className="min-w-0">
-                            <h1 className="m-0 text-balance text-4xl font-bold leading-[1.1] tracking-tight @2xl:text-5xl">
-                                Query your{' '}
-                                <RoughAnnotation
-                                    type="highlight"
-                                    color={HIGHLIGHT_COLOR}
-                                    strokeWidth={1}
-                                    padding={2}
-                                    delay={300}
-                                    // The scroll trigger never fires this close to the top of the window
-                                    show
-                                    multiline
-                                >
-                                    Stripe data
-                                </RoughAnnotation>{' '}
-                                in PostHog
-                            </h1>
-                            <p className="m-0 mt-4 max-w-xl text-pretty text-lg text-secondary @2xl:text-xl">
-                                Connect Stripe to PostHog to put your revenue and product data in one place, so you can
-                                see which features drive revenue and what customers do before they cancel.
-                            </p>
-                            <div className="mt-6">
-                                <OSButton
-                                    asLink
-                                    to="/docs/data-pipelines/sources"
-                                    state={{ newWindow: true }}
-                                    variant="primary"
-                                    size="xl"
-                                >
-                                    Connect Stripe to get started
-                                </OSButton>
-                            </div>
-                        </div>
-                        <HedgehogMoney className="hidden w-full max-w-[15rem] justify-self-end @3xl:block" />
-                    </header>
-
-                    <JumpLinks pageRef={pageRef} />
-
-                    <Section
-                        id="what-syncs"
-                        title="What syncs from Stripe"
-                        intro={
-                            <>
-                                PostHog can sync <strong className="text-primary">40+ Stripe tables</strong>, so most of
-                                your billing model comes across, not a thin slice of it, including:
-                            </>
-                        }
-                    >
-                        <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @5xl:grid-cols-4">
-                            {syncedTables.map((t) => (
-                                <div key={t.group} className={CARD}>
-                                    <h3 className="m-0 mb-1 flex items-center gap-2 text-base font-bold">
-                                        <t.Icon className="size-5 shrink-0 text-muted" />
-                                        {t.group}
-                                    </h3>
-                                    <p className="m-0 text-[15px] text-secondary">{t.tables}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <h3 className="m-0 mb-3 mt-10 text-xl font-bold tracking-tight">Choose your sync mode</h3>
-                        <div className="grid grid-cols-1 gap-4 @3xl:grid-cols-3">
-                            {syncModes.map((m) => (
-                                <div key={m.mode} className={CARD}>
-                                    <h4 className="m-0 mb-1 flex items-center gap-2 text-base font-bold">
-                                        <m.Icon className="size-5 shrink-0 text-muted" />
-                                        {m.mode}
-                                    </h4>
-                                    <p className="m-0 text-[15px] text-secondary">{m.description}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <p className="m-0 mt-4 text-[15px] text-secondary">
-                            PostHog handles the webhook signing secrets and updates subscriptions when you turn on new
-                            tables.
-                        </p>
-                        <div className="mt-6">
-                            <OSButton
-                                asLink
-                                to="/docs/data-pipelines/sources/stripe"
-                                state={{ newWindow: true }}
-                                variant="secondary"
-                                size="md"
-                            >
-                                Read the docs
-                            </OSButton>
-                        </div>
-                    </Section>
-
-                    <Section
-                        id="connect"
-                        title="How to connect Stripe"
-                        intro="You don't need a data engineer or a warehouse of your own. The setup wizard walks you through it, and you choose which tables to sync and what access PostHog gets: connect with OAuth, or use a restricted API key with read access."
-                    >
-                        <WarehouseWizardHint />
-                    </Section>
-
-                    <Section id="questions" title="Questions you can answer with Stripe and PostHog">
-                        {questionGroups.map((group) => (
-                            <div key={group.role} className="mt-8 first:mt-0">
-                                <h3 className="m-0 mb-3 text-xl font-bold tracking-tight">{group.role}</h3>
-                                <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
-                                    {group.questions.map((q) => (
-                                        <div key={q.question} className={CARD}>
-                                            <q.Icon className={`mb-3 size-6 ${q.iconColor}`} />
-                                            <h4 className="m-0 mb-2 text-lg font-bold leading-tight">{q.question}</h4>
-                                            <p className="m-0 text-[15px] text-secondary">{q.answer}</p>
-                                            <GuideCardActions href={q.href} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </Section>
-
-                    <Section
-                        id="across-posthog"
-                        title="Use Stripe data across PostHog"
-                        intro="Once it's in PostHog, Stripe data isn't trapped in an analytics tab. You can use it everywhere you already work."
-                    >
-                        <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2 @6xl:grid-cols-3">
-                            {productUses.map((use) => (
-                                <div key={use.product} className={CARD}>
-                                    <h3 className="m-0 mb-2 flex items-center gap-2 text-lg font-bold leading-tight">
-                                        <use.Icon className={`size-5 shrink-0 ${use.iconColor}`} />
-                                        {use.product}
-                                    </h3>
-                                    <p className="m-0 text-[15px] text-secondary">{use.description}</p>
-                                    <div className="mt-auto pt-4">
-                                        <OSButton
-                                            asLink
-                                            to={maxPromptUrl(use.prompt)}
-                                            external
-                                            variant="secondary"
-                                            size="sm"
-                                        >
-                                            Try it in PostHog AI
-                                        </OSButton>
-                                    </div>
-                                </div>
-                            ))}
-                            <div className="flex h-full overflow-hidden rounded border border-primary bg-primary">
-                                <div className="w-1 shrink-0 bg-green" aria-hidden />
-                                <p className="m-0 p-5 text-[15px] text-secondary">
-                                    <strong className="text-primary">Tip:</strong> Build a{' '}
-                                    <em>&ldquo;paying and near their plan limit&rdquo;</em> cohort once, then reuse the
-                                    same group as a flag target, a survey audience, and an alert.
-                                </p>
-                            </div>
-                        </div>
-                    </Section>
-
-                    <section className={SECTION}>
-                        <div className="grid items-center gap-6 @3xl:grid-cols-[minmax(0,1fr)_minmax(10rem,13rem)] @3xl:gap-10">
-                            <div className="min-w-0">
-                                <h2 className="m-0 max-w-xl text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">
-                                    You've exported from Stripe for the last time
-                                </h2>
-                                <p className="m-0 mt-2 max-w-2xl text-base text-secondary">
-                                    Connect Stripe and never open a spreadsheet to answer one question again.
-                                </p>
-                                <div className="mt-5 flex flex-col items-start gap-3 @xs:flex-row @xs:items-center">
-                                    <OSButton
-                                        asLink
-                                        to="/docs/data-pipelines/sources"
-                                        state={{ newWindow: true }}
-                                        variant="primary"
-                                        size="xl"
-                                    >
-                                        Show me the money (data)
-                                    </OSButton>
-                                    <p className="m-0 text-sm text-secondary">
-                                        Not using PostHog?{' '}
-                                        <Link
-                                            to="https://app.posthog.com/signup"
-                                            external
-                                            className="font-semibold text-red dark:text-yellow"
-                                        >
-                                            Sign up
-                                        </Link>
-                                    </p>
-                                </div>
-                            </div>
-                            <HedgehogHahaBizzniss className="hidden w-full max-w-[13rem] justify-self-end @3xl:block" />
-                        </div>
-                    </section>
-                </div>
-            </Editor>
-        </>
+        <SourcePage
+            seo={{
+                title: 'Query your Stripe data in PostHog',
+                description:
+                    'Connect Stripe to PostHog and answer revenue questions like which features drive revenue, or what customers do before they cancel.',
+                image: 'images/og/cdp.jpg',
+            }}
+            slug="/data-pipelines/sources/stripe"
+            bookmark={{
+                title: 'Query your Stripe data in PostHog',
+                description: 'Connect Stripe to PostHog and answer revenue questions with product data.',
+            }}
+            hero={{
+                before: 'Query your',
+                highlight: 'Stripe data',
+                after: 'in PostHog',
+                description:
+                    'Connect Stripe to PostHog to put your revenue and product data in one place, so you can see which features drive revenue and what customers do before they cancel.',
+                ctaLabel: 'Connect Stripe to get started',
+                ctaTo: '/docs/data-pipelines/sources',
+                Hedgehog: HedgehogMoney,
+            }}
+            whatSyncs={{
+                title: 'What syncs from Stripe',
+                intro: (
+                    <>
+                        PostHog can sync <strong className="text-primary">40+ Stripe tables</strong>, so most of your
+                        billing model comes across, not a thin slice of it, including:
+                    </>
+                ),
+                features: syncedTables,
+                modesTitle: 'Choose your sync mode',
+                modes: syncModes,
+                note: 'PostHog handles the webhook signing secrets and updates subscriptions when you turn on new tables.',
+                docsTo: '/docs/data-pipelines/sources/stripe',
+            }}
+            connect={{
+                title: 'How to connect Stripe',
+                intro: "You don't need a data engineer or a warehouse of your own. The setup wizard walks you through it, and you choose which tables to sync and what access PostHog gets: connect with OAuth, or use a restricted API key with read access.",
+            }}
+            questions={{
+                title: 'Questions you can answer with Stripe and PostHog',
+                groups: questionGroups,
+            }}
+            across={{
+                title: 'Use Stripe data across PostHog',
+                intro: "Once it's in PostHog, Stripe data isn't trapped in an analytics tab. You can use it everywhere you already work.",
+                uses: productUses,
+                tip: (
+                    <>
+                        Build a <strong>&ldquo;paying and near their plan limit&rdquo;</strong> cohort once, then reuse
+                        the same group as a flag target, a survey audience, and an alert.
+                    </>
+                ),
+            }}
+            closing={{
+                title: "You've exported from Stripe for the last time",
+                description: 'Connect Stripe and never open a spreadsheet to answer one question again.',
+                ctaLabel: 'Show me the money (data)',
+                ctaTo: '/docs/data-pipelines/sources',
+                Hedgehog: HedgehogHahaBizzniss,
+            }}
+        />
     )
 }

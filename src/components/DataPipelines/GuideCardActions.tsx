@@ -4,7 +4,7 @@ import { normalizeUrl } from 'components/Learn/PocketGuides/bookModel'
 import { useSkillFiles } from 'components/Learn/PocketGuides/useSkillFile'
 import { pocketGuideDestination } from 'constants/pocketGuides'
 
-/** "Read the guide" + "Copy skill" buttons for a card that links to a pocket guide. */
+/** "Read the guide" button and "Copy skill" text for a card that links to a pocket guide. */
 export default function GuideCardActions({ href }: { href: string }): JSX.Element {
     const skills = useSkillFiles()
     const guideUrl = pocketGuideDestination(href)
@@ -28,9 +28,14 @@ export default function GuideCardActions({ href }: { href: string }): JSX.Elemen
             <CallToAction to={guideUrl} size="sm">
                 Read the guide
             </CallToAction>
-            <CallToAction type="secondary" size="sm" disabled={!skill?.raw} onClick={copySkill}>
+            <button
+                type="button"
+                className="text-sm font-semibold text-secondary hover:text-primary disabled:opacity-50"
+                disabled={!skill?.raw}
+                onClick={copySkill}
+            >
                 {copyState === 'copied' ? 'Copied' : copyState === 'failed' ? "Couldn't copy" : 'Copy skill'}
-            </CallToAction>
+            </button>
         </div>
     )
 }
