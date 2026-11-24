@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconGraph, IconMegaphone, IconPencil, IconToggle } from '@posthog/icons'
+import { IconCalendar, IconGraph, IconMegaphone, IconPencil, IconToggle } from '@posthog/icons'
 import Link from 'components/Link'
 import { InlineCode, LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -58,6 +58,42 @@ export const broadcasts: CarouselSlide[] = [
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/broadcasts_schedule_light_5a2d626aff.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/broadcasts_schedule_dark_d66e222027.png',
             alt: 'The Schedule step of a broadcast with a weekly recurring schedule',
+        },
+    },
+    {
+        ...slideStyle,
+        slug: 'calendar',
+        label: 'Calendar',
+        icon: <IconCalendar className="size-5" />,
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'See every send on a calendar',
+        description: (
+            <>
+                <p>
+                    The Calendar tab shows each broadcast and scheduled workflow on the day it goes out, with a check
+                    when it sent. Drag a scheduled send to another day to move it.
+                </p>
+                {list([
+                    {
+                        label: 'Repeats',
+                        description: 'A recurring broadcast shows on each day it sends, like a weekly digest.',
+                    },
+                    {
+                        label: 'Month or week',
+                        description: 'Switch between a month and a week view, and filter which sends show.',
+                    },
+                    {
+                        label: 'Details on click',
+                        description: 'Click a send to see its time, audience, category, and who made it.',
+                    },
+                ])}
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_broadcasts_calendar_light_900a17d154.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_broadcasts_calendar_dark_d3910ae42d.png',
+            alt: 'The broadcasts calendar, with sent and scheduled broadcasts across a month',
         },
     },
     {
