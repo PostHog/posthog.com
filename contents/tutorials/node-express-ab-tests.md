@@ -136,7 +136,7 @@ Once created, set the primary metric to a trend of `endpoint_called` and then cl
 To implement the A/B test, we: 
 
 1. Change our request handler to `async`.
-2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node/reference#get-feature-flag). 
+2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node#get-feature-flag). 
 3. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 

@@ -21,6 +21,7 @@ Enter your Gorgias credentials to pull your helpdesk data – tickets, messages,
    - **API key** – create one in your Gorgias account under **Settings → REST API**.
 
    This source authenticates with HTTP Basic Auth (email plus API key) and requires read access to the endpoints you want to sync.
+
 4. Back in PostHog, enter the credentials and click **Next**.
 5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
 
@@ -28,17 +29,18 @@ Once the syncs are complete, you can start using Gorgias data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `tickets` | Support tickets | Full refresh |
-| `messages` | Messages on tickets | Full refresh |
-| `customers` | Customers | Full refresh |
-| `users` | Helpdesk users (agents) | Full refresh |
-| `satisfaction_surveys` | Customer satisfaction surveys | Full refresh |
-| `tags` | Tags | Full refresh |
-| `views` | Views | Full refresh |
-| `teams` | Teams | Full refresh |
-| `macros` | Macros | Full refresh |
+| Table                  | Description                       | Sync method  |
+| ---------------------- | --------------------------------- | ------------ |
+| `tickets`              | Support tickets                   | Full refresh |
+| `messages`             | Messages on tickets               | Full refresh |
+| `customers`            | Customers                         | Full refresh |
+| `users`                | Helpdesk users (agents)           | Full refresh |
+| `satisfaction_surveys` | Customer satisfaction surveys     | Full refresh |
+| `tags`                 | Tags                              | Full refresh |
+| `views`                | Views                             | Full refresh |
+| `view_items`           | Tickets in each saved ticket view | Full refresh |
+| `teams`                | Teams                             | Full refresh |
+| `macros`               | Macros                            | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

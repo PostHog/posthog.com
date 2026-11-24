@@ -4,7 +4,7 @@ title: Privacy and redaction
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-MCP tool calls can contain API tokens, personal data, and model output. The SDK sanitizes and truncates events before sending them. Use this page to understand automatic redaction and configure additional filtering.
+MCP tool calls can contain API tokens, personal data, and model output. The SDK sanitizes and truncates events before sending them. Use this page to understand automatic redaction and configure additional filtering. For how anonymous sessions avoid creating person profiles, see [Identifying users](/docs/mcp-analytics/identifying-users#anonymous-sessions-and-person-profiles).
 
 ## What never leaves your process
 
@@ -135,13 +135,9 @@ PostHog::MCP.instrument(
 
 Removing `$mcp_parameters` and `$mcp_response` keeps tool arguments and results out of PostHog. Intent, error messages, exception details, and custom properties stay unless you remove them too.
 
-Language notes:
+In Python, `MCPAnalyticsOptions.before_send` can be sync or async.
 
-- **Python:** `MCPAnalyticsOptions.before_send` can be sync or async. On a [`PostHogMCP`](/docs/mcp-analytics/installation/python#custom-dispatchers) dispatcher, pass `before_send=` to the client instead. That callback must be synchronous.
-- **Go:** the hook is the `posthog-go` client's `BeforeSend`, so it also sees your app's other events. It receives the `$exception` event as a `posthog.Exception` and every other event as a `posthog.Capture`.
-- **TypeScript:** on a `PostHogMCP` dispatcher, pass `beforeSend` to the client constructor.
-
-Dropping a tool call event doesn't drop its `$exception` event. Check for `$exception` too if you want both gone. In Rust, dropping a `$mcp_tool_call` also drops its `$exception`.
+In Rust, dropping a tool call event also drops its `$exception` event. Elsewhere it doesn't, so check for `$exception` too if you want both gone.
 
 ## Turn off exception events
 
@@ -167,19 +163,13 @@ PostHog::MCP.instrument(server, posthog, enable_exception_autocapture: false)
 
 </MultiLanguage>
 
-On custom dispatchers, use `mcp_exception_autocapture=False` on Python's `PostHogMCP` and `mcp_exception_autocapture: false` on Ruby's `PostHog::MCP::Client`.
-
-## Anonymous sessions and person profiles
-
-Events for sessions with no resolved identity are sent with person processing turned off, so anonymous MCP sessions don't each create a person profile. When your identify callback resolves an identity, events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
-
 ## Buffering
 
 Events queue in the PostHog client you pass in. If the queue overflows or fails to flush, events are dropped. Send queued events before the process stops, as each [installation page](/docs/mcp-analytics/installation) shows.
 
 ## Logging
 
-MCP servers often use stdio, where writing to stdout corrupts the protocol stream. The SDKs' default loggers write nothing. Pass a logger during development to see callback errors and warnings, such as `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go. The Rust SDK logs through `tracing`, so point your subscriber at stderr. The Go adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that:
+The SDKs write nothing to stdout, because stdio servers use it for the protocol. During development, pass `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go, to see callback errors and warnings. Rust logs through `tracing`, so point your subscriber at stderr:
 
 ```ts
 instrument(server, posthog, {

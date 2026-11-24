@@ -11,12 +11,14 @@ import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
 <PrivateBeta />
 
-Business Knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business Knowledge MCP tools all read the same sources.
+Business Knowledge gives your agents the facts about your business. Add your docs, pricing, and policies once. Then connect a support agent, a help desk, or any other agent you build, and it answers from that knowledge and names its source.
+
+PostHog AI and Support read the same sources, so every agent gives the same answer. You decide what each agent can read, and you see how often your knowledge is searched and cited.
 
 <ProductScreenshot
-    imageLight="/images/docs/business-knowledge/libraries-light.png"
-    imageDark="/images/docs/business-knowledge/libraries-dark.png"
-    alt="The Business Knowledge Libraries tab, listing text and URL sources grouped into two libraries"
+    imageLight="/images/docs/business-knowledge/sources-light.png"
+    imageDark="/images/docs/business-knowledge/sources-dark.png"
+    alt="The Business Knowledge Sources tab, listing URL, text, file, and learned sources with their libraries and status"
     classes="rounded"
 />
 
@@ -39,7 +41,11 @@ The Support AI agent drafts ticket replies grounded in these sources.
 </SurfaceCard>
 
 <SurfaceCard icon="IconMagic" color="purple" title="MCP" url="/docs/business-knowledge/where-to-use#mcp" cta="MCP tools and scopes">
-Search, read, add, and update sources from any MCP client or agent.
+Search, read, add, and update sources from your own MCP client, signed in as you.
+</SurfaceCard>
+
+<SurfaceCard icon="IconPlug" color="green" title="Your own agents" url="/docs/business-knowledge/connect-your-agent" cta="Connect your agent">
+Give an agent you build read-only access to all your knowledge, or to one library.
 </SurfaceCard>
 
 </SurfaceCards>
@@ -75,6 +81,7 @@ Finds files by name and README in repositories you select. Your code is not inde
 ## Use cases
 
 - **A customer asks about refunds.** Support drafts the reply from the refund policy you pasted or the page you indexed.
+- **Your own support agent needs your policies.** Connect it with a key limited to your public docs [library](/docs/business-knowledge/libraries), and it searches those sources before it answers.
 - **A teammate asks which plan includes a limit.** PostHog AI answers from your pricing page.
 - **Every reply needs the same tone.** Turn on **Always include in replies** for your tone guide, and every answer includes it.
 - **Your docs change.** A URL source on a daily refresh picks up the new pages.
@@ -82,3 +89,11 @@ Finds files by name and README in repositories you select. Your code is not inde
 - **Your handbook lives in GitHub.** Select the repository, and agents find the file by name and read it.
 
 Answers stay empty until two checks pass. See [Turn on AI data processing](/docs/business-knowledge/ai-data-processing).
+
+## Learn more
+
+- [How Business Knowledge works](/docs/business-knowledge/how-it-works) – What happens to a source, and how search finds a passage
+- [Libraries](/docs/business-knowledge/libraries) – Group sources and limit what each agent reads
+- [Build a support agent](/docs/business-knowledge/build-a-support-agent) – A working agent in Python, with OpenAI or Anthropic
+- [Usage](/docs/business-knowledge/usage) – Chunks ingested, searches, and citations
+- [Troubleshooting](/docs/business-knowledge/troubleshooting) – Fixes for the most common problems

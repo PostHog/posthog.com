@@ -1,3 +1,5 @@
+import sdkMarkdownReferences from '../../../gatsby/sdkMarkdownReferences.js'
+
 export const SDK_LANGUAGE_BY_ID = {
     'posthog-js': 'ts',
     'posthog-python': 'python',
@@ -16,8 +18,81 @@ export type SupportedSdkId = keyof typeof SDK_LANGUAGE_BY_ID
 
 export const SUPPORTED_SDK_IDS = Object.keys(SDK_LANGUAGE_BY_ID) as SupportedSdkId[]
 
+/** SDKs whose reference is served at `/docs/libraries/<slug>` instead of `/docs/references/<id>`. */
+export const LIBRARY_REFERENCE_SDK_IDS: readonly string[] = sdkMarkdownReferences.PUBLISHED_SDK_REFERENCES
+
+export const getSdkReferenceUrl = (sdkId: string): string =>
+    LIBRARY_REFERENCE_SDK_IDS.includes(sdkId)
+        ? `/docs/libraries/${sdkId.replace(/^posthog-/, '')}`
+        : `/docs/references/${sdkId}`
+
 export const getLanguageFromSdkId = (sdkId: string): string =>
     (SDK_LANGUAGE_BY_ID as Record<string, string>)[sdkId] ?? 'ts'
+
+export type PublishedSdkFeatures = {
+    eventCapture: boolean
+    autoCapture?: boolean
+    featureFlags: boolean
+    groupAnalytics: boolean
+    sessionRecording?: boolean
+    userIdentification: boolean
+    surveys?: boolean
+    aiObservability?: boolean
+    errorTracking?: boolean
+    logs?: boolean
+    tracing?: boolean
+}
+
+export type PublishedSdkMeta = {
+    slug: string
+    label: string
+    logoKey: string
+    features: PublishedSdkFeatures
+}
+
+const SERVER_FEATURES: PublishedSdkFeatures = {
+    eventCapture: true,
+    userIdentification: true,
+    featureFlags: true,
+    groupAnalytics: true,
+    errorTracking: true,
+}
+
+const CLIENT_FEATURES: PublishedSdkFeatures = {
+    ...SERVER_FEATURES,
+    autoCapture: true,
+    sessionRecording: true,
+    logs: true,
+}
+
+/** Metadata for SDKs whose reference page is generated from Strapi and carries no MDX frontmatter. */
+export const PUBLISHED_SDK_METADATA: Record<string, PublishedSdkMeta> = {
+    'posthog-node': { slug: 'node', label: 'Node.js', logoKey: 'nodejs', features: { ...SERVER_FEATURES, tracing: true } },
+    'posthog-python': {
+        slug: 'python',
+        label: 'Python',
+        logoKey: 'python',
+        features: { ...SERVER_FEATURES, tracing: true },
+    },
+    'posthog-go': { slug: 'go', label: 'Go', logoKey: 'go', features: SERVER_FEATURES },
+    'posthog-rust': { slug: 'rust', label: 'Rust', logoKey: 'rust', features: SERVER_FEATURES },
+    'posthog-ios': { slug: 'ios', label: 'iOS', logoKey: 'ios', features: CLIENT_FEATURES },
+    'posthog-android': { slug: 'android', label: 'Android', logoKey: 'android', features: CLIENT_FEATURES },
+    'posthog-flutter': {
+        slug: 'flutter',
+        label: 'Flutter',
+        logoKey: 'flutter',
+        features: { ...CLIENT_FEATURES, autoCapture: false, surveys: true },
+    },
+    'posthog-react-native': {
+        slug: 'react-native',
+        label: 'React Native',
+        logoKey: 'reactNative',
+        features: { ...CLIENT_FEATURES, surveys: true },
+    },
+}
+
+export const PUBLISHED_SDK_LIST: PublishedSdkMeta[] = Object.values(PUBLISHED_SDK_METADATA)
 
 /** The pinned `latest` row carries this in `info.version` instead of a semver. */
 export const VERSION_PLACEHOLDER = '<version>'
@@ -46,7 +121,8 @@ export const typeHasPage = (type?: { id?: string; properties?: unknown; example?
 export const parseVersionedReferenceSlug = (slug: string): { sdk: string; version: string } | null => {
     const trimmed = slug.replace(/^\/docs\/references\//, '').replace(/\.md$/, '')
     // Longest id first, or `posthog-react-native-1.2.3` resolves to `posthog-react`.
-    const sdk = [...SUPPORTED_SDK_IDS].sort((a, b) => b.length - a.length).find((id) => trimmed.startsWith(`${id}-`))
+    const knownSdkIds = Array.from(new Set([...SUPPORTED_SDK_IDS, ...LIBRARY_REFERENCE_SDK_IDS]))
+    const sdk = knownSdkIds.sort((a, b) => b.length - a.length).find((id) => trimmed.startsWith(`${id}-`))
     if (!sdk) return null
     const version = trimmed.slice(sdk.length + 1).split('/')[0]
     return version ? { sdk, version } : null

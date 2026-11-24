@@ -9,11 +9,11 @@ availability:
 sourceId: Yoco
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Yoco connector syncs payments, orders, refunds, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Yoco connector syncs payments, orders, refunds, taxes, Capital financing, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,9 +23,9 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Import payments, orders, refunds, payouts, catalogue, and staff from your Yoco business.
+Import payments, orders, refunds, payouts, catalogue, taxes, Capital advances, and staff from your Yoco business.
 
-Create an API key in the [Yoco Developer Console](https://developer.yoco.com/ui). Give the key the scopes for the tables you want to sync: `business/orders:read` for payments, orders, refunds, and payment links, `business/payouts:read` for payouts and payout entries, `business/catalogue:read` for items, categories, brands, and modifier groups, `business/locations:read` for locations, `business/staff:read` for staff, and `business/devices:read` for card machines.
+Create an API key in the [Yoco Developer Console](https://developer.yoco.com/ui). Give the key the scopes for the tables you want to sync: `business/orders:read` for payments, orders, refunds, and payment links, `business/payouts:read` for payouts and payout entries, `business/catalogue:read` for items, categories, brands, modifier groups, and taxes, `business/locations:read` for locations, `business/staff:read` for staff, `business/devices:read` for card machines, `business/capital_advances:read` for active Capital advances, and `business/capital_offers:read` for active Capital offers.
 
 You'll be asked for:
 

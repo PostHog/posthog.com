@@ -8,8 +8,16 @@ import { GatsbyNode } from 'gatsby'
 import fs from 'fs'
 import path from 'path'
 import DataLoader from 'dataloader'
+import YAML from 'yaml'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
-import { isSdkReferenceFile, splitFrontmatter } from './sdkMarkdownReferences'
+import { isSdkReferenceFile, sdkReferenceSlug } from './sdkMarkdownReferences'
+
+/** Splits a plain Markdown SDK reference into its YAML front matter and body. */
+const splitFrontmatter = (raw: string): { frontmatter: Record<string, any>; body: string } => {
+    const end = raw.startsWith('---\n') ? raw.indexOf('\n---\n', 3) : -1
+    if (end === -1) return { frontmatter: {}, body: raw }
+    return { frontmatter: YAML.parse(raw.slice(4, end)) || {}, body: raw.slice(end + 5) }
+}
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -163,7 +171,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             id: createNodeId(`sdk-markdown-reference-${file.id}`),
             parent: file.id,
             children: [],
-            slug: `/${file.relativePath.slice(0, -'.md'.length)}`,
+            slug: sdkReferenceSlug(file.relativePath),
             title: frontmatter.title || '',
             contentMaxWidthClass: frontmatter.contentMaxWidthClass,
             tableOfContents: frontmatter.tableOfContents,

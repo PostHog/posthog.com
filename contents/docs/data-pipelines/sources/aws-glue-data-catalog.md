@@ -56,7 +56,13 @@ When linking AWS Glue Data Catalog, you'll need:
         "glue:ListCrawls",
         "glue:ListWorkflows",
         "glue:GetWorkflowRuns",
-        "glue:ListDataQualityResults"
+        "glue:ListDataQualityResults",
+        "glue:ListDataQualityRulesets",
+        "glue:GetTriggers",
+        "glue:GetConnections",
+        "glue:ListRegistries",
+        "glue:ListSchemas",
+        "glue:ListSchemaVersions"
       ],
       "Resource": "*"
     }
@@ -73,6 +79,12 @@ You can scope this down to only the permissions you need:
 | `crawlers`, `crawls`                                  | `glue:GetCrawlers`, `glue:ListCrawls`                                                |
 | `workflow_runs`                                       | `glue:ListWorkflows`, `glue:GetWorkflowRuns`                                         |
 | `data_quality_results`                                | `glue:ListDataQualityResults`                                                        |
+| `data_quality_rulesets`                               | `glue:ListDataQualityRulesets`                                                       |
+| `triggers`                                            | `glue:GetTriggers`                                                                   |
+| `connections`                                         | `glue:GetConnections`                                                                |
+| `schema_registries`                                   | `glue:ListRegistries`                                                                |
+| `schemas`                                             | `glue:ListSchemas`                                                                   |
+| `schema_versions`                                     | `glue:ListSchemaVersions`                                                            |
 
 3. Create an access key for the user under **Security credentials** > **Access keys**.
 4. Copy the **Access key ID** and **Secret access key** – you'll need both when linking the source in PostHog.

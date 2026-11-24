@@ -14,7 +14,6 @@ import { MDXProvider } from '@mdx-js/react'
 import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
-import { DifferentHighlights } from 'components/About/v2/DifferentHighlights'
 import OSButton from 'components/OSButton'
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 const CustomerCount = () => <span>{CUSTOMER_COUNT.toLocaleString()}+</span>
@@ -35,7 +34,6 @@ const mdxComponents = {
     YC,
     TLDR,
     LottieAnimation,
-    DifferentHighlights,
     HappyHog,
     Letterhead,
     CloudinaryImage,

@@ -272,6 +272,7 @@ import (
     "context"
     "net/http"
     "net/http/httptest"
+    "strings"
     "testing"
 
     "github.com/posthog/posthog-go/v2"
@@ -280,7 +281,7 @@ import (
 func TestSendPasswordReset(t *testing.T) {
     keys := make(chan string, 1)
     server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        if r.URL.Path != "/api/projects/@current/messaging/send/email/" {
+        if !strings.HasSuffix(r.URL.Path, "/messaging/send/email/") {
             // The client also polls flag definitions here with the secret key
             http.NotFound(w, r)
             return

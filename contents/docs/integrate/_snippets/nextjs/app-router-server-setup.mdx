@@ -16,15 +16,19 @@ export default function PostHogClient() {
 }
 ```
 
-> **Note:** Because server-side functions in Next.js can be short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. 
-> - `flushAt` sets how many capture calls we should flush the queue (in one batch). 
-> - `flushInterval` sets how many milliseconds we should wait before flushing the queue. 
-> Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdown()` once done.
+> **Note:** Next.js server code often runs in serverless functions, which can freeze as soon as the response is sent. Setting `flushAt` to `1` and `flushInterval` to `0` sends each event right away instead of batching it.
+> - `flushAt` sets how many capture calls are queued before the SDK sends them in one batch.
+> - `flushInterval` sets how many milliseconds the SDK waits before sending the queue.
+>
+> Call `posthog.shutdown()` once you're done so pending events are sent. On Next.js 15.1 and later, wrap it in [`after`](https://nextjs.org/docs/app/api-reference/functions/after) so the network request runs after the response is sent and doesn't delay it.
+>
+> If you run Next.js as a long-running Node server (for example `next start` on your own infrastructure), create one shared client at module level and keep the default `flushAt` and `flushInterval`. Every event then rides in a batch instead of its own HTTP request, and you call `shutdown()` only when the process exits.
 
 To use this client, we import it into our pages and call it with the `PostHogClient` function:
 
 ```js
 import Link from 'next/link'
+import { after } from 'next/server'
 import PostHogClient from '../posthog'
 
 export default async function About() {
@@ -33,7 +37,7 @@ export default async function About() {
   const flags = await posthog.getAllFlags(
     'user_distinct_id' // replace with a user's distinct ID
   );
-  await posthog.shutdown()
+  after(() => posthog.shutdown())
 
   return (
     <main>

@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The CleverTap connector syncs one configured event and the profiles of users who performed that event into the PostHog data warehouse. This is useful for retention analysis, campaign attribution, and combining CleverTap engagement data with your product analytics.
+The CleverTap connector syncs events, profiles, campaigns, message reports, and content blocks into the PostHog data warehouse. This is useful for retention analysis, campaign attribution, and combining CleverTap engagement data with your product analytics.
 
 ## Prerequisites
 
@@ -49,14 +49,18 @@ You'll be asked for:
 
 <SyncModes />
 
-Both CleverTap tables use full refresh. Each sync replaces the contents of the table.
+All CleverTap tables use full refresh. Each sync replaces the contents of the table.
 
 ## Available tables
 
-| Table      | Description                                                                       | Sync method  |
-| ---------- | --------------------------------------------------------------------------------- | ------------ |
-| `events`   | Occurrences of the configured CleverTap event within the export date range        | Full refresh |
-| `profiles` | Profiles of users who performed the configured event within the export date range | Full refresh |
+| Table              | Description                                                                                        | Sync method  |
+| ------------------ | -------------------------------------------------------------------------------------------------- | ------------ |
+| `events`           | Occurrences of the configured CleverTap event within the export date range                         | Full refresh |
+| `profiles`         | Profiles of users who performed the configured event within the export date range                  | Full refresh |
+| `message_reports`  | Messages that started within the configured date range, with channel, status, and delivery metrics | Full refresh |
+| `campaigns`        | Campaigns created through the API and scheduled within the configured date range                   | Full refresh |
+| `campaign_reports` | Delivery and click metrics for each completed campaign created through the API                     | Full refresh |
+| `content_blocks`   | Reusable content blocks with their content, creator, and update details                            | Full refresh |
 
 ### Events columns
 
@@ -81,6 +85,53 @@ Both CleverTap tables use full refresh. Each sync replaces the contents of the t
 | `platformInfo` | Device and platform metadata, including platform object IDs                  |
 | `events`       | Lifetime event counts and the first and last occurrence times for each event |
 
+### Message reports columns
+
+| Column             | Description                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `message_id`       | Unique identifier for the message                                                 |
+| `message_name`     | The name of the campaign                                                          |
+| `data`             | Delivery metrics (sent, viewed, clicked), aggregated over the date range          |
+| `start_date`       | The campaign start date and time, without the year (for example, Oct 18, 4:08 PM) |
+| `device`           | Platforms targeted by the campaign                                                |
+| `conversion_event` | The event configured as the conversion goal, or null                              |
+| `labels`           | Labels assigned to the campaign                                                   |
+| `status`           | Current status of the campaign: scheduled, running, stopped, or completed         |
+| `channel`          | The channel used by the campaign, as a display name (for example, InApp)          |
+| `delivery`         | The delivery type of the campaign, as a display name                              |
+
+### Campaigns columns
+
+| Column         | Description                                                                |
+| -------------- | -------------------------------------------------------------------------- |
+| `id`           | Unique identifier for the campaign                                         |
+| `name`         | Name of the campaign as specified at creation                              |
+| `scheduled_on` | Scheduled date and time in account time, stored as a YYYYMMDDHHMM integer  |
+| `status`       | Current status: scheduled, pending, running, paused, stopped, or completed |
+
+### Campaign reports columns
+
+| Column          | Description                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| `campaign_id`   | Identifier of the campaign this report belongs to                                  |
+| `campaign_name` | Name of the campaign                                                               |
+| `scheduled_on`  | Scheduled date and time of the campaign in account time, as a YYYYMMDDHHMM integer |
+| `sent`          | Number of messages attempted to be sent                                            |
+| `clicked`       | Number of users who clicked the message                                            |
+
+### Content blocks columns
+
+| Column      | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `id`        | Unique identifier for the content block              |
+| `name`      | Name of the content block                            |
+| `type`      | Content type of the block: html or text              |
+| `content`   | The content of the block                             |
+| `createdBy` | Email address of the user who created the block      |
+| `createdAt` | Time the block was created, in ISO 8601 format       |
+| `updatedBy` | Email address of the user who last updated the block |
+| `updatedAt` | Time the block was last updated, in ISO 8601 format  |
+
 ## Sync limitations
 
 - The connector exports a single event at a time. To sync multiple events, create a separate source for each one.
@@ -96,6 +147,8 @@ Both CleverTap tables use full refresh. Each sync replaces the contents of the t
 
 - Event timestamps use account time, not UTC.
 
+- Some CleverTap accounts allow only one message report request each hour. If you're syncing the `message_reports` table, use an hourly or slower sync schedule to avoid rate limiting errors.
+
 ## Troubleshooting
 
 - **Invalid credentials** – check that your Account ID and Passcode are correct and haven't been rotated.
@@ -105,6 +158,8 @@ Both CleverTap tables use full refresh. Each sync replaces the contents of the t
 - **Export errors** – check the event name, date range, and API access. CleverTap rejects exports for unsupported notification events.
 
 - **Cursor errors** – if an export cursor expires or becomes invalid, reset the table sync to start a new export.
+
+- **Rate limiting errors** – if you receive 429 errors when syncing `message_reports`, your account may be limited to one request per hour. Use an hourly or slower sync schedule.
 
 <TroubleshootingLink />
 

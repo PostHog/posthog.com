@@ -101,7 +101,7 @@ These are powerful tools for organizing your data, but we're just scratching the
 - Anomaly detection for malformed events and properties
 - Person and Group Property definitions
 
-As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team, or [submit a ticket in our app](https://app.posthog.com/home#supportModal). 
+As always, we welcome any feedback you may have about this feature. Feel free to open an issue in [our GitHub repo](https://github.com/PostHog/posthog), join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team, or [submit a ticket in our app](https://app.posthog.com/home#supportModal). 
 
 > PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 

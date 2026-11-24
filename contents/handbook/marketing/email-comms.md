@@ -87,7 +87,7 @@ We solve both of these issues by using the <PrivateLink url="https://us.posthog.
 
 **Add this cohort to all broadcasts by default.**
 
-If you want to notify a specific group of users about a breaking change, incident, or other one-off scenario, you can create the cohort yourself and add it to the [Github issue](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md). It really helps the Developer Marketing team and speeds up the process to get comms out. Give the cohort the same title prefix as the workflow that uses it. See [naming and tagging workflows](#naming-and-tagging-workflows).
+If you want to notify a specific group of users about a breaking change, incident, or other one-off scenario, you can create the cohort yourself and add it to the [GitHub issue](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md). It really helps the Developer Marketing team and speeds up the process to get comms out. Give the cohort the same title prefix as the workflow that uses it. See [naming and tagging workflows](#naming-and-tagging-workflows).
 
 ## Before you send
 

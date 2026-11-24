@@ -8,7 +8,7 @@ export const kissmetrics = {
                 pageviews: true,
                 bounce_rate: false,
                 traffic_breakdown: 'Partial',
-                utm_tracking: 'Partial',
+                utm_tracking: true,
                 web_vitals: false,
                 cookieless_tracking: false,
             },
