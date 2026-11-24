@@ -151,9 +151,16 @@ Sync the corresponding warehouse tables, then enable the source in the inbox **s
 
 ### Search analytics
 
-Search-performance opportunities from connected analytics sources. The inbox identifies pages that rank and receive meaningful impressions but have unusually low click-through rates, then surfaces the query, landing page, impressions, clicks, CTR, and average position for investigation.
+Search-performance opportunities and site audit issues from connected analytics sources. For Google Search Console, the inbox identifies pages that rank and receive meaningful impressions but have unusually low click-through rates, then surfaces the query, landing page, impressions, clicks, CTR, and average position for investigation.
 
 - Google Search Console
+- Bing Webmaster Tools: crawl issues from `crawl_issues`
+- Ahrefs: errors and warnings affecting URLs in the latest crawl from `site_audit_issues`
+- Semrush: pages affected by issues in the latest Site Audit snapshot from `site_audit_issue_details`, with issue titles from `site_audit_issue_descriptions`
+
+Sync both Semrush tables so the inbox can read each issue's title. Ahrefs requires a Lite plan or higher. Semrush requires an SEO Business subscription and a project with Site Audit enabled.
+
+For Bing Webmaster Tools, Ahrefs, and Semrush, the inbox groups findings by site or project and issue type. Each group emits at most one signal per ISO week, even if the issue stays open across syncs.
 
 ### Issue trackers
 
@@ -226,12 +233,35 @@ Errors and exceptions from external error monitoring services. The inbox surface
 
 ### Security scanners
 
-Security vulnerabilities and findings from code scanning tools. The inbox prioritizes actionable security issues.
+Security vulnerabilities, code-quality issues, leaked secrets, and endpoint threats from security tools. The inbox prioritizes actionable security issues.
 
 - Snyk
 - SonarQube
 - Semgrep
 - Rapid7 InsightVM
+- SonarCloud: code issues from `issues`
+- Checkmarx: scan findings from `scan_results`
+- Veracode: static, dynamic, and manual security findings from `findings`
+- Veracode SCA: vulnerabilities in open-source and third-party components from `sca_findings`
+- Semgrep Supply Chain: dependency vulnerabilities from `sca_findings`, excluding unreachable findings
+- GitGuardian: leaked secret incidents from `secret_incidents`
+- Infisical: leaked credentials from `secret_scanning_findings`
+- SentinelOne: endpoint threats from `threats`
+- JFrog Xray: security, license, and operational risk policy violations from `xray_violations`
+- Dynatrace Application Security: vulnerabilities from `security_problems`
+
+Each security source has its own toggle. **Veracode SCA**, **Semgrep Supply Chain**, and **Dynatrace Application Security** are separate from **Veracode**, **Semgrep**, and **Dynatrace**.
+
+Enable Veracode's `sca_findings` table explicitly. It's off by default, and SCA findings require a separate request from static, dynamic, and manual findings. Both Veracode sources require the **Results API** and **Applications API** roles.
+
+JFrog's `xray_violations` table is off by default because it requires JFrog Xray. Enable it if your instance has Xray.
+
+For the other sources, check these access requirements:
+
+- **Semgrep Supply Chain**: a token with the **Web API** scope and a Semgrep Team or Enterprise plan
+- **GitGuardian**: the `incidents:read` scope and at least the **Manager** access level
+- **Infisical**: a machine identity with **Universal Auth** and read access to secret scanning findings. Secret scanning is plan-gated on Infisical Cloud
+- **Dynatrace Application Security**: the `securityProblems.read` token scope
 
 ### Cloud security
 
@@ -241,6 +271,9 @@ Threat and vulnerability findings from cloud infrastructure security tools. The 
 - AWS GuardDuty
 - AWS Inspector
 - Microsoft Defender for Cloud Apps
+- AWS Macie: sensitive data and security findings in S3 buckets and objects from `findings`
+
+For **AWS Macie**, enable Macie in the region you select and grant the `macie2:ListFindings` and `macie2:GetFindings` IAM permissions.
 
 ### Code review
 
@@ -298,7 +331,7 @@ Reviews without text are skipped. **Trustpilot product reviews** is separate fro
 
 ### Incident management
 
-Open incidents and problems from status monitoring and incident tracking tools. The inbox surfaces active incidents, filtering out resolved or closed ones, so only ongoing problems become signals.
+Incidents, monitoring problems, and on-call alerts from incident tracking tools. Filtering depends on the source: some exclude resolved records, while others include records regardless of status.
 
 - Dynatrace
 - Statuspage
@@ -306,6 +339,24 @@ Open incidents and problems from status monitoring and incident tracking tools. 
 - Instatus
 - Amazon CloudWatch: alarm history entries that change to `ALARM` from `alarm_history`
 - LogicMonitor: alerts that have not cleared from `alerts`
+- Rootly: incidents from `incidents`, excluding test, example, and scheduled-maintenance incidents
+- Rootly alerts: on-call alerts from `alerts`
+- Zenduty: incidents from `incidents`
+- Splunk Observability Cloud: detector incidents from `incidents`
+- UptimeRobot: monitor downtime incidents from `incidents`
+- incident.io alerts: on-call alerts from `alerts`
+- FireHydrant alerts: on-call alerts from `alerts`, excluding linked, ignored, and expired alerts
+- Grafana IRM alert groups: related on-call alerts from `alert_groups`, excluding silenced groups
+
+**Rootly alerts**, **incident.io alerts**, **FireHydrant alerts**, and **Grafana IRM alert groups** have separate toggles from their services' incident sources. Enable each feed you want to use.
+
+Check these access requirements before syncing:
+
+- **Zenduty**: an account owner or admin must create the API key. Read access is enough for syncing
+- **Splunk Observability Cloud**: an access token with **API** permission
+- **UptimeRobot**: your account's **read-only API key**. A monitor-specific key cannot sync `incidents`
+- **incident.io alerts**: an API key with the `view` scope for alerts
+- **Grafana IRM alert groups**: a service account token with the **Viewer** role or the IRM reader permissions for alert groups
 
 ## Steer a source with guidance
 
