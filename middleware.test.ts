@@ -102,44 +102,49 @@ function mockSiblingAndLog(t: TestContext, markdownStatus = 200): Record<string,
     return lines
 }
 
-test('logs the request and the Markdown served, leaving out credentials and secrets', async (t) => {
+test('logs the request and the Markdown served, with values only for allowlisted headers and parameters', async (t) => {
     enableLog(t)
     const lines = mockSiblingAndLog(t)
     const headers = {
         'user-agent': 'Claude-User (claude-code/2.1.0; +https://support.anthropic.com/)',
         accept: '*/*',
+        'accept-language': 'en',
         'sec-fetch-site': 'none',
         'signature-agent': '"https://agent.example.com"',
         'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
         'x-vercel-ip-country': 'DE',
-        'x-forwarded-for': '203.0.113.7',
+        'x-vercel-ip-city': 'Berlin',
     }
 
     const response = await middleware(
-        new Request(`${page}?utm_source=example`, {
+        new Request(`${page}?utm_source=example&ref=hn&token=test-secret-1&next=test-secret-2`, {
             headers: {
                 ...headers,
-                cookie: 'ph_phc_test_posthog=%7B%7D',
-                authorization: 'Bearer test-token',
-                'x-vercel-oidc-token': 'test-oidc',
-                'x-vercel-protection-bypass': 'test-bypass',
-                'x-vercel-sc-headers': '{"Authorization":"Bearer test"}',
+                cookie: 'ph_phc_test_posthog=test-secret-3',
+                authorization: 'Bearer test-secret-4',
+                'x-forwarded-for': '203.0.113.7',
+                'x-real-ip': '203.0.113.8',
+                'x-session': 'test-secret-5',
             },
         })
     )
 
     assert.equal(await response?.text(), '# Product analytics')
     assert.equal(lines.length, 1)
+    assert.doesNotMatch(JSON.stringify(lines[0]), /test-secret|203\.0\.113/)
     const { markdown_fetch_ms, ...line } = lines[0]
     assert.equal(typeof markdown_fetch_ms, 'number')
     assert.deepEqual(line, {
         type: 'docs_request',
         method: 'GET',
-        url: `${page}?utm_source=example`,
+        path: '/docs/product-analytics',
         served_format: 'markdown',
         negotiation: 'served',
         markdown_reason: 'agent_fetcher',
+        query_params: { utm_source: 'example', ref: 'hn' },
+        other_query_param_names: ['token', 'next'],
         request_headers: headers,
+        other_header_names: ['authorization', 'cookie', 'x-forwarded-for', 'x-real-ip', 'x-session'],
     })
 })
 

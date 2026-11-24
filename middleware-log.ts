@@ -11,8 +11,11 @@ const LOG_TYPE = 'docs_request'
 export const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
 // The matcher in middleware.ts covers more prefixes; only /docs requests are logged.
 const LOGGED_PATHS = /^\/docs(\/|$)/
-// Request headers not logged, because they carry credentials or secrets.
-const EXCLUDED_HEADERS = /cookie|auth|token|secret|bypass|key|^x-vercel-(proxy-signature|sc-|internal-)/
+// Logs are widely readable, so only values known to carry no credentials or IP are logged. Every other
+// header and query parameter is logged by name only.
+const LOGGED_HEADERS =
+    /^(accept(-.+)?|user-agent|sec-ch-ua(-.+)?|sec-fetch-.+|signature(-input|-agent)?|referer|via|from|dnt|cache-control|priority|upgrade-insecure-requests|x-vercel-id|x-vercel-ip-(country|country-region|city))$/
+const LOGGED_QUERY_PARAMS = /^(utm_.+|ref|source|via|format|tab)$/
 
 type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
 
@@ -30,25 +33,35 @@ export function logRequest(request: Request, result: NegotiationResult): void {
     if (request.headers.has(SUBREQUEST_HEADER)) return
     const url = new URL(request.url)
     if (!LOGGED_PATHS.test(url.pathname)) return
+    const query = split(url.searchParams, LOGGED_QUERY_PARAMS)
+    const headers = split(request.headers, LOGGED_HEADERS)
 
     console.log(
         JSON.stringify({
             type: LOG_TYPE,
             method: request.method,
-            url: request.url,
+            path: url.pathname,
             served_format: result.response || result.negotiation === 'markdown_url' ? 'markdown' : 'html',
             negotiation: result.negotiation,
             markdown_reason: result.reason,
             markdown_fetch_ms: result.markdownFetchMs,
-            request_headers: loggedHeaders(request.headers),
+            query_params: query.values,
+            other_query_param_names: query.otherNames,
+            request_headers: headers.values,
+            other_header_names: headers.otherNames,
         })
     )
 }
 
-function loggedHeaders(headers: Headers): Record<string, string> {
-    const logged: Record<string, string> = {}
-    headers.forEach((value, name) => {
-        if (!EXCLUDED_HEADERS.test(name)) logged[name] = value
+function split(
+    pairs: { forEach(callback: (value: string, name: string) => void): void },
+    logged: RegExp
+): { values: Record<string, string>; otherNames: string[] } {
+    const values: Record<string, string> = {}
+    const otherNames: string[] = []
+    pairs.forEach((value, name) => {
+        if (logged.test(name)) values[name] = value
+        else otherNames.push(name)
     })
-    return logged
+    return { values, otherNames }
 }
