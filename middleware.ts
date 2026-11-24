@@ -18,8 +18,8 @@
  * Returning `undefined` continues to the normal static response, so anything
  * this function declines to handle behaves exactly as it does today.
  */
-import { captureRequest, SUBREQUEST_HEADER } from './middleware-capture.ts'
-import type { NegotiationResult } from './middleware-capture.ts'
+import { logRequest, SUBREQUEST_HEADER } from './middleware-log.ts'
+import type { NegotiationResult } from './middleware-log.ts'
 
 export const config = {
     matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog', '/mcp'],
@@ -28,12 +28,9 @@ export const config = {
 const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']
 const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('|')})\\b`, 'i')
 
-export default async function middleware(
-    request: Request,
-    context?: { waitUntil(promise: Promise<unknown>): void }
-): Promise<Response | undefined> {
+export default async function middleware(request: Request): Promise<Response | undefined> {
     const result = await negotiate(request)
-    captureRequest(request, result, context)
+    logRequest(request, result)
     return result.response
 }
 
@@ -53,10 +50,12 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
     // section index pages (/docs, /blog, /handbook, /newsletter) don't. Ask for
     // it and fall through to the HTML when it isn't there, rather than keeping a
     // hand-maintained list of exceptions that silently rots.
+    const started = Date.now()
     const markdown = await fetch(new URL(`${pathname}.md`, url.origin), {
         headers: { accept: 'text/plain', [SUBREQUEST_HEADER]: '1' },
     })
-    if (!markdown.ok) return { response: undefined, negotiation: 'no_sibling', reason }
+    const markdownFetchMs = Date.now() - started
+    if (!markdown.ok) return { response: undefined, negotiation: 'no_sibling', reason, markdownFetchMs }
 
     const response = new Response(markdown.body, {
         status: 200,
@@ -66,5 +65,5 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
             vary: 'Accept, User-Agent',
         },
     })
-    return { response, negotiation: 'served', reason }
+    return { response, negotiation: 'served', reason, markdownFetchMs }
 }
