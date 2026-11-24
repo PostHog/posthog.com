@@ -4,10 +4,9 @@ status: active
 
 # One check for each flow the Rust docs teach. Every check is a baseline: a short
 # prompt in a user's words, no docs added. The prompt names PostHog and the kind of
-# analytics, and no API. The rubrics describe the correct result for posthog-rs as the
-# docs show it. `install` runs in an app with no PostHog code. The other checks run in
-# codemod's CLI, which already uses posthog-rs 0.21. The docs have no Rust group
-# analytics section, so there is no groups check.
+# analytics, and no API. `install` grades against posthog 1.x, which the docs now show.
+# The other checks run in codemod's CLI, which already uses posthog-rs 0.21. The docs have
+# no Rust group analytics section, so there is no groups check.
 checks:
     - id: install
       description: >-
@@ -22,18 +21,20 @@ checks:
           shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/Cargo.toml lists `posthog-rs` at 0.14 or newer.
+                  {folder}/Cargo.toml lists `posthog` at 1.x, or as a path or git
+                  dependency on the posthog 1.0 source.
               initialized: >-
-                  The app creates one client at startup with posthog_rs::client(),
-                  passing the project token or ClientOptionsBuilder options. Cite the
-                  file and line(s).
+                  The app creates one client at startup with posthog::client() or
+                  posthog::init_global(), passing the project token or
+                  ClientOptionsBuilder options. Cite the file and line(s).
               token-from-env: >-
                   The project token comes from an environment variable. It is not
                   written in the source.
               flushes-on-exit: >-
-                  After the server's run().await returns, the app awaits flush() and
-                  then shutdown() on the client. Fails if it only relies on the client
-                  being dropped.
+                  After the server's run().await returns, the app awaits shutdown() on
+                  the client (or posthog::shutdown() for the global client), which
+                  sends queued events. Fails if it only relies on
+                  the client being dropped.
 
     - id: event-by-user
       description: >-
@@ -132,30 +133,3 @@ checks:
                   get_feature_flag() on the client. Cite the file and line(s).
               flag-gates-unpublish: >-
                   Unpublishing is refused when the flag is off.
-
-    # Next major: the same tasks for a project on posthog 1.0. Expected to fail until
-    # the docs show that major.
-    - id: install-next
-      description: >-
-          The same task for an app that installs posthog 1.0. Expected to fail until
-          the docs show that major.
-      codebase_to_test: oss-rustypaste
-      prompt: *install-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  {folder}/Cargo.toml lists `posthog` at 1.x, or as a path or git
-                  dependency on the posthog 1.0 source.
-              initialized: >-
-                  The app creates one client at startup with posthog::client() or
-                  posthog::init_global(), passing the project token or
-                  ClientOptionsBuilder options. Cite the file and line(s).
-              token-from-env: >-
-                  The project token comes from an environment variable. It is not
-                  written in the source.
-              flushes-on-exit: >-
-                  After the server's run().await returns, the app awaits shutdown() on
-                  the client (or posthog::shutdown() for the global client), which
-                  sends queued events. Fails if it only relies on
-                  the client being dropped.
