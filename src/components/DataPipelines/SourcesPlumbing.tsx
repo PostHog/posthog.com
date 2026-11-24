@@ -40,19 +40,14 @@ export default function SourcesPlumbing(): JSX.Element {
             <p className="mb-0 mt-3 max-w-prose text-lg text-secondary">
                 Setting up a sync takes minutes. Keeping it running is the part we take off your hands.
             </p>
-            <ul className="m-0 mt-6 grid list-none grid-cols-1 gap-3 p-0 @2xl/reader-content:grid-cols-2">
+            <ul className="m-0 mt-6 grid list-none grid-cols-1 gap-4 p-0 @2xl/reader-content:grid-cols-2">
                 {POINTS.map((point) => {
                     const Icon = point.icon
                     return (
                         <li key={point.title}>
-                            <Card.Root className="h-full" appearance="solid">
-                                <Card.Header>
-                                    <Card.Title className="flex items-center gap-2">
-                                        <Icon aria-hidden="true" className="size-4 shrink-0 text-secondary" />
-                                        {point.title}
-                                    </Card.Title>
-                                    <Card.Description>{point.description}</Card.Description>
-                                </Card.Header>
+                            <Card.Root className="h-full">
+                                <Card.TitleBar icon={<Icon className="text-muted" />}>{point.title}</Card.TitleBar>
+                                <Card.Description>{point.description}</Card.Description>
                             </Card.Root>
                         </li>
                     )
