@@ -16,6 +16,10 @@ Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Imp
   alt="PostHog opt-out list page"
 />
 
+## What the import doesn't bring over
+
+People, most segments, transactional messages, newsletters, forms, collections, and delivery history stay in Customer.io. This import covers subscription topics, suppressed addresses, and global unsubscribes.
+
 <Steps>
 
 <Step title="Import categories and global opt-outs" badge="required">
@@ -45,6 +49,12 @@ Go back to PostHog, paste the key into the first step, select which data to impo
 - All customers who are generally unsubscribed (not subscribed to any category)
 
 Customer.io only supports importing globally unsubscribed users via API, so per-category opt-outs need to be imported through a CSV in the next step.
+
+<CalloutBox type="warning" title="Opt-in topics">
+
+Some Customer.io topics are opt-in – people start unsubscribed by default. PostHog has no opt-in categories, so anyone without an explicit opt-out can receive messages in these categories after the import. If you use opt-in topics, send those messages only to a cohort of people who explicitly subscribed.
+
+</CalloutBox>
 
 </Step>
 
@@ -150,5 +160,14 @@ Back in PostHog:
 />
 
 </Step>
+
+## What to do next
+
+After importing your opt-out lists:
+
+1. Upload the opt-out preferences CSV (see [step 2](#upload-opt-out-preferences-csv) above), so people who left a single topic stay out of it.
+2. Import your automations from the **Workflows** page. They arrive as drafts.
+3. Add your [sending domain](/docs/workflows/sending-reputation) in PostHog and publish its DNS records.
+4. Run the import and upload a fresh CSV right before you stop sending from Customer.io, so late unsubscribes come over.
 
 </Steps>
