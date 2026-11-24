@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Upstash connector syncs redis databases, redis stats, teams, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Upstash connector syncs Redis databases, Redis stats, teams, team members, vector indexes, vector index stats, search indexes, QStash stats, and more into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Upstash account email and a management API key to pull your Upstash Redis databases, usage stats, teams, and vector indexes.
+Enter your Upstash account email and a management API key to pull your Upstash Redis databases, Redis usage stats, teams, team members, vector indexes, vector index usage stats, search indexes, and QStash usage stats.
 
 Create a management API key in the [Upstash console](https://console.upstash.com/account/api) under **Account > Management API**. The Developer API is only available to native Upstash accounts (not Vercel or Fly.io marketplace accounts).
 

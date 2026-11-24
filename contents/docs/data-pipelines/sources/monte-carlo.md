@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-Connect your [Monte Carlo](https://www.montecarlodata.com/) account to pull your data observability history – alerts, monitors, observed tables, users, and warehouse connections – into the PostHog Data Warehouse. This is useful for building data quality scorecards and correlating data incidents with downstream product impact.
+Connect your [Monte Carlo](https://www.montecarlodata.com/) account to pull your data observability history – alerts, monitors, observed tables, users, warehouse connections, authorization groups, group membership, roles, daily monitor credit usage, data products, and monitor change history – into the PostHog Data Warehouse. This is useful for building data quality scorecards and correlating data incidents with downstream product impact.
 
 ## Prerequisites
 
@@ -36,7 +36,11 @@ Monte Carlo API keys expire on the date you chose when creating them. When a key
 
 <SyncModes />
 
-The `alerts` table supports incremental syncing on `createdTime` (new alerts) or `updatedTime` (new alerts plus status changes on existing ones). The initial sync only pulls the last 365 days of alerts. All other tables are full refresh, as Monte Carlo's API doesn't expose server-side timestamp filters for them.
+The `alerts` table supports incremental syncing on `createdTime` (new alerts) or `updatedTime` (new alerts plus status changes on existing ones). The initial sync only pulls the last 365 days of alerts.
+
+The `billing_monitor_usage` table supports incremental sync on `date`. Its initial sync pulls the last 365 days. Incremental syncs re-read two days before the last synced date because daily credit usage can continue to change.
+
+The `dbt_test_results`, `events`, `fh_events`, and `job_executions` tables also support incremental sync. All remaining tables, including `authorization_group_members`, `authorization_groups`, `data_products`, `monitor_audit_logs`, and `roles`, use full refresh.
 
 ## Configuration
 
