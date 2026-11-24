@@ -371,9 +371,8 @@ export const aiObservability = {
             },
             {
                 name: 'Traffic classification',
-                summary:
-                    'Set up clustering jobs and taggers so recurring patterns in your traffic get labeled automatically.',
-                prefixes: ['llma-clustering-', 'llma-tagger-'],
+                summary: 'Set up clustering jobs so recurring patterns in your traffic get grouped automatically.',
+                prefixes: ['llma-clustering-'],
             },
         ],
         // Prompts lifted from contents/docs/ai-observability/query-traces-mcp.mdx.
