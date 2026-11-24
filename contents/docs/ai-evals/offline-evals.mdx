@@ -30,10 +30,11 @@ Three deliberate mistakes give you failures to inspect: a wrong tool, a missing 
 
 ### 1. Install the SDK and configure access
 
-Install the latest SDK. This quickstart requires:
+Install the SDK for your language. This quickstart requires:
 
 -   **Python:** Python 3.10+ and `posthog` 7.74.0+.
 -   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
+-   **Go:** Go 1.21+ and `posthog-go/v2` v2.2.0+. Run the commands in an empty directory, then complete the Go client setup below.
 
 <MultiLanguage selector="tabs">
 
@@ -43,6 +44,12 @@ pip install --upgrade "posthog>=8,<9"
 
 ```shell file=TypeScript
 pnpm add @posthog/ai@8
+```
+
+```sh file=Go
+go mod init example.com/support-eval
+go get github.com/posthog/posthog-go/v2/ai/evaluations@v2.2.0
+mkdir -p scorers baseline
 ```
 
 </MultiLanguage>
@@ -70,9 +77,50 @@ Find your project ID in [project settings](https://app.posthog.com/settings/proj
 
 Keep your API key in an environment variable or your CI's secret store. Never commit it or expose it in browser code. Your public project token can't authenticate these requests.
 
+<details>
+
+<summary>Go: set up the shared client</summary>
+
+Save this as `client.go` next to `go.mod`. Each Go example uses it to open a client with the same project settings and close it when the command finishes.
+
+```go
+package supporteval
+
+import (
+	"context"
+	"log"
+	"os"
+	"strconv"
+
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+func Run(work func(context.Context, *evaluations.Client) error) {
+	projectID, err := strconv.Atoi(os.Getenv("POSTHOG_PROJECT_ID"))
+	if err != nil {
+		log.Fatal("Set POSTHOG_PROJECT_ID to a numeric project ID")
+	}
+	client, err := evaluations.NewClient(evaluations.Config{
+		ProjectID: projectID,
+		SecretKey: os.Getenv("POSTHOG_PERSONAL_API_KEY"),
+		Host:      os.Getenv("POSTHOG_HOST"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = work(context.Background(), client)
+	client.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+</details>
+
 ### 2. Create two scorers
 
-Save this as `create_scorers.py` or `create_scorers.mts` and run it once to create **Correct tool** and **Correct arguments**. For both scorers, `true` passes and `false` fails.
+Save this as `create_scorers.py`, `create_scorers.mts`, or `scorers/main.go` and run it once to create **Correct tool** and **Correct arguments**. For both scorers, `true` passes and `false` fails.
 
 <MultiLanguage selector="tabs">
 
@@ -121,6 +169,35 @@ try {
 }
 ```
 
+```go file=Go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"example.com/support-eval"
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+func main() { supporteval.Run(createScorers) }
+
+func createScorers(ctx context.Context, client *evaluations.Client) error {
+	pass, fail := "Pass", "Fail"
+	config := evaluations.BooleanConfig{
+		TrueIsFailure: evaluations.Value(false), TrueLabel: &pass, FalseLabel: &fail,
+	}
+	for _, name := range []string{"Correct tool", "Correct arguments"} {
+		scorer, err := client.Scorers.Create(ctx, name, config, evaluations.CreateScorerOptions{})
+		if err != nil {
+			return err
+		}
+		fmt.Printf("%s: %s\n", name, scorer.ID)
+	}
+	return nil
+}
+```
+
 </MultiLanguage>
 
 <MultiLanguage selector="tabs">
@@ -133,6 +210,10 @@ python create_scorers.py
 pnpm dlx tsx create_scorers.mts
 ```
 
+```sh file=Go
+go run ./scorers
+```
+
 </MultiLanguage>
 
 Save the two printed scorer IDs. The run script fetches each scorer once and uses its current version for every case:
@@ -142,11 +223,11 @@ export POSTHOG_TOOL_SCORER_ID="<correct_tool_scorer_id>"
 export POSTHOG_ARGUMENTS_SCORER_ID="<correct_arguments_scorer_id>"
 ```
 
-Reuse these scorers across experiments to keep their history together. To compare runs against a fixed configuration, save the version IDs (`current_version_id` / `currentVersionId`) instead of fetching the latest versions.
+Reuse these scorers across experiments to keep their history together. To compare runs against a fixed configuration, save the version IDs (`current_version_id` in Python, `currentVersionId` in TypeScript, or `CurrentVersionID` in Go).
 
 ### 3. Run the cases and upload scores
 
-Save this as `support_eval.py` or `support_eval.mts`. It uploads two scores per case, each with an explanation. The argument check compares exact key-value pairs independently of the tool name, so a case can pass one check and fail the other.
+Save this as `support_eval.py`, `support_eval.mts`, or `baseline/main.go`. It uploads two scores per case, each with an explanation. The argument check compares exact key-value pairs independently of the tool name, so a case can pass one check and fail the other.
 
 <MultiLanguage selector="tabs">
 
@@ -385,6 +466,141 @@ try {
 }
 ```
 
+```go file=Go
+package main
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"maps"
+	"os"
+	"regexp"
+	"strings"
+
+	"example.com/support-eval"
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+type toolCall struct {
+	Tool      string
+	Arguments map[string]string
+}
+
+func (call toolCall) fields() evaluations.Fields {
+	return evaluations.Fields{"tool": call.Tool, "arguments": call.Arguments}
+}
+
+type testCase struct {
+	key, input string
+	expected   toolCall
+}
+
+var cases = []testCase{
+	{"refund_eligibility", "Can I get a refund for order #1001?", toolCall{"check_refund_policy", map[string]string{"order_id": "1001"}}},
+	{"delivery_status", "Where is order #1002?", toolCall{"look_up_order", map[string]string{"order_id": "1002"}}},
+	{"cancel_order", "Please cancel order #1003.", toolCall{"cancel_order", map[string]string{"order_id": "1003"}}},
+	{"refund_other_order", "Can I get a refund for order #1004?", toolCall{"check_refund_policy", map[string]string{"order_id": "1004"}}},
+	{"account_access", "I can't sign in to my account.", toolCall{"handoff_to_support", map[string]string{"queue": "account"}}},
+	{"billing_question", "Why was I charged twice?", toolCall{"handoff_to_support", map[string]string{"queue": "billing"}}},
+}
+
+var orderNumber = regexp.MustCompile(`#[0-9]+`)
+
+func runAgent(input string) toolCall {
+	text := strings.ToLower(input)
+	// These first three rules contain the deliberate mistakes.
+	switch {
+	case strings.Contains(text, "cancel"):
+		return toolCall{"cancel_order", map[string]string{}}
+	case strings.Contains(text, "refund"):
+		return toolCall{"check_refund_policy", map[string]string{"order_id": "1001"}}
+	case strings.Contains(text, "order"):
+		orderID := strings.TrimPrefix(orderNumber.FindString(text), "#")
+		return toolCall{"check_refund_policy", map[string]string{"order_id": orderID}}
+	case strings.Contains(text, "charged"):
+		return toolCall{"handoff_to_support", map[string]string{"queue": "billing"}}
+	default:
+		return toolCall{"handoff_to_support", map[string]string{"queue": "account"}}
+	}
+}
+
+func evaluateAnswer(item evaluations.Item, output, expected toolCall, versions map[string]string) ([]evaluations.Result, error) {
+	tool, err := evaluations.NewResult(item, versions["tool_correct"], evaluations.Fields{
+		"value":     output.Tool == expected.Tool,
+		"reasoning": fmt.Sprintf("Expected %s, selected %s.", expected.Tool, output.Tool),
+	})
+	if err != nil {
+		return nil, err
+	}
+	args, err := evaluations.NewResult(item, versions["arguments_correct"], evaluations.Fields{
+		"value":     maps.Equal(output.Arguments, expected.Arguments),
+		"reasoning": fmt.Sprintf("Expected %v, received %v.", expected.Arguments, output.Arguments),
+	})
+	if err != nil {
+		return nil, err
+	}
+	return []evaluations.Result{tool, args}, nil
+}
+
+func (c testCase) evaluate(versions map[string]string) (evaluations.Item, []evaluations.Result, error) {
+	output := runAgent(c.input)
+	item, err := evaluations.NewItem(evaluations.Fields{
+		"case_key": c.key, "input": c.input, "output": output.fields(), "expected_output": c.expected.fields(),
+	})
+	if err != nil {
+		return item, nil, err
+	}
+	results, err := evaluateAnswer(item, output, c.expected, versions)
+	return item, results, err
+}
+
+func finish(ctx context.Context, experiment *evaluations.Experiment, uploadErr error) error {
+	if uploadErr != nil {
+		_, failErr := experiment.Fail(ctx)
+		return errors.Join(uploadErr, failErr)
+	}
+	_, err := experiment.Complete(ctx)
+	if err == nil {
+		fmt.Println("Completed experiment:", experiment.ID())
+	}
+	return err
+}
+
+func runExperiment(ctx context.Context, client *evaluations.Client) error {
+	versions := map[string]string{}
+	for alias, id := range map[string]string{
+		"tool_correct":      os.Getenv("POSTHOG_TOOL_SCORER_ID"),
+		"arguments_correct": os.Getenv("POSTHOG_ARGUMENTS_SCORER_ID"),
+	} {
+		scorer, err := client.Scorers.Get(ctx, id)
+		if err != nil {
+			return err
+		}
+		versions[alias] = scorer.CurrentVersionID
+	}
+	experiment, err := client.CreateExperiment(ctx, evaluations.Fields{
+		"name": "Support agent baseline", "suite_key": "support-agent", "run_source": "local",
+		"expected_item_count": len(cases), "expected_result_count": len(cases) * len(versions),
+	})
+	if err != nil {
+		return err
+	}
+	for _, c := range cases {
+		_, results, err := c.evaluate(versions)
+		if err != nil {
+			return finish(ctx, experiment, err)
+		}
+		if _, err := experiment.UploadResults(ctx, results); err != nil {
+			return finish(ctx, experiment, err)
+		}
+	}
+	return finish(ctx, experiment, nil)
+}
+
+func main() { supporteval.Run(runExperiment) }
+```
+
 </MultiLanguage>
 
 Run the script with the environment variables from the previous steps:
@@ -397,6 +613,10 @@ python support_eval.py
 
 ```shell file=TypeScript
 pnpm dlx tsx support_eval.mts
+```
+
+```sh file=Go
+go run ./baseline
 ```
 
 </MultiLanguage>
@@ -430,9 +650,9 @@ style={{ maxWidth: "100%" }}
 
 </ImageAnnotations>
 
-Keep `suite_key` / `suiteKey` the same across runs of a test suite and `case_key` / `caseKey` the same for each test case. To repeat a case within one run, create a new `EvaluationItem` with the same case key and a distinct `trial`, such as `"1"` or `"2"`.
+Keep `suite_key` / `suiteKey` the same across runs of a test suite and `case_key` / `caseKey` the same for each test case. To repeat a case within one run, create a new item with the same case key and a distinct `trial`, such as `"1"` or `"2"`.
 
-Call `complete()` after the uploads succeed, or `fail()` if the run stops early. Closing the SDK client only releases connections; it doesn't complete the experiment.
+Complete the experiment after the uploads succeed, or mark it as failed if the run stops early. Close the SDK client after that to release its connections.
 
 ## Review and compare experiments
 

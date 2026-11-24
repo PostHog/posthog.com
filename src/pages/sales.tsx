@@ -757,7 +757,7 @@ export default function Sales() {
                         </div>
                     </div>
                     <div className="w-full max-w-2xl mx-auto">
-                        <SuggestedLinksBlock links={['hate', 'pricing', 'careers']} />
+                        <SuggestedLinksBlock links={['pricing', 'careers']} />
                     </div>
                 </>
             ),
