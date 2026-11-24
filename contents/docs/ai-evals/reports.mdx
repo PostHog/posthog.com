@@ -2,11 +2,25 @@
 title: Evaluation reports
 ---
 
+import CalloutBox from "components/Docs/CalloutBox";
+
 Evaluation reports summarize your [evaluation](/docs/ai-evals) results over time and send them to email or Slack, so you can track quality without reading every result. PostHog creates a default report configuration for every evaluation you make.
 
 Reports are available for all evaluation types – **LLM-as-a-judge**, **code-based**, and **sentiment analysis** – on any target.
 
 Reports also power [Self-driving](/docs/ai-observability/self-driving#eval-reports). Turn on the **AI observability** source in your [inbox](https://app.posthog.com/inbox) settings, and report findings arrive as signals.
+
+<CalloutBox icon="IconInfo" title="AI data processing approval required" type="action">
+
+Evaluation reports send evaluation results to a third-party LLM, so they require your organization to approve AI data processing. Without approval:
+
+- The reports toggle on the evaluation form is disabled
+- **Generate now** on the Reports tab is unavailable
+- Scheduled and count-triggered reports don't run
+
+An organization admin can [enable AI data processing](/docs/posthog-ai/allow-access) in organization settings.
+
+</CalloutBox>
 
 ## Default report configuration
 
