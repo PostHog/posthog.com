@@ -44,14 +44,14 @@ The data warehouse then starts syncing your Clover data. You can see details and
 
 Your API token must have the correct permissions for the tables you want to sync. Grant these in the Clover developer dashboard:
 
-| Tables                                                                          | Required permission |
-| ------------------------------------------------------------------------------- | ------------------- |
-| `orders`, `line_items`                                                          | Read orders         |
-| `payments`, `refunds`, `credit_refunds`                                         | Read payments       |
-| `items`, `categories`, `modifier_groups`, `modifiers`, `discounts`, `tax_rates` | Read inventory      |
-| `customers`                                                                     | Read customers      |
-| `employees`, `shifts`                                                           | Read employees      |
-| `tenders`                                                                       | Read merchant       |
+| Tables                                                                                         | Required permission |
+| ---------------------------------------------------------------------------------------------- | ------------------- |
+| `orders`, `line_items`                                                                         | Read orders         |
+| `payments`, `refunds`, `credit_refunds`, `authorizations`                                      | Read payments       |
+| `items`, `categories`, `modifier_groups`, `modifiers`, `discounts`, `tax_rates`, `item_stocks` | Read inventory      |
+| `customers`                                                                                    | Read customers      |
+| `employees`, `shifts`                                                                          | Read employees      |
+| `tenders`, `cash_events`, `order_types`                                                        | Read merchant       |
 
 If your token is missing a permission, PostHog shows an error when you try to sync that table. Grant the permission in the Clover dashboard and try again.
 
@@ -63,18 +63,19 @@ If your token is missing a permission, PostHog shows an error when you try to sy
 
 <SourceTables />
 
-The Clover source supports 15 tables:
+The Clover source supports 19 tables:
 
-- **Commerce:** `orders`, `line_items`, `payments`, `refunds`, `credit_refunds`
-- **Inventory:** `items`, `categories`, `modifier_groups`, `modifiers`
+- **Commerce:** `orders`, `line_items`, `payments`, `refunds`, `credit_refunds`, `authorizations`, `cash_events`
+- **Inventory:** `items`, `categories`, `modifier_groups`, `modifiers`, `item_stocks`
 - **People:** `customers`, `employees`, `shifts`
-- **Settings:** `tenders`, `discounts`, `tax_rates`
+- **Settings:** `tenders`, `discounts`, `tax_rates`, `order_types`
 
 A few things to note:
 
 - All Clover timestamps are **epoch milliseconds**. Tables with a creation timestamp also include a `created_at` column converted to UTC.
 - Money amounts are integers in the merchant's **smallest currency unit** (for example, cents for USD).
 - `line_items` are fetched per order. The `order_id` and `order_created_time` columns link each line item back to its parent order.
+- `item_stocks` rows use `item_id` as their primary key instead of `id`. A row without an `item_id` fails the sync.
 
 ## Troubleshooting
 
