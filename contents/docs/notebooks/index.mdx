@@ -133,6 +133,19 @@ Each of them can be completely customized within notebooks like you would in ins
 
 You can add insights from the insights list by clicking, holding, and dragging the title onto the right-side popover.
 
+### Saving SQL results
+
+After running a SQL query in a notebook, you can save the results as a **warehouse table** or a **static cohort**. This requires warehouse write permission.
+
+To save results, click the menu on the SQL cell and choose:
+
+- **Save as warehouse table** – creates a new table in your data warehouse from the query results. Table names must use letters, numbers, and underscores, and start with a letter or underscore.
+- **Save as cohort** – creates a static cohort from the results. This option is only available when your query returns a `person_id`, `actor_id`, or `distinct_id` column.
+
+Direct SQL queries save up to 300 rows.
+
+Once a table is saved, you can update it with fresh results by running the cell again and choosing **Update from this run**. The next sync replaces all rows in the linked table and counts toward your warehouse usage.
+
 ### Events, persons, groups, cohorts
 
 On top of insights, you can add event, person, group, and cohort lists or entries. They provide a summary of the event, person, group, or cohort and let you click in to get more details or filter.
