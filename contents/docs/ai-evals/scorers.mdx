@@ -16,7 +16,7 @@ Use a separate scorer for each thing you want to measure, such as correctness, r
 
 Create scorers with the SDK or in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Each result references a fixed scorer version, so configuration changes don't reinterpret earlier results.
 
-For each additional reported score, call `upload_result()` / `uploadResult()` with the same `EvaluationItem` and the new scorer's version ID. Include all reported and composite results in your expected result count.
+For each additional reported score, use the same item and the new scorer's version ID. Call `upload_result()` in Python, `uploadResult()` in TypeScript, or `UploadResult()` in Go. Include all reported and composite results in your expected result count.
 
 Use `reasoning` to explain a score. Set `application_trace_id` / `applicationTraceId` on the item to link it to an [AI Observability trace](/docs/ai-observability/traces).
 
@@ -34,7 +34,7 @@ For the support-agent example, **Support task passed** requires both **Correct t
 
 ### Create the composite
 
-Use the latest SDK. Save this as `create_composite.py` or `create_composite.mts` and run it once with the quickstart's environment variables and existing scorers.
+Use the [quickstart's SDK and environment variables](/docs/ai-evals/offline-evals#1-install-the-sdk-and-configure-access) and the two scorers you created there. Save this as `create_composite.py` or `create_composite.mts` and run it once. For Go, create a `composite` directory next to `go.mod`, save the example as `composite/main.go`, and run `go run ./composite`.
 
 <MultiLanguage selector="tabs">
 
@@ -110,6 +110,56 @@ try {
 }
 ```
 
+```go file=Go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"example.com/support-eval"
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+func main() { supporteval.Run(createComposite) }
+
+func createComposite(ctx context.Context, client *evaluations.Client) error {
+	tool, err := client.Scorers.Get(ctx, os.Getenv("POSTHOG_TOOL_SCORER_ID"))
+	if err != nil {
+		return err
+	}
+	args, err := client.Scorers.Get(ctx, os.Getenv("POSTHOG_ARGUMENTS_SCORER_ID"))
+	if err != nil {
+		return err
+	}
+	composition := evaluations.Composition{
+		Expression: "tool_correct and arguments_correct",
+		Inputs: []evaluations.CompositionInput{
+			{Alias: "tool_correct", ScorerVersionID: tool.CurrentVersionID},
+			{Alias: "arguments_correct", ScorerVersionID: args.CurrentVersionID},
+		},
+	}
+	// Optional: check the formula before saving it.
+	valid, err := client.Scorers.ValidateComposition(ctx, "boolean", composition, nil)
+	if err != nil {
+		return err
+	}
+	if !valid {
+		return fmt.Errorf("invalid composite formula")
+	}
+	composite, err := client.Scorers.Create(ctx, "Support task passed",
+		evaluations.BooleanConfig{TrueIsFailure: evaluations.Value(false)},
+		evaluations.CreateScorerOptions{Calculation: "composite", Composition: &composition},
+	)
+	if err != nil {
+		return err
+	}
+	fmt.Println(composite.ID)
+	return nil
+}
+```
+
 </MultiLanguage>
 
 Save the printed scorer ID:
@@ -126,7 +176,7 @@ Each input uses a fixed scorer version. New input versions don't update the comp
 
 Upload the reported inputs and a calculation request together for each item. Creating the scorer alone doesn't calculate results.
 
-In `support_eval.py` or `support_eval.mts`, add `EvaluationResult` to the SDK imports. Keep the agent, evaluator, and cases, then replace the client block below them with this code. It uses the input versions saved in the composite.
+In `support_eval.py` or `support_eval.mts`, add `EvaluationResult` to the SDK imports. Keep the agent, evaluator, and cases, then replace the client block below them with this code. In `baseline/main.go`, replace the `runExperiment` function with the Go example. Each example uses the input versions saved in the composite.
 
 <MultiLanguage selector="tabs">
 
@@ -262,9 +312,55 @@ try {
 }
 ```
 
+```go file=Go
+func runExperiment(ctx context.Context, client *evaluations.Client) error {
+	composite, err := client.Scorers.Get(ctx, os.Getenv("POSTHOG_COMPOSITE_SCORER_ID"))
+	if err != nil {
+		return err
+	}
+	versions := map[string]string{}
+	for _, input := range composite.InputScorers {
+		versions[input.Alias] = input.ScorerVersionID
+	}
+	experiment, err := client.CreateExperiment(ctx, evaluations.Fields{
+		"name": "Support agent with composite", "suite_key": "support-agent", "run_source": "local",
+		"expected_item_count": len(cases), "expected_result_count": len(cases) * 3,
+	})
+	if err != nil {
+		return err
+	}
+	for _, c := range cases {
+		item, results, err := c.evaluate(versions)
+		if err != nil {
+			return finish(ctx, experiment, err)
+		}
+		calculation, err := evaluations.NewResult(item, composite.CurrentVersionID, evaluations.Fields{"calculate": true})
+		if err != nil {
+			return finish(ctx, experiment, err)
+		}
+		receipt, err := experiment.UploadResults(ctx, append(results, calculation))
+		if err != nil {
+			return finish(ctx, experiment, err)
+		}
+		for _, chunk := range receipt.Chunks {
+			for _, result := range chunk.Results {
+				if result.Status != nil && *result.Status == "error" {
+					code := "unknown"
+					if result.ErrorCode != nil {
+						code = *result.ErrorCode
+					}
+					fmt.Fprintf(os.Stderr, "%s: %s: %s\n", c.key, result.ScorerVersionID, code)
+				}
+			}
+		}
+	}
+	return finish(ctx, experiment, nil)
+}
+```
+
 </MultiLanguage>
 
-For a composite result, send only the item, scorer version, and `calculate=True` / `calculate: true`. PostHog calculates the value. Check each returned `status` and `error_code` / `errorCode`: an upload can succeed while a calculation fails.
+Run the updated script with the [quickstart command](/docs/ai-evals/offline-evals#3-run-the-cases-and-upload-scores). For a composite result, send only the item, scorer version, and `calculate` set to true. PostHog calculates the value. Check the status and error code on each returned result. An upload can succeed while a calculation fails.
 
 This run expects **18** results: twelve reported and six composite. Accepted errors and skipped results count toward the total. Start a new experiment to test another composite version; completed runs can't accept new results.
 
