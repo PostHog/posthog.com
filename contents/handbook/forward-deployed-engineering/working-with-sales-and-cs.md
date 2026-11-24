@@ -21,9 +21,9 @@ Sales or CS flag a technical blocker or opportunity, and we scope it. Before you
 One thing worth naming from the sales and CS side: **an FDE ask usually surfaces mid-deal or mid-relationship**, so the person routing it already holds the commercial context we don't. Bring that with you: where the account is in its lifecycle, what's actually at stake commercially, and how time-sensitive it is, so we scope against the real constraint rather than the technical problem in isolation. Then bring it to the <SmallTeam slug="forward-deployed-engineering" /> team.
 
 ## Pre-sale vs post-sale
-FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
+FDE engagements usually begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
 
-- **Pre-sale:** helping a prospect prove PostHog will work for them through advisory reviews, proofs-of-concept, and architecture assessments, often alongside [trials](/handbook/growth/sales/running-trials). Currently FDEs don't do pre-sales work.
+- **Pre-sale:** helping a prospect prove PostHog will work for them through advisory reviews, proofs-of-concept, and architecture assessments, often alongside [trials](/handbook/growth/sales/running-trials). Some deals can include FDE work through our [standard packages](/handbook/forward-deployed-engineering/how-to-get-fde-involved#self-serve-and-price-our-standard-packages), such as Managed Migrations. For enterprise deals, we also do wider pre-sales work; see [how the FDE motion works for enterprise](/handbook/forward-deployed-engineering/enterprise-motion).
 - **Post-sale:** implementation, migration, and expansion work for existing customers.
 
 ## Handoffs

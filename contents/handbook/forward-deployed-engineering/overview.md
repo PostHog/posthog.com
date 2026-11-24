@@ -45,6 +45,7 @@ You can also check out our <PrivateLink url="https://fde-engagement-menu.hosthog
 The FDE team is small, so we're deliberate about where we spend time. Typical triggers:
 
 - A high-value prospect or customer with a technical blocker to adoption or expansion
+- An enterprise deal with a technical question that sales can't answer alone; see [how the FDE motion works for enterprise](/handbook/forward-deployed-engineering/enterprise-motion)
 - A complex implementation, migration, or integration that benefits from hands-on engineering
 - The same technical problem showing up across several customers at once
 - An ambiguous, open-ended problem with no clear owner or obvious solution, where an engineer needs to dig in, work out what's really going on, and define the path forward

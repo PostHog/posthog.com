@@ -15,7 +15,7 @@ We work with **teams that have a PostHog problem** that FDE can help solve with 
 | &nbsp; | Teams with a hands-on PostHog problem |
 |---|---|
 | **Description** | Accounts where something in the implementation holds the team back and self-serve hasn't fixed it. That covers:<br />• A customer at churn risk from an implementation they no longer trust<br />• A team scaling into a product area where no best practice exists yet<br />• A new customer whose first implementation decides whether the account ever works |
-| **Criteria** | Ideally all of them, but we take work outside the ICP on purpose, so not every one has to be met.<br />• It serves revenue retention or growth<br />• $50k ARR or above. For a new customer, we count predicted ARR. Smaller accounts qualify as a group when one piece of work serves all of them and their combined ARR clears the bar<br />• Any industry, any region<br />• At Proving or later in the [customer journey](/handbook/growth/sales/customer-journey). Earlier stages (Exploring, Evaluating, and Buying) are covered by other teams<br />• The [wizard audit](/handbook/forward-deployed-engineering/how-to-get-fde-involved) and PostHog skills haven't already closed the gap |
+| **Criteria** | Ideally all of them, but we take work outside the ICP on purpose, so not every one has to be met.<br />• It serves revenue retention or growth<br />• $50k ARR or above. For a new customer, we count predicted ARR. Smaller accounts qualify as a group when one piece of work serves all of them and their combined ARR clears the bar<br />• Any industry, any region<br />• At Proving or later in the [customer journey](/handbook/growth/sales/customer-journey). Earlier stages (Exploring, Evaluating, and Buying) are covered by other teams, except for [enterprise deals](/handbook/forward-deployed-engineering/enterprise-motion)<br />• The [wizard audit](/handbook/forward-deployed-engineering/how-to-get-fde-involved) and PostHog skills haven't already closed the gap |
 | **Why they matter** | • Retention and expansion both run through the implementation. An account that can't trust its own data doesn't renew or expand<br />• Solving the problem well for one customer often makes it faster to solve for the next<br />• We see the messy problems before anyone else, which tells us what the product should build next |
 | **Examples** | • A team whose three SDKs evaluated the same flags with no shared identity state<br />• A technically strong product team with no bandwidth to work on PostHog<br />• An account where one person held the whole data pipeline<br />• A net-new implementation that set the foundation for everything built after it |
 
@@ -45,7 +45,7 @@ Capacity is a separate question. The ICP says which accounts qualify; how many w
 
 - **Single-customer delivery.** We still do it, as professional services. It comes to us through sales or bundled into an engagement we're already running, and we don't go out looking for it.
 
-- **Exploring, Evaluating, and Buying.** Sales owns those phases.
+- **Exploring, Evaluating, and Buying.** Sales owns those phases. The exception is enterprise deals, where we join before the sale for specific technical work; see [how the FDE motion works for enterprise](/handbook/forward-deployed-engineering/enterprise-motion).
 
 Two things we deliberately don't screen on:
 
