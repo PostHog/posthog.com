@@ -1,5 +1,5 @@
 /**
- * Sends one PostHog event per request the middleware handles, recording what the client asked for
+ * Sends one PostHog event per /docs request the middleware handles, recording what the client asked for
  * and what it was served. The Vercel log drain in PostHog Logs stays the complete record. These
  * events carry the request headers the drain leaves out, and `vercel_request_id` joins each one to
  * its lines in Logs.
@@ -22,6 +22,8 @@ const SEND_ATTEMPTS = 2
 const SEND_TIMEOUT_MS = 3000
 // The user agent of the middleware's own `fetch` for a page's `.md` sibling.
 const SUBREQUEST_USER_AGENT = 'Vercel Edge Functions'
+// Only the docs to start with. The middleware's matcher covers more paths than this.
+const CAPTURE_PATHS = /^\/docs(\/|$)/
 
 export type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
 export type MarkdownReason = 'accept' | 'agent_fetcher'
@@ -99,6 +101,7 @@ export function captureRequest(request: Request, result: NegotiationResult, wait
         const config = readConfig()
         if (!config || config.sampleRate === 0) return
         if (request.headers.get('user-agent') === SUBREQUEST_USER_AGENT) return
+        if (!CAPTURE_PATHS.test(new URL(request.url).pathname)) return
 
         const timestamp = new Date().toISOString()
         const pending = capture(request, result, config, timestamp).catch(() => undefined)

@@ -203,12 +203,17 @@ test('samples on the request id', async (t) => {
     )
 })
 
-test("records nothing when capture is off, or for the middleware's own Markdown fetch", async (t) => {
+test("records nothing when capture is off, outside /docs, or for the middleware's own Markdown fetch", async (t) => {
     const captures = mockFetches(t)
     await handle(page, { 'user-agent': 'Claude-User' })
     assert.equal(captures.length, 0)
 
     enableCapture(t)
     await handle(`${page}.md`, { 'user-agent': 'Vercel Edge Functions' })
+    await handle('https://posthog.com/blog/some-post', { 'user-agent': 'Claude-User' })
+    await handle('https://posthog.com/docsearch', { 'user-agent': 'Claude-User' })
     assert.equal(captures.length, 0)
+
+    await handle('https://posthog.com/docs', { 'user-agent': 'Claude-User' })
+    assert.equal(captures.length, 1)
 })
