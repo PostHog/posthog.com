@@ -92,11 +92,12 @@ checks:
           rubrics:
               no-person-profile: >-
                   The event is personless: its properties set `$process_person_profile`
-                  to false, or capture() is called with no distinctId, which the SDK
-                  marks personless. Cite the file and line(s).
+                  to false, or capture() is called with no distinctId and no distinctId
+                  in the active context, which the SDK marks personless. Cite the file
+                  and line(s).
               distinct-id-per-visitor: >-
-                  Each visitor gets their own distinct ID, such as a generated ID, a
-                  cookie or a hash. It is not one constant shared by all visitors.
+                  Visitors don't share one constant distinct ID. A generated ID, a
+                  cookie, a hash or the SDK's auto-generated ID passes.
 
     - id: error
       description: >-
