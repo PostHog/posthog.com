@@ -217,7 +217,8 @@ The use-case emails are where things changed the most. Previous versions tried t
 Personalization is still light, but it goes further than it used to. Each email uses Liquid to change the copy based on how someone signed up and what role they picked. If you signed up through Claude, Cursor, or Lovable, the welcome email names the tool and tells you how to install PostHog from there. If you're a founder, your use cases are about revenue and retention, not failed network requests.
 
 And yes, it's still fun. There's a hot dog joke, a Chrome extension that lets Max the hedgehog loose on the internet, and an email that promotes our least profitable products because we don't listen to our shareholders. Most footers have their own joke too, mostly at my expense.
-
+![Onboarding 210.0](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/68747470733a2f2f75732d6d656469612e706f7374686f672e636f6d2f75706c6f616465645f6d656469612f30316132306533632d306563622d303030302d383461382d666339643562623231666139_9e66c0c9df.png)
+<Caption>Onboarding 10.0 gives users a slightly different path based on if they've been invited, or are a new sign-up</Caption>
 ### Building it with the MCP
 
 This is the bit I'm most excited about. I built almost all of 10.0 by talking to Claude through the [PostHog MCP](/docs/model-context-protocol). I'd describe a branch or paste in some copy, and the agent would build the step, write the Liquid, and wire it all together. When I wanted to see the result, I asked for a test of every email and every variation, and they landed in my inbox a few minutes later.
