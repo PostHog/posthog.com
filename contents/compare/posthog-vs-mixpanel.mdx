@@ -146,7 +146,7 @@ PostHog and Mixpanel offer broadly similar product analytics features, including
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-Our [generous free tier](/pricing) means every PostHog customer gets 1 million analytics events for free every single month. More than 90% of companies use PostHog for free, and our [startup program](/startups) comes with $50,000 in credit.
+Our [generous free tier](/pricing) means every PostHog customer gets 1 million analytics events for free every single month. 97% of companies use PostHog for free, and our [startup program](/startups) comes with $50,000 in credit.
 
 </CalloutBox>
 
@@ -292,7 +292,7 @@ Both PostHog and Mixpanel offer native A/B testing and feature flags. PostHog bi
         {
             label: 'Built-in A/B testing',
             description: 'Setup and run A/B tests using feature flags',
-            values: [true, false],
+            values: [true, true],
         },
         {
             path: 'experiments.features.experiment_analysis',
@@ -400,7 +400,7 @@ Both tools now have a built-in AI agent and a hosted MCP server, so the question
 
 - **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents can open PRs.
  
-The difference is what's behind them. Mixpanel's agent and MCP server work from your events, replays, and experiments. PostHog's work from those plus your errors, logs, survey responses, and external data in the warehouse.
+The difference is what's behind them. Mixpanel's agent and MCP server work from your events, replays, and experiments, and Mixpanel Agent can also read tools like GitHub, Jira, Linear, and Notion through MCP Connections. PostHog's work from your events, replays, and experiments plus your errors, logs, survey responses, and the external data in your warehouse.
 
 ### Price comparison
 
@@ -595,7 +595,7 @@ Mixpanel is cheaper if you commit to yearly billing ($270 a month at 3 million e
 Mixpanel has three tiers:
 
 1. **Free:** 1M events/month, core analytics, limited features
-2. **Growth:** Starts ~$28/month per 10k events after, scales with volume
+2. **Growth:** Usage-based. At low volume on monthly billing this is about $0.28 per 1,000 events, and the rate falls as volume grows
 3. **Enterprise:** Custom pricing, custom experiment and feature flag volumes, advanced features
 
 Add-ons like Group Analytics and Data Pipelines are separately priced. Experiments and Feature Flags are included on every plan, with limits on monthly experiment users and active flags (1,000 and 10 on Free; 5,000 and 50 on Growth). Session Replay is included up to 10,000 replays a month on Free and 20,000 on Growth. For comparison, PostHog's [pricing](/pricing) publishes every per-unit rate, including add-ons.
@@ -661,7 +661,7 @@ Not as a released product. Mixpanel's Agent Intelligence, which analyzes AI agen
 <details>
     <summary>Which is easier to set up – PostHog or Mixpanel?</summary>
 
-Both are designed for quick implementation. **PostHog** offers an [AI install wizard](/docs/ai-engineering/ai-wizard) that gets you running in under 90 seconds, plus autocapture that starts collecting events immediately. **Mixpanel** also supports autocapture and has straightforward SDK installation. The main difference is PostHog's broader feature set means there's more to explore, but you can adopt features incrementally.
+Both are designed for quick implementation. **PostHog** offers an [AI install wizard](/docs/ai-engineering/ai-wizard) that gets you running in minutes, plus autocapture that starts collecting events immediately. **Mixpanel** also supports autocapture and has straightforward SDK installation. The main difference is PostHog's broader feature set means there's more to explore, but you can adopt features incrementally.
 
 </details>
 
@@ -692,7 +692,7 @@ Companies like [HeadshotPro](/customers/headshotpro) and [Webshare](/customers/w
 <details>
     <summary>Which has better support?</summary>
 
-**PostHog** support is handled by engineers: support engineers first, backed by the engineers who build each product. Paid plans get faster response targets, and the free plan relies on our [community forums](/forum) and [documentation](/docs). **Mixpanel** offers support on every plan, around the clock on Enterprise, with paid add-ons for faster response times.
+**PostHog** support is handled by engineers: support engineers first, backed by the engineers who build each product. Paid plans get faster response targets, and the free plan relies on our [community forums](/forum) and [documentation](/docs). **Mixpanel** offers support on every plan, with extended hours on Enterprise and paid add-ons there for faster response times.
 
 </details>
 
