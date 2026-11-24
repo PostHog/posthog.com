@@ -9,7 +9,7 @@ availability:
 sourceId: Coupa
 ---
 
-The Coupa connector syncs spend management data from your Coupa instance into PostHog, including invoices, purchase orders, requisitions, suppliers, contracts, expense reports, users, and approvals.
+The Coupa connector syncs spend management data from your Coupa instance into PostHog, including invoices, purchase orders, requisitions, suppliers, contracts, expense reports, users, approvals, accounts, account types, commodities, departments, and receiving transactions.
 
 ## Prerequisites
 
@@ -19,16 +19,21 @@ Before linking Coupa, you need an OIDC client set up in your Coupa instance:
 2. Create a new OIDC client using the **client credentials** grant type.
 3. Grant it read scopes for the objects you want to sync:
 
-| Table           | Required scope             |
-| --------------- | -------------------------- |
-| Invoices        | `core.invoice.read`        |
-| Purchase orders | `core.purchase_order.read` |
-| Requisitions    | `core.requisition.read`    |
-| Suppliers       | `core.supplier.read`       |
-| Contracts       | `core.contract.read`       |
-| Expense reports | `core.expense.read`        |
-| Users           | `core.user.read`           |
-| Approvals       | `core.approval.read`       |
+| Table                  | Required scope                  |
+| ---------------------- | ------------------------------- |
+| Invoices               | `core.invoice.read`             |
+| Purchase orders        | `core.purchase_order.read`      |
+| Requisitions           | `core.requisition.read`         |
+| Suppliers              | `core.supplier.read`            |
+| Contracts              | `core.contract.read`            |
+| Expense reports        | `core.expense.read`             |
+| Users                  | `core.user.read`                |
+| Approvals              | `core.approval.read`            |
+| Accounts               | `core.accounting.read`          |
+| Account types          | `core.accounting.read`          |
+| Commodities            | `core.common.read`              |
+| Departments            | `core.common.read`              |
+| Receiving transactions | `core.inventory.receiving.read` |
 
 You only need to grant scopes for the tables you plan to sync. If your Coupa instance doesn't support per-object scopes, PostHog falls back to a scope-less token request that uses whichever scopes the admin granted the OIDC client.
 
