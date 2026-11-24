@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import qs from 'qs'
 import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import {
@@ -179,6 +179,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isValidating, setIsValidating] = useState(true)
     const [user, setUser] = useState<User | null>(null)
+    const learnProgressSaveQueue = useRef<Promise<void>>(Promise.resolve())
     const [jwt, setJwt] = useState<string | null>(null)
     const [notifications, setNotifications] = useState<any>([])
     const { addToast } = useToast()
@@ -841,7 +842,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
-    const saveLearnProgress = async (progress: ReadChapterIdsByGuide, signedInUser: User): Promise<void> => {
+    const sendLearnProgress = async (progress: ReadChapterIdsByGuide, signedInUser: User): Promise<void> => {
         try {
             const token = await getJwt()
             const res = await fetch(`${SQUEAK_HOST}/api/profiles/${signedInUser.profile.id}`, {
@@ -855,10 +856,22 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             if (!res.ok) throw new Error(`Saving Learn progress failed with ${res.status}`)
             const savedProgress: ReadChapterIdsByGuide | undefined = (await res.json())?.data?.attributes?.learnProgress
             if (!savedProgress) return
-            setUser((currentUser) => (currentUser ? { ...currentUser, learnProgress: savedProgress } : currentUser))
+            setUser((currentUser) =>
+                currentUser?.profile?.id === signedInUser.profile.id
+                    ? { ...currentUser, learnProgress: savedProgress }
+                    : currentUser
+            )
         } catch (error) {
             console.error(error)
         }
+    }
+
+    // One save at a time: the server only grows the map, so in-order responses never replace a newer one with an older one.
+    const saveLearnProgress = (progress: ReadChapterIdsByGuide, signedInUser: User): Promise<void> => {
+        learnProgressSaveQueue.current = learnProgressSaveQueue.current.then(() =>
+            sendLearnProgress(progress, signedInUser)
+        )
+        return learnProgressSaveQueue.current
     }
 
     const syncLocalLearnProgress = (signedInUser: User): void => {
