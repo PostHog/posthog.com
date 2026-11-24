@@ -110,6 +110,7 @@ test('logs the request and the Markdown served, with values only for allowlisted
         accept: '*/*',
         'accept-language': 'en',
         'sec-fetch-site': 'none',
+        'sec-purpose': 'prefetch',
         'signature-agent': '"https://agent.example.com"',
         'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
         'x-vercel-ip-country': 'DE',
@@ -125,6 +126,7 @@ test('logs the request and the Markdown served, with values only for allowlisted
                 'x-forwarded-for': '203.0.113.7',
                 'x-real-ip': '203.0.113.8',
                 'x-session': 'test-secret-5',
+                from: 'test-secret-6@example.com',
             },
         })
     )
@@ -137,15 +139,22 @@ test('logs the request and the Markdown served, with values only for allowlisted
     assert.deepEqual(line, {
         type: 'docs_request',
         method: 'GET',
-        path: '/docs/product-analytics',
+        url: '/docs/product-analytics?utm_source=example&ref=hn&token=REDACTED&next=REDACTED',
         served_format: 'markdown',
         negotiation: 'served',
         markdown_reason: 'agent_fetcher',
-        query_params: { utm_source: 'example', ref: 'hn' },
-        other_query_param_names: ['token', 'next'],
         request_headers: headers,
-        other_header_names: ['authorization', 'cookie', 'x-forwarded-for', 'x-real-ip', 'x-session'],
+        other_header_names: ['authorization', 'cookie', 'from', 'x-forwarded-for', 'x-real-ip', 'x-session'],
     })
+})
+
+test('logs an email address in the path as {email}', async (t) => {
+    enableLog(t)
+    const lines = mockSiblingAndLog(t)
+
+    await middleware(new Request('https://posthog.com/docs/someone%40example.com/setup'))
+
+    assert.equal(lines[0].url, '/docs/{email}/setup')
 })
 
 test('logs why no Markdown was served, and requests for a Markdown URL', async (t) => {

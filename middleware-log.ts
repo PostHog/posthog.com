@@ -11,11 +11,57 @@ const LOG_TYPE = 'docs_request'
 export const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
 // The matcher in middleware.ts covers more prefixes; only /docs requests are logged.
 const LOGGED_PATHS = /^\/docs(\/|$)/
-// Logs are widely readable, so only values known to carry no credentials or IP are logged. Every other
-// header and query parameter is logged by name only.
-const LOGGED_HEADERS =
-    /^(accept(-.+)?|user-agent|sec-ch-ua(-.+)?|sec-fetch-.+|signature(-input|-agent)?|referer|via|from|dnt|cache-control|priority|upgrade-insecure-requests|x-vercel-id|x-vercel-ip-(country|country-region|city))$/
-const LOGGED_QUERY_PARAMS = /^(utm_.+|ref|source|via|format|tab)$/
+// Logs are widely readable, so values are logged only for headers and query parameters known to carry
+// no credentials, IP or personal data. Every other one is logged by name only. `from` stays out because
+// it carries an email address.
+const HEADER_ALLOWLIST = new Set([
+    'accept',
+    'accept-encoding',
+    'accept-language',
+    'user-agent',
+    'sec-ch-ua',
+    'sec-ch-ua-mobile',
+    'sec-ch-ua-platform',
+    'sec-fetch-dest',
+    'sec-fetch-mode',
+    'sec-fetch-site',
+    'sec-fetch-user',
+    // Prefetch and prerender hints.
+    'sec-purpose',
+    'purpose',
+    'x-purpose',
+    'x-moz',
+    // Web Bot Auth, sent by agents that sign their requests.
+    'signature',
+    'signature-input',
+    'signature-agent',
+    'referer',
+    'via',
+    'dnt',
+    'cache-control',
+    'priority',
+    'upgrade-insecure-requests',
+    'x-vercel-id',
+    'x-vercel-ip-country',
+    'x-vercel-ip-country-region',
+    'x-vercel-ip-city',
+])
+const QUERY_PARAM_ALLOWLIST = new Set([
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+    'ref',
+    'source',
+    'via',
+    'format',
+    'tab',
+])
+const REDACTED = 'REDACTED'
+// An email address in a path segment is personal data. The dot-suffixed domain keeps other uses of `@`
+// readable.
+const EMAIL_SEGMENT = /^[^/]*(?:@|%40)[^/]*\.[A-Za-z]{2,}$/i
 
 type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
 
@@ -33,34 +79,43 @@ export function logRequest(request: Request, result: NegotiationResult): void {
     if (request.headers.has(SUBREQUEST_HEADER)) return
     const url = new URL(request.url)
     if (!LOGGED_PATHS.test(url.pathname)) return
-    const query = split(url.searchParams, LOGGED_QUERY_PARAMS)
-    const headers = split(request.headers, LOGGED_HEADERS)
+    const headers = splitHeaders(request.headers)
 
     console.log(
         JSON.stringify({
             type: LOG_TYPE,
             method: request.method,
-            path: url.pathname,
+            url: scrubUrl(url),
             served_format: result.response || result.negotiation === 'markdown_url' ? 'markdown' : 'html',
             negotiation: result.negotiation,
             markdown_reason: result.reason,
             markdown_fetch_ms: result.markdownFetchMs,
-            query_params: query.values,
-            other_query_param_names: query.otherNames,
             request_headers: headers.values,
             other_header_names: headers.otherNames,
         })
     )
 }
 
-function split(
-    pairs: { forEach(callback: (value: string, name: string) => void): void },
-    logged: RegExp
-): { values: Record<string, string>; otherNames: string[] } {
+// The path and query, with the value of every query parameter outside the allowlist replaced by
+// REDACTED, and email address path segments by `{email}`.
+function scrubUrl(url: URL): string {
+    const path = url.pathname
+        .split('/')
+        .map((segment) => (EMAIL_SEGMENT.test(segment) ? '{email}' : segment))
+        .join('/')
+    if (!url.search) return path
+    const query = new URLSearchParams()
+    url.searchParams.forEach((value, name) => {
+        query.append(name, QUERY_PARAM_ALLOWLIST.has(name.toLowerCase()) ? value : REDACTED)
+    })
+    return `${path}?${query}`
+}
+
+function splitHeaders(headers: Headers): { values: Record<string, string>; otherNames: string[] } {
     const values: Record<string, string> = {}
     const otherNames: string[] = []
-    pairs.forEach((value, name) => {
-        if (logged.test(name)) values[name] = value
+    headers.forEach((value, name) => {
+        if (HEADER_ALLOWLIST.has(name.toLowerCase())) values[name] = value
         else otherNames.push(name)
     })
     return { values, otherNames }
