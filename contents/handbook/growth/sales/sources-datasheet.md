@@ -18,7 +18,7 @@ PostHog Sources is a fully managed tool that extracts data from your apps and da
 
 Move data in minutes, set and forget.
 
-- **700+ sources:** Stripe, HubSpot, Salesforce, Zendesk, Postgres and more, with new connectors shipping regularly.
+- **1,400+ sources:** Stripe, HubSpot, Salesforce, Zendesk, Postgres and more, with new connectors shipping regularly.
 - **AI-assisted setup:** Paste in a read-only key and pick your tables, or run `npx @posthog/wizard warehouse` and the wizard finds your databases and APIs for you.
 - **Free historical syncs:** Every row synced in a new source's first 7 days is free, so backfills don't land on the bill.
 - **A reliable sync engine:** Every incremental sync runs on deltalite, our own upsert engine. Memory scales with the batch, not the table, so big tables sync reliably.
@@ -26,7 +26,7 @@ Move data in minutes, set and forget.
 
 ## Sources, or ELT?
 
-Sources is our name for it. The rest of the industry calls this kind of tool ELT (or ETL). Data people search for, compare and budget for "ELT tools". We call it Sources because we aren't solely serving data professionals, when were targeting product engineers we should talk primarily about Sources as ELT would be an unknown and confusing term. 
+Sources is our name for it. The rest of the industry calls this kind of tool ELT (or ETL). Data people search for, compare and budget for "ELT tools". We call it Sources because we aren't solely serving data professionals. When we're targeting product engineers, we should talk primarily about Sources, as ELT would be an unknown and confusing term.
 
 ELT stands for Extract, Load, Transform:
 
@@ -83,15 +83,17 @@ They use PostHog but have no warehouse or other data tools yet. Pitch PostHog So
 | Historical backfills | Free for each new source's first 7 days | Count towards usage | Count towards credits |
 | Managed schema changes, retries, rate limits | Yes | Yes | Yes |
 | Data usable in analytics, experiments and agents | Yes, out of the box | No, needs a separate BI and product stack | No, needs a separate BI and product stack |
+
 ### Where they're stronger
 
-- Both have a better brand recognition and well established footholds. Point to PostHogs established rputation in other fields and entering new markets.
+- Both have better brand recognition and well-established footholds. Point to PostHog's established reputation in other fields and its track record of entering new markets.
 - Airbyte's open-source version is free if you host it, but someone has to run and fix it.
 
 ## Pricing framework
 
 - The first 1 million rows synced every month are free.
 - Historical syncs are free: every row synced in a new source's first 7 days costs nothing.
+
 See the [pricing calculator](/pricing).
 
 | Monthly rows synced | Price per row | Monthly cost at the top of the tier (list) |
@@ -114,6 +116,6 @@ See the [pricing calculator](/pricing).
 - `#team-warehouse-pipelines` for questions and support
 - `@lizzieepton` for marketing and sales resource requests
 - [Sources docs](/docs/data-pipelines/sources)
-- Migration guide:
+- [Migration guide: moving off Fivetran](/docs/data-pipelines/migrate-off-fivetran)
 - Wizard setup command: `npx @posthog/wizard warehouse`
 - [Connect your first source in app](https://app.posthog.com/data-warehouse/new-source)

@@ -9,7 +9,7 @@ availability:
 sourceId: Shortio
 ---
 
-Enter your Short.io API key to pull your domains, links, and click statistics into the PostHog data warehouse.
+Enter your Short.io API key to sync your branded-link domains, links, and click statistics to the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -23,19 +23,24 @@ Once the syncs are complete, you can start using Short.io data in PostHog.
 
 ## Available tables
 
-| Table              | Description                                                               | Sync method  |
-| ------------------ | ------------------------------------------------------------------------- | ------------ |
-| `domains`          | Branded short-link domains configured in your Short.io account            | Full refresh |
-| `links`            | Short links in a Short.io domain, including changes to existing links     | Full refresh |
-| `link_clicks`      | Total click count for each link within the account's available history    | Full refresh |
-| `last_clicks`      | Raw click events in the account's available history                       | Full refresh |
-| `link_by_interval` | Daily click counts per link in UTC within the account's available history | Full refresh |
+| Table                | Description                                                                       | Sync method  |
+| -------------------- | --------------------------------------------------------------------------------- | ------------ |
+| `domains`            | Branded short-link domains configured in your Short.io account                    | Full refresh |
+| `links`              | Short links in a Short.io domain, including changes to existing links             | Full refresh |
+| `link_clicks`        | Total click count for each link within the account's available history            | Full refresh |
+| `last_clicks`        | Raw click events in the account's available history                               | Full refresh |
+| `link_by_interval`   | Daily click counts per link in UTC within the account's available history         | Full refresh |
+| `domain_by_interval` | Daily click counts per domain in UTC within the account's available history       | Full refresh |
+| `domain_top`         | Top click dimension values (country, browser, referrer, UTM tags) for each domain | Full refresh |
+| `link_top`           | Top click dimension values (country, browser, referrer, UTM tags) for each link   | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
-- All tables sync via full refresh only. Short.io's APIs do not expose reliable server-side filters for incremental syncing.
+- All tables sync via full refresh only. Incremental syncing is not supported.
+- Click statistics include all the history that is available to your Short.io account.
+- The `links` table does not include link passwords.
 
 ## Configuration
 

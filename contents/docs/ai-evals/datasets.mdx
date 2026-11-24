@@ -62,6 +62,17 @@ The fastest way to build a useful dataset is to harvest real traffic. On a [trac
 
 Open a dataset and add an item directly, filling in **Input**, **Expected output**, and **Metadata** as JSON.
 
+## Example: turn a production failure into a test case
+
+Twig's AI trip planner helps guests find a place to stay. One day it books a group of four into a nest that sleeps two. Here's how that failure becomes a test that runs on every change:
+
+1. An [online evaluation](/docs/ai-evals) called "Stay fits the group" fails the trace in production.
+2. On the trace, click **Add to dataset** and pick your regression dataset. PostHog fills in the input and saves the planner's answer as `source_output`.
+3. Open the new item and set **Expected output** to a stay that sleeps four.
+4. Fix the guest filter in the planner and open a pull request.
+5. Your CI runs [offline evals](/docs/ai-evals/offline-evals) against the latest dataset revision, new item included. The fix passes, so you merge it.
+6. Every later pull request runs the same item. If the bug comes back, CI fails before a guest sees it.
+
 ## Versioning
 
 Every item change creates an immutable version and a new dataset revision. You can view past revisions and restore an earlier version of an item while that history is still available under the [retention policy](#data-retention).
@@ -139,11 +150,131 @@ CLI access is on the way, so you'll be able to pull a dataset revision and run i
 
 ## Limits
 
-PostHog applies limits to datasets to prevent abuse. These limits are subject to change.
+These limits are subject to change.
+
+| Resource | Limit | What counts |
+| --- | --- | --- |
+| Datasets per project | 100 by default | Active datasets and archived datasets that haven't expired. |
+| Items per dataset | 2,000 | Both active and archived items. |
+| Retained versions per item | 40 | The item's first version and each subsequent version. |
+| Retained item versions per project | 25,000 | Item versions across all datasets in the project. |
+| Payload per item | 406,666 bytes | The combined size of `input`, `expected_output`, `source_output`, and `metadata` as compact UTF-8 JSON. |
+| JSONL export | 250 MB | The entire file. A dataset with large items can exceed this limit even when each item fits within its payload limit. |
+
+Editing, archiving, or restoring an item can add a version. Each version counts toward both version limits until PostHog deletes it under the [retention policy](#data-retention).
 
 ## Report results with offline evals
 
 After your CI run scores each dataset item, send the results to PostHog with [offline evals](/docs/ai-evals/offline-evals). Each run appears as an experiment, with one row per test case and one column per evaluator, so you can compare runs and find the items that regressed.
+
+### Use a dataset in offline evals
+
+Use a PostHog [dataset](/docs/ai-evals/datasets) to manage cases in PostHog or save them from production traces. This example loads a dataset revision before starting the experiment.
+
+This example builds on the [offline evals quickstart](/docs/ai-evals/offline-evals#run-your-first-experiment). Complete the quickstart first. To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, like the `cases` list in [step 3 of the quickstart](/docs/ai-evals/offline-evals#3-run-the-cases-and-upload-scores). Set `POSTHOG_DATASET_ID` to your dataset's ID.
+
+In Python or TypeScript, replace the experiment creation and the loop over `cases`. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call. In Go, add `"encoding/json"` to the imports in `baseline/main.go` and replace the rest of `runExperiment` after the scorer lookup.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+snapshot = evaluations.datasets.snapshot(os.environ["POSTHOG_DATASET_ID"])
+items = list(snapshot.iter_items())
+
+experiment = evaluations.create_experiment(
+    name="Support agent from a dataset",
+    suite_key="support-agent",
+    dataset_revision_id=snapshot.revision_id,
+    run_source="local",
+)
+
+for row in items:
+    output = run_agent(row.input)
+    item = EvaluationItem.from_dataset_item(row, output=output)
+    for key, result in evaluate_answer(output, row.expected_output).items():
+        experiment.upload_result(
+            item=item,
+            scorer_version_id=scorers[key].current_version_id,
+            **result,
+        )
+```
+
+```typescript file=TypeScript
+const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!)
+const items = []
+for await (const row of snapshot) {
+    items.push(row)
+}
+
+const experiment = await evaluations.createExperiment({
+    name: "Support agent from a dataset",
+    suiteKey: "support-agent",
+    datasetRevisionId: snapshot.revisionId,
+    runSource: "local",
+})
+
+for (const row of items) {
+    if (typeof row.input !== "string") {
+        throw new Error("The demo requires string inputs")
+    }
+    const output = await runAgent(row.input)
+    const scores = evaluateAnswer(output, row.expectedOutput as ToolCall)
+    const item = EvaluationItem.fromDatasetItem(row, { output })
+    for (const key of ["tool", "arguments"] as const) {
+        await experiment.uploadResult({
+            item,
+            scorerVersionId: scorers[key].currentVersionId,
+            ...scores[key],
+        })
+    }
+}
+```
+
+```go file=Go
+snapshot, err := client.Datasets.Snapshot(ctx, os.Getenv("POSTHOG_DATASET_ID"), nil)
+if err != nil {
+	return err
+}
+experiment, err := client.CreateExperiment(ctx, evaluations.Fields{
+	"name": "Support agent from a dataset", "suite_key": "support-agent", "run_source": "local",
+	"dataset_revision_id": snapshot.RevisionID(),
+})
+if err != nil {
+	return err
+}
+err = snapshot.ForEach(ctx, 25, func(row evaluations.DatasetItem) error {
+	input, ok := row.Input.(string)
+	if !ok {
+		return fmt.Errorf("dataset item %s requires a string input", row.ID)
+	}
+	raw, err := json.Marshal(row.ExpectedOutput)
+	if err != nil {
+		return err
+	}
+	var expected toolCall
+	if err := json.Unmarshal(raw, &expected); err != nil || expected.Tool == "" || expected.Arguments == nil {
+		return fmt.Errorf("dataset item %s requires an expected tool and arguments", row.ID)
+	}
+	output := runAgent(input)
+	item, err := evaluations.ItemFromDataset(row, evaluations.Fields{"output": output.fields()})
+	if err != nil {
+		return err
+	}
+	results, err := evaluateAnswer(item, output, expected, versions)
+	if err != nil {
+		return err
+	}
+	_, err = experiment.UploadResults(ctx, results)
+	return err
+})
+return finish(ctx, experiment, err)
+```
+
+</MultiLanguage>
+
+`from_dataset_item()` in Python, `fromDatasetItem()` in TypeScript, and `ItemFromDataset()` in Go copy the test case and its version into the experiment item. Always supply the new run's output. The dataset's `source_output` is an earlier answer.
+
+By default, the snapshot uses the latest revision when you open it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript. In Go, set `revision := 12` and pass `&revision` as the last argument to `Snapshot`. The revision must still be available under the [dataset retention policy](/docs/ai-evals/datasets#data-retention).
 
 ## Further reading
 

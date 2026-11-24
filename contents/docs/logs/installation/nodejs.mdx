@@ -7,7 +7,7 @@ showStepsToc: true
 import { Steps, Step } from 'components/Docs/Steps'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
-> **Note:** `posthog-node` doesn't have a logs API, so Node.js logs go through OpenTelemetry. (Node.js [tracing](/docs/distributed-tracing/installation/nodejs) and [metrics](/docs/metrics/installation/nodejs) have native `posthog-node` APIs.) See the [SDK support table](/docs/logs/installation#sdk-support-by-signal).
+> **Note:** This guide sends Node.js logs through OpenTelemetry. `posthog-node` 5.65.0 or later also has a native logs API: set the `logs` client option (for example `logs: { serviceName: 'my-service' }`), then call `posthog.logger.info('message', attributes)` or `posthog.captureLog({ body, level, attributes })`. Native records carry the active span's trace and span IDs. See the [SDK support table](/docs/logs/installation#sdk-support-by-signal).
 
 > **Note:** If you use Pino or Winston, follow the [Pino](/docs/logs/installation/pino) or [Winston](/docs/logs/installation/winston) guide instead. It sends your existing logs without changes to your logger calls.
 

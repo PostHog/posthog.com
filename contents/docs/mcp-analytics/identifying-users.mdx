@@ -2,9 +2,7 @@
 title: Identifying users
 ---
 
-By default, the SDK attributes MCP events to a generated session ID (`ses_…`). On `2025-11-25`, this normally follows the protocol session. On `2026-07-28`, [conversation IDs](/docs/mcp-analytics/conversation-id) are on by default. Calls share a session only when the agent echoes the handle. The SDK does not know the person behind the session.
-
-Use `identify` to associate calls with a person.
+By default, the SDK attributes events to a generated session ID (`ses_…`), not to a person. Use `identify` to associate calls with a person.
 
 ## How attribution works
 
@@ -20,13 +18,13 @@ Before `identify` returns a user, events use the session ID. Later events use th
 
 ## Anonymous sessions and person profiles
 
-Events for sessions with **no** resolved identity are sent with `$process_person_profile: false`. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
+Events for sessions with **no** resolved identity are sent with person processing turned off. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
 
 <a id="wiring-identify" />
 
 ## Configure `identify`
 
-`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. In TypeScript, Python, and Ruby, `identify` can also be a static identity instead of a callback. Except in Go and Rust, the SDK caches the identity per session and merges each new result into it. Go and Rust have no cache. In Go, the resolver runs once for each captured event. In Rust, it runs once per request, so a failed call's `$mcp_tool_call` and `$exception` share one result.
+`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. In TypeScript, Python, and Ruby, `identify` can also be a static identity instead of a callback, and the SDK caches the result per session.
 
 <MultiLanguage>
 
@@ -104,19 +102,13 @@ PostHog::MCP.instrument(
 
 </MultiLanguage>
 
-In TypeScript, read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations, and reading `extra` directly can return `undefined` and cause anonymous attribution. See [reading request headers](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors). Python has the same helper, `get_request_headers`. In Go, go-sdk gives you `req.Extra.Header` and `req.Extra.TokenInfo`. In Ruby (`posthog-ruby` 3.29.0 and later), `extra["headers"]` holds every HTTP request header, with lowercase keys. On stdio, it's an empty Hash.
+Each example reads the request headers its own way. See your language's [installation page](/docs/mcp-analytics/installation) for details. In TypeScript and Python, use `getRequestHeaders` or `get_request_headers`. Reading `extra` directly can return nothing, and every call goes anonymous.
 
 An identity has three fields, named in each language's style:
 
 - The distinct ID becomes the event's `distinct_id`.
 - Person properties are written to `$set`, such as name, email, or plan. `$set` updates the person profile but isn't kept on the stored event, so query these as [person properties](/docs/product-analytics/person-properties).
 - Groups, a map of group type to group key, are added to every event as `$groups`.
-
-When the callback returns an identity, the SDK:
-
-1. Uses the distinct ID as the event's `distinct_id`.
-2. Adds the person properties as `$set` on every event except `$exception` (Rust includes `$exception`), and the groups as `$groups` on every event.
-3. Caches the identity per session, merging person properties across requests. The Go and Rust SDKs have no cache.
 
 The TypeScript, Python, Go, and Rust SDKs don't send a standalone `$identify` event. The Ruby SDK still sends one when the identity for a session changes.
 
@@ -129,7 +121,7 @@ No SDK sets `$anon_distinct_id`, so PostHog doesn't merge these earlier events i
 ## When *not* to call identify
 
 - **Internal tools without per-user auth.** If your MCP server doesn't authenticate end users (e.g. a single-tenant internal server behind a VPN), leave `identify` unset. Session-scoped attribution is fine.
-- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify. Those events stay session-scoped, unless an earlier request on the same session was identified. Except in Go, the cached identity then still applies.
+- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify. Those events stay session-scoped. In every SDK except Go and Rust, if an earlier request in the same session was identified, the SDK keeps that identity.
 
 ## Querying by identified user
 

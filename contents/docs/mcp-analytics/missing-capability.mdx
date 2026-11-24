@@ -8,12 +8,6 @@ Missing-capability reports show what agents need but your server does not suppor
 
 Turn on missing-capability reports to capture them. They're off by default.
 
-<CalloutBox icon="IconInfo" title="Agent feedback in TypeScript and Python" type="fyi">
-
-In TypeScript and Python, `collectFeedback` (`collect_feedback`) adds a `send_feedback` tool. It reports missing capabilities as `feedback_type: "missing_capability"`, plus broken tools and praise, as [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties) events. The **Missing capabilities** tab, API, and MCP tool read only `$mcp_missing_capability`, so query `$mcp_feedback` with SQL or insights.
-
-</CalloutBox>
-
 ## Enabling
 
 <MultiLanguage>
@@ -44,9 +38,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 
 The SDK registers a virtual tool named `get_more_tools`. It advertises this tool through `tools/list`. The description asks the agent to call it when the available tools cannot satisfy a request.
 
-In TypeScript and Python, the SDK adds the tool to the first page of `tools/list` only. A real tool with the same name on that page wins. A real tool with that name on a later page is still listed, but the SDK intercepts its calls, so rename the virtual tool with `missingCapabilityToolName` if your server uses the name.
-
-In Go, `WithMissingCapabilityTool` turns the feature on. Pass a different name to rename the tool. An empty name uses `get_more_tools`. The SDK adds the tool to the last page of `tools/list`. If your server registers a tool with the same name, the SDK keeps your tool and does not add its own. A server that registers no tools must set `HasTools` in go-sdk's `ServerOptions`. Without it, clients never list tools and never see `get_more_tools`.
+If your server already has a tool named `get_more_tools`, rename the virtual one (`missingCapabilityToolName` in TypeScript and Python). In Go, a server with no tools must set `HasTools` in `ServerOptions`, or clients never see it.
 
 ## What gets captured
 
@@ -71,32 +63,7 @@ ORDER BY times_asked DESC
 LIMIT 50
 ```
 
-## Complementary signal: advertised but uncalled
-
-Missing-capability reports tell you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* – tools the agent saw but never invoked.
-
-```sql
-WITH listed AS (
-  SELECT DISTINCT arrayJoin(properties.$mcp_listed_tool_names) AS tool_name
-  FROM events
-  WHERE event = '$mcp_tools_list'
-    AND timestamp > now() - INTERVAL 30 DAY
-),
-called AS (
-  SELECT DISTINCT properties.$mcp_tool_name AS tool_name
-  FROM events
-  WHERE event = '$mcp_tool_call'
-    AND timestamp > now() - INTERVAL 30 DAY
-)
-SELECT tool_name AS zombie_tool
-FROM listed
-WHERE tool_name NOT IN (SELECT tool_name FROM called)
-ORDER BY tool_name
-```
-
-The Go SDK sends no `$mcp_tools_list`, so the second query returns nothing for Go servers.
-
-Together, the two queries answer "what tools should I build?" and "what tools should I cut?".
+To find tools agents see but never call, see [Advertised tools that never get called](/docs/mcp-analytics/queries#advertised-tools-that-never-get-called).
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_light_f9864cae92.png"
@@ -110,17 +77,5 @@ classes="rounded"
 <CalloutBox icon="IconInfo" title="Agents have to actually call it" type="fyi">
 
 The agent must call `get_more_tools` to produce a report. Clients that ignore tool descriptions may not call it, even when capabilities are missing.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="It's its own event, not a tool call" type="fyi">
-
-`get_more_tools` emits a dedicated `$mcp_missing_capability` event rather than a `$mcp_tool_call`, so it never pollutes your tool-call volume, error-rate, or intent-source queries. Query it directly via `event = '$mcp_missing_capability'`.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="Only enable when you'll act on the signal" type="fyi">
-
-Enable this feature when you plan to review missing-capability reports and use them to prioritize work.
 
 </CalloutBox>

@@ -26,8 +26,9 @@ seo:
 - `$feature_flag_called` events and `$feature/*` properties move to dedicated storage built for them. Most queries on flag calls keep working, but [a few need a change](#do-you-need-to-change-anything-for-flag-calls).
 - We're removing some deprecated properties, mostly flag payloads and internal SDK state.
 - We'll drop `null` values and empty objects from properties, and store a few built-in properties as text. [See what this changes](#how-some-property-values-change).
+- These changes will also impact batch exports of events: flags arrive as one map, and some properties are left out or change format. [See what changes for batch exports](#what-changes-for-batch-exports).
 - Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
-- All of this takes effect on November 30.
+- We'll roll out all of this starting November 30.
 
 ## We're making queries faster
 
@@ -67,12 +68,15 @@ Here's more details on what this means:
 
 ### Do you need to change anything for flag calls?
 
-Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations and workflows that explicitly set `$feature_flag_called` as a trigger will continue to work. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
+Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations and workflows keep receiving `$feature_flag_called` events. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
 
-Two exceptions:
+From November 30, queries that read every event and don't name `$feature_flag_called` don't count new flag calls. This includes insight series and retention steps on **All events**, funnel steps on **All events** (unless the funnel also has a `$feature_flag_called` step), and SQL such as `SELECT count() FROM events` or `SELECT event, count() FROM events GROUP BY event`. Their totals drop by the number of flag calls you send. Unique-user counts, such as daily active users, also drop if you evaluate flags for users who send no other events. Server-side flag evaluation often does this. Queries that name `$feature_flag_called` still return flag calls, from at most the last 90 days.
 
-- **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
-- **Batch exports and Destinations:** from November 30, exports of the `events` table or `all events` will not include `$feature_flag_called` events. [Tell us](/support) if you need them.
+Three exceptions:
+
+- **SQL with `SELECT *` or some `SAMPLE` forms:** a query that reads `$feature_flag_called` with `SELECT *`, `COLUMNS(...)`, a `SAMPLE` with an `OFFSET`, or a `SAMPLE` of a row count returns an error. List the columns you need instead of `*`, and write `SAMPLE` as a ratio, such as `SAMPLE 0.1`.
+- **Batch exports:** from November 30, exports of the `events` table will not include `$feature_flag_called` events. To keep exporting them, see [What changes for batch exports](#what-changes-for-batch-exports).
+- **Legacy apps:** from November 30, legacy apps won't receive `$feature_flag_called` events. To keep receiving them, switch to the matching destination, such as [Customer.io](/docs/data-pipelines/destinations/customerio) or [RudderStack](/docs/data-pipelines/destinations/rudderstack).
 
 We'll email you before your organization moves. For details, see [Where does PostHog store flag calls?](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls)
 
@@ -122,6 +126,53 @@ We'll drop `null` values and empty objects from properties, and store a few buil
 | An empty object, like `{"filters": {}}` | Stored as sent | Dropped. The property counts as not set everywhere, including in filters and whole events. An object that only holds `null` values counts as not set too | Only if you filter on whether the property is set, or a tool that reads your batch exports expects the object |
 | A number in a built-in text property, like `$browser_version` or the group keys `$group_0` to `$group_4` | Stored as a number, like `155` | Stored as text, like `"155"`. An empty value (`""` or `[]`) in these properties is left out of whole events | Only if a tool that reads your batch exports expects a number |
 
+## What changes for batch exports
+
+From November 30, [batch exports](/docs/data-pipelines/batch-exports) that use the [events model](/docs/data-pipelines/batch-exports#events-model) change in two ways:
+
+- They no longer include `$feature_flag_called` events, because these events move to their own table. You can export that table separately (see below).
+- They send `properties` and `person_properties` in the new storage format. This format stores feature flags more efficiently, so events with many flags are much smaller.
+
+This applies to every destination. The persons and sessions models don't change.
+
+Here's what changes in exported events:
+
+| What | Before | After | What to do |
+| --- | --- | --- | --- |
+| `$feature_flag_called` events | Included | Not included | Create a second batch export with the [SQL query model](/docs/data-pipelines/batch-exports#sql-query-model) that exports `posthog.flag_evaluations`. This table keeps the last 90 days of flag calls |
+| Feature flag values | One property for each flag, like `"$feature/new-checkout": true` | One `$feature_flags` object for each event, like `"$feature_flags": {"new-checkout": "true"}`. The values are text: `"true"`, `"false"`, or the variant name | Read flag values from `$feature_flags`, and compare them as text |
+| `$active_feature_flags` | The list of active flags | Not included | Use the keys in `$feature_flags` that have a value other than `"false"` |
+| Flag payloads, product tour and survey state, data pipeline debugging properties, and raw LLM payloads | Included | Not included. See [What properties we're removing](#what-properties-were-removing) for the full list | None. We no longer store these properties |
+| `$set`, `$set_once`, and the other [properties that expire after 60 days](#what-properties-expire-after-60-days) | Included in `properties` for every event. `$set` and `$set_once` also fill the `set` and `set_once` fields | Included as before for events we received in the last 60 days. Not included for older events, for example when you backfill older data | For older events, use `person_properties`, which holds the person properties that these updates produce |
+| A top-level property set to `null`, like `{"plan": null}` | Included as `null` | Not included. A `null` inside an object or list, like `{"cart": {"note": null}}`, is still included | Treat a missing property as not set |
+| A number in a built-in text property, like `$browser_version` or `$group_0` to `$group_4` | A number, like `155` | Text, like `"155"` | Convert the value to a number if your tools need one |
+
+Here's an example of the `properties` of one event in a **batch export** before November 30:
+
+```json
+{
+  "$browser": "Chrome",
+  "$browser_version": 131,
+  "$referrer": null,
+  "$feature/new-checkout": true,
+  "$feature/pricing-test": "variant-b",
+  "$feature/legacy-nav": false,
+  "$active_feature_flags": ["new-checkout", "pricing-test"],
+  "$set": {"email": "user@example.com"}
+}
+```
+
+And the same event in a **batch export** after November 30:
+
+```json
+{
+  "$browser": "Chrome",
+  "$browser_version": "131",
+  "$feature_flags": {"legacy-nav": "false", "new-checkout": "true", "pricing-test": "variant-b"},
+  "$set": {"email": "user@example.com"}
+}
+```
+
 ## When
 
-The changes take effect on November 30. Questions? [Get in touch with support](/support).
+We'll roll out these changes starting November 30. Questions? [Get in touch with support](/support).

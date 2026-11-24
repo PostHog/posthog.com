@@ -47,7 +47,7 @@ However, Webshare doesn’t just use PostHog to run experiments and track produc
 
 “Every email, every Intercom message – basically every time we interact with a customer on any platform – that all goes into PostHog,” says Utku. “We track all of our KPIs there, as well as product usage, conversion rates, marketing campaigns, and so on.” 
 
-The team does, reluctantly, maintain a [Google Analytics](/compare/ga4-alternatives) account alongside PostHog, but it’s used only for tracking advertising performance. All other data can, and is, sent to PostHog so the team can track it there. 
+The team does, reluctantly, maintain a [Google Analytics](/compare/best-ga4-alternatives) account alongside PostHog, but it’s used only for tracking advertising performance. All other data can, and is, sent to PostHog so the team can track it there. 
 
 “That’s why PostHog is our favorite tool; it’s the single source of truth for us. We knew exactly what we wanted to do when we were coming from Mixpanel and Hotjar. We wanted to move away from all these separate tools, and put everything in one place. PostHog absolutely nails it.”
 

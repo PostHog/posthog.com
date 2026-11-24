@@ -7,9 +7,17 @@ import {
     IconPiggyBank,
     IconPresent,
     IconTerminal,
+    IconVideoCamera,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
+import {
+    learnChapterPath,
+    learnChapterSlug,
+    normalizeUrl,
+    sectionPages,
+    useBookPages,
+} from 'components/Learn/PocketGuides/bookModel'
+import { markChapterReadOnMove } from 'components/Learn/PocketGuides/chapterProgress'
 import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -20,6 +28,7 @@ import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
 
 const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    videos: { name: 'Videos', icon: <IconVideoCamera className="size-4" /> },
     'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
     'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
 }
@@ -157,7 +166,11 @@ const LearnNav = ({
             page.isFrontMatter ? 'introduction' : learnChapterSlug(page),
         ])
     )
+    const currentSlug = currentPath ? chapterByUrl.get(normalizeUrl(currentPath)) : undefined
     const trackClick = ({ url }: { url?: string }) => {
+        if (url && currentSlug) {
+            markChapterReadOnMove({ volumeId, pages, basePath: guideBasePath, currentSlug, targetHref: url })
+        }
         const chapter = url && chapterByUrl.get(url)
         if (chapter) {
             posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })

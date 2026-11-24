@@ -13,7 +13,7 @@ PostHog.com replicates a desktop-style OS. All pages should use one of these tem
 | `<Presentation />` | `/llm-analytics` | `src/components/Presentation/index.tsx` | Sources data from product hooks. Uses slide templates inside presentations. |
 | `<Explorer />` | `/products` | `src/components/Explorer/index.tsx` | Grid/list view for browsing items |
 | `<Inbox />` | `/questions` | `src/components/Inbox/index.tsx` | Outlook-style panes |
-| `<Wizard />` | `/vibe-check` | `src/pages/vibe-check/index.tsx` | Slides with navigation and a final screen |
+| `<Wizard />` | `/events-feedback-form` | `src/components/Wizard/index.tsx` | Slides with navigation and a final screen |
 | `<MediaPlayer />` | `/demo` | `src/components/MediaPlayer/index.tsx` | QuickTime clone, supports YouTube (nocookie), Wistia |
 
 ## Creating new pages

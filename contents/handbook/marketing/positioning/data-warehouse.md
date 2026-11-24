@@ -25,7 +25,7 @@ Snowflake, BigQuery, and Databricks are powerful. They're also expensive, comple
 ## Who this is for
 
 - **Startups who haven't built a data stack yet.** PostHog gets them to a complete, queryable data foundation in minutes, not months – and our [startup program](/startups) offers up to $50k in credits.
-- **Engineer-led teams tired of maintaining pipelines.** No ETL to babysit. Data flows in automatically from 40+ sources.
+- **Engineer-led teams tired of maintaining pipelines.** No ETL to babysit. Data flows in automatically from 1,400+ sources.
 - **Teams already using PostHog for analytics.** Adding the warehouse unifies product and business data in the place they already work.
 - **Compliance-sensitive orgs.** EU residency, SOC 2, HIPAA-ready – data stays in PostHog.
 
@@ -41,10 +41,10 @@ Snowflake, BigQuery, and Databricks are powerful. They're also expensive, comple
 
 **Problem:** Agents can see product signals – errors, funnel drops, slow sessions. But without business context, they're guessing. An agent can't prioritize the right customers without seeing revenue and plan data.
 
-**Solution:** PostHog's warehouse brings Stripe, HubSpot, Salesforce, and 40+ other sources alongside your product events. Every query, every insight, every agent prompt runs on the same unified dataset – no joins across systems, no pipelines to keep in sync.
+**Solution:** PostHog's warehouse brings Stripe, HubSpot, Salesforce, and 1,400+ other sources alongside your product events. Every query, every insight, every agent prompt runs on the same unified dataset – no joins across systems, no pipelines to keep in sync.
 
 **Supporting features:**
-- 44+ sources including Stripe, HubSpot, Salesforce, Postgres, Snowflake, BigQuery, Databricks
+- 1,400+ sources including Stripe, HubSpot, Salesforce, Postgres, Snowflake, BigQuery, Databricks
 - Unified SQL across product events and business data
 - MCP exposes warehouse data to Claude Code, Cursor, and other agent runtimes
 - PostHog AI generates queries and SQL from plain English

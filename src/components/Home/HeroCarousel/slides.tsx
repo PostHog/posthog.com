@@ -66,7 +66,7 @@ const rolloutGroups = [
     },
     {
         title: 'Feedback & training',
-        handles: ['surveys', 'support', 'user_interviews'] as const,
+        handles: ['surveys', 'support'] as const,
     },
 ] as const
 

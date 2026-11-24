@@ -37,17 +37,18 @@ Beyond optimization, we offer discounts based on three levers:
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
 
-> Two things to be clear on when working out which tier applies:
+> Three things to be clear on when working out which tier applies:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
 > - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
+> - **The credit purchase must be sized in good faith to cover the customer's forecasted usage for the full contract year.** A purchase that clearly covers only part of the year doesn't qualify for a volume discount.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
 - **Multi-year deals:** +2.5% per additional year paid upfront (+2.5% for 2 years, +5% for 3 years. capped at +5%)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
-> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can stay on monthly billing, or buy credits sized to a lower but credible 12-month forecast. A credible forecast starts from the customer's current run rate, annualized. A lower amount only qualifies if we've agreed a concrete plan with them to [bring usage down](/docs/billing/estimating-usage-costs) (the specific changes, the saving from each, and when they'll make them).
 
 #### 3. Ability to forecast - mutual commitment to timing (additive)
 
@@ -69,6 +70,8 @@ Beyond optimization, we offer discounts based on three levers:
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
 > You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs or TAMs) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (CSMs), you should assume by default that the deal will not count toward your quota.
+>
+> The numbers on this page are also kept as data in <PrivateLink url="https://github.com/PostHog/deal-desk/blob/main/contract-rules.json">contract-rules.json</PrivateLink> (PostHog team only). When you change a rule on this page, change it in that file at the same time.
 
 ### Contract term length
 
@@ -84,7 +87,7 @@ One-off free credits appear on order forms in three cases: [contract buyouts](#c
 
 ### Why we require up-front payment for credit purchases
 
-We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
+We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer can't pay for a full year up front, they can stay on monthly billing, or buy credits sized to a lower but credible 12-month forecast at whatever tier that amount qualifies for. We don't split payments, and we don't discount a purchase that only covers part of the year.
 
 ### Credit for case studies
 
@@ -244,6 +247,16 @@ Do not change the payment terms or the payment method on the order form to allow
 
 > We absolutely do not allow payment by check. This is made clear on order forms. 
 
+### Payment currency
+
+We invoice in USD and only accept bank transfer payments in USD. We do not accept non-USD bank transfers for credits bought via an order form. This is because:
+
+- PostHog Inc is a US entity, and our billing system is USD-only.
+- A non-USD bank transfer needs manual Stripe reconciliation, and no team owns that process today.
+- Any FX risk on a non-USD payment falls on PostHog.
+
+If a customer can't pay in USD by bank transfer, they can stay on (or move to) a monthly self-serve plan and pay by credit card in their local currency. 
+
 ## Contract buyouts
 
 > **Are you a potential customer who wants to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
@@ -344,6 +357,8 @@ We have alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C0
     -   Example: a customer buys $105k of credits (30% tier). Later they add $400k, which qualifies for 35% on its own (not treated as $505k). If the same customer adds $30k in credits, that qualifies for 20% on its own, which is lower than the original purchase tier, so they keep the original 30% rate from their initial order form.
 -   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends, while still on prepaid credits and for at least as much credit as the current contract's amount per contract year, qualifies for the [early renewal discount](#3-ability-to-forecast---mutual-commitment-to-timing-additive). The renewal order form can start when the credits run out rather than waiting for the original end date. Any credit still left when the new term starts carries over in full (see [early renewals](#when-they-will-end-the-contract-term-with-credit-remaining) below).
 -   If credits run out before a renewal order form is in effect, the account rolls onto our standard pay-as-you-go rates until the new term starts. We don't cover gap usage for free. These alerts give account owners early warning of the run-out date, so a customer paying list price for a gap is a customer we failed to engage early.
+
+To check a runway yourself, divide the remaining credit balance by **Forecasted Usage MRR** in Customer Analytics, not **Forecasted MRR**. Credits are drawn down at list price, because the customer's discount was applied when they bought the credits, and Forecasted Usage MRR is billing's projection of the next invoice before credits and the annual plan discount.
 
 ### When they will end the contract term with credit remaining
 

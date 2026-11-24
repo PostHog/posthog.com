@@ -105,11 +105,19 @@ The credential ID is null for impersonated actions and for credential types that
 
 ### 5. Bound the first run
 
-Your first poll returns your full retained history, which can be large. To start from a specific point, add `start_date` with an ISO 8601 timestamp:
+Your first poll returns your full retained history, which can be large. To start from a specific point, add `start_date` with an ISO 8601 timestamp that includes a UTC offset (such as `Z` or `+02:00`):
 
 ```
 &start_date=2026-01-01T00:00:00Z
 ```
+
+You can also pass `end_date` to limit the window. Both parameters accept time-precise values, so you can filter to ranges shorter than a day:
+
+```
+&start_date=2026-01-15T10:30:00Z&end_date=2026-01-15T11:30:00Z
+```
+
+A timestamp without a UTC offset is read as UTC by the REST API. The MCP tool requires an offset and rejects values without one.
 
 You can only backfill as far as your [retention period](/docs/settings/activity-logs#retention-periods) allows.
 
@@ -143,15 +151,15 @@ If you self-host PostHog, enter your own address. It has to be https, because th
 
 Go to **Inputs** and click **Create New Input**.
 
-| Field                  | Value                                                                 |
-| ---------------------- | --------------------------------------------------------------------- |
-| Name                   | A name for this input                                                 |
-| Account                | The account you just added                                            |
-| Organization ID        | Find it in PostHog under **Settings** > **Organization**              |
-| Interval               | How often to poll, in seconds. 300 is a reasonable start              |
-| Index                  | The index to write to. Note which one you pick, you need it to search |
-| Include changed values | Leave off unless you need before and after values                     |
-| Start date             | Optional ISO-8601 lower bound for the first run                       |
+| Field                  | Value                                                                                              |
+| ---------------------- | -------------------------------------------------------------------------------------------------- |
+| Name                   | A name for this input                                                                              |
+| Account                | The account you just added                                                                         |
+| Organization ID        | Find it in PostHog under **Settings** > **Organization**                                           |
+| Interval               | How often to poll, in seconds. 300 is a reasonable start                                           |
+| Index                  | The index to write to. Note which one you pick, you need it to search                              |
+| Include changed values | Leave off unless you need before and after values                                                  |
+| Start date             | Optional ISO 8601 timestamp for the first run (include a UTC offset, e.g., `2026-01-01T00:00:00Z`) |
 
 Save. Splunk polls on your interval and resumes from where it stopped, so entries are not collected twice.
 

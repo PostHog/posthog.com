@@ -243,7 +243,7 @@ The platform you choose for LLM or AI observability will depend on your current 
 
 It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
 
-It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
@@ -307,7 +307,7 @@ For many teams, yes. **PostHog** covers tracing, cost tracking, [prompt manageme
 <details>
 <summary>Can I use PostHog and Langfuse together?</summary>
 
-Yes. Both support `OpenTelemetry` so you can instrument your LLM calls once and send traces to both platforms. [PostHog and Langfuse](/docs/ai-observability/integrations/langfuse-posthog) also offer a built-in integration.
+Yes. Both support `OpenTelemetry` so you can instrument your LLM calls once and send traces to both platforms. You can also sync your Langfuse data into PostHog with the [Langfuse source](/docs/data-pipelines/sources/langfuse).
 
 The trade-off is maintaining two platforms. That means more setup, more integrations, and potentially more cost. For smaller teams, or teams where AI is one part of a broader product, PostHog is usually simpler to manage.
 
@@ -322,7 +322,7 @@ It depends on what you're looking for. For dedicated LLM observability and traci
 
 If you want LLM observability as part of a broader product analytics platform, **PostHog** is the [best alternative to Langfuse](/compare/best-langfuse-alternatives). We tie model performance to actual product outcomes on a single platform.
 
-You can find a few more in our [guide on LLM observability tools](/blog/best-open-source-llm-observability-tools).
+You can find a few more in our [guide on LLM observability tools](/compare/best-open-source-llm-observability-tools).
 
 </details>
 

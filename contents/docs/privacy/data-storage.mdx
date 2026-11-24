@@ -100,13 +100,31 @@ This allows you to enrich your events with location data or filter out bot traff
 
 ## Data retention
 
-How long PostHog keeps your data depends on the product. See the retention docs for each one:
+How long PostHog keeps your data depends on the type of data. This table covers the main types. Follow the links for details and settings.
 
-- [Events](/docs/data/events-retention)
-- [Session recordings](/docs/session-replay/recording-retention)
-- [AI events](/docs/ai-observability/data-retention)
-- [Logs](/docs/logs/pricing#retention)
-- [File download exports](/docs/data-pipelines/file-download-exports)
+| Data                            | How long PostHog keeps it                                                                                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Events                          | Depends on your plan and retention setting. See [events retention](/docs/data/events-retention).                                                                        |
+| Person profiles and properties  | Until you [delete them](#data-deletion). Events retention doesn't apply to them.                                                                                           |
+| Session recordings              | Depends on your plan. See [recording retention](/docs/session-replay/recording-retention).                                                                                 |
+| AI events                       | The large properties of `$ai_` events, like prompts and outputs, are deleted after 30 days. See [AI event data retention](/docs/ai-observability/data-retention).           |
+| Logs                            | 14 days by default. See [logs retention](/docs/logs/pricing#retention).                                                                                                    |
+| Heatmaps                        | 90 days.                                                                                                                                                                   |
+| Data pipeline logs              | 90 days for the logs of destinations and transformations.                                                                                                                 |
+| File download exports           | One week. See [file download exports](/docs/data-pipelines/file-download-exports).                                                                                         |
+| Query log                       | 3 months. See [query log retention](/docs/data/query-log#retention).                                                                                                       |
+| PostHog AI chats                | Until the user, project, or organization they belong to is deleted. Deleting a chat hides it, but PostHog keeps it until then.                                             |
+| Support tickets                 | While your account is active. Deleted tickets are permanently removed 14 days after deletion.                                                                              |
+| Backups                         | About two weeks for event data and about 12 months for app data. See [backups](#backups).                                                                                  |
+
+### Backups
+
+PostHog keeps backups so it can restore service after an incident. Backups expire on a fixed schedule:
+
+- **Event data:** about two weeks
+- **App data stored in Postgres**, such as your account, project settings, and support tickets: about 12 months
+
+Retention periods and deletion requests don't apply to data inside backups. Data you delete stays in existing backups until those backups expire.
 
 ## Data deletion
 
@@ -114,10 +132,10 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 | What to delete    | Where to delete                                                                           | Additional details                                                                                                                                                                                                         |
 | ----------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Your account**  | [Account settings](https://us.posthog.com/settings/user#user-delete)                      | Account is deleted immediately; all stored data about you is cleared within 30 days. See [deleting your account](/docs/settings/account-settings#deleting-your-account).                                                   |
+| **Your account**  | [Account settings](https://us.posthog.com/settings/user#user-delete)                      | Account is deleted immediately; all stored data about you is cleared within 30 days, apart from copies in [backups](#backups). See [deleting your account](/docs/settings/account-settings#deleting-your-account).                                                   |
 | **Projects**      | [Project settings](https://us.posthog.com/settings/project#project-delete)                | All data under the project (including events) are automatically removed                                                                                                                                                    |
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | Deletion is processed in the background and typically takes a couple of minutes. You'll see a blocking screen while it completes. All data under the organization's projects (including events) are automatically removed. |
-| **Persons**       | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten)    | When a person is deleted, all events and [session recordings](/docs/session-replay) for that person can be deleted                                                                                                          |
+| **Persons**       | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten)    | When a person is deleted, all events and [session recordings](/docs/session-replay) for that person can be deleted. Some data isn't covered, see [what deleting a person doesn't remove](#what-deleting-a-person-doesnt-remove)                                                                                                          |
 
 Organization admins can also set a [custom events retention window](/docs/data/events-retention#how-to-customize-your-retention-period). PostHog deletes events older than the window at the next monthly cleanup, not right away. To answer a right to be forgotten request, delete the person instead.
 
@@ -284,6 +302,46 @@ You can manually delete persons and their events in the PostHog UI:
 - Search for the person via their `distinct_id` or a property like email.
 - Click **view** next to the person within the search results
 - Click **Delete person** to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
+
+### Deleting events without a person profile
+
+Person deletion removes events by person. Events captured without a [person profile](/docs/data/persons), such as [anonymous events](/docs/data/anonymous-vs-identified-events), have no person to delete, so the person deletion tools can't remove them on their own.
+
+To delete all the events for one distinct ID, give the distinct ID a person profile first, then delete that person:
+
+1. Send a `$set` event for the distinct ID with the [capture API](/docs/api/capture). This creates a person profile for the distinct ID, and its existing events and recordings are linked to that person. Send it from your server or with `curl`, because the [JavaScript Web SDK](/docs/libraries/js) ignores person calls when `person_profiles` is set to `'never'`.
+2. Check that the person exists by calling `GET /api/projects/:project_id/persons/?distinct_id=<distinct_id>` with a [personal API key](/docs/api#authentication). If `results` is empty, the `$set` event hasn't been processed yet, so wait a minute and check again.
+3. Call the [bulk delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete) with the distinct ID in `distinct_ids`, `delete_events: true`, and `delete_recordings: true`. This deletes the person you just created, along with its events and recordings.
+4. [Check the deletion status](#checking-deletion-status). The events are deleted once `delete_verified_at` has a value.
+
+Like other event deletions, the events are deleted [asynchronously](#asynchronous-data-deletion).
+
+### Deleting specific events
+
+To delete events that match more specific criteria, such as events from a specific date range or events with specific properties, [contact support](https://app.posthog.com/#panel=support) and include:
+
+- Your project ID
+- How to find the events, such as an event name, property filters, a date range, or a [SQL query](/docs/sql)
+- How many events you expect the deletion to match
+
+Support can request the deletion for you, or turn on event deletion in the PostHog app for your organization. Like other event deletions, it runs [asynchronously](#asynchronous-data-deletion).
+
+### What deleting a person doesn't remove
+
+Deleting a person, along with their events and recordings, doesn't remove every copy of their data:
+
+- **AI events:** person deletion removes the person's `$ai_` events from the events table, but not the full copy PostHog keeps in `ai_events`, which includes prompts and outputs. That copy is deleted after [30 days](/docs/ai-observability/data-retention).
+- **Heatmaps:** heatmap data can't be deleted per person. It expires after 90 days.
+- **PostHog AI chats:** chats that quote the person's data stay until the chat's user, project, or organization is deleted.
+- **Events without a person profile:** see [deleting events without a person profile](#deleting-events-without-a-person-profile).
+- **Backups:** deleted data stays in [backups](#backups) until they expire.
+- **Data you've sent elsewhere:** data that [batch exports](/docs/data-pipelines/batch-exports) or destinations already sent to other tools stays there. Delete it in those tools.
+
+### When expired events are deleted
+
+PostHog doesn't delete events as soon as they pass your [retention period](/docs/data/events-retention). A cleanup runs once a month and deletes a whole calendar month of events at a time, once every event in that month has expired. This means events from early in a month stay longer than events from late in the month, and an event can stay for up to about two months past your retention period.
+
+Deleted events also stay in [backups](#backups) for about two weeks.
 
 ### Asynchronous data deletion
 

@@ -41,15 +41,15 @@ Install the SDK for your server's language:
 <MultiLanguage>
 
 ```bash file=TypeScript
-npm install @posthog/mcp@1 posthog-node@5
+npm install @posthog/mcp@1 posthog-node@6
 ```
 
 ```bash file=Python
-pip install "posthog<8"
+pip install "posthog>=8,<9"
 ```
 
 ```bash file=Go
-go get github.com/posthog/posthog-go/posthogmcpsdk
+go get github.com/posthog/posthog-go/posthogmcpsdk/v2
 ```
 
 ```bash file=Ruby
@@ -57,7 +57,7 @@ bundle add posthog-ruby --version "~> 3.0"
 ```
 
 ```bash file=Rust
-cargo add posthog-rs@0.31 --features mcp
+cargo add posthog@1 --features mcp
 ```
 
 </MultiLanguage>
@@ -76,6 +76,12 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
 instrument(server, posthog)
 
 process.on("SIGTERM", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
+
+// stdio only: MCP clients close stdin first and may never send SIGTERM
+process.stdin.on("end", async () => {
   await posthog.shutdown()
   process.exit(0)
 })
@@ -132,10 +138,10 @@ use rmcp::ServiceExt;
 
 let token = std::env::var("POSTHOG_PROJECT_TOKEN")?;
 let posthog = Arc::new(
-    posthog_rs::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
+    posthog::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
 );
 
-let server = posthog_rs::mcp::instrument(server, posthog.clone());
+let server = posthog::mcp::instrument(server, posthog.clone());
 server.serve(rmcp::transport::stdio()).await?.waiting().await?;
 
 posthog.shutdown().await;
@@ -143,7 +149,7 @@ posthog.shutdown().await;
 
 </MultiLanguage>
 
-Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The [Ruby](/docs/mcp-analytics/installation/ruby) and [Rust](/docs/mcp-analytics/installation/rust) SDKs are experimental.
+Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in.
 
 For TypeScript, Python, Go, Ruby, and Rust servers, the wizard does the setup for you:
 
@@ -163,7 +169,7 @@ subtitle="Required"
 icon="IconGraph"
 >
 
-Run your MCP server. Connect an agent, such as Claude Desktop, Cursor, Codex, or your own client. PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events when the agent calls tools and requests their listing. Clients on `2025-11-25` also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision has no initialize event. The Go SDK sends `$mcp_tool_call`, `$exception`, `$mcp_unknown_tool`, and `$mcp_input_required`. It sends neither `$mcp_tools_list` nor `$mcp_initialize`.
+Run your server and connect an agent, such as Claude Desktop, Cursor, or Codex. PostHog receives a `$mcp_tool_call` event for each tool call.
 
 Open the [activity feed](https://app.posthog.com/activity/explore) in your project. Filter for `event = $mcp_tool_call`. Each row represents a tool invocation and includes `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
@@ -230,7 +236,7 @@ PostHog::MCP.instrument(
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .capture_responses(false) // keep tool results out of PostHog
@@ -240,7 +246,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(server);
 
 </MultiLanguage>
 
-In Go and Rust, turning off response capture still sends a failed call's error text, as `$mcp_error_message` and in `$exception`. In Go, a full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
+In Go and Rust, turning off response capture still sends a failed call's error text, as `$mcp_error_message` and in `$exception`. Go also supports a full before-send hook. See [Privacy](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
@@ -258,7 +264,7 @@ icon="IconAIText"
 
 [Model capture](/docs/mcp-analytics/events#model-capture) is on by default. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
-Use this unverified client input to compare quality, latency, and errors across models, not for billing or security decisions. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted.
+The model is unverified client input. Use it to compare quality, latency, and errors across models, not for billing or security decisions. Clients may report an exact model or a model family.
 
 </QuestLogItem>
 
@@ -270,7 +276,7 @@ icon="IconAIText"
 
 **Intent** is the user goal that led the agent to call a tool. The SDK adds a `context` argument to compatible tool schemas and captures it as `$mcp_intent`. It removes the argument before your handler runs.
 
-You can change the prompt the agent sees, and supply a fallback for agents that skip the argument. The Go SDK has a fixed prompt.
+You can change the prompt the agent sees (not in Go), and supply a fallback for agents that skip the argument.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/intent">
 
@@ -298,7 +304,7 @@ Which tools fail most often? Use `$exception` events to investigate errors.
 How much of your traffic supplies explicit context, and how much uses the intent fallback?
 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
-Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call. The Go SDK sends no `$mcp_tools_list`, so this query returns nothing for Go servers.
+Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call.
 
 The tool quality tab shows error rates and latency percentiles for each tool. Select a tool to inspect its calls:
 
@@ -371,7 +377,7 @@ PostHog::MCP.instrument(
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .identify(|request| {
@@ -422,7 +428,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .missing_capability_tool("get_more_tools")

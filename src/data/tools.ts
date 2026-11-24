@@ -49,7 +49,6 @@ export const tools = [
         description: 'Custom API endpoints powered by your PostHog data.',
         slug: 'endpoints',
         category: 'product_engineering',
-        status: 'beta',
         aliases: ['Query API endpoint'],
     },
     {
@@ -159,16 +158,6 @@ export const tools = [
         aliases: ['Customer messaging'],
     },
     {
-        handle: 'user_interviews',
-        name: 'User interviews',
-        description: 'Get feedback from users.',
-        // Points at the tool directory as a placeholder. Give this a real slug before removing
-        // WIP status, or search will treat /products as the User Interviews canonical page.
-        slug: 'products',
-        category: 'communication',
-        status: 'WIP',
-    },
-    {
         handle: 'support',
         name: 'Support',
         description: 'Built-in customer support with chat widget and unified inbox.',
@@ -252,13 +241,6 @@ export const tools = [
         name: 'User Paths',
         searchDescription: 'See how users navigate your product, website, or conversion funnel.',
         slug: 'user-paths',
-        category: 'dataviz',
-    },
-    {
-        handle: 'correlation_analysis',
-        name: 'Correlation Analysis',
-        searchDescription: 'Discover which events correlate with conversion or churn.',
-        slug: 'correlation-analysis',
         category: 'dataviz',
     },
     {
@@ -354,7 +336,6 @@ export const tools = [
         searchDescription: 'Transform, enrich, and model your data.',
         slug: 'context-warehouse/data-modeling',
         category: 'data',
-        status: 'beta',
     },
     {
         handle: 'sql_editor',

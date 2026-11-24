@@ -12,6 +12,7 @@ availability:
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 import { ProductVideo } from "components/ProductVideo";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 export const dashboardLight =
   "https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png";
@@ -34,6 +35,12 @@ You can create a new dashboard from scratch, but we also offer numerous [dashboa
   classes="rounded"
   alt="Example of a dashboard"
 />
+
+<CalloutBox icon="IconFlask" title="Pin key numbers to Home" type="action">
+
+With the new UI, Home shows four key numbers at a glance. Add any insight with **Add to home** in its menu, no dashboard needed. [Try the new UI](https://app.posthog.com/settings/user-feature-previews#today-rail-nav).
+
+</CalloutBox>
 
 ## Creating a new dashboard
 
@@ -304,7 +311,7 @@ Tiles ignoring dashboard filters display an **Ignores dashboard filters** indica
 
 If you have edit access to a dashboard, you can drag and resize tiles directly – no edit mode required. Layout changes save automatically as you make them.
 
-To **resize** a tile, hover near any edge or corner to reveal resize handles, then drag to resize. Corner handles support diagonal resizing.
+To **resize** a tile, hover near any edge or corner to reveal resize handles, then drag to resize. Corner handles support diagonal resizing. You can also click once on a resize handle to start resizing, then click again to set the size. Press **Escape** while resizing to restore the original size. If you drag a resize handle and release the mouse button, the resize continues until you click to set the size.
 
 To **move** a tile, grab its header or body area and drag it to a new position. You can also click once on a tile's header (where the grab cursor appears) to pick it up, then click again to place it. Press **Escape** while carrying a tile to return it to its original position. If you hold and drag a tile, releasing the mouse button continues the move until you click to place it – this is useful for scrolling across large dashboards mid-drag.
 
@@ -604,7 +611,7 @@ After the analysis completes, you can rate it with a thumbs up or thumbs down.
 
 ## Managing dashboards with Terraform
 
-For teams practicing infrastructure-as-code, you can manage PostHog dashboards and insights using the [PostHog Terraform Provider](https://registry.terraform.io/providers/PostHog/posthog/latest).
+For teams practicing infrastructure-as-code, you can manage PostHog dashboards and insights using the [PostHog Terraform provider](/docs/terraform).
 
 This enables:
 
@@ -625,7 +632,7 @@ Click the button to generate HCL code that you can copy directly into your Terra
 
 ### Installation
 
-Add the provider to your Terraform configuration:
+Add the provider to your Terraform configuration. See the [Terraform provider docs](/docs/terraform#authenticate) for how to authenticate and import existing resources.
 
 ```hcl
 terraform {

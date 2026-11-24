@@ -9,7 +9,7 @@ availability:
 sourceId: Svix
 ---
 
-The Svix connector syncs your webhook infrastructure data — applications and event types — into PostHog.
+The Svix connector syncs your webhook infrastructure data — applications, event types, endpoints, messages, message attempts, and delivery statistics — into PostHog.
 
 ## Adding a data source
 
@@ -23,12 +23,16 @@ Once the syncs are complete, you can start using Svix data in PostHog.
 
 ## Available tables
 
-| Table          | Description                                                                                          | Sync method  |
-| -------------- | ---------------------------------------------------------------------------------------------------- | ------------ |
-| `applications` | Applications in your Svix account — isolated tenants that own endpoints and receive webhook messages | Full refresh |
-| `event_types`  | Event types — the schema and metadata for categories of webhook messages                             | Full refresh |
+| Table              | Description                                                                                          | Sync method  |
+| ------------------ | ---------------------------------------------------------------------------------------------------- | ------------ |
+| `applications`     | Applications in your Svix account — isolated tenants that own endpoints and receive webhook messages | Full refresh |
+| `event_types`      | Event types — the schema and metadata for categories of webhook messages                             | Full refresh |
+| `endpoints`        | Endpoints configured to receive webhook messages for a specific application                          | Full refresh |
+| `messages`         | Webhook messages sent by your applications, including their payloads                                 | Incremental  |
+| `message_attempts` | Delivery attempts for messages to endpoints, with response details                                   | Incremental  |
+| `endpoint_stats`   | Delivery attempt counts per endpoint for the last 28 days                                            | Full refresh |
 
-**Full refresh** tables reload all data on each sync.
+**Full refresh** tables reload all data on each sync. **Incremental** tables sync only new or updated data based on the `timestamp` field.
 
 ## Configuration
 

@@ -24,6 +24,7 @@ import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
 import qs from 'qs'
 import usePostHog from '../hooks/usePostHog'
+import { LEARN_VIDEOS, learnVideoUrl } from '../components/Learn/LearnTV/videos'
 
 declare global {
     interface Window {
@@ -497,6 +498,29 @@ export interface AppSetting {
 
 export interface AppSettings {
     [key: string]: AppSetting
+}
+
+// Learn TV videos open like the /demo video, tall enough for the details and transcript under the player.
+const LEARN_TV_WINDOW: AppSetting = {
+    toolbar: true,
+    size: {
+        min: {
+            width: 960,
+            height: 1000,
+        },
+        max: {
+            width: 960,
+            height: 1000,
+        },
+        fixed: true,
+        autoHeight: true,
+    },
+    position: {
+        center: true,
+    },
+    modal: {
+        type: 'standard',
+    },
 }
 
 const appSettings: AppSettings = {
@@ -1014,22 +1038,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/vibe-check': {
-        size: {
-            min: {
-                width: 750,
-                height: 575,
-            },
-            max: {
-                width: 750,
-                height: 575,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
     'research-talk': {
         size: {
             min: {
@@ -1071,6 +1079,8 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    // One window entry for each Learn TV video, built from the video list.
+    ...Object.fromEntries(LEARN_VIDEOS.map((video) => [learnVideoUrl(video), LEARN_TV_WINDOW])),
     '/changelog-video': {
         size: {
             min: {
