@@ -1,10 +1,8 @@
 /**
  * Logs one JSON line per /docs request the middleware handles, recording what the client asked for
- * and what it was served. Vercel adds the line to the request's `middleware-invocation` entry in
- * the log drain, so in PostHog Logs it sits next to the request id, client IP, user agent, path and
- * status that Vercel already records. Only what the drain leaves out is logged here.
- *
- * Off unless MIDDLEWARE_LOG_ENABLED is "true".
+ * and what it was served. Vercel's log drain carries the line into PostHog Logs with the request id,
+ * client IP, path and status it already records. The line adds what the drain leaves out: the
+ * negotiation and the raw request headers, some of which the drain also maps to attributes.
  */
 
 // Queries find the line by parsing each line of the entry body and matching `type` exactly, so this
@@ -15,8 +13,10 @@ const LOG_TYPE = 'docs_request'
 export const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
 // The matcher in middleware.ts covers more prefixes; only /docs requests are logged.
 const LOGGED_PATHS = /^\/docs(\/|$)/
-// Request headers not logged: credentials and secrets, and the client IP the drain already records.
-const EXCLUDED_HEADERS = /cookie|auth|token|secret|bypass|key|^forwarded$|-for$|real-ip|client-ip|connecting-ip/
+// Request headers not logged: credentials and secrets, Vercel's internal headers, and the client IP
+// the drain already records.
+const EXCLUDED_HEADERS =
+    /cookie|auth|token|secret|bypass|key|^x-vercel-(proxy-signature|sc-|internal-)|^forwarded$|-for$|real-ip|client-ip|connecting-ip/
 
 type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
 
@@ -28,7 +28,8 @@ export interface NegotiationResult {
 }
 
 export function logRequest(request: Request, result: NegotiationResult): void {
-    // Bundlers for edge code may only substitute `process.env.NAME` written out in full.
+    // Written out in full: the edge bundler substitutes only the literal expression, so a helper or
+    // destructuring would read undefined.
     if (process.env.MIDDLEWARE_LOG_ENABLED !== 'true') return
     if (request.headers.has(SUBREQUEST_HEADER)) return
     const url = new URL(request.url)

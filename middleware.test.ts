@@ -87,7 +87,7 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
     assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })
 
-function enableLog(t: TestContext) {
+function enableLog(t: TestContext): void {
     process.env.MIDDLEWARE_LOG_ENABLED = 'true'
     t.after(() => {
         delete process.env.MIDDLEWARE_LOG_ENABLED
@@ -121,7 +121,10 @@ test('logs the request headers and the Markdown served, leaving out credentials 
                 cookie: 'ph_phc_test_posthog=%7B%7D',
                 authorization: 'Bearer test-token',
                 'x-forwarded-for': '203.0.113.7',
+                'x-real-ip': '203.0.113.7',
                 'x-vercel-oidc-token': 'test-oidc',
+                'x-vercel-protection-bypass': 'test-bypass',
+                'x-vercel-sc-headers': '{"Authorization":"Bearer test"}',
             },
         })
     )
@@ -145,16 +148,19 @@ test('logs why no Markdown was served, and requests for a Markdown URL', async (
 
     await middleware(new Request(page, { headers: { 'user-agent': 'Mozilla/5.0', accept: 'text/html' } }))
     await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User/1.0' } }))
+    await middleware(new Request(page, { headers: { accept: 'text/markdown' } }))
     await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
 
     assert.deepEqual(
-        lines.map((line) => [line.served_format, line.negotiation]),
+        lines.map((line) => [line.served_format, line.negotiation, line.markdown_reason]),
         [
-            ['html', 'not_requested'],
-            ['html', 'no_sibling'],
-            ['markdown', 'markdown_url'],
+            ['html', 'not_requested', undefined],
+            ['html', 'no_sibling', 'agent_fetcher'],
+            ['html', 'no_sibling', 'accept'],
+            ['markdown', 'markdown_url', undefined],
         ]
     )
+    assert.equal(typeof lines[1].markdown_fetch_ms, 'number')
 })
 
 test("logs nothing when off, outside /docs, or for the middleware's own Markdown fetch", async (t) => {
