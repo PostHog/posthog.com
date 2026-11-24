@@ -6,7 +6,7 @@ import {
     forgetLocalChaptersSavedIn,
     hasChaptersMissingFrom,
     readLocalProgress,
-    type ReadChapterIdsByGuide,
+    type ReadChapterSlugsByVolume,
 } from 'lib/learnProgress'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
@@ -71,7 +71,7 @@ export type User = {
     hasPosthogLogin?: boolean
     distinctId?: string | null
     // Undefined until the Strapi `me` override returns it; null means nothing saved yet.
-    learnProgress?: ReadChapterIdsByGuide | null
+    learnProgress?: ReadChapterSlugsByVolume | null
 }
 
 export type DisambiguationResult = {
@@ -842,7 +842,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
-    const sendLearnProgress = async (progress: ReadChapterIdsByGuide, signedInUser: User): Promise<void> => {
+    const sendLearnProgress = async (progress: ReadChapterSlugsByVolume, signedInUser: User): Promise<void> => {
         try {
             const token = await getJwt()
             const res = await fetch(`${SQUEAK_HOST}/api/profiles/${signedInUser.profile.id}`, {
@@ -854,7 +854,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 body: JSON.stringify({ data: { learnProgress: progress } }),
             })
             if (!res.ok) throw new Error(`Saving Learn progress failed with ${res.status}`)
-            const savedProgress: ReadChapterIdsByGuide | undefined = (await res.json())?.data?.attributes?.learnProgress
+            const savedProgress: ReadChapterSlugsByVolume | undefined = (await res.json())?.data?.attributes
+                ?.learnProgress
             if (!savedProgress) return
             setUser((currentUser) =>
                 currentUser?.profile?.id === signedInUser.profile.id
@@ -867,7 +868,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     // One save at a time: the server only grows the map, so in-order responses never replace a newer one with an older one.
-    const saveLearnProgress = (progress: ReadChapterIdsByGuide, signedInUser: User): Promise<void> => {
+    const saveLearnProgress = (progress: ReadChapterSlugsByVolume, signedInUser: User): Promise<void> => {
         learnProgressSaveQueue.current = learnProgressSaveQueue.current.then(() =>
             sendLearnProgress(progress, signedInUser)
         )

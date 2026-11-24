@@ -298,7 +298,7 @@ for (const initiallyAvailable of [false, true]) {
             './bookOpening': { openPocketGuide: () => undefined },
             './chapterProgress': {
                 useMarkChapterReadOnMove: () => () => undefined,
-                useReadChapterIds: () => new Set(),
+                useReadChapterSlugs: () => new Set(),
             },
             './bookContext': { useEntry: () => ({}) },
             '../../../context/App': { useAppWindows: () => ({ windows }) },

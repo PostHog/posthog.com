@@ -113,41 +113,11 @@ describe('pocket guide volumes', () => {
     })
 })
 
-function frontmatterValue(page: string, field: string): string | undefined {
+function frontmatterSection(page: string): string | undefined {
     return readFileSync(page, 'utf8')
-        .match(new RegExp(`^${field}:\\s*(.+)$`, 'm'))?.[1]
+        .match(/^section:\s*(.+)$/m)?.[1]
         .trim()
 }
-
-describe('chapter ids', () => {
-    test('every guide has its own progressKey, so saved progress survives a guide rename', () => {
-        const progressKeys = POCKET_GUIDE_VOLUMES.map((volume) => volume.progressKey)
-        assert.ok(progressKeys.every((progressKey) => /^[a-z0-9-]+$/.test(progressKey)))
-        assert.equal(new Set(progressKeys).size, progressKeys.length)
-    })
-
-    test('every listed chapter has a pocketGuideChapterId unique within its guide, so saved progress survives renames', () => {
-        const problems = POCKET_GUIDE_VOLUMES.flatMap((volume) => {
-            const chapterPages = listGuidePages(path.join(guidesDir, volume.id, 'pocket-guide')).filter(
-                (page) =>
-                    !path
-                        .relative(guidesDir, page)
-                        .split(path.sep)
-                        .some((part) => part.startsWith('_')) && Number(frontmatterValue(page, 'pocketGuideOrder')) > 0
-            )
-            const seenChapterIds = new Set<string>()
-            return chapterPages.flatMap((page) => {
-                const chapterId = frontmatterValue(page, 'pocketGuideChapterId')
-                const relativePage = path.relative(repoRoot, page)
-                if (!chapterId || !/^[a-z0-9-]+$/.test(chapterId)) return [`${relativePage}: missing or malformed`]
-                if (seenChapterIds.has(chapterId)) return [`${relativePage}: duplicate ${chapterId}`]
-                seenChapterIds.add(chapterId)
-                return []
-            })
-        })
-        assert.deepEqual(problems, [])
-    })
-})
 
 describe('self-driving sections', () => {
     test('each selfDrivingSection names a section that pages use', () => {
@@ -155,7 +125,7 @@ describe('self-driving sections', () => {
             .filter(
                 (volume) =>
                     !listGuidePages(path.join(guidesDir, volume.id, 'pocket-guide')).some(
-                        (page) => frontmatterValue(page, 'section') === volume.learnHub?.selfDrivingSection
+                        (page) => frontmatterSection(page) === volume.learnHub?.selfDrivingSection
                     )
             )
             .map((volume) => volume.id)

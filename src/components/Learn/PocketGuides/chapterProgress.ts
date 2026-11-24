@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
 
-import { pocketGuideDestination, volumeById } from '../../../constants/pocketGuides'
+import { pocketGuideDestination } from '../../../constants/pocketGuides'
 import { useUser } from '../../../hooks/useUser'
 import {
     READ_CHAPTERS_STORAGE_KEY,
     parseProgress,
-    readChapterIds,
+    readChapterSlugs,
     readLocalProgress,
     readStoredProgress,
     writeLocalProgress,
@@ -20,25 +20,23 @@ type ChapterMove = {
     targetHref: string
 }
 
-function markChapterRead(progressKey: string, chapterId: string): void {
+function markChapterRead(volumeId: string, chapterSlug: string): void {
     const progress = readLocalProgress()
-    const chapterIds = readChapterIds(progress, progressKey)
-    if (chapterIds.includes(chapterId)) return
-    writeLocalProgress({ ...progress, [progressKey]: [...chapterIds, chapterId] })
+    const chapterSlugs = readChapterSlugs(progress, volumeId)
+    if (chapterSlugs.includes(chapterSlug)) return
+    writeLocalProgress({ ...progress, [volumeId]: [...chapterSlugs, chapterSlug] })
 }
 
 function markChapterReadOnMove({ volumeId, pages, basePath, currentSlug, targetHref }: ChapterMove): void {
     const chapters = pages.filter((page) => page.page)
     const currentIndex = chapters.findIndex((page) => learnChapterSlug(page) === currentSlug)
-    const currentChapterId = chapters[currentIndex]?.chapterId
     const nextChapter = currentIndex >= 0 ? chapters[currentIndex + 1] : undefined
-    const progressKey = volumeById(volumeId)?.progressKey
-    if (!currentChapterId || !nextChapter || !progressKey) return
+    if (!nextChapter) return
     const targetPath = normalizeUrl(pocketGuideDestination(targetHref.split(/[?#]/)[0]))
     const isNextChapter =
         targetPath === learnChapterPath(basePath, nextChapter) || targetPath === normalizeUrl(nextChapter.url)
     if (!isNextChapter) return
-    markChapterRead(progressKey, currentChapterId)
+    markChapterRead(volumeId, currentSlug)
 }
 
 export function useMarkChapterReadOnMove(): (move: ChapterMove) => void {
@@ -68,16 +66,15 @@ const useSyncExternalStore = (
     }
 ).useSyncExternalStore
 
-export function useReadChapterIds(volumeId: string): Set<string> {
+export function useReadChapterSlugs(volumeId: string): Set<string> {
     const storedProgress = useSyncExternalStore(subscribeToProgressInOtherTabs, readStoredProgress, () => null)
     const profileProgress = useUser().user?.learnProgress
-    const progressKey = volumeById(volumeId)?.progressKey ?? ''
     return useMemo(
         () =>
             new Set([
-                ...readChapterIds(parseProgress(storedProgress), progressKey),
-                ...readChapterIds(profileProgress, progressKey),
+                ...readChapterSlugs(parseProgress(storedProgress), volumeId),
+                ...readChapterSlugs(profileProgress, volumeId),
             ]),
-        [storedProgress, profileProgress, progressKey]
+        [storedProgress, profileProgress, volumeId]
     )
 }
