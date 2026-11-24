@@ -32,11 +32,11 @@ import WizardSection from './_snippets/wizard-section.mdx'
     },
     plugins: [
       posthog({
-        personalApiKey: process.env.POSTHOG_API_KEY!, // Personal API Key
-        projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
-        host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
+        personalApiKey: process.env.POSTHOG_CLI_API_KEY ?? '', // Personal API Key
+        projectId: process.env.POSTHOG_CLI_PROJECT_ID, // Project ID
+        host: process.env.POSTHOG_CLI_HOST, // (optional) defaults to https://us.i.posthog.com
         sourcemaps: { // (optional)
-          enabled: true, // (optional) Enable sourcemaps generation and upload, defaults to true
+          enabled: Boolean(process.env.POSTHOG_CLI_API_KEY && process.env.POSTHOG_CLI_PROJECT_ID), // Upload only when the credentials are set
           releaseName: 'my-application', // (optional) Release name
           releaseVersion: '1.0.0', // (optional) Release version
           deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
@@ -52,11 +52,13 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
   | Environment Variable | Description |
   | --- | --- |
-  | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
-  | `POSTHOG_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
-  | `POSTHOG_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
+  | `POSTHOG_CLI_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
+  | `POSTHOG_CLI_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
+  | `POSTHOG_CLI_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
 
   </div>
+
+  The upload runs only when the key and project ID are set, so a build without them (a teammate's checkout, a pull request build) still passes. The `POSTHOG_CLI_*` names are the ones `posthog-cli` reads. Keep them apart from `POSTHOG_API_KEY` and `POSTHOG_HOST`, which PostHog's SDKs read at run time: posthog-laravel, for example, takes its project token from `POSTHOG_API_KEY`.
 
   If you are using a CI/CD service, make sure these environment variables are added to your project settings, not just your local setup. This enables source maps to be automatically uploaded on your production build.
 
