@@ -149,6 +149,20 @@ The cohort is a dated snapshot: it captures the users matched in the trailing wi
 
 > **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support cohorts.
 
+### Method 5: Create a cohort from notebook SQL results
+
+You can save SQL query results from a [notebook](/docs/notebooks) as a static cohort when the results include a person identifier column (`person_id`, `actor_id`, or `distinct_id`).
+
+1. Open a notebook and add a SQL cell.
+
+2. Write a query that returns a column named `person_id`, `actor_id`, or `distinct_id`.
+
+3. Run the cell, then click **Save as cohort** in the result menu.
+
+4. Enter a name and click **Save**.
+
+Direct SQL queries save up to 300 rows. Stored compute frames support up to 10,000 rows.
+
 ## Static and dynamic cohorts
 
 You have two options when creating a cohort:
@@ -159,7 +173,7 @@ You have two options when creating a cohort:
 
 ### Static cohorts
 
-Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, by defining criteria for a one-time snapshot, or from [Replay Vision](/docs/replay-vision) scanner results.
+Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, by defining criteria for a one-time snapshot, from [Replay Vision](/docs/replay-vision) scanner results, or from [notebook](/docs/notebooks) SQL results.
 
 When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog.
 
