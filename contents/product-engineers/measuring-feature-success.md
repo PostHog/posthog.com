@@ -41,7 +41,7 @@ Measuring feature success at PostHog is a multi-step process that goes hand-in-h
 3. **Personal experience** – Dog fooding is old advice, but [good advice](/newsletter/how-i-get-good-advice).
 
 In this case, Yakko decided to work on data sampling because:
-1. Slow results on complex queries were causing frustrations for large customers. This ties to the <SmallTeam slug="product-analytics" /> objective of "[make PostHog performance frustration free for our 10 largest customers](/teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
+1. Slow results on complex queries were causing frustrations for large customers. This ties to the product analytics team objective of "[make PostHog performance frustration free for our 10 largest customers](/teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
 
 2. Sampling felt like a simple solution that could be implemented quickly.
 

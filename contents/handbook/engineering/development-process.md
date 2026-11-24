@@ -176,7 +176,7 @@ pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
 
 It happens often that your PR will show conflics with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
 
-Github does not allow for conflict resolution inside their website, so you must do it manually.
+GitHub does not allow for conflict resolution inside their website, so you must do it manually.
 
 > The following is done on your branch in question.
 
@@ -198,7 +198,7 @@ Github does not allow for conflict resolution inside their website, so you must 
     git pull --rebase <your branch>
     ```
 
-In your terminal, it should show you the conflicts mimicking what you see in your Github PR.
+In your terminal, it should show you the conflicts mimicking what you see in your GitHub PR.
 
 ```bash
 warning: Cannot merge binary files: frontend/__snapshots__/<conflicted_file_1>.png (HEAD vs. xxx (Update UI snapshots for `chromium` (1)))

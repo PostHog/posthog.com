@@ -2626,6 +2626,10 @@ const posthogMcpNav = [
         url: '/docs/integrations/replit',
     },
     {
+        name: 'Superhuman',
+        url: '/docs/integrations/superhuman',
+    },
+    {
         name: 'v0',
         url: '/docs/integrations/v0',
     },
@@ -2945,6 +2949,20 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/android/4.x.x',
+                                },
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/android/3.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/android/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'C/C++',
@@ -2976,6 +2994,20 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/libraries/flutter',
+                            children: [
+                                {
+                                    name: '6.x.x',
+                                    url: '/docs/libraries/flutter/6.x.x',
+                                },
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/flutter/5.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/flutter/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Go',
@@ -3012,16 +3044,16 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Installation',
-                                    url: '/docs/libraries/ios',
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/ios/4.x.x',
                                 },
                                 {
-                                    name: 'Usage',
-                                    url: '/docs/libraries/ios/usage',
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/ios/3.x.x',
                                 },
                                 {
-                                    name: 'Configuration',
-                                    url: '/docs/libraries/ios/configuration',
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/ios/migration',
                                 },
                             ],
                         },
@@ -3032,10 +3064,6 @@ export const docsMenu = {
                         {
                             name: 'Kotlin Multiplatform',
                             url: '/docs/libraries/kmp',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'Node.js',
@@ -3441,7 +3469,7 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
-                            name: 'Realtime cohorts',
+                            name: 'Real-time cohorts',
                             url: '/docs/data/realtime-cohorts',
                             badge: {
                                 title: 'Beta',

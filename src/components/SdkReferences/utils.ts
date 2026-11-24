@@ -29,6 +29,65 @@ export const getSdkReferenceUrl = (sdkId: string): string =>
 export const getLanguageFromSdkId = (sdkId: string): string =>
     (SDK_LANGUAGE_BY_ID as Record<string, string>)[sdkId] ?? 'ts'
 
+export type PublishedSdkFeatures = {
+    eventCapture: boolean
+    autoCapture?: boolean
+    featureFlags: boolean
+    groupAnalytics: boolean
+    sessionRecording?: boolean
+    userIdentification: boolean
+    surveys?: boolean
+    aiObservability?: boolean
+    errorTracking?: boolean
+    logs?: boolean
+    tracing?: boolean
+}
+
+export type PublishedSdkMeta = {
+    slug: string
+    label: string
+    logoKey: string
+    features: PublishedSdkFeatures
+}
+
+const SERVER_FEATURES: PublishedSdkFeatures = {
+    eventCapture: true,
+    userIdentification: true,
+    featureFlags: true,
+    groupAnalytics: true,
+    errorTracking: true,
+}
+
+const CLIENT_FEATURES: PublishedSdkFeatures = {
+    ...SERVER_FEATURES,
+    autoCapture: true,
+    sessionRecording: true,
+    logs: true,
+}
+
+/** Metadata for SDKs whose reference page is generated from Strapi and carries no MDX frontmatter. */
+export const PUBLISHED_SDK_METADATA: Record<string, PublishedSdkMeta> = {
+    'posthog-node': { slug: 'node', label: 'Node.js', logoKey: 'nodejs', features: { ...SERVER_FEATURES, tracing: true } },
+    'posthog-python': {
+        slug: 'python',
+        label: 'Python',
+        logoKey: 'python',
+        features: { ...SERVER_FEATURES, tracing: true },
+    },
+    'posthog-go': { slug: 'go', label: 'Go', logoKey: 'go', features: SERVER_FEATURES },
+    'posthog-rust': { slug: 'rust', label: 'Rust', logoKey: 'rust', features: SERVER_FEATURES },
+    'posthog-ios': { slug: 'ios', label: 'iOS', logoKey: 'ios', features: CLIENT_FEATURES },
+    'posthog-android': { slug: 'android', label: 'Android', logoKey: 'android', features: CLIENT_FEATURES },
+    'posthog-flutter': {
+        slug: 'flutter',
+        label: 'Flutter',
+        logoKey: 'flutter',
+        features: { ...CLIENT_FEATURES, autoCapture: false, surveys: true },
+    },
+}
+
+export const PUBLISHED_SDK_LIST: PublishedSdkMeta[] = Object.values(PUBLISHED_SDK_METADATA)
+
 /** The pinned `latest` row carries this in `info.version` instead of a semver. */
 export const VERSION_PLACEHOLDER = '<version>'
 
