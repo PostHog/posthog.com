@@ -9,7 +9,7 @@ availability:
 sourceId: Vapi
 ---
 
-The Vapi connector syncs your AI voice agent data into PostHog, including call transcripts, analysis, cost breakdowns, assistants, phone numbers, and more. Use it to join your Vapi call data with product analytics to understand how voice interactions impact user behavior.
+The Vapi connector syncs your AI voice agent data into PostHog, including call transcripts, analysis, cost breakdowns, assistants, phone numbers, scorecards, and evaluations. Use it to join your Vapi call data with Product Analytics to understand how voice interactions impact user behavior.
 
 ## Adding a data source
 
@@ -34,6 +34,9 @@ Once the syncs are complete, you can start using Vapi data in PostHog.
 | `chats`         | Text-based chat interactions with assistants                                                     | Incremental (by `createdAt`)                |
 | `sessions`      | Sessions that group related chats and calls into one conversation context                        | Incremental (by `createdAt`)                |
 | `campaigns`     | Outbound call campaigns with live progress counters                                              | Full refresh                                |
+| `scorecards`    | Scorecards that grade completed calls by awarding points per metric, based on conditions over the call's structured outputs | Full refresh                                |
+| `evals`         | Evaluation definitions: mock conversations used to test an assistant or squad's responses and tool calls | Full refresh                                |
+| `eval_runs`     | Runs of an eval against an assistant or squad, with status, per-eval results, and cost           | Full refresh                                |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
