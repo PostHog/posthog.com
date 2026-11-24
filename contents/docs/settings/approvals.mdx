@@ -82,7 +82,7 @@ An **Update feature flag** policy requires approval when someone changes a flag'
 
 Renaming or describing a condition set doesn't need approval. Saving a flag without changing its conditions doesn't create a change request.
 
-Release condition changes need approval only on flags that no other product manages. A flag that an experiment, survey, product tour, or early access feature created needs approval for rollout percentage changes only, because those products update its conditions themselves.
+Release condition changes need approval only on flags that no other product manages. A flag that an experiment, survey, or early access feature created needs approval for rollout percentage changes only, because those products update its conditions themselves.
 
 ### Experiment policies
 
@@ -92,7 +92,7 @@ Experiments have approval policies of their own. Each policy applies to the flag
 | ---- | ------------------- |
 | A flag that no other product manages | **Enable feature flag**, **Disable feature flag**, **Update feature flag** |
 | A flag that an experiment manages | **Launch experiment**, **Pause experiment**, **Update experiment** |
-| A flag that a survey, product tour, or early access feature manages | None |
+| A flag that a survey or early access feature manages | None |
 
 - **Launch experiment** requires approval to launch or resume an experiment, which turns its flag on.
 - **Pause experiment** requires approval to pause an experiment, which turns its flag off.

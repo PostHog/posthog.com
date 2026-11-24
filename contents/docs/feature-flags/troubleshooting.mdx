@@ -139,7 +139,7 @@ PostHog enforces per-team limits on feature flags to protect against memory issu
 
 To free up capacity, [delete unused feature flags](https://app.posthog.com/feature_flags) that are no longer needed.
 
-Surveys, web experiments, and product tours also count toward the flag limit because they create backing feature flags. If you're close to the limit, check for flags created by these features as well.
+Surveys and web experiments also count toward the flag limit because they create backing feature flags. If you're close to the limit, check for flags created by these features as well.
 
 Self-hosted users can adjust these limits using the `MAX_FEATURE_FLAGS_PER_TEAM` and `MAX_FEATURE_FLAG_FILTER_SIZE_BYTES` environment variables.
 
