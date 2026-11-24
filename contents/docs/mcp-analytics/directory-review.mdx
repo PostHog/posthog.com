@@ -1,32 +1,20 @@
 ---
-title: Listing your MCP server in the ChatGPT and Claude directories
+title: Listing your MCP server in ChatGPT and Claude
 ---
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-MCP Analytics works with servers listed in the ChatGPT app directory and the Claude Connectors Directory. You need one configuration change before you submit, and you still see which tools agents call, which calls fail, how long they take, and which clients and users they come from.
-
-Directory reviewers check that every tool argument serves the tool's function. By default, the SDK adds a few analytics arguments to your tools so agents can tell you why they called them. Those arguments are what reviewers ask about. Turn them off for a Claude listing. A ChatGPT listing can keep a short intent field. Everything that runs on your server keeps working.
+You can list an instrumented MCP server in the ChatGPT app directory or the Claude Connectors Directory. Directory reviewers want every tool argument to serve the tool itself, and by default the SDK adds three that exist for analytics: `context`, `llm_model`, and `conversation_id`. Turn those off before you submit. Your tool calls, errors, latency, clients, and users still show up in PostHog.
 
 <CalloutBox icon="IconInfo" title="Last updated November 24, 2026" type="fyi">
 
-We update this page as directory guidelines and SDK defaults change. Each platform makes the final decision under its own policy: the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
+Each directory makes the final call under its own policy. Read the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
 
 </CalloutBox>
 
-## What to change for a directory listing
+## Configure the SDK before you submit
 
-| What the SDK adds | Why it matters for review | What to do |
-| --- | --- | --- |
-| A required `context` argument on every tool | OpenAI's guidelines allow a brief, task-specific intent field. Claude reviewers ask that every argument serve the tool's function. | ChatGPT: [keep a short version](#chatgpt-keep-a-short-intent-field). Claude: turn it off and use an [intent fallback](#what-you-keep). |
-| An `llm_model` argument on every tool | It isn't part of the tool's function. | Turn it off. |
-| A `conversation_id` argument, and a `{"conversation_id": ...}` block appended to tool results | OpenAI's guidelines don't allow session IDs in tool responses. | Turn it off. ChatGPT sessions still group in TypeScript 1.7.0 and later. |
-| The `get_more_tools` and `send_feedback` tools | Reviewers expect every tool to serve the user. | Nothing. They're off by default. |
-| Tool arguments, results, and error messages sent to PostHog | The model doesn't see them. Reviewers can ask whether you need them and whether you disclose them. | Your choice. See [drop tool data](#optional-drop-tool-arguments-and-results). |
-
-## Turn off the arguments the model sees
-
-Set these options before you submit. Your server then advertises the same tool schemas and returns the same tool results as it does without the SDK. The SDK still sends an event for every tool call.
+With this config, your server lists the same tools and returns the same results as it would without the SDK.
 
 <MultiLanguage>
 
@@ -80,99 +68,70 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(MyServer);
 
 </MultiLanguage>
 
-Don't turn on the virtual tools. Leave out `reportMissing` and `collectFeedback` in TypeScript, `report_missing` and `collect_feedback` in Python and Ruby, `WithMissingCapabilityTool` in Go, and `missing_capability_tool` and `feedback_tool` in Rust.
+Keep the `get_more_tools` and `send_feedback` tools off. They're off by default, so leave out `reportMissing`, `collectFeedback`, `report_missing`, `collect_feedback`, `WithMissingCapabilityTool`, `missing_capability_tool`, and `feedback_tool`.
 
-If you use a [custom dispatcher](/docs/mcp-analytics/installation/typescript#custom-dispatchers) (`PostHogMCP`) instead of `instrument()`, pass `captureModel: false` and `enableConversationId: false` to the constructor, and `{ context: false }` to `prepareToolList`. In Python, pass `capture_model=False` and `enable_conversation_id=False` to the constructor, and `context=False` to `prepare_tool_list`. In Ruby, pass `capture_model: false` to `PostHog::MCP::Client.new` and `context: false` to `prepare_tool_list`.
+On a [custom dispatcher](/docs/mcp-analytics/installation/typescript#custom-dispatchers), `context` is an option of `prepareToolList`, not the constructor:
 
-If you submit to one directory and also serve other clients from a separate deployment, you can keep the defaults on that deployment.
+- TypeScript: `captureModel: false` and `enableConversationId: false` on `PostHogMCP`, and `{ context: false }` on `prepareToolList`.
+- Python: `capture_model=False` and `enable_conversation_id=False` on `PostHogMCP`, and `context=False` on `prepare_tool_list`.
+- Ruby: `capture_model: false` on `PostHog::MCP::Client.new`, and `context: false` on `prepare_tool_list`.
 
 ### ChatGPT: keep a short intent field
 
-OpenAI's guidelines allow a brief, task-specific intent field. For a ChatGPT listing, keep `context` and replace its prompt with a short one. Ask for a few words, never for the user's own words or personal details. Keep model capture and conversation IDs off.
+OpenAI's guidelines allow a brief, task-specific intent field, so a ChatGPT listing can keep `context` with a short prompt. Replace `context: false` with:
 
 <MultiLanguage>
 
 ```ts file=TypeScript
-instrument(server, posthog, {
-  context: {
-    description: "A few words on the user's goal for this call. Leave out personal details.",
-  },
-  captureModel: false,
-  enableConversationId: false,
-})
+context: { description: "A few words on the user's goal for this call. Leave out personal details." },
 ```
 
 ```python file=Python
-from posthog.mcp.types import MCPAnalyticsContextOptions, MCPAnalyticsOptions
-
-instrument(
-    server,
-    posthog,
-    MCPAnalyticsOptions(
-        context=MCPAnalyticsContextOptions(
-            description="A few words on the user's goal for this call. Leave out personal details.",
-        ),
-        capture_model=False,
-        enable_conversation_id=False,
-    ),
-)
+context=MCPAnalyticsContextOptions(
+    description="A few words on the user's goal for this call. Leave out personal details.",
+),
 ```
 
 ```ruby file=Ruby
-PostHog::MCP.instrument(
-  server, posthog,
-  context: { description: "A few words on the user's goal for this call. Leave out personal details." },
-  capture_model: false,
-  enable_conversation_id: false
-)
+context: { description: "A few words on the user's goal for this call. Leave out personal details." },
 ```
 
 ```rust file=Rust
-let options = McpOptionsBuilder::default()
-    .context_description("A few words on the user's goal for this call. Leave out personal details.")
-    .capture_model(false)
-    .conversation_id(false)
-    .build()?;
+.context_description("A few words on the user's goal for this call. Leave out personal details.")
 ```
 
 </MultiLanguage>
 
-The Go SDK uses a fixed prompt, so turn `context` off in Go.
+Go has a fixed prompt, so keep `context` off there. Claude listings should keep it off too.
 
-### What you keep
+## What you still get
 
-With these options off, PostHog still records the data most teams start with:
+- Every tool call, with its outcome, latency, and error type.
+- The client, such as ChatGPT or Claude.
+- Sessions, when the transport has a session ID. From TypeScript 1.7.0, ChatGPT calls also group by ChatGPT's own conversation ID.
+- Users, from your [identify callback](/docs/mcp-analytics/identifying-users).
+- Intent from an [intent fallback](/docs/mcp-analytics/intent#the-intent-fallback-callback), which runs on your server and builds intent from the tool name and arguments.
 
-- The tool name, the outcome, the latency, and the error type of every call.
-- The client and harness, such as ChatGPT or Claude.
-- Sessions, wherever the transport has a session ID. The TypeScript SDK (1.7.0 and later) also groups ChatGPT calls by ChatGPT's own conversation ID.
-- Users, through your [identify callback](/docs/mcp-analytics/identifying-users).
-- Intent, if you add an [intent fallback](/docs/mcp-analytics/intent#the-intent-fallback-callback). It derives intent from the tool name and arguments on your server, so the model sees nothing.
+You lose the calling model, including the one Codex sends in request metadata. On a stateless server with no session ID, each call is its own session.
 
-What changes:
+## Optional: send less tool data
 
-- With `context` off, intent comes from your fallback instead of the agent's own words.
-- PostHog doesn't record the calling model (`$mcp_llm_model`). This also applies to the model that Codex sends in request metadata.
-- On a stateless server with no transport session ID, each call is its own session.
+Tool arguments, results, and error messages go to PostHog, never to the model, so they don't affect what reviewers see in your tools. They're the fastest way to debug a failed call. If you'd rather send only usage data, remove `$mcp_parameters`, `$mcp_response`, and `$mcp_error_message`:
 
-## Optional: drop tool arguments and results
+- TypeScript, Python, and Ruby: the [before-send hook](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
+- Go: `posthogmcpsdk.WithCaptureParameters(false)` and `posthogmcpsdk.WithCaptureResponses(false)` on `Instrument`, and `posthogmcp.WithCaptureErrorMessages(false)` on `posthogmcp.New`.
+- Rust: `.capture_parameters(false)` and `.capture_responses(false)`, and remove `$mcp_error_message` in `before_send`.
 
-The model never sees what the SDK sends to PostHog, so these properties don't change your tools. They're useful for debugging failed calls. Keep them if you need them, and say so in your privacy policy. If a reviewer asks you to collect less, or you want to send only usage data, remove `$mcp_parameters`, `$mcp_response`, and `$mcp_error_message` from each event:
+Failed calls also send an `$exception` event with the error message. [Turn off exception events](/docs/mcp-analytics/privacy#turn-off-exception-events) to stop it.
 
-- In TypeScript, Python, and Ruby, use the [before-send hook](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
-- In Go, pass `posthogmcpsdk.WithCaptureParameters(false)` and `posthogmcpsdk.WithCaptureResponses(false)` to `Instrument`, and `posthogmcp.WithCaptureErrorMessages(false)` to `posthogmcp.New`.
-- In Rust, call `.capture_parameters(false)` and `.capture_responses(false)` on `McpOptionsBuilder`, and remove `$mcp_error_message` in its `before_send` hook.
+## Tell users what you collect
 
-Failed calls also send an `$exception` event with the error message. To stop it, [turn off exception events](/docs/mcp-analytics/privacy#turn-off-exception-events).
+Both directories expect your privacy policy to say what your server records. Something like:
 
-## Disclose analytics in your privacy policy
+> We use PostHog to see how AI clients use this server: which tools they call, whether the calls succeed, and how long they take.
 
-Both platforms expect you to tell users what your server collects. Add a sentence like this one to your privacy policy, and edit it to match your configuration:
+Mention tool arguments and results if you keep them.
 
-> We use PostHog to record how AI clients use this server: which tool was called, whether it succeeded, how long it took, and which client called it.
+## Recheck your tools after upgrading
 
-If you keep tool arguments and results, say so too.
-
-## Check your tools after each SDK upgrade
-
-An SDK upgrade can change the schemas your server advertises. OpenAI reviews changed tools again, and Anthropic asks you to report material changes to tool descriptions. After you upgrade, compare your server's `tools/list` output with the version you submitted.
+An SDK upgrade can change the tool schemas your server lists, and both directories care about that. OpenAI reviews changed tools again. Anthropic asks you to report material changes. After an upgrade, diff your `tools/list` output against what you submitted.
