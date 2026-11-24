@@ -4,133 +4,85 @@
  * events carry the request headers the drain leaves out, and `vercel_request_id` joins each one to
  * its lines in Logs.
  *
- * Off unless MIDDLEWARE_CAPTURE_ENABLED is "true". MIDDLEWARE_CAPTURE_SAMPLE_RATE (0 to 1, default
- * 1) keeps a share of requests chosen from the request id, so retries of one request agree. The
- * event uuid comes from the same id, so a resent event replaces the first instead of adding to it.
+ * Off unless MIDDLEWARE_CAPTURE_ENABLED is "true" and GATSBY_POSTHOG_API_KEY is set.
+ * MIDDLEWARE_CAPTURE_SAMPLE_RATE (0 to 1, default 1) keeps a share of requests chosen from the
+ * request id. The event uuid comes from the same id, so a resent event replaces the first instead
+ * of adding to it.
  *
  * The send runs after the response through `waitUntil` and never throws into the request.
  */
 
 const CAPTURE_EVENT = 'docs_request'
-
-const DEFAULT_HOST = 'https://us.i.posthog.com'
-// The website's public project token, the same one the browser SDK ships with.
-const DEFAULT_TOKEN = 'sTMFPsFhdP1Ssg'
-// Fixed so that a request id always maps to the same event uuid.
+const CAPTURE_URL = 'https://us.i.posthog.com/i/v0/e/'
 const UUID_NAMESPACE = '3b9c78a8-39be-49bf-950e-04a247c76119'
 const SEND_ATTEMPTS = 2
 const SEND_TIMEOUT_MS = 3000
 const RETRY_BASE_DELAY_MS = 250
-// `waitUntil` work runs on borrowed time after the response, so a longer Retry-After drops the event.
-const MAX_RETRY_DELAY_MS = 2000
-// The user agent of the middleware's own `fetch` for a page's `.md` sibling.
-const SUBREQUEST_USER_AGENT = 'Vercel Edge Functions'
-// Only the docs to start with. The middleware's matcher covers more paths than this.
+// Set by the middleware on its own fetch of a page's `.md` sibling, which passes through the
+// middleware again and would otherwise be recorded as a second request.
+export const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
+// The matcher in middleware.ts covers more prefixes; only /docs requests are recorded.
 const CAPTURE_PATHS = /^\/docs(\/|$)/
 
-export type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
-export type MarkdownReason = 'accept' | 'agent_fetcher'
+type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
 
 export interface NegotiationResult {
     response: Response | undefined
     negotiation: Negotiation
-    reason?: MarkdownReason
-    markdownFetchMs?: number
+    reason?: 'accept' | 'agent_fetcher'
 }
 
-type WaitUntil = (promise: Promise<unknown>) => void
+interface WaitUntilContext {
+    waitUntil(promise: Promise<unknown>): void
+}
 
 interface CaptureConfig {
     sampleRate: number
     token: string
-    host: string
-}
-
-type AgentCategory = 'ai_assistant' | 'ai_search' | 'ai_crawler' | 'bot' | 'http_client' | 'no_user_agent' | 'regular'
-
-// The agents seen most on posthog.com. The full list is in PostHog's bot definitions: run
-// getTrafficType($raw_user_agent, $ip) on these events for the classification Logs uses.
-// Order matters: Claude-User sends "claude-code/" in its user agent too.
-const AGENTS: [RegExp, string, AgentCategory][] = [
-    [/Claude-User/i, 'Claude User', 'ai_assistant'],
-    [/claude-code\//i, 'Claude Code', 'ai_assistant'],
-    [/ChatGPT-User/i, 'ChatGPT', 'ai_assistant'],
-    [/Perplexity-User/i, 'Perplexity User', 'ai_assistant'],
-    [/MistralAI-User/i, 'Mistral AI', 'ai_assistant'],
-    [/meta-externalfetcher/i, 'Meta Fetcher', 'ai_assistant'],
-    [/GoogleAgent-URLContext/i, 'Gemini URL Context', 'ai_assistant'],
-    [/^Cursor\/[0-9.]+ \(/, 'Cursor', 'ai_assistant'],
-    [/OAI-SearchBot/i, 'OpenAI Search', 'ai_search'],
-    [/Claude-SearchBot/i, 'Claude Search', 'ai_search'],
-    [/PerplexityBot/i, 'Perplexity', 'ai_search'],
-    [/Applebot/i, 'Applebot', 'ai_search'],
-    [/GPTBot/i, 'GPTBot', 'ai_crawler'],
-    [/ClaudeBot/i, 'Claude', 'ai_crawler'],
-    [/meta-externalagent/i, 'Meta AI', 'ai_crawler'],
-    [/Amazonbot/i, 'Amazon', 'ai_crawler'],
-    [/Bytespider/i, 'ByteDance', 'ai_crawler'],
-    [/CCBot/i, 'Common Crawl', 'ai_crawler'],
-    [/PetalBot/i, 'Petal', 'ai_crawler'],
-    [/PostHog-BusinessKnowledge/i, 'PostHog BusinessKnowledge', 'ai_crawler'],
-]
-const GENERIC_BOT = /bot\b|crawl|spider|slurp/i
-const HTTP_CLIENT =
-    /^(curl|wget|python-requests|python-urllib|python-httpx|aiohttp|axios|node-fetch|node|undici|go-http-client|okhttp|java\/|ruby|deno|bun)\b/i
-
-function classifyAgent(userAgent: string): { name?: string; category: AgentCategory } {
-    if (!userAgent) return { category: 'no_user_agent' }
-    for (const [pattern, name, category] of AGENTS) {
-        if (pattern.test(userAgent)) return { name, category }
-    }
-    if (GENERIC_BOT.test(userAgent)) return { category: 'bot' }
-    if (HTTP_CLIENT.test(userAgent)) return { category: 'http_client' }
-    return { category: 'regular' }
 }
 
 // Bundlers for edge code may only substitute `process.env.NAME` written out in full, so each
-// variable is named here.
+// variable is named here. The middleware sees only the Vercel project's variables: .env.production
+// is read by Gatsby, so GATSBY_POSTHOG_API_KEY must also be set in Vercel or nothing is sent.
 function readConfig(): CaptureConfig | undefined {
-    if (typeof process === 'undefined' || process.env.MIDDLEWARE_CAPTURE_ENABLED !== 'true') return undefined
+    const token = process.env.GATSBY_POSTHOG_API_KEY
+    if (process.env.MIDDLEWARE_CAPTURE_ENABLED !== 'true' || !token) return undefined
     const rate = Number(process.env.MIDDLEWARE_CAPTURE_SAMPLE_RATE || '1')
-    return {
-        sampleRate: Number.isFinite(rate) ? Math.min(Math.max(rate, 0), 1) : 0,
-        token: process.env.MIDDLEWARE_CAPTURE_TOKEN || DEFAULT_TOKEN,
-        host: (process.env.MIDDLEWARE_CAPTURE_HOST || DEFAULT_HOST).replace(/\/$/, ''),
-    }
+    return { sampleRate: Number.isFinite(rate) ? Math.min(Math.max(rate, 0), 1) : 0, token }
 }
 
-export function captureRequest(request: Request, result: NegotiationResult, waitUntil?: WaitUntil): void {
+export function captureRequest(request: Request, result: NegotiationResult, context?: WaitUntilContext): void {
     try {
         const config = readConfig()
         if (!config || config.sampleRate === 0) return
-        if (request.headers.get('user-agent') === SUBREQUEST_USER_AGENT) return
-        if (!CAPTURE_PATHS.test(new URL(request.url).pathname)) return
+        if (request.headers.has(SUBREQUEST_HEADER)) return
+        const url = new URL(request.url)
+        if (!CAPTURE_PATHS.test(url.pathname)) return
 
-        const timestamp = new Date().toISOString()
-        const pending = capture(request, result, config, timestamp).catch(() => undefined)
-        waitUntil?.(pending)
+        context?.waitUntil(capture(request, url, result, config).catch(() => undefined))
     } catch {
         // Recording a request must never affect the response.
     }
 }
 
-async function capture(request: Request, result: NegotiationResult, config: CaptureConfig, timestamp: string) {
+async function capture(request: Request, url: URL, result: NegotiationResult, config: CaptureConfig): Promise<void> {
+    // Taken before the first await, so it is the time of the request rather than of the send.
+    const timestamp = new Date().toISOString()
     const headers = request.headers
-    const requestId = vercelRequestId(headers.get('x-vercel-id'))
+    const vercelId = headers.get('x-vercel-id') || undefined
+    const requestId = vercelRequestId(vercelId)
     const uuid = requestId ? await uuidV5(`posthog.com-middleware:${requestId}`) : crypto.randomUUID()
     if (config.sampleRate < 1 && parseInt(uuid.slice(0, 8), 16) / 2 ** 32 >= config.sampleRate) return
 
-    const url = new URL(request.url)
     const userAgent = headers.get('user-agent') || ''
     const ip = headers.get('x-real-ip') || headers.get('x-forwarded-for')?.split(',')[0].trim() || ''
-    const agent = classifyAgent(userAgent)
-    const servedMarkdown = result.response !== undefined || result.negotiation === 'markdown_url'
 
     const event = {
         api_key: config.token,
         event: CAPTURE_EVENT,
         uuid,
         timestamp,
+        // One id per client, so unique-visitor counts work without person profiles.
         distinct_id: `mw_${(await sha256Hex(`${ip}:${userAgent}`)).slice(0, 32)}`,
         properties: {
             $process_person_profile: false,
@@ -142,34 +94,35 @@ async function capture(request: Request, result: NegotiationResult, config: Capt
             $raw_user_agent: userAgent,
             $ip: ip || undefined,
             method: request.method,
-            served_format: servedMarkdown ? 'markdown' : 'html',
             negotiation: result.negotiation,
             markdown_reason: result.reason,
-            markdown_fetch_ms: result.markdownFetchMs,
-            accept: headers.get('accept') || '',
-            // Browsers send Sec-Fetch-*; most HTTP clients do not, even with a browser user agent.
+            accept: headers.get('accept') || undefined,
             sec_fetch_site: headers.get('sec-fetch-site') || undefined,
             sec_fetch_mode: headers.get('sec-fetch-mode') || undefined,
             signature_agent: headers.get('signature-agent') || undefined,
-            has_http_signature: headers.has('signature') && headers.has('signature-input'),
-            agent_name: agent.name,
-            agent_category: agent.category,
+            signature_input: headers.get('signature-input') || undefined,
+            vercel_id: vercelId,
             vercel_request_id: requestId,
             vercel_env: process.env.VERCEL_ENV,
             vercel_deployment_id: process.env.VERCEL_DEPLOYMENT_ID,
             sample_rate: config.sampleRate,
         },
     }
-    await send(event, config, requestId)
+    await send(event, requestId)
 }
 
-async function send(event: Record<string, unknown>, config: CaptureConfig, requestId: string | undefined) {
+// One retry after a server or network error. A 429 is not retried: resending inside the throttle
+// window only adds load, and `waitUntil` has no time to wait the window out.
+async function send(event: Record<string, unknown>, requestId: string | undefined): Promise<void> {
     const body = JSON.stringify(event)
     let failure = ''
     for (let attempt = 1; attempt <= SEND_ATTEMPTS; attempt++) {
-        let delay: number | undefined
+        if (attempt > 1) {
+            // Jittered, so the retries of many requests failing at once spread out.
+            await new Promise((resolve) => setTimeout(resolve, RETRY_BASE_DELAY_MS * (1 + Math.random())))
+        }
         try {
-            const response = await fetch(`${config.host}/i/v0/e/`, {
+            const response = await fetch(CAPTURE_URL, {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
                 body,
@@ -177,34 +130,18 @@ async function send(event: Record<string, unknown>, config: CaptureConfig, reque
             })
             if (response.ok) return
             failure = `status ${response.status}`
-            if (response.status < 500 && response.status !== 429) break
-            delay = retryDelay(response.headers.get('retry-after'))
+            if (response.status < 500) break
         } catch (error) {
             failure = error instanceof Error ? error.name : 'unknown'
-            delay = retryDelay(null)
         }
-        if (attempt === SEND_ATTEMPTS || delay === undefined) break
-        await new Promise((resolve) => setTimeout(resolve, delay))
     }
     // Lands in Logs as an edge line with this request's id, which is how lost events get counted.
     console.error(JSON.stringify({ middleware_capture: 'failed', reason: failure, vercel_request_id: requestId }))
 }
 
-// Retry-After is seconds or an HTTP date. Without one, wait a jittered backoff so retries from many
-// requests failing together spread out.
-function retryDelay(retryAfter: string | null): number | undefined {
-    if (retryAfter) {
-        const seconds = Number(retryAfter)
-        const ms = Number.isFinite(seconds) ? seconds * 1000 : Date.parse(retryAfter) - Date.now()
-        if (ms > MAX_RETRY_DELAY_MS) return undefined
-        if (ms >= 0) return ms
-    }
-    return RETRY_BASE_DELAY_MS * (1 + Math.random())
-}
-
 // x-vercel-id is the request id behind one or more region prefixes, as in "fra1::iad1::<id>".
 // The last part matches `vercel.request.id` on the request's lines in Logs.
-function vercelRequestId(header: string | null): string | undefined {
+function vercelRequestId(header: string | undefined): string | undefined {
     return header?.split('::').pop() || undefined
 }
 

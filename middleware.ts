@@ -18,7 +18,7 @@
  * Returning `undefined` continues to the normal static response, so anything
  * this function declines to handle behaves exactly as it does today.
  */
-import { captureRequest } from './middleware-capture.ts'
+import { captureRequest, SUBREQUEST_HEADER } from './middleware-capture.ts'
 import type { NegotiationResult } from './middleware-capture.ts'
 
 export const config = {
@@ -33,7 +33,7 @@ export default async function middleware(
     context?: { waitUntil(promise: Promise<unknown>): void }
 ): Promise<Response | undefined> {
     const result = await negotiate(request)
-    captureRequest(request, result, context && ((promise) => context.waitUntil(promise)))
+    captureRequest(request, result, context)
     return result.response
 }
 
@@ -53,12 +53,10 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
     // section index pages (/docs, /blog, /handbook, /newsletter) don't. Ask for
     // it and fall through to the HTML when it isn't there, rather than keeping a
     // hand-maintained list of exceptions that silently rots.
-    const started = Date.now()
     const markdown = await fetch(new URL(`${pathname}.md`, url.origin), {
-        headers: { accept: 'text/plain' },
+        headers: { accept: 'text/plain', [SUBREQUEST_HEADER]: '1' },
     })
-    const markdownFetchMs = Date.now() - started
-    if (!markdown.ok) return { response: undefined, negotiation: 'no_sibling', reason, markdownFetchMs }
+    if (!markdown.ok) return { response: undefined, negotiation: 'no_sibling', reason }
 
     const response = new Response(markdown.body, {
         status: 200,
@@ -68,5 +66,5 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
             vary: 'Accept, User-Agent',
         },
     })
-    return { response, negotiation: 'served', reason, markdownFetchMs }
+    return { response, negotiation: 'served', reason }
 }

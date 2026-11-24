@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { test, type TestContext } from 'node:test'
 
 import middleware from './middleware.ts'
+import { SUBREQUEST_HEADER } from './middleware-capture.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
 
@@ -60,6 +61,7 @@ test('honors explicit Markdown requests and fetches the sibling without a traili
     assert.equal(response.headers.get('cache-control'), 'public, max-age=60')
     assert.equal(fetch.mock.callCount(), 1)
     assert.equal(String(fetch.mock.calls[0].arguments[0]), `${page}.md`)
+    assert.equal(new Headers(fetch.mock.calls[0].arguments[1]?.headers).get(SUBREQUEST_HEADER), '1')
 })
 
 test('does not fetch another sibling for a Markdown URL', async (t) => {
@@ -88,7 +90,7 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
 const CAPTURE_URL = 'https://us.i.posthog.com/i/v0/e/'
 
 function enableCapture(t: TestContext, env: Record<string, string> = {}) {
-    const vars = { MIDDLEWARE_CAPTURE_ENABLED: 'true', ...env }
+    const vars = { MIDDLEWARE_CAPTURE_ENABLED: 'true', GATSBY_POSTHOG_API_KEY: 'phc_test', ...env }
     for (const [key, value] of Object.entries(vars)) process.env[key] = value
     t.after(() => {
         for (const key of Object.keys(vars)) delete process.env[key]
@@ -96,31 +98,22 @@ function enableCapture(t: TestContext, env: Record<string, string> = {}) {
 }
 
 interface CapturedEvent {
+    api_key: string
     event: string
     uuid: string
     properties: Record<string, unknown>
 }
 
-function mockFetches(
-    t: TestContext,
-    { markdownStatus = 200, captureStatuses = [200], retryAfter = '' }: MockOptions = {}
-) {
+function mockFetches(t: TestContext, { markdownStatus = 200, captureStatuses = [200] } = {}) {
     const captures: CapturedEvent[] = []
     t.mock.method(globalThis, 'fetch', async (input: unknown, init?: RequestInit) => {
         if (String(input) === CAPTURE_URL) {
             captures.push(JSON.parse(String(init?.body)))
-            const headers: Record<string, string> = retryAfter ? { 'retry-after': retryAfter } : {}
-            return new Response('{}', { status: captureStatuses[captures.length - 1] ?? 200, headers })
+            return new Response('{}', { status: captureStatuses[captures.length - 1] ?? 200 })
         }
         return new Response('# Product analytics', { status: markdownStatus })
     })
     return captures
-}
-
-interface MockOptions {
-    markdownStatus?: number
-    captureStatuses?: number[]
-    retryAfter?: string
 }
 
 // Runs each retry wait at once and records how long it asked for.
@@ -149,6 +142,7 @@ test('records the request headers and the Markdown served, keyed on the Vercel r
         accept: '*/*',
         'sec-fetch-site': 'none',
         'signature-agent': '"https://agent.example.com"',
+        'signature-input': 'sig1=("@authority");keyid="test-key"',
         'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
     })
 
@@ -156,37 +150,36 @@ test('records the request headers and the Markdown served, keyed on the Vercel r
     assert.equal(captures.length, 1)
     const [event] = captures
     assert.equal(event.event, 'docs_request')
+    assert.equal(event.api_key, 'phc_test')
     assert.equal(event.uuid, 'f250a31f-f9e1-5dae-8ed3-305625543a58')
     assert.equal(event.properties.$process_person_profile, false)
     assert.deepEqual(
         {
             path: event.properties.$pathname,
-            served: event.properties.served_format,
             negotiation: event.properties.negotiation,
             reason: event.properties.markdown_reason,
             accept: event.properties.accept,
             site: event.properties.sec_fetch_site,
             signatureAgent: event.properties.signature_agent,
-            agent: event.properties.agent_name,
-            category: event.properties.agent_category,
+            signatureInput: event.properties.signature_input,
+            vercelId: event.properties.vercel_id,
             requestId: event.properties.vercel_request_id,
         },
         {
             path: '/docs/product-analytics',
-            served: 'markdown',
             negotiation: 'served',
             reason: 'agent_fetcher',
             accept: '*/*',
             site: 'none',
             signatureAgent: '"https://agent.example.com"',
-            agent: 'Claude User',
-            category: 'ai_assistant',
+            signatureInput: 'sig1=("@authority");keyid="test-key"',
+            vercelId: 'fra1::iad1::test1-1700000000000-000000000001',
             requestId: 'test1-1700000000000-000000000001',
         }
     )
 })
 
-test('records HTML for browsers and for pages without a Markdown sibling', async (t) => {
+test('records why no Markdown was served, and requests for a Markdown URL', async (t) => {
     enableCapture(t)
     const captures = mockFetches(t, { markdownStatus: 404 })
 
@@ -195,12 +188,8 @@ test('records HTML for browsers and for pages without a Markdown sibling', async
     await handle(`${page}.md`, { 'user-agent': 'curl/8.0' })
 
     assert.deepEqual(
-        captures.map((e) => [e.properties.served_format, e.properties.negotiation, e.properties.agent_category]),
-        [
-            ['html', 'not_requested', 'regular'],
-            ['html', 'no_sibling', 'ai_assistant'],
-            ['markdown', 'markdown_url', 'http_client'],
-        ]
+        captures.map((e) => e.properties.negotiation),
+        ['not_requested', 'no_sibling', 'markdown_url']
     )
 })
 
@@ -217,21 +206,20 @@ test('resends the same event after a server error so a retry cannot count twice'
     assert.ok(delays[0] >= 250 && delays[0] < 500, `backoff ${delays[0]}`)
 })
 
-for (const [retryAfter, expectedDelays] of [
-    ['1', [1000]],
-    ['30', []],
-] as const) {
-    test(`waits out a 429 with Retry-After ${retryAfter}, or gives up when it outlasts the request`, async (t) => {
-        enableCapture(t)
-        const captures = mockFetches(t, { captureStatuses: [429, 200], retryAfter })
-        const delays = recordDelays(t)
+test('does not resend into a rate limit, and logs the lost event against its request id', async (t) => {
+    enableCapture(t)
+    const captures = mockFetches(t, { captureStatuses: [429, 200] })
+    const errors = t.mock.method(console, 'error', () => undefined)
 
-        await handle(page, { 'x-vercel-id': 'iad1::test2-1700000000000-000000000002' })
+    await handle(page, { 'x-vercel-id': 'iad1::test2-1700000000000-000000000002' })
 
-        assert.deepEqual(delays, expectedDelays)
-        assert.equal(captures.length, expectedDelays.length + 1)
+    assert.equal(captures.length, 1)
+    assert.deepEqual(JSON.parse(String(errors.mock.calls[0].arguments[0])), {
+        middleware_capture: 'failed',
+        reason: 'status 429',
+        vercel_request_id: 'test2-1700000000000-000000000002',
     })
-}
+})
 
 test('samples on the request id', async (t) => {
     enableCapture(t, { MIDDLEWARE_CAPTURE_SAMPLE_RATE: '0.5' })
@@ -251,10 +239,12 @@ test('samples on the request id', async (t) => {
 test("records nothing when capture is off, outside /docs, or for the middleware's own Markdown fetch", async (t) => {
     const captures = mockFetches(t)
     await handle(page, { 'user-agent': 'Claude-User' })
+    enableCapture(t, { GATSBY_POSTHOG_API_KEY: '' })
+    await handle(page, { 'user-agent': 'Claude-User' })
     assert.equal(captures.length, 0)
 
     enableCapture(t)
-    await handle(`${page}.md`, { 'user-agent': 'Vercel Edge Functions' })
+    await handle(`${page}.md`, { [SUBREQUEST_HEADER]: '1' })
     await handle('https://posthog.com/blog/some-post', { 'user-agent': 'Claude-User' })
     await handle('https://posthog.com/docsearch', { 'user-agent': 'Claude-User' })
     assert.equal(captures.length, 0)
