@@ -11,7 +11,7 @@
  * The send runs after the response through `waitUntil` and never throws into the request.
  */
 
-const CAPTURE_EVENT = 'middleware_request'
+const CAPTURE_EVENT = 'docs_request'
 
 const DEFAULT_HOST = 'https://us.i.posthog.com'
 // The website's public project token, the same one the browser SDK ships with.

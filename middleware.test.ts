@@ -129,7 +129,7 @@ test('records the request headers and the Markdown served, keyed on the Vercel r
     assert.equal(await response?.text(), '# Product analytics')
     assert.equal(captures.length, 1)
     const [event] = captures
-    assert.equal(event.event, 'middleware_request')
+    assert.equal(event.event, 'docs_request')
     assert.equal(event.uuid, 'f250a31f-f9e1-5dae-8ed3-305625543a58')
     assert.equal(event.properties.$process_person_profile, false)
     assert.deepEqual(
