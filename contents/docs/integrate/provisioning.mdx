@@ -205,7 +205,7 @@ PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP
 Link your app to a PostHog organization with a [verification token](#link-your-partner-app-to-a-posthog-organization) to follow and answer the review from PostHog. Without a linked organization, PostHog has nobody to tell about the decision, and your app can't answer it.
 
 - The organization's admins and owners get an email when the review accepts your app, declines it, or hands it to PostHog staff, and again whenever staff change the decision. Staff can also ask for changes or more information. The email carries any message staff left for you.
-- In PostHog, go to **Organization settings → OAuth applications** and expand your app. It shows the provisioning status, which step the review is at, and its history: each decision, every message from PostHog staff, and the notes your organization sent.
+- In PostHog, go to **Organization settings → OAuth applications** and open your app. Its page shows the provisioning status, which step the review is at, and its history: each decision, every message from PostHog staff, and the notes your organization sent. It also shows what PostHog read from your client metadata document, which is what staff review, and lets you check a note before you send it.
 - When your app is declined, staff asked for changes, or your app waits for staff, the same row has a **Note to PostHog staff** box. Say what your app does, why it creates accounts or provisions resources, and what you changed. Sending the note puts your app back in front of PostHog staff.
 - A blocked app can't send a note. Its row has **Contact support about this review** instead, which opens a support request with your app's details filled in, on every plan.
 - An agent connected to the [PostHog MCP server](/docs/model-context-protocol) can read the same status with the `oauth-applications-list` tool.
@@ -833,7 +833,7 @@ When you provision a new account, the user receives:
 
 Your integration gets back the project token and host, so you can start sending events the moment the API call returns.
 
-If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, link it to an organization, go to **Organization settings → OAuth applications**, expand your app, and click **Request verification**. That opens a support request with a template to fill in, on every plan.
+If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, link it to an organization, go to **Organization settings → OAuth applications**, open your app, and click **Request verification**. That opens a support request with a template to fill in, on every plan.
 
 ## Error handling
 
