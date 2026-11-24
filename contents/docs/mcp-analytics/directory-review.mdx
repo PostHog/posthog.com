@@ -6,11 +6,11 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 MCP Analytics works with servers listed in the ChatGPT app directory and the Claude Connectors Directory. You need one configuration change before you submit, and you still see which tools agents call, which calls fail, how long they take, and which clients and users they come from.
 
-Directory reviewers check that every tool argument serves the tool's function. By default, the SDK adds a few analytics arguments to your tools so agents can tell you why they called them. Those arguments are what reviewers ask about, so turn them off for a directory listing. Everything that runs on your server keeps working.
+Directory reviewers check that every tool argument serves the tool's function. By default, the SDK adds a few analytics arguments to your tools so agents can tell you why they called them. Those arguments are what reviewers ask about. Turn them off for a Claude listing. A ChatGPT listing can keep a short intent field. Everything that runs on your server keeps working.
 
 <CalloutBox icon="IconInfo" title="Last updated November 24, 2026" type="fyi">
 
-We're working with OpenAI and Anthropic to bring more of the SDK's insights to directory-listed servers. We update this page as their guidance and our defaults change. Each platform makes the final decision under its own policy: the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
+We update this page as directory guidelines and SDK defaults change. Each platform makes the final decision under its own policy: the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
 
 </CalloutBox>
 
@@ -18,7 +18,7 @@ We're working with OpenAI and Anthropic to bring more of the SDK's insights to d
 
 | What the SDK adds | Why it matters for review | What to do |
 | --- | --- | --- |
-| A required `context` argument on every tool | It captures intent for analytics, not for the tool's function. | Turn it off. Use an [intent fallback](#what-you-keep) instead. |
+| A required `context` argument on every tool | OpenAI's guidelines allow a brief, task-specific intent field. Claude reviewers ask that every argument serve the tool's function. | ChatGPT: [keep a short version](#chatgpt-keep-a-short-intent-field). Claude: turn it off and use an [intent fallback](#what-you-keep). |
 | An `llm_model` argument on every tool | It isn't part of the tool's function. | Turn it off. |
 | A `conversation_id` argument, and a `{"conversation_id": ...}` block appended to tool results | OpenAI's guidelines don't allow session IDs in tool responses. | Turn it off. ChatGPT sessions still group in TypeScript 1.7.0 and later. |
 | The `get_more_tools` and `send_feedback` tools | Reviewers expect every tool to serve the user. | Nothing. They're off by default. |
@@ -86,6 +86,59 @@ If you use a [custom dispatcher](/docs/mcp-analytics/installation/typescript#cus
 
 If you submit to one directory and also serve other clients from a separate deployment, you can keep the defaults on that deployment.
 
+### ChatGPT: keep a short intent field
+
+OpenAI's guidelines allow a brief, task-specific intent field. For a ChatGPT listing, keep `context` and replace its prompt with a short one. Ask for a few words, never for the user's own words or personal details. Keep model capture and conversation IDs off.
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, {
+  context: {
+    description: "A few words on the user's goal for this call. Leave out personal details.",
+  },
+  captureModel: false,
+  enableConversationId: false,
+})
+```
+
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsContextOptions, MCPAnalyticsOptions
+
+instrument(
+    server,
+    posthog,
+    MCPAnalyticsOptions(
+        context=MCPAnalyticsContextOptions(
+            description="A few words on the user's goal for this call. Leave out personal details.",
+        ),
+        capture_model=False,
+        enable_conversation_id=False,
+    ),
+)
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  context: { description: "A few words on the user's goal for this call. Leave out personal details." },
+  capture_model: false,
+  enable_conversation_id: false
+)
+```
+
+```rust file=Rust
+let options = McpOptionsBuilder::default()
+    .context_description("A few words on the user's goal for this call. Leave out personal details.")
+    .capture_model(false)
+    .conversation_id(false)
+    .build()?;
+```
+
+</MultiLanguage>
+
+The Go SDK uses a fixed prompt, so turn `context` off in Go.
+
 ### What you keep
 
 With these options off, PostHog still records the data most teams start with:
@@ -98,7 +151,7 @@ With these options off, PostHog still records the data most teams start with:
 
 What changes:
 
-- Intent comes from your fallback instead of the agent's own words.
+- With `context` off, intent comes from your fallback instead of the agent's own words.
 - PostHog doesn't record the calling model (`$mcp_llm_model`). This also applies to the model that Codex sends in request metadata.
 - On a stateless server with no transport session ID, each call is its own session.
 
