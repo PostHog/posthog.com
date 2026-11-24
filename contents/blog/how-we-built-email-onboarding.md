@@ -1,5 +1,5 @@
 ---
-date: 2024-02-19
+date: 2026-22-24
 title: How we built our onboarding email flow (with actual performance data)
 rootPage: /blog
 category: Inside PostHog
