@@ -347,7 +347,7 @@ export const replayVision = {
             { name: 'FullStory', key: 'fullstory', link: '/compare/posthog-vs-fullstory' },
             { name: 'Contentsquare', key: 'contentsquare' },
             { name: 'Datadog', key: 'datadog' },
-            { name: 'Mixpanel', key: 'mixpanel', link: '/blog/posthog-vs-mixpanel' },
+            { name: 'Mixpanel', key: 'mixpanel', link: '/compare/posthog-vs-mixpanel' },
             { name: 'PostHog', key: 'posthog' },
         ],
         rows: featureComparisonRows,

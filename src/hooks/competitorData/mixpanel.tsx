@@ -3,7 +3,7 @@ export const mixpanel = {
     key: 'mixpanel',
     assets: {
         icon: '/images/competitors/mixpanel.svg',
-        comparisonArticle: '/blog/posthog-vs-mixpanel',
+        comparisonArticle: '/compare/posthog-vs-mixpanel',
     },
     available: true,
     products: {
