@@ -185,7 +185,7 @@ To check the status, call the [registration endpoint](#register-your-app) again.
 
 Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
 
-A declined app keeps the connections it already has, and it can ask for another review as often as it needs. Only PostHog staff block an app, for example after reports of abuse. Blocking signs out every connection your app had.
+Declining and blocking both sign out every connection your app had. A declined app can ask for another review once you've changed it. Only PostHog staff block an app, for example after reports of abuse, and a blocked app can't ask again.
 
 PostHog staff can change the decision later. They can block an accepted app, and they can accept an app that was declined or blocked. If your app is blocked and you think that is a mistake, contact PostHog support. When staff lift a block, call the registration endpoint again to check, and have your users connect again.
 
