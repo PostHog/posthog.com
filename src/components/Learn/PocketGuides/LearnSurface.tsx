@@ -15,7 +15,7 @@ import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { useEntry } from './bookContext'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, sectionPages, useBookPages } from './bookModel'
-import { markChapterReadOnMove, useReadChapterSlugs } from './chapterProgress'
+import { useMarkChapterReadOnMove, useReadChapterSlugs } from './chapterProgress'
 import { isReaderWindowActive } from '../learnTracking'
 
 interface LearnBodyNode {
@@ -218,6 +218,7 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     const bodies = useBookBodies()
     const counts = usePocketGuideCounts()
     const readChapterSlugs = useReadChapterSlugs(volumeId)
+    const markChapterReadOnMove = useMarkChapterReadOnMove()
     const coverRef = React.useRef<HTMLDivElement>(null)
 
     const entry = React.useMemo(() => {
