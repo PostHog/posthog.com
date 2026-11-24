@@ -198,7 +198,7 @@ Luckily, [I didn't have to look far for an alternative](/workflows).
 
 ## Onboarding 10.0: The current one
 
-Onboarding 10.0 is the first flow I built entirely in [PostHog Workflows](/workflows), and the first one I built mostly by talking to an agent.
+[Onboarding 10.0](https://github.com/PostHog/marketing/issues/441) is the first flow I built entirely in [PostHog Workflows](/workflows), and the first one I built mostly by talking to an agent.
 
 Before I started, I [asked three lifecycle marketers to roast our lifecycle marketing](/blog/lifecycle-marketing). The clearest advice was to swap our tree of roughly 100 emails for one simple trunk with one goal, so that's what I built.
 
