@@ -254,7 +254,8 @@ export function SendBlock({ title }: { title: (about: React.ReactNode) => React.
                                 </select>
                             </span>
                         )}{' '}
-                        <span className="inline-block align-middle">
+                        {/* The orange face matches the highlight height next to it. */}
+                        <span className="inline-block align-middle leading-none [&_button>span]:h-[33px] [&_button>span]:!py-0 @xl/reader-content:[&_button>span]:h-10">
                             <OSButton variant="primary" size="lg" disabled={running} onClick={send} icon={<IconSend />}>
                                 Send
                             </OSButton>
