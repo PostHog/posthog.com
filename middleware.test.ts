@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { test } from 'node:test'
+import { test, type TestContext } from 'node:test'
 
 import middleware from './middleware.ts'
 
@@ -87,7 +87,7 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
 
 const CAPTURE_URL = 'https://us.i.posthog.com/i/v0/e/'
 
-function enableCapture(t: { after(fn: () => void): void }, env: Record<string, string> = {}) {
+function enableCapture(t: TestContext, env: Record<string, string> = {}) {
     const vars = { MIDDLEWARE_CAPTURE_ENABLED: 'true', ...env }
     for (const [key, value] of Object.entries(vars)) process.env[key] = value
     t.after(() => {
@@ -95,8 +95,14 @@ function enableCapture(t: { after(fn: () => void): void }, env: Record<string, s
     })
 }
 
-function mockFetches(t: any, { markdownStatus = 200, captureStatuses = [200] } = {}) {
-    const captures: any[] = []
+interface CapturedEvent {
+    event: string
+    uuid: string
+    properties: Record<string, unknown>
+}
+
+function mockFetches(t: TestContext, { markdownStatus = 200, captureStatuses = [200] } = {}) {
+    const captures: CapturedEvent[] = []
     t.mock.method(globalThis, 'fetch', async (input: unknown, init?: RequestInit) => {
         if (String(input) === CAPTURE_URL) {
             captures.push(JSON.parse(String(init?.body)))

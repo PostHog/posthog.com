@@ -160,7 +160,7 @@ async function capture(request: Request, result: NegotiationResult, config: Capt
     await send(event, config, requestId)
 }
 
-async function send(event: object, config: CaptureConfig, requestId: string | undefined) {
+async function send(event: Record<string, unknown>, config: CaptureConfig, requestId: string | undefined) {
     const body = JSON.stringify(event)
     let failure = ''
     for (let attempt = 1; attempt <= SEND_ATTEMPTS; attempt++) {
