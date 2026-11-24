@@ -1,28 +1,28 @@
 ---
-title: Submitting to the ChatGPT and Claude directories
+title: Listing your MCP server in the ChatGPT and Claude directories
 ---
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-The ChatGPT app directory and the Claude Connectors Directory review every tool your MCP server advertises. By default, the MCP Analytics SDK adds analytics arguments to your tools, and reviewers on both platforms have flagged them. This page lists what reviewers flag and the configuration to use before you submit.
+MCP Analytics works with servers listed in the ChatGPT app directory and the Claude Connectors Directory. You need one configuration change before you submit, and you still see which tools agents call, which calls fail, how long they take, and which clients and users they come from.
 
-We're working with OpenAI and Anthropic to make the SDK defaults pass review. As each issue is resolved, we change the default and remove it from this page.
+Directory reviewers check that every tool argument serves the tool's function. By default, the SDK adds a few analytics arguments to your tools so agents can tell you why they called them. Those arguments are what reviewers ask about, so turn them off for a directory listing. Everything that runs on your server keeps working.
 
-<CalloutBox icon="IconInfo" title="Last updated November 23, 2026" type="fyi">
+<CalloutBox icon="IconInfo" title="Last updated November 24, 2026" type="fyi">
 
-This page describes what reviewers have flagged so far. It can't guarantee that your submission passes. Each platform's own policy decides: the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
+We're working with OpenAI and Anthropic to bring more of the SDK's insights to directory-listed servers. We update this page as their guidance and our defaults change. Each platform makes the final decision under its own policy: the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
 
 </CalloutBox>
 
-## What reviewers flag
+## What to change for a directory listing
 
-| What the SDK adds | Why reviewers flag it | Status |
+| What the SDK adds | Why it matters for review | What to do |
 | --- | --- | --- |
-| A required `context` argument on every tool | Its purpose is analytics, not the tool's function. Reviewers on both platforms have asked developers to remove it. | Turn off before you submit |
-| An `llm_model` argument on every tool | It isn't related to the tool's function, and the agent can't always report its model accurately. | Turn off before you submit |
-| A `conversation_id` argument, and a `{"conversation_id": ...}` block appended to tool results | OpenAI's guidelines don't allow session IDs and other internal identifiers in tool responses. | Turn off before you submit |
-| The `get_more_tools` and `send_feedback` tools | They are tools the user didn't ask for. | Off by default. Leave them off. |
-| Tool arguments, results, and error messages sent to PostHog | The model doesn't see them, but reviewers ask whether you need the data and whether you disclose it. | Your decision. See [drop tool data](#optional-drop-tool-arguments-and-results). |
+| A required `context` argument on every tool | It captures intent for analytics, not for the tool's function. | Turn it off. Use an [intent fallback](#what-you-keep) instead. |
+| An `llm_model` argument on every tool | It isn't part of the tool's function. | Turn it off. |
+| A `conversation_id` argument, and a `{"conversation_id": ...}` block appended to tool results | OpenAI's guidelines don't allow session IDs in tool responses. | Turn it off. ChatGPT sessions still group in TypeScript 1.7.0 and later. |
+| The `get_more_tools` and `send_feedback` tools | Reviewers expect every tool to serve the user. | Nothing. They're off by default. |
+| Tool arguments, results, and error messages sent to PostHog | The model doesn't see them. Reviewers can ask whether you need them and whether you disclose them. | Your choice. See [drop tool data](#optional-drop-tool-arguments-and-results). |
 
 ## Turn off the arguments the model sees
 
@@ -86,24 +86,25 @@ If you use a [custom dispatcher](/docs/mcp-analytics/installation/typescript#cus
 
 If you submit to one directory and also serve other clients from a separate deployment, you can keep the defaults on that deployment.
 
-### What you keep and what you lose
+### What you keep
 
-With these options off, PostHog still records:
+With these options off, PostHog still records the data most teams start with:
 
 - The tool name, the outcome, the latency, and the error type of every call.
 - The client and harness, such as ChatGPT or Claude.
 - Sessions, wherever the transport has a session ID. The TypeScript SDK (1.7.0 and later) also groups ChatGPT calls by ChatGPT's own conversation ID.
 - Users, through your [identify callback](/docs/mcp-analytics/identifying-users).
+- Intent, if you add an [intent fallback](/docs/mcp-analytics/intent#the-intent-fallback-callback). It derives intent from the tool name and arguments on your server, so the model sees nothing.
 
-You lose:
+What changes:
 
-- Agent intent (`$mcp_intent`). To keep some intent, derive it from the tool name and arguments with an [intent fallback](/docs/mcp-analytics/intent#the-intent-fallback-callback). The fallback runs on your server, so the model sees nothing.
-- The calling model (`$mcp_llm_model`) for every client. Turning off model capture also stops the SDK from reading the model that Codex sends in request metadata.
-- Sessions on stateless servers that have no transport session ID. Each call is its own session there.
+- Intent comes from your fallback instead of the agent's own words.
+- PostHog doesn't record the calling model (`$mcp_llm_model`). This also applies to the model that Codex sends in request metadata.
+- On a stateless server with no transport session ID, each call is its own session.
 
 ## Optional: drop tool arguments and results
 
-The model never sees what the SDK sends to PostHog. Reviewers still ask whether you collect tool data you don't need. To send only usage data, remove `$mcp_parameters`, `$mcp_response`, and `$mcp_error_message` from each event:
+The model never sees what the SDK sends to PostHog, so these properties don't change your tools. They're useful for debugging failed calls. Keep them if you need them, and say so in your privacy policy. If a reviewer asks you to collect less, or you want to send only usage data, remove `$mcp_parameters`, `$mcp_response`, and `$mcp_error_message` from each event:
 
 - In TypeScript, Python, and Ruby, use the [before-send hook](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
 - In Go, pass `posthogmcpsdk.WithCaptureParameters(false)` and `posthogmcpsdk.WithCaptureResponses(false)` to `Instrument`, and `posthogmcp.WithCaptureErrorMessages(false)` to `posthogmcp.New`.
