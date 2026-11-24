@@ -68,6 +68,16 @@ Get a clear yes on each of these in addition to the confirmations above:
 6. **Cancel and invoice each source organization.** After all its projects move, cancel its subscription and invoice its accrued usage for the partial period. Do not cancel a subscription while the organization still has active projects. A free plan organization has usage limits, and the customer can lose data.
 7. **Set the invoice email** on the target organization (the confirmed email, or the placeholder).
 
+## Delete a stray or duplicate Stripe customer
+
+Sometimes a customer ends up with more than one Stripe customer by mistake, for example a payment or an invoice created under the wrong Stripe customer for an organization. Once the payment is moved to the correct Stripe customer, check all of the following before you delete the stray one:
+
+- **No link to an organization in billing.** Confirm the stray Stripe customer is not the one attached to the organization in Billing admin. If it is linked, this is not a stray customer, and you likely want [consolidation](#choose-the-target-setup-with-the-customer) or a [merge](#merge-paying-accounts-into-one-organization) instead of a deletion.
+- **No active subscription.** Confirm the Stripe customer has no active or scheduled subscription.
+- **No payment or invoice history.** Check the Stripe customer's payments and invoices. If it has any history, keep the record instead of deleting it: delete only a Stripe customer with no payment or invoice history.
+
+If a Stripe customer fails any of these checks, do not delete it. Get a second confirmation from <SmallTeam slug="billing" /> before you delete.
+
 ## After the migration
 
 - Watch the first consolidated invoice. The usage from all the linked organizations, or from all the moved projects, should appear on the target customer.
