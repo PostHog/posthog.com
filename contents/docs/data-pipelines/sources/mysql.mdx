@@ -149,7 +149,8 @@ PostHog checks these when you click **Check database prerequisites**:
   `PROCESS` lets PostHog wait for open transactions before it starts a snapshot, so no change falls between the snapshot and the binary log.
 
 - **A primary key on every table** you sync with CDC.
-- **No XA transactions** on the synced databases. CDC stops with an error when it reads one.
+- **A server time zone with daylight saving rules.** Set `time_zone` to `UTC`, an offset such as `'+00:00'`, or a named zone such as `'Europe/Berlin'`. If `time_zone` is `SYSTEM`, the host's zone must be UTC or a named zone, because an abbreviation such as `CET` doesn't say when daylight saving time applies.
+- **No two-phase XA transactions** that write to the synced databases. CDC stops with an error when it reads one. XA transactions in other databases, and `XA COMMIT ... ONE PHASE`, are fine.
 
 ### Enabling CDC
 
