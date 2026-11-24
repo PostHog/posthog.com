@@ -1,6 +1,6 @@
 export const READ_CHAPTERS_STORAGE_KEY = 'pocket-guide-chapters-read'
 
-export type ReadChapterIdsByVolume = Record<string, string[]>
+export type ReadChapterIdsByGuide = Record<string, string[]>
 
 export function readStoredProgress(): string | null {
     try {
@@ -10,7 +10,7 @@ export function readStoredProgress(): string | null {
     }
 }
 
-export function parseProgress(storedProgress: string | null): ReadChapterIdsByVolume {
+export function parseProgress(storedProgress: string | null): ReadChapterIdsByGuide {
     if (!storedProgress) return {}
     try {
         const parsedProgress = JSON.parse(storedProgress)
@@ -20,11 +20,11 @@ export function parseProgress(storedProgress: string | null): ReadChapterIdsByVo
     }
 }
 
-export function readLocalProgress(): ReadChapterIdsByVolume {
+export function readLocalProgress(): ReadChapterIdsByGuide {
     return parseProgress(readStoredProgress())
 }
 
-export function writeLocalProgress(progress: ReadChapterIdsByVolume): void {
+export function writeLocalProgress(progress: ReadChapterIdsByGuide): void {
     try {
         window.localStorage.setItem(READ_CHAPTERS_STORAGE_KEY, JSON.stringify(progress))
     } catch {
@@ -40,33 +40,35 @@ export function clearLocalProgress(): void {
     }
 }
 
-export function readChapterIds(progress: ReadChapterIdsByVolume | null | undefined, volumeId: string): string[] {
-    const chapterIds = progress?.[volumeId]
+export function readChapterIds(progress: ReadChapterIdsByGuide | null | undefined, progressKey: string): string[] {
+    const chapterIds = progress?.[progressKey]
     return Array.isArray(chapterIds) ? chapterIds : []
 }
 
-export function mergeProgress(
-    ...progressSources: (ReadChapterIdsByVolume | null | undefined)[]
-): ReadChapterIdsByVolume {
-    const mergedProgress: ReadChapterIdsByVolume = {}
-    for (const progress of progressSources) {
-        for (const volumeId of Object.keys(progress ?? {})) {
-            const chapterIds = new Set([
-                ...readChapterIds(mergedProgress, volumeId),
-                ...readChapterIds(progress, volumeId),
-            ])
-            mergedProgress[volumeId] = Array.from(chapterIds)
-        }
+function chaptersMissingFrom(
+    progress: ReadChapterIdsByGuide,
+    otherProgress: ReadChapterIdsByGuide | null | undefined
+): ReadChapterIdsByGuide {
+    const missingProgress: ReadChapterIdsByGuide = {}
+    for (const progressKey of Object.keys(progress)) {
+        const otherChapterIds = new Set(readChapterIds(otherProgress, progressKey))
+        const missingChapterIds = readChapterIds(progress, progressKey).filter(
+            (chapterId) => !otherChapterIds.has(chapterId)
+        )
+        if (missingChapterIds.length > 0) missingProgress[progressKey] = missingChapterIds
     }
-    return mergedProgress
+    return missingProgress
 }
 
 export function hasChaptersMissingFrom(
-    progress: ReadChapterIdsByVolume,
-    otherProgress: ReadChapterIdsByVolume | null | undefined
+    progress: ReadChapterIdsByGuide,
+    otherProgress: ReadChapterIdsByGuide | null | undefined
 ): boolean {
-    return Object.keys(progress).some((volumeId) => {
-        const otherChapterIds = new Set(readChapterIds(otherProgress, volumeId))
-        return readChapterIds(progress, volumeId).some((chapterId) => !otherChapterIds.has(chapterId))
-    })
+    return Object.keys(chaptersMissingFrom(progress, otherProgress)).length > 0
+}
+
+export function forgetLocalChaptersSavedIn(savedProgress: ReadChapterIdsByGuide | null): void {
+    const unsavedProgress = chaptersMissingFrom(readLocalProgress(), savedProgress)
+    if (Object.keys(unsavedProgress).length === 0) return clearLocalProgress()
+    writeLocalProgress(unsavedProgress)
 }

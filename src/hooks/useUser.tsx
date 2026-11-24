@@ -3,11 +3,10 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import {
-    clearLocalProgress,
+    forgetLocalChaptersSavedIn,
     hasChaptersMissingFrom,
-    mergeProgress,
     readLocalProgress,
-    type ReadChapterIdsByVolume,
+    type ReadChapterIdsByGuide,
 } from 'lib/learnProgress'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
@@ -72,7 +71,7 @@ export type User = {
     hasPosthogLogin?: boolean
     distinctId?: string | null
     // Undefined until the Strapi `me` override returns it; null means nothing saved yet.
-    learnProgress?: ReadChapterIdsByVolume | null
+    learnProgress?: ReadChapterIdsByGuide | null
 }
 
 export type DisambiguationResult = {
@@ -188,11 +187,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     const validateUser = async () => {
         const jwt = localStorage.getItem('jwt')
-        if (jwt && (await fetchUser(jwt))) {
-            setJwt(jwt)
-        } else {
+        const validatedUser = jwt ? await fetchUser(jwt) : null
+        if (!validatedUser) {
             clearUser()
+            setIsValidating(false)
+            return
         }
+        setJwt(jwt)
+        syncLocalLearnProgress(validatedUser)
         setIsValidating(false)
     }
 
@@ -457,7 +459,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const clearUser = async (): Promise<void> => {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
-        if (user?.learnProgress !== undefined) clearLocalProgress()
+        if (user && user.learnProgress !== undefined) forgetLocalChaptersSavedIn(user.learnProgress)
 
         setUser(null)
         setJwt(null)
@@ -839,7 +841,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
-    const saveLearnProgress = async (progress: ReadChapterIdsByVolume, signedInUser: User): Promise<void> => {
+    const saveLearnProgress = async (progress: ReadChapterIdsByGuide, signedInUser: User): Promise<void> => {
         try {
             const token = await getJwt()
             const res = await fetch(`${SQUEAK_HOST}/api/profiles/${signedInUser.profile.id}`, {
@@ -851,11 +853,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 body: JSON.stringify({ data: { learnProgress: progress } }),
             })
             if (!res.ok) throw new Error(`Saving Learn progress failed with ${res.status}`)
-            setUser((currentUser) =>
-                currentUser
-                    ? { ...currentUser, learnProgress: mergeProgress(currentUser.learnProgress, progress) }
-                    : currentUser
-            )
+            const savedProgress: ReadChapterIdsByGuide | undefined = (await res.json())?.data?.attributes?.learnProgress
+            if (!savedProgress) return
+            setUser((currentUser) => (currentUser ? { ...currentUser, learnProgress: savedProgress } : currentUser))
         } catch (error) {
             console.error(error)
         }

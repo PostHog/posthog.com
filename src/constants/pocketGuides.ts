@@ -19,8 +19,10 @@ export interface LearnHubSubpage {
 }
 
 export interface PocketGuideVolume {
-    /** Topic directory: contents/learn/<id>/pocket-guide/. Saved reading progress keys on it, so never rename. */
+    /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
     id: string
+    /** Saved reading progress keys on this, so it must never change, even when `id` is renamed. */
+    progressKey: string
     title: string
     /** One line on the shelf. What the volume gets you, not what's in it. */
     description: string
@@ -58,6 +60,7 @@ export const FIRST_GUIDE_BOOK_ORDER = 2
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
         id: 'product-analytics',
+        progressKey: 'product-analytics',
         title: 'Product Analytics',
         description: 'Record what people do in Twig, connect their activity, and build reports you can explain.',
         token: 'blue',
@@ -70,6 +73,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'ai-observability',
+        progressKey: 'ai-observability',
         title: 'AI Observability',
         description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
         token: 'purple',
@@ -89,6 +93,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'data-stack',
+        progressKey: 'data-stack',
         title: 'Data Stack',
         description:
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
@@ -100,6 +105,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'session-replay',
+        progressKey: 'session-replay',
         title: 'Session Replay',
         description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
         token: 'yellow',
@@ -111,6 +117,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'feature-flags',
+        progressKey: 'feature-flags',
         title: 'Feature Flags',
         description: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.',
         token: 'seagreen',
@@ -122,6 +129,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'self-driving',
+        progressKey: 'self-driving',
         title: 'Self-driving',
         description: 'Scouts that watch your product and open a pull request when something breaks.',
         token: 'red',
@@ -131,6 +139,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'error-tracking',
+        progressKey: 'error-tracking',
         title: 'Error Tracking',
         description: 'Catch what breaks, measure who it hurts, and hand the fix to an agent.',
         token: 'orange',

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 
-import { pocketGuideDestination } from '../../../constants/pocketGuides'
+import { pocketGuideDestination, volumeById } from '../../../constants/pocketGuides'
 import { useUser } from '../../../hooks/useUser'
 import {
     READ_CHAPTERS_STORAGE_KEY,
@@ -20,11 +20,11 @@ type ChapterMove = {
     targetHref: string
 }
 
-function markChapterRead(volumeId: string, chapterId: string): void {
+function markChapterRead(progressKey: string, chapterId: string): void {
     const progress = readLocalProgress()
-    const chapterIds = readChapterIds(progress, volumeId)
+    const chapterIds = readChapterIds(progress, progressKey)
     if (chapterIds.includes(chapterId)) return
-    writeLocalProgress({ ...progress, [volumeId]: [...chapterIds, chapterId] })
+    writeLocalProgress({ ...progress, [progressKey]: [...chapterIds, chapterId] })
 }
 
 function markChapterReadOnMove({ volumeId, pages, basePath, currentSlug, targetHref }: ChapterMove): void {
@@ -32,12 +32,13 @@ function markChapterReadOnMove({ volumeId, pages, basePath, currentSlug, targetH
     const currentIndex = chapters.findIndex((page) => learnChapterSlug(page) === currentSlug)
     const currentChapterId = chapters[currentIndex]?.chapterId
     const nextChapter = currentIndex >= 0 ? chapters[currentIndex + 1] : undefined
-    if (!currentChapterId || !nextChapter) return
+    const progressKey = volumeById(volumeId)?.progressKey
+    if (!currentChapterId || !nextChapter || !progressKey) return
     const targetPath = normalizeUrl(pocketGuideDestination(targetHref.split(/[?#]/)[0]))
     const isNextChapter =
         targetPath === learnChapterPath(basePath, nextChapter) || targetPath === normalizeUrl(nextChapter.url)
     if (!isNextChapter) return
-    markChapterRead(volumeId, currentChapterId)
+    markChapterRead(progressKey, currentChapterId)
 }
 
 export function useMarkChapterReadOnMove(): (move: ChapterMove) => void {
@@ -70,12 +71,13 @@ const useSyncExternalStore = (
 export function useReadChapterIds(volumeId: string): Set<string> {
     const storedProgress = useSyncExternalStore(subscribeToProgressInOtherTabs, readStoredProgress, () => null)
     const profileProgress = useUser().user?.learnProgress
+    const progressKey = volumeById(volumeId)?.progressKey ?? ''
     return useMemo(
         () =>
             new Set([
-                ...readChapterIds(parseProgress(storedProgress), volumeId),
-                ...readChapterIds(profileProgress, volumeId),
+                ...readChapterIds(parseProgress(storedProgress), progressKey),
+                ...readChapterIds(profileProgress, progressKey),
             ]),
-        [storedProgress, profileProgress, volumeId]
+        [storedProgress, profileProgress, progressKey]
     )
 }

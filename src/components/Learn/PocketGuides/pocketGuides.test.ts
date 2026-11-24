@@ -120,6 +120,12 @@ function frontmatterValue(page: string, field: string): string | undefined {
 }
 
 describe('chapter ids', () => {
+    test('every guide has its own progressKey, so saved progress survives a guide rename', () => {
+        const progressKeys = POCKET_GUIDE_VOLUMES.map((volume) => volume.progressKey)
+        assert.ok(progressKeys.every((progressKey) => /^[a-z0-9-]+$/.test(progressKey)))
+        assert.equal(new Set(progressKeys).size, progressKeys.length)
+    })
+
     test('every listed chapter has a pocketGuideChapterId unique within its guide, so saved progress survives renames', () => {
         const problems = POCKET_GUIDE_VOLUMES.flatMap((volume) => {
             const chapterPages = listGuidePages(path.join(guidesDir, volume.id, 'pocket-guide')).filter(
