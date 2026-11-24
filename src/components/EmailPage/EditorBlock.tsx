@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Extension, Node, mergeAttributes, type Editor, type Range } from '@tiptap/core'
 import { EditorContent, useEditor } from '@tiptap/react'
@@ -8,7 +8,7 @@ import { Placeholder } from '@tiptap/extensions'
 import Image from '@tiptap/extension-image'
 import Mention from '@tiptap/extension-mention'
 import Suggestion, { type SuggestionOptions, type SuggestionProps } from '@tiptap/suggestion'
-import { IconEye, IconPalette, IconPeople } from '@posthog/icons'
+import { IconChevronDown, IconEye, IconPalette, IconPeople } from '@posthog/icons'
 
 const previewWidths = { Desktop: '100%', '600 px': 600, '375 px': 375, '320 px': 320 } as const
 import OSButton from 'components/OSButton'
@@ -155,6 +155,25 @@ function previewHtml(html: string): string {
 
 export function EditorBlock(): JSX.Element {
     const [audienceOpen, setAudienceOpen] = useState(false)
+    const audienceRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        if (!audienceOpen) return
+        const close = (e: Event) => {
+            if (
+                e instanceof KeyboardEvent
+                    ? e.key === 'Escape'
+                    : !audienceRef.current?.contains(e.target as globalThis.Node)
+            ) {
+                setAudienceOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', close)
+        document.addEventListener('keydown', close)
+        return () => {
+            document.removeEventListener('mousedown', close)
+            document.removeEventListener('keydown', close)
+        }
+    }, [audienceOpen])
     const [on, setOn] = useState([true, false, false])
     const [mode, setMode] = useState<'edit' | 'preview'>('edit')
     const [styleOpen, setStyleOpen] = useState(false)
@@ -236,10 +255,10 @@ export function EditorBlock(): JSX.Element {
     const canvasRect = canvasRef.current?.getBoundingClientRect()
 
     return (
-        <div className={`${blockClassName} !p-0 overflow-hidden`}>
+        <div className={`${blockClassName} !p-0`}>
             <style>{canvasCss}</style>
             {/* One toolbar, then the email as one card: the header fields on top and the body below. */}
-            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 border-b border-primary px-4 py-3">
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-t-2xl border-b border-primary px-4 py-3">
                 <div>
                     <OSButton
                         size="sm"
@@ -274,7 +293,7 @@ export function EditorBlock(): JSX.Element {
                     ref={canvasRef}
                     // The site opens search on "/" from a document listener, so keep the key inside the editor.
                     onKeyDown={(e) => e.key === '/' && e.nativeEvent.stopPropagation()}
-                    className="email-canvas relative min-w-0 flex-1 overflow-auto px-4 py-8 @xl/reader-content:px-10 @xl/reader-content:py-12"
+                    className="email-canvas relative min-w-0 flex-1 rounded-b-2xl px-4 py-8 @xl/reader-content:px-10 @xl/reader-content:py-12"
                     style={
                         {
                             background: pageBg,
@@ -315,23 +334,30 @@ export function EditorBlock(): JSX.Element {
                                 <span className="text-secondary">From</span>
                                 <span className="truncate">Hedgebox &lt;hello@hedgebox.net&gt;</span>
                             </div>
-                            <div className="grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-2 border-b border-primary py-3">
+                            <div
+                                ref={audienceRef}
+                                className="grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-2 border-b border-primary py-3"
+                            >
                                 <span className="text-secondary">To</span>
-                                <div className="flex min-w-0 flex-wrap items-center gap-2">
+                                <div className="flex min-w-0 items-center gap-2">
                                     <button
                                         type="button"
                                         aria-expanded={audienceOpen}
                                         onClick={() => setAudienceOpen(!audienceOpen)}
-                                        className="inline-flex max-w-full items-center gap-1.5 truncate rounded-full bg-accent px-3 py-1"
+                                        className="inline-flex min-w-0 items-center gap-1.5 rounded-full border border-primary bg-accent py-1 pl-3 pr-2 hover:border-secondary"
                                     >
                                         <IconPeople className="size-4 shrink-0" />
-                                        <span className="truncate">
-                                            {activeFilters.length
-                                                ? activeFilters.map((f) => f.label).join(' and ')
-                                                : 'Everyone'}
-                                        </span>
+                                        <span className="truncate">{activeFilters[0]?.label ?? 'Everyone'}</span>
+                                        {activeFilters.length > 1 && (
+                                            <span className="shrink-0 font-semibold">+{activeFilters.length - 1}</span>
+                                        )}
+                                        <IconChevronDown
+                                            className={`size-4 shrink-0 transition-transform ${
+                                                audienceOpen ? 'rotate-180' : ''
+                                            }`}
+                                        />
                                     </button>
-                                    <span className="text-secondary">
+                                    <span className="shrink-0 whitespace-nowrap text-secondary">
                                         <strong className="tabular-nums text-primary">
                                             {shownPeople.toLocaleString('en-US')}
                                         </strong>{' '}
@@ -489,7 +515,7 @@ export function EditorBlock(): JSX.Element {
                 </div>
 
                 {styleOpen && mode === 'edit' && (
-                    <div className="absolute inset-y-0 right-0 z-20 flex w-72 flex-col gap-2 overflow-y-auto border-l border-primary bg-white p-3 text-xs shadow-xl dark:bg-accent">
+                    <div className="absolute inset-y-0 right-0 z-20 flex w-72 flex-col gap-2 overflow-y-auto rounded-br-2xl border-l border-primary bg-white p-3 text-xs shadow-xl dark:bg-accent">
                         <h3 className="m-0 text-sm font-semibold">Page style</h3>
                         <StyleRow label="Background">
                             <ColorInput value={pageBg} onChange={setPageBg} />
