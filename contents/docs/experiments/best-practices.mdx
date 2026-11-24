@@ -127,3 +127,14 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 - [ ] Document your results and share with your team for feedback.
 - [ ] End experiment and deploy winning variant code. Delete code for losing variant.
 ```
+
+## 7. Write the decision rule before launch
+
+Once results come in, it's easy to read them in whatever way supports the outcome you were hoping for. Write the decision rule down before you launch, in the experiment's hypothesis, so the result decides and not the mood of the review. It should cover:
+
+1. The primary metric and the lift that would make you ship.
+2. The counter metrics and how much each is allowed to drop.
+3. The minimum run: whole weeks, so every day of the week counts equally, at least the longest conversion window of your metrics, and until the running time calculator shows the target is reached.
+4. What an inconclusive result means for the change (for example, ship it, drop it, or run it again with more traffic).
+5. Who makes the decision.
+6. The date you'll review the results.
