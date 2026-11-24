@@ -326,6 +326,35 @@ To delete events that match more specific criteria, such as events from a specif
 
 Support can request the deletion for you, or turn on event deletion in the PostHog app for your organization. Like other event deletions, it runs [asynchronously](#asynchronous-data-deletion).
 
+### Events that arrive after a deletion
+
+A deletion removes the events that are stored when it runs. It doesn't remove events that reach PostHog later, such as:
+
+- New events for the same distinct ID. If person profiles are on, these create a new person.
+- Events captured earlier but sent late, for example events queued on a mobile device while it was offline, or events you import.
+
+To delete all of a person's data, stop sending events for them first, then delete the person or request the event deletion. If more events arrive afterwards, delete them with a new request.
+
+### Removing properties from events
+
+PostHog deletes whole events. It can't remove or change a single property on an event that's already stored.
+
+To remove a property, you can:
+
+- **Delete the events** that contain it. See [deleting specific events](#deleting-specific-events).
+- **Delete the events and import a cleaned copy:** export the events, remove the property from your copy, delete the events in PostHog, then send your copy back with the [batch capture API](/docs/api/capture#batch-events). Keep each event's original `timestamp` and `distinct_id`, and set `historical_migration` to `true`.
+
+Imported events go through ingestion again, the same as new events:
+
+- **They count as new events for billing.** Usage is recorded when PostHog receives an event, not at the event's original timestamp.
+- **`$set` and `$set_once` properties are applied again.** They can overwrite the current properties of the person with older values. Remove `$set` and `$set_once` from your copy unless you want to apply them again. Events like `$identify` and `$create_alias` also link distinct IDs again.
+- **Person properties on the events are taken from the person as it is now**, not as it was when the events were first captured.
+- **Your data pipelines run on them again.** [Transformations](/docs/data-pipelines/transformations) change them again, [destinations](/docs/data-pipelines/destinations) can send them to other tools again, and [batch exports](/docs/data-pipelines/batch-exports) can export them again. Pause or filter these if you don't want the events processed twice.
+
+Person properties copied onto events stay on those events after you change or remove them on the person profile. To remove them from events, use one of the options above.
+
+To stop collecting a property, remove it before it's stored. See [processing data before storage](#processing-data-before-storage).
+
 ### What deleting a person doesn't remove
 
 Deleting a person, along with their events and recordings, doesn't remove every copy of their data:
