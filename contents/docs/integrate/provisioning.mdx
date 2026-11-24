@@ -75,7 +75,19 @@ Most of the provisioning API is self-serve. The rest needs PostHog to turn it on
 
 To ask for any of these, open a [support request](https://app.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app.
 
-Verification changes what your users see, not what your app can do. A verified app shows a Verified badge in your users' organization settings and skips the [first-login question](#what-the-user-gets) about keeping it connected.
+### Verification and the provisioning review are separate
+
+PostHog checks a partner app in two separate ways, and you ask for each one separately. Passing one doesn't give you the other.
+
+|                       | Provisioning review                                                                                     | Verification                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| What it decides       | Whether your app can create accounts and provision resources                                            | Whether people see your app as verified                                                                                                                             |
+| Without it            | Account and provisioning requests fail                                                                  | People see an **Unverified application** warning when they connect your app, and the [first time they log in](#what-the-user-gets) they're asked whether to keep it connected |
+| How it starts         | Automatically, when you [register](#register-your-app) a metadata document that declares provisioning | You click **Request verification** on your app's page in PostHog, which opens a support request                                                                    |
+| Who decides           | An automated [review](#how-posthog-reviews-your-app), then PostHog staff when it isn't sure            | PostHog staff                                                                                                                                                       |
+| Where you follow it   | Your app's page and email, see [follow your review](#follow-your-review)                                 | The support request. Your app's page shows **Verified** once it's done                                                                                             |
+
+Verification changes what your users see, not what your app can do.
 
 ### Pay for your users' usage
 
@@ -183,7 +195,7 @@ To check the status, call the [registration endpoint](#register-your-app) again.
 | `PostHog needs changes or more information before this client can provision. ...` | PostHog staff sent your app back. Read their message and [answer it](#follow-your-review). |
 | `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.` | PostHog staff blocked provisioning for your app. Neither registering again nor asking for another review lifts the block. |
 
-Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
+Once the review accepts your app, the `provisioning_enabled` check reports `Active`. An accepted app isn't verified by the review. To remove the unverified warning, ask for [verification](#verification-and-the-provisioning-review-are-separate) separately.
 
 Declining and blocking both sign out every connection your app had. A declined app can ask for another review once you've changed it. Only PostHog staff block an app, for example after reports of abuse, and a blocked app can't ask again.
 
@@ -205,9 +217,9 @@ PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP
 Link your app to a PostHog organization with a [verification token](#link-your-partner-app-to-a-posthog-organization) to follow and answer the review from PostHog. Without a linked organization, PostHog has nobody to tell about the decision, and your app can't answer it.
 
 - The organization's admins and owners get an email when the review accepts your app, declines it, or hands it to PostHog staff, and again whenever staff change the decision. Staff can also ask for changes or more information. The email carries any message staff left for you.
-- In PostHog, go to **Organization settings → OAuth applications** and open your app. Its page shows the provisioning status, which step the review is at, and its history: each decision, every message from PostHog staff, and the notes your organization sent. It also shows what PostHog read from your client metadata document, which is what staff review, and lets you check a note before you send it.
-- When your app is declined, staff asked for changes, or your app waits for staff, the same row has a **Note to PostHog staff** box. Say what your app does, why it creates accounts or provisions resources, and what you changed. Sending the note puts your app back in front of PostHog staff.
-- A blocked app can't send a note. Its row has **Contact support about this review** instead, which opens a support request with your app's details filled in, on every plan.
+- In PostHog, go to **Organization settings → OAuth applications** and open your app. Its page shows the provisioning status, which step the review is at, and its history: each decision, every message from PostHog staff, and the notes your organization sent. It also shows how PostHog treats your app, which is what staff review, and lets you check a note before you send it. Verification has its own section on the same page.
+- When your app is declined, staff asked for changes, or your app waits for staff, the page has a **Note to PostHog staff** box. Say what your app does, why it creates accounts or provisions resources, and what you changed. Sending the note puts your app back in front of PostHog staff.
+- A blocked app can't send a note. Its page has **Contact support about this review** instead, which opens a support request with your app's details filled in, on every plan.
 - An agent connected to the [PostHog MCP server](/docs/model-context-protocol) can read the same status with the `oauth-applications-list` tool.
 
 Only organization admins and owners see this page. An app that isn't linked to an organization gets no email, so call the [registration endpoint](#register-your-app) to check its status.
@@ -833,7 +845,7 @@ When you provision a new account, the user receives:
 
 Your integration gets back the project token and host, so you can start sending events the moment the API call returns.
 
-If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, link it to an organization, go to **Organization settings → OAuth applications**, open your app, and click **Request verification**. That opens a support request with a template to fill in, on every plan.
+If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, link it to an organization, go to **Organization settings → OAuth applications**, open your app, and click **Request verification**. That opens a support request with a template to fill in, on every plan. Verification is [separate from the provisioning review](#verification-and-the-provisioning-review-are-separate).
 
 ## Error handling
 
