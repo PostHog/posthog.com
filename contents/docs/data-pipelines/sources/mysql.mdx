@@ -128,6 +128,7 @@ PostHog checks these when you click **Check database prerequisites**:
   binlog_row_image = FULL
   binlog_row_metadata = FULL
   binlog_transaction_compression = OFF
+  binlog_row_value_options = ''
   ```
 
   On Amazon RDS and Aurora, set these in the DB parameter group, and turn on automated backups, which turns on binary logging.
@@ -148,6 +149,7 @@ PostHog checks these when you click **Check database prerequisites**:
   `PROCESS` lets PostHog wait for open transactions before it starts a snapshot, so no change falls between the snapshot and the binary log.
 
 - **A primary key on every table** you sync with CDC.
+- **No XA transactions** on the synced databases. CDC stops with an error when it reads one.
 
 ### Enabling CDC
 
