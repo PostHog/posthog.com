@@ -539,26 +539,26 @@ export default function EmailPage(): JSX.Element {
                                 </>
                             }
                         >
-                            Every email goes out through Amazon SES, from a sending account in the US and one in the EU.
-                            Here's the last 30 days, across every project.
+                            Password resets, receipts, and launch emails for teams of every size, sent from the US or
+                            the EU.
                         </Intro>
                         {/* Last 30 days to Nov 24, 2026, US and EU, from the Workflows Grafana dashboards. Refresh before shipping. */}
                         <div className="grid gap-4 @xl/reader-content:grid-cols-3">
                             {[
                                 {
                                     value: '10M+',
-                                    label: 'emails sent',
-                                    note: 'in the last 30 days, up to 885k in a single day',
+                                    label: 'emails a month',
+                                    note: 'sent through PostHog in the last 30 days',
                                 },
                                 {
                                     value: '99.9%+',
-                                    label: 'sent without an error',
-                                    note: 'of every email requested, US and EU',
+                                    label: 'of sends go out',
+                                    note: 'accepted for delivery, in the US and the EU',
                                 },
                                 {
                                     value: '0.2s',
                                     label: 'median time to send',
-                                    note: 'from the moment an email is queued to Amazon SES',
+                                    note: 'from your send call to the email leaving PostHog',
                                 },
                             ].map((stat) => (
                                 <div
@@ -619,6 +619,9 @@ export default function EmailPage(): JSX.Element {
                                 </a>
                             ))}
                         </div>
+                        <Link to="/docs/workflows" className="not-prose text-lg font-semibold text-red">
+                            And so much more &rarr;
+                        </Link>
                     </section>
 
                     <section
