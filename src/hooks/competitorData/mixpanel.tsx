@@ -146,7 +146,7 @@ export const mixpanel = {
                 canvas_recording: 'Beta',
                 chat_with_recordings: true,
                 clickmaps: true,
-                conditional_recording: false,
+                conditional_recording: 'Add-on',
                 event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
@@ -184,13 +184,13 @@ export const mixpanel = {
                     heatmaps: true,
                     console_logs: true,
                     performance_monitoring: false,
-                    network_monitor: false,
+                    network_monitor: true,
                     dom_explorer: false,
                 },
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    ai_summaries: true,
                 },
             },
         },
@@ -281,7 +281,7 @@ export const mixpanel = {
                 features: {
                     api_access: true,
                     feature_flag_foundation: true,
-                    json_payloads: false,
+                    json_payloads: true,
                     multivariate_testing: true,
                 },
             },
@@ -414,7 +414,7 @@ export const mixpanel = {
     platform: {
         deployment: {
             eu_hosting: true,
-            managed_reverse_proxy: false,
+            managed_reverse_proxy: 'Enterprise',
             open_source: false,
             self_host: false,
         },
