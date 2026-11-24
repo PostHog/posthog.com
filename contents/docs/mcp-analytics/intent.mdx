@@ -86,7 +86,7 @@ The Go SDK uses a fixed prompt.
 
 ### Disabling the injected argument
 
-Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, `posthogmcpsdk.WithContextParameter(false)` in Go, or `.context(false)` on `McpOptionsBuilder` in Rust. Use an intent fallback if you still want to capture intent. In Go, with `WithContextParameter(false)`, only `WithIntentFallback` supplies intent. The SDK doesn't read a tool's own `context` argument. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
+Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, `posthogmcpsdk.WithContextParameter(false)` in Go, or `.context(false)` on `McpOptionsBuilder` in Rust. Use an intent fallback if you still want to capture intent. In Go, with `WithContextParameter(false)`, only `WithIntentFallback` supplies intent. The SDK doesn't read a tool's own `context` argument. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes. Submitting your server to the ChatGPT or Claude directory? See [Listing your MCP server in ChatGPT and Claude](/docs/mcp-analytics/directory-review).
 
 ## The intent fallback callback
 
