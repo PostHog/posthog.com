@@ -179,14 +179,28 @@ config :posthog,
     },
 ]
 
-const SendCode = () => {
-    const [current, setCurrent] = useState<{ label?: string; language: string; code: string }>(sendSnippets[0])
+// The send call alone, without the client setup, for the page hero.
+const sendCalls = sendSnippets.map((s) => ({
+    ...s,
+    code: (s.code.split('\n\n').pop() as string).replace('const { data, error } = ', ''),
+}))
+
+const SendCode = ({ short = false }: { short?: boolean }) => {
+    const snippets = short ? sendCalls : sendSnippets
+    const [current, setCurrent] = useState<{ label?: string; language: string; code: string }>(snippets[0])
     return (
-        <CodeBlock currentLanguage={current} onChange={setCurrent} selector="tabs" showAskAI={false}>
-            {sendSnippets}
+        <CodeBlock
+            currentLanguage={current}
+            onChange={setCurrent}
+            selector={short ? 'dropdown' : 'tabs'}
+            showAskAI={false}
+        >
+            {snippets}
         </CodeBlock>
     )
 }
+
+export const HeroSendCode = (): JSX.Element => <SendCode short />
 
 export const transactional: CarouselSlide[] = [
     {

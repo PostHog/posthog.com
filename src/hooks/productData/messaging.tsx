@@ -16,12 +16,11 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { transactional } from './messaging/transactional'
+import { transactional, HeroSendCode } from './messaging/transactional'
 import { broadcasts } from './messaging/broadcasts'
 import { automations } from './messaging/automation'
 import { standout } from './messaging/standout'
 import { getTool } from '../../data/tools'
-import { SingleCodeBlock } from 'components/CodeBlock'
 import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const messaging = {
@@ -170,25 +169,14 @@ export const messaging = {
     overview: {
         title: 'Send email and push from the place your user data already lives',
         description: 'Send a password reset from your backend, then see what the person did next.',
+        media: <HeroSendCode />,
         eli5: (
             <>
                 <p>
                     Messaging sends email and push to your users, using the data you already have in PostHog. Send a
-                    password reset from your backend with one call:
-                </p>
-                <SingleCodeBlock language="js" showAskAI={false}>
-                    {`await posthog.emails.send({
-    to: "jane@example.com",
-    from: "Hedgebox <security@example.com>",
-    subject: "Reset your password",
-    html: "<p>Click the link to reset your password.</p>",
-    templateKey: "password-reset",
-})`}
-                </SingleCodeBlock>
-                <p>
-                    Or send a launch email to a cohort, or build an automation from any event. Every send, open, and
-                    click is an event on the person, so you see what they did next in your funnels and replays. The
-                    first 10,000 emails each month are free.
+                    password reset from your backend, send a launch email to a cohort, or build an automation from any
+                    event. Every send, open, and click is an event on the person, so you see what they did next in your
+                    funnels and replays. The first 10,000 emails each month are free.
                 </p>
             </>
         ),
