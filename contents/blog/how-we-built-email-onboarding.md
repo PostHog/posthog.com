@@ -196,7 +196,7 @@ Luckily, [I didn't have to look far for an alternative](/workflows).
 - **Click-through-rate:** 1.4%
 - **Unsubscribe rate:** 1.1%
 
-## Onboarding 10.0: The current one
+## Onboarding 10.0: The upcoming one
 
 [Onboarding 10.0](https://github.com/PostHog/marketing/issues/441) is the first flow I built entirely in [PostHog Workflows](/workflows), and the first one I built mostly by talking to an agent.
 
@@ -204,7 +204,7 @@ Before I started, I [asked three lifecycle marketers to roast our lifecycle mark
 
 9.0 pointed people at our agentic tools, but it was still a product tour with extra steps. For 10.0, I picked one north star: get new users to set up [the MCP](/mcp) or use [PostHog AI](/ai). Everything else in the flow exists to get them there, or to make their org a bit healthier along the way.
 
-So, instead of a forest of product paths, every new signup now goes down one trunk. It only branches on a handful of things we actually know about them:
+So, instead of a forest of product paths, every new signup will go down one trunk. It only branches on a handful of things we actually know about them:
 
 - **Data:** Has their org started sending events? If not, we help with setup before anything else.
 - **AI use:** Have they used PostHog AI, the MCP, or the Slack app? If so, they skip the emails that nudge them towards it and move through the rest of the flow about three days early.
@@ -235,7 +235,7 @@ In PostHog, the flow can use anything the product already knows: events, person 
 
 The same goes for measurement. Conversions, opens, and clicks sit in the same place as product usage, so I can see whether someone who got the MCP email went on to use the MCP, not just whether they clicked a link.
 
-At the time of writing, 10.0 is still too new to judge, so there's no performance data here yet. I'll add it once there is.
+At the time of writing, 10.0 hasn't launched yet, so there's no performance data here. I'll add it once there is.
 
 ## What we learned
 
