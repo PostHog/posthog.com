@@ -21,6 +21,7 @@ import { broadcasts } from './messaging/broadcasts'
 import { automations } from './messaging/automation'
 import { standout } from './messaging/standout'
 import { getTool } from '../../data/tools'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const messaging = {
@@ -64,28 +65,28 @@ export const messaging = {
             icon: <IconInfo className="size-4" />,
         },
         {
-            slug: 'use-cases',
-            name: 'Who is it for?',
-            hideFromNav: true,
-            group: 'divided',
-            icon: <IconMagic className="size-4" />,
-        },
-        {
-            slug: 'email-as-code',
-            name: 'Email as code',
+            slug: 'transactional-email',
+            name: 'Transactional email',
             group: 'divided',
             template: 'key-features',
             icon: <IconCode className="size-4" />,
             props: {
                 slides: transactional,
-                heading: 'Email as code',
+                heading: 'Transactional email',
                 intro: (
                     <p>
-                        Write password resets, sign-in codes, receipts, and invites in your codebase, and send them from
-                        your backend with one call on the PostHog client.
+                        Send password resets, sign-in codes, receipts, and invites from your backend. Write them as
+                        code, or design them in the PostHog editor.
                     </p>
                 ),
             },
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
         },
         {
             slug: 'broadcasts',
@@ -167,18 +168,27 @@ export const messaging = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Email people based on what they do in your product',
-        description: '"Email new sign-ups who haven\'t created a project after two days"',
+        title: 'Send email and push from the place your user data already lives',
+        description: 'Send a password reset from your backend, then see what the person did next.',
         eli5: (
             <>
                 <p>
-                    Messaging sends email, SMS, and push notifications to your users, using the events and cohorts you
-                    have in PostHog. Write a password reset as code and send it from your backend, send a launch email
-                    to a cohort, or build a drip campaign or a larger automation that also posts to Slack or calls a
-                    webhook. Every send, open, and click is an event on the person, so you check if an email worked in
-                    the same funnels and replays as everything else. The first 10,000 emails each month are free. After
-                    that, 1,000 transactional emails cost $0.40 and 1,000 marketing emails cost $3, with lower rates at
-                    higher volume.
+                    Messaging sends email and push to your users, using the data you already have in PostHog. Send a
+                    password reset from your backend with one call:
+                </p>
+                <SingleCodeBlock language="js" showAskAI={false}>
+                    {`await posthog.emails.send({
+    to: "jane@example.com",
+    from: "Hedgebox <security@example.com>",
+    subject: "Reset your password",
+    html: "<p>Click the link to reset your password.</p>",
+    templateKey: "password-reset",
+})`}
+                </SingleCodeBlock>
+                <p>
+                    Or send a launch email to a cohort, or build an automation from any event. Every send, open, and
+                    click is an event on the person, so you see what they did next in your funnels and replays. The
+                    first 10,000 emails each month are free.
                 </p>
             </>
         ),
@@ -195,9 +205,9 @@ export const messaging = {
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/broadcasts_list_light_50450977b5.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/broadcasts_list_dark_c3d1d672e8.png',
-            alt: 'Broadcasts in PostHog with sent, delivered, opened, clicked, and converted counts',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_sends_light_930879a223.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_sends_dark_4adc54f69d.png',
+            alt: 'Transactional sends in PostHog, with the status, opens, and clicks of each email',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
         },
@@ -443,8 +453,8 @@ export const messaging = {
         },
         // Perches on the bottom-right of the Overview screenshot.
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-            alt: 'the automator hedgehog',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png',
+            alt: 'A hedgehog posting a letter',
         },
     },
     videos: {

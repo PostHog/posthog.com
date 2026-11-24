@@ -32,7 +32,7 @@ export const broadcasts: CarouselSlide[] = [
         label: 'Broadcasts',
         icon: <IconMegaphone className="size-5" />,
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Send to an audience now, later, or every week',
         description: (
             <>
@@ -66,7 +66,7 @@ export const broadcasts: CarouselSlide[] = [
         label: 'Email editor',
         icon: <IconPencil className="size-5" />,
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Write emails with templates and merge tags',
         description: (
             <>
@@ -109,7 +109,7 @@ export const broadcasts: CarouselSlide[] = [
         label: 'Opt-outs',
         icon: <IconToggle className="size-5" />,
         progressBar: 'bg-red',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Let people opt out of one category at a time',
         description: (
             <>
@@ -158,7 +158,7 @@ export const broadcasts: CarouselSlide[] = [
         label: 'Results',
         icon: <IconGraph className="size-5" />,
         progressBar: 'bg-green',
-        layout: 'stack',
+        layout: 'float',
         heading: 'See who converted after a broadcast',
         description: (
             <>

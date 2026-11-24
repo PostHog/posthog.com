@@ -25,7 +25,7 @@ export const standout: CarouselSlide[] = [
         label: 'What happened next',
         icon: <IconRewindPlay className="size-5" />,
         progressBar: 'bg-yellow',
-        layout: 'stack',
+        layout: 'float',
         heading: 'See what each person did around your email',
         description: (
             <>
@@ -63,7 +63,7 @@ export const standout: CarouselSlide[] = [
         label: 'Self-driving',
         icon: <IconMagic className="size-5" />,
         progressBar: 'bg-purple',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Let PostHog suggest how to improve each email',
         description: (
             <>
@@ -100,7 +100,7 @@ export const standout: CarouselSlide[] = [
         label: 'Send from anywhere',
         icon: <IconBolt className="size-5" />,
         progressBar: 'bg-green',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Send the email when the moment happens',
         description: (
             <>

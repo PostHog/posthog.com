@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconCode, IconLaptop, IconShieldLock } from '@posthog/icons'
+import { IconCode, IconLaptop } from '@posthog/icons'
 import { CodeBlock } from 'components/CodeBlock'
 import { InlineCode, LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -200,36 +200,32 @@ export const transactional: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Keep your emails in your repo as HTML or React Email components, and review them like the rest of
-                    your code. Then call send on the PostHog client. Node.js, Python, Go, Ruby, PHP, .NET, Rust, and
-                    Elixir all support it, and the REST API covers everything else.
+                    Keep your emails in your repo, and send them with one call on the PostHog client. Eight server SDKs
+                    support it, and the REST API covers everything else.
                 </p>
                 <SendCode />
                 {list([
                     {
-                        label: 'React Email built in',
+                        label: 'HTML or React Email',
                         description: (
                             <>
-                                Pass a React Email component to the Node.js SDK as <InlineCode>react</InlineCode>, and
-                                it renders the HTML and plain text. Any other renderer works too: send its{' '}
-                                <InlineCode>html</InlineCode>.
+                                Send HTML from any renderer, or pass a React Email component to the Node.js SDK as{' '}
+                                <InlineCode>react</InlineCode>.
                             </>
                         ),
                     },
                     {
-                        label: 'Write it with your agent',
-                        description:
-                            'Ask Claude Code or Cursor to "send password resets from our Node backend with PostHog". The sending-transactional-emails skill writes the email and the send call.',
+                        label: 'Status of every send',
+                        description: 'Each send returns a message ID. Read its status from your code for 30 days.',
                     },
                     {
-                        label: 'Scoped key',
-                        description:
-                            'A project secret API key with the Workflow scope can send email and read statuses, and nothing else.',
+                        label: 'Safe retries',
+                        description: 'An idempotency key stops a retry from sending the same email twice.',
                     },
                     {
-                        label: 'Send before you verify',
+                        label: 'Sensitive sends',
                         description:
-                            'The sandbox sender delivers to members of your organization before your domain is verified, so the first test takes minutes.',
+                            'For sign-in codes and reset links, PostHog keeps no copy of the content and skips link tracking.',
                     },
                 ])}
             </>
@@ -241,32 +237,26 @@ export const transactional: CarouselSlide[] = [
         label: 'Editor',
         icon: <IconLaptop className="size-5" />,
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Or design templates in the PostHog editor',
         description: (
             <>
                 <p>
-                    When someone outside engineering owns the copy, write the email in PostHog instead. Your code sends
-                    it by its ID, and each email gets its own page where you publish versions and see every send.
+                    When someone outside engineering owns the copy, they write the email in PostHog. Your code sends it
+                    by its ID.
                 </p>
                 {list([
                     {
-                        label: 'Design',
-                        description:
-                            'Write the subject and body in the editor, add the variables your code sends, and choose a verified sender. Edits save as a draft until you publish.',
+                        label: 'Versions',
+                        description: 'Each publish adds a version. Roll back to any of them.',
                     },
                     {
                         label: 'Metrics',
-                        description:
-                            'Delivered, bounced, spam, open, and click rates per email and per sending domain, for the last hour to the last 30 days.',
+                        description: 'Delivered, bounced, open, and click rates for each email.',
                     },
                     {
                         label: 'Sends',
-                        description: "Every send with its status and log messages, and on the recipient's person.",
-                    },
-                    {
-                        label: 'Versions',
-                        description: 'Each publish adds a version. Roll back to any of them.',
+                        description: "Every send with its status, and on the recipient's person.",
                     },
                 ])}
             </>
@@ -275,50 +265,6 @@ export const transactional: CarouselSlide[] = [
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_design_light_f68b361139.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_design_dark_5ca3d36e60.png',
             alt: 'A transactional email template in the PostHog email editor',
-        },
-    },
-    {
-        ...slideStyle,
-        slug: 'reliable-sends',
-        label: 'Reliable sends',
-        icon: <IconShieldLock className="size-5" />,
-        progressBar: 'bg-red',
-        layout: 'stack',
-        heading: 'Know what happened to every email',
-        description: (
-            <>
-                <p>
-                    Each send returns a message ID. Read its status from your code, or find it on the email's Sends tab
-                    with its opens and clicks.
-                </p>
-                {list([
-                    {
-                        label: 'Status by message ID',
-                        description:
-                            'Queued, sent, delivered, bounced, complained, or failed with a reason, for 30 days after the send.',
-                    },
-                    {
-                        label: 'Safe retries',
-                        description:
-                            'Send an idempotency key, and a retry after a timeout never sends the same email twice.',
-                    },
-                    {
-                        label: 'Suppression built in',
-                        description:
-                            'An address that hard bounces or marks you as spam goes on the suppression list, and later sends to it stop.',
-                    },
-                    {
-                        label: 'Sensitive sends',
-                        description:
-                            'For sign-in codes and reset links, PostHog keeps no copy of the content and skips link tracking.',
-                    },
-                ])}
-            </>
-        ),
-        image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_sends_light_930879a223.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_transactional_sends_dark_4adc54f69d.png',
-            alt: 'The Sends tab of a transactional email, with the status and opens and clicks of each send',
         },
     },
 ]

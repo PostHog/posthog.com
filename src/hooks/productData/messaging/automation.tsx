@@ -25,7 +25,7 @@ export const automations: CarouselSlide[] = [
         label: 'Drip campaigns',
         icon: <IconDecisionTree className="size-5" />,
         progressBar: 'bg-teal',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Build a drip campaign from what people do',
         description: (
             <>
@@ -64,7 +64,7 @@ export const automations: CarouselSlide[] = [
         label: 'Complex automations',
         icon: <IconSparkles className="size-5" />,
         progressBar: 'bg-purple',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Build automations as complex as you need',
         description: (
             <>
@@ -108,7 +108,7 @@ export const automations: CarouselSlide[] = [
         label: 'Any destination',
         icon: <IconSend className="size-5" />,
         progressBar: 'bg-yellow',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Send to any destination from any step',
         description: (
             <>
@@ -141,7 +141,6 @@ export const automations: CarouselSlide[] = [
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_destinations_picker_light_663523e7cc.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_destinations_picker_dark_9bb8f235ea.png',
             alt: 'The step picker with email, SMS, Slack, webhook, push, and more destinations',
-            maxWidth: 'max-w-lg',
         },
     },
 ]
