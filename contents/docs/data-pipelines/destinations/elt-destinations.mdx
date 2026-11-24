@@ -46,3 +46,20 @@ If you want your Stripe data in Snowflake, that's a destination. If you want you
 ## Checking what lands
 
 The [ELT page](https://app.posthog.com/elt) shows rows written per destination over the window you pick, so a destination that stopped receiving rows shows up as a flat line. See [monitoring your syncs](/docs/data-pipelines/destinations/monitoring).
+
+## S3 key prefix template variables
+
+S3 destinations write files, not database tables. The **Prefix** field controls where files land in your bucket.
+
+The prefix supports template variables that are filled when each sync runs:
+
+- `{year}`, `{month}`, `{day}`, `{hour}`, `{minute}`, `{second}` – date and time of the sync job start, in UTC
+- `{table}` – the name of the table being synced (e.g. `charges`)
+
+For example, `exports/{year}/{month}/{day}/{table}/` produces prefixes like `exports/2025/01/15/charges/`.
+
+When the prefix includes `{table}`, PostHog doesn't add a separate table folder. Without `{table}`, each table still gets its own subfolder below the prefix.
+
+PostHog rejects a prefix that contains braces outside these seven variable names. The prefix can't be changed after creation, so confirm it before saving.
+
+S3 destinations share connections and file format options with [S3 batch exports](/docs/data-pipelines/batch-exports/s3). See that page for details on file formats, compression, and authentication.
