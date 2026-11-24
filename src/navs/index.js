@@ -7964,6 +7964,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'ChatGPT & Claude directories',
+                    url: '/docs/mcp-analytics/directory-review',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                },
+                {
                     name: 'Resources',
                 },
                 {

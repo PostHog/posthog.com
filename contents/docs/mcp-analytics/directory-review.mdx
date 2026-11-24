@@ -1,0 +1,124 @@
+---
+title: Submitting to the ChatGPT and Claude directories
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+The ChatGPT app directory and the Claude Connectors Directory review every tool your MCP server advertises. By default, the MCP Analytics SDK adds analytics arguments to your tools, and reviewers on both platforms have flagged them. This page lists what reviewers flag and the configuration to use before you submit.
+
+We're working with OpenAI and Anthropic to make the SDK defaults pass review. As each issue is resolved, we change the default and remove it from this page.
+
+<CalloutBox icon="IconInfo" title="Last updated November 23, 2026" type="fyi">
+
+This page describes what reviewers have flagged so far. It can't guarantee that your submission passes. Each platform's own policy decides: the [OpenAI app developer guidelines](https://developers.openai.com/apps-sdk/app-developer-guidelines/) and the [Claude Connectors Directory review criteria](https://claude.com/docs/connectors/building/review-criteria).
+
+</CalloutBox>
+
+## What reviewers flag
+
+| What the SDK adds | Why reviewers flag it | Status |
+| --- | --- | --- |
+| A required `context` argument on every tool | Its purpose is analytics, not the tool's function. Reviewers on both platforms have asked developers to remove it. | Turn off before you submit |
+| An `llm_model` argument on every tool | It isn't related to the tool's function, and the agent can't always report its model accurately. | Turn off before you submit |
+| A `conversation_id` argument, and a `{"conversation_id": ...}` block appended to tool results | OpenAI's guidelines don't allow session IDs and other internal identifiers in tool responses. | Turn off before you submit |
+| The `get_more_tools` and `send_feedback` tools | They are tools the user didn't ask for. | Off by default. Leave them off. |
+| Tool arguments, results, and error messages sent to PostHog | The model doesn't see them, but reviewers ask whether you need the data and whether you disclose it. | Your decision. See [drop tool data](#optional-drop-tool-arguments-and-results). |
+
+## Turn off the arguments the model sees
+
+Set these options before you submit. Your server then advertises the same tool schemas and returns the same tool results as it does without the SDK. The SDK still sends an event for every tool call.
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, {
+  context: false,
+  captureModel: false,
+  enableConversationId: false,
+})
+```
+
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsOptions
+
+instrument(
+    server,
+    posthog,
+    MCPAnalyticsOptions(
+        context=False,
+        capture_model=False,
+        enable_conversation_id=False,
+    ),
+)
+```
+
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithContextParameter(false),
+	posthogmcpsdk.WithCaptureModel(false),
+	posthogmcpsdk.WithConversationID(false),
+)
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  context: false,
+  capture_model: false,
+  enable_conversation_id: false
+)
+```
+
+```rust file=Rust
+let options = McpOptionsBuilder::default()
+    .context(false)
+    .capture_model(false)
+    .conversation_id(false)
+    .build()?;
+let server = McpAnalytics::new(posthog.clone(), options).instrument(MyServer);
+```
+
+</MultiLanguage>
+
+Don't turn on the virtual tools. Leave out `reportMissing` and `collectFeedback` in TypeScript, `report_missing` and `collect_feedback` in Python and Ruby, `WithMissingCapabilityTool` in Go, and `missing_capability_tool` and `feedback_tool` in Rust.
+
+If you use a [custom dispatcher](/docs/mcp-analytics/installation/typescript#custom-dispatchers) (`PostHogMCP`) instead of `instrument()`, pass `captureModel: false` and `enableConversationId: false` to the constructor, and `{ context: false }` to `prepareToolList`. In Python, pass `capture_model=False` and `enable_conversation_id=False` to the constructor, and `context=False` to `prepare_tool_list`. In Ruby, pass `capture_model: false` to `PostHog::MCP::Client.new` and `context: false` to `prepare_tool_list`.
+
+If you submit to one directory and also serve other clients from a separate deployment, you can keep the defaults on that deployment.
+
+### What you keep and what you lose
+
+With these options off, PostHog still records:
+
+- The tool name, the outcome, the latency, and the error type of every call.
+- The client and harness, such as ChatGPT or Claude.
+- Sessions, wherever the transport has a session ID. The TypeScript SDK (1.7.0 and later) also groups ChatGPT calls by ChatGPT's own conversation ID.
+- Users, through your [identify callback](/docs/mcp-analytics/identifying-users).
+
+You lose:
+
+- Agent intent (`$mcp_intent`). To keep some intent, derive it from the tool name and arguments with an [intent fallback](/docs/mcp-analytics/intent#the-intent-fallback-callback). The fallback runs on your server, so the model sees nothing.
+- The calling model (`$mcp_llm_model`) for every client. Turning off model capture also stops the SDK from reading the model that Codex sends in request metadata.
+- Sessions on stateless servers that have no transport session ID. Each call is its own session there.
+
+## Optional: drop tool arguments and results
+
+The model never sees what the SDK sends to PostHog. Reviewers still ask whether you collect tool data you don't need. To send only usage data, remove `$mcp_parameters`, `$mcp_response`, and `$mcp_error_message` from each event:
+
+- In TypeScript, Python, and Ruby, use the [before-send hook](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
+- In Go, pass `posthogmcpsdk.WithCaptureParameters(false)` and `posthogmcpsdk.WithCaptureResponses(false)` to `Instrument`, and `posthogmcp.WithCaptureErrorMessages(false)` to `posthogmcp.New`.
+- In Rust, call `.capture_parameters(false)` and `.capture_responses(false)` on `McpOptionsBuilder`, and remove `$mcp_error_message` in its `before_send` hook.
+
+Failed calls also send an `$exception` event with the error message. To stop it, [turn off exception events](/docs/mcp-analytics/privacy#turn-off-exception-events).
+
+## Disclose analytics in your privacy policy
+
+Both platforms expect you to tell users what your server collects. Add a sentence like this one to your privacy policy, and edit it to match your configuration:
+
+> We use PostHog to record how AI clients use this server: which tool was called, whether it succeeded, how long it took, and which client called it.
+
+If you keep tool arguments and results, say so too.
+
+## Check your tools after each SDK upgrade
+
+An SDK upgrade can change the schemas your server advertises. OpenAI reviews changed tools again, and Anthropic asks you to report material changes to tool descriptions. After you upgrade, compare your server's `tools/list` output with the version you submitted.
