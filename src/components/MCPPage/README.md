@@ -50,6 +50,7 @@ To keep the brief true:
   - Each answer must agree with the results above it. Keep each result short, so each call fits on one line.
   - Keep at least one run that writes. Now the signup run turns off a flag, and the dashboard run creates a dashboard and an insight.
 - **Space:** in two columns, the prompts are on the left and the terminal (`h-80`) is on the right. They fit in one window together, and a click never scrolls the page. Think about this before you add a prompt or make the terminal taller. In one column, the terminal is below all the prompts, so a click on a prompt scrolls the terminal into view.
+- **On `/messaging`:** the page passes its own `flows`, `placement` and `cwd`, and `compactOnNarrow`. In one column, that puts the terminal first and shows the prompts as a row of chips with each flow's `title` under it.
 - **Analytics:** a click sends `ai_prompt_selected` with `placement: 'mcp_page'` and `trigger: 'list'` or `'terminal'`. `/ai` sends the same event with `placement: 'ai_page'`. Auto-play sends no event.
 - **The terminal** is the homepage `ClaudeTerminal` in `src/components/Home/DataStory/Query/AgentWindow.tsx`. It uses `defineTrace` from `Query/trace.tsx`, so a change to those files can change the homepage too.
   - `/mcp` makes it smaller (`className`, `lightSize`), sets `cwd` to `~/hogflix`, and gives it a `suggestion`. Without these props, it shows as it does on the homepage.

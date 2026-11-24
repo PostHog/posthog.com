@@ -1,0 +1,893 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import {
+    IconBolt,
+    IconCheck,
+    IconCheckCircle,
+    IconCursor,
+    IconEye,
+    IconSend,
+    IconClock,
+    IconDecisionTree,
+    IconLeave,
+    IconLetter,
+    IconPerson,
+    IconRefresh,
+    IconUndo,
+    IconWarning,
+} from '@posthog/icons'
+import { CodeBlock } from 'components/CodeBlock'
+import OSButton from 'components/OSButton'
+import { sendSnippets } from './sendSnippets'
+
+export const blockClassName =
+    'not-prose rounded-2xl border border-primary bg-white p-4 shadow-2xl dark:bg-accent @xl/reader-content:p-8 @5xl/reader-content:p-10'
+
+// Counts from the shown value to `target` with an ease-out.
+export function useCountUp(target: number, duration = 700): number {
+    const [value, setValue] = useState(target)
+    const from = useRef(target)
+    const reducedMotion = useReducedMotion()
+    useEffect(() => {
+        if (reducedMotion) return setValue(target)
+        const start = performance.now()
+        const initial = from.current
+        let frame = 0
+        const step = (now: number) => {
+            const p = Math.min(1, (now - start) / duration)
+            const v = initial + (target - initial) * (1 - Math.pow(1 - p, 3))
+            from.current = v
+            setValue(v)
+            if (p < 1) frame = requestAnimationFrame(step)
+        }
+        frame = requestAnimationFrame(step)
+        return () => cancelAnimationFrame(frame)
+    }, [target])
+    return value
+}
+
+// Block 1: send from code on the left, and the events around the email stream in on the right.
+
+type Part = [prefix: string, chip: string]
+type FeedEvent = {
+    time: string
+    kind: 'sent' | 'delivered' | 'opened' | 'clicked' | 'app'
+    label: string
+    parts: Part[]
+    tone?: 'bad' | 'good'
+}
+
+const stories: {
+    label: string
+    about: string
+    subject: string
+    template: string
+    html: string
+    before: FeedEvent
+    after: FeedEvent[]
+    outcome: string
+}[] = [
+    {
+        label: 'Payment failed',
+        about: 'a failed payment',
+        subject: 'Update your card',
+        template: 'payment-failed',
+        html: '<p>Your card was declined. Update it to keep your Pro plan.</p>',
+        before: {
+            time: '09:14:02',
+            kind: 'app',
+            label: 'payment_failed',
+            parts: [
+                ['', 'Card declined'],
+                ['for', '$49'],
+            ],
+            tone: 'bad',
+        },
+        after: [
+            { time: '09:14:03', kind: 'sent', label: 'Sent', parts: [['with subject', 'Update your card']] },
+            { time: '09:14:03', kind: 'delivered', label: 'Delivered', parts: [['to', 'jane@example.com']] },
+            {
+                time: '09:16:40',
+                kind: 'opened',
+                label: 'Opened',
+                parts: [
+                    ['on', 'Gmail'],
+                    ['running on', 'iOS'],
+                ],
+            },
+            { time: '09:16:52', kind: 'clicked', label: 'Clicked', parts: [['link', '/billing']] },
+            {
+                time: '09:18:10',
+                kind: 'app',
+                label: 'payment_succeeded',
+                parts: [
+                    ['', '$49'],
+                    ['plan', 'Pro'],
+                ],
+                tone: 'good',
+            },
+        ],
+        outcome: '$49 recovered, 4 minutes after the send',
+    },
+    {
+        label: 'Password reset',
+        about: 'a password reset',
+        subject: 'Reset your password',
+        template: 'password-reset',
+        html: '<p>Use this link to reset your password. It expires in 1 hour.</p>',
+        before: { time: '18:30:11', kind: 'app', label: 'login_failed', parts: [['', '3 attempts']], tone: 'bad' },
+        after: [
+            { time: '18:31:02', kind: 'sent', label: 'Sent', parts: [['with subject', 'Reset your password']] },
+            {
+                time: '18:31:03',
+                kind: 'delivered',
+                label: 'Delivered',
+                parts: [
+                    ['to', 'jane@example.com'],
+                    ['in', '1.2s'],
+                ],
+            },
+            { time: '18:31:40', kind: 'clicked', label: 'Clicked', parts: [['link', '/reset']] },
+            { time: '18:32:15', kind: 'app', label: 'password_rejected', parts: [['replay', '1m 12s']], tone: 'bad' },
+            { time: '18:33:02', kind: 'app', label: 'logged_in', parts: [['on', 'Chrome']], tone: 'good' },
+        ],
+        outcome: 'Back in after 2 minutes, and the replay shows the password rule that tripped her up',
+    },
+    {
+        label: 'Team invite',
+        about: 'a team invite',
+        subject: 'Jane invited you to Hedgebox',
+        template: 'team-invite',
+        html: '<p>Jane invited you to her team on Hedgebox.</p>',
+        before: { time: '11:02:45', kind: 'app', label: 'member_invited', parts: [['by', 'jane@example.com']] },
+        after: [
+            {
+                time: '11:02:46',
+                kind: 'sent',
+                label: 'Sent',
+                parts: [['with subject', 'Jane invited you to Hedgebox']],
+            },
+            { time: '11:02:46', kind: 'delivered', label: 'Delivered', parts: [['to', 'sam@example.com']] },
+            { time: '11:05:30', kind: 'clicked', label: 'Clicked', parts: [['link', '/join']] },
+            { time: '11:06:12', kind: 'app', label: 'signed_up', parts: [['with', 'Google']], tone: 'good' },
+            { time: '11:08:59', kind: 'app', label: 'file_uploaded', parts: [['', 'Q4 plan.pdf']], tone: 'good' },
+        ],
+        outcome: 'Sam joined and shared a file within 6 minutes of the invite',
+    },
+]
+
+const kindLook: Record<FeedEvent['kind'], { Icon: React.ComponentType<{ className?: string }>; pill: string }> = {
+    sent: { Icon: IconSend, pill: 'bg-accent text-secondary' },
+    delivered: { Icon: IconCheckCircle, pill: 'bg-green/15 text-green' },
+    opened: { Icon: IconEye, pill: 'bg-blue/15 text-blue' },
+    clicked: { Icon: IconCursor, pill: 'bg-lilac/15 text-lilac' },
+    app: { Icon: IconBolt, pill: 'bg-blue/10 text-primary font-code' },
+}
+
+function TimelineEvent({ event }: { event: FeedEvent }): JSX.Element {
+    const { Icon, pill } = kindLook[event.kind]
+    const tone = event.tone === 'good' ? 'text-green' : event.tone === 'bad' ? 'text-red' : 'text-secondary'
+    return (
+        <div className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-3">
+            <span
+                className={`flex size-9 items-center justify-center rounded-md border border-primary bg-white dark:bg-accent ${tone}`}
+            >
+                <Icon className="size-5" />
+            </span>
+            <div className="min-w-0 pb-2.5">
+                <div className="flex flex-wrap items-center gap-2">
+                    <span className={`rounded px-2 py-0.5 text-xs font-semibold ${pill}`}>{event.label}</span>
+                    <span className="font-code text-xs text-muted">{event.time}</span>
+                </div>
+                <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-sm text-secondary">
+                    {event.parts.map(([prefix, chip]) => (
+                        <React.Fragment key={prefix + chip}>
+                            {prefix && <span>{prefix}</span>}
+                            <span className="rounded border border-primary bg-white px-1.5 text-primary dark:bg-accent">
+                                {chip}
+                            </span>
+                        </React.Fragment>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const fakeId = (n: number) =>
+    `${(0x5a6e6328 + n * 7919).toString(16)}-ffd8-45bb-8dae-${(0x6ccd4de7 + n * 104729).toString(16)}`
+
+export function SendBlock({ title }: { title: (about: string) => React.ReactNode }): JSX.Element {
+    const [storyIndex, setStoryIndex] = useState(0)
+    const [language, setLanguage] = useState<string>('Node.js')
+    const [shown, setShown] = useState(0)
+    const [responses, setResponses] = useState<number[]>([])
+    const timers = useRef<ReturnType<typeof setTimeout>[]>([])
+    useEffect(() => () => timers.current.forEach(clearTimeout), [])
+    const story = stories[storyIndex]
+    const done = shown === story.after.length
+    const running = shown > 0 && !done
+
+    const reset = () => {
+        timers.current.forEach(clearTimeout)
+        setShown(0)
+    }
+    const send = () => {
+        reset()
+        setResponses((r) => [r.length, ...r].slice(0, 4))
+        timers.current = story.after.map((_, i) => setTimeout(() => setShown(i + 1), 300 + i * 700))
+    }
+    const options = sendSnippets(story)
+    // Only the send call, without the client setup, for narrow windows.
+    const shortOptions = options.map((o) => ({
+        ...o,
+        code: (o.code.split('\n\n').pop() as string).replace('const { data, error } = ', ''),
+    }))
+    // Newest first, and the panel has a fixed height, so a new event never moves the page.
+    const events = [...story.after.slice(0, shown)].reverse()
+
+    return (
+        <div className={blockClassName}>
+            <h2 className="m-0 mb-1 text-2xl font-bold leading-tight @xl/reader-content:text-3xl">
+                {title(story.about)}
+            </h2>
+            <p className="m-0 mb-4 text-secondary">Hit send, then see what the user does next.</p>
+            <div className="grid gap-4 @3xl/reader-content:grid-cols-[3fr_2fr]">
+                {/* On a narrow window the column dissolves into the grid: send bar, events, then only the send call. */}
+                <div className="contents @3xl/reader-content:flex @3xl/reader-content:min-w-0 @3xl/reader-content:flex-col @3xl/reader-content:gap-3">
+                    <div className="flex items-center gap-2 rounded-xl border border-primary py-1.5 pl-3 pr-1.5">
+                        <select
+                            aria-label="Email to send"
+                            value={storyIndex}
+                            onChange={(e) => {
+                                reset()
+                                setStoryIndex(Number(e.target.value))
+                            }}
+                            className="min-w-0 flex-1 cursor-pointer border-0 bg-transparent text-sm font-semibold text-primary outline-none"
+                        >
+                            {stories.map((s, i) => (
+                                <option key={s.label} value={i}>
+                                    {s.label}
+                                </option>
+                            ))}
+                        </select>
+                        <OSButton variant="primary" size="md" disabled={running} onClick={send} icon={<IconSend />}>
+                            Send
+                        </OSButton>
+                    </div>
+                    <div className="order-3 min-w-0 @3xl/reader-content:order-none">
+                        <div className="hidden @3xl/reader-content:block">
+                            <CodeBlock
+                                currentLanguage={options.find((o) => o.label === language) ?? options[0]}
+                                onChange={(option) => setLanguage(option.label ?? 'Node.js')}
+                                showAskAI={false}
+                            >
+                                {options}
+                            </CodeBlock>
+                        </div>
+                        <div className="@3xl/reader-content:hidden">
+                            <CodeBlock
+                                currentLanguage={shortOptions.find((o) => o.label === language) ?? shortOptions[0]}
+                                onChange={(option) => setLanguage(option.label ?? 'Node.js')}
+                                selector="dropdown"
+                                showAskAI={false}
+                            >
+                                {shortOptions}
+                            </CodeBlock>
+                        </div>
+                    </div>
+                    <div className="hidden h-12 overflow-hidden font-code text-xs @3xl/reader-content:block [mask-image:linear-gradient(to_bottom,black_55%,transparent)]">
+                        {responses.length === 0 ? (
+                            <span className="text-muted">Responses show up here.</span>
+                        ) : (
+                            responses.map((n) => (
+                                <motion.div
+                                    key={n}
+                                    initial={{ opacity: 0, y: -6 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="py-0.5"
+                                >
+                                    <span className="text-secondary">HTTP 202:</span> {'{ "id": "'}
+                                    {fakeId(n)}
+                                    {'" }'}
+                                </motion.div>
+                            ))
+                        )}
+                    </div>
+                </div>
+                <div className="relative order-2 h-[21rem] overflow-hidden rounded-lg @3xl/reader-content:order-none @3xl/reader-content:h-auto border border-primary p-4 [mask-image:linear-gradient(to_bottom,black_85%,transparent)]">
+                    <span className="absolute bottom-0 left-[2.1rem] top-4 w-px bg-border" aria-hidden />
+                    <div className="relative">
+                        <AnimatePresence initial={false}>
+                            {done && (
+                                <motion.p
+                                    key="outcome"
+                                    layout
+                                    initial={{ opacity: 0, y: -8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="relative z-10 m-0 mb-4 overflow-hidden rounded-md bg-white text-sm font-semibold dark:bg-accent"
+                                >
+                                    <span className="flex items-center gap-2 bg-green/15 px-3 py-2">
+                                        <IconCheck className="size-5 shrink-0 text-green" />
+                                        {story.outcome}
+                                    </span>
+                                </motion.p>
+                            )}
+                            {events.map((event) => (
+                                <motion.div
+                                    key={storyIndex + event.label + event.time}
+                                    layout
+                                    initial={{ opacity: 0, y: -12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+                                >
+                                    <TimelineEvent event={event} />
+                                </motion.div>
+                            ))}
+                            <motion.div key={storyIndex + 'before'} layout className={shown > 0 ? 'opacity-60' : ''}>
+                                <TimelineEvent event={story.before} />
+                            </motion.div>
+                        </AnimatePresence>
+                        {shown === 0 && (
+                            <p className="m-0 ml-12 text-sm text-muted">
+                                That happened in your app. Hit send to see what happens next.
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// Block 2: the app's send calendar and its day picker (SendCalendar, SendDayPicker). When you schedule a broadcast,
+// the picker shades the days that are too close to other sends to the same people and suggests one that isn't.
+// December 2026 starts on a Tuesday, so the grid starts on Monday, Nov 30.
+
+type Send = {
+    day: number
+    time: string
+    name: string
+    kind: 'broadcast' | 'workflow'
+    shared: boolean
+    repeats?: boolean
+}
+
+const sends: Send[] = [
+    { day: 2, time: '9:00 AM', name: 'Trial ending', kind: 'broadcast', shared: false },
+    { day: 9, time: '10:00 AM', name: 'New: shared folders', kind: 'broadcast', shared: true },
+    { day: 16, time: '10:00 AM', name: 'December changelog', kind: 'broadcast', shared: true },
+    { day: 23, time: '9:00 AM', name: 'Year in review', kind: 'broadcast', shared: false },
+    ...[7, 14, 21, 28].map(
+        (day): Send => ({ day, time: '8:00 AM', name: 'Weekly digest', kind: 'workflow', shared: false, repeats: true })
+    ),
+]
+const today = 3
+const cells = Array.from({ length: 35 }, (_, i) => i) // 0 is Nov 30, 1 to 31 are December, 32+ are January
+const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const dayLabel = (d: number) => `${weekdays[d % 7]}, Dec ${d}`
+
+// The app's default spacing rule: 1 marketing email per person every 2 days.
+const crowdedBy = (day: number) => sends.filter((s) => s.shared && Math.abs(s.day - day) < 2)
+const bookable = (day: number) => day > today && day <= 31 && crowdedBy(day).length === 0
+function suggestFrom(day: number): number {
+    for (let offset = 0; offset < 31; offset++) {
+        if (bookable(day + offset)) return day + offset
+        if (bookable(day - offset)) return day - offset
+    }
+    return day
+}
+
+function SendChip({
+    send,
+    isNew = false,
+}: {
+    send: Pick<Send, 'time' | 'name' | 'kind' | 'repeats'>
+    isNew?: boolean
+}) {
+    return (
+        <span
+            className={`flex min-w-0 items-center gap-1 rounded px-1 py-0.5 text-[11px] leading-tight ${
+                isNew ? 'bg-red/10 ring-1 ring-red' : ''
+            }`}
+        >
+            <span className={`size-2 shrink-0 rounded-full ${send.kind === 'broadcast' ? 'bg-red' : 'bg-blue'}`} />
+            <span className="truncate" title={`${send.time} · ${send.name}`}>
+                {send.name}
+            </span>
+            {send.repeats && <IconRefresh className="size-3 shrink-0 text-secondary" />}
+        </span>
+    )
+}
+
+export function CalendarBlock(): JSX.Element {
+    const [picked, setPicked] = useState<number | null>(null)
+    const [scheduled, setScheduled] = useState<number | null>(null)
+    const picking = scheduled === null
+    const suggestion = suggestFrom(picked ?? 10)
+    const crowding = picked === null ? [] : crowdedBy(picked)
+    const draft = { time: '10:00 AM', name: 'Holiday sale', kind: 'broadcast' as const }
+
+    return (
+        <div className={blockClassName}>
+            <div className="grid gap-5 @4xl/reader-content:grid-cols-[minmax(0,1fr)_17rem]">
+                <div className="min-w-0">
+                    <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                        <strong className="text-lg">December 2026</strong>
+                        {picking ? (
+                            <span className="flex gap-3 text-xs text-secondary">
+                                <span className="flex items-center gap-1">
+                                    <span className="size-3 rounded-sm border border-primary bg-yellow/25" /> Too close
+                                    to other sends
+                                </span>
+                                <span className="flex items-center gap-1">
+                                    <span className="size-3 rounded-sm border-2 border-dashed border-green" /> Suggested
+                                </span>
+                            </span>
+                        ) : (
+                            <span className="flex gap-3 text-xs text-secondary">
+                                <span className="flex items-center gap-1">
+                                    <span className="size-2 rounded-full bg-red" /> Broadcast
+                                </span>
+                                <span className="flex items-center gap-1">
+                                    <span className="size-2 rounded-full bg-blue" /> Automation
+                                </span>
+                            </span>
+                        )}
+                    </div>
+                    <div className="overflow-hidden rounded border border-primary bg-white dark:bg-accent">
+                        <div className="grid grid-cols-7 border-b border-primary bg-accent">
+                            {weekdays.map((d) => (
+                                <span key={d} className="px-2 py-1 text-xs font-semibold uppercase text-secondary">
+                                    {d}
+                                </span>
+                            ))}
+                        </div>
+                        <div className="grid grid-cols-7">
+                            {cells.map((i) => {
+                                const inMonth = i >= 1 && i <= 31
+                                const label =
+                                    i === 0 ? 'Nov 30' : i === 32 ? 'Jan 1' : i > 32 ? String(i - 31) : String(i)
+                                const selectable = picking && inMonth && i > today
+                                const crowded = selectable && crowdedBy(i).length > 0
+                                const isSuggested = picking && i === suggestion
+                                return (
+                                    <div
+                                        key={i}
+                                        role={selectable ? 'button' : undefined}
+                                        tabIndex={selectable ? 0 : undefined}
+                                        aria-label={selectable ? `Send on ${dayLabel(i)}` : undefined}
+                                        aria-pressed={selectable ? picked === i : undefined}
+                                        onClick={selectable ? () => setPicked(i) : undefined}
+                                        onKeyDown={selectable ? (e) => e.key === 'Enter' && setPicked(i) : undefined}
+                                        className={`relative flex min-h-[4.25rem] min-w-0 flex-col gap-0.5 p-1 transition-colors @2xl/reader-content:min-h-[5.25rem] ${
+                                            i % 7 !== 6 ? 'border-r border-primary' : ''
+                                        } ${i < 28 ? 'border-b border-primary' : ''} ${
+                                            !inMonth || (picking && i <= today) ? 'bg-accent/60' : ''
+                                        } ${crowded ? 'bg-yellow/20' : ''} ${
+                                            selectable ? 'cursor-pointer hover:bg-blue/5' : ''
+                                        } ${
+                                            picked === i && picking
+                                                ? '!bg-blue/10 shadow-[inset_0_0_0_2px_theme(colors.blue)]'
+                                                : ''
+                                        }`}
+                                    >
+                                        {isSuggested && (
+                                            <span className="pointer-events-none absolute inset-1 rounded border-2 border-dashed border-green" />
+                                        )}
+                                        <span className="flex h-5 items-center pl-1 text-xs font-semibold">
+                                            <span
+                                                className={
+                                                    i === today
+                                                        ? 'rounded-full bg-red px-1.5 text-white'
+                                                        : inMonth
+                                                        ? ''
+                                                        : 'text-muted'
+                                                }
+                                            >
+                                                {label}
+                                            </span>
+                                        </span>
+                                        {sends
+                                            .filter((s) => s.day === i)
+                                            .map((s) => (
+                                                <SendChip key={s.name} send={s} />
+                                            ))}
+                                        {scheduled === i && (
+                                            <motion.span
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                            >
+                                                <SendChip send={draft} isNew />
+                                            </motion.span>
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col gap-3 self-start rounded-lg border border-primary p-4 text-sm">
+                    <span className="flex items-center gap-1.5 text-xs text-secondary">
+                        <span className="size-2 rounded-full bg-red" /> Broadcast · 31,400 free-plan users
+                    </span>
+                    <strong className="-mt-2 text-base">Holiday sale</strong>
+                    {scheduled !== null ? (
+                        <>
+                            <span className="flex gap-1.5 rounded bg-green/10 p-2">
+                                <IconCheck className="size-5 shrink-0 text-green" />
+                                Scheduled for {dayLabel(scheduled)} at 10:00 AM.
+                            </span>
+                            <div>
+                                <OSButton
+                                    size="sm"
+                                    variant="secondary"
+                                    icon={<IconUndo />}
+                                    onClick={() => {
+                                        setScheduled(null)
+                                        setPicked(null)
+                                    }}
+                                >
+                                    Pick again
+                                </OSButton>
+                            </div>
+                        </>
+                    ) : picked === null ? (
+                        <>
+                            <span className="text-secondary">
+                                Pick a send day. PostHog checks it against every other send to the same people.
+                            </span>
+                            <SuggestionLine day={suggestion} onUse={() => setPicked(suggestion)} />
+                        </>
+                    ) : crowding.length ? (
+                        <>
+                            <span className="flex gap-1.5 rounded bg-yellow/15 p-2">
+                                <IconWarning className="size-5 shrink-0 text-yellow" />
+                                <span>
+                                    Some people in this audience also get{' '}
+                                    {crowding.map((c) => `"${c.name}"`).join(', ')} within 2 days.
+                                </span>
+                            </span>
+                            <SuggestionLine day={suggestion} onUse={() => setPicked(suggestion)} />
+                        </>
+                    ) : (
+                        <>
+                            <span className="flex gap-1.5 rounded bg-green/10 p-2">
+                                <IconCheck className="size-5 shrink-0 text-green" />
+                                {dayLabel(picked)} at 10:00 AM stays within 1 marketing email per person every 2 days.
+                            </span>
+                            <div>
+                                <OSButton size="sm" variant="primary" onClick={() => setScheduled(picked)}>
+                                    Schedule
+                                </OSButton>
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function SuggestionLine({ day, onUse }: { day: number; onUse: () => void }): JSX.Element {
+    return (
+        <span className="flex flex-wrap items-center gap-2">
+            <span>
+                Suggested: <strong>{dayLabel(day)} at 10:00 AM</strong>
+            </span>
+            <OSButton size="sm" variant="secondary" onClick={onUse}>
+                Use this day
+            </OSButton>
+        </span>
+    )
+}
+
+// Block 3: the app's tile canvas, and the suggestion flow from Workflows/suggestions:
+// suggested -> approved as a draft -> published -> per-version outcome.
+
+type Tile = {
+    Icon: React.ComponentType<{ className?: string }>
+    color: string
+    shape?: 'start' | 'end'
+    title: string
+    detail: string
+    count?: number
+    badge?: string
+    changed?: boolean
+}
+
+function tileRadius(shape?: 'start' | 'end'): string {
+    return shape === 'start' ? '32px 32px 12px 12px' : shape === 'end' ? '12px 12px 32px 32px' : '12px'
+}
+
+const badgeClassName =
+    'absolute whitespace-nowrap rounded-full border border-primary bg-white px-1.5 text-[11px] font-semibold leading-[18px] shadow-sm dark:bg-accent'
+
+// One row: the tile sits on the center line and its caption to the right, as in the app.
+function TileRow({ tile }: { tile: Tile }): JSX.Element {
+    const count = useCountUp(tile.count ?? 0, 900)
+    return (
+        <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.6 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+            className="grid w-full grid-cols-[minmax(0,1fr)_4rem_minmax(0,1fr)] items-start gap-3"
+        >
+            <span />
+            <div className="relative">
+                <div
+                    className={`flex size-16 items-center justify-center border-2 bg-white shadow-sm dark:bg-accent ${
+                        tile.changed ? 'ring-2 ring-lilac ring-offset-4 ring-offset-white dark:ring-offset-accent' : ''
+                    }`}
+                    style={{ borderRadius: tileRadius(tile.shape), borderColor: tile.color, color: tile.color }}
+                >
+                    <tile.Icon className="size-7" />
+                </div>
+                {tile.count !== undefined && (
+                    <span className={`${badgeClassName} -right-3 -top-2.5 inline-flex items-center gap-0.5`}>
+                        <IconPerson className="size-3" />
+                        {Math.round(count).toLocaleString('en-US')}
+                    </span>
+                )}
+                {tile.badge && (
+                    <span
+                        className={`${badgeClassName} -bottom-2 left-1/2 -translate-x-1/2`}
+                        style={{ color: tile.color }}
+                    >
+                        {tile.badge}
+                    </span>
+                )}
+            </div>
+            <div className="min-w-0 pt-1 text-left">
+                <div className="text-[13px] font-semibold leading-tight">{tile.title}</div>
+                <div className="text-xs leading-snug text-secondary">{tile.detail}</div>
+            </div>
+        </motion.div>
+    )
+}
+
+const Down = () => <span className="mx-auto block h-7 w-[1.5px] bg-border" />
+const Pill = ({ children }: { children: React.ReactNode }) => (
+    <span className="mx-auto block w-fit rounded-full border border-primary bg-white px-2 text-xs font-semibold dark:bg-accent">
+        {children}
+    </span>
+)
+
+const exitTile: Tile = { Icon: IconLeave, color: '#9a9a9a', shape: 'end', title: 'Exit', detail: 'End of automation' }
+
+type Stage = 'suggested' | 'draft' | 'live'
+
+const outcomes = [
+    { label: 'Opened', before: 48.2, after: 51.0 },
+    { label: 'Clicked', before: 2.1, after: 4.6 },
+    { label: 'Unsubscribed', before: 0.4, after: 0.2 },
+]
+
+function Tag({ tone, children }: { tone: 'highlight' | 'success'; children: React.ReactNode }) {
+    return (
+        <span
+            className={`rounded px-1.5 py-0.5 text-[11px] font-semibold ${
+                tone === 'success' ? 'bg-green/15 text-green' : 'bg-lilac/15 text-lilac'
+            }`}
+        >
+            {children}
+        </span>
+    )
+}
+
+function SuggestionPanel({ stage, setStage }: { stage: Stage; setStage: (s: Stage) => void }): JSX.Element {
+    return (
+        <div className="order-first flex flex-col gap-4 self-start rounded-xl border border-primary bg-white p-5 text-sm leading-relaxed shadow-xl dark:bg-accent @3xl/reader-content:order-none">
+            <div className="flex items-start gap-2">
+                <IconBolt className="mt-0.5 size-4 shrink-0" />
+                <div className="flex flex-col gap-1">
+                    <strong>Wait for the first upload before the nudge</strong>
+                    <span>
+                        {stage === 'suggested' && <Tag tone="highlight">Suggested by PostHog</Tag>}
+                        {stage === 'draft' && <Tag tone="highlight">Staged as draft</Tag>}
+                        {stage === 'live' && <Tag tone="success">Published as version 4</Tag>}
+                    </span>
+                </div>
+            </div>
+            {stage === 'suggested' && (
+                <>
+                    <p className="m-0 text-secondary">
+                        Most people who haven't uploaded a file on day 1 are still exploring. Send the nudge after 2
+                        days, and only to people who still haven't uploaded one.
+                    </p>
+                    <p className="m-0">
+                        Click rate 2.1% on 1,198 tracked sends (v3, last 30 days), target 4%{' '}
+                        <Tag tone="success">Measured by PostHog</Tag>
+                    </p>
+                    <div className="flex flex-col gap-2 border-l-2 border-primary pl-3 text-xs">
+                        <strong className="text-secondary">What changes</strong>
+                        <span>
+                            Wait: <span className="rounded bg-red/15 px-1 line-through">1 day</span>{' '}
+                            <span className="rounded bg-green/15 px-1">2 days</span>
+                        </span>
+                        <span>
+                            New step: <span className="rounded bg-green/15 px-1">Condition: uploaded a file?</span>
+                        </span>
+                    </div>
+                    <span className="text-xs text-secondary">Suggested 2 hours ago against version 3</span>
+                    <div className="flex gap-2">
+                        <OSButton size="sm" variant="secondary" disabled tooltip="Approve it to see what happens">
+                            Reject
+                        </OSButton>
+                        <OSButton size="sm" variant="primary" onClick={() => setStage('draft')}>
+                            Approve as draft
+                        </OSButton>
+                    </div>
+                </>
+            )}
+            {stage === 'draft' && (
+                <>
+                    <p className="m-0 text-secondary">
+                        It's the automation's draft now, and the canvas shows it. Publish the draft to make it live.
+                    </p>
+                    <div className="flex gap-2">
+                        <OSButton size="sm" variant="secondary" onClick={() => setStage('suggested')}>
+                            Discard
+                        </OSButton>
+                        <OSButton size="sm" variant="primary" onClick={() => setStage('live')}>
+                            Publish
+                        </OSButton>
+                    </div>
+                </>
+            )}
+            {stage === 'live' && (
+                <>
+                    <p className="m-0 text-secondary">The nudge email, version 3 against version 4:</p>
+                    <div className="grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-1 text-xs">
+                        <span />
+                        <strong className="text-secondary">v3</strong>
+                        <strong className="text-secondary">v4</strong>
+                        {outcomes.map((o) => (
+                            <React.Fragment key={o.label}>
+                                <span className="text-secondary">{o.label}</span>
+                                <span className="font-semibold">{o.before.toFixed(1)}%</span>
+                                <span className="font-semibold text-green">{o.after.toFixed(1)}%</span>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <div className="self-start">
+                        <OSButton
+                            size="sm"
+                            variant="secondary"
+                            icon={<IconUndo />}
+                            onClick={() => setStage('suggested')}
+                        >
+                            Start over
+                        </OSButton>
+                    </div>
+                </>
+            )}
+        </div>
+    )
+}
+
+export function CanvasBlock(): JSX.Element {
+    const [stage, setStage] = useState<Stage>('suggested')
+    const proposed = stage !== 'suggested'
+    const draft = stage === 'draft'
+    const clicked = useCountUp(stage === 'live' ? 4.6 : 2.1, 900)
+
+    const head: Tile[] = [
+        {
+            Icon: IconBolt,
+            color: '#35C46F',
+            shape: 'start',
+            title: 'User signed up',
+            detail: 'Event trigger',
+            count: 1204,
+        },
+        { Icon: IconLetter, color: '#2F80FA', title: 'Welcome to Hedgebox', detail: 'Email', count: 1204 },
+        {
+            Icon: IconClock,
+            color: '#a20031',
+            title: proposed ? 'Wait 2 days' : 'Wait 1 day',
+            detail: 'Delay',
+            badge: proposed ? '2d' : '1d',
+            count: 1198,
+            changed: draft,
+        },
+    ]
+    const nudge: Tile = {
+        Icon: IconLetter,
+        color: '#2F80FA',
+        title: 'Upload your first file',
+        detail: 'Email',
+        count: proposed ? 655 : 1198,
+    }
+
+    return (
+        <div className={`${blockClassName} !p-0 overflow-hidden`}>
+            <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-2.5">
+                <strong>Onboarding</strong>
+                {draft ? (
+                    <span className="rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">Draft</span>
+                ) : (
+                    <span className="rounded-full bg-green/15 px-2 text-xs font-semibold text-green">
+                        Live · v{stage === 'live' ? 4 : 3}
+                    </span>
+                )}
+                <span className="ml-auto text-sm text-secondary">
+                    Nudge clicked{' '}
+                    <strong className="font-code text-base text-primary tabular-nums">{clicked.toFixed(1)}%</strong>
+                </span>
+            </div>
+            <div
+                className="grid gap-8 p-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_22rem]"
+                style={{
+                    backgroundImage: 'radial-gradient(rgb(var(--border) / 0.7) 1px, transparent 1px)',
+                    backgroundSize: '18px 18px',
+                }}
+            >
+                <div className="flex flex-col pt-2 @3xl/reader-content:min-h-[38rem]">
+                    {head.map((tile, i) => (
+                        <React.Fragment key={i}>
+                            {i > 0 && <Down />}
+                            <TileRow tile={tile} />
+                        </React.Fragment>
+                    ))}
+                    <Down />
+                    <AnimatePresence mode="popLayout" initial={false}>
+                        {proposed ? (
+                            <motion.div
+                                key="branch"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex flex-col"
+                            >
+                                <TileRow
+                                    tile={{
+                                        Icon: IconDecisionTree,
+                                        color: '#35C46F',
+                                        title: 'Uploaded a file?',
+                                        detail: 'Condition',
+                                        count: 1198,
+                                        changed: draft,
+                                    }}
+                                />
+                                {/* The fork: one line down from the condition, then out to each branch. */}
+                                <span className="mx-auto block h-4 w-[1.5px] bg-border" />
+                                <div className="mx-auto h-4 w-1/2 rounded-t-lg border-x-[1.5px] border-t-[1.5px] border-primary" />
+                                <div className="grid grid-cols-2">
+                                    <div className="flex flex-col">
+                                        <Pill>No</Pill>
+                                        <Down />
+                                        <TileRow tile={nudge} />
+                                        <Down />
+                                        <TileRow tile={exitTile} />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <Pill>Yes</Pill>
+                                        <Down />
+                                        <TileRow tile={{ ...exitTile, title: 'Exit', detail: 'Already active' }} />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="line"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex flex-col"
+                            >
+                                <TileRow tile={nudge} />
+                                <Down />
+                                <TileRow tile={exitTile} />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+                <SuggestionPanel stage={stage} setStage={setStage} />
+            </div>
+        </div>
+    )
+}

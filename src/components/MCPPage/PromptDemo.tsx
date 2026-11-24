@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { IconArrowRight } from '@posthog/icons'
 import { useReducedMotion } from 'framer-motion'
 import usePostHog from 'hooks/usePostHog'
@@ -6,7 +6,7 @@ import { cn } from '../../utils'
 import { ClaudeTerminal } from '../Home/DataStory/Query/AgentWindow'
 import { ANSWER_MS_PER_CHAR, SourceIcon, TOOL_RUN_MS, Trace, defineTrace } from '../Home/DataStory/Query/trace'
 import { useEventClock } from '../Home/DataStory/timeline'
-import { PromptFlow, flows } from './promptDemo.data'
+import { PromptFlow, flows as mcpFlows } from './promptDemo.data'
 
 const SUBMIT_AT = 400
 const FIRST_CALL_DELAY_MS = 700
@@ -46,9 +46,19 @@ const buildDemo = (flow: PromptFlow): Demo => {
     }
 }
 
-const demos = flows.map(buildDemo)
-
-const Run = ({ demo, next, onNext, onDone }: { demo: Demo; next: Demo; onNext: () => void; onDone?: () => void }) => {
+const Run = ({
+    demo,
+    next,
+    cwd,
+    onNext,
+    onDone,
+}: {
+    demo: Demo
+    next: Demo
+    cwd: string
+    onNext: () => void
+    onDone?: () => void
+}) => {
     const ref = useRef<HTMLDivElement>(null)
     const elapsed = useEventClock(ref, { ...demo.trace, loop: false })
     const answered = elapsed >= demo.trace.restingMs
@@ -62,14 +72,26 @@ const Run = ({ demo, next, onNext, onDone }: { demo: Demo; next: Demo; onNext: (
                 state={demo.trace.stateAt(elapsed)}
                 className="h-80 rounded @2xl/reader-content:h-full"
                 lightSize={10}
-                cwd="~/hogflix"
+                cwd={cwd}
                 suggestion={answered ? { prompt: next.prompt, onRun: onNext } : undefined}
             />
         </div>
     )
 }
 
-export default function PromptDemo(): JSX.Element {
+export default function PromptDemo({
+    flows = mcpFlows,
+    placement = 'mcp_page',
+    cwd = '~/hogflix',
+    compactOnNarrow = false,
+}: {
+    flows?: PromptFlow[]
+    placement?: string
+    cwd?: string
+    /** In one column, show the terminal first and the prompts as a row of short chips under it. */
+    compactOnNarrow?: boolean
+}): JSX.Element {
+    const demos = useMemo(() => flows.map(buildDemo), [flows])
     const posthog = usePostHog()
     const [activeIndex, setActiveIndex] = useState(0)
     const [runId, setRunId] = useState(0)
@@ -96,7 +118,7 @@ export default function PromptDemo(): JSX.Element {
         if (trigger === 'list' && singleColumn) {
             terminalRef.current?.scrollIntoView({ block: 'nearest', behavior: shouldReduceMotion ? 'auto' : 'smooth' })
         }
-        posthog?.capture('ai_prompt_selected', { group: title, prompt, placement: 'mcp_page', trigger })
+        posthog?.capture('ai_prompt_selected', { group: title, prompt, placement, trigger })
     }
 
     const nextIndex = (activeIndex + 1) % demos.length
@@ -107,9 +129,29 @@ export default function PromptDemo(): JSX.Element {
                 ref={layoutRef}
                 className="grid gap-x-8 gap-y-4 @2xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
             >
-                <div>
+                {compactOnNarrow && (
+                    <div className="order-2 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 @2xl/reader-content:hidden">
+                        {demos.map(({ title }, index) => (
+                            <button
+                                key={title}
+                                type="button"
+                                aria-pressed={index === activeIndex}
+                                onClick={() => pick(index, 'list')}
+                                className={cn(
+                                    'shrink-0 cursor-pointer rounded-full border px-3 py-1.5 text-sm font-semibold',
+                                    index === activeIndex
+                                        ? 'border-primary bg-primary text-primary'
+                                        : 'border-primary bg-transparent text-secondary'
+                                )}
+                            >
+                                {title}
+                            </button>
+                        ))}
+                    </div>
+                )}
+                <div className={compactOnNarrow ? 'hidden @2xl/reader-content:block' : undefined}>
                     <ul className="m-0 list-none p-0">
-                        {demos.map(({ title, prompt, calls }, index) => {
+                        {demos.map(({ title, prompt, calls, skill }, index) => {
                             const active = index === activeIndex
                             const sources = Array.from(new Set(calls.map(({ source }) => source)))
                             return (
@@ -127,6 +169,11 @@ export default function PromptDemo(): JSX.Element {
                                         )}
                                     >
                                         <span className="text-base font-bold leading-snug">“{prompt}”</span>
+                                        {skill && (
+                                            <span className="mt-2 w-fit rounded bg-accent px-1.5 py-0.5 font-code text-xs text-secondary">
+                                                skill: {skill}
+                                            </span>
+                                        )}
                                         <span aria-hidden className="mt-2 flex items-center gap-1">
                                             {sources.map((source, sourceIndex) => (
                                                 <React.Fragment key={source}>
@@ -143,11 +190,18 @@ export default function PromptDemo(): JSX.Element {
                         })}
                     </ul>
                 </div>
-                <div ref={terminalRef} className="relative @2xl/reader-content:min-h-80">
+                <div
+                    ref={terminalRef}
+                    className={cn(
+                        'relative @2xl/reader-content:min-h-80',
+                        compactOnNarrow && 'order-1 @2xl/reader-content:order-none'
+                    )}
+                >
                     <Run
                         key={runId}
                         demo={demos[activeIndex]}
                         next={demos[nextIndex]}
+                        cwd={cwd}
                         onNext={() => pick(nextIndex, 'terminal')}
                         onDone={picked ? undefined : () => play(nextIndex)}
                     />

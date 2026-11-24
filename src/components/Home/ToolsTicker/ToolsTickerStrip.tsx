@@ -4,7 +4,8 @@ import Link from 'components/Link'
 export interface ToolsTickerProduct {
     handle: string
     name: string
-    slug: string
+    /** The page the item links to. Without it the item is plain text. */
+    slug?: string
     color?: string
     Icon?: React.ComponentType<{ className?: string }>
 }
@@ -44,15 +45,21 @@ export default function ToolsTickerStrip({
                     }`}
                 >
                     {product.Icon && <product.Icon className={`size-4 shrink-0 text-${product.color}`} />}
-                    <Link
-                        to={`/${product.slug}`}
-                        state={{ newWindow: true }}
-                        tabIndex={ariaHidden ? -1 : undefined}
-                        wrapperClassName={compact ? 'min-w-0' : undefined}
-                        className={compact ? 'block truncate text-xs font-semibold' : 'text-sm font-semibold'}
-                    >
-                        {product.name}
-                    </Link>
+                    {product.slug ? (
+                        <Link
+                            to={`/${product.slug}`}
+                            state={{ newWindow: true }}
+                            tabIndex={ariaHidden ? -1 : undefined}
+                            wrapperClassName={compact ? 'min-w-0' : undefined}
+                            className={compact ? 'block truncate text-xs font-semibold' : 'text-sm font-semibold'}
+                        >
+                            {product.name}
+                        </Link>
+                    ) : (
+                        <span className={compact ? 'block truncate text-xs font-semibold' : 'text-sm font-semibold'}>
+                            {product.name}
+                        </span>
+                    )}
                 </li>
             ))}
             {compact && (

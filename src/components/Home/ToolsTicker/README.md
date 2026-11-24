@@ -17,7 +17,9 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `handles` | `string[]` | Core products + notable betas (18 handles) | Product handles resolved via `useProduct()` |
+| `items` | `ToolsTickerProduct[]` | – | Items to scroll instead of products, such as the destinations on `/messaging`. Replaces `handles`. An item without a `slug` shows as plain text, not a link |
 | `label` | `string` | `"Built-in tools for your agents:"` | Static prefix shown before the scrolling strip |
+| `stacked` | `boolean` | `false` | Keeps the label on its own row until the container is `@2xl` wide, for a long label |
 | `className` | `string` | `''` | Extra classes on the root element |
 
 Handles that don't resolve to a product with a `name` and `slug` are silently skipped. `SLUG_OVERRIDES` in the component maps handles whose product data has no `slug` (currently `inbox` → `docs/self-driving/inbox`).
