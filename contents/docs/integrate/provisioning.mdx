@@ -251,7 +251,7 @@ Do these steps in order: publish your keys, update your metadata document, call 
 3. Call the [registration endpoint](#register-your-app), on both `us.posthog.com` and `eu.posthog.com` if you use both regions. It re-reads your document and switches your app over in the same request. The response shows `"token_endpoint_auth_method": "private_key_jwt"`, and its `jwks` check lists the key IDs PostHog found at your `jwks_uri`. If that check fails, fix it right away: your app has already switched, so signed requests fail until PostHog can read your keys.
 4. Start signing the requests below.
 
-Once the switch applies, unsigned account requests and token calls fail with a 401. Before it applies, signed account requests fail. Without step 3, the switch waits until PostHog's cached copy of your document expires and a later account request triggers a background refresh. Token calls and `Bearer` requests never trigger one.
+Until the switch applies, every provisioning request fails with a 401, because PostHog doesn't have your keys yet. Once it applies, unsigned requests fail. Without step 3, the switch waits until PostHog's cached copy of your document expires and a later account request triggers a background refresh. Token calls and `Bearer` requests never trigger one.
 
 #### Which requests to sign
 
@@ -955,15 +955,15 @@ A `client_id` on its own is not enough. Your `client_id` is published, so accept
 
 ```json
 {
-  "tier": "public_attested",
+  "tier": "jwks_attested",
   "tier_basis": {
-    "client_authentication": "none",
+    "client_authentication": "private_key_jwt",
     "attested": true
   },
   "endpoints": {
-    "account_requests": { "per_hour": 20, "burst": 10, "remaining": 9, "reset": 180 },
-    "token_exchanges": { "per_hour": 40, "burst": 20, "remaining": 20, "reset": 0 },
-    "deep_links": { "blocked": true }
+    "account_requests": { "per_hour": 100, "burst": 50, "remaining": 49, "reset": 36 },
+    "token_exchanges": { "per_hour": 200, "burst": 100, "remaining": 100, "reset": 0 },
+    "deep_links": { "per_hour": 1200, "burst": 300, "remaining": 300, "reset": 0 }
   }
 }
 ```
