@@ -14,12 +14,14 @@ import {
     IconLetter,
     IconPerson,
     IconRefresh,
+    IconRewindPlay,
     IconUndo,
     IconWarning,
 } from '@posthog/icons'
 import { CodeBlock } from 'components/CodeBlock'
 import OSButton from 'components/OSButton'
 import { sendSnippets } from './sendSnippets'
+import { ReplayPlayer } from './Replay'
 
 export const blockClassName =
     'not-prose rounded-2xl border border-primary bg-white p-4 shadow-2xl dark:bg-accent @xl/reader-content:p-8 @5xl/reader-content:p-10'
@@ -67,6 +69,7 @@ const stories: {
     before: FeedEvent
     after: FeedEvent[]
     outcome: string
+    replay: string
 }[] = [
     {
         label: 'Payment failed',
@@ -109,6 +112,7 @@ const stories: {
             },
         ],
         outcome: '$49 recovered, 4 minutes after the send',
+        replay: 'payment',
     },
     {
         label: 'Password reset',
@@ -133,6 +137,7 @@ const stories: {
             { time: '18:33:02', kind: 'app', label: 'logged_in', parts: [['on', 'Chrome']], tone: 'good' },
         ],
         outcome: 'Back in after 2 minutes, and the replay shows the password rule that tripped her up',
+        replay: 'reset',
     },
     {
         label: 'Team invite',
@@ -154,6 +159,7 @@ const stories: {
             { time: '11:08:59', kind: 'app', label: 'file_uploaded', parts: [['', 'Q4 plan.pdf']], tone: 'good' },
         ],
         outcome: 'Sam joined and shared a file within 6 minutes of the invite',
+        replay: 'invite',
     },
 ]
 
@@ -203,6 +209,7 @@ export function SendBlock({ title }: { title: (about: React.ReactNode) => React.
     const [language, setLanguage] = useState<string>('Node.js')
     const [shown, setShown] = useState(0)
     const [responses, setResponses] = useState<number[]>([])
+    const [watching, setWatching] = useState(false)
     const timers = useRef<ReturnType<typeof setTimeout>[]>([])
     useEffect(() => () => timers.current.forEach(clearTimeout), [])
     const story = stories[storyIndex]
@@ -212,6 +219,7 @@ export function SendBlock({ title }: { title: (about: React.ReactNode) => React.
     const reset = () => {
         timers.current.forEach(clearTimeout)
         setShown(0)
+        setWatching(false)
     }
     const send = () => {
         reset()
@@ -307,7 +315,16 @@ export function SendBlock({ title }: { title: (about: React.ReactNode) => React.
                         )}
                     </div>
                 </div>
-                <div className="relative order-2 h-[21rem] overflow-hidden rounded-lg @3xl/reader-content:order-none @3xl/reader-content:h-auto border border-primary p-4 [mask-image:linear-gradient(to_bottom,black_85%,transparent)]">
+                <div
+                    className={`relative order-2 h-[21rem] overflow-hidden rounded-lg border border-primary p-4 @3xl/reader-content:order-none @3xl/reader-content:h-auto ${
+                        watching ? '' : '[mask-image:linear-gradient(to_bottom,black_85%,transparent)]'
+                    }`}
+                >
+                    {watching && (
+                        <div className="absolute inset-0 z-20 bg-white p-4 dark:bg-accent">
+                            <ReplayPlayer scene={story.replay} onClose={() => setWatching(false)} />
+                        </div>
+                    )}
                     <span className="absolute bottom-0 left-[2.1rem] top-4 w-px bg-border" aria-hidden />
                     <div className="relative">
                         <AnimatePresence initial={false}>
@@ -323,6 +340,14 @@ export function SendBlock({ title }: { title: (about: React.ReactNode) => React.
                                         <IconCheck className="size-5 shrink-0 text-green" />
                                         {story.outcome}
                                     </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => setWatching(true)}
+                                        className="flex w-full items-center gap-2 border-t border-primary px-3 py-2 text-left font-semibold text-red hover:bg-accent"
+                                    >
+                                        <IconRewindPlay className="size-5 shrink-0" />
+                                        Watch what {story.replay === 'invite' ? 'Sam' : 'Jane'} did after the click
+                                    </button>
                                 </motion.p>
                             )}
                             {events.map((event) => (
