@@ -73,9 +73,6 @@ export interface NegotiationResult {
 }
 
 export function logRequest(request: Request, result: NegotiationResult): void {
-    // Written out in full: the edge bundler substitutes only the literal expression, so a helper or
-    // destructuring would read undefined.
-    if (process.env.MIDDLEWARE_LOG_ENABLED !== 'true') return
     if (request.headers.has(SUBREQUEST_HEADER)) return
     const url = new URL(request.url)
     if (!LOGGED_PATHS.test(url.pathname)) return

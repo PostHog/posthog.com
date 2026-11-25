@@ -87,13 +87,6 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
     assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })
 
-function enableLog(t: TestContext): void {
-    process.env.MIDDLEWARE_LOG_ENABLED = 'true'
-    t.after(() => {
-        delete process.env.MIDDLEWARE_LOG_ENABLED
-    })
-}
-
 // Answers the `.md` sibling fetch and collects the request lines the middleware logs.
 function mockSiblingAndLog(t: TestContext, markdownStatus = 200): Record<string, unknown>[] {
     t.mock.method(globalThis, 'fetch', async () => new Response('# Product analytics', { status: markdownStatus }))
@@ -103,7 +96,6 @@ function mockSiblingAndLog(t: TestContext, markdownStatus = 200): Record<string,
 }
 
 test('logs the request and the Markdown served, with values only for allowlisted headers and parameters', async (t) => {
-    enableLog(t)
     const lines = mockSiblingAndLog(t)
     const headers = {
         'user-agent': 'Claude-User (claude-code/2.1.0; +https://support.anthropic.com/)',
@@ -149,7 +141,6 @@ test('logs the request and the Markdown served, with values only for allowlisted
 })
 
 test('logs an email address in the path as {email}', async (t) => {
-    enableLog(t)
     const lines = mockSiblingAndLog(t)
 
     await middleware(new Request('https://posthog.com/docs/someone%40example.com/setup'))
@@ -158,7 +149,6 @@ test('logs an email address in the path as {email}', async (t) => {
 })
 
 test('logs why no Markdown was served, and requests for a Markdown URL', async (t) => {
-    enableLog(t)
     const lines = mockSiblingAndLog(t, 404)
 
     await middleware(new Request(page, { headers: { 'user-agent': 'Mozilla/5.0', accept: 'text/html' } }))
@@ -178,12 +168,8 @@ test('logs why no Markdown was served, and requests for a Markdown URL', async (
     assert.equal(typeof lines[1].markdown_fetch_ms, 'number')
 })
 
-test("logs nothing when off, outside /docs, or for the middleware's own Markdown fetch", async (t) => {
+test("logs nothing outside /docs, or for the middleware's own Markdown fetch", async (t) => {
     const lines = mockSiblingAndLog(t)
-    await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
-    assert.equal(lines.length, 0)
-
-    enableLog(t)
     await middleware(new Request(`${page}.md`, { headers: { [SUBREQUEST_HEADER]: '1' } }))
     await middleware(new Request('https://posthog.com/blog/some-post', { headers: { 'user-agent': 'Claude-User' } }))
     await middleware(new Request('https://posthog.com/docsearch', { headers: { 'user-agent': 'Claude-User' } }))
