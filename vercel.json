@@ -305,6 +305,31 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/js/reference:ext(\\.md)?",
+            "destination": "/docs/references/posthog-js:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/react-native/reference:ext(\\.md)?",
+            "destination": "/docs/references/posthog-react-native:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/android/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/flutter/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-ios:ext(\\.md)?",
             "destination": "/docs/libraries/ios:ext?",
             "statusCode": 301
