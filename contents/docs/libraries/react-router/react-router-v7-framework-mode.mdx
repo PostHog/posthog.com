@@ -254,7 +254,6 @@ import { posthog } from './posthog.server';
 type RequestIds = { distinctId?: string; sessionId?: string };
 
 export const posthogClientContext = createContext<typeof posthog>();
-export const posthogErrorContext = createContext<RequestIds | undefined>(undefined);
 
 function tracingId(value: string | null): string | undefined {
   return value?.replace(/[\x00-\x1F\x7F-\x9F]/g, '').trim().slice(0, 1000) || undefined;
@@ -267,7 +266,6 @@ export const posthogMiddleware: MiddlewareFunction<Response> = async ({ request,
     sessionId: existing?.sessionId ?? tracingId(request.headers.get('x-posthog-session-id')),
   };
   context.set(posthogClientContext, posthog);
-  context.set(posthogErrorContext, data);
 
   return posthog.withContext(data, () => next(), { fresh: true });
 };
@@ -286,30 +284,16 @@ export const middleware: Route.MiddlewareFunction[] = [
 
 Work that the request starts keeps its IDs after `next()` settles. Pass explicit context to separate jobs that need their own IDs. Flush queued events before your platform can stop server work. Call `posthog.shutdown()` once when the server stops.
 
-To capture server errors, add the capture call to your `handleError` export in `app/entry.server.tsx`. Page loads send no tracing headers, only the PostHog cookie, so take the request's page URL and the cookie's IDs from `posthogExceptionContext` in the [React Router error tracking guide](/docs/error-tracking/installation/react-router#link-server-errors-to-the-user). The IDs the middleware saved take priority: they include an application identity set before it. Errors before this middleware runs have no saved IDs.
+To capture server errors, export the `handleError` that `createReactRouterErrorHandler` from `posthog-node` 6.1.0 or later creates. Add `readPostHogCookie: true` to the client options in `posthog.server.ts`, so page loads, which send only the PostHog cookie, link to the visitor too.
 
 ```ts file=app/entry.server.tsx
-import { isRouteErrorResponse, type HandleErrorFunction } from 'react-router';
+import { createReactRouterErrorHandler } from 'posthog-node';
 import { posthog } from './lib/posthog.server';
-import { posthogErrorContext } from './lib/posthog-middleware.server';
-import { posthogExceptionContext } from './lib/posthog-request.server';
 
-export const handleError: HandleErrorFunction = (error, { request, context }) => {
-  if (request.signal.aborted) return;
-  // Exporting handleError replaces React Router's own error log.
-  console.error(error);
-  // The 404 and 405 responses React Router creates are not errors to track.
-  if (isRouteErrorResponse(error)) return;
-  const saved = context.get(posthogErrorContext);
-  const { distinctId, properties } = posthogExceptionContext(request);
-  posthog.captureException(error, {
-    distinctId: saved?.distinctId ?? distinctId,
-    properties: saved?.sessionId ? { ...properties, $session_id: saved.sessionId } : properties,
-  });
-};
+export const handleError = createReactRouterErrorHandler(posthog);
 ```
 
-The guide also captures errors thrown while the page streams, and rejections of promises rendered with `<Await>`.
+The handler uses the IDs this middleware sets, including an application identity set before it, then the tracing headers, then the cookie. It skips cancelled requests and the 404 and 405 responses React Router creates, and logs each error the way React Router does. The [React Router error tracking guide](/docs/error-tracking/installation/react-router) also captures errors thrown while the page streams, and rejections of promises rendered with `<Await>`.
 
 ### Optional server span context
 
