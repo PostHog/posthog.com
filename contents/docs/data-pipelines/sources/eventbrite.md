@@ -9,7 +9,7 @@ availability:
 sourceId: Eventbrite
 ---
 
-Enter your Eventbrite private token to automatically pull your Eventbrite data – organizations, events, orders, attendees, and more – into the PostHog data warehouse.
+Enter your Eventbrite private token to automatically pull your Eventbrite data – organizations, events, orders, attendees, discounts, members, and more – into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -23,16 +23,20 @@ Once the syncs are complete, you can start using Eventbrite data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `organizations` | Organizations you have access to | Full refresh |
-| `categories` | Event categories | Full refresh |
-| `formats` | Event formats | Full refresh |
-| `events` | Events across your organizations | Full refresh |
-| `venues` | Venues across your organizations | Full refresh |
-| `orders` | Orders placed for your events | Incremental |
-| `attendees` | Attendees of your events | Incremental |
-| `ticket_classes` | Ticket classes defined on your events | Full refresh |
+| Table             | Description                                                    | Sync method  |
+| ----------------- | -------------------------------------------------------------- | ------------ |
+| `categories`      | Event categories                                               | Full refresh |
+| `discounts`       | Single-event discounts (public, coded, access codes, or holds) | Full refresh |
+| `events`          | Events across your organizations                               | Full refresh |
+| `formats`         | Event formats                                                  | Full refresh |
+| `inventory_tiers` | Inventory tiers with shared capacity across ticket classes     | Full refresh |
+| `members`         | Organization members with their role summaries                 | Full refresh |
+| `organizations`   | Organizations you have access to                               | Full refresh |
+| `ticket_classes`  | Ticket classes defined on your events                          | Full refresh |
+| `ticket_groups`   | Groups of ticket classes for cross-event discounts             | Full refresh |
+| `venues`          | Venues across your organizations                               | Full refresh |
+| `orders`          | Orders placed for your events                                  | Incremental  |
+| `attendees`       | Attendees of your events                                       | Incremental  |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
