@@ -931,7 +931,7 @@ export const posthog = {
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: 'Scale',
+            history_audit_logs: 'Boost',
             role_based_access_control: 'Enterprise',
             saml_sso: 'Scale',
             siem: false,
