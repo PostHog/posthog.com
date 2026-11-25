@@ -1341,6 +1341,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/ai-engineering/wizard-signup:ext(\\.md)?",
+            "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-engineering/manual-capture:ext(\\.md)?",
             "destination": "/docs/ai-observability/installation/manual-capture:ext?",
             "statusCode": 301
@@ -7816,6 +7821,11 @@
         {
             "source": "/docs/ai-evals/taggers.md",
             "destination": "/docs/ai-evals.md#categories",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/taggers:ext(\\.md)?",
+            "destination": "/docs/api/evaluations:ext?",
             "statusCode": 301
         },
         {

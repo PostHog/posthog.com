@@ -171,7 +171,9 @@ After your CI run scores each dataset item, send the results to PostHog with [of
 
 Use a PostHog [dataset](/docs/ai-evals/datasets) to manage cases in PostHog or save them from production traces. This example loads a dataset revision before starting the experiment.
 
-This example builds on the [offline evals quickstart](/docs/ai-evals/offline-evals#run-your-first-experiment). Complete the quickstart first. To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, like the `cases` list in [step 3 of the quickstart](/docs/ai-evals/offline-evals#3-run-the-cases-and-upload-scores). Set `POSTHOG_DATASET_ID` to your dataset's ID. Then, in the step 3 code, replace the experiment creation and the loop over `cases` with the code below. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call.
+This example builds on the [offline evals quickstart](/docs/ai-evals/offline-evals#run-your-first-experiment). Complete the quickstart first. To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, like the `cases` list in [step 3 of the quickstart](/docs/ai-evals/offline-evals#3-run-the-cases-and-upload-scores). Set `POSTHOG_DATASET_ID` to your dataset's ID.
+
+In Python or TypeScript, replace the experiment creation and the loop over `cases`. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call. In Go, add `"encoding/json"` to the imports in `baseline/main.go` and replace the rest of `runExperiment` after the scorer lookup.
 
 <MultiLanguage selector="tabs">
 
@@ -228,11 +230,51 @@ for (const row of items) {
 }
 ```
 
+```go file=Go
+snapshot, err := client.Datasets.Snapshot(ctx, os.Getenv("POSTHOG_DATASET_ID"), nil)
+if err != nil {
+	return err
+}
+experiment, err := client.CreateExperiment(ctx, evaluations.Fields{
+	"name": "Support agent from a dataset", "suite_key": "support-agent", "run_source": "local",
+	"dataset_revision_id": snapshot.RevisionID(),
+})
+if err != nil {
+	return err
+}
+err = snapshot.ForEach(ctx, 25, func(row evaluations.DatasetItem) error {
+	input, ok := row.Input.(string)
+	if !ok {
+		return fmt.Errorf("dataset item %s requires a string input", row.ID)
+	}
+	raw, err := json.Marshal(row.ExpectedOutput)
+	if err != nil {
+		return err
+	}
+	var expected toolCall
+	if err := json.Unmarshal(raw, &expected); err != nil || expected.Tool == "" || expected.Arguments == nil {
+		return fmt.Errorf("dataset item %s requires an expected tool and arguments", row.ID)
+	}
+	output := runAgent(input)
+	item, err := evaluations.ItemFromDataset(row, evaluations.Fields{"output": output.fields()})
+	if err != nil {
+		return err
+	}
+	results, err := evaluateAnswer(item, output, expected, versions)
+	if err != nil {
+		return err
+	}
+	_, err = experiment.UploadResults(ctx, results)
+	return err
+})
+return finish(ctx, experiment, err)
+```
+
 </MultiLanguage>
 
-`from_dataset_item()` / `fromDatasetItem()` copies the test case and its version into the experiment item. Always supply the new run's output. The dataset's `source_output` is an earlier answer.
+`from_dataset_item()` in Python, `fromDatasetItem()` in TypeScript, and `ItemFromDataset()` in Go copy the test case and its version into the experiment item. Always supply the new run's output. The dataset's `source_output` is an earlier answer.
 
-By default, `snapshot()` selects the latest revision when you call it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript. The revision must still be available under the [dataset retention policy](/docs/ai-evals/datasets#data-retention).
+By default, the snapshot uses the latest revision when you open it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript. In Go, set `revision := 12` and pass `&revision` as the last argument to `Snapshot`. The revision must still be available under the [dataset retention policy](/docs/ai-evals/datasets#data-retention).
 
 ## Further reading
 

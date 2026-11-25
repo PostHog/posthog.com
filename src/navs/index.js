@@ -4193,10 +4193,6 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/ai-wizard',
                         },
                         {
-                            name: 'Sign up with the wizard',
-                            url: '/docs/ai-engineering/wizard-signup',
-                        },
-                        {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
                             children: posthogMcpNav,

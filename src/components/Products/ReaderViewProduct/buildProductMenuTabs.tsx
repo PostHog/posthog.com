@@ -17,7 +17,7 @@ import {
     sectionPages,
     useBookPages,
 } from 'components/Learn/PocketGuides/bookModel'
-import { markChapterReadOnMove } from 'components/Learn/PocketGuides/chapterProgress'
+import { useMarkChapterReadOnMove } from 'components/Learn/PocketGuides/chapterProgress'
 import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -116,6 +116,7 @@ const LearnNav = ({
 }) => {
     const pages = sectionPages(useBookPages(volumeId), section)
     const posthog = usePostHog()
+    const markChapterReadOnMove = useMarkChapterReadOnMove()
     const volume = volumeById(volumeId)
     const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.

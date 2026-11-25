@@ -296,7 +296,10 @@ for (const initiallyAvailable of [false, true]) {
             '../../../hooks/usePocketGuideCounts': () => ({}),
             './Cover': () => null,
             './bookOpening': { openPocketGuide: () => undefined },
-            './chapterProgress': { markChapterReadOnMove: () => undefined, useReadChapterSlugs: () => new Set() },
+            './chapterProgress': {
+                useMarkChapterReadOnMove: () => () => undefined,
+                useReadChapterSlugs: () => new Set(),
+            },
             './bookContext': { useEntry: () => ({}) },
             '../../../context/App': { useAppWindows: () => ({ windows }) },
             '../../../constants/pocketGuides': {
