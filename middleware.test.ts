@@ -2,9 +2,9 @@ import assert from 'node:assert/strict'
 import { test, type TestContext } from 'node:test'
 
 import middleware from './middleware.ts'
-import { SUBREQUEST_HEADER } from './middleware-log.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
+const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
 
 test('serves Markdown on consecutive requests from each supported agent', async (t) => {
     t.mock.method(globalThis, 'fetch', async () => new Response('# Product analytics'))
