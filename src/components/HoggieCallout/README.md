@@ -158,8 +158,8 @@ The box uses `bg-lemon-lighter` (`#FFEBA3`) in light mode and `bg-accent` in dar
 
 When `interactive` is `true`:
 
-- **Hover nudge:** when the pointer enters the hog, the hog hops 8px and tilts 1.5°, then settles in about 500ms. It uses transitions, not keyframes.
-- **Poke:** the hog is a button labeled "Poke the hog". A click or tap plays `animate-wiggle`, like `CampfireHog`, and shows a speech bubble above the hog for 1.8 seconds. The bubble says a random line from the standard lines and `hoggieLines`. It never says the same line two times in a row. Screen readers announce the line through `role="status"`.
+- **Hover nudge:** when the pointer enters the hog, the hog hops 8px with a 1.5° tilt and springs back (`animate-hog-nudge`, 520ms). The nudge does not play while the hog bounces from a poke.
+- **Poke:** the hog is a button labeled "Poke the hog". A click or tap plays a squash-and-stretch bounce (`animate-hog-poke`, 560ms): the hog squashes, hops 12px, and settles. Each poke starts the bounce again. The hog pivots near its feet. The poke also shows a speech bubble above the hog for 1.8 seconds, which springs in (`animate-hog-bubble`). The bubble says a random line from the standard lines and `hoggieLines`. It never says the same line two times in a row. Screen readers announce the line through `role="status"`.
 - With `prefers-reduced-motion`, the hog does not move, but the bubble still shows.
 - The interactions do not move the copy or the button.
 

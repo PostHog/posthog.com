@@ -324,6 +324,22 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(6deg)' },
                     '50%': { transform: 'rotate(-6deg)' },
                 },
+                // HoggieCallout (yellow): a springy hop on hover, a squash-and-stretch bounce on poke, and a
+                // speech bubble that springs in.
+                'hog-nudge': {
+                    '0%, 100%': { transform: 'none' },
+                    '35%': { transform: 'translateY(-8px) rotate(1.5deg)' },
+                },
+                'hog-poke': {
+                    '0%, 100%': { transform: 'none' },
+                    '18%': { transform: 'scale(1.06, 0.92)' },
+                    '45%': { transform: 'translateY(-12px) scale(0.97, 1.04)' },
+                    '70%': { transform: 'translateY(0) scale(1.02, 0.98)' },
+                },
+                'hog-bubble': {
+                    '0%': { opacity: '0', transform: 'translateY(4px)' },
+                    '100%': { opacity: '1', transform: 'none' },
+                },
                 grow: {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.2)' },
@@ -450,6 +466,9 @@ module.exports = {
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
+                'hog-nudge': 'hog-nudge 520ms cubic-bezier(.3, 1.6, .5, 1)',
+                'hog-poke': 'hog-poke 560ms cubic-bezier(.3, 1.3, .5, 1)',
+                'hog-bubble': 'hog-bubble 200ms cubic-bezier(.3, 1.6, .5, 1)',
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
                 flash: 'flash 1s ease-in-out 2',

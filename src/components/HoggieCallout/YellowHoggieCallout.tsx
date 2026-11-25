@@ -12,9 +12,8 @@ import { focusRing } from 'components/UI/styles'
 import type { HoggieAlign, HoggieSize, YellowHoggieCalloutProps } from './index'
 import { MAX_LINE_LENGTH, STANDARD_LINES } from './lines'
 
-// How long the bubble stays up after a poke, and how long the hog stays up in a hover nudge.
+// How long the bubble stays up after a poke.
 const BUBBLE_MS = 1800
-const NUDGE_MS = 200
 
 // The outer padding on the side without the hog, and the hog's distance from its edge. `hogOut` is for
 // a centered hog that breaks out: it goes 16px past the side border.
@@ -120,12 +119,12 @@ export default function YellowHoggieCallout({
         MIN_HEIGHTS[mode][hoggieAlign][hoggieSize]
     }`
     const [nudging, setNudging] = useState(false)
-    // Each poke mounts a new wiggle element, so a poke during a wiggle starts the wiggle again.
+    // Each poke mounts a new bouncing element, so a poke during a bounce starts the bounce again.
     const [pokes, setPokes] = useState(0)
+    const [bouncing, setBouncing] = useState(false)
     const [saying, setSaying] = useState('')
     const lastLine = useRef('')
     const bubbleTimer = useRef<ReturnType<typeof setTimeout>>()
-    const nudgeTimer = useRef<ReturnType<typeof setTimeout>>()
 
     const linesKey = hoggieLines.join('\n')
     useEffect(() => {
@@ -143,18 +142,13 @@ export default function YellowHoggieCallout({
     useEffect(
         () => () => {
             clearTimeout(bubbleTimer.current)
-            clearTimeout(nudgeTimer.current)
         },
         []
     )
 
-    // A small hop on hover. It goes up fast and settles slowly, with transitions only.
-    // Touch and pen also fire pointerenter, so a tap would hop and wiggle at the same time.
-    const nudge = (event: React.PointerEvent) => {
-        if (event.pointerType !== 'mouse') return
-        setNudging(true)
-        clearTimeout(nudgeTimer.current)
-        nudgeTimer.current = setTimeout(() => setNudging(false), NUDGE_MS)
+    // A springy hop on hover. It does not play while the hog bounces from a poke.
+    const nudge = () => {
+        if (!bouncing) setNudging(true)
     }
 
     // A random line that is not the line the hog just said.
@@ -164,7 +158,9 @@ export default function YellowHoggieCallout({
         const line = fresh[Math.floor(Math.random() * fresh.length)] ?? lines[0]
         lastLine.current = line
         setSaying(line)
+        setNudging(false)
         setPokes((count) => count + 1)
+        setBouncing(true)
         clearTimeout(bubbleTimer.current)
         bubbleTimer.current = setTimeout(() => setSaying(''), BUBBLE_MS)
     }
@@ -188,7 +184,10 @@ export default function YellowHoggieCallout({
                                 className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-3 w-max max-w-[11rem] -translate-x-1/2"
                             >
                                 {saying && (
-                                    <SpeechBubble className="px-3 py-2 text-center text-sm font-medium">
+                                    <SpeechBubble
+                                        key={saying}
+                                        className="px-3 py-2 text-center text-sm font-medium motion-safe:animate-hog-bubble"
+                                    >
                                         {saying}
                                     </SpeechBubble>
                                 )}
@@ -200,16 +199,22 @@ export default function YellowHoggieCallout({
                                 onPointerEnter={nudge}
                                 className={`h-full cursor-pointer rounded-sm ${focusRing}`}
                             >
+                                {/* Both spans pivot near the hog's feet. The bounce's animationend also
+                                    reaches the outer span, so the outer span checks the target. */}
                                 <span
-                                    className={`block h-full motion-safe:transition-transform motion-safe:ease-out ${
-                                        nudging
-                                            ? 'motion-safe:duration-200 motion-safe:-translate-y-2 motion-safe:rotate-[1.5deg]'
-                                            : 'motion-safe:duration-500'
+                                    onAnimationEnd={(event) =>
+                                        event.target === event.currentTarget && setNudging(false)
+                                    }
+                                    className={`block h-full origin-[50%_92%] ${
+                                        nudging ? 'motion-safe:animate-hog-nudge' : ''
                                     }`}
                                 >
                                     <span
                                         key={pokes}
-                                        className={`block h-full ${pokes > 0 ? 'motion-safe:animate-wiggle' : ''}`}
+                                        onAnimationEnd={() => setBouncing(false)}
+                                        className={`block h-full origin-[50%_92%] ${
+                                            bouncing ? 'motion-safe:animate-hog-poke' : ''
+                                        }`}
                                     >
                                         {hog}
                                     </span>
