@@ -53,7 +53,8 @@ Group properties also need [group analytics](/docs/product-analytics/group-analy
 6. Select the synced table or materialized view to read from.
 7. Select the **Distinct ID column**, or the **Group key column** for groups. This is how a row finds the person or group to update.
 8. Map each warehouse column to the property name to write it to. Add one row per column. Each mapped column takes its own optional description.
-9. Save.
+9. For person properties, choose what happens **When a person leaves the table**: **Keep the last synced values** (the default) or **Remove mapped properties** once the row is gone. This setting is not available for group properties.
+10. Save.
 
 PostHog starts a backfill as soon as you save, so the first values arrive without another sync.
 
@@ -63,7 +64,7 @@ You need project admin access, plus edit access on the warehouse source behind t
 
 The table and the column mappings are fixed once you save. To change either, delete the mapping and create it again.
 
-The key column and the on/off toggle stay editable.
+The key column, the removal behavior (person properties only), and the on/off toggle stay editable.
 
 Properties that arrive this way carry a **Warehouse** provenance tag in property lists, so you can tell them apart from the ones your SDK sets.
 
@@ -128,7 +129,28 @@ Step 4 is where rows go missing. The run history reports that count separately, 
 
 Materialized views use the same property sync steps after refreshing. **Sync now** refreshes the view, and **Backfill** reads its stored results. Views on the older data modeling schedule do not update properties automatically; **Sync now** reports this limitation. Refresh the view, then use **Backfill** to update its properties.
 
-A person update arrives as a `$set` event. A group update arrives as a `$groupidentify` event. PostHog sends them at a controlled rate, so a large backfill lands over time rather than all at once.
+A person update arrives as a `$set` event. A removal arrives as a `$unset` event. A group update arrives as a `$groupidentify` event. PostHog sends them at a controlled rate, so a large backfill lands over time rather than all at once.
+
+### Removing stale properties
+
+By default, a person who leaves the warehouse table keeps their last synced values. If you sync a membership-style table – where rows come and go as customers join or leave – those stale values can cause cohorts and feature flags to keep matching people who are no longer in the table.
+
+To clean up automatically, set **When a person leaves the table** to **Remove mapped properties** on a person property mapping. After a full table read that no longer contains the person's row, PostHog unsets every property that mapping wrote.
+
+Removal only runs after a complete table read. These reads trigger removal:
+
+- A full-refresh import (not incremental or append)
+- A view rebuild that staged every batch
+
+These reads never remove properties:
+
+- Incremental or append syncs, because they only stage changed rows
+- Resumable reads, because they can pick up part way through
+- Backfills, because the underlying table can be partial while a view rebuild runs or after one failed
+
+When a person has multiple distinct IDs and at least one is still in the table, PostHog keeps their properties. Removal is decided per person, not per distinct ID. As a safety guard, persons with 1,000 or more distinct IDs are never removed.
+
+This setting is only available for person properties. Group properties do not support removal.
 
 ### Sync now and backfill
 
@@ -143,13 +165,14 @@ Only one run happens at a time per table. Both buttons are disabled while a run 
 
 Expand a row to see its runs. The counts follow the steps above:
 
-| Column                  | What it means                                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------------------------- |
-| **Status**              | Whether the run finished. A completed run that updated nobody is normal                           |
-| **Trigger**             | What started the run: the sync schedule, **Sync now**, or **Backfill**                            |
-| **Rows read**           | Rows the import staged for this run                                                               |
-| **Updated**             | People or groups updated, out of the rows whose values changed, with the share of those rows      |
-| **Skipped (no person)** | Changed rows whose key matched no existing person. Reads **Skipped (no group)** on the Groups tab |
+| Column                  | What it means                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Status**              | Whether the run finished. A completed run that updated nobody is normal                                |
+| **Trigger**             | What started the run: the sync schedule, **Sync now**, or **Backfill**                                 |
+| **Rows read**           | Rows the import staged for this run                                                                    |
+| **Updated**             | People or groups updated, out of the rows whose values changed, with the share of those rows           |
+| **Skipped (no person)** | Changed rows whose key matched no existing person. Reads **Skipped (no group)** on the Groups tab      |
+| **Removed**             | People whose mapped properties were removed because they left the source table. Person properties only |
 
 A row of zeros is not a failure on its own. The status carries a short note that says which zero you are looking at: `no new rows` means the import brought nothing, and `no changes` means every row already holds the values last sent.
 
@@ -157,7 +180,7 @@ A row of zeros is not a failure on its own. The status carries a short note that
 
 Toggle a mapping off to stop updating its properties without deleting it. Values already synced stay on the people and groups. They stop changing.
 
-Deleting the mapping does the same and removes the configuration. Neither action removes the property values from person profiles.
+Deleting the mapping does the same and removes the configuration. Neither action removes the property values from person profiles. To remove properties from people who left the table, enable the **Remove mapped properties** setting instead.
 
 ## Costs
 
