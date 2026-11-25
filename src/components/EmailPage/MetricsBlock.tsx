@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { IconChevronDown, IconSparkles } from '@posthog/icons'
+import { IconChevronDown, IconRewindPlay, IconSparkles } from '@posthog/icons'
 import { blockClassName } from './Widgets'
+import { ReplayPlayer } from './Replay'
 
 // A slimmed-down copy of a workflow's Overview tab in the app: headline metrics with sparklines, health, step reach,
 // and what people did in the product afterwards. The numbers are made up, and stable for each date range.
@@ -83,6 +84,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 export function MetricsBlock(): JSX.Element {
     const [range, setRange] = useState<Range>('30d')
+    const [watching, setWatching] = useState(false)
     const days = ranges[range]
 
     const data = useMemo(() => {
@@ -253,17 +255,34 @@ export function MetricsBlock(): JSX.Element {
                     </div>
                     <div className="flex flex-col gap-4">
                         <div className="rounded-lg border border-red bg-red/5 p-4">
-                            <p className="m-0 font-semibold">After the click</p>
-                            <p className="m-0 mb-2 text-xs text-secondary">
-                                Only PostHog sees this part. It comes from your product events.
-                            </p>
-                            <p className="m-0 text-3xl font-bold tabular-nums">{upgraded.toLocaleString('en-US')}</p>
-                            <p className="m-0 text-sm">
-                                people who clicked uploaded their first file within 7 days{' '}
-                                <span className="text-secondary">
-                                    ({((upgraded / data.totals.clicked) * 100).toFixed(0)}% of clicks)
-                                </span>
-                            </p>
+                            {watching ? (
+                                <div className="h-80">
+                                    <ReplayPlayer scene="invite" onClose={() => setWatching(false)} />
+                                </div>
+                            ) : (
+                                <>
+                                    <p className="m-0 font-semibold">After the click</p>
+                                    <p className="m-0 mb-2 text-xs text-secondary">
+                                        Only PostHog sees this part. It comes from your product events.
+                                    </p>
+                                    <p className="m-0 text-3xl font-bold tabular-nums">
+                                        {upgraded.toLocaleString('en-US')}
+                                    </p>
+                                    <p className="m-0 text-sm">
+                                        people who clicked uploaded their first file within 7 days{' '}
+                                        <span className="text-secondary">
+                                            ({((upgraded / data.totals.clicked) * 100).toFixed(0)}% of clicks)
+                                        </span>
+                                    </p>
+                                    <button
+                                        type="button"
+                                        onClick={() => setWatching(true)}
+                                        className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-red"
+                                    >
+                                        <IconRewindPlay className="size-4" /> Watch one of them
+                                    </button>
+                                </>
+                            )}
                         </div>
                         <div className="rounded-lg border border-primary bg-white p-4 dark:bg-accent">
                             <p className="m-0 flex items-center gap-1.5 font-semibold">

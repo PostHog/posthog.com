@@ -14,14 +14,11 @@ import {
     IconCode,
     IconCopy,
     IconFilter,
-    IconMessage,
-    IconPeople,
     IconRewindPlay,
     IconServer,
     IconShieldPeople,
     IconSparkles,
     IconWarning,
-    IconWebhooks,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
@@ -61,15 +58,6 @@ function StartButtons(): JSX.Element {
         </div>
     )
 }
-
-const triggers = [
-    { Icon: IconBolt, label: 'Any event' },
-    { Icon: IconPeople, label: 'Joins a cohort' },
-    { Icon: IconCalendar, label: 'On a schedule' },
-    { Icon: IconWebhooks, label: 'Webhook' },
-    { Icon: IconSparkles, label: 'Survey response' },
-    { Icon: IconMessage, label: 'Slack message' },
-]
 
 const features = [
     {
@@ -418,20 +406,9 @@ export default function EmailPage(): JSX.Element {
                     <section className="flex flex-col gap-6">
                         <Intro title={<>Automations that improve themselves</>}>
                             An automation starts when someone does something, then waits, branches, and sends email,
-                            SMS, push, or Slack messages. PostHog watches how each one performs and suggests changes.
-                            You approve one as a draft, publish it, and see whether it worked.
+                            push, or Slack messages. Pick an example. On self-driving ones, PostHog watches how each
+                            step performs and suggests changes, and you approve them.
                         </Intro>
-                        <div className="flex flex-wrap items-center gap-2">
-                            <span className="mr-1 text-sm font-semibold text-secondary">Triggered by</span>
-                            {triggers.map(({ Icon, label }) => (
-                                <span
-                                    key={label}
-                                    className="flex items-center gap-1.5 rounded-full border border-primary bg-white px-3 py-1 text-sm dark:bg-accent"
-                                >
-                                    <Icon className="size-4 text-blue" /> {label}
-                                </span>
-                            ))}
-                        </div>
                         <CanvasBlock />
                         <ToolsTicker
                             items={destinationItems}

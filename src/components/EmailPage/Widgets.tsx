@@ -6,6 +6,12 @@ import {
     IconCheckCircle,
     IconChevronDown,
     IconCursor,
+    IconBell,
+    IconCalendar,
+    IconMessage,
+    IconPeople,
+    IconSparkles,
+    IconWebhooks,
     IconEye,
     IconSend,
     IconClock,
@@ -813,7 +819,181 @@ function SuggestionPanel({ stage, setStage }: { stage: Stage; setStage: (s: Stag
     )
 }
 
+// The example scenarios above the canvas. Onboarding is the one PostHog improves on its own; the rest are static.
+type Scenario = {
+    trigger: { Icon: Tile['Icon']; label: string }
+    name: string
+    steps: Tile[]
+    branch?: { condition: Tile; no: Tile[]; yes: Tile[] }
+    about: string
+    stats: [label: string, value: string][]
+}
+
+const email = (title: string, count?: number): Tile => ({
+    Icon: IconLetter,
+    color: '#2F80FA',
+    title,
+    detail: 'Email',
+    count,
+})
+const wait = (days: number, count?: number): Tile => ({
+    Icon: IconClock,
+    color: '#a20031',
+    title: `Wait ${days} day${days > 1 ? 's' : ''}`,
+    detail: 'Delay',
+    badge: `${days}d`,
+    count,
+})
+const start = (Icon: Tile['Icon'], title: string, detail: string, count: number): Tile => ({
+    Icon,
+    color: '#35C46F',
+    shape: 'start',
+    title,
+    detail,
+    count,
+})
+
+const scenarios: Scenario[] = [
+    {
+        trigger: { Icon: IconSparkles, label: 'Sign up' },
+        name: 'Onboarding',
+        steps: [],
+        about: '',
+        stats: [],
+    },
+    {
+        trigger: { Icon: IconPeople, label: 'Joining a cohort' },
+        name: 'Win back',
+        steps: [
+            start(IconPeople, 'Joins "At risk of churning"', 'Cohort trigger', 312),
+            email('We miss you', 312),
+            wait(3, 309),
+        ],
+        branch: {
+            condition: {
+                Icon: IconDecisionTree,
+                color: '#35C46F',
+                title: 'Came back?',
+                detail: 'Condition',
+                count: 309,
+            },
+            no: [{ Icon: IconMessage, color: '#4A154B', title: 'Ping the account owner', detail: 'Slack', count: 201 }],
+            yes: [{ ...exitTile, detail: 'Active again' }],
+        },
+        about: 'When someone stops using Hedgebox, email them. If they still don’t come back, tell their account owner in Slack.',
+        stats: [
+            ['Came back', '35%'],
+            ['Opened', '44%'],
+            ['Slack pings', '201'],
+        ],
+    },
+    {
+        trigger: { Icon: IconCalendar, label: 'A schedule' },
+        name: 'Weekly digest',
+        steps: [
+            start(IconCalendar, 'Every Monday at 8 AM', 'Schedule trigger', 18450),
+            email('Your week in Hedgebox', 18450),
+            exitTile,
+        ],
+        about: 'Every Monday, send each active person what changed in their folders last week.',
+        stats: [
+            ['Sent', '18,450'],
+            ['Opened', '52%'],
+            ['Clicked', '9.8%'],
+        ],
+    },
+    {
+        trigger: { Icon: IconWebhooks, label: 'A webhook' },
+        name: 'Trial ending',
+        steps: [
+            start(IconWebhooks, 'Stripe: trial ends in 3 days', 'Webhook trigger', 540),
+            email('Your trial ends Friday', 540),
+            wait(2, 532),
+            {
+                Icon: IconBell,
+                color: '#F7A501',
+                title: 'Last day of your trial',
+                detail: 'Push notification',
+                count: 498,
+            },
+            exitTile,
+        ],
+        about: 'Stripe tells PostHog a trial is about to end. Email first, then a push notification on the last day.',
+        stats: [
+            ['Upgraded', '23%'],
+            ['Opened', '61%'],
+            ['Push taps', '14%'],
+        ],
+    },
+    {
+        trigger: { Icon: IconMessage, label: 'A survey response' },
+        name: 'Unhappy NPS',
+        steps: [start(IconMessage, 'NPS score of 6 or less', 'Survey trigger', 87)],
+        branch: {
+            condition: {
+                Icon: IconDecisionTree,
+                color: '#35C46F',
+                title: 'On a paid plan?',
+                detail: 'Condition',
+                count: 87,
+            },
+            no: [email('Sorry to hear that', 52)],
+            yes: [
+                { Icon: IconMessage, color: '#4A154B', title: 'Post to #customer-success', detail: 'Slack', count: 35 },
+            ],
+        },
+        about: 'A low score gets a personal reply. If they pay, the customer success team hears about it in Slack.',
+        stats: [
+            ['Replied', '41%'],
+            ['Slack posts', '35'],
+            ['Score went up', '29%'],
+        ],
+    },
+]
+
+function Flow({ scenario }: { scenario: Scenario }): JSX.Element {
+    const { steps, branch } = scenario
+    return (
+        <motion.div
+            key={scenario.name}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col pt-2 @3xl/reader-content:min-h-[38rem]"
+        >
+            {steps.map((tile, i) => (
+                <React.Fragment key={i}>
+                    {i > 0 && <Down />}
+                    <TileRow tile={tile} />
+                </React.Fragment>
+            ))}
+            {branch && (
+                <>
+                    <Down />
+                    <TileRow tile={branch.condition} />
+                    <span className="mx-auto block h-4 w-[1.5px] bg-border" />
+                    <div className="mx-auto h-4 w-1/2 rounded-t-lg border-x-[1.5px] border-t-[1.5px] border-primary" />
+                    <div className="grid grid-cols-2">
+                        {(['No', 'Yes'] as const).map((side) => (
+                            <div key={side} className="flex flex-col">
+                                <Pill>{side}</Pill>
+                                {branch[side === 'No' ? 'no' : 'yes'].map((tile, i) => (
+                                    <React.Fragment key={i}>
+                                        <Down />
+                                        <TileRow tile={tile} />
+                                    </React.Fragment>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
+        </motion.div>
+    )
+}
+
 export function CanvasBlock(): JSX.Element {
+    const [scenarioIndex, setScenarioIndex] = useState(0)
+    const scenario = scenarios[scenarioIndex]
     const [stage, setStage] = useState<Stage>('suggested')
     const proposed = stage !== 'suggested'
     const draft = stage === 'draft'
@@ -849,89 +1029,150 @@ export function CanvasBlock(): JSX.Element {
 
     return (
         <div className={`${blockClassName} !p-0 overflow-hidden`}>
-            <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-2.5">
-                <strong>Onboarding</strong>
-                {draft ? (
-                    <span className="rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">Draft</span>
-                ) : (
-                    <span className="rounded-full bg-green/15 px-2 text-xs font-semibold text-green">
-                        Live · v{stage === 'live' ? 4 : 3}
-                    </span>
-                )}
-                <span className="ml-auto text-sm text-secondary">
-                    Nudge clicked{' '}
-                    <strong className="font-code text-base text-primary tabular-nums">{clicked.toFixed(1)}%</strong>
-                </span>
+            <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-3">
+                <span className="mr-1 text-sm font-semibold text-secondary">Triggered by</span>
+                {scenarios.map(({ trigger: { Icon, label } }, i) => (
+                    <button
+                        key={label}
+                        type="button"
+                        aria-pressed={i === scenarioIndex}
+                        onClick={() => setScenarioIndex(i)}
+                        className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm ${
+                            i === scenarioIndex
+                                ? 'border-blue bg-blue/10 font-semibold text-primary'
+                                : 'border-primary bg-white hover:bg-accent dark:bg-accent'
+                        }`}
+                    >
+                        <Icon className={`size-4 ${i === 0 ? 'text-lilac' : 'text-blue'}`} /> {label}
+                    </button>
+                ))}
             </div>
-            <div
-                className="grid gap-8 p-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_22rem]"
-                style={{
-                    backgroundImage: 'radial-gradient(rgb(var(--border) / 0.7) 1px, transparent 1px)',
-                    backgroundSize: '18px 18px',
-                }}
-            >
-                <div className="flex flex-col pt-2 @3xl/reader-content:min-h-[38rem]">
-                    {head.map((tile, i) => (
-                        <React.Fragment key={i}>
-                            {i > 0 && <Down />}
-                            <TileRow tile={tile} />
-                        </React.Fragment>
-                    ))}
-                    <Down />
-                    <AnimatePresence mode="popLayout" initial={false}>
-                        {proposed ? (
-                            <motion.div
-                                key="branch"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="flex flex-col"
-                            >
-                                <TileRow
-                                    tile={{
-                                        Icon: IconDecisionTree,
-                                        color: '#35C46F',
-                                        title: 'Uploaded a file?',
-                                        detail: 'Condition',
-                                        count: 1198,
-                                        changed: draft,
-                                    }}
-                                />
-                                {/* The fork: one line down from the condition, then out to each branch. */}
-                                <span className="mx-auto block h-4 w-[1.5px] bg-border" />
-                                <div className="mx-auto h-4 w-1/2 rounded-t-lg border-x-[1.5px] border-t-[1.5px] border-primary" />
-                                <div className="grid grid-cols-2">
-                                    <div className="flex flex-col">
-                                        <Pill>No</Pill>
-                                        <Down />
+            {scenarioIndex > 0 ? (
+                <>
+                    <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-2.5">
+                        <strong>{scenario.name}</strong>
+                        <span className="rounded-full bg-green/15 px-2 text-xs font-semibold text-green">Live</span>
+                    </div>
+                    <div
+                        className="grid gap-8 p-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_22rem]"
+                        style={{
+                            backgroundImage: 'radial-gradient(rgb(var(--border) / 0.7) 1px, transparent 1px)',
+                            backgroundSize: '18px 18px',
+                        }}
+                    >
+                        <Flow scenario={scenario} />
+                        <div className="flex flex-col gap-3 self-start rounded-lg border border-primary bg-white p-4 text-sm dark:bg-accent">
+                            <p className="m-0">{scenario.about}</p>
+                            <div className="grid grid-cols-3 gap-2">
+                                {scenario.stats.map(([label, value]) => (
+                                    <div key={label} className="rounded bg-accent p-2">
+                                        <div className="text-lg font-bold tabular-nums">{value}</div>
+                                        <div className="text-xs text-secondary">{label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                            <p className="m-0 text-xs text-secondary">
+                                Last 30 days. PostHog has no changes to suggest yet.
+                            </p>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-2.5">
+                        <strong>Onboarding</strong>
+                        <span className="flex items-center gap-1 rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">
+                            <IconSparkles className="size-3" /> Self-driving
+                        </span>
+                        {draft ? (
+                            <span className="rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">
+                                Draft
+                            </span>
+                        ) : (
+                            <span className="rounded-full bg-green/15 px-2 text-xs font-semibold text-green">
+                                Live · v{stage === 'live' ? 4 : 3}
+                            </span>
+                        )}
+                        <span className="ml-auto text-sm text-secondary">
+                            Nudge clicked{' '}
+                            <strong className="font-code text-base text-primary tabular-nums">
+                                {clicked.toFixed(1)}%
+                            </strong>
+                        </span>
+                    </div>
+                    <div
+                        className="grid gap-8 p-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_22rem]"
+                        style={{
+                            backgroundImage: 'radial-gradient(rgb(var(--border) / 0.7) 1px, transparent 1px)',
+                            backgroundSize: '18px 18px',
+                        }}
+                    >
+                        <div className="flex flex-col pt-2 @3xl/reader-content:min-h-[38rem]">
+                            {head.map((tile, i) => (
+                                <React.Fragment key={i}>
+                                    {i > 0 && <Down />}
+                                    <TileRow tile={tile} />
+                                </React.Fragment>
+                            ))}
+                            <Down />
+                            <AnimatePresence mode="popLayout" initial={false}>
+                                {proposed ? (
+                                    <motion.div
+                                        key="branch"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        className="flex flex-col"
+                                    >
+                                        <TileRow
+                                            tile={{
+                                                Icon: IconDecisionTree,
+                                                color: '#35C46F',
+                                                title: 'Uploaded a file?',
+                                                detail: 'Condition',
+                                                count: 1198,
+                                                changed: draft,
+                                            }}
+                                        />
+                                        {/* The fork: one line down from the condition, then out to each branch. */}
+                                        <span className="mx-auto block h-4 w-[1.5px] bg-border" />
+                                        <div className="mx-auto h-4 w-1/2 rounded-t-lg border-x-[1.5px] border-t-[1.5px] border-primary" />
+                                        <div className="grid grid-cols-2">
+                                            <div className="flex flex-col">
+                                                <Pill>No</Pill>
+                                                <Down />
+                                                <TileRow tile={nudge} />
+                                                <Down />
+                                                <TileRow tile={exitTile} />
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <Pill>Yes</Pill>
+                                                <Down />
+                                                <TileRow
+                                                    tile={{ ...exitTile, title: 'Exit', detail: 'Already active' }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ) : (
+                                    <motion.div
+                                        key="line"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        className="flex flex-col"
+                                    >
                                         <TileRow tile={nudge} />
                                         <Down />
                                         <TileRow tile={exitTile} />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <Pill>Yes</Pill>
-                                        <Down />
-                                        <TileRow tile={{ ...exitTile, title: 'Exit', detail: 'Already active' }} />
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                key="line"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="flex flex-col"
-                            >
-                                <TileRow tile={nudge} />
-                                <Down />
-                                <TileRow tile={exitTile} />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-                <SuggestionPanel stage={stage} setStage={setStage} />
-            </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                        <SuggestionPanel stage={stage} setStage={setStage} />
+                    </div>
+                </>
+            )}
         </div>
     )
 }

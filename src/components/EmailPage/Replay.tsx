@@ -173,7 +173,7 @@ export function ReplayPlayer({ scene: key, onClose }: { scene: string; onClose: 
                     transition={{ duration: next ? Math.min(0.6, (next.at - last.at) / 1000) : 0.3, ease: 'easeInOut' }}
                 >
                     {state.drag && (
-                        <span className="absolute left-3 top-3 whitespace-nowrap rounded bg-white px-1.5 py-0.5 text-[10px] shadow dark:bg-accent">
+                        <span className="absolute right-1 top-4 whitespace-nowrap rounded bg-white px-1.5 py-0.5 text-[10px] shadow dark:bg-accent">
                             Q4 plan.pdf
                         </span>
                     )}
