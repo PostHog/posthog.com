@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import { colors } from '@posthog/brand/colors'
-import { HedgehogChart } from '@posthog/brand/hoggies'
+import { HedgehogRobot } from '@posthog/brand/hoggies'
+import { Logo } from '@posthog/brand/logo'
+import { IconCheck, IconLlmAnalytics } from '@posthog/icons'
 import { DefaultTooltip } from '@posthog/quill-charts'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import OSButton from 'components/OSButton'
+import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import Stickers from 'components/Stickers/Index'
+import { StickerAi, StickerCrown, StickerRobot, StickerServers } from 'components/Stickers/Stickers'
 import { Accordion } from 'components/UI/Accordion'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
 import { Table } from 'components/UI/Table'
@@ -9,36 +17,32 @@ import { rowLogo } from './rowLogo'
 
 const sections = {
     model: {
-        question: 'Which AI models do teams use?',
+        question: 'May the best model win',
+        sticker: StickerAi,
         heading: 'Model',
         plural: 'models',
         caption: 'Model adoption',
-        description:
-            'Each percentage is the share of organizations in the report that used that model that month. An organization can use several models, so the percentages can add up to more than 100%.',
     },
     lab: {
-        question: 'Who makes the models teams use?',
+        question: 'AI labs battle it out',
+        sticker: StickerRobot,
         heading: 'Lab',
         plural: 'labs',
         caption: 'Model adoption by lab',
-        description:
-            'Each percentage is the share of organizations in the report that used at least one model from that lab that month. An organization can use models from several labs, so the percentages can add up to more than 100%.',
     },
     provider_diversity: {
         question: 'How many model providers do teams use?',
+        sticker: StickerServers,
         heading: 'Providers',
         plural: 'provider groups',
         caption: 'Number of providers per organization',
-        description:
-            'We count providers for organizations whose events named at least one that month. A routing service counts as one provider, even if a team uses it to access several models.',
     },
     framework: {
-        question: 'Which frameworks and agent tools do teams use?',
+        question: 'Framework and agent tool popularity contest',
+        sticker: StickerCrown,
         heading: 'Framework or tool',
         plural: 'frameworks and tools',
         caption: 'Framework and agent tool adoption',
-        description:
-            'We calculate each month’s percentages using only organizations that named a tool. An organization that named two tools counts toward both.',
     },
 } as const
 type Section = keyof typeof sections
@@ -116,7 +120,7 @@ function ReportSection({
     const [expanded, setExpanded] = useState('')
     const month = history[history.length - 1]
     const previous = month && previousMonth(month)
-    const { question, heading, plural, caption, description } = sections[section]
+    const { question, sticker: Sticker, heading, plural, caption } = sections[section]
     const rows = series
         .filter((row) => row.facet === section && row.label !== 'Other models' && row.label !== 'Not reported')
         .map((row) => {
@@ -139,11 +143,6 @@ function ReportSection({
     const chartRows = rows.filter((row) => row.share != null).slice(0, section === 'model' ? modelChartLimit : 5)
     const expandedRow = rows.find((row) => row.key === expanded)
     if (expandedRow && !chartRows.includes(expandedRow)) chartRows.push(expandedRow)
-    const coverageLabel =
-        section === 'framework' ? 'Framework reported' : section === 'provider_diversity' ? 'Provider reported' : ''
-    const coverage = series
-        .find((row) => row.facet === 'coverage' && row.label === coverageLabel)
-        ?.points.find((point) => point.month === month)?.share
     const dates = history.map((value) => monthName(value))
 
     return (
@@ -151,18 +150,13 @@ function ReportSection({
             aria-labelledby={`ai-adoption-${section}`}
             className="border-t border-primary px-1 py-8 @lg:px-4 @lg:py-12"
         >
-            <h2 id={`ai-adoption-${section}`} className="m-0 text-2xl @lg:text-3xl">
-                {question}
-            </h2>
-            <p className="my-2 text-sm text-secondary">
-                {coverage != null &&
-                    `In ${monthName(month, longDateFormat)}, ${Number(
-                        coverage.toFixed(1)
-                    )}% of organizations in the report sent events that named ${
-                        section === 'framework' ? 'a framework or agent tool' : 'a model provider'
-                    }. `}
-                {description}
-            </p>
+            {/* Same sticker heading as the MCP leaderboard's StickerHeading. */}
+            <SectionHeading>
+                <span id={`ai-adoption-${section}`} className="inline-flex items-center gap-2.5">
+                    <Sticker className="size-8 shrink-0 -rotate-3" />
+                    {question}
+                </span>
+            </SectionHeading>
             {chartRows.length > 0 && (
                 <figure className="my-4 rounded-md border border-primary p-3 @lg:p-5">
                     <figcaption className="mb-2 font-semibold">
@@ -319,6 +313,55 @@ const reportQuestions = (period: string) => [
     },
 ]
 
+// A house ad for AI observability, with the same card as the MCP leaderboard's MCPAnalyticsAd.
+function AIObservabilityAd() {
+    const features = [
+        'Users, traces, generations, cost, and latency, all on one dashboard',
+        'Cost per customer, per model, and in total',
+        'Online evals that score live traffic with LLM judges or code',
+        'Offline evals in CI, so you catch regressions before you ship',
+    ]
+    return (
+        <aside aria-label="AI observability" className="not-prose mb-8">
+            <div className="relative border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6 @2xl/reader-content:grid @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @2xl/reader-content:gap-2">
+                <div className="min-w-0">
+                    <div className="flex items-center gap-2 text-blue mb-2">
+                        <IconLlmAnalytics className="size-6" />
+                        <span className="font-bold">AI Observability</span>
+                    </div>
+                    <h2 className="text-2xl font-bold text-primary m-0 mb-4">
+                        Have an agent of your own? See what it really does
+                    </h2>
+                    {/* Two independent columns, so an item never stretches to match the row beside it. */}
+                    <ul className="list-none m-0 p-0 mb-5 gap-x-6 text-sm text-primary @2xl/reader-content:columns-2">
+                        {features.map((feature) => (
+                            <li key={feature} className="flex items-start gap-2 mb-1.5 break-inside-avoid">
+                                <IconCheck className="size-4 shrink-0 text-green mt-0.5" />
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="text-sm text-secondary m-0 mb-4">
+                        Run this command to install: <InlineCode>npx @posthog/wizard ai-observability</InlineCode>
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <OSButton asLink to="https://app.posthog.com/signup" variant="primary" size="md">
+                            Get started
+                        </OSButton>
+                        <OSButton asLink to="/docs/ai-observability/start-here" variant="secondary" size="md">
+                            Read the docs
+                        </OSButton>
+                    </div>
+                </div>
+                <HedgehogRobot
+                    title="A robot hedgehog"
+                    className="hidden @2xl/reader-content:block justify-self-end self-center pt-8 w-44 @4xl/reader-content:w-52"
+                />
+            </div>
+        </aside>
+    )
+}
+
 export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] }): JSX.Element {
     const months = Array.from(new Set(series.flatMap((row) => row.points.map((point) => point.month)))).sort()
     const [selected, setSelected] = useState('')
@@ -327,34 +370,64 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
 
     return (
         <article className="@container mx-auto max-w-4xl text-primary">
-            <header className="flex items-center justify-between gap-3 rounded-lg border border-primary bg-gradient-to-r from-primary to-light-purple p-4 dark:to-purple-2-dark @lg:p-8">
-                <div className="min-w-0">
-                    <p className="m-0 font-mono text-xs">AI Observability · Monthly report</p>
-                    <h1 className="my-2 text-4xl tracking-tight @lg:text-5xl">How teams use AI</h1>
-                    <p className="m-0 max-w-prose">
-                        Each month, we look at organizations that sent at least 100 AI generation or embedding events to
-                        PostHog Cloud. An organization that sends a million events counts just as much as one that sends
-                        100.
-                    </p>
-                </div>
-                <HedgehogChart aria-hidden="true" className="size-20 shrink-0 @md:size-32 @lg:size-40" />
+            {/* Same hero as the MCP leaderboard. */}
+            <header className="not-prose">
+                <h1 className="text-4xl @3xl/reader-content:text-5xl font-bold !leading-[1.12] !m-0 tracking-tight">
+                    <Logo
+                        layout="logomark"
+                        variant="gradient"
+                        className="inline-block h-[0.8em] w-auto mr-3 align-baseline dark:hidden"
+                    />
+                    <Logo
+                        layout="logomark"
+                        variant="mono"
+                        className="hidden h-[0.8em] w-auto mr-3 align-baseline dark:inline-block"
+                    />
+                    PostHog's <span className="whitespace-nowrap">AI Observability</span>{' '}
+                    <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1 whitespace-nowrap">
+                        Leaderboard
+                    </span>
+                    <Stickers
+                        name="StickerTrophy"
+                        label="1"
+                        className="inline-block size-12 ml-2 align-middle rotate-6"
+                    />
+                </h1>
+                <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
+                    We opened up the hood on our AI observability metrics so you'll also get to see{' '}
+                    <RoughAnnotation
+                        type="highlight"
+                        color="rgba(247, 165, 1, 0.15)"
+                        strokeWidth={1}
+                        padding={2}
+                        multiline
+                    >
+                        agents battling it out
+                    </RoughAnnotation>
+                    .
+                </p>
+                <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
+                    Each month, we look at organizations that sent at least 100 AI generation or embedding events to
+                    PostHog Cloud. An organization that sends a million events counts just as much as one that sends
+                    100.
+                </p>
             </header>
             {month ? (
                 <>
-                    <label className="my-5 flex items-center gap-2 text-sm font-semibold @lg:mx-4">
-                        Report month
-                        <select
-                            className="rounded border border-input bg-primary py-1 pl-2 pr-10 text-primary"
+                    <div className="not-prose my-5 flex flex-col items-start gap-2 @md:flex-row @md:items-center @lg:mx-4">
+                        <span className="shrink-0 text-sm font-semibold">Report month</span>
+                        {/* Scroll the months sideways on narrow screens instead of wrapping them. */}
+                        <ToggleGroup
+                            title="Report month"
+                            hideTitle
+                            size="sm"
+                            className="w-fit max-w-full overflow-x-auto [scrollbar-width:none] [&>*]:whitespace-nowrap [&>*]:px-2"
                             value={month}
-                            onChange={(event) => setSelected(event.target.value)}
-                        >
-                            {[...months].reverse().map((value) => (
-                                <option key={value} value={value}>
-                                    {monthName(value)}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
+                            onValueChange={setSelected}
+                            // String labels, so each item's accessible name is the month, not its date key.
+                            options={months.map((value) => ({ label: monthName(value), value }))}
+                        />
+                    </div>
                     {(Object.keys(sections) as Section[]).map((section) => (
                         <ReportSection key={section} section={section} series={series} history={history} />
                     ))}
@@ -364,6 +437,7 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     The monthly report is not available yet.
                 </p>
             )}
+            <AIObservabilityAd />
             <section aria-labelledby="ai-adoption-faq" className="border-t border-primary px-1 py-8 @lg:px-4 @lg:py-12">
                 <h2 id="ai-adoption-faq" className="m-0 mb-4 text-2xl @lg:text-3xl">
                     Frequently asked questions
