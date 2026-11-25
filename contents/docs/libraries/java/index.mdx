@@ -45,8 +45,8 @@ PostHogConfig config = PostHogConfig
 | `maxQueueSize` | `10000` | Maximum number of events held in memory. When the queue is full, the SDK drops the oldest event. |
 | `sendFeatureFlagEvent` | `true` | Sends a `$feature_flag_called` event when you evaluate a feature flag. Experiments use these events. |
 | `featureFlagCalledCacheSize` | `1000` | Maximum number of entries in the cache that prevents duplicate `$feature_flag_called` events. |
-| `personalApiKey` | `null` | Your [personal API key](/docs/api/overview#personal-api-keys-recommended). Required for [local evaluation](#local-evaluation). |
-| `localEvaluation` | `false` | Evaluates feature flags locally. Setting `personalApiKey` changes the default to `true`. |
+| `personalApiKey` | `null` | Your [personal API key](/docs/api/overview#personal-api-keys-recommended). Needed to fetch flag definitions for [local evaluation](#local-evaluation), unless you supply a `flagDefinitionCacheProvider`. |
+| `localEvaluation` | `false` | Evaluates feature flags locally instead of calling the API on every flag check. Requires `personalApiKey` or `flagDefinitionCacheProvider`, and must be set to `true` explicitly. |
 | `pollIntervalSeconds` | `30` | Interval in seconds between polls for feature flag definitions, when local evaluation is on. |
 | `proxy` | `null` | A `java.net.Proxy` for requests to PostHog. |
 
@@ -244,7 +244,7 @@ PostHogConfig config = PostHogConfig
     .build();
 ```
 
-> **Note:** Setting the `personalApiKey` automatically enables `localEvaluation` unless explicitly set to `false`.
+> **Note:** `localEvaluation` defaults to `false` and setting `personalApiKey` does not change it. Set both, as shown above. With `localEvaluation` left off, every flag check still calls the PostHog API.
 
 #### Usage with person and group properties
 
