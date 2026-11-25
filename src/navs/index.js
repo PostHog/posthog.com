@@ -3598,6 +3598,10 @@ export const docsMenu = {
                             url: '/docs/api/scopes',
                         },
                         {
+                            name: 'Deprecation of @current',
+                            url: '/docs/api/current-alias-deprecation',
+                        },
+                        {
                             name: 'Terraform provider',
                             url: '/docs/terraform',
                         },
