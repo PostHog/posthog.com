@@ -10,7 +10,7 @@ const Layout = ({
     parent,
     activeInternalMenu,
     className = '',
-    scrollAreaDataScheme = '',
+    scrollAreaDataScheme,
     scrollAreaClassName = '',
     headerBlur = true,
 }: IProps & {

@@ -1,5 +1,4 @@
 import cntl from 'cntl'
-import Layout from 'components/Layout'
 import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
@@ -7,7 +6,6 @@ import Tooltip from 'components/Tooltip'
 import { LinkedIn, Twitter, YouTube } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
-import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
 import { Tweet } from 'components/Tweet'
 import Toggle from 'components/Toggle'
@@ -155,10 +153,7 @@ function Terms() {
     }, [])
 
     return (
-        <Layout
-            parent={sexyLegalMenu}
-            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'terms')}
-        >
+        <>
             <SEO title="Terms, PostHog style" description="Terms, PostHog style" image={`/images/og/terms.png`} />
             <div className="prose dark:prose-invert">
                 <div className="flex justify-end max-w-6xl mx-auto px-4 lg:px-8 pt-4 print:hidden">
@@ -1423,7 +1418,7 @@ function Terms() {
                 </div>
                 <p className="text-center text-sm opacity-60 mt-8 pb-12">Last Updated: June 29, 2026</p>
             </div>
-        </Layout>
+        </>
     )
 }
 
