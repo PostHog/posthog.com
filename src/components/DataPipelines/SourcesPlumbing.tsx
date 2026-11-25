@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconClockRewind, IconColumns, IconMemory, IconRefresh, IconShield } from '@posthog/icons'
+import { IconCheckCircle, IconClockRewind, IconColumns, IconMemory, IconRefresh, IconShield } from '@posthog/icons'
 import { Card } from 'components/UI/Card'
 
 const POINTS = [
@@ -28,6 +28,12 @@ const POINTS = [
         description:
             'We encrypt credentials at rest, and you can connect with a read-only user. SOC 2 certified, EU data residency, and a HIPAA BAA if you need one.',
         icon: IconShield,
+    },
+    {
+        title: 'Switch without risk',
+        description:
+            'Give the migration wizard a read-only API key from Fivetran or Airbyte. It pulls your full setup and checks every pipeline against Sources before anything changes.',
+        icon: IconCheckCircle,
     },
 ]
 
