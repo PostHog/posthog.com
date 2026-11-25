@@ -96,6 +96,7 @@ export default function ScalePage({ data }: { data: { scaleData: ScaleData | nul
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap&text=Thank%20you%20for%20your%20data"
                 />
+                <link rel="alternate" type="text/markdown" href="https://posthog.com/scale.md" />
             </Helmet>
             <SEO
                 title="Scale and reliability - PostHog"

@@ -11,6 +11,7 @@ import {
 } from '../src/components/SdkReferences/utils'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
 import { buildMcpBrief, BriefToolCategory } from '../src/components/MCPPage/agentBrief'
+import { buildScaleBrief } from '../src/components/Scale/brief'
 import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
@@ -687,6 +688,16 @@ export const generateMcpMd = () => {
     console.log('Generated: mcp.md')
 }
 
+export const generateScaleMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    const pageDataPath = path.join(publicPath, 'page-data/scale/page-data.json')
+    const scaleData = fs.existsSync(pageDataPath)
+        ? JSON.parse(fs.readFileSync(pageDataPath, 'utf8')).result.data.scaleData
+        : null
+    fs.writeFileSync(path.join(publicPath, 'scale.md'), buildScaleBrief(scaleData), 'utf8')
+    console.log('Generated: scale.md')
+}
+
 type ChangelogRoadmapNode = {
     strapiID?: number | string
     title: string
@@ -934,6 +945,8 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
 **MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`. To decide if the MCP server fits a task, read the [MCP brief](https://posthog.com/mcp.md): what it does, its limits, safety controls, and the full tool list.
+
+**Scale and reliability:** How much data PostHog Cloud handled in one recent day (rows read, events, logs, feature flag requests, MCP tool calls) and where to find live uptime: [scale brief](https://posthog.com/scale.md).
 
 `
 

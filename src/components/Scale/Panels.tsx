@@ -18,9 +18,9 @@ import {
     titleSummary,
     useSelfDrivingFeed,
 } from 'components/Home/DataStory/SelfDrive/useSelfDrivingFeed'
-import { dottedUnderline, formatCount, inSentence, lineByKey, useScaleData } from './data'
+import { average, dottedUnderline, formatCount, inSentence, lineByKey, logBands, useScaleData } from './data'
 import type { LineKey } from './data'
-import { PANEL_ID, tabId } from './Receipt'
+import { NoteText, PANEL_ID, tabId } from './Receipt'
 import './panels.css'
 
 const PULL_REQUESTS_SHOWN = 5
@@ -137,7 +137,6 @@ function RowsReadPanel(): JSX.Element {
 
 const BAR_HEADROOM = 85
 const COLUMN_STAGGER_MS = 60
-const logBands = ['Under 100', '100–1K', '1K–10K', '10K–100K', '100K–1M', '1M+']
 
 function LogsPanel(): JSX.Element {
     const { relativeDay, logOrgSizes, totals } = useScaleData()
@@ -175,10 +174,6 @@ function LogsPanel(): JSX.Element {
             <p className="m-0 text-xs text-secondary">Lines per organization in one day, from PostHog usage reports.</p>
         </div>
     )
-}
-
-function average(values: number[]): number {
-    return values.reduce((sum, value) => sum + value, 0) / values.length
 }
 
 function LatencyPanel({
@@ -571,7 +566,9 @@ export default function Panels({
                                     {formatCount(totals[key])} {lineByKey[key].noun}
                                 </Emphasis>
                             </h2>
-                            <p className="m-0 text-sm text-secondary">{lineByKey[key].note(data)}</p>
+                            <p className="m-0 text-sm text-secondary">
+                                <NoteText text={lineByKey[key].note(data)} />
+                            </p>
                         </header>
                         <Card.Root appearance="solid" className="min-h-72 @3xl:pl-[12.5rem]">
                             <div className={`grid flex-1 grid-cols-[minmax(0,1fr)] ${swap}`}>

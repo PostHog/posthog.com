@@ -84,3 +84,13 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
     assert.equal(await response?.text(), '# PostHog MCP server')
     assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })
+
+test('serves the scale brief to agents that fetch /scale for a user', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog at scale'))
+
+    const response = await middleware(
+        new Request('https://posthog.com/scale', { headers: { accept: 'text/markdown' } })
+    )
+    assert.equal(await response?.text(), '# PostHog at scale')
+    assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/scale.md')
+})

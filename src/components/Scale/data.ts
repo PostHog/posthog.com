@@ -1,13 +1,12 @@
-import React, { createContext, useContext } from 'react'
-import type { ReactNode } from 'react'
-import { displayLabel } from 'components/MCPLeaderboard/data'
+import { createContext, useContext } from 'react'
+import { displayLabel } from '../MCPLeaderboard/data'
 
 export type LineKey = 'events' | 'rowsRead' | 'logs' | 'flags' | 'mcp' | 'reports' | 'salesCalls'
 
 export type ReceiptLine = {
     key: LineKey
     item: string
-    note: (data: ScaleData) => ReactNode
+    note: (data: ScaleData) => string
     verb: string
     noun: string
 }
@@ -24,6 +23,12 @@ export type ScaleData = {
     logOrgSizes: { orgs: number; shares: number[] }
     mcpClients: { label: string; share: number }[]
     status: { polledAt: string; eventLag: Latency; flagResponse: Latency } | null
+}
+
+export const logBands = ['Under 100', '100–1K', '1K–10K', '10K–100K', '100K–1M', '1M+']
+
+export function average(values: number[]): number {
+    return values.reduce((sum, value) => sum + value, 0) / values.length
 }
 
 export const dottedUnderline = 'underline decoration-dotted underline-offset-2 hover:decoration-solid'
@@ -83,11 +88,7 @@ export const lines: ReceiptLine[] = [
     {
         key: 'salesCalls',
         item: 'Quick calls required',
-        note: () => (
-            <>
-                you can buy one if you <em>really</em> want
-            </>
-        ),
+        note: () => 'you can buy one if you *really* want',
         verb: 'needed',
         noun: 'quick calls',
     },

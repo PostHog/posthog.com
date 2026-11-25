@@ -14,6 +14,7 @@ import {
     generatePlatformMd,
     generateProductPagesMarkdown,
     generateMcpMd,
+    generateScaleMd,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { pocketGuideDestination } from '../src/constants/pocketGuides'
@@ -166,6 +167,7 @@ const generateMarkdownArtifacts = async (graphql: any) => {
     generatePlatformMd()
     generateProductPagesMarkdown()
     generateMcpMd()
+    generateScaleMd()
 
     // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
     // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.

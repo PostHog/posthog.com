@@ -22,6 +22,10 @@ const KEY_STEPS: Record<string, number | 'first' | 'last'> = {
     End: 'last',
 }
 
+export function NoteText({ text }: { text: string }): JSX.Element {
+    return <>{text.split(/\*([^*]+)\*/).map((part, index) => (index % 2 ? <em key={index}>{part}</em> : part))}</>
+}
+
 const rule = 'border-t border-dashed border-[rgb(var(--text-primary)/0.4)]'
 
 function secondsSinceMidnightUtc(): number {
@@ -134,7 +138,9 @@ export default function Receipt({
                                         {formatCount(totals[line.key])}
                                     </span>
                                 </span>
-                                <span className="truncate text-13 text-secondary">{line.note(data)}</span>
+                                <span className="truncate text-13 text-secondary">
+                                    <NoteText text={line.note(data)} />
+                                </span>
                                 {active && rotating && (
                                     <span
                                         key={line.key}
