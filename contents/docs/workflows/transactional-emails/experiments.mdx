@@ -114,11 +114,15 @@ An idempotency key belongs to one version of the email. For 24 hours, a retry th
 
 The retry can still change the results:
 
-- If the rollout changed, the retry records an exposure to the second variant. The experiment [excludes people with two variants](/docs/experiments/exposures#handling-multiple-exposures) by default.
+- If the rollout change gives the person the other variant, the retry records an exposure to it. The experiment [excludes people with two variants](/docs/experiments/exposures#handling-multiple-exposures) by default.
 - If the first flag request failed, the person got your current email, and a retry that reads `test` counts them as `test`.
 
 If you retry from a job queue, save the variant with the job and use it on each attempt. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
 
 ## End the experiment
 
-When you have a result, [end the experiment](/docs/experiments/managing-lifecycle) and roll out the winner. Then remove the flag check and the other version from your code.
+When you have a result, [end the experiment](/docs/experiments/managing-lifecycle) and roll out the winner. Then remove the other version:
+
+- **React Email:** Remove the flag check and the other component.
+- **A template with a branch:** Publish the template with only the winning version. Then remove the flag check and the variable from your code. Without the variable, the template sends the version in `else`.
+- **Two templates:** Remove the flag check and keep the template ID of the winner.
