@@ -1,3 +1,4 @@
+/// <reference lib="es2020" />
 /**
  * Serve raw markdown to clients that ask for it with `Accept: text/markdown`,
  * and to agents that fetch a page for a user unless they ask for HTML (#21381).
@@ -86,6 +87,10 @@ const REDACTED = 'REDACTED'
 // An email address in a path segment is personal data. The dot-suffixed domain keeps other uses of `@`
 // readable.
 const EMAIL_SEGMENT = /^[^/]*(?:@|%40)[^/]*\.[A-Za-z]{2,}$/i
+
+// Vercel typechecks this file with tsconfig.json, whose `lib` has no ES core library and which has no
+// @types/node. Without these two declarations every build prints type errors for it.
+declare const process: { env: { [name: string]: string | undefined } }
 
 type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
 
