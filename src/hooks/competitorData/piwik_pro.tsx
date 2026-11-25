@@ -1,5 +1,5 @@
 export const piwik_pro = {
-    name: 'Piwik Pro',
+    name: 'Piwik PRO',
     key: 'piwik_pro',
     assets: {
         icon: '/images/competitors/piwik-pro.svg',
@@ -81,13 +81,13 @@ export const piwik_pro = {
     platform: {
         deployment: {
             open_source: false,
-            self_host: true,
+            self_host: false,
             eu_hosting: true,
             reverse_proxy: true,
         },
         pricing: {
             free_tier: false,
-            self_serve: 'Trial only',
+            self_serve: 'Business plan',
             transparent_pricing: false,
             usage_based_pricing: true,
         },

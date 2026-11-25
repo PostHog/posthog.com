@@ -66,7 +66,7 @@ export const plausible = {
                     available: 'Business plan only',
                     features: {
                         correlation_analysis: false,
-                        conversion_funnels: true,
+                        conversion_funnels: 'Business plan',
                     },
                 },
                 retention: {
@@ -181,7 +181,7 @@ export const plausible = {
         },
         pricing: {
             free_tier: false,
-            self_serve: 'Trial only',
+            self_serve: true,
             transparent_pricing: true,
             usage_based_pricing: true,
         },

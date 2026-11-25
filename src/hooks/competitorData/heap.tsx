@@ -263,9 +263,9 @@ export const heap = {
     },
     platform: {
         deployment: {
-            eu_hosting: true,
+            eu_hosting: 'Premier plan',
             open_source: false,
-            reverse_proxy: false,
+            reverse_proxy: true,
             self_host: false,
         },
         pricing: {
