@@ -75,17 +75,19 @@ On the experiment handle, use the ID from the upload receipt to read the current
 
 If you change the input or either output, rerun the affected checks and update their scores. A `revision_conflict` means the record changed. Review it before retrying with the latest revision.
 
-Use a [personal API key](/docs/api/personal-api-keys) with `evaluation:read` to read revisions and `evaluation:write` plus evaluation editor access to make changes. Working with results or deleting an entire item also requires `llm_analytics:read` and access to the affected scorers and composite inputs.
+Use a [project secret API key](/docs/api/project-secret-api-keys) for the experiment's project or a [personal API key](/docs/api/personal-api-keys). Grant `evaluation:read` to read revisions or tags, and `evaluation:write` to correct items or results, delete them, or replace tags.
+
+Reading a result revision, changing a result or its payload, and deleting an entire item also require `llm_analytics:read`. With a personal key, you need evaluation editor access for corrections and access to any affected scorers and composite inputs.
 
 ## Use results in your CI
 
 Use a [project secret API key](/docs/api/project-secret-api-keys) with the `offline_evaluation_ingestion:write` scope for your CI uploads. It can create experiments, upload results, and mark runs complete or failed without depending on a teammate's account.
 
-Project secret keys can also read scorers and datasets. Grant **AI observability** (`llm_analytics:read`) to read scorers, and **Dataset** (`dataset:read`) to load a PostHog dataset. With both, your CI can read stored composite inputs without a personal key. To create or modify scorers, grant `llm_analytics:write`. Dataset exports still require a [personal API key](/docs/api/personal-api-keys).
+If CI looks up scorer versions, grant `llm_analytics:read`. If it loads cases from a [PostHog dataset](/docs/ai-evals/datasets), grant `dataset:read`. A job that already has its cases and scorer version IDs can upload with the ingestion scope alone.
 
 In your CI script, pass the project key as `secret_key` in Python, `secretKey` in TypeScript, or `evaluations.Config.SecretKey` in Go. Use the saved scorer version IDs for uploads.
 
-For a composite, save its version ID and the exact input versions it pins. Send those input results with each calculation request.
+For a composite, save its version ID and the exact input versions it pins. With an ingestion-only key, send every pinned input result in the same request as the calculation, including on retries. To reuse results from an earlier upload, grant both `evaluation:read` and `llm_analytics:read` in addition to `offline_evaluation_ingestion:write`.
 
 Set the experiment's run source to `"ci"` and record your agent's commit SHA as the application version. Python and Go use `run_source` and `application_version`. TypeScript uses `runSource` and `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
 

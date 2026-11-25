@@ -155,9 +155,9 @@ Pass a `client_item_id` when an agent creates items. An identical retry returns 
 
 ### API
 
-The same operations are available over REST at [`/api/projects/:project_id/datasets`](/docs/api/datasets) and [`/api/projects/:project_id/dataset_items`](/docs/api/dataset-items). Use a [personal API key](/docs/api#authentication) or [project secret API key](/docs/api/project-secret-api-keys) with the `dataset` scope.
+The same operations are available over REST at [`/api/projects/:project_id/datasets`](/docs/api/datasets) and [`/api/projects/:project_id/dataset_items`](/docs/api/dataset-items). Use a [project secret API key](/docs/api/project-secret-api-keys) for the dataset's project or a [personal API key](/docs/api/personal-api-keys). Grant `dataset:read` to read datasets, items, and revisions. Grant `dataset:write` to create, update, archive, or restore datasets and items.
 
-Project secret API keys can read and write datasets and items. Exports require a personal API key with `dataset:read` — project secret keys can't create, check, or download exports. Project keys need `dataset:write` to extend retention; reading a dataset or using it in an offline evaluation also refreshes retention.
+A project secret key needs `dataset:write` to extend retention explicitly. Reading a dataset or using it in an offline evaluation also refreshes retention. To create an export, check its status, or download it through the API, use a personal API key with `dataset:read`.
 
 ### CLI
 
