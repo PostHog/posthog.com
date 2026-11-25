@@ -52,37 +52,37 @@ Product Analytics,product analytics,/blog/product-analytics,Blog,Blog: product a
 Product Analytics,what is product analytics,/blog/what-is-product-analytics,Blog,Blog: what is product analytics
 Product Analytics,product metrics,/blog/product-metrics,Blog,Blog: product metrics
 Product Analytics,null handling hogql,/blog/null-handling-hogql,Blog,Blog: null handling hogql
-Product Analytics,is autocapture still bad,/blog/is-autocapture-still-bad,Blog,Blog: is autocapture still bad
+Product Analytics,is autocapture still bad,/docs/product-analytics/autocapture,Blog,Blog: is autocapture still bad
 Product Analytics,Introduction to self service analytics,/blog/Introduction-to-self-service-analytics,Blog,Blog: Introduction to self service analytics
 Product Analytics,how to do user segmentation,/blog/how-to-do-user-segmentation,Blog,Blog: how to do user segmentation
 Product Analytics,how to measure product engagement,/blog/how-to-measure-product-engagement,Blog,Blog: how to measure product engagement
 Product Analytics,posthog vs amplitude,/compare/posthog-vs-amplitude,Blog,Blog: posthog vs amplitude
-Product Analytics,posthog vs mixpanel,/blog/posthog-vs-mixpanel,Blog,Blog: posthog vs mixpanel
-Product Analytics,posthog vs heap,/blog/posthog-vs-heap,Blog,Blog: posthog vs heap
-Product Analytics,posthog vs pendo,/blog/posthog-vs-pendo,Blog,Blog: posthog vs pendo
-Product Analytics,posthog vs ga4,/blog/posthog-vs-ga4,Blog,Blog: posthog vs ga4
-Product Analytics,posthog vs matomo,/blog/posthog-vs-matomo,Blog,Blog: posthog vs matomo
-Product Analytics,posthog vs plausible,/blog/posthog-vs-plausible,Blog,Blog: posthog vs plausible
-Product Analytics,posthog vs fathom,/blog/posthog-vs-fathom,Blog,Blog: posthog vs fathom
-Product Analytics,best amplitude alternatives,/blog/best-amplitude-alternatives,Blog,Competitor comparison
-Product Analytics,best mixpanel alternatives,/blog/best-mixpanel-alternatives,Blog,Competitor comparison
-Product Analytics,best heap alternatives,/blog/best-heap-alternatives,Blog,Competitor comparison
-Product Analytics,best pendo alternatives,/blog/best-pendo-alternatives,Blog,Competitor comparison
-Product Analytics,best matomo alternatives,/blog/best-matomo-alternatives,Blog,Competitor comparison
-Product Analytics,best plausible alternatives,/blog/best-plausible-alternatives,Blog,Competitor comparison
-Product Analytics,best fathom alternatives,/blog/best-fathom-alternatives,Blog,Competitor comparison
+Product Analytics,posthog vs mixpanel,/compare/posthog-vs-mixpanel,Blog,Blog: posthog vs mixpanel
+Product Analytics,posthog vs heap,/compare/posthog-vs-heap,Blog,Blog: posthog vs heap
+Product Analytics,posthog vs pendo,/compare/posthog-vs-pendo,Blog,Blog: posthog vs pendo
+Product Analytics,posthog vs ga4,/compare/posthog-vs-ga4,Blog,Blog: posthog vs ga4
+Product Analytics,posthog vs matomo,/compare/posthog-vs-matomo,Blog,Blog: posthog vs matomo
+Product Analytics,posthog vs plausible,/compare/posthog-vs-plausible,Blog,Blog: posthog vs plausible
+Product Analytics,posthog vs fathom,/compare/posthog-vs-fathom,Blog,Blog: posthog vs fathom
+Product Analytics,best amplitude alternatives,/compare/best-amplitude-alternatives,Blog,Competitor comparison
+Product Analytics,best mixpanel alternatives,/compare/best-mixpanel-alternatives,Blog,Competitor comparison
+Product Analytics,best heap alternatives,/compare/best-heap-alternatives,Blog,Competitor comparison
+Product Analytics,best pendo alternatives,/compare/best-pendo-alternatives,Blog,Competitor comparison
+Product Analytics,best matomo alternatives,/compare/best-matomo-alternatives,Blog,Competitor comparison
+Product Analytics,best plausible alternatives,/compare/best-plausible-alternatives,Blog,Competitor comparison
+Product Analytics,best fathom alternatives,/compare/best-fathom-alternatives,Blog,Competitor comparison
 Product Analytics,ga4 alternatives,/compare/best-ga4-alternatives,Blog,Competitor comparison
-Product Analytics,best open source analytics tools,/blog/best-open-source-analytics-tools,Blog,Competitor comparison
-Product Analytics,best gdpr compliant analytics tools,/blog/best-gdpr-compliant-analytics-tools,Blog,Competitor comparison
-Product Analytics,best hipaa compliant analytics tools,/blog/best-hipaa-compliant-analytics-tools,Blog,Competitor comparison
+Product Analytics,best open source analytics tools,/compare/best-open-source-analytics-tools,Blog,Competitor comparison
+Product Analytics,best gdpr compliant analytics tools,/compare/best-gdpr-compliant-analytics-tools,Blog,Competitor comparison
+Product Analytics,best hipaa compliant analytics tools,/compare/best-hipaa-compliant-analytics-tools,Blog,Competitor comparison
 Product Analytics,google analytics cost,/blog/google-analytics-cost,Blog,Competitor comparison
 Product Analytics,google analytics to posthog,/blog/google-analytics-to-posthog,Blog,Competitor comparison
-Product Analytics,best adobe analytics alternatives,/blog/best-adobe-analytics-alternatives,Blog,Competitor comparison
-Product Analytics,best product analytics tools for startups,/blog/best-product-analytics-tools-for-startups,Blog,Competitor comparison
-Product Analytics,best real time analytics platforms,/blog/best-real-time-analytics-platforms,Blog,Competitor comparison
-Product Analytics,best mobile app analytics tools,/blog/best-mobile-app-analytics-tools,Blog,Competitor comparison
+Product Analytics,best adobe analytics alternatives,/compare/best-adobe-analytics-alternatives,Blog,Competitor comparison
+Product Analytics,best product analytics tools for startups,/compare/best-product-analytics-tools-for-startups,Blog,Competitor comparison
+Product Analytics,best real time analytics platforms,/compare/best-real-time-analytics-platforms,Blog,Competitor comparison
+Product Analytics,best mobile app analytics tools,/compare/best-mobile-app-analytics-tools,Blog,Competitor comparison
 Product Analytics,posthog alternatives,/compare/best-posthog-alternatives,Compare,Competitor comparison
-Product Analytics,best analytics stack for vibe coded apps,/blog/best-analytics-stack-for-vibe-coded-apps,Blog,Blog: analytics stack for vibe coded apps
+Product Analytics,best analytics stack for vibe coded apps,/compare/best-analytics-stack-for-vibe-coded-apps,Blog,Blog: analytics stack for vibe coded apps
 Product Analytics,misconceptions about analytics,/newsletter/misconceptions-about-analytics,Newsletter,Newsletter: misconceptions about analytics
 Product Analytics,ab testing,/newsletter/ab-testing,Newsletter,Newsletter: ab testing
 Product Analytics,product analytics,/product-engineers/product-analytics,Prod. Engineers,Engineering guide: product analytics
@@ -181,20 +181,20 @@ Session Replay,missing recordings,/blog/missing-recordings,Blog,Blog: missing re
 Session Replay,mobile session replay,/blog/mobile-session-replay,Blog,Blog: mobile session replay
 Session Replay,session recording performance,/blog/session-recording-performance,Blog,Blog: session recording performance
 Session Replay,session replay pricing,/blog/session-replay-pricing,Blog,Blog: session replay pricing
-Session Replay,best session replay tools,/blog/best-session-replay-tools,Blog,Blog: best session replay tools
+Session Replay,best session replay tools,/compare/best-session-replay-tools,Blog,Blog: best session replay tools
 Session Replay,best open source session replay tools,/compare/best-open-source-session-replay-tools,Compare,Competitor comparison
-Session Replay,best hotjar alternatives,/blog/best-hotjar-alternatives,Blog,Blog: best hotjar alternatives
-Session Replay,best fullstory alternatives,/blog/best-fullstory-alternatives,Blog,Blog: best fullstory alternatives
-Session Replay,best logrocket alternatives,/blog/best-logrocket-alternatives,Blog,Blog: best logrocket alternatives
-Session Replay,best mouseflow alternatives,/blog/best-mouseflow-alternatives,Blog,Blog: best mouseflow alternatives
+Session Replay,best hotjar alternatives,/compare/best-hotjar-alternatives,Blog,Blog: best hotjar alternatives
+Session Replay,best fullstory alternatives,/compare/best-fullstory-alternatives,Blog,Blog: best fullstory alternatives
+Session Replay,best logrocket alternatives,/compare/best-logrocket-alternatives,Blog,Blog: best logrocket alternatives
+Session Replay,best mouseflow alternatives,/compare/best-mouseflow-alternatives,Blog,Blog: best mouseflow alternatives
 Session Replay,best microsoft clarity alternatives,/blog/best-microsoft-clarity-alternatives,Blog,Blog: best microsoft clarity alternatives
-Session Replay,best uxcam alternatives,/blog/best-uxcam-alternatives,Blog,Blog: best uxcam alternatives
-Session Replay,posthog vs hotjar,/blog/posthog-vs-hotjar,Blog,Blog: posthog vs hotjar
-Session Replay,posthog vs fullstory,/blog/posthog-vs-fullstory,Blog,Blog: posthog vs fullstory
-Session Replay,posthog vs logrocket,/blog/posthog-vs-logrocket,Blog,Blog: posthog vs logrocket
-Session Replay,best contentsquare alternatives,/blog/best-contentsquare-alternatives,Blog,Competitor comparison
-Session Replay,best mobile app session replay tools,/blog/best-mobile-app-session-replay-tools,Blog,Competitor comparison
-Session Replay,smartlook alternatives,/blog/smartlook-alternatives,Blog,Competitor comparison
+Session Replay,best uxcam alternatives,/compare/best-uxcam-alternatives,Blog,Blog: best uxcam alternatives
+Session Replay,posthog vs hotjar,/compare/posthog-vs-hotjar,Blog,Blog: posthog vs hotjar
+Session Replay,posthog vs fullstory,/compare/posthog-vs-fullstory,Blog,Blog: posthog vs fullstory
+Session Replay,posthog vs logrocket,/compare/posthog-vs-logrocket,Blog,Blog: posthog vs logrocket
+Session Replay,best contentsquare alternatives,/compare/best-contentsquare-alternatives,Blog,Competitor comparison
+Session Replay,best mobile app session replay tools,/compare/best-mobile-app-session-replay-tools,Blog,Competitor comparison
+Session Replay,smartlook alternatives,/compare/smartlook-alternatives,Blog,Competitor comparison
 Session Replay,session replay,/product-engineers/session-replay,Prod. Engineers,Engineering guide: session replay
 Session Replay,real user monitoring,/product-engineers/real-user-monitoring,Prod. Engineers,Engineering guide: real user monitoring
 Session Replay,session replay,/tutorials/session-replay,Tutorial,Tutorial: session replay
@@ -241,15 +241,15 @@ Feature Flags,feature flag use cases docs,/docs/feature-flag-use-cases,Docs,Feat
 Feature Flags,what is a feature flag,/blog/what-is-a-feature-flag,Blog,Blog: what is a feature flag
 Feature Flags,feature flags as a service,/blog/feature-flags-as-a-service,Blog,Blog: feature flags as a service
 Feature Flags,even faster more reliable flags,/blog/even-faster-more-reliable-flags,Blog,Blog: even faster more reliable flags
-Feature Flags,best launchdarkly alternatives,/blog/best-launchdarkly-alternatives,Blog,Blog: best launchdarkly alternatives
-Feature Flags,best flagsmith alternatives,/blog/best-flagsmith-alternatives,Blog,Blog: best flagsmith alternatives
-Feature Flags,best split alternatives,/blog/best-split-alternatives,Blog,Blog: best split alternatives
-Feature Flags,best statsig alternatives,/blog/best-statsig-alternatives,Blog,Blog: best statsig alternatives
-Feature Flags,posthog vs launchdarkly,/blog/posthog-vs-launchdarkly,Blog,Blog: posthog vs launchdarkly
-Feature Flags,posthog vs statsig,/blog/posthog-vs-statsig,Blog,Blog: posthog vs statsig
-Feature Flags,best growthbook alternatives,/blog/best-growthbook-alternatives,Blog,Competitor comparison
-Feature Flags,best feature flag software for developers,/blog/best-feature-flag-software-for-developers,Blog,Competitor comparison
-Feature Flags,best open source feature flag tools,/blog/best-open-source-feature-flag-tools,Blog,Competitor comparison
+Feature Flags,best launchdarkly alternatives,/compare/best-launchdarkly-alternatives,Blog,Blog: best launchdarkly alternatives
+Feature Flags,best flagsmith alternatives,/compare/best-flagsmith-alternatives,Blog,Blog: best flagsmith alternatives
+Feature Flags,best split alternatives,/compare/best-split-alternatives,Blog,Blog: best split alternatives
+Feature Flags,best statsig alternatives,/compare/best-statsig-alternatives,Blog,Blog: best statsig alternatives
+Feature Flags,posthog vs launchdarkly,/compare/posthog-vs-launchdarkly,Blog,Blog: posthog vs launchdarkly
+Feature Flags,posthog vs statsig,/compare/posthog-vs-statsig,Blog,Blog: posthog vs statsig
+Feature Flags,best growthbook alternatives,/compare/best-growthbook-alternatives,Blog,Competitor comparison
+Feature Flags,best feature flag software for developers,/compare/best-feature-flag-tools-for-developers,Blog,Competitor comparison
+Feature Flags,best open source feature flag tools,/compare/best-open-source-feature-flag-tools,Blog,Competitor comparison
 Feature Flags,feature flag mistakes,/newsletter/feature-flag-mistakes,Newsletter,Newsletter: feature flag mistakes
 Feature Flags,feature flags,/product-engineers/feature-flags,Prod. Engineers,Engineering guide: feature flags
 Feature Flags,feature management,/product-engineers/feature-management,Prod. Engineers,Engineering guide: feature management
@@ -310,17 +310,17 @@ Experiments,traffic allocation,/docs/experiments/traffic-allocation,Docs,Traffic
 Experiments,troubleshooting,/docs/experiments/troubleshooting,Docs,"Debugging, missing data, fixes"
 Experiments,tutorials,/docs/experiments/tutorials,Docs,"Learning resources, how-to content"
 Experiments,experiments,/blog/experiments,Blog,Blog: experiments
-Experiments,best optimizely alternatives,/blog/best-optimizely-alternatives,Blog,Blog: best optimizely alternatives
-Experiments,best vwo alternatives,/blog/best-vwo-alternatives,Blog,Blog: best vwo alternatives
-Experiments,best eppo alternatives,/blog/best-eppo-alternatives,Blog,Blog: best eppo alternatives
-Experiments,best growthbook alternatives,/blog/best-growthbook-alternatives,Blog,Blog: best growthbook alternatives
-Experiments,posthog vs optimizely,/blog/posthog-vs-optimizely,Blog,Blog: posthog vs optimizely
-Experiments,posthog vs growthbook,/blog/posthog-vs-growthbook,Blog,Blog: posthog vs growthbook
-Experiments,posthog vs statsig,/blog/posthog-vs-statsig,Blog,Blog: posthog vs statsig
+Experiments,best optimizely alternatives,/compare/best-optimizely-alternatives,Blog,Blog: best optimizely alternatives
+Experiments,best vwo alternatives,/compare/best-vwo-alternatives,Blog,Blog: best vwo alternatives
+Experiments,best eppo alternatives,/compare/best-eppo-alternatives,Blog,Blog: best eppo alternatives
+Experiments,best growthbook alternatives,/compare/best-growthbook-alternatives,Blog,Blog: best growthbook alternatives
+Experiments,posthog vs optimizely,/compare/posthog-vs-optimizely,Blog,Blog: posthog vs optimizely
+Experiments,posthog vs growthbook,/compare/posthog-vs-growthbook,Blog,Blog: posthog vs growthbook
+Experiments,posthog vs statsig,/compare/posthog-vs-statsig,Blog,Blog: posthog vs statsig
 Experiments,google optimize alternatives,/blog/google-optimize-alternatives,Blog,Blog: google optimize alternatives
-Experiments,best mobile app ab testing tools,/blog/best-mobile-app-ab-testing-tools,Blog,Competitor comparison
+Experiments,best mobile app ab testing tools,/compare/best-mobile-app-ab-testing-tools,Blog,Competitor comparison
 Experiments,best open source ab testing tools,/compare/best-open-source-ab-testing-tools,Compare,Competitor comparison
-Experiments,best hipaa compliant ab testing tools,/blog/best-hipaa-compliant-ab-testing-tools,Blog,Competitor comparison
+Experiments,best hipaa compliant ab testing tools,/compare/best-hipaa-compliant-ab-testing-tools,Blog,Competitor comparison
 Experiments,experiments,/newsletter/experiments,Newsletter,Newsletter: experiments
 Experiments,ab testing,/newsletter/ab-testing,Newsletter,Newsletter: ab testing
 Experiments,what we've learned about ab testing,/newsletter/what-we've-learned-about-ab-testing,Newsletter,Newsletter: what we've learned about ab testing
@@ -376,10 +376,10 @@ Surveys,troubleshooting,/docs/surveys/troubleshooting,Docs,"Debugging, missing d
 Surveys,tutorials,/docs/surveys/tutorials,Docs,"Learning resources, how-to content"
 Surveys,viewing results,/docs/surveys/viewing-results,Docs,Viewing Results feature or configuration
 Surveys,why we made surveys,/blog/why-we-made-surveys,Blog,Blog: why we made surveys
-Surveys,best sprig alternatives,/blog/best-sprig-alternatives,Blog,Blog: best sprig alternatives
-Surveys,best survicate alternatives,/blog/best-survicate-alternatives,Blog,Blog: best survicate alternatives
-Surveys,best userpilot alternatives,/blog/best-userpilot-alternatives,Blog,Blog: best userpilot alternatives
-Surveys,best inapp survey tools,/blog/best-inapp-survey-tools,Blog,Competitor comparison
+Surveys,best sprig alternatives,/compare/best-sprig-alternatives,Blog,Blog: best sprig alternatives
+Surveys,best survicate alternatives,/compare/best-survicate-alternatives,Blog,Blog: best survicate alternatives
+Surveys,best userpilot alternatives,/compare/best-userpilot-alternatives,Blog,Blog: best userpilot alternatives
+Surveys,best inapp survey tools,/compare/best-inapp-survey-tools,Blog,Competitor comparison
 Surveys,user research,/newsletter/user-research,Newsletter,Newsletter: user research
 Surveys,surveys,/product-engineers/surveys,Prod. Engineers,Engineering guide: surveys
 Surveys,product survey questions,/product-engineers/product-survey-questions,Prod. Engineers,Engineering guide: product survey questions
@@ -435,7 +435,7 @@ CDP / Data Pipeline,essential posthog apps,/blog/essential-posthog-apps,Blog,Blo
 CDP / Data Pipeline,data pipelines,/blog/data-pipelines,Blog,Blog: data pipelines
 CDP / Data Pipeline,cdp vs data warehouse,/blog/cdp-vs-data-warehouse,Blog,Blog: cdp vs data warehouse
 CDP / Data Pipeline,data pipeline pricing,/blog/data-pipeline-pricing,Blog,Blog: data pipeline pricing
-CDP / Data Pipeline,best customer data platforms for developers,/blog/best-customer-data-platforms-for-developers,Blog,Competitor comparison
+CDP / Data Pipeline,best customer data platforms for developers,/compare/best-customer-data-platforms-for-developers,Blog,Competitor comparison
 CDP / Data Pipeline,cdp,/tutorials/cdp,Tutorial,Tutorial: cdp
 CDP / Data Pipeline,zapier,/tutorials/zapier,Tutorial,Tutorial: zapier
 CDP / Data Pipeline,zapier surveys,/tutorials/zapier-surveys,Tutorial,Tutorial: zapier surveys
@@ -532,20 +532,20 @@ Web Analytics,troubleshooting,/docs/web-analytics/troubleshooting,Docs,"Debuggin
 Web Analytics,web vitals,/docs/web-analytics/web-vitals,Docs,Web Vitals feature or configuration
 Web Analytics,web vs product analytics,/docs/web-analytics/web-vs-product-analytics,Docs,Web Vs Product Analytics feature or configuration
 Web Analytics,google analytics alternative,/google-analytics-alternative,Product page,Google Analytics Alternative feature page
-Web Analytics,best web analytics tools,/blog/best-web-analytics-tools,Blog,Blog: best web analytics tools
-Web Analytics,posthog vs ga4,/blog/posthog-vs-ga4,Blog,Blog: posthog vs ga4
+Web Analytics,best web analytics tools,/compare/best-web-analytics-tools,Blog,Blog: best web analytics tools
+Web Analytics,posthog vs ga4,/compare/posthog-vs-ga4,Blog,Blog: posthog vs ga4
 Web Analytics,ga4 alternatives,/compare/best-ga4-alternatives,Blog,Blog: ga4 alternatives
 Web Analytics,google analytics cost,/blog/google-analytics-cost,Blog,Blog: google analytics cost
 Web Analytics,google analytics to posthog,/blog/google-analytics-to-posthog,Blog,Blog: google analytics to posthog
 Web Analytics,is google analytics hipaa compliant,/blog/is-google-analytics-hipaa-compliant,Blog,Blog: is google analytics hipaa compliant
 Web Analytics,cookieless analytics,/blog/cookieless-analytics,Blog,Blog: cookieless analytics
-Web Analytics,best plausible alternatives,/blog/best-plausible-alternatives,Blog,Blog: best plausible alternatives
-Web Analytics,best fathom alternatives,/blog/best-fathom-alternatives,Blog,Blog: best fathom alternatives
-Web Analytics,best matomo alternatives,/blog/best-matomo-alternatives,Blog,Blog: best matomo alternatives
-Web Analytics,posthog vs matomo,/blog/posthog-vs-matomo,Blog,Blog: posthog vs matomo
-Web Analytics,posthog vs plausible,/blog/posthog-vs-plausible,Blog,Blog: posthog vs plausible
-Web Analytics,posthog vs fathom,/blog/posthog-vs-fathom,Blog,Blog: posthog vs fathom
-Web Analytics,best gdpr compliant analytics tools,/blog/best-gdpr-compliant-analytics-tools,Blog,Blog: best gdpr compliant analytics tools
+Web Analytics,best plausible alternatives,/compare/best-plausible-alternatives,Blog,Blog: best plausible alternatives
+Web Analytics,best fathom alternatives,/compare/best-fathom-alternatives,Blog,Blog: best fathom alternatives
+Web Analytics,best matomo alternatives,/compare/best-matomo-alternatives,Blog,Blog: best matomo alternatives
+Web Analytics,posthog vs matomo,/compare/posthog-vs-matomo,Blog,Blog: posthog vs matomo
+Web Analytics,posthog vs plausible,/compare/posthog-vs-plausible,Blog,Blog: posthog vs plausible
+Web Analytics,posthog vs fathom,/compare/posthog-vs-fathom,Blog,Blog: posthog vs fathom
+Web Analytics,best gdpr compliant analytics tools,/compare/best-gdpr-compliant-analytics-tools,Blog,Blog: best gdpr compliant analytics tools
 Web Analytics,is google analytics illegal microsite,/blog/is-google-analytics-illegal-microsite,Blog,Blog: is google analytics illegal microsite
 Web Analytics,why i ditched google analytics for posthog,/blog/why-i-ditched-google-analytics-for-posthog,Blog,Blog: why i ditched google analytics for posthog
 Web Analytics,web analytics,/tutorials/web-analytics,Tutorial,Tutorial: web analytics
@@ -604,11 +604,11 @@ Error Tracking,rollup,/docs/error-tracking/upload-source-maps/rollup,Docs,Rollup
 Error Tracking,vite,/docs/error-tracking/upload-source-maps/vite,Docs,Vite feature or configuration
 Error Tracking,web,/docs/error-tracking/upload-source-maps/web,Docs,Web feature or configuration
 Error Tracking,webpack,/docs/error-tracking/upload-source-maps/webpack,Docs,Webpack feature or configuration
-Error Tracking,best error tracking tools,/blog/best-error-tracking-tools,Blog,Blog: best error tracking tools
-Error Tracking,best sentry alternatives,/blog/best-sentry-alternatives,Blog,Blog: best sentry alternatives
-Error Tracking,best rollbar alternatives,/blog/best-rollbar-alternatives,Blog,Blog: best rollbar alternatives
-Error Tracking,best datadog alternatives,/blog/best-datadog-alternatives,Blog,Blog: best datadog alternatives
-Error Tracking,posthog vs sentry,/blog/posthog-vs-sentry,Blog,Blog: posthog vs sentry
+Error Tracking,best error tracking tools,/compare/best-error-tracking-tools,Blog,Blog: best error tracking tools
+Error Tracking,best sentry alternatives,/compare/best-sentry-alternatives,Blog,Blog: best sentry alternatives
+Error Tracking,best rollbar alternatives,/compare/best-rollbar-alternatives,Blog,Blog: best rollbar alternatives
+Error Tracking,best datadog alternatives,/compare/best-datadog-alternatives,Blog,Blog: best datadog alternatives
+Error Tracking,posthog vs sentry,/compare/posthog-vs-sentry,Blog,Blog: posthog vs sentry
 Error Tracking,error tracking,/tutorials/error-tracking,Tutorial,Tutorial: error tracking
 Error Tracking,sentry,/tutorials/sentry,Tutorial,Tutorial: sentry
 Error Tracking,nextjs error monitoring,/tutorials/nextjs-error-monitoring,Tutorial,Tutorial: nextjs error monitoring
@@ -656,14 +656,14 @@ LLM Analytics,envoy wizard llm agent,/blog/envoy-wizard-llm-agent,Blog,Blog: env
 LLM Analytics,optimizing agent cost,/blog/optimizing-agent-cost,Blog,Blog: optimizing agent cost
 LLM Analytics,ai community answers,/blog/ai-community-answers,Blog,Blog: ai community answers
 LLM Analytics,stop ai slop,/blog/stop-ai-slop,Blog,Blog: stop ai slop
-LLM Analytics,best ai observability tools,/blog/best-ai-observability-tools,Blog,Competitor comparison
+LLM Analytics,best ai observability tools,/compare/best-ai-observability-tools,Blog,Competitor comparison
 LLM Analytics,best open source llm observability tools,/compare/best-open-source-llm-observability-tools,Compare,Competitor comparison
-LLM Analytics,best langfuse alternatives,/blog/best-langfuse-alternatives,Blog,Competitor comparison
-LLM Analytics,best langsmith alternatives,/blog/best-langsmith-alternatives,Blog,Competitor comparison
-LLM Analytics,best braintrust alternatives,/blog/best-braintrust-alternatives,Blog,Competitor comparison
-LLM Analytics,best helicone alternatives,/blog/best-helicone-alternatives,Blog,Competitor comparison
-LLM Analytics,best mcp servers for startups,/blog/best-mcp-servers-for-startups,Blog,Competitor comparison
-LLM Analytics,posthog vs langfuse,/blog/posthog-vs-langfuse,Blog,Blog: posthog vs langfuse
+LLM Analytics,best langfuse alternatives,/compare/best-langfuse-alternatives,Blog,Competitor comparison
+LLM Analytics,best langsmith alternatives,/compare/best-langsmith-alternatives,Blog,Competitor comparison
+LLM Analytics,best braintrust alternatives,/compare/best-braintrust-alternatives,Blog,Competitor comparison
+LLM Analytics,best helicone alternatives,/compare/best-helicone-alternatives,Blog,Competitor comparison
+LLM Analytics,best mcp servers for startups,/compare/best-mcp-servers-for-startups,Blog,Competitor comparison
+LLM Analytics,posthog vs langfuse,/compare/posthog-vs-langfuse,Blog,Blog: posthog vs langfuse
 LLM Analytics,building ai features,/newsletter/building-ai-features,Newsletter,Newsletter: building ai features
 LLM Analytics,ai coding mistakes,/newsletter/ai-coding-mistakes,Newsletter,Newsletter: ai coding mistakes
 LLM Analytics,llm product metrics,/product-engineers/llm-product-metrics,Prod. Engineers,Engineering guide: llm product metrics
