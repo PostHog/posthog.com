@@ -5,6 +5,7 @@ import SourcesHero from 'components/DataPipelines/SourcesHero'
 import SourcesPipelineCarousel from 'components/DataPipelines/SourcesPipelineCarousel'
 import SourcesPlumbing from 'components/DataPipelines/SourcesPlumbing'
 import SourcesComparison from 'components/DataPipelines/SourcesComparison'
+import SourcesCatalog from 'components/DataPipelines/SourcesCatalog'
 import SourcesCTA from 'components/DataPipelines/SourcesCTA'
 
 export default function DataPipelineSources(): JSX.Element {
@@ -25,6 +26,7 @@ export default function DataPipelineSources(): JSX.Element {
                     <SourcesPipelineCarousel />
                     <SourcesPlumbing />
                     <SourcesComparison />
+                    <SourcesCatalog />
                     <SourcesCTA />
                 </div>
             </ReaderView>

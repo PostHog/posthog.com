@@ -1343,6 +1343,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     sourceId: config.name,
                     slug,
                     name: displayName,
+                    category: config.category || null,
                     icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
                     docsUrl: config.docsUrl || null,
                     unreleased: config.unreleasedSource || false,

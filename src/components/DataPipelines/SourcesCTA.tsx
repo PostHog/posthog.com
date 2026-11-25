@@ -19,7 +19,7 @@ export default function SourcesCTA(): JSX.Element {
                     <p className="m-0 text-sm text-primary @xl:text-base">
                         Run this in your project and the wizard detects your databases and APIs, then connects them.
                     </p>
-                    <div className="mt-5 flex flex-wrap items-center gap-3">
+                    <div className="mt-5 flex flex-wrap items-center gap-2">
                         <WizardCommand command="warehouse" slim className="!px-3 !py-1.5 [&_code]:text-base" />
                         <p className="m-0 text-sm text-secondary">
                             or{' '}

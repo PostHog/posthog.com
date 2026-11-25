@@ -574,6 +574,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       sourceId: String
       name: String
       slug: String
+      category: String
       icon_url: String
       docsUrl: String
       unreleased: Boolean

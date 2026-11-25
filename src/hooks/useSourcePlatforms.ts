@@ -9,6 +9,7 @@ export default function useSourcePlatforms() {
                 nodes {
                     name
                     slug
+                    category
                     mdx {
                         fields {
                             slug
@@ -26,6 +27,7 @@ export default function useSourcePlatforms() {
                 label: node.name,
                 url: getSourceDocsPath(node),
                 image: node.icon_url,
+                category: node.category as string | null,
             })),
         [allPostHogSource]
     )
