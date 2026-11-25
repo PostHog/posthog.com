@@ -18,7 +18,7 @@ import {
     titleSummary,
     useSelfDrivingFeed,
 } from 'components/Home/DataStory/SelfDrive/useSelfDrivingFeed'
-import { formatCount, inSentence, lineByKey, useScaleData } from './data'
+import { dottedUnderline, formatCount, inSentence, lineByKey, useScaleData } from './data'
 import type { LineKey } from './data'
 import { PANEL_ID, tabId } from './Receipt'
 import './panels.css'
@@ -31,11 +31,7 @@ const STATUS_PAGE_URL = 'https://www.posthogstatus.com'
 
 function SourceLink({ to, children }: { to: string; children: React.ReactNode }): JSX.Element {
     return (
-        <Link
-            to={to}
-            externalNoIcon
-            className="text-secondary underline decoration-dotted underline-offset-2 hover:decoration-solid"
-        >
+        <Link to={to} externalNoIcon className={`text-secondary ${dottedUnderline}`}>
             {children}
         </Link>
     )
@@ -82,8 +78,7 @@ function RowsReadPanel(): JSX.Element {
     return (
         <div className="flex h-full flex-col gap-4">
             <PanelHeader title={`Half of ${formatCount(queries)} queries finished in ${medianMs}\u00a0ms`}>
-                Every successful database query we ran {inSentence(relativeDay)}, sorted by how long it took.{' '}
-                {Math.round(underOneSecond * 10)} in 10 finished in under a second.
+                Every successful database query we ran {inSentence(relativeDay)}, sorted by how long it took.
             </PanelHeader>
             <div
                 role="img"
@@ -135,9 +130,7 @@ function RowsReadPanel(): JSX.Element {
                     ))}
                 </div>
             </div>
-            <p className="m-0 mt-2 text-xs text-secondary">
-                ClickHouse query logs, US and EU, {dayLabel}. Includes background jobs and our own queries.
-            </p>
+            <p className="m-0 mt-2 text-xs text-secondary">ClickHouse query logs, US and EU, {dayLabel}.</p>
         </div>
     )
 }
@@ -147,14 +140,14 @@ const COLUMN_STAGGER_MS = 60
 const logBands = ['Under 100', '100–1K', '1K–10K', '10K–100K', '100K–1M', '1M+']
 
 function LogsPanel(): JSX.Element {
-    const { relativeDay, logOrgSizes } = useScaleData()
+    const { relativeDay, logOrgSizes, totals } = useScaleData()
     const sizes = logOrgSizes.shares.map((share, band) => ({ label: logBands[band], share }))
     const tallest = Math.max(...logOrgSizes.shares)
     return (
         <div className="flex h-full flex-col gap-5">
             <PanelHeader title="Logs from teams of every size">
-                {logOrgSizes.orgs.toLocaleString('en-US')} organizations sent us logs {inSentence(relativeDay)}. This is
-                how many lines each one sent.
+                {logOrgSizes.orgs.toLocaleString('en-US')} organizations sent us {formatCount(totals.logs)} logs{' '}
+                {inSentence(relativeDay)}.
             </PanelHeader>
             <ol className="m-0 grid min-h-48 flex-1 list-none grid-cols-6 gap-2 p-0 @lg:gap-4">
                 {sizes.map((size, column) => (
@@ -182,11 +175,6 @@ function LogsPanel(): JSX.Element {
             <p className="m-0 text-xs text-secondary">Lines per organization in one day, from PostHog usage reports.</p>
         </div>
     )
-}
-
-function ceilToOneDigit(value: number): number {
-    const magnitude = 10 ** Math.floor(Math.log10(value))
-    return Number((Math.ceil(value / magnitude) * magnitude).toPrecision(1))
 }
 
 function average(values: number[]): number {
@@ -241,23 +229,17 @@ function EventsPanel(): JSX.Element {
     if (!status) {
         return <StatusUnavailable title="Time to query an event" />
     }
-    const { eventLag, captureErrorPeakPercent, polledAt } = status
+    const { eventLag, polledAt } = status
     return (
         <LatencyPanel
             polledAt={polledAt}
-            title={`Median time to query an event: about ${Math.round(average(eventLag.median))} seconds`}
+            title={`Time from ingestion to query visibility: about ${Math.round(average(eventLag.median))} seconds`}
             labels={eventLag.hours}
             unit="seconds"
             median={eventLag.median}
             p99={eventLag.p99}
         >
-            The average of the hourly medians of the time from capture to queryable, over the last 24 hours on US Cloud.
-            The chart also shows the hourly 99th percentile.{' '}
-            {captureErrorPeakPercent === 0
-                ? 'Capture returned no server errors (HTTP 5xx) in the same 24 hours.'
-                : `Capture's server error rate (HTTP 5xx) stayed at or under ${ceilToOneDigit(
-                      captureErrorPeakPercent
-                  )}% in the same 24 hours.`}
+            The median time from event capture to queryable, US Cloud.
         </LatencyPanel>
     )
 }
@@ -277,8 +259,7 @@ function FlagsPanel(): JSX.Element {
             median={flagResponse.median}
             p99={flagResponse.p99}
         >
-            The average of the hourly medians for remote evaluation, over the last 24 hours on US Cloud. The 99th
-            percentile stayed under {Math.ceil(Math.max(...flagResponse.p99))} ms in every hour.
+            The median flag evaluation time, US Cloud.
         </LatencyPanel>
     )
 }
@@ -341,8 +322,7 @@ function ReportsPanel(): JSX.Element {
     return (
         <div className="flex flex-col gap-4">
             <PanelHeader title="What self-driving shipped for us lately">
-                We run PostHog on PostHog. PostHog wrote these pull requests from reports on our own product, and an
-                engineer reviewed and merged each one.
+                Pull requests written by PostHog, for PostHog.
             </PanelHeader>
             <ol className="relative m-0 flex list-none flex-col p-0 pl-6">
                 <ShadeBorder />
@@ -561,7 +541,8 @@ export default function Panels({
     swapClass: string
     onNext: () => void
 }): JSX.Element {
-    const { totals } = useScaleData()
+    const data = useScaleData()
+    const { totals } = data
     const { headingRef, stacked } = useStackedLayout()
     const tabpanel = stacked ? {} : { role: 'tabpanel', 'aria-labelledby': tabId(shown), tabIndex: 0 }
     const position = panelEntries.findIndex(([key]) => key === shown) + 1
@@ -590,9 +571,9 @@ export default function Panels({
                                     {formatCount(totals[key])} {lineByKey[key].noun}
                                 </Emphasis>
                             </h2>
-                            <p className="m-0 text-sm text-secondary">{lineByKey[key].note(totals[key])}</p>
+                            <p className="m-0 text-sm text-secondary">{lineByKey[key].note(data)}</p>
                         </header>
-                        <Card.Root appearance="solid" className="min-h-72 @3xl:pl-48">
+                        <Card.Root appearance="solid" className="min-h-72 @3xl:pl-[12.5rem]">
                             <div className={`grid flex-1 grid-cols-[minmax(0,1fr)] ${swap}`}>
                                 <Panel />
                             </div>

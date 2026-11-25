@@ -39,7 +39,6 @@ async function fetchStatus() {
     const { charts, polled_at }: { charts: StatusChart[]; polled_at: string } = await response.json()
     return {
         polledAt: `${polled_at.slice(0, 10)} ${polled_at.slice(11, 16)} UTC`,
-        captureErrorPeakPercent: Math.max(...statusSeries(charts, 'capture_5xx_rate', '5xx').map(([, value]) => value)),
         eventLag: latency(charts, 'e2e_events_to_clickhouse_lag'),
         flagResponse: latency(charts, 'feature_flags_response_time'),
     }
@@ -94,6 +93,7 @@ export async function fetchScaleData(apiKey: string) {
             reports: Number(dayTotals.self_driving_reports),
             salesCalls: 0,
         },
+        logBytes: Number(dayTotals.log_bytes),
         rowsReadSeries: completeDays
             .filter((row) => String(row.day) <= day)
             .sort((a, b) => String(a.day).localeCompare(String(b.day)))

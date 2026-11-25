@@ -1,11 +1,13 @@
-import { createContext, useContext } from 'react'
+import React, { createContext, useContext } from 'react'
+import type { ReactNode } from 'react'
+import { displayLabel } from 'components/MCPLeaderboard/data'
 
 export type LineKey = 'events' | 'rowsRead' | 'logs' | 'flags' | 'mcp' | 'reports' | 'salesCalls'
 
 export type ReceiptLine = {
     key: LineKey
     item: string
-    note: (value: number) => string
+    note: (data: ScaleData) => ReactNode
     verb: string
     noun: string
 }
@@ -16,15 +18,19 @@ export type ScaleData = {
     dayLabel: string
     relativeDay: string
     totals: Record<LineKey, number>
+    logBytes: number
     rowsReadSeries: number[]
     queryDurations: { queries: number; medianMs: number; shareUnderOneSecond: number; counts: number[] }
     logOrgSizes: { orgs: number; shares: number[] }
     mcpClients: { label: string; share: number }[]
-    status: { polledAt: string; eventLag: Latency; flagResponse: Latency; captureErrorPeakPercent: number } | null
+    status: { polledAt: string; eventLag: Latency; flagResponse: Latency } | null
 }
+
+export const dottedUnderline = 'underline decoration-dotted underline-offset-2 hover:decoration-solid'
 
 const SECONDS_PER_DAY = 86_400
 const WORLD_POPULATION = 8.2e9
+const WAR_AND_PEACE_BYTES = 3.2e6
 
 function perPerson(events: number): string {
     const ratio = Math.round((events / WORLD_POPULATION) * 10) / 10
@@ -34,50 +40,54 @@ function perPerson(events: number): string {
 export const lines: ReceiptLine[] = [
     {
         key: 'rowsRead',
-        item: 'Rows read by queries',
-        note: () => 'every dashboard, insight, and query',
+        item: 'Rows read',
+        note: ({ totals, queryDurations }) => `${formatCount(totals.rowsRead / queryDurations.queries)} rows per query`,
         verb: 'read',
         noun: 'rows',
     },
     {
         key: 'events',
         item: 'Events ingested',
-        note: perPerson,
+        note: ({ totals }) => perPerson(totals.events),
         verb: 'ingested',
         noun: 'events',
     },
     {
         key: 'logs',
         item: 'Log records',
-        note: () => 'mostly somebody else’s stack traces',
+        note: ({ logBytes }) => `${formatCount(logBytes / WAR_AND_PEACE_BYTES)} copies of War and Peace`,
         verb: 'stored',
         noun: 'log records',
     },
     {
         key: 'flags',
         item: 'Feature flag requests',
-        note: () => 'each one decides what a user sees',
+        note: () => 'collapsing wave functions since 2020',
         verb: 'served',
         noun: 'flag requests',
     },
     {
         key: 'mcp',
         item: 'MCP tool calls',
-        note: () => 'agents asking instead of people',
+        note: ({ mcpClients: [top] }) => `${top.share}% of them from ${displayLabel('client', top.label)}`,
         verb: 'answered',
         noun: 'MCP tool calls',
     },
     {
         key: 'reports',
         item: 'Self-driving reports',
-        note: (reports) => `one every ${Math.round(SECONDS_PER_DAY / reports)} seconds`,
+        note: ({ totals }) => `one every ${Math.round(SECONDS_PER_DAY / totals.reports)} seconds`,
         verb: 'wrote',
         noun: 'self-driving reports',
     },
     {
         key: 'salesCalls',
         item: 'Quick calls required',
-        note: () => 'the product did the talking',
+        note: () => (
+            <>
+                you can buy one if you <em>really</em> want
+            </>
+        ),
         verb: 'needed',
         noun: 'quick calls',
     },

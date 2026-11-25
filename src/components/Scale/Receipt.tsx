@@ -57,7 +57,8 @@ export default function Receipt({
     onAdvance: () => void
     className?: string
 }): JSX.Element {
-    const { dayLabel, totals, rowsReadSeries } = useScaleData()
+    const data = useScaleData()
+    const { dayLabel, totals, rowsReadSeries } = data
     const happenedPerSecond = lines.reduce((sum, line) => sum + totals[line.key], 0) / SECONDS_PER_DAY
     const happenedToday = useCallback(() => secondsSinceMidnightUtc() * happenedPerSecond, [happenedPerSecond])
     const selectedIndex = lines.findIndex((line) => line.key === selected)
@@ -87,14 +88,14 @@ export default function Receipt({
             >
                 <div className={rule} />
                 <div className="text-center">
-                    <div className="font-sans text-3xl font-semibold text-secondary">PostHog Cloud</div>
+                    <div className="font-sans text-3xl font-semibold text-secondary">PostHog</div>
                     <div className="text-13 text-secondary">US + EU · open 24 hours</div>
                     <div className="text-13 text-secondary">{dayLabel}</div>
                 </div>
                 <div className={rule} />
                 <div
                     role="tablist"
-                    aria-label={`${dayLabel} on PostHog Cloud`}
+                    aria-label={`${dayLabel} on PostHog`}
                     aria-orientation="vertical"
                     onKeyDown={moveWithKeys}
                     className="relative -mx-3 grid auto-rows-fr"
@@ -133,7 +134,7 @@ export default function Receipt({
                                         {formatCount(totals[line.key])}
                                     </span>
                                 </span>
-                                <span className="truncate text-13 text-secondary">{line.note(totals[line.key])}</span>
+                                <span className="truncate text-13 text-secondary">{line.note(data)}</span>
                                 {active && rotating && (
                                     <span
                                         key={line.key}

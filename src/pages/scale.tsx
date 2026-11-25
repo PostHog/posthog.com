@@ -11,7 +11,7 @@ import { SignupCTA } from 'components/SignupCTA'
 import { RoughAnnotation } from 'components/UI/RoughAnnotation'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
-import { ScaleDataContext, formatCount, inSentence, lines, useScaleData } from 'components/Scale/data'
+import { ScaleDataContext, dottedUnderline, formatCount, inSentence, lines, useScaleData } from 'components/Scale/data'
 import { useSwap } from 'components/Scale/useSwap'
 import type { LineKey, ScaleData } from 'components/Scale/data'
 
@@ -58,8 +58,8 @@ function ScaleContent(): JSX.Element {
                     })}
                 </h1>
                 <p className="m-0 max-w-prose text-lg text-secondary">
-                    Don’t believe us? Here’s the receipts of everything that happened {inSentence(relativeDay)} to put
-                    that into perspective.
+                    Here’s the receipts of everything that happened {inSentence(relativeDay)} to put that into
+                    perspective.
                 </p>
             </header>
             <Receipt
@@ -75,9 +75,9 @@ function ScaleContent(): JSX.Element {
             />
             <div className="flex flex-col gap-3 @3xl:col-span-2 @3xl:col-start-1 @3xl:row-start-2 @3xl:ml-48 @3xl:self-start">
                 <Panels shown={shown} next={next} swapClass={swapClass} onNext={() => select(next)} />
-                <p className="m-0 text-sm text-secondary @3xl:pl-48">
+                <p className="m-0 text-sm text-secondary @3xl:pl-[12.5rem]">
                     Running PostHog at serious scale?{' '}
-                    <Link to="/enterprise" state={{ newWindow: true }} className="font-semibold">
+                    <Link to="/enterprise" state={{ newWindow: true }} className={`font-semibold ${dottedUnderline}`}>
                         Talk to us about enterprise
                     </Link>
                 </p>
@@ -150,6 +150,7 @@ export const query = graphql`
                 reports
                 salesCalls
             }
+            logBytes
             rowsReadSeries
             queryDurations {
                 queries
@@ -167,7 +168,6 @@ export const query = graphql`
             }
             status {
                 polledAt
-                captureErrorPeakPercent
                 eventLag {
                     hours
                     median

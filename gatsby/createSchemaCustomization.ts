@@ -839,7 +839,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type ScaleStatus {
         polledAt: String!
-        captureErrorPeakPercent: Float!
         eventLag: ScaleLatency!
         flagResponse: ScaleLatency!
     }
@@ -847,6 +846,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         dayLabel: String!
         relativeDay: String!
         totals: ScaleTotals!
+        logBytes: Float!
         rowsReadSeries: [Float!]!
         queryDurations: ScaleQueryDurations!
         logOrgSizes: ScaleLogOrgSizes!
