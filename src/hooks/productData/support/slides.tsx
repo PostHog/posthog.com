@@ -61,7 +61,7 @@ export const applications: CarouselSlide[] = [
                             {
                                 label: 'AI investigation (beta)',
                                 description:
-                                    "Turn it on and the AI agent reads the ticket's events, errors, replays, and logs, then leaves what it found as a private note.",
+                                    "Turn it on and PostHog AI reads the ticket's events, errors, replays, and logs, then leaves what it found as a private note.",
                             },
                         ]}
                     />
@@ -99,11 +99,6 @@ export const applications: CarouselSlide[] = [
                                     'Reply to the customer and update the ticket status without switching windows.',
                             },
                             {
-                                label: 'Describe a workflow, get a draft',
-                                description:
-                                    'Tell PostHog AI or Claude what rule you want, and it drafts the workflow for you to review. Our support lead builds most of our support workflows this way.',
-                            },
-                            {
                                 label: 'Works anywhere MCP does',
                                 description:
                                     "Cursor, Claude Code, PostHog Code, VS Code, or any MCP-compatible agent that has 'Code' in the title.",
@@ -139,11 +134,6 @@ export const applications: CarouselSlide[] = [
                 </p>
             </>
         ),
-        image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
-            alt: 'The PostHog Slack app answering a question in a thread',
-        },
     },
     {
         slug: 'api',
@@ -285,7 +275,7 @@ export const keyFeatures: CarouselSlide[] = [
     },
     {
         slug: 'ai-agent',
-        label: 'AI agent (beta)',
+        label: 'AI agent',
         icon: <IconSparkles className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -295,11 +285,9 @@ export const keyFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Your support knowledge lives in <Link to="/docs/business-knowledge">Business knowledge</Link>: your
-                    docs, links, and notes, plus answers learned from resolved tickets. Turn on the AI agent and it
-                    drafts a reply to each new ticket from that knowledge. Drafts land as private notes, so a person on
-                    your team decides what the customer reads. It's free while in beta. Ask us to turn it on for your
-                    project.
+                    Turn on the AI agent and it drafts a reply to each new ticket. Drafts land as private notes, so a
+                    person on your team decides what the customer reads. It's free while in beta. Ask us to turn it on
+                    for your project.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -332,7 +320,7 @@ export const keyFeatures: CarouselSlide[] = [
     },
     {
         slug: 'workflows',
-        label: 'Workflows',
+        label: 'Works with Workflows',
         icon: <IconBolt className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -344,7 +332,7 @@ export const keyFeatures: CarouselSlide[] = [
                 <p>
                     Every ticket event can start a workflow: a new ticket, a reply from you or the customer, a change of
                     status or assignee. A workflow can update the ticket, post to Slack, call a webhook, or run an AI
-                    task. Rules you control. No autonomous AI deciding your SLA policy at 3am.
+                    task.
                 </p>
                 <p>
                     PostHog's own support team runs on 27 of these workflows. Start from the{' '}
@@ -364,11 +352,11 @@ export const keyFeatures: CarouselSlide[] = [
                             {
                                 label: 'Set SLAs',
                                 description:
-                                    "Based on channel, priority, or the customer's plan, then filter tickets by on track, at risk, or breached.",
+                                    'Based on channel, priority, or pricing plan, then filter tickets by on track, at risk, or breached.',
                             },
                             {
                                 label: 'Triage with AI',
-                                description: 'An AI task step can set the team, tags, and priority on each new ticket.',
+                                description: 'Prepopulate the team, tags, and priority using AI',
                             },
                             {
                                 label: 'Auto-assign',
@@ -376,7 +364,7 @@ export const keyFeatures: CarouselSlide[] = [
                             },
                             {
                                 label: 'Reopen on reply',
-                                description: 'A resolved ticket reopens itself when the customer responds.',
+                                description: 'Customers can reopen closed tickets by responding.',
                             },
                             {
                                 label: 'Tag automatically',

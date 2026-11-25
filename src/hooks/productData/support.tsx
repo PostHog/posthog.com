@@ -6,7 +6,6 @@ import {
     IconEye,
     IconGraph,
     IconInfo,
-    IconList,
     IconMagic,
     IconRocket,
     IconSparkles,
@@ -23,7 +22,7 @@ import hedgehogLifeguardPng from 'hoggies/lifeguard.png'
 
 const SupportTweet = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
-        <SectionHeading>We didn't pay him to say this</SectionHeading>
+        <SectionHeading>We didn't pay him to say this (honest)</SectionHeading>
         <Tweet
             name="Mathew Chan"
             handle="itsmattchan"
@@ -101,7 +100,7 @@ export const support = {
         },
         {
             slug: 'social-proof',
-            name: "We didn't pay him to say this",
+            name: "We didn't pay him to say this (honest)",
             hideFromNav: true,
             group: 'divided',
             icon: <IconChat className="size-4" />,
@@ -115,13 +114,6 @@ export const support = {
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         {
-            slug: 'posthog-vs',
-            name: 'PostHog vs...',
-            template: 'comparison-summary',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
-        {
             slug: 'feature-comparison',
             name: 'Feature comparison',
             group: 'divided',
@@ -132,7 +124,7 @@ export const support = {
     overview: {
         title: 'Support tickets that arrive with the bug attached',
         description: '"Which tickets this week came from users who hit an error?"',
-        eli5: "Support is a helpdesk inside PostHog. Tickets come in from an in-app widget, email, Slack, Microsoft Teams, GitHub issues, or your own UI through the API. Each one opens with the customer's session replay, recent events, and exceptions next to the conversation. PostHog AI and the MCP can read your tickets and the product data behind them, so you find the cause without asking the customer to explain it again. Recurring problems become Self-driving reports, with a draft pull request when there's a code fix.",
+        eli5: "Support is a helpdesk inside PostHog. Tickets come in from an in-app widget, email, Slack, Microsoft Teams, GitHub issues, or your own UI through the API. Each one opens with the customer's session replay, recent events, and exceptions next to the conversation. PostHog AI and the MCP can read your tickets and the product data behind them, so you find the cause without asking the customer to explain it again. Recurring problems can become Self-driving reports with a draft pull request, so support engineers get closer to the fix and have more good news for users.",
         textColor: 'text-black', // tw
     },
     hogs: {
@@ -151,7 +143,7 @@ export const support = {
             ],
             [
                 'Engineers on support rotation',
-                'Open the ticket, watch the replay, and read the stack trace. Then fix the bug and reply to the customer from your editor through the MCP. PostHog engineers do support this way.',
+                "Open the ticket in PostHog, watch the replay, and read the stack trace that it links to directly. Then fix the bug and reply to the customer through the MCP. That's how our PostHog engineers do support.",
             ],
             [
                 'Support engineers',
@@ -168,7 +160,7 @@ export const support = {
         ],
     },
     postHogOnPostHog: {
-        title: 'How PostHog uses Support',
+        title: 'How PostHog uses Support (and Workflows)',
         description: (
             <>
                 We moved our support team off Zendesk in July 2026. Support had no SLAs, routing, or CSAT surveys then,
@@ -232,7 +224,7 @@ export const support = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png',
         imageAlt: 'A support team of hedgehogs at their desks',
-        intro: 'Ask PostHog AI to triage tickets, investigate them, and draft replies. It reads the ticket, the replay, and the errors. A person on your team decides what the customer reads.',
+        intro: 'Ask PostHog AI to triage tickets, investigate them, and draft replies. It reads the ticket, the replay, and the errors.',
         mcpFeatures: ['conversations'],
         groups: [
             {
