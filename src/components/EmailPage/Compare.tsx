@@ -191,7 +191,6 @@ const categories: [title: string, rows: Row[]][] = [
             ['CLI', true, true, true, true, true],
         ],
     ],
-    ['Pricing', [['Price at 100k emails a month', '$36', '$35', '$126', '$49', 'About $145']]],
 ]
 
 function Mark({ mark, us }: { mark: Mark; us: boolean }): JSX.Element {
