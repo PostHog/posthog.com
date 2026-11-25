@@ -259,6 +259,8 @@ module.exports = {
                     const transformedPages = allPages
                         .filter(
                             ({ path }) =>
+                                // File system route templates (e.g. /startups/[...slug]) are not real pages
+                                !path.includes('[') &&
                                 !VERSIONED_SDK_REFERENCE.test(path) &&
                                 !isNoindexSdkReference(path) &&
                                 !isRedirectedSdkReference(path)

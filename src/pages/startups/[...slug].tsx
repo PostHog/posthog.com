@@ -7,7 +7,8 @@ import StartupProgram from 'components/Startups/StartupProgram'
 export default function StartupsPartner(): JSX.Element {
     const location = useLocation()
     const pathSegments = location.pathname.split('/').filter(Boolean)
-    const partnerSlug = pathSegments.length > 1 ? pathSegments[1] : null
+    // Ignore anything that isn't a plain slug, such as the literal "[...slug]" route path
+    const partnerSlug = pathSegments.length > 1 && /^[a-z0-9-]+$/i.test(pathSegments[1]) ? pathSegments[1] : null
 
     return <StartupProgram partnerSlug={partnerSlug} />
 }
