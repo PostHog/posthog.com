@@ -1,59 +1,88 @@
 ---
 title: 'The best Plausible alternatives & competitors, compared'
-date: 2026-02-03
+date: 2026-11-25
 author:
     - ian-vanagas
     - natalia-amorim
 rootPage: /compare
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/plausible_5d7d99ef07.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/best_plausible_alternatives_competitors_3f01f9284d.png
 featuredImageType: full
 category: General
 tags:
     - Alternatives
-
 seo:
     metaTitle: The best Plausible alternatives & competitors, compared
-    metaDescription: Compare the best Plausible alternatives for web analytics, product analytics, and more – including PostHog, Matomo, and Fathom.
+    metaDescription: Looking for a Plausible Analytics alternative? Compare 7 free and paid web analytics tools on pricing, privacy, and features.
 sidebar: Compare
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
-[Plausible](/compare/posthog-vs-plausible) does simple, privacy-friendly website analytics really well. No cookies, no complex setup, no overwhelming dashboards.
+[Plausible Analytics](/compare/posthog-vs-plausible) does simple, privacy-friendly website analytics really well. No cookies, no complex setup, no overwhelming dashboards.
 
-But simplicity has trade-offs. Plausible doesn't offer session replay, A/B testing, or feature flags. Key features like funnels and ecommerce tracking are locked behind its Business plan. And there's no free tier – just a 30-day trial.
+But simplicity has its drawbacks. Plausible doesn't offer session replay, A/B testing, or feature flags. Key features like funnels and ecommerce tracking are locked behind its Business plan. And there's no free tier – just a 30-day trial.
 
-If you've outgrown Plausible or need more from your analytics stack, this guide compares the best alternatives – whether you want a similarly lightweight tool or a full platform for building better products.
+If you've outgrown Plausible or need more from your analytics stack, this guide compares the best Plausible alternatives – whether you want a similarly lightweight tool or a full platform for building better products.
+
+<details>
+<summary>What are the best Plausible alternatives? The short version</summary>
+
+| Tool | Best for | Free plan | Open source |
+|---|---|---|---|
+| **PostHog** | Engineers and product teams | 1M events a month | Yes (MIT, open core) |
+| **Fathom** | Content and marketing sites | No (7-day trial) | No |
+| **Matomo** | Content, marketing, and e-commerce sites | Self-hosted only | Yes (GPLv3) |
+| **Heap** | Product and marketing teams | 10k sessions a month | No |
+| **Piwik PRO** | Enterprises in regulated industries | No (30-day trial) | No |
+| **Umami** | Developers and small sites | 100k events a month, 1 website | Yes (MIT) |
+| **Google Analytics** | Marketing teams in Google's ecosystem | Free, with sampling and retention limits | No |
+ 
+**PostHog** is the pick if you want to follow a visitor past the pageview: from the [traffic source](/web-analytics) to the [funnel](/product-analytics), the [session replay](/session-replay), and the [error](/error-tracking) they hit. From there you can [A/B test](/experiments) a fix behind a [feature flag](/feature-flags), [survey](/surveys) your visitors, and query it all from your editor through [the MCP](/mcp), with [1 million events](/pricing) free every month.
+ 
+**Umami** and **Fathom** are the closest to Plausible: simple, cookieless dashboards for content sites. Umami is open source with a free hosted plan, and Fathom includes 50 sites on its entry plan.
+ 
+**Matomo** and **Piwik PRO** are closer to the old Google Analytics. Matomo is open source and free to self-host, and Piwik PRO adds consent management for regulated teams. **Heap** is built for product analytics, and **Google Analytics** is the free default if you rely on Google Ads.
+ 
+</details>
 
 ## 1. PostHog
 
--   **Founded:** 2020
--   **Similar to:** Heap, Matomo
--   **Typical users:** Engineers and product teams
--   **Typical customers:** Mid-size B2Bs and startups
+- **Founded:** 2020
+- **Who it's for:** Startups, engineers, and product teams who want web analytics connected to product analytics, session replay, experiments, and error tracking.
+- **Who it isn't for:** Sites that only need a simple traffic dashboard with cookieless tracking out of the box; PostHog's cookieless mode is opt-in.
+- **Cookieless tracking:** Opt-in ([cookieless mode](/docs/privacy/data-collection))
+- **Open source:** Yes
 
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Posthog_web_analytics_679d394b35.png)
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform combining [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/ab-testing), [feature flags](/feature-flags), [user surveys](/surveys), and more into one product. This means it's not only an alternative to [Plausible](/compare/posthog-vs-plausible) but also tools like [Mixpanel](/compare/posthog-vs-mixpanel), [Hotjar](/compare/posthog-vs-hotjar), and [LaunchDarkly](/compare/posthog-vs-launchdarkly).
+[PostHog](/) (that's us 👋) is your product's context layer. It combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), [feature flags](/feature-flags), [user surveys](/surveys), and [other developer tools](/products), all built on the same events, users, and sessions.
+
+A [data warehouse](/warehouse) and [data pipelines](/data-pipelines) connect it all to the business data you keep elsewhere, like Stripe or HubSpot. You can query everything with [SQL](/docs/sql), or hand it to an agent from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp).
 
 ### Key features
 
-- **Web analytics:** Monitor your [web traffic](/docs/web-analytics) by automatically capturing and calculating metrics like visitors, pageviews, session duration, and bounce rate. See the sources, entry and exit paths, [channels](/docs/data/channel-type), and more.
+- **Web analytics:** Monitor your [web traffic](/docs/web-analytics) by automatically capturing and calculating metrics like [visitors, pageviews, session duration, and bounce rate](/docs/web-analytics/dashboard). See the sources, entry and exit paths, [channels](/docs/data/channel-type), and more.
 
-- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/data-warehouse/sql) for power users.
+- **Heatmaps:** [Clicks, rage clicks, scroll depth, and mouse movement](/docs/toolbar/heatmaps). Heatmap data is free.
 
-- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and [90-day data retention](/docs/session-replay/recording-retention) on the pay-as-you-go plan.
+- **Product analytics:** Custom [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths), [retention analysis](/docs/product-analytics/retention), and segment user [cohorts](/docs/data/cohorts). Also, direct [SQL querying](/docs/data-warehouse/sql) for power users.
 
-- **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **Agent access:** The [MCP server](/docs/web-analytics/surfaces/mcp) lets an AI agent query your web analytics [from your editor](/docs/model-context-protocol).
 
-- **A/B tests:** Optimize your app and website with up to 19 test variants and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **Session replays:** [View exactly how users are using your site](/docs/session-replay). Includes [event timelines](/docs/session-replay/how-to-watch-recordings), [console logs](/docs/session-replay/console-log-recording), [network activity](/docs/session-replay/network-recording), and [90-day data retention](/docs/session-replay/recording-retention) on the pay-as-you-go plan.
+
+- **A/B tests:** [Optimize your app and website](/docs/experiments) with up to 19 test variants and track impact on [primary and secondary metrics](/docs/experiments/metrics#primary-and-secondary-metrics). Automatically calculate [test duration, sample size](/docs/experiments/sample-size-running-time), and [statistical significance](/docs/experiments/analyzing-results).
+
+- **Surveys:** [Target surveys](/docs/surveys/creating-surveys#display-conditions) by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
 ### How does PostHog compare to Plausible?
 
-Plausible focuses on web analytics. PostHog includes web analytics but also offers a full suite of tools to help you build a better site and product. On top of this, you can use all of the features of PostHog for free forever. Plausible costs a minimum of $9/month.
+Plausible focuses on web analytics. PostHog includes [web analytics](/web-analytics) but also offers a [full suite of tools](/products) to help you build a better site and product. On top of this, PostHog has a [free tier](/pricing) with 1 million events a month, while Plausible costs a minimum of $9/month.
+
+Read our [PostHog vs Plausible comparison](/compare/posthog-vs-plausible) for an in-depth look at the differences.
 
 <p>
 <ProductComparisonTable
@@ -79,10 +108,11 @@ Plausible focuses on web analytics. PostHog includes web analytics but also offe
 <details>
 <summary>Main differences between PostHog and Plausible</summary>
 
+
 - PostHog's free tier includes 1 million events/month; Plausible has a limited 30-day free trial – after that, plans start at $9/month for 10k pageviews.
-- PostHog includes [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/ai-observability), and more; Plausible focuses exclusively on web analytics.
-- PostHog offers [SQL access](/docs/data-warehouse/sql) for custom queries and a built-in [data warehouse](/data-warehouse) for importing external data; Plausible offers CSV exports and a Stats API.
-- PostHog supports web, mobile, and backend tracking with SDKs for every major platform; Plausible is web-only with a single JavaScript snippet.
+- PostHog includes [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more; Plausible focuses exclusively on web analytics.
+- PostHog offers [SQL access](/docs/data-warehouse/sql) for custom queries and a built-in [data warehouse](/warehouse) for importing external data; Plausible offers CSV exports and, on its Business plan, a Stats API.
+- PostHog supports web, mobile, and backend tracking with SDKs for every major platform; Plausible has one official JavaScript snippet, plus an Events API for server-side and mobile tracking and community-built mobile SDKs.
 
 </details>
 
@@ -90,7 +120,7 @@ Plausible focuses on web analytics. PostHog includes web analytics but also offe
 <summary>Main similarities between PostHog and Plausible</summary>
 
 - Both are open source with publicly available codebases on GitHub.
-- Both support cookieless tracking and can be used without cookie consent banners.
+- Both support cookieless tracking: Plausible by default, and PostHog with its opt-in [cookieless mode](/docs/privacy/data-collection).
 - Both are GDPR-ready with EU data hosting options.
 - Both offer clean, simple web analytics dashboards with pageviews, visitors, bounce rate, and referrers.
 - Both support custom events, UTM tracking, and conversion goals.
@@ -98,28 +128,32 @@ Plausible focuses on web analytics. PostHog includes web analytics but also offe
 
 </details>
 
-### Why do companies use PostHog?
-
-According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
-
-1. **It replaces multiple tools:** PostHog can replace Plausible (web analytics), [Amplitude](/compare/posthog-vs-amplitude) (product analytics), and [Fullstory](/compare/posthog-vs-fullstory) (session replay). This simplifies workflows and ensures product data is all in one place.
-
-2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) they can use forever. Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
-
-3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+### PostHog and Plausible pricing comparison
+ 
+| | PostHog | Plausible |
+|---|---|---|
+| **Free plan** | 1M events, 5,000 web + 2,500 mobile replays, and 1M feature flag requests a month | None (30-day trial) |
+| **Paid plans** | No base fee; usage-based per product | From $9/month for 10k pageviews |
+| **MCP server** | [Free and hosted](/docs/web-analytics/surfaces/mcp), with tools for querying web analytics | No official server; its docs point to a community-built one |
+| **Self-hosting** | Free (MIT, open core), but unsupported | Free Community Edition (AGPLv3) |
+| **EU data storage** | Yes (Frankfurt) | Yes (Germany) |
 
 > #### Bottom line
 >
-> Because PostHog is free, has web analytics and more, and still has the privacy and compliance features Plausible offers, it makes for a great alternative, especially for developers and startups.
+> Because PostHog has a generous free tier, has web analytics and more, and still has the privacy and compliance features Plausible offers, it makes for a great alternative, especially for developers and startups.
 
-<WizardCTA />
+<WizardCTA
+    title="Set up web analytics with one command"
+    subtitle="The wizard adds PostHog to your app and starts capturing pageviews automatically."
+    learnMoreTo="/docs/web-analytics/installation"
+/>
 
 ## 2. Fathom
 
--   **Founded:** 2018
--   **Similar to:** Plausible, Google Analytics
--   **Typical users:** Founders and content teams
--   **Typical customers:** Privacy-conscious, content-focused websites
+- **Founded:** 2018
+- **Similar to:** Plausible, Google Analytics
+- **Typical users:** Founders and content teams
+- **Typical customers:** Privacy-conscious, content-focused websites
 
 ![Fathom](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_02_at_16_12_06_c41b89ea2f.png)
 
@@ -130,12 +164,10 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 #### Key features
 
 - **Simple web analytics:** Fathom provides a simple, GA-like experience to monitor your website and get an overview of your traffic.
-
 - **Cookieless:** Avoid cookie banners and track your site without using cookies.
-
 - **Marketing metrics:** Track the sources, devices, browsers, locations, UTMs, and more for your traffic.
-
 - **Conversions:** Track custom events and analyze them as conversions towards a goal.
+- **Google integrations:** Imports your Google Analytics 4 history and, since February 2026, shows Search Console data in the dashboard.
 
 ### How does Fathom compare to Plausible?
 
@@ -166,10 +198,10 @@ Feature-wise, Plausible and Fathom are nearly identical. Looking closer, however
 <summary>Main differences between Fathom and Plausible</summary>
 
 - Plausible is open source (AGPL license) with a self-hostable Community Edition; Fathom is closed-source and cloud-only.
-- Plausible is fully EU-hosted on European-owned infrastructure; Fathom is Canadian-based with EU isolation for visitor data routing.
+- Plausible is fully EU-hosted on European-owned infrastructure; Fathom is a Canadian company that processes EU visitors' data on EU servers, then stores the anonymized data in the US.
 - Plausible offers conversion funnels on its Business plan; Fathom doesn't have native funnel analysis.
-- Plausible integrates with Google Search Console for SEO data in-dashboard; Fathom doesn't offer this integration.
-- Fathom starts at $15/month for 100k pageviews; Plausible starts at $9/month for 10k pageviews, making it cheaper at low volumes but more expensive as traffic grows beyond 2M pageviews.
+- Fathom starts at $15/month for 100k pageviews across 50 sites; Plausible's Starter plan is $9/month for 10k pageviews and $19/month for 100k, on one site.
+- Plausible's trial is 30 days with no card; Fathom's is 7 days and needs a card.
 
 </details>
 
@@ -180,9 +212,9 @@ Feature-wise, Plausible and Fathom are nearly identical. Looking closer, however
 - Both use cookieless tracking and don't require cookie consent banners.
 - Both offer simple, single-page dashboards with pageviews, visitors, referrers, and sources.
 - Both support custom events, UTM campaign tracking, and conversion goals.
-- Both offer email reports and uptime monitoring.
-- Both support Google Analytics data import for easy migration.
-- Neither offer session replay, A/B testing, feature flags, or product analytics.
+- Both offer email reports and show Google Search Console data in the dashboard.
+- Both can import your Google Analytics 4 history.
+- Neither offers session replay, A/B testing, feature flags, or product analytics.
 
 </details>
 
@@ -192,15 +224,15 @@ Feature-wise, Plausible and Fathom are nearly identical. Looking closer, however
 > 2. Having EU isolation so visitor data is routed and stored on EU servers.
 > 3. Having a data processing agreement (DPA) available.
 
-### Why do companies use Fathom?
-
-Fathom has limited reviews on G2, but much more praise on social. Judging from social posts, the main reasons people choose Fathom are:
-
-1. **Privacy-focus:** Fathom reviewers almost always praise its focus on privacy. This allows users to stay compliant with regulations like GDPR, CCPA, and more.
-
-2. **Ease of use:** Reviewers find Fathom is simple to set up and simple to understand. Less technical users find this especially helpful.
-
-3. **Migration from GA:** Thanks to both its Google Analytics importer and its relatively similar interface, reviewers find the migration from GA to Fathom relatively easy.
+### Fathom and Plausible pricing comparison
+ 
+| | Fathom | Plausible |
+|---|---|---|
+| **Free plan** | None (7-day trial, card required) | None (30-day trial) |
+| **Paid plans** | From $15/month for 100k pageviews, with 50 sites included | From $9/month for 10k pageviews on one site; $19/month for 100k |
+| **MCP server** | None documented | No official server; its docs point to a community-built one |
+| **Self-hosting** | None | Free Community Edition (AGPLv3) |
+| **EU data storage** | No (EU processing, US storage) | Yes (Germany) |
 
 > #### Bottom line
 >
@@ -208,16 +240,17 @@ Fathom has limited reviews on G2, but much more praise on social. Judging from s
 
 ## 3. Matomo
 
--   **Founded:** 2007
--   **Similar to:** Piwik Pro, Google Analytics
--   **Typical users:** Marketing and ecommerce teams
--   **Typical customers:** Privacy-focused former GA users
+- **Founded:** 2007
+- **Who it's for:** Content, marketing, and e-commerce teams who want a Google Analytics-style tool they can self-host.
+- **Who it isn't for:** Teams that want Plausible's simplicity, or self-hosters who want funnels, cohorts, and session recordings without paying for plugins.
+- **Cookieless tracking:** Optional (first-party cookies by default)
+- **Open source:** Yes (GPLv3; premium plugins are proprietary)
 
 ![Matomo](https://res.cloudinary.com/dmukukwp6/image/upload/matomo_8d74c7fc2c.png)
 
 ### What is Matomo?
 
-[Matomo](/compare/posthog-vs-matomo) is a fully-featured, privacy-focused Google Analytics alternative. It contains basic web analytics along with more advanced product and behavioral analytics features. This includes features like funnels, cohorts, session recordings, and heatmaps.
+[Matomo](/compare/posthog-vs-matomo) is a fully-featured, privacy-focused Google Analytics alternative. It contains basic web analytics along with more advanced product and behavioral analytics features. This includes features like funnels, cohorts, session recordings, and heatmaps, which are included in Matomo Cloud and sold as plugins if you self-host.
 
 #### Key features
 
@@ -228,6 +261,8 @@ Fathom has limited reviews on G2, but much more praise on social. Judging from s
 - **Marketing analysis:** Combine traffic insights with channel attribution, keyword data, ad performance, and more.
 
 - **Ecommerce:** Integrate with popular ecommerce platforms and track sales, products, and conversions.
+
+- **Agent access:** An MCP server for Matomo Cloud and self-hosted Matomo, released in May 2026.
 
 ### How does Matomo compare to Plausible?
 
@@ -257,10 +292,10 @@ Matomo is more of a like-for-like alternative to Google Analytics, meaning it ha
 <details>
 <summary>Main differences between Matomo and Plausible</summary>
 
-- Matomo includes paid plugins for session recordings, heatmaps, and A/B testing; Plausible focuses exclusively on web analytics.
-- Matomo offers a fully self-hostable version for free with no event limits; Plausible's self-hosted Community Edition excludes premium features like funnels and ecommerce tracking.
+- Matomo has session recordings, heatmaps, and A/B testing, included in Matomo Cloud and sold as plugins if you self-host; Plausible focuses exclusively on web analytics.
+- Both can be self-hosted for free, and both hold features back: Matomo sells funnels, cohorts, and heatmaps as paid plugins, while Plausible's Community Edition has no funnels or ecommerce revenue goals.
 - Matomo has a GA-like interface with multi-page reports, custom dashboards, and segmentation; Plausible keeps everything on a single-page dashboard.
-- Matomo offers ecommerce integrations with WooCommerce, Shopify, and Magento out of the box; Plausible's ecommerce revenue tracking is limited to its Business plan.
+- Matomo has ecommerce reports and integrations for WooCommerce (a premium plugin), Shopify, and Magento; Plausible's ecommerce revenue tracking is limited to its Business plan.
 - Matomo uses cookies by default (with a cookieless option); Plausible is cookieless by design and never uses cookies.
 - Matomo's cloud pricing starts higher and scales based on traffic; Plausible's subscription tiers are simpler and cheaper at lower volumes.
 
@@ -273,21 +308,21 @@ Matomo is more of a like-for-like alternative to Google Analytics, meaning it ha
 - Both offer EU hosting and GDPR compliance.
 - Both support self-hosting for full data ownership.
 - Both track pageviews, visitors, referrers, sources, UTM campaigns, and conversion goals.
-- Both integrate with Google Search Console for SEO data.
+- Both integrate with Google Search Console for SEO data (a paid plugin on self-hosted Matomo).
 - Both support custom events for tracking actions beyond pageviews.
 - Both have active communities and long track records in the privacy analytics space.
 
 </details>
 
-### Why do companies use Matomo?
-
-According to reviews on [G2](https://www.g2.com/products/matomo-formerly-piwik/reviews), people choose Matomo because:
-
-1. **On-premise:** Reviews appreciate that Matomo can be hosted and run from your own servers, keeping them in full control of their data.
-
-2. **Privacy:** Matomo is open-source, self-hostable, and community-focused. The combination of these creates a privacy-focused platform reviewers appreciate.
-
-3. **GA-like:** Matomo's feature set is very similar to Google Analytics. This means users can do the analysis they are familiar with on a more privacy-friendly platform.
+### Matomo and Plausible pricing comparison
+ 
+| | Matomo | Plausible |
+|---|---|---|
+| **Free plan** | Self-hosted only (21-day trial on Cloud) | None (30-day trial) |
+| **Paid plans** | Cloud priced by monthly hits, starting at 50,000; self-hosted plugin bundles from €275/month | From $9/month for 10k pageviews |
+| **MCP server** | Yes, on Cloud and as a free plugin for self-hosted | No official server; its docs point to a community-built one |
+| **Self-hosting** | Free (GPLv3) | Free Community Edition (AGPLv3) |
+| **EU data storage** | Yes (Frankfurt, on Cloud) | Yes (Germany) |
 
 > #### Bottom line
 >
@@ -295,16 +330,20 @@ According to reviews on [G2](https://www.g2.com/products/matomo-formerly-piwik/r
 
 ## 4. Heap
 
--   **Founded:** 2013
--   **Similar to:** PostHog, LogRocket
--   **Typical users:** Product and marketing teams
--   **Typical customers:** B2C SaaS and ecommerce companies with a user experience focus.
+- **Founded:** 2013
+- **Who it's for:** Product and marketing teams who want autocaptured product analytics, with session replay and heatmaps as add-ons.
+- **Who it isn't for:** Teams that want simple, cookieless web analytics, open source code, or public pricing.
+- **Cookieless tracking:** No (first-party cookies or local storage)
+- **Open source:** No
+
 
 ![Heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
 
 ### What is Heap?
 
-[Heap](/compare/posthog-vs-heap) describes itself as a digital insights platform. This means it offers both product analytics and session replay and supports marketing use cases with multi-touch attribution. Contentsquare, a marketing and ecommerce analytics firm, [acquired Heap in September 2023](https://contentsquare.com/heap/) and announced plans to integrate the two products.
+[Heap](/compare/posthog-vs-heap) describes itself as a digital insights platform. This means it offers both product analytics and session replay and supports marketing use cases with multi-touch attribution. 
+
+[Contentsquare](/compare/best-contentsquare-alternatives), a marketing and ecommerce analytics firm, agreed to acquire Heap in September 2023 and completed the deal that December. Heap is still sold on its own as Heap by Contentsquare, and its features are also part of Contentsquare's Product Analytics.
 
 #### Key features
 
@@ -320,7 +359,7 @@ According to reviews on [G2](https://www.g2.com/products/matomo-formerly-piwik/r
 
 ### How does Heap compare to Plausible?
 
-Heap has much more of a product focus than Plausible. This means it lacks the easy-to-use web analytics features, but makes up for it with product analytics, session replay, and more. It also isn't open source or hostable in the EU.
+Heap has much more of a product focus than Plausible. This means it lacks the easy-to-use web analytics features, but makes up for it with product analytics, session replay, and more. It also isn't open source or cookieless.
 
 <p>
 <ProductComparisonTable
@@ -349,31 +388,31 @@ Heap has much more of a product focus than Plausible. This means it lacks the ea
 - Heap is a product analytics platform with funnels, retention, cohorts, and user paths; Plausible focuses on simple website traffic metrics.
 - Heap includes session replay and heatmaps as paid add-ons; Plausible doesn't offer either.
 - Heap's autocapture automatically records clicks, form submissions, and pageviews without manual instrumentation; Plausible requires you to define custom events manually.
-- Plausible is open source, cookieless, and EU-hosted; Heap is closed-source, uses cookies, and doesn't offer EU data residency.
+- Plausible is open source and cookieless; Heap is closed-source and uses cookies. Both can store your data in the EU.
 - Plausible starts at $9/month with transparent pricing; Heap's pricing is sales-driven and opaque beyond its limited free tier (10k sessions/month).
+- Heap syncs to Snowflake, BigQuery, Redshift, and S3 with Heap Connect; Plausible has no native warehouse integration.
 
 </details>
 
 <details>
 <summary>Main similarities between Heap and Plausible</summary>
 
-- Both are self-serve with free or trial options to get started (Heap has a 14-day free trial while Plausible has a 30-day free trial).
+- Both are self-serve with free or trial options to get started (Heap has a free plan and a 14-day trial, while Plausible has a 30-day trial).
 - Both track pageviews, custom events, and user interactions.
-- Both support integrations with data warehouses like Snowflake and BigQuery.
 - Both offer simple setup with a single script snippet.
 - Both are positioned as alternatives to Google Analytics, though for different use cases.
 
 </details>
 
-### Why do companies use Heap?
-
-According to G2 reviews, companies enjoy these three areas of Heap:
-
-1. **Autocapture:** Non-technical users love how easy autocapture makes tracking on their site. Along with the element data included, this provides a huge amount of useful analytics data with little setup.
-
-2. **Simple setup:** It does not take a big technical effort to set Heap up. Users can add a single script and begin collecting data. They then make it easy to visualize that data through user paths, funnels, and session replays.
-
-3. **Streamlining analysis:** By having analytics and session replay data in one place, Heap makes it easy to understand the usage of their app or site. This replaces interviews or user testing and makes the development cycle faster.
+### Heap and Plausible pricing comparison
+ 
+| | Heap | Plausible |
+|---|---|---|
+| **Free plan** | 10k sessions a month, with 6 months of data history | None (30-day trial) |
+| **Paid plans** | Growth, Pro, and Premier, with no public prices | From $9/month for 10k pageviews |
+| **MCP server** | Yes, read-only, launched in October 2026 | No official server; its docs point to a community-built one |
+| **Self-hosting** | None | Free Community Edition (AGPLv3) |
+| **EU data storage** | Yes (EU data center) | Yes (Germany) |
 
 > #### Bottom line
 >
@@ -381,18 +420,19 @@ According to G2 reviews, companies enjoy these three areas of Heap:
 
 ## 5. Piwik Pro
 
--   **Founded:** 2013
--   **Similar to:** Matomo, Google Analytics
--   **Typical users:** Marketing and analysis teams
--   **Typical customers:** European enterprises in strict regulatory situations
+- **Founded:** 2013
+- **Who it's for:** Enterprise teams in regulated industries who need analytics, consent management, and a choice of where their data is hosted.
+- **Who it isn't for:** Small teams that want a free plan or self-hosting; it has neither.
+- **Cookieless tracking:** Optional
+- **Open source:** No
 
 ![Piwik Pro](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_03_at_10_24_54_2x_b0a26db1cb.png)
 
 ### What is Piwik Pro?
 
-Piwik Pro is a suite of privacy respecting analytics tools. These include web, mobile, and product analytics as well as tag and consent management. It is targeted at users in a strict regulatory environment.
-
-Piwik Pro spun out as a paid fork of Matomo in 2013. Since then, it has added compliance-focused features as well as a range of integrations with tools like Looker, Google Search Console, and Google Ads.
+Piwik PRO is a suite of privacy respecting analytics tools. These include web, mobile, and product analytics as well as tag and consent management. It is targeted at users in a strict regulatory environment.
+ 
+Piwik PRO launched in 2013, offering enterprise support and premium features on top of the open source Piwik project (now Matomo). The two went their separate ways in 2016. Since then, it has added compliance-focused features as well as a range of integrations with tools like Data Studio (formerly Looker Studio), Google Search Console, and Google Ads.
 
 #### Key features
 
@@ -402,7 +442,9 @@ Piwik Pro spun out as a paid fork of Matomo in 2013. Since then, it has added co
 
 - **Consent manager:** Collect and manage consent to track and use personal information. Customize and tailor banners for different situations.
 
-- **Customer data platform:** Integrate with other tools and capture data to have it all in one place. Send data from Piwik Pro to other tools.
+- **Data Activation:** Piwik PRO's customer data platform. Integrate with other tools and capture data to have it all in one place, then send it from Piwik PRO to other tools.
+
+- **Agent access:** An MCP server you run locally, in beta since May 2026.
 
 ### How does Piwik Pro compare to Plausible?
 
@@ -432,11 +474,11 @@ Piwik Pro takes a more heavyweight approach to compliance with its consent and t
 <details>
 <summary>Main differences between Piwik Pro and Plausible</summary>
 
-- Piwik Pro includes built-in tag management and consent management for handling cookies and tracking scripts; Plausible is cookieless by design and doesn't need either.
-- Piwik Pro offers a customer data platform for integrating with third-party tools and syncing audiences; Plausible has limited integrations beyond basic webhooks and CSV exports.
-- Piwik Pro has a GA-like interface with multi-page reports, custom dashboards, and advanced segmentation; Plausible keeps everything on a single-page dashboard.
-- Plausible is open source with a self-hostable Community Edition; Piwik Pro is closed-source and cloud or private cloud only.
-- Plausible's script is lightweight (~1KB) and cookieless by default; Piwik Pro's tracking is heavier and typically uses cookies alongside its consent manager.
+- Piwik PRO includes built-in tag management and consent management for handling cookies and tracking scripts; Plausible is cookieless by design and doesn't need either.
+- Piwik PRO offers a customer data platform for integrating with third-party tools and syncing audiences; Plausible's data access is limited to CSV exports and, on its Business plan, a Stats API and a Data Studio connector.
+- Piwik PRO has a GA-like interface with multi-page reports, custom dashboards, and advanced segmentation; Plausible keeps everything on a single-page dashboard.
+- Plausible is open source with a self-hostable Community Edition; Piwik PRO is closed-source and cloud or private cloud only.
+- Plausible's script is 2.5KB and cookieless by default; Piwik PRO can track with or without cookies, depending on your consent settings.
 
 </details>
 
@@ -452,15 +494,15 @@ Piwik Pro takes a more heavyweight approach to compliance with its consent and t
 
 </details>
 
-### Why do companies use Piwik Pro?
-
-Based on reviews from [G2](https://www.g2.com/products/piwik-pro/reviews), the following summarizes of reasons why users choose Piwik Pro:
-
-1. **GA-like:** Google Analytics users find that the transition to Piwik Pro is an easy one thanks to their similar dashboards and data models.
-
-2. **Compliance:** Those in strict regulatory environments appreciate how Piwik Pro provides many of the tools they need to stay compliant like tag and consent management.
-
-3. **Control:** Reviewers like that they are in control of their data, tune it to their needs, and host it outside the US.
+### Piwik PRO and Plausible pricing comparison
+ 
+| | Piwik PRO | Plausible |
+|---|---|---|
+| **Free plan** | None (30-day trial) | None (30-day trial) |
+| **Paid plans** | Business from €36/month; Enterprise from €366/month billed annually | From $9/month for 10k pageviews |
+| **MCP server** | Yes, in beta, run locally | No official server; its docs point to a community-built one |
+| **Self-hosting** | None (private cloud on Enterprise) | Free Community Edition (AGPLv3) |
+| **EU data storage** | Yes (Sweden on Business) | Yes (Germany) |
 
 > #### Bottom line
 >
@@ -468,16 +510,17 @@ Based on reviews from [G2](https://www.g2.com/products/piwik-pro/reviews), the f
 
 ## 6. Umami
 
--   **Founded:** 2022
--   **Similar to:** Fathom, Plausible
--   **Typical users:** Developers and content-focused teams
--   **Typical customers:** Small devs and large content-focused enterprises
+- **Founded:** 2020
+- **Who it's for:** Developers and small teams who want a Plausible-style dashboard they can self-host for free, or a free hosted plan for one site.
+- **Who it isn't for:** Teams that want session replay or heatmaps on a low-cost hosted plan; on Umami Cloud they're on the $200/month Business plan.
+- **Cookieless tracking:** Yes, by default
+- **Open source:** Yes (MIT)
 
 ![Umami](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_07_at_11_29_28_46e1a43d78.png)
 
 ### What is Umami?
 
-Umami is an open source, easy-to-use [Google Analytics alternative](/compare/best-ga4-alternatives). Like other similar tools, it is privacy friendly, meaning data is anonymized, no personal data is saved, you don't need a cookie banner, and it [complies with GDPR](/compare/best-gdpr-compliant-analytics-tools).
+Umami is an open source, easy-to-use [Google Analytics alternative](/compare/best-ga4-alternatives). Like other similar tools, it is privacy friendly: its tracker doesn't use cookies, so Umami says most sites can drop the cookie banner, and it's built to support [GDPR compliance](/compare/best-gdpr-compliant-analytics-tools).
 
 #### Key features
 
@@ -488,6 +531,10 @@ Umami is an open source, easy-to-use [Google Analytics alternative](/compare/bes
 - **Open source**: See all of the code, run and host it yourself, modify it for your needs, and contribute to it.
 
 - **Realtime**: Get a view into the live stats for your site. See how many current visitors you have.
+
+- **Session replay and heatmaps**: Added in 2026. Free when you self-host, and on the Business plan on Umami Cloud.
+
+- **Agent access**: An official MCP server, on the Pro plan and above on Umami Cloud.
 
 ### How does Umami compare to Plausible?
 
@@ -517,11 +564,11 @@ Umami is one of the most similar tools to Plausible on this list. It is open sou
 <details>
 <summary>Main differences between Umami and Plausible</summary>
 
-- Umami has a free cloud tier (3 sites, 100k events/month); Plausible has no free tier – plans start at $9/month.
-- Plausible keeps conversion funnels and ecommerce revenue tracking on its Business plan; Umami includes funnel, journey, retention, and revenue reports.
-- Umami can record session replays and heatmaps; Plausible has neither.
-- Umami's open-source edition is more permissive and full-featured; Plausible's Community Edition excludes premium features like funnels and ecommerce.
-- Plausible has a larger user base and more mature ecosystem with email reports, Slack integration, and a Looker Studio connector; Umami's integration options are more limited.
+- Umami has a free cloud tier (1 website, 100k events/month); Plausible has no free tier – plans start at $9/month.
+- Plausible keeps conversion funnels and ecommerce revenue tracking on its Business plan; Umami includes funnel, journey, retention, and revenue reports on every plan.
+- Umami added session replay and heatmaps in 2026, free when you self-host and on its $200/month Business plan on Umami Cloud; Plausible has neither.
+- Umami's open-source edition is MIT-licensed and close to full-featured; Plausible's Community Edition excludes premium features like funnels and ecommerce.
+- Plausible includes email reports on every plan and has a Data Studio connector on its Business plan; Umami's email reports start on its Pro plan and are only on Umami Cloud.
 
 </details>
 
@@ -529,24 +576,24 @@ Umami is one of the most similar tools to Plausible on this list. It is open sou
 <summary>Main similarities between Umami and Plausible</summary>
 
 - Both are open source, privacy-first web analytics tools positioned as Google Analytics alternatives.
-- Both use cookieless tracking and don't require consent banners.
+- Both use cookieless tracking, so most sites can run them without a cookie banner.
 - Both offer clean, single-page dashboards with pageviews, visitors, referrers, and sources.
 - Both support custom events, UTM campaign tracking, and real-time visitor data.
 - Both can be self-hosted for full data ownership.
-- Both are GDPR-compliant and don't collect personal data.
+- Both are built with GDPR compliance in mind and can store your data in the EU.
 - Both are lightweight with minimal impact on page load speed.
 
 </details>
 
-### Why do companies use Umami?
-
-According to its few [G2](https://www.g2.com/products/umami/reviews) reviews and mentions on social, users choose Umami because of:
-
-1. **Simple setup:** Reviewers find that Umami is easy to setup, self-host, and add to their site.
-
-2. **Free plan:** Users appreciate they can use Umami for 3 sites and 100k events for free.
-
-3. **Minimal design:** Umami's clean and simple UI is a selling point for some reviewers.
+### Umami and Plausible pricing comparison
+ 
+| | Umami | Plausible |
+|---|---|---|
+| **Free plan** | 100k events a month, 1 website, 6 months of data retention | None (30-day trial) |
+| **Paid plans** | Pro $20/month for 1M events; Business $200/month for 10M events | From $9/month for 10k pageviews |
+| **MCP server** | Yes, official, on Pro and above on Umami Cloud | No official server; its docs point to a community-built one |
+| **Self-hosting** | Free (MIT) | Free Community Edition (AGPLv3) |
+| **EU data storage** | Yes (choice of US or EU region) | Yes (Germany) |
 
 > #### Bottom line
 >
@@ -554,10 +601,11 @@ According to its few [G2](https://www.g2.com/products/umami/reviews) reviews and
 
 ## 7. Google Analytics
 
--   **Founded:** 2005
--   **Similar to:** Matomo, Piwik Pro
--   **Typical users:** Marketing and business teams reliant on Google's ecosystem
--   **Typical customers:** Small businesses and massive enterprises
+- **Founded:** 2005
+- **Who it's for:** Marketing teams that rely on Google Ads, Search Console, and the rest of Google's ecosystem.
+- **Who it isn't for:** Teams that want cookieless tracking, EU-only data storage, or a dashboard anyone can read at a glance.
+- **Cookieless tracking:** No (first-party cookies by default)
+- **Open source:** No
 
 ![Google Analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_02_at_14_54_37_25bd7082b7.png)
 
@@ -565,9 +613,7 @@ According to its few [G2](https://www.g2.com/products/umami/reviews) reviews and
 
 [Google Analytics](/compare/posthog-vs-ga4) has long been the go-to choice for website and app analytics thanks to Google's huge market share, a large amount of informational content, and its connection with the rest of the Google suite.
 
-Google Analytics recently switched fully over from session-based Universal Analytics (GA3) to event-based GA4. This also introduced conversion funnels and retention tables that product teams are fans of.
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of October 2024, a whopping 489,524 of the top 1 million websites deploy Google Analytics. Massively more than the 3,500 using Plausible.
+Google Analytics switched fully from session-based Universal Analytics (GA3) to event-based GA4 in July 2023, with Analytics 360 properties following in July 2024. This also introduced conversion funnels and retention tables that product teams are fans of.
 
 #### Key features
 
@@ -577,7 +623,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics
 
 - **Integration with Google tools:** It's easy to combine and analyze your GA4 data with tools like Looker Studio, Google Ads, BigQuery, and Firebase.
 
-- **Natural language search:** Ask specific questions, like "MoM growth in users on iOS", rather than searching existing reports.
+- **Natural language search:** Ask specific questions, like "MoM growth in users on iOS", rather than searching existing reports. Ask Advisor, a Gemini-powered assistant, is in beta for English-language properties.
 
 - **Revenue metrics:** Connect metrics to marketing spend and revenue conversion to get a full picture of ROI.
 
@@ -609,10 +655,11 @@ Plausible positions itself as a privacy-focused alternative to Google Analytics.
 <details>
 <summary>Main differences between Google Analytics and Plausible</summary>
 
-- GA4 uses cookies and collects personal data by default, requiring consent banners in the EU; Plausible is cookieless and doesn't collect personal data.
-- GA4 is free for up to 10M events/month but data is processed on Google's US servers; Plausible is paid but all data stays on EU-owned infrastructure.
+
+- GA4 sets first-party cookies by default, so sites typically need a consent banner in the EU; Plausible is cookieless and doesn't collect personal data.
+- GA4 is free, with sampling above 10 million events per exploration and up to 14 months of event-level data, and it has no EU-only data storage option; Plausible is paid, but all data stays on EU-owned infrastructure.
 - GA4 offers advanced features like predictive insights, audience building, and advertising attribution; Plausible focuses on essential web metrics only.
-- GA4 integrates deeply with Google Ads, BigQuery, Looker Studio, and Firebase; Plausible has limited integrations beyond Google Search Console and Looker Studio.
+- GA4 integrates deeply with Google Ads, BigQuery, Data Studio, and Firebase; Plausible's Google integrations are Search Console and, on its Business plan, a Data Studio connector.
 - GA4 has a steep learning curve with multi-layered reports and a complex interface; Plausible puts everything on a single, simple dashboard.
 - GA4 is closed-source and owned by Google; Plausible is open source and independently owned.
 
@@ -630,15 +677,15 @@ Plausible positions itself as a privacy-focused alternative to Google Analytics.
 
 </details>
 
-### Why do companies use Google Analytics?
-
-According to [G2](https://www.g2.com/products/google-analytics/reviews), users choose Google Analytics for:
-
-1. **Website traffic:** The main use case reviewers praise GA for simply understanding their website's traffic, where it comes from, and what they do on the site.
-
-2. **Connection to marketing:** Marketers like that it connects to marketing tools like Ads and Search Console. This helps them analyze the overall effectiveness of marketing efforts.
-
-3. **AI insights:** Reviewers appreciate the fact that GA surfaces insights automatically and makes predictions. This helps them find new ways of improving their site.
+### Google Analytics and Plausible pricing comparison
+ 
+| | Google Analytics | Plausible |
+|---|---|---|
+| **Free plan** | Free, with sampling above 10M events per exploration and 14 months of event-level data | None (30-day trial) |
+| **Paid plans** | Analytics 360, priced through sales | From $9/month for 10k pageviews |
+| **MCP server** | Yes, run locally, read-only by default | No official server; its docs point to a community-built one |
+| **Self-hosting** | None | Free Community Edition (AGPLv3) |
+| **EU data storage** | No EU-only option | Yes (Germany) |
 
 > #### Bottom line
 >
@@ -646,11 +693,12 @@ According to [G2](https://www.g2.com/products/google-analytics/reviews), users c
 
 ## Which Plausible alternative should you choose?
 
-- Need more than web analytics – like [session replay](/docs/session-replay), [A/B testing](/docs/ab-testing), [feature flags](/docs/feature-flags), and [error tracking](/docs/error-tracking)? **PostHog** goes far beyond pageviews and won't cost you a thing to start.
+- Need more than web analytics – like [session replay](/docs/session-replay), [A/B testing](/docs/experiments), [feature flags](/docs/feature-flags), and [error tracking](/docs/error-tracking) – in a platform your agents can query via [the MCP](/mcp)? **PostHog** goes far beyond pageviews and won't cost you a thing to start.
 - Want a near-identical experience to Plausible with a free cloud tier? **Umami** is the closest match.
 - Privacy-focused but need a GA-like feature set with funnels, heatmaps, and ecommerce? **Matomo** bridges the gap.
 - Looking for the simplest possible dashboard with strong privacy credentials? **Fathom** keeps it minimal.
-- Enterprise team needing consent management, tag management, and strict compliance? **Piwik Pro** is built for regulated environments.
+- Enterprise team needing consent management, tag management, and strict compliance? **Piwik PRO** is built for regulated environments.
+- Want autocaptured product analytics and don't mind sales-led pricing? **Heap** is the product-focused option.
 - Heavily invested in Google Ads, BigQuery, and the Google ecosystem? **Google Analytics** is hard to beat for marketing attribution.
 
 ## Is PostHog right for you?
@@ -662,12 +710,26 @@ We're biased, obviously, but we think PostHog is the perfect Plausible replaceme
 -   You want all the tools to help you build a better product (like product analytics and session replays).
 -   You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 -   You value transparency. We're open source and open core.
+-   You want your coding agent to query your traffic through [the MCP](/docs/web-analytics/surfaces/mcp).
 
 It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<WizardCTA />
+<WizardCTA
+    title="Moving from Plausible?"
+    subtitle="The wizard installs PostHog in your app in minutes. Our migration guide covers importing your Plausible exports."
+    learnMoreTo="/docs/migrate/plausible"
+/>
 
 ## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+It means your web analytics sits next to everything else you know about the user. [Web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [logs](/logs) all share one model of users and sessions. From a traffic source, you can follow visitors into funnels, session replays, and the errors they hit for example.
+ 
+The [data warehouse](/warehouse) and [CDP](/data-pipelines) extend it to the business data that lives elsewhere, like Stripe, HubSpot, and Postgres, and an agent working from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp) can work across all of it without stitching tools together.
+ 
+</details>
 
 <details>
 <summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
@@ -699,7 +761,7 @@ Common reasons include: needing product analytics with funnels, retention, and c
 <details>
 <summary>What's the best Plausible alternative overall?</summary>
 
-For most teams, **[PostHog](/compare/posthog-vs-plausible)** is the best alternative. It includes [web analytics](/web-analytics) with a similarly simple dashboard, plus [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), [surveys](/surveys), and [error tracking](/error-tracking) – all with a free tier that covers 1 million events/month.
+For most teams, **[PostHog](/compare/posthog-vs-plausible)** is the best alternative. It includes [web analytics](/web-analytics) with a similarly simple dashboard, plus [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more – all with a free tier that covers 1 million events/month.
 
 </details>
 
@@ -713,7 +775,7 @@ For most teams, **[PostHog](/compare/posthog-vs-plausible)** is the best alterna
 <details>
 <summary>Which Plausible alternative has the best free tier?</summary>
 
-**PostHog** offers the most generous free tier: 1 million events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests per month, and [see full pricing](/pricing). **Umami** offers a free cloud tier for 3 sites and 100k events/month. **Piwik Pro** offers a free tier up to 500k actions/month. **Google Analytics** is free for up to 10M events/month. Plausible has no free tier – only a 30-day trial.
+**PostHog** offers the most generous free tier: 1 million events, 5,000 web and 2,500 mobile session replays, and 1 million feature flag requests per month ([see full pricing](/pricing)). **Umami** has a free cloud plan for 1 website and 100k events a month. **Google Analytics** is free, with sampling above 10 million events per exploration. **Heap** has a free plan for 10k sessions a month, and **Matomo** is free if you self-host. **Piwik PRO** no longer has a free plan, and Plausible and **Fathom** only have trials (30 and 7 days).
 
 </details>
 
@@ -748,7 +810,7 @@ Yes. **PostHog**, **Fathom**, **Umami**, and **Piwik Pro** (in cookieless mode) 
 <details>
 <summary>Can I migrate from Plausible to PostHog?</summary>
 
-Yes. See the [Plausible to PostHog migration guide](/docs/migrate/plausible) for step-by-step instructions on importing your historical data.
+Yes. Plausible exports aggregated stats, not individual events, so our [Plausible to PostHog migration guide](/docs/migrate/plausible) converts your exported visitors and pageviews into approximate PostHog events. It's experimental and doesn't carry over UTMs, sessions, or custom events, so we recommend running both tools side by side for a while.
 
 </details>
 
@@ -762,7 +824,7 @@ Yes. See the [Google Analytics to PostHog migration guide](/docs/migrate/google-
 <details>
 <summary>What other web analytics tools are available?</summary>
 
-Beyond the tools in this guide, there are many more options. See our guides to [Google Analytics alternatives](/compare/best-ga4-alternatives), [Fathom alternatives](/compare/best-fathom-alternatives), [Matomo alternatives](/compare/posthog-vs-matomo), and the [best web analytics tools](/compare/best-web-analytics-tools) for broader comparisons.
+Beyond the tools in this guide, there are many more options. See our guides to [Google Analytics alternatives](/compare/best-ga4-alternatives), [Fathom alternatives](/compare/best-fathom-alternatives), [Matomo alternatives](/compare/best-matomo-alternatives), and the [best web analytics tools](/compare/best-web-analytics-tools) for broader comparisons.
 
 </details>
 
