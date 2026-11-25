@@ -38,7 +38,7 @@ You'll be asked for:
 
 <SyncModes />
 
-Most Ahrefs tables are full refresh. The `domain_rating_history`, `metrics_history`, and `site_metrics_daily` tables sync incrementally on `date`.
+Most Ahrefs tables are full refresh. The `domain_rating_history`, `metrics_history`, `site_metrics_daily`, and `brand_radar_mentions_history` tables sync incrementally on `date`.
 
 ## API unit costs
 
@@ -51,9 +51,12 @@ Syncs use your Ahrefs account's API units. Plan for these costs per sync:
 | Issues, pages                                  | 50 units per request          |
 | Metrics history                                | 10 units per metric per month |
 | Daily site metrics                             | ~150 units per day            |
+| Brand Radar mentions history                   | 50+ units per platform/report |
 | Backlinks, keywords, referring domains         | Varies by plan                |
 
-The first sync of `site_metrics_daily` reads the last 7 days. Later syncs add each new day, up to 31 days back. History tables (`domain_rating_history`, `metrics_history`) start 180 days back on first sync.
+The first sync of `site_metrics_daily` reads the last 7 days. Later syncs add each new day, up to 31 days back. History tables (`domain_rating_history`, `metrics_history`, `brand_radar_mentions_history`) start 180 days back on first sync.
+
+The `brand_radar_mentions_history` table reads each AI search platform in your Ahrefs plan, for each Brand Radar report linked to the project. Each incremental sync reads the last 30 days again, to get days that one platform publishes after the others. If you link a report or add a platform after the first sync, run a full resync to get its earlier days.
 
 ## Data limits
 
@@ -64,6 +67,7 @@ Some tables return a capped number of rows per sync:
 | `site_audit_pages`          | 100 pages         |
 | `backlinks`                 | 1,000 live links  |
 | `organic_keywords`          | 1,000 keywords    |
+| `top_pages`                 | 1,000 pages       |
 | `referring_domains`         | 1,000 domains     |
 | `domain_rating_top_domains` | 1,000,000 domains |
 
