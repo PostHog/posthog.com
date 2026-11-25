@@ -418,7 +418,7 @@ export function CalendarBlock(): JSX.Element {
     const picking = scheduled === null
     const suggestion = suggestFrom(picked ?? 10)
     const crowding = picked === null ? [] : crowdedBy(picked)
-    const draft = { time: '10:00 AM', name: 'Holiday sale', kind: 'broadcast' as const }
+    const draft = { time: '10:00 AM', name: 'New: file requests', kind: 'broadcast' as const }
 
     return (
         <div className={blockClassName}>
@@ -522,9 +522,9 @@ export function CalendarBlock(): JSX.Element {
 
                 <div className="flex flex-col gap-3 self-start rounded-lg border border-primary p-4 text-sm">
                     <span className="flex items-center gap-1.5 text-xs text-secondary">
-                        <span className="size-2 rounded-full bg-red" /> Broadcast · 31,400 free-plan users
+                        <span className="size-2 rounded-full bg-red" /> Broadcast · 48,210 active users
                     </span>
-                    <strong className="-mt-2 text-base">Holiday sale</strong>
+                    <strong className="-mt-2 text-base">{draft.name}</strong>
                     {scheduled !== null ? (
                         <>
                             <span className="flex gap-1.5 rounded bg-green/10 p-2">
@@ -562,6 +562,13 @@ export function CalendarBlock(): JSX.Element {
                                 </span>
                             </span>
                             <SuggestionLine day={suggestion} onUse={() => setPicked(suggestion)} />
+                            <button
+                                type="button"
+                                onClick={() => setScheduled(picked)}
+                                className="self-start text-xs text-secondary underline"
+                            >
+                                Send on {dayLabel(picked)} anyway
+                            </button>
                         </>
                     ) : (
                         <>
@@ -589,7 +596,7 @@ function SuggestionLine({ day, onUse }: { day: number; onUse: () => void }): JSX
                 Suggested: <strong>{dayLabel(day)} at 10:00 AM</strong>
             </span>
             <OSButton size="sm" variant="secondary" onClick={onUse}>
-                Use this day
+                Pick {dayLabel(day)}
             </OSButton>
         </span>
     )

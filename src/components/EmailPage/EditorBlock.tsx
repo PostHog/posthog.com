@@ -118,9 +118,9 @@ function suggestionRender(
 }
 
 const initialContent = `
-<h1>Your files deserve a holiday too</h1>
-<p>Hi <span data-type="mention" data-id="person.first_name"></span>, you shared <span data-type="mention" data-id="person.properties.files_shared"></span> files this year. Take <strong>20% off Pro</strong> until Dec 31.</p>
-<p data-email-button label="Claim 20% off"></p>
+<h1>Ask anyone for files</h1>
+<p>Hi <span data-type="mention" data-id="person.first_name"></span>, you've shared <span data-type="mention" data-id="person.properties.files_shared"></span> files this year. Now you can ask for them too: send a link, and anyone can upload straight to your folder, <strong>no account needed</strong>.</p>
+<p data-email-button label="Try file requests"></p>
 <p></p>
 `
 
@@ -155,6 +155,11 @@ function previewHtml(html: string): string {
 
 export function EditorBlock(): JSX.Element {
     const [audienceOpen, setAudienceOpen] = useState(false)
+    const [status, setStatus] = useState<string | null>(null)
+    const flash = (text: string) => {
+        setStatus(text)
+        setTimeout(() => setStatus(null), 2500)
+    }
     const audienceRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (!audienceOpen) return
@@ -269,7 +274,11 @@ export function EditorBlock(): JSX.Element {
                         Styles
                     </OSButton>
                 </div>
-                <span className="truncate text-center text-sm text-secondary">Holiday sale</span>
+                <span
+                    className={`truncate text-center text-sm ${status ? 'font-semibold text-green' : 'text-secondary'}`}
+                >
+                    {status ?? 'New: file requests'}
+                </span>
                 <div className="flex items-center justify-end gap-2">
                     <OSButton
                         size="sm"
@@ -279,10 +288,14 @@ export function EditorBlock(): JSX.Element {
                     >
                         {mode === 'edit' ? 'Preview' : 'Edit'}
                     </OSButton>
-                    <OSButton size="sm" variant="secondary">
+                    <OSButton size="sm" variant="secondary" onClick={() => flash('Test sent to jane@hedgebox.net')}>
                         Test
                     </OSButton>
-                    <OSButton size="sm" variant="primary">
+                    <OSButton
+                        size="sm"
+                        variant="primary"
+                        onClick={() => flash(`Sending to ${people.toLocaleString('en-US')} people`)}
+                    >
                         Send
                     </OSButton>
                 </div>
@@ -395,7 +408,7 @@ export function EditorBlock(): JSX.Element {
                             </div>
                             <div className="grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-2 py-3.5">
                                 <span className="text-secondary">Subject</span>
-                                <span className="truncate">20% off Pro, just for you</span>
+                                <span className="truncate">New: ask anyone for files</span>
                             </div>
                         </div>
                         <img

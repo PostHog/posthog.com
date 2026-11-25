@@ -34,6 +34,7 @@ import { EditorBlock } from './EditorBlock'
 import { MetricsBlock } from './MetricsBlock'
 import PromptDemo from 'components/MCPPage/PromptDemo'
 import CustomerLogo from 'components/CustomerLogo'
+import { CardStackCarousel } from 'components/CardStackCarousel'
 import { useCustomers, Customer } from 'hooks/useCustomers'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import MCPInstallCTA from 'components/MCPInstallCTA'
@@ -178,64 +179,30 @@ type Quote = {
     text: string
     avatar?: string
     customer?: Customer
-    wide?: boolean
 }
 
-// Draft: only the Grantable and Croissant quotes are published. The founder quote comes from a customer email in
-// Slack, and Joe's from #team-workflows. Each needs its author's OK, and the founder a name, before this ships.
-const draftQuotes: Record<string, Quote> = {
-    founder: {
-        name: 'A founder with four products',
-        role: 'Moving from SendGrid, Resend, and Loops',
-        text: 'I have for a very long time been trying to find one tool for both analytics and email, as that’s where you create your audiences and don’t want to keep syncing systems. […] I’ll definitely migrate them from SendGrid, Resend, and Loops.',
-        wide: true,
-    },
-    joe: {
-        name: 'Joe Black',
-        role: 'Chaos Marketer, PostHog',
-        avatar: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1781263362/Portrait_1_1_5d4e6711d2.png',
-        text: 'Building and documenting this was (excuse my French) un putain de bonheur absolu. Working with the AI and the MCP just made it sublime, from helping me parse Liquid code to triggering sends and updating the issue. Loved it. 10/10. Would onboard again.',
-        wide: true,
-    },
+// Draft: only the Grantable and Croissant quotes are published. Joe's is from #team-workflows and needs his OK.
+const joeQuote: Quote = {
+    name: 'Joe Black',
+    role: 'Chaos Marketer, PostHog',
+    avatar: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1781263362/Portrait_1_1_5d4e6711d2.png',
+    text: 'Building and documenting this was (excuse my French) un putain de bonheur absolu. Working with the AI and the MCP just made it sublime, from helping me parse Liquid code to triggering sends and updating the issue. Loved it. 10/10. Would onboard again.',
 }
 
-function QuoteBubble({ quote }: { quote: Quote }): JSX.Element {
-    const initials = quote.name
-        .split(' ')
-        .map((w) => w[0])
-        .join('')
-        .slice(0, 2)
+function QuoteCard({ quote, isActive }: { quote: Quote; isActive: boolean }): JSX.Element {
     return (
-        <figure
-            className={`m-0 flex flex-col ${
-                quote.wide ? '@3xl/reader-content:col-span-3' : '@3xl/reader-content:col-span-2'
-            }`}
-        >
-            <div className="relative flex-1 rounded-2xl border border-primary bg-white p-5 shadow-lg dark:bg-accent @xl/reader-content:p-6">
-                {quote.customer && (
-                    <div className="mb-3 flex h-6 items-center">
-                        <CustomerLogo customer={quote.customer} className="h-6 max-w-28" />
-                    </div>
-                )}
-                <blockquote
-                    className={`m-0 border-0 p-0 not-italic leading-snug text-primary ${
-                        quote.wide ? 'text-lg @xl/reader-content:text-xl' : 'text-base'
-                    }`}
-                >
+        <figure className="m-0 flex h-full w-full flex-col justify-between gap-4 rounded-2xl border border-primary bg-white p-5 text-left shadow-xl dark:bg-accent @md/reader-content:p-6">
+            <div>
+                <div className="mb-3 flex h-6 items-center">
+                    {quote.customer && <CustomerLogo customer={quote.customer} className="h-6 max-w-28" />}
+                </div>
+                <blockquote className="m-0 border-0 p-0 text-sm not-italic leading-snug text-primary @md/reader-content:text-base">
                     &ldquo;{quote.text}&rdquo;
                 </blockquote>
-                <span
-                    aria-hidden
-                    className="absolute -bottom-[7px] left-8 size-3.5 rotate-45 border-b border-r border-primary bg-white dark:bg-accent"
-                />
             </div>
-            <figcaption className="mt-4 flex items-center gap-3 pl-4">
-                {quote.avatar ? (
+            <figcaption className="flex items-center gap-3">
+                {quote.avatar && (
                     <img src={quote.avatar} alt="" className="size-10 shrink-0 rounded-full bg-accent object-cover" />
-                ) : (
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-red/15 text-sm font-bold text-red">
-                        {initials}
-                    </span>
                 )}
                 <span className="min-w-0 text-sm">
                     <strong className="block text-primary">{quote.name}</strong>
@@ -243,7 +210,8 @@ function QuoteBubble({ quote }: { quote: Quote }): JSX.Element {
                     {quote.customer && (
                         <Link
                             to={`/customers/${quote.customer.slug}`}
-                            className="ml-2 whitespace-nowrap font-semibold text-red"
+                            tabIndex={isActive ? 0 : -1}
+                            className="block font-semibold text-red"
                         >
                             Read the story →
                         </Link>
@@ -270,23 +238,22 @@ function Testimonials(): JSX.Element {
               }
             : undefined
     }
-    // Two rows of five columns: a wide quote takes three, the others two.
-    const quotes = [
-        draftQuotes.founder,
-        published('grantable', 'evan_ralliss'),
-        published('croissant', 'jorge_lopez'),
-        draftQuotes.joe,
-    ].filter((q): q is Quote => !!q)
+    const quotes = [published('grantable', 'evan_ralliss'), published('croissant', 'jorge_lopez'), joeQuote].filter(
+        (q): q is Quote => !!q
+    )
     return (
-        <section className="not-prose flex flex-col gap-8">
-            <h2 className="m-0 text-balance text-2xl font-bold leading-tight text-primary @xl/reader-content:text-3xl">
+        <section className="not-prose flex flex-col gap-4">
+            <h2 className="m-0 text-balance text-center text-2xl font-bold leading-tight text-primary @xl/reader-content:text-3xl">
                 One tool for your analytics and your email
             </h2>
-            <div className="grid gap-x-5 gap-y-8 @xl/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-5">
-                {quotes.map((quote) => (
-                    <QuoteBubble key={quote.name} quote={quote} />
-                ))}
-            </div>
+            <CardStackCarousel
+                count={quotes.length}
+                ariaLabel="What people say about PostHog Messaging"
+                framed={false}
+                showCounter={false}
+                stageClassName="h-[330px]"
+                renderCard={(index, { isActive }) => <QuoteCard quote={quotes[index]} isActive={isActive} />}
+            />
         </section>
     )
 }

@@ -4,36 +4,6 @@ import type { PromptFlow } from '../MCPPage/promptDemo.data'
 // real parameter of it, and each skill a real PostHog skill. promptDemo.test.ts checks the tool names.
 export const emailFlows: PromptFlow[] = [
     {
-        title: 'Move from Resend',
-        prompt: 'Move our email from Resend to PostHog.',
-        skill: 'migrating-from-email-providers',
-        intro: "I'll import what Resend has, then check what's left before the switch.",
-        calls: [
-            {
-                source: 'email',
-                mcpTool: 'provider-imports-create',
-                argName: 'provider',
-                args: 'resend',
-                result: 'Import started: templates, suppressions, unsubscribes',
-            },
-            {
-                source: 'email',
-                mcpTool: 'provider-imports-get',
-                argName: 'id',
-                args: 'imp_2f9c',
-                result: '12 templates, 1,204 suppressions, 38 unsubscribes',
-            },
-            {
-                source: 'email',
-                mcpTool: 'workflows-list-email-templates',
-                argName: 'transactional',
-                args: 'true',
-                result: '12 transactional templates, ready to send',
-            },
-        ],
-        answer: 'Your Resend templates, suppressions, and unsubscribes are in PostHog, and nothing sends until you say so. Add the DNS records from Channels, then I can swap `resend.emails.send` for `posthog.emails.send` in the 4 files that call it.',
-    },
-    {
         title: 'Build onboarding emails',
         prompt: "Set up onboarding: a welcome, a day-3 nudge if they haven't uploaded a file, and a day-15 win-back.",
         skill: 'building-workflows',
@@ -129,5 +99,35 @@ export const emailFlows: PromptFlow[] = [
             },
         ],
         answer: 'The holiday sale is a draft with last year’s design and this year’s dates. The December changelog reaches the same people on Dec 16, and your cap allows 1 marketing email every 2 days, so I’d send this on Friday, Dec 18 at 10 AM. Want me to schedule it?',
+    },
+    {
+        title: 'Move from Resend',
+        prompt: 'Move our email from Resend to PostHog.',
+        skill: 'migrating-from-email-providers',
+        intro: "I'll import what Resend has, then check what's left before the switch.",
+        calls: [
+            {
+                source: 'email',
+                mcpTool: 'provider-imports-create',
+                argName: 'provider',
+                args: 'resend',
+                result: 'Import started: templates, suppressions, unsubscribes',
+            },
+            {
+                source: 'email',
+                mcpTool: 'provider-imports-get',
+                argName: 'id',
+                args: 'imp_2f9c',
+                result: '12 templates, 1,204 suppressions, 38 unsubscribes',
+            },
+            {
+                source: 'email',
+                mcpTool: 'workflows-list-email-templates',
+                argName: 'transactional',
+                args: 'true',
+                result: '12 transactional templates, ready to send',
+            },
+        ],
+        answer: 'Your Resend templates, suppressions, and unsubscribes are in PostHog, and nothing sends until you say so. Add the DNS records from Channels, then I can swap `resend.emails.send` for `posthog.emails.send` in the 4 files that call it.',
     },
 ]
