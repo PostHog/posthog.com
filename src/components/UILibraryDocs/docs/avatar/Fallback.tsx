@@ -1,8 +1,9 @@
 import React from 'react'
 import { Avatar } from 'components/UI/Avatar'
 import { DemoLabel } from 'components/UILibraryDocs/DemoLayout'
+import hedgehogSleepyPng from 'hoggies/sleepy.png'
 
-const nightHogImage = 'https://res.cloudinary.com/dmukukwp6/image/upload/c_fill,w_96,h_96/night_hog_219fff00f3.png'
+const nightHogImage = hedgehogSleepyPng
 
 const cases = [
     { label: 'Image loads', src: nightHogImage, initials: 'NH' },

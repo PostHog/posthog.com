@@ -23,6 +23,7 @@ import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import CustomerLogo from 'components/CustomerLogo'
 import SlotMachineText from 'components/SlotMachineText'
 import SmallTeam from 'components/SmallTeam'
@@ -44,6 +45,8 @@ import WaitingRoom from './WaitingRoom'
 import PromptDemo from './PromptDemo'
 import Highlight from './Highlight'
 import mcpToolsData from '../../data/mcp-tools.json'
+import hedgehogIchabodPng from 'hoggies/ichabod.png'
+import hedgehogMrPotatoHead1Png from 'hoggies/mr-potato-head-1.png'
 
 // The tool schema is fetched from the main repo at build time, so the exact totals move
 // between builds. Round down to the nearest hundred to keep the claim true either way.
@@ -128,12 +131,12 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
                         animate={reducedMotion ? undefined : { y: [0, -6, 0] }}
                         transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
                     >
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/headless_horsehog_17d1541713.png"
+                        <HoggieImage
+                            src={hedgehogIchabodPng}
                             alt="A hedgehog dressed as the headless horseman, riding a toy horse and holding a flaming pumpkin"
                             width={800}
+                            crop={[0, 132, 1000, 760]}
                             className="w-full"
-                            imgClassName="w-full"
                         />
                     </motion.div>
                     <p className="m-0 hidden w-full -translate-x-[7%] text-balance text-center text-sm text-secondary @lg/reader-content:block">
@@ -634,8 +637,8 @@ function MCPSetupCTA(): JSX.Element {
                 <MCPInstallCTA className="mt-5 w-full" showDesktopLink={false} />
             </div>
             <figure className="m-0 flex min-w-0 flex-col items-center gap-3">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144404_d649bc516c.png"
+                <HoggieImage
+                    src={hedgehogMrPotatoHead1Png}
                     alt="A hedgehog toy with its arm, ear, shoe, and hat in pieces on the floor around it"
                     title="Mr. Potato Hog, now with context included."
                     loading="lazy"

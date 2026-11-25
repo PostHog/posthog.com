@@ -1,6 +1,7 @@
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-import CloudinaryImage from '../CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from '../CloudinaryImage'
+import HoggieImage from '../HoggieImage'
 
 export default function Intro({
     subheader,
@@ -13,6 +14,7 @@ export default function Intro({
     secondaryExternalNoIcon,
     imageColumnClasses,
     imageUrl,
+    imageCrop,
     imageClasses,
 }) {
     return (
@@ -40,14 +42,26 @@ export default function Intro({
 
             {imageUrl && (
                 <figure className="m-0 mt-auto px-4 pb-4 md:px-8 md:pb-6 flex items-end justify-center">
-                    <CloudinaryImage
-                        alt=""
-                        placeholder="none"
-                        quality={100}
-                        className={imageColumnClasses}
-                        imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
-                        src={imageUrl}
-                    />
+                    {isCloudinaryImage(imageUrl) ? (
+                        <CloudinaryImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className={imageColumnClasses}
+                            imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
+                            src={imageUrl}
+                        />
+                    ) : imageCrop ? (
+                        // A crop box has no size of its own, so it gets the height that `max-h` gives the full image
+                        <HoggieImage alt="" src={imageUrl} crop={imageCrop} className="h-40 md:h-52" />
+                    ) : (
+                        <HoggieImage
+                            alt=""
+                            className={imageColumnClasses}
+                            imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
+                            src={imageUrl}
+                        />
+                    )}
                 </figure>
             )}
         </div>

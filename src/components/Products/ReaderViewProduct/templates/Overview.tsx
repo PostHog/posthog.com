@@ -1,5 +1,6 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { SectionComponentProps } from '../types'
 import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -14,6 +15,25 @@ const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & 
     const hog = hogs?.mobileHog
     const HogComponent = hog?.Component
     const hogSizeClasses = hog?.className || 'h-32 @3xl/reader-content:h-44 @6xl/reader-content:h-52'
+    const hogImage =
+        hog?.src &&
+        (isCloudinaryImage(hog.src) ? (
+            <CloudinaryImage
+                src={hog.src as `https://res.cloudinary.com/${string}`}
+                alt={hog.alt || `${name} hedgehog`}
+                className="h-full"
+                imgClassName="h-full w-auto"
+            />
+        ) : (
+            <HoggieImage
+                src={hog.src}
+                mirror={hog.mirror}
+                alt={hog.alt || `${name} hedgehog`}
+                className="h-full"
+                // A cropped hoggie takes its size from the box. The full art needs the size on the `<img>` too.
+                {...(hog.crop ? { crop: hog.crop } : { imgClassName: 'h-full w-auto' })}
+            />
+        ))
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 w-full">
@@ -40,12 +60,7 @@ const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & 
                                 {HogComponent ? (
                                     <HogComponent className="h-full w-auto" title={hog.alt || name} />
                                 ) : (
-                                    <CloudinaryImage
-                                        src={hog.src as `https://res.cloudinary.com/${string}`}
-                                        alt={hog.alt || `${name} hedgehog`}
-                                        className="h-full"
-                                        imgClassName="h-full w-auto"
-                                    />
+                                    hogImage
                                 )}
                             </div>
                         )}
@@ -55,16 +70,7 @@ const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & 
                     <div
                         className={`mx-auto mb-8 w-fit @xl/reader-content:float-right @xl/reader-content:mx-0 @xl/reader-content:ml-8 ${hogSizeClasses}`}
                     >
-                        {HogComponent ? (
-                            <HogComponent className="h-full w-auto" title={hog.alt || name} />
-                        ) : (
-                            <CloudinaryImage
-                                src={hog.src as `https://res.cloudinary.com/${string}`}
-                                alt={hog.alt || `${name} hedgehog`}
-                                className="h-full"
-                                imgClassName="h-full w-auto"
-                            />
-                        )}
+                        {HogComponent ? <HogComponent className="h-full w-auto" title={hog.alt || name} /> : hogImage}
                     </div>
                 )}
 
