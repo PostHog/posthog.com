@@ -44,10 +44,9 @@ Your customer is halfway through checkout on an old laptop with 40 tabs open. Th
 
 Mobile apps don't have a DOM, so the [mobile SDKs](/docs/session-replay/mobile) work differently. The native iOS and Android SDKs read the screen's view hierarchy and send a wireframe by default. React Native and Flutter send screenshots.
 
-Sampling, minimum duration, and [trigger rules](/docs/session-replay/how-to-control-which-sessions-you-record) run on the device. While a trigger waits to match, the recorder keeps a short buffer in memory, so a session that never qualifies is never uploaded and never billed.
+Sampling, minimum duration, and [trigger rules](/docs/session-replay/how-to-control-which-sessions-you-record) run on the device. On the web, the recorder keeps a short buffer in memory while a trigger waits to match. On mobile, recording starts when the trigger matches. Either way, a session that never qualifies is never uploaded and never billed.
 
 A recorder is code that runs inside your product, so a bug in the recorder is a bug in your product. This is a major reason why it can make more sense to use PostHog than to build your own session recorder – because anything you build yourself is something you then have to maintain and manage. This includes being responsible for the performance impact. 
-
 
 ### Step 2: Keeping private data private
 
@@ -118,7 +117,7 @@ A first build covers recording and playback. The costs below show up once it's i
 
 ### The recorder is code in your product
 
-You own its performance budget, its bundle size, and its bugs. Every browser release and frontend framework upgrade can change what it sees. Our January incident shows how that can go wrong, even for a team that works on replay full time.
+You own its performance budget, its bundle size, and its bugs. Every browser release and frontend framework upgrade can change what it sees. Our [January 2026 incident](/handbook/company/post-mortems/2026-01-17-replay-sdk-fetch-wrapper-incident) shows how that can go wrong, even for a team that works on replay full time.
 
 ### Privacy is never finished
 
