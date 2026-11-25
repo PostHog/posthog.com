@@ -1345,6 +1345,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/ai-engineering/wizard-signup:ext(\\.md)?",
+            "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-engineering/manual-capture:ext(\\.md)?",
             "destination": "/docs/ai-observability/installation/manual-capture:ext?",
             "statusCode": 301
@@ -2257,6 +2262,11 @@
         {
             "source": "/handbook/company/structure",
             "destination": "/handbook/people/team-structure/why-small-teams"
+        },
+        {
+            "source": "/handbook/company/fuzzy-ownership:ext(\\.md)?",
+            "destination": "/handbook/company/ownership:ext?",
+            "permanent": true
         },
         {
             "source": "/handbook/people/team",
