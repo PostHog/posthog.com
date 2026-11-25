@@ -2260,6 +2260,11 @@
             "destination": "/handbook/people/team-structure/why-small-teams"
         },
         {
+            "source": "/handbook/company/fuzzy-ownership:ext(\\.md)?",
+            "destination": "/handbook/company/ownership:ext?",
+            "permanent": true
+        },
+        {
             "source": "/handbook/people/team",
             "destination": "/people"
         },
