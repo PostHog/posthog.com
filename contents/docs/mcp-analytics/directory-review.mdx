@@ -33,7 +33,7 @@ Even with those fields off, PostHog still captures server-side `$mcp_tool_call` 
 
 ## Configure the SDK before you submit
 
-Pass these options where you call `instrument()` in your server setup (see the [installation guide](/docs/mcp-analytics/installation)). Your `tools/list` schemas and tool results then match an uninstrumented server, while `$mcp_tool_call` events still flow to PostHog.
+Pass these options where you call `instrument()` in your server setup (see the [installation guide](/docs/mcp-analytics/installation)). Your `tools/list` schemas and tool results then match a server without the SDK, while `$mcp_tool_call` events still flow to PostHog.
 
 <MultiLanguage>
 
@@ -87,7 +87,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(MyServer);
 
 </MultiLanguage>
 
-Leave `get_more_tools` and `send_feedback` off (both are disabled by default).
+Leave `get_more_tools` off (it's disabled by default).
 
 On a [custom dispatcher](/docs/mcp-analytics/installation/typescript#custom-dispatchers), `context` is an option of `prepareToolList`, not the constructor:
 
@@ -147,6 +147,6 @@ If you keep tool arguments and results enabled (the default), mention them in yo
 
 ## Verify before submitting and after upgrading
 
-Before submitting – and after any SDK upgrade – inspect `tools/list` (no `context` unless kept for ChatGPT, no `llm_model` or `conversation_id`, no `get_more_tools` or `send_feedback`), check a tool response for any appended `conversation_id` text block, and confirm `$mcp_tool_call` events still arrive.
+Before submitting – and after any SDK upgrade – inspect `tools/list` (no `context` unless kept for ChatGPT, and no `llm_model`, `conversation_id`, or `get_more_tools`), check a tool response for any appended `conversation_id` text block, and confirm `$mcp_tool_call` events still arrive.
 
 OpenAI re-reviews changed tools, and Anthropic asks you to tell them about material changes. If a reviewer still flags an MCP Analytics field after applying this config, turn `context` off completely, recheck `tools/list`, and share the feedback with [PostHog support](/docs/support-options) so we can update this guide.
