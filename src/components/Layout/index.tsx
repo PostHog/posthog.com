@@ -10,8 +10,15 @@ const Layout = ({
     parent,
     activeInternalMenu,
     className = '',
+    scrollAreaDataScheme = '',
+    scrollAreaClassName = '',
     headerBlur = true,
-}: IProps & { className?: string; headerBlur?: boolean }): JSX.Element => {
+}: IProps & {
+    className?: string
+    scrollAreaDataScheme?: string
+    scrollAreaClassName?: string
+    headerBlur?: boolean
+}): JSX.Element => {
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -25,7 +32,7 @@ const Layout = ({
     }, [])
 
     return (
-        <ScrollArea>
+        <ScrollArea dataScheme={scrollAreaDataScheme} className={scrollAreaClassName}>
             <div data-scheme="secondary" className="bg-primary text-primary rounded">
                 {children}
             </div>
