@@ -15,7 +15,7 @@ export type GeoProfile = {
 
 type MemberGeocode = { query: string; countryFilter: string | null }
 
-const MEMBER_PLACE_TYPES = 'place,locality,district,region,country'
+const PLACE_TYPES = 'place,locality,district,region,country'
 
 // Collapse whitespace and dashes so a "#Jean-Luc-Picard" hash matches "Jean-Luc Picard".
 const normalizeName = (s: string): string =>
@@ -58,10 +58,10 @@ export const buildMemberGeocode = (m: GeoProfile): MemberGeocode | null => {
     return { query, countryFilter }
 }
 
-const buildForwardGeocodeUrl = (query: string, types: string, token: string, countryFilter?: string | null): URL => {
+const buildForwardGeocodeUrl = (query: string, token: string, countryFilter?: string | null): URL => {
     const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
     url.searchParams.set('q', query)
-    url.searchParams.set('types', types)
+    url.searchParams.set('types', PLACE_TYPES)
     if (countryFilter) {
         url.searchParams.set('country', countryFilter)
     }
@@ -74,7 +74,7 @@ const geocodeMemberPlace = async (
     token: string
 ): Promise<Coordinates | null> => {
     try {
-        const resp = await fetch(buildForwardGeocodeUrl(query, MEMBER_PLACE_TYPES, token, countryFilter).toString())
+        const resp = await fetch(buildForwardGeocodeUrl(query, token, countryFilter).toString())
         const json = await resp.json()
         const coords = json?.features?.[0]?.geometry?.coordinates
         if (!Array.isArray(coords) || coords.length < 2) {
@@ -189,12 +189,7 @@ export const useGeocodedArea = (
         const controller = new AbortController()
         const handle = setTimeout(async () => {
             try {
-                const url = buildForwardGeocodeUrl(
-                    trimmed,
-                    'country,region,place,district,locality',
-                    token,
-                    countryFilter
-                )
+                const url = buildForwardGeocodeUrl(trimmed, token, countryFilter)
                 url.searchParams.set('limit', '1')
                 const resp = await fetch(url.toString(), { signal: controller.signal })
                 const json = await resp.json()
