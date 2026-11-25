@@ -184,12 +184,11 @@ const categories: [title: string, rows: Row[]][] = [
             ['A/B test emails and send the winner', 'Partly', false, false, true, true],
         ],
     ],
-    ['Deliverability', [['Dedicated IPs', false, 'Paid add-on', 'Paid add-on', false, 'Paid add-on']]],
     [
         'Agents',
         [
             ['MCP server and agent skills', '62 tools, 7 skills', true, true, true, true],
-            ['CLI', 'Setup wizard', true, true, true, true],
+            ['CLI', true, true, true, true, true],
         ],
     ],
     ['Pricing', [['Price at 100k emails a month', '$36', '$35', '$126', '$49', 'About $145']]],
