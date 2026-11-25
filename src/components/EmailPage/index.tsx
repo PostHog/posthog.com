@@ -558,8 +558,9 @@ export default function EmailPage(): JSX.Element {
 
                     <section className="flex flex-col gap-6">
                         <Intro title="Pay per email, not per plan">
-                            Transactional email has its own price, below Resend at most volumes. There’s no base fee and
-                            no contact tiers, and the first 10,000 emails are free every month. Drag to compare.
+                            Transactional email has its own price, the lowest of the big email APIs at most volumes.
+                            There’s no base fee and no contact tiers, and the first 10,000 emails are free every month.
+                            Drag to compare.
                         </Intro>
                         <PricingCompare />
                     </section>
