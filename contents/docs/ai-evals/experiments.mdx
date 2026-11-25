@@ -2,7 +2,7 @@
 title: Review and compare experiments
 ---
 
-import ImageAnnotations from "components/ImageAnnotations"
+import ImageAnnotations from "components/ImageAnnotations";
 
 An experiment is one run of your test cases against your agent. After your CI or a local script uploads an experiment, compare it with earlier runs to find the change that made a score drop. To run your first experiment, see [Offline evals](/docs/ai-evals/offline-evals#run-your-first-experiment).
 
@@ -18,25 +18,27 @@ Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.co
 <div className="dark:hidden rounded border border-primary p-4" style={{ backgroundColor: "#eff0e9" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/92f4b7e6-4735-4600-9016-06b5c4dc6569.jpg"
-alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/92f4b7e6-4735-4600-9016-06b5c4dc6569.jpg"
+  alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 <div className="hidden dark:block rounded border border-primary p-4" style={{ backgroundColor: "#18171c" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/38927b3b-c40d-47ac-bb9f-e64df4d228bf.jpg"
-alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/38927b3b-c40d-47ac-bb9f-e64df4d228bf.jpg"
+  alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 
-<div><ImageAnnotations.Key title="" className="mb-4" /></div>
+<div>
+  <ImageAnnotations.Key title="" className="mb-4" />
+</div>
 
 </ImageAnnotations>
 
@@ -58,18 +60,18 @@ Each reported result belongs to one item in one experiment and uses a specific s
 
 On the experiment handle, use the ID from the upload receipt to read the current revision. Pass that ID and revision with the edit or deletion. In Go, pass your context as the first argument to each method.
 
-| Action | Python | TypeScript | Go |
-| --- | --- | --- | --- |
-| Read the current item revision | `get_item_revision` | `getItemRevision` | `GetItemRevision` |
-| Fix the case key, trial, model version, or trace ID | `update_item` | `updateItem` | `UpdateItem` |
-| Replace item input, output, expected output, or metadata | `update_item_payload` | `updateItemPayload` | `UpdateItemPayload` |
-| Remove the item payload and keep its scores | `delete_item_payload` | `deleteItemPayload` | `DeleteItemPayload` |
-| Delete the item and all its scores and payloads | `delete_item` | `deleteItem` | `DeleteItem` |
-| Read the current result revision | `get_result_revision` | `getResultRevision` | `GetResultRevision` |
-| Correct a reported result's status, value, or error code | `update_result` | `updateResult` | `UpdateResult` |
-| Replace result reasoning, error message, or metadata | `update_result_payload` | `updateResultPayload` | `UpdateResultPayload` |
-| Remove the result payload and keep the score | `delete_result_payload` | `deleteResultPayload` | `DeleteResultPayload` |
-| Delete the result, its payload, and dependent composite scores | `delete_result` | `deleteResult` | `DeleteResult` |
+| Action                                                         | Python                  | TypeScript            | Go                    |
+| -------------------------------------------------------------- | ----------------------- | --------------------- | --------------------- |
+| Read the current item revision                                 | `get_item_revision`     | `getItemRevision`     | `GetItemRevision`     |
+| Fix the case key, trial, model version, or trace ID            | `update_item`           | `updateItem`          | `UpdateItem`          |
+| Replace item input, output, expected output, or metadata       | `update_item_payload`   | `updateItemPayload`   | `UpdateItemPayload`   |
+| Remove the item payload and keep its scores                    | `delete_item_payload`   | `deleteItemPayload`   | `DeleteItemPayload`   |
+| Delete the item and all its scores and payloads                | `delete_item`           | `deleteItem`          | `DeleteItem`          |
+| Read the current result revision                               | `get_result_revision`   | `getResultRevision`   | `GetResultRevision`   |
+| Correct a reported result's status, value, or error code       | `update_result`         | `updateResult`        | `UpdateResult`        |
+| Replace result reasoning, error message, or metadata           | `update_result_payload` | `updateResultPayload` | `UpdateResultPayload` |
+| Remove the result payload and keep the score                   | `delete_result_payload` | `deleteResultPayload` | `DeleteResultPayload` |
+| Delete the result, its payload, and dependent composite scores | `delete_result`         | `deleteResult`        | `DeleteResult`        |
 
 If you change the input or either output, rerun the affected checks and update their scores. A `revision_conflict` means the record changed. Review it before retrying with the latest revision.
 
@@ -79,7 +81,9 @@ Use a [personal API key](/docs/api/personal-api-keys) with `evaluation:read` to 
 
 Use a [project secret API key](/docs/api/project-secret-api-keys) with the `offline_evaluation_ingestion:write` scope for your CI uploads. It can create experiments, upload results, and mark runs complete or failed without depending on a teammate's account.
 
-Project secret keys can't create or read scorers or fetch datasets. Set up scorers and load any PostHog dataset with a personal key first. In your CI script, pass the project key as `secret_key` in Python, `secretKey` in TypeScript, or `evaluations.Config.SecretKey` in Go. Use the saved scorer version IDs for uploads.
+Project secret keys can also read scorers and datasets. Grant **AI observability** (`llm_analytics:read`) to read scorers, and **Dataset** (`dataset:read`) to load a PostHog dataset. With both, your CI can read stored composite inputs without a personal key. To create or modify scorers, grant `llm_analytics:write`. Dataset exports still require a [personal API key](/docs/api/personal-api-keys).
+
+In your CI script, pass the project key as `secret_key` in Python, `secretKey` in TypeScript, or `evaluations.Config.SecretKey` in Go. Use the saved scorer version IDs for uploads.
 
 For a composite, save its version ID and the exact input versions it pins. Send those input results with each calculation request.
 
