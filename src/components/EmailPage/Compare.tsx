@@ -181,8 +181,7 @@ const categories: [title: string, rows: Row[]][] = [
         'Broadcasts and automations',
         [
             ['Broadcasts, segments, and a journey builder', true, true, 'Partly', true, true],
-            ['A/B test with a winner', 'Partly', false, false, true, true],
-            ['Experiments on a product outcome', 'Partly', false, false, 'Partly', 'Partly'],
+            ['A/B test emails and send the winner', 'Partly', false, false, true, true],
         ],
     ],
     ['Deliverability', [['Dedicated IPs', false, 'Paid add-on', 'Paid add-on', false, 'Paid add-on']]],
