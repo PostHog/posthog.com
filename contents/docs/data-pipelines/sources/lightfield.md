@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Lightfield connector syncs your CRM data – accounts, contacts, opportunities, meetings, tasks, notes, lists, members, and emails – into PostHog.
+The Lightfield connector syncs your CRM data – accounts, contacts, opportunities, meetings, tasks, notes, lists, list members, members, emails, messages, and sequences – into PostHog.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ You need admin access to your Lightfield organization to create an API key. Keys
 
 When linking Lightfield, you'll need:
 
-- **API key** – create one in your Lightfield settings. It starts with `sk_lf_`. Grant the read scope for every table you plan to sync: `accounts:read`, `contacts:read`, `opportunities:read`, `meetings:read`, `tasks:read`, `notes:read`, `lists:read`, `members:read`, and `emails:read`. Tables without their scope show a permission warning in the schema picker.
+- **API key** – create one in your Lightfield settings. It starts with `sk_lf_`. Grant the read scope for every table you plan to sync: `accounts:read`, `contacts:read`, `opportunities:read`, `meetings:read`, `tasks:read`, `notes:read`, `lists:read`, `members:read`, `emails:read`, `messages:read`, and `sequences:read`. The `sequences` and `sequence_enrollments` tables both use `sequences:read`. The list member tables need `lists:read` and the scope of the member type: `list_accounts` needs `accounts:read`, `list_contacts` needs `contacts:read`, and `list_opportunities` needs `opportunities:read`. Tables without their scopes show a permission warning in the schema picker.
 
 ## Sync modes
 
