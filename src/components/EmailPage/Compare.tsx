@@ -30,14 +30,16 @@ function posthogPrice(emails: number): number {
     return total
 }
 
-const volumes = [10_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 2_500_000]
-const competitorPrices: Record<string, (number | null)[]> = {
-    Resend: [20, 20, 35, 170, 350, 650, 1150],
-    SendGrid: [20, 20, 35, 249, 499, 799, 1099],
-    Mailtrap: [15, 20, 30, 200, 300, 750, 1250],
-    MailerSend: [15, 35, 68, 163, 325, 600, null],
-    Mailgun: [15, 35, 90, 255, 530, 1080, 2730],
-    Postmark: [15, 66, 126, 306, 606, 1206, 3006],
+const volumes = [10_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 2_500_000, 5_000_000, 10_000_000]
+// Up to 2.5M: the cheapest published plan that fits. Above 2.5M nobody publishes a plan, so it's the 2.5M plan plus
+// that provider's published overage rate (Resend $0.46, SendGrid $0.50, Mailtrap $0.55, Mailgun $1.10, Postmark $1.20
+// per 1k). MailerSend publishes nothing past 50k, so it's left out.
+const competitorPrices: Record<string, number[]> = {
+    Resend: [20, 20, 35, 170, 350, 650, 1150, 2300, 4600],
+    SendGrid: [20, 20, 35, 249, 499, 799, 1099, 2349, 4849],
+    Mailtrap: [15, 20, 30, 200, 300, 750, 1250, 2625, 5375],
+    Mailgun: [15, 35, 90, 255, 530, 1080, 2730, 5480, 10980],
+    Postmark: [15, 66, 126, 306, 606, 1206, 3006, 6006, 12006],
 }
 
 const short = (n: number) => (n >= 1_000_000 ? `${n / 1_000_000}M` : `${n / 1000}k`)
@@ -48,12 +50,9 @@ export function PricingCompare(): JSX.Element {
     const emails = volumes[index]
     const bars = [
         { name: 'PostHog', price: posthogPrice(emails) },
-        ...Object.entries(competitorPrices)
-            .filter(([, prices]) => prices[index] !== null)
-            .map(([name, prices]) => ({ name, price: prices[index] as number })),
+        ...Object.entries(competitorPrices).map(([name, prices]) => ({ name, price: prices[index] })),
     ].sort((a, b) => a.price - b.price)
     const max = Math.max(...bars.map((b) => b.price))
-    const cheapest = bars[0].name === 'PostHog'
 
     return (
         <div className={`${blockClassName} grid gap-8 @3xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]`}>
@@ -73,7 +72,10 @@ export function PricingCompare(): JSX.Element {
                     />
                     <span className="flex justify-between text-xs font-normal text-secondary">
                         {volumes.map((v) => (
-                            <span key={v}>{short(v)}</span>
+                            <span key={v}>
+                                {short(v)}
+                                {v === volumes[volumes.length - 1] && '+'}
+                            </span>
                         ))}
                     </span>
                 </label>
@@ -91,7 +93,9 @@ export function PricingCompare(): JSX.Element {
                                 <span className="h-5 rounded bg-accent">
                                     <motion.span
                                         className={`block h-full rounded ${us ? 'bg-red' : 'bg-border'}`}
-                                        animate={{ width: `${Math.max((bar.price / max) * 100, 1)}%` }}
+                                        animate={{
+                                            width: `${Math.max((bar.price / max) * 100, 1)}%`,
+                                        }}
                                     />
                                 </span>
                                 <span className={`text-right tabular-nums ${us ? 'font-bold' : 'text-secondary'}`}>
@@ -101,9 +105,6 @@ export function PricingCompare(): JSX.Element {
                         )
                     })}
                 </div>
-                <p className={`m-0 h-7 text-lg font-semibold ${cheapest ? '' : 'invisible'}`}>
-                    The cheapest at {short(emails)} emails a month.
-                </p>
             </div>
             <div className="flex flex-col gap-3 text-sm">
                 <strong>Transactional email, per 1,000</strong>
@@ -133,8 +134,8 @@ export function PricingCompare(): JSX.Element {
                 </div>
                 <p className="m-0 text-xs text-secondary">
                     No base fee: each email is billed at the rate for its tier. Broadcasts and automations use the
-                    marketing email rate. Other prices are each provider’s cheapest published plan that fits, November
-                    2026.{' '}
+                    marketing email rate. Other prices are each provider’s cheapest published plan that fits, plus its
+                    overage rate above 2.5M, November 2026.{' '}
                     <Link to="/pricing" className="underline">
                         See all pricing
                     </Link>
@@ -195,18 +196,10 @@ const categories: [title: string, rows: Row[]][] = [
 
 function Mark({ mark, us }: { mark: Mark; us: boolean }): JSX.Element {
     if (mark === true) {
-        return (
-            <span className="mx-auto flex size-6 items-center justify-center rounded-full bg-green/15 text-green">
-                <IconCheck className="size-4" aria-label="Yes" />
-            </span>
-        )
+        return <IconCheck className="mx-auto size-5 text-green" aria-label="Yes" />
     }
     if (mark === false) {
-        return (
-            <span className="mx-auto flex size-6 items-center justify-center rounded-full bg-red/10 text-red">
-                <IconX className="size-3.5" aria-label="No" />
-            </span>
-        )
+        return <IconX className="mx-auto size-4 text-red" aria-label="No" />
     }
     if (mark === 'Partly') {
         return <span className="rounded-full bg-yellow/20 px-2 py-0.5 text-xs font-semibold">Partly</span>
@@ -214,8 +207,7 @@ function Mark({ mark, us }: { mark: Mark; us: boolean }): JSX.Element {
     return <span className={us ? 'font-bold' : 'text-secondary'}>{mark}</span>
 }
 
-// The PostHog column reads as one raised card running down the table.
-const usCell = 'bg-red/[0.06] shadow-[inset_2px_0_0_rgba(245,78,0,0.45),inset_-2px_0_0_rgba(245,78,0,0.45)]'
+const usCell = 'bg-accent/60'
 
 function Rows({ rows }: { rows: Row[] }): JSX.Element {
     return (
@@ -249,9 +241,7 @@ export function FeatureCompare(): JSX.Element {
                                 <th
                                     key={name}
                                     className={`px-3 py-4 text-center text-base font-bold ${
-                                        i === 0
-                                            ? `${usCell} rounded-t-xl shadow-[inset_2px_2px_0_rgba(245,78,0,0.45),inset_-2px_0_0_rgba(245,78,0,0.45)]`
-                                            : 'text-secondary'
+                                        i === 0 ? usCell : 'text-secondary'
                                     }`}
                                 >
                                     {i === 0 ? (
