@@ -567,20 +567,26 @@ export default function EmailPage(): JSX.Element {
 
                     <section
                         id="switch"
-                        className="not-prose grid scroll-mt-20 items-center gap-8 rounded-2xl bg-white p-6 shadow-2xl dark:bg-accent @3xl/reader-content:grid-cols-2 @xl/reader-content:p-10"
+                        className="not-prose grid scroll-mt-20 items-start gap-8 rounded-2xl bg-white p-6 shadow-2xl dark:bg-accent @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-12 @xl/reader-content:p-10"
                     >
                         <div>
                             <h2 className="m-0 mb-2 text-3xl font-bold">Already sending with someone else?</h2>
-                            <p className="m-0 mb-5 text-secondary">
+                            <p className="m-0 mb-6 text-secondary">
                                 Connect the PostHog MCP, then ask your agent to move you over. It imports your
                                 templates, suppressions, and unsubscribes as drafts, so nothing sends until you say so.
                             </p>
-                            <SwitchPrompt />
-                            <div className="mt-5 flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-2">
                                 <StartButtons />
                             </div>
                         </div>
-                        <MCPInstallCTA showDesktopLink={false} />
+                        {/* The two steps share one column, so both boxes line up. */}
+                        <div className="flex flex-col gap-5">
+                            <MCPInstallCTA showDesktopLink={false} className="w-full" />
+                            <div>
+                                <p className="m-0 mb-2 text-sm font-semibold">Then ask your agent</p>
+                                <SwitchPrompt />
+                            </div>
+                        </div>
                     </section>
                 </div>
             </ReaderView>
