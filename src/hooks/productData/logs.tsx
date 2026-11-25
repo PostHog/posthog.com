@@ -34,7 +34,7 @@ export const logs = {
     // forumTopicId: /* create topic, then uncomment community menu item below */,
     color: PRODUCT_COLORS.logs,
     colorSecondary: 'green-2',
-    wizardSupport: 'Coming soon',
+    wizardSupport: true,
     includeAddonRates: true,
     // From contents/docs/logs/pricing.mdx
     pricingDescription:
