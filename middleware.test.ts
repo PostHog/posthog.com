@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { test, type TestContext } from 'node:test'
 
 import middleware from './middleware.ts'
+import { MCP_SERVER_URL, MCP_SERVER_URL_EU } from './src/constants/index.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
 const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
@@ -89,38 +90,61 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
 
 const mcpClientHeaders = { accept: 'application/json, text/event-stream', 'content-type': 'application/json' }
 
+// An MCP message as a client sends it. `new Request` sets no content-length, but a client over the network does.
+function mcpPost(url: string, body: string, headers: Record<string, string> = {}): Request {
+    const length = String(new TextEncoder().encode(body).length)
+    return new Request(url, {
+        method: 'POST',
+        headers: { ...mcpClientHeaders, 'content-length': length, ...headers },
+        body,
+    })
+}
+
 test('answers MCP clients pointed at a page with a JSON-RPC error that names the MCP server', async (t) => {
     const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog MCP server'))
     const initialize = { jsonrpc: '2.0', id: 0, method: 'initialize', params: {} }
 
     for (const path of ['/docs/model-context-protocol', '/docs/product-analytics', '/mcp', '/mcp.md']) {
         const response = await middleware(
-            new Request(`https://posthog.com${path}`, {
-                method: 'POST',
-                headers: { ...mcpClientHeaders, 'user-agent': 'Claude-User' },
-                body: JSON.stringify(initialize),
-            })
+            mcpPost(`https://posthog.com${path}`, JSON.stringify(initialize), { 'user-agent': 'Claude-User' })
         )
         assert.equal(response?.status, 200, path)
         assert.equal(response.headers.get('content-type'), 'application/json')
         const { jsonrpc, id, error } = await response.json()
         assert.deepEqual({ jsonrpc, id, code: error.code }, { jsonrpc: '2.0', id: 0, code: -32600 })
-        assert.match(error.message, /https:\/\/mcp\.posthog\.com\/mcp\b.*https:\/\/mcp-eu\.posthog\.com\/mcp\b/)
+        assert.ok(error.message.includes(MCP_SERVER_URL), path)
+        assert.ok(error.message.includes(MCP_SERVER_URL_EU), path)
     }
     assert.equal(fetch.mock.callCount(), 0)
 })
 
-test('answers a malformed MCP message and an SSE client with the same hint', async () => {
-    const malformed = await middleware(
-        new Request(page, { method: 'POST', headers: mcpClientHeaders, body: '{"jsonrpc":' })
-    )
-    const { id, error } = await malformed?.json()
-    assert.equal(id, null)
-    assert.match(error.message, /mcp\.posthog\.com/)
+test('echoes only a JSON-RPC id it read from a small body', async () => {
+    const initialize = (id: unknown, padding = '') =>
+        JSON.stringify({ jsonrpc: '2.0', id, method: 'initialize', params: { padding } })
+    const cases: [string, Request, string | number | null][] = [
+        ['string id', mcpPost(page, initialize('a1')), 'a1'],
+        ['malformed body', mcpPost(page, '{"jsonrpc":'), null],
+        ['object id', mcpPost(page, initialize({ a: 1 })), null],
+        ['boolean id', mcpPost(page, initialize(true)), null],
+        ['body over 64 KB', mcpPost(page, initialize(1, 'x'.repeat(64 * 1024))), null],
+        [
+            'no content-length',
+            new Request(page, { method: 'POST', headers: mcpClientHeaders, body: initialize(1) }),
+            null,
+        ],
+    ]
+    for (const [name, request, expected] of cases) {
+        const response = await middleware(request)
+        const { id, error } = await response?.json()
+        assert.equal(id, expected, name)
+        assert.ok(error.message.includes(MCP_SERVER_URL), name)
+    }
+})
 
+test('answers an SSE client with the hint in a 405', async () => {
     const sse = await middleware(new Request(page, { headers: { accept: 'text/event-stream' } }))
     assert.equal(sse?.status, 405)
-    assert.match(await sse.text(), /mcp\.posthog\.com/)
+    assert.ok((await sse.text()).includes(MCP_SERVER_URL))
 })
 
 function enableLog(t: TestContext): void {
