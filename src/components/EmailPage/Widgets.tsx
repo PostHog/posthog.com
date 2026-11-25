@@ -710,11 +710,32 @@ const exitTile: Tile = { Icon: IconLeave, color: '#9a9a9a', shape: 'end', title:
 
 type Stage = 'suggested' | 'draft' | 'live'
 
-const outcomes = [
-    { label: 'Opened', before: 48.2, after: 51.0 },
-    { label: 'Clicked', before: 2.1, after: 4.6 },
-    { label: 'Unsubscribed', before: 0.4, after: 0.2 },
-]
+type Suggestion = {
+    title: string
+    why: string
+    measured: string
+    changes: [label: string, before: string | null, after: string][]
+    version: number
+    step: string
+    outcomes: { label: string; before: number; after: number }[]
+}
+
+const onboardingSuggestion: Suggestion = {
+    title: 'Wait for the first upload before the nudge',
+    why: "Most people who haven't uploaded a file on day 1 are still exploring. Send the nudge after 2 days, and only to people who still haven't uploaded one.",
+    measured: 'Click rate 2.1% on 1,198 tracked sends (v3, last 30 days), target 4%',
+    changes: [
+        ['Wait', '1 day', '2 days'],
+        ['New step', null, 'Condition: uploaded a file?'],
+    ],
+    version: 3,
+    step: 'The nudge email',
+    outcomes: [
+        { label: 'Opened', before: 48.2, after: 51.0 },
+        { label: 'Clicked', before: 2.1, after: 4.6 },
+        { label: 'Unsubscribed', before: 0.4, after: 0.2 },
+    ],
+}
 
 function Tag({ tone, children }: { tone: 'highlight' | 'success'; children: React.ReactNode }) {
     return (
@@ -728,41 +749,45 @@ function Tag({ tone, children }: { tone: 'highlight' | 'success'; children: Reac
     )
 }
 
-function SuggestionPanel({ stage, setStage }: { stage: Stage; setStage: (s: Stage) => void }): JSX.Element {
+function SuggestionPanel({
+    s,
+    stage,
+    setStage,
+}: {
+    s: Suggestion
+    stage: Stage
+    setStage: (s: Stage) => void
+}): JSX.Element {
     return (
         <div className="order-first flex flex-col gap-4 self-start rounded-xl border border-primary bg-white p-5 text-sm leading-relaxed shadow-xl dark:bg-accent @3xl/reader-content:order-none">
             <div className="flex items-start gap-2">
                 <IconBolt className="mt-0.5 size-4 shrink-0" />
                 <div className="flex flex-col gap-1">
-                    <strong>Wait for the first upload before the nudge</strong>
+                    <strong>{s.title}</strong>
                     <span>
                         {stage === 'suggested' && <Tag tone="highlight">Suggested by PostHog</Tag>}
                         {stage === 'draft' && <Tag tone="highlight">Staged as draft</Tag>}
-                        {stage === 'live' && <Tag tone="success">Published as version 4</Tag>}
+                        {stage === 'live' && <Tag tone="success">Published as version {s.version + 1}</Tag>}
                     </span>
                 </div>
             </div>
             {stage === 'suggested' && (
                 <>
-                    <p className="m-0 text-secondary">
-                        Most people who haven't uploaded a file on day 1 are still exploring. Send the nudge after 2
-                        days, and only to people who still haven't uploaded one.
-                    </p>
+                    <p className="m-0 text-secondary">{s.why}</p>
                     <p className="m-0">
-                        Click rate 2.1% on 1,198 tracked sends (v3, last 30 days), target 4%{' '}
-                        <Tag tone="success">Measured by PostHog</Tag>
+                        {s.measured} <Tag tone="success">Measured by PostHog</Tag>
                     </p>
                     <div className="flex flex-col gap-2 border-l-2 border-primary pl-3 text-xs">
                         <strong className="text-secondary">What changes</strong>
-                        <span>
-                            Wait: <span className="rounded bg-red/15 px-1 line-through">1 day</span>{' '}
-                            <span className="rounded bg-green/15 px-1">2 days</span>
-                        </span>
-                        <span>
-                            New step: <span className="rounded bg-green/15 px-1">Condition: uploaded a file?</span>
-                        </span>
+                        {s.changes.map(([label, before, after]) => (
+                            <span key={label}>
+                                {label}:{' '}
+                                {before && <span className="rounded bg-red/15 px-1 line-through">{before}</span>}{' '}
+                                <span className="rounded bg-green/15 px-1">{after}</span>
+                            </span>
+                        ))}
                     </div>
-                    <span className="text-xs text-secondary">Suggested 2 hours ago against version 3</span>
+                    <span className="text-xs text-secondary">Suggested 2 hours ago against version {s.version}</span>
                     <div className="flex gap-2">
                         <OSButton size="sm" variant="secondary" disabled tooltip="Approve it to see what happens">
                             Reject
@@ -790,12 +815,14 @@ function SuggestionPanel({ stage, setStage }: { stage: Stage; setStage: (s: Stag
             )}
             {stage === 'live' && (
                 <>
-                    <p className="m-0 text-secondary">The nudge email, version 3 against version 4:</p>
+                    <p className="m-0 text-secondary">
+                        {s.step}, version {s.version} against version {s.version + 1}:
+                    </p>
                     <div className="grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-1 text-xs">
                         <span />
-                        <strong className="text-secondary">v3</strong>
-                        <strong className="text-secondary">v4</strong>
-                        {outcomes.map((o) => (
+                        <strong className="text-secondary">v{s.version}</strong>
+                        <strong className="text-secondary">v{s.version + 1}</strong>
+                        {s.outcomes.map((o) => (
                             <React.Fragment key={o.label}>
                                 <span className="text-secondary">{o.label}</span>
                                 <span className="font-semibold">{o.before.toFixed(1)}%</span>
@@ -827,6 +854,8 @@ type Scenario = {
     branch?: { condition: Tile; no: Tile[]; yes: Tile[] }
     about: string
     stats: [label: string, value: string][]
+    // Self-driving: what PostHog suggests, and the flow once it's applied. Tiles marked `changed` light up in the draft.
+    suggestion?: Suggestion & { after: Pick<Scenario, 'steps' | 'branch'> }
 }
 
 const email = (title: string, count?: number): Tile => ({
@@ -886,6 +915,45 @@ const scenarios: Scenario[] = [
             ['Opened', '44%'],
             ['Slack pings', '201'],
         ],
+        suggestion: {
+            title: 'Ping the account owner a day sooner',
+            why: 'Almost everyone who comes back does it within 2 days of the email. Waiting a third day only delays the Slack ping.',
+            measured: 'Came back 35% of 309 runs (v2, last 30 days), target 45%',
+            changes: [['Wait', '3 days', '2 days']],
+            version: 2,
+            step: 'The win-back automation',
+            outcomes: [
+                { label: 'Came back', before: 35.0, after: 43.2 },
+                { label: 'Opened', before: 44.1, after: 44.8 },
+                { label: 'Unsubscribed', before: 0.6, after: 0.5 },
+            ],
+            after: {
+                steps: [
+                    start(IconPeople, 'Joins "At risk of churning"', 'Cohort trigger', 312),
+                    email('We miss you', 312),
+                    { ...wait(2, 310), changed: true },
+                ],
+                branch: {
+                    condition: {
+                        Icon: IconDecisionTree,
+                        color: '#35C46F',
+                        title: 'Came back?',
+                        detail: 'Condition',
+                        count: 310,
+                    },
+                    no: [
+                        {
+                            Icon: IconMessage,
+                            color: '#4A154B',
+                            title: 'Ping the account owner',
+                            detail: 'Slack',
+                            count: 176,
+                        },
+                    ],
+                    yes: [{ ...exitTile, detail: 'Active again' }],
+                },
+            },
+        },
     },
     {
         trigger: { Icon: IconCalendar, label: 'A schedule' },
@@ -924,6 +992,42 @@ const scenarios: Scenario[] = [
             ['Opened', '61%'],
             ['Push taps', '14%'],
         ],
+        suggestion: {
+            title: 'Send the push at 9 AM in their time zone',
+            why: 'Pushes sent overnight get swiped away. People tap twice as often when it lands in the morning.',
+            measured: 'Push taps 14% on 498 sends (v1, last 30 days), target 25%',
+            changes: [['Wait', '2 days', 'until the last day, 9 AM local time']],
+            version: 1,
+            step: 'The trial ending automation',
+            outcomes: [
+                { label: 'Push taps', before: 14.0, after: 27.5 },
+                { label: 'Upgraded', before: 23.0, after: 26.1 },
+                { label: 'Push turned off', before: 1.2, after: 0.9 },
+            ],
+            after: {
+                steps: [
+                    start(IconWebhooks, 'Stripe: trial ends in 3 days', 'Webhook trigger', 540),
+                    email('Your trial ends Friday', 540),
+                    {
+                        Icon: IconClock,
+                        color: '#a20031',
+                        title: 'Wait until the last day, 9 AM',
+                        detail: 'Delay, in their time zone',
+                        badge: '9am',
+                        count: 532,
+                        changed: true,
+                    },
+                    {
+                        Icon: IconBell,
+                        color: '#F7A501',
+                        title: 'Last day of your trial',
+                        detail: 'Push notification',
+                        count: 498,
+                    },
+                    exitTile,
+                ],
+            },
+        },
     },
     {
         trigger: { Icon: IconMessage, label: 'A survey response' },
@@ -951,8 +1055,15 @@ const scenarios: Scenario[] = [
     },
 ]
 
-function Flow({ scenario }: { scenario: Scenario }): JSX.Element {
-    const { steps, branch } = scenario
+function Flow({
+    scenario,
+    highlight,
+}: {
+    scenario: Pick<Scenario, 'name' | 'steps' | 'branch'>
+    highlight: boolean
+}): JSX.Element {
+    const { branch } = scenario
+    const steps = scenario.steps.map((t) => ({ ...t, changed: highlight && t.changed }))
     return (
         <motion.div
             key={scenario.name}
@@ -990,6 +1101,12 @@ function Flow({ scenario }: { scenario: Scenario }): JSX.Element {
         </motion.div>
     )
 }
+
+const SelfDriving = () => (
+    <span className="flex items-center gap-1 rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">
+        <IconSparkles className="size-3" /> Self-driving
+    </span>
+)
 
 export function CanvasBlock(): JSX.Element {
     const [scenarioIndex, setScenarioIndex] = useState(0)
@@ -1036,14 +1153,17 @@ export function CanvasBlock(): JSX.Element {
                         key={label}
                         type="button"
                         aria-pressed={i === scenarioIndex}
-                        onClick={() => setScenarioIndex(i)}
+                        onClick={() => {
+                            setScenarioIndex(i)
+                            setStage('suggested')
+                        }}
                         className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm ${
                             i === scenarioIndex
                                 ? 'border-blue bg-blue/10 font-semibold text-primary'
                                 : 'border-primary bg-white hover:bg-accent dark:bg-accent'
                         }`}
                     >
-                        <Icon className={`size-4 ${i === 0 ? 'text-lilac' : 'text-blue'}`} /> {label}
+                        <Icon className="size-4 text-blue" /> {label}
                     </button>
                 ))}
             </div>
@@ -1051,7 +1171,18 @@ export function CanvasBlock(): JSX.Element {
                 <>
                     <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-2.5">
                         <strong>{scenario.name}</strong>
-                        <span className="rounded-full bg-green/15 px-2 text-xs font-semibold text-green">Live</span>
+                        {scenario.suggestion && <SelfDriving />}
+                        {draft ? (
+                            <span className="rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">
+                                Draft
+                            </span>
+                        ) : (
+                            <span className="rounded-full bg-green/15 px-2 text-xs font-semibold text-green">
+                                Live
+                                {scenario.suggestion &&
+                                    ` · v${scenario.suggestion.version + (stage === 'live' ? 1 : 0)}`}
+                            </span>
+                        )}
                     </div>
                     <div
                         className="grid gap-8 p-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_22rem]"
@@ -1060,30 +1191,40 @@ export function CanvasBlock(): JSX.Element {
                             backgroundSize: '18px 18px',
                         }}
                     >
-                        <Flow scenario={scenario} />
-                        <div className="flex flex-col gap-3 self-start rounded-lg border border-primary bg-white p-4 text-sm dark:bg-accent">
-                            <p className="m-0">{scenario.about}</p>
-                            <div className="grid grid-cols-3 gap-2">
-                                {scenario.stats.map(([label, value]) => (
-                                    <div key={label} className="rounded bg-accent p-2">
-                                        <div className="text-lg font-bold tabular-nums">{value}</div>
-                                        <div className="text-xs text-secondary">{label}</div>
-                                    </div>
-                                ))}
+                        <Flow
+                            key={scenario.name + proposed}
+                            scenario={
+                                proposed && scenario.suggestion
+                                    ? { ...scenario, ...scenario.suggestion.after }
+                                    : scenario
+                            }
+                            highlight={draft}
+                        />
+                        {scenario.suggestion ? (
+                            <SuggestionPanel s={scenario.suggestion} stage={stage} setStage={setStage} />
+                        ) : (
+                            <div className="flex flex-col gap-3 self-start rounded-lg border border-primary bg-white p-4 text-sm dark:bg-accent">
+                                <p className="m-0">{scenario.about}</p>
+                                <div className="grid grid-cols-3 gap-2">
+                                    {scenario.stats.map(([label, value]) => (
+                                        <div key={label} className="rounded bg-accent p-2">
+                                            <div className="text-lg font-bold tabular-nums">{value}</div>
+                                            <div className="text-xs text-secondary">{label}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className="m-0 text-xs text-secondary">
+                                    Last 30 days. PostHog has no changes to suggest yet.
+                                </p>
                             </div>
-                            <p className="m-0 text-xs text-secondary">
-                                Last 30 days. PostHog has no changes to suggest yet.
-                            </p>
-                        </div>
+                        )}
                     </div>
                 </>
             ) : (
                 <>
                     <div className="flex flex-wrap items-center gap-2 border-b border-primary px-4 py-2.5">
                         <strong>Onboarding</strong>
-                        <span className="flex items-center gap-1 rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">
-                            <IconSparkles className="size-3" /> Self-driving
-                        </span>
+                        <SelfDriving />
                         {draft ? (
                             <span className="rounded-full bg-lilac/15 px-2 text-xs font-semibold text-lilac">
                                 Draft
@@ -1169,7 +1310,7 @@ export function CanvasBlock(): JSX.Element {
                                 )}
                             </AnimatePresence>
                         </div>
-                        <SuggestionPanel stage={stage} setStage={setStage} />
+                        <SuggestionPanel s={onboardingSuggestion} stage={stage} setStage={setStage} />
                     </div>
                 </>
             )}
