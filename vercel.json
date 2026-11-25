@@ -5036,6 +5036,14 @@
             "destination": "/templates/in-app-feedback-survey"
         },
         {
+            "source": "/apps/notification-bar",
+            "destination": "/docs/js-snippets/notification-bar"
+        },
+        {
+            "source": "/apps/pineapple-mode",
+            "destination": "/docs/js-snippets/pineapple-mode"
+        },
+        {
             "source": "/apps/user-interviewer",
             "destination": "/templates/user-interview"
         },
