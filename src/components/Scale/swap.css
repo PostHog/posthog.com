@@ -1,0 +1,38 @@
+.scale-swap-out {
+    animation: scale-swap-out 160ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.scale-swap-in {
+    animation: scale-swap-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes scale-swap-out {
+    to {
+        opacity: 0;
+        transform: translateY(-0.12em);
+    }
+}
+
+@keyframes scale-swap-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.12em);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scale-swap-out,
+    .scale-swap-in {
+        animation-name: scale-swap-fade;
+    }
+
+    .scale-swap-out {
+        animation-direction: reverse;
+    }
+}
+
+@keyframes scale-swap-fade {
+    from {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,16 @@
+.share-bar-fill {
+    transform-origin: left;
+    animation: share-bar-grow 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes share-bar-grow {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .share-bar-fill {
+        animation: none;
+    }
+}

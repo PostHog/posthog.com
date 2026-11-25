@@ -1,0 +1,53 @@
+.scale-bar {
+    transform-origin: bottom;
+}
+
+[data-active] .scale-bar {
+    animation: scale-bar-grow 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+#scale-panel section:not([data-active]) .share-bar-fill {
+    animation: none;
+}
+
+[data-active] .scale-ink {
+    animation: scale-ink 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes scale-ink {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0);
+    }
+}
+
+[data-active] .scale-shade {
+    animation: scale-shade 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-active] .scale-note {
+    animation: scale-shade 500ms cubic-bezier(0.22, 1, 0.36, 1) 600ms both;
+}
+
+@keyframes scale-shade {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes scale-bar-grow {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-active] .scale-ink,
+    [data-active] .scale-note,
+    [data-active] .scale-shade,
+    [data-active] .scale-bar {
+        animation: none;
+    }
+}
