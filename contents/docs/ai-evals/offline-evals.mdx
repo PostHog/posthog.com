@@ -2,14 +2,16 @@
 title: Offline evals
 ---
 
-import ImageAnnotations from "components/ImageAnnotations"
-import EvalsPlaygroundCallout from 'components/EvalsPlaygroundCallout'
+import ImageAnnotations from "components/ImageAnnotations";
+import EvalsPlaygroundCallout from "components/EvalsPlaygroundCallout";
 
 Offline evals test your AI agent against known inputs before you ship a prompt, model, or code change. Run your agent and score its outputs locally or in your CI, using your existing test framework. The PostHog SDK uploads the results so you can compare runs and inspect failures.
 
 [Online evaluations](/docs/ai-evals) help you find failures in production. Add those failures to your offline test set to check that your next change fixes them. For a walkthrough, see [turn a production failure into a test case](/docs/ai-evals/datasets#example-turn-a-production-failure-into-a-test-case).
 
-<div><EvalsPlaygroundCallout /></div>
+<div>
+  <EvalsPlaygroundCallout />
+</div>
 
 ## How offline evals work
 
@@ -32,9 +34,9 @@ Three deliberate mistakes give you failures to inspect: a wrong tool, a missing 
 
 Install the SDK for your language. This quickstart requires:
 
--   **Python:** Python 3.10+ and `posthog` 7.74.0+.
--   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
--   **Go:** Go 1.21+ and `posthog-go/v2` v2.2.0+. Run the commands in an empty directory, then complete the Go client setup below.
+- **Python:** Python 3.10+ and `posthog` 7.74.0+.
+- **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
+- **Go:** Go 1.21+ and `posthog-go/v2` v2.2.0+. Run the commands in an empty directory, then complete the Go client setup below.
 
 <MultiLanguage selector="tabs">
 
@@ -54,7 +56,7 @@ mkdir -p scorers baseline
 
 </MultiLanguage>
 
-This walkthrough uses a [personal API key](/docs/api/personal-api-keys) to create and read scorers. Experiments you create with it are attributed to your PostHog user. For uploads from your CI, use a [project secret API key](/docs/api/project-secret-api-keys), which isn't tied to a person. See [Use results in your CI](/docs/ai-evals/experiments#use-results-in-your-ci).
+This walkthrough uses a [personal API key](/docs/api/personal-api-keys) to create and read scorers. Experiments you create with it are attributed to your PostHog user. For uploads from your CI, use a [project secret API key](/docs/api/project-secret-api-keys), which isn't tied to a person and supports the same scopes. See [Use results in your CI](/docs/ai-evals/experiments#use-results-in-your-ci).
 
 Create a personal API key with access to your project and these scopes:
 
@@ -147,25 +149,25 @@ with OfflineEvaluations(
 ```
 
 ```typescript file=TypeScript
-import { OfflineEvaluations } from "@posthog/ai/evaluations"
+import { OfflineEvaluations } from "@posthog/ai/evaluations";
 
 const evaluations = new OfflineEvaluations({
-    projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
-    host: process.env.POSTHOG_HOST!,
-})
+  projectId: Number(process.env.POSTHOG_PROJECT_ID),
+  secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+  host: process.env.POSTHOG_HOST!,
+});
 
 try {
-    for (const name of ["Correct tool", "Correct arguments"]) {
-        const scorer = await evaluations.scorers.create({
-            name,
-            kind: "boolean",
-            config: { trueIsFailure: false, trueLabel: "Pass", falseLabel: "Fail" },
-        })
-        console.log(`${name}: ${scorer.id}`)
-    }
+  for (const name of ["Correct tool", "Correct arguments"]) {
+    const scorer = await evaluations.scorers.create({
+      name,
+      kind: "boolean",
+      config: { trueIsFailure: false, trueLabel: "Pass", falseLabel: "Fail" },
+    });
+    console.log(`${name}: ${scorer.id}`);
+  }
 } finally {
-    evaluations.close()
+  evaluations.close();
 }
 ```
 
@@ -340,129 +342,125 @@ with OfflineEvaluations(
 ```
 
 ```typescript file=TypeScript
-import { EvaluationItem, OfflineEvaluations } from "@posthog/ai/evaluations"
+import { EvaluationItem, OfflineEvaluations } from "@posthog/ai/evaluations";
 
-type ToolCall = { tool: string; arguments: Record<string, string> }
+type ToolCall = { tool: string; arguments: Record<string, string> };
 
 function runAgent(input: string): ToolCall {
-    const text = input.toLowerCase()
-    const orderId = text.match(/#(\d+)/)?.[1] ?? ""
-    // These three rules contain deliberate mistakes for the demo.
-    if (text.includes("cancel")) {
-        return { tool: "cancel_order", arguments: {} }
-    }
-    if (text.includes("refund")) {
-        return { tool: "check_refund_policy", arguments: { order_id: "1001" } }
-    }
-    if (text.includes("order")) {
-        return { tool: "check_refund_policy", arguments: { order_id: orderId } }
-    }
-    const queue = text.includes("charged") ? "billing" : "account"
-    return { tool: "handoff_to_support", arguments: { queue } }
+  const text = input.toLowerCase();
+  const orderId = text.match(/#(\d+)/)?.[1] ?? "";
+  // These three rules contain deliberate mistakes for the demo.
+  if (text.includes("cancel")) {
+    return { tool: "cancel_order", arguments: {} };
+  }
+  if (text.includes("refund")) {
+    return { tool: "check_refund_policy", arguments: { order_id: "1001" } };
+  }
+  if (text.includes("order")) {
+    return { tool: "check_refund_policy", arguments: { order_id: orderId } };
+  }
+  const queue = text.includes("charged") ? "billing" : "account";
+  return { tool: "handoff_to_support", arguments: { queue } };
 }
 
 function evaluateAnswer(output: ToolCall, expected: ToolCall) {
-    const actualArgs = output.arguments
-    const expectedArgs = expected.arguments
-    return {
-        tool: {
-            value: output.tool === expected.tool,
-            reasoning: `Expected ${expected.tool}; selected ${output.tool}.`,
-        },
-        arguments: {
-            value:
-                Object.keys(actualArgs).length === Object.keys(expectedArgs).length &&
-                Object.entries(expectedArgs).every(
-                    ([key, value]) => actualArgs[key] === value
-                ),
-            reasoning: `Expected ${JSON.stringify(
-                expectedArgs
-            )}; received ${JSON.stringify(actualArgs)}.`,
-        },
-    }
+  const actualArgs = output.arguments;
+  const expectedArgs = expected.arguments;
+  return {
+    tool: {
+      value: output.tool === expected.tool,
+      reasoning: `Expected ${expected.tool}; selected ${output.tool}.`,
+    },
+    arguments: {
+      value:
+        Object.keys(actualArgs).length === Object.keys(expectedArgs).length &&
+        Object.entries(expectedArgs).every(([key, value]) => actualArgs[key] === value),
+      reasoning: `Expected ${JSON.stringify(
+        expectedArgs,
+      )}; received ${JSON.stringify(actualArgs)}.`,
+    },
+  };
 }
 
 const cases: { id: string; input: string; expected: ToolCall }[] = [
-    {
-        id: "refund_eligibility",
-        input: "Can I get a refund for order #1001?",
-        expected: { tool: "check_refund_policy", arguments: { order_id: "1001" } },
-    },
-    {
-        id: "delivery_status",
-        input: "Where is order #1002?",
-        expected: { tool: "look_up_order", arguments: { order_id: "1002" } },
-    },
-    {
-        id: "cancel_order",
-        input: "Please cancel order #1003.",
-        expected: { tool: "cancel_order", arguments: { order_id: "1003" } },
-    },
-    {
-        id: "refund_other_order",
-        input: "Can I get a refund for order #1004?",
-        expected: { tool: "check_refund_policy", arguments: { order_id: "1004" } },
-    },
-    {
-        id: "account_access",
-        input: "I can't sign in to my account.",
-        expected: { tool: "handoff_to_support", arguments: { queue: "account" } },
-    },
-    {
-        id: "billing_question",
-        input: "Why was I charged twice?",
-        expected: { tool: "handoff_to_support", arguments: { queue: "billing" } },
-    },
-]
+  {
+    id: "refund_eligibility",
+    input: "Can I get a refund for order #1001?",
+    expected: { tool: "check_refund_policy", arguments: { order_id: "1001" } },
+  },
+  {
+    id: "delivery_status",
+    input: "Where is order #1002?",
+    expected: { tool: "look_up_order", arguments: { order_id: "1002" } },
+  },
+  {
+    id: "cancel_order",
+    input: "Please cancel order #1003.",
+    expected: { tool: "cancel_order", arguments: { order_id: "1003" } },
+  },
+  {
+    id: "refund_other_order",
+    input: "Can I get a refund for order #1004?",
+    expected: { tool: "check_refund_policy", arguments: { order_id: "1004" } },
+  },
+  {
+    id: "account_access",
+    input: "I can't sign in to my account.",
+    expected: { tool: "handoff_to_support", arguments: { queue: "account" } },
+  },
+  {
+    id: "billing_question",
+    input: "Why was I charged twice?",
+    expected: { tool: "handoff_to_support", arguments: { queue: "billing" } },
+  },
+];
 
 const evaluations = new OfflineEvaluations({
-    projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
-    host: process.env.POSTHOG_HOST!,
-})
+  projectId: Number(process.env.POSTHOG_PROJECT_ID),
+  secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+  host: process.env.POSTHOG_HOST!,
+});
 
 try {
-    const scorers = {
-        tool: await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!),
-        arguments: await evaluations.scorers.get(
-            process.env.POSTHOG_ARGUMENTS_SCORER_ID!
-        ),
-    }
-    const experiment = await evaluations.createExperiment({
-        name: "Support agent baseline",
-        suiteKey: "support-agent",
-        runSource: "local",
-        expectedItemCount: cases.length,
-        expectedResultCount: cases.length * Object.keys(scorers).length,
-    })
+  const scorers = {
+    tool: await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!),
+    arguments: await evaluations.scorers.get(process.env.POSTHOG_ARGUMENTS_SCORER_ID!),
+  };
+  const experiment = await evaluations.createExperiment({
+    name: "Support agent baseline",
+    suiteKey: "support-agent",
+    runSource: "local",
+    expectedItemCount: cases.length,
+    expectedResultCount: cases.length * Object.keys(scorers).length,
+  });
 
-    try {
-        for (const testCase of cases) {
-            const output = await runAgent(testCase.input)
-            const item = new EvaluationItem({
-                caseKey: testCase.id,
-                input: testCase.input,
-                output,
-                expectedOutput: testCase.expected,
-            })
-            const scores = evaluateAnswer(output, testCase.expected)
-            for (const key of ["tool", "arguments"] as const) {
-                await experiment.uploadResult({
-                    item,
-                    scorerVersionId: scorers[key].currentVersionId,
-                    ...scores[key],
-                })
-            }
-        }
-    } catch (error) {
-        await experiment.fail()
-        throw error
+  try {
+    for (const testCase of cases) {
+      const output = await runAgent(testCase.input);
+      const item = new EvaluationItem({
+        caseKey: testCase.id,
+        input: testCase.input,
+        output,
+        expectedOutput: testCase.expected,
+      });
+      const scores = evaluateAnswer(output, testCase.expected);
+      for (const key of ["tool", "arguments"] as const) {
+        await experiment.uploadResult({
+          item,
+          scorerVersionId: scorers[key].currentVersionId,
+          ...scores[key],
+        });
+      }
     }
+  } catch (error) {
+    await experiment.fail();
+    throw error;
+  }
 
-    await experiment.complete()
-    console.log(`Completed experiment: ${experiment.id}`)
+  await experiment.complete();
+  console.log(`Completed experiment: ${experiment.id}`);
 } finally {
-    evaluations.close()
+  evaluations.close();
 }
 ```
 
@@ -628,25 +626,27 @@ Open [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/expe
 <div className="dark:hidden rounded border border-primary p-4" style={{ backgroundColor: "#f3f4ef" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/85e5b267-1ac4-4b18-9162-687dc293b2c6.jpg"
-alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/85e5b267-1ac4-4b18-9162-687dc293b2c6.jpg"
+  alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 <div className="hidden dark:block rounded border border-primary p-4" style={{ backgroundColor: "#131315" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/0f241dae-87e5-43d8-a733-9a1f529eacfd.jpg"
-alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/0f241dae-87e5-43d8-a733-9a1f529eacfd.jpg"
+  alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 
-<div><ImageAnnotations.Key title="" className="mb-4" /></div>
+<div>
+  <ImageAnnotations.Key title="" className="mb-4" />
+</div>
 
 </ImageAnnotations>
 

@@ -97,15 +97,21 @@ You can:
 
 If you delete a review, it disappears from the active reviews list and you can create a new active review for that trace later.
 
+## Programmatic access
+
+You can manage trace reviews through the API at `/api/projects/:project_id/llm_analytics/trace_reviews/`. Authenticate with a [personal API key](/docs/api) or a [project secret API key](/docs/api/project-secret-api-keys/overview) that has the **AI observability** (`llm_analytics`) scope.
+
+Both key types can create, read, update, and delete reviews. Each review records whether it was last saved by a user or a project key, and the activity log tracks project key changes.
+
 ## Trace Reviews vs. evaluations
 
 Trace Reviews and [evaluations](/docs/ai-evals) solve different problems:
 
-| | Trace Reviews | Evaluations |
-|---|---|---|
-| **Who runs it** | A human reviewer | An LLM judge or code |
-| **Best for** | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
-| **Workflow** | Queues, scorers, and notes | Prompts or code running automatically |
+|                 | Trace Reviews                                         | Evaluations                             |
+| --------------- | ----------------------------------------------------- | --------------------------------------- |
+| **Who runs it** | A human reviewer                                      | An LLM judge or code                    |
+| **Best for**    | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
+| **Workflow**    | Queues, scorers, and notes                            | Prompts or code running automatically   |
 
 In practice, they work well together:
 
