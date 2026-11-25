@@ -3800,11 +3800,11 @@ export const docsMenu = {
                             url: '/docs/api/hog-flows',
                         },
                         {
-                            name: 'Workflow runs, metrics, and revisions',
+                            name: 'Workflows (2)',
                             url: '/docs/api/hog-flows-2',
                         },
                         {
-                            name: 'Workflow schedules and bulk actions',
+                            name: 'Workflows (3)',
                             url: '/docs/api/hog-flows-3',
                         },
                         {
