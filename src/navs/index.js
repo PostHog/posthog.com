@@ -507,7 +507,7 @@ export const handbookSidebar = [
             { name: 'Lore', url: '/handbook/company/lore' },
             { name: 'A grown-up company', url: '/handbook/company/grown-ups' },
             { name: 'Small teams', url: '/handbook/company/small-teams' },
-            { name: 'Fuzzy ownership', url: '/handbook/company/fuzzy-ownership' },
+            { name: 'Ownership', url: '/handbook/company/ownership' },
             { name: 'Goal setting', url: '/handbook/company/goal-setting' },
             { name: 'Sprints', url: '/handbook/company/sprints' },
             { name: 'Management', url: '/handbook/company/management' },

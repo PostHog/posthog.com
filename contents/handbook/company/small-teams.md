@@ -185,14 +185,6 @@ No more than 6 people, but that's the only rule. It could be any group of people
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
-### Can I still [step on toes](/handbook/values)?
-
-Yes. In fact, it's actively encouraged. 
-
-We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
-
-You're actively encouraged to raise pull requests or propose changes to stuff that doesn't have anything to do with your small team.
-
 ### Can people change teams?
 
 Yes. If you've been on a team for a while and feel like you're running low on energy or new ideas, it might be time to think about a move. A fresh pair of eyes helps the team you join, and a change of problem helps you. It's also how ideas spread across PostHog.
