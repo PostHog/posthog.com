@@ -29,7 +29,7 @@ Although the core features of both are the same, there are differences between t
 
 ## Google Analytics 4 is free (but limited)
 
-[Google Analytics 4](/blog/posthog-vs-ga4) (GA4) is Google's latest iteration of analytics. It replaced Universal Analytics on July 1st, 2024 much to its users' chagrin. GA4 includes many standard features of analytics tools including:
+[Google Analytics 4](/compare/posthog-vs-ga4) (GA4) is Google's latest iteration of analytics. It replaced Universal Analytics on July 1st, 2024 much to its users' chagrin. GA4 includes many standard features of analytics tools including:
 
 - Customizable capture and reporting of behavioral and demographic data
 - Traffic and acquisition analysis
@@ -122,7 +122,7 @@ Although Google Analytics is strong when it comes to [web](/web-analytics) and [
 
 ## How PostHog is different
 
-We've written a full post on [how GA4 and PostHog compare](/blog/posthog-vs-ga4), but as a quick summary:
+We've written a full post on [how GA4 and PostHog compare](/compare/posthog-vs-ga4), but as a quick summary:
 
 1. **We're transparent.** Everything from our [pricing](/pricing) to [code](https://github.com/PostHog/posthog) to [strategy](/handbook) is open for anyone to see.
 

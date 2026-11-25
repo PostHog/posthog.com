@@ -285,11 +285,11 @@ This specifies the conditions a user must meet to be shown an in-app survey. A u
 
 You can display your survey to specific users based on:
 
-- **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag)). [Realtime cohorts](/docs/data/realtime-cohorts) lift this limit for cohorts built from simple event criteria, but they're in early beta and aren't available in most projects yet.
+- **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag)). [Real-time cohorts](/docs/data/realtime-cohorts) lift this limit for cohorts built from simple event criteria, but they're in early beta and aren't available in most projects yet.
 
 - **URL targeting:** Show when URL either contains a string, exactly matches a string, or matches a regex. When using exact matching, trailing slashes are stripped before comparison. The URL targeting is evaluated against `window.location.href`.
 
-- **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
+- **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. On web, the SDK detects the device type from the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent). Mobile SDKs use the device type that they detect on the device, the same value they send as `$device_type`. Possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Requires `posthog-js` 1.214.0, React Native 4.3.0, iOS 3.22.0, Android 3.21.0, or Flutter 5.1.0, or later.
 
 - **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
@@ -418,7 +418,7 @@ The original does not change, and the copy does not sync with it.
 
 ## How PostHog handles partial survey responses
 
-You can enable partial responses in the "Completion conditions" section of the survey. This option is enabled by default for all new surveys. Please note that partial responses require `posthog-js` version `1.240.0` or higher and are currently only supported in `posthog-js` library.
+You can enable partial responses in the "Completion conditions" section of the survey. This option is enabled by default for all new surveys. Partial responses require `posthog-js` 1.240.0, React Native 4.75.0, iOS 3.79.0, Android 3.70.0, or Flutter 5.48.0, or later. See [SDK feature support](/docs/surveys/sdk-feature-support) for other features.
 
 **If partial responses are disabled, PostHog sends a single `survey sent` event**. This event is triggered once the user answers the last question of the survey. It contains all the user's responses. The `$survey_completed` property in this event will be `true`.
 

@@ -290,12 +290,16 @@ for (const initiallyAvailable of [false, true]) {
                 useStaticQuery: () => ({ pages: { nodes: [{ body: 'chapter', fields: { slug: '/chapter' } }] } }),
             },
             'gatsby-plugin-mdx': { MDXRenderer: passthrough },
-            'lucide-react': { BookOpen: () => null },
+            'lucide-react': { BookOpen: () => null, Check: () => null },
             'components/Link': passthrough,
             'components/OSButton': passthrough,
             '../../../hooks/usePocketGuideCounts': () => ({}),
             './Cover': () => null,
             './bookOpening': { openPocketGuide: () => undefined },
+            './chapterProgress': {
+                useMarkChapterReadOnMove: () => () => undefined,
+                useReadChapterSlugs: () => new Set(),
+            },
             './bookContext': { useEntry: () => ({}) },
             '../../../context/App': { useAppWindows: () => ({ windows }) },
             '../../../constants/pocketGuides': {

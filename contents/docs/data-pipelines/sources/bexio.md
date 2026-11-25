@@ -41,32 +41,39 @@ Bexio tables sync in one of two modes depending on whether the Bexio API support
 
 ## Available tables
 
-| Table               | Description                                       | Sync method  |
-| ------------------- | ------------------------------------------------- | ------------ |
-| `contacts`          | Companies and people in the address book          | Incremental  |
-| `contact_groups`    | Groups used to categorize contacts                | Full refresh |
-| `contact_relations` | Links between two contacts                        | Incremental  |
-| `invoices`          | Sales invoices sent to customers                  | Incremental  |
-| `quotes`            | Quotes (offers) sent to customers                 | Incremental  |
-| `orders`            | Sales orders confirmed with customers             | Incremental  |
-| `deliveries`        | Delivery notes for goods shipped to customers     | Full refresh |
-| `purchase_orders`   | Purchase orders sent to suppliers                 | Full refresh |
-| `bills`             | Supplier bills recorded in purchases              | Full refresh |
-| `expenses`          | Expenses paid directly                            | Full refresh |
-| `items`             | Products and services in the item catalog         | Full refresh |
-| `projects`          | Projects used to group time, tasks, and documents | Full refresh |
-| `timesheets`        | Time entries recorded by users                    | Full refresh |
-| `tasks`             | Tasks assigned to users                           | Full refresh |
-| `notes`             | Notes recorded on contacts and projects           | Full refresh |
-| `accounts`          | Accounts of the chart of accounts                 | Full refresh |
-| `account_groups`    | Groups that structure the chart of accounts       | Full refresh |
-| `journal_entries`   | Bookings in the general ledger journal            | Full refresh |
-| `manual_entries`    | Bookings entered by hand in the accounting module | Full refresh |
-| `business_years`    | Business years of the accounting                  | Full refresh |
-| `bank_accounts`     | Bank accounts set up in banking                   | Full refresh |
-| `currencies`        | Currencies available in the company               | Full refresh |
-| `taxes`             | Tax rates set up for sales and purchases          | Full refresh |
-| `users`             | Users of the Bexio company                        | Full refresh |
+| Table                    | Description                                       | Sync method  |
+| ------------------------ | ------------------------------------------------- | ------------ |
+| `contacts`               | Companies and people in the address book          | Incremental  |
+| `contact_groups`         | Groups used to categorize contacts                | Full refresh |
+| `contact_relations`      | Links between two contacts                        | Incremental  |
+| `invoices`               | Sales invoices sent to customers                  | Incremental  |
+| `invoice_item_positions` | Line items on invoices                            | Full refresh |
+| `quotes`                 | Quotes (offers) sent to customers                 | Incremental  |
+| `quote_item_positions`   | Line items on quotes                              | Full refresh |
+| `orders`                 | Sales orders confirmed with customers             | Incremental  |
+| `order_item_positions`   | Line items on orders                              | Full refresh |
+| `deliveries`             | Delivery notes for goods shipped to customers     | Full refresh |
+| `purchase_orders`        | Purchase orders sent to suppliers                 | Full refresh |
+| `bills`                  | Supplier bills recorded in purchases              | Full refresh |
+| `outgoing_payments`      | Payments made against supplier bills              | Full refresh |
+| `expenses`               | Expenses paid directly                            | Full refresh |
+| `items`                  | Products and services in the item catalog         | Full refresh |
+| `projects`               | Projects used to group time, tasks, and documents | Full refresh |
+| `project_states`         | Statuses a project can have                       | Full refresh |
+| `project_types`          | Types a project can have                          | Full refresh |
+| `timesheets`             | Time entries recorded by users                    | Full refresh |
+| `client_services`        | Business activities for timesheets                | Full refresh |
+| `tasks`                  | Tasks assigned to users                           | Full refresh |
+| `notes`                  | Notes recorded on contacts and projects           | Full refresh |
+| `accounts`               | Accounts of the chart of accounts                 | Full refresh |
+| `account_groups`         | Groups that structure the chart of accounts       | Full refresh |
+| `journal_entries`        | Bookings in the general ledger journal            | Full refresh |
+| `manual_entries`         | Bookings entered by hand in the accounting module | Full refresh |
+| `business_years`         | Business years of the accounting                  | Full refresh |
+| `bank_accounts`          | Bank accounts set up in banking                   | Full refresh |
+| `currencies`             | Currencies available in the company               | Full refresh |
+| `taxes`                  | Tax rates set up for sales and purchases          | Full refresh |
+| `users`                  | Users of the Bexio company                        | Full refresh |
 
 ## Configuration
 

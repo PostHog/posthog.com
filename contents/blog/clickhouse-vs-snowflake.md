@@ -129,7 +129,7 @@ Traditionally, Snowflake can be considered more of a standard data warehouse or 
 
 **Snowflake customers** include AT&T, Jetblue, Anthem, and Capital One. Snowflake customers tend to be enterprise-level and have to deal with a lot of data. 
 
-**ClickHouse’s customers** include Github, YouTube, Twitter, and Slack. We, at PostHog, also [use ClickHouse](/docs/how-posthog-works/clickhouse). It dramatically improved our analytics data warehouse from our previous Postgres setup and allows us to deliver billion-event scale insights quickly. 
+**ClickHouse’s customers** include GitHub, YouTube, Twitter, and Slack. We, at PostHog, also [use ClickHouse](/docs/how-posthog-works/clickhouse). It dramatically improved our analytics data warehouse from our previous Postgres setup and allows us to deliver billion-event scale insights quickly. 
 
 ## Conclusion
 

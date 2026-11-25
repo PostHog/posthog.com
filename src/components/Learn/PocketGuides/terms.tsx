@@ -84,7 +84,7 @@ export const TERMS = {
         title: 'Playground',
         description:
             'A PostHog workspace for trying prompt and model changes with captured inputs and comparing the resulting answers.',
-        slug: '/docs/ai-observability/playground',
+        slug: '/docs/experiments/playground',
     },
     'regression test': {
         title: 'Regression test',

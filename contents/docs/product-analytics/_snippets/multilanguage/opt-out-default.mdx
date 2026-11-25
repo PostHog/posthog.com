@@ -14,8 +14,8 @@ PostHogSDK.shared.setup(config)
 
 ```android
 val config = PostHogAndroidConfig(
-    apiKey = <ph_project_token>,
-    host = <ph_client_api_host> 
+    projectToken = "<ph_project_token>",
+    host = "<ph_client_api_host>"
 )
 config.optOut = true
 PostHogAndroid.setup(this, config)

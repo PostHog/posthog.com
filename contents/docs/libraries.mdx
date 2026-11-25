@@ -7,7 +7,7 @@ showTitle: true
 
 import LibraryComparison from "components/LibraryComparison"
 
-PostHog has official SDKs for web, mobile, and server-side languages, plus libraries the community maintains. Use the SDK for the language or framework your app runs on.
+PostHog has official SDKs for web, mobile, desktop, and server-side languages, plus libraries the community maintains. Use the SDK for the language or framework your app runs on.
 
 ## SDK versions and capture v1
 
@@ -19,12 +19,16 @@ We suggest you migrate as soon as possible, but the older major versions keep wo
 
 | SDK | Moves to capture v1 in | Migration guide |
 |---|---|---|
-| [Python](/docs/libraries/python/reference) | `8.0.0` | [`7.x.x` to `8.0.0`](/docs/libraries/python/migration) |
-| [Go](/docs/libraries/go/reference) | `2.0.0` | [`1.x.x` to `2.0.0`](/docs/libraries/go/migration) |
-| [Rust](/docs/libraries/rust/reference) | `1.0.0` | [`0.x.x` to `1.0.0`](/docs/libraries/rust/migration) |
-| [Node.js](/docs/libraries/node/reference) | `6.0.0` | [`5.x.x` to `6.0.0`](/docs/libraries/node/migration) |
+| [Python](/docs/libraries/python) | `8.0.0` | [`7.x.x` to `8.0.0`](/docs/libraries/python/migration) |
+| [Go](/docs/libraries/go) | `2.0.0` | [`1.x.x` to `2.0.0`](/docs/libraries/go/migration) |
+| [Rust](/docs/libraries/rust) | `1.0.0` | [`0.x.x` to `1.0.0`](/docs/libraries/rust/migration) |
+| [Node.js](/docs/libraries/node) | `6.0.0` | [`5.x.x` to `6.0.0`](/docs/libraries/node/migration) |
+| [iOS](/docs/libraries/ios) | `4.0.0` | [`3.x.x` to `4.0.0`](/docs/libraries/ios/migration) |
+| [Android](/docs/libraries/android) | `4.0.0` | [`3.x.x` to `4.0.0`](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md) |
+| [Flutter](/docs/libraries/flutter) | `6.0.0` | [`5.x.x` to `6.0.0`](/docs/libraries/flutter/migration) |
+| [Kotlin Multiplatform](/docs/libraries/kmp) | `0.12.0` (Android, iOS, macOS, JVM) | [`0.11` to `0.12`](/docs/libraries/kmp#upgrade-to-0120) |
 
-Every other SDK, including the JavaScript Web SDK and the mobile SDKs, stays on legacy capture for now.
+Every other SDK, including the JavaScript Web SDK and React Native, stays on legacy capture for now.
 
 For how capture v1 handles events, see the [Capture API (v1)](/docs/api/capture-v1).
 

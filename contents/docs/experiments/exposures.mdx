@@ -71,6 +71,7 @@ While the default `$feature_flag_called` event works for most experiments, you m
 
 - You are using a different feature flag SDK that doesn't send `$feature_flag_called` events
 - You want more precise control over when users are considered exposed
+- You want users to enter the experiment only when they visit a [specific page](#exposing-users-on-a-specific-page)
 - You're running server-side experiments with custom instrumentation
 - You're [running experiments without PostHog's feature flags](/docs/experiments/running-experiments-without-feature-flags)
 
@@ -100,6 +101,18 @@ If you're using PostHog's SDKs and feature flags, variant tracking is handled au
 For example, if your flag key is "new-checkout" and you're using a custom "viewed_checkout" event, that event must include the property `$feature/new-checkout` with values like "control" or "test".
 
 </CalloutBox>
+
+### Exposing users on a specific page
+
+If your code reads the flag only on the target page, the default exposure already works. The SDK sends `$feature_flag_called` from that page. If other pages also read the flag, a user's first read can happen elsewhere, so use a `$pageview` exposure instead.
+
+To include only users who visit a specific page, set the exposure event to `$pageview` and add a property filter on `$pathname` (for example, `$pathname` equals `/pricing`) or `$current_url`.
+
+The web SDK adds `$feature/<flag-key>` to each event after flags load, so the pageview carries the variant. If the first pageview goes out before flags load, it has no variant. See [exposure fired before the flag was ready](/docs/experiments/troubleshooting#my-exposure-event-has-the-wrong-variant-because-the-flag-wasnt-ready-when-it-fired).
+
+Don't filter the default `$feature_flag_called` event by `$current_url`. The web SDK sends that event only once per flag value, on the page where the user first reads the flag, and it remembers this across page loads (see [returning users](#ensuring-exposures-for-returning-users)). A user who first read the flag on a different page never sends the event from your target page, so your exposure count is too low.
+
+The `$pageview` exposure limits who enters the experiment. It doesn't stop the flag from returning a variant on other pages. To limit where the flag applies, see [targeting a specific URL](/docs/feature-flags/property-overrides#targeting-a-specific-url).
 
 ## Handling multiple exposures
 

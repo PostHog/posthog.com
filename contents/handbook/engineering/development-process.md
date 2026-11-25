@@ -27,7 +27,7 @@ Use the following principles:
 -   **Finite:** There should be an obvious end to the goal and cannot go on forever (i.e. NOT “improve dashboards”)
 -   **Assessable:** You can validate whether or not you’ve achieved the goal - it doesn’t need to be a metric (e.g. Increased signups by 20% or Events can be ingested in any order)
 -   **Meaningful:** If we achieve this goal it will solve a real need for our customers (i.e. a 10x improvement in performance sounds great as a goal - but it's not meaningful if our customers are happy with the current performance)
--   **Challenging:** It should too big for one person to solve on their own and require creativity or brute force to achieve in the proposed time-frame (e.g. ship correlation analysis with a killer feature no one else has)
+-   **Challenging:** It should be too big for one person to solve on their own and require creativity or brute force to achieve in the proposed time-frame (e.g. ship correlation analysis with a killer feature no one else has)
 -   **Homogenous:** The goal should be all about achieving a single meaningful thing and not a collection of unconnected things (i.e. NOT ‘Improve query performance and launch collaboration MVP’)
 
 ### Assign an owner
@@ -174,9 +174,9 @@ pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
 
 #### Merge conflicts with visual regression snapshots
 
-It happens often that your PR will show conflics with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
+It happens often that your PR will show conflicts with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
 
-Github does not allow for conflict resolution inside their website, so you must do it manually.
+GitHub does not allow for conflict resolution inside their website, so you must do it manually.
 
 > The following is done on your branch in question.
 
@@ -198,7 +198,7 @@ Github does not allow for conflict resolution inside their website, so you must 
     git pull --rebase <your branch>
     ```
 
-In your terminal, it should show you the conflicts mimicking what you see in your Github PR.
+In your terminal, it should show you the conflicts mimicking what you see in your GitHub PR.
 
 ```bash
 warning: Cannot merge binary files: frontend/__snapshots__/<conflicted_file_1>.png (HEAD vs. xxx (Update UI snapshots for `chromium` (1)))
@@ -349,7 +349,7 @@ See our [docs style guide](/handbook/content/posthog-style-guide) for tips on ho
 There are a few different ways to release code here:
 
 * just release the code change directly
-    * when you have hign confidence the change is safe 
+    * when you have high confidence the change is safe 
 * release it behind a flag and slowly roll it out
     * when you don't need to run an AB test but want to be sure you can check the impact of the change 
 * release it behind a flag and roll it out on demand (we call this a closed beta)
@@ -391,7 +391,7 @@ A/B tests make sense when:
     - If the feature is designed to improve some other metric like retention or stickiness, then test away!
 - The change impacts user behavior (eg most backend changes should have code tests - not behavioral A/B tests)
 
-If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sidwways. And it's always nice to know how your changes might move the numbers! 
+If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sideways. And it's always nice to know how your changes might move the numbers! 
 
 It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes it has unintended consequences. We obviously can't and shouldn't test everything, but running A/B tests frequently gets you comfortable with being wrong, which is a _very_ handy skill to have.
 

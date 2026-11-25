@@ -41,6 +41,10 @@ TVmaze has no server-side change filter, so every table syncs as a full refresh.
 
 <SourceTables />
 
+The `seasons`, `episodes`, and `cast` tables include a `show_id` column to join them to `shows`. The `episodes` table includes specials. Cast rows also include `person_id` and `character_id`.
+
+These three tables make one request per show on every full refresh, so syncing the full catalog can take a long time.
+
 ## Troubleshooting
 
 <TroubleshootingLink />

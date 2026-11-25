@@ -123,7 +123,7 @@ Keeping track of everything that's happening in GitHub can be daunting, but it's
 
 To keep on top of this, we suggest going through issues where you've been mentioned regularly. Some tricks which can help are:
 
--   (Highly recommended) [Turn on Github slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
+-   (Highly recommended) [Turn on GitHub slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
     -   This will send you a slack notification when someone mentions you in a PR or issue. You can also get periodic reminders for PRs that you've been requested to review.
 -   (Highly recommended) Join the `#github-rfcs` channel on Slack. This is where we post all the RFCs.
 -   [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and use filters to focus on your teams activity.
@@ -131,7 +131,7 @@ To keep on top of this, we suggest going through issues where you've been mentio
 
 #### Tip for easy searching through everything
 
-To search all code, PRs and issues ever written at PostHog you can search everything in the PostHog organization on Github. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
+To search all code, PRs and issues ever written at PostHog you can search everything in the PostHog organization on GitHub. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
 
 For extra convenience, you can also add this search as a 'search engine' in Chrome. That way you can type in `ph <tab>` and instantly find anything. To do that, follow these steps:
 
