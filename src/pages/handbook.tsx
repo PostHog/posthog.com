@@ -23,7 +23,7 @@ export const Handbook: React.FC = () => {
                         <div>
                             <HoggieImage
                                 src={hedgehogReadingIsMagicPng}
-                                alt="This hog has an answer"
+                                alt="A hedgehog reading a glowing book"
                                 width={400}
                                 className="max-w-[300px] @xl:max-w-[300px]"
                             />
