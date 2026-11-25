@@ -56,36 +56,23 @@ If you made an SSH key before, it's probably a file in the hidden `~/.ssh` folde
 
 A git commit's `Author` field is completely user controllable and can be forged. Signing your commits cryptographically proves you authored them, preventing impersonation and confusion. **Signing is required, not optional:** an org-wide GitHub ruleset rejects unsigned commits in every PostHog repository, on every branch. Set this up before your first push, rather than when a push fails. This applies to automation too, see [signing commits from workflows](#signing-commits-from-workflows).
 
-You can sign commits with either [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/git-commit-signing/). We have a slight preference for Secretive because it stores your key in the macOS Secure Enclave, ensuring the key can never be exported or extracted, even by malware.
+On macOS 26 or later, use `hogli git:signing-key`. It makes a signing key in the macOS Secure Enclave, so nobody can export or copy the key, not even malware. The key signs without a Touch ID prompt, so you can rebase a stack or let an agent commit without many prompts. If you can't use macOS 26, use [1Password](#setting-up-with-1password).
 
-#### Setting up with Secretive
+#### Setting up with hogli
 
-1. Open Secretive and click the + button to create a new key.
-2. Name your key "Git signing key" and select **Notify** in the **Protection Level** dropdown.
-3. Go to **Secretive > Integrations** in the menu bar.
-4. Click **Git Signing** and select "Git signing key" from the **Secret** dropdown.
-5. Copy and paste the `~/.gitconfig` and `~/.gitallowedsigners` snippets into their respective files.
-    - If you already have content in `~/.gitconfig`, merge the new sections into the existing file rather than replacing it.
-    - If you've previously configured commit signing (with a different SSH key, a GPG key, or an older Secretive key), **replace** any existing `signingkey`, `gpgsign`, `gpg.format`, and `allowedSignersFile` entries. Don't append duplicates. Git will silently use the last value, but a `.gitconfig` with multiple conflicting `signingkey` lines is hard to reason about.
-    - A project can have its own git settings that override `~/.gitconfig`. If git still uses an old key, see [troubleshooting](#troubleshooting).
-    - The `~/.gitallowedsigners` file is used by `git log --show-signature` for local verification. Each line is `<your-git-email> <key-type> <public-key>`, e.g. `you@posthog.com ecdsa-sha2-nistp256 AAAA... Git-Signing-Key@...`. If you skip it, signing still works but local verification will report `No principal matched`.
-6. Select your shell on the left side of Secretive and set the `SSH_AUTH_SOCK` environment variable as instructed. Skip this step if you already did it in the SSH key setup. For zsh, add the following to your `~/.zshrc`:
+1. In your clone of the [PostHog repository](https://github.com/PostHog/posthog), run:
 
    ```bash
-   export SSH_AUTH_SOCK=~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+   hogli git:signing-key --global
    ```
 
-   Then run `source ~/.zshrc` to apply it.
-
-7. Your `~/.gitconfig` now has a `signingkey` pointing to a file. Copy your public key to the clipboard:
-
-   ```bash
-   cat <path-from-signingkey> | pbcopy
-   ```
-
-8. Go to your [GitHub SSH keys settings](https://github.com/settings/keys) and add a new SSH key. Paste your public key and set the key type to **Signing Key**.
-    - GitHub treats **Authentication Key** and **Signing Key** as separate roles, even for the same key. If you get **"Key is already in use"**, it most likely means you already added this key as an Authentication Key (from the SSH Keys setup above). The same key can serve both roles — but you have to add it once for each. Add it again with key type **Signing Key**.
-9. **Verify the signature locally before pushing.** Create an empty commit on a new branch:
+   With `--global`, git signs with the new key in every repository. To sign in some repositories only, use `--repo <path>` one time for each repository. If you don't use a flag, the command asks you.
+2. The command shows the git settings that it changes. Read them, then confirm.
+3. The command makes the key, does a test signature, and adds the key to GitHub as a **Signing Key**. If it can't add the key, it opens the GitHub page and copies the public key to your clipboard. Set the key type to **Signing Key**, paste the key, and save. The command changes your git config only after GitHub has the key.
+    - Each Mac needs its own key. To use the key in more repositories, run the command again.
+    - A devbox can't sign with this key. While you commit from a devbox, keep your previous signing key on GitHub.
+    - A project can have its own git settings that override your global settings. If git still uses an old key, see [troubleshooting](#troubleshooting).
+4. **Verify the signature locally before pushing.** Create an empty commit on a new branch:
 
    ```bash
    git switch -c test-signing
@@ -98,11 +85,11 @@ You can sign commits with either [Secretive](https://github.com/maxgoedjen/secre
    Check the letter at the end:
     - `G`: the signature is good.
     - `U`: git signed with a key it doesn't know, usually an old key. See [troubleshooting](#troubleshooting).
-    - `N`: the commit isn't signed. Check the `~/.gitconfig` lines from step 5.
+    - `N`: the commit isn't signed. Run `hogli git:signing-key` again.
 
-10. Push the branch to GitHub — you should see a green **Verified** badge on the commit.
+5. Push the branch to GitHub — you should see a green **Verified** badge on the commit.
 
-    ![Signed commit](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/signed_commit_ea0c0b0cb0.png)
+   ![Signed commit](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/signed_commit_ea0c0b0cb0.png)
 
 
 #### Setting up with 1Password
@@ -117,7 +104,7 @@ Once commit signing is configured, enable the option in your [GitHub Profile](ht
 
 - If using iTerm/Cursor/GitHub Desktop/Sourcetree/etc., you may be endlessly prompted to "access data from other apps". You can fix this by granting the app **Full Disk Access** in **System Settings > Privacy & Security > Full Disk Access**.
 
-- If you are prompted to complete Touch ID each time you commit, your signing key is using a **Protection Level** of **Require Authentication**. Re-follow the instructions above to generate a new signing key with a **Protection Level** of **Notify**.
+- If you are prompted to complete Touch ID each time you commit, your signing key needs authentication. Run `hogli git:signing-key` to make a key that signs without a prompt.
 
 - **GitHub rejects your push with `GH013: Commits must have verified signatures`** even though the commits look signed locally. The commit was signed with a key GitHub doesn't recognize as a **Signing Key** — usually because (a) the key is only registered as an **Authentication Key**, or (b) your `user.signingkey` points at the wrong file. Confirm with `git log -1 --format='%GK'` and cross-check the fingerprint against [your GitHub keys](https://github.com/settings/keys). Once the right key is registered as a Signing Key, re-sign the existing commit:
 
