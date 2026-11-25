@@ -28,6 +28,7 @@ import {
 } from '@posthog/icons'
 import { CodeBlock } from 'components/CodeBlock'
 import OSButton from 'components/OSButton'
+import Link from 'components/Link'
 import { sendSnippets } from './sendSnippets'
 import { ReplayPlayer } from './Replay'
 
@@ -1277,6 +1278,9 @@ export function CanvasBlock(): JSX.Element {
                         <Icon className="size-4 text-blue" /> {label}
                     </button>
                 ))}
+                <Link to="/docs/workflows/workflow-builder#triggers" className="ml-1 text-sm font-semibold text-red">
+                    and any event you capture →
+                </Link>
             </div>
             {scenarioIndex > 0 ? (
                 <>
