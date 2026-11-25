@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { test, type TestContext } from 'node:test'
 
 import middleware from './middleware.ts'
-import { MCP_SERVER_URL, MCP_SERVER_URL_EU } from './src/constants/index.ts'
+import { MCP_SERVER_URL } from './src/constants/index.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
 const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
@@ -113,7 +113,6 @@ test('answers MCP clients pointed at a page with a JSON-RPC error that names the
         const { jsonrpc, id, error } = await response.json()
         assert.deepEqual({ jsonrpc, id, code: error.code }, { jsonrpc: '2.0', id: 0, code: -32600 })
         assert.ok(error.message.includes(MCP_SERVER_URL), path)
-        assert.ok(error.message.includes(MCP_SERVER_URL_EU), path)
     }
     assert.equal(fetch.mock.callCount(), 0)
 })

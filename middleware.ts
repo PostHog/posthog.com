@@ -41,12 +41,11 @@ const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('
 // MCP clients list this in Accept on every request, as the MCP spec requires. Browsers and crawlers
 // loading a page never do.
 const MCP_CLIENT_ACCEPT = 'text/event-stream'
-// Copies of MCP_SERVER_URL and MCP_SERVER_URL_EU in src/constants. The middleware cannot import them: Vercel
-// keeps import paths as written when it compiles the middleware, so the deployed file would import a `.ts`
-// file that is not in the bundle. middleware.test.ts fails if the copies differ.
+// A copy of MCP_SERVER_URL in src/constants. The middleware cannot import it: Vercel keeps import paths as
+// written when it compiles the middleware, so the deployed file would import a `.ts` file that is not in
+// the bundle. middleware.test.ts fails if the copy differs.
 const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
-const MCP_SERVER_URL_EU = 'https://mcp-eu.posthog.com/mcp'
-const MCP_SERVER_HINT = `This is posthog.com, not PostHog's MCP server. Use ${MCP_SERVER_URL}, or ${MCP_SERVER_URL_EU} for EU Cloud.`
+const MCP_SERVER_HINT = `This is posthog.com, not PostHog's MCP server. Use ${MCP_SERVER_URL}.`
 // The middleware reads an MCP message only to echo its `id`. An `initialize` message is a few hundred
 // bytes, and 64 KB leaves room for clients that send large capabilities. A larger body is not read, so a
 // request cannot make the middleware buffer and parse megabytes of JSON.
