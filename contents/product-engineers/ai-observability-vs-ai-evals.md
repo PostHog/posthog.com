@@ -34,9 +34,9 @@ AI observability shows you what your AI feature did on each request, like which 
 
 Say someone asks your support chatbot "Where's my order?" and waits ten seconds for it to respond: "It shipped yesterday." On your dashboard, that's a slow answer to a very easy question.
 
-But if you open the trace for that request in PostHog’s [AI Observability](docs/ai-observability), you’ll get something more specific. The order lookup took nine seconds, and the model spent the remaining second writing the reply. Even a model that answered instantly would leave your customer staring at a typing indicator for nine seconds.
+But if you open the trace for that request in PostHog’s [AI Observability](/docs/ai-observability), you’ll get something more specific. The order lookup took nine seconds, and the model spent the remaining second writing the reply. Even a model that answered instantly would leave your customer staring at a typing indicator for nine seconds.
 
-[A trace](docs/ai-observability/traces) is the record of everything you've instrumented for one request. To get that view in PostHog, record the model call as a **generation** and the order lookup as a [**span**](/docs/ai-observability/spans) (a timed operation), and give them the same trace ID. If you use one of PostHog's SDKs, generations are captured for you. The order lookup is your own code, so you record that span yourself with `captureAi()`:
+[A trace](/docs/ai-observability/traces) is the record of everything you've instrumented for one request. To get that view in PostHog, record the model call as a **generation** and the order lookup as a [**span**](/docs/ai-observability/spans) (a timed operation), and give them the same trace ID. If you use one of PostHog's SDKs, generations are captured for you. The order lookup is your own code, so you record that span yourself with `captureAi()`:
 
 ```javascript
 const start = Date.now()
@@ -88,7 +88,7 @@ Here’s a sample eval:
 
 That's a turn-by-turn check, which suits a chatbot. For an agent like the Wizard, one right answer isn't enough. Its eval has to look at the whole run: did it finish the job, how many steps and tool calls did it take, and what did it cost? Run it several times, too. Why? Because an agent that takes a different path every time can still pass once by luck.
 
-You can do this with [offline evals](/docs/ai-evals/offline-evals). In PostHog, you can run the same cases against the old and new versions in CI, then compare the two runs in [Experiments](/docs/experiments). If you want a reusable set of cases, just save them in a dataset. And what counts as a pass depends on what you've promised the user.
+You can do this with [offline evals](/docs/ai-evals/offline-evals). In PostHog, you can run the same cases against the old and new versions in CI, then compare the two runs in [Experiments](docs/ai-evals/offline-evals#review-and-compare-experiments). If you want a reusable set of cases, just save them in a dataset. And what counts as a pass depends on what you've promised the user.
 
 ## Why you need both observability and evals 🤝
 
