@@ -29,6 +29,7 @@ import Highlight from 'components/MCPPage/Highlight'
 import { CalendarBlock, CanvasBlock, SendBlock } from './Widgets'
 import { EditorBlock } from './EditorBlock'
 import { BroadcastBlock, BroadcastDraft } from './BroadcastBlock'
+import { FeatureCompare, PricingCompare } from './Compare'
 import { MetricsBlock } from './MetricsBlock'
 import PromptDemo from 'components/MCPPage/PromptDemo'
 import CustomerLogo from 'components/CustomerLogo'
@@ -545,6 +546,22 @@ export default function EmailPage(): JSX.Element {
                         <Link to="/docs/workflows" className="not-prose text-lg font-semibold text-red">
                             And so much more &rarr;
                         </Link>
+                    </section>
+
+                    <section className="flex flex-col gap-6">
+                        <Intro title="How it compares">
+                            Most email tools stop at the send. PostHog keeps going, into what people did in your product
+                            afterwards.
+                        </Intro>
+                        <FeatureCompare />
+                    </section>
+
+                    <section className="flex flex-col gap-6">
+                        <Intro title="Pay per email, not per plan">
+                            Transactional email has its own price, below Resend at most volumes. There’s no base fee and
+                            no contact tiers, and the first 10,000 emails are free every month. Drag to compare.
+                        </Intro>
+                        <PricingCompare />
                     </section>
 
                     <section
