@@ -68,11 +68,11 @@ function BAAGenerator() {
                         package to get a BAA.
                     </p>
 
-                    <div className="flex flex-col-reverse md:flex-col place-self-center md:place-self-start items-center md:items-start mb-2 md:mb-0 md:mt-9">
+                    <div className="flex flex-col place-self-start items-start mt-9">
                         <Link
                             to={APP_LEGAL_URL}
                             external
-                            className="mt-4 px-4 py-2.5 mx-auto @3xl:mx-0 rounded bg-red text-white font-semibold no-underline hover:bg-red/90"
+                            className="inline-block px-4 py-2 @3xl:mx-0 rounded bg-red text-white font-semibold no-underline hover:bg-red/90"
                         >
                             Generate a BAA in PostHog
                         </Link>
