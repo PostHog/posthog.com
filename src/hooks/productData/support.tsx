@@ -12,6 +12,7 @@ import {
     IconSparkles,
     IconSupport,
 } from '@posthog/icons'
+import Link from 'components/Link'
 import { Tweet } from 'components/Tweet'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
@@ -150,7 +151,21 @@ export const support = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/support_hog_f7ed8447c9.png',
         imageAlt: 'A lifeguard hedgehog with binoculars and a life ring',
-        intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Desktop, Slack, and your product editor (using the MCP).',
+        // The intro lists the surfaces itself, because Support also works in Slack.
+        intro: (
+            <>
+                Ask PostHog AI to triage, investigate, and answer tickets. Works in{' '}
+                <Link to="/ai" state={{ newWindow: true }} className="font-semibold underline">
+                    PostHog AI
+                </Link>{' '}
+                (in-app chat),{' '}
+                <Link to="/desktop" state={{ newWindow: true }} className="font-semibold underline">
+                    PostHog Desktop
+                </Link>{' '}
+                (our AI code editor), Slack, and in your product editor (using the MCP).
+            </>
+        ),
+        hideSurfaces: true,
         mcpFeatures: ['conversations'],
         groups: [
             {
