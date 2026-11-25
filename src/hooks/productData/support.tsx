@@ -12,6 +12,8 @@ import {
     IconSparkles,
     IconSupport,
 } from '@posthog/icons'
+import Link from 'components/Link'
+import TeamMember from 'components/TeamMember'
 import { Tweet } from 'components/Tweet'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
@@ -46,12 +48,12 @@ export const support = {
     color: PRODUCT_COLORS.support,
     colorSecondary: 'blue',
     category: 'communication',
-    description: 'Built-in customer support with chat widget and unified helpdesk.',
-    shortDescription: 'One helpdesk for every customer conversation',
+    description: 'Helpdesk with session replays, events, and errors attached to every ticket.',
+    shortDescription: 'Helpdesk with product context on every ticket',
     seo: {
         title: 'Support – Customer support with product context built in | PostHog',
         description:
-            'PostHog Support centralizes tickets from your app, email, Slack, and GitHub into a single helpdesk – with session replays, events, and errors attached to each one.',
+            "PostHog Support is a free helpdesk for tickets from your app, email, Slack, Microsoft Teams, and GitHub. Each ticket opens with the customer's session replay, events, and errors.",
     },
     /**
      * Sections rendered on the Product surface (`/support`). Each entry resolves
@@ -78,12 +80,10 @@ export const support = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'social-proof',
-            name: "We didn't pay him to say this",
-            hideFromNav: true,
+            slug: 'posthog-on-posthog',
+            name: 'How we use it',
             group: 'divided',
-            icon: <IconChat className="size-4" />,
-            component: SupportTweet,
+            icon: <IconSupport className="size-4" />,
         },
         {
             slug: 'applications',
@@ -98,6 +98,14 @@ export const support = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: keyFeatures },
+        },
+        {
+            slug: 'social-proof',
+            name: "We didn't pay him to say this",
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+            component: SupportTweet,
         },
         {
             slug: 'ask-anything',
@@ -122,9 +130,9 @@ export const support = {
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     overview: {
-        title: 'One place for every user conversation',
-        description: '"Show me which features generate the most support tickets"',
-        eli5: 'Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.',
+        title: 'Support tickets that arrive with the bug attached',
+        description: '"Which tickets this week came from users who hit an error?"',
+        eli5: "Support is a helpdesk inside PostHog. Tickets come in from an in-app widget, email, Slack, Microsoft Teams, GitHub issues, or your own UI through the API. Each one opens with the customer's session replay, recent events, and exceptions next to the conversation. PostHog AI and the MCP can read your tickets and the product data behind them, so you find the cause without asking the customer to explain it again. Recurring problems become Self-driving reports, with a draft pull request when there's a code fix.",
         textColor: 'text-black', // tw
     },
     hogs: {
@@ -135,24 +143,96 @@ export const support = {
         },
     },
     useCases: {
+        intro: 'Built for early teams that outgrew a shared inbox, and for support teams that debug their own tickets.',
         rows: [
             [
-                'Product engineers',
-                'Respond to escalated tickets with the session replay and error trace already attached',
+                'Founders and early engineers',
+                'Swap the shared inbox and Jira board for a free helpdesk. If you already run posthog-js, the chat widget is one setting away. No contract and no per-seat price.',
             ],
             [
-                'Support Engineers',
-                'A daily driver for ticket response, with all the customer context you need in PostHog',
+                'Engineers on support rotation',
+                'Open the ticket, watch the replay, and read the stack trace. Then fix the bug and reply to the customer from your editor through the MCP. PostHog engineers do support this way.',
             ],
-            ['PMs & designers', 'Get reports of where users hit friction, pulled through the MCP'],
-            ['Growth Engineers', 'Investigate how support tickets correlate with other metrics, right from Slack'],
-            ['QA', 'Turn GitHub issues into tickets to validate user frustration'],
+            [
+                'Support engineers',
+                'Work tickets from saved views with SLAs, assignment, and macros. Check the errors and the replay yourself before you escalate.',
+            ],
+            [
+                'Support leads',
+                'Build SLAs, routing, and CSAT surveys in Workflows. Ticket events sit next to your product analytics, so you can report on both together.',
+            ],
+            [
+                'Product managers',
+                'Read Self-driving reports that group recurring tickets with the errors and replays behind them.',
+            ],
+        ],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Support',
+        description: (
+            <>
+                We moved our support team off Zendesk in July 2026. Support had no SLAs, routing, or CSAT surveys then,
+                so the team built them in Workflows. We now run 27 support workflows.{' '}
+                <Link to="/blog/support-workflows" className="font-semibold underline" state={{ newWindow: true }}>
+                    Read how we built them
+                </Link>
+                .
+            </>
+        ),
+        benefits: [
+            {
+                title: 'AI triage on every ticket',
+                description: (
+                    <>
+                        Our support lead <TeamMember name="Abigail Richardson" photo /> built a workflow that runs a
+                        read-only PostHog AI task on each new ticket. The task sets the owning team, the subject expert,
+                        and the priority.
+                    </>
+                ),
+            },
+            {
+                title: 'Routing with no upkeep',
+                description:
+                    "A destination reads the team tag and posts the ticket to that team's Slack channel. When a team is renamed or split, nothing needs an update.",
+            },
+            {
+                title: 'SLAs set by plan',
+                description:
+                    "Workflows set first response, next response, and update deadlines from the customer's plan. Team channels get a Slack warning 2 hours and 30 minutes before a breach.",
+            },
+            {
+                title: 'Incidents in one place',
+                description: (
+                    <>
+                        <TeamMember name="Chris Shine" photo /> built a workflow that tags open tickets about a new
+                        incident. New tickets about the same incident get the tag too.
+                    </>
+                ),
+            },
+            {
+                title: 'Personal SLA alerts',
+                description: (
+                    <>
+                        <TeamMember name="Christiaan Hendriksen" photo /> gets a Slack warning 15 minutes before the SLA
+                        deadline on each open ticket assigned to him.
+                    </>
+                ),
+            },
+            {
+                title: 'Follow a ticket',
+                description: (
+                    <>
+                        <TeamMember name="Christian Rafferty" photo /> and <TeamMember name="Luke Belton" photo /> built
+                        workflows that email you when someone replies to a ticket you follow.
+                    </>
+                ),
+            },
         ],
     },
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png',
         imageAlt: 'A support team of hedgehogs at their desks',
-        intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Desktop, Slack, and your product editor (using the MCP).',
+        intro: 'Ask PostHog AI to triage tickets, investigate them, and draft replies. It reads the ticket, the replay, and the errors. A person on your team decides what the customer reads.',
         mcpFeatures: ['conversations'],
         groups: [
             {
@@ -171,8 +251,9 @@ export const support = {
                 prompts: [
                     'Summarize what the customer on ticket #482 did before they wrote in',
                     'Find the session replay attached to this ticket and tell me where it went wrong',
-                    'Are there errors in this customer’s session that match an existing issue?',
-                    'Have we heard from anyone else at this customer’s company recently?',
+                    "Are there errors in this customer's session that match an existing issue?",
+                    'Check the logs from the 10 minutes before this ticket was created',
+                    "Have we heard from anyone else at this customer's company recently?",
                 ],
             },
             {
@@ -187,8 +268,17 @@ export const support = {
                 title: 'Analyze',
                 prompts: [
                     'Which feature generates the most tickets?',
+                    'Which tickets this week came from users who hit an error?',
                     'How does ticket volume this week compare to last week?',
-                    'Do customers who file tickets retain better or worse than those who don’t?',
+                    "Do customers who file tickets retain better or worse than those who don't?",
+                ],
+            },
+            {
+                title: 'Automate',
+                prompts: [
+                    'Build a workflow that warns #support 2 hours before a ticket breaches its SLA',
+                    'Tag every new ticket with the team that owns the feature it mentions',
+                    'Email the customer a CSAT survey the day after their ticket is resolved',
                 ],
             },
         ],
@@ -202,21 +292,29 @@ export const support = {
                 {
                     title: 'You want a mature ecosystem of helpdesk add-ons, marketplaces, and certified consultants',
                 },
+                {
+                    title: 'You need a public help center for customers',
+                },
             ],
             us: [
                 {
-                    title: 'Tickets arrive with session replays, events, and errors attached – no reproduction steps required',
+                    title: 'Tickets arrive with session replays, events, and errors attached',
+                    subtitle: 'No reproduction steps required',
                 },
                 {
                     title: 'Support data lives next to your product analytics',
                     subtitle: 'Correlate tickets with retention, funnels, and flags',
                 },
                 {
+                    title: 'Support and engineering work in the same tool',
+                    subtitle: 'Escalate a ticket without copying its context into Jira',
+                },
+                {
                     title: 'Recurring issues become Self-driving reports and draft PRs',
                 },
                 {
-                    title: 'Core features are free',
-                    subtitle: 'No per-seat pricing',
+                    title: 'Free core, with no contract and no per-seat price',
+                    subtitle: 'Widget, inbox, every channel, workflows, and imports',
                 },
             ],
         },
@@ -238,16 +336,16 @@ export const support = {
     },
     pairsWith: [
         {
-            slug: 'product-analytics',
-            description: 'Investigate the numbers behind each ticket, including how they correlate with retention',
-        },
-        {
             slug: 'session-replay',
-            description: 'Watch exactly what a customer did before they wrote in – no reproduction steps needed',
+            description: 'Watch what the customer did before they wrote in, with no reproduction steps',
         },
         {
             slug: 'error-tracking',
-            description: 'See the full stack trace behind every error to find the root cause of each ticket',
+            description: 'Open the stack trace behind a ticket and see how many other users hit the same error',
+        },
+        {
+            slug: 'workflows',
+            description: 'Build SLAs, routing, and CSAT surveys on ticket events. Our support team runs on 27 of them.',
         },
     ],
 }

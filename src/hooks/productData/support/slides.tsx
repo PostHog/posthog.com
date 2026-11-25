@@ -9,8 +9,10 @@ import {
     IconLaptop,
     IconMagic,
     IconPullRequest,
+    IconSparkles,
 } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
+import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall from 'components/PlatformInstall'
@@ -28,9 +30,9 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    The Support helpdesk in PostHog is your home base. Open a ticket and the customer's session replays,
-                    recent events, exceptions, and previous tickets sit right next to the conversation – so you can see
-                    what broke instead of asking someone to describe it from memory.
+                    Open a ticket and the customer's session replays, recent events, exceptions, and previous tickets
+                    sit next to the conversation. You see what broke instead of asking someone to describe it from
+                    memory.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -49,46 +51,23 @@ export const applications: CarouselSlide[] = [
                             {
                                 label: 'Private notes',
                                 description:
-                                    'Leave internal context for teammates. Customers never see them, and they don’t count toward unread messages.',
+                                    "Leave internal context for teammates. Customers never see them, and they don't count toward unread messages.",
                             },
                             {
                                 label: 'Assign, tag, and snooze',
                                 description:
                                     'Route tickets to a person or role, categorize with free-form tags, and snooze anything waiting on someone else.',
                             },
+                            {
+                                label: 'AI investigation (beta)',
+                                description:
+                                    "Turn it on and the AI agent reads the ticket's events, errors, replays, and logs, then leaves what it found as a private note.",
+                            },
                         ]}
                     />
                 </div>
             </>
         ),
-    },
-    {
-        slug: 'slack',
-        label: 'Slack',
-        icon: <IconAtSign className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-red',
-        layout: 'stack',
-        heading: 'Triage without leaving Slack',
-        description: (
-            <>
-                <p>
-                    Connect Slack to turn messages, mentions, or an emoji reaction into tickets – handy for shared
-                    customer channels where bug reports arrive disguised as small talk. Replies post back to the
-                    original thread.
-                </p>
-                <p>
-                    You can also tag <code>@PostHog</code> in any thread to ask about your support data, like how ticket
-                    volume correlates with other metrics, and review self-driving reports built from your tickets.
-                </p>
-            </>
-        ),
-        image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
-            alt: 'The PostHog Slack app answering a question in a thread',
-        },
     },
     {
         slug: 'editor',
@@ -102,9 +81,8 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    The PostHog MCP includes tools for listing, reading, replying to, and updating tickets – so your
-                    agent can pull a ticket's context while you're fixing the bug it describes, then reply to the
-                    customer when the fix ships.
+                    The PostHog MCP has tools to list, read, reply to, and update tickets. Your agent pulls a ticket's
+                    context while you fix the bug it describes, then replies to the customer when the fix ships.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -113,12 +91,17 @@ export const applications: CarouselSlide[] = [
                             {
                                 label: 'Investigate with context',
                                 description:
-                                    'Pull the ticket, its session replay, and related errors into your agent’s context before touching code.',
+                                    "Pull the ticket, its session replay, and related errors into your agent's context before touching code.",
                             },
                             {
                                 label: 'Close the loop',
                                 description:
                                     'Reply to the customer and update the ticket status without switching windows.',
+                            },
+                            {
+                                label: 'Describe a workflow, get a draft',
+                                description:
+                                    'Tell PostHog AI or Claude what rule you want, and it drafts the workflow for you to review. Our support lead builds most of our support workflows this way.',
                             },
                             {
                                 label: 'Works anywhere MCP does',
@@ -133,6 +116,36 @@ export const applications: CarouselSlide[] = [
         ),
     },
     {
+        slug: 'slack',
+        label: 'Slack & Teams',
+        icon: <IconAtSign className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-red',
+        layout: 'stack',
+        heading: 'Triage without leaving Slack',
+        description: (
+            <>
+                <p>
+                    Add the SupportHog bot to Slack to turn messages, mentions, or an emoji reaction into tickets. This
+                    works well in shared customer channels, where bug reports arrive disguised as small talk. Replies
+                    post back to the original thread. Microsoft Teams works the same way (beta), with mentions instead
+                    of emoji.
+                </p>
+                <p>
+                    PostHog runs support this way for customers who have a shared channel with us. You can also tag{' '}
+                    <code>@PostHog</code> in any thread to ask about your support data, like how ticket volume
+                    correlates with other metrics, and review self-driving reports built from your tickets.
+                </p>
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
+            alt: 'The PostHog Slack app answering a question in a thread',
+        },
+    },
+    {
         slug: 'api',
         label: 'API',
         icon: <IconCode className="size-5" />,
@@ -145,8 +158,8 @@ export const applications: CarouselSlide[] = [
             <>
                 <p>
                     Don't like our widget? Rude, but fine. The <code>posthog.conversations</code> JavaScript API gives
-                    you the same backend – tickets, messages, unread counts, delivery status – so you can build a fully
-                    custom support experience into your product.
+                    you the same backend (tickets, messages, unread counts, delivery status), so you can build your own
+                    support UI into your product.
                 </p>
                 <CodeBlock
                     code={`// Send a message (creates a ticket if none exists)
@@ -173,12 +186,12 @@ export const keyFeatures: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'One helpdesk, four ways in',
+        heading: 'One helpdesk, six ways in',
         description: (
             <>
                 <p>
-                    Tickets reach you through four channels, and every one syncs both ways – you answer from a single
-                    place, and the reply lands wherever the conversation started.
+                    Every channel syncs both ways. You answer from one place, and the reply lands where the conversation
+                    started.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -192,7 +205,7 @@ export const keyFeatures: CarouselSlide[] = [
                             {
                                 label: 'Email',
                                 description:
-                                    'Forward your support@ mail in, and replies thread back to the customer’s inbox.',
+                                    "Forward your support@ mail in, and replies thread back to the customer's inbox.",
                             },
                             {
                                 label: 'Slack',
@@ -200,9 +213,17 @@ export const keyFeatures: CarouselSlide[] = [
                                     'Turn messages, mentions, or an emoji reaction in shared channels into tickets.',
                             },
                             {
+                                label: 'Microsoft Teams (beta)',
+                                description: 'Mention SupportHog, or mark a channel as a support channel.',
+                            },
+                            {
                                 label: 'GitHub',
                                 description:
                                     'Issues in monitored repos become tickets, and replies post back as comments.',
+                            },
+                            {
+                                label: 'API',
+                                description: 'Send tickets from your own contact form or support UI.',
                             },
                         ]}
                     />
@@ -232,7 +253,7 @@ export const keyFeatures: CarouselSlide[] = [
                         items={[
                             {
                                 label: 'Session recording',
-                                description: 'Watch the customer’s session replay from right before they wrote in.',
+                                description: "Watch the customer's session replay from right before they wrote in.",
                             },
                             {
                                 label: 'Recent events',
@@ -253,6 +274,51 @@ export const keyFeatures: CarouselSlide[] = [
         ),
     },
     {
+        slug: 'ai-agent',
+        label: 'AI agent (beta)',
+        icon: <IconSparkles className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: 'AI does the context. People do the conversation.',
+        description: (
+            <>
+                <p>
+                    Turn on the AI agent and it drafts a reply to each new ticket, based on your Business knowledge
+                    (your docs, links, and notes). Drafts land as private notes, so a person on your team decides what
+                    the customer reads. It's free while in beta. Ask us to turn it on for your project.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        columns={[1, 2]}
+                        items={[
+                            {
+                                label: 'Investigates first',
+                                description:
+                                    "With read-only access, it can check the customer's events, errors, replays, and logs before it writes.",
+                            },
+                            {
+                                label: 'Private where it matters',
+                                description:
+                                    'Diagnostic and billing tickets always get a private note, never an automatic reply.',
+                            },
+                            {
+                                label: 'Auto-replies you choose',
+                                description: 'You can let it answer how-to questions directly, one channel at a time.',
+                            },
+                            {
+                                label: 'Learns from your team (beta)',
+                                description:
+                                    "It can add reusable answers from your team's replies on resolved tickets. You review and edit everything it learns.",
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+    },
+    {
         slug: 'workflows',
         label: 'Workflows',
         icon: <IconBolt className="size-5" />,
@@ -260,14 +326,24 @@ export const keyFeatures: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-purple',
         layout: 'stack',
-        heading: 'Automate the busywork',
+        heading: 'Build your support process in Workflows',
         description: (
             <>
                 <p>
-                    Support plugs straight into Workflows, so every ticket event – a new ticket, a reply from you or the
-                    customer, a status or assignee change – can trigger the full Workflows toolkit. Update the ticket
-                    itself, or reach beyond it: post to Slack, fire a webhook, run anything Workflows can run. Rules you
-                    control – no autonomous AI deciding your SLA policy at 3am.
+                    Every ticket event can start a workflow: a new ticket, a reply from you or the customer, a change of
+                    status or assignee. A workflow can update the ticket, post to Slack, call a webhook, or run an AI
+                    task. Rules you control. No autonomous AI deciding your SLA policy at 3am.
+                </p>
+                <p>
+                    PostHog's own support team runs on 27 of these workflows. Start from the{' '}
+                    <Link
+                        to="https://app.posthog.com/workflows/templates?tagFilter=support"
+                        className="font-semibold underline"
+                        externalNoIcon
+                    >
+                        support templates
+                    </Link>{' '}
+                    they built.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -276,19 +352,23 @@ export const keyFeatures: CarouselSlide[] = [
                             {
                                 label: 'Set SLAs',
                                 description:
-                                    'Based on channel or priority, then filter tickets by on track, at risk, or breached.',
+                                    "Based on channel, priority, or the customer's plan, then filter tickets by on track, at risk, or breached.",
+                            },
+                            {
+                                label: 'Triage with AI',
+                                description: 'An AI task step can set the team, tags, and priority on each new ticket.',
                             },
                             {
                                 label: 'Auto-assign',
                                 description: 'Route new tickets to a role or by customer email domain.',
                             },
                             {
-                                label: 'Tag automatically',
-                                description: 'Categorize tickets as they arrive so views stay useful.',
-                            },
-                            {
                                 label: 'Reopen on reply',
                                 description: 'A resolved ticket reopens itself when the customer responds.',
+                            },
+                            {
+                                label: 'Tag automatically',
+                                description: 'Categorize tickets as they arrive so views stay useful.',
                             },
                             {
                                 label: 'Notify anywhere',
@@ -313,13 +393,13 @@ export const keyFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Support isn't just a pile of tickets – it's a signal source. AI scouts pick up recurring issues
-                    across your tickets and group them with related errors and replays into Self-driving reports. When
-                    there's a code fix, you get a draft pull request to review. Nothing merges without a human.
+                    AI scouts pick up recurring issues across your tickets and group them with related errors and
+                    replays into Self-driving reports. When there's a code fix, you get a draft pull request to review.
+                    Nothing merges without a human.
                 </p>
                 <p>
-                    Answering customers happens here, in Support. Reviewing and merging fixes happens in the
-                    Self-driving inbox – fix the cause once, instead of answering the same ticket every week.
+                    You answer customers in Support. You review and merge fixes in the Self-driving inbox, so you fix
+                    the cause once instead of answering the same ticket every week.
                 </p>
             </>
         ),
@@ -331,7 +411,7 @@ export const keyFeatures: CarouselSlide[] = [
     },
     {
         slug: 'import',
-        label: 'Zendesk import',
+        label: 'Imports',
         icon: <IconDownload className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -341,9 +421,10 @@ export const keyFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Migrating shouldn't mean starting from an empty helpdesk. The Zendesk import (beta) brings over your
-                    full message threads (including internal notes), customer names and emails, tags, statuses,
-                    priorities, attachments, and original timestamps.
+                    Moving helpdesks shouldn't mean starting from an empty inbox. Import your old tickets from Zendesk,
+                    Intercom, or Pylon (all in beta). The Zendesk import brings over full message threads (including
+                    internal notes), customer names and emails, tags, statuses, priorities, attachments, and original
+                    timestamps.
                 </p>
                 <p>Your first day on PostHog Support starts with all the context of your last day on Zendesk.</p>
             </>

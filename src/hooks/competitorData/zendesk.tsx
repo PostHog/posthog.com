@@ -10,6 +10,7 @@ export const zendesk = {
                 in_app_widget: true,
                 email_channel: true,
                 slack_channel: true,
+                teams_channel: true,
                 github_issues: 'Via integration',
                 javascript_api: true,
                 saved_views: true,
