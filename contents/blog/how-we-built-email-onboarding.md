@@ -1,5 +1,5 @@
 ---
-date: 2026-22-24
+date: 2026-11-24
 title: How we built our onboarding email flow (with actual performance data)
 rootPage: /blog
 category: Inside PostHog
@@ -162,13 +162,13 @@ The new onboarding features a new loop when users first sign up that assesses wh
 
 I've tried to make the emails a lot more fun and anarchic than they were even in Onboarding 6.0, but in 7.0 I also took on feedback from users about the sort of content that would help. A lot of users wanted to know how we personally use PostHog, or what they can learn from other customers. Additionally, 100% of the onboarding emails now come directly from me (albeit still automated) and the emails themselves have a new design which actually works in dark mode. 
 
-At the time of writing it's still a little early to know how successful these new experiments will be, but the early response is positive. After being live for a week this version has already equalled the CTR of the previous version, though the jury remains out on the overall conversion rate. 
+Data-wise, we unfortunately don't have much of a clear read on how this version performed – other than some historic notes that suggest the CTR and open-rate matched those of the previous version within 30 days. The issue here is that I foolishly overwrote this version in Customer.io with the changes that followed in 8.0 – a lesson we'll be sure not to repeat. 
 
 ## Onboarding 8.0: The one with videos
 
 [Onboarding 8.0](https://github.com/PostHog/requests-for-comments-public/issues/414) rolled in some small, tactical changes to our emails and attempted to build on the cross-sell logic we started in Onboarding 7.0. It also used a lot of videos, as we'd just started building our video team at PostHog and were finally able to create richer assets.
 
-Under the hood, most of the changes were about cross-sell. We extended the cross-sell logic so it ran at every layer of the flow and went three products deep, and added three more cross-sell checks that kicked in after a user's first 30 days. We also moved the add-on email to a more prominent spot (people liked it), added a pricing explanation step, and renamed Max AI to PostHog AI.
+Under the hood, most of the changes were about cross-sell. We extended the cross-sell logic so it ran at every layer of the flow and went three products deep, and added three more cross-sell checks after a user's first 30 days. We also moved the add-on email to a more prominent spot (people liked it), added a pricing explanation step, and renamed Max AI to PostHog AI.
 
 As in the previous flow, we used product intent and product activation to try and time messages to users based on what we thought they wanted to set up and what products they were using. This time we'd send them emails with videos about how we used PostHog internally to demonstrate common use cases.
 
@@ -221,6 +221,7 @@ And yes, it's still fun. There's a hot dog joke, a Chrome extension that lets Ma
 ![Onboarding 10.0](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/68747470733a2f2f75732d6d656469612e706f7374686f672e636f6d2f75706c6f616465645f6d656469612f30316132306533632d306563622d303030302d383461382d666339643562623231666139_9e66c0c9df.png)
 
 <Caption>Onboarding 10.0 gives users a slightly different path based on if they've been invited, or are a new sign-up</Caption>
+
 ### Building it with the MCP
 
 This is the bit I'm most excited about. I built almost all of 10.0 by talking to Claude through the [PostHog MCP](/docs/model-context-protocol). I'd describe a branch or paste in some copy, and the agent would build the step, write the Liquid, and wire it all together. When I wanted to see the result, I asked for a test of every email and every variation, and they landed in my inbox a few minutes later.
