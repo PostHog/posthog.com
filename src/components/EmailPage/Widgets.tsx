@@ -6,6 +6,8 @@ import {
     IconCheckCircle,
     IconChevronDown,
     IconCursor,
+    IconCollapse,
+    IconExpand,
     IconBell,
     IconCalendar,
     IconMessage,
@@ -332,7 +334,8 @@ export function SendBlock({ title }: { title: (about: React.ReactNode) => React.
                         </div>
                     )}
                     <span className="absolute bottom-0 left-[2.1rem] top-4 w-px bg-border" aria-hidden />
-                    <div className="relative">
+                    {/* Out of the flow, so a new event or the outcome never makes the panel, or the page, taller. */}
+                    <div className="absolute inset-x-4 top-4">
                         <AnimatePresence initial={false}>
                             {done && (
                                 <motion.p
@@ -861,7 +864,7 @@ type Scenario = {
     trigger: { Icon: Tile['Icon']; label: string }
     name: string
     steps: Tile[]
-    branch?: { condition: Tile; no: Tile[]; yes: Tile[] }
+    branch?: { condition: Tile; no: Tile[] | Path; yes: Tile[] | Path }
     about: string
     stats: [label: string, value: string][]
     // Self-driving: what PostHog suggests, and the flow once it's applied. Tiles marked `changed` light up in the draft.
@@ -1052,9 +1055,28 @@ const scenarios: Scenario[] = [
                 count: 87,
             },
             no: [email('Sorry to hear that', 52)],
-            yes: [
-                { Icon: IconMessage, color: '#4A154B', title: 'Post to #customer-success', detail: 'Slack', count: 35 },
-            ],
+            yes: {
+                label: 'Paid customer follow-up',
+                summary: 'Slack, then a founder email and a ticket',
+                steps: [
+                    {
+                        Icon: IconMessage,
+                        color: '#4A154B',
+                        title: 'Post to #customer-success',
+                        detail: 'Slack',
+                        count: 35,
+                    },
+                    wait(1, 35),
+                    email('A note from our founder', 35),
+                    {
+                        Icon: IconWebhooks,
+                        color: '#F54E00',
+                        title: 'Create a Zendesk ticket',
+                        detail: 'Webhook',
+                        count: 35,
+                    },
+                ],
+            },
         },
         about: 'A low score gets a personal reply. If they pay, the customer success team hears about it in Slack.',
         stats: [
@@ -1064,6 +1086,90 @@ const scenarios: Scenario[] = [
         ],
     },
 ]
+
+// A path of several steps, collapsed into one stacked tile as the app's canvas does. Open it to see the steps.
+type Path = { label: string; summary: string; steps: Tile[] }
+
+function BranchSide({ side }: { side: Tile[] | Path }): JSX.Element {
+    const [open, setOpen] = useState(false)
+    if (Array.isArray(side) || open) {
+        const steps = Array.isArray(side) ? side : side.steps
+        return (
+            <>
+                {!Array.isArray(side) && (
+                    <>
+                        <Down />
+                        <button
+                            type="button"
+                            onClick={() => setOpen(false)}
+                            className="mx-auto flex items-center gap-1.5 rounded-full border border-primary bg-white py-0.5 pl-2.5 pr-1 text-xs font-semibold text-orange shadow-sm dark:bg-accent"
+                        >
+                            {side.label}
+                            <span className="flex items-center gap-0.5 rounded-full px-1.5 font-medium text-secondary hover:bg-accent">
+                                <IconCollapse className="size-3" /> Collapse
+                            </span>
+                        </button>
+                    </>
+                )}
+                {steps.map((tile, i) => (
+                    <motion.div
+                        key={i}
+                        initial={Array.isArray(side) ? false : { opacity: 0, y: -24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.06 }}
+                        className="flex flex-col"
+                    >
+                        <Down />
+                        <TileRow tile={tile} />
+                    </motion.div>
+                ))}
+            </>
+        )
+    }
+    return (
+        <>
+            <Down />
+            <button
+                type="button"
+                onClick={() => setOpen(true)}
+                title="Open this path"
+                className="grid w-full grid-cols-[minmax(0,1fr)_4rem_minmax(0,1fr)] items-start gap-3 text-left"
+            >
+                <span />
+                <span className="relative block size-16">
+                    {[8, 4].map((offset) => (
+                        <span
+                            key={offset}
+                            className="absolute inset-0 rounded-xl border-2 border-orange bg-white opacity-50 dark:bg-accent"
+                            style={{ transform: `translate(${offset}px, ${-offset}px)` }}
+                        />
+                    ))}
+                    <span className="absolute inset-0 grid grid-cols-2 place-items-center rounded-xl border-2 border-dashed border-orange bg-white p-1.5 dark:bg-accent">
+                        {side.steps.slice(0, 4).map(({ Icon, color }, i) => (
+                            <span key={i} style={{ color }}>
+                                <Icon className="size-4" />
+                            </span>
+                        ))}
+                    </span>
+                    <span className={`${badgeClassName} -right-3 -top-2.5 inline-flex items-center gap-0.5`}>
+                        <IconPerson className="size-3" />
+                        {side.steps[0].count}
+                    </span>
+                </span>
+                <span className="min-w-0 pt-1">
+                    <span className="block text-[13px] font-semibold leading-tight text-orange">{side.label}</span>
+                    <span className="block text-xs leading-snug text-secondary">{side.summary}</span>
+                    <span className="flex items-center gap-1 whitespace-nowrap text-[11px] text-secondary">
+                        {side.steps.length} steps
+                        <span className="flex items-center gap-0.5 font-medium text-primary">
+                            <IconExpand className="size-3" /> Open
+                        </span>
+                    </span>
+                </span>
+            </button>
+        </>
+    )
+}
 
 function Flow({
     scenario,
@@ -1097,12 +1203,7 @@ function Flow({
                         {(['No', 'Yes'] as const).map((side) => (
                             <div key={side} className="flex flex-col">
                                 <Pill>{side}</Pill>
-                                {branch[side === 'No' ? 'no' : 'yes'].map((tile, i) => (
-                                    <React.Fragment key={i}>
-                                        <Down />
-                                        <TileRow tile={tile} />
-                                    </React.Fragment>
-                                ))}
+                                <BranchSide side={branch[side === 'No' ? 'no' : 'yes']} />
                             </div>
                         ))}
                     </div>

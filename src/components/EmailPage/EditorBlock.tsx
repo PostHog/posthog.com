@@ -124,8 +124,15 @@ const initialContent = `
 <p></p>
 `
 
-const swatches = ['#2F80FA', '#F54E00', '#6AA84F', '#8567FF', '#111111']
-const fonts = ['Arial, sans-serif', 'Georgia, serif', '"Courier New", monospace']
+// The app's default email styles.
+const buttonColor = '#2F80FA'
+const font = 'Arial, sans-serif'
+const width = 560
+const pageBg = '#f4f4f2'
+const bodyBg = '#ffffff'
+const textColor = '#222222'
+const fontSize = 16
+const buttonRadius = 6
 
 const canvasCss = `
 .email-canvas .ProseMirror { outline: none; }
@@ -155,11 +162,6 @@ function previewHtml(html: string): string {
 
 export function EditorBlock(): JSX.Element {
     const [audienceOpen, setAudienceOpen] = useState(false)
-    const [status, setStatus] = useState<string | null>(null)
-    const flash = (text: string) => {
-        setStatus(text)
-        setTimeout(() => setStatus(null), 2500)
-    }
     const audienceRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (!audienceOpen) return
@@ -181,16 +183,6 @@ export function EditorBlock(): JSX.Element {
     }, [audienceOpen])
     const [on, setOn] = useState([true, false, false])
     const [mode, setMode] = useState<'edit' | 'preview'>('edit')
-    const [styleOpen, setStyleOpen] = useState(false)
-    const [buttonColor, setButtonColor] = useState(swatches[0])
-    const [font, setFont] = useState(fonts[0])
-    const [width, setWidth] = useState(560)
-    const [pageBg, setPageBg] = useState('#f4f4f2')
-    const [bodyBg, setBodyBg] = useState('#ffffff')
-    const [textColor, setTextColor] = useState('#222222')
-    const [radius, setRadius] = useState(8)
-    const [fontSize, setFontSize] = useState(16)
-    const [buttonRadius, setButtonRadius] = useState(6)
     const [previewWidth, setPreviewWidth] = useState<keyof typeof previewWidths>('Desktop')
     const [menu, setMenuState] = useState<MenuState>(null)
     const setMenu = useRef<MenuControl>({
@@ -265,20 +257,11 @@ export function EditorBlock(): JSX.Element {
             {/* One toolbar, then the email as one card: the header fields on top and the body below. */}
             <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-t-2xl border-b border-primary px-4 py-3">
                 <div>
-                    <OSButton
-                        size="sm"
-                        icon={<IconPalette />}
-                        active={styleOpen}
-                        onClick={() => setStyleOpen(!styleOpen)}
-                    >
+                    <OSButton size="sm" icon={<IconPalette />} disabled>
                         Styles
                     </OSButton>
                 </div>
-                <span
-                    className={`truncate text-center text-sm ${status ? 'font-semibold text-green' : 'text-secondary'}`}
-                >
-                    {status ?? 'New: file requests'}
-                </span>
+                <span className="truncate text-center text-sm text-secondary">New: file requests</span>
                 <div className="flex items-center justify-end gap-2">
                     <OSButton
                         size="sm"
@@ -288,14 +271,10 @@ export function EditorBlock(): JSX.Element {
                     >
                         {mode === 'edit' ? 'Preview' : 'Edit'}
                     </OSButton>
-                    <OSButton size="sm" variant="secondary" onClick={() => flash('Test sent to jane@hedgebox.net')}>
+                    <OSButton size="sm" variant="secondary" disabled>
                         Test
                     </OSButton>
-                    <OSButton
-                        size="sm"
-                        variant="primary"
-                        onClick={() => flash(`Sending to ${people.toLocaleString('en-US')} people`)}
-                    >
+                    <OSButton size="sm" variant="primary" disabled>
                         Send
                     </OSButton>
                 </div>
@@ -526,116 +505,7 @@ export function EditorBlock(): JSX.Element {
                         </div>
                     )}
                 </div>
-
-                {styleOpen && mode === 'edit' && (
-                    <div className="absolute inset-y-0 right-0 z-20 flex w-72 flex-col gap-2 overflow-y-auto rounded-br-2xl border-l border-primary bg-white p-3 text-xs shadow-xl dark:bg-accent">
-                        <h3 className="m-0 text-sm font-semibold">Page style</h3>
-                        <StyleRow label="Background">
-                            <ColorInput value={pageBg} onChange={setPageBg} />
-                        </StyleRow>
-                        <h4 className="m-0 mt-2 text-xs font-semibold uppercase text-secondary">Body</h4>
-                        <StyleRow label="Text">
-                            <ColorInput value={textColor} onChange={setTextColor} />
-                        </StyleRow>
-                        <StyleRow label="Background">
-                            <ColorInput value={bodyBg} onChange={setBodyBg} />
-                        </StyleRow>
-                        <StyleRow label={`Width · ${width}px`}>
-                            <input
-                                type="range"
-                                min={420}
-                                max={680}
-                                step={20}
-                                value={width}
-                                onChange={(e) => setWidth(Number(e.target.value))}
-                                className="w-24 accent-red"
-                            />
-                        </StyleRow>
-                        <StyleRow label={`Corner radius · ${radius}px`}>
-                            <input
-                                type="range"
-                                min={0}
-                                max={24}
-                                value={radius}
-                                onChange={(e) => setRadius(Number(e.target.value))}
-                                className="w-24 accent-red"
-                            />
-                        </StyleRow>
-                        <StyleRow label="Font">
-                            <select
-                                value={font}
-                                onChange={(e) => setFont(e.target.value)}
-                                className="w-28 rounded border border-primary bg-transparent px-1 py-0.5"
-                            >
-                                {fonts.map((f) => (
-                                    <option key={f} value={f}>
-                                        {f.split(',')[0].replace(/"/g, '')}
-                                    </option>
-                                ))}
-                            </select>
-                        </StyleRow>
-                        <StyleRow label={`Font size · ${fontSize}px`}>
-                            <input
-                                type="range"
-                                min={13}
-                                max={20}
-                                value={fontSize}
-                                onChange={(e) => setFontSize(Number(e.target.value))}
-                                className="w-24 accent-red"
-                            />
-                        </StyleRow>
-                        <StyleRow label="Links and buttons">
-                            <div className="flex gap-1">
-                                {swatches.map((c) => (
-                                    <button
-                                        key={c}
-                                        type="button"
-                                        aria-label={`Use ${c}`}
-                                        onClick={() => setButtonColor(c)}
-                                        className={`size-5 rounded-full border-2 ${
-                                            buttonColor === c ? 'border-primary' : 'border-transparent'
-                                        }`}
-                                        style={{ background: c }}
-                                    />
-                                ))}
-                            </div>
-                        </StyleRow>
-                        <StyleRow label={`Button radius · ${buttonRadius}px`}>
-                            <input
-                                type="range"
-                                min={0}
-                                max={24}
-                                value={buttonRadius}
-                                onChange={(e) => setButtonRadius(Number(e.target.value))}
-                                className="w-24 accent-red"
-                            />
-                        </StyleRow>
-                    </div>
-                )}
             </div>
         </div>
-    )
-}
-
-function StyleRow({ label, children }: { label: string; children: React.ReactNode }): JSX.Element {
-    return (
-        <div className="flex min-h-[2rem] items-center justify-between gap-2">
-            <span className="text-secondary">{label}</span>
-            {children}
-        </div>
-    )
-}
-
-function ColorInput({ value, onChange }: { value: string; onChange: (v: string) => void }): JSX.Element {
-    return (
-        <label className="flex cursor-pointer items-center gap-1.5 rounded border border-primary px-1.5 py-0.5 font-code">
-            <input
-                type="color"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className="size-4 cursor-pointer border-0 bg-transparent p-0"
-            />
-            {value}
-        </label>
     )
 }
