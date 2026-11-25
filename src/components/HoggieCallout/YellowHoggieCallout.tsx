@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import OSButton from 'components/OSButton'
 import SpeechBubble from 'components/SpeechBubble'
 import { focusRing } from 'components/UI/styles'
-import type { HoggieCalloutProps } from './index'
+import type { YellowHoggieCalloutProps } from './index'
 import { MAX_LINE_LENGTH, STANDARD_LINES } from './lines'
 
 // How long the bubble stays up after a poke, and how long the hog stays up in a hover nudge.
@@ -41,15 +41,17 @@ export default function YellowHoggieCallout({
     hoggieSide = 'left',
     interactive = true,
     hoggieLines = [],
-}: HoggieCalloutProps): JSX.Element {
+}: YellowHoggieCalloutProps): JSX.Element {
     const side = SIDES[hoggieSide]
     const [nudging, setNudging] = useState(false)
-    const [shaking, setShaking] = useState(false)
+    // Each poke mounts a new wiggle element, so a poke during a wiggle starts the wiggle again.
+    const [pokes, setPokes] = useState(0)
     const [saying, setSaying] = useState('')
     const lastLine = useRef('')
     const bubbleTimer = useRef<ReturnType<typeof setTimeout>>()
     const nudgeTimer = useRef<ReturnType<typeof setTimeout>>()
 
+    const linesKey = hoggieLines.join('\n')
     useEffect(() => {
         if (process.env.NODE_ENV !== 'production') {
             hoggieLines
@@ -60,7 +62,7 @@ export default function YellowHoggieCallout({
                     )
                 )
         }
-    }, [hoggieLines.join('\n')])
+    }, [linesKey])
 
     useEffect(
         () => () => {
@@ -71,7 +73,9 @@ export default function YellowHoggieCallout({
     )
 
     // A small hop on hover. It goes up fast and settles slowly, with transitions only.
-    const nudge = () => {
+    // Touch and pen also fire pointerenter, so a tap would hop and wiggle at the same time.
+    const nudge = (event: React.PointerEvent) => {
+        if (event.pointerType !== 'mouse') return
         setNudging(true)
         clearTimeout(nudgeTimer.current)
         nudgeTimer.current = setTimeout(() => setNudging(false), NUDGE_MS)
@@ -84,7 +88,7 @@ export default function YellowHoggieCallout({
         const line = fresh[Math.floor(Math.random() * fresh.length)] ?? lines[0]
         lastLine.current = line
         setSaying(line)
-        setShaking(true)
+        setPokes((count) => count + 1)
         clearTimeout(bubbleTimer.current)
         bubbleTimer.current = setTimeout(() => setSaying(''), BUBBLE_MS)
     }
@@ -128,8 +132,8 @@ export default function YellowHoggieCallout({
                                     }`}
                                 >
                                     <span
-                                        onAnimationEnd={() => setShaking(false)}
-                                        className={`block h-full ${shaking ? 'motion-safe:animate-wiggle' : ''}`}
+                                        key={pokes}
+                                        className={`block h-full ${pokes > 0 ? 'motion-safe:animate-wiggle' : ''}`}
                                     >
                                         {hog}
                                     </span>

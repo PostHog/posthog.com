@@ -20,28 +20,38 @@ const placements: Record<HoggiePlacement, { box: string; hoggie: string }> = {
     inset: { box: 'pl-28 @xl:pl-32', hoggie: 'bottom-0 left-4 w-20 @xl:w-24' },
 }
 
-export interface HoggieCalloutProps {
+interface BaseHoggieCalloutProps {
     /** A component from `@posthog/brand/hoggies` */
     hoggie: Hoggie
     /** Describes what the art shows, for screen readers */
     hoggieTitle: string
-    /** Where the hoggie sits. Defaults to `breakout`. */
-    hoggiePlacement?: HoggiePlacement
     ariaLabel: string
     title: string
     description: React.ReactNode
     buttonLabel: string
     to: string
     className?: string
-    /** `yellow` turns on the yellow layout and the hog interactions. Defaults to `default`. */
-    variant?: 'default' | 'yellow'
-    /** Yellow only. The side the hog sits on in a medium or wide container. Defaults to `left`. */
+}
+
+export interface DefaultHoggieCalloutProps extends BaseHoggieCalloutProps {
+    variant?: 'default'
+    /** Where the hoggie sits. Defaults to `breakout`. */
+    hoggiePlacement?: HoggiePlacement
+}
+
+export interface YellowHoggieCalloutProps extends BaseHoggieCalloutProps {
+    /** Turns on the yellow layout and the hog interactions. */
+    variant: 'yellow'
+    /** The side the hog sits on in a medium or wide container. Defaults to `left`. */
     hoggieSide?: 'left' | 'right'
-    /** Yellow only. Turns on the hover nudge and the poke. Defaults to `true` for `yellow`. */
+    /** Turns on the hover nudge and the poke. Defaults to `true` for `yellow`. */
     interactive?: boolean
-    /** Yellow only. Extra speech bubble lines, added to the standard lines. */
+    /** Extra speech bubble lines, added to the standard lines. */
     hoggieLines?: string[]
 }
+
+/** The props of one variant are not valid on the other variant. */
+export type HoggieCalloutProps = DefaultHoggieCalloutProps | YellowHoggieCalloutProps
 
 export default function HoggieCallout(props: HoggieCalloutProps): JSX.Element {
     if (props.variant === 'yellow') {
@@ -60,7 +70,7 @@ function DefaultHoggieCallout({
     buttonLabel,
     to,
     className = '',
-}: HoggieCalloutProps): JSX.Element {
+}: DefaultHoggieCalloutProps): JSX.Element {
     const placement = placements[hoggiePlacement]
     return (
         <aside aria-label={ariaLabel} className={`@container not-prose my-6 ${className}`}>
