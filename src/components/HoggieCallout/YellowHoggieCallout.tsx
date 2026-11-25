@@ -9,29 +9,98 @@ import React, { useEffect, useRef, useState } from 'react'
 import OSButton from 'components/OSButton'
 import SpeechBubble from 'components/SpeechBubble'
 import { focusRing } from 'components/UI/styles'
-import type { YellowHoggieCalloutProps } from './index'
+import type { HoggieAlign, HoggieSize, YellowHoggieCalloutProps } from './index'
 import { MAX_LINE_LENGTH, STANDARD_LINES } from './lines'
 
 // How long the bubble stays up after a poke, and how long the hog stays up in a hover nudge.
 const BUBBLE_MS = 1800
 const NUDGE_MS = 200
 
-// In a medium or wide container, the hog sits in a 152px column. The box pads the hog side by
-// the outer padding plus the column plus a 24px gap.
+// The outer padding on the side without the hog, and the hog's distance from its edge. `hogOut` is for
+// a centered hog that breaks out: it goes 16px past the side border.
 const SIDES = {
-    left: {
-        box: '@xl:pl-[208px] @xl:pr-8 @4xl:pl-[216px] @4xl:pr-10',
-        hog: '@xl:left-8 @4xl:left-10',
+    left: { box: '@xl:pr-8 @4xl:pr-10', hog: '@xl:left-8 @4xl:left-10', hogOut: '@xl:-left-4' },
+    right: { box: '@xl:pl-8 @4xl:pl-10', hog: '@xl:right-8 @4xl:right-10', hogOut: '@xl:-right-4' },
+}
+
+// In a medium or wide container, the hog sits in a column. The box pads the hog side by the outer
+// padding plus the column plus a 24px gap. A centered hog that breaks out needs less padding, because
+// its column starts past the border. `md` is the size the callout had before the `hoggieSize` prop.
+const SIZES: Record<HoggieSize, { hog: string; left: string; right: string; leftOut: string; rightOut: string }> = {
+    sm: {
+        hog: 'h-24 @xl:h-32 @xl:w-28',
+        left: '@xl:pl-[168px] @4xl:pl-[176px]',
+        right: '@xl:pr-[168px] @4xl:pr-[176px]',
+        leftOut: '@xl:pl-[120px]',
+        rightOut: '@xl:pr-[120px]',
     },
-    right: {
-        box: '@xl:pr-[208px] @xl:pl-8 @4xl:pr-[216px] @4xl:pl-10',
-        hog: '@xl:right-8 @4xl:right-10',
+    md: {
+        hog: 'h-[120px] @xl:h-44 @xl:w-[152px]',
+        left: '@xl:pl-[208px] @4xl:pl-[216px]',
+        right: '@xl:pr-[208px] @4xl:pr-[216px]',
+        leftOut: '@xl:pl-[160px]',
+        rightOut: '@xl:pr-[160px]',
+    },
+    lg: {
+        hog: 'h-36 @xl:h-56 @xl:w-48',
+        left: '@xl:pl-[248px] @4xl:pl-[256px]',
+        right: '@xl:pr-[248px] @4xl:pr-[256px]',
+        leftOut: '@xl:pl-[200px]',
+        rightOut: '@xl:pr-[200px]',
+    },
+}
+
+type HoggieMode = 'inside' | 'breakout'
+
+// Where the hog sits in a medium or wide container. In a narrow container, the hog is always above the
+// copy, 32px over the top border. Breakout goes past one border: 32px over the top, 16px under the
+// bottom, or (for `center`) 16px past the side.
+const POSITIONS: Record<HoggieMode, Record<HoggieAlign, string>> = {
+    inside: { top: '@xl:top-4', center: '@xl:top-1/2 @xl:-translate-y-1/2', bottom: '@xl:bottom-4' },
+    breakout: { top: '@xl:-top-8', center: '@xl:top-1/2 @xl:-translate-y-1/2', bottom: '@xl:-bottom-4' },
+}
+
+// Minimum box heights, so the hog only goes past the border it breaks out of. Inside at the bottom has
+// no minimum below `@4xl`, as before this prop: a short box lets the hog go over the top border.
+const MIN_HEIGHTS: Record<HoggieMode, Record<HoggieAlign, Record<HoggieSize, string>>> = {
+    inside: {
+        top: {
+            sm: '@xl:min-h-[160px] @4xl:min-h-[168px] @xl:justify-center',
+            md: '@xl:min-h-[208px] @4xl:min-h-[208px] @xl:justify-center',
+            lg: '@xl:min-h-[256px] @4xl:min-h-[256px] @xl:justify-center',
+        },
+        center: {
+            sm: '@xl:min-h-[160px] @4xl:min-h-[168px] @xl:justify-center',
+            md: '@xl:min-h-[208px] @4xl:min-h-[208px] @xl:justify-center',
+            lg: '@xl:min-h-[256px] @4xl:min-h-[256px] @xl:justify-center',
+        },
+        bottom: { sm: '@4xl:min-h-[168px]', md: '@4xl:min-h-[168px]', lg: '@4xl:min-h-[168px]' },
+    },
+    breakout: {
+        top: {
+            sm: '@xl:min-h-[112px] @4xl:min-h-[168px] @xl:justify-center',
+            md: '@xl:min-h-[160px] @4xl:min-h-[168px] @xl:justify-center',
+            lg: '@xl:min-h-[208px] @4xl:min-h-[208px] @xl:justify-center',
+        },
+        center: {
+            sm: '@xl:min-h-[144px] @4xl:min-h-[168px] @xl:justify-center',
+            md: '@xl:min-h-[192px] @4xl:min-h-[192px] @xl:justify-center',
+            lg: '@xl:min-h-[240px] @4xl:min-h-[240px] @xl:justify-center',
+        },
+        bottom: {
+            sm: '@xl:min-h-[128px] @4xl:min-h-[168px] @xl:justify-center',
+            md: '@xl:min-h-[176px] @4xl:min-h-[176px] @xl:justify-center',
+            lg: '@xl:min-h-[224px] @4xl:min-h-[224px] @xl:justify-center',
+        },
     },
 }
 
 export default function YellowHoggieCallout({
     hoggie: Hoggie,
     hoggieTitle,
+    hoggieAlign = 'bottom',
+    hoggieBreakout = false,
+    hoggieSize = 'md',
     ariaLabel,
     title,
     description,
@@ -43,6 +112,13 @@ export default function YellowHoggieCallout({
     hoggieLines = [],
 }: YellowHoggieCalloutProps): JSX.Element {
     const side = SIDES[hoggieSide]
+    const size = SIZES[hoggieSize]
+    const mode: HoggieMode = hoggieBreakout ? 'breakout' : 'inside'
+    const outToSide = hoggieBreakout && hoggieAlign === 'center'
+    const hogSide = outToSide ? side.hogOut : side.hog
+    const sizedBox = `${outToSide ? (hoggieSide === 'left' ? size.leftOut : size.rightOut) : size[hoggieSide]} ${
+        MIN_HEIGHTS[mode][hoggieAlign][hoggieSize]
+    }`
     const [nudging, setNudging] = useState(false)
     // Each poke mounts a new wiggle element, so a poke during a wiggle starts the wiggle again.
     const [pokes, setPokes] = useState(0)
@@ -98,12 +174,12 @@ export default function YellowHoggieCallout({
     return (
         <aside aria-label={ariaLabel} className={`@container not-prose mt-12 mb-8 ${className}`}>
             <div
-                className={`relative flex flex-col rounded-[8px] border border-solid border-primary bg-lemon-lighter dark:bg-accent text-primary p-5 @xl:py-7 @4xl:min-h-[168px] @4xl:justify-center ${side.box}`}
+                className={`relative flex flex-col rounded-[8px] border border-solid border-primary bg-lemon-lighter dark:bg-accent text-primary p-5 @xl:py-7 @4xl:justify-center ${side.box} ${sizedBox}`}
             >
                 {/* Narrow: centered, in the flow, and 32px over the top border. Medium and wide: in the
-                    hog column, 16px above the bottom border. */}
+                    hog column, where `hoggieAlign` and `hoggieBreakout` put it. */}
                 <div
-                    className={`relative flex items-end justify-center self-center h-[120px] -mt-[52px] mb-4 @xl:absolute @xl:bottom-4 @xl:m-0 @xl:h-44 @xl:w-[152px] ${side.hog}`}
+                    className={`relative flex items-end justify-center self-center -mt-[52px] mb-4 @xl:absolute @xl:m-0 ${size.hog} ${POSITIONS[mode][hoggieAlign]} ${hogSide}`}
                 >
                     {interactive ? (
                         <>

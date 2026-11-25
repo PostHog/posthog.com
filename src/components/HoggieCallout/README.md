@@ -5,7 +5,7 @@ A callout that sends readers to another page. It has two variants:
 - `default`: the callout on the live pages in the "Used by" table. The rest of this section is about this variant.
 - `yellow`: a yellow box with a hog that readers can poke. Use it in docs and handbook pages. See [Yellow variant](#yellow-variant).
 
-In the default variant, a hoggie sits on the left, the copy sits next to it, and a button sits on the right. The hoggie breaks out of the top border, or stands on the bottom border inside the callout (see `hoggiePlacement`). In a narrow container, the button moves under the copy.
+In the default variant, a hoggie sits on the left, the copy sits next to it, and a button sits on the right. The hoggie breaks out of the top border, or stands on the bottom border inside the callout (see [Hoggie size and placement](#hoggie-size-and-placement)). In a narrow container, the button moves under the copy.
 
 The button opens its link in a new window, with `state={{ newWindow: true }}` on `OSButton`.
 
@@ -34,7 +34,8 @@ export default function EvalsPlaygroundCallout({ className = '' }: { className?:
         <HoggieCallout
             hoggie={HedgehogJudge}
             hoggieTitle="A hedgehog judge in a robe and lace collar, raising a gavel"
-            hoggiePlacement="inset"
+            hoggieAlign="bottom"
+            hoggieBreakout={false}
             ariaLabel="Evals playground"
             title="Before you ship, or after?"
             description="Learn the differences between offline and online evals in our live playground."
@@ -52,7 +53,9 @@ export default function EvalsPlaygroundCallout({ className = '' }: { className?:
 | --- | --- | --- |
 | `hoggie` | component | A hoggie from `@posthog/brand/hoggies`. It gets the `title` and the position classes. |
 | `hoggieTitle` | `string` | Describes what the art shows, for screen readers. |
-| `hoggiePlacement` | `'breakout'` or `'inset'` | `breakout` (the default) lets the hoggie break out of the top border. `inset` makes the hoggie smaller and stands it on the bottom border, inside the callout. Use `inset` for a hoggie whose art is cut off at the bottom, like `HedgehogJudge`. |
+| `hoggieAlign` | `'top'`, `'center'`, or `'bottom'` | The height the hoggie sits at. Defaults to `top`, or `bottom` for `yellow`. See [Hoggie size and placement](#hoggie-size-and-placement). |
+| `hoggieBreakout` | `boolean` | Lets the hoggie go past the border it is aligned to. Defaults to `true`, or `false` for `yellow`. |
+| `hoggieSize` | `'sm'`, `'md'`, or `'lg'` | The size of the hoggie. Defaults to `md`, the size the callouts had before this prop. |
 | `ariaLabel` | `string` | Label for the outer `aside`. |
 | `title` | `string` | Bold first line. |
 | `description` | `ReactNode` | Text under the title. |
@@ -64,7 +67,43 @@ export default function EvalsPlaygroundCallout({ className = '' }: { className?:
 | `interactive` | `boolean` | Yellow only. Turns on the hover nudge and the poke. Defaults to `true`. |
 | `hoggieLines` | `string[]` | Yellow only. Extra speech bubble lines for the chosen hog. They are added to the standard lines, not used instead of them. |
 
-`hoggiePlacement` has no effect in the yellow variant.
+## Hoggie size and placement
+
+Three props control the hoggie in both variants. Each one works with any value of the other two.
+
+- `hoggieAlign`: the height the hoggie sits at: `top`, `center`, or `bottom`.
+- `hoggieBreakout`: when `true`, the hoggie goes past the border it is aligned to. `top` goes over the top border, `bottom` goes under the bottom border, and `center` goes past the side border. When `false`, the hoggie stays inside the box.
+- `hoggieSize`: `sm`, `md`, or `lg`. Use a size, not a pixel value: Tailwind only makes classes that it finds in the source.
+
+The box padding changes with the size, so the copy never goes under the hoggie. The box also gets a minimum height, so the hoggie only goes past the border that it breaks out of. Two cases keep the layout they had before these props: breakout at the top, and inside at the bottom, where a short box lets the hoggie go over the top border.
+
+Use `hoggieAlign="bottom"` with `hoggieBreakout={false}` for a hoggie whose art is cut off at the bottom, like `HedgehogJudge`. The cut edge then sits on the bottom border.
+
+Default variant. The defaults are `hoggieAlign="top"` and `hoggieBreakout={true}`:
+
+| `hoggieBreakout` | `top` | `center` | `bottom` |
+| --- | --- | --- | --- |
+| `true` | 16px over the top border | 16px past the left border | 16px under the bottom border |
+| `false` | 16px below the top border | Centered from top to bottom | On the bottom border |
+
+| `hoggieSize` | Width, breakout | Width, inside |
+| --- | --- | --- |
+| `sm` | 80px, and 96px from `@xl` | 64px, and 80px from `@xl` |
+| `md` (default) | 96px, and 128px from `@xl` | 80px, and 96px from `@xl` |
+| `lg` | 112px, and 160px from `@xl` | 96px, and 128px from `@xl` |
+
+Yellow variant. The defaults are `hoggieAlign="bottom"` and `hoggieBreakout={false}`. In a narrow container, the hoggie is always above the copy and 32px over the top border, and only `hoggieSize` has an effect. In a medium or wide container:
+
+| `hoggieBreakout` | `top` | `center` | `bottom` |
+| --- | --- | --- | --- |
+| `true` | 32px over the top border | 16px past the side border (`hoggieSide`) | 16px under the bottom border |
+| `false` | 16px below the top border | Centered from top to bottom | 16px above the bottom border |
+
+| `hoggieSize` | Hoggie height, narrow | Hoggie height and column width, medium and wide |
+| --- | --- | --- |
+| `sm` | 96px | 128px tall, 112px column |
+| `md` (default) | 120px | 176px tall, 152px column |
+| `lg` | 144px | 224px tall, 192px column |
 
 ## Layout
 
