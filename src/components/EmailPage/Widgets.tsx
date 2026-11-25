@@ -443,13 +443,22 @@ function SendChip({
     )
 }
 
-export function CalendarBlock(): JSX.Element {
+export function CalendarBlock({
+    broadcast = { name: 'New: file requests', audience: '', people: 3560 },
+}: {
+    broadcast?: { name: string; people: number }
+}): JSX.Element {
     const [picked, setPicked] = useState<number | null>(null)
     const [scheduled, setScheduled] = useState<number | null>(null)
     const picking = scheduled === null
     const suggestion = suggestFrom(picked ?? 10)
     const crowding = picked === null ? [] : crowdedBy(picked)
-    const draft = { time: '10:00 AM', name: 'New: file requests', kind: 'broadcast' as const }
+    const draft = { time: '10:00 AM', name: broadcast.name, kind: 'broadcast' as const }
+    // A new draft from the broadcast block starts the picking over.
+    useEffect(() => {
+        setPicked(null)
+        setScheduled(null)
+    }, [broadcast.name])
 
     return (
         <div className={blockClassName}>
@@ -553,7 +562,8 @@ export function CalendarBlock(): JSX.Element {
 
                 <div className="flex flex-col gap-3 self-start rounded-lg border border-primary p-4 text-sm">
                     <span className="flex items-center gap-1.5 text-xs text-secondary">
-                        <span className="size-2 rounded-full bg-red" /> Broadcast · 48,210 active users
+                        <span className="size-2 rounded-full bg-red" /> Broadcast ·{' '}
+                        {broadcast.people.toLocaleString('en-US')} people
                     </span>
                     <strong className="-mt-2 text-base">{draft.name}</strong>
                     {scheduled !== null ? (

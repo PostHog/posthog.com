@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ToolsTicker from 'components/Home/ToolsTicker'
 import { destinations } from './destinations.data'
 import { motion, useReducedMotion } from 'framer-motion'
@@ -28,6 +28,7 @@ import OSButton from 'components/OSButton'
 import Highlight from 'components/MCPPage/Highlight'
 import { CalendarBlock, CanvasBlock, SendBlock } from './Widgets'
 import { EditorBlock } from './EditorBlock'
+import { BroadcastBlock, BroadcastDraft } from './BroadcastBlock'
 import { MetricsBlock } from './MetricsBlock'
 import PromptDemo from 'components/MCPPage/PromptDemo'
 import CustomerLogo from 'components/CustomerLogo'
@@ -259,6 +260,7 @@ export default function EmailPage(): JSX.Element {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const reducedMotion = useReducedMotion()
+    const [broadcast, setBroadcast] = useState<BroadcastDraft | undefined>()
 
     useEffect(() => {
         if (appWindow) {
@@ -389,18 +391,31 @@ export default function EmailPage(): JSX.Element {
 
                     <section className="flex flex-col gap-6">
                         <Intro title={<>Broadcasts that know who they’re for</>}>
-                            Write a newsletter or an announcement, pull in anything you know about the person, and send
-                            it to an audience built from your product data. Type / to add a block.
+                            PostHog looks at what people do in your product and suggests who to email next. Pick an
+                            audience and PostHog AI drafts the email, then find it a day.
                         </Intro>
-                        <EditorBlock />
+                        <BroadcastBlock
+                            onSchedule={(draft) => {
+                                setBroadcast(draft)
+                                document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' })
+                            }}
+                        />
                     </section>
 
-                    <section className="flex flex-col gap-6">
+                    <section id="calendar" className="flex scroll-mt-6 flex-col gap-6">
                         <Intro title={<>Plan every send on one calendar</>}>
                             See every broadcast and automated email next to each other. PostHog stops you before the
                             same people get two marketing emails in two days, and finds the next day that works.
                         </Intro>
-                        <CalendarBlock />
+                        <CalendarBlock broadcast={broadcast} />
+                    </section>
+
+                    <section className="flex flex-col gap-6">
+                        <Intro title={<>Or write it yourself</>}>
+                            A block editor your whole team can use. Type / to add a block, {'{{'} to pull in anything
+                            you know about the person, and preview it at every screen width.
+                        </Intro>
+                        <EditorBlock />
                     </section>
 
                     <section className="flex flex-col gap-6">
