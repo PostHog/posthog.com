@@ -60,7 +60,7 @@ We're open source, so you can inspect [our source code](https://github.com/PostH
 
 We pride ourselves on [having a generous free tier](/pricing). Your first 1 million events every month are free, and 97% of companies use PostHog for free.
 
-Beyond the free tier, our pricing is usage-based and transparent. Anonymous events start at $0.00005 each and identified events at $0.000248, and both get cheaper as your volume grows. There's no minimum spend and no per-seat charge, and you can set [billing limits](/docs/billing/limits-alerts) so you're never surprised.
+Beyond the free tier, our pricing is usage-based and transparent. Anonymous events start at $0.00005 each and identified events at $0.000248, and both get cheaper as your volume grows. There's no minimum spend and you can set [billing limits](/docs/billing/limits-alerts) (unlike in Mixpanel) so you're never surprised.
 
 Want to know how much we'll charge? See our [pricing calculator](/pricing).
 
@@ -68,7 +68,6 @@ Want to know how much we'll charge? See our [pricing calculator](/pricing).
 <summary>PostHog vs Mixpanel: the short version</summary>
 
 - **Choose Mixpanel** if product managers and analysts own your analytics and want a polished, self-serve interface. It has experiments and feature flags on every plan, a built-in AI agent, and Metric Trees for tying metrics to goals (an Enterprise add-on). If you commit to yearly billing, its event pricing is lower than its month-to-month rate.
-
 - **Choose PostHog** if engineers need the context around the analytics too. Product analytics sits next to [session replay](/session-replay), [error tracking](/error-tracking), [logs](/logs), and [surveys](/surveys) on the same users, and Mixpanel has no equivalent for the last three. A built-in [data warehouse](/warehouse) brings in sources like Stripe and Zendesk. Anonymous events cost up to 80% less, and you can pay as you go without committing to a year.
 
 Both include 1 million free events a month, session replay, heatmaps, experiments, feature flags, and a hosted MCP server for your agents.
@@ -517,7 +516,7 @@ Choosing the right product analytics platform depends on your team's needs and t
 <details>
 <summary>What does it mean for PostHog to be your product's context layer?</summary>
 
-Mixpanel can tell you what your users did; PostHog knows that too, as well as what they saw, what broke, what your servers logged, and what they told you in a survey. That's because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), [surveys](/surveys), and [AI observability](/ai-observability) all share one model of users and sessions.
+Mixpanel can tell you what your users did and what they saw; PostHog knows that too, as well as what broke, what your servers logged, and what they told you in a survey. That's because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), [surveys](/surveys), and [AI observability](/ai-observability) all share one model of users and sessions.
  
 The [data warehouse](/warehouse) and [data pipelines](/data-pipelines) bring in the business data that lives elsewhere, like Stripe, HubSpot, or Postgres, and push data back out, so your agents can read across all of it. They can work from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp), and they see your whole product, not just your events.
  

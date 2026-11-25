@@ -167,7 +167,7 @@ export const mixpanel = {
                 target_by_feature_flag: false,
                 target_by_sample: true,
                 target_by_url: true,
-                wireframe_mode: 'Beta',
+                wireframe_mode: false,
             },
             platform_support: {
                 features: {
@@ -183,7 +183,7 @@ export const mixpanel = {
                 features: {
                     heatmaps: true,
                     console_logs: true,
-                    performance_monitoring: false,
+                    performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: false,
                 },
