@@ -881,6 +881,10 @@
             "destination": "/compare/posthog-vs-amplitude"
         },
         {
+            "source": "/blog/posthog-vs-mixpanel",
+            "destination": "/compare/posthog-vs-mixpanel"
+        },
+        {
             "source": "/blog/best-braintrust-alternatives",
             "destination": "/compare/best-braintrust-alternatives"
         },

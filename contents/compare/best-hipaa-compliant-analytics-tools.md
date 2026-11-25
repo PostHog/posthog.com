@@ -77,7 +77,7 @@ Health tech companies like [Juno](/customers/juno), an AI health assistant for p
 
 ![Mixpanel - hipaa analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/mixpanel.png)
 
-[Mixpanel](/blog/posthog-vs-mixpanel) is a product analytics tool with genuinely strong funnel and behavioral analysis – useful for healthcare teams tracking complex user journeys. It added session replay and feature flags in late 2025, which means more functionality under a single BAA than before.
+[Mixpanel](/compare/posthog-vs-mixpanel) is a product analytics tool with genuinely strong funnel and behavioral analysis – useful for healthcare teams tracking complex user journeys. It added session replay and feature flags in late 2025, which means more functionality under a single BAA than before.
 
 That said, surveys and error tracking still aren't included natively, so you'd likely need additional tools – and separate BAAs – for those.
 

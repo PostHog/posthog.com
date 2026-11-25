@@ -342,7 +342,7 @@ export const productAnalytics = {
             {
                 name: 'Mixpanel',
                 key: 'mixpanel',
-                link: '/blog/posthog-vs-mixpanel',
+                link: '/compare/posthog-vs-mixpanel',
             },
             {
                 name: 'Heap',
