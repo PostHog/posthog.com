@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import PrivateBeta from './_snippets/private-beta.mdx'
+import PrivateBeta from "./_snippets/private-beta.mdx";
 
 <PrivateBeta />
 
@@ -26,10 +26,12 @@ The Support [AI agent](/docs/support/ai-agent) drafts ticket replies from your s
 
 The [PostHog MCP server](/docs/model-context-protocol) gives any MCP client tools to search and manage your sources. It tells agents to check Business Knowledge before they answer a question about your company.
 
-| Scope | What the tools do |
-| --- | --- |
-| `business_knowledge:read` | Search sources, read the text around a match, get sources and libraries, and search or read files in selected GitHub repositories |
-| `business_knowledge:write` | Add text and URL sources, update a source, and create, update, or delete libraries |
+| Scope                      | What the tools do                                                                                                                 |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `business_knowledge:read`  | Search sources, read the text around a match, get sources and libraries, and search or read files in selected GitHub repositories |
+| `business_knowledge:write` | Add text and URL sources, update a source, and create, update, or delete libraries                                                |
+
+Authenticate using OAuth, a [personal API key](/docs/api/personal-api-keys), or a [project secret API key](/docs/api/project-secret-api-keys/overview) with the `business_knowledge:read` scope for read-only access. Project secret API keys aren't tied to anyone's user account, so they keep working when teammates leave.
 
 Upload files and delete sources in PostHog. MCP can't do either. See the [MCP tools reference](/docs/model-context-protocol/tools) for each tool.
 
