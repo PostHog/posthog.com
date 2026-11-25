@@ -155,7 +155,7 @@ function DpaGenerator() {
                 <h2
                     className={`mt-2 px-2 @3xl:-mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}
                 >
-                    Welcome to PostHog's data processing agreement (DPA) generator,
+                    Welcome to PostHog's Data Processing Agreement (DPA) generator,
                     <br className="hidden lg:block" /> designed to make even the most{' '}
                     <span className="line-through">mundane</span> exciting tasks <em>even more fun.</em>
                 </h2>
@@ -163,7 +163,7 @@ function DpaGenerator() {
 
             <section
                 data-scheme="primary"
-                className="grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4"
+                className="grid @3xl:grid-cols-5 2xl:grid-cols-4 relative border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4"
             >
                 <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0">
                     <h2 className="mb-1 text-xl">Want a countersigned DPA?</h2>
@@ -281,10 +281,10 @@ function DpaGenerator() {
 
                 <div
                     id="page"
-                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-b-0 border-primary @3xl:border-l print:shadow-none rounded relative"
+                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 py-4 border-t border-primary @3xl:border-l print:shadow-none @3xl:rounded-tl relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10 gap-4">
-                        <div className="text-lg font-bold dark:text-primary">Preview</div>
+                    <div className="bg-accent lg:rounded-tl py-2 px-4 text-sm border-b border-light -mx-4 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10 gap-4">
+                        <div className="text-lg font-bold dark:text-primary">Data Processing Agreement preview</div>
                         <Link
                             to={APP_LEGAL_URL}
                             external
@@ -294,7 +294,7 @@ function DpaGenerator() {
                         </Link>
                     </div>
 
-                    <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
+                    <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 mt-0 border-b border-light dark:text-black">
                         <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
                         inside your PostHog organization. It's self-serve, and we've already signed it before it reaches
                         you, so all that's left is your signature. Go to{' '}
@@ -310,7 +310,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
-                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                        <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 mt-0 border-b border-light dark:text-black">
                             <strong>Notice:</strong> While this version is a great way to understand what the DPA says,
                             we don't recommend sending this version to the lawyers.
                         </div>
@@ -608,7 +608,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className={`${mode === 'tswift' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
-                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                        <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 mt-0 border-b border-light dark:text-black">
                             <strong>Notice:</strong> We don't recommend this version, unless you know a judge who's a
                             Swiftie.
                         </div>
@@ -686,7 +686,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className={`${mode === 'genz' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
-                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                        <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 mt-0 border-b border-light dark:text-black">
                             <strong>Notice:</strong> Vibes-only translation, bestie. Not legally binding on its own —
                             you still need the real one from{' '}
                             <a
