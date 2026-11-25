@@ -26,27 +26,23 @@ import WizardSection from './_snippets/wizard-section.mdx'
   Add the PostHog plugin to your `vite.config.js` file:
 
   ```js file=vite.config.js
-  import { defineConfig, loadEnv } from 'vite'
+  import { defineConfig } from 'vite'
   import posthog from '@posthog/rollup-plugin'
 
-  export default defineConfig(({ mode }) => {
-    // Vite loads .env only for your app's code. Load it for the config too.
-    const env = loadEnv(mode, process.cwd(), '')
-    return {
-      plugins: [
-        posthog({
-          personalApiKey: env.POSTHOG_CLI_API_KEY ?? '', // Personal API Key
-          projectId: env.POSTHOG_CLI_PROJECT_ID, // Project ID
-          host: env.POSTHOG_CLI_HOST, // (optional) defaults to https://us.i.posthog.com
-          sourcemaps: { // (optional)
-            enabled: Boolean(env.POSTHOG_CLI_API_KEY && env.POSTHOG_CLI_PROJECT_ID), // Upload only when the credentials are set
-            releaseName: 'my-application', // (optional) Release name
-            releaseVersion: '1.0.0', // (optional) Release version
-            deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
-          },
-        }),
-      ],
-    }
+  export default defineConfig({
+    plugins: [
+      posthog({
+        personalApiKey: process.env.POSTHOG_API_KEY!, // Personal API Key
+        projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
+        host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
+        sourcemaps: { // (optional)
+          enabled: true, // (optional) Enable sourcemaps generation and upload, defaults to true
+          releaseName: 'my-application', // (optional) Release name
+          releaseVersion: '1.0.0', // (optional) Release version
+          deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
+        },
+      }),
+    ],
   })
   ```
 
@@ -56,13 +52,11 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
   | Environment variable | Description |
   | --- | --- |
-  | `POSTHOG_CLI_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
-  | `POSTHOG_CLI_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
-  | `POSTHOG_CLI_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
+  | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
+  | `POSTHOG_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
+  | `POSTHOG_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
 
   </div>
-
-  The upload runs only when the key and project ID are set, so a build without them (a teammate's checkout, a pull request build) still passes. The `POSTHOG_CLI_*` names are the ones `posthog-cli` reads. Keep them apart from `POSTHOG_API_KEY` and `POSTHOG_HOST`, which PostHog's SDKs read at run time: posthog-laravel, for example, takes its project token from `POSTHOG_API_KEY`.
 
 <CalloutBox icon="IconInfo" title="Using CI/CD?" type="action">
 
