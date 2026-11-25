@@ -21,11 +21,10 @@
  *
  * It also answers MCP clients that people point at a posthog.com page instead
  * of the MCP server, so they show where the server is rather than a parse
- * error. `/` and `/mcp.md` are in the matcher only for those clients.
+ * error. `/mcp.md` is in the matcher only for those clients.
  */
 export const config = {
     matcher: [
-        '/',
         '/docs/:path*',
         '/handbook/:path*',
         '/blog/:path*',

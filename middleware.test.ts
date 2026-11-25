@@ -93,7 +93,7 @@ test('answers MCP clients pointed at a page with a JSON-RPC error that names the
     const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog MCP server'))
     const initialize = { jsonrpc: '2.0', id: 0, method: 'initialize', params: {} }
 
-    for (const path of ['/', '/docs/model-context-protocol', '/mcp', '/mcp.md']) {
+    for (const path of ['/docs/model-context-protocol', '/docs/product-analytics', '/mcp', '/mcp.md']) {
         const response = await middleware(
             new Request(`https://posthog.com${path}`, {
                 method: 'POST',
@@ -112,13 +112,13 @@ test('answers MCP clients pointed at a page with a JSON-RPC error that names the
 
 test('answers a malformed MCP message and an SSE client with the same hint', async () => {
     const malformed = await middleware(
-        new Request('https://posthog.com/', { method: 'POST', headers: mcpClientHeaders, body: '{"jsonrpc":' })
+        new Request(page, { method: 'POST', headers: mcpClientHeaders, body: '{"jsonrpc":' })
     )
     const { id, error } = await malformed?.json()
     assert.equal(id, null)
     assert.match(error.message, /mcp\.posthog\.com/)
 
-    const sse = await middleware(new Request('https://posthog.com/', { headers: { accept: 'text/event-stream' } }))
+    const sse = await middleware(new Request(page, { headers: { accept: 'text/event-stream' } }))
     assert.equal(sse?.status, 405)
     assert.match(await sse.text(), /mcp\.posthog\.com/)
 })
