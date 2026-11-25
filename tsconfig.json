@@ -23,15 +23,10 @@
         "noUnusedParameters": true, // Report errors on unused parameters
         "experimentalDecorators": true, // Enables experimental support for ES decorators
         "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
-        "lib": ["dom", "es2019.array"],
-        // middleware.ts imports with a `.ts` extension so `node --test` can load it. Vercel compiles the
-        // middleware with this config and bundles the output, which has only `.js` files, so the import
-        // must be rewritten to `.js`.
-        "allowImportingTsExtensions": true,
-        "rewriteRelativeImportExtensions": true
+        "lib": ["dom", "es2019.array"]
     },
     "include": ["src/**/*"],
-    // *.test.ts files are run directly by `node --test` and import node: builtins, which this config
-    // has no types for
+    // *.test.ts files are run directly by `node --test`, which needs explicit .ts import
+    // extensions and node: builtins – neither of which this config is set up for
     "exclude": ["node_modules/**/*", "staticfiles/**/*", "frontend/dist/**/*", "src/**/*.test.ts"]
 }

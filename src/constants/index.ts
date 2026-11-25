@@ -27,8 +27,8 @@ export const isMarkdownContentPath = (path: string): boolean => {
     )
 }
 
-// Hosted PostHog MCP server (streamable HTTP). Shared by the install UI, the WebMCP tools and the
-// middleware.
+// Hosted PostHog MCP server (streamable HTTP). Shared by the install UI and the WebMCP tools.
+// middleware.ts keeps its own copy of both URLs, and its test checks that they match.
 export const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
 export const MCP_SERVER_URL_EU = 'https://mcp-eu.posthog.com/mcp'
 
