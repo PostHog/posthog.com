@@ -499,7 +499,7 @@ A token works only at the metadata URL you named when you created it. If you hos
 
 The token is only used to prove ownership of the partner app. It isn't sent on API requests.
 You can rotate or revoke a token at any time from the same settings page.
-Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org. Your app then stops provisioning until it's linked again.
+Revocation clears the link in each region the next time that region reads your document, which is within a day, so a leaked or stale token can't keep an app linked to your org. To clear it at once, call the [registration endpoint](#register-your-app) in each region. Your app then stops provisioning until it's linked again.
 
 > **Note:** The legacy top-level `posthog_verification_token` field is still supported as a fallback. PostHog reads `com.posthog.verification_token` first and falls back to the top-level field if the nested one is absent or unrecognized. New integrations should use the `com.posthog` namespace.
 
