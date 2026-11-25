@@ -512,7 +512,7 @@ export const posthog = {
             },
             features: {
                 aggregated_results: true,
-                ai_response_summaries: 'Beta',
+                ai_response_summaries: true,
                 api_access: true,
                 automatic_nps_calculation: true,
                 calendar_invites: true,
