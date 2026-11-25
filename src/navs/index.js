@@ -8560,6 +8560,10 @@ export const docsMenu = {
                             name: 'Examples',
                             url: '/docs/workflows/transactional-emails/examples',
                         },
+                        {
+                            name: 'Experiments',
+                            url: '/docs/workflows/transactional-emails/experiments',
+                        },
                     ],
                 },
                 {

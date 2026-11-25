@@ -1,0 +1,110 @@
+---
+title: Run experiments on transactional emails
+sidebar: Docs
+showTitle: true
+---
+
+Test two versions of a transactional email with an [experiment](/docs/experiments). A feature flag picks the version for each user, your code sends that version, and the experiment compares what the users do next. You can measure any product event, such as finished onboarding, and email clicks.
+
+The examples use the [Node.js SDK](/docs/workflows/transactional-emails/node), version 6. The same steps work in each SDK that has feature flags and transactional emails.
+
+## Before you start
+
+- [Send the email](/docs/workflows/transactional-emails#send-your-first-email) from your code.
+- Use one distinct ID for the flag, the send, and your product events. If they differ, PostHog counts them as different people, and the experiment has no conversions. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
+- To measure clicks, turn on [engagement events](/docs/workflows/engagement-events#enable-engagement-events). These events count toward your event usage. You don't need them to measure product events.
+
+Choose an email with enough sends. The [sample size calculator](/docs/experiments/sample-size-running-time) shows how long a result takes.
+
+## Create the experiment
+
+1. [Create an experiment](/docs/experiments/creating-an-experiment). This page uses the flag key `welcome-email-test`, with the variants `control` and `test`.
+2. Keep the default exposure event. PostHog sends it when your code reads the flag.
+3. Add the product event that the email is for as the primary metric.
+4. Deploy the code below, then launch the experiment.
+
+## Send the version that the flag picks
+
+### React Email
+
+Keep both versions as [React Email](/docs/workflows/transactional-emails/react-email) components, and use one `templateKey` for both:
+
+```jsx
+import { WelcomeEmail, WelcomeEmailShort } from "./emails/welcome"
+import { posthog } from "./posthog"
+
+export async function sendWelcome({ userId, email, firstName }) {
+    const flags = await posthog.evaluateFlags(userId, { flagKeys: ["welcome-email-test"] })
+    const Email = flags.getFlag("welcome-email-test") === "test" ? WelcomeEmailShort : WelcomeEmail
+
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateKey: "welcome",
+        subject: "Welcome to Hedgebox",
+        react: <Email firstName={firstName} setupUrl="https://example.com/setup" />,
+        sensitive: false,
+        distinctId: userId,
+        idempotencyKey: `welcome-${userId}`,
+    })
+    if (error) {
+        throw error
+    }
+    return data.id
+}
+```
+
+`evaluateFlags` gets the flag for the user. `getFlag` reads the variant and records the exposure. Read the flag immediately before the send, so that only people who get the email are in the experiment.
+
+Everything except `test` sends your current email. This covers users outside the rollout and a flag that PostHog can't evaluate.
+
+### A template in PostHog
+
+For a small change, such as a subject or a button, send the variant as a template variable:
+
+```js
+const flags = await posthog.evaluateFlags(userId, { flagKeys: ["welcome-email-test"] })
+
+const { error } = await posthog.emails.send({
+    to: email,
+    templateId: "<template_id>",
+    templateData: { variant: flags.getFlag("welcome-email-test") ?? "control" },
+    distinctId: userId,
+    idempotencyKey: `welcome-${userId}`,
+})
+```
+
+Then branch on it in the subject or the body:
+
+```liquid
+{% if variables.variant == "test" %}Your project is ready{% else %}Welcome to Hedgebox{% endif %}
+```
+
+For a different design, make a second transactional email that takes the same variables, and pick the template:
+
+```js
+const isTest = flags.getFlag("welcome-email-test") === "test"
+
+const { error } = await posthog.emails.send({
+    to: email,
+    templateId: isTest ? "<test_template_id>" : "<control_template_id>",
+    templateData: { first_name: firstName },
+    distinctId: userId,
+    idempotencyKey: `welcome-${userId}`,
+})
+```
+
+## Measure clicks
+
+Add `$workflows_email_link_clicked` as a metric, and filter it to this email with `$workflow_id`. Every transactional email has its own `$workflow_id`. To find it, open a `$workflows_email_sent` event for the email in [Activity](https://app.posthog.com/activity/explore).
+
+If you use two templates, add both workflow IDs to the filter. Otherwise, the metric counts clicks on only one version.
+
+PostHog can't record clicks for a send with [click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking) off. Use the same tracking settings for both versions.
+
+## Retry with the same version
+
+An idempotency key belongs to one version of the email. If a retry picks the other version, because you changed the rollout or the flag request failed, the send returns `idempotency_key_reused` and sends nothing. The first email still goes out, so treat this error as already sent. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
+
+## End the experiment
+
+When you have a result, [end the experiment](/docs/experiments/managing-lifecycle) and roll out the winner. Then remove the flag check and the other version from your code.
