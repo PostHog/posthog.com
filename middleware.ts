@@ -68,6 +68,10 @@ const HEADER_ALLOWLIST = [
     'x-vercel-ip-country',
     'x-vercel-ip-country-region',
     'x-vercel-ip-city',
+    // TLS fingerprints and the network's AS number, set by Vercel, which tell agents apart.
+    'x-vercel-ja3-digest',
+    'x-vercel-ja4-digest',
+    'x-vercel-ip-as-number',
 ]
 const HEADER_ALLOWLIST_REGEX = new RegExp(`^(?:${HEADER_ALLOWLIST.join('|')})$`, 'i')
 const QUERY_PARAM_ALLOWLIST = [

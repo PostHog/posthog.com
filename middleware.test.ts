@@ -115,6 +115,9 @@ test('logs the request and the Markdown served, with values only for allowlisted
         'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
         'x-vercel-ip-country': 'DE',
         'x-vercel-ip-city': 'Berlin',
+        'x-vercel-ja3-digest': 'test-ja3-digest',
+        'x-vercel-ja4-digest': 't13d1516h2_8daaf6152771_test',
+        'x-vercel-ip-as-number': '64500',
     }
 
     const response = await middleware(
