@@ -29,10 +29,16 @@ Just to reassure you, PostHog won't try to claim ownership of any intellectual p
 
 If a project is born from work you have done inside PostHog – that is, using work time, PostHog code, PostHog data, or other PostHog tools and infrastructure – these projects belong to PostHog and should live in PostHog repos. If you want to develop these projects further on the side, you will need explicit permission.
 
-If you are ever worried about this, please talk to Fraser and he can help you figure out the best solution here, especially if what you are working on directly competes with something PostHog has built or is on our roadmap. 
+If you are ever worried about this, please talk to Fraser and he can help you figure out the best solution here, especially if what you are working on directly competes with something PostHog has built or is on our roadmap.
+
+### Side projects that end up getting used by PostHog
+
+You might build something that’s useful to people at PostHog. Congrats! It’s fine to share it internally. Be upfront if you own it or stand to benefit from people using it, and let people decide for themselves.
+
+If a team wants to pay for it, run it on PostHog infrastructure, rely on it for ongoing work, or give it access to company or customer data, you need to flag it in `#legal` first. We’ll do the same checks we’d do for any other supplier. If you subsequently want to use PostHog as a customer reference, please ask - we’re usually happy to say yes.
 
 ## Getting signoff
 
-We ask you to please just check in with the relevant Exec team member for your team (ie. James, Tim, or Charles) to get their confirmation before going ahead with any side gigs. 
+Generally we ask you to please just check in with the relevant Blitzscale team member for your team to get their confirmation before going ahead with any side gigs. They may loop in Hector or Fraser if they're not sure. 
 
 If your side gig existed before you joined PostHog, this will usually be covered as part of the onboarding process. 
