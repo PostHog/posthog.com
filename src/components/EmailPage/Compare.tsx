@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { IconCheck, IconChevronDown, IconX } from '@posthog/icons'
 import Link from 'components/Link'
+import OSButton from 'components/OSButton'
+import { Logo } from '@posthog/brand/logo'
 import { blockClassName } from './Widgets'
 
 // Transactional email pricing, written as if the new prices are live (PostHog/billing#2760, RFC #1380).
@@ -191,21 +193,39 @@ const categories: [title: string, rows: Row[]][] = [
     ['Pricing', [['Price at 100k emails a month', '$36', '$35', '$49', 'About $145']]],
 ]
 
+function Mark({ mark, us }: { mark: Mark; us: boolean }): JSX.Element {
+    if (mark === true) {
+        return (
+            <span className="mx-auto flex size-6 items-center justify-center rounded-full bg-green/15 text-green">
+                <IconCheck className="size-4" aria-label="Yes" />
+            </span>
+        )
+    }
+    if (mark === false) {
+        return (
+            <span className="mx-auto flex size-6 items-center justify-center rounded-full bg-red/10 text-red">
+                <IconX className="size-3.5" aria-label="No" />
+            </span>
+        )
+    }
+    if (mark === 'Partly') {
+        return <span className="rounded-full bg-yellow/20 px-2 py-0.5 text-xs font-semibold">Partly</span>
+    }
+    return <span className={us ? 'font-bold' : 'text-secondary'}>{mark}</span>
+}
+
+// The PostHog column reads as one raised card running down the table.
+const usCell = 'bg-red/[0.06] shadow-[inset_2px_0_0_rgba(245,78,0,0.45),inset_-2px_0_0_rgba(245,78,0,0.45)]'
+
 function Rows({ rows }: { rows: Row[] }): JSX.Element {
     return (
         <>
             {rows.map(([feature, ...marks]) => (
-                <tr key={feature} className="border-b border-primary last:border-0">
-                    <td className="p-3">{feature}</td>
+                <tr key={feature} className="border-b border-primary/50 last:border-0">
+                    <td className="px-4 py-3.5 font-medium">{feature}</td>
                     {marks.map((mark, i) => (
-                        <td key={i} className={`p-3 text-center ${i === 0 ? 'bg-red/5 font-semibold' : ''}`}>
-                            {mark === true ? (
-                                <IconCheck className="mx-auto size-5 text-green" aria-label="Yes" />
-                            ) : mark === false ? (
-                                <IconX className="mx-auto size-4 text-muted" aria-label="No" />
-                            ) : (
-                                <span className={i === 0 ? '' : 'text-secondary'}>{mark}</span>
-                            )}
+                        <td key={i} className={`px-3 py-3.5 text-center ${i === 0 ? usCell : ''}`}>
+                            <Mark mark={mark} us={i === 0} />
                         </td>
                     ))}
                 </tr>
@@ -217,46 +237,81 @@ function Rows({ rows }: { rows: Row[] }): JSX.Element {
 export function FeatureCompare(): JSX.Element {
     const [open, setOpen] = useState(false)
     return (
-        <div className="not-prose overflow-hidden rounded-2xl border border-primary bg-white dark:bg-accent">
-            <div className="overflow-x-auto">
-                <table className="w-full min-w-[36rem] border-collapse text-sm">
+        <div className="not-prose relative overflow-hidden rounded-2xl border border-primary bg-white shadow-xl dark:bg-accent">
+            <div className={`overflow-x-auto ${open ? '' : 'max-h-[36rem] overflow-y-hidden'}`}>
+                <table className="w-full min-w-[38rem] border-collapse text-sm">
                     <thead>
-                        <tr className="border-b border-primary">
-                            <th className="p-3" />
+                        <tr>
+                            <th className="w-[38%] px-4 py-4 text-left text-xs font-semibold uppercase text-secondary">
+                                Where we’re different
+                            </th>
                             {competitors.map((name, i) => (
-                                <th key={name} className={`p-3 text-center font-bold ${i === 0 ? 'bg-red/5' : ''}`}>
-                                    {name}
+                                <th
+                                    key={name}
+                                    className={`px-3 py-4 text-center text-base font-bold ${
+                                        i === 0
+                                            ? `${usCell} rounded-t-xl shadow-[inset_2px_2px_0_rgba(245,78,0,0.45),inset_-2px_0_0_rgba(245,78,0,0.45)]`
+                                            : 'text-secondary'
+                                    }`}
+                                >
+                                    {i === 0 ? (
+                                        <>
+                                            <Logo className="mx-auto h-5 w-auto dark:hidden" width="auto" />
+                                            <Logo
+                                                className="mx-auto hidden h-5 w-auto dark:block"
+                                                variant="mono"
+                                                color="white"
+                                                width="auto"
+                                            />
+                                        </>
+                                    ) : (
+                                        name
+                                    )}
                                 </th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
                         <Rows rows={headline} />
-                        {open &&
-                            categories.map(([title, rows]) => (
-                                <React.Fragment key={title}>
-                                    <tr className="border-y border-primary bg-accent">
-                                        <th
-                                            colSpan={5}
-                                            className="px-3 py-2 text-left text-xs uppercase text-secondary"
-                                        >
-                                            {title}
-                                        </th>
-                                    </tr>
-                                    <Rows rows={rows} />
-                                </React.Fragment>
-                            ))}
+                        {categories.map(([title, rows]) => (
+                            <React.Fragment key={title}>
+                                <tr>
+                                    <th
+                                        colSpan={1}
+                                        className="px-4 pb-2 pt-6 text-left text-xs font-semibold uppercase text-secondary"
+                                    >
+                                        {title}
+                                    </th>
+                                    <td className={usCell} />
+                                    <td colSpan={3} />
+                                </tr>
+                                <Rows rows={rows} />
+                            </React.Fragment>
+                        ))}
                     </tbody>
                 </table>
             </div>
-            <button
-                type="button"
-                onClick={() => setOpen(!open)}
-                className="flex w-full items-center justify-center gap-1.5 border-t border-primary p-3 text-sm font-semibold hover:bg-accent"
-            >
-                {open ? 'Show less' : 'See the full table'}
-                <IconChevronDown className={`size-4 transition-transform ${open ? 'rotate-180' : ''}`} />
-            </button>
+            {open ? (
+                <div className="flex justify-center border-t border-primary p-3">
+                    <OSButton size="sm" variant="secondary" onClick={() => setOpen(false)}>
+                        Show less
+                    </OSButton>
+                </div>
+            ) : (
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-44 items-end justify-center bg-gradient-to-t from-white from-30% to-transparent pb-6 dark:from-accent">
+                    <span className="pointer-events-auto">
+                        <OSButton
+                            size="md"
+                            variant="secondary"
+                            icon={<IconChevronDown />}
+                            iconPosition="right"
+                            onClick={() => setOpen(true)}
+                        >
+                            See the full table
+                        </OSButton>
+                    </span>
+                </div>
+            )}
         </div>
     )
 }
