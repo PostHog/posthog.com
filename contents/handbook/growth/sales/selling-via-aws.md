@@ -121,6 +121,7 @@ If you need more control or Salesforce isn't cooperating:
 **Payment not showing up:**
 - AWS disbursements take time (check the disbursement schedule)
 - Verify the offer was actually accepted in AWS
+- Ask the finance team. Finance reconciles AWS Marketplace payments against our invoices, and owns [collections](/handbook/growth/sales/billing#payments-outside-stripe) on them.
 
 ### Pro tips
 - **Double-check AWS Account IDs** - This is where most mistakes happen

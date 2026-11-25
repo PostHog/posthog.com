@@ -112,7 +112,7 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
 -   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
--   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
+-   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps. 
 -   **Pay-as-you-go customers:** issue credits if the period hasn't ended and the invoice isn't finalized. If the invoice has been finalized, issue a refund via billing admin.
 -   **Prepaid customers (annual contracts or self-serve credit purchases):** don't add a credit. Wait until the invoice with the spike is issued, then go to Billing Admin → the invoice → **Start refund** and choose **Balance first**. This puts their prepaid credits back.
     -   **Why:** prepaid credits already paid for the spike, so it counts as revenue. A free credit doesn't undo that and our revenue model counts it again when it's used.
