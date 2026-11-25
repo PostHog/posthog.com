@@ -1,5 +1,6 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { OverviewSlideProps } from './types'
 
 export default function OverviewSlideStacked({
@@ -74,11 +75,20 @@ export default function OverviewSlideStacked({
             </div>
             {hog?.src && (
                 <div className="absolute -bottom-4 -right-4">
-                    <CloudinaryImage
-                        src={hog.src as `https://res.cloudinary.com/${string}`}
-                        alt={hog.alt}
-                        imgClassName={hog.classes || 'w-24 h-24'}
-                    />
+                    {isCloudinaryImage(hog.src) ? (
+                        <CloudinaryImage
+                            src={hog.src as `https://res.cloudinary.com/${string}`}
+                            alt={hog.alt}
+                            imgClassName={hog.classes || 'w-24 h-24'}
+                        />
+                    ) : (
+                        <HoggieImage
+                            src={hog.src}
+                            mirror={hog.mirror}
+                            alt={hog.alt}
+                            imgClassName={hog.classes || 'w-24 h-24'}
+                        />
+                    )}
                 </div>
             )}
         </div>

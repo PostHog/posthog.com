@@ -64,7 +64,6 @@ import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
 import { RainbowText } from './components/RainbowText'
 import { Signatures } from './components/Signatures'
-import { SlackPage } from './components/SlackPage'
 import SmallTeam from './components/SmallTeam'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
@@ -136,7 +135,6 @@ export const shortcodes = {
     QuickLinks,
     Quote2,
     Signatures,
-    SlackPage,
     Squeak,
     StarRepoButton,
     TracksCTA,

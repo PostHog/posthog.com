@@ -1,0 +1,1017 @@
+---
+date: 2026-11-19
+title: The best GA4 alternatives for apps and websites, compared
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+author:
+  - natalia-amorim
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/best_ga4_alternatives_competitors_1a159eedc0.png
+featuredImageType: full
+category: General
+tags:
+    - Alternatives
+seo:
+    metaTitle: The best GA4 alternatives for apps and websites
+    metaDescription: >-
+        What are the best GA4 alternatives? Compare 9 Google Analytics alternatives for websites and apps on privacy, GDPR compliance, data import, pricing, and more.
+
+---
+
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+[Google Analytics 4](/compare/posthog-vs-ga4) is one of the most widely deployed analytics tools in the world – and one of the most complained about too.
+
+GA4's event-based model is more powerful than its predecessor, Universal Analytics (UA), in theory, but in practice, many teams found it harder to use, harder to query, and harder to trust. 
+
+Add in data sampling on large exploration queries, a 14-month limit on event-level data, [privacy concerns under GDPR](/compare/best-gdpr-compliant-analytics-tools), [opaque pricing](/blog/google-analytics-cost) once you outgrow the free version, and a UI that frustrates marketers and developers alike – and it's easy to understand why so many teams are looking for alternatives.
+
+Whether you're leaving GA4 for privacy reasons, because you don't like it, or because you simply need more than web analytics, this guide covers the best GA4 alternatives available today.
+
+<details>
+<summary>Why do people dislike GA4?</summary>
+
+If event-based tracking is more powerful, why do so many people complain about GA4? Users tend to fall into one of three camps:
+
+1. **Users who miss pre-defined reports** – GA4 launched without many of the reports teams relied on. Google has added some back, including annotations in 2025 and dashboards in 2026, but things are still harder to find.
+2. **Teams without data science support** – GA4 caters more to large enterprises and app developers. Its reliance on Data Studio (formerly Looker Studio) and BigQuery exports is a barrier for small business and marketing teams who don't have analytics engineers.
+3. **App developers who need more** – Despite courting app developers, GA4 still falls short of alternatives that pulled users away from Universal Analytics in the first place. For many, it's too little, too late.
+
+Some teams also avoid GA4 for privacy reasons. GA4 is not GDPR-compliant by default – it requires additional configuration including consent banners and Consent Mode v2. The 2023 EU-U.S. Data Privacy Framework gave those data transfers a legal basis. The EU General Court upheld it in September 2025, though an appeal was filed the following month.
+
+</details>
+
+<details>
+<summary>What are the best GA4 alternatives? The short version</summary>
+
+| Tool | Best for | Free plan | GA4 data import |
+|---|---|---|---|
+| **PostHog** | Engineers and product teams | 1M events a month | Partial (into the data warehouse) |
+| **Matomo** | Content, marketing, and e-commerce sites | Self-hosted only | Yes |
+| **Kissmetrics** | Marketing and e-commerce teams | 100k events a month | No |
+| **TelemetryDeck** | Mobile apps | 50k events a month | No |
+| **Plausible** | Content and marketing sites | No (30-day trial) | Yes |
+| **Vercel Web Analytics** | Sites hosted on Vercel | 50k events a month | No |
+| **Piwik PRO** | Enterprises in regulated industries | No (30-day trial) | No |
+| **Fathom** | Content and marketing sites | No (7-day trial) | Yes |
+| **Counter** | Personal sites and side projects | Free (pay what you want) | No |
+ 
+**PostHog** is the pick if you want to follow a visitor past the pageview: from the [traffic source](/web-analytics) to the [funnel](/product-analytics), the [session replay](/session-replay), and the [error](/error-tracking) they hit. From there you can [A/B test](/experiments) a fix behind a [feature flag](/feature-flags), [survey](/surveys) your visitors, and query it all from your editor through [the MCP](/mcp), with [1 million events](/pricing) free every month.
+ 
+**Matomo** and **Piwik PRO** are the closest to the old Universal Analytics experience. Matomo is open source and can import your GA4 history, and Piwik PRO adds consent management for regulated teams.
+ 
+**Plausible** and **Fathom** are the simple, cookieless options for content sites, and **Counter** is the free, minimal one. **Kissmetrics** ties marketing to revenue, **TelemetryDeck** is built for mobile apps, and **Vercel Web Analytics** is the easy choice if you already host on Vercel.
+ 
+</details>
+
+<details>
+<summary>Prefer video? Watch our rundown of GA4 alternatives in 5 minutes</summary>
+
+<iframe
+    width="100%"
+    height="400"
+    src="https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ"
+    title="The best GA4 alternatives for apps and websites"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+
+<br />
+
+This video was made for an earlier version of this guide, so some details have changed since.
+
+</details>
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Who it's for:** Startups, engineers, and product teams who want web analytics connected to product analytics, session replay, experiments, and error tracking.
+- **Who it isn't for:** Marketing teams that depend on GA4's built-in Google Ads attribution and Search Console reporting; our marketing analytics is still in beta.
+- **GA4 data import:** Partial (GA4 report data syncs into the [data warehouse](/docs/data-pipelines/sources/google-analytics))
+- **GDPR compliant:** [Yes](/docs/privacy/gdpr-compliance)
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Posthog_web_analytics_679d394b35.png)
+
+[PostHog](/) (that's us 👋) is your product's context layer. It combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), [user surveys](/surveys), and [other developer tools](/products), all built on the same events, users, and sessions. 
+
+A [data warehouse](/warehouse) and [data pipelines](/data-pipelines) connect it all to the business data you keep elsewhere, like Stripe, HubSpot, or your GA4 reports. You can query everything with [SQL](/docs/sql), or hand it to an agent from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp).
+
+### Key features
+
+- **Web analytics:** [Pageviews, sessions, bounce rate, channels, and UTMs](/docs/web-analytics), plus conversion goals and [web vitals](/docs/web-analytics/web-vitals).
+- **Product analytics:** [Funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [user paths](/docs/product-analytics/paths), and [SQL access](/docs/sql) on the same events.
+- **Session replay:** [Watch what visitors did](/docs/session-replay), with console logs and network activity, on web and mobile.
+- **Heatmaps:** [Clicks, rage clicks, scroll depth, and mouse movement](/docs/toolbar/heatmaps). Heatmap data is free.
+- **Feature flags and experiments:** Roll out changes with [feature flags](/docs/feature-flags) and A/B test them with [experiments](/docs/experiments), without another tool.
+- **Marketing analytics (beta):** [Syncs spend and clicks](/docs/web-analytics/marketing-analytics) from Google, Meta, LinkedIn, TikTok, and other ad platforms.
+- **Data warehouse and CDP:** Sync GA4 reports, Stripe, HubSpot, and other sources into the [data warehouse](/warehouse) and query them alongside your events.
+- **Agent access:** The [MCP server](/docs/web-analytics/surfaces/mcp) lets an AI agent query your web analytics from your editor.
+
+### How does PostHog compare to GA4?
+
+PostHog covers the core [web analytics](/docs/web-analytics) most teams use in GA4 – traffic sources, pageviews, sessions, bounce rate, UTMs, [conversions](/docs/web-analytics/conversion-goals), and [web vitals](/docs/web-analytics/web-vitals) – and adds far more on top. It doesn't yet match GA4's advanced attribution or its built-in Google Ads reporting, though [marketing analytics](/docs/web-analytics/marketing-analytics) is in beta.
+
+Where GA4 is a marketing analytics tool, PostHog is a full product development platform. This means that, in addition to tracking user behavior, you can also use PostHog to run [A/B tests](/docs/experiments), set up [feature flags](/docs/feature-flags), [record user sessions](/docs/session-replay), and a lot more.
+
+GA4 doesn't have any of these features built-in, so you'd need to integrate with other tools to get the same functionality.
+
+Read our [PostHog and Google Analytics comparison](/compare/posthog-vs-ga4) for an in-depth look at the differences.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between PostHog and GA4</summary>
+
+- PostHog includes session replay, heatmaps, feature flags, A/B testing, error tracking, and surveys; GA4 offers none of these.
+- GA4 integrates natively with Google Ads, Search Console, and the broader Google Marketing Platform; PostHog's [marketing analytics](/docs/web-analytics/marketing-analytics), currently in beta, syncs spend and clicks from Google, Meta, LinkedIn, TikTok, and other ad platforms, but doesn't match GA4's built-in Google attribution.
+- PostHog [offers EU hosting](/blog/posthog-cloud-eu), with data stored in Frankfurt; GA4 collects EU traffic on EU servers but doesn't offer EU-only data residency.
+- PostHog Cloud is [HIPAA-ready](/docs/privacy/hipaa-compliance), with a BAA available on the Boost, Scale, and Enterprise packages; GA4 is not HIPAA-compliant.
+- PostHog is open source; GA4 is closed source.
+- PostHog offers an opt-in [cookieless mode](/docs/privacy/data-collection); GA4 relies on cookies by default.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and GA4</summary>
+
+- Both offer web analytics with traffic breakdown, UTM tracking, and conversion tracking.
+- Both are event-based, with automatically collected events and custom events.
+- Both hold security certifications: PostHog is SOC 2 Type 2 certified, and Google Analytics is ISO 27001 certified.
+- Both support real-time data views.
+- Both offer free tiers that are sufficient for most small to mid-size teams.
+- Both integrate with Segment, Zapier, and other popular tools.
+
+</details>
+
+### PostHog and GA4 pricing comparison
+
+| | PostHog | GA4 |
+|---|---|---|
+| **Free plan** | 1M events, 5,000 web + 2,500 mobile replays, and 1M feature flag requests a month | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | No base fee; usage-based per product | Analytics 360, priced through sales |
+| **MCP server** | [Free and hosted](/docs/web-analytics/surfaces/mcp), with tools for querying web analytics | Yes, run locally, read-only by default |
+| **Self-hosting** | Free (MIT, open core), but unsupported | None |
+| **EU data storage** | Yes (Frankfurt) | No EU-only option |
+
+> #### Bottom line
+>
+> PostHog is the best GA4 alternative for engineering and product teams who need more than just web analytics. It covers the core of what GA4 does and adds a full stack of product tools, all with transparent pricing and a generous free tier.
+
+<WizardCTA
+    title="Set up web analytics with one command"
+    subtitle="The wizard adds PostHog to your app and starts capturing pageviews automatically."
+    learnMoreTo="/docs/web-analytics/installation"
+/>
+
+## 2. Matomo
+
+- **Founded:** 2007
+- **Who it's for:** Content, marketing, and e-commerce teams who want a Universal Analytics-style tool they can self-host, with their GA4 history imported.
+- **Who it isn't for:** Teams tracking apps more than websites, or self-hosters who want funnels, cohorts, and session recordings without paying for plugins.
+- **GA4 data import:** Yes (aggregated reports, not raw events)
+- **GDPR compliant:** Yes
+
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
+
+[Matomo](/compare/posthog-vs-matomo) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
+
+It also shares some weaknesses inherent in Universal Analytics. While [Matomo](/compare/best-matomo-alternatives) has added more advanced analytics features, it better suits traditional website analytics than tracking desktop and mobile apps. It's open source, so can be self-hosted if you prefer.
+
+### Key features
+
+- **Web analytics:** Visits, referrers, goals, and e-commerce reports, with no data sampling on any plan.
+- **Google Analytics import:** A free importer brings in your GA4 report data, on Cloud and self-hosted.
+- **Privacy:** Can be configured for cookieless tracking, and Matomo Cloud stores data in Frankfurt.
+- **Premium features:** Funnels, cohorts, heatmaps and session recording, and A/B testing are included in Matomo Cloud and sold as plugins for self-hosted Matomo.
+- **Mobile SDKs:** Official SDKs for iOS and Android.
+- **Agent access:** An MCP server for Cloud and On-Premise, released in 2026.
+
+### How does Matomo compare to GA4?
+
+Matomo is session-based like Universal Analytics, making it a more natural migration path for teams who preferred the old Google Analytics model. It gives you full data ownership and GDPR compliance without the complexity of GA4.
+
+<p>
+<ProductComparisonTable
+    competitors={['matomo', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Matomo and GA4</summary>
+
+- Matomo is session-based like Universal Analytics; GA4 is event-based. Matomo is a more natural migration for UA users.
+- Matomo can import historical data from Google Analytics; GA4 cannot import historical data from other tools.
+- Matomo can be self-hosted for full data ownership; GA4 is cloud-only.
+- Matomo doesn't sample data on any plan; GA4 free applies sampling to large exploration queries.
+- GA4 integrates natively with Google Ads and Search Console; Matomo connects to both through premium plugins, which are included in Matomo Cloud and paid when you self-host.
+- GA4 has a large free tier; Matomo's cloud is paid (free for self-hosted).
+
+</details>
+
+<details>
+<summary>Main similarities between Matomo and GA4</summary>
+
+- Both offer web analytics with traffic breakdown, referrers, and conversion tracking.
+- Both support custom event tracking.
+- Both offer goal tracking and funnel analysis (funnels are a paid plugin for self-hosted Matomo).
+- Both support integrations with popular CMS and ecommerce platforms.
+
+</details>
+
+### Matomo and GA4 pricing comparison
+
+| | Matomo | GA4 |
+|---|---|---|
+| **Free plan** | Self-hosted only (21-day trial on Cloud) | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | Cloud priced by monthly hits; self-hosted plugin bundles from €275/month | Analytics 360, priced through sales |
+| **MCP server** | Yes, on Cloud and as a free plugin for self-hosted | Yes, run locally, read-only by default |
+| **Self-hosting** | Free (GPLv3) | None |
+| **EU data storage** | Yes (Frankfurt, on Cloud) | No EU-only option |
+
+> #### Bottom line
+> 
+> Matomo is the closest you'll get to a Universal Analytics-style experience. It's session-based and was conceived as an open source alternative to Google Analytics. It has plenty of features, too, and its interface got a refresh in 2026. It's especially well-suited to publishers, privacy-conscious organizations, and teams in regulated industries.
+
+## 3. Kissmetrics
+
+- **Founded:** 2008
+- **Who it's for:** Marketing and e-commerce teams who want to tie campaigns and behavior to revenue for each customer.
+- **Who it isn't for:** Teams that want traffic metrics like bounce rate, EU data hosting, or session replay.
+- **GA4 data import:** No
+- **GDPR compliant:** Yes
+
+![kissmetrics](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_19_T18_01_26_061_Z_257c2f5bd5.png)
+
+**Kissmetrics** is all about tracking marketing ROI. As a result, it doesn't track what Kissmetrics deems vanity metrics like bounce rate, time on page, exits, etc. It does, however, track most essential website metrics, and makes it easy to understand the impact of organic and paid marketing activity.
+
+One of its key features is the Populations report, which groups users into key cohorts, such as those who have recently activated trials, or are at risk of churning. You can also create custom funnel reports, and track user paths through your website.
+
+### Key features
+
+- **Person-based tracking:** Every event is tied to a person, so you can see everything one customer did.
+- **Populations:** Groups defined by behavior, like trials at risk or recently churned customers, that keep themselves up to date.
+- **Funnels and paths:** Funnels and activity reports are on the free plan; revenue, paths, and A/B test reports are on Growth.
+- **Campaign reporting:** Performance by source, and medium with UTM capture. Campaign reports are on the paid Growth plan.
+
+### How does Kissmetrics compare to GA4?
+
+Kissmetrics and GA4 serve different masters. GA4 is built for traffic and marketing attribution. Kissmetrics is built for understanding customers and driving revenue – it intentionally excludes "vanity metrics" like bounce rate and time on page, focusing instead on what actually drives growth.
+
+<p>
+<ProductComparisonTable
+    competitors={['kissmetrics', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Kissmetrics and GA4</summary>
+
+- Kissmetrics is person-based (every action tied to an individual); GA4 is event-based with session context.
+- Kissmetrics focuses on revenue analytics and customer lifetime value; GA4 focuses on traffic, acquisition, and marketing attribution.
+- Kissmetrics deliberately excludes "vanity metrics" like bounce rate; GA4 tracks them all.
+- Both have free plans; Kissmetrics is free up to 100,000 events a month, then starts at $99 a month.
+- GA4 integrates natively with Google Ads and Search Console; Kissmetrics does not.
+
+</details>
+
+<details>
+<summary>Main similarities between Kissmetrics and GA4</summary>
+
+- Both offer funnel analysis and conversion tracking.
+- Both track custom events and user behavior.
+- Both report on A/B tests you run in other tools, but neither runs experiments itself.
+
+</details>
+
+### Kissmetrics and GA4 pricing comparison
+
+| | Kissmetrics | GA4 |
+|---|---|---|
+| **Free plan** | 100k events a month, 3 seats | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | Growth from $99/month (500k events) | Analytics 360, priced through sales |
+| **MCP server** | Agent access advertised, but no MCP server documented | Yes, run locally, read-only by default |
+| **Self-hosting** | None | None |
+| **EU data storage** | No (US) | No EU-only option |
+
+> #### Bottom line
+> 
+> Kissmetrics is a great platform for sophisticated marketing teams who want to track the impact of their work on revenue. It's overkill for basic website analytics use cases, but a good option for mature businesses looking for a robust alternative to Google Analytics.
+
+## 4. TelemetryDeck
+
+- **Founded:** 2020
+- **Who it's for:** Indie developers and app teams who want privacy-safe analytics for iOS, Android, and Flutter apps.
+- **Who it isn't for:** Teams that need user profiles, ad attribution, or website-first analytics.
+- **GA4 data import:** No
+- **GDPR compliant:** Yes
+
+![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_19_T19_20_44_169_Z_4b2ac82b01.png)
+
+While it can be used on websites, **TelemetryDeck** is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), Flutter, and JavaScript (Node and web apps).
+
+TelemetryDeck makes it easy for app developers to track things like active users, OS version, app version, and basic user metadata like user location. It also supports basic retention and conversion funnel insights. TelemetryDeck doesn't collect any personally identifiable metadata, so you don't need tracking consent banners.
+
+### Key features
+ 
+- **SDKs:** Swift, Kotlin, Flutter, and JavaScript, plus a web SDK and partner-maintained React Native support.
+- **Privacy:** Collects no personally identifiable information, and runs on servers in Germany and Finland.
+- **Retention and funnels:** See how many users come back after day 1, 7, and 30, and where they drop off.
+- **Purchase tracking:** Automatic purchase tracking and a RevenueCat integration.
+
+### How does TelemetryDeck compare to GA4?
+
+TelemetryDeck does far less than GA4 by design. It's intentionally lean – no user profiles, no ad attribution, and only basic purchase tracking. What it offers is privacy-safe app analytics with zero compliance overhead, which is a compelling advantage for many indie developers and privacy-focused teams.
+
+<p>
+<ProductComparisonTable
+    competitors={['telemetrydeck', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between TelemetryDeck and GA4</summary>
+
+- TelemetryDeck collects no personally identifiable information by design; GA4 collects user-level data and requires GDPR consent management.
+- TelemetryDeck doesn't require cookie consent banners; GA4 does in most EU contexts.
+- TelemetryDeck is focused on app analytics (iOS, Android, Flutter, React Native); GA4 covers both websites and apps.
+- GA4 is free, with unpublished pricing for Analytics 360; TelemetryDeck has a free tier (50,000 events a month for new accounts) with plans tiered by event volume after that.
+- GA4 integrates with Google Ads; TelemetryDeck has no ad platform integrations.
+- TelemetryDeck has no user profiles and only basic purchase tracking; GA4 includes user-level reporting and revenue tracking.
+
+</details>
+
+<details>
+<summary>Main similarities between TelemetryDeck and GA4</summary>
+
+- Both support event-based tracking.
+- Both offer funnels and retention analysis.
+- Both support multiple platforms including iOS, Android, and web.
+- Both offer real-time dashboards.
+
+</details>
+
+### TelemetryDeck and GA4 pricing comparison
+ 
+| | TelemetryDeck | GA4 |
+|---|---|---|
+| **Free plan** | 50,000 events a month for new accounts | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | Tiered by monthly events | Analytics 360, priced through sales |
+| **MCP server** | Yes, hosted, in open beta | Yes, run locally, read-only by default |
+| **Self-hosting** | None | None |
+| **EU data storage** | Yes (Germany and Finland) | No EU-only option |
+
+> #### Bottom line
+> 
+> TelemetryDeck is a good option for those who want basic app analytics, but it falls short of feature parity with GA4. It's not a full GA4 replacement for teams that need revenue tracking, ad attribution, or user profiles – but it's a great fit for indie developers and privacy-first teams.
+
+## 5. Plausible
+
+- **Founded:** 2018
+- **Who it's for:** Content and marketing teams who want simple, cookieless website analytics they can read at a glance.
+- **Who it isn't for:** Teams that need user-level product analytics, session replay, or a free hosted plan.
+- **GA4 data import:** Yes (historical stats)
+- **GDPR compliant:** Yes
+
+![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
+
+[Plausible](/compare/posthog-vs-plausible) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
+ 
+[Plausible](/compare/best-plausible-alternatives) focuses on website metrics like pageviews, session duration, and referrers, plus custom events and goals. Funnels and revenue attribution are on its Business plan. It has no user-level product analytics, so it's a poor fit for apps, and it's significantly less powerful than Google Analytics and other alternatives in this list.
+ 
+But, if you just want basic website analytics, it gets the job done, and won't adversely impact the performance of your website thanks to its lightweight tracking script.
+
+### Key features
+ 
+- **Lightweight script:** 2.5KB with no cookies.
+- **Goals and custom events:** On every plan; funnels, revenue attribution, and custom properties are on Business.
+- **Google integrations:** Imports your GA4 history and connects to Search Console.
+- **Events API:** For server-side and mobile app tracking.
+- **Self-hosting:** A Community Edition under AGPLv3, without funnels and revenue goals.
+
+### How does Plausible compare to GA4?
+
+Plausible covers the basics of web analytics without the complexity. It's not a like-for-like GA4 replacement – it lacks user profiles, advanced segmentation, and the depth of reporting GA4 offers. But for teams who just want simple, trustworthy traffic data without GDPR headaches, it's hard to beat.
+
+<p>
+<ProductComparisonTable
+    competitors={['plausible', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Plausible and GA4</summary>
+
+- Plausible collects no personal data and requires no cookie consent banners; GA4 does.
+- GA4 has far deeper analytics: user profiles, cohorts, advanced segmentation, predictive insights. Plausible is intentionally basic.
+- Plausible is open source and can be self-hosted; GA4 is cloud-only.
+- GA4 integrates with Google Ads; Plausible doesn't.
+
+</details>
+
+<details>
+<summary>Main similarities between Plausible and GA4</summary>
+
+- Both offer web analytics with traffic sources, pageviews, and bounce rate.
+- Both support UTM tracking and campaign attribution.
+- Both support custom event tracking and goal conversion.
+
+</details>
+
+### Plausible and GA4 pricing comparison
+ 
+| | Plausible | GA4 |
+|---|---|---|
+| **Free plan** | None (30-day trial) | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | From $9/month for 10k pageviews | Analytics 360, priced through sales |
+| **MCP server** | No official server; its docs point to a community-built one | Yes, run locally, read-only by default |
+| **Self-hosting** | Free Community Edition (AGPLv3) | None |
+| **EU data storage** | Yes (Germany) | No EU-only option |
+
+> #### Bottom line
+>
+> While it lacks many of the advanced features of GA4, Plausible is a good option for content and marketing teams who just want easy to use, basic website analytics.
+
+## 6. Vercel Web Analytics
+
+- **Launched:** 2023
+- **Who it's for:** Front-end teams already deploying on Vercel who want basic traffic data without adding another tool.
+- **Who it isn't for:** Sites hosted anywhere else, or teams that need funnels, retention, or user-level data.
+- **GA4 data import:** No
+- **GDPR compliant:** Yes
+
+![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_19_T19_16_27_398_Z_a4c72f8822.png)
+
+**Vercel Web Analytics** is a privacy-friendly analytics tool available on all Vercel plans, with 50,000 events a month included on the free Hobby plan and usage-based pricing on Pro. Like Plausible, it tracks basic website metrics like pageviews, unique visitors, bounce rate, and referrers. It doesn't use cookies and only stores anonymized data.
+ 
+Vercel also has Speed Insights, a separate product for keeping track of your website's Core Web Vitals. Custom events for tracking conversions need a Pro or Enterprise plan, and UTM parameters need the Web Analytics Plus add-on.
+
+### Key features
+ 
+- **Traffic basics:** Visitors, pageviews, bounce rate, and referrers.
+- **Privacy:** No cookies, and only anonymized data is stored.
+- **Custom events:** Available on Pro and Enterprise plans.
+- **UTM parameters:** Available with the Web Analytics Plus add-on or on Enterprise.
+- **Speed Insights:** A separate Vercel product for tracking Core Web Vitals.
+
+### How does Vercel Web Analytics compare to GA4?
+
+Vercel Web Analytics is a convenience product, not a GA4 replacement. If you're already on Vercel, it's worth enabling for basic traffic data. If you need more depth – funnels, user paths, retention, ad attribution – you'll need a dedicated analytics tool.
+
+<p>
+<ProductComparisonTable
+    competitors={['vercel_analytics', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Vercel Web Analytics and GA4</summary>
+
+- Vercel Analytics uses no cookies and stores only anonymized data; GA4 sets cookies and needs consent banners in the EU.
+- GA4 is far more capable: user profiles, cohorts, segmentation, funnel analysis, ad attribution, and more.
+- Vercel Analytics only works for sites hosted on Vercel; GA4 works anywhere.
+- Vercel offers Core Web Vitals monitoring through Speed Insights, a separate product; GA4 has none built in.
+
+</details>
+
+<details>
+<summary>Main similarities between Vercel Web Analytics and GA4</summary>
+
+- Both offer basic web analytics: pageviews, visitors, and referrers.
+- Both support custom event tracking and conversion goals.
+- Both offer real-time data.
+
+</details>
+
+### Vercel Web Analytics and GA4 pricing comparison
+ 
+| | Vercel Web Analytics | GA4 |
+|---|---|---|
+| **Free plan** | 50,000 events a month on Hobby | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | Pro: $0.03 per 1,000 events; Web Analytics Plus: $10/month | Analytics 360, priced through sales |
+| **MCP server** | Yes, hosted, on all plans, with Web Analytics queries | Yes, run locally, read-only by default |
+| **Self-hosting** | None | None |
+| **EU data storage** | No (processed mainly in the US) | No EU-only option |
+
+> #### Bottom line
+>
+> Vercel Web Analytics is a nice value-add for any front-end dev using Vercel's frontend-as-a-service. There's certainly no need to deploy another privacy-first analytics tool (e.g. Plausible, Fathom) if you're already using Vercel, though it falls a long way short of a genuine Google Analytics alternative. If you need more than what it offers, consider deploying PostHog or Matomo.
+
+## 7. Piwik PRO
+
+- **Founded:** 2013
+- **Who it's for:** Enterprise teams in regulated industries who need analytics, consent management, and a choice of where their data is hosted.
+- **Who it isn't for:** Small teams that want a free plan or self-hosting; it has neither, and it can't import your Google Analytics history.
+- **GA4 data import:** No
+- **GDPR compliant:** Yes
+
+![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_19_T19_17_10_435_Z_27ed362823.png)
+
+**Piwik PRO** shares its roots with Matomo, which used to be called Piwik, but has been a separate company and product since 2016. As such, there are some similarities between the two, such as session-based tracking and superficial UX similarities.
+ 
+Piwik PRO's main differentiators are enterprise level support and the integration of a customer data platform (CDP), which it now calls Data Activation. Like Matomo, it also puts an emphasis on privacy compliance by integrating a consent manager.
+
+### Key features
+ 
+- **Four modules:** Analytics, Tag Manager, Consent Management, and Data Activation (its customer data platform), on both plans.
+- **Google integrations:** Connects to Google Ads and Search Console.
+- **Hosting choices:** Business plan hosted in Sweden. Choose other European countries, the US, and Hong Kong, or the UAE with private cloud on Enterprise.
+- **Compliance:** ISO 27001 and SOC 2 Type II, with a HIPAA BAA on the Enterprise plan.
+- **Agent access:** An MCP server, in beta since May 2026.
+
+### How does Piwik PRO compare to GA4?
+
+Piwik PRO is particularly strong for regulated industries and enterprise teams that need GDPR compliance, consent management, and EU data residency in a single package. It's less self-serve than GA4 but offers more control.
+
+<p>
+<ProductComparisonTable
+    competitors={['piwik_pro', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Piwik PRO and GA4</summary>
+
+- Piwik PRO includes a built-in consent manager and CDP; GA4 requires separate tools for both.
+- Piwik PRO offers private cloud hosting and a choice of data center region; GA4 doesn't. Neither can be self-hosted.
+- GA4 is free; Piwik PRO no longer has a free plan, and its paid plans start at €36 a month.
+- Piwik PRO is session-based like Universal Analytics; GA4 is event-based.
+- Piwik PRO requires a sales conversation for enterprise features; GA4 is self-serve.
+
+</details>
+
+<details>
+<summary>Main similarities between Piwik PRO and GA4</summary>
+
+- Both offer web analytics with traffic breakdown, referrers, and conversion tracking.
+- Both support custom event tracking.
+- Both offer funnels and user journey analysis.
+- Both integrate with Google Ads and Search Console.
+- Both support integrations with popular marketing tools.
+
+</details>
+
+### Piwik PRO and GA4 pricing comparison
+
+| | Piwik PRO | GA4 |
+|---|---|---|
+| **Free plan** | None (30-day trial) | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | Business from €36/month; Enterprise from €366/month billed annually | Analytics 360, priced through sales |
+| **MCP server** | Yes, in beta, run locally | Yes, run locally, read-only by default |
+| **Self-hosting** | None (private cloud on Enterprise) | None |
+| **EU data storage** | Yes (Sweden on Business) | No EU-only option |
+
+> #### Bottom line
+>
+> Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users who are familiar with Universal Analytics. It's less feature-rich than Matomo in some respects, but may be a better choice for larger organizations who require more support and scale.
+
+## 8. Fathom
+
+- **Founded:** 2018
+- **Who it's for:** Small and medium-size content and marketing sites that want simple, cookieless analytics.
+- **Who it isn't for:** Teams that need funnels, user-level data, or EU-only data storage.
+- **GA4 data import:** Yes (not events)
+- **GDPR compliant:** Yes
+
+![Fathom - GDPR compliant analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/fathom.png)
+
+[Fathom](/compare/best-fathom-alternatives) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand.
+
+For a deep dive, check out [PostHog vs Fathom Analytics](/compare/posthog-vs-fathom) too.
+
+### Key features
+ 
+- **Traffic basics:** Pageviews, visitors, bounce rate, and referrers, with no cookies.
+- **Events:** Fathom's version of goal tracking.
+- **UTM campaign tracking:** Included on all plans.
+- **GA4 importer:** Brings in your Google Analytics 4 history, without events.
+- **EU Isolation:** EU visitors' data is processed on EU servers.
+
+### How does Fathom compare to GA4?
+
+Like Plausible, Fathom is intentionally simple. It provides clean, unsampled web analytics data without the privacy concerns or interface complexity of GA4. It's not for teams that need advanced segmentation, user-level data, or ad attribution – but it's excellent for what it does.
+
+<p>
+<ProductComparisonTable
+    competitors={['fathom', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Fathom and GA4</summary>
+
+- Fathom uses no cookies and stores no personal data; GA4 sets cookies and needs consent banners in the EU.
+- Fathom is intentionally basic – no user profiles, cohorts, or advanced segmentation.
+- Fathom is paid (starts at $15/month); GA4 has a large free tier.
+- GA4 has far deeper analytics capabilities and integrates with Google Ads.
+- Fathom routes EU visitors through EU servers, but stores the anonymized data in the US; GA4 doesn't offer EU-only data residency either.
+
+</details>
+
+<details>
+<summary>Main similarities between Fathom and GA4</summary>
+
+- Both offer web analytics with traffic sources, pageviews, and bounce rate.
+- Both support UTM tracking and campaign attribution.
+- Both support custom event tracking and goal conversion.
+
+</details>
+
+### Fathom and GA4 pricing comparison
+
+| | Fathom | GA4 |
+|---|---|---|
+| **Free plan** | None (7-day trial, card required) | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | From $15/month for 100k pageviews | Analytics 360, priced through sales |
+| **MCP server** | None documented | Yes, run locally, read-only by default |
+| **Self-hosting** | None | None |
+| **EU data storage** | No (EU processing, US storage) | No EU-only option |
+
+> #### Bottom line
+>
+> There isn't much to choose between Fathom and Plausible. Again, if you want lightweight website analytics without the feature bloat of Google, you can't go wrong with Fathom.
+
+## 9. Counter
+
+- **Founded:** 2020
+- **Who it's for:** Personal sites, blogs, and side projects that only need visit counts and referrers.
+- **Who it isn't for:** Anyone who needs UTM tracking, bounce rate, or funnels.
+- **GA4 data import:** No
+- **GDPR compliant:** Yes
+
+![counter](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_19_T19_19_21_277_Z_fc8a748c75.png)
+
+**Counter** is a free and [open source analytics](/compare/best-open-source-analytics-tools) tool that operates a "pay what you want" model. It's by no means a feature-complete alternative to GA4, but it's ideal if you want to track basic website activity like visits, referral data, and user properties (device, platform, browser etc.).
+ 
+Counter's creators can offer it for free because it only collects aggregated data, reducing the complexity and load on the server, while also improving data privacy. To count unique users, Counter uses a combination of techniques including the browser's cache, `sessionStorage`, and referrer inspection.
+
+### Key features
+ 
+- **Traffic basics:** Visits, referrers, and device, platform, and browser breakdowns.
+- **Aggregated data only:** No cookies, no logging, and no IP fingerprinting.
+- **Open source:** Published under AGPLv3, with a self-hosted version.
+- **Pay what you want:** Free to use, with optional payment.
+
+### How does Counter compare to GA4?
+
+Counter is about as minimal as analytics gets. It does just enough to answer "how many people visited my site and where did they come from?" For personal projects, blogs, and indie developers who don't need anything more, it's a compelling free alternative.
+
+<p>
+<ProductComparisonTable
+    competitors={['counter', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
+        'session_replay',
+        'experiments',
+        'heatmaps',
+        'feature_flags',
+        'error_tracking',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Counter and GA4</summary>
+
+- Counter only collects aggregated data; GA4 collects individual user-level event data.
+- Counter is free on a pay-what-you-want basis; GA4 is also free but with data retention and sampling limits.
+- Counter's feature set is extremely minimal; GA4 offers deep analytics, segmentation, and attribution.
+- Counter has no integrations with ad platforms or external tools; GA4 connects to Google's entire marketing stack.
+- Counter can be self-hosted; GA4 cannot.
+- Counter uses no cookies, though it doesn't promise you can skip a consent banner; GA4 requires one in most EU contexts.
+
+</details>
+
+<details>
+<summary>Main similarities between Counter and GA4</summary>
+
+- Both offer basic web analytics: visits, referrers, and device breakdown.
+- Both are free to use.
+
+</details>
+
+### Counter and GA4 pricing comparison
+ 
+| | Counter | GA4 |
+|---|---|---|
+| **Free plan** | Free (pay what you want) | Free, with sampling above 10M events per exploration and 14 months of event-level data |
+| **Paid plans** | None | Analytics 360, priced through sales |
+| **MCP server** | None documented | Yes, run locally, read-only by default |
+| **Self-hosting** | Free (AGPLv3) | None |
+| **EU data storage** | Yes (Frankfurt) | No EU-only option |
+
+> #### Bottom line
+>
+> Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down deeply into individual page performance like Fathom or Plausible.
+
+## Which GA4 alternative should you choose?
+ 
+- Want powerful web analytics and free heatmaps, plus multiple other developer tools in a platform your agents can query via the MCP, with 1 million events free every month? Go with **PostHog**.
+- Miss Universal Analytics and want to self-host with your GA4 history imported? Try **Matomo**.
+- Want to tie marketing campaigns to revenue for each customer? Consider **Kissmetrics**.
+- Building a mobile app and want privacy-safe analytics? **TelemetryDeck** is built for that.
+- Just need simple, cookieless traffic numbers for a content site? **Plausible** keeps it lightweight.
+- Already deploying on Vercel and only need the basics? Turn on **Vercel Web Analytics**.
+- In a regulated industry and need consent management and a choice of hosting region? **Piwik PRO** is the enterprise pick.
+- Running simple analytics across lots of small sites? **Fathom** includes 50 sites on its entry plan.
+- Only need a free visit counter for a personal site or side project? **Counter** does just that.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the best GA4 replacement if:
+
+- You need more than web analytics – session replay, feature flags, A/B testing, and error tracking all in one place.
+- You want transparent, usage-based pricing without a sales call.
+- You're an engineering or product team who wants SQL access, open-source code, and APIs.
+- You want your coding agent to query your traffic through [the MCP](/docs/web-analytics/surfaces/mcp).
+- You want to try before you buy (we're self-serve with a [generous free tier](/pricing)).
+
+It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or check out [our docs](/docs) to do it yourself.
+
+<WizardCTA
+    title="Start tracking with one command"
+    subtitle="The wizard installs PostHog in your app, so pageviews and events start flowing in minutes."
+    learnMoreTo="/docs/migrate/google-analytics"
+/>
+
+## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+It means your web analytics sits next to everything else you know about the user. [Web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [logs](/logs) all share one model of users and sessions. From a traffic source, you can follow visitors into funnels, session replays, and the errors they hit for example.
+ 
+The [data warehouse](/warehouse) and [CDP](/data-pipelines) extend it to the business data that lives elsewhere, like Stripe, HubSpot, and Postgres, and an agent working from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp) can work across all of it without stitching tools together.
+ 
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+<summary>Why are people looking for Google Analytics alternatives?</summary>
+
+Common reasons include: GA4 is harder to use than Universal Analytics, data sampling affects accuracy on large exploration queries, the 14-month limit on event-level data in the free version is restrictive, privacy concerns and GDPR compliance are complicated under GA4, and many teams need more than web analytics – session replay, feature flags, error tracking – that GA4 simply doesn't offer.
+
+</details>
+
+<details>
+<summary>What's the best free Google Analytics alternative?</summary>
+
+**PostHog** offers the most complete free tier: 1 million analytics events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests, and 1,500 survey responses per month. **Plausible** and **Fathom** are both paid but have free trials. **Counter** is completely free.
+
+</details>
+
+<details>
+<summary>What's the best privacy-friendly Google Analytics alternative?</summary>
+
+For lightweight web analytics, **Plausible** and **Fathom** are the strongest options – both are cookieless, GDPR-compliant by default, and collect no personally identifiable information. **TelemetryDeck** is the best option for app developers who need privacy-safe analytics without consent banners. **PostHog** and **Matomo** both support EU hosting and cookieless tracking for teams with more advanced requirements. 
+
+See our guide to [GDPR-compliant analytics tools](/compare/best-gdpr-compliant-analytics-tools) for a full breakdown.
+
+</details>
+
+<details>
+<summary>Which GA4 alternatives are open source?</summary>
+
+Four of the nine. **PostHog** is open source under the MIT license, with enterprise features licensed separately. **Matomo** is GPLv3, though some premium plugins are proprietary. **Plausible** publishes a self-hosted Community Edition under AGPLv3, and **Counter** is AGPLv3 too.
+ 
+GA4, Kissmetrics, Piwik PRO, Fathom, TelemetryDeck, and Vercel Web Analytics are closed source. See our guide to the [best open source analytics tools](/compare/best-open-source-analytics-tools) for more.
+ 
+</details>
+
+<details>
+<summary>What's the best GA4 alternative for startups?</summary>
+
+**PostHog** is the best option for early-stage companies. Beyond the generous free tier, startups can apply for [PostHog for Startups](/startups) to get $50,000 in additional credits. One platform that covers analytics, replays, feature flags, and more from day one means you don't have to swap tools as you scale.
+
+</details>
+
+<details>
+<summary>What's the best GA4 alternative for developers?</summary>
+
+**PostHog** is built for developers – SQL access, MCP server and [CLI](/docs/cli) for AI coding tools, open-source codebase, extensively documented APIs, and SDKs for every major platform. **TelemetryDeck** is a good lightweight option for app developers who prioritize privacy.
+
+</details>
+
+<details>
+<summary>What's the best GA4 alternative for session replay?</summary>
+
+**PostHog** includes session replay with console logs, network monitoring, a DOM explorer, and performance metrics – tightly integrated with analytics. 
+
+For standalone session replay, see our guide to the [best session replay tools](/compare/best-session-replay-tools).
+
+</details>
+
+<details>
+<summary>Can I migrate historical data from GA4 to another tool?</summary>
+
+**Matomo**, **Plausible**, and **Fathom** can all import GA4 data, as aggregated reports rather than raw events.
+
+**PostHog** can sync GA4 report data into its data warehouse with the [Google Analytics source](/docs/data-pipelines/sources/google-analytics), and you can backfill raw events through GA4's BigQuery export using our [migration guide](/docs/migrate/google-analytics). There's no one-click import of GA4 history into web analytics, so we recommend running both tools in parallel during the transition.
+
+</details>
+
+<details>
+<summary>Does GA4 have session replay?</summary>
+
+No. GA4 does not include session replay. If you need session replay alongside web analytics, consider **PostHog** (which integrates replay with analytics, feature flags, and error tracking) or **Hotjar** (now part of Contentsquare).
+
+</details>
+
+<details>
+<summary>Does GA4 have feature flags or A/B testing?</summary>
+
+No. GA4 does not offer native feature flags or A/B testing. [Google Optimize](/blog/optimize-to-posthog) (GA4's A/B testing product) was shut down in 2023. For feature flags and experimentation tightly integrated with analytics, **PostHog** is the best alternative. 
+
+See our guide to the [best LaunchDarkly alternatives](/compare/best-launchdarkly-alternatives) for more options.
+
+</details>
+
+<details>
+<summary>What are the best web analytics tools in 2026?</summary>
+
+The [top web analytics tools in 2026](/compare/best-web-analytics-tools) include:
+
+- **[PostHog](/web-analytics)** – Best all-in-one for engineering teams wanting analytics, replay, feature flags, and more
+- **[Plausible](/compare/posthog-vs-plausible)** – Best lightweight, privacy-focused option
+- **[Matomo](/compare/posthog-vs-matomo)** – Best self-hosted GA alternative with full data ownership
+- **[Fathom](/compare/best-fathom-alternatives)** – Best for privacy-conscious teams wanting simple, cookieless analytics
+- **[Amplitude](/compare/posthog-vs-amplitude)** – Best for enterprise product analytics with a built-in CDP
+- **[Mixpanel](/compare/posthog-vs-mixpanel)** – Best for product managers wanting event-based analytics
+
+See our full guide to the [best web analytics tools](/compare/best-web-analytics-tools) for more options.
+
+</details>

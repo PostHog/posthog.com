@@ -62,9 +62,9 @@ If you find a paying customer who we should not be doing business with according
 
 1. First get in touch with all active users in the account via a group email to let them know that:
   - As they are a Russian company, we can not do business with them and link this handbook page.
-  - You'll be cancelling their paid subscription today
+  - Their paid subscription will be canceled today
   - They will be given a few days grace to export any data, and then access to PostHog will be suspended
-2. In Stripe, cancel their subscription (don't collect any due fees) and also set `is_blocked_from_subscribing` to true in their customer metadata.  You can access their Stripe customer record via Customer Analytics.
+2. Only the billing and finance teams can make changes in Stripe. Tag `@billing-support` in Slack and ask them to cancel the subscription without collecting any due fees, and to set `is_blocked_from_subscribing` to `true` in the customer metadata. Include the link to their Stripe customer record, which you can find in Customer Analytics.
 3. After 3 business days, suspend their access to PostHog using the Billing Admin.
 
 ## Checking whether we can do business with a customer

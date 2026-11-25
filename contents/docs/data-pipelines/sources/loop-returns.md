@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Loop Returns connector syncs returns, advanced shipping notices, destinations, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Loop Returns connector syncs returns, advanced shipping notices, destinations, and more into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -25,19 +25,37 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Loop API key to pull your returns data.
 
-Create a key in Loop under **Settings** > **Developers**. The key needs the `Returns` scope for the returns and advanced shipping notice tables, and `Destinations (Read)` for the destinations table.
+Create a key in Loop under **Settings** > **Developers**. Give it the scopes for the tables you want to sync:
 
-Start date is optional and sets how far back the first sync reaches. Without it, syncing starts two years ago.
+| Tables                                 | Required scope        |
+| -------------------------------------- | --------------------- |
+| `returns`, `advanced_shipping_notices` | `Returns`             |
+| `destinations`                         | `Destinations (Read)` |
+| `orders`                               | `Order (Read)`        |
+| `products`, `product_variants`         | `Product (Read)`      |
+| `customers`                            | `Customers (Read)`    |
+| `locations`                            | `Locations (Read)`    |
+| `inventories`                          | `Inventory (Read)`    |
+
+Start date is optional and sets how far back the first sync reaches. Without it, syncing starts two years ago. You can select a date up to five years ago.
 
 You'll be asked for:
 
 - **API key**
 
+## API versions
+
+New sources default to API version `2026-10`. PostHog also supports `2026-07` and the legacy `v1` alias for `2026-07`.
+
+The `v1` alias sunsets on July 15, 2028. After the sunset, Loop serves the oldest supported version instead of rejecting requests. Update sources that use `v1` to an explicit supported version before then. See [Loop's API versioning guide](https://docs.loopreturns.com/api-reference/versioning).
+
 ## Sync modes
 
 <SyncModes />
 
-All Loop Returns tables are full refresh. Each sync replaces the contents of the table.
+The `returns` table supports incremental sync on `created_at` or `updated_at`. The `advanced_shipping_notices` table supports incremental sync on `created_at`.
+
+The remaining tables use full refresh. Each sync replaces their contents.
 
 ## Configuration
 

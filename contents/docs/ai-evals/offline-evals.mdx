@@ -2,11 +2,16 @@
 title: Offline evals
 ---
 
-import ImageAnnotations from "components/ImageAnnotations"
+import ImageAnnotations from "components/ImageAnnotations";
+import EvalsPlaygroundCallout from "components/EvalsPlaygroundCallout";
 
 Offline evals test your AI agent against known inputs before you ship a prompt, model, or code change. Run your agent and score its outputs locally or in your CI, using your existing test framework. The PostHog SDK uploads the results so you can compare runs and inspect failures.
 
-[Online evaluations](/docs/ai-evals) help you find failures in production. Add those failures to your offline test set to check that your next change fixes them.
+[Online evaluations](/docs/ai-evals) help you find failures in production. Add those failures to your offline test set to check that your next change fixes them. For a walkthrough, see [turn a production failure into a test case](/docs/ai-evals/datasets#example-turn-a-production-failure-into-a-test-case).
+
+<div>
+  <EvalsPlaygroundCallout />
+</div>
 
 ## How offline evals work
 
@@ -17,7 +22,7 @@ Each run follows four steps:
 3. **Score the output** – Use code checks, an LLM judge, or your existing evaluation library.
 4. **Upload the results** – Send the items and scores to PostHog, then mark the experiment complete.
 
-A _scorer_ defines what a result means: its name, value type, and passing rule. A **reported scorer** records scores calculated by your evaluation code and reported to PostHog, such as whether your agent selected the expected tool. With a [**composite scorer**](#combine-scores-with-a-composite-scorer), PostHog calculates a score from other reported scores for the same item.
+A _scorer_ defines what a result means: its name, value type, and passing rule. A **reported scorer** records scores calculated by your evaluation code and reported to PostHog, such as whether your agent selected the expected tool. With a [**composite scorer**](/docs/ai-evals/scorers#combine-scores-with-a-composite-scorer), PostHog calculates a score from other reported scores for the same item.
 
 ## Run your first experiment
 
@@ -27,24 +32,31 @@ Three deliberate mistakes give you failures to inspect: a wrong tool, a missing 
 
 ### 1. Install the SDK and configure access
 
-Install the latest SDK. This quickstart requires:
+Install the SDK for your language. This quickstart requires:
 
--   **Python:** Python 3.10+ and `posthog` 7.74.0+.
--   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
+- **Python:** Python 3.10+ and `posthog` 7.74.0+.
+- **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
+- **Go:** Go 1.21+ and `posthog-go/v2` v2.2.0+. Run the commands in an empty directory, then complete the Go client setup below.
 
 <MultiLanguage selector="tabs">
 
 ```bash file=Python
-pip install --upgrade "posthog<8"
+pip install --upgrade "posthog>=8,<9"
 ```
 
 ```shell file=TypeScript
 pnpm add @posthog/ai@8
 ```
 
+```sh file=Go
+go mod init example.com/support-eval
+go get github.com/posthog/posthog-go/v2/ai/evaluations@v2.2.0
+mkdir -p scorers baseline
+```
+
 </MultiLanguage>
 
-This walkthrough uses a [personal API key](/docs/api/personal-api-keys) to create and read scorers. Experiments you create with it are attributed to your PostHog user. For uploads from your CI, use a [project secret API key](/docs/api/project-secret-api-keys), which isn't tied to a person. See [Use results in your CI](#use-results-in-your-ci).
+This walkthrough uses a [personal API key](/docs/api/personal-api-keys) to create and read scorers. Experiments you create with it are attributed to your PostHog user. For uploads from your CI, use a [project secret API key](/docs/api/project-secret-api-keys), which isn't tied to a person and supports the same scopes. See [Use results in your CI](/docs/ai-evals/experiments#use-results-in-your-ci).
 
 Create a personal API key with access to your project and these scopes:
 
@@ -67,9 +79,50 @@ Find your project ID in [project settings](https://app.posthog.com/settings/proj
 
 Keep your API key in an environment variable or your CI's secret store. Never commit it or expose it in browser code. Your public project token can't authenticate these requests.
 
+<details>
+
+<summary>Go: set up the shared client</summary>
+
+Save this as `client.go` next to `go.mod`. Each Go example uses it to open a client with the same project settings and close it when the command finishes.
+
+```go
+package supporteval
+
+import (
+	"context"
+	"log"
+	"os"
+	"strconv"
+
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+func Run(work func(context.Context, *evaluations.Client) error) {
+	projectID, err := strconv.Atoi(os.Getenv("POSTHOG_PROJECT_ID"))
+	if err != nil {
+		log.Fatal("Set POSTHOG_PROJECT_ID to a numeric project ID")
+	}
+	client, err := evaluations.NewClient(evaluations.Config{
+		ProjectID: projectID,
+		SecretKey: os.Getenv("POSTHOG_PERSONAL_API_KEY"),
+		Host:      os.Getenv("POSTHOG_HOST"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = work(context.Background(), client)
+	client.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+</details>
+
 ### 2. Create two scorers
 
-Save this as `create_scorers.py` or `create_scorers.mts` and run it once to create **Correct tool** and **Correct arguments**. For both scorers, `true` passes and `false` fails.
+Save this as `create_scorers.py`, `create_scorers.mts`, or `scorers/main.go` and run it once to create **Correct tool** and **Correct arguments**. For both scorers, `true` passes and `false` fails.
 
 <MultiLanguage selector="tabs">
 
@@ -96,25 +149,54 @@ with OfflineEvaluations(
 ```
 
 ```typescript file=TypeScript
-import { OfflineEvaluations } from "@posthog/ai/evaluations"
+import { OfflineEvaluations } from "@posthog/ai/evaluations";
 
 const evaluations = new OfflineEvaluations({
-    projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
-    host: process.env.POSTHOG_HOST!,
-})
+  projectId: Number(process.env.POSTHOG_PROJECT_ID),
+  secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+  host: process.env.POSTHOG_HOST!,
+});
 
 try {
-    for (const name of ["Correct tool", "Correct arguments"]) {
-        const scorer = await evaluations.scorers.create({
-            name,
-            kind: "boolean",
-            config: { trueIsFailure: false, trueLabel: "Pass", falseLabel: "Fail" },
-        })
-        console.log(`${name}: ${scorer.id}`)
-    }
+  for (const name of ["Correct tool", "Correct arguments"]) {
+    const scorer = await evaluations.scorers.create({
+      name,
+      kind: "boolean",
+      config: { trueIsFailure: false, trueLabel: "Pass", falseLabel: "Fail" },
+    });
+    console.log(`${name}: ${scorer.id}`);
+  }
 } finally {
-    evaluations.close()
+  evaluations.close();
+}
+```
+
+```go file=Go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"example.com/support-eval"
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+func main() { supporteval.Run(createScorers) }
+
+func createScorers(ctx context.Context, client *evaluations.Client) error {
+	pass, fail := "Pass", "Fail"
+	config := evaluations.BooleanConfig{
+		TrueIsFailure: evaluations.Value(false), TrueLabel: &pass, FalseLabel: &fail,
+	}
+	for _, name := range []string{"Correct tool", "Correct arguments"} {
+		scorer, err := client.Scorers.Create(ctx, name, config, evaluations.CreateScorerOptions{})
+		if err != nil {
+			return err
+		}
+		fmt.Printf("%s: %s\n", name, scorer.ID)
+	}
+	return nil
 }
 ```
 
@@ -130,6 +212,10 @@ python create_scorers.py
 pnpm dlx tsx create_scorers.mts
 ```
 
+```sh file=Go
+go run ./scorers
+```
+
 </MultiLanguage>
 
 Save the two printed scorer IDs. The run script fetches each scorer once and uses its current version for every case:
@@ -139,11 +225,11 @@ export POSTHOG_TOOL_SCORER_ID="<correct_tool_scorer_id>"
 export POSTHOG_ARGUMENTS_SCORER_ID="<correct_arguments_scorer_id>"
 ```
 
-Reuse these scorers across experiments to keep their history together. To compare runs against a fixed configuration, save the version IDs (`current_version_id` / `currentVersionId`) instead of fetching the latest versions.
+Reuse these scorers across experiments to keep their history together. To compare runs against a fixed configuration, save the version IDs (`current_version_id` in Python, `currentVersionId` in TypeScript, or `CurrentVersionID` in Go).
 
 ### 3. Run the cases and upload scores
 
-Save this as `support_eval.py` or `support_eval.mts`. It uploads two scores per case, each with an explanation. The argument check compares exact key-value pairs independently of the tool name, so a case can pass one check and fail the other.
+Save this as `support_eval.py`, `support_eval.mts`, or `baseline/main.go`. It uploads two scores per case, each with an explanation. The argument check compares exact key-value pairs independently of the tool name, so a case can pass one check and fail the other.
 
 <MultiLanguage selector="tabs">
 
@@ -256,130 +342,261 @@ with OfflineEvaluations(
 ```
 
 ```typescript file=TypeScript
-import { EvaluationItem, OfflineEvaluations } from "@posthog/ai/evaluations"
+import { EvaluationItem, OfflineEvaluations } from "@posthog/ai/evaluations";
 
-type ToolCall = { tool: string; arguments: Record<string, string> }
+type ToolCall = { tool: string; arguments: Record<string, string> };
 
 function runAgent(input: string): ToolCall {
-    const text = input.toLowerCase()
-    const orderId = text.match(/#(\d+)/)?.[1] ?? ""
-    // These three rules contain deliberate mistakes for the demo.
-    if (text.includes("cancel")) {
-        return { tool: "cancel_order", arguments: {} }
-    }
-    if (text.includes("refund")) {
-        return { tool: "check_refund_policy", arguments: { order_id: "1001" } }
-    }
-    if (text.includes("order")) {
-        return { tool: "check_refund_policy", arguments: { order_id: orderId } }
-    }
-    const queue = text.includes("charged") ? "billing" : "account"
-    return { tool: "handoff_to_support", arguments: { queue } }
+  const text = input.toLowerCase();
+  const orderId = text.match(/#(\d+)/)?.[1] ?? "";
+  // These three rules contain deliberate mistakes for the demo.
+  if (text.includes("cancel")) {
+    return { tool: "cancel_order", arguments: {} };
+  }
+  if (text.includes("refund")) {
+    return { tool: "check_refund_policy", arguments: { order_id: "1001" } };
+  }
+  if (text.includes("order")) {
+    return { tool: "check_refund_policy", arguments: { order_id: orderId } };
+  }
+  const queue = text.includes("charged") ? "billing" : "account";
+  return { tool: "handoff_to_support", arguments: { queue } };
 }
 
 function evaluateAnswer(output: ToolCall, expected: ToolCall) {
-    const actualArgs = output.arguments
-    const expectedArgs = expected.arguments
-    return {
-        tool: {
-            value: output.tool === expected.tool,
-            reasoning: `Expected ${expected.tool}; selected ${output.tool}.`,
-        },
-        arguments: {
-            value:
-                Object.keys(actualArgs).length === Object.keys(expectedArgs).length &&
-                Object.entries(expectedArgs).every(
-                    ([key, value]) => actualArgs[key] === value
-                ),
-            reasoning: `Expected ${JSON.stringify(
-                expectedArgs
-            )}; received ${JSON.stringify(actualArgs)}.`,
-        },
-    }
+  const actualArgs = output.arguments;
+  const expectedArgs = expected.arguments;
+  return {
+    tool: {
+      value: output.tool === expected.tool,
+      reasoning: `Expected ${expected.tool}; selected ${output.tool}.`,
+    },
+    arguments: {
+      value:
+        Object.keys(actualArgs).length === Object.keys(expectedArgs).length &&
+        Object.entries(expectedArgs).every(([key, value]) => actualArgs[key] === value),
+      reasoning: `Expected ${JSON.stringify(
+        expectedArgs,
+      )}; received ${JSON.stringify(actualArgs)}.`,
+    },
+  };
 }
 
 const cases: { id: string; input: string; expected: ToolCall }[] = [
-    {
-        id: "refund_eligibility",
-        input: "Can I get a refund for order #1001?",
-        expected: { tool: "check_refund_policy", arguments: { order_id: "1001" } },
-    },
-    {
-        id: "delivery_status",
-        input: "Where is order #1002?",
-        expected: { tool: "look_up_order", arguments: { order_id: "1002" } },
-    },
-    {
-        id: "cancel_order",
-        input: "Please cancel order #1003.",
-        expected: { tool: "cancel_order", arguments: { order_id: "1003" } },
-    },
-    {
-        id: "refund_other_order",
-        input: "Can I get a refund for order #1004?",
-        expected: { tool: "check_refund_policy", arguments: { order_id: "1004" } },
-    },
-    {
-        id: "account_access",
-        input: "I can't sign in to my account.",
-        expected: { tool: "handoff_to_support", arguments: { queue: "account" } },
-    },
-    {
-        id: "billing_question",
-        input: "Why was I charged twice?",
-        expected: { tool: "handoff_to_support", arguments: { queue: "billing" } },
-    },
-]
+  {
+    id: "refund_eligibility",
+    input: "Can I get a refund for order #1001?",
+    expected: { tool: "check_refund_policy", arguments: { order_id: "1001" } },
+  },
+  {
+    id: "delivery_status",
+    input: "Where is order #1002?",
+    expected: { tool: "look_up_order", arguments: { order_id: "1002" } },
+  },
+  {
+    id: "cancel_order",
+    input: "Please cancel order #1003.",
+    expected: { tool: "cancel_order", arguments: { order_id: "1003" } },
+  },
+  {
+    id: "refund_other_order",
+    input: "Can I get a refund for order #1004?",
+    expected: { tool: "check_refund_policy", arguments: { order_id: "1004" } },
+  },
+  {
+    id: "account_access",
+    input: "I can't sign in to my account.",
+    expected: { tool: "handoff_to_support", arguments: { queue: "account" } },
+  },
+  {
+    id: "billing_question",
+    input: "Why was I charged twice?",
+    expected: { tool: "handoff_to_support", arguments: { queue: "billing" } },
+  },
+];
 
 const evaluations = new OfflineEvaluations({
-    projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
-    host: process.env.POSTHOG_HOST!,
-})
+  projectId: Number(process.env.POSTHOG_PROJECT_ID),
+  secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+  host: process.env.POSTHOG_HOST!,
+});
 
 try {
-    const scorers = {
-        tool: await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!),
-        arguments: await evaluations.scorers.get(
-            process.env.POSTHOG_ARGUMENTS_SCORER_ID!
-        ),
-    }
-    const experiment = await evaluations.createExperiment({
-        name: "Support agent baseline",
-        suiteKey: "support-agent",
-        runSource: "local",
-        expectedItemCount: cases.length,
-        expectedResultCount: cases.length * Object.keys(scorers).length,
-    })
+  const scorers = {
+    tool: await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!),
+    arguments: await evaluations.scorers.get(process.env.POSTHOG_ARGUMENTS_SCORER_ID!),
+  };
+  const experiment = await evaluations.createExperiment({
+    name: "Support agent baseline",
+    suiteKey: "support-agent",
+    runSource: "local",
+    expectedItemCount: cases.length,
+    expectedResultCount: cases.length * Object.keys(scorers).length,
+  });
 
-    try {
-        for (const testCase of cases) {
-            const output = await runAgent(testCase.input)
-            const item = new EvaluationItem({
-                caseKey: testCase.id,
-                input: testCase.input,
-                output,
-                expectedOutput: testCase.expected,
-            })
-            const scores = evaluateAnswer(output, testCase.expected)
-            for (const key of ["tool", "arguments"] as const) {
-                await experiment.uploadResult({
-                    item,
-                    scorerVersionId: scorers[key].currentVersionId,
-                    ...scores[key],
-                })
-            }
-        }
-    } catch (error) {
-        await experiment.fail()
-        throw error
+  try {
+    for (const testCase of cases) {
+      const output = await runAgent(testCase.input);
+      const item = new EvaluationItem({
+        caseKey: testCase.id,
+        input: testCase.input,
+        output,
+        expectedOutput: testCase.expected,
+      });
+      const scores = evaluateAnswer(output, testCase.expected);
+      for (const key of ["tool", "arguments"] as const) {
+        await experiment.uploadResult({
+          item,
+          scorerVersionId: scorers[key].currentVersionId,
+          ...scores[key],
+        });
+      }
     }
+  } catch (error) {
+    await experiment.fail();
+    throw error;
+  }
 
-    await experiment.complete()
-    console.log(`Completed experiment: ${experiment.id}`)
+  await experiment.complete();
+  console.log(`Completed experiment: ${experiment.id}`);
 } finally {
-    evaluations.close()
+  evaluations.close();
 }
+```
+
+```go file=Go
+package main
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"maps"
+	"os"
+	"regexp"
+	"strings"
+
+	"example.com/support-eval"
+	"github.com/posthog/posthog-go/v2/ai/evaluations"
+)
+
+type toolCall struct {
+	Tool      string
+	Arguments map[string]string
+}
+
+func (call toolCall) fields() evaluations.Fields {
+	return evaluations.Fields{"tool": call.Tool, "arguments": call.Arguments}
+}
+
+type testCase struct {
+	key, input string
+	expected   toolCall
+}
+
+var cases = []testCase{
+	{"refund_eligibility", "Can I get a refund for order #1001?", toolCall{"check_refund_policy", map[string]string{"order_id": "1001"}}},
+	{"delivery_status", "Where is order #1002?", toolCall{"look_up_order", map[string]string{"order_id": "1002"}}},
+	{"cancel_order", "Please cancel order #1003.", toolCall{"cancel_order", map[string]string{"order_id": "1003"}}},
+	{"refund_other_order", "Can I get a refund for order #1004?", toolCall{"check_refund_policy", map[string]string{"order_id": "1004"}}},
+	{"account_access", "I can't sign in to my account.", toolCall{"handoff_to_support", map[string]string{"queue": "account"}}},
+	{"billing_question", "Why was I charged twice?", toolCall{"handoff_to_support", map[string]string{"queue": "billing"}}},
+}
+
+var orderNumber = regexp.MustCompile(`#[0-9]+`)
+
+func runAgent(input string) toolCall {
+	text := strings.ToLower(input)
+	// These first three rules contain the deliberate mistakes.
+	switch {
+	case strings.Contains(text, "cancel"):
+		return toolCall{"cancel_order", map[string]string{}}
+	case strings.Contains(text, "refund"):
+		return toolCall{"check_refund_policy", map[string]string{"order_id": "1001"}}
+	case strings.Contains(text, "order"):
+		orderID := strings.TrimPrefix(orderNumber.FindString(text), "#")
+		return toolCall{"check_refund_policy", map[string]string{"order_id": orderID}}
+	case strings.Contains(text, "charged"):
+		return toolCall{"handoff_to_support", map[string]string{"queue": "billing"}}
+	default:
+		return toolCall{"handoff_to_support", map[string]string{"queue": "account"}}
+	}
+}
+
+func evaluateAnswer(item evaluations.Item, output, expected toolCall, versions map[string]string) ([]evaluations.Result, error) {
+	tool, err := evaluations.NewResult(item, versions["tool_correct"], evaluations.Fields{
+		"value":     output.Tool == expected.Tool,
+		"reasoning": fmt.Sprintf("Expected %s, selected %s.", expected.Tool, output.Tool),
+	})
+	if err != nil {
+		return nil, err
+	}
+	args, err := evaluations.NewResult(item, versions["arguments_correct"], evaluations.Fields{
+		"value":     maps.Equal(output.Arguments, expected.Arguments),
+		"reasoning": fmt.Sprintf("Expected %v, received %v.", expected.Arguments, output.Arguments),
+	})
+	if err != nil {
+		return nil, err
+	}
+	return []evaluations.Result{tool, args}, nil
+}
+
+func (c testCase) evaluate(versions map[string]string) (evaluations.Item, []evaluations.Result, error) {
+	output := runAgent(c.input)
+	item, err := evaluations.NewItem(evaluations.Fields{
+		"case_key": c.key, "input": c.input, "output": output.fields(), "expected_output": c.expected.fields(),
+	})
+	if err != nil {
+		return item, nil, err
+	}
+	results, err := evaluateAnswer(item, output, c.expected, versions)
+	return item, results, err
+}
+
+func finish(ctx context.Context, experiment *evaluations.Experiment, uploadErr error) error {
+	if uploadErr != nil {
+		_, failErr := experiment.Fail(ctx)
+		return errors.Join(uploadErr, failErr)
+	}
+	_, err := experiment.Complete(ctx)
+	if err == nil {
+		fmt.Println("Completed experiment:", experiment.ID())
+	}
+	return err
+}
+
+func runExperiment(ctx context.Context, client *evaluations.Client) error {
+	versions := map[string]string{}
+	for alias, id := range map[string]string{
+		"tool_correct":      os.Getenv("POSTHOG_TOOL_SCORER_ID"),
+		"arguments_correct": os.Getenv("POSTHOG_ARGUMENTS_SCORER_ID"),
+	} {
+		scorer, err := client.Scorers.Get(ctx, id)
+		if err != nil {
+			return err
+		}
+		versions[alias] = scorer.CurrentVersionID
+	}
+	experiment, err := client.CreateExperiment(ctx, evaluations.Fields{
+		"name": "Support agent baseline", "suite_key": "support-agent", "run_source": "local",
+		"expected_item_count": len(cases), "expected_result_count": len(cases) * len(versions),
+	})
+	if err != nil {
+		return err
+	}
+	for _, c := range cases {
+		_, results, err := c.evaluate(versions)
+		if err != nil {
+			return finish(ctx, experiment, err)
+		}
+		if _, err := experiment.UploadResults(ctx, results); err != nil {
+			return finish(ctx, experiment, err)
+		}
+	}
+	return finish(ctx, experiment, nil)
+}
+
+func main() { supporteval.Run(runExperiment) }
 ```
 
 </MultiLanguage>
@@ -396,6 +613,10 @@ python support_eval.py
 pnpm dlx tsx support_eval.mts
 ```
 
+```sh file=Go
+go run ./baseline
+```
+
 </MultiLanguage>
 
 Open [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments) and select **Support agent baseline**. You should see six items and twelve results. **Correct tool** passes five of six cases (83.33%), and **Correct arguments** passes four of six (66.67%).
@@ -405,452 +626,63 @@ Open [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/expe
 <div className="dark:hidden rounded border border-primary p-4" style={{ backgroundColor: "#f3f4ef" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/85e5b267-1ac4-4b18-9162-687dc293b2c6.jpg"
-alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/85e5b267-1ac4-4b18-9162-687dc293b2c6.jpg"
+  alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 <div className="hidden dark:block rounded border border-primary p-4" style={{ backgroundColor: "#131315" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/0f241dae-87e5-43d8-a733-9a1f529eacfd.jpg"
-alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/0f241dae-87e5-43d8-a733-9a1f529eacfd.jpg"
+  alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 
-<div><ImageAnnotations.Key title="" className="mb-4" /></div>
+<div>
+  <ImageAnnotations.Key title="" className="mb-4" />
+</div>
 
 </ImageAnnotations>
 
-Keep `suite_key` / `suiteKey` the same across runs of a test suite and `case_key` / `caseKey` the same for each test case. To repeat a case within one run, create a new `EvaluationItem` with the same case key and a distinct `trial`, such as `"1"` or `"2"`.
+Keep `suite_key` / `suiteKey` the same across runs of a test suite and `case_key` / `caseKey` the same for each test case. To repeat a case within one run, create a new item with the same case key and a distinct `trial`, such as `"1"` or `"2"`.
 
-Call `complete()` after the uploads succeed, or `fail()` if the run stops early. Closing the SDK client only releases connections; it doesn't complete the experiment.
+Complete the experiment after the uploads succeed, or mark it as failed if the run stops early. Close the SDK client after that to release its connections.
 
 ## Review and compare experiments
 
-Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments):
+<a id="read-scores-alongside-coverage"></a>
+<a id="use-results-in-your-ci"></a>
 
-1. Select **Completed** in the upload-state filter to exclude runs that are still uploading or failed before all results arrived.
-2. Click **Choose scores** to select the scorers shown in **Score trends**. Open a scorer's history to inspect its versions and the experiments behind the trend.
-3. Select **Support agent baseline**. Each row is an experiment item, and each scorer version has its own column.
-4. Click **Fail** under **Correct arguments** for `refund_other_order`. The inspector shows why: the agent selected the right tool but passed order ID `1001` instead of `1004`.
-
-<ImageAnnotations annotations={[{ x: 64, y: 29.8, title: "Expected order 1004; received order 1001." }]}>
-
-<div className="dark:hidden rounded border border-primary p-4" style={{ backgroundColor: "#eff0e9" }}>
-
-<ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/92f4b7e6-4735-4600-9016-06b5c4dc6569.jpg"
-alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
-/>
-
-</div>
-<div className="hidden dark:block rounded border border-primary p-4" style={{ backgroundColor: "#18171c" }}>
-
-<ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/38927b3b-c40d-47ac-bb9f-e64df4d228bf.jpg"
-alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
-/>
-
-</div>
-
-<div><ImageAnnotations.Key title="" className="mb-4" /></div>
-
-</ImageAnnotations>
-
-To fix the demo, pass the extracted order ID to the cancellation and refund tools, and return `look_up_order` for delivery questions. Run the same cases again with the experiment name **Support agent routing fix**. Both scorers should pass all six cases.
-
-Compare runs with the same test cases and scorer versions so changes in the test don't hide changes in your agent.
-
-### Read scores alongside coverage
-
-Pass rate includes only results with status `ok`. Eight passing results and two evaluator errors produce a 100% pass rate, with only eight scored items.
-
-Expand **Coverage** beside each scorer summary to check errors, skipped checks, and missing results. **Missing** means an uploaded item has no result for that scorer. It can't reveal cases you never uploaded, so compare the received item count with your expected count too. Composite calculations you haven't requested show **Not requested**.
-
-Numeric scorers show their mean. Numeric and categorical scorers need a passing rule to show a pass rate. Repeated trials each count as an item, so keep trial counts consistent when comparing runs.
-
-### Use results in your CI
-
-Use a [project secret API key](/docs/api/project-secret-api-keys) with the `offline_evaluation_ingestion:write` scope for your CI uploads. It can create experiments, upload results, and mark runs complete or failed without depending on a teammate's account.
-
-Project secret keys can't create or read scorers or fetch datasets. Set up scorers and load any PostHog dataset with a personal key first. In your CI script, pass the project key as `secret_key` / `secretKey` and use saved scorer version IDs instead of calling `scorers.get()`.
-
-For a composite, save its version ID and the exact input versions it pins. Send those input results with each calculation request.
-
-In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
-
-For runs that use multiple models, set `model_version` / `modelVersion` on each `EvaluationItem` to override the experiment's model. This requires `posthog` 7.76.0+ or `@posthog/ai` 8.17.0+.
-
-Completing an experiment means the run finished, not that every case passed. To block a deployment, check scores against your own threshold in the test script and exit with a failure code.
+See [Experiments](/docs/ai-evals/experiments) to compare runs, check coverage, and use results in your CI. After upload, you can [edit an experiment item or its reported scores](/docs/ai-evals/experiments#edit-experiment-items-and-results).
 
 ## Use a PostHog dataset (optional)
 
-Use a PostHog [dataset](/docs/ai-evals/datasets) to manage cases in PostHog or save them from production traces. This example loads a dataset revision before starting the experiment.
-
-To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, as in the cases above. Set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call.
-
-<MultiLanguage selector="tabs">
-
-```python file=Python
-snapshot = evaluations.datasets.snapshot(os.environ["POSTHOG_DATASET_ID"])
-items = list(snapshot.iter_items())
-
-experiment = evaluations.create_experiment(
-    name="Support agent from a dataset",
-    suite_key="support-agent",
-    dataset_revision_id=snapshot.revision_id,
-    run_source="local",
-)
-
-for row in items:
-    output = run_agent(row.input)
-    item = EvaluationItem.from_dataset_item(row, output=output)
-    for key, result in evaluate_answer(output, row.expected_output).items():
-        experiment.upload_result(
-            item=item,
-            scorer_version_id=scorers[key].current_version_id,
-            **result,
-        )
-```
-
-```typescript file=TypeScript
-const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!)
-const items = []
-for await (const row of snapshot) {
-    items.push(row)
-}
-
-const experiment = await evaluations.createExperiment({
-    name: "Support agent from a dataset",
-    suiteKey: "support-agent",
-    datasetRevisionId: snapshot.revisionId,
-    runSource: "local",
-})
-
-for (const row of items) {
-    if (typeof row.input !== "string") {
-        throw new Error("The demo requires string inputs")
-    }
-    const output = await runAgent(row.input)
-    const scores = evaluateAnswer(output, row.expectedOutput as ToolCall)
-    const item = EvaluationItem.fromDatasetItem(row, { output })
-    for (const key of ["tool", "arguments"] as const) {
-        await experiment.uploadResult({
-            item,
-            scorerVersionId: scorers[key].currentVersionId,
-            ...scores[key],
-        })
-    }
-}
-```
-
-</MultiLanguage>
-
-`from_dataset_item()` / `fromDatasetItem()` copies the test case and its version into the experiment item. Always supply the new run's output. The dataset's `source_output` is an earlier answer.
-
-By default, `snapshot()` selects the latest revision when you call it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript. The revision must still be available under the [dataset retention policy](/docs/ai-evals/datasets#data-retention).
+To load test cases from a PostHog dataset, see [Datasets](/docs/ai-evals/datasets#use-a-dataset-in-offline-evals).
 
 ## Add more scores
 
-Use a separate scorer for each thing you want to measure, such as correctness, relevance, or whether the agent selected the right tool.
+To add scores, handle failed checks, and build composite scorers, see [Scorers](/docs/ai-evals/scorers).
 
-| Scorer type | Result value            | Example                                                 |
-| ----------- | ----------------------- | ------------------------------------------------------- |
-| Boolean     | `true` or `false`       | Did the agent complete the task correctly?              |
-| Numeric     | A number                | How relevant is the answer, from zero to five?          |
-| Categorical | A list of category keys | Which failure types occurred, such as `["wrong_tool"]`? |
+<a id="failed-checks-and-evaluator-errors"></a>
 
-Create scorers with the SDK or in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Each result references a fixed scorer version, so configuration changes don't reinterpret earlier results.
-
-For each additional reported score, call `upload_result()` / `uploadResult()` with the same `EvaluationItem` and the new scorer's version ID. Include all reported and composite results in your expected result count.
-
-Use `reasoning` to explain a score. Set `application_trace_id` / `applicationTraceId` on the item to link it to an [AI Observability trace](/docs/ai-observability/traces).
-
-### Failed checks and evaluator errors
-
-Use `value=False` / `value: false` for a failed check. The default status, `ok`, means the evaluator produced a score, not that the item passed.
-
-If the evaluator can't produce a score, upload `status="error"` / `status: "error"`, omit `value`, and include an `error_message` / `errorMessage`. Use `skipped` for a check you didn't run, or `not_applicable` when a scorer doesn't apply to an item.
+To handle failed checks, see [Failed checks and evaluator errors](/docs/ai-evals/scorers#failed-checks-and-evaluator-errors).
 
 ## Combine scores with a composite scorer
 
-A composite scorer combines reported scores for one item into a boolean, numeric, or categorical result.
+See [Scorers](/docs/ai-evals/scorers#combine-scores-with-a-composite-scorer).
 
-For the support-agent example, **Support task passed** requires both **Correct tool** and **Correct arguments** to pass. Three of the six cases pass both checks, giving a 50% pass rate.
+<a id="create-the-composite"></a>
+<a id="request-a-calculation-for-each-item"></a>
+<a id="write-formulas"></a>
+<a id="handle-missing-inputs-and-calculation-errors"></a>
 
-### Create the composite
-
-Use the latest SDK. Save this as `create_composite.py` or `create_composite.mts` and run it once with the quickstart's environment variables and existing scorers.
-
-<MultiLanguage selector="tabs">
-
-```python file=Python
-import os
-from posthog.ai.evaluations import OfflineEvaluations, ScorerComposition
-
-with OfflineEvaluations(
-    project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
-    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
-    host=os.environ["POSTHOG_HOST"],
-) as evaluations:
-    tool = evaluations.scorers.get(os.environ["POSTHOG_TOOL_SCORER_ID"])
-    arguments = evaluations.scorers.get(os.environ["POSTHOG_ARGUMENTS_SCORER_ID"])
-    composition: ScorerComposition = {
-        "expression": "tool_correct and arguments_correct",
-        "inputs": [
-            {"alias": "tool_correct", "scorer_version_id": tool.current_version_id},
-            {
-                "alias": "arguments_correct",
-                "scorer_version_id": arguments.current_version_id,
-            },
-        ],
-    }
-    # Optional: check the formula without saving a scorer.
-    evaluations.scorers.validate_composition(kind="boolean", composition=composition)
-    composite = evaluations.scorers.create(
-        name="Support task passed",
-        kind="boolean",
-        calculation="composite",
-        config={"true_is_failure": False},
-        composition=composition,
-    )
-    print(composite.id)
-```
-
-```typescript file=TypeScript
-import { OfflineEvaluations } from "@posthog/ai/evaluations"
-
-const evaluations = new OfflineEvaluations({
-    projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
-    host: process.env.POSTHOG_HOST!,
-})
-
-try {
-    const tool = await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!)
-    const argumentsScorer = await evaluations.scorers.get(
-        process.env.POSTHOG_ARGUMENTS_SCORER_ID!
-    )
-    const composition = {
-        expression: "tool_correct and arguments_correct",
-        inputs: [
-            { alias: "tool_correct", scorerVersionId: tool.currentVersionId },
-            {
-                alias: "arguments_correct",
-                scorerVersionId: argumentsScorer.currentVersionId,
-            },
-        ],
-    }
-    // Optional: check the formula without saving a scorer.
-    await evaluations.scorers.validateComposition({ kind: "boolean", composition })
-    const composite = await evaluations.scorers.create({
-        name: "Support task passed",
-        kind: "boolean",
-        calculation: "composite",
-        config: { trueIsFailure: false },
-        composition,
-    })
-    console.log(composite.id)
-} finally {
-    evaluations.close()
-}
-```
-
-</MultiLanguage>
-
-Save the printed scorer ID:
-
-```bash
-export POSTHOG_COMPOSITE_SCORER_ID="<support_task_passed_scorer_id>"
-```
-
-You can also create this scorer in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Choose **Composite formula** and **Boolean**, add the two input scorers, and set their **Formula name** fields to `tool_correct` and `arguments_correct`. Use `tool_correct and arguments_correct` as the formula and **True means pass** as the passing value.
-
-Each input uses a fixed scorer version. New input versions don't update the composite automatically. Changing its formula or inputs creates a new composite version; existing results stay unchanged.
-
-### Request a calculation for each item
-
-Upload the reported inputs and a calculation request together for each item. Creating the scorer alone doesn't calculate results.
-
-In `support_eval.py` or `support_eval.mts`, add `EvaluationResult` to the SDK imports. Keep the agent, evaluator, and cases, then replace the client block below them with this code. It uses the input versions saved in the composite.
-
-<MultiLanguage selector="tabs">
-
-```python file=Python
-with OfflineEvaluations(
-    project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
-    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
-    host=os.environ["POSTHOG_HOST"],
-) as evaluations:
-    composite = evaluations.scorers.get(os.environ["POSTHOG_COMPOSITE_SCORER_ID"])
-    input_versions = {
-        source.alias: source.scorer_version_id for source in composite.input_scorers
-    }
-    experiment = evaluations.create_experiment(
-        name="Support agent with composite",
-        suite_key="support-agent",
-        run_source="local",
-        expected_item_count=len(cases),
-        expected_result_count=len(cases) * 3,
-    )
-
-    try:
-        for case in cases:
-            output = run_agent(case["input"])
-            item = EvaluationItem(
-                case_key=case["id"],
-                input=case["input"],
-                output=output,
-                expected_output=case["expected"],
-            )
-            scores = evaluate_answer(output, case["expected"])
-            receipt = experiment.upload_results(
-                [
-                    EvaluationResult(
-                        item=item,
-                        scorer_version_id=input_versions["tool_correct"],
-                        **scores["tool"],
-                    ),
-                    EvaluationResult(
-                        item=item,
-                        scorer_version_id=input_versions["arguments_correct"],
-                        **scores["arguments"],
-                    ),
-                    EvaluationResult(
-                        item=item,
-                        scorer_version_id=composite.current_version_id,
-                        calculate=True,
-                    ),
-                ]
-            )
-            for chunk in receipt.chunks:
-                for outcome in chunk.results:
-                    if outcome.status == "error":
-                        print(
-                            f"{case['id']}: {outcome.scorer_version_id}: {outcome.error_code}"
-                        )
-    except Exception:
-        experiment.fail()
-        raise
-
-    experiment.complete()
-    print(f"Completed experiment: {experiment.id}")
-```
-
-```typescript file=TypeScript
-const evaluations = new OfflineEvaluations({
-    projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
-    host: process.env.POSTHOG_HOST!,
-})
-
-try {
-    const composite = await evaluations.scorers.get(
-        process.env.POSTHOG_COMPOSITE_SCORER_ID!
-    )
-    const inputVersions = new Map(
-        composite.inputScorers.map((source) => [source.alias, source.scorerVersionId])
-    )
-    const experiment = await evaluations.createExperiment({
-        name: "Support agent with composite",
-        suiteKey: "support-agent",
-        runSource: "local",
-        expectedItemCount: cases.length,
-        expectedResultCount: cases.length * 3,
-    })
-
-    try {
-        for (const testCase of cases) {
-            const output = await runAgent(testCase.input)
-            const item = new EvaluationItem({
-                caseKey: testCase.id,
-                input: testCase.input,
-                output,
-                expectedOutput: testCase.expected,
-            })
-            const scores = evaluateAnswer(output, testCase.expected)
-            const receipt = await experiment.uploadResults([
-                new EvaluationResult({
-                    item,
-                    scorerVersionId: inputVersions.get("tool_correct")!,
-                    ...scores.tool,
-                }),
-                new EvaluationResult({
-                    item,
-                    scorerVersionId: inputVersions.get("arguments_correct")!,
-                    ...scores.arguments,
-                }),
-                new EvaluationResult({
-                    item,
-                    scorerVersionId: composite.currentVersionId,
-                    calculate: true,
-                }),
-            ])
-            for (const chunk of receipt.chunks) {
-                for (const outcome of chunk.results) {
-                    if (outcome.status === "error") {
-                        console.error(
-                            `${testCase.id}: ${outcome.scorerVersionId}: ${outcome.errorCode}`
-                        )
-                    }
-                }
-            }
-        }
-    } catch (error) {
-        await experiment.fail()
-        throw error
-    }
-
-    await experiment.complete()
-    console.log(`Completed experiment: ${experiment.id}`)
-} finally {
-    evaluations.close()
-}
-```
-
-</MultiLanguage>
-
-For a composite result, send only the item, scorer version, and `calculate=True` / `calculate: true`. PostHog calculates the value. Check each returned `status` and `error_code` / `errorCode`: an upload can succeed while a calculation fails.
-
-This run expects **18** results: twelve reported and six composite. Accepted errors and skipped results count toward the total. Start a new experiment to test another composite version; completed runs can't accept new results.
-
-Sending the inputs and calculation together works with the quickstart's permissions, including on retries. To reuse previously uploaded inputs, also grant `evaluation:read` and `llm_analytics:read`. For larger batches, keep each item's results together so the SDK can send them in one request.
-
-Open the experiment to see **Support task passed** alongside the two reported scorers. Items without a calculation request show **Not requested** and don't affect its pass rate.
-
-### Write formulas
-
-These formulas use the two boolean inputs from the support-agent example:
-
-| Output | Formula | Meaning |
-| --- | --- | --- |
-| Boolean | `tool_correct and arguments_correct` | Pass only when both checks are true. |
-| Numeric | `(number(tool_correct) + number(arguments_correct)) / 2` | Return 0, 0.5, or 1 for each item. |
-| Categorical | `"pass" if tool_correct and arguments_correct else "fail"` | Return a category key configured on the composite. |
-
-Formulas read raw input values. `number(True)` is 1 and `number(False)` is 0, even if an input scorer treats `true` as a failure. For categorical inputs, test category keys with expressions such as `"helpful" in relevance`.
-
-In the UI, the formula editor suggests a formula from the output type and inputs' passing rules. Manual edits stay unchanged when you edit inputs. Click **Use default formula** to restore the suggestion.
-
-You can use arithmetic (`+`, `-`, `*`, `/`), comparisons, `and`, `or`, `not`, conditional expressions, and the `number`, `min`, `max`, and `abs` functions. Each formula can reference up to 16 reported scorer versions. Every selected input must appear in the formula. Composite scorers can't use other composites as inputs or combine results across different items.
-
-### Handle missing inputs and calculation errors
-
-If a pinned input result is missing, PostHog rejects the entire upload request. Include that input for the same item and version when you retry.
-
-If an input has status `error`, `skipped`, or `not_applicable`, the composite inherits that status without a value. If several statuses apply, the order is `error`, then `skipped`, then `not_applicable`. Input errors use the code `composite_input_error`.
-
-A calculation error, such as division by zero or a value outside the composite's configured bounds, produces an `error` result with code `composite_formula_error`. Valid reported inputs in the same request are still saved. These errors don't enter the composite's mean or pass rate.
+For each step, see [Create the composite](/docs/ai-evals/scorers#create-the-composite), [Request a calculation for each item](/docs/ai-evals/scorers#request-a-calculation-for-each-item), [Write formulas](/docs/ai-evals/scorers#write-formulas), and [Handle missing inputs and calculation errors](/docs/ai-evals/scorers#handle-missing-inputs-and-calculation-errors).
 
 ## Use MCP
 
@@ -858,7 +690,7 @@ Use the [PostHog MCP server](/docs/model-context-protocol) to create scorers, ma
 
 ## Data retention
 
-PostHog deletes evaluation payloads 30 days after first accepting them:
+PostHog deletes payloads 30 days after it first accepts the item or result. Edits keep the original deadline.
 
 | Data                                                                                    | Retention             |
 | --------------------------------------------------------------------------------------- | --------------------- |
@@ -866,11 +698,11 @@ PostHog deletes evaluation payloads 30 days after first accepting them:
 | Result reasoning, error messages, and payload metadata                                  | Deleted after 30 days |
 | Experiment, item, and result records, including scores, statuses, summaries, and trends | Kept                  |
 
-Keep your own copy of payloads you need after 30 days. Source datasets have their own [retention policy](/docs/ai-evals/datasets#data-retention).
+Keep your own copy of any payload you need later. You can't restore a deleted or expired payload. Source datasets have their own [retention policy](/docs/ai-evals/datasets#data-retention).
 
 ## Pricing
 
-Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Retrying the same result doesn't add another event.
+Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Retries, edits, and deletes add no events. Uploading a deleted result again in an open experiment counts as a new event.
 
 Calculated composite results don't add billed events. For example, the six support-agent cases with two reported scorers and one composite produce 18 results and count as 12 events.
 

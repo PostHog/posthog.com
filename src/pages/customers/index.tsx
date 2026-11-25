@@ -12,11 +12,14 @@ import { SectionLayout, SectionHeader } from 'components/Pricing/Test/Sections'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { StickerCoffee } from 'components/Stickers/Stickers'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight, IconChevronLeft, IconChevronRight } from '@posthog/icons'
+import hedgehogReadingPng from 'hoggies/reading.png'
+import hedgehogWillSmithPng from 'hoggies/will-smith.png'
 
 // Same lookup as OSQuote: a product quote when `product` is set, otherwise `quotes[quote]`
 interface QuoteSource {
@@ -177,25 +180,28 @@ const HERO_QUOTES: QuoteSource[] = [
 const TOOLS_SHOWN = 5
 const TABLE_ROWS_STEP = 10
 const HERO_ROTATE_MS = 8000
-const HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/will_smith_hog_0248c8f94c.png'
-const NEWSPAPER_HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/newspaper_hog_f0dd8cda48.png'
+const HOG_IMAGE = hedgehogWillSmithPng
+const NEWSPAPER_HOG_IMAGE = hedgehogReadingPng
 
 const HogCard = ({
     image,
+    mirror,
     imageClassName,
     className = '',
     children,
     ...props
 }: {
-    image: `https://res.cloudinary.com/${string}`
+    image: string
+    mirror?: boolean
     imageClassName: string
 } & React.HTMLAttributes<HTMLDivElement>) => (
     <div className={`@container not-prose ${className}`} {...props}>
         <div className="paper-desk rounded-lg border border-primary">
             <div className="flex flex-col gap-6 p-6 @2xl:flex-row @2xl:items-center @2xl:gap-8 @2xl:p-8">
                 <div className="min-w-0 flex-1">{children}</div>
-                <CloudinaryImage
+                <HoggieImage
                     src={image}
+                    mirror={mirror}
                     alt=""
                     className={`hidden shrink-0 @2xl:block ${imageClassName}`}
                     imgClassName="h-auto w-full"
@@ -246,6 +252,7 @@ const HeroQuote = ({ people }: { people: HeroPerson[] }): JSX.Element => {
     return (
         <HogCard
             image={HOG_IMAGE}
+            mirror
             imageClassName="@2xl:w-56"
             className="mb-6"
             onMouseEnter={() => setPaused(true)}

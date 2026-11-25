@@ -728,3 +728,88 @@ Object flagValue = flags.getFlag("feature-flag-key");
 Server-side SDKs disable GeoIP by default. This is because PostHog derives GeoIP properties from the request's IP address, which for server-side requests is your server's IP rather than your user's.
 
 For geolocation-based flags, evaluate them on the client side where the user's actual IP is available.
+
+## Targeting a specific URL
+
+Flags are evaluated when the SDK makes a request, not when the user opens a page, so they don't have a setting that limits them to a page. To make a flag apply only on a specific page, use one of these options:
+
+- [Check the URL in your code](#check-the-url-in-your-code) before you read the flag. This is the most reliable option.
+- [Pass the URL in the browser](#pass-the-url-in-the-browser) with `setPersonPropertiesForFlags()`.
+- [Pass the URL to a server-side SDK](#pass-the-url-to-a-server-side-sdk) as a person property.
+- On a site where each page is a full page load, set [evaluation contexts from the page path](/docs/feature-flags/evaluation-contexts#pages-on-a-site-with-full-page-loads).
+- For an experiment, use a [`$pageview` exposure event filtered to the page](/docs/experiments/exposures#exposing-users-on-a-specific-page).
+
+### Check the URL in your code
+
+Read the flag only on the page where it applies:
+
+```js
+if (window.location.pathname === '/pricing') {
+    const variant = posthog.getFeatureFlag('pricing-test')
+    // ...
+}
+```
+
+The SDK still returns the flag's value on every page, but your code uses it only on `/pricing`. Because the SDK sends `$feature_flag_called` when you read a flag, it also doesn't send that event from other pages.
+
+### Pass the URL in the browser
+
+Set `$current_url` and `$pathname` as flag properties in the `loaded` callback and on each client-side route change:
+
+```js
+function setUrlForFlags() {
+    posthog.setPersonPropertiesForFlags({
+        $current_url: window.location.href,
+        $pathname: window.location.pathname,
+    })
+}
+
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: () => setUrlForFlags(),
+})
+
+// Call setUrlForFlags() again after each client-side route change
+```
+
+Then add a release condition on the person property `$pathname` (for example, `$pathname` equals `/pricing`) or `$current_url`.
+
+- The `loaded` callback runs before the SDK's first flag request, so that request sends the current URL. If you call `setPersonPropertiesForFlags()` later in the page load, the first request sends the URL from the previous page, and your call adds a second billed request.
+- Each later call [reloads flags](#controlling-automatic-flag-reload), and each reload is a billed `/flags` request. This adds one request for each client-side route change. See [cutting costs](/docs/feature-flags/cutting-costs).
+- The reload is async. Until it responds, the flag returns the value for the previous page. `onFeatureFlags()` doesn't wait for the reload: if flags have already loaded, it runs your callback right away with the previous values. If your code must have the value for the new page, [check the URL in your code](#check-the-url-in-your-code) instead.
+- The values persist in storage until the next call, `resetPersonPropertiesForFlags()`, or `reset()`. If you don't call it on a navigation, the flag uses the last URL you set.
+
+The [`setAllPersonProfilePropertiesAsPersonPropertiesForFlags`](#including-browser-and-device-properties) customization also sets `$current_url` and `$pathname`, but only when you call it. It doesn't update them on client-side route changes.
+
+### Pass the URL to a server-side SDK
+
+When you evaluate flags on your server, pass the URL or path of the current request in `personProperties`, and target it with the same release condition. This works with [local evaluation](/docs/feature-flags/local-evaluation).
+
+<MultiLanguage selector="tabs">
+
+```node
+const flags = await client.evaluateFlags('user-distinct-id', {
+    personProperties: {
+        $current_url: currentUrl,
+        $pathname: pathname,
+    },
+})
+
+const flagValue = flags.getFlag('pricing-test')
+```
+
+```python
+flags = posthog.evaluate_flags(
+    "user-distinct-id",
+    person_properties={
+        "$current_url": current_url,
+        "$pathname": pathname,
+    },
+)
+
+flag_value = flags.get_flag("pricing-test")
+```
+
+</MultiLanguage>
+
+Pass the property on every call. If a remote evaluation doesn't include it, PostHog uses the value stored on the person, such as "Latest current URL". That stored value often isn't the page the user is on now.

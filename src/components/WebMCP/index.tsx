@@ -55,9 +55,9 @@ const SKILL_RAW_BASE = 'https://raw.githubusercontent.com/PostHog/posthog/master
 const SKILL_SOURCE_BASE = 'https://github.com/PostHog/posthog/tree/master'
 
 // The two install paths the docs give people, see contents/docs/ai-observability/skills.mdx.
-const SKILLS_PLUGIN_URL = 'https://github.com/PostHog/ai-plugin'
+const SKILLS_MCP_URL = 'https://posthog.com/docs/model-context-protocol'
 const SKILLS_RELEASE_URL = 'https://github.com/PostHog/posthog/releases/tag/agent-skills-latest'
-const SKILLS_INSTALL_LINE = `Install: the PostHog AI plugin (${SKILLS_PLUGIN_URL}) bundles every PostHog skill for Claude Code, Codex, Cursor, and Gemini CLI. Or download skills.zip from ${SKILLS_RELEASE_URL} and copy a skill folder into the agent's skills directory, for example .claude/skills/.`
+const SKILLS_INSTALL_LINE = `Install: every PostHog skill ships with the PostHog MCP server (${SKILLS_MCP_URL}), so a connected agent loads the one it needs when a task calls for it. Or download skills.zip from ${SKILLS_RELEASE_URL} and copy a skill folder into the agent's skills directory, for example .claude/skills/.`
 
 const NO_INPUT_SCHEMA = { type: 'object', properties: {} }
 

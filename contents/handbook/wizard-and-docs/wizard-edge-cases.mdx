@@ -703,7 +703,7 @@ callbacks: {
 // identify only when the stable id is a string; otherwise skip and stay anonymous
 if (typeof session.user?.id === 'string') posthog.identify(session.user.id, { email: session.user.email })
 // truly system-level: no person profile
-posthog.capture({ distinctId: 'cron', event: 'nightly_sync', properties: { $process_person_profile: false } })
+posthog.capture({ distinctId: crypto.randomUUID(), event: 'nightly_sync', options: { process_person_profile: false } })
 ```
 
 **Also catches:**
@@ -2182,7 +2182,7 @@ STEP 1: Call load_skill_menu (from the wizard-tools MCP server).
 - A wide connection form is abandoned instead of split across calls. [tools/tools.ts](https://github.com/PostHog/wizard/blob/main/src/agent/tools/tools.ts)
 - The agent asks questions in CI or headless runs where nobody answers. The wizard removes the question tool there. [bootstrap.ts](https://github.com/PostHog/wizard/blob/main/src/agent/runner/shared/bootstrap.ts)
 - With no prompt tool, the agent waits, guesses credentials, or reports done. [warehouse/description.md](https://github.com/PostHog/context-mill/blob/main/context/skills/integration-v2/warehouse/description.md)
-- An interactive-only program starts in CI or signup mode, where questions are off. [self-driving.ts](https://github.com/PostHog/wizard/blob/main/src/cli/commands/self-driving.ts)
+- An interactive-only program starts in CI mode, where questions are off. [self-driving.ts](https://github.com/PostHog/wizard/blob/main/src/cli/commands/self-driving.ts)
 - A missing prerequisite does not stop the run. The wizard stops on an abort line. [agent-interface.ts](https://github.com/PostHog/wizard/blob/main/src/agent/agent-interface.ts)
 - The agent invents a fallback id or tries to halt the process, not knowing the harness has an abort channel. [revenue-analytics/description.md](https://github.com/PostHog/context-mill/blob/main/context/skills/revenue-analytics/description.md)
 - The agent gives up without a reason. The wizard requires one abort line with a reason. [mcp-analytics/description.md](https://github.com/PostHog/context-mill/blob/main/context/skills/mcp-analytics/description.md)

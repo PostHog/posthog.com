@@ -25,22 +25,27 @@ Once the syncs are complete, you can start using Freshdesk data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `tickets` | Support tickets | Incremental |
-| `contacts` | Contacts | Incremental |
-| `companies` | Companies | Full refresh |
-| `agents` | Support agents | Full refresh |
-| `groups` | Agent groups | Full refresh |
-| `roles` | Agent roles | Full refresh |
-| `products` | Products | Full refresh |
-| `skills` | Agent skills | Full refresh |
-| `ticket_fields` | Ticket field definitions | Full refresh |
-| `time_entries` | Time entries logged on tickets | Full refresh |
-| `satisfaction_ratings` | Customer satisfaction survey ratings | Full refresh |
-| `sla_policies` | SLA policies | Full refresh |
-| `business_hours` | Business hours definitions | Full refresh |
-| `canned_response_folders` | Canned response folders | Full refresh |
+| Table                     | Description                            | Sync method  |
+| ------------------------- | -------------------------------------- | ------------ |
+| `tickets`                 | Support tickets                        | Incremental  |
+| `ticket_watchers`         | Agents following each ticket           | Full refresh |
+| `contacts`                | Contacts                               | Incremental  |
+| `companies`               | Companies                              | Full refresh |
+| `agents`                  | Support agents                         | Full refresh |
+| `groups`                  | Agent groups                           | Full refresh |
+| `roles`                   | Agent roles                            | Full refresh |
+| `products`                | Products                               | Full refresh |
+| `skills`                  | Agent skills                           | Full refresh |
+| `ticket_fields`           | Ticket field definitions               | Full refresh |
+| `time_entries`            | Time entries logged on tickets         | Full refresh |
+| `satisfaction_ratings`    | Customer satisfaction survey ratings   | Full refresh |
+| `sla_policies`            | SLA policies                           | Full refresh |
+| `business_hours`          | Business hours definitions             | Full refresh |
+| `canned_response_folders` | Canned response folders                | Full refresh |
+| `discussion_categories`   | Categories that group community forums | Full refresh |
+| `discussion_forums`       | Community discussion forums            | Full refresh |
+| `discussion_topics`       | Topics (threads) in community forums   | Full refresh |
+| `discussion_comments`     | Comments (posts) in forum topics       | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

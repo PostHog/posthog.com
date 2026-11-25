@@ -28,7 +28,7 @@ const slugify = (text: string): string => {
 const FEATURE_DATA: Record<string, BaseFeature> = {
     actions: {
         feature: 'Actions',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     'activity-log': {
         feature: 'Activity log',
@@ -37,7 +37,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'activity-view': {
         feature: 'Activity view',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
         label: 'feature/events',
     },
     'agent-proxy': {
@@ -55,10 +55,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['growth'],
         label: 'feature/agentic-provisioning',
     },
+    'ai-datasets': {
+        feature: 'AI datasets',
+        owner: ['ai-observability'],
+        notes: 'Dataset curation, versioning, exports, and retention for AI evaluations.',
+        label: 'aio/evals',
+    },
+    'ai-evaluations': {
+        feature: 'AI evaluations',
+        owner: ['ai-observability'],
+        notes: 'Online and offline evaluations, scorers, trace reviews, review queues, and evaluation reports.',
+        label: 'aio/evals',
+    },
     'ai-gateway': {
         feature: 'AI gateway',
         owner: ['agent-infrastructure'],
         label: 'feature/ai-gateway',
+    },
+    'ai-observability': {
+        feature: 'AI Observability',
+        owner: ['ai-observability'],
+        notes: 'LLM tracing, cost and latency analytics, multimodal content, trace summaries, and sentiment analysis.',
+        label: 'feature/ai-observability',
     },
     'ai-playground': {
         feature: 'AI playground',
@@ -70,13 +88,19 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['context-and-mcp'],
         label: false,
     },
+    'ai-trace-clustering': {
+        feature: 'AI trace clustering',
+        owner: ['ai-observability'],
+        notes: 'Groups similar LLM traces to identify usage patterns and failure modes.',
+        label: 'feature/aio-clusters',
+    },
     alerts: {
         feature: 'Alerts',
         owner: ['apm'],
     },
     annotations: {
         feature: 'Annotations',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     'background-agents': {
         feature: 'Cloud agents',
@@ -95,11 +119,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     autocapture: {
         feature: 'Autocapture',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     'base-currency': {
         feature: 'Base currency',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
         label: 'feature/currency',
     },
     'batch-exports': {
@@ -116,7 +140,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     canvases: {
         feature: 'Canvases',
-        owner: ['product-analytics'],
+        owner: ['dashboards-and-charts'],
         label: false,
     },
     cli: {
@@ -124,11 +148,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['growth', 'error-tracking'],
         notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
+    'ci-and-merge-queue': {
+        feature: 'CI and merge queue',
+        owner: ['developer-experience'],
+        notes: (
+            <>
+                Shared developer tooling. See{' '}
+                <Link to="/handbook/engineering/developer-experience">Developer experience</Link>.
+            </>
+        ),
+        label: 'team-devex',
+    },
     'client-libraries': {
         feature: 'Client libraries',
         owner: ['client-libraries'],
         notes: <em>See SDKs</em>,
         label: false,
+    },
+    'product-foundation': {
+        feature: 'Product foundation and shared mechanisms',
+        owner: ['developer-experience'],
+        notes: 'The standard product shape, isolation and facades, base classes, webhook ingress, and egress.',
+        label: 'team-devex',
     },
     cohorts: {
         feature: 'Cohorts',
@@ -146,25 +187,25 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'csp-tracking': {
         feature: 'CSP tracking',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
         label: 'feature/csp-tracking',
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
         feature: 'Customer Analytics',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     dashboards: {
         feature: 'Dashboards',
-        owner: ['product-analytics'],
+        owner: ['dashboards-and-charts'],
     },
     'dashboard-templates': {
         feature: 'Dashboard templates',
-        owner: ['product-analytics'],
+        owner: ['dashboards-and-charts'],
     },
     'data-colors-themes': {
         feature: 'Data colors & themes',
@@ -173,7 +214,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-management': {
         feature: 'Data management',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-modeling': {
@@ -189,11 +230,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-table': {
         feature: 'Data table',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['product-analytics'],
+        owner: ['dashboards-and-charts'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -224,6 +265,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Endpoints',
         owner: ['data-modeling'],
     },
+    'engineering-analytics': {
+        feature: 'Engineering analytics',
+        owner: ['developer-experience'],
+        notes: 'CI and pull request data per team: merge times, CI health, and flaky tests.',
+        label: false,
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -243,7 +290,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'group-analytics': {
         feature: 'Group analytics',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     'health-alerts': {
         feature: 'Health alerts',
@@ -252,7 +299,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     heatmaps: {
         feature: 'Heatmaps',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     'hog-harness': {
         feature: 'Hog harness',
@@ -271,7 +318,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     insights: {
         feature: 'Insights',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     integrations: {
         feature: 'Integrations',
@@ -288,6 +335,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    'local-development': {
+        feature: 'Local development (hogli, devboxes)',
+        owner: ['developer-experience'],
+        label: 'local-dev',
+    },
     loops: {
         feature: 'Loops',
         owner: ['surfaces'],
@@ -299,7 +351,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'marketing-analytics': {
         feature: 'Marketing analytics',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     'mcp-analytics': {
         feature: 'MCP analytics',
@@ -347,7 +399,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'path-cleaning': {
         feature: 'Path cleaning',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     permissions: {
         feature: 'Permissions and access control',
@@ -360,7 +412,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'persons-view': {
         feature: 'Persons view',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
         label: 'feature/persons',
     },
     'pipeline-transformations': {
@@ -410,6 +462,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['surfaces'],
         label: 'feature/posthog-code',
     },
+    'posthog-commands': {
+        feature: 'PostHog commands',
+        owner: ['developer-experience'],
+        notes: (
+            <>
+                <code>@posthog</code> commands from PR comments and Slack mentions.
+            </>
+        ),
+        label: false,
+    },
+    'posthog-review': {
+        feature: 'PostHog Review',
+        owner: ['developer-experience'],
+        notes: 'AI code review bot on PRs, also known as ReviewHog.',
+        label: false,
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
@@ -424,6 +492,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             </>
         ),
         label: false,
+    },
+    'prompt-management': {
+        feature: 'Prompt management',
+        owner: ['experiments'],
+        notes: 'Prompt versioning, labels, configuration, and prompt A/B testing.',
+        label: 'feature/prompt-management',
     },
     'property-filters': {
         feature: 'Property filters',
@@ -446,7 +520,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: false,
     },
     'realtime-cohort-calculations': {
-        feature: 'Realtime cohort calculations',
+        feature: 'Real-time cohort calculations',
         owner: ['feature-flags'],
         label: false,
     },
@@ -461,11 +535,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries',
@@ -512,12 +586,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'session-analytics': {
         feature: 'Session analytics',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
         label: 'feature/sessions',
     },
     'session-explorer': {
         feature: 'Session explorer',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
         label: 'feature/session-explorer',
     },
     'session-summaries': {
@@ -573,7 +647,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
         label: false,
     },
     sso: {
@@ -581,13 +655,27 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-features'],
         label: false,
     },
+    stamphog: {
+        feature: 'Stamphog',
+        owner: ['developer-experience'],
+        notes: (
+            <>
+                AI approval agent for PRs. See{' '}
+                <Link to="/handbook/engineering/how-we-review#enabling-stamphog-on-a-repo">
+                    Enabling Stamphog on a repo
+                </Link>
+                .
+            </>
+        ),
+        label: false,
+    },
     'statistical-analysis': {
         feature: 'Statistical analysis',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     subscriptions: {
         feature: 'Subscriptions',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     support: {
         feature: 'Support',
@@ -599,7 +687,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'table-exports': {
         feature: 'Table exports',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
     },
     tasks: {
         feature: 'Tasks',
@@ -608,7 +696,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     terraform: {
         feature: 'Terraform integration',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
         label: 'feature/terraform',
     },
     'taxonomic-filters': {
@@ -632,7 +720,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     variables: {
         feature: 'Variables',
-        owner: ['product-analytics'],
+        owner: ['analytics'],
+    },
+    'visual-review': {
+        feature: 'Visual review',
+        owner: ['developer-experience'],
+        notes: 'Screenshot regression checks on PRs, with an approval flow.',
+        label: false,
     },
     'vscode-extension': {
         feature: 'VS Code extension',
@@ -641,7 +735,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'web-analytics': {
         feature: 'Web analytics',
-        owner: ['web-analytics'],
+        owner: ['analytics'],
     },
     'webhook-delivery': {
         feature: 'Webhook delivery service',

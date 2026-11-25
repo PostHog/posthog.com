@@ -51,23 +51,28 @@ All Deputy tables support incremental sync on the `Modified` field, which merges
 
 <SourceTables />
 
-| Table                 | Description                                                                                                                            |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| companies             | Locations (called companies in the API) of the Deputy business. Employees, areas, rosters, and timesheets link to a location.          |
-| contacts              | Contact details (phone numbers, email addresses) that employees, locations, and areas link to.                                         |
-| employees             | People who can be rostered, time tracked, or managed in Deputy.                                                                        |
-| employee_agreements   | Employment agreements. An agreement links an employee to a pay center and sets employment type, start date, pay terms, and payroll ID. |
-| employee_availability | Availability and unavailability that employees record, for one date or as a recurring schedule.                                        |
-| employee_roles        | Access levels that set what an employee can see and do in Deputy.                                                                      |
-| events                | Events added to schedules to track what happens in the business on a day.                                                              |
-| journals              | Journal entries recorded against employees.                                                                                            |
-| leave                 | Leave requests of employees, with their dates, hours, and approval status.                                                             |
-| memos                 | Memos that managers send to employees.                                                                                                 |
-| operational_units     | Areas (called operational units in the API) inside a location. Shifts and timesheets link to an area.                                  |
-| rosters               | Scheduled shifts. A shift can be published and filled, published and open, or a private draft.                                         |
-| tasks                 | Tasks assigned to areas or employees, with their due dates and completion.                                                             |
-| timesheets            | Records of the time employees actually worked. A timesheet goes through time approval and pay approval.                                |
-| timesheet_pay_returns | Pay lines that approved timesheets generate, with the hours and cost per pay rule.                                                     |
+| Table                 | Description                                                                                                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| companies             | Locations (called companies in the API) of the Deputy business. Employees, areas, rosters, and timesheets link to a location.                                                         |
+| contacts              | Contact details (phone numbers, email addresses) that employees, locations, and areas link to.                                                                                        |
+| employees             | People who can be rostered, time tracked, or managed in Deputy.                                                                                                                       |
+| employee_agreements   | Employment agreements. An agreement links an employee to a pay center and sets employment type, start date, pay terms, and payroll ID.                                                |
+| employee_availability | Availability and unavailability that employees record, for one date or as a recurring schedule.                                                                                       |
+| employee_roles        | Access levels that set what an employee can see and do in Deputy.                                                                                                                     |
+| employment_contracts  | Employment contracts (called pay rates, employment terms, or awards in the Deputy UI). Each one holds the pay and leave rules for the employees whose employee agreement links to it. |
+| events                | Events added to schedules to track what happens in the business on a day.                                                                                                             |
+| journals              | Journal entries recorded against employees.                                                                                                                                           |
+| leave                 | Leave requests of employees, with their dates, hours, and approval status.                                                                                                            |
+| leave_accruals        | Leave balance transactions per employee. Each row adds or removes hours or days from the balance of one leave rule.                                                                   |
+| memos                 | Memos that managers send to employees.                                                                                                                                                |
+| operational_units     | Areas (called operational units in the API) inside a location. Shifts and timesheets link to an area.                                                                                 |
+| rosters               | Scheduled shifts. A shift can be published and filled, published and open, or a private draft.                                                                                        |
+| tasks                 | Tasks assigned to areas or employees, with their due dates and completion.                                                                                                            |
+| teams                 | Teams that group employees, each with an optional team leader.                                                                                                                        |
+| timesheets            | Records of the time employees actually worked. A timesheet goes through time approval and pay approval.                                                                               |
+| timesheet_pay_returns | Pay lines that approved timesheets generate, with the hours and cost per pay rule.                                                                                                    |
+| training_modules      | Types of training that can be assigned to employees.                                                                                                                                  |
+| training_records      | Training assigned to employees. Each row links one employee to one training module.                                                                                                   |
 
 ## Troubleshooting
 

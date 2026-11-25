@@ -275,16 +275,9 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
-    // A forum topic turns solutions on or off. Other questions keep the # topic rule.
-    const solutionsAllowed = forumTopic?.data
-        ? forumTopic.data.attributes.solutionsEnabled
-        : topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
+    const solutionsAllowed = !!forumTopic?.data?.attributes.solutionsEnabled
     const resolvable = !resolved && (isAuthor || isForumModerator) && solutionsAllowed
-    // Moderators can change a solution anywhere, except in a forum topic with solutions off. A locked forum post
-    // refuses edits from everyone else. The server enforces both.
-    const showMarkSolution = forumTopic?.data
-        ? solutionsAllowed && (isForumModerator || (resolvable && !locked))
-        : isForumModerator || resolvable
+    const showMarkSolution = solutionsAllowed && (isForumModerator || (resolvable && !locked))
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()

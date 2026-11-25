@@ -6,7 +6,7 @@ showTitle: true
 
 Each feature at PostHog has an Engineering owner. This owner is responsible for maintaining the feature (keep the lights on), championing any efforts to improve it (e.g. by bringing up improvements in sprint planning), [planning launches](/handbook/marketing/product-announcements) for new parts of it, and making sure it is well documented.
 
-For shared developer tooling and infrastructure that cuts across product teams (CI, local dev, builds, migrations, etc.), see the [Developer Experience](/handbook/engineering/developer-experience) page.
+Shared developer tooling, and the foundation products are built on, belong to [Developer Experience](/handbook/engineering/developer-experience): CI, the merge queue, Stamphog and other review bots, local dev, migration tooling, the standard product shape, and shared mechanisms like webhook ingress and egress. Ask in #team-devex.
 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
@@ -14,7 +14,7 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 
 Feature ownership does **not** mean that the owner is the **only** person/team who can contribute to the feature. If another team requires something from an existing feature that isn't supported, that non-owning team builds it. How you start depends on the size of the change (see [PR or context?](#pr-or-context)). The owner team is responsible for reviewing PRs to make sure the code patterns and UX makes sense for the feature overall. After the change is merged, the owner team then owns it (assuming no major bugs from the initial implementation).
 
-For example, web analytics wanted a heatmap insight type to see what times of day people were active. <TeamMember name="Javier Bahamondes" photo /> from web analytics opened up the necessary PRs to build this feature. It was reviewed by the <SmallTeam slug="product-analytics" />, owner of all insight types, who then took responsibility for it after it was merged.
+For example, web analytics wanted a heatmap insight type to see what times of day people were active. <TeamMember name="Javier Bahamondes" photo /> from web analytics opened up the necessary PRs to build this feature. It was reviewed by the product analytics team, then the owner of all insight types, who then took responsibility for it after it was merged.
 
 This process does four things:
 
@@ -35,7 +35,7 @@ This process does four things:
 
 The bigger the change, the more it shapes the owning team's direction, and they maintain it after it merges, so they get a say before the code exists.
 
-Not sure which row fits your change? If all else fails, ask the owning team. Not sure who owns it? See [Fuzzy ownership](/handbook/company/fuzzy-ownership).
+Not sure which row fits your change? If all else fails, ask the owning team. Not sure who owns it? See [Ownership](/handbook/company/ownership).
 
 ### If you open the PR, you own it
 

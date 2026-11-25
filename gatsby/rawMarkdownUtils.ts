@@ -1,5 +1,7 @@
 import path from 'path'
 import fs from 'fs'
+import { availableParallelism } from 'node:os'
+import { Worker } from 'node:worker_threads'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
 import {
     getLanguageFromSdkId,
@@ -7,7 +9,6 @@ import {
     isLatestVersion,
     typeHasPage,
 } from '../src/components/SdkReferences/utils'
-import { convertHtmlToAgentMarkdown, extractTitleFromHtml } from './turndownService'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
 import { buildMcpBrief, BriefToolCategory } from '../src/components/MCPPage/agentBrief'
 import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
@@ -45,20 +46,21 @@ export const generateRawMarkdownPages = async (
     })
 
     const processedPages: Array<{ slug: string; title: string }> = []
+    const batchSize = Math.max(1, Math.ceil(filteredNodes.length / Math.min(30, availableParallelism())))
+    const batches = Array.from(
+        { length: Math.ceil(filteredNodes.length / batchSize) },
+        (_, index) =>
+            new Promise<Array<{ slug: string; title: string; markdown: string }>>((resolve, reject) => {
+                const worker = new Worker(path.resolve('gatsby/markdownWorker.ts'), {
+                    workerData: { nodes: filteredNodes.slice(index * batchSize, (index + 1) * batchSize), publicPath },
+                })
+                worker.once('message', resolve)
+                worker.once('error', reject)
+            })
+    )
 
-    for (const node of filteredNodes) {
+    for (const { slug, title, markdown } of (await Promise.all(batches)).flat()) {
         try {
-            const { slug } = node.fields
-            const htmlFilePath = path.join(publicPath, slug, 'index.html')
-
-            if (!fs.existsSync(htmlFilePath)) {
-                continue
-            }
-
-            const html = fs.readFileSync(htmlFilePath, 'utf8')
-            const title = extractTitleFromHtml(html) || node.frontmatter.title || 'Untitled'
-            const markdown = convertHtmlToAgentMarkdown(html, title, slug)
-
             const outputPath = path.join(publicPath, `${slug}.md`)
             const dirPath = path.dirname(outputPath)
 

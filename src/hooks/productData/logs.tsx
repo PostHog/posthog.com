@@ -18,6 +18,9 @@ import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
 import { applications, keyFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogGreekPng from 'hoggies/greek.png'
+import hedgehogSleepyPng from 'hoggies/sleepy.png'
 
 const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 
@@ -31,7 +34,7 @@ export const logs = {
     teamSlug: 'apm',
     // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
     // forumTopicId: /* create topic, then uncomment community menu item below */,
-    color: 'red',
+    color: PRODUCT_COLORS.logs,
     colorSecondary: 'green-2',
     wizardSupport: 'Coming soon',
     includeAddonRates: true,
@@ -131,14 +134,14 @@ export const logs = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
-        alt: 'A hedgehog in its log store',
+        src: hedgehogGreekPng,
+        alt: 'A hedgehog reading a very long scroll',
         classes: 'hidden @2xl:block max-w-sm',
         footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
+            src: hedgehogGreekPng,
             alt: 'A hedgehog perusing some logs',
         },
         mobileHog: {
@@ -347,7 +350,7 @@ export const logs = {
     ],
     worksWith: ['session_replay', 'error_tracking', 'product_analytics', 'feature_flags'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/night_hog_219fff00f3.png',
+        image: hedgehogSleepyPng,
         imageAlt: 'A hedgehog asleep at a laptop after a long log dive',
         description: 'find the bug in your logs and ship the fix',
         intro: 'Ask PostHog AI to find error logs, mine patterns, and explain what changed.',

@@ -32,7 +32,7 @@ When linking Proofpoint TAP, you'll need:
 
 <SyncModes />
 
-The SIEM tables (`clicks_blocked`, `clicks_permitted`, `messages_blocked`, `messages_delivered`), `threats`, and `campaigns` support incremental and full refresh syncs. Incremental syncs use the `query_end_time` cursor field and merge records by their unique IDs.
+The SIEM tables (`clicks_blocked`, `clicks_permitted`, `messages_blocked`, `messages_delivered`), `threats`, `forensics`, and `campaigns` support incremental and full refresh syncs. Incremental syncs use the `query_end_time` cursor field and merge records by their unique IDs.
 
 The `very_attacked_people` and `top_clickers` tables use full refresh only. Each sync fetches the full 90-day window from the People API.
 
@@ -48,16 +48,17 @@ Proofpoint TAP rate-limits SIEM API access to 1,800 requests per rolling day for
 
 <SourceTables />
 
-| Table                  | Primary key | Event time field | Description                                            |
-| ---------------------- | ----------- | ---------------- | ------------------------------------------------------ |
-| `clicks_blocked`       | `id`        | `clickTime`      | Blocked URL clicks from email messages                 |
-| `clicks_permitted`     | `id`        | `clickTime`      | Permitted URL clicks from email messages               |
-| `messages_blocked`     | `GUID`      | `messageTime`    | Blocked email messages                                 |
-| `messages_delivered`   | `GUID`      | `messageTime`    | Delivered email messages                               |
-| `threats`              | `id`        | `identifiedAt`   | Threat summaries from SIEM events                      |
-| `campaigns`            | `id`        | `startDate`      | Campaigns with their threats, actors, and malware      |
-| `very_attacked_people` | `guid`      | –                | Users with highest attack index over 90 days           |
-| `top_clickers`         | `guid`      | –                | Users who clicked the most malicious URLs over 90 days |
+| Table                  | Primary key | Event time field | Description                                                |
+| ---------------------- | ----------- | ---------------- | ---------------------------------------------------------- |
+| `clicks_blocked`       | `id`        | `clickTime`      | Blocked URL clicks from email messages                     |
+| `clicks_permitted`     | `id`        | `clickTime`      | Permitted URL clicks from email messages                   |
+| `messages_blocked`     | `GUID`      | `messageTime`    | Blocked email messages                                     |
+| `messages_delivered`   | `GUID`      | `messageTime`    | Delivered email messages                                   |
+| `threats`              | `id`        | `identifiedAt`   | Threat summaries from SIEM events                          |
+| `forensics`            | `id`        | `generated`      | Forensic evidence and indicators of compromise for threats |
+| `campaigns`            | `id`        | `startDate`      | Campaigns with their threats, actors, and malware          |
+| `very_attacked_people` | `guid`      | –                | Users with highest attack index over 90 days               |
+| `top_clickers`         | `guid`      | –                | Users who clicked the most malicious URLs over 90 days     |
 
 ## Troubleshooting
 

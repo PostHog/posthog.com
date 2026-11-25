@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
@@ -51,6 +52,15 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
             .flatMap((c: any) => (c.tools as McpTool[]) ?? [])
     }, [mcpFeatures])
 
+    // Opt-in: `ai.featuredTools` replaces the searchable list with one example tool per use case
+    // (name and summary), under an optional `ai.toolsIntro` line. Products without it are unchanged.
+    const featuredToolNames: string[] = ai?.featuredTools ?? []
+    const featuredTools: McpTool[] = useMemo(
+        () =>
+            featuredToolNames.map((name) => productTools.find((t) => t.name === name)).filter((t): t is McpTool => !!t),
+        [featuredToolNames, productTools]
+    )
+
     const filteredTools = useMemo(() => {
         const q = query.trim().toLowerCase()
         if (!q) return productTools
@@ -98,15 +108,20 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
             <h2 className={SECTION_H2}>AI prompts</h2>
             {ai?.intro && (
                 <p className="text-base text-secondary mb-4">
-                    {ai.intro} Works in{' '}
-                    <Link to="/ai" state={{ newWindow: true }} className="font-semibold underline">
-                        PostHog AI
-                    </Link>{' '}
-                    (in-app chat),{' '}
-                    <Link to="/desktop" state={{ newWindow: true }} className="font-semibold underline">
-                        PostHog Desktop
-                    </Link>{' '}
-                    (our AI code editor), and in your product editor (using the MCP).{' '}
+                    {ai.intro} {/* Opt-in: `ai.hideSurfaces` drops the "Works in…" sentence. */}
+                    {!ai.hideSurfaces && (
+                        <>
+                            Works in{' '}
+                            <Link to="/ai" state={{ newWindow: true }} className="font-semibold underline">
+                                PostHog AI
+                            </Link>{' '}
+                            (in-app chat),{' '}
+                            <Link to="/desktop" state={{ newWindow: true }} className="font-semibold underline">
+                                PostHog Desktop
+                            </Link>{' '}
+                            (our AI code editor), and in your product editor (using the MCP).{' '}
+                        </>
+                    )}
                     {copyPrompts
                         ? 'Click a prompt to copy it, then paste it into your agent.'
                         : 'Already signed in? Click a prompt to try it.'}
@@ -138,8 +153,14 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                                             className="w-full h-auto"
                                             title={ai.imageAlt || 'Ask PostHog anything'}
                                         />
-                                    ) : (
+                                    ) : isCloudinaryImage(ai.image) ? (
                                         <CloudinaryImage
+                                            src={ai.image}
+                                            alt={ai.imageAlt || 'Ask PostHog anything'}
+                                            className="w-full"
+                                        />
+                                    ) : (
+                                        <HoggieImage
                                             src={ai.image}
                                             alt={ai.imageAlt || 'Ask PostHog anything'}
                                             className="w-full"
@@ -194,7 +215,21 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                         </>
                     )}
 
-                    {tab === 'tools' && (
+                    {tab === 'tools' && featuredTools.length > 0 && (
+                        <>
+                            {ai?.toolsIntro && <p className="text-base text-secondary m-0 mb-2">{ai.toolsIntro}</p>}
+                            <div className="@container">
+                                <LabeledList
+                                    items={featuredTools.map((t) => ({
+                                        label: <p className="text-xs font-mono font-normal m-0">{t.name}</p>,
+                                        description: t.summary,
+                                    }))}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {tab === 'tools' && featuredTools.length === 0 && (
                         <>
                             <div className="mb-4">
                                 <Input

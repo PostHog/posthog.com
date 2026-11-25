@@ -1,5 +1,5 @@
 ---
-date: 2024-02-19
+date: 2026-11-24
 title: How we built our onboarding email flow (with actual performance data)
 rootPage: /blog
 category: Inside PostHog
@@ -14,12 +14,13 @@ ogImage: generated
 
 > **Updated July 26, 2024:** Added information about Onboarding 6.0
 > **Updated Feb 18, 2025:** Added information about Onboarding 7.0
+> **Updated Nov 24, 2026:** Added information about Onboarding 8.0, 9.0, and 10.0
 
 Marketers believe onboarding emails are a powerful tool for driving engagement. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.
 
 People, and developers in particular, hate onboarding campaigns because the bad ones are so memorable. And how would you know what "good" looks like without signing up and risking a flood of tedious outreach emails from sales reps?
 
-We don’t do those sorts of outreach emails. This is what we do instead, and how we got there over 7 major iterations. We think it works and we've included performance data so you can judge for yourself.
+We don’t do those sorts of outreach emails. This is what we do instead, and how we got there over 10 major iterations. We think it works and we've included performance data so you can judge for yourself.
 
 ## Onboarding 1.0: The one where it started costing lots
 
@@ -58,7 +59,6 @@ Our conversion event was a user log-in within one week of opening an email. We h
 
 - **Open rate:** 56%
 - **Click-through-rate:** 7.4%
-- **Conversion rate:** 3%
 - **Unsubscribe rate:** 0.6%
 
 Based on this high open rate and low unsubscribe rate we felt that users didn't mind getting the emails, and the click-through rate suggested they liked what they read. So, we continued adding more messages. 
@@ -68,7 +68,6 @@ Based on this high open rate and low unsubscribe rate we felt that users didn't 
 >
 > - **Open rate:** Anything above 40% is OK. 50% is the goal.
 > - **Click-through-rate:** Anything above 4% is OK. 6% is the goal. 
-> - **Conversion rate:** Anything above 3% is OK. 5% is the goal. 
 > - **Unsubscribe rate:** Anything below 1% is OK. 0% is the goal.
 
 ## Onboarding 3.1: The one where we added personalization
@@ -104,7 +103,6 @@ By this point we’d also changed our conversion event to mean a user enabling b
 - **Open rate:** 52%
 - **Click-through-rate:** 4%
 - **Unsubscribe rate:** 0.4%
-- **Conversion rate:** 6%
 
 Around this point we also started filtering out teams in our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so our <SmallTeam slug="customer-success" /> could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
 
@@ -130,7 +128,6 @@ And as for performance?
 
 - **Open rate:** 50%
 - **Click-through-rate:** 2.4%
-- **Conversion rate:** 3.5%
 - **Unsubscribe rate:** 0.4%
 
 ## Onboarding 6.0: The one that lasted almost a whole year
@@ -150,10 +147,9 @@ You'd think doing things like actively goading users into unsubscribing would be
 
 - **Open rate:** 52%
 - **Click-through-rate:** 3.1%
-- **Conversion rate:** 2.2% (with a new conversion event of activating any single product)
 - **Unsubscribe rate:** 0.3%
 
-## Onboarding 7.0: The current one
+## Onboarding 7.0: The one with intent and activation criteria
 
 In 2025, I decided to revisit the onboarding flow with a two main goals. First, I wanted to more actively encourage cross-sell again, but this time with a focus on doing it just for products that combined _really_ well. I'd decided that what held previous attempts at cross-sell back wasn't the idea, but just that the content was a bit m'eh. Secondly, I wanted to design a secondary flow which focused on pulling in feedback for our betas - but that's another story. 
 
@@ -166,11 +162,85 @@ The new onboarding features a new loop when users first sign up that assesses wh
 
 I've tried to make the emails a lot more fun and anarchic than they were even in Onboarding 6.0, but in 7.0 I also took on feedback from users about the sort of content that would help. A lot of users wanted to know how we personally use PostHog, or what they can learn from other customers. Additionally, 100% of the onboarding emails now come directly from me (albeit still automated) and the emails themselves have a new design which actually works in dark mode. 
 
-At the time of writing it's still a little early to know how successful these new experiments will be, but the early response is positive. After being live for a week this version has already equalled the CTR of the previous version, though the jury remains out on the overall conversion rate. 
+Data-wise, we unfortunately don't have much of a clear read on how this version performed – other than some historic notes that suggest the CTR and open-rate matched those of the previous version within 30 days. The issue here is that I foolishly overwrote this version in Customer.io with the changes that followed in 8.0 – a lesson we'll be sure not to repeat. 
+
+## Onboarding 8.0: The one with videos
+
+[Onboarding 8.0](https://github.com/PostHog/requests-for-comments-public/issues/414) rolled in some small, tactical changes to our emails and attempted to build on the cross-sell logic we started in Onboarding 7.0. It also used a lot of videos, as we'd just started building our video team at PostHog and were finally able to create richer assets.
+
+Under the hood, most of the changes were about cross-sell. We extended the cross-sell logic so it ran at every layer of the flow and went three products deep, and added three more cross-sell checks after a user's first 30 days. We also moved the add-on email to a more prominent spot (people liked it), added a pricing explanation step, and renamed Max AI to PostHog AI.
+
+As in the previous flow, we used product intent and product activation to try and time messages to users based on what we thought they wanted to set up and what products they were using. This time we'd send them emails with videos about how we used PostHog internally to demonstrate common use cases.
+
+On paper, this sounds great. People love videos, right?
+
+In practice, we quickly got frustrated with it. The videos didn't seem to perform especially well, took too much time to create, and often went out of date as we shipped new features and UI. We became keen to replace the content with something better, especially as we shipped more and more products, the flow got more complex as a result, and the data showed more of a downturn.
+
+- **Open rate:** 42%
+- **Click-through-rate:** 2.3%
+- **Unsubscribe rate:** 1.2%
+
+## Onboarding 9.0: The last one in Customer.io
+
+Onboarding 9.0 was less of a strategically planned update and more of a reactionary set of changes that increasingly grew in scope. What began as a positioning update as we launched our self-driving features later grew into a much broader set of changes than that implies.
+
+The context here is that the Marketing teams at PostHog came together as a group and decided to make a directed effort to reposition our product. You can read all about that in [Charles' article about the decision](/blog/repositioning-posthog), but the impact on the onboarding flow was expansive.
+
+We started by rewriting every email and funneling users not towards videos and specific products, but to our agentic and [self-driving tools](/self-driving). [Our Slack app](/slack) got a lot of attention (primarily because I'm a habitual user of it internally), as did the then-in-beta [PostHog Desktop app](/desktop).
+
+Beyond the emails themselves, 9.0 was also the last email campaign we built in Customer.io. We'd had a number of issues with Customer.io since adopting the tool, such as a constantly degraded pipeline due to the amount of data we (as a data company) wanted to send and issues with user and org relationship mapping. By the time it came to renew our annual contract we found ourselves paying $5,000 per month in overages and with campaigns increasingly siloed from the data we wanted to use. Negotiations with Customer.io also became lengthy and I was personally disappointed in how slow the MCP and agent tools felt.
+
+Luckily, [I didn't have to look far for an alternative](/workflows).
+
+- **Open rate:** 41%
+- **Click-through-rate:** 1.4%
+- **Unsubscribe rate:** 1.1%
+
+## Onboarding 10.0: The upcoming one
+
+[Onboarding 10.0](https://github.com/PostHog/marketing/issues/441) is the first flow I built entirely in [PostHog Workflows](/workflows), and the first one I built mostly by talking to an agent.
+
+Before I started, I [asked three lifecycle marketers to roast our lifecycle marketing](/blog/lifecycle-marketing). The clearest advice was to swap our tree of roughly 100 emails for one simple trunk with one goal, so that's what I built.
+
+9.0 pointed people at our agentic tools, but it was still a product tour with extra steps. For 10.0, I picked one north star: get new users to set up [the MCP](/mcp) or use [PostHog AI](/ai). Everything else in the flow exists to get them there, or to make their org a bit healthier along the way.
+
+So, instead of a forest of product paths, every new signup will go down one trunk. It only branches on a handful of things we actually know about them:
+
+- **Data:** Has their org started sending events? If not, we help with setup before anything else.
+- **AI use:** Have they used PostHog AI, the MCP, or the Slack app? If so, they skip the emails that nudge them towards it and move through the rest of the flow about three days early.
+- **Teammates:** Have they invited anyone, or joined an existing team? If not, we suggest they do. Every plan has unlimited teammates, even the free one.
+- **Products:** Do they already use two or more products? If so, they skip the use-case emails.
+- **Plan:** Owners and admins with data who aren't paying yet get an email about adding a card and setting a $0 billing limit. Paying orgs skip it.
+
+The use-case emails are where things changed the most. Previous versions tried to sell you on specific products, which is how the cross-sell logic got so tangled in 7.0 and 8.0. Now each email gives you a problem and a prompt to paste into PostHog AI, your own agent, or Slack. Every prompt uses at least two products, so cross-sell is the agent's job now, not mine. Honestly, it's better at it.
+
+Personalization is still light, but it goes further than it used to. Each email uses Liquid to change the copy based on how someone signed up and what role they picked. If you signed up through Claude, Cursor, or Lovable, the welcome email names the tool and tells you how to install PostHog from there. If you're a founder, your use cases are about revenue and retention, not failed network requests.
+
+And yes, it's still fun. There's a hot dog joke, a Chrome extension that lets Max the hedgehog loose on the internet, and an email that promotes our least profitable products because we don't listen to our shareholders. Most footers have their own joke too, mostly at my expense.
+
+![Onboarding 10.0](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/68747470733a2f2f75732d6d656469612e706f7374686f672e636f6d2f75706c6f616465645f6d656469612f30316132306533632d306563622d303030302d383461382d666339643562623231666139_9e66c0c9df.png)
+
+<Caption>Onboarding 10.0 gives users a slightly different path based on if they've been invited, or are a new sign-up</Caption>
+
+### Building it with the MCP
+
+This is the bit I'm most excited about. I built almost all of 10.0 by talking to Claude through the [PostHog MCP](/docs/model-context-protocol). I'd describe a branch or paste in some copy, and the agent would build the step, write the Liquid, and wire it all together. When I wanted to see the result, I asked for a test of every email and every variation, and they landed in my inbox a few minutes later.
+
+It also did the boring checks I'd normally skip. It tested every Liquid branch against real signup data, so we weren't personalizing on properties that don't exist. It regenerated the plain-text version of every email. It even spotted that orgs on one of our paid plans would have got the add-a-card email, which would have been embarrassing. In Customer.io, that sort of audit would have taken me a week and a spreadsheet. Here, it took a few prompts.
+
+### Having all the data
+
+The other big change is that the flow now lives next to the data, not downstream of it. In Customer.io, every signal we wanted to use had to be piped across, mapped to the right user and org, and paid for. We were always working from a partial, slightly stale copy.
+
+In PostHog, the flow can use anything the product already knows: events, person and org properties, and cohorts. That's how 10.0 checks whether an org has ingested data, whether someone has used the MCP, how many products they use, and which plan they're on, at the moment each email is due. No syncing, no overages, and no arguing about which user belongs to which org.
+
+The same goes for measurement. Conversions, opens, and clicks sit in the same place as product usage, so I can see whether someone who got the MCP email went on to use the MCP, not just whether they clicked a link.
+
+At the time of writing, 10.0 hasn't launched yet, so there's no performance data here. I'll add it once there is.
 
 ## What we learned
 
-Across the ~five~ six major versions (and many other smaller iterations) of our email onboarding, there are a few definite things we've learned. 
+Across the various different versions (and many other smaller iterations) of our email onboarding, there are a few definite things we've learned. 
 
 ### Email works for engineers too
 As I said at the start, the conventional wisdom is that engineers are particularly skeptical of any marketing activity, and likely to unsubscribe to emails. However, our unsubscribe rates have been consistently low enough to disprove this. If the emails add value for engineers and are [well-written for that audience](/founders/writing-for-developers), they can still be effective. 

@@ -25,7 +25,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Unleash instance URL and an Admin API token to sync your feature flags, projects, environments, strategies, segments, and other configuration data.
 
-The instance URL is where you open the Unleash UI - for Unleash cloud it includes your instance name (e.g. `https://us.app.unleash-hosted.com/your-instance`); for self-hosted it's your server's URL. The token is a personal access token or, on Enterprise, a [service account token](https://docs.getunleash.io/reference/service-accounts); it inherits the owner's permissions, and the `users` table additionally requires the Admin root role. The `features` table uses the flag search API, which requires Unleash 5.12 or newer.
+The instance URL is where you open the Unleash UI - for Unleash cloud it includes your instance name (e.g. `https://us.app.unleash-hosted.com/your-instance`); for self-hosted it's your server's URL. The token is a personal access token or, on Enterprise, a [service account token](https://docs.getunleash.io/reference/service-accounts); it inherits the owner's permissions, and the `users` table additionally requires the Admin root role. The `features`, `feature_strategies`, and `feature_metrics` tables use the flag search API, which requires Unleash 5.12 or newer.
 
 You'll be asked for:
 
@@ -36,7 +36,9 @@ You'll be asked for:
 
 <SyncModes />
 
-All Unleash tables are full refresh. Each sync replaces the contents of the table.
+The `events` audit log supports incremental sync on `createdAt`, and `feature_metrics` supports incremental sync on `timestamp`. Both also support full refresh, but not append-only sync. All other tables, including `feature_strategies`, are full refresh only.
+
+The `feature_strategies` table contains one row per strategy per feature environment. The `feature_metrics` table contains hourly evaluation counts per feature, SDK application, and environment. Unleash retains raw metrics for 48 hours. Sync metrics incrementally at least every 48 hours to keep the history; each run reads the available window again and merges updated counts.
 
 ## Configuration
 
