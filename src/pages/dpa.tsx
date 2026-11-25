@@ -283,7 +283,7 @@ function DpaGenerator() {
                     id="page"
                     className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 py-4 border-t border-primary @3xl:border-l print:shadow-none @3xl:rounded-tl relative"
                 >
-                    <div className="bg-accent lg:rounded-tl py-2 px-4 text-sm border-b border-light -mx-4 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10 gap-4">
+                    <div className="bg-accent lg:rounded-tl py-2 px-4 text-sm border-b border-light -mx-4 -mt-4 flex items-center justify-between print:hidden sticky top-0 z-10 gap-4">
                         <div className="text-lg font-bold dark:text-primary">Data Processing Agreement preview</div>
                         <Link
                             to={APP_LEGAL_URL}
