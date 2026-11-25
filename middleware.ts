@@ -18,13 +18,32 @@
  *
  * Returning `undefined` continues to the normal static response, so anything
  * this function declines to handle behaves exactly as it does today.
+ *
+ * It also answers MCP clients that people point at a posthog.com page instead
+ * of the MCP server, so they show where the server is rather than a parse
+ * error. `/` and `/mcp.md` are in the matcher only for those clients.
  */
 export const config = {
-    matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog', '/mcp'],
+    matcher: [
+        '/',
+        '/docs/:path*',
+        '/handbook/:path*',
+        '/blog/:path*',
+        '/newsletter/:path*',
+        '/changelog',
+        '/mcp',
+        '/mcp.md',
+    ],
 }
 
 const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']
 const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('|')})\\b`, 'i')
+
+// MCP clients list this in Accept on every request, as the MCP spec requires. Browsers and crawlers
+// loading a page never do.
+const MCP_CLIENT_ACCEPT = 'text/event-stream'
+const MCP_SERVER_HINT =
+    "This is posthog.com, not PostHog's MCP server. Use https://mcp.posthog.com/mcp, or https://mcp-eu.posthog.com/mcp for EU Cloud."
 
 // Queries find the line by parsing each line of the entry body and matching `type` exactly, so this
 // value must stay distinct from the other `type` values in PostHog Logs.
@@ -92,7 +111,7 @@ const EMAIL_SEGMENT = /^[^/]*(?:@|%40)[^/]*\.[A-Za-z]{2,}$/i
 // @types/node. Without these two declarations every build prints type errors for it.
 declare const process: { env: { [name: string]: string | undefined } }
 
-type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url'
+type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url' | 'mcp_client'
 
 interface NegotiationResult {
     response: Response | undefined
@@ -109,6 +128,7 @@ export default async function middleware(request: Request): Promise<Response | u
 
 async function negotiate(request: Request): Promise<NegotiationResult> {
     const accept = request.headers.get('accept') || ''
+    if (accept.includes(MCP_CLIENT_ACCEPT)) return { response: await mcpServerHint(request), negotiation: 'mcp_client' }
     const acceptsMarkdown = accept.includes('text/markdown')
     const isAgentFetch =
         USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') && !accept.includes('text/html')
@@ -155,7 +175,7 @@ function logRequest(request: Request, result: NegotiationResult): void {
             type: LOG_TYPE,
             method: request.method,
             url: scrubUrl(url),
-            served_format: result.response || result.negotiation === 'markdown_url' ? 'markdown' : 'html',
+            served_format: servedFormat(result),
             negotiation: result.negotiation,
             markdown_reason: result.reason,
             markdown_fetch_ms: result.markdownFetchMs,
@@ -163,6 +183,29 @@ function logRequest(request: Request, result: NegotiationResult): void {
             other_header_names: headers.otherNames,
         })
     )
+}
+
+function servedFormat(result: NegotiationResult): 'html' | 'markdown' | 'mcp_error' {
+    if (result.negotiation === 'mcp_client') return 'mcp_error'
+    return result.response || result.negotiation === 'markdown_url' ? 'markdown' : 'html'
+}
+
+// An MCP client opens with a JSON-RPC `initialize` POST. It shows the message of a JSON-RPC error sent
+// with a 200; with a 4xx it shows the raw response body instead. An SSE client opens with a GET and
+// reads only the status, so that gets a 405.
+async function mcpServerHint(request: Request): Promise<Response> {
+    if (request.method !== 'POST') {
+        return new Response(MCP_SERVER_HINT, {
+            status: 405,
+            headers: { allow: 'POST', 'content-type': 'text/plain; charset=utf-8' },
+        })
+    }
+    const message = await request.json().catch(() => null)
+    const id = message && typeof message === 'object' && 'id' in message ? message.id : null
+    return new Response(JSON.stringify({ jsonrpc: '2.0', id, error: { code: -32600, message: MCP_SERVER_HINT } }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+    })
 }
 
 // The path and query, with the value of every query parameter outside the allowlist replaced by

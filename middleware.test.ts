@@ -87,6 +87,42 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
     assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })
 
+const mcpClientHeaders = { accept: 'application/json, text/event-stream', 'content-type': 'application/json' }
+
+test('answers MCP clients pointed at a page with a JSON-RPC error that names the MCP server', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog MCP server'))
+    const initialize = { jsonrpc: '2.0', id: 0, method: 'initialize', params: {} }
+
+    for (const path of ['/', '/docs/model-context-protocol', '/mcp', '/mcp.md']) {
+        const response = await middleware(
+            new Request(`https://posthog.com${path}`, {
+                method: 'POST',
+                headers: { ...mcpClientHeaders, 'user-agent': 'Claude-User' },
+                body: JSON.stringify(initialize),
+            })
+        )
+        assert.equal(response?.status, 200, path)
+        assert.equal(response.headers.get('content-type'), 'application/json')
+        const { jsonrpc, id, error } = await response.json()
+        assert.deepEqual({ jsonrpc, id, code: error.code }, { jsonrpc: '2.0', id: 0, code: -32600 })
+        assert.match(error.message, /https:\/\/mcp\.posthog\.com\/mcp\b.*https:\/\/mcp-eu\.posthog\.com\/mcp\b/)
+    }
+    assert.equal(fetch.mock.callCount(), 0)
+})
+
+test('answers a malformed MCP message and an SSE client with the same hint', async () => {
+    const malformed = await middleware(
+        new Request('https://posthog.com/', { method: 'POST', headers: mcpClientHeaders, body: '{"jsonrpc":' })
+    )
+    const { id, error } = await malformed?.json()
+    assert.equal(id, null)
+    assert.match(error.message, /mcp\.posthog\.com/)
+
+    const sse = await middleware(new Request('https://posthog.com/', { headers: { accept: 'text/event-stream' } }))
+    assert.equal(sse?.status, 405)
+    assert.match(await sse.text(), /mcp\.posthog\.com/)
+})
+
 function enableLog(t: TestContext): void {
     process.env.MIDDLEWARE_LOG_ENABLED = 'true'
     t.after(() => {
@@ -165,6 +201,7 @@ test('logs why no Markdown was served, and requests for a Markdown URL', async (
     await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User/1.0' } }))
     await middleware(new Request(page, { headers: { accept: 'text/markdown' } }))
     await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
+    await middleware(new Request(page, { method: 'POST', headers: mcpClientHeaders, body: '{}' }))
 
     assert.deepEqual(
         lines.map((line) => [line.served_format, line.negotiation, line.markdown_reason]),
@@ -173,6 +210,7 @@ test('logs why no Markdown was served, and requests for a Markdown URL', async (
             ['html', 'no_sibling', 'agent_fetcher'],
             ['html', 'no_sibling', 'accept'],
             ['markdown', 'markdown_url', undefined],
+            ['mcp_error', 'mcp_client', undefined],
         ]
     )
     assert.equal(typeof lines[1].markdown_fetch_ms, 'number')
