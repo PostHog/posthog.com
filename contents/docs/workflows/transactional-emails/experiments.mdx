@@ -6,11 +6,11 @@ showTitle: true
 
 Test two versions of a transactional email with an [experiment](/docs/experiments). A feature flag picks the version for each user, your code sends that version, and the experiment compares what the users do next. You can measure any product event, such as finished onboarding, and email clicks.
 
-The examples use the [Node.js SDK](/docs/workflows/transactional-emails/node), version 6. The same steps work in each SDK that has feature flags and transactional emails.
+The examples use the [Node.js SDK](/docs/workflows/transactional-emails/node), version 6. The template steps also work in other SDKs with feature flags and transactional emails. The `react` option needs Node.js.
 
 ## Before you start
 
-- [Send the email](/docs/workflows/transactional-emails#send-your-first-email) from your code.
+- Send the email from your code, with [a template](/docs/workflows/transactional-emails/node#send-an-email) or with [React Email](/docs/workflows/transactional-emails/react-email). The examples import the client from [set up the client](/docs/workflows/transactional-emails/react-email#set-up-the-client).
 - Use one distinct ID for the flag, the send, and your product events. If they differ, PostHog counts them as different people, and the experiment has no conversions. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
 - To measure clicks, turn on [engagement events](/docs/workflows/engagement-events#enable-engagement-events). These events count toward your event usage. You don't need them to measure product events.
 
@@ -21,13 +21,13 @@ Choose an email with enough sends. The [sample size calculator](/docs/experiment
 1. [Create an experiment](/docs/experiments/creating-an-experiment). This page uses the flag key `welcome-email-test`, with the variants `control` and `test`.
 2. Keep the default exposure event. PostHog sends it when your code reads the flag.
 3. Add the product event that the email is for as the primary metric.
-4. Deploy the code below, then launch the experiment.
+4. Deploy the code below and publish any template changes. Then launch the experiment.
 
 ## Send the version that the flag picks
 
 ### React Email
 
-Keep both versions as [React Email](/docs/workflows/transactional-emails/react-email) components, and use one `templateKey` for both:
+Keep both versions as [React Email](/docs/workflows/transactional-emails/react-email) components, and use one `templateKey` for both. PostHog then groups their sends and clicks as one email:
 
 ```jsx
 import { WelcomeEmail, WelcomeEmailShort } from "./emails/welcome"
@@ -46,6 +46,9 @@ export async function sendWelcome({ userId, email, firstName }) {
         distinctId: userId,
         idempotencyKey: `welcome-${userId}`,
     })
+    if (error?.code === "idempotency_key_reused") {
+        return null // An earlier attempt sent the other version
+    }
     if (error) {
         throw error
     }
@@ -53,13 +56,13 @@ export async function sendWelcome({ userId, email, firstName }) {
 }
 ```
 
-`evaluateFlags` gets the flag for the user. `getFlag` reads the variant and records the exposure. Read the flag immediately before the send, so that only people who get the email are in the experiment.
+`evaluateFlags` gets the flag for the user. `getFlag` reads the variant and records the exposure. Read the flag immediately before the send, so that only people you try to email are in the experiment. In a script or a serverless function, call `await posthog.flush()` before it ends. Otherwise, the email goes out but the exposure can be lost.
 
 Everything except `test` sends your current email. This covers users outside the rollout and a flag that PostHog can't evaluate.
 
 ### A template in PostHog
 
-For a small change, such as a subject or a button, send the variant as a template variable:
+For a small change, such as a subject or a button, replace the send with one that passes the variant as a template variable:
 
 ```js
 const flags = await posthog.evaluateFlags(userId, { flagKeys: ["welcome-email-test"] })
@@ -79,7 +82,9 @@ Then branch on it in the subject or the body:
 {% if variables.variant == "test" %}Your project is ready{% else %}Welcome to Hedgebox{% endif %}
 ```
 
-For a different design, make a second transactional email that takes the same variables, and pick the template:
+Publish the template before you launch the experiment. Until then, everyone gets the published version.
+
+For a different design, make a second transactional email that takes the same variables, publish it, and pick the template:
 
 ```js
 const isTest = flags.getFlag("welcome-email-test") === "test"
@@ -99,11 +104,13 @@ Add `$workflows_email_link_clicked` as a metric, and filter it to this email wit
 
 If you use two templates, add both workflow IDs to the filter. Otherwise, the metric counts clicks on only one version.
 
-PostHog can't record clicks for a send with [click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking) off. Use the same tracking settings for both versions.
+PostHog can't record clicks for a send with [click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking) off. The React Email example passes `sensitive: false` because a welcome email has no secrets. Keep the default for an email with login links, reset tokens, or codes. For two templates, use the same [Protect sensitive data](/docs/workflows/transactional-emails#protect-sensitive-data) setting on both.
 
 ## Retry with the same version
 
-An idempotency key belongs to one version of the email. If a retry picks the other version, because you changed the rollout or the flag request failed, the send returns `idempotency_key_reused` and sends nothing. The first email still goes out, so treat this error as already sent. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
+An idempotency key belongs to one version of the email. If a retry picks the other version, because you changed the rollout or the flag request failed, the send returns `idempotency_key_reused` and sends nothing. An earlier attempt already sent the email.
+
+The retry still records an exposure to the second variant, and the experiment [excludes people with two variants](/docs/experiments/exposures#handling-multiple-exposures) by default. If you retry from a job queue, save the variant with the job and use it on each attempt. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
 
 ## End the experiment
 
