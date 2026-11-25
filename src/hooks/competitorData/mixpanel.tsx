@@ -47,7 +47,7 @@ export const mixpanel = {
             features: {
                 advertising_analytics: true,
                 autocapture: true,
-                cohorts: true,
+                cohorts: 'Limited on Free',
                 custom_events: true,
                 custom_properties: true,
                 monetization_analytics: true,
@@ -59,7 +59,7 @@ export const mixpanel = {
                     available: true,
                     features: {
                         ai_insight_builder: true,
-                        alerts: true,
+                        alerts: 'Paid (up to 5 on Growth)',
                         formula_mode: true,
                         ready_made_insight_types: true,
                         sampling: false,
@@ -73,7 +73,7 @@ export const mixpanel = {
                 funnels: {
                     available: true,
                     features: {
-                        correlation_analysis: true,
+                        correlation_analysis: 'Enterprise',
                     },
                 },
                 retention: {
@@ -85,7 +85,7 @@ export const mixpanel = {
                     features: {},
                 },
                 lifecycle: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
                 stickiness: {
@@ -93,7 +93,7 @@ export const mixpanel = {
                     features: {},
                 },
                 group_analytics: {
-                    available: true,
+                    available: 'Add-on',
                     features: {},
                 },
             },
@@ -120,7 +120,7 @@ export const mixpanel = {
                 migration: true,
                 movement_maps: false,
                 open_source: false,
-                outbound_clicks: true,
+                outbound_clicks: false,
                 pageviews: true,
                 pre_configured_dashboards: true,
                 real_time_reporting: true,
@@ -158,7 +158,7 @@ export const mixpanel = {
                 notes_on_replays: false,
                 playlists: true,
                 privacy_masking: true,
-                retention_policy: true,
+                retention_policy: '30 days (up to 1 year on Enterprise add-on)',
                 screenshot_mode: true,
                 scrollmaps: true,
                 search_by_network: false,
@@ -191,6 +191,7 @@ export const mixpanel = {
             ai: {
                 features: {
                     ai_summaries: true,
+                    replay_vision: 'Partial',
                 },
             },
         },
@@ -206,7 +207,7 @@ export const mixpanel = {
             implementation: {
                 features: {
                     local_evaluation: true,
-                    bootstrapping: true,
+                    bootstrapping: false,
                 },
             },
             targeting: {
@@ -382,7 +383,7 @@ export const mixpanel = {
             available: true,
         },
         cdp: {
-            available: false,
+            available: 'Add-on',
         },
         data_warehouse: {
             available: false,

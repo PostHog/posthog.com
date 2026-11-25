@@ -152,6 +152,8 @@ Our [generous free tier](/pricing) means every PostHog customer gets 1 million a
 
 PostHog is also a powerful [alternative to Google Analytics](/compare/best-ga4-alternatives) that bridges the gap between lightweight tools like [Plausible](/compare/best-plausible-alternatives), and expensive enterprise platforms like [Adobe Analytics](/compare/best-adobe-analytics-alternatives).
 
+Mixpanel's web analytics is a dashboard template built on its event reports. PostHog's is a dedicated, preconfigured product, with its own queries and UI built for website traffic.
+
 <p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
@@ -208,6 +210,9 @@ Features include [console logs](/docs/session-replay/console-log-recording), [ne
         'session_replay.privacy.privacy_masking',
         'session_replay.targeting.target_by_feature_flag',
         'session_replay.targeting.target_by_sample',
+        'session_replay.features.retention_policy',
+        'session_replay.ai.ai_summaries',
+        'session_replay.ai.replay_vision',
     ]}
 />
 </p>
@@ -226,11 +231,6 @@ Both PostHog and Mixpanel offer broad SDK support for session replay across web 
         'session_replay.platform_support.react_native_recordings',
         'session_replay.platform_support.flutter_recordings',
         {
-            path: 'session_replay.features.wireframe_mode',
-            label: 'Wireframe mode',
-            description: 'Low performance impact mobile recordings using wireframes',
-        },
-        {
             path: 'session_replay.features.screenshot_mode',
             label: 'Screenshot mode',
             description: 'Mobile session reconstructions using app screenshots',
@@ -245,9 +245,21 @@ You can use PostHog AI to chat with your recordings using natural language – e
 
 </CalloutBox>
 
+### AI and MCP
+ 
+Both tools now have a built-in AI agent and a hosted MCP server, so the question is what your agents can see in each.
+ 
+- **Mixpanel** has Mixpanel Agent, an AI analyst that builds reports and answers questions in plain language, AI summaries of session replays, and Agent Intelligence for analyzing AI agent traces, which is in beta for a limited set of customers. Its hosted MCP server can read and write, with its experiment and feature flag tools in open beta.
+
+- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) that can read and write, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents can open PRs.
+ 
+The difference is what's behind them. Mixpanel's agent and MCP server work from your events, replays, and experiments, and Mixpanel Agent can also read tools like GitHub, Jira, Linear, and Notion through MCP Connections. PostHog's work from your events, replays, and experiments plus your errors, logs, survey responses, and the external data in your warehouse.
+
 ### Feature flags
 
 Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). You can also use them to [control access to beta features](/docs/feature-flags/early-access-feature-management), and make [scheduled changes to your app](/docs/feature-flags/scheduled-flag-changes).
+
+Mixpanel includes feature flags and experiments on every plan, but with limits below Enterprise: 10 active flags and 1,000 monthly experiment users on Free, and 50 active flags and 5,000 monthly experiment users on Growth. PostHog has no limit on the number of flags or experiments, and you only pay for usage.
 
 <p>
 <ProductComparisonTable
@@ -264,11 +276,6 @@ Feature flags make it easy to roll out features to specific users or groups, and
         'feature_flags.management.features.multi_environment',
         'feature_flags.management.history_activity',
         'feature_flags.features.early_access_management',
-        {
-            path: 'feature_flags.features.json_payloads',
-            label: 'Remote config',
-            description: 'Pass config without making code changes or redeploying your app',
-        },
     ]}
 />
 </p>
@@ -347,15 +354,6 @@ You can't build a successful product on data alone. Surveys are useful for [gath
             description: 'Automated summary of user feedback',
         },
         'surveys.targeting.custom_targeting',
-        {
-            path: 'surveys.targeting.display_conditions',
-            label: 'Cohort targeting',
-            description: 'Show surveys to predefined static list of users',
-        },
-        {
-            path: 'surveys.targeting.display_conditions',
-            label: 'Display based on device',
-            description: 'Show surveys only on desktop, tablet or mobile',
         'surveys.targeting.display_conditions',
         'surveys.targeting.event_triggered',
         'surveys.presentation.feedback_button',
@@ -389,16 +387,6 @@ You can't build a successful product on data alone. Surveys are useful for [gath
 Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more. Read our [guide comparing NPS, CSAT, and CES](/product-engineers/nps-vs-csat-vs-ces) to see which survey type you should use and when.
 
 </CalloutBox>
-
-### AI and MCP
- 
-Both tools now have a built-in AI agent and a hosted MCP server, so the question is what your agents can see in each.
- 
-- **Mixpanel** has Mixpanel Agent, an AI analyst that builds reports and answers questions in plain language, AI summaries of session replays, and Agent Intelligence for analyzing AI agent traces, which is in beta for a limited set of customers. Its hosted MCP server can read and write, with its experiment and feature flag tools in open beta.
-
-- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents can open PRs.
- 
-The difference is what's behind them. Mixpanel's agent and MCP server work from your events, replays, and experiments, and Mixpanel Agent can also read tools like GitHub, Jira, Linear, and Notion through MCP Connections. PostHog's work from your events, replays, and experiments plus your errors, logs, survey responses, and the external data in your warehouse.
 
 ### Price comparison
 

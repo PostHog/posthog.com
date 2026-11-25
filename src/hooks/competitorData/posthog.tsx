@@ -331,7 +331,7 @@ export const posthog = {
                     },
                 },
                 group_analytics: {
-                    available: true,
+                    available: 'Add-on',
                     features: {
                         group_by_events: true,
                     },
