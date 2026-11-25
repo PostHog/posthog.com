@@ -36,7 +36,9 @@ You also need a Listmonk API user. To create one:
    - `subscribers:sql_query`, only if you want to sync the `subscribers` table incrementally
 3. Copy the API token of the user.
 
-If you do not want to sync a table, you can leave out its permission. Then deselect that table when you link the source.
+The `lists:get_all` permission is always necessary, because PostHog reads your lists to check the credentials when you link the source. The `campaign_analytics` table also needs `campaigns:get_all`, because PostHog first gets the list of campaigns.
+
+If you do not want to sync a different table, you can leave out its permission. Then deselect that table when you link the source.
 
 <InboundIpAddresses />
 
