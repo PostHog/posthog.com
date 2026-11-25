@@ -6,7 +6,7 @@ showTitle: true
 
 Test two versions of a transactional email with an [experiment](/docs/experiments). A feature flag picks the version for each user, your code sends that version, and the experiment compares what the users do next. You can measure any product event, such as finished onboarding, and email clicks.
 
-The examples use the [Node.js SDK](/docs/workflows/transactional-emails/node), version 6. The template steps also work in other SDKs with feature flags and transactional emails. The `react` option needs Node.js.
+The examples use the [Node.js SDK](/docs/workflows/transactional-emails/node), version 6. The template steps also work in the [Python SDK](/docs/workflows/transactional-emails/python). The `react` option needs Node.js.
 
 ## Before you start
 
@@ -70,7 +70,7 @@ const flags = await posthog.evaluateFlags(userId, { flagKeys: ["welcome-email-te
 const { error } = await posthog.emails.send({
     to: email,
     templateId: "<template_id>",
-    templateData: { variant: flags.getFlag("welcome-email-test") ?? "control" },
+    templateData: { variant: flags.getFlag("welcome-email-test") || "control" },
     distinctId: userId,
     idempotencyKey: `welcome-${userId}`,
 })
@@ -110,9 +110,14 @@ The React Email example passes `sensitive: false` because a welcome email has no
 
 ## Retry with the same version
 
-An idempotency key belongs to one version of the email. If a retry picks the other version, because you changed the rollout or the flag request failed, the send returns `idempotency_key_reused` and sends nothing. An earlier attempt already sent the email.
+An idempotency key belongs to one version of the email. For 24 hours, a retry that picks the other version returns `idempotency_key_reused` and sends nothing, because an earlier attempt already sent the email. This happens if you change the rollout, or if a flag request fails, between attempts.
 
-The retry still records an exposure to the second variant, and the experiment [excludes people with two variants](/docs/experiments/exposures#handling-multiple-exposures) by default. If you retry from a job queue, save the variant with the job and use it on each attempt. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
+The retry can still change the results:
+
+- If the rollout changed, the retry records an exposure to the second variant. The experiment [excludes people with two variants](/docs/experiments/exposures#handling-multiple-exposures) by default.
+- If the first flag request failed, the person got your current email, and a retry that reads `test` counts them as `test`.
+
+If you retry from a job queue, save the variant with the job and use it on each attempt. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
 
 ## End the experiment
 
