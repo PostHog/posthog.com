@@ -1185,7 +1185,7 @@ function Flow({
             key={scenario.name}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex flex-col pt-2 @3xl/reader-content:min-h-[38rem]"
+            className="flex flex-col pt-2 @3xl/reader-content:min-h-[41rem]"
         >
             {steps.map((tile, i) => (
                 <React.Fragment key={i}>
@@ -1359,7 +1359,7 @@ export function CanvasBlock(): JSX.Element {
                             backgroundSize: '18px 18px',
                         }}
                     >
-                        <div className="flex flex-col pt-2 @3xl/reader-content:min-h-[38rem]">
+                        <div className="flex flex-col pt-2 @3xl/reader-content:min-h-[41rem]">
                             {head.map((tile, i) => (
                                 <React.Fragment key={i}>
                                     {i > 0 && <Down />}
