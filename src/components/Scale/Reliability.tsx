@@ -14,6 +14,7 @@ const REFRESH_MS = 60_000
 const FRESH_MS = 10 * 60_000
 const FETCH_TIMEOUT_MS = 10_000
 const LATEST_INCIDENTS = 10
+const UPTIME_TITLE_ID = 'scale-uptime-title'
 
 const impactColors: Record<string, ColorName> = {
     degraded_performance: 'yellow',
@@ -104,6 +105,7 @@ const componentLabels: [string, string][] = [
 ]
 
 const labels = new Map(componentLabels)
+const loadingRows = componentLabels.map(([name]) => ({ name, us: null, eu: null }))
 const componentRank = new Map(componentLabels.map(([name], index) => [name, index]))
 
 const noticeRow = 'm-0 grid grid-cols-[5rem_minmax(0,1fr)] gap-4 border-l border-primary py-2 pl-4'
@@ -126,36 +128,36 @@ function UptimeCard({ status }: { status: ScaleStatus | null }): JSX.Element {
         : undefined
     return (
         <Card.Root padding="sm">
-            <Card.TitleBar meta={period}>Uptime, last 90 days</Card.TitleBar>
-            {status ? (
-                <Table.Root appearance="plain" density="compact">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.Head>Component</Table.Head>
-                            <Table.Head align="end">US</Table.Head>
-                            <Table.Head align="end">EU</Table.Head>
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        {sortRows(status.uptime).map((row) => (
-                            <Table.Row key={row.name}>
-                                <Table.Head scope="row">{labels.get(row.name) ?? row.name}</Table.Head>
-                                {[row.us, row.eu].map((value, region) => (
-                                    <Table.Cell key={region} align="end" className="font-code tabular-nums">
+            <Card.TitleBar id={UPTIME_TITLE_ID} meta={period}>
+                Uptime, last 90 days
+            </Card.TitleBar>
+            <Table.Root appearance="plain" density="compact" aria-labelledby={UPTIME_TITLE_ID} aria-busy={!status}>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.Head>Component</Table.Head>
+                        <Table.Head align="end">US</Table.Head>
+                        <Table.Head align="end">EU</Table.Head>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    {(status ? sortRows(status.uptime) : loadingRows).map((row) => (
+                        <Table.Row key={row.name}>
+                            <Table.Head scope="row">{labels.get(row.name) ?? row.name}</Table.Head>
+                            {[row.us, row.eu].map((value, region) => (
+                                <Table.Cell key={region} align="end" className="font-code tabular-nums">
+                                    {value === null ? (
+                                        <Skeleton width="4.5rem" className="ml-auto" />
+                                    ) : (
                                         <span className={value === 100 ? 'text-green' : 'text-yellow'}>
                                             {formatUptime(value)}
                                         </span>
-                                    </Table.Cell>
-                                ))}
-                            </Table.Row>
-                        ))}
-                    </Table.Body>
-                </Table.Root>
-            ) : (
-                <div aria-hidden className="py-2">
-                    <Skeleton lines={componentLabels.length} />
-                </div>
-            )}
+                                    )}
+                                </Table.Cell>
+                            ))}
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table.Root>
         </Card.Root>
     )
 }
@@ -184,8 +186,8 @@ function RecentIncidents({ status }: { status: ScaleStatus | null }): JSX.Elemen
                       ))
                     : Array.from({ length: LATEST_INCIDENTS }, (_, row) => (
                           <li key={row} aria-hidden className={noticeRow}>
-                              <Skeleton width="3rem" />
-                              <Skeleton width="80%" />
+                              <Skeleton width="3rem" className="font-code text-13" />
+                              <Skeleton width="80%" className="text-15" />
                           </li>
                       ))}
             </ol>

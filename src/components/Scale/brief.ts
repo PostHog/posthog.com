@@ -15,10 +15,10 @@ function latencySection(status: NonNullable<ScaleData['status']>): string {
 
 US Cloud, the 24 hours before ${status.polledAt}, from the [status page](${STATUS_SITE}).
 
-- Time from ingestion to query visibility: about ${eventLag} seconds (median). Hourly p99 peaked at ${Math.round(
+- Time from ingestion to query visibility: about ${eventLag} seconds (average of the hourly medians). Hourly p99 peaked at ${Math.round(
         Math.max(...status.eventLag.p99)
     )} seconds.
-- Feature flag evaluation: about ${flagResponse} ms (median). Hourly p99 peaked at ${Math.ceil(
+- Feature flag evaluation: about ${flagResponse} ms (average of the hourly medians). Hourly p99 peaked at ${Math.ceil(
         Math.max(...status.flagResponse.p99)
     )} ms.
 
@@ -31,11 +31,21 @@ export function buildScaleBrief(data: ScaleData | null): string {
 > For AI agents. This is the plain version of ${SITE}/scale. The numbers cover one complete UTC day of PostHog Cloud (US and EU) and change when the site deploys. They include PostHog's own organizations.
 
 `
+    const reliability = `## Reliability
+
+The uptime and incidents on the page load live, so they are not in this file.
+
+- Status page: ${STATUS_SITE}
+- Uptime per component and region for the last 90 days, and the latest notices, as JSON: ${SITE}/api/scale-status
+`
     if (!data) {
-        return `${header}The numbers for this page are not available in this build. See ${SITE}/scale.\n`
+        return `${header}The usage numbers are not available in this build.
+
+${reliability}`
     }
     const { dayLabel, totals, logBytes, queryDurations, logOrgSizes, mcpClients, status } = data
     const receipt = lines
+        .filter((line) => line.key !== 'salesCalls')
         .map((line) => `- ${line.item}: ${formatCount(totals[line.key])} (${line.note(data)})`)
         .join('\n')
     const logSizes = logOrgSizes.shares.map((share, band) => `${logBands[band]} lines: ${share}%`).join(', ')
@@ -59,17 +69,11 @@ ${logOrgSizes.orgs.toLocaleString('en-US')} organizations sent ${formatCount(tot
         logBytes / TERABYTE
     ).toFixed(1)} TB). Organizations by the number of lines they sent: ${logSizes}.
 
-${status ? latencySection(status) : ''}## MCP tool calls by client
+${status ? latencySection(status) : ''}## Top MCP clients by share of tool calls
 
 ${clients}
 
-## Reliability
-
-The uptime and incidents on the page load live, so they are not in this file.
-
-- Status page: ${STATUS_SITE}
-- Uptime per component and region for the last 90 days, and the latest notices, as JSON: ${SITE}/api/scale-status
-
+${reliability}
 ## Next steps
 
 - Sign up free: https://app.posthog.com/signup
