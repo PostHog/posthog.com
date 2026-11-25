@@ -170,9 +170,9 @@ const categories: [title: string, rows: Row[]][] = [
             ['Official SDKs', '8', '9', '4', '4'],
             ['cc and bcc, attachments, idempotency', true, true, 'Partly', 'Partly'],
             ['Delivery webhooks', true, true, true, true],
-            ['Custom headers and tags', false, true, false, true],
-            ['Batch and scheduled send', false, true, false, 'Partly'],
-            ['SMTP relay and inbound email', false, true, false, false],
+            ['Custom headers and tags', true, true, false, true],
+            ['Batch and scheduled send', true, true, false, 'Partly'],
+            ['SMTP relay and inbound email', true, true, false, false],
         ],
     ],
     [
