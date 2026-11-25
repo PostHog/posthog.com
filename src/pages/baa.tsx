@@ -1,8 +1,6 @@
 import React from 'react'
-import Layout from 'components/Layout'
 import { heading } from 'components/Home/classes'
 import { SEO } from 'components/seo'
-import { sexyLegalMenu } from '../navs'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
