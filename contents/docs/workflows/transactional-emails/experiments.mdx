@@ -104,7 +104,9 @@ Add `$workflows_email_link_clicked` as a metric, and filter it to this email wit
 
 If you use two templates, add both workflow IDs to the filter. Otherwise, the metric counts clicks on only one version.
 
-PostHog can't record clicks for a send with [click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking) off. The React Email example passes `sensitive: false` because a welcome email has no secrets. Keep the default for an email with login links, reset tokens, or codes. For two templates, use the same [Protect sensitive data](/docs/workflows/transactional-emails#protect-sensitive-data) setting on both.
+PostHog can't record clicks for a send with [click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking) off. Use the same tracking for both versions.
+
+The React Email example passes `sensitive: false` because a welcome email has no secrets. Keep the default for an email with login links, reset tokens, or codes. Click events for a sensitive email have only the origin of the link, such as `https://example.com`.
 
 ## Retry with the same version
 
