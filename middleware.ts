@@ -173,8 +173,12 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
     const htmlWeight = weights.get('text/html') ?? weights.get('text/*') ?? weights.get('*/*') ?? 0
     // Ties go to Markdown: Claude Code lists `text/markdown, text/html, */*` and means Markdown.
     const acceptsMarkdown = markdownWeight > 0 && markdownWeight >= htmlWeight
+    // An agent's Accept can still rule Markdown out with a zero weight, as in `text/*;q=0`.
+    const refusesMarkdown = (weights.get('text/markdown') ?? weights.get('text/*') ?? weights.get('*/*')) === 0
     const isAgentFetch =
-        USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') && !weights.get('text/html')
+        USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') &&
+        !weights.get('text/html') &&
+        !refusesMarkdown
 
     const url = new URL(request.url)
     const pathname = url.pathname.replace(/\/$/, '')

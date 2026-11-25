@@ -50,6 +50,7 @@ test('weighs text/markdown against text/html in Accept', async (t) => {
         ['Mozilla/5.0', 'text/markdown;q=0.5, */*', undefined],
         ['Mozilla/5.0', 'text/markdown;q=0', undefined],
         ['ChatGPT-User/1.0', 'text/html;q=0, */*', 'text/markdown; charset=utf-8'],
+        ['ChatGPT-User/1.0', 'text/html;q=0, text/*;q=0, */*', undefined],
     ]
 
     for (const [agent, accept, contentType] of cases) {
