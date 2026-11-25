@@ -3,7 +3,7 @@ title: Sign up with the wizard
 sidebarTitle: Sign up with the wizard
 ---
 
-If you don't have a PostHog account yet, the [AI wizard](/docs/ai-engineering/ai-wizard) can start from sign-up. The setup agent opens PostHog's sign-up page in your browser. Once you've created your account, it installs the SDK in your codebase, all from one command.
+If you don't have a PostHog account yet, the [AI wizard](/docs/ai-engineering/ai-wizard) can start from sign-up. The setup agent opens PostHog in your browser, where you create your account. Once you have, it installs the SDK in your codebase, all from one command.
 
 If you already have a PostHog account, run the wizard without `--signup` and it logs in to your existing account instead.
 
@@ -13,13 +13,13 @@ If you already have a PostHog account, run the wizard without `--signup` and it 
 npx @posthog/wizard@latest --signup
 ```
 
-The wizard opens PostHog's sign-up page in your browser. Create your account there, then approve the wizard's access to your new project. The setup agent takes it from there: it writes the project token and host into your code, installs the SDK, and instruments your code, exactly as it does for an existing account. See [how the wizard works](/docs/ai-engineering/ai-wizard#how-it-works) for what it changes in your project.
+The wizard opens PostHog's login page in your browser. Enter your email, and PostHog takes you to sign-up because the email is new. Create your account there, then approve the wizard's access to your new project. The setup agent takes it from there: it writes the project token and host into your code, installs the SDK, and instruments your code, exactly as it does for an existing account. See [how the wizard works](/docs/ai-engineering/ai-wizard#how-it-works) for what it changes in your project.
 
 ### Flags
 
 | Flag | Required | Description |
 | --- | --- | --- |
-| `--signup` | Yes | Starts at PostHog's sign-up page instead of the login page. |
+| `--signup` | Yes | Says you're creating an account. The wizard stops if it can't open a browser, instead of offering to paste a login code. |
 | `--region` | No | Where your data lives. Use `us` ([us.posthog.com](https://us.posthog.com)) or `eu` ([eu.posthog.com](https://eu.posthog.com)). |
 
 ## Things to know
