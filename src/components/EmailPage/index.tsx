@@ -497,9 +497,9 @@ export default function EmailPage(): JSX.Element {
                         <div className="grid items-center gap-6 rounded-2xl border border-blue bg-blue/5 p-6 @3xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] @xl/reader-content:p-8">
                             <div>
                                 <p className="m-0 mb-2 text-xs font-bold uppercase tracking-wider text-blue">
-                                    Your email never leaves the EU
+                                    PostHog Cloud EU
                                 </p>
-                                <h3 className="m-0 mb-2 text-2xl font-bold">For EU teams</h3>
+                                <h3 className="m-0 mb-2 text-2xl font-bold">Your email never leaves the EU</h3>
                                 <p className="m-0 text-secondary">
                                     Projects on{' '}
                                     <Link to="/eu" className="font-semibold underline">
