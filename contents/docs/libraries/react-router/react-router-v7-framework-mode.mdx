@@ -201,7 +201,7 @@ const onError: ClientOnErrorFunction = (error) => {
 <HydratedRouter onError={onError} />
 ```
 
-Skip "Unexpected Server Error" only if you also capture server errors, as below. Without server capture, it is the only report of a server error.
+Skip "Unexpected Server Error" only if you also capture server errors, including rejected `<Await>` promises, as below. Without server capture, it is the only report of a server error.
 
 `onError` needs React Router 7.11 or later. On 7.8.2 to 7.10, pass the same handler as `unstable_onError` and type it with `unstable_ClientOnErrorFunction`. On earlier versions, capture inside a `useEffect` in every `ErrorBoundary` your routes export, with the same two checks. Do not also call `captureException` in your `ErrorBoundary`: each error would arrive twice.
 
@@ -284,16 +284,50 @@ export const middleware: Route.MiddlewareFunction[] = [
 
 Work that the request starts keeps its IDs after `next()` settles. Pass explicit context to separate jobs that need their own IDs. Flush queued events before your platform can stop server work. Call `posthog.shutdown()` once when the server stops.
 
-To capture server errors, export the `handleError` that `createReactRouterErrorHandler` from `posthog-node` 6.1.0 or later creates. Add `readPostHogCookie: true` to the client options in `posthog.server.ts`, so page loads, which send only the PostHog cookie, link to the visitor too.
+To capture server errors, create a handler with `createReactRouterErrorHandler` from `posthog-node` 6.1.0 or later in `posthog.server.ts`. Add `readPostHogCookie: true` to the client options, so page loads, which send only the PostHog cookie, link to the visitor too.
 
-```ts file=app/entry.server.tsx
-import { createReactRouterErrorHandler } from 'posthog-node';
-import { posthog } from './lib/posthog.server';
+```ts file=app/lib/posthog.server.ts
+import { createReactRouterErrorHandler, PostHog } from 'posthog-node';
+
+export const posthog = new PostHog(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN, {
+  host: import.meta.env.VITE_POSTHOG_HOST,
+  readPostHogCookie: true,
+});
 
 export const handleError = createReactRouterErrorHandler(posthog);
 ```
 
-The handler uses the IDs this middleware sets, including an application identity set before it, then the tracing headers, then the cookie. It skips cancelled requests and the 404 and 405 responses React Router creates, and logs each error the way React Router does. The [React Router error tracking guide](/docs/error-tracking/installation/react-router) also captures errors thrown while the page streams, and rejections of promises rendered with `<Await>`.
+Export it as `handleError` from `app/entry.server.tsx`. Errors thrown while the page streams, after the first part was sent, skip `handleError` and reach React's `onError` in the same file. Call the handler there too:
+
+```ts file=app/entry.server.tsx
+import { handleError } from './lib/posthog.server';
+
+export { handleError };
+
+// In handleRequest, in the renderToPipeableStream options:
+onError(error: unknown) {
+  responseStatusCode = 500;
+  if (shellRendered) {
+    void handleError(error, { request });
+  }
+},
+```
+
+When a loader returns a promise for `<Await>` and the promise rejects, React Router does not call `handleError`, and in production builds the browser receives "Unexpected Server Error", which the browser's `onError` above skips. Pass those rejections to the handler in the loader:
+
+```ts file=app/routes/product.tsx
+import { handleError } from '../lib/posthog.server';
+
+export async function loader({ params, request }: Route.LoaderArgs) {
+  const reviews = getReviews(params.id).catch((error) => {
+    void handleError(error, { request });
+    throw error;
+  });
+  return { reviews };
+}
+```
+
+The handler uses the IDs the middleware above sets, including an application identity set before it, then the tracing headers, then the cookie. It skips canceled requests and the 404 and 405 responses React Router creates, and logs each error the way React Router does. For serverless hosts and visitors who opt out, see the [React Router error tracking guide](/docs/error-tracking/installation/react-router).
 
 ### Optional server span context
 
