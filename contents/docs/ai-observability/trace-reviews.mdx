@@ -99,9 +99,9 @@ If you delete a review, it disappears from the active reviews list and you can c
 
 ## Programmatic access
 
-You can manage trace reviews through the API at `/api/projects/:project_id/llm_analytics/trace_reviews/`. Authenticate with a [personal API key](/docs/api) or a [project secret API key](/docs/api/project-secret-api-keys/overview) that has the **AI observability** (`llm_analytics`) scope.
+Use `/api/projects/:project_id/llm_analytics/trace_reviews/` to save scores on a trace review. A result uploaded for an offline experiment belongs to its experiment item, even if the item links to a trace. Edit that result through the [offline experiment API](/docs/ai-evals/experiments#edit-experiment-items-and-results).
 
-Both key types can create, read, update, and delete reviews. Each review records whether it was last saved by a user or a project key, and the activity log tracks project key changes.
+Authenticate with a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys). Grant `llm_analytics:read` to read reviews or `llm_analytics:write` to create, update, or delete a review and its scores. Each review records whether it was last saved by a user or a project key, and the activity log tracks project key changes.
 
 ## Trace Reviews vs. evaluations
 

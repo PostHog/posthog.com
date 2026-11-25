@@ -16,6 +16,8 @@ Use a separate scorer for each thing you want to measure, such as correctness, r
 
 Create scorers with the SDK or in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Each result references a fixed scorer version, so configuration changes don't reinterpret earlier results.
 
+With the SDK, use a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys). Grant `llm_analytics:read` to read scorers and versions or validate a composite formula. Grant `llm_analytics:write` to create or update scorers and publish versions.
+
 For each additional reported score, use the same item and the new scorer's version ID. Call `upload_result()` in Python, `uploadResult()` in TypeScript, or `UploadResult()` in Go. Include all reported and composite results in your expected result count.
 
 Use `reasoning` to explain a score. Set `application_trace_id` / `applicationTraceId` on the item to link it to an [AI Observability trace](/docs/ai-observability/traces).
@@ -44,7 +46,7 @@ from posthog.ai.evaluations import OfflineEvaluations, ScorerComposition
 
 with OfflineEvaluations(
     project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
-    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
     host=os.environ["POSTHOG_HOST"],
 ) as evaluations:
     tool = evaluations.scorers.get(os.environ["POSTHOG_TOOL_SCORER_ID"])
@@ -76,7 +78,7 @@ import { OfflineEvaluations } from "@posthog/ai/evaluations"
 
 const evaluations = new OfflineEvaluations({
     projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY!,
     host: process.env.POSTHOG_HOST!,
 })
 
@@ -183,7 +185,7 @@ In `support_eval.py` or `support_eval.mts`, add `EvaluationResult` to the SDK im
 ```python file=Python
 with OfflineEvaluations(
     project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
-    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
     host=os.environ["POSTHOG_HOST"],
 ) as evaluations:
     composite = evaluations.scorers.get(os.environ["POSTHOG_COMPOSITE_SCORER_ID"])
@@ -244,7 +246,7 @@ with OfflineEvaluations(
 ```typescript file=TypeScript
 const evaluations = new OfflineEvaluations({
     projectId: Number(process.env.POSTHOG_PROJECT_ID),
-    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY!,
     host: process.env.POSTHOG_HOST!,
 })
 
