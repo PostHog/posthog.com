@@ -198,7 +198,7 @@ export const support = {
             {
                 title: 'SLAs set by plan',
                 description:
-                    "Workflows set first response, next response, and update deadlines from the customer's plan. Team channels get a Slack warning 2 hours and 30 minutes before a breach.",
+                    "Workflows read the customer's plan and churn risk from Customer Analytics, then set first response, next response, and update deadlines. Team channels get a Slack warning 2 hours and 30 minutes before a breach.",
             },
             {
                 title: 'Incidents in one place',
@@ -304,6 +304,10 @@ export const support = {
                 {
                     title: 'Support data lives next to your product analytics',
                     subtitle: 'Correlate tickets with retention, funnels, and flags',
+                },
+                {
+                    title: 'Support knowledge lives in PostHog too',
+                    subtitle: 'Business knowledge drafts answers and learns from resolved tickets',
                 },
                 {
                     title: 'Support and engineering work in the same tool',

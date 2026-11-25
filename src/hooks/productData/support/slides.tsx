@@ -267,6 +267,16 @@ export const keyFeatures: CarouselSlide[] = [
                                 label: 'Previous tickets',
                                 description: 'Past conversations with the same person, so nobody repeats themselves.',
                             },
+                            {
+                                label: 'Company and revenue',
+                                description: (
+                                    <>
+                                        The groups the customer belongs to, with revenue. In{' '}
+                                        <Link to="/docs/customer-analytics">Customer Analytics</Link>, each account
+                                        lists its tickets too.
+                                    </>
+                                ),
+                            },
                         ]}
                     />
                 </div>
@@ -285,9 +295,11 @@ export const keyFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Turn on the AI agent and it drafts a reply to each new ticket, based on your Business knowledge
-                    (your docs, links, and notes). Drafts land as private notes, so a person on your team decides what
-                    the customer reads. It's free while in beta. Ask us to turn it on for your project.
+                    Your support knowledge lives in <Link to="/docs/business-knowledge">Business knowledge</Link>: your
+                    docs, links, and notes, plus answers learned from resolved tickets. Turn on the AI agent and it
+                    drafts a reply to each new ticket from that knowledge. Drafts land as private notes, so a person on
+                    your team decides what the customer reads. It's free while in beta. Ask us to turn it on for your
+                    project.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -427,6 +439,12 @@ export const keyFeatures: CarouselSlide[] = [
                     timestamps.
                 </p>
                 <p>Your first day on PostHog Support starts with all the context of your last day on Zendesk.</p>
+                <p>
+                    If you can't switch yet, keep your helpdesk and{' '}
+                    <Link to="/docs/self-driving/inbox/sources">connect it to Self-driving</Link> as a source. Recurring
+                    tickets from Zendesk, Intercom, Front, and others still become reports and draft pull requests, and
+                    your team can check replays and errors in PostHog.
+                </p>
             </>
         ),
         image: {
