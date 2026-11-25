@@ -9,11 +9,11 @@ availability:
 sourceId: Honeybadger
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Honeybadger connector syncs your error monitoring data – projects, errors (faults), error occurrences (notices), deployments, and uptime checks – into PostHog, so you can track error rates across environments and correlate error spikes with releases.
+The Honeybadger connector syncs your error monitoring data – projects, errors (faults), error occurrences (notices), deployments, uptime checks, and status pages – into PostHog, so you can track error rates across environments and correlate error spikes with releases.
 
 ## Prerequisites
 
@@ -34,6 +34,8 @@ When linking Honeybadger, you'll need:
 We recommend incremental sync for the `faults`, `notices`, and `deploys` tables. Honeybadger's API allows 360 requests per hour with at most 25 rows per page, so full refreshes of large accounts are slow – incremental syncs only fetch what changed since the last run.
 
 The `notices` table is disabled by default because it is fetched one fault at a time, which can use up the API quota quickly on accounts with many errors. Enable it if you need per-occurrence detail such as request context and backtraces.
+
+The `status_pages` table is disabled by default because not every account uses Honeybadger's status page feature. Enable it if you want to sync the status pages configured for your accounts.
 
 ## Configuration
 
