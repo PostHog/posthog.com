@@ -79,14 +79,6 @@ A single criterion from this list makes the whole cohort fall back to the standa
 
 [Static cohorts](/docs/data/cohorts#static-cohorts) are never real-time. They don't change on their own, and they already work in feature flags.
 
-### Cohorts that include other cohorts
-
-A real-time cohort can include another cohort that qualifies. [Turn real-time on for a cohort](#turn-real-time-on-for-a-cohort) explains what turning real-time on does to the cohorts it includes.
-
-During the beta, event criteria have to be in the cohort that a flag targets. Say a flag targets cohort A, which has no event criteria of its own and includes cohort B, which has event criteria. The flag can't read B's real-time membership yet, so it counts nobody as a member of B. An "In cohort B" criterion in A then matches nobody, and "Not in cohort B" matches everybody. To avoid this, add B's event criteria to A directly. Or take B out of A's criteria, and add both A and B to the flag's release condition.
-
-Included cohorts without event criteria work as before. A flag can target a cohort whose only criterion is "In cohort B" when B is a static cohort or has only person property criteria.
-
 ## Turn real-time on for a cohort
 
 In a project that has joined the beta, each cohort with event criteria that qualifies has its own real-time switch, and it starts off. While it's off, PostHog doesn't keep the cohort's membership up to date, and feature flags can't target it.
