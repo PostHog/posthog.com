@@ -149,49 +149,51 @@ export function PricingCompare(): JSX.Element {
 // From Michael's feature matrix in #team-workflows (Nov 18, 2026): PostHog from code and docs, the others from their
 // own docs and pricing pages. Written for launch, so the transactional API, SDKs, push, and delivery webhooks are GA.
 type Mark = boolean | string
-const competitors = ['PostHog', 'Resend', 'Loops', 'Customer.io']
+const competitors = ['PostHog', 'Resend', 'Postmark', 'Loops', 'Customer.io']
 type Row = [feature: string, ...marks: Mark[]]
 
+// Postmark cells come from its docs, support articles, and pricing page (November 2026). Check before shipping.
 const headline: Row[] = [
-    ['Email events in funnels and cohorts', true, false, 'Partly', 'Partly'],
-    ['Session replay of the people you email', true, false, false, false],
-    ['Replay Vision on the session behind a send', true, false, false, false],
-    ['Slack, webhooks, and hundreds of other destinations', true, false, false, 'Partly'],
-    ['SMS and push', true, false, false, true],
-    ['React Email', true, true, false, false],
-    ['Free every month', '10,000 emails', '3,000 emails', '4,000 sends', 'None'],
+    ['Email events in funnels and cohorts', true, false, false, 'Partly', 'Partly'],
+    ['Session replay of the people you email', true, false, false, false, false],
+    ['Replay Vision on the session behind a send', true, false, false, false, false],
+    ['Slack, webhooks, and hundreds of other destinations', true, false, false, false, 'Partly'],
+    ['SMS and push', true, false, false, false, true],
+    ['React Email', true, true, false, false, false],
+    ['Free every month', '10,000 emails', '3,000 emails', '100 emails', '4,000 sends', 'None'],
 ]
 
 const categories: [title: string, rows: Row[]][] = [
     [
         'Send from code',
         [
-            ['Transactional send API', true, true, true, true],
-            ['Official SDKs', '8', '9', '4', '4'],
-            ['cc and bcc, attachments, idempotency', true, true, 'Partly', 'Partly'],
-            ['Delivery webhooks', true, true, true, true],
-            ['Custom headers and tags', true, true, false, true],
-            ['Batch and scheduled send', true, true, false, 'Partly'],
-            ['SMTP relay and inbound email', true, true, false, false],
+            ['Transactional send API', true, true, true, true, true],
+            ['Official SDKs', '8', '9', '6', '4', '4'],
+            ['cc and bcc, attachments, idempotency', true, true, 'Partly', 'Partly', 'Partly'],
+            ['Delivery webhooks', true, true, true, true, true],
+            ['Custom headers and tags', true, true, true, false, true],
+            ['Batch and scheduled send', true, true, 'Partly', false, 'Partly'],
+            ['Inbound email', true, true, true, false, false],
+            ['SMTP relay', false, true, true, false, false],
         ],
     ],
     [
         'Broadcasts and automations',
         [
-            ['Broadcasts, segments, and a journey builder', true, true, true, true],
-            ['A/B test with a winner', 'Partly', false, true, true],
-            ['Experiments on a product outcome', 'Partly', false, 'Partly', 'Partly'],
+            ['Broadcasts, segments, and a journey builder', true, true, 'Partly', true, true],
+            ['A/B test with a winner', 'Partly', false, false, true, true],
+            ['Experiments on a product outcome', 'Partly', false, false, 'Partly', 'Partly'],
         ],
     ],
-    ['Deliverability', [['Dedicated IPs', false, 'Paid add-on', false, 'Paid add-on']]],
+    ['Deliverability', [['Dedicated IPs', false, 'Paid add-on', 'Paid add-on', false, 'Paid add-on']]],
     [
         'Agents',
         [
-            ['MCP server and agent skills', '62 tools, 7 skills', true, true, true],
-            ['CLI', 'Setup wizard', true, true, true],
+            ['MCP server and agent skills', '62 tools, 7 skills', true, true, true, true],
+            ['CLI', 'Setup wizard', true, true, true, true],
         ],
     ],
-    ['Pricing', [['Price at 100k emails a month', '$36', '$35', '$49', 'About $145']]],
+    ['Pricing', [['Price at 100k emails a month', '$36', '$35', '$126', '$49', 'About $145']]],
 ]
 
 function Mark({ mark, us }: { mark: Mark; us: boolean }): JSX.Element {
@@ -231,10 +233,10 @@ export function FeatureCompare(): JSX.Element {
     return (
         <div className="not-prose relative overflow-hidden rounded-2xl border border-primary bg-white shadow-xl dark:bg-accent">
             <div className={`overflow-x-auto ${open ? '' : 'max-h-[36rem] overflow-y-hidden'}`}>
-                <table className="w-full min-w-[38rem] border-collapse text-sm">
+                <table className="w-full min-w-[44rem] border-collapse text-sm">
                     <thead>
                         <tr>
-                            <th className="w-[38%] px-4 py-4 text-left text-xs font-semibold uppercase text-secondary">
+                            <th className="w-[32%] px-4 py-4 text-left text-xs font-semibold uppercase text-secondary">
                                 Where we’re different
                             </th>
                             {competitors.map((name, i) => (
@@ -273,7 +275,7 @@ export function FeatureCompare(): JSX.Element {
                                         {title}
                                     </th>
                                     <td className={usCell} />
-                                    <td colSpan={3} />
+                                    <td colSpan={4} />
                                 </tr>
                                 <Rows rows={rows} />
                             </React.Fragment>
