@@ -20,6 +20,8 @@ import { PUBLISHED_SDK_LIST } from '../../SdkReferences/utils'
 interface InstallFrameworkGridProps {
     /** TAXONOMY category ids to show (e.g. `['web', 'mobile', 'no-code']`). Omit for all. */
     categories?: string[]
+    /** When set, show only these items, each linked to its URL. Keyed by item slug. */
+    hrefs?: Record<string, string>
     /** Prefer `/docs/{productSlug}/installation/{slug}` guides when they exist. */
     productSlug?: string
     /** Show the search input. */
@@ -46,6 +48,7 @@ const tileGrid = 'grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-4 g
 
 const InstallFrameworkGrid = ({
     categories,
+    hrefs,
     productSlug,
     searchable = true,
     className = '',
@@ -107,6 +110,7 @@ const InstallFrameworkGrid = ({
     }, [data])
 
     const resolveUrl = (item: InstallItem): string | null => {
+        if (hrefs) return hrefs[item.slug] ?? null
         if (productSlug) {
             const candidate = `/docs/${productSlug}/installation/${item.slug}`
             if (productInstallUrls.has(candidate)) return candidate
@@ -122,19 +126,20 @@ const InstallFrameworkGrid = ({
                     .map((item) => ({ ...item, url: resolveUrl(item) }))
                     .filter((item): item is ResolvedItem => item.url !== null),
             })),
-        [categories, libraryMeta, productInstallUrls, productSlug]
+        [categories, hrefs, libraryMeta, productInstallUrls, productSlug]
     )
 
     const renderTile = (item: ResolvedItem, keyPrefix: string) => {
         const meta = libraryMeta.get(item.librarySlug)
+        const logo = meta?.logo ?? getLogo(item.wizardLogoKey ?? item.librarySlug)
         return (
             <li key={`${keyPrefix}-${item.slug}`} className="m-0 list-none break-inside-avoid">
                 <Link
                     to={item.url}
                     className="group flex items-center gap-2 py-1.5 px-1 rounded hover:bg-accent text-primary no-underline"
                 >
-                    {meta?.logo ? (
-                        <img src={meta.logo} alt="" className="w-5 h-5 object-contain shrink-0" />
+                    {logo ? (
+                        <img src={logo} alt="" className="w-5 h-5 object-contain shrink-0" />
                     ) : (
                         <span className="w-5 h-5 shrink-0 inline-block rounded bg-accent" aria-hidden />
                     )}

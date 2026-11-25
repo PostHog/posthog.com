@@ -17,6 +17,7 @@ export const PRODUCT_COLORS = {
     llm_evals: 'lilac',
     logs: 'red',
     marketing_analytics: 'orange',
+    messaging: 'teal',
     mcp_analytics: 'purple',
     posthog_ai: 'blue',
     posthog_code: 'brown',

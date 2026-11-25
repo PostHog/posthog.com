@@ -1,6 +1,14 @@
 import React from 'react'
-import { IconBrackets, IconBrowser, IconClock, IconDecisionTree, IconLaptop, IconPlug, IconSend } from '@posthog/icons'
-import { IconEnvelope } from 'components/OSIcons'
+import {
+    IconBrackets,
+    IconBrowser,
+    IconClock,
+    IconDecisionTree,
+    IconLaptop,
+    IconPlug,
+    IconSend,
+    IconSparkles,
+} from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -64,14 +72,13 @@ export const applications: CarouselSlide[] = [
                 <p>
                     The{' '}
                     <Link
-                        to="/docs/workflows/surfaces/web-app"
+                        to="/docs/workflows/workflow-builder"
                         state={{ newWindow: true }}
                         className="underline font-semibold"
                     >
                         PostHog web app
                     </Link>{' '}
-                    is where workflows are built – the drag-and-drop builder, the content library where message
-                    templates live, your channels, and your opt-out and suppression lists.
+                    is where workflows are built - the drag-and-drop builder and the destinations each step can send to.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -84,17 +91,12 @@ export const applications: CarouselSlide[] = [
                             {
                                 label: 'Work in drafts, then publish',
                                 description:
-                                    'A workflow stays a draft until you enable it, so you can build and test without anyone receiving a message.',
+                                    'A workflow stays a draft until you enable it, so you can build and test it before it runs for anyone.',
                             },
                             {
-                                label: 'Design message templates',
+                                label: 'Connect destinations',
                                 description:
-                                    'Compose emails and other messages in the content library, personalize them with person properties, and reuse them across workflows.',
-                            },
-                            {
-                                label: 'Manage channels & opt-outs',
-                                description:
-                                    'Verify a sending domain and connect email, Slack, or any real-time destination. Review message categories, recipient preferences, and the suppression list.',
+                                    'Connect Slack, a webhook, or any real-time destination, and use it from any step.',
                             },
                         ]}
                     />
@@ -189,35 +191,9 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.workflow_builder.images[0].src,
-            alt: f.workflow_builder.images[0].alt,
-        },
-    },
-    {
-        slug: 'messaging',
-        label: 'Messaging',
-        icon: <IconEnvelope className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-blue',
-        layout: 'float',
-        heading: f.messaging.headline,
-        description: (
-            <>
-                <p>{f.messaging.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.messaging.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            src: f.messaging.images[0].src,
-            alt: f.messaging.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_complex_canvas_light_6ffea9518c.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_complex_canvas_dark_b696c34697.png',
+            alt: 'A workflow with branches and steps on the canvas',
         },
     },
     {
@@ -247,6 +223,46 @@ export const keyFeatures: CarouselSlide[] = [
             alt: f.flow_logic.images[0].alt,
         },
     },
+    // Copy reshaped from contents/docs/workflows/{ai-tasks,replay-vision}.mdx
+    {
+        slug: 'ai-steps',
+        label: 'AI steps',
+        icon: <IconSparkles className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-purple',
+        layout: 'float',
+        heading: 'Hand a step to an agent',
+        description: (
+            <>
+                <p>
+                    Some steps need judgment, not a rule. Add an AI step, and the workflow waits for the answer, then
+                    continues with it.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Create AI task',
+                                description:
+                                    'Start an agent with your instructions, the triggering event and person, and the GitHub repositories, connectors, and skills you allow. It can tag a support ticket, open a pull request, or review trial accounts each week.',
+                            },
+                            {
+                                label: 'Replay Vision',
+                                description:
+                                    'Have Replay Vision watch the session behind the event, then answer a question, categorize it, score it, or summarize it. Branch on the result.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/rv_workflow_canvas_light_bdd322e059.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/rv_workflow_canvas_dark_c31893e45c.png',
+            alt: "A workflow that scores each signup's first session with Replay Vision, then branches on the score",
+        },
+    },
     {
         slug: 'channels',
         label: 'Channels',
@@ -270,8 +286,10 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.channels.images[0].src,
-            alt: f.channels.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_destinations_picker_light_663523e7cc.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/pp_destinations_picker_dark_9bb8f235ea.png',
+            alt: 'The step picker with email, SMS, Slack, webhook, push, and more destinations',
+            maxWidth: 'max-w-lg',
         },
     },
     {

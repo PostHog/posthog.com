@@ -5717,20 +5717,28 @@
             "destination": "/endpoints#community"
         },
         {
+            "source": "/workflows",
+            "destination": "/messaging"
+        },
+        {
+            "source": "/workflows/pricing",
+            "destination": "/messaging/pricing"
+        },
+        {
             "source": "/workflows/customers",
-            "destination": "/workflows"
+            "destination": "/messaging"
         },
         {
             "source": "/workflows/comparisons",
-            "destination": "/workflows#feature-comparison"
+            "destination": "/messaging#feature-comparison"
         },
         {
             "source": "/workflows/documentation",
-            "destination": "/docs/workflows"
+            "destination": "/docs/messaging"
         },
         {
             "source": "/workflows/tutorials",
-            "destination": "/workflows#tutorials"
+            "destination": "/messaging#tutorials"
         },
         {
             "source": "/workflows/roadmap",
@@ -5738,7 +5746,7 @@
         },
         {
             "source": "/workflows/questions",
-            "destination": "/workflows#community"
+            "destination": "/messaging#community"
         },
         {
             "source": "/handbook/what-is-posthog",
@@ -6312,7 +6320,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/workflows/pricing",
+            "destination": "/messaging/pricing",
             "has": [
                 {
                     "type": "query",

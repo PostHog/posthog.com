@@ -14,12 +14,19 @@ const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & 
     const hog = hogs?.mobileHog
     const HogComponent = hog?.Component
     const hogSizeClasses = hog?.className || 'h-32 @3xl/reader-content:h-44 @6xl/reader-content:h-52'
+    // Optional element (such as a code sample) shown in place of the screenshot.
+    const media = overview?.media
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 w-full">
             {/* <DebugContainerQuery name="reader-content" /> */}
             <header>
-                {screenshots?.home?.src && (
+                {media && (
+                    <div className="mb-8 w-full @xl/reader-content:float-right @xl/reader-content:ml-8 @xl/reader-content:w-1/2 @xl/reader-content:max-w-md @6xl/reader-content:max-w-xl">
+                        {media}
+                    </div>
+                )}
+                {!media && screenshots?.home?.src && (
                     <div className="relative mb-8 w-full transition-all duration-300 @xl/reader-content:float-right @xl/reader-content:ml-8 @xl/reader-content:w-1/2 @xl/reader-content:max-w-md @6xl/reader-content:max-w-xl">
                         <CloudinaryImage
                             src={screenshots.home.src as `https://res.cloudinary.com/${string}`}
@@ -51,7 +58,7 @@ const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & 
                         )}
                     </div>
                 )}
-                {!screenshots?.home?.src && (HogComponent || hog?.src) && (
+                {!media && !screenshots?.home?.src && (HogComponent || hog?.src) && (
                     <div
                         className={`mx-auto mb-8 w-fit @xl/reader-content:float-right @xl/reader-content:mx-0 @xl/reader-content:ml-8 ${hogSizeClasses}`}
                     >
