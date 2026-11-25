@@ -262,7 +262,7 @@ export default function SourcePage({
                                 </Card.TitleBar>
                                 <Card.Description className="flex-1">{across.tip}</Card.Description>
                                 <Link
-                                    to="/docs/product-analytics/cohorts"
+                                    to="/docs/data/cohorts"
                                     state={{ newWindow: true }}
                                     className="text-sm font-semibold text-primary"
                                 >
