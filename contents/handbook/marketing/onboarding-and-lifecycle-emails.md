@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-How PostHog's automated onboarding and lifecycle emails work in Customer.io, and what to do when you launch a new product. Aimed at product marketers. These are the patterns we use *today* — conventions, not hard rules. Build something new when a launch calls for it.
+> **This page is out of date.** It describes our old setup in Customer.io. We don't use Customer.io anymore. We now send all of our email with [PostHog Workflows](/docs/workflows). For how we work today, see [email comms](/handbook/marketing/email-comms).
+
+How PostHog's automated onboarding and lifecycle emails worked in Customer.io, and what to do when you launch a new product. Aimed at product marketers. These are the patterns we use *today* — conventions, not hard rules. Build something new when a launch calls for it.
 
 > **Launching something, or want a second pair of eyes?** <TeamMember name="Joe Black" photo /> owns customer comms — loop him in early.
 
