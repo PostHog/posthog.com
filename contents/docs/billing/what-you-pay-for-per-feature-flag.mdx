@@ -10,8 +10,6 @@ The price per request covers more than an on/off switch. It covers answering fas
 
 A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon – though it's much easier and also free to get started with PostHog. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off.
 
-Below is what each request pays for, so you can compare it with building your own system.
-
 Every section starts in plain English and ends with the technical detail, so you don't need to be an engineer to follow it.
 
 > **No bill yet?** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. If you make fewer than 1 million flag requests a month, it is always easier and cheaper to start with PostHog.
@@ -38,15 +36,13 @@ In practice that's six steps.
 
 ### Step 1: Answering on every page load
 
-Your customer opens your pricing page. Before the page can decide which version to show, it needs to know which flags are on for this person. Every millisecond the answer takes is a millisecond the page waits, and the same check happens on every page load, for every user, at your busiest hour.
+Your customer opens your pricing page. Before the page can decide which version to show, it needs to know which flags are on for this person. The page waits for that answer, and the same check happens on every page load, for every user, at your busiest hour.
 
 **How it works at PostHog:** Flags are served by a dedicated [service written in Rust](https://github.com/PostHog/posthog/tree/master/rust/feature-flags), separate from the rest of PostHog. Flag definitions are cached in Redis, with S3 and then Postgres behind it if the cache misses. For each request, the service fetches the person's properties in one query, then evaluates every flag in memory, in parallel. We [rewrote it from Django](/blog/even-faster-more-reliable-flags) for this, and it now serves about 13,000 requests per second with a p99 under 100 ms ([how we got there](/blog/untangling-rayon-and-tokio)).
 
 On your servers, [local evaluation](/docs/feature-flags/local-evaluation) skips the network for each check. The SDK downloads your flag definitions every 30 seconds by default and evaluates flags in memory. It's available in 10 server-side SDKs. Definition downloads run on their own servers, apart from the ones that answer `/flags`, and when nothing has changed we reply `304 Not Modified` with no data at all.
 
-A flag check sits between your user and the page they asked for. This is a major reason why it can make more sense to use PostHog than to build your own flags – anything you build yourself is something you then have to keep fast, at every scale.
-
-Without it, every flag check waits on a database query, and the page waits with it.
+Without it, every flag check waits on a database query, and the page waits with it. This is a major reason why it can make more sense to use PostHog than to build your own flags. Anything you build yourself is something you then have to keep fast as your traffic grows.
 
 ### Step 2: Giving the same answer every time
 
@@ -74,7 +70,7 @@ Networks drop and ad blockers block requests. When the flag service doesn't answ
 
 Your code still has to handle a flag that hasn't loaded yet. [Best practices](/docs/feature-flags/best-practices) explains how.
 
-Without it, when your flag service goes down, your product goes down with it – and someone on your team gets paged at 2 am.
+Without it, when your flag service goes down, your product goes down with it, and someone on your team gets paged at 2 am.
 
 ### Step 5: Changing a flag safely
 
