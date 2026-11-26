@@ -8,7 +8,7 @@ The Slack app is in beta. Billing is usage-based through PostHog AI credits and 
 
 </CalloutBox>
 
-The PostHog Slack app doesn't have its own subscription. The agent that runs behind `@PostHog` mentions consumes **PostHog AI credits** for the LLM work it does. This includes tokens used when planning a task, editing files, reasoning about your data. 
+The PostHog Slack app doesn't have its own subscription. The agent that runs behind `@PostHog` mentions consumes **PostHog AI credits** for the LLM work it does. This includes tokens used when planning a task, editing files, reasoning about your data. When the agent runs a task in a cloud sandbox, it also consumes AI credits for the sandbox's compute.
 
 TL;DR: anything billable in Slack rolls up under your existing PostHog AI usage.
 
@@ -28,6 +28,13 @@ A lot of the Slack surface is just plumbing and stays free:
 
 Anything the agent does behind an `@PostHog` mention – drafting a PR, answering a data question with the PostHog [MCP](/docs/model-context-protocol), summarizing a thread to spec a feature – consumes resources. The same per-token economics that apply to PostHog AI in the app apply here.
 
+A task that runs in a cloud sandbox, such as drafting a PR, uses credits for two things:
+
+- **Tokens** - The LLM work the agent does
+- **Compute** - The CPU and memory that the sandbox uses while it runs
+
+We charge compute at cost, with no markup. See [sandbox compute](/docs/posthog-ai/pricing#sandbox-compute) for the rates.
+
 ## Tracking and controlling spend
 
-Slack-driven credit usage shows up alongside in-app PostHog AI usage in [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage). PostHog sets a $150 default billing limit on PostHog AI; raise or lower it to cap spend across both surfaces at once – there's no separate cap for the Slack app.
+Slack-driven credit usage shows up alongside in-app PostHog AI usage in [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage). PostHog sets a $150 default billing limit on PostHog AI; raise or lower it to cap spend across both surfaces at once – there's no separate cap for the Slack app. The limit covers tokens and compute together.

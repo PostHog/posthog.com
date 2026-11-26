@@ -14,6 +14,8 @@ For reference, **100 AI credits = $1**.
 
 We apply a simple, consistent 20% markup over the underlying LLM provider’s cost. So 1 PostHog AI credit corresponds to $0.008333 of raw inference.
 
+The markup applies to LLM costs only. We charge [sandbox compute](#sandbox-compute) at cost.
+
 <Pricing productType="posthog_ai" />
 
 ## What consumes AI credits
@@ -29,12 +31,13 @@ Examples include:
 - AI summaries in [insight and dashboard subscriptions](/docs/product-analytics/subscriptions#ai-summaries)
 - [Prompt subscriptions](/docs/product-analytics/subscriptions#prompt-subscriptions)
 - Checks and previews of [alerts that use AI judgment](/docs/alerts#ai-judgment)
+- Tasks that PostHog AI or the [Slack app](/docs/slack/pricing) runs in a cloud sandbox, which use credits for tokens and for [sandbox compute](#sandbox-compute)
 
 ## What doesn't consume AI credits
 
 Getting help on how to use PostHog (i.e., asking questions about our docs) does not use AI credits.
 
-AI features in beta are also free to use.
+Most AI features in beta are also free to use. The exception is a task that runs in a cloud sandbox. It uses AI credits for tokens and for [sandbox compute](#sandbox-compute), including during a beta.
 
 ## How AI credit usage works
 
@@ -46,11 +49,37 @@ AI credits are based on the **underlying token costs**, which reflect the effort
 
 While exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper insights and time savings. You’ll always see **real-time cost information** while using AI features.
 
+## Sandbox compute
+
+Some tasks need more than a model call. When PostHog AI or the [Slack app](/docs/slack) has to run code or work in a repository, the agent works in a cloud sandbox. A cloud sandbox is an isolated machine that runs for the length of the task.
+
+A task in a cloud sandbox uses AI credits for two things:
+
+- **Tokens** - The LLM work, priced as described above
+- **Compute** - The CPU and memory that the sandbox uses while it runs
+
+We charge compute at cost, with no markup:
+
+| Resource | Price                                           | AI credits        |
+| -------- | ----------------------------------------------- | ----------------- |
+| CPU      | $0.000075 per core-second ($0.27 per core-hour) | 27 per core-hour  |
+| Memory   | $0.000008 per GiB-second ($0.0288 per GiB-hour) | 2.88 per GiB-hour |
+
+For example, a sandbox with two CPU cores and 4 GiB of memory that runs for 10 minutes uses about 11 AI credits ($0.11).
+
+Compute counts toward the same AI credits total as tokens. This means:
+
+- Your monthly free tier covers compute too
+- One billing limit controls tokens and compute together
+- There is no separate product or subscription to set up
+
+Chat requests that don't start a cloud sandbox use no compute credits.
+
 ## Track your AI credit usage
 
 Stay on top of your AI credit spend in real time:
 
-1. Type [`/usage`](https://app.posthog.com/#panel=max:!/usage) in chat to see the current cost of your conversation
+1. Type [`/usage`](https://app.posthog.com/#panel=max:!/usage) in chat to see the current cost of your conversation. This shows token costs only and doesn't include [sandbox compute](#sandbox-compute).
 2. Check the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages to view your total monthly consumption
 3. (Coming soon) A dashboard showing which AI features use the most credits
 
@@ -78,7 +107,7 @@ You’re always in control of your AI credit usage:
 - **Default billing limit:** PostHog sets a default $150 billing limit so you don't accidentally rack up costs without a ceiling
 - **Usage alerts:** Get notified when you hit key thresholds
 
-When you hit your credit limit, AI features pause until your credits reset at the next billing period. For subscriptions:
+When you hit your credit limit, AI features pause until your credits reset at the next billing period. New tasks that need a cloud sandbox don't start. For subscriptions:
 
 - **[Prompt subscriptions](/docs/product-analytics/subscriptions#prompt-subscriptions)** are paused entirely and automatically resume when credits are available.
 - **[Insight and dashboard subscriptions with AI summaries](/docs/product-analytics/subscriptions#when-ai-credits-run-out)** continue to deliver on schedule, but without the AI-generated summary.
