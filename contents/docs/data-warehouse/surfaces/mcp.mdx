@@ -60,14 +60,17 @@ These tools manage [data warehouse](/docs/data-warehouse) import sources – ext
 | `external-data-sources-list`                  | List configured import sources with source health and a summary per table by default.                                                                                               |
 | `external-data-sources-retrieve`              | Get one source by ID with source health and a summary per table by default.                                                                                                         |
 | `external-data-sources-create`                | Create a new source connection. Use `external-data-sources-wizard` first to discover available source types and required fields.                                                    |
+| `external-data-sources-add-table`             | Add one object storage table by path or URL. Created with syncing off. Requires `external_data_source:write`.                                                                       |
 | `external-data-sources-partial-update`        | Update a source's prefix, description, or connection credentials.                                                                                                                   |
 | `external-data-sources-destroy`               | Delete a source and all its synced data. This can't be undone.                                                                                                                      |
 | `external-data-sources-reload`                | Trigger a sync for all enabled tables in a source.                                                                                                                                  |
-| `external-data-sources-refresh-schemas`       | Fetch the latest table list from the remote database and add any new tables.                                                                                                        |
+| `external-data-sources-refresh-schemas`       | Discover new tables in a source. For migrated object storage sources, use `external-data-sources-add-table` instead.                                                                |
 | `external-data-sources-wizard`                | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                                                                     |
 | `external-data-sources-revenue-config-update` | Update `enabled` or `include_invoiceless_charges` for a source's Revenue Analytics configuration. Rebuilds managed revenue views without changing synced source tables.             |
 | `external-data-sources-draft-custom-manifest` | Draft and validate a Custom REST source manifest from `docs_url` or `docs_text`. Creates no source and needs no credentials. Review and test the manifest before creating a source. |
 | `external-data-sources-preview-resource`      | Read up to 50 sample rows from one table of a Custom REST source before you create it. Returns the rows, column types, and any live read error.                                     |
+
+`external-data-sources-add-table` accepts a table name, a path or URL within the source's folder, and a file format. It checks only that location and creates a pinned table without starting a sync. Enable syncing with `external-data-schemas-partial-update` on the returned schema ID.
 
 ### Compact responses
 
