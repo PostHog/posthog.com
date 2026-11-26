@@ -16,13 +16,21 @@ The setting takes effect within a couple of minutes for future email sends. Emai
 
 ## Email tracking controls
 
-Two independent controls determine whether an email includes open and click tracking (the tracking pixel and rewritten links):
+Three independent controls determine what tracking an email includes:
 
 ### Per-email step toggle
 
 Each email step in the workflow builder has a **Track opens and link clicks** toggle. When off, the email is sent without a tracking pixel and without rewritten links, so opens and clicks are never recorded for that step. Delivery, bounce, and unsubscribe events are still recorded.
 
 This toggle defaults to on. Turn it off for emails that should never be tracked, such as transactional messages or deliverability-sensitive sends.
+
+### Connect clicks to sessions
+
+Each email step also has a **Connect clicks to sessions** toggle, visible when **Track opens and link clicks** is on. When enabled, PostHog adds a URL parameter to tracked links that connects the click to the session it starts on your site, including its session replay when recording is on. The connection works for links to your main domain or any of its subdomains.
+
+This toggle defaults to on. Turn it off when you don't want email clicks connected to sessions — for example, when linking to external domains where the parameter has no effect.
+
+A project-level setting acts as a ceiling: if **Connect clicks to sessions** is off in [**Settings → Workflows**](https://app.posthog.com/settings/environment-workflows#workflows-email-run-link-tag), the per-email toggle is disabled. The email step shows a hint linking to the setting so you can turn it back on.
 
 ### Team-level tracking consent
 
