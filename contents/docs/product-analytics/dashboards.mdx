@@ -305,6 +305,25 @@ When enabled, the tile ignores the dashboard's date range, properties, breakdown
 
 Tiles ignoring dashboard filters display an **Ignores dashboard filters** indicator in the card heading.
 
+### Filtering by chart results
+
+You can filter an entire dashboard by a specific chart result's population. This narrows every other insight on the dashboard to only the people, groups, or sessions from that data point.
+
+To use this:
+
+1. Click on a data point in any supported insight (trends, funnels, retention, lifecycle, stickiness, or paths).
+2. In the context menu, select **Filter dashboard by this result**.
+3. The other tiles on the dashboard update to show only that population's data. Tiles that don't support the filter are dimmed and labeled **Not filtered**.
+4. The source tile is labeled **Filter source** and affected tiles are labeled **Filtered by selection**.
+
+The filter selection is saved in the URL, so you can share or bookmark the filtered view.
+
+To clear the filter, click the **X** on the filter bar at the top of the dashboard, or select **Remove filter** from the same context menu on the source insight.
+
+Filtering by chart results doesn't modify saved insights or the dashboard configuration – it's a temporary view that persists in the URL.
+
+> **Note:** This feature doesn't work with funnels aggregated by a custom HogQL expression (anything other than `person_id` or `properties.$session_id`), data warehouse series, the "Other" breakdown bucket, or tiles set to ignore dashboard filters.
+
 ## Dashboard options
 
 ### Editing the layout
