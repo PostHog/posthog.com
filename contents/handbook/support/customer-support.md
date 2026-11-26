@@ -116,9 +116,7 @@ We've also created a bunch of useful [templates](/templates) that cover many of 
 
 ### Dealing with billing issues
 
-Support staff with Billing admin access can [switch an existing platform package](/handbook/growth/sales/billing#switch-an-existing-platform-package). Route other billing issues to Billing Support.
-
-Billing support is currently led by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to billing support, however some issues require technical investigation before the billing issue can be resolved. In such cases, let <TeamMember name="Eleftheria Trivyzaki" /> know by messaging #team-support in Slack, and leave a private note on the ticket briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to billing support.
+Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to billing support, however some issues require technical investigation before the billing issue can be resolved. In such cases, let <TeamMember name="Eleftheria Trivyzaki" /> know by messaging #team-support in Slack, and leave a private note on the ticket briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to billing support.
 
 ### Users asking for demos, consultations or partnerships
 
