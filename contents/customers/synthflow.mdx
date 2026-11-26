@@ -8,17 +8,13 @@ date: 2026-11-26
 
 import { HedgehogRobot } from "@posthog/brand/hoggies"
 
-Ever since launching their MCP server in June, [Synthflow](https://synthflow.ai/) has received 1.64M tool calls from 191 workspaces and 239 users. They had no logs or custom events on their MCP server and went straight to PostHog's [MCP Analytics](/mcp-analytics), getting full visibility from day one.
+Ever since launching their MCP server in June, [Synthflow](https://synthflow.ai/) has received 1.64M tool calls. They had no logs or custom events on their MCP server and went straight to PostHog's [MCP Analytics](/mcp-analytics), getting full visibility from day one.
 
 Synthflow is a voice AI platform that lets customers build voice agents. They're a Series A, Berlin-based company, serving global customers with an engineering-led team. Fionn Delahunty, Head of Product at Synthflow, shared the story behind how their MCP launch rolled out, and how they monitor it.
 
 ## Launching an MCP with no hypotheses
 
-Synthflow shipped their MCP server as a standalone product. No one works on it full time: four or five backend engineers pick it up when needed. With such a lean team, seeing how the server performs to fix issues right away is crucial.
-
-There's a lot of curiosity about how users interact with products through MCP, since it's still a new technology and usage is growing fast.
-
-For Synthflow, analytics was part of the launch plan, so they added MCP Analytics straight away.
+For Synthflow, analytics was part of the launch plan, so they added MCP Analytics straight away. There's a lot of curiosity about how users interact with products through MCP, since it's still a new technology and usage is growing fast.
 
 For the launch, Fionn wanted to know:
 
@@ -36,7 +32,11 @@ quote={0}
 
 ## Letting the dashboard decide what to track
 
-There aren't many widespread standards or benchmarks for MCP usage in the industry yet, so it's not always clear what you should be tracking. Synthflow found that opening the [MCP Analytics dashboard](/docs/mcp-analytics/surfaces/web-app#dashboard) and seeing its opinionated, built-in metrics ([intent](/docs/mcp-analytics/intent), [tool quality](/docs/mcp-analytics/surfaces/web-app#tool-quality), [sessions](/docs/mcp-analytics/surfaces/web-app#sessions), [missing capabilities](/docs/mcp-analytics/missing-capability), harnesses) showed them what to keep an eye on. Synthflow's [forward-deployed engineering](/blog/forward-deployed-engineer) teams use MCP Analytics a lot too, which brought plenty of dogfooding and feedback.
+There aren't many widespread standards or benchmarks for MCP usage in the industry yet, so it's not always clear what you should be tracking.
+
+Synthflow shipped their MCP server without a full-time team: four or five backend engineers pick it up when needed. With such a lean team, seeing how the server performs to fix issues right away is crucial.
+
+Synthflow found that opening the [MCP Analytics dashboard](/docs/mcp-analytics/surfaces/web-app#dashboard) and seeing its opinionated, built-in metrics ([intent](/docs/mcp-analytics/intent), [tool quality](/docs/mcp-analytics/surfaces/web-app#tool-quality), [sessions](/docs/mcp-analytics/surfaces/web-app#sessions), [missing capabilities](/docs/mcp-analytics/missing-capability), harnesses) showed them what to keep an eye on. Synthflow's [forward-deployed engineering](/blog/forward-deployed-engineer) teams use MCP Analytics a lot too, which brought plenty of dogfooding and feedback.
 
 Fionn ranks what they monitor in order of priority:
 
@@ -47,13 +47,15 @@ Fionn ranks what they monitor in order of priority:
 
 > *"I quite like the PostHog MCP dashboard, actually. It's one of the nicer ones to look at. I like that it's opinionated."* – Fionn Delahunty
 
+After identifying what was failing, Synthflow updated their MCP connector to solve the error "`workspace_id` is not accessible for this user". After hearing about the fix, a user replied "that is the most exciting thing I have heard all week!"
+
 Through the MCP Analytics dashboard, they realized Claude Code is their most popular harness, with 134 users across 110 workspaces. Claude.ai is next with 91 users. Codex has only 14 users but they're the heaviest: about 1,200 calls each, against about 200 for Claude Code users.
 
 ## Self-driving reports instead of a dedicated team
 
 Usually Fionn or other PMs monitor MCP Analytics in PostHog. When they spot something that needs human action, they create a ticket and pass it to the engineering team, who decide whether to act on it. Or just tag [PostHog in Slack](/slack) to fix the issues found.
 
-They've also turned to [Self-driving](/self-driving) reports, and [scouts](/docs/self-driving/scouts) to spot issues before they scale. Every Monday, Fionn reviews an [alert summarizing last week's MCP usage](/docs/mcp-analytics/surfaces/web-app#notifications), including:
+They've also turned to [Self-driving](/self-driving) reports, and [scouts](/docs/self-driving/scouts) to spot issues before they scale. Every Monday, Fionn reviews an [alert summarizing last week's](/docs/mcp-analytics/surfaces/web-app#notifications) MCP usage, including:
 
 - What tools failed
 - What's changed
@@ -62,29 +64,25 @@ They've also turned to [Self-driving](/self-driving) reports, and [scouts](/docs
 
 When he needs to go deeper, he opens the [MCP Analytics dashboard](/docs/mcp-analytics/surfaces/web-app) or uses [the PostHog MCP](/docs/mcp-analytics/surfaces/mcp) in Claude Code to analyze MCP data and debug failing tools.
 
-After identifying what was failing, Synthflow updated their MCP connector to solve the error "`workspace_id` is not accessible for this user". After hearing about the fix, a user replied "that is the most exciting thing I have heard all week!"
-
 ## What they would have missed
-
-> *"It would be very hard to track missing tool capabilities without PostHog, and we've definitely shipped some tool calls as a result of that."* – Fionn Delahunty
 
 Synthflow shipped their MCP and an in-app AI copilot at the same time. Usage of both was reasonably high but split: non-technical users mostly used the copilot, while more technical users went to MCP. There was very little overlap between those two cohorts, which shaped their product strategy. The data showed them where to invest, and which product should get more technical updates and which fewer.
 
 > *"I had my agent review the last 30 days of PostHog data on MCP and suggest five skills that we were lacking, and I shipped them into our public repo."* – Fionn Delahunty
 
-They added new tools based on what the [missing capabilities](/docs/mcp-analytics/missing-capability) feature showed them: `get_knowledge_base_item`, `get_call_details_batch`, `list_calls_by_extractor_result`, and `get_current_workspace`, for example.
+Fionn mentioned how it would be "very hard to track missing tool capabilities without PostHog" and they added new tools based on what the [missing capabilities](/docs/mcp-analytics/missing-capability) feature showed them: `get_knowledge_base_item`, `get_call_details_batch`, `list_calls_by_extractor_result`, and `get_current_workspace`, for example.
 
-Not every request is worth building though. As Fionn puts it, "people want things that don't always make sense". Missing capabilities groups similar requests, so the team can see which needs come up most.
+Not every request is worth building though. As Fionn puts it, "people want things that don't always make sense". Missing capabilities groups similar requests, so the team reads through the requests and sees which ones come up most.
 
 ## What's next
 
-With usage data behind it, Synthflow is doubling down on MCP as a core part of the product.
+With usage data behind it, Synthflow is investing in MCP as a core part of the product.
 
 They're expanding the analytics capabilities in their MCP, so customers can query Synthflow's data warehouses directly.
 
 They also found that many customers use Synthflow's MCP to build their own dashboards outside their app. So they launched plugins with Anthropic and OpenAI on top of their MCP, which got a lot of uptake.
 
-> *"MCP is becoming a first-class interface into our product, same as our API and our UI. MCP was an experimental interface and is now a first-class interface that customers will genuinely spend most of their time in."* – Fionn Delahunty
+> *"MCP is becoming a first-class interface into our product, same as our API and our UI. MCP was an experimental interface and is now a first-class interface that customers will genuinely spend most of their time [in]."* – Fionn Delahunty
 
 <HoggieCallout
 layout="featured"
