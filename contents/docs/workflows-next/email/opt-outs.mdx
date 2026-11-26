@@ -1,0 +1,52 @@
+---
+title: Opt-outs and categories
+sidebar: Docs
+showTitle: true
+---
+
+People don't want all your email, or none of it. Message categories let them pick: leave your newsletter, and still get product updates and receipts.
+
+## Message categories
+
+On the **Opt-outs** tab, click **New category**. Each one has:
+
+- **A name**, such as "Newsletter".
+- **A public description**, which people see on the [preferences page](/docs/workflows-next/email/unsubscribes), such as "Tips and stories, once a month".
+- **A type:** **marketing** or **transactional**.
+
+Make the categories you actually send, then pick one on each broadcast and automation email. PostHog skips anyone who opted out of it.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_light_8ffe0244a4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_dark_f0182f29ef.png"
+  alt="Message categories and the marketing opt-out list on the Opt-outs tab"
+  classes="rounded"
+/>
+
+## Marketing or transactional
+
+| | Marketing | Transactional |
+| --- | --- | --- |
+| **For** | Newsletters, product updates, offers | Receipts, password resets, security alerts |
+| **Opt-outs** | Respected | Skipped, because people need these |
+| **Frequency cap** | Counts | Doesn't count |
+| **Suppression list** | Any entry blocks it | Only a hard bounce blocks it |
+
+Use transactional only for emails a person needs. Sending marketing as transactional breaks the law in most places, and gets you reported as spam.
+
+## The opt-out list
+
+Under each category, and under **Marketing opt-out list** for people who left all marketing email, you see who opted out and when. People get there by:
+
+- Clicking unsubscribe, in an email or in their email app. See [unsubscribes](/docs/workflows-next/email/unsubscribes).
+- Changing their choices on the preferences page.
+- You adding them, with **Add opt-out** or **Import CSV**.
+- An import from another email provider. See [move from another provider](/docs/workflows-next/migrate).
+
+**Export CSV** downloads the list.
+
+## From your own systems
+
+If your product has its own email settings, keep them in sync with the [messaging preferences API](/docs/api/messaging-preferences): list a category's opt-outs, add them one at a time or 1,000 at once, and remove one when someone opts back in. Leave out the category to work with the opt-out from all marketing email.
+
+Opting someone back in to one marketing category also lifts their opt-out from all marketing, but their other categories stay off.

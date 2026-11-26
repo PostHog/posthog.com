@@ -1,5 +1,5 @@
 ---
-title: Unsubscribe links
+title: Unsubscribes and the preferences page
 sidebar: Docs
 showTitle: true
 ---
@@ -14,7 +14,13 @@ In the [email editor](/docs/workflows-next/email-editor), add the **Unsubscribe 
 <a href="{{ unsubscribe_url }}">Unsubscribe or change what you get</a>
 ```
 
-`{{ unsubscribe_url }}` opens your preferences page, where the person picks which kinds of email to stop, or stops them all.
+`{{ unsubscribe_url }}` opens your preferences page.
+
+## The preferences page
+
+The page lists your marketing [categories](/docs/workflows-next/email/opt-outs), with their public descriptions, so people can turn off the ones they don't want, or unsubscribe from all marketing email. Click **Preview opt-out page** on the **Opt-outs** tab to see what they see.
+
+If you use [tracking consent](/docs/workflows-next/email/link-tracking#tracking-consent), people also choose there whether you track their opens and clicks.
 
 ## One-click unsubscribe
 
@@ -22,7 +28,7 @@ Gmail, Yahoo, and other mailbox providers show their own **Unsubscribe** button 
 
 ## What happens next
 
-- The person is opted out of that [message category](/docs/workflows-next/sending-rules#opt-outs), or of everything, and PostHog skips them from then on.
+- The person is opted out of that [category](/docs/workflows-next/email/opt-outs), or of everything, and PostHog skips them from then on.
 - PostHog records a `$workflows_email_unsubscribed` event, with the `category` they left and the `source`: `one_click` or `preferences_page`.
 - The unsubscribe shows on the broadcast or automation's metrics.
 

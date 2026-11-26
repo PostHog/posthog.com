@@ -1,0 +1,51 @@
+---
+title: Suppression list
+sidebar: Docs
+showTitle: true
+---
+
+The suppression list holds addresses PostHog stops emailing, because email to them bounces or gets reported as spam. It protects your [deliverability](/docs/workflows-next/email/deliverability), so you don't have to clean your lists by hand.
+
+An opt-out is a person's choice. A suppression is about the address: it can't, or shouldn't, get email.
+
+## How addresses get on it
+
+PostHog adds them for you:
+
+- **Hard bounce:** the address doesn't exist, or refuses mail. Added after the first one.
+- **Soft bounces:** the mailbox is full or down. Added after several in a row with no delivery between them.
+- **Spam complaint:** the person marked an email as spam. Added after the first one.
+
+You can also click **Add address**, for example for someone who asked you by email to stop.
+
+Each entry shows the address, how it got there, the reason, and when.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_light_0f0f19a931.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_dark_3ede49aca0.png"
+  alt="The suppression list"
+  classes="rounded"
+/>
+
+## What it blocks
+
+- **Marketing email:** any entry blocks it.
+- **Transactional email:** only a hard bounce blocks it, because only a hard bounce proves the address is dead. Someone who reported your newsletter still gets their password reset.
+
+A transactional send to a hard-bounced address fails with `recipient_suppressed`. Don't retry it.
+
+## Remove an address
+
+Remove an entry if a bounce was a one-off, such as a full mailbox that's been emptied. Don't remove a real hard bounce: it bounces again and costs you twice.
+
+## From your own systems
+
+The [messaging suppressions API](/docs/api/messaging-suppressions) lists, adds, and removes entries, one at a time or in bulk. A bulk add takes a `reason` for each address:
+
+| `reason` | Blocks |
+| --- | --- |
+| `bounce` | All email, transactional too |
+| `complaint` | Marketing email |
+| `manual` | Marketing email |
+
+Moving from another provider? Import its bounces as `bounce` before your first send. See [move from another provider](/docs/workflows-next/migrate).
