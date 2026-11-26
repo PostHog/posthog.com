@@ -10,7 +10,7 @@ The price per request covers more than an on/off switch. It covers answering fas
 
 A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off.
 
-This page explains what each request pays for, so you know what the price includes and can compare it with building your own system from scratch.
+Below is what each request pays for, so you can compare it with building your own system.
 
 Every section starts in plain English and ends with the technical detail, so you don't need to be an engineer to follow it.
 
@@ -22,7 +22,7 @@ You pay per request, not per flag. A request is one call to our `/flags` endpoin
 
 <Pricing productType="feature_flags" />
 
-A request that doesn't evaluate any active, billable flag isn't charged. The `$feature_flag_called` events your SDK sends for usage charts aren't flag requests either. [Cutting feature flag costs](/docs/feature-flags/cutting-costs#understanding-your-bill) explains exactly what counts.
+A request that doesn't evaluate any active, billable flag isn't charged. The `$feature_flag_called` events your SDK sends for usage charts aren't flag requests either. [Cutting feature flag costs](/docs/feature-flags/cutting-costs#understanding-your-bill) explains what counts.
 
 [Local evaluation](/docs/feature-flags/local-evaluation) on your servers bills differently. Each time a server downloads your flag definitions, it counts as 10 requests, or as 1 request if nothing changed since the last download. The flag checks your server then makes in memory are free.
 
@@ -32,7 +32,7 @@ Those are the only line items. We don't charge per flag, per seat, per rollout c
 
 ## What happens to one flag request
 
-A feature flag system has the same jobs whether you buy it or build it. It has to answer quickly, give each person the same answer every time, and know enough about that person to target them. It has to keep your product working when it can't answer. Then your team needs a safe way to change flags, and a way to see what each flag did.
+A feature flag system has the same jobs whether you buy it or build it. It has to answer before the page needs it, give each person the same answer every time, and know enough about that person to target them. It has to keep your product working when it can't answer. Then your team needs a safe way to change flags, and a way to see what each flag did.
 
 In practice that's six steps.
 
@@ -44,7 +44,7 @@ Your customer opens your pricing page. Before the page can decide which version 
 
 On your servers, [local evaluation](/docs/feature-flags/local-evaluation) skips the network for each check. The SDK downloads your flag definitions every 30 seconds by default and evaluates flags in memory. It's available in 10 server-side SDKs. Definition downloads run on their own servers, apart from the ones that answer `/flags`, and when nothing has changed we reply `304 Not Modified` with no data at all.
 
-Without it, every flag check is a database query, and your slowest query sets the speed of your fastest page.
+Without it, every flag check waits on a database query, and the page waits with it.
 
 ### Step 2: Giving the same answer every time
 
@@ -66,13 +66,13 @@ Without it, every targeting rule needs a copy of your user data inside the flag 
 
 ### Step 4: Not breaking your product when something fails
 
-Networks fail, ad blockers block requests, and servers restart. When the flag service doesn't answer, your product still has to load, and it has to show something sensible.
+Networks drop and ad blockers block requests. When the flag service doesn't answer, your product still has to load, and it has to show something sensible.
 
 **How it works at PostHog:** Most SDKs wait 3 seconds by default, then stop waiting and carry on. When a response comes back with only some flags, the SDK updates those and keeps the last known values for the rest. [Bootstrapping](/docs/feature-flags/bootstrapping) lets you send flag values with the page, so the first render doesn't wait for a request at all. On your servers, local evaluation keeps working from cached definitions when PostHog can't be reached, and the safe defaults you set cover a cold start. If you go over a [billing limit](/docs/feature-flags/cutting-costs#quota-limiting), flags return their default values instead of errors.
 
 Your code still has to handle a flag that hasn't loaded yet. [Best practices](/docs/feature-flags/best-practices) explains how.
 
-Without it, an outage in your flag system is an outage in your product.
+Without it, when your flag service goes down, your product goes down with it.
 
 ### Step 5: Changing a flag safely
 
@@ -84,7 +84,7 @@ Without it, every flag change is a pull request, or a database edit with no hist
 
 ### Step 6: Knowing what a flag did
 
-You shipped the new checkout to half your users. Did it work? Who saw it, did they convert, and did anything break for them?
+You shipped the new checkout to half your users. Now you want to know who saw it, whether they converted, and whether anything broke for them.
 
 **How it works at PostHog:** Each flag has a [Usage tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used) that shows how often your code checked it and which values it returned. [Experiments](/docs/experiments) run on the same flags and bill as flag requests. Because flags share people with the rest of PostHog, you can see the [session replays](/docs/session-replay), events, and [errors](/docs/error-tracking) from the people who got a flag, and [start recording](/docs/session-replay/how-to-control-which-sessions-you-record) only when a flag is on. When a flag has done its job, [stale flag cleanup](/docs/feature-flags/cleaning-up-stale-flags) finds flags nothing has checked in 30 days, or that have been fully rolled out for 30 days.
 
@@ -109,7 +109,7 @@ A first build covers a table of flags and a function that reads it. The costs be
 
 ### The flag service is in your critical path
 
-If your pages wait for flags, the worst minute of your flag service is the worst minute of your product. It has to be sized for your busiest hour, not your average one. Our [October 2025 outages](/handbook/company/post-mortems/2025-10-21-feature-flags-recurring-outages) show how that can go wrong, even for a team that works on flags full time. Some failures are quieter. In [February 2026](/handbook/company/post-mortems/2026-02-06-feature-flags-cache-degradation), a cache backlog meant flag changes were slow to take effect, and there were no errors to warn anyone.
+If your pages wait for flags, any slowdown in your flag service slows your product too. The service has to be sized for your busiest hour. Our [October 2025 outages](/handbook/company/post-mortems/2025-10-21-feature-flags-recurring-outages) show how that can go wrong, even for a team that works on flags full time. Some failures are quieter. In [February 2026](/handbook/company/post-mortems/2026-02-06-feature-flags-cache-degradation), a cache backlog meant flag changes were slow to take effect, and there were no errors to warn anyone.
 
 ### Consistency bugs don't cause errors
 
@@ -121,7 +121,7 @@ Every new targeting rule needs data your flag system may not have: a plan, a com
 
 ### Old flags stay in your code
 
-Teams add flags faster than they remove them. Each forgotten flag is a branch in your code that nobody tests. Without usage data, you can't tell which flags are safe to remove.
+A flag that has done its job stays in your code until someone removes it. Each forgotten flag is a branch in your code that nobody tests. Without usage data, you can't tell which flags are safe to remove.
 
 ### Time and trust
 
@@ -150,7 +150,7 @@ your cost per request = monthly total ÷ flag requests per month
 
 Compare the last line with [a PostHog bill](/pricing) at the same volume. Take the Feature Flags total from the pricing calculator and divide it by your monthly requests. The free million and the falling tiers mean that average comes out lower than the rates at the top of this page. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates).
 
-Don't be surprised if compute is the smallest line. The ledger also leaves out the costs you can't put a price on, like a slower page, a user who sees the wrong version, and an experiment result you can't trust.
+The ledger leaves out the costs you can't put a price on, like a slower page, a user who sees the wrong version, and an experiment result you can't trust.
 
 ## When building is the right call
 
