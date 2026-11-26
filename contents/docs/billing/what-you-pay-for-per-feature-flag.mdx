@@ -4,11 +4,11 @@ title: What you actually get when you pay for a feature flag
 
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
-In PostHog your first 1 million feature flag requests are free every month. After that, you pay per request and the price per request drops as you make more – this helps ensure a busy app doesn't end up with a massive bill. [Experiments](/docs/experiments) use the same requests and the same free tier, so there's no separate price for running a test.
+In PostHog your first 1 million feature flag requests are free every month. After that, you pay per request and the price per request drops as you make more – this helps ensure a busy app doesn't end up with a massive bill. [Experiments](/docs/experiments) use the same requests and the same free tier, so there's no separate price for running a test. This is [how we think pricing should be](/handbook/engineering/feature-pricing) in order for it to be fair for you and successful for us.
 
-The price per request covers more than an on/off switch. It covers answering fast on every page load, giving each user the same answer every time, targeting on what you know about your users, keeping your product working when something fails, changing flags safely, and seeing what each flag did. It also buys peace of mind: when the flag service has a bad day, our engineers get paged, not yours.
+The price per request covers more than just an on/off switch. It covers answering fast on every page load, giving each user the same answer every time, targeting on what you know about your users, keeping your product working when something fails, changing flags safely, and seeing what each flag did. It also covers the continuing investment into keeping our feature flags platform running smoothly and growing the features within it. And when the flag service has a bad day, our engineers get paged, not yours.
 
-A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon – though it's much easier and also free to get started with PostHog. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off.
+A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon – though it's much easier and also free to get started with PostHog. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off if you want to dig into that in detail.
 
 Every section starts in plain English and ends with the technical detail, so you don't need to be an engineer to follow it.
 
@@ -16,7 +16,7 @@ Every section starts in plain English and ends with the technical detail, so you
 
 ## The price
 
-You pay per request, not per flag. A request is one call to our `/flags` endpoint, which returns the value of every flag that applies to one user. Your app makes one when the SDK loads, when a user logs in or their properties change, and when your server checks a flag. A request that evaluates 50 flags costs the same as a request that evaluates one. Below are the live rates for [Feature Flags](/feature-flags).
+You pay per request, not per flag. A request is one call to our `/flags` endpoint, which returns the value of every flag that applies to a user. Your app makes a request when the SDK loads, when a user logs in or their properties change, or when your server checks a flag. A request that evaluates 50 flags costs the same as a request that evaluates one even though they carry different amounts of data – we think this helps keep pricing simpler. Below are the live rates for [Feature Flags](/feature-flags).
 
 <Pricing productType="feature_flags" />
 
@@ -154,7 +154,7 @@ The ledger leaves out the costs you can't put a price on, like a slower page, a 
 
 Building your own flags is the better choice for some teams. These are the cases where we'd build it too.
 
-**You only need a few on/off switches.** If your flags are kill switches that change once a month and apply to everyone, a config file or an environment variable will do. You can skip most of this page, because you don't need targeting, rollouts, or experiments.
+**You only need a few on/off switches.** If your flags are a handful of kill switches that only change once a month and apply to everyone universally then a config file or an environment variable will do. You can skip most of this page, because you don't need targeting, rollouts, or experiments.
 
 **Flag checks can never leave your infrastructure.** If a policy says that no request may go to a third party, you need flags you host yourself. Check first whether [local evaluation](/docs/feature-flags/local-evaluation) meets the policy: your servers download flag rules from PostHog, then check flags without a request for each user.
 
