@@ -36,7 +36,7 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Email from your code, broadcasts, and automations on your product data',
+        title: 'Workflows - Email from your code, broadcasts, and automations on your product data',
         description:
             'Send transactional email from your backend, broadcasts to the right people, and automations that start on what users do. All next to your product data, with 10K emails free monthly.',
     },
