@@ -149,7 +149,7 @@ export const ga4 = {
         deployment: {
             eu_hosting: false,
             open_source: false,
-            reverse_proxy: false,
+            reverse_proxy: 'Via Google tag gateway',
             self_host: false,
         },
         developer: {
