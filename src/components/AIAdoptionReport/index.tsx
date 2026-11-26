@@ -300,7 +300,7 @@ const reportQuestions = (period: string) => [
     {
         question: 'Which months does the report cover?',
         answer: period
-            ? `The report covers ${period}. We include only complete calendar months in UTC.`
+            ? `The report covers ${period}. We use complete calendar months in UTC and refresh the data when we rebuild this site.`
             : 'No monthly data is available yet.',
     },
     {
@@ -398,7 +398,7 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     />
                 </h1>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
-                    We opened up the hood on our AI observability metrics so you'll also get to see{' '}
+                    We popped the hood on our AI observability metrics so you can see{' '}
                     <RoughAnnotation
                         type="highlight"
                         color="rgba(247, 165, 1, 0.15)"
@@ -411,9 +411,9 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     .
                 </p>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
-                    Each month, we look at organizations that sent at least 100 AI generation or embedding events to
-                    PostHog Cloud. An organization that sends a million events counts just as much as one that sends
-                    100.
+                    This page looks at organizations that sent at least 100 AI generation or embedding events to PostHog
+                    Cloud in the selected month. An organization that sends a million events counts just as much as one
+                    that sends 100.
                 </p>
             </header>
             {month ? (
