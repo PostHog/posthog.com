@@ -324,7 +324,7 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(6deg)' },
                     '50%': { transform: 'rotate(-6deg)' },
                 },
-                // HoggieCallout (yellow): a springy hop on hover, a squash-and-stretch bounce on poke, and a
+                // HoggieCallout (featured layout): a springy hop on hover, a squash-and-stretch bounce on poke, and a
                 // speech bubble that springs in.
                 'hog-nudge': {
                     '0%, 100%': { transform: 'none' },

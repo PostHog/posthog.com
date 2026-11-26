@@ -1,23 +1,23 @@
 # HoggieCallout
 
-A callout that sends readers to another page. It has two variants:
+A callout that sends readers to another page. It has two layouts. Choose one with the `layout` prop:
 
-- `default`: the callout on the live pages in the "Used by" table. The rest of this section is about this variant.
-- `yellow`: a yellow box with a hog that readers can poke. Use it in docs and handbook pages. See [Yellow variant](#yellow-variant).
+- `compact` (the default): the callout on the live pages in the "Used by" table. The rest of this section is about this layout.
+- `featured`: a larger yellow callout with a hog that readers can poke. Use it in docs and handbook pages. See [Featured layout](#featured-layout).
 
-In the default variant, a hoggie sits on the left, the copy sits next to it, and a button sits on the right. The hoggie breaks out of the top border, or stands on the bottom border inside the callout (see [Hoggie size and placement](#hoggie-size-and-placement)). In a narrow container, the button moves under the copy.
+In the compact layout, a hoggie sits on the left, the copy sits next to it, and a button sits on the right. The hoggie breaks out of the top border, or stands on the bottom border inside the callout (see [Hoggie size and placement](#hoggie-size-and-placement)). In a narrow container, the button moves under the copy.
 
 The button opens its link in a new window, with `state={{ newWindow: true }}` on `OSButton`.
 
 ## Used by
 
-| Component or page | Variant | Where it shows |
+| Component or page | Layout | Where it shows |
 | --- | --- | --- |
-| `MCPLeaderboardCallout` | `default` | `/mcp-analytics` (the leaderboard section) |
-| `EvalsPlaygroundCallout` | `default` | `/docs/ai-evals` and `/docs/ai-evals/offline-evals` |
-| `contents/handbook/wizard-and-docs/mdx-and-components.mdx` | `yellow` | `/handbook/wizard-and-docs/mdx-and-components` (the live example) |
+| `MCPLeaderboardCallout` | `compact` | `/mcp-analytics` (the leaderboard section) |
+| `EvalsPlaygroundCallout` | `compact` | `/docs/ai-evals` and `/docs/ai-evals/offline-evals` |
+| `contents/handbook/wizard-and-docs/mdx-and-components.mdx` | `featured` | `/handbook/wizard-and-docs/mdx-and-components` (the live example) |
 
-For the default variant in a `.tsx` page, make a small wrapper component for each callout, so a page imports one component with no props. Put the copy in the wrapper. In MDX, use the yellow variant directly, with no wrapper.
+For the compact layout in a `.tsx` page, make a small wrapper component for each callout, so a page imports one component with no props. Put the copy in the wrapper. In MDX, use the featured layout directly, with no wrapper.
 
 Add a row here when you add a callout to a page.
 
@@ -53,23 +53,23 @@ export default function EvalsPlaygroundCallout({ className = '' }: { className?:
 | --- | --- | --- |
 | `hoggie` | component | A hoggie from `@posthog/brand/hoggies`. It gets the `title` and the position classes. |
 | `hoggieTitle` | `string` | Describes what the art shows, for screen readers. |
-| `hoggieAlign` | `'top'`, `'center'`, or `'bottom'` | The height the hoggie sits at. Defaults to `top`, or `bottom` for `yellow`. See [Hoggie size and placement](#hoggie-size-and-placement). |
-| `hoggieBreakout` | `boolean` | Lets the hoggie go past the border it is aligned to. Defaults to `true`, or `false` for `yellow`. |
+| `hoggieAlign` | `'top'`, `'center'`, or `'bottom'` | The height the hoggie sits at. Defaults to `top`, or `bottom` for `featured`. See [Hoggie size and placement](#hoggie-size-and-placement). |
+| `hoggieBreakout` | `boolean` | Lets the hoggie go past the border it is aligned to. Defaults to `true`, or `false` for `featured`. |
 | `hoggieSize` | `'sm'`, `'md'`, or `'lg'` | The size of the hoggie. Defaults to `md`, the size the callouts had before this prop. |
 | `ariaLabel` | `string` | Label for the outer `aside`. |
 | `title` | `string` | Bold first line. |
 | `description` | `ReactNode` | Text under the title. |
 | `buttonLabel` | `string` | Button text. |
 | `to` | `string` | Button link. |
-| `className` | `string` | Classes for the outer `aside`, for spacing. The default margin is `my-6`, or `mt-12 mb-8` for `yellow`. |
-| `variant` | `'default'` or `'yellow'` | `yellow` turns on the yellow layout and the hog interactions. Defaults to `default`. |
-| `hoggieSide` | `'left'` or `'right'` | Yellow only. The side the hog sits on in a medium or wide container. In a narrow container, the hog is always centered. Defaults to `left`. |
-| `interactive` | `boolean` | Yellow only. Turns on the hover nudge and the poke. Defaults to `true`. |
-| `hoggieLines` | `string[]` | Yellow only. Extra speech bubble lines for the chosen hog. They are added to the standard lines, not used instead of them. |
+| `className` | `string` | Classes for the outer `aside`, for spacing. The default margin is `my-6`, or `mt-12 mb-8` for `featured`. |
+| `layout` | `'compact'` or `'featured'` | `featured` turns on the featured layout and the hog interactions. Defaults to `compact`. |
+| `hoggieSide` | `'left'` or `'right'` | Featured only. The side the hog sits on in a medium or wide container. In a narrow container, the hog is always centered. Defaults to `left`. |
+| `interactive` | `boolean` | Featured only. Turns on the hover nudge and the poke. Defaults to `true`. |
+| `hoggieLines` | `string[]` | Featured only. Extra speech bubble lines for the chosen hog. They are added to the standard lines, not used instead of them. |
 
 ## Hoggie size and placement
 
-Three props control the hoggie in both variants. Each one works with any value of the other two.
+Three props control the hoggie in both layouts. Each one works with any value of the other two.
 
 - `hoggieAlign`: the height the hoggie sits at: `top`, `center`, or `bottom`.
 - `hoggieBreakout`: when `true`, the hoggie goes past the border it is aligned to. `top` goes over the top border, `bottom` goes under the bottom border, and `center` goes past the side border. When `false`, the hoggie stays inside the box.
@@ -79,7 +79,7 @@ The box padding changes with the size, so the copy never goes under the hoggie. 
 
 Use `hoggieAlign="bottom"` with `hoggieBreakout={false}` for a hoggie whose art is cut off at the bottom, like `HedgehogJudge`. The cut edge then sits on the bottom border.
 
-Default variant. The defaults are `hoggieAlign="top"` and `hoggieBreakout={true}`:
+Compact layout. The defaults are `hoggieAlign="top"` and `hoggieBreakout={true}`:
 
 | `hoggieBreakout` | `top` | `center` | `bottom` |
 | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ Default variant. The defaults are `hoggieAlign="top"` and `hoggieBreakout={true}
 | `md` (default) | 96px, and 128px from `@xl` | 80px, and 96px from `@xl` |
 | `lg` | 112px, and 160px from `@xl` | 96px, and 128px from `@xl` |
 
-Yellow variant. The defaults are `hoggieAlign="bottom"` and `hoggieBreakout={false}`. In a narrow container, the hoggie is always above the copy and 32px over the top border, and only `hoggieSize` has an effect. In a medium or wide container:
+Featured layout. The defaults are `hoggieAlign="bottom"` and `hoggieBreakout={false}`. In a narrow container, the hoggie is always above the copy and 32px over the top border, and only `hoggieSize` has an effect. In a medium or wide container:
 
 | `hoggieBreakout` | `top` | `center` | `bottom` |
 | --- | --- | --- | --- |
@@ -109,9 +109,9 @@ Yellow variant. The defaults are `hoggieAlign="bottom"` and `hoggieBreakout={fal
 
 The outer `aside` is a size container (`@container`). The hoggie and the button row change at `@xl`, so the callout responds to its own width, not to the window width.
 
-## Yellow variant
+## Featured layout
 
-`variant="yellow"` renders `YellowHoggieCallout.tsx`. It is a global MDX component, so docs and handbook pages can use it with no wrapper.
+`layout="featured"` renders `FeaturedHoggieCallout.tsx`. It is a global MDX component, so docs and handbook pages can use it with no wrapper.
 
 ### When to use it
 
@@ -123,7 +123,7 @@ Suggest one when a page links to a marketing asset, a tool, a playground, a lead
 import { HedgehogBasketballCoach } from "@posthog/brand/hoggies"
 
 <HoggieCallout
-    variant="yellow"
+    layout="featured"
     hoggie={HedgehogBasketballCoach}
     hoggieTitle="A hedgehog basketball coach spinning a ball, holding a clipboard"
     ariaLabel="[Add callout label]"

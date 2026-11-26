@@ -214,7 +214,7 @@ Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog
 
 ### Hoggie callouts
 
-Use a `<HoggieCallout>` with `variant="yellow"` to send readers to a marketing asset, a tool, a playground, a leaderboard, or a weird, fun, or sparks-joy page. A hog stands next to the copy. Readers can poke it, and it says a short line in a speech bubble.
+Use a `<HoggieCallout>` with `layout="featured"` to send readers to a marketing asset, a tool, a playground, a leaderboard, or a weird, fun, or sparks-joy page. A hog stands next to the copy. Readers can poke it, and it says a short line in a speech bubble.
 
 Don't use it for warnings or required steps – use a [callout box](#callout-boxes) for those. Use one per page at most.
 
@@ -222,7 +222,7 @@ Don't use it for warnings or required steps – use a [callout box](#callout-box
 import { HedgehogBasketballCoach } from "@posthog/brand/hoggies"
 
 <HoggieCallout
-    variant="yellow"
+    layout="featured"
     hoggie={HedgehogBasketballCoach}
     hoggieTitle="A hedgehog basketball coach spinning a ball, holding a clipboard"
     ariaLabel="[Add callout label]"
@@ -237,7 +237,7 @@ import { HedgehogBasketballCoach } from "@posthog/brand/hoggies"
 It looks like this. Poke the hog:
 
 <HoggieCallout
-variant="yellow"
+layout="featured"
 hoggie={HedgehogBasketballCoach}
 hoggieTitle="A hedgehog basketball coach spinning a ball, holding a clipboard"
 ariaLabel="MCP leaderboard"

@@ -1,11 +1,11 @@
 /**
  * Callout with a hoggie breaking out of the top border, copy on the left, and a button on the right.
  * The wrapper is a size container, so the row stacks on the callout's width.
- * `variant="yellow"` renders `YellowHoggieCallout` instead.
+ * `layout="featured"` renders `FeaturedHoggieCallout` instead.
  */
 import React from 'react'
 import OSButton from 'components/OSButton'
-import YellowHoggieCallout from './YellowHoggieCallout'
+import FeaturedHoggieCallout from './FeaturedHoggieCallout'
 
 type Hoggie = React.ComponentType<{ title?: string; className?: string }>
 
@@ -80,9 +80,9 @@ interface BaseHoggieCalloutProps {
     hoggie: Hoggie
     /** Describes what the art shows, for screen readers */
     hoggieTitle: string
-    /** The height the hoggie sits at. Defaults to `top` (default variant) or `bottom` (yellow variant). */
+    /** The height the hoggie sits at. Defaults to `top` (compact layout) or `bottom` (featured layout). */
     hoggieAlign?: HoggieAlign
-    /** Lets the hoggie go 16px past the border it is aligned to. Defaults to `true` (default variant) or `false` (yellow variant). */
+    /** Lets the hoggie go 16px past the border it is aligned to. Defaults to `true` (compact layout) or `false` (featured layout). */
     hoggieBreakout?: boolean
     /** The size of the hoggie. Defaults to `md`. */
     hoggieSize?: HoggieSize
@@ -94,32 +94,33 @@ interface BaseHoggieCalloutProps {
     className?: string
 }
 
-export interface DefaultHoggieCalloutProps extends BaseHoggieCalloutProps {
-    variant?: 'default'
+export interface CompactHoggieCalloutProps extends BaseHoggieCalloutProps {
+    /** The layout of the live callouts on /mcp-analytics and /docs/ai-evals. Defaults to `compact`. */
+    layout?: 'compact'
 }
 
-export interface YellowHoggieCalloutProps extends BaseHoggieCalloutProps {
-    /** Turns on the yellow layout and the hog interactions. */
-    variant: 'yellow'
+export interface FeaturedHoggieCalloutProps extends BaseHoggieCalloutProps {
+    /** A larger callout with a hog column and the hog interactions. Use one per page at most. */
+    layout: 'featured'
     /** The side the hog sits on in a medium or wide container. Defaults to `left`. */
     hoggieSide?: 'left' | 'right'
-    /** Turns on the hover nudge and the poke. Defaults to `true` for `yellow`. */
+    /** Turns on the hover nudge and the poke. Defaults to `true`. */
     interactive?: boolean
     /** Extra speech bubble lines, added to the standard lines. */
     hoggieLines?: string[]
 }
 
-/** The props of one variant are not valid on the other variant. */
-export type HoggieCalloutProps = DefaultHoggieCalloutProps | YellowHoggieCalloutProps
+/** The props of one layout are not valid on the other layout. */
+export type HoggieCalloutProps = CompactHoggieCalloutProps | FeaturedHoggieCalloutProps
 
 export default function HoggieCallout(props: HoggieCalloutProps): JSX.Element {
-    if (props.variant === 'yellow') {
-        return <YellowHoggieCallout {...props} />
+    if (props.layout === 'featured') {
+        return <FeaturedHoggieCallout {...props} />
     }
-    return <DefaultHoggieCallout {...props} />
+    return <CompactHoggieCallout {...props} />
 }
 
-function DefaultHoggieCallout({
+function CompactHoggieCallout({
     hoggie: Hoggie,
     hoggieTitle,
     hoggieAlign = 'top',
@@ -131,13 +132,13 @@ function DefaultHoggieCallout({
     buttonLabel,
     to,
     className = '',
-}: DefaultHoggieCalloutProps): JSX.Element {
+}: CompactHoggieCalloutProps): JSX.Element {
     const mode: HoggieMode = hoggieBreakout ? 'breakout' : 'inside'
-    const layout = LAYOUTS[mode][hoggieAlign]
+    const placement = LAYOUTS[mode][hoggieAlign]
     return (
         <aside aria-label={ariaLabel} className={`@container not-prose my-6 ${className}`}>
-            <div className={`relative border rounded bg-accent border-primary p-4 ${layout.box[hoggieSize]}`}>
-                <Hoggie title={hoggieTitle} className={`absolute ${layout.hoggie} ${WIDTHS[mode][hoggieSize]}`} />
+            <div className={`relative border rounded bg-accent border-primary p-4 ${placement.box[hoggieSize]}`}>
+                <Hoggie title={hoggieTitle} className={`absolute ${placement.hoggie} ${WIDTHS[mode][hoggieSize]}`} />
                 <div className="flex flex-col @xl:flex-row @xl:items-center gap-3 @xl:gap-4">
                     <div className="flex-1 min-w-0">
                         <strong className="block text-lg mb-0.5">{title}</strong>

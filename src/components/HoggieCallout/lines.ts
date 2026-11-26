@@ -1,4 +1,4 @@
-// What the hog can say when a reader pokes it in the yellow variant of `HoggieCallout`.
+// What the hog can say when a reader pokes it in the featured layout of `HoggieCallout`.
 // Rules for new lines are in the README.
 export const STANDARD_LINES = [
     'Hedgehog. Not a pig.',

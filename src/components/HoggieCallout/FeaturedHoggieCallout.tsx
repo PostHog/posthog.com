@@ -1,5 +1,5 @@
 /**
- * The yellow variant of `HoggieCallout`. The hog stands next to the copy and talks when a reader pokes it.
+ * The card layout of `HoggieCallout`. The hog stands next to the copy and talks when a reader pokes it.
  * The wrapper is a size container, so the layout changes on the callout's width, not the window's:
  * - below `@xl`: the hog, then the copy, then a full-width button
  * - `@xl`: a hog column next to the copy, with the button under the description
@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import OSButton from 'components/OSButton'
 import SpeechBubble from 'components/SpeechBubble'
 import { focusRing } from 'components/UI/styles'
-import type { HoggieAlign, HoggieSize, YellowHoggieCalloutProps } from './index'
+import type { FeaturedHoggieCalloutProps, HoggieAlign, HoggieSize } from './index'
 import { MAX_LINE_LENGTH, STANDARD_LINES } from './lines'
 
 // How long the bubble stays up after a poke.
@@ -94,7 +94,7 @@ const MIN_HEIGHTS: Record<HoggieMode, Record<HoggieAlign, Record<HoggieSize, str
     },
 }
 
-export default function YellowHoggieCallout({
+export default function FeaturedHoggieCallout({
     hoggie: Hoggie,
     hoggieTitle,
     hoggieAlign = 'bottom',
@@ -109,7 +109,7 @@ export default function YellowHoggieCallout({
     hoggieSide = 'left',
     interactive = true,
     hoggieLines = [],
-}: YellowHoggieCalloutProps): JSX.Element {
+}: FeaturedHoggieCalloutProps): JSX.Element {
     const side = SIDES[hoggieSide]
     const size = SIZES[hoggieSize]
     const mode: HoggieMode = hoggieBreakout ? 'breakout' : 'inside'
