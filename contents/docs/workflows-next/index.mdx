@@ -10,9 +10,11 @@ import OSButton from 'components/OSButton'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import SwitchPrompt, { CopyPrompt } from './_snippets/switch-prompt'
-import audienceSuggestions from './images/broadcast-audience-suggestions.png'
+import audienceSuggestions from './images/broadcast-audience-suggestions-light.png'
+import audienceSuggestionsDark from './images/broadcast-audience-suggestions-dark.png'
 import emailEditor from './images/email-editor.png'
-import automationMetrics from './images/automation-metrics.png'
+import automationMetrics from './images/automation-overview-light.png'
+import automationMetricsDark from './images/automation-overview-dark.png'
 
 Send email from your code, then see what happens next. Broadcasts, automations, and push notifications are built in, next to your product data.
 
@@ -238,6 +240,7 @@ PostHog looks at what people do in your product and suggests who to email next. 
 
 <ProductScreenshot
   imageLight={audienceSuggestions}
+  imageDark={audienceSuggestionsDark}
   alt="Suggested audiences for a new broadcast"
   classes="rounded"
 />
@@ -280,6 +283,7 @@ Sends, opens, clicks, bounces, and complaints for each automation and broadcast,
 
 <ProductScreenshot
   imageLight={automationMetrics}
+  imageDark={automationMetricsDark}
   alt="The metrics for an automation in PostHog"
   classes="rounded"
 />

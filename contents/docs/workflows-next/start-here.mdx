@@ -7,8 +7,10 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from "components/Docs/QuestLog"
 import OSButton from "components/OSButton"
 import PlatformInstall, { wizardInstallSchema } from "components/PlatformInstall"
-import audienceSuggestions from "./images/broadcast-audience-suggestions.png"
-import automationMetrics from "./images/automation-metrics.png"
+import audienceSuggestions from "./images/broadcast-audience-suggestions-light.png"
+import audienceSuggestionsDark from "./images/broadcast-audience-suggestions-dark.png"
+import automationMetrics from "./images/automation-overview-light.png"
+import automationMetricsDark from "./images/automation-overview-dark.png"
 
 <QuestLog firstSpeechBubble="Let's send an email!" lastSpeechBubble="Now see what it did.">
 
@@ -62,6 +64,7 @@ Email many people at once, such as a product update. Pick one of PostHog's sugge
 
 <ProductScreenshot
   imageLight={audienceSuggestions}
+  imageDark={audienceSuggestionsDark}
   alt="Suggested audiences for a new broadcast"
   classes="rounded"
 />
@@ -99,6 +102,7 @@ Every send, open, and click is an event on the person who got it. See what they 
 
 <ProductScreenshot
   imageLight={automationMetrics}
+  imageDark={automationMetricsDark}
   alt="The metrics for an automation in PostHog"
   classes="rounded"
 />
