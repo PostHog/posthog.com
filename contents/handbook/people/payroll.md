@@ -44,7 +44,7 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 **Bank details**
 
 - Germany, EOR or contractor: update them in Deel.
-- UK: send them to [@Milagros](https://posthog.slack.com/team/U0B4W74LN83) through a 1Password share link.
+- UK: send them to <PrivateLink url="https://posthog.slack.com/team/U0B4W74LN83">@Milagros</PrivateLink> through a 1Password share link.
 - US: update them in BambooHR.
 
 We'll never ask you to change your bank details through an email link or a message from someone you don't know. If you get a request like this, check with us in Slack first.
@@ -90,4 +90,4 @@ Tell us as soon as you notice and we'll look into it. If you were underpaid, we'
 ## Questions
 
 - For anything that isn't confidential, post in the #team-people-and-ops Slack channel.
-- For anything sensitive about your pay, DM [@Milagros](https://posthog.slack.com/team/U0B4W74LN83).
+- For anything sensitive about your pay, DM <PrivateLink url="https://posthog.slack.com/team/U0B4W74LN83">@Milagros</PrivateLink>.
