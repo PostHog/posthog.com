@@ -78,7 +78,7 @@ We "like" all posts which are complimentary of PostHog to reinforce that behavio
 >
 > please help us help you spend less money on PostHog
 
-**Who does it?** <TeamMember name="Andy Vandervell" photo />, <TeamMember name="Ian Vanagas" photo />, or <TeamMember name="Liam Graham" photo />. [Editorial](/teams/editorial) owns social. If Liam's online alone and needs help with a technical question, ask <TeamMember name="Rafael Audibert" photo /> or <TeamMember name="Fernando Gomes" photo />. Default to replying from <TeamMember name="Tim Glaser" photo />'s account. If it might get spicy, just use the PostHog account or your own. Everyone else, leave Editorial to it.
+**Who does it?** <TeamMember name="Andy Vandervell" photo />, <TeamMember name="Ian Vanagas" photo />, or <TeamMember name="Liam Graham" photo />. [Editorial](/teams/editorial) owns social. If Liam's online alone and needs help with a technical question, ask <TeamMember name="Fernando Gomes" photo />, <TeamMember name="Paul D'Ambra" photo />, <TeamMember name="Matt Pua" photo /> or <TeamMember name="Rafael Audibert" photo />. Default to replying from <TeamMember name="Tim Glaser" photo />'s account, which can be accessed via [Typefully](https://typefully.com/). If it might get spicy, use your own. Avoid using the PostHog account if you can. Everyone else, leave Editorial to it.
 
 ### Posting on LinkedIn
 
