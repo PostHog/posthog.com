@@ -934,13 +934,14 @@ ${PLATFORM_ITEMS.filter((i) => i.layer === 'tool')
 **Context warehouse** — ${CONTEXT_WAREHOUSE_BLURB}
 `
 
-// Changelog — high-value for agents deciding what PostHog can do today
-const LLMS_TXT_CHANGELOG = `## Changelog
+// The indexes list docs pages, not every feature, so agents search before they decide PostHog lacks something.
+const LLMS_TXT_SEARCH_DOCS = `## Search the docs
 
-What's new in PostHog — new features, products, and tools, updated with every deploy. Check this before assuming a capability doesn't exist.
+These files list the docs pages, not every feature. Before you decide that PostHog cannot do something, search the docs:
 
-- [Changelog (last 12 months, Markdown)](https://posthog.com/changelog.md)
-- [Changelog RSS feed](https://posthog.com/changelog.rss)
+- With the [PostHog MCP server](https://posthog.com/docs/model-context-protocol.md) connected, call its \`docs-search\` tool.
+- In a browser that supports [WebMCP](https://webmachinelearning.github.io/webmcp/), every posthog.com page registers tools for agents: \`search_docs\` searches the docs, \`read_page\` reads any page as Markdown, and \`get_site_overview\` returns the platform overview.
+- Without either, read the full-text file of the docs section, linked from https://posthog.com/llms.txt.
 `
 
 type LlmsTxtPage = { title: string; slug: string; url: string }
@@ -1125,7 +1126,7 @@ export const generateLlmsTxt = (pages) => {
 ${LLMS_TXT_HOW_POSTHOG_WORKS}
 ${LLMS_TXT_AGENT_INSTRUCTIONS}
 ${llmsTxtProductsAndTools()}
-${LLMS_TXT_CHANGELOG}
+${LLMS_TXT_SEARCH_DOCS}
 ## Docs
 
 Each line links the overview page of a docs section, and one file with the full text of all its pages.
@@ -1166,7 +1167,7 @@ Each line links the overview page of a docs section, and one file with the full 
 ${LLMS_TXT_HOW_POSTHOG_WORKS}
 ${LLMS_TXT_AGENT_INSTRUCTIONS}
 ${llmsTxtProductsAndTools()}
-${LLMS_TXT_CHANGELOG}`
+${LLMS_TXT_SEARCH_DOCS}`
     for (const section of sections) {
         llmsFullTxtContent += `## ${formatSectionTitle(section)}\n\n`
         const fullText = fullTextBySection[section]
