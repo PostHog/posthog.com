@@ -8672,6 +8672,51 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Automations',
+                },
+                {
+                    name: 'Build your first automation',
+                    url: '/docs/workflows-next/automations/first-automation',
+                    icon: 'IconRocket',
+                    color: 'orange',
+                },
+                {
+                    name: 'Triggers',
+                    url: '/docs/workflows-next/automations/triggers',
+                    icon: 'IconBolt',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Steps',
+                    url: '/docs/workflows-next/automations/steps',
+                    icon: 'IconDecisionTree',
+                    color: 'blue',
+                },
+                {
+                    name: 'AI steps',
+                    url: '/docs/workflows-next/automations/ai-steps',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'Edit a live automation',
+                    url: '/docs/workflows-next/automations/editing-live',
+                    icon: 'IconPencil',
+                    color: 'green',
+                },
+                {
+                    name: 'Test and debug',
+                    url: '/docs/workflows-next/automations/debug',
+                    icon: 'IconWrench',
+                    color: 'red',
+                },
+                {
+                    name: 'Templates and suggestions',
+                    url: '/docs/workflows-next/automations/templates',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Channels',
                 },
                 {

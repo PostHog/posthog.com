@@ -1,0 +1,39 @@
+---
+title: Test and debug an automation
+sidebar: Docs
+showTitle: true
+---
+
+Test each step before anyone gets an email, then follow every run once it's live.
+
+## Test a step
+
+Open **Test**, pick a sample person or event, and run a step. PostHog shows what it would do, such as the email it would send, without sending it to anyone. Send a test email to your own address to check it in a real inbox.
+
+<!-- shot: automation-test -->
+
+## Follow every run
+
+**Invocations** lists every run: who it was for, its status, and when it started. Filter by status, such as **Running** or failed. Open a run to see each step it took, and its logs, such as why a step was skipped.
+
+<!-- shot: automation-invocations -->
+
+Each email a run sent also shows on its own, with its timeline and what the person did around it. See [metrics](/docs/workflows-next/metrics#what-each-person-did).
+
+## Stop runs
+
+On **Invocations**:
+
+- **Cancel** stops one run before its next step.
+- **Cancel in-flight runs** stops every run at once.
+- **Stop** on a batch run stops it entering more people, and cancels the runs it started.
+
+A run that's mid-step finishes that step first. Emails already sent can't be recalled. A cancelled run keeps its logs, and you can **Rerun** it later.
+
+## Common problems
+
+- **Nobody entered.** Check the trigger's filters, and that the event arrives: the trigger shows how many matched in the last 7 days.
+- **An email didn't send.** Open the run's logs. It might be the person's opt-out, a suppressed address, the [frequency cap](/docs/workflows-next/sending-rules#frequency-cap), or a missing email address.
+- **A variable is empty.** The person doesn't have the property, or the step that sets it ran after they passed. Add a default, such as `{{ person.properties.first_name | default: 'there' }}`.
+- **It won't turn on.** PostHog checks every step first, and shows which one needs fixing.
+- **No sender in the email step.** Set up your domain first. See [set up your domain](/docs/workflows-next/domain).

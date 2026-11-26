@@ -1,0 +1,49 @@
+---
+title: AI steps
+sidebar: Docs
+showTitle: true
+---
+
+AI steps let an automation look at something and decide, such as what a support message is about, or whether a new signup struggled. The automation waits for the answer, then branches on it.
+
+| Step | What it does |
+| --- | --- |
+| **Classify with AI** | Sorts text, such as a ticket or a survey answer, into categories you pick, with a confidence score. |
+| **Replay Vision** | Watches the person's session recording and answers a question about it. |
+| **Create AI task** | Starts an AI agent with your instructions, repositories, and connectors, then continues with its result. |
+| **Run scout** | Runs a scout, and continues with what it found. |
+
+## Replay Vision
+
+The **Replay Vision** step watches the session behind the trigger. Pick what you want back:
+
+- **Ask a question:** a yes or no answer, such as "Did they get stuck setting up?"
+- **Categorize:** which of your categories fit.
+- **Score:** a number on a scale you set, such as how smooth onboarding was from 1 to 5.
+- **Summarize:** a title, summary, and chapters.
+- **Use a saved scanner:** the answer from a [scanner](/docs/replay-vision/creating-scanners) you already have.
+
+By default it waits for the session to end, then watches the whole thing. Branch on the answer, so you only email the people who struggled.
+
+<!-- shot: automation-replay-vision -->
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_dark_c31893e45c.png"
+  alt="An automation that scores a signup's first session with Replay Vision, then branches on the score"
+  classes="rounded"
+/>
+
+See [Replay Vision in automations](/docs/workflows/replay-vision) for every setting, the limits, and the credits it uses.
+
+## AI tasks
+
+The **Create AI task** step starts an agent with instructions you write, and optional repositories and connectors. Use it to triage a new ticket, reply to an alert in Slack, or open a pull request from a webhook. The automation continues with the agent's result, which can be structured, so later steps branch on it.
+
+See [AI tasks](/docs/workflows/ai-tasks) for the setup, limits, and examples.
+
+## Tips
+
+- **Ask one clear question.** "Did they upload a file?" beats "How did onboarding go?"
+- **Branch on the answer.** An AI step is most useful when the next step depends on it.
+- **Plan for no answer.** Every AI step can fail or come back empty, so give that path somewhere to go.

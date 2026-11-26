@@ -1,0 +1,58 @@
+---
+title: Build your first automation
+sidebar: Docs
+showTitle: true
+---
+
+In about 10 minutes, build an onboarding automation. It welcomes new signups, waits up to 2 days for them to upload their first file, and nudges the ones who don't.
+
+## Before you start
+
+- **Set up your domain**, or use the test sender. See [set up your domain](/docs/workflows-next/domain).
+- **Capture events** for what people do, such as `signed_up` and `uploaded_file`, and identify people with their email. See [installation](/docs/workflows-next/installation#capture-events-from-your-app).
+
+<!-- shot: automation-canvas -->
+
+## 1. Pick the trigger
+
+Open [Workflows](https://app.posthog.com/workflows) and click **New workflow**. Click the trigger step, pick **Event**, and choose `signed_up`.
+
+Under **Frequency**, pick **One time per period**, then **ever**, so each person only gets the welcome series once.
+
+<!-- shot: automation-trigger-event -->
+
+## 2. Send the welcome email
+
+Click **+** under the trigger, and pick **Email**. Pick a sender, write the subject, and write the email in the [email editor](/docs/workflows-next/email-editor). Use `{{ person.properties.first_name | default: 'there' }}` to greet them by name.
+
+## 3. Wait for the first upload
+
+Add a **Wait until** step. Wait for the `uploaded_file` event, for at most 2 days.
+
+The step has two exits: one for people who uploaded, and one for people who hit the time limit.
+
+<!-- shot: automation-wait-until -->
+
+## 4. Nudge the people who didn't
+
+On the time-limit exit, add a second **Email** with a short tip on how to upload a file. Leave the other exit going straight to the end. They've already done it.
+
+## 5. Set the goal
+
+Click the trigger step again. Under **Conversion goal**, pick the `uploaded_file` event. PostHog now counts how many people convert, and you can take people out of the automation once they do.
+
+## 6. Test it
+
+Click **Test**, and run the email step on a sample person. PostHog shows the email it would send, without sending it to anyone. Send a test to your own address to see it in a real inbox.
+
+<!-- shot: automation-test -->
+
+## 7. Turn it on
+
+Click **Save**, then turn the automation on. Nothing sends until you do. From now on, everyone who signs up goes through it.
+
+## What's next
+
+- Watch how it does on the **Overview** tab. See [metrics](/docs/workflows-next/metrics#automations).
+- Let PostHog suggest improvements with [self-driving](/docs/workflows-next/self-driving).
+- Add more steps. See [triggers](/docs/workflows-next/automations/triggers) and [steps](/docs/workflows-next/automations/steps).

@@ -1,0 +1,92 @@
+---
+title: Triggers
+sidebar: Docs
+showTitle: true
+---
+
+The trigger decides who enters an automation, and when. Click the trigger step to pick its type.
+
+<!-- shot: automation-trigger-types -->
+
+## Trigger types
+
+**People**
+
+| Trigger | Starts when |
+| --- | --- |
+| **Event** | Someone does something in your product, such as `signed_up`. Filter it by event, person, or group properties. |
+| **Batch** | You run it, or on a schedule. It runs once for each person in an audience you define, like a broadcast with more steps. |
+| **Survey response** | Someone answers a [survey](/docs/surveys). |
+| **Cohort membership** | Someone joins or leaves a [cohort](/docs/data/cohorts). Rolling out. |
+
+**Systems and schedules**
+
+| Trigger | Starts when |
+| --- | --- |
+| **Schedule** | A time you set, once or on repeat, with no person. Good for AI tasks and reports. |
+| **Webhook** | Your own system sends a request to the automation's URL. |
+| **Manual** | You click **Trigger** in the editor. |
+| **Tracking pixel** | A 1x1 image you embed loads, such as in an email. |
+
+**Tools you already use**
+
+| Trigger | Starts when |
+| --- | --- |
+| **Slack message posted** | Someone posts in a connected Slack channel. |
+| **GitHub activity** | Something happens on a GitHub repository. |
+| **Tickets** | A [support](/docs/support) ticket is created, changes status, is assigned, or gets a message. |
+| **Accounts** | An account's tag, property, or relationship changes. |
+| **Data warehouse** | A row is synced into a [data warehouse](/docs/data-warehouse) table, or a materialized view updates. |
+
+Some of these are still rolling out, so your project might not have them all yet.
+
+## Event triggers
+
+Pick one or more events, and filter them. Turn on **Filter out internal and test users** to skip your own team. The trigger shows how many events matched in the last 7 days, so you can tell how busy it'll be.
+
+<!-- shot: automation-trigger-event -->
+
+## Webhook triggers
+
+PostHog gives the automation its own URL. Send it a request from any system to start a run, and use the request's data in later steps. Pair it with a **Capture event** step to turn outside webhooks into PostHog events.
+
+Send an `Idempotency-Key` header so a retried request doesn't start a second run:
+
+```bash
+curl -X POST "<your-webhook-url>" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: order-1042" \
+  -d '{"order_id": "1042"}'
+```
+
+| Request | Response |
+| --- | --- |
+| First request with a key | `201`, and the run starts |
+| Same key in the next 24 hours | `200`, `duplicate`, and nothing starts |
+| Same key while the first is still starting | `409`. Retry shortly. |
+
+## How often one person can enter
+
+**Frequency** on the trigger:
+
+| Option | What it does |
+| --- | --- |
+| **Every time the trigger fires** | Each event starts a new run. The default. |
+| **One time per period** | Once, then not again until the period ends. Pick from 5 minutes to 365 days, or **ever**. |
+| **Once per calendar day** | At most once a day. |
+
+Use **ever** for a welcome series. Use a short period when the same event can arrive twice, such as a server retry, so nobody gets the email twice.
+
+This is different from the [frequency cap](/docs/workflows-next/sending-rules#frequency-cap), which limits marketing messages across every automation and broadcast.
+
+## Conversion goal and exit
+
+Set a **Conversion goal** on the trigger: an event, such as `subscription_started`, or a person property, such as `plan` is `growth`. PostHog counts conversions on the **Overview** tab, and records a `$workflows_conversion` event you can use in insights.
+
+Then pick when people leave:
+
+- **Exit only once workflow reaches the end**
+- **Exit when conversion goal is met**
+- When they no longer match the trigger's filters, or either one.
+
+Conversions are counted whichever you pick.

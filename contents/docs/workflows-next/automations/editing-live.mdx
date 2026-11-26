@@ -1,0 +1,39 @@
+---
+title: Edit a live automation
+sidebar: Docs
+showTitle: true
+---
+
+You can change an automation while people are in it. Your edits save as a draft, and nothing changes for anyone until you publish.
+
+## Draft and publish
+
+Edit a live automation, and your changes stage as a draft. When you click **Publish**, PostHog shows who is partway through right now, and what happens to them. Each publish adds a version on **History**, so you can see what changed and roll back.
+
+<!-- shot: automation-publish -->
+
+## What happens to people already in it
+
+People in an automation remember which step they're on, not the automation as it was when they started. So:
+
+- **Fixes reach them.** When someone reaches their next step, it runs as it's published now.
+- **Nobody goes back.** A step you add behind someone never runs for them.
+- **Sent is sent.** Emails already sent are never resent or changed.
+
+| You change | People waiting at that step |
+| --- | --- |
+| A delay, shorter | Move on within minutes if they've already waited long enough. |
+| A delay, longer | Keep waiting for the rest of the new time. |
+| A time window or **Wait until** condition | Are checked against the new one within minutes. |
+| An email's content | Get the new version when they reach it. |
+| Delete the step they're waiting in | Move to the next step, or leave if there isn't one. |
+
+A variable from a step you just added is empty for people who were already past it.
+
+<!-- shot: automation-history -->
+
+## Turn it off
+
+Turning an automation off stops new people from entering. People already waiting stay where they are, and are stopped when they reach their next step while it's still off. Turn it back on in time, and they carry on.
+
+To stop them straight away, cancel their runs. See [debug an automation](/docs/workflows-next/automations/debug#stop-runs).
