@@ -32,20 +32,26 @@ When you use an agent to edit email copy, ask it to use the <PrivateLink url="ht
 
 ## Building emails in Workflows
 
-You can build an email in two ways. Both are fine:
+We design all of our emails with the <PrivateLink url="https://us.posthog.com/project/2/skills/posthog-email-maker?owner_id=3301">PostHog Email Maker</PrivateLink> skill from the PostHog skills store. It is how we keep every email in the same style. It knows our layout, title size, colors, link styles, footer, and unsubscribe link, and it checks the email for common bugs.
 
-- **HTML blocks** give you more control, but need more code.
-- **Drag-and-drop blocks** are faster to edit, and need less code.
+To create an email:
 
-The emails in our <PrivateLink url="https://us.posthog.com/project/2/workflows/01a1915c-bcb1-0000-d804-641ff1757a98/workflow">Onboarding 10 workflow</PrivateLink> are the reference for our house style. All designed emails use the same layout, title size, colors, footer, and unsubscribe link. To start a new email, copy one of these templates:
+1. **Write your copy first.** Write the subject, preview text, title, body, and button label yourself. Don't ask AI to write it for you.
+2. **Ask PostHog AI to build the email.** Give it your copy and the image you want, and ask it to use the `posthog-email-maker` skill from the PostHog skills store.
+3. **Choose a build mode.** The skill asks if you want HTML blocks (more control, more code) or drag-and-drop blocks (faster to edit, less code). Both are fine, and both look the same.
+
+The emails in our <PrivateLink url="https://us.posthog.com/project/2/workflows/01a1915c-bcb1-0000-d804-641ff1757a98/workflow">Onboarding 10 workflow</PrivateLink> are the reference for our house style. If you build an email by hand, start from one of these templates:
 
 - <PrivateLink url="https://us.posthog.com/project/2/workflows/library/templates/01a21808-afb6-0000-4cf7-3a906d486bba">Designed email: drag-and-drop</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/workflows/library/templates/01a21808-b07d-0000-e8ac-1ee38513810b">Designed email: HTML</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/workflows/library/templates/01a21808-b125-0000-95db-78b82ab1504f">Plain personal email</PrivateLink>
 
-Use the <PrivateLink url="https://us.posthog.com/project/2/skills/posthog-email-maker?owner_id=3301">PostHog Email Maker</PrivateLink> skill to build or fix an email in this style. It asks which build mode you want, adds the correct footer and unsubscribe link, and checks the email for common bugs. It works great if you just feed it the copy and image you want as raw text!
+A few rules apply to every email:
 
-Every marketing email needs exactly one unsubscribe link and our postal address. This includes plain emails that look like a personal note.
+- **Links:** Make a link bold only when it is the main action or result of the email. Other links, such as docs or background reading, are not bold.
+- **Unsubscribe and address:** Every marketing email needs exactly one unsubscribe link and our postal address. This includes plain emails that look like a personal note.
+
+If you change the skill, add version notes that say what changed and why. We post the notes of each new version in Slack, so the team can see the change.
 
 All new broadcasts and automations should use these defaults:
 
