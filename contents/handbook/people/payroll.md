@@ -8,8 +8,6 @@ You should be able to find answers to most of your payroll questions here. If yo
 
 ## When you get paid
 
-**Employees**
-
 - US (PostHog Inc): paid on the 15th and the last day of the month. You'll find all your payslips in BambooHR.
 - UK (Hiberly Ltd): paid on the last working day of the month. You'll find all your payslips in Sage.
 - Germany (PostHog GmbH): paid on the last working day of the month. You'll find all your payslips in Deel.
