@@ -6135,6 +6135,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/react',
                         },
                         {
+                            name: 'React Router',
+                            url: '/docs/error-tracking/installation/react-router',
+                        },
+                        {
                             name: 'Angular',
                             url: '/docs/error-tracking/installation/angular',
                         },
