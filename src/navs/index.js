@@ -8597,7 +8597,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Attachments and copies',
+                    name: 'Attachments',
                     url: '/docs/workflows-next/transactional/attachments',
                     icon: 'IconDocument',
                     color: 'orange',
