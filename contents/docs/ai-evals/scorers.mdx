@@ -2,7 +2,7 @@
 title: Scorers
 ---
 
-A scorer defines what a result means: its name, value type, and passing rule. A reported scorer records scores that your evaluation code calculates. A composite scorer calculates a score in PostHog from other scores on the same item. For the basics, see [how offline evals work](/docs/ai-evals/offline-evals#how-offline-evals-work).
+A scorer defines what you measure and what counts as a pass. Use item scorers to check individual answers and an [experiment scorer](#score-a-whole-experiment) to compare whole runs.
 
 ## Add more scores
 
@@ -18,7 +18,7 @@ Create scorers with the SDK or in [**Scorers**](https://app.posthog.com/ai-evals
 
 With the SDK, use a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys). Grant `llm_analytics:read` to read scorers and versions or validate a composite formula. Grant `llm_analytics:write` to create or update scorers and publish versions.
 
-For each additional reported score, use the same item and the new scorer's version ID. Call `upload_result()` in Python, `uploadResult()` in TypeScript, or `UploadResult()` in Go. Include all reported and composite results in your expected result count.
+For each additional reported score, use the same item and the new scorer's version ID. Call `upload_result()` in Python, `uploadResult()` in TypeScript, or `UploadResult()` in Go. The expected result count includes all reported and calculated item results.
 
 Use `reasoning` to explain a score. Set `application_trace_id` / `applicationTraceId` on the item to link it to an [AI Observability trace](/docs/ai-observability/traces).
 
@@ -30,7 +30,7 @@ If the evaluator can't produce a score, upload `status="error"` / `status: "erro
 
 ## Combine scores with a composite scorer
 
-A composite scorer combines reported scores for one item into a boolean, numeric, or categorical result.
+An item composite combines reported scores for one item into a boolean, numeric, or categorical result.
 
 For the support-agent example, **Support task passed** requires both **Correct tool** and **Correct arguments** to pass. Three of the six cases pass both checks, giving a 50% pass rate.
 
@@ -384,7 +384,7 @@ Formulas read raw input values. `number(True)` is 1 and `number(False)` is 0, ev
 
 In the UI, the formula editor suggests a formula from the output type and inputs' passing rules. Manual edits stay unchanged when you edit inputs. Click **Use default formula** to restore the suggestion.
 
-You can use arithmetic (`+`, `-`, `*`, `/`), comparisons, `and`, `or`, `not`, conditional expressions, and the `number`, `min`, `max`, and `abs` functions. Each formula can reference up to 16 reported scorer versions. Every selected input must appear in the formula. Composite scorers can't use other composites as inputs or combine results across different items.
+You can use arithmetic (`+`, `-`, `*`, `/`), comparisons, `and`, `or`, `not`, conditional expressions, and the `number`, `min`, `max`, and `abs` functions. Each item formula can reference up to 16 reported scorer versions. Every selected input must appear in the formula.
 
 ### Handle missing inputs and calculation errors
 
@@ -393,3 +393,99 @@ If a pinned input result is missing, PostHog rejects the entire upload request. 
 If an input has status `error`, `skipped`, or `not_applicable`, the composite inherits that status without a value. If several statuses apply, the order is `error`, then `skipped`, then `not_applicable`. Input errors use the code `composite_input_error`.
 
 A calculation error, such as division by zero or a value outside the composite's configured bounds, produces an `error` result with code `composite_formula_error`. Valid reported inputs in the same request are still saved. These errors don't enter the composite's mean or pass rate.
+
+## Score a whole experiment
+
+Suppose you're comparing two versions of the [quickstart's support agent](/docs/ai-evals/offline-evals#run-your-first-experiment). Choosing the right tool matters, but calling it with the wrong order ID could refund the wrong customer. You can give **Correct arguments** 60 points and **Correct tool** 40 points, then compare runs on a 100-point scale.
+
+1. Open **Support agent baseline** in [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments) and click **Set up experiment score**.
+2. Name the scorer **Support quality**. Choose a numeric result from 0 to 100. Add **Correct arguments** and **Correct tool** as inputs, select **Pass rate** for each, and give them the formula names `args` and `tool`.
+3. Enter `60 * args + 40 * tool` and click **Preview on this experiment**. Four of six cases passed the argument check and five passed the tool check, so the score is about **73 out of 100**.
+4. Under **Apply to suite keys**, select `support-agent` and save. Run the quickstart again. PostHog now scores completed runs for that suite in this environment. Your script still uploads twelve item results.
+
+### Choose what goes into the score
+
+Each input uses results from an item scorer, including an item composite. Only results with status `ok` count, whether the check passed or failed. Rates range from 0 to 1.
+
+| Statistic | What it measures |
+| --- | --- |
+| `pass_rate` | Fraction that passed the scorer's passing rule. |
+| `mean` | Average value of a numeric scorer. |
+| `true_rate` | Fraction of boolean results that were `true`, even if `true` means failure. |
+| `category_rate` | Fraction of categorical results containing the category you select. |
+
+By default, each input uses the one scorer version that produced scores in that run (`run`). If several versions produced scores, choose **Exact version** (`exact`) to use just one, or **Combine versions** (`combine`) to pool their scored items. If two versions scored the same item, PostHog leaves the pooled score blank.
+
+<details>
+<summary>Set up the same scorer with the SDK</summary>
+
+These examples require the experiment scorer API for [Python](https://github.com/PostHog/posthog-python/pull/1313), [TypeScript](https://github.com/PostHog/posthog-js/pull/5906), or [Go](https://github.com/PostHog/posthog-go/pull/483). If your SDK doesn't have it yet, use the setup in PostHog above.
+
+Run this once, after looking up the two item scorers as in the quickstart.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+quality = evaluations.scorers.create(
+    name="Support quality",
+    scope="experiment",
+    kind="numeric",
+    config={"min": 0, "max": 100},
+    calculation="composite",
+    composition={
+        "expression": "60 * args + 40 * tool",
+        "inputs": [
+            {"alias": "args", "scorer_version_id": scorers["arguments"].current_version_id, "statistic": "pass_rate"},
+            {"alias": "tool", "scorer_version_id": scorers["tool"].current_version_id, "statistic": "pass_rate"},
+        ],
+    },
+    apply_to_suite_keys=["support-agent"],
+)
+```
+
+```typescript file=TypeScript
+const quality = await evaluations.scorers.create({
+    name: "Support quality",
+    scope: "experiment",
+    kind: "numeric",
+    config: { min: 0, max: 100 },
+    calculation: "composite",
+    composition: {
+        expression: "60 * args + 40 * tool",
+        inputs: [
+            { alias: "args", scorerVersionId: scorers.arguments.currentVersionId, statistic: "pass_rate" },
+            { alias: "tool", scorerVersionId: scorers.tool.currentVersionId, statistic: "pass_rate" },
+        ],
+    },
+    applyToSuiteKeys: ["support-agent"],
+})
+```
+
+```go file=Go
+quality, err := client.Scorers.Create(ctx, "Support quality",
+	evaluations.NumericConfig{Min: evaluations.Value(0.0), Max: evaluations.Value(100.0)},
+	evaluations.CreateScorerOptions{
+		Scope: "experiment", Calculation: "composite", ApplyToSuiteKeys: []string{"support-agent"},
+		Composition: &evaluations.Composition{
+			Expression: "60 * args + 40 * tool",
+			Inputs: []evaluations.CompositionInput{
+				{Alias: "args", ScorerVersionID: versions["arguments_correct"], Statistic: "pass_rate"},
+				{Alias: "tool", ScorerVersionID: versions["tool_correct"], Statistic: "pass_rate"},
+			},
+		},
+	})
+if err != nil {
+	return err
+}
+fmt.Println(quality.CurrentVersionID)
+```
+
+</MultiLanguage>
+
+To use this formula for one run regardless of the suite default, pass its version ID when you create the experiment.
+
+| Python | TypeScript | Go (`evaluations.Fields`) |
+| --- | --- | --- |
+| `experiment_scorer_version_id=quality.current_version_id` | `experimentScorerVersionId: quality.currentVersionId` | `"experiment_scorer_version_id": quality.CurrentVersionID` |
+
+</details>
