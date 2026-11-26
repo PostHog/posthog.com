@@ -8,18 +8,16 @@ You should be able to find answers to most of your payroll questions here. If yo
 
 ## When you get paid
 
-**Employees**
-
 - US (PostHog Inc): paid on the 15th and the last day of the month. You'll find all your payslips in BambooHR.
 - UK (Hiberly Ltd): paid on the last working day of the month. You'll find all your payslips in Sage.
 - Germany (PostHog GmbH): paid on the last working day of the month. You'll find all your payslips in Deel.
 
-**Employed through Deel (EOR)**
+**Deel (EOR)**
 
 - Paid on the last working day of the month. You'll find all your payslips in Deel.
 - Canada is the exception: you're paid every two weeks.
 
-**Contractors**
+**Deel Contractors**
 
 - Paid monthly through your Deel invoice.
 
@@ -29,8 +27,8 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 
 - Pay review changes take effect from the 1st of the month after your review. See [pay reviews](/handbook/people/compensation#pay-reviews).
 - Any change needs to reach payroll before that month's cutoff. If it misses the cutoff, it will be paid in the next payroll and backdated.
-- If you're employed through Deel or you're a contractor, you need to sign the pay change in Deel before it can be applied.
-
+- If you're under EOR or you're a contractor, you need to sign the pay change in Deel before it can be applied.
+- 
 ## Your first payroll
 
 - Complete all your onboarding tasks in Deel (and BambooHR if you're in the US) during your first week. If anything is missing, you may not be included in your first payroll.
@@ -46,7 +44,7 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 **Bank details**
 
 - Germany, EOR or contractor: update them in Deel.
-- UK: send them to [@Milagros](https://posthog.slack.com/team/U0B4W74LN83) through a 1Password share link.
+- UK: send them to <PrivateLink url="https://posthog.slack.com/team/U0B4W74LN83">@Milagros</PrivateLink> through a 1Password share link.
 - US: update them in BambooHR.
 
 We'll never ask you to change your bank details through an email link or a message from someone you don't know. If you get a request like this, check with us in Slack first.
@@ -58,7 +56,7 @@ We'll never ask you to change your bank details through an email link or a messa
 
 **Moving**
 
-- If you're moving to another state or country, tell us before you move. It can change your taxes or the entity that employs you.
+- If you're moving to another state or country, tell us before you move. It can change your taxes or the entity you're in.
 
 
 ## Retirement contributions
@@ -83,7 +81,7 @@ If none of these explain it, ask us.
 - UK: your P60 and P45 are in Sage.
 - Germany and EOR: your tax documents are in Deel.
 
-For an employment verification letter, request it in Deel if you're employed through Deel or in Germany. Otherwise, ask us.
+For an employment verification letter, request it in Deel if you're under EOR. Otherwise, ask us.
 
 ## If something looks wrong
 
@@ -92,4 +90,4 @@ Tell us as soon as you notice and we'll look into it. If you were underpaid, we'
 ## Questions
 
 - For anything that isn't confidential, post in the #team-people-and-ops Slack channel.
-- For anything sensitive about your pay, DM [@Milagros](https://posthog.slack.com/team/U0B4W74LN83).
+- For anything sensitive about your pay, DM <PrivateLink url="https://posthog.slack.com/team/U0B4W74LN83">@Milagros</PrivateLink>.
