@@ -18,6 +18,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 - Accounts come from a few places (listed by priority): CSMs can offload accounts if they're overloaded, product-led sales and new business sales can have accounts waiting for a CSM handover, and Simon frequently pulls net-new accounts - ask all groups to see what needs coverage. 
 - Tee up ~20 accounts so they're not at capacity immediately - it also leaves room for late handovers. 
 - Follow the [capacity model](/handbook/customer-success/how-we-work), and bonus points if accounts can line up with their previous experience.
+- Assign the book about 3 days before the in-person week. Getting it the same week is overwhelming, and 5 days is too long to go without feedback before bad habits set in.
 
 **Book the 1:1s:** Welcome 1:1 on day 1, a recurring 1:1, and (optionally) an extended 1:1 every 4 weeks.
 
@@ -65,7 +66,7 @@ Onboarding
       - [CSM + TAM](https://posthog.com/handbook/growth/sales/account-allocation)
       - [Contract rules](https://posthog.com/handbook/growth/sales/contract-rules)
 - Work through your onboarding plan - make sure to prioritize Drata
-- Practice your demo
+- Prepare your PostHog demo for the in-person onboarding (30 minutes, you set the context!)
 - The plan for onboarding week
 How we work
 - Sprint planning issue on GitHub
@@ -91,9 +92,11 @@ By the end of the week they should:
 - Know where to find answers and how to verify them
 - Have their own Customer Analytics views set up, and a first outreach drafted - maybe even sent! 
  
-Sessions tend to work best as observe, do, review - you do it once, they try it on their own, and you give feedback.
+Sessions tend to work best as observe, do, review. For account investigations, often the most useful part of the week for a new CSM, show them the tools and how to form a hypothesis, let them dig into an account on their own, then investigate the same account together to sense-check and refine their approach.
 
 ### Topics to cover
+
+Teach everything through their own accounts rather than in theory. Contracts through one of their contracts, outreach by drafting a real first message, investigations on their book. Most of day 2 already works this way, so anchor the context and optional sessions to an account too.
 
 #### Context (day 1)
 
@@ -117,6 +120,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 - **Prioritizing a book** - the signals we look at and which ones are more worrisome, both when a book is first assigned and on an ongoing basis. Have them set up their own Customer Analytics views
 - **Deciding next steps** - by now they should have a read on where each account's at (or know how to find out). Use next steps that haven't come up yet as chances to talk them through - e.g. a new Slack channel (invite you + support-hog), an upcoming renewal (how renewals work)
+- **Alerts and how to respond** - go through every alert and task the team gets and what the right response to each one is: the renewal pings in #sales-alerts, the spike detector, the Customer Analytics tasks from the [managed customer scouts](/handbook/customer-success/how-we-use-automation#managed-customer-scouts), overdue invoice and credit alerts, and tags like `churn risk`
 
 #### Throughout the week
 
@@ -129,8 +133,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 - **PostHog fundamentals** - a walkthrough, depending on their familiarity with the product
 - **Working with support** - how tickets flow, [handling customer issues](/handbook/customer-success/handling-customer-issues)
 - **Quarterly goal brainstorm** - useful when they join near the start of a quarter
-- **Billing mechanics** - billing-limit grace periods and trust scores, giving credits, chasing overdue invoices, the spike detector
-- **Customer Analytics mechanics** - tags like `churn risk`, the renewal alerts in #sales-alerts
+- **Billing mechanics** - billing-limit grace periods and trust scores, giving credits, chasing overdue invoices
 
 ## First month
 
