@@ -101,12 +101,14 @@ function brandLogo(brand: string | undefined): React.ReactElement {
     return <IconApps className="size-4 shrink-0 text-secondary" aria-hidden="true" />
 }
 
+export function modelLab(key: string): string | undefined {
+    const model = key.toLowerCase().split('/').pop() ?? ''
+    return modelFamilies.find(([pattern]) => pattern.test(model))?.[1]
+}
+
 export function rowLogo(section: string, key: string): React.ReactElement | null {
     if (section === 'provider_diversity') return null
-    if (section === 'model') {
-        const model = key.toLowerCase().split('/').pop() ?? ''
-        return brandLogo(modelFamilies.find(([pattern]) => pattern.test(model))?.[1])
-    }
+    if (section === 'model') return brandLogo(modelLab(key))
     if (section === 'framework') {
         const tile = frameworkTiles[key] ?? 'bg-accent'
         return (

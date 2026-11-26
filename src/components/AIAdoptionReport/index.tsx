@@ -3,17 +3,19 @@ import { colors } from '@posthog/brand/colors'
 import { HedgehogRobot } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 import { IconCheck, IconLlmAnalytics } from '@posthog/icons'
-import { DefaultTooltip } from '@posthog/quill-charts'
+import { DefaultTooltip, useChartLayout } from '@posthog/quill-charts'
+import type { TooltipContext } from '@posthog/quill-charts'
+import { labColor, labShades } from 'components/MCPLeaderboard/data'
+import { useAppSettings } from '../../context/App'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import OSButton from 'components/OSButton'
 import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import Stickers from 'components/Stickers/Index'
 import { StickerAi, StickerCrown, StickerRobot, StickerServers } from 'components/Stickers/Stickers'
 import { Accordion } from 'components/UI/Accordion'
 import { BarChart, LineChart, Sparkline } from 'components/UI/Chart'
 import { Table } from 'components/UI/Table'
-import { rowLogo } from './rowLogo'
+import { modelLab, rowLogo } from './rowLogo'
 
 const sections = {
     model: {
@@ -93,18 +95,81 @@ const previousMonth = (month: string) =>
     new Date(Date.UTC(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 2, 1)).toISOString().slice(0, 10)
 const percent = (share: number | null | undefined) =>
     share != null && Number.isFinite(share) ? `${share.toFixed(1)}%` : '—'
+function percentagePointChange(current: number | null | undefined, prior: number | null | undefined): string | null {
+    if (current == null || prior == null || !Number.isFinite(current) || !Number.isFinite(prior)) return null
+    const change = Number((current - prior).toFixed(1))
+    return `${change > 0 ? '+' : ''}${change.toFixed(1)} pp`
+}
+
+function shareWithChange(value: number, change?: string | null) {
+    return change ? `${percent(value)} (${change})` : percent(value)
+}
+
 const chartConfig = {
     legend: { show: true },
     yTickFormatter: (v: number) => `${v}%`,
-    tooltip: { valueFormatter: percent },
 }
 const modelChartLimit = 15
-// Extend the site's 12-color palette through the optional comparison line.
-const extraLineColors: Partial<Record<number, string>> = {
-    13: colors.purple.darker,
-    14: colors.blue.darker,
-    15: colors.tangerine.lighter,
-    16: colors.lemon.darker,
+const mainLabs = new Set(['anthropic', 'openai', 'google', 'xai'])
+const otherLabColors = [
+    colors.purple.core,
+    colors.coral.core,
+    colors.lime.core,
+    colors.violet.core,
+    colors.tangerine.core,
+]
+
+// The monthly values belong in the tooltip. Hit-test the line between those months at the pointer's x.
+function SeriesTooltip({
+    point,
+    stacked,
+    onFocus,
+    changes,
+}: {
+    point: TooltipContext
+    stacked: boolean
+    onFocus: (key: string | null) => void
+    changes: Map<string, (string | null)[]>
+}) {
+    const { scales, labels } = useChartLayout()
+    const { dataIndex, hoverPosition, position, seriesData } = point
+    let focused = point.hoveredSeriesKey ?? null
+    if (!stacked && hoverPosition) {
+        const adjacent = dataIndex + (hoverPosition.x < position.x ? -1 : 1)
+        const nextX = scales.x(labels[adjacent])
+        let closest = 8 // Hit tolerance in CSS pixels.
+        for (const { series, yPixel } of seriesData) {
+            if (yPixel == null) continue
+            let distance = Math.hypot(hoverPosition.x - position.x, hoverPosition.y - yPixel)
+            if (nextX != null && nextX !== position.x && Number.isFinite(series.data[adjacent])) {
+                const dx = nextX - position.x
+                const dy = scales.y(series.data[adjacent]) - yPixel
+                const t = Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        ((hoverPosition.x - position.x) * dx + (hoverPosition.y - yPixel) * dy) / (dx * dx + dy * dy)
+                    )
+                )
+                distance = Math.hypot(hoverPosition.x - position.x - t * dx, hoverPosition.y - yPixel - t * dy)
+            }
+            if (distance <= closest) {
+                closest = distance
+                focused = series.key
+            }
+        }
+    }
+    React.useEffect(() => {
+        onFocus(focused)
+        return () => onFocus(null)
+    }, [focused, onFocus])
+    return (
+        <DefaultTooltip
+            {...point}
+            seriesData={focused ? seriesData.filter(({ series }) => series.key === focused) : seriesData}
+            valueFormatter={(value, { series }) => shareWithChange(value, changes.get(series.key)?.[dataIndex])}
+        />
+    )
 }
 
 function ReportSection({
@@ -119,19 +184,29 @@ function ReportSection({
     const [showAll, setShowAll] = useState(false)
     const [expanded, setExpanded] = useState('')
     const month = history[history.length - 1]
-    const previous = month && previousMonth(month)
+    const [focused, setFocused] = useState<string | null>(null)
+    const { siteSettings } = useAppSettings()
+    const theme = siteSettings.theme === 'dark' ? 'dark' : 'light'
     const { question, sticker: Sticker, heading, plural, caption } = sections[section]
     const rows = series
-        .filter((row) => row.facet === section && row.label !== 'Other models' && row.label !== 'Not reported')
+        .filter(
+            (row) =>
+                row.facet === section &&
+                row.label !== 'Other models' &&
+                row.label !== 'Not reported' &&
+                row.points.some(({ month: date }) => date >= history[0] && date <= month)
+        )
         .map((row) => {
             const values = new Map(row.points.map((point) => [point.month, point.share]))
             const share = values.get(month)
-            const prior = values.get(previous)
+            const changes = history.map((date) =>
+                percentagePointChange(values.get(date), values.get(previousMonth(date)))
+            )
             return {
                 key: row.label,
                 label: displayNames[row.label] ?? row.label,
                 share,
-                change: share == null || prior == null ? null : Number((share - prior).toFixed(1)),
+                changes,
                 data: history.map((value) => values.get(value) ?? NaN),
             }
         })
@@ -143,6 +218,34 @@ function ReportSection({
     const chartRows = rows.filter((row) => row.share != null).slice(0, section === 'model' ? modelChartLimit : 5)
     const expandedRow = rows.find((row) => row.key === expanded)
     if (expandedRow && !chartRows.includes(expandedRow)) chartRows.push(expandedRow)
+    const vendors = chartRows.flatMap(({ key }) => {
+        const lab = section === 'model' ? modelLab(key) : section === 'lab' ? key : undefined
+        return lab && mainLabs.has(lab) ? [{ label: key, vendor: displayNames[lab] }] : []
+    })
+    const palette =
+        section === 'model'
+            ? labShades(vendors, theme)
+            : new Map(vendors.map(({ label, vendor }) => [label, labColor(vendor, theme)]))
+    let fallback = 0
+    const chartSeries = chartRows.map((row) => {
+        const color =
+            palette.get(row.key) ??
+            (section === 'model' || section === 'lab' ? otherLabColors[fallback++ % otherLabColors.length] : undefined)
+        return {
+            ...row,
+            color: focused && focused !== row.key ? 'rgba(128, 128, 128, 0.4)' : color,
+            points: history.length === 1 ? { radius: 4 } : undefined,
+        }
+    })
+    const changes = new Map(chartRows.map((row) => [row.key, row.changes]))
+    const tooltip = (point: TooltipContext) => (
+        <SeriesTooltip
+            point={point}
+            stacked={section === 'provider_diversity'}
+            onFocus={setFocused}
+            changes={changes}
+        />
+    )
     const dates = history.map((value) => monthName(value))
 
     return (
@@ -171,7 +274,8 @@ function ReportSection({
                         <BarChart
                             className="h-64"
                             labels={dates}
-                            series={chartRows}
+                            series={chartSeries}
+                            tooltip={tooltip}
                             config={{
                                 ...chartConfig,
                                 barLayout: 'stacked',
@@ -182,12 +286,9 @@ function ReportSection({
                         <LineChart
                             className={section === 'model' ? 'h-[28rem] @md:h-96' : 'h-64'}
                             labels={dates}
-                            series={chartRows.map((row, index) => ({
-                                ...row,
-                                color: extraLineColors[index + 1],
-                                points: history.length === 1 ? { radius: 4 } : undefined,
-                            }))}
-                            config={chartConfig}
+                            series={chartSeries}
+                            tooltip={tooltip}
+                            config={{ ...chartConfig, curve: 'linear' }}
                         />
                     )}
                 </figure>
@@ -232,22 +333,22 @@ function ReportSection({
                                         <Sparkline
                                             className="hidden max-w-24 @md:flex"
                                             data={row.data}
-                                            height={24}
+                                            height={38}
                                             labels={dates}
                                             tooltip={(point) => (
                                                 <DefaultTooltip
                                                     {...point}
                                                     labelRenderer={() => row.label}
-                                                    valueFormatter={percent}
+                                                    valueFormatter={(value) =>
+                                                        shareWithChange(value, row.changes[point.dataIndex])
+                                                    }
                                                 />
                                             )}
                                         />
                                     </Table.Cell>
                                     <Table.Cell align="end">{percent(row.share)}</Table.Cell>
                                     <Table.Cell align="end" className="whitespace-nowrap">
-                                        {row.change === null
-                                            ? '—'
-                                            : `${row.change > 0 ? '+' : ''}${row.change.toFixed(1)} pp`}
+                                        {row.changes[row.changes.length - 1] ?? '—'}
                                     </Table.Cell>
                                 </Table.Row>
                                 {expanded === row.key && (
@@ -286,21 +387,24 @@ function ReportSection({
     )
 }
 
-function describeMonths(months: string[]): string {
-    const labels = months.map((value) => monthName(value, longDateFormat))
-    if (labels.length < 2) return labels[0] ?? ''
-    const last = labels.pop()
-    if (months.every((value, i) => i === 0 || previousMonth(value) === months[i - 1])) {
-        return `${labels[0]} through ${last}`
+function reportMonths(series: AdoptionSeries[]): string[] {
+    const months = series.flatMap((row) => row.points.map((point) => point.month)).sort()
+    const history: string[] = []
+    for (
+        let month = months[months.length - 1];
+        month && month >= months[0] && history.length < 12;
+        month = previousMonth(month)
+    ) {
+        history.unshift(month)
     }
-    return `${labels.join(', ')}${labels.length > 1 ? ',' : ''} and ${last}`
+    return history
 }
 
 const reportQuestions = (period: string) => [
     {
         question: 'Which months does the report cover?',
         answer: period
-            ? `The report covers ${period}. We use complete calendar months in UTC and refresh the data when we rebuild this site.`
+            ? `The charts show up to 12 complete calendar months in UTC, covering ${period}. We refresh the data when we rebuild this site.`
             : 'No monthly data is available yet.',
     },
     {
@@ -309,11 +413,11 @@ const reportQuestions = (period: string) => [
     },
     {
         question: 'Which models, labs, and tools appear on the line charts?',
-        answer: `The model chart follows the ${modelChartLimit} models with the highest shares in the selected month. The lab and tool charts each follow the top five. Select another name in a table to add its line.`,
+        answer: `The model chart follows the ${modelChartLimit} models with the highest shares in the latest month. The lab and tool charts each follow the top five. Select another name in a table to add its line.`,
     },
     {
-        question: 'What does “pp” mean in the Change column?',
-        answer: 'It stands for percentage points. If a model’s share rises from 10% in one month to 12% the next, the table shows +2.0 pp. A dash means we don’t have enough data to compare the two months.',
+        question: 'What does “pp” mean?',
+        answer: 'It stands for percentage points. If a model’s share rises from 10% in one month to 12% the next, the change is +2.0 pp. A dash means we don’t have enough data to compare the two months.',
     },
 ]
 
@@ -328,6 +432,9 @@ function AIObservabilityAd() {
     return (
         <aside aria-label="AI observability" className="not-prose mb-8">
             <div className="relative border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6 @2xl/reader-content:grid @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @2xl/reader-content:gap-2">
+                <span className="block w-fit ml-auto mb-3 @2xl/reader-content:mb-0 @2xl/reader-content:absolute @2xl/reader-content:top-3 @2xl/reader-content:right-3 text-[11px] font-semibold uppercase tracking-wide text-muted border border-primary rounded px-1.5 py-px">
+                    Yes, sorry, this is an ad
+                </span>
                 <div className="min-w-0">
                     <div className="flex items-center gap-2 text-blue mb-2">
                         <IconLlmAnalytics className="size-6" />
@@ -367,10 +474,12 @@ function AIObservabilityAd() {
 }
 
 export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] }): JSX.Element {
-    const months = Array.from(new Set(series.flatMap((row) => row.points.map((point) => point.month)))).sort()
-    const [selected, setSelected] = useState('')
-    const month = months.includes(selected) ? selected : months[months.length - 1]
-    const history = months.filter((value) => value <= month)
+    const history = reportMonths(series)
+    const month = history[history.length - 1]
+    const period =
+        history.length > 1
+            ? `${monthName(history[0], longDateFormat)} through ${monthName(month, longDateFormat)}`
+            : month && monthName(month, longDateFormat)
 
     return (
         <article className="@container mx-auto max-w-4xl text-primary">
@@ -394,7 +503,7 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     <Stickers
                         name="StickerTrophy"
                         label="1"
-                        className="inline-block size-12 ml-2 align-middle rotate-6"
+                        className="inline-block size-12 ml-2 align-middle rotate-6 [&_text]:-translate-x-[1.5px]"
                     />
                 </h1>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
@@ -412,26 +521,13 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                 </p>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
                     This page looks at organizations that sent at least 100 AI generation or embedding events to PostHog
-                    Cloud in the selected month. An organization that sends a million events counts just as much as one
-                    that sends 100.
+                    Cloud in a given month. An organization that sends a million events counts just as much as one that
+                    sends 100.
                 </p>
             </header>
             {month ? (
                 <>
-                    <div className="not-prose my-5 flex flex-col items-start gap-2 @md:flex-row @md:items-center @lg:mx-4">
-                        <span className="shrink-0 text-sm font-semibold">Report month</span>
-                        {/* Scroll the months sideways on narrow screens instead of wrapping them. */}
-                        <ToggleGroup
-                            title="Report month"
-                            hideTitle
-                            size="sm"
-                            className="w-fit max-w-full overflow-x-auto [scrollbar-width:none] [&>*]:whitespace-nowrap [&>*]:px-2"
-                            value={month}
-                            onValueChange={setSelected}
-                            // String labels, so each item's accessible name is the month, not its date key.
-                            options={months.map((value) => ({ label: monthName(value), value }))}
-                        />
-                    </div>
+                    <p className="my-5 text-sm font-semibold">Latest rankings · {monthName(month, longDateFormat)}</p>
                     {(Object.keys(sections) as Section[]).map((section) => (
                         <ReportSection key={section} section={section} series={series} history={history} />
                     ))}
@@ -447,7 +543,7 @@ export default function AIAdoptionReport({ series }: { series: AdoptionSeries[] 
                     Frequently asked questions
                 </h2>
                 <Accordion.Root>
-                    {reportQuestions(describeMonths(months)).map(({ question, answer }) => (
+                    {reportQuestions(period).map(({ question, answer }) => (
                         <Accordion.Item key={question} value={question}>
                             <Accordion.Header>
                                 <Accordion.Trigger>{question}</Accordion.Trigger>
