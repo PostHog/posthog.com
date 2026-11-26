@@ -768,8 +768,6 @@ export default function TeamPage(props: TeamPageProps) {
                                     </Fieldset>
                                 </div>
 
-                                <TeamFeatures teamSlug={slug} />
-
                                 <SpiritAnimal
                                     spiritAnimal={values.spiritAnimal}
                                     editing={editing}
@@ -812,6 +810,8 @@ export default function TeamPage(props: TeamPageProps) {
                             />
                         )}
                     </div>
+
+                    <TeamFeatures teamSlug={slug} className="col-span-2" />
                 </div>
 
                 <Fieldset legend="Members">
