@@ -3599,8 +3599,8 @@ export const docsMenu = {
                             url: '/docs/api/scopes',
                         },
                         {
-                            name: 'Deprecation of @current',
-                            url: '/docs/api/current-alias-deprecation',
+                            name: 'Removing state-dependent requests',
+                            url: '/docs/api/state-dependent-requests',
                         },
                         {
                             name: 'Terraform provider',
