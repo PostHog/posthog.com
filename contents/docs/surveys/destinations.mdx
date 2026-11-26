@@ -27,7 +27,18 @@ Intermediate `survey sent` events from partial responses (`$survey_completed: fa
 
 For Slack notifications, you can also include buttons to view the survey and the respondent's person profile.
 
-After creating a notification, you can open it from the notifications list to use the full [Hog function](/docs/data-pipelines/destinations) editor for deeper customization.
+After creating a notification, open it from the notifications list to:
+
+- Click **Send test** and choose **With sample data** or **With last response** to send a live test payload and inspect the status banner and logs.
+- Edit the underlying [Hog function](/docs/data-pipelines/destinations) directly for custom headers, payloads, or extra filters.
+
+## Trigger a survey from a workflow
+
+To show an in-app survey in response to an automated workflow (for example after a backend event or cohort transition):
+
+1. Open [Workflows](/docs/workflows) and add a **Show survey** step.
+2. Select a launched in-app survey whose targeting includes the workflow condition (so PostHog sets `$survey_triggered/<survey-id>: true` on the person from the triggering event's `distinct_id`).
+3. When the workflow runs, PostHog shows the survey on that user's next active SDK session.
 
 ## Use data pipeline destinations
 
