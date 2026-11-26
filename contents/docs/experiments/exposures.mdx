@@ -102,6 +102,12 @@ For example, if your flag key is "new-checkout" and you're using a custom "viewe
 
 </CalloutBox>
 
+<CalloutBox icon="IconWarning" title="The flag property isn't proof of exposure" type="caution">
+
+PostHog's client-side SDKs attach `$feature/<flag-key>` to every event for each flag they've loaded successfully, whether or not your code read the flag. The property shows the SDK loaded the flag, not that the person saw the variant. If you fire a custom exposure event, send it only where the variant is shown. Confirm that your code calls `getFeatureFlag()`, or its framework equivalent, for the experiment's flag.
+
+</CalloutBox>
+
 ### Exposing users on a specific page
 
 If your code reads the flag only on the target page, the default exposure already works. The SDK sends `$feature_flag_called` from that page. If other pages also read the flag, a user's first read can happen elsewhere, so use a `$pageview` exposure instead.
