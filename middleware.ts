@@ -218,9 +218,33 @@ async function mcpServerHint(request: Request): Promise<Response> {
 async function mcpMessageId(request: Request): Promise<string | number | null> {
     const length = Number(request.headers.get('content-length'))
     if (!length || length > MCP_MESSAGE_MAX_BYTES) return null
-    const message = await request.json().catch(() => null)
+    const message = await readJsonUpTo(request, MCP_MESSAGE_MAX_BYTES)
     const id = message && typeof message === 'object' && 'id' in message ? message.id : null
     return typeof id === 'string' || typeof id === 'number' ? id : null
+}
+
+// The content-length header is the sender's claim, so the limit is also enforced on the bytes read.
+async function readJsonUpTo(request: Request, maxBytes: number): Promise<unknown> {
+    if (!request.body) return null
+    const reader = request.body.getReader()
+    const decoder = new TextDecoder()
+    let text = ''
+    let received = 0
+    try {
+        for (;;) {
+            const { done, value } = await reader.read()
+            if (done) break
+            received += value.byteLength
+            if (received > maxBytes) {
+                await reader.cancel()
+                return null
+            }
+            text += decoder.decode(value, { stream: true })
+        }
+        return JSON.parse(text + decoder.decode())
+    } catch {
+        return null
+    }
 }
 
 // The path and query, with the value of every query parameter outside the allowlist replaced by

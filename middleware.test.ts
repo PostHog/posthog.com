@@ -127,6 +127,11 @@ test('echoes only a JSON-RPC id it read from a small body', async () => {
         ['boolean id', mcpPost(page, initialize(true)), null],
         ['body over 64 KB', mcpPost(page, initialize(1, 'x'.repeat(64 * 1024))), null],
         [
+            'body over 64 KB with a small content-length',
+            mcpPost(page, initialize(1, 'x'.repeat(64 * 1024)), { 'content-length': '100' }),
+            null,
+        ],
+        [
             'no content-length',
             new Request(page, { method: 'POST', headers: mcpClientHeaders, body: initialize(1) }),
             null,
