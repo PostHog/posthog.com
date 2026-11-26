@@ -2,46 +2,48 @@
 title: Initial setup
 ---
 
-There are two ways to set up surveys:
+You can set up surveys as a pre-built in-app popover or with your own custom UI (`type: "api"`).
 
-1. Get started quickly with a pre-built survey
-1. Create your own UI components
+## Option 1: Pre-built survey
 
-## Option 1 (recommended): Pre-built survey
-
-1. Turn on the **Enable surveys** switch in your [project survey settings](https://app.posthog.com/settings/project-surveys) (this sets `surveys_opt_in` on your project).
-
-2. Install and initialize `posthog-js` (or add the [JavaScript snippet](/docs/getting-started/install#frameworks-and-languages)) without `disable_surveys: true`:
+1. Turn on **Enable surveys** in [project survey settings](https://app.posthog.com/settings/project-surveys) (sets `surveys_opt_in: true` on the project).
+2. Initialize `posthog-js` (or add the [JavaScript snippet](/docs/getting-started/install)) without `disable_surveys: true`:
 
 ```js-web
 posthog.init("<ph_project_token>", {
-    "api_host": "<ph_client_api_host>"
+    api_host: "<ph_client_api_host>",
+    // Optional: set opt_out_useragent_filter: true in headless browser tests (Playwright/Puppeteer)
 })
 ```
 
-3. That's it! Now you can go [create a survey in PostHog](https://app.posthog.com/surveys).
+3. Create and launch a survey in [Surveys](https://app.posthog.com/surveys).
 
-## Option 2: Custom UI components
+## Option 2: Custom UI (`type: "api"`)
 
-1. Make sure you're up to date on PostHog's [JavaScript web library](/docs/libraries/js). Surveys requires version 1.67.1, or later.
-
-2. After creating your survey on PostHog app, call `posthog.getSurveys()` and get a list of all surveys back if you wish to do your own matching, or `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
-
-2.5. Make sure you filter for surveys that are of the type "api".
+1. Enable `surveys_opt_in` in project settings and initialize `posthog-js >= 1.232.7` for `onSurveysLoaded` (`>= 1.249.2` for automatic seen-state tracking, `>= 1.435.0` for `onActiveMatchingSurveysChanged`). Set `opt_out_useragent_filter: true` in automated headless browsers so bot filtering doesn't drop events.
+2. Wait for surveys and feature flags before reading matches. Do **not** call `getActiveMatchingSurveys()` directly inside `posthog.init`'s `loaded` callback (the surveys module finishes initializing after `loaded`). Subscribe with `onActiveMatchingSurveysChanged` or nest inside `onSurveysLoaded` / `onFeatureFlags`, and filter for `survey.type === 'api'`:
 
 ```js-web
-posthog.getActiveMatchingSurveys((surveys) => {
-    // do something with surveys
-    // handleSurveys(surveys.filter(survey => survey.type === 'api'))
+posthog.onFeatureFlags(() => {
+    posthog.onSurveysLoaded(() => {
+        posthog.getActiveMatchingSurveys((surveys) => {
+            const apiSurveys = surveys.filter((survey) => survey.type === 'api')
+            handleSurveys(apiSurveys)
+        })
+    })
 })
 ```
 
-> **Note:** When you capture `survey sent` or `survey dismissed` with `posthog-js`, the SDK marks the survey as seen so it doesn't show again. Include `$survey_iteration: survey.current_iteration` in each event. See [mark a survey as seen](/docs/surveys/implementing-custom-surveys#mark-a-survey-as-seen) if you capture these events another way.
-> **Note:** If you're using a URL or selector targeting option, you'll need to poll with `posthog.getActiveMatchingSurveys()` to get the most updated survey results.
+> **Note:** On `posthog-js >= 1.249.2`, capturing `survey sent` or `survey dismissed` automatically marks the survey as seen in `localStorage` and sets the response/dismissal person properties (include `$survey_iteration` for recurring surveys). See [mark a survey as seen](/docs/surveys/implementing-custom-surveys#mark-a-survey-as-seen) for backend capture.
 
-3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's ID, a response for each question, and any properties you'd want. See [capture survey responses](/docs/surveys/implementing-custom-surveys#capture-survey-responses) for the full list of properties.
+3. Capture lifecycle events (`survey shown`, `survey sent`, `survey dismissed`) using ID-keyed response properties (`$survey_response_<question.id>`):
 
 ```js-web
+posthog.capture("survey shown", {
+    $survey_id: survey.id,
+    $survey_iteration: survey.current_iteration,
+})
+
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
     $survey_iteration: survey.current_iteration,
@@ -49,10 +51,8 @@ posthog.capture("survey sent", {
     $survey_completed: true,
     $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
     [`$survey_response_${survey.questions[0].id}`]: surveyResponse,
-    $survey_name: survey.name // optional
+    $survey_name: survey.name, // optional
 })
 ```
 
-Surveys that are shown should be captured with a "survey shown" event and those that are dismissed, with a "survey dismissed" event similar to the above.
-
-> API surveys support the same question types as other surveys, such as open text, rating, single choice, and multiple choice. Send each response in the format described in [response formats](/docs/surveys/implementing-custom-surveys#response-formats).
+See [implementing custom surveys](/docs/surveys/implementing-custom-surveys#response-formats) for rating, choice, branching, and inline rendering details.

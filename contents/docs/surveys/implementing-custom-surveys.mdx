@@ -172,11 +172,10 @@ export default App;
   - **Rating**: Rating value as a number (e.g., `9` for a 0-10 scale)
 
 **Important notes:**
-- Only supported for popover surveys — inline surveys will log a warning and ignore the prefill
-- Choice and question indices are 0-based
-- Invalid indices are silently ignored
-- Open text and link questions do not support prefill
-- Pre-filled questions with "Automatically submit on selection" enabled will be skipped, advancing the user to the first non-prefilled question
+- Only supported for popover surveys. Inline surveys log a warning and ignore `initialResponses`.
+- Choice and question indices are 0-based. Invalid indices are silently ignored.
+- Open text and link questions do not support prefill.
+- Prefilled initial questions only skip automatically when **Automatically submit on selection** (`skipSubmitButton: true`) is enabled on each skipped question. Otherwise the survey opens on that prefilled question with the value pre-selected.
 
 #### Inline surveys
 
@@ -227,6 +226,25 @@ function App() {
 }
 
 export default App;
+```
+
+### Checking renderability and React thumbs hook
+
+- **Renderability checks:** Call `await posthog.canRenderSurveyAsync(surveyId, forceReload)` (recommended, synchronous `posthog.canRenderSurvey(surveyId)` is deprecated) to inspect `{ visible, disabledReason }` before triggering `displaySurvey`.
+- **React thumbs widget (`useThumbSurvey`):** Import `useThumbSurvey` from `@posthog/react`:
+
+```js
+import { useThumbSurvey } from '@posthog/react'
+
+const { triggerRef, respond } = useThumbSurvey({ // destructure trackShown only with disableAutoShownTracking: true
+    surveyId: '01942e4c-d028-0000-6ab5-afb4ed961263',
+    displayPosition: 'next_to_trigger', // or 'right' for bottom-right corner
+    properties: { source: 'docs' },
+    disableAutoShownTracking: false,
+})
+// Attach triggerRef to the trigger element and call respond('up') or respond('down').
+// Calls displaySurvey as a popover with ignoreConditions: true, ignoreDelay: true,
+// skipShownEvent: true, and initialResponses: { 0: 1 | 2 }.
 ```
 
 ### Using renderSurvey (deprecated)
@@ -280,25 +298,27 @@ You can then style the survey by targeting the classes like `survey-box`, `surve
 
 ## Fetching surveys manually
 
-For more control over your surveys, you can use API surveys. Fetching a survey and capturing its responses yourself is all you need to show it with your own UI, without PostHog's built-in popover. This approach is sometimes called a headless survey. There are two options for fetching surveys from PostHog:
+Initialize `posthog-js` with your project token and `api_host`. Leave `disable_surveys` false, set `advanced_enable_surveys: true` to force-load surveys without waiting on remote config, and set `opt_out_useragent_filter: true` in headless browser tests. On self-hosted installs without `/static/surveys.js` lazy-loading, load `<api_host>/static/array.full.js`.
 
-1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle display conditions yourself.
+Three methods expose survey definitions on the browser client:
 
-2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This returns the active surveys the user matches the display conditions for, as long as the user (determined by their distinct ID) has not already dismissed or responded to the survey. This also returns popover and widget surveys, so filter to API surveys with `surveys.filter((survey) => survey.type === 'api')`.
+1. `posthog.getSurveys(callback, forceReload)` returns all active project surveys (5-minute client cache in `$surveys` / `$surveys_loaded_at`, pass `true` as `forceReload` (`getSurveys(callback, true)`) to bypass cache).
+2. `posthog.getActiveMatchingSurveys(callback, forceReload)` returns active surveys matching the current user's display conditions and unseen/undismissed state. Includes `popover` and `widget` surveys, so filter with `surveys.filter((survey) => survey.type === 'api')`.
+3. `posthog.onActiveMatchingSurveysChanged(callback)` subscribes to live matching-survey updates and returns an unsubscribe function.
 
-Surveys are requested on first load and then cached by default by the JavaScript SDK. If you want to force an API call to get an updated list of surveys, pass `true` to the `forceReload` parameter. You only need to do this if you want changed surveys to appear mid-session for users.
+Do **not** call `getActiveMatchingSurveys` synchronously inside `posthog.init`'s `loaded` callback (the surveys extension initializes after `loaded`, logging `[Surveys] init was not called`). Use `onActiveMatchingSurveysChanged`, or nest `getActiveMatchingSurveys` inside `onFeatureFlags` and `onSurveysLoaded`.
 
-Both methods return a callback with an array of surveys in this format:
+Both fetch methods call your callback with an array in this format:
 
 ```json
-// Example surveys response:
+// Example surveys response (public /api/surveys/ omits description and excludes external_survey):
 [{
   "id": "your_survey_id",
   "name": "Your survey name",
-  "description": "Metadata describing your survey",
-  "type": "api", // "api" or "popover"
+  "type": "api", // "api", "popover", or "widget" (external_survey is excluded)
   "linked_flag_key": null, // Linked feature flag key, if any.
   "targeting_flag_key": "your_survey_targeting_flag_key",
+  "internal_targeting_flag_key": "survey-targeting-your_survey_id",
   "questions": [
     {
       "type": "single_choice",
@@ -346,17 +366,19 @@ import { usePostHog } from '@posthog/react';
 import { useEffect, useState } from 'react';
 
 export default function Feedback() {
-  const [survey, setSurvey] = useState({})
+  const [survey, setSurvey] = useState(null)
   const posthog = usePostHog()
 
   useEffect(() => {
-    // Wait for feature flags so surveys targeted with a flag are evaluated against real values
+    // Wait for feature flags and the surveys extension before reading matches
     return posthog.onFeatureFlags(() => {
-      posthog.getActiveMatchingSurveys((surveys) => {
-        const apiSurveys = surveys.filter((survey) => survey.type === 'api');
-        if (apiSurveys.length > 0) {
-          setSurvey(apiSurveys[0])
-        }
+      posthog.onSurveysLoaded(() => {
+        posthog.getActiveMatchingSurveys((surveys) => {
+          const apiSurveys = surveys.filter((survey) => survey.type === 'api');
+          if (apiSurveys.length > 0) {
+            setSurvey(apiSurveys[0])
+          }
+        });
       });
     });
   }, [posthog]);
@@ -467,7 +489,7 @@ posthog.capture("survey sent", {
 | `$survey_submission_id` | A unique ID for each submission, for example from `crypto.randomUUID()`. Reuse the same ID for the partial and final sends of one submission. PostHog deduplicates responses and counts them for billing by this ID, so events without it each count as a separate response. |
 | `$survey_completed` | `true` on the final send, `false` for a partial response. |
 | `$survey_questions` | Recommended. The survey's questions as `[{ id, question }]`. Queries that look up a response by question position read it. |
-| `$set` | Only needed when you capture outside `posthog-js`, which sets it for you. Set `{ '$survey_responded/<survey_id>': true }` on `survey sent` and `{ '$survey_dismissed/<survey_id>': true }` on `survey dismissed`, so targeting excludes the person. If the survey has a `current_iteration` greater than 0, append it to the key, for example `$survey_responded/<survey_id>/<iteration>`. |
+| `$set` | Only needed when capturing outside `posthog-js`, `posthog-ios`, or `posthog-android` (those SDKs set it automatically). Set `{ '$survey_responded/<survey_id>': true }` on `survey sent` and `{ '$survey_dismissed/<survey_id>': true }` on `survey dismissed` so targeting excludes the person. Append `/<iteration>` when `current_iteration > 0`. |
 
 ### Response formats
 
