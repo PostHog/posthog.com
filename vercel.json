@@ -7,6 +7,19 @@
     },
     "headers": [
         {
+            "source": "/auth.md",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/markdown; charset=utf-8"
+                },
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                }
+            ]
+        },
+        {
             "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x):ext(\\.md)?",
             "headers": [
                 {
