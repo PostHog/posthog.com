@@ -18,7 +18,7 @@ seo:
     metaDescription: "What two years of rebuilding an AI agent taught us about B2B SaaS."
 ---
 
-Over two years, we wrote about 42,000 lines of Python to run PostHog AI. In the version we just shipped (the fifth), our part of the agent is a 10 KB prompt. It's the one we'd have built first if we'd known then what we know now.
+Over two years, PostHog AI went from 42,000 lines of Python to a 10 KB prompt. The (fifth) version we just shipped is what we would have built first if we knew what we know now.
 
 The nice thing about being open source is that every version still lives in our public [repos](https://github.com/posthog/posthog). You're welcome to dig through the git history yourself, or you could just read this. It has a plot.
 
@@ -26,9 +26,9 @@ Don't care about history? Jump straight into the good stuff: [what's new in Post
 
 ![The five versions of PostHog AI, from a single chat box in 2024 to a rented coding agent in 2026](https://res.cloudinary.com/dmukukwp6/image/upload/five_versions_e6118884aa.png)
 
-_Note: Ian counted [three harnesses in a year](/newsletter/building-ai-agents). I'm counting from the first chat box, before there was a loop at all._
+> _Note: Ian counted [three harnesses in a year](/newsletter/building-ai-agents). I'm counting from the first chat box, before there was a loop at all._
 
-## (2024) It all started at a hackathon
+## It all started at a hackathon (2024)
 
 PostHog AI was born at a [hackathon](/newsletter/hackathons) in August 2024, as a simple chat box that [turned your question into a trends chart](https://github.com/PostHog/posthog/pull/24463). It made a single call to GPT-4o, which was only [four months old](https://openai.com/index/hello-gpt-4o/) at the time. The system prompt told the model it was both a head of product growth and a top-tier data engineer (no pressure). Then it pasted in every event and property in the project and forced the answer into our query format.
 
@@ -36,15 +36,15 @@ Seven weeks later, we [split the job in two](https://github.com/PostHog/posthog/
 
 Most of the early bugs weren't the model's fault, they were plumbing. Streaming broke twice in one month, mostly because Django and our infra weren't built for it. The first time, answers started so slowly that our web server [gave up and killed the connection](https://github.com/PostHog/posthog/pull/25826). The second time, we'd just [moved to async serving](https://github.com/PostHog/posthog/pull/26374).
 
-In December 2024, PostHog AI [learned to ask a clarifying question](https://github.com/PostHog/posthog/pull/26767) when your event names didn't make the answer obvious. For the first time it had to keep a conversation around between messages. We built our own way to save chats in Postgres, and soon had to [fix it so they actually loaded back](https://github.com/PostHog/posthog/pull/27048). In January 2025, it got a longer memory too: a [running note about your company](https://github.com/PostHog/posthog/pull/27270) that it researched from the web, checked with you, and kept updating across chats.
+In December 2024, PostHog AI [learned to ask a clarifying question](https://github.com/PostHog/posthog/pull/26767) when your event names didn't make the answer obvious. This meant, for the first time, it had to keep a conversation around between messages so we started saving chats in Postgres, but soon had to [fix it so they actually loaded back](https://github.com/PostHog/posthog/pull/27048). In January 2025, it got a longer memory too: a [running note about your company](https://github.com/PostHog/posthog/pull/27270) that it researched from the web, checked with you, and kept updating across chats.
 
 Every one of these features added more boxes to the flowchart. It was getting too damn big, so in February, we started taking it apart.
 
-## (Early 2025) Enter the "boss agent"
+## Enter the "boss agent" (Early 2025)
 
 In a flowchart, you decide every step in advance. In a loop, the model decides the steps itself: it picks a tool, reads the result, and keeps going until it's done. That's what turned PostHog AI into a proper agent, and it meant we could stop drawing new boxes for every new kind of question.
 
-The first loop had [a boss called "Root"](https://github.com/PostHog/posthog/pull/28154). Root handed each question to a specialist sub-agent, but since it couldn't see what the sub-agent did, context got lost at every handoff (the [black box problem](/newsletter/building-ai-agents#2-your-harness-is-not-your-moat)). This turned out to be a real problem. Sub-agents sometimes made up data, and some questions got stuck in infinite loops.
+The first loop had [a boss called "Root"](https://github.com/PostHog/posthog/pull/28154). Root handed each question to a specialist sub-agent, but since it couldn't see what the sub-agent did, context got lost at every handoff (the [black box problem](/newsletter/building-ai-agents#2-your-harness-is-not-your-moat)). Sub-agents sometimes made up data, and some questions got stuck in infinite loops.
 
 By spring, teams across PostHog were each building their own AI features, with their own tuned prompts and tools that called their product's API. That meant a lot of teams building small agents in parallel, so the AI team [shipped MaxTool](https://github.com/PostHog/posthog/pull/30027), then [opened it up](https://github.com/PostHog/posthog/pull/30705) so any team could plug its tools into PostHog AI instead.
 
@@ -56,11 +56,11 @@ Then we fiddled with everything around the model:
 - **Clarifying questions** got flaky once Root arrived, because [Root's replies confused the sub-agent](https://github.com/PostHog/posthog/pull/28678) asking them.
 - **Evals** [started on deepeval](https://github.com/PostHog/posthog/pull/26179), then [moved to Braintrust](https://github.com/PostHog/posthog/pull/31686). Running them on every PR got pricey, so we [cut them back](https://github.com/PostHog/posthog/pull/37165) to save some benjamins.
 
-While we were busy tweaking, the frontier labs were moving faster than our graphs. Models that think before answering got cheap with [o4-mini in April](https://openai.com/index/introducing-o3-and-o4-mini/) 2025, and models got reliable at using tools with [Claude 4 in May](https://www.anthropic.com/news/claude-4). As Ian wrote in [38 things we've learned about building AI products](/newsletter/building-ai-products), those two releases are what convinced us to restructure PostHog AI. That same month, we also started [our own MCP server](https://github.com/PostHog/mcp) (now in the [main repo](https://github.com/PostHog/posthog/tree/master/services/mcp)), which turned out to matter a lot later.
+While we were busy tweaking, the frontier labs were moving faster than our graphs. Models that think before answering got cheap with [o4-mini in April 2025](https://openai.com/index/introducing-o3-and-o4-mini/), and models got reliable at using tools with [Claude 4 in May](https://www.anthropic.com/news/claude-4). As Ian wrote in [38 things we've learned about building AI products](/newsletter/building-ai-products), those two releases are what convinced us to restructure PostHog AI. That same month, we also started [our own MCP server](/mcp), which turned out to matter a lot later.
 
 In July, we [moved chat out of the web request and into Temporal](https://github.com/PostHog/posthog/pull/34607), a workflow engine, with replies streamed through Redis. Before, closing the tab or losing wifi killed the answer halfway through. Now the agent kept working in the background, and picked the reply back up when you came back.
 
-## (Late 2025) Bye bye boss, hello loop
+## Bye bye boss, hello loop (Late 2025)
 
 By then, Claude Code had shown how much a single loop could do on its own (with no boss and no sub-agents). It was clear where the frontier labs were heading: models that work as agents by themselves, so the team decided specialists no longer made sense.
 
@@ -74,9 +74,9 @@ The real limit was tools. The agent could only do what someone had written a too
 
 Then, in November 2025, Anthropic released [tool search](https://www.anthropic.com/engineering/advanced-tool-use), which lets an agent look up tools as it needs them instead of loading them all at once. Suddenly, thousands of tools weren't a problem. We just needed a way to make them without anyone writing them by hand.
 
-So we built two pipelines. One [turns the API endpoints teams already ship into MCP tools](https://github.com/PostHog/posthog/pull/47859). The other [packages skills](https://github.com/PostHog/posthog/pull/47218) (how-to files for common jobs) into [plugins any agent can install](https://github.com/PostHog/ai-plugin). We don't even have a PostHog AI team anymore. Every product team builds PostHog's AI now, mostly just by shipping their APIs.
+So we built two pipelines. One [turns the API endpoints teams already ship into MCP tools](https://github.com/PostHog/posthog/pull/47859). The other [packages skills](https://github.com/PostHog/posthog/pull/47218) (how-to files for common jobs) into [plugins any agent can install](https://github.com/PostHog/ai-plugin). We didn't need a PostHog AI specific team anymore. Every product team builds PostHog's AI now, mostly just by shipping their APIs.
 
-## (2026) Finally, we rented a coding agent instead of building one
+## Finally, we rented a coding agent instead of building one (2026)
 
 Up to this point, we'd been rebuilding PostHog AI one plank at a time (a bit like the ship of Theseus). Meanwhile, a team next door had built a whole second ship.
 
@@ -94,12 +94,12 @@ That's the version you're getting now btw. It took a while to get ready, so we k
 
 Moving over wasn't smooth. For every good call we made, we made a few wrong guesses:
 
-- **We thought the new agent should start somewhere else.** We gave the new agent to our other products first. Desktop, the Slack app and Self-driving all had it before PostHog AI's own chat did, so PostHog AI users waited longer than they should have. We should have moved PostHog AI over much earlier.
+- **We thought the new agent should start somewhere else.** We gave the new agent to our other products first. Desktop, the Slack app, and Self-driving all had it before PostHog AI's own chat did, so PostHog AI users waited longer than they should have.
 - **We thought the migration would be quick.** It took much longer than expected. The new agent had to support two harnesses (Claude Code and Codex), 1,200+ tools and a better UI, plus fraud prevention, because sandboxes are easy to abuse without prepaid credits.
 - **We thought sandboxes would be the easy part.** They're hard, but manageable. If we did it again, we'd start sandboxes on demand, like ChatGPT Work does.
 - **We thought agents would use the tools we spent longest on.** Across 63 million calls to our MCP server, a quarter are raw SQL. The trends, funnels and retention tools our old graph was built around get 3% (see more in [how AI agents behave](/blog/how-ai-agents-behave)).
 
-It also meant throwing a lot of our own work away. The tools went first. Our MCP server (which lets any agent use PostHog) had one tool per API action, enough to [dump a "270-tool catalog" on the agent](https://github.com/PostHog/posthog/pull/56644). Now the agent sees one tool, exec, and uses it to find and run the rest.
+It also meant throwing a lot of our own work away. The tools went first. Our MCP server (which lets any agent use PostHog) had one tool per API action, enough to [dump a 270-tool catalog on the agent](https://github.com/PostHog/posthog/pull/56644). Now the agent sees one tool, exec, and uses it to find and run the rest.
 
 Then our agent code went. The old agent was about [42,000 lines of Python](https://github.com/PostHog/posthog/tree/master/ee/hogai), not counting tests. In the new one, PostHog's part is [one file](https://github.com/PostHog/posthog/blob/master/products/posthog_ai/backend/services/system_prompt/prompt.py), under 10 KB, appended to Claude Code's own [system prompt](https://github.com/PostHog/posthog/blob/master/products/posthog_ai/backend/services/system_prompt/service.py).
 
@@ -123,10 +123,10 @@ Five rebuilds of plumbing were fun for us, but here's what you actually get:
 - **An MCP store.** Hook up your other tools' MCP servers, and PostHog AI can work across them too.
 - **It writes code.** Ask it to instrument an event or set up an experiment, and it opens a pull request in your repo.
 - **Any model, any time.** Claude Sonnet 5.5 is the default, but you can switch to Opus, Fable or OpenAI's GPT models, even halfway through a conversation. We're not model-monogamous, so why should you be?
-- **Your own subscription.** Already paying for ChatGPT? Sign in, and PostHog AI runs Codex on your plan. Claude is on the way, don't you worry.
+- **Your own subscription.** Already paying for ChatGPT? Sign in and PostHog AI runs Codex on your plan. Claude is on the way, don't you worry.
 - **Plan mode.** By default, it gets stuck in straight away, but it still checks with you before changing live data. For bigger jobs, use Plan mode to agree on the approach first.
 
-There's plenty of smaller stuff too. A Faster/Smarter slider lets you choose how hard it thinks, so you can slide left for a quick count of yesterday's signups and right for a proper look at a retention drop. (The slider literally says $$$, so the bill won't come as a shock.) You can pull an insight, dashboard, notebook, event or error into the chat with @. And there are a few slash commands, like /btw for a side question, /usage to see what a run has cost, and /ticket to open a support ticket.
+There's plenty of smaller stuff too. A Faster/Smarter slider lets you choose how hard it thinks, so you can slide left for a quick count of yesterday's signups and right for a proper look at a retention drop. (The slider literally says $$$, so the bill won't come as a shock.) You can pull an insight, dashboard, notebook, event or error into the chat with @. And there are a few slash commands, like `/btw` for a side question, `/usage` to see what a run has cost, and `/ticket` to open a support ticket.
 
 ## Try it
 
@@ -150,7 +150,7 @@ Yes, from [start date]. The new PostHog AI works in a cloud sandbox, which is wh
 
 **How do I stop it from running up a bill?**
 
-Tokens and sandbox time share one meter and one billing limit. Every organization starts with a $150 limit, and you can [set your own](/docs/posthog-ai/pricing#control-your-ai-credit-spend) and turn on usage alerts. If you hit it, AI features pause until your credits reset next billing period.
+Tokens and sandbox time share one meter and one billing limit. Every organization starts with a $150 limit, and you can [set your own](/docs/posthog-ai/pricing#control-your-ai-credit-spend) and turn on usage alerts. If you hit it, AI features pause until your billing reset next period.
 
 **Which model does it use?**
 
