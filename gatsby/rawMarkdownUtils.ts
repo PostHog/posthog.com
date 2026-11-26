@@ -813,7 +813,7 @@ New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated o
 // that reads either one learns what PostHog is before the page links.
 const LLMS_TXT_INTRO = `# PostHog
 
-> PostHog is the platform for self-driving products. It pairs the full context of your product's data (events, errors, logs, replays, and more) with agents that find problems and ship changes with you. It includes tools for product analytics, session replay, feature flags, A/B testing, error tracking, surveys, AI observability, web analytics, a data warehouse, and more. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
+> PostHog is your product's context layer. It ingests and stores your analytics, errors, session replays, logs, LLM traces, and business data in one place, so you and your agents can query that data and act on it. On top of the data sit tools for product analytics, web analytics, session replay, feature flags, experiments, error tracking, surveys, AI observability, a data warehouse, data pipelines, and workflows. With self-driving on, agents in PostHog watch the data, report problems, and open pull requests that fix them. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
 
 PostHog can be added to any web, mobile, or backend application. All docs pages are available as raw Markdown by appending \`.md\` to any URL.
 `
@@ -844,12 +844,42 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 **Docs in bulk:** Each docs section has one file with the full text of all its pages, linked from https://posthog.com/llms.txt. https://posthog.com/llms-full.txt links every docs page, including the REST API reference.
 `
 
+// What PostHog is, told through the data: the ways data gets in, how PostHog connects it, and the ways to
+// work with it. Follows the order of the homepage steps (get the data in, query it, act on it, self-drive).
 const LLMS_TXT_HOW_POSTHOG_WORKS = `## How PostHog works
 
-- An app sends events to PostHog from one of the [SDKs](https://posthog.com/docs/libraries.md) or the [capture API](https://posthog.com/docs/api/capture.md). An event is one action at one point in time, such as a pageview or a purchase.
-- Properties are key-value metadata on events and persons, such as the current URL or a plan name. See [understanding PostHog](https://posthog.com/docs/new-to-posthog/understand-posthog.md).
-- PostHog ties events to a person profile through the \`distinct_id\`, and groups them into sessions. Persons can belong to cohorts and to groups, such as companies.
-- Every product in PostHog reads the same events and persons. A session recording, an error, a flag evaluation, and a survey response can all link to the same person.
+PostHog keeps all the data about your product in one place. Data comes in from your apps, your backend, and the other tools you use. PostHog connects it to the users and companies it belongs to. Then you, PostHog AI, or your own agent can query it, send it elsewhere, and act on it.
+
+### Get data in
+
+- **Product events**: The [SDKs](https://posthog.com/docs/libraries.md) for web, mobile, and backend send events, or you call the [capture API](https://posthog.com/docs/api/capture.md). On the web, [autocapture](https://posthog.com/docs/product-analytics/autocapture.md) records pageviews and clicks with no extra code.
+- **Session replays and heatmaps**: \`posthog-js\` and the mobile SDKs record [sessions](https://posthog.com/docs/session-replay.md). [Heatmaps](https://posthog.com/docs/toolbar/heatmaps.md) show where people click and scroll.
+- **Errors**: The SDKs capture exceptions for [error tracking](https://posthog.com/docs/error-tracking.md), automatically or with \`captureException\`.
+- **Logs and traces**: Any OpenTelemetry client can send [logs](https://posthog.com/docs/logs.md) and [traces](https://posthog.com/docs/distributed-tracing/start-here.md) over OTLP.
+- **LLM calls**: [AI observability](https://posthog.com/docs/ai-observability.md) captures each prompt, response, token count, cost, and latency, with integrations for OpenAI, Anthropic, LangChain, and more.
+- **What users say**: [Surveys](https://posthog.com/docs/surveys.md) collect answers inside your app.
+- **Business data**: [Sources](https://posthog.com/docs/data-pipelines/sources.md) sync Stripe, HubSpot, Salesforce, Zendesk, Postgres, and hundreds of other tools and databases into the [data warehouse](https://posthog.com/docs/data-warehouse.md).
+- **Historical data**: [Managed migrations](https://posthog.com/docs/migrate/managed-migrations.md) import past events from Mixpanel, Amplitude, or S3. See [migrations](https://posthog.com/docs/migrate.md) for other tools.
+
+### How the data connects
+
+- An [event](https://posthog.com/docs/data/events.md) is one action at one point in time, such as a pageview or a purchase. Properties are key-value metadata on events and persons, such as the current URL or a plan name.
+- PostHog ties events to a [person](https://posthog.com/docs/data/persons.md) through the \`distinct_id\`, and groups them into sessions. Persons can belong to cohorts and to groups, such as companies. See [understanding PostHog](https://posthog.com/docs/new-to-posthog/understand-posthog.md).
+- Every tool reads the same data. A recording, an error, a log line, a trace, a flag evaluation, and a survey response can all link to the same person, and warehouse tables join to them in SQL.
+
+### Work with the data
+
+- **Analyze**: Build [insights](https://posthog.com/docs/product-analytics/insights.md) such as trends, funnels, retention, and paths, and collect them in [dashboards](https://posthog.com/docs/product-analytics/dashboards.md) and [notebooks](https://posthog.com/docs/notebooks.md). [Web analytics](https://posthog.com/docs/web-analytics.md) gives a ready-made view of site traffic.
+- **Query with SQL**: Run [SQL](https://posthog.com/docs/sql.md) across events, persons, sessions, and warehouse tables. Save queries as [views](https://posthog.com/docs/data-warehouse/views.md), and materialize them on a schedule.
+- **Ask an agent**: Ask [PostHog AI](https://posthog.com/docs/posthog-ai.md) in the app, or connect your own agent with the [MCP server](https://posthog.com/docs/model-context-protocol.md). Scripts use the [REST API](https://posthog.com/docs/api.md).
+- **Transform it**: [Transformations](https://posthog.com/docs/data-pipelines/transformations.md) add, edit, or drop event properties as events arrive.
+- **Send it out**: [Destinations](https://posthog.com/docs/data-pipelines/destinations.md) send events to tools like Slack and HubSpot in real time. [Batch exports](https://posthog.com/docs/data-pipelines/batch-exports.md) copy your data to S3, BigQuery, Snowflake, Databricks, Postgres, or Azure Blob Storage.
+- **Serve it to your app**: [Endpoints](https://posthog.com/docs/endpoints.md) turn a saved insight or SQL query into an API route, for customer-facing analytics and internal tools.
+- **Act on it**: [Feature flags](https://posthog.com/docs/feature-flags.md) roll changes out and back, [experiments](https://posthog.com/docs/experiments.md) measure whether they worked, and [workflows](https://posthog.com/docs/workflows.md) send messages and run actions when events happen.
+- **Let agents act on it**: [Scouts](https://posthog.com/docs/self-driving/scouts.md) watch your product and file reports in your [Inbox](https://posthog.com/docs/self-driving/inbox.md). With [self-driving](https://posthog.com/docs/self-driving.md) on, PostHog writes the pull request, you review and merge it, and PostHog checks whether the change worked.
+
+### Projects, keys, and regions
+
 - All data belongs to a project. SDKs send events with the project token, which is write-only. The private API needs a [personal API key](https://posthog.com/docs/api/personal-api-keys.md) or [OAuth](https://posthog.com/docs/api/oauth.md).
 - PostHog Cloud has two regions: US Cloud (\`us.posthog.com\`) and EU Cloud (\`eu.posthog.com\`). A project lives in one region, so use the hosts of that region.
 - PostHog is open source. [Self-hosting](https://posthog.com/docs/self-host.md) is possible, but it is officially unsupported.
@@ -1064,8 +1094,8 @@ export const generateLlmsTxt = (pages) => {
 
     // llms.txt: what PostHog is, then one line per docs section
     let llmsTxtContent = `${LLMS_TXT_INTRO}
-${LLMS_TXT_AGENT_INSTRUCTIONS}
 ${LLMS_TXT_HOW_POSTHOG_WORKS}
+${LLMS_TXT_AGENT_INSTRUCTIONS}
 ${llmsTxtProductsAndTools()}
 ${LLMS_TXT_CHANGELOG}
 ## Docs
@@ -1105,8 +1135,8 @@ Each line links the overview page of a docs section, and one file with the full 
     let llmsFullTxtContent = `${LLMS_TXT_INTRO}
 > This file links every docs page. For a shorter index, see https://posthog.com/llms.txt
 
-${LLMS_TXT_AGENT_INSTRUCTIONS}
 ${LLMS_TXT_HOW_POSTHOG_WORKS}
+${LLMS_TXT_AGENT_INSTRUCTIONS}
 ${llmsTxtProductsAndTools()}
 ${LLMS_TXT_CHANGELOG}`
     for (const section of sections) {
