@@ -23,18 +23,21 @@ Once the syncs are complete, you can start using GitLab data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `issues` | Issues in the project | Incremental |
-| `merge_requests` | Merge requests in the project | Incremental |
-| `commits` | Repository commits | Incremental |
-| `pipelines` | CI/CD pipelines | Incremental |
-| `releases` | Project releases | Full refresh |
-| `milestones` | Project milestones | Full refresh |
-| `branches` | Repository branches | Full refresh |
-| `tags` | Repository tags | Full refresh |
-| `labels` | Project labels | Full refresh |
-| `members` | Project members | Full refresh |
+| Table                    | Description                                                                 | Sync method  |
+| ------------------------ | --------------------------------------------------------------------------- | ------------ |
+| `issues`                 | Issues in the project                                                       | Incremental  |
+| `merge_requests`         | Merge requests in the project                                               | Incremental  |
+| `commits`                | Repository commits                                                          | Incremental  |
+| `pipelines`              | CI/CD pipelines                                                             | Incremental  |
+| `releases`               | Project releases                                                            | Full refresh |
+| `milestones`             | Project milestones                                                          | Full refresh |
+| `branches`               | Repository branches                                                         | Full refresh |
+| `tags`                   | Repository tags                                                             | Full refresh |
+| `labels`                 | Project labels                                                              | Full refresh |
+| `members`                | Project members                                                             | Full refresh |
+| `events`                 | Project activity stream (pushes, comments, issue and merge request changes) | Incremental  |
+| `issue_milestone_events` | Milestone change history for issues                                         | Incremental  |
+| `iterations`             | Iteration (sprint) definitions (requires GitLab Premium or Ultimate)        | Incremental  |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
