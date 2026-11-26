@@ -24,7 +24,7 @@ By September, p95 was down to 4 seconds and those failures were 14 times rarer, 
 
 [PostHog Experiments](/experiments) first shipped in December 2021 as a very minimal tool. Built on top of our [Feature Flags](/feature-flags), it was initially just a simple wrapper around [Product Analytics](/product-analytics) – a single funnel query with some statistical calculations on top.
 
-Over time, it evolved into a mature experimentation product. Today, we support many different metric types and aggregations, [Data Warehouse](/data-warehouse) sources, Bayesian and frequentist statistics, CUPED for variance reduction, winsorization for handling outliers, and holdout groups for measuring long-term effects of experimentation. If you need a mature experimentation tool, it's all here under one roof in PostHog.
+Over time, it evolved into a mature experimentation product. Today, we support many different metric types and aggregations, [Data Warehouse](/warehouse) sources, Bayesian and frequentist statistics, CUPED for variance reduction, winsorization for handling outliers, and holdout groups for measuring long-term effects of experimentation. If you need a mature experimentation tool, it's all here under one roof in PostHog.
 
 As our product grew, our customers did too. From a handful of small customers, we've grown to serve [some of the fastest-growing startups in the world](/customers). Some of them send hundreds of millions of events per day, with individual metric queries scanning terabytes of data.
 
