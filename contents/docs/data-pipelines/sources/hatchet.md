@@ -37,7 +37,20 @@ You'll be asked for:
 
 <SyncModes />
 
-All Hatchet tables are full refresh. Each sync replaces the contents of the table.
+These Hatchet tables support incremental and append sync:
+
+| Table | Incremental field |
+| --- | --- |
+| `workflow_runs` | `created_at` |
+| `tasks` | `created_at` |
+| `events` | `created_at` |
+| `logs` | `createdAt` |
+| `task_events` | `workflow_run_created_at` (the parent workflow run's creation time) |
+| `task_timings` | `workflow_run_created_at` (the parent workflow run's creation time) |
+
+The first incremental sync of a table reads only the last 30 days. Each later sync reads again an overlap window before the last synced value, so it gets rows that changed after they were created. The overlap is 1 day for most tables and 5 minutes for `logs`. In incremental sync, PostHog merges these rows on the primary key, so the overlap does not add duplicate rows.
+
+All other Hatchet tables are full refresh. Each sync replaces the contents of the table.
 
 ## Configuration
 
