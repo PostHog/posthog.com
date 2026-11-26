@@ -5,9 +5,9 @@ title: Android push notifications
 sidebarTitle: Android
 ---
 
-Set up [Workflows](/docs/workflows-next) push notifications in the Android SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/channels/push).
+Set up [Workflows](/docs/workflows-next) push notifications in the Android SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/push).
 
-Available in the Android SDK version 3.58.0 and newer. Versions before 3.72.0 take `apiKey` instead of `projectToken`. Sends go out through the FCM channel you connect in [Workflows > Channels](/docs/workflows-next/channels/push#connect-a-push-channel), so the Firebase project on that channel must match your app.
+Available in the Android SDK version 3.58.0 and newer. Versions before 3.72.0 take `apiKey` instead of `projectToken`. Sends go out through the FCM channel you connect in [Workflows > Channels](/docs/workflows-next/push#connect-a-push-channel), so the Firebase project on that channel must match your app.
 
 ## Requirements
 
@@ -96,7 +96,7 @@ The `$push_notification_opened` event includes `$notification_title` and `$notif
 
 ## Identity verification
 
-If your push channel requires [identity verification](/docs/workflows-next/channels/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
+If your push channel requires [identity verification](/docs/workflows-next/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
 
 ```kotlin
 config.pushIdentityProvider = { distinctId, appId, completion ->
@@ -111,4 +111,4 @@ config.pushIdentityProvider = { distinctId, appId, completion ->
 | --- | --- |
 | Token never registers | Confirm `firebase-messaging` is on the classpath and your Firebase setup (`google-services.json`) is in place, and that you forward rotated tokens from `onNewToken`. |
 | Push doesn't arrive | Confirm the Firebase project on your Workflows channel matches your app, and the user granted the `POST_NOTIFICATIONS` permission. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/channels/push#identity-verification). |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/push#identity-verification). |

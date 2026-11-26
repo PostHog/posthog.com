@@ -4,7 +4,7 @@ showTitle: true
 title: Push notifications
 ---
 
-PostHog mobile SDKs can register a device for [Workflows](/docs/workflows-next) push notifications and capture when a user opens one. Sends go out through the FCM or APNs channel you connect in [Workflows > Channels](/docs/workflows-next/channels/push#connect-a-push-channel).
+PostHog mobile SDKs can register a device for [Workflows](/docs/workflows-next) push notifications and capture when a user opens one. Sends go out through the FCM or APNs channel you connect in [Workflows > Channels](/docs/workflows-next/push#connect-a-push-channel).
 
 <CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
 
@@ -32,23 +32,23 @@ Then pick an **Identity verification** mode. See [identity verification](#identi
 
 ## Requirements
 
-- A connected **FCM** or **APNs** channel in PostHog whose Firebase project (FCM) or bundle id (APNs) matches your app. See [Configure a workflows channel](/docs/workflows-next/channels/push#connect-a-push-channel).
+- A connected **FCM** or **APNs** channel in PostHog whose Firebase project (FCM) or bundle id (APNs) matches your app. See [Configure a workflows channel](/docs/workflows-next/push#connect-a-push-channel).
 - Platform push set up in your app and notification permission requested from the user.
 
 ## Set up
 
-Moving from another push provider? [Import your existing device tokens](/docs/workflows-next/channels/push/import-device-tokens) so devices that registered before you added PostHog can still get pushes.
+Moving from another push provider? [Import your existing device tokens](/docs/workflows-next/push/import-device-tokens) so devices that registered before you added PostHog can still get pushes.
 
 Follow the guide for your SDK:
 
-- [iOS](/docs/workflows-next/channels/push/ios)
-- [Android](/docs/workflows-next/channels/push/android)
-- [React Native](/docs/workflows-next/channels/push/react-native)
-- [Flutter](/docs/workflows-next/channels/push/flutter)
+- [iOS](/docs/workflows-next/push/ios)
+- [Android](/docs/workflows-next/push/android)
+- [React Native](/docs/workflows-next/push/react-native)
+- [Flutter](/docs/workflows-next/push/flutter)
 
 ## Send a push
 
-Add a **Push** step to a workflow. [Push step settings](/docs/workflows-next/channels/push/push-step-options) covers each setting, including data only and silent pushes, links, grouping and protecting sensitive content.
+Add a **Push** step to a workflow. [Push step settings](/docs/workflows-next/push/push-step-options) covers each setting, including data only and silent pushes, links, grouping and protecting sensitive content.
 
 ## Pricing
 
@@ -56,7 +56,7 @@ Each push send counts as a workflows destination dispatch, at the same rate as a
 
 ## Identity verification
 
-A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows-next/channels/push#connect-a-push-channel)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
+A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows-next/push#connect-a-push-channel)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
 Your **backend** mints that token. The SDK never signs one itself. Generate an EC (P-256) key pair, keep the private key on your backend, and paste the public key into the channel's **Public key** field when you turn on identity verification. Your backend signs an ES256 JWT with the private key, with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id` (your Firebase project ID or APNs bundle ID), `aud` set to `posthog:push_identity`, and a short `exp`. PostHog verifies the token with the public key you registered, so the private key never leaves your control.
 

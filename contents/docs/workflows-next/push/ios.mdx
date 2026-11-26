@@ -5,7 +5,7 @@ title: iOS push notifications
 sidebarTitle: iOS
 ---
 
-Set up [Workflows](/docs/workflows-next) push notifications in the iOS SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/channels/push).
+Set up [Workflows](/docs/workflows-next) push notifications in the iOS SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/push).
 
 Available in the iOS SDK version 3.69.0 and newer.
 
@@ -106,7 +106,7 @@ The `$push_notification_opened` event includes `$notification_title`, `$notifica
 
 ## Identity verification
 
-If your push channel requires [identity verification](/docs/workflows-next/channels/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
+If your push channel requires [identity verification](/docs/workflows-next/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
 
 ```swift
 config.pushIdentityProvider = { distinctId, appId, completion in
@@ -122,4 +122,4 @@ config.pushIdentityProvider = { distinctId, appId, completion in
 | Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. If you set `config.enableSwizzling = false`, automatic registration and open capture are off. Use the manual APIs. |
 | Push doesn't arrive | Confirm the channel's APNs environment (Production/Sandbox) matches your build, and the bundle id matches. |
 | Opens are never captured | Confirm your app sets `UNUserNotificationCenter.current().delegate`, that `config.enableSwizzling` is `true`, and that the device runs iOS 14 or newer. In a cross-platform host that configures PostHog from Dart or JavaScript, call `PostHogSDK.prewarmPushNotificationOpenCapture()` (iOS SDK 3.72.0 and newer) from `application(_:didFinishLaunchingWithOptions:)` so a cold-start tap isn't lost before `setup()` runs. The PostHog Flutter and React Native plugins already do this for you. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/channels/push#identity-verification). |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/push#identity-verification). |

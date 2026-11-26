@@ -5,11 +5,11 @@ title: React Native push notifications
 sidebarTitle: React Native
 ---
 
-Set up [Workflows](/docs/workflows-next) push notifications in the React Native SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/channels/push).
+Set up [Workflows](/docs/workflows-next) push notifications in the React Native SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/push).
 
 Available in `posthog-react-native` 4.62.0 and newer, and requires the optional [`@posthog/react-native-plugin`](https://www.npmjs.com/package/@posthog/react-native-plugin) package (2.3.0+). Not supported on React Native Web or macOS.
 
-import ReactNativeCocoaPodsNotice from "../../../_snippets/react-native-cocoapods-notice.mdx"
+import ReactNativeCocoaPodsNotice from "../../_snippets/react-native-cocoapods-notice.mdx"
 
 ## Requirements
 
@@ -151,7 +151,7 @@ On iOS from `@posthog/react-native-plugin` 2.9.2, `capturePushNotificationOpened
 
 ## Identity verification
 
-If your push channel requires [identity verification](/docs/workflows-next/channels/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
+If your push channel requires [identity verification](/docs/workflows-next/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
 
 ```react-native
 <PostHogProvider
@@ -175,4 +175,4 @@ If your push channel requires [identity verification](/docs/workflows-next/chann
 | Token never registers | Confirm `@posthog/react-native-plugin` is installed, push is set up in your app, and the user granted notification permission. On Android, confirm Firebase Messaging is on the classpath (`@react-native-firebase/messaging` sets this up). |
 | Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
 | `$push_notification_opened` never fires | On iOS, confirm something in your app sets `UNUserNotificationCenter.current().delegate`, that the device runs iOS 14 or newer, and, for a tap that cold-launches the app, that you're on `@posthog/react-native-plugin` 2.9.2 or newer. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), that you're on `@posthog/react-native-plugin` 2.6.0 or newer for taps that arrive while the app is already running, and that your `MainActivity` [overrides `onNewIntent`](#android-taps-after-the-process-is-killed) for taps after the process was killed. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/channels/push#identity-verification). |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/push#identity-verification). |

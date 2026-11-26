@@ -5,11 +5,11 @@ title: Flutter push notifications
 sidebarTitle: Flutter
 ---
 
-Set up [Workflows](/docs/workflows-next) push notifications in the Flutter SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/channels/push).
+Set up [Workflows](/docs/workflows-next) push notifications in the Flutter SDK. For the concept and channel setup, see [Push notifications](/docs/workflows-next/push).
 
 Available in the Flutter SDK version 5.35.0 and newer. Not supported on Flutter Web or macOS.
 
-import FlutterCocoaPodsNotice from "../../../_snippets/flutter-cocoapods-notice.mdx"
+import FlutterCocoaPodsNotice from "../../_snippets/flutter-cocoapods-notice.mdx"
 
 ## Requirements
 
@@ -117,7 +117,7 @@ If your app initializes the SDK natively via `com.posthog.posthog.AUTO_INIT`, th
 
 ## Identity verification
 
-If your push channel requires [identity verification](/docs/workflows-next/channels/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
+If your push channel requires [identity verification](/docs/workflows-next/push#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
 
 ```dart
 config.pushIdentityProvider = (distinctId, appId) async {
@@ -135,4 +135,4 @@ config.pushIdentityProvider = (distinctId, appId) async {
 | Token never registers | Confirm push is set up in your app and the user granted notification permission. On Android, confirm `firebase-messaging` is on the classpath (`firebase_messaging` sets this up). Any manual `registerPushNotificationToken` call must come after `setup()` completes. |
 | Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
 | `$push_notification_opened` never fires | On iOS, confirm your `AppDelegate` sets `UNUserNotificationCenter.current().delegate`. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), and that your launcher activity still has `android:launchMode="singleTop"`, without which the system resumes the task instead of delivering the tap. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/channels/push#identity-verification). |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows-next/push#identity-verification). |
