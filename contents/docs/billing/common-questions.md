@@ -24,7 +24,7 @@ Recording the session without slowing your product down, masking private data on
 
 ## What does the price of a feature flag include?
 
-You pay per request to the `/flags` endpoint, not per flag. Each request covers answering fast on every page load, giving each user the same answer every time, targeting on your user data, safe fallbacks when something fails, and the tools your team uses to change flags and see what they did. Experiments bill as flag requests too. Check our breakdown of [what you pay for per feature flag](/docs/billing/what-you-pay-for-per-feature-flag) for a detailed explanation of each step.
+Answering on every page load, giving each user the same answer every time, targeting on your user data, and keeping your product working when something fails. It also covers the tools your team uses to change flags and see what they did. You pay per `/flags` request, not per flag, and experiments bill as flag requests too. Check our breakdown of [what you pay for per feature flag](/docs/billing/what-you-pay-for-per-feature-flag) for a detailed explanation of each step.
 
 ## Do projects share usage and free allowances?
 

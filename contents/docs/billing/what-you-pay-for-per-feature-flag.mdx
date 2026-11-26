@@ -4,11 +4,11 @@ title: What you actually get when you pay for a feature flag
 
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
-In PostHog your first 1 million feature flag requests are free every month. After that, you pay per request and the price per request drops as you make more. [Experiments](/docs/experiments) use the same requests and the same free tier, so there's no separate price for running a test.
+In PostHog your first 1 million feature flag requests are free every month. After that, you pay per request and the price per request drops as you make more – this helps ensure a busy app doesn't end up with a massive bill. [Experiments](/docs/experiments) use the same requests and the same free tier, so there's no separate price for running a test.
 
-The price per request covers more than an on/off switch. It covers answering fast on every page load, giving each user the same answer every time, targeting on what you know about your users, keeping your product working when something fails, changing flags safely, and seeing what each flag did.
+The price per request covers more than an on/off switch. It covers answering fast on every page load, giving each user the same answer every time, targeting on what you know about your users, keeping your product working when something fails, changing flags safely, and seeing what each flag did. It also buys peace of mind: when the flag service has a bad day, our engineers get paged, not yours.
 
-A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off.
+A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon – though it's much easier and also free to get started with PostHog. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off.
 
 Below is what each request pays for, so you can compare it with building your own system.
 
@@ -44,6 +44,8 @@ Your customer opens your pricing page. Before the page can decide which version 
 
 On your servers, [local evaluation](/docs/feature-flags/local-evaluation) skips the network for each check. The SDK downloads your flag definitions every 30 seconds by default and evaluates flags in memory. It's available in 10 server-side SDKs. Definition downloads run on their own servers, apart from the ones that answer `/flags`, and when nothing has changed we reply `304 Not Modified` with no data at all.
 
+A flag check sits between your user and the page they asked for. This is a major reason why it can make more sense to use PostHog than to build your own flags – anything you build yourself is something you then have to keep fast, at every scale.
+
 Without it, every flag check waits on a database query, and the page waits with it.
 
 ### Step 2: Giving the same answer every time
@@ -58,7 +60,7 @@ Without it, a user can see the old checkout before login and the new one after, 
 
 ### Step 3: Knowing who's asking
 
-"Turn this on for enterprise customers in Europe who signed up after January" is a normal request. To answer it, the flag needs to know the person's plan, country, and signup date at the moment it's checked, including properties they got one second ago.
+"Turn this on for enterprise customers in Europe who signed up after January" is a normal request. (Give it a month and someone will ask for one that's more specific.) To answer it, the flag needs to know the person's plan, country, and signup date at the moment it's checked, including properties they got one second ago.
 
 **How it works at PostHog:** Flags target on [person and group properties](/docs/feature-flags/user-and-group-targeting), [cohorts](/docs/data/cohorts), and [other flags](/docs/feature-flags/dependencies). They read the same people and properties that your [events](/docs/billing/what-you-pay-for-per-event) already build, so there's no second user database to keep in sync. Cohort membership is cached in the service, so cohort targeting is as fast as a property check. When your app sets a new property, client SDKs send it with the next request as a [property override](/docs/feature-flags/property-overrides), so the flag doesn't wait for ingestion to catch up. [Evaluation contexts](/docs/feature-flags/evaluation-contexts) limit each flag to the apps and environments it belongs to.
 
@@ -72,11 +74,11 @@ Networks drop and ad blockers block requests. When the flag service doesn't answ
 
 Your code still has to handle a flag that hasn't loaded yet. [Best practices](/docs/feature-flags/best-practices) explains how.
 
-Without it, when your flag service goes down, your product goes down with it.
+Without it, when your flag service goes down, your product goes down with it – and someone on your team gets paged at 2 am.
 
 ### Step 5: Changing a flag safely
 
-Your product manager wants to widen a rollout on Friday afternoon. Your support lead wants to turn a feature on for one customer. Neither of them should need a deploy, and both should be able to see who changed what, and when.
+Your product manager wants to widen a rollout on Friday afternoon (brave, but it happens). Your support lead wants to turn a feature on for one customer. Neither of them should need a deploy, and both should be able to see who changed what, and when.
 
 **How it works at PostHog:** The [web app](/docs/feature-flags/surfaces/web-app) handles boolean, multivariate, and [remote config](/docs/feature-flags/remote-config) flags, with [payloads](/docs/feature-flags/creating-feature-flags), release conditions, and a test view that shows how a flag evaluates for one user. You can [schedule changes](/docs/feature-flags/scheduled-flag-changes), including recurring ones, and see roughly how many users a change will affect before you make it. Every flag has an activity log of who changed what. The same actions work from the [MCP server](/docs/feature-flags/surfaces/mcp) and the [API](/docs/feature-flags/surfaces/api), and calling the MCP tools is free.
 
@@ -105,7 +107,7 @@ Every one of those jobs still exists when you run flags yourself. This table sho
 
 ## Costs that arrive later
 
-A first build covers a table of flags and a function that reads it. The costs below show up once it's in production.
+A first build covers a table of flags and a function that reads it. The costs below show up once it's in production, so estimates often leave them out, whether a person or an agent writes them.
 
 ### The flag service is in your critical path
 
