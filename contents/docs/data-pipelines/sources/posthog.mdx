@@ -414,14 +414,22 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 
 The `system.event_definitions` table contains the [event definitions](/docs/data/events#managing-event-definitions) in your project: every event PostHog has ingested or that someone defined ahead of time. It has one row per event name.
 
-| Column         | Description                                                                                        |
-| -------------- | -------------------------------------------------------------------------------------------------- |
-| `id`           | Unique identifier for the event definition                                                         |
-| `team_id`      | Team ID the event definition belongs to                                                            |
-| `name`         | Event name, like `$pageview` or `signed_up`                                                        |
-| `created_at`   | When the event was first seen or defined                                                           |
-| `last_seen_at` | When the event was last ingested (null if it hasn't been seen since PostHog started tracking this) |
-| `tags.names`   | Sorted list of the tag names applied to the event                                                  |
+| Column           | Description                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| `id`             | Unique identifier for the event definition                                                         |
+| `team_id`        | Team ID the event definition belongs to                                                            |
+| `name`           | Event name, like `$pageview` or `signed_up`                                                        |
+| `created_at`     | When the event was first seen or defined                                                           |
+| `last_seen_at`   | When the event was last ingested (null if it hasn't been seen since PostHog started tracking this) |
+| `tags.names`     | Sorted list of the tag names applied to the event                                                  |
+| `description`    | Description of the event (null if nobody described it)                                             |
+| `owner_id`       | User ID of the event's owner (null if it has no owner)                                             |
+| `verified`       | Whether someone marked the event as verified (1 = yes, 0 = no)                                     |
+| `verified_at`    | When someone marked the event as verified (null if it isn't verified)                              |
+| `verified_by_id` | User ID of the person who marked the event as verified                                             |
+| `hidden`         | Whether someone marked the event as hidden (1 = yes, 0 = no)                                       |
+| `updated_at`     | When someone last edited the event's metadata (null if nobody edited it)                           |
+| `updated_by_id`  | User ID of the person who last edited the event's metadata                                         |
 
 For example, to find events that stopped arriving more than 30 days ago:
 
@@ -431,6 +439,16 @@ FROM system.event_definitions
 WHERE last_seen_at < now() - INTERVAL 30 DAY
 ORDER BY last_seen_at
 ```
+
+The columns from `description` to `updated_by_id` contain the metadata that your team sets on the [events management page](https://app.posthog.com/data-management/events): the description, the owner, and the **Verified** or **Hidden** status. `SELECT *` doesn't return these columns, so name them in your query. For example, to list the events that have a description:
+
+```sql
+SELECT name, description, verified, hidden
+FROM system.event_definitions
+WHERE description IS NOT NULL AND description != ''
+```
+
+Keep the `IS NOT NULL` check. An event without metadata returns null for `description`, and HogQL treats `NULL != ''` as true. Without the check, the query also returns events that have no description.
 
 > **Note:** This table is scoped by `team_id`, so in a project with multiple environments it can return fewer events than the REST API.
 
@@ -548,8 +566,17 @@ The `system.property_definitions` table contains the property definitions in you
 | `property_type`    | Detected value type: `String`, `Numeric`, `Boolean`, `DateTime`, or `Duration` (null if not detected yet) |
 | `is_numerical`     | Whether the property's values can be used in numeric aggregations (1 = yes, 0 = no)                       |
 | `tags.names`       | Sorted list of the tag names applied to the property                                                      |
+| `description`      | Description of the property (null if nobody described it)                                                 |
+| `verified`         | Whether someone marked the property as verified (1 = yes, 0 = no)                                         |
+| `verified_at`      | When someone marked the property as verified (null if it isn't verified)                                  |
+| `verified_by_id`   | User ID of the person who marked the property as verified                                                 |
+| `hidden`           | Whether someone marked the property as hidden (1 = yes, 0 = no)                                           |
+| `updated_at`       | When someone last edited the property's metadata (null if nobody edited it)                               |
+| `updated_by_id`    | User ID of the person who last edited the property's metadata                                             |
 
-> **Note:** Properties that [property access control](/docs/settings/property-access-control) hides from you are not included, the same as in the properties list in data management. Like `system.event_definitions`, this table is scoped by `team_id`, so in a project with multiple environments it can return fewer properties than the REST API.
+The metadata columns, from `description` to `updated_by_id`, work the same way as in `system.event_definitions` above. `SELECT *` doesn't return them, so name them in your query. To filter on `description`, check for `IS NOT NULL` as well as `!= ''`.
+
+> **Note:** Properties that [property access control](/docs/settings/property-access-control) hides from you are not included, the same as in the properties list in data management. Their metadata isn't included either. Like `system.event_definitions`, this table is scoped by `team_id`, so in a project with multiple environments it can return fewer properties than the REST API.
 
 ### `system.support_tickets`
 
