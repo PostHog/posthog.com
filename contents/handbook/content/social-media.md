@@ -60,6 +60,26 @@ For "everything else", we follow the guidance above to optimize for mobile. Info
 
 We "like" all posts which are complimentary of PostHog to reinforce that behavior from users. We rarely retweet or quote tweet: only doing so for examples of helpful use cases that users share.
 
+#### Replying to people who complain about a high bill and/or switching to PostHog or ClickHouse self hosted because of it
+
+- We have early detection on these posts in [#reply-guys](https://posthog.slack.com/archives/C0C9FQY4ZM5). If you're picking one up, react with a check mark and say "I'm the driver" in the thread.
+- Ask PostHog AI what happened. Try "Here's the post: [link]. Can you find their PostHog account? What drove the bill? Was it more traffic, a change in what they're capturing, or credits running out? Did they have billing limits set? Has anyone emailed them already? Who owns the account, and what could we do to help them spend less? Link me to what you found and tell me if you're guessing." Keep the account details in Slack.
+- Reply with "here are some things we use to reduce spend." Pick the bits that are relevant to their bill.
+
+> 97% of people don't pay anything for PostHog and we do an unreasonable number of things to keep it that way:
+>
+> - transparent pricing, with a [pricing calculator](/pricing#calculator) you can use to figure out what you'd pay us before you sign up (without talking to sales)
+> - [billing limits](/docs/billing/limits-alerts) on eeeeverything - we give you a lot of fine-grained control here, per-product
+> - if we see a spike or a high forecast first bill on your account, an actual human will probably email you multiple times to check it was intentional
+> - if it wasn't intentional - maybe you forgot to set a billing limit or instrumented the wrong thing - we will almost always refund you
+> - if you accidentally go viral, we have an official [side projects insurance policy](/side-project-insurance) where we'll refund you
+> - we have LOADS of [docs to feed your agent on how to cut costs](/docs/billing/estimating-usage-costs#how-to-reduce-your-posthog-costs) - we only want you to pay for stuff you're using
+> - use the [PostHog Wizard](/docs/ai-engineering/ai-wizard) to check you're not wasting money - it can instrument PostHog up front for you, or audit your existing setup
+>
+> please help us help you spend less money on PostHog
+
+**Who does it?** <TeamMember name="Andy Vandervell" photo />, <TeamMember name="Ian Vanagas" photo />, or <TeamMember name="Liam Graham" photo />. [Editorial](/teams/editorial) owns social. If Liam's online alone and needs help with a technical question, ask <TeamMember name="Rafael Audibert" photo /> or <TeamMember name="Fernando Gomes" photo />. Default to replying from <TeamMember name="Tim Glaser" photo />'s account. If it might get spicy, just use the PostHog account or your own. Everyone else, leave Editorial to it.
+
 ### Posting on LinkedIn
 
 LinkedIn is a platform that rewards individual contributions over amplifying company pages. As a result, we lean heavily on reposting content that employees and users tag us in, as it will achieve more reach.
