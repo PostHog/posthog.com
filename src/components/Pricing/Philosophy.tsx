@@ -72,7 +72,7 @@ const PricingPhilosophy = (): JSX.Element => {
                 </li>
                 <li>
                     We have an open source product too. It is MIT licensed if you want to use it in a big organization
-                    that isn’t ready to move to PostHog Web yet.
+                    that isn’t ready to move to PostHog Cloud yet.
                 </li>
             </ul>
             <p className="mb-4">If this makes you happy, just start here:</p>
