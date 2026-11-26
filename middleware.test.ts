@@ -179,6 +179,13 @@ test('logs the request and the Markdown served, with values only for allowlisted
         'x-vercel-id': 'fra1::iad1::test1-1700000000000-000000000001',
         'x-vercel-ip-country': 'DE',
         'x-vercel-ip-city': 'Berlin',
+        'x-vercel-ja3-digest': 'test-ja3-digest',
+        'x-vercel-ja4-digest': 't13d1516h2_8daaf6152771_test',
+        'x-vercel-ip-as-number': '64500',
+        'mcp-protocol-version': '2025-06-18',
+        'if-none-match': '"test-etag"',
+        'cf-worker': 'example.com',
+        'x-anthropic-client': 'test-client',
     }
 
     const response = await middleware(
@@ -191,6 +198,7 @@ test('logs the request and the Markdown served, with values only for allowlisted
                 'x-real-ip': '203.0.113.8',
                 'x-session': 'test-secret-5',
                 from: 'test-secret-6@example.com',
+                'cf-connecting-ip': '203.0.113.9',
             },
         })
     )
@@ -208,7 +216,15 @@ test('logs the request and the Markdown served, with values only for allowlisted
         negotiation: 'served',
         markdown_reason: 'agent_fetcher',
         request_headers: headers,
-        other_header_names: ['authorization', 'cookie', 'from', 'x-forwarded-for', 'x-real-ip', 'x-session'],
+        other_header_names: [
+            'authorization',
+            'cf-connecting-ip',
+            'cookie',
+            'from',
+            'x-forwarded-for',
+            'x-real-ip',
+            'x-session',
+        ],
     })
 })
 

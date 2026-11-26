@@ -66,6 +66,7 @@ const HEADER_ALLOWLIST = [
     'accept',
     'accept-encoding',
     'accept-language',
+    'accept-charset',
     'user-agent',
     'sec-ch-ua',
     'sec-ch-ua-mobile',
@@ -93,6 +94,37 @@ const HEADER_ALLOWLIST = [
     'x-vercel-ip-country',
     'x-vercel-ip-country-region',
     'x-vercel-ip-city',
+    'x-vercel-ip-continent',
+    'x-vercel-ip-timezone',
+    // Set by Vercel when the Host header names a different site than the TLS connection.
+    'x-vercel-internal-is-domain-fronting',
+    // TLS fingerprints and the network's AS number, set by Vercel, which tell agents apart.
+    'x-vercel-ja3-digest',
+    'x-vercel-ja4-digest',
+    'x-vercel-ip-as-number',
+    // Sent by MCP clients that point at a page instead of the MCP server.
+    'mcp-method',
+    'mcp-protocol-version',
+    'x-mcp-features',
+    // Set by Anthropic's and OpenAI's fetchers.
+    'x-anthropic-client',
+    'x-openai-host-hash',
+    // Revalidation and partial requests, which explain 304 and 206 responses.
+    'if-none-match',
+    'if-modified-since',
+    'range',
+    // The body of a POST, and the site behind a cross-origin request.
+    'content-type',
+    'content-length',
+    'origin',
+    // Set when a CDN or a Cloudflare Worker sits in front of the docs. `cf-worker` names that site.
+    // `cf-connecting-ip` and `cf-warp-tag-id` stay names only: an IP address and a device id.
+    'cdn-loop',
+    'cf-worker',
+    'cf-ew-via',
+    'cf-ray',
+    'cf-visitor',
+    'cf-ipcountry',
 ]
 const HEADER_ALLOWLIST_REGEX = new RegExp(`^(?:${HEADER_ALLOWLIST.join('|')})$`, 'i')
 const QUERY_PARAM_ALLOWLIST = [
