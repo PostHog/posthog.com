@@ -1,0 +1,195 @@
+---
+title: What you actually get when you pay for a feature flag
+---
+
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
+
+In PostHog your first 1 million feature flag requests are free every month. After that, you pay per request and the price per request drops as you make more. [Experiments](/docs/experiments) use the same requests and the same free tier, so there's no separate price for running a test.
+
+The price per request covers more than an on/off switch. It covers answering fast on every page load, giving each user the same answer every time, targeting on what you know about your users, keeping your product working when something fails, changing flags safely, and seeing what each flag did.
+
+A basic flag is the easy part. A table of flag keys and an `if` statement in your code will do, and an AI agent can write that in an afternoon. Our post on [whether to build or buy feature flags](/blog/build-or-buy-feature-flags) covers the wider trade-off.
+
+This page explains what each request pays for, so you know what the price includes and can compare it with building your own system from scratch.
+
+Every section starts in plain English and ends with the technical detail, so you don't need to be an engineer to follow it.
+
+> **No bill yet?** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. If you make fewer than 1 million flag requests a month, it is always easier and cheaper to start with PostHog.
+
+## The price
+
+You pay per request, not per flag. A request is one call to our `/flags` endpoint, which returns the value of every flag that applies to one user. Your app makes one when the SDK loads, when a user logs in or their properties change, and when your server checks a flag. A request that evaluates 50 flags costs the same as a request that evaluates one. Below are the live rates for [Feature Flags](/feature-flags).
+
+<Pricing productType="feature_flags" />
+
+A request that doesn't evaluate any active, billable flag isn't charged. The `$feature_flag_called` events your SDK sends for usage charts aren't flag requests either. [Cutting feature flag costs](/docs/feature-flags/cutting-costs#understanding-your-bill) explains exactly what counts.
+
+[Local evaluation](/docs/feature-flags/local-evaluation) on your servers bills differently. Each time a server downloads your flag definitions, it counts as 10 requests, or as 1 request if nothing changed since the last download. The flag checks your server then makes in memory are free.
+
+> Asking [PostHog AI to create or change a flag](/docs/feature-flags/manage-flags-ai) spends [AI credits](/docs/posthog-ai/pricing). [Approvals](/docs/settings/approvals) for flag changes are part of the Scale and Enterprise [platform packages](/pricing).
+
+Those are the only line items. We don't charge per flag, per seat, per rollout change, or per experiment, so your whole team can create and change as many flags as they need.
+
+## What happens to one flag request
+
+A feature flag system has the same jobs whether you buy it or build it. It has to answer quickly, give each person the same answer every time, and know enough about that person to target them. It has to keep your product working when it can't answer. Then your team needs a safe way to change flags, and a way to see what each flag did.
+
+In practice that's six steps.
+
+### Step 1: Answering on every page load
+
+Your customer opens your pricing page. Before the page can decide which version to show, it needs to know which flags are on for this person. Every millisecond the answer takes is a millisecond the page waits, and the same check happens on every page load, for every user, at your busiest hour.
+
+**How it works at PostHog:** Flags are served by a dedicated [service written in Rust](https://github.com/PostHog/posthog/tree/master/rust/feature-flags), separate from the rest of PostHog. Flag definitions are cached in Redis, with S3 and then Postgres behind it if the cache misses. For each request, the service fetches the person's properties in one query, then evaluates every flag in memory, in parallel. We [rewrote it from Django](/blog/even-faster-more-reliable-flags) for this, and it now serves about 13,000 requests per second with a p99 under 100 ms ([how we got there](/blog/untangling-rayon-and-tokio)).
+
+On your servers, [local evaluation](/docs/feature-flags/local-evaluation) skips the network for each check. The SDK downloads your flag definitions every 30 seconds by default and evaluates flags in memory. It's available in 10 server-side SDKs. Definition downloads run on their own servers, apart from the ones that answer `/flags`, and when nothing has changed we reply `304 Not Modified` with no data at all.
+
+Without it, every flag check is a database query, and your slowest query sets the speed of your fastest page.
+
+### Step 2: Giving the same answer every time
+
+You roll out a new checkout to 20% of users. Someone in that 20% sees it on Monday, comes back on Tuesday, and should see it again. When you widen the rollout to 50%, the people who already had it should keep it. If they flip back and forth, your support team hears about it, and your experiment results are wrong.
+
+**How it works at PostHog:** Each flag hashes the flag key and the user's ID with SHA-1, and turns the result into a number between 0 and 1. If that number is below the rollout percentage, the user gets the flag. The same inputs always give the same answer, so a rollout needs no stored list of who got what, and widening it only adds people. The flag key is part of the hash, so a user's place in one flag doesn't decide their place in another. Variants use a second hash. [Best practices](/docs/feature-flags/best-practices#how-the-hash-works) shows the full formula.
+
+The hardest case is a user who logs in partway through a visit, because their ID changes. [Device bucketing](/docs/feature-flags/device-bucketing) hashes on the device ID instead, which stays the same through login. [Experience continuity](/docs/feature-flags/stable-identity-for-flags) stores an override when the ID changes, so the value they had before login carries over.
+
+Without it, a user can see the old checkout before login and the new one after, and nobody can tell you why.
+
+### Step 3: Knowing who's asking
+
+"Turn this on for enterprise customers in Europe who signed up after January" is a normal request. To answer it, the flag needs to know the person's plan, country, and signup date at the moment it's checked, including properties they got one second ago.
+
+**How it works at PostHog:** Flags target on [person and group properties](/docs/feature-flags/user-and-group-targeting), [cohorts](/docs/data/cohorts), and [other flags](/docs/feature-flags/dependencies). They read the same people and properties that your [events](/docs/billing/what-you-pay-for-per-event) already build, so there's no second user database to keep in sync. Cohort membership is cached in the service, so cohort targeting is as fast as a property check. When your app sets a new property, client SDKs send it with the next request as a [property override](/docs/feature-flags/property-overrides), so the flag doesn't wait for ingestion to catch up. [Evaluation contexts](/docs/feature-flags/evaluation-contexts) limit each flag to the apps and environments it belongs to.
+
+Without it, every targeting rule needs a copy of your user data inside the flag system, and that copy is always a little out of date.
+
+### Step 4: Not breaking your product when something fails
+
+Networks fail, ad blockers block requests, and servers restart. When the flag service doesn't answer, your product still has to load, and it has to show something sensible.
+
+**How it works at PostHog:** Most SDKs wait 3 seconds by default, then stop waiting and carry on. When a response comes back with only some flags, the SDK updates those and keeps the last known values for the rest. [Bootstrapping](/docs/feature-flags/bootstrapping) lets you send flag values with the page, so the first render doesn't wait for a request at all. On your servers, local evaluation keeps working from cached definitions when PostHog can't be reached, and the safe defaults you set cover a cold start. If you go over a [billing limit](/docs/feature-flags/cutting-costs#quota-limiting), flags return their default values instead of errors.
+
+Your code still has to handle a flag that hasn't loaded yet. [Best practices](/docs/feature-flags/best-practices) explains how.
+
+Without it, an outage in your flag system is an outage in your product.
+
+### Step 5: Changing a flag safely
+
+Your product manager wants to widen a rollout on Friday afternoon. Your support lead wants to turn a feature on for one customer. Neither of them should need a deploy, and both should be able to see who changed what, and when.
+
+**How it works at PostHog:** The [web app](/docs/feature-flags/surfaces/web-app) handles boolean, multivariate, and [remote config](/docs/feature-flags/remote-config) flags, with [payloads](/docs/feature-flags/creating-feature-flags), release conditions, and a test view that shows how a flag evaluates for one user. You can [schedule changes](/docs/feature-flags/scheduled-flag-changes), including recurring ones, and see roughly how many users a change will affect before you make it. Every flag has an activity log of who changed what. The same actions work from the [MCP server](/docs/feature-flags/surfaces/mcp) and the [API](/docs/feature-flags/surfaces/api), and calling the MCP tools is free.
+
+Without it, every flag change is a pull request, or a database edit with no history.
+
+### Step 6: Knowing what a flag did
+
+You shipped the new checkout to half your users. Did it work? Who saw it, did they convert, and did anything break for them?
+
+**How it works at PostHog:** Each flag has a [Usage tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used) that shows how often your code checked it and which values it returned. [Experiments](/docs/experiments) run on the same flags and bill as flag requests. Because flags share people with the rest of PostHog, you can see the [session replays](/docs/session-replay), events, and [errors](/docs/error-tracking) from the people who got a flag, and [start recording](/docs/session-replay/how-to-control-which-sessions-you-record) only when a flag is on. When a flag has done its job, [stale flag cleanup](/docs/feature-flags/cleaning-up-stale-flags) finds flags nothing has checked in 30 days, or that have been fully rolled out for 30 days.
+
+Without it, you know a flag is on but not whether it helped.
+
+## If you build it yourself
+
+Every one of those jobs still exists when you run flags yourself. This table shows what each one looks like on both sides. The second column is what we run for you, the third is what you'd run instead, and the last is when the job needs time from your team.
+
+| Job | What PostHog runs | What you run instead | When it needs your team |
+|---|---|---|---|
+| Answering fast | A Rust flags service, a Redis, S3, and Postgres cache, and local evaluation in 10 server-side SDKs | An API, a cache, and a database of flag rules, close to every app that checks flags | When traffic peaks or the database slows down |
+| Giving the same answer | Deterministic hashing, device bucketing, and experience continuity | A hashing scheme that every SDK and service implements the same way | When a user logs in partway through a visit, or one SDK hashes differently |
+| Knowing who's asking | Targeting on person and group properties, cohorts, and other flags, from the people your events already build | A copy of your user data in the flag system, and a way to keep it current | When someone asks to target a new property |
+| Not breaking your product | SDK timeouts, partial responses, bootstrapping, and cached definitions | Timeouts, defaults, and fallback logic in every app | When the flag service is down |
+| Changing flags safely | A web app, scheduled changes, an activity log, MCP, and an API | An admin UI, permissions, and an audit log | When someone outside engineering needs to change a flag |
+| Knowing what it did | Usage charts, experiments, and links to replays, events, and errors | Logging, a connection to your analytics, and a stats engine | When someone asks whether the feature worked |
+
+## Costs that arrive later
+
+A first build covers a table of flags and a function that reads it. The costs below show up once it's in production.
+
+### The flag service is in your critical path
+
+If your pages wait for flags, the worst minute of your flag service is the worst minute of your product. It has to be sized for your busiest hour, not your average one. Our [October 2025 outages](/handbook/company/post-mortems/2025-10-21-feature-flags-recurring-outages) show how that can go wrong, even for a team that works on flags full time. Some failures are quieter. In [February 2026](/handbook/company/post-mortems/2026-02-06-feature-flags-cache-degradation), a cache backlog meant flag changes were slow to take effect, and there were no errors to warn anyone.
+
+### Consistency bugs don't cause errors
+
+A hashing difference between two SDKs, or an ID that changes at login, doesn't crash anything. It shows a user the wrong version, and it skews your experiment results. Someone has to notice, and then someone has to find the cause.
+
+### Targeting needs your user data
+
+Every new targeting rule needs data your flag system may not have: a plan, a company size, or a cohort of users who did something last week. Each one is another sync to build, and another place where data can be out of date. In PostHog, [the events you already send](/docs/billing/what-you-pay-for-per-event) do this job.
+
+### Old flags stay in your code
+
+Teams add flags faster than they remove them. Each forgotten flag is a branch in your code that nobody tests. Without usage data, you can't tell which flags are safe to remove.
+
+### Time and trust
+
+The rest is the same as for events. There are the [hours your team doesn't spend on your product](/docs/billing/what-you-pay-for-per-event#time-you-dont-spend-on-your-product), and the controls your own build would need to match: [SOC 2](/docs/privacy/soc2), [HIPAA](/docs/privacy/hipaa-compliance), and a public [status page](/status). Flags decide what your users see, so the system that serves them needs the same care as the rest of your product.
+
+## Your own ledger
+
+This is where you do the math. You'll want an engineer for the technical rows, but anyone can fill in the rest. If an agent is helping with your estimate, ask it to fill this in too and say where each number came from.
+
+| Input | Your number | Notes |
+|---|---|---|
+| Flag requests per month | | Your [billing page](https://app.posthog.com/organization/billing) shows it, or [estimate it](/docs/billing/estimating-usage-costs#how-do-i-estimate-the-number-of-feature-flag-requests) |
+| Regions | | Every region where your users need a fast answer |
+| Service compute per region | | The servers that answer flag requests, sized for your busiest hour |
+| Cache and database | | Where flag rules and user properties live |
+| User data sync | | Keeping properties and cohorts current in the flag system |
+| Engineer hours per month | | SDK updates, admin UI requests, and debugging flags that gave the wrong answer |
+| On-call | | Who, and what it costs them |
+
+In plain English, add up the servers, the data, and the people, then divide by the number of requests you make. As a formula:
+
+```
+monthly total         = (compute per region × regions) + cache and database + user data sync + (engineer hours × loaded rate) + on-call
+your cost per request = monthly total ÷ flag requests per month
+```
+
+Compare the last line with [a PostHog bill](/pricing) at the same volume. Take the Feature Flags total from the pricing calculator and divide it by your monthly requests. The free million and the falling tiers mean that average comes out lower than the rates at the top of this page. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates).
+
+Don't be surprised if compute is the smallest line. The ledger also leaves out the costs you can't put a price on, like a slower page, a user who sees the wrong version, and an experiment result you can't trust.
+
+## When building is the right call
+
+Building your own flags is the better choice for some teams. These are the cases where we'd build it too.
+
+**You only need a few on/off switches.** If your flags are kill switches that change once a month and apply to everyone, a config file or an environment variable will do. You can skip most of this page, because you don't need targeting, rollouts, or experiments.
+
+**Flag checks can never leave your infrastructure.** If a policy says that no request may go to a third party, you need flags you host yourself. Check first whether [local evaluation](/docs/feature-flags/local-evaluation) meets the policy: your servers download flag rules from PostHog, then check flags without a request for each user.
+
+If you're not sure which side you're on, fill in the ledger. For more on the trade-off, see our post on [building or buying feature flags](/blog/build-or-buy-feature-flags).
+
+## Common questions
+
+### Does PostHog charge per flag or per seat?
+
+No. You pay per request to the `/flags` endpoint. A request costs the same whether it evaluates one flag or 50, and seats are free. Experiments bill as flag requests too.
+
+### Do `$feature_flag_called` events count as flag requests?
+
+No. They're the events that build each flag's usage charts, and they don't add to your flag bill. [Cutting feature flag costs](/docs/feature-flags/cutting-costs#understanding-your-bill) explains what counts.
+
+### Is local evaluation cheaper?
+
+Often, for servers that check flags many times. Each server pays for its downloads of flag definitions, not for each check: 10 requests when the definitions changed and 1 when they didn't. One server at the default 30-second interval downloads about 86,400 times a month. More servers multiply that, so [share one cache](/docs/feature-flags/local-evaluation/distributed-environments) between them.
+
+### Is it cheaper to build my own feature flags?
+
+A table and an `if` statement cost almost nothing. Most of the cost is the work around them: fast answers, the same hashing in every SDK, targeting on current user data, fallbacks, and a UI for your team. The [ledger](#your-own-ledger) works it out with your numbers.
+
+## How to lower your PostHog bill
+
+If you want to keep using PostHog but pay less, these changes help most.
+
+- [Reduce client-side requests](/docs/feature-flags/cutting-costs#reducing-client-side-feature-flag-requests). Skip the request on first load when you call `identify()` straight after, or [bootstrap](/docs/feature-flags/bootstrapping) flags from your server.
+
+- On servers, use [local evaluation](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs) with an SDK version that sends ETags, and share definitions across instances.
+
+- Turn off flag requests in [test and CI environments](/docs/feature-flags/cutting-costs#configuring-test-and-ci-environments).
+
+- Set a [billing limit](/docs/billing/limits-alerts) so you know the most you'll pay in a month.
+
+If you'd like help with your setup, [talk to us](/talk-to-a-human).

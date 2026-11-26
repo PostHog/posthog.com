@@ -4031,6 +4031,10 @@ export const docsMenu = {
                             url: '/docs/billing/what-you-pay-for-per-recording',
                         },
                         {
+                            name: 'What you actually get when you pay for a feature flag',
+                            url: '/docs/billing/what-you-pay-for-per-feature-flag',
+                        },
+                        {
                             name: 'Pre-paid plans',
                             url: '/docs/billing/pre-paid-plans',
                         },

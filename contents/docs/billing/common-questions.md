@@ -22,6 +22,10 @@ It's also confidence that your data is safe, that there's a team of on-call engi
 
 Recording the session without slowing your product down, masking private data on the device, storing the recording, and playback for everyone on your team. Check our breakdown of [what you pay for per recording](/docs/billing/what-you-pay-for-per-recording) for a detailed explanation of each step.
 
+## What does the price of a feature flag include?
+
+You pay per request to the `/flags` endpoint, not per flag. Each request covers answering fast on every page load, giving each user the same answer every time, targeting on your user data, safe fallbacks when something fails, and the tools your team uses to change flags and see what they did. Experiments bill as flag requests too. Check our breakdown of [what you pay for per feature flag](/docs/billing/what-you-pay-for-per-feature-flag) for a detailed explanation of each step.
+
 ## Do projects share usage and free allowances?
 
 Yes. Billing is organization-wide, so usage from all projects in an organization is combined into one bill with one free allowance. For example, if your development, staging, and production projects each send 400,000 events in a month, that counts as 1.2 million events, not three separate free tiers.
