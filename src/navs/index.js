@@ -8815,12 +8815,6 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Pricing',
-                    url: '/docs/workflows-next/resources/pricing',
-                    icon: 'IconPiggyBank',
-                    color: 'green',
-                },
-                {
                     name: 'Tutorials and guides',
                     url: '/docs/workflows-next/resources/tutorials',
                     icon: 'IconGraduationCap',
