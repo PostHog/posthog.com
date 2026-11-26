@@ -1,7 +1,8 @@
 /// <reference lib="es2020" />
 /**
- * Serve raw markdown to clients that ask for it with `Accept: text/markdown`,
- * and to agents that fetch a page for a user unless they ask for HTML (#21381).
+ * Serve raw markdown to clients whose Accept ranks `text/markdown` at least as
+ * high as `text/html`, and to agents that fetch a page for a user unless they
+ * ask for HTML (#21381).
  * Crawlers such as Googlebot and ClaudeBot keep the HTML. Mintlify-hosted docs
  * use the same user-agent and Accept split.
  *
@@ -167,9 +168,17 @@ export default async function middleware(request: Request): Promise<Response | u
 async function negotiate(request: Request): Promise<NegotiationResult> {
     const accept = request.headers.get('accept') || ''
     if (accept.includes(MCP_CLIENT_ACCEPT)) return { response: await mcpServerHint(request), negotiation: 'mcp_client' }
-    const acceptsMarkdown = accept.includes('text/markdown')
+    const weights = acceptWeights(accept)
+    const markdownWeight = weights.get('text/markdown') ?? 0
+    const htmlWeight = weights.get('text/html') ?? weights.get('text/*') ?? weights.get('*/*') ?? 0
+    // Ties go to Markdown: Claude Code lists `text/markdown, text/html, */*` and means Markdown.
+    const acceptsMarkdown = markdownWeight > 0 && markdownWeight >= htmlWeight
+    // An agent's Accept can still rule Markdown out with a zero weight, as in `text/*;q=0`.
+    const refusesMarkdown = (weights.get('text/markdown') ?? weights.get('text/*') ?? weights.get('*/*')) === 0
     const isAgentFetch =
-        USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') && !accept.includes('text/html')
+        USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') &&
+        !weights.get('text/html') &&
+        !refusesMarkdown
 
     const url = new URL(request.url)
     const pathname = url.pathname.replace(/\/$/, '')
@@ -197,6 +206,20 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
         },
     })
     return { response, negotiation: 'served', reason, markdownFetchMs }
+}
+
+// The q-value of each media range in an Accept header, 1 when it has none. A range listed twice keeps its
+// first weight.
+function acceptWeights(accept: string): Map<string, number> {
+    const weights = new Map<string, number>()
+    for (const part of accept.split(',')) {
+        const [range, ...params] = part.split(';').map((piece) => piece.trim().toLowerCase())
+        if (!range || weights.has(range)) continue
+        const q = params.find((param) => param.startsWith('q='))
+        const weight = q === undefined ? 1 : Number(q.slice(2))
+        weights.set(range, Number.isNaN(weight) ? 0 : weight)
+    }
+    return weights
 }
 
 function logRequest(request: Request, result: NegotiationResult): void {
