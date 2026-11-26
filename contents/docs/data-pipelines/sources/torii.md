@@ -9,9 +9,9 @@ availability:
 sourceId: Torii
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Torii connector syncs apps, users, contracts, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -33,7 +33,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Torii tables are full refresh. Each sync replaces the contents of the table.
+Most Torii tables use full refresh, which replaces the contents of the table on each sync. The Audit table supports incremental sync based on `creationTime`.
 
 ## Configuration
 
