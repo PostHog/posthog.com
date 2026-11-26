@@ -59,6 +59,8 @@ import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
+import SynthflowLogo from '../images/customers/synthflow-light.png'
+import SynthflowLogoDark from '../images/customers/synthflow-dark.png'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
 import UKGovtLogo from '../components/CustomerLogos/UKGovtLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
@@ -1449,6 +1451,41 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 quotes: [
                     "I don't need to leave the PostHog ecosystem often. I get almost everything I need on PostHog, which makes it easy for me to make a lot of decisions very fast.",
                     'Instead of using 10 different data layers, data providers, and data collectors, you can just use PostHog.',
+                ],
+            },
+        },
+    },
+    synthflow: {
+        name: 'Synthflow',
+        toolsUsed: [
+            'mcp_analytics',
+            'ai_observability',
+            'product_analytics',
+            'inbox',
+            'feature_flags',
+            'error_tracking',
+            'cdp',
+            'posthog_slack',
+        ],
+        industries: ['AI'],
+        users: ['Engineering', 'Product'],
+        notes: 'AI voice agents that answer and make phone calls.',
+        featured: false,
+        logo: {
+            light: SynthflowLogo,
+            dark: SynthflowLogoDark,
+        },
+        height: 8,
+        quotes: {
+            fionn_delahunty: {
+                // This is the author handle used in OSQuote
+                name: 'Fionn Delahunty',
+                role: 'Head of Product',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Fionn_Delahaunty_customer_story_8e75e57847.jpeg',
+                },
+                quotes: [
+                    "There's some things you roll out that you have prior experience of rolling out. So you have a hypothesis about how customers will use them. I was curious from a product perspective how our users would use our MCP.",
                 ],
             },
         },

@@ -16,6 +16,7 @@ The button opens its link in a new window, with `state={{ newWindow: true }}` on
 | `MCPLeaderboardCallout` | `compact` | `/mcp-analytics` (the leaderboard section) |
 | `EvalsPlaygroundCallout` | `compact` | `/docs/ai-evals` and `/docs/ai-evals/offline-evals` |
 | `contents/handbook/wizard-and-docs/mdx-and-components.mdx` | `featured` | `/handbook/wizard-and-docs/mdx-and-components` (the live example) |
+| `contents/customers/synthflow.mdx` | `featured` | `/customers/synthflow` (the end of the story) |
 
 For the compact layout in a `.tsx` page, make a small wrapper component for each callout, so a page imports one component with no props. Put the copy in the wrapper. In MDX, use the featured layout directly, with no wrapper.
 
