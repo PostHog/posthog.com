@@ -65,7 +65,7 @@ Onboarding
       - [CSM + TAM](https://posthog.com/handbook/growth/sales/account-allocation)
       - [Contract rules](https://posthog.com/handbook/growth/sales/contract-rules)
 - Work through your onboarding plan - make sure to prioritize Drata
-- Practice your demo
+- Prepare your PostHog demo for the in-person onboarding (30 minutes, you set the context!)
 - The plan for onboarding week
 How we work
 - Sprint planning issue on GitHub
@@ -117,6 +117,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 - **Prioritizing a book** - the signals we look at and which ones are more worrisome, both when a book is first assigned and on an ongoing basis. Have them set up their own Customer Analytics views
 - **Deciding next steps** - by now they should have a read on where each account's at (or know how to find out). Use next steps that haven't come up yet as chances to talk them through - e.g. a new Slack channel (invite you + support-hog), an upcoming renewal (how renewals work)
+- **Alerts and how to respond** - go through every alert and task the team gets and what the right response to each one is: the renewal pings in #sales-alerts, the spike detector, the Customer Analytics tasks from the [managed customer scouts](/handbook/customer-success/how-we-use-automation#managed-customer-scouts), overdue invoice and credit alerts, and tags like `churn risk`
 
 #### Throughout the week
 
@@ -129,8 +130,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 - **PostHog fundamentals** - a walkthrough, depending on their familiarity with the product
 - **Working with support** - how tickets flow, [handling customer issues](/handbook/customer-success/handling-customer-issues)
 - **Quarterly goal brainstorm** - useful when they join near the start of a quarter
-- **Billing mechanics** - billing-limit grace periods and trust scores, giving credits, chasing overdue invoices, the spike detector
-- **Customer Analytics mechanics** - tags like `churn risk`, the renewal alerts in #sales-alerts
+- **Billing mechanics** - billing-limit grace periods and trust scores, giving credits, chasing overdue invoices
 
 ## First month
 
