@@ -32,7 +32,7 @@ Add the dependency to your shared module's `commonMain` source set:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.posthog:posthog-kmp:<version>")
+            implementation("com.posthog:posthog-kmp:1.+")
         }
     }
 }
@@ -42,13 +42,13 @@ If you use a [Gradle version catalog](https://docs.gradle.org/current/userguide/
 
 ```toml file=gradle/libs.versions.toml
 [versions]
-posthog-kmp = "<version>"
+posthog-kmp = "1.0.0"
 
 [libraries]
 posthog-kmp = { group = "com.posthog", name = "posthog-kmp", version.ref = "posthog-kmp" }
 ```
 
-You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-kmp).
+You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-kmp). `posthog-kmp` 1.0.0 requires Kotlin 2.4.0 or later across all targets (`com.posthog:posthog-kmp` ships Kotlin 2.4 metadata).
 
 ### Link the iOS Swift package
 

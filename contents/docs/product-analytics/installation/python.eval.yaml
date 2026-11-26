@@ -4,9 +4,8 @@ status: active
 
 # One check for each flow the Python docs teach. Every check is a baseline: a short
 # prompt in a user's words, no docs added. The prompt names PostHog and the kind of
-# analytics, and no API. The rubrics describe the correct result for posthog 7, the
-# major the docs show. `install` runs in an app with no PostHog code. The other checks run
-# in an app that already uses posthog 7.
+# analytics, and no API. `install` grades against posthog 8, which the docs now show.
+# The existing codebase checks run in Polar's server on posthog 7 (and -next on posthog 8).
 checks:
     - id: install
       description: >-
@@ -23,11 +22,12 @@ checks:
           shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/pyproject.toml lists `posthog` at 7.x.
+                  {folder}/pyproject.toml lists `posthog` at 8.x.
               initialized: >-
                   The backend creates one client at startup with Posthog(token,
                   host=...) or AsyncPosthog(token, host=...) from the posthog package.
-                  Cite the file and line(s).
+                  Every argument after the token and host is passed by keyword. Cite the
+                  file and line(s).
               token-from-env: >-
                   The project token comes from an environment variable, directly or
                   through the app's settings. It is not written in the source.
@@ -167,35 +167,7 @@ checks:
               flag-gates-invite: >-
                   Inviting a member is refused when the flag is off.
 
-    # Next major: the same tasks for a project on posthog 8. Expected to fail until the
-    # docs show that major.
-    - id: install-next
-      description: >-
-          The install task for a project on posthog 8. Expected to fail until the docs
-          show that major.
-      codebase_to_test: oss-mealie
-      pages:
-          - docs/libraries/python
-      prompt: *install-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  {folder}/pyproject.toml lists `posthog` at 8.x.
-              initialized: >-
-                  The backend creates one client at startup with Posthog(token,
-                  host=...) or AsyncPosthog(token, host=...) from the posthog package.
-                  Every argument after the token and host is passed by keyword. Cite the
-                  file and line(s).
-              token-from-env: >-
-                  The project token comes from an environment variable, directly or
-                  through the app's settings. It is not written in the source.
-              shuts-down-on-exit: >-
-                  The client's shutdown() runs when the server stops: called in the
-                  app's shutdown hook (awaited for AsyncPosthog), or by leaving an `async
-                  with AsyncPosthog(...)` block. Fails if nothing flushes or shuts the
-                  client down.
-
+    # Next major: anonymous event check for a project on posthog 8.
     - id: anonymous-event-next
       description: >-
           The anonymous-event task for a project on posthog 8. Expected to fail until
