@@ -9,7 +9,7 @@ availability:
 sourceId: Guru
 ---
 
-The Guru connector can link cards, collections, groups, and members from your [Guru](https://www.getguru.com/) knowledge base to PostHog.
+The Guru connector can link cards, collections, groups, members, card templates, collection access permissions, and knowledge agents from your [Guru](https://www.getguru.com/) knowledge base to PostHog.
 
 To link Guru:
 
@@ -33,12 +33,15 @@ Once the syncs are complete, you can start using Guru data in PostHog.
 
 The following schemas are available:
 
-| Schema        | Sync mode    | Description               |
-| ------------- | ------------ | ------------------------- |
-| `cards`       | Incremental  | Guru knowledge base cards |
-| `collections` | Full refresh | Card collections          |
-| `groups`      | Full refresh | User groups               |
-| `members`     | Full refresh | Team members              |
+| Schema                    | Sync mode    | Description                             |
+| ------------------------- | ------------ | --------------------------------------- |
+| `cards`                   | Incremental  | Guru knowledge base cards               |
+| `collections`             | Full refresh | Card collections                        |
+| `groups`                  | Full refresh | User groups                             |
+| `members`                 | Full refresh | Team members                            |
+| `card_templates`          | Full refresh | Card templates                          |
+| `collection_group_access` | Full refresh | Group access permissions per collection |
+| `knowledge_agents`        | Full refresh | Knowledge agents (AI assistants)        |
 
 The `cards` schema supports incremental sync using the `lastModified` field, so only cards modified since the last sync are fetched. The other schemas perform a full refresh on each sync.
 
