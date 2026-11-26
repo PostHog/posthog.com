@@ -9,9 +9,15 @@ AI steps let an automation look at something and decide, such as what a support 
 | Step | What it does |
 | --- | --- |
 | **Classify with AI** | Sorts text, such as a ticket or a survey answer, into categories you pick, with a confidence score. |
-| **Replay Vision** | Watches the person's session recording and answers a question about it. |
 | **Create AI task** | Starts an AI agent with your instructions, repositories, and connectors, then continues with its result. |
+| **Replay Vision** | Watches the person's session recording and answers a question about it. |
 | **Run scout** | Runs a scout, and continues with what it found. |
+
+## AI tasks
+
+The **Create AI task** step starts an agent with instructions you write, and optional repositories and connectors. Use it to triage a new ticket, reply to an alert in Slack, or open a pull request from a webhook. The automation continues with the agent's result, which can be structured, so later steps branch on it.
+
+See [AI tasks](/docs/workflows/ai-tasks) for the setup, limits, and examples.
 
 ## Replay Vision
 
@@ -35,12 +41,6 @@ By default it waits for the session to end, then watches the whole thing. Branch
 />
 
 See [Replay Vision in automations](/docs/workflows/replay-vision) for every setting, the limits, and the credits it uses.
-
-## AI tasks
-
-The **Create AI task** step starts an agent with instructions you write, and optional repositories and connectors. Use it to triage a new ticket, reply to an alert in Slack, or open a pull request from a webhook. The automation continues with the agent's result, which can be structured, so later steps branch on it.
-
-See [AI tasks](/docs/workflows/ai-tasks) for the setup, limits, and examples.
 
 ## Tips
 
