@@ -11,7 +11,7 @@ import {
 } from '../src/components/SdkReferences/utils'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
 import { buildMcpBrief, BriefToolCategory } from '../src/components/MCPPage/agentBrief'
-import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
+import { calculatePrice, withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -1127,7 +1127,13 @@ export const generatePricingMd = (products: any[]) => {
         if (meta?.note) {
             section += `\n${meta.note}\n`
         }
-        section += `\n**Unit: ${unit}** | Prices decrease with volume\n\n`
+        // A product with one paid price, like the self-driving inbox, has no volume discount to mention
+        const paidPrices = new Set(
+            (tiers || [])
+                .filter((tier: any) => parseFloat(tier.unit_amount_usd) > 0)
+                .map((tier: any) => tier.unit_amount_usd)
+        )
+        section += `\n**Unit: ${unit}**${paidPrices.size > 1 ? ' | Prices decrease with volume' : ''}\n\n`
 
         if (tiers) {
             section += tierTable(tiers, unit)
@@ -1145,6 +1151,66 @@ export const generatePricingMd = (products: any[]) => {
             // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
             if (addon.legacy_product || addon.type === 'logs_retention_30d') continue
             productAddons.push({ ...addon, parentName: product.name })
+        }
+    }
+
+    // Example bills, computed from the same tiers with the pricing calculator's calculatePrice, so they
+    // stay correct when prices change. Each product gets two volumes: 10 and 100 times its free allowance.
+    const EXAMPLE_MULTIPLES = [10, 100]
+    const formatCost = (usd: number): string => `$${usd.toLocaleString('en-US')}`
+    const formatUsage = (volume: number, unit: string): string =>
+        `${formatVolume(volume)} ${unit === 'GB' ? unit : `${unit}s`}`
+    const tiersOf = (product: any): any[] | undefined => product?.plans?.find((plan: any) => plan.tiers)?.tiers
+    const freeAllowance = (tiers: any[]): number | undefined =>
+        tiers[0] && tiers[0].up_to && parseFloat(tiers[0].unit_amount_usd) === 0 ? tiers[0].up_to : undefined
+
+    const exampleRows: string[] = []
+    // The first three products at the smaller volume, added up into one example bill
+    const combinedBill: { label: string; cost: number }[] = []
+    let hasIdentifiedRows = false
+    for (const product of orderedProducts) {
+        const tiers = tiersOf(product)
+        const free = tiers && freeAllowance(tiers)
+        if (!tiers || !free) continue
+        const unit = product.plans.find((plan: any) => plan.tiers).unit || product.unit || 'unit'
+        for (const multiple of EXAMPLE_MULTIPLES) {
+            const usage = formatUsage(free * multiple, unit)
+            const cost = calculatePrice(free * multiple, tiers).total
+            exampleRows.push(`| ${product.name} | ${usage} | ${formatCost(cost)} |`)
+            if (multiple === EXAMPLE_MULTIPLES[0] && combinedBill.length < 3) {
+                combinedBill.push({ label: `${product.name} at ${usage}`, cost })
+            }
+        }
+        // Identified events bill the Product analytics price plus the Identified events add-on
+        const identified = (product.addons || []).find((addon: any) => addon.type === 'enhanced_persons')
+        const identifiedTiers = tiersOf(identified)
+        if (identifiedTiers) {
+            hasIdentifiedRows = true
+            for (const multiple of EXAMPLE_MULTIPLES) {
+                const volume = free * multiple
+                const cost = calculatePrice(volume, tiers).total + calculatePrice(volume, identifiedTiers).total
+                const usage = `${formatVolume(volume)} identified events`
+                exampleRows.push(`| ${product.name} + ${identified.name} | ${usage} | ${formatCost(cost)} |`)
+            }
+        }
+    }
+
+    let examplesSection = ''
+    if (exampleRows.length > 0) {
+        examplesSection += '## Example monthly bills\n\n'
+        examplesSection +=
+            'Each row is the monthly bill for one product at that usage, after the free tier. The numbers come from the tier tables above, computed the same way as the pricing calculator.'
+        if (hasIdentifiedRows) {
+            examplesSection += ' Product analytics rows without Identified events are anonymous events.'
+        }
+        examplesSection += '\n\n| Product | Monthly usage | Monthly bill |\n|---|---|---|\n'
+        examplesSection += exampleRows.join('\n') + '\n\n'
+        if (combinedBill.length > 1) {
+            const labels = combinedBill.map((part) => part.label)
+            const listed = `${labels.slice(0, -1).join(', ')}, and ${labels[labels.length - 1]}`
+            const sum = combinedBill.map((part) => formatCost(part.cost)).join(' + ')
+            const total = formatCost(combinedBill.reduce((acc, part) => acc + part.cost, 0))
+            examplesSection += `A month's bill is the sum of the products you use, plus add-ons and platform packages. For example, ${listed} cost ${sum} = ${total} a month.\n\n`
         }
     }
 
@@ -1226,7 +1292,7 @@ There are no per-seat charges. Your whole team can use PostHog.
 ${productSections.join('\n\n')}
 
 ${addonsSection}
-${platformSection}
+${examplesSection}${platformSection}
 ## Volume discounts for annual commitments
 
 PostHog's standard monthly pricing already gets cheaper at higher volumes (see the tier tables above). For annual credit commitments, additional discounts are available — and they're fully transparent:
@@ -1255,6 +1321,15 @@ For full details on how discounts work, see our transparent contract rules: http
 - **Y Combinator**: $50,000 in free credits per year, renewable while eligible (raised less than $25M). Any YC batch. Apply via https://app.posthog.com/startups/yc
 - **Nonprofits**: 15% discount on credit purchases below $25k. Additional 5% on top of standard volume discounts for purchases between $25k–$100k. Sign up, then contact us through the app.
 - **Self-serve annual**: 10% off for qualifying self-serve customers (3+ paid invoices, $280+ average).
+
+## Common questions
+
+- **Is there a free trial?** No trial is needed. The free tier of every product resets every month, and you can use PostHog for free for as long as you want.
+- **Can I cap my bill?** Yes. Set a billing limit for each product in your organization's [billing settings](https://app.posthog.com/organization/billing). At the limit, PostHog stops ingesting that product's data, and data it does not store is not billed. Owners get alert emails at 80% and 100% of each limit and of the free tier. Logs custom retention can't have a limit. See [billing limits and alerts](https://posthog.com/docs/billing/limits-alerts.md).
+- **Do projects share the free tier?** Yes. Billing is per organization, so the usage of all its projects adds up to one bill with one free tier.
+- **What counts as a billed event?** PostHog bills only data it receives and stores. Custom events, \`$pageview\`, \`$autocapture\`, and \`$identify\` bill as Product analytics events. Events that another product bills, such as \`$exception\`, don't also bill as Product analytics events, and events a transformation drops are free. See [what each product bills for](https://posthog.com/docs/billing/common-questions.md#what-does-each-product-bill-for).
+- **Anonymous or identified events?** Identified events are tied to a person profile, for logged-in users. They bill the Product analytics price plus the Identified events add-on. Anonymous events, such as visits to a marketing site, bill only the Product analytics price. See [anonymous vs identified events](https://posthog.com/docs/data/anonymous-vs-identified-events.md).
+- **How do I estimate my bill?** Start from the example bills above or the [pricing calculator](https://posthog.com/pricing), and see [estimating usage and costs](https://posthog.com/docs/billing/estimating-usage-costs.md).
 
 ## Definitions
 
