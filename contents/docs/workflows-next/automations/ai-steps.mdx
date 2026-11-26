@@ -15,9 +15,56 @@ AI steps let an automation look at something and decide, such as what a support 
 
 ## AI tasks
 
-The **Create AI task** step starts an agent with instructions you write, and optional repositories and connectors. Use it to triage a new ticket, reply to an alert in Slack, or open a pull request from a webhook. The automation continues with the agent's result, which can be structured, so later steps branch on it.
+The **Create AI task** step starts an agent with instructions you write. It can read your PostHog data, work in your GitHub repositories, and call your tools. The automation waits for it to finish, up to about 3 hours, then carries on with what it returned.
 
-See [AI tasks](/docs/workflows/ai-tasks) for the setup, limits, and examples.
+### Set it up
+
+Write the **Instructions**, using the trigger's data, such as `Read ticket {event.properties.ticket_id} and decide who should handle it.` Then pick what the agent can use. All of these are optional:
+
+| Field | What it does |
+| --- | --- |
+| **Repositories** | GitHub repositories it can work in, as `org/repo`. Up to 20. |
+| **Connectors** | MCP servers it can call, from the ones shared with your project. |
+| **Skills** | Skills from your skills store. |
+| **PostHog access** | **Read only** by default. **Full access** lets it change things, such as person properties. |
+| **Model** | The model and reasoning effort. |
+| **Maximum parallel tasks** | Skips new runs while this many tasks are still going. 5 by default. |
+| **Reply in the Slack thread** | On a Slack trigger, the agent replies in the thread that started it, and replies there go back to the agent. |
+
+Each task also shows up in **Tasks**, where you can follow the agent's work.
+
+<!-- shot: automation-ai-task -->
+
+### Get answers back
+
+Tell the agent which answers you want, and it hands them back as fields that later steps can use:
+
+1. On the step, open **Output variables** and add a mapping, such as the result path `output.verdict` into a variable called `verdict`.
+2. Pick the variable's type: text, number, or true or false. The agent returns that type.
+3. Ask for it in the instructions: "Set `verdict` to `bug`, `question`, or `feature_request`."
+
+Later steps use it as `{{ variables.verdict }}`, such as a **Conditional branch** that posts bugs to Slack and replies to questions by email.
+
+<!-- shot: automation-ai-task-branch -->
+
+You can ask for up to 20 fields, and each text field holds up to 1,500 characters. If the agent doesn't fill one, the step still finishes, the variable stays empty, and the run's log warns you.
+
+The step also returns:
+
+| Result path | What it holds |
+| --- | --- |
+| `status` | `completed`, or `failed` or `cancelled` when it fails |
+| `final_message` | The agent's last message |
+| `pr_urls` | Pull requests it opened |
+| `output.<name>` | The fields you asked for |
+
+### When it fails
+
+If the task fails, is cancelled, or runs out of time, the step's **On error** setting decides what's next. With **Continue**, later steps see `status` and `error_message`, so a branch can send the failure to Slack.
+
+A workflow can start 100 tasks a day, and a project 500. An admin can raise both in **Settings** > **Workflows** > **AI task limits**.
+
+See [AI tasks](/docs/workflows/ai-tasks) for more examples.
 
 ## Replay Vision
 
