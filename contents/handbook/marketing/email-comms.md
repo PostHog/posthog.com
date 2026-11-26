@@ -46,12 +46,7 @@ The emails in our <PrivateLink url="https://us.posthog.com/project/2/workflows/0
 - <PrivateLink url="https://us.posthog.com/project/2/workflows/library/templates/01a21808-b07d-0000-e8ac-1ee38513810b">Designed email: HTML</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/workflows/library/templates/01a21808-b125-0000-95db-78b82ab1504f">Plain personal email</PrivateLink>
 
-A few rules apply to every email:
-
-- **Links:** Make a link bold only when it is the main action or result of the email. Other links, such as docs or background reading, are not bold.
-- **Unsubscribe and address:** Every marketing email needs exactly one unsubscribe link and our postal address. This includes plain emails that look like a personal note.
-
-If you change the skill, add version notes that say what changed and why. We post the notes of each new version in Slack, so the team can see the change.
+The skill is the source of truth for our email rules. To change a rule, change the skill, not this page.
 
 All new broadcasts and automations should use these defaults:
 
