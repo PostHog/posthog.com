@@ -1,0 +1,53 @@
+---
+title: SDK feature support
+sidebar: Docs
+showTitle: true
+---
+
+Check minimum SDK versions and feature limits across PostHog Surveys client SDKs.
+
+## Platform requirements
+
+| SDK | Package | Minimum OS / runtime | Built-in UI | Custom UI |
+| --- | --- | --- | --- | --- |
+| Web | `posthog-js` | `>= 1.81.3` (`1.67.1` for API-only) | Automatic popover, inline (`displaySurvey`), feedback button | `getActiveMatchingSurveys` + `capture` |
+| React Native | `posthog-react-native` | `PostHogSurveyProvider` required (`react-native-svg` optional) | Built-in modal | Custom rendering via SDK survey methods |
+| iOS | `posthog-ios` | iOS `15.0+` | Built-in SwiftUI sheet | Custom `PostHogSurveysDelegate` |
+| Android | `posthog-android` | API `23+` (`posthog-android-surveys-compose` for UI) | `PostHogSurveysComposeDelegate` (auto-discovered in `3.49.0+`, otherwise log-only default) | Custom `PostHogSurveysDelegate` |
+| Flutter | `posthog_flutter` | `>= 5.8.0` (`5.14.0+` recommended), Android API `23+`, iOS `15.0+`, `PosthogObserver` required | Built-in bottom sheet (Web delegates to `posthog-js`) | Not built-in |
+
+## Feature compatibility matrix
+
+| Feature | Web (`posthog-js`) | React Native | iOS | Android | Flutter |
+| --- | --- | --- | --- | --- | --- |
+| Core popover surveys | `1.81.3+` | Supported | Supported | Supported (Compose delegate) | `5.8.0+` |
+| Wait period (`seenSurveyWaitPeriodInDays`) | `1.105.7+` | `4.81.5+` | `3.44.0+` | `3.35.0+` | `5.18.0+` |
+| Question & choice shuffling (`shuffleQuestions`, `shuffleOptions`) | `1.131.5+` | `4.68.0+` | Choice shuffling (`3.76.0+`) | Choice shuffling (Compose `0.2.2+`) | Choice shuffling (`5.44.1+`) |
+| Popup delay (`surveyPopupDelaySeconds`) | `1.141.0+` | `4.85.0+` | `3.54.0+` | `3.49.0+` | `5.54.0+` |
+| URL targeting (regex and exact match) | `1.82.0+` | Not supported | Not supported | Not supported | Not supported |
+| Device type targeting (`conditions.deviceTypes`) | `1.214.0+` | `4.3.0+` | `3.22.0+` | `3.21.0+` | `5.1.0+` |
+| Custom font (`appearance.fontFamily`) | `1.223.4+` | Not supported | `3.22.0+` | Not supported | `5.56.0+` |
+| Repeat on every activation (`schedule: "always"`) | `1.234.11+` | `4.27.0+` | `3.43.0+` | `3.35.0+` | `5.18.0+` |
+| Partial responses (`enable_partial_responses`) | `1.240.0+` | `4.75.0+` | `3.79.0+` | `3.70.0+` | `5.48.0+` |
+| Auto-submit on selection (`skipSubmitButton`) | `1.244.0+` | `4.26.0+` | `3.77.0+` | `3.66.4+` (Compose `0.3.0+`) | `5.45.0+` |
+| Custom popover position (`top`, `middle`, `bottom`) | `1.245.0+` | `4.43.13+` | `3.95.0+` | Not supported | Not supported |
+| Linked feature flag variant (`linkedFlagVariant`) | `1.259.0+` | `4.4.0+` | `3.78.0+` | `3.67.0+` | Not supported |
+| Event trigger property filters | `1.268.0+` | `4.16.0+` | `3.47.0+` | `3.38.0+` | `5.20.0+` |
+| Feedback button & tab position (`nextToTrigger`, `tabPosition`) | `1.294.0+` | Not supported | Not supported | Not supported | Not supported |
+| Cancellation events (`conditions.cancelEvents`) | `1.299.0+` | Not supported | `3.96.0+` | Not supported | Not supported |
+| Input styling (`inputBackground`, `inputTextColor`) | `1.300.0+` | `4.15.0+` | `3.38.0+` | `3.49.0+` | `5.13.0+` |
+| Action targeting (`conditions.actions`) | `1.301.0+` | Not supported | Not supported | Not supported | Not supported |
+| Custom text colors (`textColor`, `submitButtonTextColor`) | `1.310.1+` | `4.17.0+` | `3.38.0+` | `3.49.0+` | `5.13.0+` |
+| Thumbs up/down 2-point rating (`scale: 2`) | `1.326.0+` | `4.19.0+` | `3.38.0+` | `3.49.0+` | `5.13.0+` |
+| Open-text length validation (`questions[].validation`) | `1.344.0+` | `4.31.0+` | Not supported | Not supported | Not supported |
+| Intro screen (`displayIntroScreen`) | `1.415.0+` | `4.63.0+` | `3.70.0+` | `3.61.0+` | `5.39.0+` |
+| Conditional branching (`response_based`) | Supported | Supported | `3.25.0+` | Supported | Supported |
+| Inline translations (`translations`) | Supported | Supported | Supported | Supported | Supported |
+| Hosted link surveys (`external_survey`) | Browser URL (no SDK required) | Browser URL | Browser URL | Browser URL | Browser URL |
+
+## Cross-SDK constraints
+
+- Event property filters with `gte` or `lte` operators in `conditions.events` or `conditions.cancelEvents` aren't supported on any SDK.
+- Enable **Surveys** (`surveys_opt_in`) in [project survey settings](https://app.posthog.com/settings/project-surveys) before any client SDK receives active surveys.
+- On Android, HTML descriptions on intro screens, questions, and thank-you screens are omitted. Use plain text descriptions for Android compatibility.
+- On Flutter Web, survey fetching and rendering delegate to `posthog-js`, so web feature support applies instead of Flutter mobile limits.

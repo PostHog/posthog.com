@@ -24,7 +24,9 @@ Not all survey features are available on every SDK. See the [SDK feature support
 
 ## Limitations
 
+- Requires Android API `>= 23` and `surveys_opt_in` enabled in [project survey settings](https://app.posthog.com/settings/project-surveys).
 - HTML descriptions on the intro screen, questions, and thank-you screen aren't rendered. Use plain text descriptions so they aren't omitted.
+- Activity recreation saves and restores active Jetpack Compose survey state without emitting a duplicate `survey shown` event.
 
 ## Troubleshooting
 

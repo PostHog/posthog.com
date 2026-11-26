@@ -25,10 +25,11 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 
 ## Limitations
 
-- On Android, requires API >= 26.
-- On iOS, minimum deployment target is [iOS 15](/docs/libraries/ios).
-- On Web, surveys are powered by the [JavaScript Web SDK](/docs/surveys/installation/web).
-- Requires PostHog Flutter SDK version >= 5.8.0 (5.14.0+ recommended for latest features)
+- Android requires API `>= 23`.
+- iOS requires [iOS 15.0+](/docs/libraries/ios).
+- Flutter Web delegates surveys to the [JavaScript Web SDK](/docs/surveys/installation/web).
+- Requires `posthog_flutter >= 5.8.0` (`5.14.0+` recommended). See [SDK feature support](/docs/surveys/sdk-feature-support) for per-feature version floors.
+- Enable **Surveys** (`surveys_opt_in`) in [project survey settings](https://app.posthog.com/settings/project-surveys) and register `PosthogObserver` so `currentContext` is available when showing surveys.
 
 ## Troubleshooting
 
