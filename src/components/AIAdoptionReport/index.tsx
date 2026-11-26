@@ -95,14 +95,30 @@ const previousMonth = (month: string) =>
     new Date(Date.UTC(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 2, 1)).toISOString().slice(0, 10)
 const percent = (share: number | null | undefined) =>
     share != null && Number.isFinite(share) ? `${share.toFixed(1)}%` : '—'
-function percentagePointChange(current: number | null | undefined, prior: number | null | undefined): string | null {
+function percentagePointChange(current: number | null | undefined, prior: number | null | undefined): number | null {
     if (current == null || prior == null || !Number.isFinite(current) || !Number.isFinite(prior)) return null
-    const change = Number((current - prior).toFixed(1))
-    return `${change > 0 ? '+' : ''}${change.toFixed(1)} pp`
+    return Number((current - prior).toFixed(1))
 }
 
-function shareWithChange(value: number, change?: string | null) {
-    return change ? `${percent(value)} (${change})` : percent(value)
+function formatChange(change: number | null) {
+    if (change == null) return '—'
+    const color =
+        change > 0 ? 'text-green-dark dark:text-lime-green' : change < 0 ? 'text-red-2-dark dark:text-red-2' : undefined
+    return (
+        <span className={color}>
+            {change > 0 ? '+' : ''}
+            {change.toFixed(1)} pp
+        </span>
+    )
+}
+
+function shareWithChange(value: number, change?: number | null) {
+    if (change == null) return percent(value)
+    return (
+        <>
+            {percent(value)} ({formatChange(change)})
+        </>
+    )
 }
 
 const chartConfig = {
@@ -129,7 +145,7 @@ function SeriesTooltip({
     point: TooltipContext
     stacked: boolean
     onFocus: (key: string | null) => void
-    changes: Map<string, (string | null)[]>
+    changes: Map<string, (number | null)[]>
 }) {
     const { scales, labels } = useChartLayout()
     const { dataIndex, hoverPosition, position, seriesData } = point
@@ -348,7 +364,7 @@ function ReportSection({
                                     </Table.Cell>
                                     <Table.Cell align="end">{percent(row.share)}</Table.Cell>
                                     <Table.Cell align="end" className="whitespace-nowrap">
-                                        {row.changes[row.changes.length - 1] ?? '—'}
+                                        {formatChange(row.changes[row.changes.length - 1])}
                                     </Table.Cell>
                                 </Table.Row>
                                 {expanded === row.key && (
