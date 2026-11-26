@@ -182,7 +182,11 @@ function ReportSection({
                         <LineChart
                             className={section === 'model' ? 'h-[28rem] @md:h-96' : 'h-64'}
                             labels={dates}
-                            series={chartRows.map((row, index) => ({ ...row, color: extraLineColors[index + 1] }))}
+                            series={chartRows.map((row, index) => ({
+                                ...row,
+                                color: extraLineColors[index + 1],
+                                points: history.length === 1 ? { radius: 4 } : undefined,
+                            }))}
                             config={chartConfig}
                         />
                     )}
