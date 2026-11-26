@@ -109,6 +109,7 @@ export default function FeaturedHoggieCallout({
     hoggieSide = 'left',
     interactive = true,
     hoggieLines = [],
+    tight = false,
 }: FeaturedHoggieCalloutProps): JSX.Element {
     const side = SIDES[hoggieSide]
     const size = SIZES[hoggieSize]
@@ -168,14 +169,25 @@ export default function FeaturedHoggieCallout({
     const hog = <Hoggie title={hoggieTitle} className="block h-full w-auto max-w-none" />
 
     return (
-        <aside aria-label={ariaLabel} className={`@container not-prose mt-12 mb-8 ${className}`}>
+        <aside
+            aria-label={ariaLabel}
+            className={`@container not-prose ${tight ? 'mt-8 mb-6' : 'mt-12 mb-8'} ${className}`}
+        >
             <div
-                className={`relative flex flex-col rounded-[8px] border border-solid border-primary bg-lemon-lighter dark:bg-accent text-primary p-5 @xl:py-7 @4xl:justify-center ${side.box} ${sizedBox}`}
+                className={`relative flex flex-col rounded-[8px] border border-solid border-primary bg-lemon-lighter dark:bg-accent text-primary ${
+                    tight
+                        ? 'p-4 @md:pl-[136px] @md:min-h-[136px] @md:justify-center'
+                        : `p-5 @xl:py-7 @4xl:justify-center ${side.box} ${sizedBox}`
+                }`}
             >
                 {/* Narrow: centered, in the flow, and 32px over the top border. Medium and wide: in the
                     hog column, where `hoggieAlign` and `hoggieBreakout` put it. */}
                 <div
-                    className={`relative flex items-end justify-center self-center -mt-[52px] mb-4 @xl:absolute @xl:m-0 ${size.hog} ${POSITIONS[mode][hoggieAlign]} ${hogSide}`}
+                    className={`relative flex items-end justify-center self-center ${
+                        tight
+                            ? 'h-20 -mt-[44px] mb-3 @md:absolute @md:m-0 @md:left-4 @md:bottom-3 @md:h-[104px] @md:w-[88px]'
+                            : `-mt-[52px] mb-4 @xl:absolute @xl:m-0 ${size.hog} ${POSITIONS[mode][hoggieAlign]} ${hogSide}`
+                    }`}
                 >
                     {interactive ? (
                         <>
@@ -225,14 +237,20 @@ export default function FeaturedHoggieCallout({
                         hog
                     )}
                 </div>
-                <div className="flex flex-col gap-4 @4xl:flex-row @4xl:items-center @4xl:gap-8">
+                <div
+                    className={`flex flex-col ${tight ? 'gap-3' : 'gap-4'} @4xl:flex-row @4xl:items-center @4xl:gap-8`}
+                >
                     <div className="flex-1 min-w-0">
-                        <strong className="block font-rounded font-extrabold text-xl !leading-[1.25] text-balance @xl:text-[22px]">
+                        <strong
+                            className={`block font-rounded font-extrabold !leading-[1.25] text-balance ${
+                                tight ? 'text-lg' : 'text-xl @xl:text-[22px]'
+                            }`}
+                        >
                             {title}
                         </strong>
                         <p className="m-0 mt-2 text-[15px] !leading-normal text-secondary">{description}</p>
                     </div>
-                    <div className="w-full @xl:w-fit shrink-0">
+                    <div className={`w-full shrink-0 ${tight ? '@md:w-fit' : '@xl:w-fit'}`}>
                         <OSButton asLink to={to} variant="primary" size="md" width="full" state={{ newWindow: true }}>
                             {buttonLabel}
                         </OSButton>

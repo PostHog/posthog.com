@@ -8,10 +8,10 @@ import HoggieCallout from 'components/HoggieCallout'
 export default function EvalsPlaygroundCallout({ className = '' }: { className?: string }): JSX.Element {
     return (
         <HoggieCallout
+            layout="featured"
+            tight
             hoggie={HedgehogJudge}
             hoggieTitle="A hedgehog judge in a robe and lace collar, raising a gavel"
-            hoggieAlign="bottom"
-            hoggieBreakout={false}
             ariaLabel="Evals playground"
             title="Before you ship, or after?"
             description="Learn the differences between offline and online evals in our live playground."
