@@ -9,6 +9,8 @@ Prerequisites
 - Customer needs to have an Organization set up on the EU or US Cloud
 - You need access to the billing admin (billing.posthog.com).  Ask Raquel or Simon for access.
 
+When a customer with an existing platform package agrees to a standard-price switch, use [Change platform package](/handbook/growth/sales/billing#switch-an-existing-platform-package) in Billing admin.
+
 Process for giving a customer a free trial:
 1. Log in to <PrivateLink url="https://billing.posthog.com/admin/">Billing</PrivateLink> with your Google SSO login.
 2. Click the `Trials` link on the left sidebar.
