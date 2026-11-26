@@ -2,7 +2,7 @@
 title: Datasets
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
+import CalloutBox from "components/Docs/CalloutBox";
 
 <CalloutBox icon="IconFlask" title="Datasets are in beta" type="action">
 
@@ -37,12 +37,12 @@ A brand new dataset has no revision. Its first revision is created along with it
 
 | Field              | Description                                                                                                    |
 | ------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `input`            | The input given to the system under test. Any non-null JSON value – a string, an array of messages, an object.  |
+| `input`            | The input given to the system under test. Any non-null JSON value – a string, an array of messages, an object. |
 | `expected_output`  | Optional. The output you want, authored by you. This is what you compare against.                              |
-| `source_output`    | Optional. The actual output captured from the source trace, kept for reference.                                 |
-| `metadata`         | Optional JSON object for your own labels – category, difficulty, owning team, whatever you filter on later.     |
-| `client_item_id`   | Optional case-sensitive key you own. Makes creates idempotent and safe to retry. It can't be changed.           |
-| `source_trace_id`  | The trace the item came from. Provide it together with `source_timestamp`.                                      |
+| `source_output`    | Optional. The actual output captured from the source trace, kept for reference.                                |
+| `metadata`         | Optional JSON object for your own labels – category, difficulty, owning team, whatever you filter on later.    |
+| `client_item_id`   | Optional case-sensitive key you own. Makes creates idempotent and safe to retry. It can't be changed.          |
+| `source_trace_id`  | The trace the item came from. Provide it together with `source_timestamp`.                                     |
 | `source_event_id`  | Optional. The specific event within the trace.                                                                 |
 | `source_timestamp` | Required when you set `source_trace_id`. Needed to look the source trace back up.                              |
 
@@ -110,7 +110,20 @@ Click **Export** on a dataset to generate a JSONL file. Exports are:
 Each line is one item, with the revision recorded on every row:
 
 ```json
-{"dataset_id":"018f...","dataset_revision":12,"item_id":"018f...","client_item_id":"ticket-4821","version":3,"input":{"messages":[{"role":"user","content":"How do I cancel?"}]},"expected_output":"Point the user to the billing settings page.","source_output":"You can cancel any time.","metadata":{"category":"billing"},"source_trace_id":"trace_abc","source_event_id":"event_def","source_timestamp":"2026-05-04T10:12:33+00:00"}
+{
+  "dataset_id": "018f...",
+  "dataset_revision": 12,
+  "item_id": "018f...",
+  "client_item_id": "ticket-4821",
+  "version": 3,
+  "input": { "messages": [{ "role": "user", "content": "How do I cancel?" }] },
+  "expected_output": "Point the user to the billing settings page.",
+  "source_output": "You can cancel any time.",
+  "metadata": { "category": "billing" },
+  "source_trace_id": "trace_abc",
+  "source_event_id": "event_def",
+  "source_timestamp": "2026-05-04T10:12:33+00:00"
+}
 ```
 
 Pinning to a revision is what makes an export worth storing next to your test results: "this run scored 84% on revision 12" stays meaningful even after the dataset has moved on.
@@ -142,7 +155,9 @@ Pass a `client_item_id` when an agent creates items. An identical retry returns 
 
 ### API
 
-The same operations are available over REST at [`/api/projects/:project_id/datasets`](/docs/api/datasets) and [`/api/projects/:project_id/dataset_items`](/docs/api/dataset-items), including creating exports and downloading their content. Use a [personal API key](/docs/api#authentication) with the `dataset` scope.
+The same operations are available over REST at [`/api/projects/:project_id/datasets`](/docs/api/datasets) and [`/api/projects/:project_id/dataset_items`](/docs/api/dataset-items). Use a [project secret API key](/docs/api/project-secret-api-keys) for the dataset's project or a [personal API key](/docs/api/personal-api-keys). Grant `dataset:read` to read datasets, items, and revisions. Grant `dataset:write` to create, update, archive, or restore datasets and items.
+
+A project secret key needs `dataset:write` to extend retention explicitly. Reading a dataset or using it in an offline evaluation also refreshes retention. To create an export, check its status, or download it through the API, use a personal API key with `dataset:read`.
 
 ### CLI
 
@@ -152,14 +167,14 @@ CLI access is on the way, so you'll be able to pull a dataset revision and run i
 
 These limits are subject to change.
 
-| Resource | Limit | What counts |
-| --- | --- | --- |
-| Datasets per project | 100 by default | Active datasets and archived datasets that haven't expired. |
-| Items per dataset | 2,000 | Both active and archived items. |
-| Retained versions per item | 40 | The item's first version and each subsequent version. |
-| Retained item versions per project | 25,000 | Item versions across all datasets in the project. |
-| Payload per item | 406,666 bytes | The combined size of `input`, `expected_output`, `source_output`, and `metadata` as compact UTF-8 JSON. |
-| JSONL export | 250 MB | The entire file. A dataset with large items can exceed this limit even when each item fits within its payload limit. |
+| Resource                           | Limit          | What counts                                                                                                          |
+| ---------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Datasets per project               | 100 by default | Active datasets and archived datasets that haven't expired.                                                          |
+| Items per dataset                  | 2,000          | Both active and archived items.                                                                                      |
+| Retained versions per item         | 40             | The item's first version and each subsequent version.                                                                |
+| Retained item versions per project | 25,000         | Item versions across all datasets in the project.                                                                    |
+| Payload per item                   | 406,666 bytes  | The combined size of `input`, `expected_output`, `source_output`, and `metadata` as compact UTF-8 JSON.              |
+| JSONL export                       | 250 MB         | The entire file. A dataset with large items can exceed this limit even when each item fits within its payload limit. |
 
 Editing, archiving, or restoring an item can add a version. Each version counts toward both version limits until PostHog deletes it under the [retention policy](#data-retention).
 
@@ -200,33 +215,33 @@ for row in items:
 ```
 
 ```typescript file=TypeScript
-const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!)
-const items = []
+const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!);
+const items = [];
 for await (const row of snapshot) {
-    items.push(row)
+  items.push(row);
 }
 
 const experiment = await evaluations.createExperiment({
-    name: "Support agent from a dataset",
-    suiteKey: "support-agent",
-    datasetRevisionId: snapshot.revisionId,
-    runSource: "local",
-})
+  name: "Support agent from a dataset",
+  suiteKey: "support-agent",
+  datasetRevisionId: snapshot.revisionId,
+  runSource: "local",
+});
 
 for (const row of items) {
-    if (typeof row.input !== "string") {
-        throw new Error("The demo requires string inputs")
-    }
-    const output = await runAgent(row.input)
-    const scores = evaluateAnswer(output, row.expectedOutput as ToolCall)
-    const item = EvaluationItem.fromDatasetItem(row, { output })
-    for (const key of ["tool", "arguments"] as const) {
-        await experiment.uploadResult({
-            item,
-            scorerVersionId: scorers[key].currentVersionId,
-            ...scores[key],
-        })
-    }
+  if (typeof row.input !== "string") {
+    throw new Error("The demo requires string inputs");
+  }
+  const output = await runAgent(row.input);
+  const scores = evaluateAnswer(output, row.expectedOutput as ToolCall);
+  const item = EvaluationItem.fromDatasetItem(row, { output });
+  for (const key of ["tool", "arguments"] as const) {
+    await experiment.uploadResult({
+      item,
+      scorerVersionId: scorers[key].currentVersionId,
+      ...scores[key],
+    });
+  }
 }
 ```
 

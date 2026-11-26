@@ -190,6 +190,8 @@ ReactDOM.createRoot(root).render(
 
 This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
 
+This works with `<BrowserRouter>`, which has no error boundary of its own. If you use `createBrowserRouter` and `<RouterProvider>`, you are using data mode: follow [Capture router errors](/docs/libraries/react-router/react-router-v7-data-mode#capture-router-errors), because React Router's route boundaries catch render, loader and action errors before `PostHogErrorBoundary` sees them.
+
 </Step>
 
 <Step title="Tracking element visibility" badge="recommended">

@@ -65,9 +65,8 @@ Most of the provisioning API is self-serve. The rest needs PostHog to turn it on
 
 | Capability                                                                     | How to get it                                                                                                                                                                      |
 | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create accounts and organizations for your users                               | Self-serve. [Register your app](#register-your-app), pass the [review](#how-posthog-reviews-your-app), and [sign your requests](#sign-requests-with-a-key).                        |
-| Provision projects and [rotate their credentials](#rotate-project-credentials) | Self-serve, once you register.                                                                                                                                                     |
-| Higher [rate limits](#rate-limits)                                             | Self-serve. Signing your requests gives you 5x the base limits, and [linking your app to an organization](#link-your-partner-app-to-a-posthog-organization) doubles that.          |
+| Create accounts and organizations for your users                               | Self-serve. [Register your app](#register-your-app), [link it to an organization](#link-your-partner-app-to-a-posthog-organization), pass the [review](#how-posthog-reviews-your-app), and [sign your requests](#sign-requests-with-a-key).                        |
+| Provision projects and [rotate their credentials](#rotate-project-credentials) | Self-serve, once you register, [link your app](#link-your-partner-app-to-a-posthog-organization), and [sign your requests](#sign-requests-with-a-key).                                                                                                 |
 | [Deep links](#deep-linking) that log users into their project                  | Ask PostHog. Your app must also sign its requests.                                                                                                                                 |
 | Paying for your users' PostHog usage                                           | Needs a partner agreement. See [pay for your users' usage](#pay-for-your-users-usage).                                                                                             |
 | Custom rate limits                                                             | Ask PostHog, if the top [tier](#your-tier) isn't enough.                                                                                                                           |
@@ -75,7 +74,19 @@ Most of the provisioning API is self-serve. The rest needs PostHog to turn it on
 
 To ask for any of these, open a [support request](https://app.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app.
 
-Verification changes what your users see, not what your app can do. A verified app shows a Verified badge in your users' organization settings and skips the [first-login question](#what-the-user-gets) about keeping it connected.
+### Verification and the provisioning review are separate
+
+PostHog checks a partner app in two separate ways, and you ask for each one separately. Passing one doesn't give you the other.
+
+|                       | Provisioning review                                                                                     | Verification                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| What it decides       | Whether your app can create accounts and provision resources                                            | Whether people see your app as verified                                                                                                                             |
+| Without it            | Account and provisioning requests fail                                                                  | People see an **Unverified application** warning when they connect your app, and the [first time they log in](#what-the-user-gets) they're asked whether to keep it connected |
+| How it starts         | Automatically, when you [register](#register-your-app) a metadata document that declares provisioning | You click **Request verification** on your app's page in PostHog, which opens a support request                                                                    |
+| Who decides           | An automated [review](#how-posthog-reviews-your-app), then PostHog staff when it isn't sure            | PostHog staff                                                                                                                                                       |
+| Where you follow it   | Your app's page and email, see [follow your review](#follow-your-review)                                 | The support request. Your app's page shows **Verified** once it's done                                                                                             |
+
+Verification changes what your users see, not what your app can do.
 
 ### Pay for your users' usage
 
@@ -173,19 +184,24 @@ Until your app is registered, the other endpoints return HTTP 401 with a message
 
 After you register a client that declares `com.posthog.provisioning`, PostHog reviews it before it can provision. Until the review accepts your app, provisioning stays inactive: your app can't create accounts or provision resources. Most reviews finish within minutes. Some go to PostHog staff and take longer.
 
-To check the status, call the [registration endpoint](#register-your-app) again. While your app is under review or blocked, registration fails, and its `provisioning_enabled` check fails with one of these details:
+To check the status, call the [registration endpoint](#register-your-app) again. Until your app is accepted, registration fails, and its `provisioning_enabled` check fails with one of these details:
 
 | Detail                                                                                                | What it means                                                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Link this client to a PostHog organization before it can provision. ...` | Your app isn't linked to an organization yet. [Link it](#link-your-partner-app-to-a-posthog-organization), then register again. This comes before any review status. |
 | `PostHog is reviewing this client before it can provision. Register again in a few minutes to check.` | The review is in progress. Call the registration endpoint again in a few minutes.                                                              |
-| `PostHog staff are reviewing this client before it can provision. Register again later to check.`     | PostHog staff are reviewing your app. Call the registration endpoint again later.                                                              |
-| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.`             | PostHog blocked provisioning for your app, because the review rejected it or staff blocked it later. Registering again doesn't lift the block. |
+| `PostHog staff are reviewing this client before it can provision. Register again later to check.` | PostHog staff are reviewing your app. Call the registration endpoint again later. |
+| `PostHog declined this client for provisioning. ...` | The review didn't approve your app. Change what the review found, then [ask for another review](#follow-your-review). |
+| `PostHog needs changes or more information before this client can provision. ...` | PostHog staff sent your app back. Read their message and [answer it](#follow-your-review). |
+| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.` | PostHog staff blocked provisioning for your app. Neither registering again nor asking for another review lifts the block. |
 
-Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
+Once the review accepts your app, the `provisioning_enabled` check reports `Active`. An accepted app isn't verified by the review. To remove the unverified warning, ask for [verification](#verification-and-the-provisioning-review-are-separate) separately.
 
-PostHog staff can change the decision later. They can block an accepted app, for example after reports of abuse, and they can accept an app that was blocked. If your app is blocked and you think that is a mistake, contact PostHog support. When staff lift a block, call the registration endpoint again to check, and have your users connect again: blocking signs out every connection your app had.
+Declining and blocking both sign out every connection your app had. A declined app can ask for another review once you've changed it. Only PostHog staff block an app, for example after reports of abuse, and a blocked app can't ask again.
 
-The review reads your metadata document and researches your app on the web. PostHog loads the homepage at your `client_uri` and searches the web for your product, your domain, and reports of abuse. A model then judges three things from that evidence: whether your app is a real product of the organization that owns the domain, whether it shows signs of abuse, and whether the metadata document is on your own site. When the model isn't sure, PostHog staff decide.
+PostHog staff can change the decision later. They can block an accepted app, and they can accept an app that was declined or blocked. If your app is blocked and you think that is a mistake, contact PostHog support. When staff lift a block, call the registration endpoint again to check, and have your users connect again.
+
+The review reads your metadata document and researches your app on the web. PostHog loads the homepage at your `client_uri` and searches the web for your product, your domain, and reports of abuse. A model then judges three things from that evidence: whether your app is a real product of the organization that owns the domain, whether it shows signs of abuse, and whether the metadata document is on your own site. The model accepts your app or declines it. When it isn't sure, PostHog staff decide.
 
 To pass:
 
@@ -198,14 +214,15 @@ PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP
 
 #### Follow your review
 
-Link your app to a PostHog organization with a [verification token](#link-your-partner-app-to-a-posthog-organization) to follow the review from PostHog:
+The organization your app is [linked to](#link-your-partner-app-to-a-posthog-organization) follows and answers the review from PostHog.
 
-- The organization's admins and owners get an email when the review accepts your app, rejects it, or hands it to PostHog staff, and again whenever staff change the decision. The email carries any message staff left for you.
-- In PostHog, go to **Organization settings → OAuth applications** and expand your app. It shows the provisioning status, when your app registered, when the review was decided, and any message from PostHog.
-- While your app waits for PostHog staff or is blocked, the same row has **Contact support about this review**. It opens a support request with your app's details filled in, on every plan. Use it to send PostHog information the review missed.
+- The organization's admins and owners get an email when the review accepts your app, declines it, or hands it to PostHog staff, and again whenever staff change the decision. Staff can also ask for changes or more information. The email carries any message staff left for you.
+- In PostHog, go to **Organization settings → OAuth applications** and open your app. Its page shows the provisioning status, which step the review is at, and its history: each decision, every message from PostHog staff, and the notes your organization sent. It also shows how PostHog treats your app, which is what staff review, and lets you check a note before you send it. Verification has its own section on the same page.
+- When your app is declined, staff asked for changes, or your app waits for staff, the page has a **Note to PostHog staff** box. Say what your app does, why it creates accounts or provisions resources, and what you changed. Sending the note puts your app back in front of PostHog staff.
+- A blocked app can't send a note. Its page has **Contact support about this review** instead, which opens a support request with your app's details filled in, on every plan.
 - An agent connected to the [PostHog MCP server](/docs/model-context-protocol) can read the same status with the `oauth-applications-list` tool.
 
-Only organization admins and owners see this page. An app that isn't linked to an organization gets no email, so call the [registration endpoint](#register-your-app) to check its status.
+Only organization admins and owners see this page. Until your app is linked, nobody gets these emails, so call the [registration endpoint](#register-your-app) to check its status.
 
 While a client that PostHog accepted stays active, another client whose metadata document is on the same host is accepted even when the model isn't sure about it, as long as the document is on your own site and shows no signs of abuse. For example, after `https://api.yourapp.com/.well-known/yourapp.json` is accepted, `https://api.yourapp.com/.well-known/yourapp-staging.json` is accepted too. A client on another host, such as `staging.yourapp.com`, gets its own review.
 
@@ -213,11 +230,11 @@ While a client that PostHog accepted stays active, another client whose metadata
 
 ### Sign requests with a key
 
-With `private_key_jwt`, your app signs a short-lived JWT, called a client assertion, with a private key that only you hold. You send it on each request that identifies your app, and PostHog checks the signature against the public keys you publish at your `jwks_uri`. Nothing secret is shared with PostHog, and you rotate keys on your own schedule. Signing is required for apps that create accounts, and for [deep links](#requires-a-trusted-partner-record).
+With `private_key_jwt`, your app signs a short-lived JWT, called a client assertion, with a private key that only you hold. You send it on each request that identifies your app, and PostHog checks the signature against the public keys you publish at your `jwks_uri`. Nothing secret is shared with PostHog, and you rotate keys on your own schedule. Every provisioning app must sign its requests.
 
 #### When signing is required
 
-If your app can create accounts, it must sign its account requests and token calls. The [registration](#register-your-app) response shows this as `"can_create_accounts": true`. Unsigned requests get a 401.
+Every app that provisions must sign its account requests and token calls, whether it creates accounts or only provisions resources. An unsigned request gets a 401. An app with no key to sign with gets a 401 on every provisioning request, including `Bearer` requests with tokens it already holds, and its page in **Organization settings → OAuth applications** says so. The [registration](#register-your-app) response shows it as a failed `jwks` check.
 
 #### Turn on key signing
 
@@ -234,7 +251,7 @@ Do these steps in order: publish your keys, update your metadata document, call 
 3. Call the [registration endpoint](#register-your-app), on both `us.posthog.com` and `eu.posthog.com` if you use both regions. It re-reads your document and switches your app over in the same request. The response shows `"token_endpoint_auth_method": "private_key_jwt"`, and its `jwks` check lists the key IDs PostHog found at your `jwks_uri`. If that check fails, fix it right away: your app has already switched, so signed requests fail until PostHog can read your keys.
 4. Start signing the requests below.
 
-Once the switch applies, unsigned account requests and token calls fail with a 401. Before it applies, signed account requests fail. Without step 3, the switch waits until PostHog's cached copy of your document expires and a later account request triggers a background refresh. Token calls and `Bearer` requests never trigger one.
+Until the switch applies, every provisioning request fails with a 401, because PostHog doesn't have your keys yet. Once it applies, unsigned requests fail. Without step 3, the switch waits until PostHog's cached copy of your document expires and a later account request triggers a background refresh. Token calls and `Bearer` requests never trigger one.
 
 #### Which requests to sign
 
@@ -332,11 +349,9 @@ To rotate keys without downtime:
 
 If a private key leaks, remove it from your JWKS, then call the registration endpoint in each region you use. Otherwise PostHog can keep accepting the removed key for up to an hour.
 
-#### Switch back to a public client
+#### Public clients can't provision
 
-An app that creates accounts can't be a public client, because its unsigned account requests and token calls get a 401.
-
-Set `token_endpoint_auth_method` to `"none"`, call the registration endpoint in each region you use, then stop sending assertions, because a public client's account requests fail if they carry one. Your [tier](#your-tier) drops to public: 1x, or 2x if your app is linked to an org via a [verification token](#link-your-partner-app-to-a-posthog-organization). Deep links stop working, with `/deep_links` returning a 403 `forbidden`. Access and refresh tokens you already hold keep working. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
+A provisioning app can't be a public client. Once your metadata document sets `token_endpoint_auth_method` to `"none"`, every provisioning request gets a 401, including requests with access tokens you already hold. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
 
 #### Sign a request in Python or Node.js
 
@@ -449,9 +464,9 @@ Account requests and `/limits` return a 401 `unauthorized`, and the token endpoi
 
 ### Link your partner app to a PostHog organization
 
-By default, a CIMD partner app isn't linked to any PostHog organization.
-Link it with a verification token. A linked app gets higher [rate limits](#rate-limits), and its organization's admins can [follow its review](#follow-your-review) in PostHog and by email.
-Linking is optional today. PostHog will require it for provisioning partners, and announces the date to partners first.
+A CIMD partner app can't provision until it's linked to a PostHog organization. Until then, every provisioning request gets a 401 that asks you to link it.
+Link it with a verification token. The organization's admins can then [follow its review](#follow-your-review) in PostHog and by email, and your app gets the top [rate-limit tier](#your-tier).
+A partner app that PostHog set up for you doesn't need a link.
 
 Verification tokens come from PostHog US, for apps in either region.
 Your metadata document serves both PostHog US and PostHog EU and carries one token, so one region issues every token.
@@ -478,13 +493,13 @@ If your team only uses PostHog EU, create an organization in [PostHog US](https:
    }
    ```
 
-3. Call the [registration endpoint](#register-your-app) in each region you use, or wait for the next metadata refresh. The app is then linked to your organization and your rate limits go up.
+3. Call the [registration endpoint](#register-your-app) in each region you use. Each region reads your document on its own, so a region you skip doesn't see the link until your app next calls it, and refuses that first call. The app is then linked to your organization and can provision once the review accepts it.
 
 A token works only at the metadata URL you named when you created it. If you host more than one document, for example one for production and one for staging, create a token for each.
 
 The token is only used to prove ownership of the partner app. It isn't sent on API requests.
 You can rotate or revoke a token at any time from the same settings page.
-Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org.
+Revocation clears the link in each region the next time that region reads your document, so a leaked or stale token can't keep an app linked to your org. A region reads it again only when your app calls that region after its cached copy expires, which can take up to a day, and that call still uses the old link. To clear the link at once, call the [registration endpoint](#register-your-app) in each region. Your app then stops provisioning until it's linked again.
 
 > **Note:** The legacy top-level `posthog_verification_token` field is still supported as a fallback. PostHog reads `com.posthog.verification_token` first and falls back to the top-level field if the nested one is absent or unrecognized. New integrations should use the `com.posthog` namespace.
 
@@ -544,7 +559,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | `id`                              | string | Yes      | Your unique request ID (for idempotency)                                                                                                                     |
 | `email`                           | string | Yes      | User's email address. Must be a valid address of at most 254 characters                                                                                      |
 | `name`                            | string | No       | User's full name                                                                                                                                             |
-| `client_id`                       | string | No       | Your CIMD metadata URL. PostHog reads it from the assertion's `sub` if you leave it out. If you send it, it must match. An unsigned request must include it. |
+| `client_id`                       | string | No       | Your CIMD metadata URL. PostHog reads it from the assertion's `sub` if you leave it out. If you send it, it must match.                              |
 | `client_assertion_type`           | string | Yes      | Always `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. See [when signing is required](#when-signing-is-required).                                  |
 | `client_assertion`                | string | Yes      | A new signed JWT for each request. See [build the assertion](#build-the-assertion).                                                                          |
 | `code_challenge`                  | string | Yes      | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars)                                                                                          |
@@ -828,7 +843,7 @@ When you provision a new account, the user receives:
 
 Your integration gets back the project token and host, so you can start sending events the moment the API call returns.
 
-If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, link it to an organization, go to **Organization settings → OAuth applications**, expand your app, and click **Request verification**. That opens a support request with a template to fill in, on every plan.
+If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, link it to an organization, go to **Organization settings → OAuth applications**, open your app, and click **Request verification**. That opens a support request with a template to fill in, on every plan. Verification is [separate from the provisioning review](#verification-and-the-provisioning-review-are-separate).
 
 ## Error handling
 
@@ -882,30 +897,23 @@ Requests that fail validation (4xx errors like `invalid_request`) are refunded, 
 
 Budgets scale with how strongly your app identifies itself, on two axes:
 
-| Client authentication | Not linked to an org | Linked via a [verification token](#link-your-partner-app-to-a-posthog-organization) |
-| --------------------- | -------------------- | -------------------------------------------------------------------------------------------- |
-| `none` (public, PKCE) | 1x                   | 2x                                                                                           |
-| `private_key_jwt`     | 5x                   | 10x                                                                                          |
-
-An app that creates accounts must sign, so it can't use the `none` row. See [when signing is required](#when-signing-is-required).
-
-Both upgrades are self-serve: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. They apply the next time PostHog reads your metadata document, and you can make that happen right away by calling the [registration endpoint](#register-your-app). Nobody to ask.
+Every provisioning app [signs its requests](#when-signing-is-required), which gives it 5x the base budgets. Being [linked to an organization](#link-your-partner-app-to-a-posthog-organization) doubles that to 10x. An app that registered itself is always linked, so it always gets 10x. A partner app that PostHog set up for you gets 5x until it's linked.
 
 ### Budgets
 
-At the 1x tier:
+The base budgets, which your [tier](#your-tier) multiplies:
 
 | Endpoints                                                   | Burst   | Refill   |
 | ----------------------------------------------------------- | ------- | -------- |
 | Account requests                                            | 5       | 10/hour  |
 | Token exchange                                              | 10      | 20/hour  |
 | Project provisioning (`/resources`)                         | 10      | 30/hour  |
-| Deep links                                                  | Blocked | Blocked  |
+| Deep links                                                  | 30      | 120/hour |
 | Everything else (token refresh, reads, credential rotation) | 30      | 120/hour |
 
-So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers, and token exchanges at 20/40/100/200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+So account requests, the tightest budget, run at 100 per hour for a linked app, or 50 for an unlinked app PostHog set up, and token exchanges at 200 or 100. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
 
-Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x.
+Deep links run at 300 burst and 1,200/hour for a linked app, or 150 burst and 600/hour for an unlinked one.
 
 Limits are per region: US and EU count separately.
 
@@ -928,7 +936,7 @@ To see everything at once, call the limits endpoint. It returns your tier, why y
 The endpoint is `POST` only, and you have to prove the request is yours. Send an access token, or authenticate as your client the same way you do at the token endpoint:
 
 ```bash
-# With an access token. Public clients use this after their first token exchange.
+# With an access token, after your first token exchange.
 curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
   -H "Authorization: Bearer pha_abc123..."
 
@@ -945,15 +953,15 @@ A `client_id` on its own is not enough. Your `client_id` is published, so accept
 
 ```json
 {
-  "tier": "public_attested",
+  "tier": "jwks_attested",
   "tier_basis": {
-    "client_authentication": "none",
+    "client_authentication": "private_key_jwt",
     "attested": true
   },
   "endpoints": {
-    "account_requests": { "per_hour": 20, "burst": 10, "remaining": 9, "reset": 180 },
-    "token_exchanges": { "per_hour": 40, "burst": 20, "remaining": 20, "reset": 0 },
-    "deep_links": { "blocked": true }
+    "account_requests": { "per_hour": 100, "burst": 50, "remaining": 49, "reset": 36 },
+    "token_exchanges": { "per_hour": 200, "burst": 100, "remaining": 100, "reset": 0 },
+    "deep_links": { "per_hour": 1200, "burst": 300, "remaining": 300, "reset": 0 }
   }
 }
 ```

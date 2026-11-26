@@ -1,11 +1,16 @@
 Project secret API keys are server-to-server credentials scoped to a single project. They're the right choice when a backend service needs scoped, project-level access without being tied to anyone's user account.
 
-Unlike a [personal API key](/docs/api/personal-api-keys), a project secret API key doesn't represent a user—it isn't affected when a teammate leaves, and it only has the scopes you grant it. 
+Unlike a [personal API key](/docs/api/personal-api-keys), a project secret API key doesn't represent a user—it isn't affected when a teammate leaves, and it only has the scopes you grant it.
 
 Today, they're supported on a growing set of scopes:
+
 - Feature flag [local evaluation](/docs/feature-flags/local-evaluation) and [remote config](/docs/feature-flags/remote-config) (`feature_flag:read` scope)
 - Endpoints execution (`endpoint:read` scope)
 - Support external tickets API reads (`support_ticket:read` scope)
+- [Datasets and items](/docs/ai-evals/datasets#api): `dataset:read` for datasets, items, and revision history. Use `dataset:write` to manage them or extend retention. Dataset exports require a personal API key with `dataset:read`.
+- [Offline experiment uploads](/docs/ai-evals/offline-evals#run-your-first-experiment): `offline_evaluation_ingestion:write` to create experiments, upload items and results, and complete or fail runs.
+- [Offline experiment reads and corrections](/docs/ai-evals/experiments#edit-experiment-items-and-results): `evaluation:read` to read experiments and items, or `evaluation:write` to edit accepted data and tags. Reading results and scorer summaries, changing results or their payloads, and deleting an item also require `llm_analytics:read`.
+- [Scorer definitions and versions](/docs/ai-evals/scorers) and [trace review scores](/docs/ai-observability/trace-reviews#programmatic-access): `llm_analytics:read` for reads and `llm_analytics:write` for writes, labeled **AI observability** in project key settings.
 
 <CalloutBox icon="IconInfo" title="Migrating from the feature flags secure API key" type="fyi">
 
@@ -28,7 +33,7 @@ Pass the key in the `Authorization` header using `Bearer` authentication:
 ```js
 const headers = {
   Authorization: `Bearer ${POSTHOG_PROJECT_SECRET_API_KEY}`,
-}
+};
 ```
 
 PostHog detects the kind of key you sent from its `phs_` prefix and authenticates accordingly.

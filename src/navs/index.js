@@ -3598,6 +3598,10 @@ export const docsMenu = {
                             url: '/docs/api/scopes',
                         },
                         {
+                            name: 'Deprecation of @current',
+                            url: '/docs/api/current-alias-deprecation',
+                        },
+                        {
                             name: 'Terraform provider',
                             url: '/docs/terraform',
                         },
@@ -4020,6 +4024,10 @@ export const docsMenu = {
                         {
                             name: 'What you actually get when you pay for an event',
                             url: '/docs/billing/what-you-pay-for-per-event',
+                        },
+                        {
+                            name: 'What you actually get when you pay for a session recording',
+                            url: '/docs/billing/what-you-pay-for-per-recording',
                         },
                         {
                             name: 'Pre-paid plans',
@@ -6125,6 +6133,10 @@ export const docsMenu = {
                         {
                             name: 'React',
                             url: '/docs/error-tracking/installation/react',
+                        },
+                        {
+                            name: 'React Router',
+                            url: '/docs/error-tracking/installation/react-router',
                         },
                         {
                             name: 'Angular',
