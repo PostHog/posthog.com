@@ -507,7 +507,7 @@ export const handbookSidebar = [
             { name: 'Lore', url: '/handbook/company/lore' },
             { name: 'A grown-up company', url: '/handbook/company/grown-ups' },
             { name: 'Small teams', url: '/handbook/company/small-teams' },
-            { name: 'Fuzzy ownership', url: '/handbook/company/fuzzy-ownership' },
+            { name: 'Ownership', url: '/handbook/company/ownership' },
             { name: 'Goal setting', url: '/handbook/company/goal-setting' },
             { name: 'Sprints', url: '/handbook/company/sprints' },
             { name: 'Management', url: '/handbook/company/management' },
@@ -551,6 +551,7 @@ export const handbookSidebar = [
         url: '',
         children: [
             { name: 'Compensation', url: '/handbook/people/compensation' },
+            { name: 'Payroll', url: '/handbook/people/payroll' },
             { name: 'Share options', url: '/handbook/people/share-options' },
             { name: 'Benefits', url: '/handbook/people/benefits' },
             { name: 'Time off', url: '/handbook/people/time-off' },
@@ -1981,6 +1982,20 @@ export const handbookSidebar = [
                             {
                                 name: 'Data stack positioning',
                                 url: '/handbook/growth/sales/data-stack-positioning',
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Observability enablement',
+                        url: '',
+                        children: [
+                            {
+                                name: 'Observability foundations',
+                                url: '/handbook/growth/sales/observability-foundations',
+                            },
+                            {
+                                name: 'Observability positioning',
+                                url: '/handbook/growth/sales/observability-positioning',
                             },
                         ],
                     },
@@ -3584,6 +3599,10 @@ export const docsMenu = {
                             url: '/docs/api/scopes',
                         },
                         {
+                            name: 'Deprecation of @current',
+                            url: '/docs/api/current-alias-deprecation',
+                        },
+                        {
                             name: 'Terraform provider',
                             url: '/docs/terraform',
                         },
@@ -4008,6 +4027,10 @@ export const docsMenu = {
                             url: '/docs/billing/what-you-pay-for-per-event',
                         },
                         {
+                            name: 'What you actually get when you pay for a session recording',
+                            url: '/docs/billing/what-you-pay-for-per-recording',
+                        },
+                        {
                             name: 'Pre-paid plans',
                             url: '/docs/billing/pre-paid-plans',
                         },
@@ -4191,10 +4214,6 @@ export const docsMenu = {
                         {
                             name: 'AI wizard',
                             url: '/docs/ai-engineering/ai-wizard',
-                        },
-                        {
-                            name: 'Sign up with the wizard',
-                            url: '/docs/ai-engineering/wizard-signup',
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
@@ -6117,6 +6136,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/react',
                         },
                         {
+                            name: 'React Router',
+                            url: '/docs/error-tracking/installation/react-router',
+                        },
+                        {
                             name: 'Angular',
                             url: '/docs/error-tracking/installation/angular',
                         },
@@ -7976,6 +7999,12 @@ export const docsMenu = {
                     icon: 'IconLock',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'ChatGPT & Claude directories',
+                    url: '/docs/mcp-analytics/directory-review',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
                 },
                 {
                     name: 'Resources',

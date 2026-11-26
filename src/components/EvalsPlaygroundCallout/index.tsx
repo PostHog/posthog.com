@@ -10,7 +10,8 @@ export default function EvalsPlaygroundCallout({ className = '' }: { className?:
         <HoggieCallout
             hoggie={HedgehogJudge}
             hoggieTitle="A hedgehog judge in a robe and lace collar, raising a gavel"
-            hoggiePlacement="inset"
+            hoggieAlign="bottom"
+            hoggieBreakout={false}
             ariaLabel="Evals playground"
             title="Before you ship, or after?"
             description="Learn the differences between offline and online evals in our live playground."

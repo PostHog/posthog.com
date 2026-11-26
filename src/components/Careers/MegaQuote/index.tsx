@@ -1,4 +1,3 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -10,6 +9,7 @@ import { IconCake } from '@posthog/icons'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import Link from 'components/Link'
+import hogProfile from '../../../images/hog-profile.png'
 
 const TeamMemberLink = (person) => {
     const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, color } =
@@ -35,12 +35,7 @@ const TeamMemberLink = (person) => {
                                 className="size-24"
                             />
                         ) : (
-                            <CloudinaryImage
-                                alt=""
-                                width={24}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                className="size-24"
-                            />
+                            <img src={hogProfile} alt="" className="size-24" />
                         )}
                     </div>
                 </div>

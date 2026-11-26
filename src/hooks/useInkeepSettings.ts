@@ -2,6 +2,7 @@ import type { InkeepAIChatSettings, InkeepBaseSettings } from '@inkeep/cxkit-rea
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useEffect, useState } from 'react'
+import hogProfile from '../images/hog-profile.png'
 type InkeepSharedSettings = {
     baseSettings: InkeepBaseSettings
     aiChatSettings: InkeepAIChatSettings
@@ -422,8 +423,8 @@ gap: .5rem;
 
 const defaultAiChatSettings: InkeepAIChatSettings = {
     aiAssistantAvatar: {
-        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
-        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
+        light: hogProfile,
+        dark: hogProfile,
     },
     aiAssistantName: 'PostHog AI',
     isFirstExampleQuestionHighlighted: false,

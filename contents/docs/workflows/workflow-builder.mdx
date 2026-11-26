@@ -222,13 +222,17 @@ Messages posted by PostHog never start a run, so a workflow can reply in Slack w
 
 The **Frequency** setting on the trigger step controls how often one person can enter the workflow. Event triggers have these options:
 
-| Option                       | What it does                                                                                                                       |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Every time the trigger fires | Default. Each matching event starts a new run, even if the person is already in the workflow.                                      |
-| One time                     | A person enters once, then can't enter again until the window ends. Choose a window from 5 minutes to 365 days, or **indefinitely**. |
-| Once per calendar day        | A person enters at most once each day.                                                                                             |
+| Option                       | What it does                                                                                                      |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Every time the trigger fires | Default. Each matching event starts a new run, even if the person is already in the workflow.                     |
+| One time per period          | A person enters one time, then can't enter again until the period ends. You choose the period in a second menu.   |
+| Once per calendar day        | A person enters at most once each day.                                                                            |
 
-Use **One time** when the same event can arrive more than once for one real occurrence, for example a server that sends an event again on a retry. With **Every time the trigger fires**, each copy starts its own run, so the person gets the same email once for each copy. Make the window longer than the gap between duplicates, and shorter than the time before the person should get the message again.
+When you select **One time per period**, a second menu shows the period. The setting then reads, for example, **One time per 90 days**. The period starts at 30 minutes. You can choose from 5 minutes to 365 days, or **ever**. With **ever**, a person enters the workflow only one time. PostHog keeps this record for up to 3 years.
+
+Use **One time per period** with **ever** for a workflow that a person should go through only one time, such as a welcome flow.
+
+Use **One time per period** with a short period when the same event can arrive more than once for one real occurrence, for example a server that sends an event again on a retry. With **Every time the trigger fires**, each copy starts its own run, so the person gets the same email once for each copy. Make the period longer than the gap between duplicates, and shorter than the time before the person should get the message again.
 
 Some other trigger types have their own frequency options.
 

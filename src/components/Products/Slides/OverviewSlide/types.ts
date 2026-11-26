@@ -22,6 +22,8 @@ export interface OverviewSlideProps {
         src: string
         alt?: string
         classes?: string
+        /** Flips a hoggie to face the other way. */
+        mirror?: boolean
     }
     status?: string
     className?: string

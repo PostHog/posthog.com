@@ -331,7 +331,7 @@ export const posthog = {
                     },
                 },
                 group_analytics: {
-                    available: true,
+                    available: 'Add-on',
                     features: {
                         group_by_events: true,
                     },
@@ -512,7 +512,7 @@ export const posthog = {
             },
             features: {
                 aggregated_results: true,
-                ai_response_summaries: 'Beta',
+                ai_response_summaries: true,
                 api_access: true,
                 automatic_nps_calculation: true,
                 calendar_invites: true,
@@ -830,7 +830,7 @@ export const posthog = {
             open_source: true,
             open_core: true,
             reverse_proxy: true,
-            managed_reverse_proxy: 'Scale',
+            managed_reverse_proxy: true,
             self_host: true,
         },
         libraries: {
@@ -931,7 +931,7 @@ export const posthog = {
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: 'Scale',
+            history_audit_logs: 'Boost',
             role_based_access_control: 'Enterprise',
             saml_sso: 'Scale',
             siem: false,

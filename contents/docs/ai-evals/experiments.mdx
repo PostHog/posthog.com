@@ -2,7 +2,7 @@
 title: Review and compare experiments
 ---
 
-import ImageAnnotations from "components/ImageAnnotations"
+import ImageAnnotations from "components/ImageAnnotations";
 
 An experiment is one run of your test cases against your agent. After your CI or a local script uploads an experiment, compare it with earlier runs to find the change that made a score drop. To run your first experiment, see [Offline evals](/docs/ai-evals/offline-evals#run-your-first-experiment).
 
@@ -10,7 +10,7 @@ Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.co
 
 1. Select **Completed** in the upload-state filter to exclude runs that are still uploading or failed before all results arrived.
 2. Click **Choose scores** to select the scorers shown in **Score trends**. Open a scorer's history to inspect its versions and the experiments behind the trend.
-3. Select **Support agent baseline**. Each row is an experiment item, and each scorer version has its own column.
+3. Select **Support agent baseline**. Each row is an experiment item, and each item scorer version has its own column.
 4. Click **Fail** under **Correct arguments** for `refund_other_order`. The inspector shows why: the agent selected the right tool but passed order ID `1001` instead of `1004`.
 
 <ImageAnnotations annotations={[{ x: 64, y: 29.8, title: "Expected order 1004; received order 1001." }]}>
@@ -18,25 +18,27 @@ Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.co
 <div className="dark:hidden rounded border border-primary p-4" style={{ backgroundColor: "#eff0e9" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/92f4b7e6-4735-4600-9016-06b5c4dc6569.jpg"
-alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/92f4b7e6-4735-4600-9016-06b5c4dc6569.jpg"
+  alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 <div className="hidden dark:block rounded border border-primary p-4" style={{ backgroundColor: "#18171c" }}>
 
 <ImageAnnotations.Image
-src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/38927b3b-c40d-47ac-bb9f-e64df4d228bf.jpg"
-alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
-imgClassName="rounded"
-style={{ maxWidth: "100%" }}
+  src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/38927b3b-c40d-47ac-bb9f-e64df4d228bf.jpg"
+  alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
+  imgClassName="rounded"
+  style={{ maxWidth: "100%" }}
 />
 
 </div>
 
-<div><ImageAnnotations.Key title="" className="mb-4" /></div>
+<div>
+  <ImageAnnotations.Key title="" className="mb-4" />
+</div>
 
 </ImageAnnotations>
 
@@ -44,11 +46,19 @@ To fix the demo, pass the extracted order ID to the cancellation and refund tool
 
 Compare runs with the same test cases and scorer versions so changes in the test don't hide changes in your agent.
 
+## Read the experiment score
+
+In **Recent experiments**, the **Experiment score** column shows the overall result for each run. Open a run and expand **Experiment score breakdown** to see each input's value and how many items it scored. For example, if **Support quality** dropped, check whether the agent picked the wrong tool more often or started sending it the wrong arguments.
+
+PostHog pins the experiment scorer version when the run is created. A run that started without a scorer has no overall score, even if you later assign one to its suite. To try a formula on that run, [preview an experiment scorer](/docs/ai-evals/scorers#score-a-whole-experiment). The preview uses the original results and leaves the run's recorded score as it was.
+
+If a completed run has a scorer but no score, check the breakdown. An input may have no scored items or more than one scorer version contributing results.
+
 ## Read scores alongside coverage
 
 Pass rate includes only results with status `ok`. Eight passing results and two evaluator errors produce a 100% pass rate, with only eight scored items.
 
-Expand **Coverage** beside each scorer summary to check errors, skipped checks, and missing results. **Missing** means an uploaded item has no result for that scorer. It can't reveal cases you never uploaded, so compare the received item count with your expected count too. Composite calculations you haven't requested show **Not requested**.
+Expand **Coverage** beside each scorer summary to check errors, skipped checks, and missing results. **Missing** means an uploaded item has no result for that scorer. It can't reveal cases you never uploaded, so compare the received item count with your expected count too. Item composite calculations you haven't requested show **Not requested**.
 
 Numeric scorers show their mean. Numeric and categorical scorers need a passing rule to show a pass rate. Repeated trials each count as an item, so keep trial counts consistent when comparing runs.
 
@@ -56,33 +66,39 @@ Numeric scorers show their mean. Numeric and categorical scorers need a passing 
 
 Each reported result belongs to one item in one experiment and uses a specific scorer version. You can edit the item or its results even after the run finishes. When you change a reported value or status, PostHog recalculates dependent composite scores for that item.
 
-On the experiment handle, use the ID from the upload receipt to read the current revision. Call `get_item_revision()` / `getItemRevision()` for an item or `get_result_revision()` / `getResultRevision()` for a result. Pass that ID and revision with the edit or deletion.
+On the experiment handle, use the ID from the upload receipt to read the current revision. Pass that ID and revision with the edit or deletion. In Go, pass your context as the first argument to each method.
 
-| Action | Python | TypeScript |
-| --- | --- | --- |
-| Fix the case key, trial, model version, or trace ID | `update_item` | `updateItem` |
-| Replace item input, output, expected output, or metadata | `update_item_payload` | `updateItemPayload` |
-| Remove the item payload and keep its scores | `delete_item_payload` | `deleteItemPayload` |
-| Delete the item and all its scores and payloads | `delete_item` | `deleteItem` |
-| Correct a reported result's status, value, or error code | `update_result` | `updateResult` |
-| Replace result reasoning, error message, or metadata | `update_result_payload` | `updateResultPayload` |
-| Remove the result payload and keep the score | `delete_result_payload` | `deleteResultPayload` |
-| Delete the result, its payload, and dependent composite scores | `delete_result` | `deleteResult` |
+| Action                                                         | Python                  | TypeScript            | Go                    |
+| -------------------------------------------------------------- | ----------------------- | --------------------- | --------------------- |
+| Read the current item revision                                 | `get_item_revision`     | `getItemRevision`     | `GetItemRevision`     |
+| Fix the case key, trial, model version, or trace ID            | `update_item`           | `updateItem`          | `UpdateItem`          |
+| Replace item input, output, expected output, or metadata       | `update_item_payload`   | `updateItemPayload`   | `UpdateItemPayload`   |
+| Remove the item payload and keep its scores                    | `delete_item_payload`   | `deleteItemPayload`   | `DeleteItemPayload`   |
+| Delete the item and all its scores and payloads                | `delete_item`           | `deleteItem`          | `DeleteItem`          |
+| Read the current result revision                               | `get_result_revision`   | `getResultRevision`   | `GetResultRevision`   |
+| Correct a reported result's status, value, or error code       | `update_result`         | `updateResult`        | `UpdateResult`        |
+| Replace result reasoning, error message, or metadata           | `update_result_payload` | `updateResultPayload` | `UpdateResultPayload` |
+| Remove the result payload and keep the score                   | `delete_result_payload` | `deleteResultPayload` | `DeleteResultPayload` |
+| Delete the result, its payload, and dependent composite scores | `delete_result`         | `deleteResult`        | `DeleteResult`        |
 
 If you change the input or either output, rerun the affected checks and update their scores. A `revision_conflict` means the record changed. Review it before retrying with the latest revision.
 
-Use a [personal API key](/docs/api/personal-api-keys) with `evaluation:read` to read revisions and `evaluation:write` plus evaluation editor access to make changes. Working with results or deleting an entire item also requires `llm_analytics:read` and access to the affected scorers and composite inputs.
+Use a [project secret API key](/docs/api/project-secret-api-keys) for the experiment's project or a [personal API key](/docs/api/personal-api-keys). Grant `evaluation:read` to read revisions or tags, and `evaluation:write` to correct items or results, delete them, or replace tags.
+
+Reading a result revision, changing a result or its payload, and deleting an entire item also require `llm_analytics:read`. With a personal key, you need evaluation editor access for corrections and access to any affected scorers and composite inputs.
 
 ## Use results in your CI
 
 Use a [project secret API key](/docs/api/project-secret-api-keys) with the `offline_evaluation_ingestion:write` scope for your CI uploads. It can create experiments, upload results, and mark runs complete or failed without depending on a teammate's account.
 
-Project secret keys can't create or read scorers or fetch datasets. Set up scorers and load any PostHog dataset with a personal key first. In your CI script, pass the project key as `secret_key` / `secretKey` and use saved scorer version IDs instead of calling `scorers.get()`.
+If CI looks up scorer versions, grant `llm_analytics:read`. If it loads cases from a [PostHog dataset](/docs/ai-evals/datasets), grant `dataset:read`. A job that already has its cases and scorer version IDs can upload with the ingestion scope alone.
 
-For a composite, save its version ID and the exact input versions it pins. Send those input results with each calculation request.
+In your CI script, pass the project key as `secret_key` in Python, `secretKey` in TypeScript, or `evaluations.Config.SecretKey` in Go. Use the saved scorer version IDs for uploads.
 
-In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
+For an item composite, save its version ID and the exact input versions it pins. With an ingestion-only key, send every pinned input result in the same request as the calculation, including on retries. To reuse results from an earlier upload, grant both `evaluation:read` and `llm_analytics:read` in addition to `offline_evaluation_ingestion:write`.
 
-For runs that use multiple models, set `model_version` / `modelVersion` on each `EvaluationItem` to override the experiment's model. This requires `posthog` 7.76.0+ or `@posthog/ai` 8.17.0+.
+Set the experiment's run source to `"ci"` and record your agent's commit SHA as the application version. Python and Go use `run_source` and `application_version`. TypeScript uses `runSource` and `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
+
+For runs that use multiple models, set the model on each item to override the experiment's model. Use `model_version` in Go or Python (`posthog` 7.76.0+), or `modelVersion` in TypeScript (`@posthog/ai` 8.17.0+).
 
 Completing an experiment means the run finished, not that every case passed. To block a deployment, check scores against your own threshold in the test script and exit with a failure code.

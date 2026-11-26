@@ -21,10 +21,10 @@ The Arcade connector syncs data from your [Arcade](https://arcade.software) inte
 - An API key created in **Settings > Advanced** in your Arcade dashboard.
 - The API key needs different permissions depending on which tables you sync:
 
-| Tables                                                                                                 | Required permission                          |
-| ------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| `teams`, `users`                                                                                       | **User provisioning** enabled on the API key |
-| `flow_engagement`, `company_leads`, `total_plays`, `flow_views`, `flow_dropoff`, `authenticated_views` | **Insights** access enabled on the API key   |
+| Tables                                                                                                                                                                               | Required permission                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| `teams`, `users`                                                                                                                                                                     | **User provisioning** enabled on the API key |
+| `flow_engagement`, `company_leads`, `total_plays`, `flow_views`, `flow_dropoff`, `authenticated_views`, `flow_play_time`, `flow_companies`, `custom_link_views`, `custom_link_plays` | **Insights** access enabled on the API key   |
 
 ## Adding a data source
 
@@ -52,7 +52,7 @@ All Arcade tables use full refresh. Each sync replaces the contents of the table
 
 <SourceTables />
 
-> **Note:** The per-flow tables (`flow_views`, `flow_dropoff`, `authenticated_views`) only include flows that have engagement during the requested time window. Flows with no plays in the selected period won't appear in these tables.
+> **Note:** The per-flow tables (`flow_views`, `flow_dropoff`, `authenticated_views`, `flow_play_time`, `flow_companies`, `custom_link_views`, `custom_link_plays`) only include flows that have engagement during the requested time window. Flows with no plays in the selected period won't appear in these tables.
 
 ## Troubleshooting
 

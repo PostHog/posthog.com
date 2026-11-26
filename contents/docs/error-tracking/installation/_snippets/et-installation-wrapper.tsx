@@ -4,6 +4,7 @@ import {
     WebInstallation,
     NextJSInstallation,
     ReactInstallation,
+    ReactRouterInstallation,
     AngularInstallation,
     SvelteInstallation,
     NuxtInstallation,
@@ -59,6 +60,12 @@ export const ErrorTrackingNextJSInstallationWrapper = () => (
 export const ErrorTrackingReactInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{ JSEventCapture }}>
         <ReactInstallation modifySteps={(steps) => addNextStepsStep(steps, 'react')} />
+    </OnboardingContentWrapper>
+)
+
+export const ErrorTrackingReactRouterInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={{}}>
+        <ReactRouterInstallation modifySteps={(steps) => addNextStepsStep(steps, 'vite')} />
     </OnboardingContentWrapper>
 )
 

@@ -10,7 +10,7 @@ Founded by serial AI entrepreneur Danny Postma, [HeadshotPro](https://www.headsh
 
 “I used to have a whole bunch of side projects,” says Danny, “But HeadshotPro was so successful it’s become my main focus. I’ve started to build a team around it and that’s where our need for product analytics came from — I needed one source of truth for both marketing and developers to share.”
 
-After asking for recommendations from other founders, Danny narrowed his list to just two contenders — [Mixpanel and PostHog](/blog/posthog-vs-mixpanel). Both platforms enabled in-depth analytics, but with PostHog this was only the start of what was possible.
+After asking for recommendations from other founders, Danny narrowed his list to just two contenders — [Mixpanel and PostHog](/compare/posthog-vs-mixpanel). Both platforms enabled in-depth analytics, but with PostHog this was only the start of what was possible.
 
 “We looked at Mixpanel but it was always too expensive,” says Danny. “Plus, I wanted an analytics tool where I could look at different types of data. If I get concerned about something I want to dig into it — and that’s why I joined the data warehouse beta when it first launched.”
 

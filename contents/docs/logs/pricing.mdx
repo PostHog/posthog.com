@@ -10,6 +10,8 @@ No credit card is required to get started. You can set a billing limit on Logs t
 
 Logs is billed by the number of GB ingested. The price per GB changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
 
+You don't pay for log lines that a [drop rule](/docs/logs/best-practices#drop-and-rate-limit-logs-in-posthog) removes, including lines over a rate limit. Dropped log lines don't count toward your GB ingested or your custom retention costs.
+
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 <Pricing productType="logs" />

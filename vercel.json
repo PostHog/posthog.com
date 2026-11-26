@@ -305,6 +305,31 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/js/reference:ext(\\.md)?",
+            "destination": "/docs/references/posthog-js:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/react-native/reference:ext(\\.md)?",
+            "destination": "/docs/references/posthog-react-native:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/android/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/flutter/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-ios:ext(\\.md)?",
             "destination": "/docs/libraries/ios:ext?",
             "statusCode": 301
@@ -881,6 +906,10 @@
             "destination": "/compare/posthog-vs-amplitude"
         },
         {
+            "source": "/blog/posthog-vs-mixpanel",
+            "destination": "/compare/posthog-vs-mixpanel"
+        },
+        {
             "source": "/blog/best-braintrust-alternatives",
             "destination": "/compare/best-braintrust-alternatives"
         },
@@ -1341,6 +1370,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/ai-engineering/wizard-signup:ext(\\.md)?",
+            "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-engineering/manual-capture:ext(\\.md)?",
             "destination": "/docs/ai-observability/installation/manual-capture:ext?",
             "statusCode": 301
@@ -1691,6 +1725,16 @@
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/error-tracking",
+            "destination": "/handbook/growth/sales/observability-positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/logs",
+            "destination": "/handbook/growth/sales/observability-positioning",
             "statusCode": 301
         },
         {
@@ -2253,6 +2297,11 @@
         {
             "source": "/handbook/company/structure",
             "destination": "/handbook/people/team-structure/why-small-teams"
+        },
+        {
+            "source": "/handbook/company/fuzzy-ownership:ext(\\.md)?",
+            "destination": "/handbook/company/ownership:ext?",
+            "permanent": true
         },
         {
             "source": "/handbook/people/team",
@@ -5012,6 +5061,14 @@
             "destination": "/templates/in-app-feedback-survey"
         },
         {
+            "source": "/apps/notification-bar",
+            "destination": "/docs/js-snippets/notification-bar"
+        },
+        {
+            "source": "/apps/pineapple-mode",
+            "destination": "/docs/js-snippets/pineapple-mode"
+        },
+        {
             "source": "/apps/user-interviewer",
             "destination": "/templates/user-interview"
         },
@@ -7280,10 +7337,6 @@
             "destination": "/services"
         },
         {
-            "source": "/posthug",
-            "destination": "/"
-        },
-        {
             "source": "/docs/session-replay/start-here:ext(\\.md)?",
             "destination": "/docs/session-replay:ext?"
         },
@@ -7816,6 +7869,11 @@
         {
             "source": "/docs/ai-evals/taggers.md",
             "destination": "/docs/ai-evals.md#categories",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/taggers:ext(\\.md)?",
+            "destination": "/docs/api/evaluations:ext?",
             "statusCode": 301
         },
         {

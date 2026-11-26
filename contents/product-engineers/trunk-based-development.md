@@ -11,6 +11,10 @@ ogImage: generated
 tags:
   - Engineering
   - Feature flags
+seo:
+  metaTitle: "Trunk-based development: What it is and how we do it"
+  metaDescription: >-
+    Trunk-based development means merging small, short-lived branches into main often. See how it compares to Git Flow, its benefits, and how PostHog does it.
 ---
 
 What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.

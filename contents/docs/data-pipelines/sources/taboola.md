@@ -9,7 +9,7 @@ availability:
 sourceId: Taboola
 ---
 
-The Taboola connector syncs your advertising data from the Taboola Backstage API into PostHog, including campaigns, campaign items, conversion rules, and performance reports.
+The Taboola connector syncs your advertising data from the Taboola Backstage API into PostHog, including campaigns, campaign items, conversion rules, performance reports, accessible accounts, and advertisers.
 
 ## Adding a data source
 
@@ -39,6 +39,10 @@ The data warehouse then starts syncing your Taboola data. You can see details an
 | `conversion_rules`        | Universal pixel conversion rules                                      | Full refresh |
 | `campaign_summary_by_day` | Daily campaign performance metrics (impressions, clicks, conversions) | Incremental  |
 | `top_campaign_content`    | Top 1,000 performing content items over the last 30 days              | Full refresh |
+| `allowed_accounts`        | Accounts your Backstage API credentials can access. For network credentials, this lists the network account and each of its sub-accounts | Full refresh |
+| `advertisers`             | Advertiser sub-accounts in your network. Empty for accounts that are not network accounts | Full refresh |
+| `campaign_summary_by_site` | Performance metrics per publisher site, aggregated across all campaigns over the trailing 30 days | Full refresh |
+| `campaign_summary_by_country` | Performance metrics per country, aggregated across all campaigns over the trailing 30 days | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
@@ -46,7 +50,7 @@ The data warehouse then starts syncing your Taboola data. You can see details an
 
 ### Entity tables
 
-The `campaigns`, `conversion_rules`, and `campaign_items` tables use full refresh because the Taboola API doesn't provide updated-since filtering. Every sync re-downloads the full result set.
+The `campaigns`, `conversion_rules`, `campaign_items`, `allowed_accounts`, and `advertisers` tables use full refresh because the Taboola API doesn't provide updated-since filtering. Every sync re-downloads the full result set.
 
 The `campaign_items` table fans out across campaigns, fetching items for each campaign individually. If a sync is interrupted, it resumes from the next campaign rather than restarting from the beginning.
 
@@ -58,7 +62,7 @@ If a report sync is interrupted, it resumes from the next unfetched window rathe
 
 ### Snapshot tables
 
-The `top_campaign_content` table returns the top 1,000 items aggregated over the trailing 30 days. Rows carry no date, so this table always syncs as a full refresh snapshot.
+The `top_campaign_content` table returns the top 1,000 items aggregated over the trailing 30 days. The `campaign_summary_by_site` and `campaign_summary_by_country` tables aggregate all campaigns over the trailing 30 days by publisher site and country. Rows in these three tables carry no date, so they always sync as full refresh snapshots.
 
 ## Authentication
 

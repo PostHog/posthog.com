@@ -23,6 +23,7 @@ import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
+import hogProfile from '../../../images/hog-profile.png'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -88,7 +89,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                                 <div className="mr-2 relative">
                                     <Avatar
                                         className={` ${isInForum ? 'size-8' : 'w-[25px] h-[25px]'} rounded-full`}
-                                        image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                                        image={hogProfile}
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
                                         <Logo layout="logomark" className="w-[16px]" />
