@@ -139,7 +139,7 @@ import ListWithNextMarkdown from "./\_snippets/list-with-nextline-md.md"
 </Tab.Panels>
 </Tab.Group>
 
-Both render as the same list, but one is easier to read in Markdown. This isn't necessary for shorter bullet-point lists.
+Both render as the same list, but one is easier to read in Markdown. This isn't necessary for shorter bullet-point lists, or for lists inside `<details>` expandable sections.
 
 ### Use straight apostrophes and quote marks
 
