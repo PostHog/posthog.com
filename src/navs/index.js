@@ -8805,6 +8805,39 @@ export const docsMenu = {
                     icon: 'IconGear',
                     color: 'yellow',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/workflows-next/resources/best-practices',
+                    icon: 'IconStar',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/workflows-next/resources/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/workflows-next/resources/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/workflows-next/resources/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/workflows-next/resources/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
+                },
             ],
         },
         {

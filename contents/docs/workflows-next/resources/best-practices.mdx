@@ -1,0 +1,37 @@
+---
+title: Best practices
+sidebar: Docs
+showTitle: true
+---
+
+What we've learned from teams sending with Workflows.
+
+## Sending
+
+- **Start with transactional.** It's the email people need, so it goes out first and builds your sender's record. Add marketing once that's steady.
+- **Send to people who asked.** Signups, customers, and opt-ins. Never a bought list. See [deliverability](/docs/workflows-next/email/deliverability).
+- **Test on yourself first.** Send to your own inbox and a personal Gmail or Outlook account before anyone else gets it.
+- **Grow slowly.** A broadcast to your most active people first, then the rest. Watch the **Reputation** tab between sends.
+- **Keep marketing and transactional apart.** A transactional category for emails people need, and a subdomain per stream once you send a lot.
+
+## Automations
+
+- **One trigger, one job.** Two automations on the same event can send the same person two emails. Branch inside one automation instead.
+- **Keep it simple.** A few clear steps are easier to fix than a web of branches.
+- **Plan for missing data.** Add a `default` to every variable, and decide where a failed step goes.
+- **Set a goal.** A conversion goal tells you whether it works, and can take people out once they convert.
+- **Watch for loops.** An automation that captures an event can trigger itself, or another automation that triggers it back.
+- **Use the trigger's frequency.** **One time per period** with **ever** for a welcome series, so nobody gets it twice.
+
+## Staying tidy
+
+- **Name things for what they do,** such as "Welcome series: new signups", not "Workflow 1".
+- **Write a description:** what starts it, what it does, and who owns it.
+- **Archive what's done.** An old automation can still fire, and still costs money.
+- **Use categories.** One per kind of email, so people can leave your newsletter without leaving everything.
+
+## Keep an eye on it
+
+- **Check metrics weekly:** sends, bounces, unsubscribes, and conversions for each broadcast and automation. See [metrics](/docs/workflows-next/metrics).
+- **Turn on self-driving,** and let PostHog flag the steps that aren't working. See [self-driving](/docs/workflows-next/self-driving).
+- **Read the logs** when something looks off. Every run shows each step it took. See [test and debug](/docs/workflows-next/automations/debug).
