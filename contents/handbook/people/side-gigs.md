@@ -16,7 +16,6 @@ The key distinction to something being a side gig, and thus it being appropriate
 
 A few hours a month on a paid side gig is acceptable. In any case, side gigs should by default be something you work on in your personal time, and they should not impact the work you do at PostHog.
 
-
 In a few cases, you may want your side gig to become your full time work one day. That is ok - please just let us know, so we can create a plan. We know the key to motivated people is to help you achieve your long term goals, and to align this with what PostHog needs, whether or not you eventually achieve them with us.
 
 Above everything else, if you are going above and beyond for PostHog and you're still able to look after yourself properly, side gigs (whether paid or unpaid) are totally fine. We don't think that's possible beyond a certain level of time/energy commitment to them, but we are very happy for you to spend a little time on them each week.
@@ -36,6 +35,8 @@ If you are ever worried about this, please talk to Fraser and he can help you fi
 You might build something that’s useful to people at PostHog. Congrats! It’s fine to share it internally. Be upfront if you own it or stand to benefit from people using it, and let people decide for themselves.
 
 If a team wants to pay for it, run it on PostHog infrastructure, rely on it for ongoing work, or give it access to company or customer data, you need to flag it in `#legal` first. We’ll do the same checks we’d do for any other supplier. If you subsequently want to use PostHog as a customer reference, please ask - we’re usually happy to say yes.
+
+> Getting this stuff right is in your best interest too! If you create something that one day becomes a company, investors will want to know that there is no ambiguity around PostHog potentially being entitled to the IP in some way.
 
 ## Getting signoff
 
