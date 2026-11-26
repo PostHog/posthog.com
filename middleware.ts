@@ -233,7 +233,8 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
 // `doc_ctx` as well, the middleware fetches the `.md` file itself, but only for agents that fetch for a user and for
 // requests that already carry `doc_ctx`, so scripts that download `.md` files in bulk pay no extra fetch.
 async function chainLinks(request: Request, result: NegotiationResult): Promise<NegotiationResult> {
-    if (request.headers.has(SUBREQUEST_HEADER)) return result
+    // The MCP hint is not Markdown, and rewriting it would turn the SSE client's 405 into a 200.
+    if (request.headers.has(SUBREQUEST_HEADER) || result.negotiation === 'mcp_client') return result
     const url = new URL(request.url)
     const userAgent = request.headers.get('user-agent') || ''
     if (!LOGGED_PATHS.test(url.pathname) || CRAWLER_REGEX.test(userAgent)) return result

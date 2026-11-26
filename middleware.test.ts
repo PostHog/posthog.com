@@ -343,7 +343,7 @@ test('ties a request for a linked page to the response that linked it', async (t
     )
 })
 
-test('adds no doc_ctx when off, for crawlers, or for a script that fetches a .md URL', async (t) => {
+test('adds no doc_ctx when off, for crawlers, for MCP clients, or for a script that fetches a .md URL', async (t) => {
     enableLog(t)
     const { fetch, lines } = mockLinkedMarkdownAndLog(t)
 
@@ -363,6 +363,10 @@ test('adds no doc_ctx when off, for crawlers, or for a script that fetches a .md
         new Request(`${page}.md?doc_ctx=%3C%3E`, { headers: { 'user-agent': 'curl/8.0' } })
     )
     assert.equal(emptyParent, undefined)
+    const mcpClient = await middleware(
+        new Request(page, { headers: { 'user-agent': 'Claude-User', accept: 'text/event-stream' } })
+    )
+    assert.equal(mcpClient?.status, 405)
 
     assert.equal(fetch.mock.callCount(), 4)
     assert.deepEqual(
@@ -374,6 +378,7 @@ test('adds no doc_ctx when off, for crawlers, or for a script that fetches a .md
             ['/docs/product-analytics', undefined, undefined],
             ['/docs/product-analytics.md', undefined, undefined],
             ['/docs/product-analytics.md', undefined, undefined],
+            ['/docs/product-analytics', undefined, undefined],
         ]
     )
 })
