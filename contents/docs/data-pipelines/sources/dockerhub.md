@@ -9,9 +9,9 @@ availability:
 sourceId: Dockerhub
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Docker Hub connector syncs repositories, tags, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -46,9 +46,17 @@ All Docker Hub tables are full refresh. Each sync replaces the contents of the t
 
 <SourceTables />
 
+### Table availability
+
+Not all tables are available for every namespace:
+
+- **Organization tables** – `org_members`, `org_groups`, `org_group_members`, `audit_logs`, and `audit_log_actions` require the namespace to be a Docker Hub organization. The token must belong to an owner of that organization.
+- **`repository_pulls`** – Only available for namespaces in the Docker Verified Publisher program. It syncs weekly pull and unique IP counts per repository for the last 12 months.
+
 ## Troubleshooting
 
 - If the connection fails with an authorization error, the personal access token is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If `repository_pulls` shows an error or is unavailable, the namespace may not be a Docker Verified Publisher. Verify the namespace is enrolled in the DVP program and that the token owner has access, then disable the table if it doesn't apply to your namespace.
 
 <TroubleshootingLink />
