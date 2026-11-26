@@ -26,7 +26,7 @@ You need a Workable account with admin access so you can create an access token.
 When linking Workable, you'll need:
 
 - **Account subdomain** – the subdomain from `https://<subdomain>.workable.com`.
-- **API access token** – create one in your Workable account under **Settings > Integrations > Access Tokens** (admins only). Grant the `r_jobs` and `r_candidates` read scopes.
+- **API access token**: create one in your Workable account under **Settings > Integrations > Access Tokens** (admins only). Grant the `r_jobs` and `r_candidates` read scopes. Also grant `r_requisitions` for the `requisitions` table and `r_time_tracking` for the `time_entries` table. The `requisitions` table requires the Hiring Plan feature.
 
 ## Sync modes
 
@@ -43,7 +43,7 @@ When linking Workable, you'll need:
 ## Troubleshooting
 
 - If you get an authorization error, your Workable access token is invalid or has expired. Create a new token in your Workable account settings, then reconnect.
-- If you get a permission error, your access token is missing the read scopes needed to sync this data (e.g. `r_jobs`, `r_candidates`). Grant them in your Workable account settings, then reconnect.
+- If you get a permission error, check that your access token has the read scopes for the tables you selected, including `r_requisitions` for `requisitions` and `r_time_tracking` for `time_entries`. The `requisitions` table also requires the Hiring Plan feature. Grant the scopes in your Workable account settings, then reconnect.
 - If your subdomain is rejected, use just the account subdomain from `https://<subdomain>.workable.com`.
 
 <TroubleshootingLink />
