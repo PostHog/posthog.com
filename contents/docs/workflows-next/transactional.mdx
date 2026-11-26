@@ -4,11 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import createLight from './images/transactional-create-light.png'
-import createDark from './images/transactional-create-dark.png'
-import impactLight from './images/transactional-impact-light.png'
-import impactDark from './images/transactional-impact-dark.png'
-
 Transactional emails go to one person when your code says so: password resets, sign-in codes, receipts. Your code sends them. The **Transactional** tab in [Workflows](https://app.posthog.com/workflows) shows each send and what the person did next.
 
 New here? [Send your first one from code](/docs/workflows-next/installation).
@@ -22,8 +17,8 @@ Transactional emails skip marketing opt-outs, so don't use them for marketing. O
 For sign-in codes and reset links, turn on **Protect sensitive data**. PostHog won't store the email's content, and records only the domain of a clicked link.
 
 <ProductScreenshot
-  imageLight={createLight}
-  imageDark={createDark}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_light_0ca2f74599.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_dark_703e57c7eb.png"
   alt="A new transactional email in the editor, with the variables your code sends"
   classes="rounded"
 />
@@ -56,8 +51,8 @@ The **Metrics** tab counts sends, deliveries, opens, clicks, bounces, and spam c
 Open an email and pick a conversion event, such as `subscription_started`. PostHog shows the funnel from send to click to conversion. Add a revenue property to see revenue.
 
 <ProductScreenshot
-  imageLight={impactLight}
-  imageDark={impactDark}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_impact_light_5dbcfb899a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_impact_dark_a5caf8ffef.png"
   alt="The Impact tab, with the funnel from send to paid_bill"
   classes="rounded"
 />

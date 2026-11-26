@@ -10,11 +10,6 @@ import OSButton from 'components/OSButton'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import SwitchPrompt, { CopyPrompt } from './_snippets/switch-prompt'
-import audienceSuggestions from './images/broadcast-audience-suggestions-light.png'
-import audienceSuggestionsDark from './images/broadcast-audience-suggestions-dark.png'
-import emailEditor from './images/email-editor.png'
-import automationMetrics from './images/automation-overview-light.png'
-import automationMetricsDark from './images/automation-overview-dark.png'
 
 Send email from your code, then see what happens next. Broadcasts, automations, and push notifications are built in, next to your product data.
 
@@ -239,8 +234,8 @@ Your agent saves its changes as a draft. You review the draft and publish it.
 PostHog looks at what people do in your product and suggests who to email next. Pick an audience, and PostHog AI drafts the email. Then pick a day to send it. See [send a broadcast](/docs/workflows/broadcasts).
 
 <ProductScreenshot
-  imageLight={audienceSuggestions}
-  imageDark={audienceSuggestionsDark}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_light_6f107e725f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_dark_9f93dbd97f.png"
   alt="Suggested audiences for a new broadcast"
   classes="rounded"
 />
@@ -261,7 +256,7 @@ See every broadcast and automated email next to each other. PostHog stops you be
 A block editor that your whole team can use. Type `/` to add a block, `{{` to pull in anything you know about the person, and preview the email at every screen width. See the [content library](/docs/workflows/library).
 
 <ProductScreenshot
-  imageLight={emailEditor}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_editor_cdb83a96d2.png"
   alt="The email editor in PostHog"
   classes="rounded"
 />
@@ -282,8 +277,8 @@ An automation starts when someone does something, then waits, branches, and send
 Sends, opens, clicks, bounces, and complaints for each automation and broadcast, next to what people did in your product afterwards. Each one is an [engagement event](/docs/workflows/engagement-events) on the person, so you can use it in insights and funnels like any other event.
 
 <ProductScreenshot
-  imageLight={automationMetrics}
-  imageDark={automationMetricsDark}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_light_252909e556.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_dark_bc23dd407a.png"
   alt="The metrics for an automation in PostHog"
   classes="rounded"
 />

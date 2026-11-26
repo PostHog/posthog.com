@@ -7,10 +7,6 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from "components/Docs/QuestLog"
 import OSButton from "components/OSButton"
 import PlatformInstall, { wizardInstallSchema } from "components/PlatformInstall"
-import audienceSuggestions from "./images/broadcast-audience-suggestions-light.png"
-import audienceSuggestionsDark from "./images/broadcast-audience-suggestions-dark.png"
-import automationMetrics from "./images/automation-overview-light.png"
-import automationMetricsDark from "./images/automation-overview-dark.png"
 
 <QuestLog firstSpeechBubble="Let's send an email!" lastSpeechBubble="Now see what it did.">
 
@@ -63,8 +59,8 @@ Verify your domain to email your users. Your code keeps working: sends move to y
 Email many people at once, such as a product update. Pick one of PostHog's suggested audiences, and PostHog AI drafts the email.
 
 <ProductScreenshot
-  imageLight={audienceSuggestions}
-  imageDark={audienceSuggestionsDark}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_light_6f107e725f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_dark_9f93dbd97f.png"
   alt="Suggested audiences for a new broadcast"
   classes="rounded"
 />
@@ -101,8 +97,8 @@ Send emails that react to what people do, such as a welcome email at sign-up and
 Every send, open, and click is an event on the person who got it. See what they did next, and how each email performs.
 
 <ProductScreenshot
-  imageLight={automationMetrics}
-  imageDark={automationMetricsDark}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_light_252909e556.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_dark_bc23dd407a.png"
   alt="The metrics for an automation in PostHog"
   classes="rounded"
 />
