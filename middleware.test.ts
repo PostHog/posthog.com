@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { test, type TestContext } from 'node:test'
 
 import middleware from './middleware.ts'
+import { MCP_SERVER_URL } from './src/constants/index.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
 const SUBREQUEST_HEADER = 'x-posthog-middleware-subrequest'
@@ -87,6 +88,69 @@ test('serves the MCP page brief to agents that fetch /mcp for a user', async (t)
     assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })
 
+const mcpClientHeaders = { accept: 'application/json, text/event-stream', 'content-type': 'application/json' }
+
+// An MCP message as a client sends it. `new Request` sets no content-length, but a client over the network does.
+function mcpPost(url: string, body: string, headers: Record<string, string> = {}): Request {
+    const length = String(new TextEncoder().encode(body).length)
+    return new Request(url, {
+        method: 'POST',
+        headers: { ...mcpClientHeaders, 'content-length': length, ...headers },
+        body,
+    })
+}
+
+test('answers MCP clients pointed at a page with a JSON-RPC error that names the MCP server', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog MCP server'))
+    const initialize = { jsonrpc: '2.0', id: 0, method: 'initialize', params: {} }
+
+    for (const path of ['/docs/model-context-protocol', '/docs/product-analytics', '/mcp', '/mcp.md']) {
+        const response = await middleware(
+            mcpPost(`https://posthog.com${path}`, JSON.stringify(initialize), { 'user-agent': 'Claude-User' })
+        )
+        assert.equal(response?.status, 200, path)
+        assert.equal(response.headers.get('content-type'), 'application/json')
+        const { jsonrpc, id, error } = await response.json()
+        assert.deepEqual({ jsonrpc, id, code: error.code }, { jsonrpc: '2.0', id: 0, code: -32600 })
+        assert.ok(error.message.includes(MCP_SERVER_URL), path)
+    }
+    assert.equal(fetch.mock.callCount(), 0)
+})
+
+test('echoes only a JSON-RPC id it read from a small body', async () => {
+    const initialize = (id: unknown, padding = '') =>
+        JSON.stringify({ jsonrpc: '2.0', id, method: 'initialize', params: { padding } })
+    const cases: [string, Request, string | number | null][] = [
+        ['string id', mcpPost(page, initialize('a1')), 'a1'],
+        ['malformed body', mcpPost(page, '{"jsonrpc":'), null],
+        ['object id', mcpPost(page, initialize({ a: 1 })), null],
+        ['boolean id', mcpPost(page, initialize(true)), null],
+        ['body over 64 KB', mcpPost(page, initialize(1, 'x'.repeat(64 * 1024))), null],
+        [
+            'body over 64 KB with a small content-length',
+            mcpPost(page, initialize(1, 'x'.repeat(64 * 1024)), { 'content-length': '100' }),
+            null,
+        ],
+        [
+            'no content-length',
+            new Request(page, { method: 'POST', headers: mcpClientHeaders, body: initialize(1) }),
+            null,
+        ],
+    ]
+    for (const [name, request, expected] of cases) {
+        const response = await middleware(request)
+        const { id, error } = await response?.json()
+        assert.equal(id, expected, name)
+        assert.ok(error.message.includes(MCP_SERVER_URL), name)
+    }
+})
+
+test('answers an SSE client with the hint in a 405', async () => {
+    const sse = await middleware(new Request(page, { headers: { accept: 'text/event-stream' } }))
+    assert.equal(sse?.status, 405)
+    assert.ok((await sse.text()).includes(MCP_SERVER_URL))
+})
+
 function enableLog(t: TestContext): void {
     process.env.MIDDLEWARE_LOG_ENABLED = 'true'
     t.after(() => {
@@ -165,6 +229,7 @@ test('logs why no Markdown was served, and requests for a Markdown URL', async (
     await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User/1.0' } }))
     await middleware(new Request(page, { headers: { accept: 'text/markdown' } }))
     await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
+    await middleware(new Request(page, { method: 'POST', headers: mcpClientHeaders, body: '{}' }))
 
     assert.deepEqual(
         lines.map((line) => [line.served_format, line.negotiation, line.markdown_reason]),
@@ -173,6 +238,7 @@ test('logs why no Markdown was served, and requests for a Markdown URL', async (
             ['html', 'no_sibling', 'agent_fetcher'],
             ['html', 'no_sibling', 'accept'],
             ['markdown', 'markdown_url', undefined],
+            ['mcp_error', 'mcp_client', undefined],
         ]
     )
     assert.equal(typeof lines[1].markdown_fetch_ms, 'number')
