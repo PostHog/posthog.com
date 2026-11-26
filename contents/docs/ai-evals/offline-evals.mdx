@@ -22,7 +22,9 @@ Each run follows four steps:
 3. **Score the output** – Use code checks, an LLM judge, or your existing evaluation library.
 4. **Upload the results** – Send the items and scores to PostHog, then mark the experiment complete.
 
-A _scorer_ defines what a result means: its name, value type, and passing rule. A **reported scorer** records scores calculated by your evaluation code and reported to PostHog, such as whether your agent selected the expected tool. With a [**composite scorer**](/docs/ai-evals/scorers#combine-scores-with-a-composite-scorer), PostHog calculates a score from other reported scores for the same item.
+An **item scorer** scores one test case. For example, did the support agent look up the right order? Your code can report the result, or PostHog can [combine several checks on the same item](/docs/ai-evals/scorers#combine-scores-with-a-composite-scorer).
+
+An [**experiment scorer**](/docs/ai-evals/scorers#score-a-whole-experiment) gives the whole run a score. Use it to compare two versions of your agent on the same cases. If the score drops, open the run to see which checks got worse.
 
 ## Run your first experiment
 
@@ -683,7 +685,7 @@ For each step, see [Create the composite](/docs/ai-evals/scorers#create-the-comp
 
 ## Use MCP
 
-Use the [PostHog MCP server](/docs/model-context-protocol) to create scorers, manage datasets, and upload experiments from your AI agent. For composites, include the pinned inputs and a `calculate: true` request for each item.
+Use the [PostHog MCP server](/docs/model-context-protocol) to create scorers, manage datasets, and upload experiments from your AI agent. For item composites, include the pinned inputs and a `calculate: true` request for each item.
 
 ## Data retention
 
