@@ -8725,6 +8725,42 @@ export const docsMenu = {
                     icon: 'IconGlobe',
                     color: 'green',
                 },
+                {
+                    name: 'Deliverability',
+                    url: '/docs/workflows-next/channels/deliverability',
+                    icon: 'IconCheckCircle',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Test sender',
+                    url: '/docs/workflows-next/channels/test-sender',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                },
+                {
+                    name: 'Push notifications',
+                    url: '/docs/workflows-next/channels/push',
+                    icon: 'IconPhone',
+                    color: 'blue',
+                    children: [
+                        { name: 'Overview', url: '/docs/workflows-next/channels/push' },
+                        { name: 'iOS', url: '/docs/workflows-next/channels/push/ios' },
+                        { name: 'Android', url: '/docs/workflows-next/channels/push/android' },
+                        { name: 'React Native', url: '/docs/workflows-next/channels/push/react-native' },
+                        { name: 'Flutter', url: '/docs/workflows-next/channels/push/flutter' },
+                        {
+                            name: 'Import device tokens',
+                            url: '/docs/workflows-next/channels/push/import-device-tokens',
+                        },
+                        { name: 'Push step settings', url: '/docs/workflows-next/channels/push/push-step-options' },
+                    ],
+                },
+                {
+                    name: 'Slack, SMS, and webhooks',
+                    url: '/docs/workflows-next/channels/slack-sms-webhooks',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
             ],
         },
         {

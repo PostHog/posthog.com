@@ -1,0 +1,64 @@
+---
+title: Deliverability
+sidebar: Docs
+showTitle: true
+---
+
+Landing in the inbox comes down to three things: a domain that's set up properly, a sender with a clean record, and email people want. PostHog handles the infrastructure. You bring the domain and the list.
+
+## What you get
+
+- **No IP to warm up.** Email goes out over Amazon SES addresses that many senders share, which already carry steady traffic.
+- **Your domain keeps its reputation.** You send from your own domain, and can set it up next to your old provider before you switch.
+- **Transactional email never waits.** It goes out at once, ahead of marketing email, even when your allowance is used up.
+- **Marketing grows with your record.** Your [sending allowance](/docs/workflows-next/broadcasts/large-audiences) starts small and grows as you send clean email.
+
+## Sending health
+
+The **Reputation** tab shows your rates over the last 30 days, overall, by automation, and by mailbox provider. See [metrics](/docs/workflows-next/metrics#sending-health).
+
+| Rate | Keep it under |
+| --- | --- |
+| Bounce rate | 2% |
+| Spam complaint rate | 0.1% |
+
+Mailbox providers use the same lines.
+
+## When something goes wrong
+
+- **Over a line for 7 days:** your project drops one tier. It can climb again once its 30-day rates are clean.
+- **One email bouncing a lot:** PostHog can pause that email, and sends return `sending_paused`.
+- **Sending suspended:** PostHog or Amazon stops all email for the project, and it starts again from tier 0. Sends return `sending_suspended`.
+- **Quiet for 30 days:** your project drops a tier for each month without sending, because mailbox providers forget.
+
+All projects in a region share one Amazon SES account, so one bad list hurts everyone. That's why the tiers exist.
+
+## Keep your rates low
+
+- **Send only to people who asked:** signups, customers, and opt-ins. Never a bought or scraped list.
+- **Trust the suppression list.** Leave bounced addresses on it. Retrying them only bounces again.
+- **Make unsubscribing easy.** Put `{{ unsubscribe_url }}` in every marketing email. Someone who can't find it clicks "Report spam" instead.
+- **Use a real sender.** A name people know, and the same from address every time. Not `noreply`.
+- **Say what's inside.** A subject that matches the email. No all caps, no "RE:" on emails that aren't replies.
+- **Send steadily.** A weekly email to active people builds reputation. A blast to a list that hasn't heard from you in months burns it.
+- **Drop people who never engage.** Send to a [cohort](/docs/data/cohorts) of active people, not everyone.
+
+Before a big send, send a test to your own address and a personal Gmail or Outlook account. If it lands in spam for you, it will for them. Check **Reputation** the next day, because complaints arrive hours later.
+
+## Keep marketing away from transactional
+
+1. **Use a transactional category** for emails people need. They go out first and never wait.
+2. **Use a subdomain per stream,** such as `news.example.com` for marketing and `account.example.com` for transactional. A marketing complaint spike then lands on the marketing subdomain.
+3. **Use a project per stream** for full separation: its own tier, allowance, and suspension. A new project starts at tier 0.
+
+## Questions
+
+**Can I get a dedicated IP?** No. A dedicated IP only builds a reputation with large, regular volume, and [Amazon recommends shared IPs](https://docs.aws.amazon.com/ses/latest/dg/dedicated-ip.html) for everyone else.
+
+**Can I use my own SMTP server or email provider?** No. You bring the domain, and PostHog sends through Amazon SES.
+
+**Can I get a higher allowance sooner?** If you have a sending history elsewhere, click **Request a higher allowance** on the **Reputation** tab. It opens a support form with your sending record filled in.
+
+**Does this apply to push, SMS, or webhooks?** No. Only email shares the sending reputation.
+
+**Moving from another provider?** See [move from another provider](/docs/workflows-next/migrate) and [set up your domain](/docs/workflows-next/domain#already-sending-from-this-domain).
