@@ -18,23 +18,38 @@ import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { applications, keyFeatures } from './support/slides'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import HoggieImage from 'components/HoggieImage'
 import hedgehogLifeguardPng from 'hoggies/lifeguard.png'
+import hedgehogFingerGunsPng from 'hoggies/finger-guns.png'
 
 const SupportTweet = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
         <SectionHeading>We didn't pay him to say this (honest)</SectionHeading>
-        <Tweet
-            name="Mathew Chan"
-            handle="itsmattchan"
-            avatar="https://pbs.twimg.com/profile_images/1905465377280151552/VmDQ3bmf_400x400.jpg"
-            avatarAlt="Mathew Chan"
-            url="https://x.com/itsmattchan/status/2107843274643788213"
-            alertMessage="Go say it on X – this is just a screenshot in HTML form."
-        >
-            Just had my first holy shit moment with @posthog - I had a feedback form wired up to their support ticket
-            feature, and because I had "self-driving" turned on and wired up to my codebase, posthog read the support
-            ticket, identified the fix, then opened a PR. This feels like the future. Well done lads, well done. 👏
-        </Tweet>
+        {/* Same layout as the "Who is it for?" table: the tweet takes the full column and the hog fills a fixed
+            column on the right, sized to the tweet's height. */}
+        <div className="grid grid-cols-1 gap-6 @2xl/reader-content:grid-cols-[minmax(0,1fr)_10rem] @5xl/reader-content:grid-cols-[minmax(0,1fr)_18rem] @5xl/reader-content:gap-8 items-stretch">
+            <Tweet
+                name="Mathew Chan"
+                handle="itsmattchan"
+                avatar="https://pbs.twimg.com/profile_images/1905465377280151552/VmDQ3bmf_400x400.jpg"
+                avatarAlt="Mathew Chan"
+                url="https://x.com/itsmattchan/status/2107843274643788213"
+                alertMessage="Go say it on X – this is just a screenshot in HTML form."
+                className="!mb-0 !max-w-none"
+            >
+                Just had my first holy shit moment with @posthog - I had a feedback form wired up to their support
+                ticket feature, and because I had "self-driving" turned on and wired up to my codebase, posthog read the
+                support ticket, identified the fix, then opened a PR. This feels like the future. Well done lads, well
+                done. 👏
+            </Tweet>
+            <HoggieImage
+                src={hedgehogFingerGunsPng}
+                mirror
+                alt="A hedgehog doing finger guns"
+                className="hidden @2xl/reader-content:block relative"
+                imgClassName="absolute inset-0 size-full object-contain"
+            />
+        </div>
     </section>
 )
 
@@ -124,7 +139,7 @@ export const support = {
     overview: {
         title: 'Support tickets that arrive with the bug attached',
         description: '"Which tickets this week came from users who hit an error?"',
-        eli5: "Support is a helpdesk inside PostHog. Tickets come in from an in-app widget, email, Slack, Microsoft Teams, GitHub issues, or your own UI through the API. Each one opens with the customer's session replay, recent events, and exceptions next to the conversation. PostHog AI and the MCP can read your tickets and the product data behind them, so you find the cause without asking the customer to explain it again. Recurring problems can become Self-driving reports with a draft pull request, so support engineers get closer to the fix and have more good news for users.",
+        eli5: "Support is a helpdesk inside PostHog for tickets from your app, email, Slack, Microsoft Teams, and GitHub. Each ticket opens with the customer's replay, events, and errors, and PostHog AI can turn recurring problems into a draft pull request.",
         textColor: 'text-black', // tw
     },
     hogs: {
@@ -135,7 +150,7 @@ export const support = {
         },
     },
     useCases: {
-        intro: 'Built for early teams that outgrew a shared inbox, and for support teams that debug their own tickets.',
+        intro: 'For early teams leaving a shared inbox, and engineers who debug tickets.',
         rows: [
             [
                 'Founders and early engineers',
