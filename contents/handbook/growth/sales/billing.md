@@ -7,7 +7,7 @@ showTitle: true
 
 ## Managing billing
 
-> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Authorized staff can [switch an existing platform package](#switch-an-existing-platform-package) at the standard price in Billing admin. Sales should coordinate with the billing team for other billing modifications, pricing changes, or technical billing tasks.
+> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Use Billing admin to [switch an existing platform package](#switch-an-existing-platform-package) at the standard price. Sales should coordinate with the billing team for other billing modifications, pricing changes, or technical billing tasks.
 >
 > Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
@@ -301,7 +301,7 @@ Editing a customer's `plans_map` changes feature access in PostHog only.
 
 ### Switch an existing platform package
 
-Sales, CS, and Support staff with Billing admin permission can switch a customer with one existing platform package and a direct Stripe subscription to Boost, Scale, or Enterprise at the standard price.
+Members of the `Sales/CS/Support` group in Billing admin can switch a customer with one existing platform package and a direct Stripe subscription to Boost, Scale, or Enterprise at the standard price.
 
 1. Open the customer in <PrivateLink url="https://billing.posthog.com/admin/billing/customer/">Billing admin</PrivateLink>. Cancel any active platform trial in **Trials** first.
 2. Click **Change platform package** next to **History**. Select the agreed package, then click **Change package**.
