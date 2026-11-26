@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Cin7 Core connector syncs your inventory management data – products, stock levels, customers, suppliers, sales, purchases, and more – into PostHog, so you can analyze your inventory and order data alongside your product data.
+The Cin7 Core connector syncs your inventory management data – products, stock levels, customers, suppliers, sales, purchases, production orders, customer credits, journals, and general ledger transactions – into PostHog, so you can analyze your inventory and order data alongside your product data.
 
 > **Note:** This source supports Cin7 Core (formerly DEAR Inventory) only. It doesn't support Cin7 Omni.
 
@@ -32,8 +32,8 @@ You need a Cin7 Core account with API access enabled. To get your credentials:
 
 When linking Cin7 Core, you'll need:
 
-- **Account ID** - Your Cin7 Core account identifier, found under **Integrations** > **API**.
-- **Application key** - Your API application key from Cin7 Core. This is stored securely and never displayed after setup.
+- **Account ID**: Your Cin7 Core account identifier, found under **Integrations** > **API**.
+- **Application key**: Your API application key from Cin7 Core. This is stored securely and never displayed after setup.
 
 ## Sync modes
 
@@ -61,7 +61,7 @@ The Cin7 Core API allows 60 calls per minute. PostHog sends at most one request 
 
 <SourceTables />
 
-Below is a reference of all 21 available tables and their sync methods:
+Below is a reference of all 25 available tables and their sync methods:
 
 | Table                   | Sync method  | Description                                        |
 | ----------------------- | ------------ | -------------------------------------------------- |
@@ -86,6 +86,12 @@ Below is a reference of all 21 available tables and their sync methods:
 | `units_of_measure`      | Full refresh | Unit of measure definitions                        |
 | `carriers`              | Full refresh | Shipping carrier information                       |
 | `price_tiers`           | Full refresh | Pricing tier configurations                        |
+| `production_orders`     | Full refresh | Production orders and production order runs, with their status and dates |
+| `customer_credits`      | Full refresh | Customer credits, such as prepayments, with the amount that remains to use |
+| `journals`              | Full refresh | Manual journals with their status and journal lines |
+| `transactions`          | Full refresh | General ledger transactions: one row per debit and credit posting from sales, purchases, stock, and journal tasks |
+
+The `transactions` table has no primary key because general ledger postings have no unique line ID. It uses full refresh to include backdated postings.
 
 ## Troubleshooting
 

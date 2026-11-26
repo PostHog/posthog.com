@@ -9,7 +9,7 @@ availability:
 sourceId: Cyberimpact
 ---
 
-The Cyberimpact connector syncs your Cyberimpact email marketing data – members, groups, unsubscribes, bounces, mailings and their statistics, opens, clicks, and templates – into PostHog.
+The Cyberimpact connector syncs your Cyberimpact email marketing data – members, groups, unsubscribes, bounces, mailings, mailing statistics, opens, clicks, deliveries, mailing unsubscribes, mailing bounces, stopped recipients, and templates – into PostHog.
 
 ## Adding a data source
 
@@ -38,12 +38,17 @@ Once the syncs are complete, you can start using Cyberimpact data in PostHog.
 | `mailing_opens`        | Recipients who opened each sent mailing, one row per mailing and recipient            | Full refresh |
 | `mailing_clicks`       | Recipients who clicked a link in each sent mailing, one row per mailing and recipient | Full refresh |
 | `templates`            | Email templates of the account                                                        | Full refresh |
+| `mailing_deliveries`   | Recipients to whom each sent mailing was delivered, one row per mailing and recipient | Full refresh |
+| `mailing_unsubscribes` | Recipients who unsubscribed through the link in each sent mailing, one row per mailing and recipient | Full refresh |
+| `mailing_hard_bounces` | Recipients of each sent mailing whose email hard bounced, one row per mailing and recipient | Full refresh |
+| `mailing_soft_bounces` | Recipients of each sent mailing whose email soft bounced, one row per mailing and recipient | Full refresh |
+| `mailing_stopped_recipients` | Recipients who did not get a mailing because its sending was stopped, one row per mailing and recipient | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ### Sync limitations
 
-Unsubscribed and bounced member tables only filter on their event date (unsubscribe or bounce), but a profile edit can change the row afterward, so they must use full refresh. The child tables (`group_members`, `mailing_stats`, `mailing_opens`, `mailing_clicks`) make one request per parent record, so they also sync as full refresh.
+Unsubscribed and bounced member tables only filter on their event date (unsubscribe or bounce), but a profile edit can change the row afterward, so they must use full refresh. The child tables (`group_members`, `mailing_stats`, `mailing_opens`, `mailing_clicks`, `mailing_deliveries`, `mailing_unsubscribes`, `mailing_hard_bounces`, `mailing_soft_bounces`, `mailing_stopped_recipients`) make one request per parent record, so they also sync as full refresh.
 
 ## Configuration
 

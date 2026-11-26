@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Semaphore (Semaphore CI) connector syncs workflows, pipelines, and deployment targets into the PostHog data warehouse, so you can analyze your CI/CD data alongside your product data.
+The Semaphore (Semaphore CI) connector syncs workflows, pipelines, deployment targets, organization members, deployment history, and flaky test data into the PostHog Data Warehouse, so you can analyze your CI/CD data alongside your product data.
 
 ## Prerequisites
 
@@ -30,9 +30,9 @@ You can generate a personal API token under **Settings** in your [Semaphore acco
 
 You'll be asked for:
 
-- **API token** - Your personal API token from Semaphore account settings
-- **Organization subdomain** - Your organization's subdomain (e.g., `example` for `example.semaphoreci.com`)
-- **Project ID** - The UUID of the project you want to import (find this in your Semaphore project settings)
+- **API token**: Your personal API token from Semaphore account settings
+- **Organization subdomain**: Your organization's subdomain (e.g. `example` for `example.semaphoreci.com`)
+- **Project ID**: The UUID of the project you want to import (find this in your Semaphore project settings)
 
 Each connection imports one project. To import multiple projects, create multiple source connections.
 
@@ -40,13 +40,17 @@ Each connection imports one project. To import multiple projects, create multipl
 
 <SyncModes />
 
-| Table                | Sync mode                   |
-| -------------------- | --------------------------- |
-| `workflows`          | Incremental or full refresh |
-| `pipelines`          | Full refresh                |
-| `deployment_targets` | Full refresh                |
+| Table                    | Sync mode                   |
+| ------------------------ | --------------------------- |
+| `workflows`              | Incremental or full refresh |
+| `pipelines`              | Full refresh                |
+| `deployment_targets`     | Full refresh                |
+| `members`                | Full refresh                |
+| `deployment_history`     | Full refresh                |
+| `flaky_tests`            | Full refresh                |
+| `flaky_test_disruptions` | Full refresh                |
 
-The `workflows` table supports incremental sync using the `created_at` timestamp. Pipelines and deployment targets use full refresh, as their states may change after initial creation.
+The `workflows` table supports incremental sync using the `created_at` timestamp. All other tables use full refresh. The `members` table covers the organization. The `deployment_history`, `flaky_tests`, and `flaky_test_disruptions` tables cover the selected project.
 
 ## Configuration
 
