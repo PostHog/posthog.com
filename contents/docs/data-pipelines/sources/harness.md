@@ -9,7 +9,7 @@ availability:
 sourceId: Harness
 ---
 
-The Harness connector syncs your CI/CD pipeline data – pipelines, executions, services, and environments – into the PostHog data warehouse, so you can analyze your deployment activity alongside your product data.
+The Harness connector syncs your CI/CD pipeline data – pipelines, executions, services, environments, user groups, and execution metadata – into the PostHog data warehouse, so you can analyze your deployment activity alongside your product data.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ To create an API key token:
 
 1. In Harness, go to **My Profile** > **My API Keys**.
 2. Create an API key and add a token.
-3. Grant the token view permission for pipelines, executions, services, and environments in your project.
+3. Grant the token view permission for pipelines, executions, services, environments, user groups, and approvals in your project.
 
 ## Adding a data source
 
@@ -38,18 +38,24 @@ Once the syncs are complete, you can start using Harness data in PostHog.
 
 ## Available tables
 
-| Table          | Description                                                        | Sync method  |
-| -------------- | ------------------------------------------------------------------ | ------------ |
-| `pipelines`    | Pipeline summaries in the selected Harness project                 | Full refresh |
-| `executions`   | Pipeline executions, including status, timing, and stage counts    | Full refresh |
-| `services`     | Services configured for deployment in the selected Harness project | Full refresh |
-| `environments` | Deployment environments in the selected Harness project            | Full refresh |
+| Table                   | Description                                                                                         | Sync method  |
+| ----------------------- | --------------------------------------------------------------------------------------------------- | ------------ |
+| `pipelines`             | Pipeline summaries in the selected Harness project                                                  | Full refresh |
+| `executions`            | Pipeline executions, including status, timing, and stage counts                                     | Full refresh |
+| `services`              | Services configured for deployment in the selected Harness project                                  | Full refresh |
+| `environments`          | Deployment environments in the selected Harness project                                             | Full refresh |
+| `user_groups`           | User groups in the selected Harness project                                                         | Full refresh |
+| `approval_instances`    | Approval steps of each pipeline execution in the selected Harness project                           | Full refresh |
+| `execution_notes`       | Notes on pipeline executions in the selected Harness project (executions without notes have no row) | Full refresh |
+| `execution_annotations` | Annotations on pipeline executions in the selected Harness project                                  | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
 All Harness tables use full refresh only. Execution queue-time filters could miss later status changes on older executions, so incremental sync isn't supported.
+
+The `approval_instances`, `execution_notes`, and `execution_annotations` tables make one API request for each pipeline execution.
 
 ## Configuration
 
