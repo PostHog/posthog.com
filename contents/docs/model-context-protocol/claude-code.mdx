@@ -24,15 +24,13 @@ npx @posthog/wizard mcp add
 
 ## Claude Code plugin
 
-You can also install PostHog as a [Claude Code plugin](https://github.com/PostHog/ai-plugin). The plugin connects Claude Code to the PostHog MCP server and asks for your approval before sensitive PostHog writes, such as deletions.
+You can also install PostHog as a [Claude Code plugin](https://github.com/PostHog/ai-plugin), which sets up the PostHog MCP server for you.
 
 ```bash
 claude plugin install posthog
 ```
 
 After installing, run `/mcp` in Claude Code, select `plugin:posthog:posthog`, and follow the browser prompts to log in to PostHog.
-
-The plugin can also [send your Claude Code sessions to AI Observability](/docs/ai-observability/installation/claude-code).
 
 ## Manual MCP setup
 
