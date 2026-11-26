@@ -41,6 +41,7 @@ const HEADER_ALLOWLIST = [
     'accept',
     'accept-encoding',
     'accept-language',
+    'accept-charset',
     'user-agent',
     'sec-ch-ua',
     'sec-ch-ua-mobile',
@@ -72,6 +73,20 @@ const HEADER_ALLOWLIST = [
     'x-vercel-ja3-digest',
     'x-vercel-ja4-digest',
     'x-vercel-ip-as-number',
+    // Sent by MCP clients that point at a page instead of the MCP server.
+    'mcp-method',
+    'mcp-protocol-version',
+    // Revalidation and partial requests, which explain 304 and 206 responses.
+    'if-none-match',
+    'if-modified-since',
+    'range',
+    // The body of a POST, and the site behind a cross-origin request.
+    'content-type',
+    'content-length',
+    'origin',
+    // Set when a CDN or a Cloudflare Worker sits in front of the docs. `cf-worker` names that site.
+    'cdn-loop',
+    'cf-worker',
 ]
 const HEADER_ALLOWLIST_REGEX = new RegExp(`^(?:${HEADER_ALLOWLIST.join('|')})$`, 'i')
 const QUERY_PARAM_ALLOWLIST = [

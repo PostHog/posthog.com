@@ -118,6 +118,9 @@ test('logs the request and the Markdown served, with values only for allowlisted
         'x-vercel-ja3-digest': 'test-ja3-digest',
         'x-vercel-ja4-digest': 't13d1516h2_8daaf6152771_test',
         'x-vercel-ip-as-number': '64500',
+        'mcp-protocol-version': '2025-06-18',
+        'if-none-match': '"test-etag"',
+        'cf-worker': 'example.com',
     }
 
     const response = await middleware(
