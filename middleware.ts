@@ -23,9 +23,9 @@
  * of the MCP server, so they show where the server is rather than a parse
  * error. `/mcp.md` is in the matcher only for those clients.
  *
- * With MIDDLEWARE_CHAIN_LINKS on, it also ties follow-up /docs requests to the
- * request whose Markdown linked to them, without a cookie or a session. See
- * `chainLinks`.
+ * With MIDDLEWARE_CHAIN_LINKS on, it runs an experiment for Claude and ChatGPT
+ * fetches only: it ties a follow-up /docs request to the request whose Markdown
+ * linked to it, without a cookie or a session. See `chainLinks`.
  */
 export const config = {
     matcher: [
@@ -158,10 +158,10 @@ const CHAIN_PARENT_MAX_LENGTH = 100
 // A /docs link in Markdown, absolute or root-relative, with its query and fragment. Links to the same page
 // (`#heading`) and to other hosts do not match.
 const DOCS_LINK = /\]\((https:\/\/posthog\.com)?(\/docs(?:\/[^)\s?#]*)?)(\?[^)\s#]*)?(#[^)\s]*)?\)/g
-// Search engines and other crawlers get no tags: a tagged link they crawl would be a second URL for the same
-// page. Skipping them here means robots.txt needs no rule for the parameter. Most crawlers say bot, crawl or
-// spider; the names cover search engine fetchers that don't, such as Yahoo! Slurp and Mediapartners-Google.
-const CRAWLER_REGEX = /bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|yeti|archiver/i
+// The only agents that get tagged links: Claude and ChatGPT when they fetch a page for a person. Search engines
+// and every other crawler, ClaudeBot and GPTBot included, never see a tagged link, so they never find a second URL
+// for a page.
+const CHAIN_AGENTS_REGEX = /\b(?:Claude-User|ChatGPT-User)\b/i
 
 // Vercel typechecks this file with tsconfig.json, whose `lib` has no ES core library and which has no
 // @types/node. Without these two declarations every build prints type errors for it.
@@ -230,18 +230,17 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
 // ties one request to the one before it and nothing more.
 //
 // Links in the Markdown point at `.md` URLs, which Vercel serves as static files. For the next hop to carry a
-// `doc_ctx` as well, the middleware fetches the `.md` file itself, but only for agents that fetch for a user and for
-// requests that already carry `doc_ctx`, so scripts that download `.md` files in bulk pay no extra fetch.
+// `doc_ctx` as well, the middleware fetches the `.md` file itself for those agents.
 async function chainLinks(request: Request, result: NegotiationResult): Promise<NegotiationResult> {
     // The MCP hint is not Markdown, and rewriting it would turn the SSE client's 405 into a 200.
     if (request.headers.has(SUBREQUEST_HEADER) || result.negotiation === 'mcp_client') return result
     const url = new URL(request.url)
     const userAgent = request.headers.get('user-agent') || ''
-    if (!LOGGED_PATHS.test(url.pathname) || CRAWLER_REGEX.test(userAgent)) return result
+    if (!LOGGED_PATHS.test(url.pathname) || !CHAIN_AGENTS_REGEX.test(userAgent)) return result
 
     let markdown = result.response
     let chainFetchMs: number | undefined
-    if (result.negotiation === 'markdown_url' && (USER_AGENT_FETCHERS_REGEX.test(userAgent) || chainParent(url))) {
+    if (result.negotiation === 'markdown_url') {
         const started = Date.now()
         const file = await fetch(new URL(url.pathname, url.origin), { headers: { [SUBREQUEST_HEADER]: '1' } })
         chainFetchMs = Date.now() - started

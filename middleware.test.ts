@@ -333,17 +333,24 @@ test('ties a request for a linked page to the response that linked it', async (t
     // Anyone can write the parameter, so the log keeps a short value of safe characters.
     await middleware(new Request(`${page}.md?doc_ctx=a%20b<c>@${'x'.repeat(200)}`, { headers: agent }))
 
+    const chatGpt = {
+        'user-agent': 'Mozilla/5.0 AppleWebKit/537.36; compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+    }
+    const third = await middleware(new Request('https://posthog.com/docs/data/events.md', { headers: chatGpt }))
+    assert.match((await third?.text()) || '', /events\.md\?doc_ctx=data\/events\.[0-9a-z]{1,7}\)/)
+
     assert.deepEqual(
         lines.map((line) => [line.url, line.negotiation, line.chain_parent]),
         [
             ['/docs/product-analytics', 'served', undefined],
             ['/docs/data/events.md', 'markdown_url', firstId],
             ['/docs/product-analytics.md', 'markdown_url', `abc${'x'.repeat(97)}`],
+            ['/docs/data/events.md', 'markdown_url', undefined],
         ]
     )
 })
 
-test('adds no doc_ctx when off, for crawlers, for MCP clients, or for a script that fetches a .md URL', async (t) => {
+test('adds no doc_ctx when off, for other agents and crawlers, or for MCP clients', async (t) => {
     enableLog(t)
     const { fetch, lines } = mockLinkedMarkdownAndLog(t)
 
@@ -351,33 +358,37 @@ test('adds no doc_ctx when off, for crawlers, for MCP clients, or for a script t
     assert.equal(await off?.text(), linkedMarkdown)
 
     enableChaining(t)
-    for (const crawler of ['ExampleBot/1.0', 'Mozilla/5.0 (compatible; Yahoo! Slurp)', 'Mediapartners-Google']) {
+    for (const userAgent of [
+        'Perplexity-User/1.0',
+        'ClaudeBot/1.0',
+        'GPTBot/1.1',
+        'OAI-SearchBot/1.0',
+        'Googlebot/2.1',
+    ]) {
         const response = await middleware(
-            new Request(page, { headers: { 'user-agent': crawler, accept: 'text/markdown' } })
+            new Request(page, { headers: { 'user-agent': userAgent, accept: 'text/markdown' } })
         )
         assert.equal(await response?.text(), linkedMarkdown)
     }
     const script = await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
     assert.equal(script, undefined)
-    const emptyParent = await middleware(
-        new Request(`${page}.md?doc_ctx=%3C%3E`, { headers: { 'user-agent': 'curl/8.0' } })
+    // A tagged URL can travel past the agent it was made for, so a request that carries one is logged but not tagged.
+    const forwarded = await middleware(
+        new Request(`${page}.md?doc_ctx=docs.abc`, { headers: { 'user-agent': 'curl/8.0' } })
     )
-    assert.equal(emptyParent, undefined)
+    assert.equal(forwarded, undefined)
     const mcpClient = await middleware(
         new Request(page, { headers: { 'user-agent': 'Claude-User', accept: 'text/event-stream' } })
     )
     assert.equal(mcpClient?.status, 405)
 
-    assert.equal(fetch.mock.callCount(), 4)
+    assert.equal(fetch.mock.callCount(), 6)
     assert.deepEqual(
         lines.map((line) => [line.url, line.chain_id, line.chain_parent]),
         [
-            ['/docs/product-analytics', undefined, undefined],
-            ['/docs/product-analytics', undefined, undefined],
-            ['/docs/product-analytics', undefined, undefined],
-            ['/docs/product-analytics', undefined, undefined],
+            ...Array(6).fill(['/docs/product-analytics', undefined, undefined]),
             ['/docs/product-analytics.md', undefined, undefined],
-            ['/docs/product-analytics.md', undefined, undefined],
+            ['/docs/product-analytics.md', undefined, 'docs.abc'],
             ['/docs/product-analytics', undefined, undefined],
         ]
     )
