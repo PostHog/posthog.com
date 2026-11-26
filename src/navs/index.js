@@ -8433,6 +8433,222 @@ export const docsMenu = {
                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
             },
         },
+        // Preview only: the Workflows docs rebuild. Replaces the Workflows entry below at the swap.
+        {
+            name: 'Workflows (next)',
+            icon: 'IconMegaphone',
+            color: 'red',
+            url: '/docs/workflows-next',
+            description: 'The Workflows docs rebuild.',
+            children: [
+                {
+                    name: 'Workflows',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/workflows-next',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Setup',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/workflows-next/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/workflows-next/installation',
+                    icon: 'IconTerminal',
+                    color: 'blue',
+                    // Keep this order in the sidebar instead of A to Z
+                    platformOrder: 'nav',
+                    children: [
+                        {
+                            name: 'API',
+                            url: '/docs/workflows-next/installation/api',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/workflows-next/installation/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/workflows-next/installation/python',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/workflows-next/installation/ruby',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/workflows-next/installation/rust',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/workflows-next/installation/php',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/workflows-next/installation/go',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/workflows-next/installation/dotnet',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/workflows-next/installation/elixir',
+                        },
+                    ],
+                },
+                {
+                    name: 'Move from another provider',
+                    url: '/docs/workflows-next/migrate',
+                    icon: 'IconShuffle',
+                    color: 'purple',
+                    children: [
+                        { name: 'Overview', url: '/docs/workflows-next/migrate' },
+                        { name: 'Resend', url: '/docs/workflows-next/migrate/resend' },
+                        { name: 'Customer.io', url: '/docs/workflows-next/migrate/customer-io' },
+                        { name: 'Postmark', url: '/docs/workflows-next/migrate/postmark' },
+                        { name: 'SendGrid', url: '/docs/workflows-next/migrate/sendgrid' },
+                        { name: 'Mailgun', url: '/docs/workflows-next/migrate/mailgun' },
+                        { name: 'Mailchimp', url: '/docs/workflows-next/migrate/mailchimp' },
+                    ],
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/workflows-next/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows-next/web-app',
+                        },
+                        {
+                            name: 'Transactional emails',
+                            url: '/docs/workflows-next/transactional',
+                        },
+                        {
+                            name: 'Broadcasts',
+                            url: '/docs/workflows-next/broadcasts',
+                        },
+                        {
+                            name: 'Automations',
+                            url: '/docs/workflows-next/automations',
+                        },
+                        {
+                            name: 'Self-driving',
+                            url: '/docs/workflows-next/self-driving',
+                        },
+                        {
+                            name: 'Email editor',
+                            url: '/docs/workflows-next/email-editor',
+                        },
+                        {
+                            name: 'Metrics',
+                            url: '/docs/workflows-next/metrics',
+                        },
+                        {
+                            name: 'Sending rules',
+                            url: '/docs/workflows-next/sending-rules',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/workflows-next/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
+                    name: 'API',
+                    url: '/docs/workflows-next/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Transactional emails',
+                },
+                {
+                    name: 'Send emails from code',
+                    url: '/docs/workflows-next/transactional/send-from-code',
+                    icon: 'IconSend',
+                    color: 'orange',
+                },
+                {
+                    name: 'Templates and variables',
+                    url: '/docs/workflows-next/transactional/templates',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
+                {
+                    name: 'Emails your code writes',
+                    url: '/docs/workflows-next/transactional/from-code',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Attachments and copies',
+                    url: '/docs/workflows-next/transactional/attachments',
+                    icon: 'IconDocument',
+                    color: 'orange',
+                },
+                {
+                    name: 'Retries and errors',
+                    url: '/docs/workflows-next/transactional/retries-and-errors',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
+                    name: 'Status and troubleshooting',
+                    url: '/docs/workflows-next/transactional/status',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                },
+                {
+                    name: 'Sensitive data and tracking',
+                    url: '/docs/workflows-next/transactional/sensitive-data',
+                    icon: 'IconLock',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Delivery webhooks',
+                    url: '/docs/workflows-next/transactional/webhooks',
+                    icon: 'IconPlug',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Supabase auth emails',
+                    url: '/docs/workflows-next/transactional/supabase',
+                    icon: 'IconShieldLock',
+                    color: 'green',
+                },
+                {
+                    name: 'Examples',
+                    url: '/docs/workflows-next/transactional/examples',
+                    icon: 'IconLightBulb',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Channels',
+                },
+                {
+                    name: 'Set up your domain',
+                    url: '/docs/workflows-next/domain',
+                    icon: 'IconGlobe',
+                    color: 'green',
+                },
+            ],
+        },
         {
             name: 'Workflows',
             icon: 'IconMegaphone',

@@ -1,0 +1,88 @@
+---
+title: Status and troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+Each send returns a message ID. Use it to check what happened to the email for 30 days, or open the send in the [**Log**](/docs/workflows-next/transactional#log).
+
+## Check a status
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+const { data } = await posthog.emails.get(messageId)
+console.log(data.status, data.reason)
+```
+
+```python file=Python
+email = posthog.emails.get(message_id)
+print(email.status, email.reason)
+```
+
+```ruby file=Ruby
+status = $posthog.emails.get(message_id)
+puts status.status, status.reason
+```
+
+```rust file=Rust
+let status = posthog.emails().get(message_id).await?;
+println!("{}", status.status.as_str());
+```
+
+```php file=PHP
+$status = PostHog::emails()->get($messageId);
+echo $status->getStatus(), ' ', $status->getReason();
+```
+
+```go file=Go
+status, err := client.Emails().Get(ctx, messageID)
+fmt.Println(status.Status)
+```
+
+```csharp file=.NET
+var status = await emails.GetAsync(messageId);
+Console.WriteLine($"{status.Status} {status.Reason}");
+```
+
+```elixir file=Elixir
+{:ok, status} = PostHog.Emails.get(message_id)
+IO.inspect({status.status, status.reason})
+```
+
+```bash file=REST
+curl "https://us.posthog.com/api/messaging/emails/<message_id>/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
+```
+
+</MultiLanguage>
+
+| `status` | What it means |
+| --- | --- |
+| `queued` | Waiting to go out. |
+| `sent` | Handed to the email provider. |
+| `delivered` | The recipient's mail server accepted it. |
+| `bounced` | The mail server refused it. `reason` is `hard`, `soft`, or `unknown`. |
+| `complained` | The recipient marked it as spam. |
+| `failed` | It wasn't sent. `reason` says why. |
+
+A status only moves forward, and new ones can appear, so handle values you don't know.
+
+A `failed` email's `reason` is one of:
+
+- `provider_error` or `provider_rejected`: the email provider refused it.
+- `recipient_suppressed`, `recipient_unreachable`, or `missing_recipient`: PostHog skipped it because of the recipient.
+- `sending_paused` or `sending_suspended`: check **Reputation**.
+- `canceled` or `workflow_unavailable`: the send stopped before it went out.
+
+A lookup returns `404` for an email sent a few seconds ago (retry shortly), one older than 30 days, or an ID from another project.
+
+## An email didn't arrive
+
+Work down the list:
+
+1. **Did the send return a message ID?** If not, its error `code` says why. See [retries and errors](/docs/workflows-next/transactional/retries-and-errors).
+2. **Is it in the Log?** If not, check that your key is from the right project.
+3. **Is it `queued`?** Transactional emails go out ahead of marketing, so this is usually short. If it lasts minutes, [contact support](https://app.posthog.com/#panel=support).
+4. **Is it `failed` or `bounced`?** `reason` says why.
+5. **Is it `delivered`?** The mail server accepted it. Check the spam folder, and that your [domain's DNS records](/docs/workflows-next/domain) are still in place.

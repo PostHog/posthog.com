@@ -1,0 +1,107 @@
+---
+title: Metrics
+sidebar: Docs
+showTitle: true
+---
+
+import automationMetrics from './images/automation-metrics.png'
+import transactionalMetrics from './images/transactional-metrics.png'
+import whatHappenedAfterLight from './images/transactional-what-happened-after-light.png'
+import whatHappenedAfterDark from './images/transactional-what-happened-after-dark.png'
+import impactLight from './images/transactional-impact-light.png'
+import impactDark from './images/transactional-impact-dark.png'
+import broadcastLight from './images/broadcast-performance-light.png'
+import broadcastDark from './images/broadcast-performance-dark.png'
+import reputationLight from './images/reputation-light.png'
+import reputationDark from './images/reputation-dark.png'
+
+Every email you send shows how it did: sent, delivered, opened, clicked, bounced, and marked as spam. Because it runs on the same events as the rest of PostHog, you also see what people did next.
+
+## Transactional emails
+
+The **Metrics** tab counts sent, delivered, opened, and clicked emails: for all transactional emails, by email, or by sending domain.
+
+<ProductScreenshot
+  imageLight={transactionalMetrics}
+  alt="A transactional email's sent, delivered, opened, and clicked counts over the last 7 days"
+  classes="rounded"
+/>
+
+**What happened after** picks an email and an event, such as `paid_bill`. It shows how many people did the event after the email, the revenue that came with it, and the median time from send to event.
+
+<ProductScreenshot
+  imageLight={whatHappenedAfterLight}
+  imageDark={whatHappenedAfterDark}
+  alt="What happened after a payment failed email: people who paid within 7 days, revenue, and median time to convert"
+  classes="rounded"
+/>
+
+An email's **Impact** tab shows the funnel from send to click to your event, and how much more often people who clicked went on to do it. See [transactional emails](/docs/workflows-next/transactional#conversions).
+
+<ProductScreenshot
+  imageLight={impactLight}
+  imageDark={impactDark}
+  alt="The Impact tab, with the funnel from send to paid_bill"
+  classes="rounded"
+/>
+
+## Broadcasts
+
+A sent broadcast shows who was in the audience and why some didn't get it: opted out, suppressed, over the frequency cap, or no email address. Then it shows sends, deliveries, bounces, unsubscribes, opens, clicks, and conversions, activity over time, and the top clicked links. A recurring broadcast lists each send under **Runs**. See [broadcasts](/docs/workflows-next/broadcasts#after-you-send).
+
+<ProductScreenshot
+  imageLight={broadcastLight}
+  imageDark={broadcastDark}
+  alt="A broadcast's latest send, with its audience, delivery, engagement, and top clicked links"
+  classes="rounded"
+/>
+
+## Automations
+
+An automation's **Overview** tab shows:
+
+- **Conversions:** how many people reached your goal. Click **View converted people** to see who.
+- **Step reach:** how many people got to each step, and where they dropped off.
+- **Message leaderboard:** each email and push step, ranked by opens and clicks.
+- **In the workflow now:** who is partway through, and which step they wait on.
+- **Health:** failed steps, hard bounces, and spam complaints, with a link to the logs.
+
+The **Metrics** tab charts the same numbers over time, for the whole automation or one step. Each email also lists clicks for each link.
+
+<ProductScreenshot
+  imageLight={automationMetrics}
+  alt="An automation's metrics, with conversions and step reach"
+  classes="rounded"
+/>
+
+## Sending health
+
+The **Reputation** tab shows your bounce rate and spam complaint rate, overall and by mailbox provider, and your sending allowance. It flags problems early, before they can pause your sending. See [sending reputation](/docs/workflows/sending-reputation).
+
+<ProductScreenshot
+  imageLight={reputationLight}
+  imageDark={reputationDark}
+  alt="The Reputation tab, with the sending allowance and bounce and spam rates by mailbox provider"
+  classes="rounded"
+/>
+
+## What each person did
+
+Open any send to see its timeline, and what the person did in your product 7 days before and after, with a link to their [session replay](/docs/session-replay).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_light_228eeaada5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_dark_93b1987f6e.png"
+  alt="One send, with its timeline and what the person did around it"
+  classes="rounded"
+/>
+
+## Use the events anywhere
+
+Each open, click, bounce, and unsubscribe is a PostHog event, such as `$workflows_email_opened`. Use them in [insights](/docs/product-analytics/insights), [funnels](/docs/product-analytics/funnels), and [cohorts](/docs/data/cohorts), like any other event.
+
+Opens and clicks need [engagement events](/docs/workflows/engagement-events) turned on.
+
+## Ask your agent
+
+Over [MCP](/docs/workflows-next/mcp), ask "Which of our automations had the most unsubscribes last month, and why?" Your agent reads the same numbers.

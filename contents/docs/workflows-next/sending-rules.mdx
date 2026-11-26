@@ -1,0 +1,52 @@
+---
+title: Sending rules
+sidebar: Docs
+showTitle: true
+---
+
+Before PostHog sends anything, it checks three rules: what the person opted out of, whether the address is suppressed, and how many marketing emails they got lately. The rules cover every broadcast and automation, and no step can switch off an opt-out or a suppression.
+
+Find them in [Workflows](https://app.posthog.com/workflows) under **Messaging**.
+
+## Opt-outs
+
+Opt-outs are grouped into **message categories**, so someone can leave your newsletter and still get product updates. Each category is **marketing** or **transactional**. Pick a category on each broadcast and email step, and PostHog skips the people who opted out of it.
+
+People opt out with one click from their email app, or on the preferences page behind `{{ unsubscribe_url }}`. The **Opt-out list** shows who opted out of what. You can also import opt-outs from a CSV.
+
+Moving from Customer.io? [Import your opt-outs](/docs/workflows/import-customerio-optouts) and keep them in sync.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_light_8ffe0244a4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_dark_f0182f29ef.png"
+  alt="Message categories on the Opt-outs tab"
+  classes="rounded"
+/>
+
+## Suppression list
+
+An address goes on the **Suppression list** when email to it hard bounces, the person marks an email as spam, or you add it by hand. PostHog stops emailing it, which protects your [sending reputation](/docs/workflows-next/metrics#sending-health).
+
+Transactional emails are blocked only by a hard bounce, so a password reset still reaches someone who marked a newsletter as spam. Remove an address if a bounce was a one-off.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_light_0f0f19a931.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/suppression_list_dark_3ede49aca0.png"
+  alt="The suppression list"
+  classes="rounded"
+/>
+
+## Frequency cap
+
+The frequency cap limits how many marketing messages one person gets, across every broadcast and automation, such as 2 in 7 days. Set it under **Messaging** > **Settings**:
+
+- **Messages per person** and **Within this many days** set the cap.
+- **Hold capped messages for up to (hours)** keeps a message over the cap waiting for a free slot, instead of skipping it.
+
+Transactional emails never count toward the cap. For an email people need on time, such as a welcome email, turn on **Skip the frequency cap** on its automation step, or **Send even if people reached your frequency cap** on a broadcast. Opt-outs still apply.
+
+See the [frequency cap](/docs/workflows/frequency-cap) for how holds work.
+
+## From your own systems
+
+The [API](/docs/workflows-next/api) manages opt-outs, categories, and the suppression list, so your own preferences page or support tools can update them.

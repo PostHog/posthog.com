@@ -1,0 +1,119 @@
+---
+title: Use Workflows over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) gives your coding agent Workflows. It writes emails, sends them from your code, builds broadcasts and automations, and tells you how each email did, all from your editor.
+
+This works in any MCP client: Claude Code, Cursor, Codex, Windsurf, VS Code, and others.
+
+## Before you start
+
+1. **Set up Workflows:** [install the PostHog SDK](/docs/workflows-next/installation) and [set up your domain](/docs/workflows-next/domain).
+2. **Connect the MCP server:** [install it in your AI tool](#install-the-mcp-server) and give it access to your project.
+
+## What you can do here
+
+- **Send email from your code:** "Add a password reset email to our app."
+- **Write and edit emails:** "Change the button on our welcome email to say Get started."
+- **Send a broadcast:** "Email everyone on the Pro plan about the new dashboard."
+- **Build an automation:** "Email new signups who haven't created a dashboard after 2 days."
+- **See how an email did:** "Which of our automations had the most unsubscribes last month, and why?"
+- **Move from another provider:** "Move our email from Customer.io to PostHog."
+
+Your agent saves automations as drafts. Nothing sends until you publish.
+
+Some tools are still rolling out, so your project may not have all of them yet.
+
+## Email tools
+
+| Tool | Description |
+| --- | --- |
+| `workflows-send-email-template` | Send an email template to one person, such as a password reset. |
+| `workflows-send-email` | Send one email with content that you pass, such as a receipt. |
+| `workflows-make-email-template-transactional` | Make a template sendable from your code. |
+| `workflows-create-email-template` | Save an email template to the library. |
+| `workflows-list-email-templates` | List the email templates in the library. |
+| `workflows-get-email-template` | Get an email template, with its content. |
+| `workflows-patch-email-template` | Make a small edit to a template, such as a heading or a button. |
+| `workflows-update-email-template` | Replace a template's content. |
+| `workflows-show-email-template` | Show a preview of a template. |
+
+## Broadcast and automation tools
+
+| Tool | Description |
+| --- | --- |
+| `broadcasts-create` | Create a broadcast, which you review and launch in PostHog. |
+| `workflows-create` | Create an automation as a draft. |
+| `workflows-data-suggestions-list` | Suggest automations from your project's events, such as a welcome email on sign-up. |
+| `workflows-data-suggestions-create` | Build a suggested automation as a draft. |
+| `workflows-list` | List the automations in the project. |
+| `workflows-get` | Get an automation. |
+| `workflows-patch-graph` | Add, remove, or change steps. |
+| `workflows-patch-action-email` | Edit the email in one step. |
+| `workflows-update` | Change an automation's name, trigger, exit condition, or goal. |
+| `workflows-update-schedule` | Change when a scheduled automation runs. |
+| `workflows-test-run` | Test one step without sending to real people. |
+| `workflows-publish` | Make the draft live. |
+| `workflows-discard-draft` | Throw away the draft. |
+| `workflows-enable` | Turn on an automation. |
+| `workflows-suggest` | Suggest a change for a person to review. |
+| `workflows-list-proposals` | List the suggested changes on an automation. |
+| `workflows-list-revisions` | List an automation's history. |
+| `workflows-restore-revision` | Roll an automation back to an earlier version. |
+
+## Results tools
+
+| Tool | Description |
+| --- | --- |
+| `workflows-global-stats` | See how every automation is doing. |
+| `workflows-stats` | Get the stats for one automation. |
+| `workflows-version-stats` | Get the stats for one published version. |
+| `workflows-emails-list` | List the emails that an automation or broadcast sent. |
+| `workflows-email-get` | Get one email that an automation sent, with its timeline. |
+| `workflows-email-activity` | See what the recipient did before and after an email. |
+| `workflows-transactional-emails-list` | List the transactional emails from the last 30 days. |
+| `workflows-transactional-email-get` | Get one transactional email, with its timeline. |
+| `workflows-transactional-email-stats` | Count transactional emails by outcome. |
+| `workflows-transactional-email-results` | Count the recipients who did an event after an email. |
+| `workflows-transactional-email-activity` | See what the recipient did before and after a transactional email. |
+| `workflows-list-invocations` | List an automation's runs. |
+| `workflows-get-invocation` | Get one run, with the event that started it. |
+| `workflows-logs` | Read an automation's logs. |
+| `workflows-list-batch-jobs` | List the batch runs of a broadcast or scheduled automation. |
+
+## Setup tools
+
+| Tool | Description |
+| --- | --- |
+| `workflows-setup-status` | Check which setup steps the project has done, such as a verified domain. |
+| `workflows-sending-rules-get` | Get the frequency cap and other sending rules. |
+| `workflows-sending-rules-update` | Change the sending rules. |
+| `workflows-reputation-get` | Get your bounce and spam rates, and your sending allowance. |
+| `workflows-import-customerio` | Turn Customer.io automations into drafts. |
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Add a password reset email to our app, sent with PostHog.`
+- `Suggest an automation from our events, and build it as a draft.`
+- `Email everyone who signed up this week about our webinar on Thursday.`
+- `How did last week's product update broadcast do?`
+- `Why did the welcome email bounce for ada@example.com?`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#get-started-in-30-seconds).
+
+## Related
+
+- Build the same things by hand in the [web app](/docs/workflows/surfaces/web-app).
+- Script them from your own systems with the [API](/docs/workflows-next/api).

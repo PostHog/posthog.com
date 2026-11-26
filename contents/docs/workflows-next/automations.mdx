@@ -1,0 +1,77 @@
+---
+title: Automations
+sidebar: Docs
+showTitle: true
+---
+
+An automation starts when someone does something, then waits, branches, and sends email or push notifications. It can also send a Slack message to your team. Use it for onboarding, win-backs, trial reminders, and alerts.
+
+Open **Workflows** in [PostHog](https://app.posthog.com/workflows) and click **New workflow**. You build it on a canvas, one step at a time.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_dark_8fe8f4567b.png"
+  alt="An automation on the canvas"
+  classes="rounded"
+/>
+
+## Start it with a trigger
+
+The trigger decides who enters the automation, and when.
+
+- **Event:** someone does something in your product, such as `signed_up`.
+- **Cohort:** someone joins or leaves a [cohort](/docs/data/cohorts).
+- **Survey:** someone answers a [survey](/docs/surveys).
+- **Schedule:** run once, or on a repeating schedule, for everyone in an audience.
+- **Webhook:** your own system starts it with an HTTP request.
+- **Slack, GitHub, and support tickets:** a message, an issue, or a new ticket starts it.
+
+Pick how often one person can enter, such as every time or once a day.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_trigger_panel_light_65045a7652.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_trigger_panel_dark_bf54d41ffd.png"
+  alt="The trigger panel with an event trigger"
+  classes="rounded"
+/>
+
+## Add steps
+
+| Step | What it does |
+| --- | --- |
+| **Send** | Email, push, SMS, Slack, or a webhook. Write emails in the [email editor](/docs/workflows-next/email-editor). |
+| **Wait** | Wait a set time, wait until something happens, or wait for a time window, such as weekdays 9 to 5. |
+| **Branch** | Split people by their properties, by cohort, or at random to test two versions. |
+| **AI** | Classify a message, start an AI task, or have [Replay Vision](#watch-the-session-with-replay-vision) watch the person's session. |
+| **PostHog actions** | Capture an event, update a person property, or add the person to a cohort. |
+
+Set a conversion goal, such as `subscription_started`, to count how many people convert. You can also take people out of the automation once they convert.
+
+## Watch the session with Replay Vision
+
+The **Replay Vision** step watches the session recording behind the trigger and answers a question about it, such as "did they get stuck setting up?". It can also score the session, categorize it, or summarize it. The next step branches on the answer, so you only email the people who struggled.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_dark_c31893e45c.png"
+  alt="An automation that scores a signup's first session with Replay Vision, then branches on the score"
+  classes="rounded"
+/>
+
+See [Replay Vision in automations](/docs/workflows/replay-vision) for the settings.
+
+## Test and go live
+
+Test a step on a sample person before anyone gets an email. Your work saves as a draft, and nothing sends until you turn the automation on. Changes to a live automation also save as a draft until you publish them.
+
+To stop it, turn it off. People already partway through keep going unless you cancel their runs.
+
+## After it's live
+
+Each automation shows how many people entered, and how many emails were sent, opened, and clicked, step by step. See [metrics](/docs/workflows-next/metrics).
+
+Turn on [self-driving](/docs/workflows-next/self-driving), and PostHog suggests changes to the steps that aren't working. You approve them.
+
+## Build it with your agent
+
+Ask your coding agent over [MCP](/docs/workflows-next/mcp): "Email new signups who haven't created a dashboard after 2 days." It builds the automation as a draft for you to check.

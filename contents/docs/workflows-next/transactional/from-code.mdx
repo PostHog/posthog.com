@@ -1,0 +1,179 @@
+---
+title: Emails your code writes
+sidebar: Docs
+showTitle: true
+---
+
+If your code already renders its emails, such as with [React Email](https://react.email), send the subject and body yourself. There's no template in PostHog, but you still get statuses, suppression checks, metrics, and the send log.
+
+| | Template in PostHog | Content from your code |
+| --- | --- | --- |
+| Who edits it | Anyone, in PostHog, with no deploy | Engineers, in your codebase |
+| A send carries | `template_id` and `message_data` | `template_key`, `subject`, and `html` or `text` |
+| Copies and files | No | `cc`, `bcc`, and [attachments](/docs/workflows-next/transactional/attachments) |
+
+## Send it
+
+Name the email with `template_key`, and send the content:
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+const { data, error } = await posthog.emails.send({
+    to: "ada@example.com",
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    html,
+    distinctId: "user_123",
+    idempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```python file=Python
+result = posthog.emails.send(
+    to="ada@example.com",
+    template_key="password-reset",
+    subject="Reset your password",
+    html=html,
+    distinct_id="user_123",
+    idempotency_key="password-reset-8f14e45f",
+)
+```
+
+```ruby file=Ruby
+result = $posthog.emails.send(
+  to: 'ada@example.com',
+  template_key: 'password-reset',
+  subject: 'Reset your password',
+  html: html,
+  distinct_id: 'user_123',
+  idempotency_key: 'password-reset-8f14e45f'
+)
+```
+
+```rust file=Rust
+let result = posthog
+    .emails()
+    .send(
+        CodeEmail::new("ada@example.com", "password-reset", "Reset your password")
+            .html(html)
+            .distinct_id("user_123")
+            .idempotency_key("password-reset-8f14e45f"),
+    )
+    .await?;
+```
+
+```php file=PHP
+$result = PostHog::emails()->send([
+    'to' => 'ada@example.com',
+    'template_key' => 'password-reset',
+    'subject' => 'Reset your password',
+    'html' => $html,
+    'distinct_id' => 'user_123',
+    'idempotency_key' => 'password-reset-8f14e45f',
+]);
+```
+
+```go file=Go
+result, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:             "ada@example.com",
+    TemplateKey:    "password-reset",
+    Subject:        "Reset your password",
+    HTML:           html,
+    DistinctID:     "user_123",
+    IdempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```csharp file=.NET
+var result = await emails.SendAsync(new SendCodeEmailOptions
+{
+    To = "ada@example.com",
+    TemplateKey = "password-reset",
+    Subject = "Reset your password",
+    Html = html,
+    DistinctId = "user_123",
+    IdempotencyKey = "password-reset-8f14e45f",
+});
+```
+
+```elixir file=Elixir
+{:ok, result} =
+  PostHog.Emails.send(
+    to: "ada@example.com",
+    template_key: "password-reset",
+    subject: "Reset your password",
+    html: html,
+    distinct_id: "user_123",
+    idempotency_key: "password-reset-8f14e45f"
+  )
+```
+
+```bash file=REST
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: password-reset-8f14e45f" \
+  -d '{"template_key": "password-reset", "to": "ada@example.com", "distinct_id": "user_123", "subject": "Reset your password", "html": "<p>Reset it <a href=\"https://example.com/reset?token=abc\">here</a>.</p>"}'
+```
+
+</MultiLanguage>
+
+Every [SDK page](/docs/workflows-next/installation) shows the same call in its language.
+
+| Field | Required | What it does |
+| --- | --- | --- |
+| `template_key` | Yes | Names the email, such as `password-reset`. Use the same key every time, because PostHog groups its sends and metrics under it. Letters, digits, `-`, and `_`, up to 400. |
+| `to` | Yes | The recipient. |
+| `subject` | Yes | The subject. |
+| `html` or `text` | One of them | The body. PostHog sends it as written. Leave out `text` and PostHog makes it from `html`. |
+| `distinct_id` | No | The user's distinct ID, so the send lands on their person. |
+| `from` | No | Such as `Hedgebox <security@example.com>`, on a verified domain. Defaults to the project's default sender. |
+| `reply_to` | No | Up to 10 addresses. |
+| `sensitive` | No | See [sensitive data and tracking](/docs/workflows-next/transactional/sensitive-data). |
+| `tracking` | No | Turn opens, clicks, and engagement events on or off. |
+
+A request has `template_id` or `template_key`, not both.
+
+## In PostHog
+
+Each key shows up on the **Transactional** tab, with its sends and metrics. Link it to the file in your repo that sends it, and **Copy prompt for your agent** tells your coding agent which email to change, and where.
+
+## React Email
+
+The Node.js SDK renders React Email components for you, from version 5.69.0:
+
+```bash
+npm install posthog-node @react-email/render react-email react react-dom
+```
+
+Pass the component as `react`, and the SDK renders the HTML and plain text:
+
+```jsx
+await posthog.emails.send({
+    to: "ada@example.com",
+    templateKey: "order-shipped",
+    subject: "Your order shipped",
+    react: <OrderShippedEmail firstName="Ada" trackingUrl={trackingUrl} />,
+    distinctId: "user_123",
+    idempotencyKey: `order-shipped-${orderId}`,
+})
+```
+
+- **Next.js:** send from a route on the Node.js runtime. React Email doesn't render on the edge runtime.
+- **Render it yourself:** to keep a copy of the HTML, call `render` and `toPlainText` from `react-email`, and pass `html` and `text` instead.
+
+| Error | Cause |
+| --- | --- |
+| `invalid_form` | The send has `react` and `html`, or `react` and `templateId`. Pass one. |
+| `missing_react_renderer` | Install `@react-email/render` next to `posthog-node`. |
+| `react_render_failed` | The component threw, or took longer than 15 seconds. `error.cause` has the component's error. |
+
+## Checks
+
+| Code | Cause |
+| --- | --- |
+| `sender_not_verified` | No verified sender can send from `from`, or there's no `from` and no verified default sender. |
+| `validation_error` | A field is missing or breaks a rule above. `attr` names it. |
+
+See [retries and errors](/docs/workflows-next/transactional/retries-and-errors) for the errors every send can get.

@@ -1,0 +1,47 @@
+---
+title: Move from Resend
+sidebar: Docs
+showTitle: true
+---
+
+import { CopyPrompt } from '../_snippets/switch-prompt'
+
+PostHog imports your Resend suppression list, unsubscribes, topics, templates, and automations in one background import.
+
+> The Resend import is rolling out. If Resend isn't in the list, your project doesn't have it yet.
+
+## What moves
+
+| From Resend | In PostHog |
+| --- | --- |
+| Suppression list | [Suppression list](/docs/workflows-next/sending-rules#suppression-list) |
+| Unsubscribed contacts | Opted out of all marketing email |
+| Public topics, and who opted out of each | Marketing [categories](/docs/workflows-next/sending-rules#opt-outs) and opt-outs |
+| Templates | Templates, keyed by their Resend alias |
+| Automations | Draft automations |
+| Domains | A list, so you know which to add |
+
+API keys, webhooks, private topics, send history, and stats stay in Resend.
+
+## Run the import
+
+1. Create an API key at [resend.com/api-keys](https://resend.com/api-keys) with **Full access**. Resend has no read-only keys, so PostHog refuses a sending-only key. PostHog only reads, and deletes the key when the import ends.
+2. In [Workflows](https://app.posthog.com/workflows), go to **Opt-outs** and click **Import from another tool**.
+3. Pick **Resend**, paste the key, pick what to import, and click **Start import**.
+
+Topic preferences are read one contact at a time, so a big list can take a few hours. If the import stops partway, start it again with the same key, and it picks up where it left off.
+
+Or ask your agent:
+
+<CopyPrompt prompt="Move our email from Resend to PostHog." />
+
+## Switch your sending
+
+- **Domains:** add each domain in PostHog and publish its new records. If Resend uses the `feedback` subdomain, pick another MAIL FROM subdomain in PostHog. The import says when this applies.
+- **Templates:** Resend fills `FIRST_NAME` and other contact fields itself. PostHog doesn't, so your code passes them.
+- **Code:** send each template by its key: the Resend alias, or `resend-<id>` when it has none. A send to a hard-bounced address fails with `recipient_suppressed`. Don't retry it.
+- **Automations:** each draft lists the events your app must send to PostHog. Turn it on as you turn off the Resend one.
+
+Resend blocks all email to an address that marked you as spam. PostHog blocks only marketing email to it, and still sends transactional email.
+
+See [switch over safely](/docs/workflows-next/migrate#switch-over-safely) for the full checklist.

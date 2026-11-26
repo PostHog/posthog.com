@@ -71,7 +71,10 @@ const DocsTreeMenu = ({
 }) => {
     const installItem = useMemo(() => items.find((i) => i.url && /\/installation$/.test(i.url)), [items])
     const installBase = installItem?.url ? installItem.url.replace(/^\//, '') : 'docs/__no-install__/installation'
-    const platforms = usePlatformList(installBase, `${productName.toLowerCase()} installation`, { sortAlpha: true })
+    const platforms = usePlatformList(installBase, `${productName.toLowerCase()} installation`, {
+        // A nav entry with `platformOrder: 'nav'` keeps its own order instead of A to Z
+        sortAlpha: (installItem as any)?.platformOrder !== 'nav',
+    })
 
     const itemsWithInstall = useMemo(() => {
         if (!installItem || platforms.length === 0) return items

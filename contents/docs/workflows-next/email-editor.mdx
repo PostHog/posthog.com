@@ -1,0 +1,68 @@
+---
+title: Email editor
+sidebar: Docs
+showTitle: true
+---
+
+import emailEditor from './images/email-editor.png'
+import styleLight from './images/broadcast-content-editor-light.png'
+import styleDark from './images/broadcast-content-editor-dark.png'
+
+You write every email in the same editor: transactional emails, broadcasts, and the emails in an automation. Type, press `/` for a block, and style it from the panel on the right.
+
+<ProductScreenshot
+  imageLight={emailEditor}
+  alt="The email editor with the block menu and the style panel"
+  classes="rounded"
+/>
+
+## Add blocks
+
+Press `/`, or drag a block in from the toolbar on the left:
+
+- Text, headings, bullet and numbered lists, and quotes
+- Images, buttons, dividers, and spacers
+- Sections and columns, which stack on phones
+- Custom HTML, for anything else
+- An unsubscribe link
+
+Drag a block by its handle to move it, or use its menu to duplicate or delete it.
+
+## Style it
+
+**Style** sets the page: the font, colors, width, and padding. Select a block to style just that block, such as a button's color and hover color, or a section's background.
+
+<ProductScreenshot
+  imageLight={styleLight}
+  imageDark={styleDark}
+  alt="The email editor with a button selected and its style panel open"
+  classes="rounded"
+/>
+
+## Personalize it
+
+Click `{x}` to add a variable, such as the person's first name. Variables use [Liquid](https://shopify.github.io/liquid/), so add a default for people who don't have the property:
+
+```liquid
+{{ person.properties.first_name | default: 'there' }}
+```
+
+To show a block to only some people, open **Who sees it** and pick **Show only when…**, such as `person.properties.plan == 'paid'`. You can also show a block on desktop or phones only.
+
+## Check it before it sends
+
+- **Preview** shows the email on desktop or a phone, and as a real person to fill in the variables.
+- **HTML** shows the exact HTML that sends, so you can copy it.
+- **Plain text** is written for you from the email.
+
+Send a test to yourself from the email, broadcast, or automation.
+
+## Reuse it
+
+Save an email to the **Library** as a template, and start new emails from it. Templates that you made in the old editor open in the new one, and send the same as before.
+
+To start from a draft instead, ask [PostHog AI](/docs/posthog-ai) or your coding agent over [MCP](/docs/workflows-next/mcp): "Write a welcome email for new signups." Its drafts open in the editor like any other email.
+
+## Bring your own HTML
+
+Import your own HTML, and it sends exactly as written. For a smaller piece, add a **Custom HTML** block. Or write the email in code with [React Email](/docs/workflows/transactional-emails/react-email) and send it from your [server](/docs/workflows-next/installation).

@@ -1,0 +1,71 @@
+---
+title: Move from Customer.io
+sidebar: Docs
+showTitle: true
+---
+
+import { CopyPrompt } from '../_snippets/switch-prompt'
+
+If you capture events with PostHog, your people are already here. You move what's around them: opt-outs, suppressions, automations, and push devices. Automations import as drafts, and never send until you turn them on.
+
+## What moves
+
+| From Customer.io | In PostHog |
+| --- | --- |
+| Subscription topics | Marketing [categories](/docs/workflows-next/sending-rules#opt-outs) |
+| Global unsubscribes and topic preferences | Opt-outs |
+| Bounced and invalid addresses | [Suppression list](/docs/workflows-next/sending-rules#suppression-list). Blocks all email. |
+| Spam reports | Suppression list. Blocks marketing email. |
+| Campaigns | Draft [automations](/docs/workflows-next/automations), with their emails, snippets, layouts, and images |
+| Dynamic segments that a campaign uses | Realtime cohorts, when every rule has an exact match |
+| Push device tokens | Devices on a PostHog push channel |
+
+People's profiles, static segments, SMS steps, newsletters, and send history stay in Customer.io.
+
+## 1. Set up sending
+
+[Set up your domain](/docs/workflows-next/domain), and add a sender for each from-address your Customer.io emails use. The automation import matches each email to the sender with the same address.
+
+## 2. Import opt-outs and suppressions
+
+Do this first. It creates the categories that imported automations use.
+
+1. In Customer.io, create an **App API key** under **Settings** > **Account Settings** > **API Credentials**.
+2. In [Workflows](https://app.posthog.com/workflows), go to **Opt-outs** and click **Import from another tool**. Pick **Customer.io**, paste the key, and click **Start import**. This imports topics, global unsubscribes, and suppressions. PostHog keeps this key, so you can import again later, or remove it.
+3. Customer.io's API doesn't share per-topic preferences, so export them as a CSV. In Customer.io's **People** page, filter on `cio_subscription_preferences` **exists**, and export `cio_subscription_preferences` and `email`. Upload the CSV in the same window.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cio_step1_light_d6a656df00.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cio_step1_dark_c0138fc344.png"
+  alt="The Customer.io import, with the App API key step"
+  classes="rounded"
+/>
+
+While you run both tools, keep opt-outs in sync both ways:
+
+- **Customer.io to PostHog:** add a **Reporting webhook** in Customer.io with the URL PostHog gives you, and paste its signing secret back in PostHog.
+- **PostHog to Customer.io:** enter your Customer.io region, **Site ID**, and **Track API key**. Only categories imported from Customer.io sync back.
+
+## 3. Import automations
+
+On the [Workflows](https://app.posthog.com/workflows) page, click **Import from another tool**, then **Automations, as draft workflows**. Ask your agent with the Customer.io and PostHog MCPs connected, or upload JSON files exported with the Customer.io CLI.
+
+<CopyPrompt prompt="Move our Customer.io campaigns into PostHog." />
+
+The import previews first and saves nothing. Each draft gets notes:
+
+- **Needs input:** a setting only you can give, such as a sender or a branch condition. Fix it before you turn the automation on.
+- **Approximated:** works a bit differently in PostHog, such as a wait capped at 30 days. Check it.
+- **Unsupported:** left out, such as an SMS step. Rebuild it another way.
+
+Importing a campaign again replaces its draft. An automation you already turned on never changes.
+
+## 4. Move push devices
+
+Devices reach PostHog when your app registers them with the PostHog SDK, or when you [import your device tokens](/docs/workflows/push-notifications/import-device-tokens). Ask your agent to "import our Customer.io push tokens" to do it in batches.
+
+## 5. Test and turn on
+
+Open each draft, handle its notes, and send a test. Turn on the PostHog automation as you turn off the Customer.io campaign, so nobody gets the same email twice.
+
+See [switch over safely](/docs/workflows-next/migrate#switch-over-safely) for the full checklist.

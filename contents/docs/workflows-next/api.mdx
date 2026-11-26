@@ -1,0 +1,67 @@
+---
+title: Workflows API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API to send email from any language, see what you sent, and manage broadcasts and automations from your own systems.
+
+There are two kinds of endpoint. The **sending endpoints** run on your server with a project secret API key: send an email, attach files, check a send, and update a person's opt-outs. The **project endpoints** use a personal API key: read your send log and stats, and manage templates, broadcasts, automations, and opt-outs.
+
+## Before you start
+
+1. **Set up Workflows:** [set up your domain](/docs/workflows-next/domain) so PostHog can send for you.
+2. **Get API access:** create the key the job needs. See [authentication](#authentication) below.
+
+## Send email
+
+`POST /api/messaging/send/email/` sends one email from a template, or with content that you pass. The [server SDKs](/docs/workflows-next/installation) call it for you.
+
+```bash
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"to": "ada@example.com", "template_id": "<template_id>", "message_data": {"first_name": "Ada"}, "distinct_id": "user_123"}'
+```
+
+| Endpoint | What it does |
+| --- | --- |
+| `POST /api/messaging/send/email/` | Send one email. |
+| `POST /api/messaging/attachments/uploads/` | Upload files to attach to an email. |
+| `GET /api/messaging/emails/:message_id/` | Get the status of one send, such as delivered or bounced. |
+| `POST /api/messaging/preferences/` | Update a person's opt-outs from your own preferences page. |
+
+See [send email with the API](/docs/workflows-next/installation/api) for the full request, the errors, and how to retry safely.
+
+## See what you sent
+
+| Endpoint | What it does |
+| --- | --- |
+| `/api/projects/:project_id/transactional_email_log/` | List your transactional sends from the last 30 days, get one with its timeline, and count sends by outcome. See the [send log reference](/docs/api/transactional-email-log). |
+| `/api/projects/:project_id/transactional_code_emails/` | List the transactional emails whose content lives in your code. See the [code emails reference](/docs/api/transactional-code-emails). |
+| `/api/projects/:project_id/workflow_email_log/` | List the emails that a broadcast or automation sent. See the [email log reference](/docs/api/workflow-email-log). |
+
+## Manage templates, broadcasts, and automations
+
+| Endpoint | What it does |
+| --- | --- |
+| `/api/projects/:project_id/messaging_templates/` | Manage the email templates in the library. See the [templates reference](/docs/api/messaging-templates). |
+| `/api/projects/:project_id/hog_flows/` | Manage broadcasts and automations, and cancel their runs. See the [hog flows reference](/docs/api/hog-flows). |
+| `/api/projects/:project_id/messaging_categories/` | Manage the categories that people can opt out of. See the [categories reference](/docs/api/messaging-categories). |
+| `/api/projects/:project_id/messaging_preferences/` | List, add, and remove opt-outs, one at a time or in bulk. See the [preferences reference](/docs/api/messaging-preferences). |
+| `/api/projects/:project_id/messaging_suppressions/` | List, add, and remove suppressed addresses. See the [suppressions reference](/docs/api/messaging-suppressions). |
+
+## Authentication
+
+Pass the key as a bearer token.
+
+- **Sending endpoints:** use a [project secret API key](/docs/api/project-secret-api-keys) with the `transactional_email:write` scope to send, and `messaging_preference:write` to update opt-outs. Keep it on your server.
+- **Project endpoints:** use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:read` for reads and `hog_flow:write` for writes. The send log also needs `person:read`, because it lists recipients.
+
+Treat a `hog_flow:write` key like a password: it can turn on automations that email real people.
+
+## Related
+
+- Do the same things in the [web app](/docs/workflows/surfaces/web-app).
+- Ask for them conversationally over [MCP](/docs/workflows-next/mcp).
+- See the full [PostHog API reference](/docs/api).

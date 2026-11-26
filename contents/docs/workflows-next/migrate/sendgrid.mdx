@@ -1,0 +1,42 @@
+---
+title: Move from SendGrid
+sidebar: Docs
+showTitle: true
+---
+
+import { CopyPrompt } from '../_snippets/switch-prompt'
+
+PostHog imports your SendGrid suppressions, unsubscribe groups, templates, and Single Sends in one background import.
+
+> The SendGrid import is rolling out. If SendGrid isn't in the list, your project doesn't have it yet.
+
+## What moves
+
+| From SendGrid | In PostHog |
+| --- | --- |
+| Bounces, invalid addresses, and spam reports | [Suppression list](/docs/workflows-next/sending-rules#suppression-list) |
+| Global unsubscribes | Opted out of all marketing email |
+| Unsubscribe groups, and who left each | Marketing [categories](/docs/workflows-next/sending-rules#opt-outs) and opt-outs |
+| Dynamic and legacy templates, and Design Library designs | Templates. Only the active version imports. |
+| Single Sends | Templates. Nothing sends, and anything scheduled stays scheduled in SendGrid. |
+| Senders, domains, and lists | A list, so you know what to set up |
+
+SendGrid's API only shares stats for automations, so rebuild them as [automations](/docs/workflows-next/automations).
+
+## Run the import
+
+1. Create a **restricted** API key in [SendGrid](https://app.sendgrid.com/settings/api_keys) with read access to suppressions, unsubscribe groups, templates, the Design Library, marketing, sender authentication, and your username. PostHog checks the scopes before it starts, and skips a step whose scope is missing. It deletes the key when the import ends.
+2. In [Workflows](https://app.posthog.com/workflows), go to **Opt-outs** and click **Import from another tool**.
+3. Pick **SendGrid**, paste the key, pick what to import, and click **Start import**.
+
+A key belongs to one account, so import each subuser with its own key.
+
+Or ask your agent:
+
+<CopyPrompt prompt="Move our email from SendGrid to PostHog." />
+
+## Switch your sending
+
+SendGrid stops transactional email to people who unsubscribed globally. PostHog doesn't, so receipts and password resets still reach them.
+
+See [switch over safely](/docs/workflows-next/migrate#switch-over-safely) for the full checklist.

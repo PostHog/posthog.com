@@ -1,0 +1,61 @@
+---
+title: Installation
+---
+
+import PlatformInstall, { wizardInstallSchema } from "components/PlatformInstall"
+import WizardCommand from "components/WizardCommand"
+import MCPInstallCTA from "components/MCPInstallCTA"
+import { WorkflowsInstallationPlatforms, WorkflowsInstallationFrameworks } from "../../workflows/_snippets/workflows-installation-platforms"
+
+Install PostHog in up to three places. On your server, the SDK sends email. In your app, it captures the events and people that broadcasts and automations use. In your coding agent, the MCP builds and reports on your email for you. If you already use PostHog for product analytics, your app is set up.
+
+## Send email from your server
+
+Run the wizard from your server project. It installs the SDK, adds your API key, and adds the first send.
+
+<div className="not-prose max-w-md !mx-0 my-4">
+  <PlatformInstall
+    schema={{ ...wizardInstallSchema, title: "Send your first email", supports: undefined }}
+    command="email"
+    hideSecondaryAction
+    className="!mb-0 !shadow-none"
+  />
+</div>
+
+Or install it by hand:
+
+| SDK | From version | Guide |
+| --- | --- | --- |
+| Node.js | 5.61.2 | [Node.js](/docs/workflows-next/installation/node) |
+| Python | 7.81.2 | [Python](/docs/workflows-next/installation/python) |
+| Go | 1.40.0 | [Go](/docs/workflows-next/installation/go) |
+| .NET | 2.20.0 | [.NET](/docs/workflows-next/installation/dotnet) |
+| Rust | 0.31.0 | [Rust](/docs/workflows-next/installation/rust) |
+| Ruby | 3.30.0 | [Ruby](/docs/workflows-next/installation/ruby) |
+| Elixir | 2.20.0 | [Elixir](/docs/workflows-next/installation/elixir) |
+| PHP | 4.22.0 | [PHP](/docs/workflows-next/installation/php) |
+
+For another language, use the [API](/docs/workflows-next/installation/api). Send only from your server: a send needs your secret API key, so the browser and mobile SDKs can't send email.
+
+## Capture events from your app
+
+Install PostHog in your app or site. Its events can start an automation, such as a welcome email on `signed_up`. Its person properties choose who gets a broadcast. [Identify](/docs/product-analytics/identify) each user with their `email`, so PostHog knows where to send.
+
+<WizardCommand />
+
+### Platforms
+
+<WorkflowsInstallationPlatforms />
+
+### Frameworks
+
+<WorkflowsInstallationFrameworks />
+
+## Connect your agent
+
+The PostHog MCP lets Claude Code, Cursor, Codex, and other agents write emails, build broadcasts and automations, move you off another provider, and tell you how each email did. Your agent saves its changes as drafts, and you publish them.
+
+<div className="not-prose max-w-md !mx-0 my-4">
+  <MCPInstallCTA showDesktopLink={false} className="w-full" />
+</div>
+

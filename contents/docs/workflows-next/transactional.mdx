@@ -1,0 +1,69 @@
+---
+title: Transactional emails
+sidebar: Docs
+showTitle: true
+---
+
+import createLight from './images/transactional-create-light.png'
+import createDark from './images/transactional-create-dark.png'
+import impactLight from './images/transactional-impact-light.png'
+import impactDark from './images/transactional-impact-dark.png'
+
+Transactional emails go to one person when your code says so: password resets, sign-in codes, receipts. Your code sends them. The **Transactional** tab in [Workflows](https://app.posthog.com/workflows) shows each send and what the person did next.
+
+New here? [Send your first one from code](/docs/workflows-next/installation).
+
+## Create an email
+
+On the **Transactional** tab, create an email, write it in the [email editor](/docs/workflows-next/email-editor), and add the variables your code sends, such as `first_name`. Your code sends it by template ID.
+
+Transactional emails skip marketing opt-outs, so don't use them for marketing. Once published, edits save as a draft until you publish again.
+
+For sign-in codes and reset links, turn on **Protect sensitive data**. PostHog won't store the email's content, and records only the domain of a clicked link.
+
+<ProductScreenshot
+  imageLight={createLight}
+  imageDark={createDark}
+  alt="A new transactional email in the editor, with the variables your code sends"
+  classes="rounded"
+/>
+
+## Emails your code writes
+
+If your code sends the content itself, such as a [React Email](/docs/workflows-next/transactional/from-code#react-email) template, the email shows up here under the key your code sends. Link it to the file that sends it. **Copy prompt for your agent** tells your coding agent which email to change and where.
+
+## Log
+
+The **Log** lists every send from the last 30 days. Filter by email, status, or bounce reason. Open a send to see:
+
+- Its steps: queued, sent, delivered, opened, clicked.
+- The email the person got.
+- What the person did 7 days before and after, with a link to the [session replay](/docs/session-replay).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_light_228eeaada5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_dark_93b1987f6e.png"
+  alt="One send in the log, with its timeline and what the person did around it"
+  classes="rounded"
+/>
+
+## Metrics
+
+The **Metrics** tab counts sends, deliveries, opens, clicks, bounces, and spam complaints, by email or by sending domain.
+
+## Conversions
+
+Open an email and pick a conversion event, such as `subscription_started`. PostHog shows the funnel from send to click to conversion. Add a revenue property to see revenue.
+
+<ProductScreenshot
+  imageLight={impactLight}
+  imageDark={impactDark}
+  alt="The Impact tab, with the funnel from send to paid_bill"
+  classes="rounded"
+/>
+
+Opens and clicks need [engagement events](/docs/workflows/engagement-events) turned on.
+
+## Webhooks
+
+On the **Webhooks** tab, add a URL and pick events: sent, delivered, bounced, marked as spam, failed, opened, link clicked. PostHog posts them as `email.delivered`, `email.clicked`, and so on, so a webhook handler from another provider needs few changes. See [delivery webhooks](/docs/workflows-next/transactional/webhooks).

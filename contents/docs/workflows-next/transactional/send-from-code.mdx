@@ -1,0 +1,88 @@
+---
+title: Send emails from code
+sidebar: Docs
+showTitle: true
+---
+
+Your server sends a transactional email with one call: the recipient, the email, and the data it needs. PostHog checks it, sends it, and records what happens next on the person, next to everything else they do in your product.
+
+This page covers how that works. For your language's calls and fields, see its [SDK page](/docs/workflows-next/installation).
+
+## How a send works
+
+1. **Your server calls PostHog** with a project secret API key, through an [SDK](/docs/workflows-next/installation) or the [API](/docs/workflows-next/installation/api).
+2. **PostHog checks the send:** the key, the email, and the recipient. A suppressed or unreachable address, or a paused email, is refused straight away with an error code.
+3. **PostHog queues it** and returns `202` with a message ID. That means queued, not delivered.
+4. **The email goes out** ahead of any marketing email, and never waits for your sending allowance.
+5. **The status moves forward:** sent, then delivered, bounced, or complained. Check it any time in the next 30 days. See [status](/docs/workflows-next/transactional/status).
+6. **Events land on the person:** sent, delivered, opened, clicked, and so on, if [engagement events](#events-a-send-records) are on.
+
+## Create an API key
+
+Send with a [project secret API key](/docs/api/project-secret-api-keys) that has the **Transactional email** scope.
+
+1. Go to [**Project secret API keys**](https://app.posthog.com/settings/project-secret-api-keys) and click **Create project secret API key**.
+2. Set **Transactional email** to **Write**.
+3. Copy the key. It starts with `phs_`, and you only see it once.
+
+The key can send emails and read their status, and nothing else. Keep it on your server, and never ship it to the browser. For a service that only reads statuses, set the scope to **Read**.
+
+## Pick where the email lives
+
+- **[A template in PostHog](/docs/workflows-next/transactional/templates):** send its template ID and the values for its variables. Your team edits the copy without a deploy.
+- **[Content from your code](/docs/workflows-next/transactional/from-code):** send a key, subject, and HTML, such as from React Email. It can also carry [attachments and copies](/docs/workflows-next/transactional/attachments).
+
+Both get the same checks, statuses, events, and metrics.
+
+## What a send needs
+
+| | |
+| --- | --- |
+| **Recipient** | One address per send. |
+| **The email** | A template ID, or a key with a subject and body. |
+| **Data** | The values for the template's variables. The template can't read person properties, so send everything it shows. |
+| **Distinct ID** | Who the email is for. See below. |
+| **Idempotency key** | So a retry never sends twice. See [retries and errors](/docs/workflows-next/transactional/retries-and-errors). |
+
+## Link emails to your users
+
+Send the distinct ID you pass to `identify()`, usually your user's ID. The send and its events then land on that user's person, in the same timeline as their product events, and the [Log](/docs/workflows-next/transactional#log) shows what they did around it.
+
+- **No distinct ID:** PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless you identify users by email.
+- **Not a user yet:** for an invite, or checking an email address before sign-up, leave it out.
+
+## Events a send records
+
+Turn on **Capture email engagement events** in [Workflows settings](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events), and each send records events on the person:
+
+| Event | When |
+| --- | --- |
+| `$workflows_email_sent` | PostHog handed it to the email provider. |
+| `$workflows_email_delivered` | The recipient's mail server accepted it. |
+| `$workflows_email_opened` | The recipient opened it. Needs open tracking. |
+| `$workflows_email_link_clicked` | The recipient clicked a link. Needs click tracking, and `$link_url` has the link. |
+| `$workflows_email_bounced` | It bounced. |
+| `$workflows_email_blocked` | The recipient marked it as spam. |
+| `$workflows_email_failed` | It wasn't sent. |
+
+Each event carries `$email_to` and `$email_subject`, except a [sensitive](/docs/workflows-next/transactional/sensitive-data) email's subject. Use them in [funnels](/docs/product-analytics/funnels) and [insights](/docs/product-analytics/insights), such as how many people finish a password reset after the email. They count toward your event usage.
+
+Without engagement events, you still get statuses, the Log, and [metrics](/docs/workflows-next/metrics). To get them on your own server, add a [delivery webhook](/docs/workflows-next/transactional/webhooks).
+
+## Rules transactional emails follow
+
+- **No opt-outs or frequency cap.** Only a hard bounce on the [suppression list](/docs/workflows-next/sending-rules#suppression-list) blocks them. Use them only for emails a person needs, never for marketing.
+- **They can pause.** If an email gets too many bounces or complaints, PostHog pauses it, and sends return `sending_paused`.
+- **Rate limits.** 600 requests a minute and 20,000 an hour per project.
+- **Billing.** Billed like other emails. See [pricing](/pricing).
+
+## Test it
+
+- **In your tests:** each SDK page shows how to pass a fake client, so you can check what your code sends without sending anything.
+- **For real:** send to your own address, and open the send in the [Log](/docs/workflows-next/transactional#log).
+
+## Next
+
+- [Templates and variables](/docs/workflows-next/transactional/templates)
+- [Retries and errors](/docs/workflows-next/transactional/retries-and-errors)
+- [Examples](/docs/workflows-next/transactional/examples): sign-in codes, invites, receipts with a PDF.
