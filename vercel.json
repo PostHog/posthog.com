@@ -116,6 +116,10 @@
     ],
     "rewrites": [
         {
+            "source": "/llms-full.txt",
+            "destination": "/llms.txt"
+        },
+        {
             "source": "/docs/references/:slug(.*-\\d.*).md",
             "destination": "/docs/references/version-unavailable.md"
         },
