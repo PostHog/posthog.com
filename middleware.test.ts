@@ -274,3 +274,106 @@ test("logs nothing when off, outside /docs, or for the middleware's own Markdown
     await middleware(new Request('https://posthog.com/docs', { headers: { 'user-agent': 'Claude-User' } }))
     assert.equal(lines.length, 1)
 })
+
+function enableChaining(t: TestContext): void {
+    process.env.MIDDLEWARE_CHAIN_LINKS = 'true'
+    t.after(() => {
+        delete process.env.MIDDLEWARE_CHAIN_LINKS
+    })
+}
+
+const linkedMarkdown = [
+    '# Product analytics',
+    '[Events](https://posthog.com/docs/data/events.md) and [actions](/docs/data/actions.md#matching).',
+    '[Funnels](https://posthog.com/docs/product-analytics/funnels.md?tab=web)',
+    '[Below](#insights), [the blog](https://posthog.com/blog/post.md), [GitHub](https://github.com/PostHog/posthog).',
+].join('\n')
+
+// Answers every fetch with `linkedMarkdown`, as Vercel serves a `.md` file, and collects the logged lines.
+function mockLinkedMarkdownAndLog(t: TestContext) {
+    const fetch = t.mock.method(
+        globalThis,
+        'fetch',
+        async () => new Response(linkedMarkdown, { headers: { 'content-type': 'text/plain; charset=utf-8' } })
+    )
+    const lines: Record<string, unknown>[] = []
+    t.mock.method(console, 'log', (line: string) => lines.push(JSON.parse(line)))
+    return { fetch, lines }
+}
+
+test('ties a request for a linked page to the response that linked it', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+    const agent = { 'user-agent': 'Claude-User (claude-code/2.1.0; +https://support.anthropic.com/)' }
+
+    const first = await middleware(new Request(page, { headers: agent }))
+    const firstBody = (await first?.text()) || ''
+    const firstId = lines[0].chain_id
+    assert.match(String(firstId), /^product-analytics\.[0-9a-z]{1,7}$/)
+    assert.equal(
+        firstBody,
+        linkedMarkdown
+            .replace('events.md)', `events.md?doc_ctx=${firstId})`)
+            .replace('actions.md#matching', `actions.md?doc_ctx=${firstId}#matching`)
+            .replace('funnels.md?tab=web', `funnels.md?tab=web&doc_ctx=${firstId}`)
+    )
+    assert.equal(first?.headers.get('cache-control'), 'private, no-store')
+    assert.equal(first?.headers.get('link'), '<https://posthog.com/docs/product-analytics>; rel="canonical"')
+
+    const second = await middleware(
+        new Request(`https://posthog.com/docs/data/events.md?doc_ctx=${firstId}`, { headers: agent })
+    )
+    const secondId = lines[1].chain_id
+    assert.match(String(secondId), /^data\/events\.[0-9a-z]{1,7}$/)
+    assert.match((await second?.text()) || '', new RegExp(`events\\.md\\?doc_ctx=${secondId}\\)`))
+    assert.equal(second?.headers.get('content-type'), 'text/plain; charset=utf-8')
+    assert.equal(String(fetch.mock.calls[1].arguments[0]), 'https://posthog.com/docs/data/events.md')
+
+    // Anyone can write the parameter, so the log keeps a short value of safe characters.
+    await middleware(new Request(`${page}.md?doc_ctx=a%20b<c>@${'x'.repeat(200)}`, { headers: agent }))
+
+    assert.deepEqual(
+        lines.map((line) => [line.url, line.negotiation, line.chain_parent]),
+        [
+            ['/docs/product-analytics', 'served', undefined],
+            ['/docs/data/events.md', 'markdown_url', firstId],
+            ['/docs/product-analytics.md', 'markdown_url', `abc${'x'.repeat(97)}`],
+        ]
+    )
+})
+
+test('adds no doc_ctx when off, for crawlers, or for a script that fetches a .md URL', async (t) => {
+    enableLog(t)
+    const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+
+    const off = await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
+    assert.equal(await off?.text(), linkedMarkdown)
+
+    enableChaining(t)
+    for (const crawler of ['ExampleBot/1.0', 'Mozilla/5.0 (compatible; Yahoo! Slurp)', 'Mediapartners-Google']) {
+        const response = await middleware(
+            new Request(page, { headers: { 'user-agent': crawler, accept: 'text/markdown' } })
+        )
+        assert.equal(await response?.text(), linkedMarkdown)
+    }
+    const script = await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
+    assert.equal(script, undefined)
+    const emptyParent = await middleware(
+        new Request(`${page}.md?doc_ctx=%3C%3E`, { headers: { 'user-agent': 'curl/8.0' } })
+    )
+    assert.equal(emptyParent, undefined)
+
+    assert.equal(fetch.mock.callCount(), 4)
+    assert.deepEqual(
+        lines.map((line) => [line.url, line.chain_id, line.chain_parent]),
+        [
+            ['/docs/product-analytics', undefined, undefined],
+            ['/docs/product-analytics', undefined, undefined],
+            ['/docs/product-analytics', undefined, undefined],
+            ['/docs/product-analytics', undefined, undefined],
+            ['/docs/product-analytics.md', undefined, undefined],
+            ['/docs/product-analytics.md', undefined, undefined],
+        ]
+    )
+})
