@@ -222,11 +222,11 @@ Messages posted by PostHog never start a run, so a workflow can reply in Slack w
 
 The **Frequency** setting on the trigger step controls how often one person can enter the workflow. Event triggers have these options:
 
-| Option                       | What it does                                                                                                      |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Every time the trigger fires | Default. Each matching event starts a new run, even if the person is already in the workflow.                     |
-| One time per period          | A person enters one time, then can't enter again until the period ends. You choose the period in a second menu.   |
-| Once per calendar day        | A person enters at most once each day.                                                                            |
+| Option                       | What it does                                                                                                    |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Every time the trigger fires | Default. Each matching event starts a new run, even if the person is already in the workflow.                   |
+| One time per period          | A person enters one time, then can't enter again until the period ends. You choose the period in a second menu. |
+| Once per calendar day        | A person enters at most once each day.                                                                          |
 
 When you select **One time per period**, a second menu shows the period. The setting then reads, for example, **One time per 90 days**. The period starts at 30 minutes. You can choose from 5 minutes to 365 days, or **ever**. With **ever**, a person enters the workflow only one time. PostHog keeps this record for up to 3 years.
 
@@ -240,12 +240,12 @@ Some other trigger types have their own frequency options.
 
 Trigger frequency and the [frequency cap](/docs/workflows/frequency-cap) both limit messages:
 
-| | Trigger frequency | Frequency cap |
-| --- | --- | --- |
-| Scope | One workflow | All workflows and broadcasts in the project |
-| What it limits | Runs. Extra trigger events don't start a run. | Marketing messages. A message over the cap is skipped or held. |
-| Transactional messages | Applies | Doesn't apply |
-| Other steps, such as webhooks | Applies, because the run doesn't start | Doesn't apply |
+|                               | Trigger frequency                             | Frequency cap                                                  |
+| ----------------------------- | --------------------------------------------- | -------------------------------------------------------------- |
+| Scope                         | One workflow                                  | All workflows and broadcasts in the project                    |
+| What it limits                | Runs. Extra trigger events don't start a run. | Marketing messages. A message over the cap is skipped or held. |
+| Transactional messages        | Applies                                       | Doesn't apply                                                  |
+| Other steps, such as webhooks | Applies, because the run doesn't start        | Doesn't apply                                                  |
 
 Use trigger frequency to stop one workflow from running too often for one person, for example when an event arrives twice, or for a welcome flow that should run only once. Use the frequency cap to limit how many marketing messages a person gets from all of your workflows and broadcasts.
 
@@ -316,6 +316,8 @@ When enabled, PostHog injects a tracking pixel and rewrites links so that opens 
 When disabled, the email is sent without the tracking pixel or link rewriting. No open or click events are captured for these sends. Delivery, bounce, and unsubscribe events are still recorded.
 
 Use this for transactional or deliverability-sensitive emails where tracking isn't needed or could reduce inbox placement.
+
+A separate **Connect clicks to sessions** toggle appears when tracking is on. It adds a URL parameter to tracked links so that each click is connected to the session it starts on your site. This defaults to on. See [connect clicks to sessions](/docs/workflows/engagement-events#connect-clicks-to-sessions) for details.
 
 Marketing emails may also be sent untracked based on your team's email tracking consent setting. See [email tracking consent](/docs/workflows/engagement-events#team-level-tracking-consent) for details.
 
