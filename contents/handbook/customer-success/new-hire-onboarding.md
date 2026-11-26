@@ -51,7 +51,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 
 ## Week 2 – in-person onboarding, your customers
 
-In-person onboarding typically happens this week (3-4 days led by your team lead). You'll get your book of customers, work through how to prioritise it, start digging in, and see how all the systems we use come together.
+In-person onboarding typically happens this week (3-4 days led by your team lead). You'll have had your book of customers for a few days by now, and you'll work through how to prioritise it, start digging in, and see how all the systems we use come together.
 
 **Focus on:**
 
