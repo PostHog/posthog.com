@@ -95,7 +95,7 @@ interface BaseHoggieCalloutProps {
 }
 
 export interface CompactHoggieCalloutProps extends BaseHoggieCalloutProps {
-    /** The layout of the live callouts on /mcp-analytics and /docs/ai-evals. Defaults to `compact`. */
+    /** The layout of the live callout on /mcp-analytics. Defaults to `compact`. */
     layout?: 'compact'
 }
 
@@ -108,6 +108,8 @@ export interface FeaturedHoggieCalloutProps extends BaseHoggieCalloutProps {
     interactive?: boolean
     /** Extra speech bubble lines, added to the standard lines. */
     hoggieLines?: string[]
+    /** A shorter box with a smaller hog beside the copy from `@md`. */
+    tight?: boolean
 }
 
 /** The props of one layout are not valid on the other layout. */
