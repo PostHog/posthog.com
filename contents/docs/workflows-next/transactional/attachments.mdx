@@ -8,7 +8,7 @@ showTitle: true
 
 ## Attach files
 
-The SDKs do the work for you: give them each file's bytes and name, and they hash, upload, and attach it. A file PostHog already has, such as your terms, uploads only once.
+Give the SDK each file's bytes and name. It hashes, uploads, and attaches the file. A file PostHog already has, such as your terms, isn't uploaded again.
 
 <MultiLanguage selector="tabs">
 
@@ -121,13 +121,11 @@ curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
 
 </MultiLanguage>
 
-Each [SDK page](/docs/workflows-next/installation) shows its attachment fields.
-
 - **Limits:** 10 files, and 40 MB per email after Base64 encoding, which is about 29 MB of files.
-- **Inline images:** set a content ID on the file, and use it in the HTML as `<img src="cid:logo">`.
-- **Calendar invites:** send `text/calendar; method=REQUEST` as the content type, so mail apps show it as an invite.
+- **Inline images:** give the file a content ID, such as `logo`, and use it in the HTML as `<img src="cid:logo">`.
+- **Calendar invites:** send `text/calendar; method=REQUEST` as the content type, so mail apps show the file as an invite.
 - **Blocked files:** PostHog refuses types that mailbox providers block, such as `.exe`.
-- **Viruses:** each file is scanned. An email with a virus fails with `provider_rejected`.
+- **Viruses:** if the email provider finds a virus, the email fails with the reason `provider_rejected`.
 
 ## Send files with the API
 
@@ -145,7 +143,7 @@ curl -X POST "https://us.posthog.com/api/messaging/attachments/uploads/" \
   -d '{"files": [{"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "size": 48213}]}'
 ```
 
-Uploads go to Amazon S3. If your network limits outgoing traffic, allow hosts ending in `.s3.us-east-1.amazonaws.com` (US) or `.s3.eu-central-1.amazonaws.com` (EU).
+Uploads go to Amazon S3. If your network limits outgoing traffic, allow hosts that end in `.s3.us-east-1.amazonaws.com` (US) or `.s3.eu-central-1.amazonaws.com` (EU). The SDKs upload the same way.
 
 The [receipt with a PDF](/docs/workflows-next/transactional/examples#receipt-with-a-pdf) example is a complete script.
 
@@ -157,6 +155,10 @@ The [receipt with a PDF](/docs/workflows-next/transactional/examples#receipt-wit
 | `message_too_large` | Over 40 MB after encoding. | Send fewer or smaller files, or link to them. |
 | `attachment_not_uploaded` | PostHog has no file with this hash. The upload didn't finish or expired. | Ask where to upload again, upload, and resend. |
 | `blocked_file_type` | Mailbox providers block this type. | Send another type, or link to it. |
-| `unsafe_filename` | `filename` has a path or a line break. | Send just the name, such as `invoice.pdf`. |
+| `unsafe_filename` | `filename` has a path or a line break. | Send only the name, such as `invoice.pdf`. |
+| `not_mime_type` | `content_type` isn't a MIME type, or it has a `name` parameter. | Send a type such as `application/pdf`, or leave it out. |
+| `unsafe_content_id` | The content ID has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
 | `upload_quota_exceeded` | Your project hit today's upload limit. Resets at midnight UTC. | Reuse files PostHog already has, or link to new ones. |
 | `field_not_accepted` | Your project can't send files yet. | Send without files. |
+
+Other problems with a file, such as a hash that isn't 64 lowercase hex characters, return `invalid_request`, and `attr` names the field. Each of these errors returns `400`, except `upload_quota_exceeded`, which returns `429`. PostHog sends nothing when a check fails.

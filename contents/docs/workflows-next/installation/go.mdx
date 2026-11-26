@@ -6,7 +6,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [Go SDK](/docs/libraries/go) sends transactional emails from version 1.40.0. Before you start, you need a transactional email ([templates and variables](/docs/workflows-next/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows-next/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows-next/installation) sets up both and sends a test email in a few minutes.
+The [Go SDK](/docs/libraries/go) sends transactional emails. This page uses the v2 module, and every v2 release can send. On the v1 module, sending needs 1.40.0 or later. Before you start, you need a transactional email ([templates and variables](/docs/workflows-next/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows-next/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows-next/installation) sets up both and sends a test email in a few minutes.
 
 New to sending from code? Read [send emails from code](/docs/workflows-next/transactional/send-from-code) first.
 
@@ -18,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this Go app with github.com/posthog/posthog-go/v2.
 
-Read https://posthog.com/docs/workflows/transactional-emails/go.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/go.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's posthog.Client. Set SecretKey in posthog.Config from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. The client then polls flag definitions with this key, so tell me that the key needs the Feature flag read scope too.
 - Never hard-code the secret key, log it, or put it in config that reaches the browser.
@@ -27,7 +27,7 @@ Read https://posthog.com/docs/workflows/transactional-emails/go.md first. Follow
 - Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same IdempotencyKey. In a River job, set MaxRetries: posthog.Ptr(0) on the send and return river.JobCancel for every other code. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
 - Pass the DistinctID that the app passes to identify(). Leave it out for people without an account, such as invitees.
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
-- Add a test that starts an httptest.Server, sets its URL as both Endpoint and AppHost in posthog.Config, and checks the request.
+- Add a test that starts an httptest.Server, sets its URL as both Endpoint and AppHost in posthog.Config with AllowInsecureAppHost: true, and checks the request.
 
 Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
 ```
@@ -86,7 +86,7 @@ func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email
 }
 ```
 
-`Send` returns a `*SendEmailResult` and an error. `result.ID` is the message ID. Every error is a `*posthog.EmailError`. Read it with `errors.As`, and branch on its `Code`, one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
+`Send` returns a `*SendEmailResult` and an error. `result.ID` is the message ID. A result means PostHog queued the email, not that it delivered it. Every error is a `*posthog.EmailError`. Read it with `errors.As`, and branch on its `Code`, one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -104,8 +104,8 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `MaxRetries` | No | How many times the client retries this send. Takes a pointer, such as `posthog.Ptr(0)`. |
 | `TemplateKey` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
 | `Subject` | Yes, code only | The subject line. |
-| `HTML` | One of `HTML` or `Text`, code only | The HTML body. |
-| `Text` | One of `HTML` or `Text`, code only | The plain text body. PostHog makes it from `HTML` if you leave it out. |
+| `HTML` | At least one of `HTML` or `Text`, code only | The HTML body. |
+| `Text` | At least one of `HTML` or `Text`, code only | The plain text body. PostHog makes it from `HTML` if you leave it out. |
 | `From` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
 | `ReplyTo` | No, code only | A list of reply-to addresses. |
 | `Cc` | No, code only | A list of copy addresses. |
@@ -114,7 +114,7 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `Sensitive` | No, code only | Marks the email as sensitive, for login links, reset tokens, or codes. |
 | `Tracking` | No, code only | What PostHog tracks: opens, clicks, and engagement events. |
 
-Sending needs version 1.40.0 or later. `Sensitive` and `Tracking` need 1.43.0, and `Cc`, `Bcc`, and `Attachments` need 1.44.0.
+Every v2 release takes every field. On v1, `Sensitive` and `Tracking` need 1.43.0, and `Cc`, `Bcc`, and `Attachments` need 1.44.0.
 
 ### Timeouts and retries
 
@@ -219,8 +219,6 @@ See [content from your code](/docs/workflows-next/transactional/from-code) for w
 
 ### Copies and attachments
 
-Copies and attachments need version 1.44.0 or later.
-
 Each file in `Attachments` is a `posthog.EmailAttachment` with `Filename` and the file's bytes as `Content`, and can also have `ContentType` and `ContentID`. The client uploads each file before it sends the email, and checks the limits first. If an upload fails, `Send` returns an error, and PostHog sends nothing.
 
 ```go
@@ -237,11 +235,11 @@ _, err := client.Emails().Send(ctx, posthog.CodeEmail{
 })
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
-`Sensitive` and `Tracking` need version 1.43.0 or later. For example, to track the clicks of an email with no secrets:
+To track the clicks of an email with no secrets:
 
 ```go
 _, err := client.Emails().Send(ctx, posthog.CodeEmail{
@@ -281,7 +279,7 @@ See [status and troubleshooting](/docs/workflows-next/transactional/status) for 
 
 ## Test without sending email
 
-Start an `httptest.Server` and set its URL as both `Endpoint` and `AppHost`, to see exactly what your code sends with no request to PostHog. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#log) on the **Transactional** tab.
+Start an `httptest.Server` and set its URL as both `Endpoint` and `AppHost`, to see exactly what your code sends with no request to PostHog. The server uses `http`, so also set `AllowInsecureAppHost`. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#see-each-send) on the **Transactional** tab.
 
 ```go
 package email_test
@@ -311,9 +309,10 @@ func TestSendPasswordReset(t *testing.T) {
     defer server.Close()
 
     client, err := posthog.NewWithConfig("phc_test", posthog.Config{
-        Endpoint:  server.URL,
-        AppHost:   server.URL,
-        SecretKey: "phs_test",
+        Endpoint:             server.URL,
+        AppHost:              server.URL,
+        SecretKey:            "phs_test",
+        AllowInsecureAppHost: true, // The test server uses http
     })
     if err != nil {
         t.Fatal(err)
@@ -340,6 +339,8 @@ func TestSendPasswordReset(t *testing.T) {
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. If `Endpoint` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send email requests to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. If `Endpoint` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. It must use `https`. Without it, a send fails with `missing_app_host`. The client doesn't send email requests to a host that might be a proxy.
 
-Flag definitions for local evaluation still load from `Endpoint` with the secret key. If that host is a proxy that must not see the key, leave `SecretKey` off that client. Send email from a second client whose `Endpoint` is your PostHog host.
+With `AppHost` set, every request that carries the secret key goes to `AppHost`, including flag definitions for local evaluation. Your proxy never sees the key.
+
+From v2.1.1, the client sends email to `/api/messaging/`. A self-hosted PostHog needs a version from 2026-11-18 or later, or it answers with a `404`.

@@ -18,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this Python app with the posthog package.
 
-Read https://posthog.com/docs/workflows/transactional-emails/python.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/python.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's Posthog or AsyncPosthog client. Add secret_key from the POSTHOG_PROJECT_SECRET_API_KEY environment variable.
 - Send only from server code. Never put the secret key in code or config that reaches the browser.
@@ -114,7 +114,7 @@ async def send_password_reset(user_id: str, email: str, first_name: str, reset_l
 
 </MultiLanguage>
 
-`send` returns a `SendEmailResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument raises `TypeError` or `ValueError` before any request.
+`send` returns a `SendEmailResult`, and `result.id` is the message ID. A result means PostHog queued the email, not that it delivered it. When PostHog doesn't queue the email, `send` raises `EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument raises `TypeError` or `ValueError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -132,8 +132,8 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `max_retries` | No | How many times the client retries this send. |
 | `template_key` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
 | `subject` | Yes, code only | The subject line. |
-| `html` | One of `html` or `text`, code only | The HTML body. |
-| `text` | One of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `html` | At least one of `html` or `text`, code only | The HTML body. |
+| `text` | At least one of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
 | `from_` | No, code only | The sender. The underscore avoids the `from` keyword. Without it, PostHog uses the project's default sender. |
 | `reply_to` | No, code only | One reply-to address or a list. |
 | `cc` | No, code only | One copy address or a list. |
@@ -184,7 +184,7 @@ def send_password_reset_email(self, user_id: str, email: str, first_name: str, r
         )
     except EmailError as error:
         if error.code in RETRYABLE_CODES:
-            # Waits 10, 20, 40, 80, then 160 seconds, longer than a rate limit's minute
+            # Waits 10, 20, 40, 80, then 160 seconds
             raise self.retry(exc=error, countdown=10 * 2**self.request.retries)
         # Any other code marks the task as failed, with no retry
         raise
@@ -257,7 +257,7 @@ posthog.emails.send(
 )
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
@@ -300,7 +300,7 @@ See [status and troubleshooting](/docs/workflows-next/transactional/status) for 
 
 ## Test without sending email
 
-Pass your own HTTP transport to see exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#log) on the **Transactional** tab.
+Pass your own HTTP transport to see exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#see-each-send) on the **Transactional** tab.
 
 ```python
 import httpx

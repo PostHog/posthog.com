@@ -4,20 +4,18 @@ sidebar: Docs
 showTitle: true
 ---
 
-The test sender lets you try Workflows before you set up your domain. It sends from a PostHog address, and only to people in your PostHog organization.
+The **PostHog test sender** lets you try Workflows before you [set up your domain](/docs/workflows-next/domain). It sends from a PostHog address, and only to people in your PostHog organization.
 
 ## Who gets the email
 
-Only active members of your PostHog organization with a verified email address. The from name is your organization's name, then "via PostHog".
+Only active members of your PostHog organization with a verified email address. PostHog skips everyone else.
 
-To email anyone else, such as your users, [set up your domain](/docs/workflows-next/domain).
+The from name is your organization's name, then "via PostHog", such as "Hedgebox via PostHog". PostHog adds a footer that says the email came from the test sender.
 
 ## Where you can use it
 
-It shows as **PostHog test sender** on the **Channels** tab.
-
-- **Automation email steps:** pick it as the step's sender.
-- **Transactional emails from your code:** when your project has no verified sender, emails your code writes go out from the test sender.
+- **Automation email steps:** pick **PostHog test sender** in the step's **From** menu.
+- **Emails your code sends:** when your project has no verified sender, PostHog sends them from the test sender.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/sandbox_sender_step_light_e0cd795aec.png"
@@ -26,16 +24,16 @@ It shows as **PostHog test sender** on the **Channels** tab.
   classes="rounded"
 />
 
-## What it can't do
+## Limits
 
-- A custom from name or address, a reply-to, CC, or BCC.
-- Attachments.
-- UTM tags on links, or turning off open and click tracking.
-- Real traffic. It has small daily caps per project and per recipient.
+- It has daily caps per project and per recipient. Use it to test, not for real traffic.
+- It ignores a custom `from` and `reply_to`.
+- It refuses CC, BCC, attachments, reply headers, and marketing categories.
+- It doesn't add UTM tags, and you can't turn off open and click tracking.
 
 ## Move to your own domain
 
-1. [Set up your domain](/docs/workflows-next/domain), and click **Add your own sender** on the **Channels** tab.
-2. Switch each email step that uses the test sender to your sender.
+1. [Set up your domain](/docs/workflows-next/domain).
+2. Switch each email step that uses the test sender to your own sender.
 
-Emails from your code switch on their own as soon as you have a verified sender. You don't change your code.
+Emails your code sends move to your verified sender on their own. You don't change your code.

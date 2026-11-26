@@ -11,9 +11,9 @@ import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import SwitchPrompt, { CopyPrompt } from './_snippets/switch-prompt'
 
-Send email from your code, then see what happens next. Broadcasts, automations, and push notifications are built in, next to your product data.
+Send email from your code, send broadcasts, and build automations with email and push notifications, all next to your product data.
 
-Every send, open, click, and bounce comes back as an event on the person who got it. You see if an email made someone act, and you can watch the session replay of what they did after they clicked.
+Every send, open, click, and bounce is an event on the person who got it. You see if an email made someone act, and you can watch the session replay of what they did after they clicked.
 
 <div className="not-prose max-w-xl !mx-0 my-6">
   <PlatformInstall
@@ -55,7 +55,7 @@ Your first 10,000 emails each month are free. See [pricing](/pricing).
     <div>
       <p className="m-0 font-bold text-primary">The PostHog app</p>
       <p className="m-0 mt-0.5 text-sm text-secondary">Send broadcasts, plan them on a calendar, write emails, and build automations.</p>
-      <a href="#broadcasts-that-know-who-theyre-for" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build in the app →</a>
+      <a href="#send-a-broadcast" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build in the app →</a>
     </div>
   </div>
 
@@ -63,7 +63,7 @@ Your first 10,000 emails each month are free. See [pricing](/pricing).
 
 ## Send email from your code
 
-Create the email in PostHog, then send it with one call from the PostHog SDK that your server already runs:
+Create the email in PostHog, then send it with one call from the PostHog SDK on your server:
 
 <MultiLanguage selector="tabs">
 
@@ -73,6 +73,7 @@ import { PostHog } from "posthog-node"
 const posthog = new PostHog("<ph_project_token>", {
     host: "<ph_client_api_host>",
     secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    enableLocalEvaluation: false,
 })
 
 await posthog.emails.send({
@@ -217,21 +218,21 @@ PostHog::emails()->send([
 
 </MultiLanguage>
 
-PostHog links the email to the person with the distinct ID, so its events land next to everything else that the person did. You can also send over the [API](/docs/workflows/transactional-emails/api), or keep your [React Email](/docs/workflows/transactional-emails/react-email) templates. See the [SDK docs](/docs/workflows/transactional-emails) to set up your key and template.
+The distinct ID links the email to the person, so its events land next to everything else they did. You can also send over the [API](/docs/workflows-next/installation/api), or keep your [React Email](/docs/workflows-next/transactional/from-code#react-email) templates. To set up your key and template, see [install the SDK](/docs/workflows-next/installation).
 
 ## Or ask your agent
 
-The [PostHog MCP](/docs/workflows/surfaces/mcp) lets Claude Code, Cursor, Codex, and other agents create, test, and publish automations, and read how each one performs. For example:
+The [PostHog MCP](/docs/workflows-next/mcp) lets Claude Code, Cursor, Codex, and other agents build and test automations, and report how each one performs. For example:
 
 <CopyPrompt prompt="Build an onboarding automation that emails new signups who haven't created a dashboard after 2 days." />
 <CopyPrompt prompt="Which of our automations had the most unsubscribes last month, and why?" />
 <CopyPrompt prompt="Move my email from Resend to PostHog." />
 
-Your agent saves its changes as a draft. You review the draft and publish it.
+Your agent saves its changes as drafts. You review each draft and publish it.
 
-## Broadcasts that know who they're for
+## Send a broadcast
 
-PostHog looks at what people do in your product and suggests who to email next. Pick an audience, and PostHog AI drafts the email. Then pick a day to send it. See [send a broadcast](/docs/workflows/broadcasts).
+PostHog looks at what people do in your product and suggests who to email next. Pick an audience, and PostHog AI drafts the email. Then pick a day to send it. See [broadcasts](/docs/workflows-next/broadcasts).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_light_6f107e725f.png"
@@ -240,9 +241,9 @@ PostHog looks at what people do in your product and suggests who to email next. 
   classes="rounded"
 />
 
-## Plan every send on one calendar
+## Plan sends on the calendar
 
-See every broadcast and automated email next to each other. PostHog stops you before the same people get two marketing emails in two days, and finds the next day that works.
+See your broadcasts and scheduled automations on one calendar. When a send would reach the same people too soon after another marketing email, PostHog warns you and suggests a better day. The spacing follows your [frequency cap](/docs/workflows-next/email/frequency-cap), or 2 days when you have none. See [scheduling and the calendar](/docs/workflows-next/broadcasts/scheduling).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_light_900a17d154.png"
@@ -251,9 +252,9 @@ See every broadcast and automated email next to each other. PostHog stops you be
   classes="rounded"
 />
 
-## Or write it yourself
+## Write emails
 
-A block editor that your whole team can use. Type `/` to add a block, `{{` to pull in anything you know about the person, and preview the email at every screen width. See the [content library](/docs/workflows-next/email/library).
+Type `/` to add a block and `{{` to add a person property, then preview the email at desktop, tablet, and phone widths. See the [email editor](/docs/workflows-next/email-editor).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_editor_cdb83a96d2.png"
@@ -261,9 +262,11 @@ A block editor that your whole team can use. Type `/` to add a block, `{{` to pu
   classes="rounded"
 />
 
-## Automations that improve themselves
+## Build automations
 
-An automation starts when someone does something, then waits, branches, and sends email or push notifications. It can also send a Slack message to your team. On self-driving automations, PostHog watches how each step performs and suggests changes, and you approve them. See the [automation builder](/docs/workflows/workflow-builder).
+An automation starts when someone does something, then waits, branches, and sends email or push notifications. It can also send a Slack message to your team. See [automations](/docs/workflows-next/automations).
+
+With [self-driving](/docs/workflows-next/self-driving) turned on, PostHog watches how each step performs and suggests changes. Nothing changes until you approve it.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
@@ -272,9 +275,9 @@ An automation starts when someone does something, then waits, branches, and send
   classes="rounded"
 />
 
-## See how every send did
+## See how each send did
 
-Sends, opens, clicks, bounces, and complaints for each automation and broadcast, next to what people did in your product afterwards. Each one is an [engagement event](/docs/workflows-next/email/engagement-events) on the person, so you can use it in insights and funnels like any other event.
+Each automation and broadcast shows its sends, opens, clicks, bounces, and complaints, next to what people did in your product afterward. Each one is an [engagement event](/docs/workflows-next/email/engagement-events) on the person, so you can use it in insights and funnels like any other event. See [metrics](/docs/workflows-next/metrics).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_light_252909e556.png"
@@ -283,17 +286,17 @@ Sends, opens, clicks, bounces, and complaints for each automation and broadcast,
   classes="rounded"
 />
 
-## Built to land in the inbox
+## Deliverability
 
-- **No IP address to warm up.** Email goes out over shared Amazon SES IP addresses with a good reputation. See [sending reputation and allowance](/docs/workflows-next/email/deliverability).
+- **No IP address to warm up.** Email goes out over shared Amazon SES IP addresses with a good reputation. See [deliverability](/docs/workflows-next/email/deliverability).
 - **Transactional email never waits.** Password resets and receipts go out at once, even when your daily allowance for other email is used up.
-- **Opt-out categories.** People can turn off your newsletter and still get their password reset. See [opt-outs and suppression](/docs/workflows-next/email/opt-outs).
-- **Automatic suppression list.** A hard bounce or a spam complaint stops future sends to that address. No automation step can skip this check.
+- **Opt-out categories.** People can turn off your newsletter and still get their password reset. See [opt-outs](/docs/workflows-next/email/opt-outs).
+- **Automatic suppression list.** A hard bounce blocks all email to the address. A spam complaint blocks marketing email. No automation step can skip this check. See [suppression list](/docs/workflows-next/email/suppression).
 - **Frequency cap.** Set how many marketing messages one person can get in a window of days. See [frequency cap](/docs/workflows-next/email/frequency-cap).
 
-## Already sending with someone else?
+## Move from another provider
 
-Connect the PostHog MCP, then ask your agent to move you over. It imports your templates, suppressions, and unsubscribes as drafts, so nothing sends until you say so.
+Connect the PostHog MCP, then ask your agent to move you over. It imports your suppressions, unsubscribes, and templates. Imported automations are drafts, so nothing sends until you turn them on. See [move from another provider](/docs/workflows-next/migrate).
 
 <div className="not-prose max-w-md !mx-0 my-6">
   <MCPInstallCTA showDesktopLink={false} className="w-full" />

@@ -10,14 +10,16 @@ Get a signed request on your own endpoint when a transactional email is sent, de
 
 ## Add a webhook
 
-1. Turn on [engagement events](/docs/workflows-next/email/engagement-events) for your project. Webhooks are sent from them.
-2. On the **Transactional** tab, open **Webhooks** and click **Add webhook**.
-3. Enter an **Endpoint URL** that starts with `https://`.
+1. Open [**Transactional**](https://app.posthog.com/transactional/webhooks) and go to the **Webhooks** tab.
+2. If [engagement events](/docs/workflows-next/email/engagement-events) are off, click **Turn on engagement events**. Webhooks are sent from them, and they count toward your event usage.
+3. Click **Add webhook**, and enter an **Endpoint URL** that starts with `https://`.
 4. Pick the **Transactional emails** to watch, or leave it empty for all of them, including ones you add later.
-5. Pick the **Events**.
-6. Copy the secret. You can't see it again.
+5. Pick the **Events**, and add the webhook.
+6. Copy the signing secret. You can't see it again.
 
-Pause or delete a webhook from its menu.
+<!-- shot: add-delivery-webhook: the Add webhook modal on the Transactional Webhooks tab, with an endpoint URL and events picked -->
+
+Pause or delete a webhook from its menu in the list.
 
 ## Events
 
@@ -31,7 +33,7 @@ Pause or delete a webhook from its menu.
 | Marked as spam | `email.complained` |
 | Failed | `email.failed` |
 
-The names and shape follow common email provider webhooks, so a handler you already have needs few changes.
+The names and shape follow common email provider webhooks, so a handler that you already have needs few changes.
 
 ## Payload
 
@@ -47,16 +49,17 @@ The names and shape follow common email provider webhooks, so a handler you alre
     "to": ["ada@example.com"],
     "subject": "Reset your password",
     "distinct_id": "user_123",
-    "bounce": null,
-    "click": null
+    "bounce": { "type": null, "subType": null },
+    "click": { "link": null }
   }
 }
 ```
 
+- `email_id` is the message ID that the send returned.
 - `template_id` or `template_key` is set, matching what the send used. The other is `null`.
-- `bounce` has `type` (`Permanent`, `Transient`, or `Undetermined`) and `subType` on a bounce.
-- `click` has the `link` on a click.
-- `subject` is left out for a [sensitive](/docs/workflows-next/transactional/sensitive-data) email.
+- `bounce.type` is `Permanent`, `Transient`, or `Undetermined` on a bounce, and `bounce.subType` has the provider's detail.
+- `click.link` is the clicked link on a click.
+- `subject` is `null` for a [sensitive](/docs/workflows-next/transactional/sensitive-data) email.
 
 Delivery webhooks cover transactional emails only, not broadcasts or automations.
 
@@ -66,7 +69,7 @@ Requests are signed with [Standard Webhooks](https://www.standardwebhooks.com), 
 
 - `webhook-id`: stays the same across retries, so use it to ignore duplicates.
 - `webhook-timestamp`: Unix seconds.
-- `webhook-signature`: `v1,` and a base64 HMAC-SHA256 of `{webhook-id}.{webhook-timestamp}.{body}`, keyed with your secret after you strip `whsec_` and base64-decode it.
+- `webhook-signature`: `v1,` and a base64 HMAC-SHA256 of `{webhook-id}.{webhook-timestamp}.{body}`. The key is your secret without its `whsec_` prefix, base64-decoded.
 
 ```js
 import { Webhook } from "standardwebhooks"
@@ -78,6 +81,6 @@ const event = wh.verify(rawBody, request.headers) // throws if the signature is 
 ## Delivery
 
 - Any response below `400` counts as received.
-- PostHog retries `408`, `429`, and `5xx` responses, and network errors, a few times with backoff. Other `4xx` responses aren't retried.
-- Respond fast, and do slow work after you respond. A slow endpoint times out after a few seconds.
+- PostHog retries `408`, `429`, `500`, `502`, `503`, and `504` responses, and network errors, a few times with backoff. It doesn't retry other responses.
+- Respond quickly, and do slow work after you respond.
 - Events can arrive out of order. Use `created_at` to sort them.

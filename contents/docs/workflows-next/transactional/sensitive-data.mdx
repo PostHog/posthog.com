@@ -10,15 +10,15 @@ Sign-in codes, reset links, and magic links are secrets. Mark those emails as se
 
 For a sensitive email, PostHog:
 
-- **Keeps links unchanged.** It doesn't rewrite them for click tracking, so a token never goes through a redirect.
+- **Keeps links direct.** Click tracking is off by default, so a token never goes through a redirect. If you turn click tracking on, PostHog records only the site address of a clicked link, not the full link.
 - **Keeps no copy.** It doesn't store the subject or body. The Log says so instead of showing the email.
-- **Leaves the subject off events.** Engagement events don't carry it.
+- **Leaves the subject off events.** Engagement events and delivery webhooks don't carry it.
 
 PostHog still tracks deliveries, opens, bounces, and the status.
 
-**Templates:** turn on **Protect sensitive data** when you create the email, or on its **API** tab. You can change it any time.
+**Templates:** turn on **Protect sensitive data** when you create the email, or later on its **API** tab. Under it, **Track link clicks** turns click tracking on for links that carry no secrets.
 
-**Emails your code writes:** send `sensitive`. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when there isn't one. Send `"sensitive": false` for an email with no secrets, such as an order confirmation, so its clicks are tracked.
+**Emails your code writes:** send `sensitive`. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when there isn't one. Send `"sensitive": false` for an email with no secrets, such as an order confirmation, so its clicks are tracked. A send can't set `false` when the template with the same key is sensitive.
 
 ## Tracking
 
@@ -26,10 +26,12 @@ PostHog still tracks deliveries, opens, bounces, and the status.
 
 | `tracking` | Opens | Clicks | Engagement events |
 | --- | --- | --- | --- |
-| Left out | On | Off when sensitive | On |
+| Left out | On | The template's setting. Without one, off when sensitive and on otherwise. | On |
 | `true` | On | On | On |
 | `false` | Off | Off | Off |
-| `{ "opens": …, "clicks": …, "engagement": … }` | Your choice | Your choice | Your choice |
+| An object with `opens`, `clicks`, and `engagement` | Your choice | Your choice | Your choice |
+
+A kind that the object leaves out keeps its default.
 
 For example, to send an email with no secrets and track its clicks:
 
@@ -136,8 +138,8 @@ curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
 
 - **A sensitive email with safe links:** send `"tracking": {"clicks": true}` to count clicks and keep the other protections.
 - **One link untracked:** add `data-ph-no-track` to its `<a>` tag. Use this for app deep links, which break when rewritten.
-- **Clicks need opens:** `{"opens": false, "clicks": true}` is refused.
+- **Clicks need opens:** PostHog refuses `{"opens": false, "clicks": true}`.
 
 A template send uses the template's own settings, so it takes neither `sensitive` nor `tracking`.
 
-Opens and clicks only become events when [engagement events](/docs/workflows-next/email/engagement-events) are turned on for your project.
+Opens and clicks only become events when [engagement events](/docs/workflows-next/email/engagement-events) are on for your project. If they're off for the project, `tracking` can't turn them on.

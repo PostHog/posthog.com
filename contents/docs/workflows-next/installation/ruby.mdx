@@ -11,7 +11,6 @@ The [Ruby SDK](/docs/libraries/ruby) sends transactional emails from version 3.3
 New to sending from code? Read [send emails from code](/docs/workflows-next/transactional/send-from-code) first.
 
 <details>
-
 <summary>Prompt for your coding agent</summary>
 
 Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
@@ -19,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this Ruby app with the posthog-ruby gem.
 
-Read https://posthog.com/docs/workflows/transactional-emails/ruby.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/ruby.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's PostHog::Client. Add secret_key from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. The client also loads feature flag definitions with this key, so tell me to give the key the Feature flag read scope too.
 - Send only from server code. Never put the secret key in code or config that reaches the browser.
@@ -37,10 +36,10 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 
 ## Install
 
-Add this to your `Gemfile`:
+Add this to your `Gemfile`, then run `bundle install`:
 
 ```ruby
-gem "posthog-ruby", "~> 3.0"
+gem "posthog-ruby", "~> 3.35"
 ```
 
 ## Set up the client
@@ -57,7 +56,7 @@ $posthog = PostHog::Client.new({
 })
 ```
 
-When `secret_key` is set, the client also loads flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation) when it starts. Give the key the **Feature flag** read scope too, or the client logs a failed load each time it polls.
+When `secret_key` is set, the client also loads flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation) when it starts, and polls them after that. Give the key the **Feature flag** read scope too, or each of those loads fails.
 
 Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
 
@@ -94,9 +93,7 @@ def send_password_reset(user, reset_link, reset_request_id)
 end
 ```
 
-`send` returns a `SendResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument raises `ArgumentError` before any request.
-
-A successful result means the email was queued, not delivered. Use [status checks](#check-an-emails-status) to confirm delivery.
+`send` returns a `SendResult`, and `result.id` is the message ID. A result means PostHog queued the email, not that it delivered it. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument raises `ArgumentError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -114,8 +111,8 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `max_retries` | No | How many times the client retries this send. |
 | `template_key` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
 | `subject` | Yes, code only | The subject line. |
-| `html` | One of `html` or `text`, code only | The HTML body. |
-| `text` | One of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `html` | At least one of `html` or `text`, code only | The HTML body. |
+| `text` | At least one of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
 | `from` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
 | `reply_to` | No, code only | One reply-to address or a list. |
 | `cc` | No, code only | One copy address or a list. |
@@ -146,7 +143,7 @@ This example uses [Sidekiq](https://github.com/sidekiq/sidekiq) 6.5.2 or later. 
 ```ruby
 class PasswordResetEmailJob
   include Sidekiq::Job
-  # Five retries finish within minutes, well inside the 24 hours that PostHog keeps an idempotency key
+  # Five retries with Sidekiq's backoff finish within minutes, well inside the 24 hours
   sidekiq_options retry: 5
 
   # A later attempt can fix these. Any other code fails the same way again.
@@ -219,9 +216,7 @@ $posthog.emails.send(
 )
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
-
-When migrating providers, set the client option `migrated_from`, for example `migrated_from: "resend"`.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
@@ -254,9 +249,7 @@ rescue PostHog::EmailError => e
 end
 ```
 
-`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced".
-
-The key needs **Transactional email** read or write access.
+`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. The two times are `Time` objects.
 
 The client doesn't retry a `not_found`, which you can get right after a send. Try again a few times with a short wait before you treat the email as missing.
 
@@ -264,9 +257,9 @@ See [status and troubleshooting](/docs/workflows-next/transactional/status) for 
 
 ## Test without sending email
 
-The client sends email with Ruby's `Net::HTTP`, so [WebMock](https://github.com/bblimke/webmock) can stub the request and show exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#log) on the **Transactional** tab.
+The client sends email with Ruby's `Net::HTTP`, so [WebMock](https://github.com/bblimke/webmock) can stub the request and show exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#see-each-send) on the **Transactional** tab.
 
-`test_mode: true` does not disable email requests. Stub email sends, status reads, and feature flag definition requests in tests.
+`test_mode: true` doesn't stop email requests or flag definition loads, so stub both.
 
 ```ruby
 require 'posthog'

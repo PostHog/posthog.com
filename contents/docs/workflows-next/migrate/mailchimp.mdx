@@ -6,7 +6,7 @@ showTitle: true
 
 import { CopyPrompt } from '../_snippets/switch-prompt'
 
-PostHog imports your Mailchimp audiences, groups, cleaned addresses, abuse reports, templates, and campaigns in one background import.
+PostHog imports your Mailchimp audiences, groups, cleaned contacts, abuse reports, contacts, templates, and campaigns in one background import.
 
 > The Mailchimp import is rolling out. If Mailchimp isn't in the list, your project doesn't have it yet.
 
@@ -14,10 +14,11 @@ PostHog imports your Mailchimp audiences, groups, cleaned addresses, abuse repor
 
 | From Mailchimp | In PostHog |
 | --- | --- |
-| Audiences | Marketing [categories](/docs/workflows-next/sending-rules#opt-outs). People who unsubscribed, never subscribed, or were archived are opted out. |
+| Audiences | Marketing [categories](/docs/workflows-next/email/opt-outs). People who unsubscribed, never subscribed, or were archived are opted out. |
 | Groups | Categories. Hidden groups stay behind. |
-| Cleaned addresses | [Suppression list](/docs/workflows-next/sending-rules#suppression-list). Blocks all email. |
+| Cleaned contacts | [Suppression list](/docs/workflows-next/email/suppression). Blocks all email. |
 | Abuse reports | Suppression list. Blocks marketing email. |
+| Subscribed contacts | People, matched by email, or new people when nobody matches. Their merge fields come too. A cohort of all of them, and one for each audience, tag, and segment. |
 | Saved templates | Templates, with merge tags converted to Liquid |
 | Campaigns | Draft templates. None of them send. |
 
@@ -26,9 +27,13 @@ Customer journeys, classic automations, signup forms, reports, and Mailchimp Tra
 ## Run the import
 
 1. Create an API key in [Mailchimp](https://us1.admin.mailchimp.com/account/api/). It ends with your data center, such as `-us21`. Mailchimp keys can change everything in your account, so PostHog only reads, and deletes the key when the import ends.
-2. In [Workflows](https://app.posthog.com/workflows), go to **Opt-outs** and click **Import from another tool**.
-3. Pick **Mailchimp** and paste the key. Under **Campaigns**, pick drafts, paused, and scheduled campaigns, add recently sent ones, or import every campaign.
+2. In [Workflows](https://app.posthog.com/workflows/opt-outs), go to **Messaging** > **Opt-outs** and click **Import from another tool**.
+3. Pick **Mailchimp** and paste the key. Under **Campaigns**, pick **Drafts, paused and scheduled campaigns**, add campaigns sent in the last 90 days, or pick **Every campaign**.
 4. Pick what to import, and click **Start import**.
+
+<!-- shot: mailchimp-import: the Mailchimp import, with the Campaigns setting and the list of steps -->
+
+The **Contacts** step needs **Audiences**, **Groups**, **Cleaned contacts**, and **Abuse reports** in the same import, so nobody who left in Mailchimp gets marketing email. Each person it creates or updates counts as an event on your bill. Tags and segments don't update on their own, so import again to refresh their cohorts.
 
 Or ask your agent:
 
@@ -36,8 +41,9 @@ Or ask your agent:
 
 ## Switch your sending
 
-- **Merge tags:** `*|FNAME|*` becomes the `first_name` person property, and other tags become the property with the same name. Make sure your people have them.
+- **Merge tags:** `*|FNAME|*` and `*|LNAME|*` read the `first_name` and `last_name` person properties, and other tags read the property with the same name. The **Contacts** step fills these in. Send them to PostHog for people who sign up later.
 - **Images:** Mailchimp keeps hosting the images in your emails. Upload them to PostHog before you close your account.
+- **Preferences page:** people see your imported audience and group names, so rename any that read badly.
 - **Before you delete an audience:** import once more. After that, PostHog can't see who unsubscribed.
 
 See [switch over safely](/docs/workflows-next/migrate#switch-over-safely) for the full checklist.

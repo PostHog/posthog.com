@@ -18,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this .NET app with the PostHog NuGet package, or PostHog.AspNetCore for ASP.NET Core.
 
-Read https://posthog.com/docs/workflows/transactional-emails/dotnet.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/dotnet.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's PostHog client. Set SecretKey from the PostHog:SecretKey configuration value, such as user secrets or the POSTHOG_PROJECT_SECRET_API_KEY environment variable. In ASP.NET Core, inject IPostHogEmails where you send email.
 - Keep the secret key in server configuration. Never commit it, and never send it to a browser or a mobile app.
@@ -37,7 +37,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-dotnet add package PostHog --version 2.25.0
+dotnet add package PostHog
 ```
 
 For ASP.NET Core, install `PostHog.AspNetCore` instead.
@@ -109,7 +109,7 @@ public async Task<string> SendPasswordResetAsync(User user, string resetLink, st
 }
 ```
 
-`SendAsync` returns a `SendEmailResult`, and `result.Id` is the message ID. When PostHog doesn't queue the email, `SendAsync` throws an `EmailException`, and its `Code` is one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument throws `ArgumentException` before any request.
+`SendAsync` returns a `SendEmailResult`, and `result.Id` is the message ID. A result means PostHog queued the email, not that it delivered it. When PostHog doesn't queue the email, `SendAsync` throws an `EmailException`, and its `Code` is one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument throws `ArgumentException` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -127,8 +127,8 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `MaxRetries` | No | How many times the client retries this send. |
 | `TemplateKey` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
 | `Subject` | Yes, code only | The subject line. |
-| `Html` | One of `Html` or `Text`, code only | The HTML body. |
-| `Text` | One of `Html` or `Text`, code only | The plain text body. PostHog makes it from `Html` if you leave it out. |
+| `Html` | At least one of `Html` or `Text`, code only | The HTML body. |
+| `Text` | At least one of `Html` or `Text`, code only | The plain text body. PostHog makes it from `Html` if you leave it out. |
 | `From` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
 | `ReplyTo` | No, code only | A list of reply-to addresses. |
 | `Cc` | No, code only | A list of copy addresses. |
@@ -263,7 +263,7 @@ var result = await emails.SendAsync(new SendCodeEmailOptions
 });
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
@@ -309,7 +309,7 @@ See [status and troubleshooting](/docs/workflows-next/transactional/status) for 
 
 ## Test without sending email
 
-`PostHogClient` takes an `IHttpClientFactory`. Give it an `HttpClient` with your own `HttpMessageHandler` to see exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#log) on the **Transactional** tab.
+`PostHogClient` takes an `IHttpClientFactory`. Give it an `HttpClient` with your own `HttpMessageHandler` to see exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#see-each-send) on the **Transactional** tab.
 
 ```csharp
 using System.Net;
@@ -362,6 +362,8 @@ sealed class FakeHttpClientFactory(HttpClient client) : IHttpClientFactory
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `HostUrl` is an ingestion host such as `us.i.posthog.com`. If `HostUrl` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. `AppHost` must use `https`. The client doesn't send email requests to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `HostUrl` is an ingestion host such as `us.i.posthog.com`. If `HostUrl` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. `AppHost` must use `https`, unless you set `AllowInsecureAppHost` for local development. The client doesn't send email requests to a host that might be a proxy.
 
 Flag definitions for local evaluation still load from `HostUrl` with the secret key when you evaluate a flag. If that host is a proxy that must not see the key, leave `SecretKey` off that client. Send email from a second `PostHogClient` whose `HostUrl` is your PostHog host.
+
+From 2.26.3, the client sends email to `/api/messaging/`. A self-hosted PostHog needs a version from 2026-11-18 or later, or it answers with a `404`.

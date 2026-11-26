@@ -16,7 +16,7 @@ import PlatformInstall, { wizardInstallSchema } from "components/PlatformInstall
   icon="IconCode"
 >
 
-Run the wizard from your server project. It sets up the email, your API key, and the first send. Until your domain is verified, the email goes to you from the PostHog test sender.
+Run the wizard from your server project. It sets up the email, your secret API key, and the first send. Until you verify your domain, the email comes from the [PostHog test sender](/docs/workflows-next/email/test-sender), which only emails members of your PostHog organization.
 
 <div className="not-prose max-w-md my-4">
   <PlatformInstall
@@ -27,7 +27,7 @@ Run the wizard from your server project. It sets up the email, your API key, and
   />
 </div>
 
-<OSButton variant="secondary" asLink to="/docs/workflows/transactional-emails">Set it up by hand</OSButton>
+<OSButton variant="secondary" asLink to="/docs/workflows-next/installation">Set it up by hand</OSButton>
 
 </QuestLogItem>
 
@@ -37,7 +37,7 @@ Run the wizard from your server project. It sets up the email, your API key, and
   icon="IconGlobe"
 >
 
-Verify your domain to email your users. Your code keeps working: sends move to your domain once it is verified.
+Verify your domain to email your users. You don't change your code: sends move to your domain once it is verified. See [set up your domain](/docs/workflows-next/domain).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/verify_domain_dns_light_71b3304c20.png"
@@ -56,7 +56,7 @@ Verify your domain to email your users. Your code keeps working: sends move to y
   icon="IconSend"
 >
 
-Email many people at once, such as a product update. Pick one of PostHog's suggested audiences, and PostHog AI drafts the email.
+Email many people at once, such as a product update. Pick one of PostHog's suggested audiences, and PostHog AI drafts the email. See [broadcasts](/docs/workflows-next/broadcasts).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_light_6f107e725f.png"
@@ -65,7 +65,7 @@ Email many people at once, such as a product update. Pick one of PostHog's sugge
   classes="rounded"
 />
 
-<OSButton variant="primary" asLink to="https://app.posthog.com/workflows/broadcasts" external>Send a broadcast</OSButton>
+<OSButton variant="primary" asLink to="https://app.posthog.com/broadcasts" external>Send a broadcast</OSButton>
 
 </QuestLogItem>
 
@@ -75,7 +75,7 @@ Email many people at once, such as a product update. Pick one of PostHog's sugge
   icon="IconDecisionTree"
 >
 
-Send emails that react to what people do, such as a welcome email at sign-up and a nudge 3 days later.
+Send emails that react to what people do, such as a welcome email at sign-up and a nudge 3 days later. See [your first automation](/docs/workflows-next/automations/first-automation).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
@@ -94,7 +94,7 @@ Send emails that react to what people do, such as a welcome email at sign-up and
   icon="IconGraph"
 >
 
-Every send, open, and click is an event on the person who got it. See what they did next, and how each email performs.
+Every send, open, and click is an event on the person who got it, so you can see what they did next and how each email performs. See [metrics](/docs/workflows-next/metrics).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_light_252909e556.png"

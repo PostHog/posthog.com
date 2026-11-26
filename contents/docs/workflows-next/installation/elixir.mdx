@@ -18,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this Elixir app with the posthog Hex package.
 
-Read https://posthog.com/docs/workflows/transactional-emails/elixir.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/elixir.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's :posthog config. Add secret_key from the POSTHOG_PROJECT_SECRET_API_KEY environment variable in config/runtime.exs. Set enable_local_evaluation: false unless the app evaluates feature flags locally.
 - Send only from server code. Never put the secret key in source code or in anything sent to the browser.
@@ -60,7 +60,7 @@ config :posthog,
   enable_local_evaluation: false
 ```
 
-Keep `enable_local_evaluation: false` unless your app [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With local evaluation on, the SDK loads flag definitions with the secret key when it starts, and a key with only the **Transactional email** scope can't read them. If you do evaluate flags locally, give the key the **Feature flag** read scope too.
+Keep `enable_local_evaluation: false` unless your app [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With local evaluation on, the SDK polls flag definitions with the secret key, and a key with only the **Transactional email** scope can't read them. If you do evaluate flags locally, give the key the **Feature flag** read scope too.
 
 If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
 
@@ -221,9 +221,7 @@ See [content from your code](/docs/workflows-next/transactional/from-code) for w
 
 ### Copies and attachments
 
-Copies and attachments need version 2.22.0 or later.
-
-Each file in `attachments` is a map with `filename` and the file's bytes as `content`, and can also have `content_type` and `content_id`. The SDK uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` returns an error, and PostHog sends nothing.
+From version 2.22.0, `send/2` takes `cc`, `bcc`, and `attachments`. Each file in `attachments` is a map with `filename` and the file's bytes as `content`, and can also have `content_type` and `content_id`. The SDK uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` returns an error, and PostHog sends nothing.
 
 ```elixir
 PostHog.Emails.send(
@@ -239,11 +237,11 @@ PostHog.Emails.send(
 )
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
-`sensitive` and `tracking` need version 2.21.0 or later. For example, to track the clicks of an email with no secrets:
+From version 2.21.0, `send/2` takes `sensitive` and `tracking`. For example, to track the clicks of an email with no secrets:
 
 ```elixir
 PostHog.Emails.send(
@@ -284,7 +282,7 @@ See [status and troubleshooting](/docs/workflows-next/transactional/status) for 
 
 ## Test without sending email
 
-Every request goes through the config's `api_client_module`. Wrap the default client with a [`Req.Test`](https://hexdocs.pm/req/Req.Test.html) plug to see exactly what your code sends, with no network call. `Req.Test` needs the `plug` package, which a Phoenix app already has. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#log) on the **Transactional** tab.
+Every request goes through the config's `api_client_module`. Wrap the default client with a [`Req.Test`](https://hexdocs.pm/req/Req.Test.html) plug to see exactly what your code sends, with no network call. `Req.Test` needs the `plug` package, which a Phoenix app already has. This tests your integration, not delivery. To test delivery, send a real email to your own address and open the send in the [**Log**](/docs/workflows-next/transactional#see-each-send) tab.
 
 `test_mode: true` keeps captured events in memory, but it doesn't stop email requests. Use the plug for those.
 
@@ -346,6 +344,8 @@ end
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the SDK sends email to your region's app host, even when `api_host` is an ingestion host such as `us.i.posthog.com`. If `api_host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send returns the code `missing_app_host`. The SDK doesn't send email requests to a host that might be a proxy.
+On PostHog Cloud, the SDK sends email to your region's app host, even when `api_host` is an ingestion host such as `us.i.posthog.com`. If `api_host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send returns the code `missing_app_host`, because the SDK doesn't send the secret key to a host that might be a proxy.
 
-Local evaluation still loads flag definitions from `api_host` with the secret key. If the proxy must not see the key, set `enable_local_evaluation: false`.
+From version 2.23.2, the SDK sends to `/api/messaging/`. A self-hosted PostHog from before 2026-11-18 answers those requests with a `404`.
+
+With local evaluation on, the SDK still polls flag definitions from `api_host` with the secret key. If the proxy must not see the key, keep `enable_local_evaluation: false`.

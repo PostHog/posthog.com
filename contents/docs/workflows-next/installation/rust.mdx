@@ -6,7 +6,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [Rust SDK](/docs/libraries/rust) sends transactional emails from version 0.31.0. Before you start, you need a transactional email ([templates and variables](/docs/workflows-next/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows-next/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows-next/installation) sets up both and sends a test email in a few minutes.
+The [Rust SDK](/docs/libraries/rust) sends transactional emails. This page uses the `posthog` crate, and every release from 1.0.0 can send. On the older `posthog-rs` crate, sending needs 0.31.0 or later. Before you start, you need a transactional email ([templates and variables](/docs/workflows-next/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows-next/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows-next/installation) sets up both and sends a test email in a few minutes.
 
 New to sending from code? Read [send emails from code](/docs/workflows-next/transactional/send-from-code) first.
 
@@ -18,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this Rust app with the posthog crate.
 
-Read https://posthog.com/docs/workflows/transactional-emails/rust.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/rust.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's posthog::Client. Set secret_key on ClientOptionsBuilder from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. Leave enable_local_evaluation off unless the app evaluates feature flags locally with this client.
 - Never hard-code the secret key, log it, or put it in config that reaches the browser.
@@ -88,7 +88,7 @@ async fn send_password_reset(
 }
 ```
 
-`send` returns `Result<SendEmailResult, EmailError>`. `result.id` is the message ID. Branch on `error.code()`, one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
+`send` returns `Result<SendEmailResult, EmailError>`. `result.id` is the message ID. An `Ok` means PostHog queued the email, not that it delivered it. Branch on `error.code()`, one of the codes in the [errors table](/docs/workflows-next/transactional/retries-and-errors#what-to-retry). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -104,8 +104,8 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `distinct_id` | No | Links the email to your user's person in PostHog. |
 | `idempotency_key` | No | Identifies this one email, so a retry never sends it twice. |
 | `max_retries` | No | How many times the client retries this email. |
-| `html` | One of `html` or `text`, code only | The HTML body. |
-| `text` | One of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `html` | At least one of `html` or `text`, code only | The HTML body. |
+| `text` | At least one of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
 | `from` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
 | `reply_to` | No, code only | Call once for each reply-to address. |
 | `cc` | No, code only | Call once for each copy address. |
@@ -114,7 +114,7 @@ Fields marked "template only" work only with a template made in PostHog. Fields 
 | `sensitive` | No, code only | Marks the email as sensitive, for login links, reset tokens, or codes. |
 | `tracking` | No, code only | What PostHog tracks: opens, clicks, and engagement events. |
 
-Sending needs version 0.31.0 or later. `sensitive` and `tracking` need 0.32.0, and `cc`, `bcc`, and `attachment` need 0.33.0.
+Every `posthog` release takes every field. On `posthog-rs`, `sensitive` and `tracking` need 0.32.0, and `cc`, `bcc`, and `attachment` need 0.33.0.
 
 ### Timeouts and retries
 
@@ -205,15 +205,13 @@ async fn send_password_reset(
 }
 ```
 
-A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. `capture_engagement` is deprecated. Call `.tracking(EmailTrackingOptions::new().engagement(false))` instead, and don't set both.
+`capture_engagement` is deprecated. Call `.tracking(EmailTrackingOptions::new().engagement(false))` instead, and don't set both.
 
 See [content from your code](/docs/workflows-next/transactional/from-code) for what each field does and the checks PostHog runs.
 
 ### Copies and attachments
 
-Copies and attachments need version 0.33.0 or later.
-
-A `CodeEmail` takes copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes. Add `content_type` to set the file type, or `content_id`. The client uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` returns an error, and PostHog sends nothing.
+Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes. Add `content_type` to set the file type, or `content_id`. The client uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` returns an error, and PostHog sends nothing.
 
 ```rust
 use posthog::{CodeEmail, EmailAttachment};
@@ -231,13 +229,15 @@ posthog
     .await?;
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
-`sensitive` and `tracking` need version 0.32.0 or later. For example, to track the clicks of an email with no secrets:
+To track the clicks of an email with no secrets:
 
 ```rust
+use posthog::{CodeEmail, EmailTrackingOptions};
+
 posthog
     .emails()
     .send(
@@ -277,7 +277,7 @@ See [status and troubleshooting](/docs/workflows-next/transactional/status) for 
 
 ## Test without sending email
 
-Start a local stub server with [httpmock](https://docs.rs/httpmock) and set its URL as `app_host`, to see exactly what your code sends with no request to PostHog. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#log) on the **Transactional** tab.
+Start a local stub server with [httpmock](https://docs.rs/httpmock) and set its URL as `app_host`, to see exactly what your code sends with no request to PostHog. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the [**Log**](/docs/workflows-next/transactional#see-each-send) on the **Transactional** tab.
 
 ```bash
 cargo add --dev httpmock
@@ -329,4 +329,6 @@ async fn sends_password_reset() {
 
 On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send email requests to a host that might be a proxy.
 
-With `enable_local_evaluation` on, flag definitions still load from `host` with the secret key.
+With `enable_local_evaluation` on, flag definitions still load from `host` with the secret key. If that host is a proxy that must not see the key, leave `enable_local_evaluation` off on this client.
+
+From 1.1.2, the client sends email to `/api/messaging/`. A self-hosted PostHog needs a version from 2026-11-18 or later, or it answers with a `404`.

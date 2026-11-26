@@ -18,7 +18,7 @@ Paste this into Claude Code, Cursor, or another coding agent. It sends the agent
 ```text
 Add PostHog transactional email to this PHP app with posthog/posthog-php.
 
-Read https://posthog.com/docs/workflows/transactional-emails/php.md first. Follow it over anything you remember about PostHog.
+Read https://posthog.com/docs/workflows-next/installation/php.md first. Follow it over anything you remember about PostHog.
 
 - Reuse the app's PostHog client. Pass secretKey from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. Build the client with loadFeatureFlags: false unless the app evaluates feature flags locally with this client.
 - Send only from server code. Never print the secret key into a page or a JavaScript bundle.
@@ -38,7 +38,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-composer require "posthog/posthog-php:^4.0"
+composer require "posthog/posthog-php:^4.22"
 ```
 
 ## Set up the client
@@ -60,7 +60,7 @@ $client = new Client(
 PostHog::init(client: $client);
 ```
 
-Keep `loadFeatureFlags: false` unless this client also [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With it on, the client loads flag definitions with the secret key when it starts. If you do evaluate flags locally with this client, give the key the **Feature flag** read scope too.
+Keep `loadFeatureFlags: false` unless this client also [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With it on, the client loads flag definitions with the secret key when it starts, and a key with only the **Transactional email** scope can't read them. If you do evaluate flags locally with this client, give the key the **Feature flag** read scope too.
 
 If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
 
@@ -217,9 +217,7 @@ See [content from your code](/docs/workflows-next/transactional/from-code) for w
 
 ### Copies and attachments
 
-Copies and attachments need version 4.25.0 or later.
-
-Each file in `attachments` is an array with `filename` and the file's bytes as `content`, such as `file_get_contents()` returns, and can also have `content_type` and `content_id`. Don't pass Base64. If you have Base64, pass `base64_decode($content)`. The client uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` throws an error, and PostHog sends nothing.
+From version 4.25.0, `send()` takes `cc`, `bcc`, and `attachments`. Each file in `attachments` is an array with `filename` and the file's bytes as `content`, such as `file_get_contents()` returns, and can also have `content_type` and `content_id`. Don't pass Base64. If you have Base64, pass `base64_decode($content)`. The client uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` throws an error, and PostHog sends nothing.
 
 ```php
 PostHog::emails()->send([
@@ -235,11 +233,11 @@ PostHog::emails()->send([
 ]);
 ```
 
-See [attachments and copies](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
+See [attachments](/docs/workflows-next/transactional/attachments) for the limits, inline images, and errors.
 
 ### Open and click tracking
 
-`sensitive` and `tracking` need version 4.24.0 or later. For example, to track the clicks of an email with no secrets:
+From version 4.24.0, `send()` takes `sensitive` and `tracking`. For example, to track the clicks of an email with no secrets:
 
 ```php
 PostHog::emails()->send([
@@ -275,16 +273,20 @@ function emailBounced(string $messageId): ?bool
 }
 ```
 
-`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects.
-
-The helper returns `null` while the status isn't there yet, so check for `null` before you read the result as "not bounced".
+`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects. A `null` from the helper means "not known yet", not "not bounced".
 
 The client doesn't retry a `not_found`, which you can get right after a send. Try again a few times with a short wait before you treat the email as missing.
 
 See [status and troubleshooting](/docs/workflows-next/transactional/status) for what each status and reason means.
 
+## Test without sending email
+
+`PostHog\Emails` is a final class with no HTTP hook, so you can't fake it. Put the send in a small class of your own, and fake that class in your tests. To test delivery, send a real email to your own address and open the send in the [**Log**](/docs/workflows-next/transactional#see-each-send) tab.
+
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set the `app_host` option to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set the `app_host` option to your PostHog app URL. Without it, `send()` throws `EmailError` with the code `missing_app_host`, because the client doesn't send the secret key to a host that might be a proxy.
+
+From version 4.26.1, the client sends to `/api/messaging/`. A self-hosted PostHog from before 2026-11-18 answers those requests with a `404`.
 
 Flag definitions for local evaluation still load from `host` with the secret key. If that host is a proxy that must not see the key, build the client with `loadFeatureFlags: false` and don't call `loadFlags()`.

@@ -4,26 +4,28 @@ showTitle: true
 title: Push step settings
 ---
 
-The **Push** step in the [workflow builder](/docs/workflows-next/automations/steps) sends a notification to every device a person registered with one of your [push channels](/docs/workflows-next/push#connect-a-push-channel). This page covers each setting on the step and what your app receives.
+The **Push** [step](/docs/workflows-next/automations/steps) in an automation sends a notification to every device that a person registered with your [push channels](/docs/workflows-next/push#connect-a-push-channel). This page covers each setting on the step, and what your app gets.
 
-Text fields accept variables, for example `{event.properties.chat_id}` or `{person.properties.name}`. The body uses Liquid instead, for example `{{ person.properties.name }}`.
+Text fields take variables, for example `{event.properties.chat_id}` or `{person.properties.name}`. The body uses Liquid instead, for example `{{ person.properties.name }}`.
+
+<!-- shot: push-step-settings: the Push step's settings panel in the automation editor, with Push channels, Delivery, title, body, and the Android and iOS sections -->
 
 ## Main settings
 
 | Setting | What it does |
 | --- | --- |
-| **Push channels** | The FCM and APNs channels to send through. Each person gets the notification on the devices they registered with those channels. People with no device on a channel are skipped and aren't counted as a send. |
-| **Delivery** | Whether the device shows the notification, or only your app gets it. See [Delivery](#delivery). |
-| **Notification title** | Required unless the push is silent. |
+| **Push channels** | The FCM and APNs channels to send through. Each person gets the notification on the devices that they registered with those channels. PostHog skips people with no device on a channel, and doesn't bill for them. |
+| **Delivery** | Whether the device shows the notification, or only your app gets it. See [delivery](#delivery). |
+| **Notification title** | Required, except for a silent push. The default is `Notification from {event.event}`. |
 | **Notification body** | Optional text under the title. |
-| **Image URL** | Optional image shown in the notification. On iOS, your app needs a notification service extension to display it. |
-| **Link** | Where a tap should take the person. See [Link and group](#link-and-group). |
-| **Group** | Bundles related notifications together, such as one conversation. See [Link and group](#link-and-group). |
-| **Custom data payload** | Key-value pairs delivered to your app. Values must be strings, because FCM only accepts strings. |
+| **Image URL** | Optional image to show in the notification. On iOS, your app needs a notification service extension to show it. |
+| **Link** | Where a tap takes the person, such as `myapp://chat/123`. See [link and group](#link-and-group). |
+| **Group** | Bundles related notifications, such as the messages in one conversation. See [link and group](#link-and-group). |
+| **Custom data payload** | Key-value pairs that your app gets. Values must be strings, because FCM accepts only strings. |
 | **Collapse key** | On iOS, a notification with the same key replaces the one already shown. On Android, it only collapses messages still waiting for an offline device. To replace a notification already shown on Android, use **Android tag**. |
-| **TTL (seconds)** | How long the provider keeps the message for a device that's offline. |
+| **TTL (seconds)** | How long FCM or APNs keeps the message for a device that's offline. |
 
-The step also has **Android** and **iOS** sections for platform settings: priority, channel ID, sound, tag, icon, color and click action on Android, and sound, badge, subtitle, category, thread ID, interruption level and mutable content on iOS.
+The step also has **Android** and **iOS** sections. On Android, you can set the priority, channel ID, sound, tag, icon, color, and click action. On iOS, you can set the sound, badge, subtitle, category, thread ID, interruption level, and mutable content.
 
 ## Delivery
 
@@ -33,19 +35,17 @@ The step also has **Android** and **iOS** sections for platform settings: priori
 | **Data only on Android, notification on iOS** | Nothing is shown. Your app gets the message in `onMessageReceived`, even in the background, and draws the notification itself. | The system shows the notification. |
 | **Silent, show nothing** | Nothing is shown. Your app gets the message in `onMessageReceived`. | Nothing is shown. iOS wakes your app in the background with the data. |
 
-With **Show a notification**, the system only shows the notification while your app is in the background. When your app is in the foreground:
+With **Show a notification**, the system shows the notification only while your app is in the background. When your app is in the foreground:
 
 - On Android, the message goes to `onMessageReceived`, and your app has to show it.
 - On iOS, your `UNUserNotificationCenterDelegate` has to return the presentation options, such as `[.banner, .sound]`, from `userNotificationCenter(_:willPresent:withCompletionHandler:)`.
 
-For data only and silent pushes, put everything your app needs in **Custom data payload**. On Android, the title, body and image aren't sent with a data only push, and **Android priority** is the only Android setting that applies. A silent push sends no title, body or image to any device.
+For data only and silent pushes, put everything that your app needs in **Custom data payload**. A data only push sends no title, body, or image to Android, and **Android priority** is the only Android setting that applies. A silent push sends no title, body, or image to any device.
 
-Things to know about silent pushes on iOS:
+Silent pushes on iOS:
 
 - Your app needs the **Remote notifications** background mode, and it receives the push in `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)`.
 - Apple sends them at low priority and limits how often an app is woken, so a silent push can arrive late or not at all. Don't use them for anything time critical.
-
-If you create a workflow through the API and leave out the title for a push that shows a notification, PostHog uses the template's default title.
 
 ## Link and group
 
@@ -53,7 +53,7 @@ If you create a workflow through the API and leave out the title for a push that
 
 On iOS, **Group** is also used as the thread ID, so iOS bundles notifications with the same group. If you set **iOS thread ID**, that's used instead.
 
-PostHog SDKs don't open the link, and they don't group notifications on Android, so your app has to read these keys itself.
+The PostHog SDKs don't open the link, and they don't group notifications on Android. Your app reads these keys itself.
 
 On Android, read them where your app handles the push. For a data only or silent push, that's `onMessageReceived`, where you can also pass `group` to `setGroup()` when you build the notification:
 
@@ -96,12 +96,12 @@ Turn on **Protect sensitive data** in the step's settings panel for notification
 When it's on:
 
 - The notification is still sent as usual.
-- The workflow doesn't keep a copy of the title, subtitle, body or image as sent. The workflow's **Assets** tab and the person's **Push notifications** tab show that a notification was sent, with the title as you wrote it in the step, before variables are filled in, and a note that the content wasn't stored.
+- The workflow doesn't keep a copy of the title, subtitle, body, or image as sent. The workflow's **Assets** tab and the person's **Push notifications** tab show that a notification was sent, with the title as you wrote it in the step, before variables are filled in. They also show a note that the content wasn't stored.
 - The workflow run doesn't keep its variables, so the run can't be rerun.
 
 These tabs never include a push's custom data, whether or not this setting is on.
 
-This setting only covers what the workflow stores. When someone taps the notification, the iOS SDK captures a `$push_notification_opened` event with the notification's title, subtitle and body. To keep that content out of your events, remove it before the event is sent:
+This setting covers only what the workflow stores. When someone taps the notification, the iOS SDK captures a `$push_notification_opened` event with the notification's title, subtitle, and body. To keep that content out of your events, remove it before the event is sent:
 
 ```swift
 config.setBeforeSend { event in
@@ -114,4 +114,4 @@ config.setBeforeSend { event in
 }
 ```
 
-On Android, opens captured automatically carry no title or body. React Native and Flutter apps capture iOS opens in the native SDK, where your JavaScript or Dart before send hook can't reach them. In those apps, turn off `capturePushNotificationOpened` and capture opens yourself without the content. Whenever you capture an open yourself, on any platform, don't pass the content.
+On Android, opens that the SDK captures automatically have no title or body. React Native and Flutter apps capture iOS opens in the native SDK, where your JavaScript or Dart `before_send` hook can't reach them. In those apps, turn off `capturePushNotificationOpened` and capture opens yourself, without the content. When you capture an open yourself, on any platform, don't pass the content.

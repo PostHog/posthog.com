@@ -14,20 +14,22 @@ PostHog imports your Postmark suppressions, message streams, and templates in on
 
 | From Postmark | In PostHog |
 | --- | --- |
-| Hard bounces | [Suppression list](/docs/workflows-next/sending-rules#suppression-list). Blocks all email. |
+| Hard bounces | [Suppression list](/docs/workflows-next/email/suppression). Blocks all email. |
 | Spam complaints and manual suppressions | Suppression list. Blocks marketing email. |
 | Unsubscribes | Opted out of all marketing email |
-| Custom broadcast streams | Marketing [categories](/docs/workflows-next/sending-rules#opt-outs) |
-| Templates, with their layout | Templates, keyed by their Postmark alias |
-| Domains and webhooks | A list, so you know what to set up |
+| Custom broadcast streams | Marketing [categories](/docs/workflows-next/email/opt-outs) |
+| Templates, with their layout | Templates, keyed by their Postmark alias. Pick a sender for each, because Postmark templates don't name one. |
+| Servers, streams, domains, senders, and webhooks | A list, so you know what to set up |
 
 Postmark has no automations or contact lists. Inbound streams, SMTP settings, send history, stats, and tokens stay in Postmark.
 
 ## Run the import
 
 1. Copy a token from [Postmark](https://account.postmarkapp.com/api_tokens). A **server token** imports one server. The **account token** imports every live server, and lists your domains and senders. PostHog only reads, and deletes the token when the import ends.
-2. In [Workflows](https://app.posthog.com/workflows), go to **Opt-outs** and click **Import from another tool**.
+2. In [Workflows](https://app.posthog.com/workflows/opt-outs), go to **Messaging** > **Opt-outs** and click **Import from another tool**.
 3. Pick **Postmark**, paste the token, pick what to import, and click **Start import**.
+
+<!-- shot: postmark-import: the Postmark import, with the token field and the list of steps -->
 
 Or ask your agent:
 
@@ -35,8 +37,8 @@ Or ask your agent:
 
 ## Switch your sending
 
-- **Transactional stream:** templates from it become [transactional emails](/docs/workflows-next/transactional), which only a hard bounce blocks.
-- **SMTP:** PostHog has no SMTP service. An app that sends over SMTP changes to the [server SDK](/docs/workflows-next/installation) or the API.
+- **Transactional stream:** its mail becomes [transactional email](/docs/workflows-next/transactional) in PostHog, which only a hard bounce blocks. Postmark also blocks spam complaints and manual entries on this stream, so those addresses now get transactional email.
+- **SMTP:** PostHog has no SMTP service. Change an app that sends over SMTP to the [server SDK](/docs/workflows-next/installation) or the [API](/docs/workflows-next/installation/api).
 - **Inbound:** PostHog can't receive email, so inbound stays in Postmark.
 
 See [switch over safely](/docs/workflows-next/migrate#switch-over-safely) for the full checklist.

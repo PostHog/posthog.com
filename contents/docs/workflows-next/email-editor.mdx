@@ -4,7 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-You write every email in the same editor: transactional emails, broadcasts, and the emails in an automation. Type, press `/` for a block, and style it from the panel on the right.
+You write every email in the same editor: transactional emails, broadcasts, and the emails in an automation. Type, press `/` to add a block, and style it in the panel on the right.
+
+The block editor is rolling out, so your project might still open emails in the old editor. To switch back for yourself, click **Use old editor**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_editor_cdb83a96d2.png"
@@ -14,7 +16,7 @@ You write every email in the same editor: transactional emails, broadcasts, and 
 
 ## Add blocks
 
-Press `/`, or drag a block in from the toolbar on the left:
+Press `/`, or use the toolbar on the left, to add:
 
 - Text, headings, bullet and numbered lists, and quotes
 - Images, buttons, dividers, and spacers
@@ -26,7 +28,7 @@ Drag a block by its handle to move it, or use its menu to duplicate or delete it
 
 ## Style it
 
-**Style** sets the page: the font, colors, width, and padding. Select a block to style just that block, such as a button's color and hover color, or a section's background.
+Click **Style** to set the page: the font, colors, width, and padding. Select a block to style only that block, such as a button's color and hover color, or a section's background.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_content_editor_light_d0eed88d05.png"
@@ -37,28 +39,28 @@ Drag a block by its handle to move it, or use its menu to duplicate or delete it
 
 ## Personalize it
 
-Click `{x}` to add a variable, such as the person's first name. Variables use [Liquid](/docs/workflows-next/email/liquid), so add a default for people who don't have the property:
+Click `{x}` to add a variable, such as the person's first name, or type `{{`. Variables use [Liquid](/docs/workflows-next/email/liquid), so add a default for people who don't have the property:
 
 ```liquid
 {{ person.properties.first_name | default: 'there' }}
 ```
 
-To show a block to only some people, open **Who sees it** and pick **Show only when…**, such as `person.properties.plan == 'paid'`. You can also show a block on desktop or phones only.
+To show a block to only some people, go to **Who sees it** and click **Show only when…**, then add a condition such as `person.properties.plan == 'paid'`. Under **Screens**, you can also show a block on desktop or phones only.
 
 ## Check it before it sends
 
-- **Preview** shows the email on desktop or a phone, and as a real person to fill in the variables.
-- **HTML** shows the exact HTML that sends, so you can copy it.
-- **Plain text** is written for you from the email.
+- **Preview** shows the email on desktop or a phone. Pick a person to fill in the variables.
+- **HTML** shows the HTML that sends, so you can copy it.
+- **Plain text** shows the plain-text version, which PostHog writes for you from the email.
 
-Send a test to yourself from the email, broadcast, or automation.
+Send a test to yourself from the transactional email, broadcast, or automation.
 
 ## Reuse it
 
-Save an email to the **Library** as a template, and start new emails from it. Templates that you made in the old editor open in the new one, and send the same as before.
+Click **Save as new template** to save an email to your library, under **Templates** > **Email templates**. Start new emails from it with **Start from template**. Most templates from the old editor open in the new one, and opening a template doesn't change what it sends. See [template library](/docs/workflows-next/email/library).
 
-To start from a draft instead, ask [PostHog AI](/docs/posthog-ai) or your coding agent over [MCP](/docs/workflows-next/mcp): "Write a welcome email for new signups." Its drafts open in the editor like any other email.
+To get a first draft, ask [PostHog AI](/docs/posthog-ai) or your coding agent over [MCP](/docs/workflows-next/mcp): "Write a welcome email for new signups." Its drafts open in the editor like any other email.
 
 ## Bring your own HTML
 
-Import your own HTML, and it sends exactly as written. For a smaller piece, add a **Custom HTML** block. Or write the email in code with [React Email](/docs/workflows/transactional-emails/react-email) and send it from your [server](/docs/workflows-next/installation).
+Add a **Custom HTML** block for a piece of HTML that the blocks can't make. An email whose HTML comes from outside the editor, such as a template that you import from another tool or create over the API, sends exactly as written. To write the email in code instead, use [React Email](/docs/workflows-next/transactional/from-code#react-email) and send it from your [server](/docs/workflows-next/installation).

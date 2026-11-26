@@ -4,32 +4,35 @@ sidebar: Docs
 showTitle: true
 ---
 
-Send a broadcast now, at a time you pick, or on a repeating schedule. The send calendar shows it next to everything else going out.
+Send a broadcast now, at a time you pick, or on a repeating schedule. The **Calendar** tab shows it next to your other planned sends.
 
-## When it sends
+## Pick when it sends
 
 On the **Schedule** step, pick one:
 
 | Option | What it does |
 | --- | --- |
 | **Send now** | Sends as soon as you launch it. |
-| **Send later** | Sends once, at a date and time you pick. |
-| **Recurring** | Sends on a schedule, such as every Monday at 9am. |
+| **Send later** | Sends once, at a date, time, and time zone you pick. |
+| **Recurring** | Sends on a repeating schedule, such as every Monday at 9am. |
 
-Each one with a time has a time zone.
+## Pick a day that isn't crowded
 
-## Recurring broadcasts
+With **Send later**, a month view shows your other marketing sends. Days that would give some people in this audience too many marketing emails show as **Too close to other sends**. PostHog suggests the first day that fits. Click **Use this day** to take it.
 
-Type the schedule in plain English, such as "every week on Monday and Wednesday", and check the next send times before you launch. Or set it with the picker:
+The rule comes from your [frequency cap](/docs/workflows-next/email/frequency-cap). Without a cap, PostHog suggests one marketing email per person every 2 days.
+
+## Set a recurring schedule
+
+Type the schedule in plain English, such as "every week on Monday and Wednesday", or set it with the controls:
 
 | Setting | Options |
 | --- | --- |
-| **Frequency** | Daily, weekly, monthly, or yearly, with an interval such as every 2 weeks |
-| **Weekly** | The days of the week |
-| **Monthly** | A day of the month, a weekday such as the 3rd Wednesday, or the last day |
-| **Ends** | Never, on a date, or after a number of sends |
+| **Every** | A number of days, weeks, months, or years |
+| **On** | For weekly: the days of the week. For monthly: a day of the month, a weekday such as the 3rd Wednesday, or the last day. |
+| **Ends** | **Never**, **On date**, or **After** a number of sends |
 
-Each send picks up whoever matches the audience at that moment. **Runs** lists every send, with its results.
+Check the next send times before you continue. Each send goes to whoever matches the audience at that time. The broadcast's **Runs** tab lists every send, with its results.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_schedule_light_d4b64d361c.png"
@@ -38,22 +41,24 @@ Each send picks up whoever matches the audience at that moment. **Runs** lists e
   classes="rounded"
 />
 
-## The send calendar
+## Plan on the calendar
 
-The calendar shows every broadcast and automated email side by side, so the same people don't get two marketing emails in two days.
+The **Calendar** tab on **Broadcasts** shows scheduled broadcasts and scheduled workflows that send marketing email, plus past sends. Drafts, transactional emails, and event-triggered workflows don't show. Switch between **Month** and **Week**, and filter to **Broadcasts** or **Workflows**.
 
-- **Start from a day:** click a day, and pick **New broadcast** or **New workflow**.
-- **Move a send:** drag a scheduled broadcast to another day.
-- **Avoid doubling up:** when you schedule, PostHog warns you if a broadcast on the same thing is already scheduled or sending.
+- **Start from a day:** hover a day, click **+**, and pick **New broadcast** or **New workflow**.
+- **Move a send:** drag a scheduled send to another day. For a recurring send, this moves every future send by the same number of days. Click **Undo** on the message to put it back.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_light_900a17d154.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_dark_d3910ae42d.png"
-  alt="Broadcasts and automated emails on the send calendar"
+  alt="Broadcasts and workflows on the send calendar"
   classes="rounded"
 />
 
-## Change or stop it
+## Change or stop a scheduled broadcast
 
-- **Scheduled:** click **Stop and edit**. It goes back to a draft, and you launch it again when you're done.
-- **Recurring:** change the schedule the same way. Sends that already went out stay as they are.
+Open the broadcast, click **Actions**, then **Stop and edit**. It goes back to a draft, and nothing sends until you launch it again. This works for a one-time broadcast that hasn't sent, and for a recurring broadcast that has sends to come. Sends that already went out stay as they are.
+
+You can't stop a broadcast while it's sending.
+
+Next, [test and send it](/docs/workflows-next/broadcasts/test-and-send).

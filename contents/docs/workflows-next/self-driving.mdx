@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog watches how each automation performs, such as how many people open and click each email. When a step underperforms, it suggests one change, such as a new subject line. You approve it. Nothing reaches anyone until you do.
+PostHog watches how each automation performs, such as how many people open and click each email. When a step underperforms, it suggests one change, such as a new subject line. Nothing changes until you approve the suggestion and publish it.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_workflow_suggestions_light_d19e4b909a.png"
@@ -15,30 +15,30 @@ PostHog watches how each automation performs, such as how many people open and c
 
 ## Turn it on
 
-Self-driving is in beta. Open an automation, go to **Self-driving**, and turn on **Suggest improvements**. Your organization needs [AI data processing](/docs/posthog-ai/allow-access) turned on.
+Self-driving is in beta, and works only on automations that send email. Your organization needs [AI data processing](/docs/posthog-ai/allow-access) turned on.
 
-PostHog starts suggesting once the automation:
+Open an automation, go to the **Self-driving** tab, and turn on **Suggest improvements**. PostHog can start to suggest once the automation:
 
 - Has been live for 2 days.
-- Has sent enough emails from its busiest email step in the last 7 days. The tab shows how close it is.
+- Has sent enough emails from its busiest email step in the last 7 days. The tab shows how many more it needs.
 
-Then PostHog checks it once a day. Transactional emails, such as receipts, aren't reviewed.
+After that, PostHog checks the automation on a schedule, and the tab shows when the next check is.
 
-Set a [conversion goal](/docs/workflows-next/automations#add-steps), and suggestions aim at conversions, not just opens and clicks.
+Set a [conversion goal](/docs/workflows-next/automations/triggers#conversion-goal-and-exit), and suggestions can aim at conversions, not only opens and clicks.
 
 ## Review a suggestion
 
 Each suggestion shows:
 
-- **The change:** what it changes, such as an email's subject or content. **Compare emails** puts the old and new email side by side.
+- **The change:** what it changes, such as an email's subject or content. **Compare emails** shows the old and new email side by side.
 - **The evidence:** the numbers behind it, and how many sends they came from. With too little data, it says so.
 
-Click **Approve as draft** to stage it, then publish the automation when you're ready. Or click **Reject**, and say why, such as "this is the last email in the series, so clicks aren't its goal". Rejected suggestions stay in the history, and nothing changes.
+Click **Approve as draft** to stage the change, then publish the automation when you're ready. Or click **Reject**, and say why, such as "this is the last email in the series, so clicks aren't its goal". A rejected suggestion stays in the history, and nothing changes.
 
 ## See if it worked
 
-Once you publish a suggestion, PostHog measures the step before and after the change, version by version. If someone changes the step again later, it says so.
+After you publish a suggestion, PostHog compares the step before and after the change, version by version.
 
 ## Over MCP
 
-Your coding agent can file suggestions for you to review, and read the ones PostHog filed. Ask "What has PostHog suggested for our onboarding automation?" over [MCP](/docs/workflows-next/mcp).
+Your coding agent can file suggestions for you to review, and list the ones that PostHog filed. Ask "What has PostHog suggested for our onboarding automation?" over [MCP](/docs/workflows-next/mcp).

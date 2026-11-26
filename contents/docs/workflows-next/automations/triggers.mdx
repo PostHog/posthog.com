@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The trigger decides who enters an automation, and when. Click the trigger step to pick its type.
+The trigger decides who enters an automation, and when. Click the trigger step, then pick a **Trigger type**.
 
 <!-- shot: automation-trigger-types -->
 
@@ -14,8 +14,8 @@ The trigger decides who enters an automation, and when. Click the trigger step t
 
 | Trigger | Starts when |
 | --- | --- |
-| **Event** | Someone does something in your product, such as `signed_up`. Filter it by event, person, or group properties. |
-| **Batch** | You run it, or on a schedule. It runs once for each person in an audience you define, like a broadcast with more steps. |
+| **Event** | Someone does something in your product, such as `signed_up`. |
+| **Batch** | You click **Trigger**, or on a schedule. It runs once for each person in an audience you define. |
 | **Survey response** | Someone answers a [survey](/docs/surveys). |
 | **Cohort membership** | Someone joins or leaves a [cohort](/docs/data/cohorts). Rolling out. |
 
@@ -23,34 +23,39 @@ The trigger decides who enters an automation, and when. Click the trigger step t
 
 | Trigger | Starts when |
 | --- | --- |
-| **Schedule** | A time you set, once or on repeat, with no person. Good for AI tasks and reports. |
+| **Schedule** | A time you set, once or on repeat. It runs with no person or event. Use **Batch** to reach people on a schedule. |
 | **Webhook** | Your own system sends a request to the automation's URL. |
 | **Manual** | You click **Trigger** in the editor. |
-| **Tracking pixel** | A 1x1 image you embed loads, such as in an email. |
+| **Tracking pixel** | Something loads the automation's 1x1 image, such as a web page or an email. |
 
 **Tools you already use**
 
 | Trigger | Starts when |
 | --- | --- |
-| **Slack message posted** | Someone posts in a connected Slack channel. |
+| **Slack message posted** | Someone posts in a Slack channel that PostHog is in. See [Slack](/docs/workflows-next/automations/slack-sms-webhooks#slack). |
 | **GitHub activity** | Something happens on a GitHub repository. |
-| **Tickets** | A [support](/docs/support) ticket is created, changes status, is assigned, or gets a message. |
-| **Accounts** | An account's tag, property, or relationship changes. |
-| **Data warehouse** | A row is synced into a [data warehouse](/docs/data-warehouse) table, or a materialized view updates. |
+| **Support** | A [support](/docs/support/workflows) ticket is created, changes status, is assigned, or gets a message or a private note. Each is its own trigger, such as **New ticket created**. |
+| **Account tag, property, or relationship changed** | An account changes. Rolling out. |
+| **Data warehouse row synced** | A row is synced into a [data warehouse](/docs/data-warehouse) table. Rolling out. |
+| **Materialized view row updated** | A materialized view adds or updates a row. Rolling out. |
 
-Some of these are still rolling out, so your project might not have them all yet.
+Triggers that are rolling out show only in projects that have them.
 
 ## Event triggers
 
-Pick one or more events, and filter them. Turn on **Filter out internal and test users** to skip your own team. The trigger shows how many events matched in the last 7 days, so you can tell how busy it'll be.
+Add one or more events or actions. Under **Additional filters**, add conditions that apply to all of them, such as a person property. Turn on **Filter out internal and test users** to skip your own team.
+
+Below the filters, the trigger shows how many events matched in the last 7 days, so you can see how often it will fire.
 
 <!-- shot: automation-trigger-event -->
 
 ## Webhook triggers
 
-PostHog gives the automation its own URL. Send it a request from any system to start a run, and use the request's data in later steps. Pair it with a **Capture event** step to turn outside webhooks into PostHog events.
+Save the automation, and the trigger shows its **Webhook URL**. Send it a request with any JSON payload. In the trigger's settings, use `request.body` and `request.headers` to fill in the event and person for the run.
 
-Send an `Idempotency-Key` header so a retried request doesn't start a second run:
+The request only starts the run. It doesn't record an event in PostHog. To record one, add a **Capture event** step.
+
+To stop a retried request from starting a second run, send an `Idempotency-Key` header:
 
 ```bash
 curl -X POST "<your-webhook-url>" \
@@ -61,32 +66,45 @@ curl -X POST "<your-webhook-url>" \
 
 | Request | Response |
 | --- | --- |
-| First request with a key | `201`, and the run starts |
-| Same key in the next 24 hours | `200`, `duplicate`, and nothing starts |
-| Same key while the first is still starting | `409`. Retry shortly. |
+| First request with a key, or no key | `201` with `{"status": "queued"}`. The run starts. |
+| Same key again within 4 days | `200` with `{"status": "duplicate"}`. No run starts. |
+| Key longer than 255 characters | `400`. No run starts. |
+
+Each key applies to one automation. The same key on two automations starts a run on each.
 
 ## How often one person can enter
 
-**Frequency** on the trigger:
+Event and cohort membership triggers have a **Frequency** setting:
 
 | Option | What it does |
 | --- | --- |
-| **Every time the trigger fires** | Each event starts a new run. The default. |
-| **One time per period** | Once, then not again until the period ends. Pick from 5 minutes to 365 days, or **ever**. |
-| **Once per calendar day** | At most once a day. |
+| **Every time the trigger fires** | Each event starts a new run. This is the default. |
+| **One time per period** | A person enters once, then not again until the period ends. Pick a period from 5 minutes to 365 days, or **ever**. |
+| **Once per calendar day** | A person enters at most once each day. |
 
-Use **ever** for a welcome series. Use a short period when the same event can arrive twice, such as a server retry, so nobody gets the email twice.
+Use **ever** for a welcome series. Use a short period when the same event can arrive twice, such as from a server retry.
 
-This is different from the [frequency cap](/docs/workflows-next/sending-rules#frequency-cap), which limits marketing messages across every automation and broadcast.
+Account triggers limit entry per account instead of per person.
+
+Frequency is not the same as the [frequency cap](/docs/workflows-next/email/frequency-cap#frequency-cap-or-trigger-frequency), which limits marketing messages across all automations and broadcasts.
 
 ## Conversion goal and exit
 
-Set a **Conversion goal** on the trigger: an event, such as `subscription_started`, or a person property, such as `plan` is `growth`. PostHog counts conversions on the **Overview** tab, and records a `$workflows_conversion` event you can use in insights.
+Event triggers have a **Conversion goal**. A person converts when they meet all the conditions you set:
 
-Then pick when people leave:
+- **Property changes:** a person property, such as `plan` is `growth`.
+- **Events:** an event, such as `subscription_started`.
+- **Cohort membership:** they join or leave a cohort. Rolling out.
 
-- **Exit only once workflow reaches the end**
-- **Exit when conversion goal is met**
-- When they no longer match the trigger's filters, or either one.
+A person counts as converted only within the **Conversion window**, which starts when they enter. The default is 90 days. Each conversion is recorded as a `$workflows_conversion` event, which you can use in insights and cohorts. This event counts toward your event usage.
 
-Conversions are counted whichever you pick.
+Event and cohort membership triggers also have an **Exit condition**:
+
+- **Exit only once workflow reaches the end**. This is the default.
+- **Exit when trigger filters no longer match**. On a cohort membership trigger, this is when the person leaves or rejoins the cohort.
+- **Exit when conversion goal is met**.
+- **Exit when trigger filters no longer match, or when conversion goal is met**.
+
+## Limit the sending rate
+
+When the automation has an email step, the trigger also has **Email sending rate limit**. Turn on **Limit sending rate**, and set the most emails to send per minute or per hour. This spreads a burst of sends over time.

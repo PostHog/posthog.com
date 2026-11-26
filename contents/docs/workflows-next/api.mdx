@@ -4,14 +4,17 @@ sidebar: Docs
 showTitle: true
 ---
 
-Use the API to send email from any language, see what you sent, and manage broadcasts and automations from your own systems.
+Use the API to send email from any language, see what you sent, and manage templates, broadcasts, automations, and opt-outs from your own systems.
 
-There are two kinds of endpoint. The **sending endpoints** run on your server with a project secret API key: send an email, attach files, check a send, and update a person's opt-outs. The **project endpoints** use a personal API key: read your send log and stats, and manage templates, broadcasts, automations, and opt-outs.
+There are two kinds of endpoint:
+
+- **Sending endpoints** run on your server with a project secret API key. They send email, upload attachments, read a send's status, and update a person's opt-outs.
+- **Project endpoints** use a personal API key. They read your send logs, and manage templates, broadcasts, automations, opt-outs, and the suppression list.
 
 ## Before you start
 
-1. **Set up Workflows:** [set up your domain](/docs/workflows-next/domain) so PostHog can send for you.
-2. **Get API access:** create the key the job needs. See [authentication](#authentication) below.
+1. **Set up your domain:** [verify the domain](/docs/workflows-next/domain) that you send from.
+2. **Create a key:** create the key that the endpoint needs. See [authentication](#authentication).
 
 ## Send email
 
@@ -27,7 +30,8 @@ curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
 | Endpoint | What it does |
 | --- | --- |
 | `POST /api/messaging/send/email/` | Send one email. |
-| `POST /api/messaging/attachments/uploads/` | Upload files to attach to an email. |
+| `POST /api/messaging/send/email_batch/` | Send one email to up to 100 recipients, each with their own copy. |
+| `POST /api/messaging/attachments/uploads/` | Get upload URLs for files to attach to an email. |
 | `GET /api/messaging/emails/:message_id/` | Get the status of one send, such as delivered or bounced. |
 | `POST /api/messaging/preferences/` | Update a person's opt-outs from your own preferences page. |
 
@@ -38,7 +42,7 @@ See [send email with the API](/docs/workflows-next/installation/api) for the ful
 | Endpoint | What it does |
 | --- | --- |
 | `/api/projects/:project_id/transactional_email_log/` | List your transactional sends from the last 30 days, get one with its timeline, and count sends by outcome. See the [send log reference](/docs/api/transactional-email-log). |
-| `/api/projects/:project_id/transactional_code_emails/` | List the transactional emails whose content lives in your code. See the [code emails reference](/docs/api/transactional-code-emails). |
+| `/api/projects/:project_id/transactional_code_emails/` | List the transactional emails whose content comes from your code. See the [code emails reference](/docs/api/transactional-code-emails). |
 | `/api/projects/:project_id/workflow_email_log/` | List the emails that a broadcast or automation sent. See the [email log reference](/docs/api/workflow-email-log). |
 
 ## Manage templates, broadcasts, and automations
@@ -53,15 +57,15 @@ See [send email with the API](/docs/workflows-next/installation/api) for the ful
 
 ## Authentication
 
-Pass the key as a bearer token.
+Send the key as a bearer token.
 
-- **Sending endpoints:** use a [project secret API key](/docs/api/project-secret-api-keys) with the `transactional_email:write` scope to send, and `messaging_preference:write` to update opt-outs. Keep it on your server.
-- **Project endpoints:** use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:read` for reads and `hog_flow:write` for writes. The send log also needs `person:read`, because it lists recipients.
+- **Sending endpoints:** use a [project secret API key](/docs/api/project-secret-api-keys). Give it the `transactional_email:write` scope to send and upload attachments, `transactional_email:read` to read a send's status, and `messaging_preference:write` to update opt-outs. Keep the key on your server.
+- **Project endpoints:** use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:read` to read and `hog_flow:write` to make changes. The send logs and the suppression list also need `person:read`, because they show recipients. Counts of what people did after an email, and their activity around it, also need `query:read`.
 
-Treat a `hog_flow:write` key like a password: it can turn on automations that email real people.
+Keep a `hog_flow:write` key as safe as a password. It can turn on automations that email real people.
 
-## Related
+## Other ways to use Workflows
 
-- Do the same things in the [web app](/docs/workflows/surfaces/web-app).
-- Ask for them conversationally over [MCP](/docs/workflows-next/mcp).
+- Do the same things in the [web app](/docs/workflows-next/web-app).
+- Ask for them in plain language over [MCP](/docs/workflows-next/mcp).
 - See the full [PostHog API reference](/docs/api).

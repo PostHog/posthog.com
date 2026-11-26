@@ -11,23 +11,25 @@ To keep the content in your code instead, see [emails your code writes](/docs/wo
 ## Create a transactional email
 
 1. Open [**Transactional**](https://app.posthog.com/transactional) and click **New transactional email**.
-2. Name it. Turn on [**Protect sensitive data**](/docs/workflows-next/transactional/sensitive-data) if it carries sign-in codes or reset links.
-3. Pick a verified sender. See [set up your domain](/docs/workflows-next/domain).
-4. Write the subject and body in the [email editor](/docs/workflows-next/email-editor), with the variables your code sends, such as `{{ variables.reset_link }}`.
-5. Copy the template ID and an example send from the **API** tab.
+2. **Name:** name the email. Turn on [**Protect sensitive data**](/docs/workflows-next/transactional/sensitive-data) if it carries sign-in codes or reset links.
+3. **Sender:** pick a verified sender. See [set up your domain](/docs/workflows-next/domain).
+4. **Content:** write the subject and body in the [email editor](/docs/workflows-next/email-editor). Add the **Variables your code sends**, such as `reset_link`, and insert them from **Merge tags**. In the subject, type them as `{{ variables.reset_link }}`.
+5. **Send from your code:** check the summary, and click **Create transactional email**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_light_0ca2f74599.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_dark_703e57c7eb.png"
-  alt="A new transactional email in the editor, with the variables your code sends"
+  alt="The Content step of a new transactional email, with the variables your code sends"
   classes="rounded"
 />
 
-Transactional emails skip marketing opt-outs and the frequency cap, so use them only for emails a person needs. A transactional email can't go back to being a regular template.
+The email's **API** tab then shows its template ID and an example send.
+
+Transactional emails skip marketing opt-outs and the frequency cap, so use them only for emails a person needs. A transactional email stays transactional.
 
 ## Use an existing template
 
-Open the template on the **Templates** tab, go to its **API** tab, and click **Make transactional**. It needs a subject, a body, a verified sender, and no marketing category. If you still use it elsewhere, **Duplicate** it first and make the copy transactional.
+Open the template on the **Templates** tab, go to its **API** tab, and click **Make transactional**. The template needs a subject, a body, a verified sender, and no marketing category. You can't undo this, so if you still use the template elsewhere, **Duplicate** it first and make the copy transactional.
 
 With the API, call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `transactional_email:write` scope.
 
@@ -50,13 +52,13 @@ Use the same names in the template:
 Hi {{ variables.first_name | default: 'there' }}, reset your password here: {{ variables.reset_link }}
 ```
 
-Variables use [Liquid](https://shopify.github.io/liquid/). Add a default for anything that might be missing.
+Variables use [Liquid](/docs/workflows-next/email/liquid). Add a default for anything that might be missing.
 
-The send also needs a recipient, a distinct ID, and an idempotency key. See [send emails from code](/docs/workflows-next/transactional/send-from-code#what-a-send-needs).
+For the other fields of a send, see [what a send needs](/docs/workflows-next/transactional/send-from-code#what-a-send-needs).
 
 ## Edit, publish, and roll back
 
-- **Drafts:** edits save as a draft. Sends use the live version until you click **Publish**, and **Discard draft** throws your edits away.
+- **Drafts:** edits save as a draft. Sends use the live version until you click **Publish**. **Discard draft** throws your edits away.
 - **Versions:** each publish adds a version on the **Versions** tab.
-- **Sender:** **Edit sender** changes the sender, display name, from address, or reply-to. The from address must be on the sender's verified domain.
-- **Checks:** PostHog won't publish a change that would stop the email from sending, such as an empty subject.
+- **Sender:** change the sender, its display name, or the reply-to address in the **From** and **Reply-to** fields at the top of the editor. The address must be on the sender's verified domain.
+- **Checks:** PostHog won't save a change that would stop the email from sending, such as an empty subject.

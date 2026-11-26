@@ -8,17 +8,25 @@ You can change an automation while people are in it. Your edits save as a draft,
 
 ## Draft and publish
 
-Edit a live automation, and your changes stage as a draft. When you click **Publish**, PostHog shows who is partway through right now, and what happens to them. Each publish adds a version on **History**, so you can see what changed and roll back.
+When you edit an enabled automation, click **Save draft** to keep your changes without making them live. To discard them, use **Discard draft**.
+
+When you're ready, click **Publish**. Before it applies the changes, PostHog shows how many people are partway through, and what happens to people who wait in a step that you removed. It also warns you about variables that will be empty for them.
 
 <!-- shot: automation-publish -->
 
+Each publish saves a version on the **History** tab. To roll back, click **Restore as draft** on an earlier version, then publish it.
+
+<!-- shot: automation-history -->
+
 ## What happens to people already in it
 
-People in an automation remember which step they're on, not the automation as it was when they started. So:
+A run remembers which step it's on, not the automation as it was when it started. So:
 
 - **Fixes reach them.** When someone reaches their next step, it runs as it's published now.
-- **Nobody goes back.** A step you add behind someone never runs for them.
+- **Nobody goes back.** A step that you add behind someone never runs for them.
 - **Sent is sent.** Emails already sent are never resent or changed.
+
+Changes reach running automations within about 30 seconds of publishing.
 
 | You change | People waiting at that step |
 | --- | --- |
@@ -28,12 +36,10 @@ People in an automation remember which step they're on, not the automation as it
 | An email's content | Get the new version when they reach it. |
 | Delete the step they're waiting in | Move to the next step, or leave if there isn't one. |
 
-A variable from a step you just added is empty for people who were already past it.
-
-<!-- shot: automation-history -->
+A variable from a step that you add is empty for people who were already past that step.
 
 ## Turn it off
 
-Turning an automation off stops new people from entering. People already waiting stay where they are, and are stopped when they reach their next step while it's still off. Turn it back on in time, and they carry on.
+Click **Disable** to stop new people from entering. People already waiting stay where they are. When they reach their next step while it's still off, their run is canceled. If you enable it again in time, they carry on.
 
-To stop them straight away, cancel their runs. See [debug an automation](/docs/workflows-next/automations/debug#stop-runs).
+To stop them straight away, cancel their runs. See [stop runs](/docs/workflows-next/automations/debug#stop-runs).

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Every email can use [Liquid](https://shopify.github.io/liquid/) to fill in names, plans, links, and anything else you know about the person. In the [email editor](/docs/workflows-next/email-editor), click `{x}` to pick one, or type it.
+Every email can use [Liquid](https://shopify.github.io/liquid/) to fill in names, plans, links, and anything else you know about the person. In the [email editor](/docs/workflows-next/email-editor), click `{x}` to pick a variable, or type it.
 
 ## What you can use
 
@@ -12,20 +12,20 @@ Every email can use [Liquid](https://shopify.github.io/liquid/) to fill in names
 | --- | --- | --- |
 | `{{ person.properties.first_name }}` | Any [person property](/docs/data/persons) | Broadcasts and automations |
 | `{{ event.properties.plan }}` | A property of the event that started the automation | Automations with an event trigger |
-| `{{ variables.reset_link }}` | Values your code sends, or values earlier steps saved | Transactional emails, and automations |
-| `{{ unsubscribe_url }}` | The person's unsubscribe link | Every marketing email. See [unsubscribe links](/docs/workflows-next/email/unsubscribes). |
+| `{{ variables.reset_link }}` | Values your code sends, or values earlier steps saved | Transactional emails and automations |
+| `{{ unsubscribe_url }}` | The person's link to the preferences page | Marketing emails. See [unsubscribes](/docs/workflows-next/email/unsubscribes). |
 
 A [transactional email](/docs/workflows-next/transactional/templates#variables) can't read person properties. Your code sends everything it shows.
 
 ## Add a default
 
-A property can be missing for some people. Add a default, in single quotes:
+A property can be missing for some people. Add a default:
 
 ```liquid
 Hi {{ person.properties.first_name | default: 'there' }},
 ```
 
-Use single quotes. Double quotes break the email when it saves.
+Use single quotes inside Liquid. A double quote inside a link's `href` ends the address early and breaks the link.
 
 ## Properties that start with `$`
 
@@ -47,24 +47,30 @@ Wrap it in an `if`:
 {% endif %}
 ```
 
-In the email editor, you can do the same for a whole block: open **Who sees it** and pick **Show only when…**.
+In the email editor, you can do the same for a whole block: open **Who sees it**, pick **Show only when…**, and fill in **Only if**.
 
 ## Filters
 
-Liquid filters change a value before it shows, such as `upcase`, `capitalize`, `date`, and `truncate`:
+Filters change a value before it shows, such as `upcase`, `capitalize`, `date`, and `truncate`:
 
 ```liquid
 Your trial ends on {{ person.properties.trial_ends_at | date: '%B %-d' }}.
 ```
 
-See the [Liquid docs](https://shopify.github.io/liquid/filters/abs/) for the full list.
+PostHog adds a `currency` filter, which takes a currency code, a locale, or both:
+
+```liquid
+Your total is {{ variables.total | currency: 'EUR' }}.
+```
+
+The [Liquid docs](https://shopify.github.io/liquid/filters/abs/) list the standard filters. PostHog turns off the filters that take an expression, such as `where_exp` and `group_by_exp`.
 
 ## When it goes wrong
 
 | Error | Fix |
 | --- | --- |
-| `TokenizationError: unexpected character` | Use single quotes inside `{{ }}`, not double quotes. |
+| `TokenizationError: unexpected character` | Replace curly quotes, often pasted from a document, with straight single quotes. |
 | `expected "\|" before filter` | A property starts with `$`. Use `person.properties['$email']`. |
 | A blank where a name should be | The person doesn't have the property. Add a `default`. |
 
-If Liquid doesn't compile, the email doesn't send. Send yourself a test first, and **Preview** it as a real person.
+If Liquid doesn't render, the email doesn't send. Before you go live, pick a real person in **Preview as**, and send yourself a test.

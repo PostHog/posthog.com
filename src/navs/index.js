@@ -8660,16 +8660,16 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Push broadcasts',
-                    url: '/docs/workflows-next/broadcasts/push',
-                    icon: 'IconPhone',
-                    color: 'green',
-                },
-                {
                     name: 'Test, send, and follow up',
                     url: '/docs/workflows-next/broadcasts/test-and-send',
                     icon: 'IconSend',
                     color: 'red',
+                },
+                {
+                    name: 'Push broadcasts',
+                    url: '/docs/workflows-next/broadcasts/push',
+                    icon: 'IconPhone',
+                    color: 'green',
                 },
                 {
                     name: 'Automations',

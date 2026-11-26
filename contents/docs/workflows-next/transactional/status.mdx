@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Each send returns a message ID. Use it to check what happened to the email for 30 days, or open the send in the [**Log**](/docs/workflows-next/transactional#log).
+Each send returns a message ID. Use it to check what happened to the email for 30 days. A key with the **Transactional email** scope set to **Read** or **Write** can read statuses.
 
 ## Check a status
 
@@ -66,16 +66,27 @@ curl "https://us.posthog.com/api/messaging/emails/<message_id>/" \
 | `complained` | The recipient marked it as spam. |
 | `failed` | It wasn't sent. `reason` says why. |
 
-A status only moves forward, and new ones can appear, so handle values you don't know.
+New statuses can appear, so handle values you don't know.
 
 A `failed` email's `reason` is one of:
 
 - `provider_error` or `provider_rejected`: the email provider refused it.
 - `recipient_suppressed`, `recipient_unreachable`, or `missing_recipient`: PostHog skipped it because of the recipient.
-- `sending_paused` or `sending_suspended`: check **Reputation**.
-- `canceled` or `workflow_unavailable`: the send stopped before it went out.
+- `sending_paused` or `sending_suspended`: check the **Reputation** tab.
+- `canceled`, `workflow_unavailable`, or an error such as `timeout`: the send stopped before it went out. More of these can appear.
 
-A lookup returns `404` for an email sent a few seconds ago (retry shortly), one older than 30 days, or an ID from another project.
+A lookup returns `404` for an email sent a few seconds ago, because its first status takes a few seconds to arrive. Retry shortly. It also returns `404` for an email older than 30 days, or an ID from another project.
+
+## Find an email by its idempotency key
+
+If the response to a send was lost, you don't have its message ID. Look the email up by the idempotency key you sent instead:
+
+```bash
+curl "https://us.posthog.com/api/messaging/emails/status/?idempotency_key=password-reset-8f14e45f" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
+```
+
+It returns the same fields as a lookup by ID, for the latest send with that key. Compare its `created_at` with when you sent: an earlier time means an earlier send with the same key. A `404` doesn't mean the email wasn't sent. To make sure it goes out once, send it again with the same key within 24 hours.
 
 ## An email didn't arrive
 
@@ -83,6 +94,15 @@ Work down the list:
 
 1. **Did the send return a message ID?** If not, its error `code` says why. See [retries and errors](/docs/workflows-next/transactional/retries-and-errors).
 2. **Is it in the Log?** If not, check that your key is from the right project.
-3. **Is it `queued`?** Transactional emails go out ahead of marketing, so this is usually short. If it lasts minutes, [contact support](https://app.posthog.com/#panel=support).
+3. **Is it `queued`?** Transactional emails go out ahead of marketing emails, so this is usually short. If it lasts minutes, [contact support](https://app.posthog.com/#panel=support).
 4. **Is it `failed` or `bounced`?** `reason` says why.
-5. **Is it `delivered`?** The mail server accepted it. Check the spam folder, and that your [domain's DNS records](/docs/workflows-next/domain) are still in place.
+5. **Is it `delivered`?** The mail server accepted it. Check the spam folder, and check that your [domain's DNS records](/docs/workflows-next/domain#the-dns-records) are still in place.
+
+Open the send in the [**Log**](/docs/workflows-next/transactional#see-each-send) to see each step, and what the person did around it:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_light_228eeaada5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_recipient_activity_dark_93b1987f6e.png"
+  alt="One send in the Log, with its steps from sent to clicked and what the person did around it"
+  classes="rounded"
+/>

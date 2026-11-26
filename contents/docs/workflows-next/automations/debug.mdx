@@ -4,36 +4,43 @@ sidebar: Docs
 showTitle: true
 ---
 
-Test each step before anyone gets an email, then follow every run once it's live.
+Test each step before anyone gets an email. After the automation is live, follow every run.
 
 ## Test a step
 
-Open **Test**, pick a sample person or event, and run a step. PostHog shows what it would do, such as the email it would send, without sending it to anyone. Send a test email to your own address to check it in a real inbox.
+1. Open the **Test** tab, and click **Start testing**.
+2. Pick a sample event, or for an email step, a sample person. The panel shows the data that the step can use.
+3. Click **Run test**. The result shows whether the step succeeded, was skipped, or failed, and its logs.
+4. Click **Go to next step** to test the next one.
+
+By default, **Make real HTTP requests** is off. Messages and other outside calls don't happen. PostHog logs what they would do instead. To check an email in a real inbox, turn it on for the email step, and enter your own address. PostHog asks you to confirm before it sends.
 
 <!-- shot: automation-test -->
 
 ## Follow every run
 
-**Invocations** lists every run: who it was for, its status, and when it started. Filter by status, such as **Running** or failed. Open a run to see each step it took, and its logs, such as why a step was skipped.
+The **Invocations** tab lists every run: its status, the person and event, when it started, and any error. Filter by status: **Running**, **Succeeded**, **Failed**, or **Canceled**. Open a run to see each step that it took, and its logs, such as why a step was skipped.
 
 <!-- shot: automation-invocations -->
 
-Each email a run sent also shows on its own, with its timeline and what the person did around it. See [metrics](/docs/workflows-next/metrics#what-each-person-did).
+A batch automation groups its runs by batch run, and shows the next scheduled runs.
+
+To see each email a run sent, with what the person did around it, see [what each person did](/docs/workflows-next/metrics#what-each-person-did).
 
 ## Stop runs
 
-On **Invocations**:
+On the **Invocations** tab:
 
-- **Cancel** stops one run before its next step.
-- **Cancel in-flight runs** stops every run at once.
-- **Stop** on a batch run stops it entering more people, and cancels the runs it started.
+- **Cancel** on a running run stops it before its next step.
+- **Cancel in-flight runs** stops every unfinished run of the automation, including runs that wait in a delay.
+- **Stop** on a batch run stops more of the audience from entering, and cancels the runs that it started.
 
-A run that's mid-step finishes that step first. Emails already sent can't be recalled. A cancelled run keeps its logs, and you can **Rerun** it later.
+A run stops before its next step, so a step that is running finishes first. Steps that already ran, such as sent emails, are not undone.
 
-## Common problems
+## Rerun runs
 
-- **Nobody entered.** Check the trigger's filters, and that the event arrives: the trigger shows how many matched in the last 7 days.
-- **An email didn't send.** Open the run's logs. It might be the person's opt-out, a suppressed address, the [frequency cap](/docs/workflows-next/sending-rules#frequency-cap), or a missing email address.
-- **A variable is empty.** The person doesn't have the property, or the step that sets it ran after they passed. Add a default, such as `{{ person.properties.first_name | default: 'there' }}`.
-- **It won't turn on.** PostHog checks every step first, and shows which one needs fixing.
-- **No sender in the email step.** Set up your domain first. See [set up your domain](/docs/workflows-next/domain).
+A canceled or finished run keeps its logs. To run it again, click **Rerun**. To rerun many at once, select them and click **Rerun selected**, or click **Re-run…** to pick runs by date. A rerun uses the run's original data and the automation's current settings.
+
+## Something else wrong?
+
+For problems such as nobody entering, an email that didn't send, or an automation that won't turn on, see [troubleshooting](/docs/workflows-next/resources/troubleshooting).
