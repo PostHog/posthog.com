@@ -50,7 +50,9 @@ These Hatchet tables support incremental and append sync:
 
 The first incremental or append sync of a table reads only the last 30 days.
 
-Each later sync reads again the rows created in an overlap window before the newest synced value. The overlap is 1 day for most tables and 5 minutes for `logs`. Thus a sync gets changes to rows created in that window, such as a run that finished after the last sync. A sync does not get changes to older rows. For example, if a run finishes days after newer runs started, the warehouse keeps its old status. To get these changes, use full refresh. A resync does not help with rows older than 30 days, because it reads only the last 30 days again.
+Each later sync reads again the rows created in an overlap window before the newest synced value. The overlap is 1 day for most tables and 5 minutes for `logs`. Thus a sync gets changes to rows created in that window, such as a run that finished after the last sync. A sync does not get changes to older rows. For example, if a run finishes days after newer runs started, the warehouse keeps its old status. To get these changes, use full refresh.
+
+> **Caution:** Do not resync an incremental or append Hatchet table to get changes to older rows. A resync deletes the table and imports only the last 30 days again. This removes all rows older than 30 days from the warehouse.
 
 In incremental sync, PostHog merges the overlap rows on the primary key, so the overlap does not add duplicate rows. In append sync, PostHog adds the overlap rows again as duplicates. To prevent duplicate rows, use incremental sync, or deduplicate on the primary key in your queries.
 
