@@ -52,14 +52,10 @@ const PricingPhilosophy = (): JSX.Element => {
                     We don't charge extra to store your events or to query them.{' '}
                     <Link href="/docs/billing/what-you-pay-for-per-event" state={{ newWindow: true }}>
                         Here's what you actually get when you pay for an event
-                    </Link>
-                    ,{' '}
+                    </Link>{' '}
+                    or{' '}
                     <Link href="/docs/billing/what-you-pay-for-per-recording" state={{ newWindow: true }}>
                         a session recording
-                    </Link>
-                    , or{' '}
-                    <Link href="/docs/billing/what-you-pay-for-per-feature-flag" state={{ newWindow: true }}>
-                        a feature flag
                     </Link>
                     .
                 </li>

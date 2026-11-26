@@ -22,7 +22,7 @@ You pay per request, not per flag. A request is one call to our `/flags` endpoin
 
 A request that doesn't evaluate any active, billable flag isn't charged. The `$feature_flag_called` events your SDK sends for usage charts aren't flag requests either. [Cutting feature flag costs](/docs/feature-flags/cutting-costs#understanding-your-bill) explains what counts.
 
-[Local evaluation](/docs/feature-flags/local-evaluation) on your servers bills differently. Each time a server downloads your flag definitions, it counts as 10 requests, or as 1 request if nothing changed since the last download. The flag checks your server then makes in memory are free.
+[Local evaluation](/docs/feature-flags/local-evaluation) on your servers bills differently. Each time a server downloads your flag definitions, it counts as 10 requests – or as 1 request if nothing changed since the last download and your [SDK version sends ETags](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs). The flag checks your server then makes in memory are free.
 
 > Asking [PostHog AI to create or change a flag](/docs/feature-flags/manage-flags-ai) spends [AI credits](/docs/posthog-ai/pricing). [Approvals](/docs/settings/approvals) for flag changes are part of the Scale and Enterprise [platform packages](/pricing).
 
@@ -172,7 +172,7 @@ No. They're the events that build each flag's usage charts, and they don't add t
 
 ### Is local evaluation cheaper?
 
-Often, for servers that check flags many times. Each server pays for its downloads of flag definitions, not for each check: 10 requests when the definitions changed and 1 when they didn't. One server at the default 30-second interval downloads about 86,400 times a month. More servers multiply that, so [share one cache](/docs/feature-flags/local-evaluation/distributed-environments) between them.
+Often, for servers that check flags many times. Each server pays for its downloads of flag definitions, not for each check: 10 requests when the definitions changed, and 1 when they didn't if your [SDK version sends ETags](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs) – older SDK versions pay 10 either way. One server at the default 30-second interval downloads about 86,400 times a month. More servers multiply that, so [share one cache](/docs/feature-flags/local-evaluation/distributed-environments) between them.
 
 ### Is it cheaper to build my own feature flags?
 
