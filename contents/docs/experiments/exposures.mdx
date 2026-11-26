@@ -138,6 +138,12 @@ PostHog counts one exposure per user per variant in experiment results. Even if 
 
 The SDKs also deduplicate on the sending side. In the browser, dedup persists across sessions via localStorage. In server-side SDKs, dedup is in-memory and resets on server restart, so a user may fire a new event after a deploy. As noted above, this doesn't affect experiment analysis.
 
+### Server-side exposure: the SDK or your code, not both
+
+By default, `posthog-node` sends `$feature_flag_called` when your code reads a flag, once per person, flag and value in each process. Don't also send your own exposure event for the same read.
+
+If your code wraps `getFeatureFlag()` in its own timeout and serves control when the timeout fires, the SDK request can still finish later and record the real variant. That person is counted in the test variant but saw control. In this case, set `sendFeatureFlagEvent: false` on the client (or `sendFeatureFlagEvents: false` on the read), and send the exposure event yourself only for a result that arrived in time and that you used. Send it as `$feature_flag_called` with `$feature_flag` and `$feature_flag_response`, or as a [custom exposure event](#custom-exposure-events) that carries `$feature/<flag-key>` and is set as the experiment's exposure criteria.
+
 ## Sample ratio mismatch detection
 
 Sample ratio mismatch (SRM) is an automatic check that compares your actual user distribution across variants against your configured split percentages. PostHog uses a chi-squared statistical test to detect when the observed distribution is significantly different from what's expected.
