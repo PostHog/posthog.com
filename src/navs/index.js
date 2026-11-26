@@ -3780,6 +3780,10 @@ export const docsMenu = {
                             url: '/docs/api/surveys',
                         },
                         {
+                            name: 'Transactional email',
+                            url: '/docs/api/messaging',
+                        },
+                        {
                             name: 'Users',
                             url: '/docs/api/users',
                         },
@@ -3788,84 +3792,13 @@ export const docsMenu = {
                             url: '/docs/api/web-analytics',
                         },
                         {
-                            name: 'Data model',
-                            url: 'https://posthog.com/docs/how-posthog-works/data-model',
-                            external: true,
-                        },
-                        {
-                            name: 'Workflows',
-                        },
-                        {
-                            name: 'Workflows',
+                            name: 'Workflows and broadcasts',
                             url: '/docs/api/hog-flows',
                         },
                         {
-                            name: 'Workflows (2)',
-                            url: '/docs/api/hog-flows-2',
-                        },
-                        {
-                            name: 'Workflows (3)',
-                            url: '/docs/api/hog-flows-3',
-                        },
-                        {
-                            name: 'Workflow sending rules',
-                            url: '/docs/api/workflow-sending-rules',
-                        },
-                        {
-                            name: 'Workflow email log',
-                            url: '/docs/api/workflow-email-log',
-                        },
-                        {
-                            name: 'Workflow imports',
-                            url: '/docs/api/workflow-imports',
-                        },
-                        {
-                            name: 'Workflow people imports',
-                            url: '/docs/api/workflow-people-imports',
-                        },
-                        {
-                            name: 'Broadcast audience suggestions',
-                            url: '/docs/api/broadcast-audience-suggestions',
-                        },
-                        {
-                            name: 'Messaging',
-                            url: '/docs/api/messaging',
-                        },
-                        {
-                            name: 'Message templates',
-                            url: '/docs/api/messaging-templates',
-                        },
-                        {
-                            name: 'Message categories',
-                            url: '/docs/api/messaging-categories',
-                        },
-                        {
-                            name: 'Message preferences',
-                            url: '/docs/api/messaging-preferences',
-                        },
-                        {
-                            name: 'Suppressions',
-                            url: '/docs/api/messaging-suppressions',
-                        },
-                        {
-                            name: 'Transactional email log',
-                            url: '/docs/api/transactional-email-log',
-                        },
-                        {
-                            name: 'Emails sent from code',
-                            url: '/docs/api/transactional-code-emails',
-                        },
-                        {
-                            name: 'Provider imports',
-                            url: '/docs/api/messaging-provider-imports',
-                        },
-                        {
-                            name: 'Push token imports',
-                            url: '/docs/api/push-token-imports',
-                        },
-                        {
-                            name: 'Supabase auth emails',
-                            url: '/docs/api/messaging-supabase-auth-emails',
+                            name: 'Data model',
+                            url: 'https://posthog.com/docs/how-posthog-works/data-model',
+                            external: true,
                         },
                     ],
                 },
