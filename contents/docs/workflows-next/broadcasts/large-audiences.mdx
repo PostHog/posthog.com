@@ -1,0 +1,44 @@
+---
+title: Large audiences and sending rate
+sidebar: Docs
+showTitle: true
+---
+
+Mailbox providers trust senders that grow steadily. So each project has a sending allowance, which grows as you send good email, and a broadcast can only reach an audience that fits it.
+
+## Your sending allowance
+
+| Tier | Emails per day | Largest audience |
+| --- | --- | --- |
+| 0 | 100 | 100 |
+| 1 | 1,000 | 1,000 |
+| 2 | 3,000 | 3,000 |
+| 3 | 10,000 | 10,000 |
+| 4 | 30,000 | 30,000 |
+| 5 | 100,000 | 100,000 |
+| 6 | 300,000 | 300,000 |
+| 7 | 1,000,000 | 1,000,000 |
+
+A new project starts at tier 0. Once a day, PostHog moves it up a tier if it held its tier for a few days, sent at least half its daily cap on 2 days, and kept bounces under 2% and spam complaints under 0.1%. A full climb takes about five weeks. The **Reputation** tab shows your tier. See [sending health](/docs/workflows-next/metrics#sending-health).
+
+The allowance refills over the day, not at midnight. Email over it waits in a queue and goes out as it refills. Nothing is dropped.
+
+## When the audience is too big
+
+If an audience is bigger than your tier allows, PostHog won't launch the broadcast, and shows your limit. You can:
+
+- **Narrow it:** add [filters](/docs/workflows-next/broadcasts/audiences).
+- **Slow it down:** limit the sending rate, below.
+- **Wait:** your tier grows as you send clean email.
+
+## Limit the sending rate
+
+On the **Schedule** step, turn on **Limit sending rate**, and set the most emails per minute or per hour. The broadcast spreads its sends out, and the rest wait their turn.
+
+A slow rate also lets a broadcast reach more people than your tier's largest audience: up to what that rate sends in 7 days, at most about 3.5 times your daily allowance. For example, at tier 3, 200 emails an hour can reach 33,600 people. When an audience is too big, PostHog suggests a rate that fits.
+
+You can't change the rate while a slowed broadcast is still sending.
+
+## Transactional email first
+
+Transactional emails count toward the allowance, but never wait for it, and go out ahead of a broadcast. A big broadcast never holds up a password reset.

@@ -8639,6 +8639,39 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Broadcasts',
+                },
+                {
+                    name: 'Audiences',
+                    url: '/docs/workflows-next/broadcasts/audiences',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                },
+                {
+                    name: 'Scheduling and the calendar',
+                    url: '/docs/workflows-next/broadcasts/scheduling',
+                    icon: 'IconCalendar',
+                    color: 'orange',
+                },
+                {
+                    name: 'Large audiences and sending rate',
+                    url: '/docs/workflows-next/broadcasts/large-audiences',
+                    icon: 'IconThrottle',
+                    color: 'purple',
+                },
+                {
+                    name: 'Push broadcasts',
+                    url: '/docs/workflows-next/broadcasts/push',
+                    icon: 'IconPhone',
+                    color: 'green',
+                },
+                {
+                    name: 'Test, send, and follow up',
+                    url: '/docs/workflows-next/broadcasts/test-and-send',
+                    icon: 'IconSend',
+                    color: 'red',
+                },
+                {
                     name: 'Channels',
                 },
                 {

@@ -1,0 +1,24 @@
+---
+title: Push broadcasts
+sidebar: Docs
+showTitle: true
+---
+
+A broadcast can send a push notification instead of an email. It shows on each person's phone, on the devices they registered with your app.
+
+## Before you start
+
+Set up a push channel for your app, and register devices with the PostHog SDK. See [push notifications](/docs/workflows/push-notifications).
+
+## Send one
+
+1. On the **Recipients** step, under **Send as**, pick **Push notification**.
+2. Pick the audience, the same as for email. See [audiences](/docs/workflows-next/broadcasts/audiences).
+3. On the **Content** step, pick the **Push channels**, and write the **Title** and the message.
+4. Send a test to your own phone, tap it, then launch.
+
+Each person gets the notification on every device they registered with those apps.
+
+## Results
+
+A sent push broadcast shows how its notifications did, the same as an email broadcast.
