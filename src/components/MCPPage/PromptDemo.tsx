@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { IconArrowRight } from '@posthog/icons'
 import { useReducedMotion } from 'framer-motion'
 import usePostHog from 'hooks/usePostHog'
@@ -6,7 +6,7 @@ import { cn } from '../../utils'
 import { ClaudeTerminal } from '../Home/DataStory/Query/AgentWindow'
 import { ANSWER_MS_PER_CHAR, SourceIcon, TOOL_RUN_MS, Trace, defineTrace } from '../Home/DataStory/Query/trace'
 import { useEventClock } from '../Home/DataStory/timeline'
-import { PromptFlow, flows } from './promptDemo.data'
+import { PromptFlow, flows as mcpFlows } from './promptDemo.data'
 
 const SUBMIT_AT = 400
 const FIRST_CALL_DELAY_MS = 700
@@ -46,9 +46,19 @@ const buildDemo = (flow: PromptFlow): Demo => {
     }
 }
 
-const demos = flows.map(buildDemo)
-
-const Run = ({ demo, next, onNext, onDone }: { demo: Demo; next: Demo; onNext: () => void; onDone?: () => void }) => {
+const Run = ({
+    demo,
+    next,
+    cwd,
+    onNext,
+    onDone,
+}: {
+    demo: Demo
+    next: Demo
+    cwd: string
+    onNext: () => void
+    onDone?: () => void
+}) => {
     const ref = useRef<HTMLDivElement>(null)
     const elapsed = useEventClock(ref, { ...demo.trace, loop: false })
     const answered = elapsed >= demo.trace.restingMs
@@ -62,14 +72,23 @@ const Run = ({ demo, next, onNext, onDone }: { demo: Demo; next: Demo; onNext: (
                 state={demo.trace.stateAt(elapsed)}
                 className="h-80 rounded @2xl/reader-content:h-full"
                 lightSize={10}
-                cwd="~/hogflix"
+                cwd={cwd}
                 suggestion={answered ? { prompt: next.prompt, onRun: onNext } : undefined}
             />
         </div>
     )
 }
 
-export default function PromptDemo(): JSX.Element {
+export default function PromptDemo({
+    flows = mcpFlows,
+    placement = 'mcp_page',
+    cwd = '~/hogflix',
+}: {
+    flows?: PromptFlow[]
+    placement?: string
+    cwd?: string
+}): JSX.Element {
+    const demos = useMemo(() => flows.map(buildDemo), [flows])
     const posthog = usePostHog()
     const [activeIndex, setActiveIndex] = useState(0)
     const [runId, setRunId] = useState(0)
@@ -96,7 +115,7 @@ export default function PromptDemo(): JSX.Element {
         if (trigger === 'list' && singleColumn) {
             terminalRef.current?.scrollIntoView({ block: 'nearest', behavior: shouldReduceMotion ? 'auto' : 'smooth' })
         }
-        posthog?.capture('ai_prompt_selected', { group: title, prompt, placement: 'mcp_page', trigger })
+        posthog?.capture('ai_prompt_selected', { group: title, prompt, placement, trigger })
     }
 
     const nextIndex = (activeIndex + 1) % demos.length
@@ -148,6 +167,7 @@ export default function PromptDemo(): JSX.Element {
                         key={runId}
                         demo={demos[activeIndex]}
                         next={demos[nextIndex]}
+                        cwd={cwd}
                         onNext={() => pick(nextIndex, 'terminal')}
                         onDone={picked ? undefined : () => play(nextIndex)}
                     />

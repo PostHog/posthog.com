@@ -36,9 +36,9 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Automate emails and messages from user behavior',
+        title: 'Workflows – Email from your code, broadcasts, and automations on your product data',
         description:
-            'Trigger emails, push notifications, Slack messages, and webhooks from live user behavior. Build automations in PostHog with 10K emails free monthly.',
+            'Send transactional email from your backend, broadcasts to the right people, and automations that start on what users do. All next to your product data, with 10K emails free monthly.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -115,15 +115,16 @@ export const workflows = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Automate workflows with product data',
-        description: '"Create an onboarding email series for trial users"',
+        title: 'Email and automations on your product data',
+        description: '"Email everyone who signed up but never uploaded a file"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>
                 <p>
-                    Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
-                    your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
-                    triggers, delays, audience splits, message sends, and PostHog actions.
+                    Workflows sends the messages your product needs. Transactional email goes out from your code,
+                    broadcasts go to the people your product data picks, and automations start when someone does
+                    something in your product. Every send lands next to the events, replays, and revenue you already
+                    have in PostHog, so you can see what people did next.
                 </p>
             </>
         ),
@@ -171,24 +172,24 @@ export const workflows = {
     useCases: {
         rows: [
             [
-                'Product Leads / Technical PMs',
-                'Consolidate Zapier or Customer.io into PostHog – activation, retention, and lifecycle flows on the same events you already track',
-            ],
-            [
-                'Product Marketers',
-                'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
+                'Product Engineers',
+                'Password resets, sign-in codes, and receipts from your backend, with each send next to what the person did after it',
             ],
             [
                 'Growth Engineers',
-                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
+                'Onboarding drips, upgrade nudges, and win-back emails that start on real user behavior',
             ],
             [
-                'Product Engineers',
-                'Event-triggered automations – Slack alerts, property updates, and follow-ups without a separate automation vendor',
+                'Product Marketers',
+                'Launch emails and newsletters to audiences picked from product data, with conversions and revenue per send',
+            ],
+            [
+                'Teams on Resend or Customer.io',
+                'Move templates, suppressions, and unsubscribes over, and drop a vendor that cannot see your product data',
             ],
             [
                 'Automation-minded teams',
-                'Zapier/n8n-style flows triggered by product events, with destinations and basic workflow logic in one place',
+                'Slack alerts, webhooks, and property updates triggered by product events, without a separate automation tool',
             ],
         ],
     },
@@ -203,14 +204,26 @@ export const workflows = {
         title: 'Install',
         headline: 'Install',
         description:
-            "Workflows is a no-code product – you can create and launch Workflows without installing any SDK. However, installing a PostHog SDK unlocks event-based triggers, letting you start Workflows when users perform specific actions in your app. These are the same SDKs used for Product Analytics – if you already have PostHog installed, you're good to go.",
+            "You can build broadcasts and automations without installing anything. A PostHog SDK lets your backend send transactional email, and lets automations start when people do something in your app. These are the same SDKs used for Product Analytics, so if you already have PostHog installed, you're good to go.",
         productSlug: 'workflows',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },
     questions: [
         {
+            question: 'How do I send a password reset email from my backend?',
+            url: '/docs/workflows/transactional-emails',
+        },
+        {
+            question: 'How do I send a newsletter or launch email?',
+            url: '/docs/workflows/broadcasts',
+        },
+        {
             question: 'How do I set up an email drip campaign?',
             url: '/docs/workflows/email-drip-campaign',
+        },
+        {
+            question: 'Do I need to warm up an IP address?',
+            url: '/docs/workflows/sending-reputation',
         },
         {
             question: 'How do I create emails with PostHog AI?',
@@ -219,14 +232,6 @@ export const workflows = {
         {
             question: 'How do I configure email, Slack, or other channels?',
             url: '/docs/workflows/configure-channels',
-        },
-        {
-            question: 'How do I run A/B tests inside workflows?',
-            url: '/tutorials/workflows-ab-testing',
-        },
-        {
-            question: 'How do teams use Workflows for customer journeys?',
-            url: '/tutorials/complete-workflows-guide',
         },
         {
             question: 'How do I manage opt-outs and suppressions?',
@@ -319,8 +324,8 @@ export const workflows = {
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
         // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
-        intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
-        mcpFeatures: ['workflows'],
+        intro: 'Ask PostHog AI to write emails, draft broadcasts, and set up automations from the triggers, conditions, and actions you describe.',
+        mcpFeatures: ['workflows', 'messaging'],
         skills: [
             'Generates email templates for your content library',
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
@@ -350,9 +355,22 @@ export const workflows = {
                 ],
             },
             {
-                title: 'Inspect templates',
-                tool: 'workflows-show-email-template',
-                prompts: ['Show me the current welcome email template'],
+                title: 'Draft broadcasts',
+                tool: 'broadcasts-create',
+                prompts: [
+                    'Draft a broadcast about our new feature for users who were active this month',
+                    'Turn last month’s newsletter into a broadcast for free-plan users',
+                ],
+            },
+            {
+                title: 'Check results',
+                tool: 'workflows-transactional-email-stats',
+                prompts: ['How many password reset emails bounced this week?'],
+            },
+            {
+                title: 'Move from another provider',
+                tool: 'provider-imports-create',
+                prompts: ['Import our templates, suppressions, and unsubscribes from Resend'],
             },
             {
                 title: 'Update templates',
