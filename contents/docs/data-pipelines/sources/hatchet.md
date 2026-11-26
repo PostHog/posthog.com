@@ -48,7 +48,11 @@ These Hatchet tables support incremental and append sync:
 | `task_events` | `workflow_run_created_at` (the parent workflow run's creation time) |
 | `task_timings` | `workflow_run_created_at` (the parent workflow run's creation time) |
 
-The first incremental sync of a table reads only the last 30 days. Each later sync reads again an overlap window before the last synced value, so it gets rows that changed after they were created. The overlap is 1 day for most tables and 5 minutes for `logs`. In incremental sync, PostHog merges these rows on the primary key, so the overlap does not add duplicate rows.
+The first incremental or append sync of a table reads only the last 30 days.
+
+Each later sync reads again the rows created in an overlap window before the newest synced value. The overlap is 1 day for most tables and 5 minutes for `logs`. Thus a sync gets changes to rows created in that window, such as a run that finished after the last sync. A sync does not get changes to older rows. For example, if a run finishes days after newer runs started, the warehouse keeps its old status. To get these changes, use full refresh or resync the table.
+
+In incremental sync, PostHog merges the overlap rows on the primary key, so the overlap does not add duplicate rows. In append sync, PostHog adds the overlap rows again as duplicates. To prevent duplicate rows, use incremental sync, or deduplicate on the primary key in your queries.
 
 All other Hatchet tables are full refresh. Each sync replaces the contents of the table.
 
