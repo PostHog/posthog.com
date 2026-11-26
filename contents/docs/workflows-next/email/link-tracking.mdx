@@ -1,0 +1,45 @@
+---
+title: Link tracking and UTM tags
+sidebar: Docs
+showTitle: true
+---
+
+PostHog counts opens and clicks by adding a tiny image to each email and sending its links through a redirect. You choose where that happens, and you can tag links so your web analytics know where visitors came from.
+
+## Opens and clicks
+
+Every email step and broadcast has **Track opens and link clicks**, on by default. Turn it off for emails that should never be tracked. With it off, PostHog still records deliveries, bounces, and unsubscribes, but not opens or clicks.
+
+Opens and clicks only become events when [engagement events](/docs/workflows-next/email/engagement-events) are turned on.
+
+## Leave one link alone
+
+Some links break when they go through a redirect, such as app deep links and universal links. Add `data-ph-no-track` to the link in a **Custom HTML** block:
+
+```html
+<a href="https://example.com/open-in-app" data-ph-no-track>Open the app</a>
+```
+
+The link keeps its address, and its clicks aren't counted.
+
+## Sensitive emails
+
+Emails with sign-in codes or reset links shouldn't send their links through a redirect at all. Mark them as sensitive. See [sensitive data and tracking](/docs/workflows-next/transactional/sensitive-data).
+
+## Tracking consent
+
+Some countries need a person's consent before you track their opens and clicks. In [**Settings** > **Workflows** > **Email tracking consent**](https://app.posthog.com/settings/environment-workflows#workflows-email-tracking-consent), pick:
+
+| Mode | What it does |
+| --- | --- |
+| **No consent enforcement** | Track by each email's setting. The default. |
+| **Opt-out** | Track, except people who said no. |
+| **Opt-in** | Track only people who said yes. |
+
+People change their choice on the preferences page. It only applies to marketing email, and an email with tracking off is never tracked.
+
+## UTM tags
+
+Turn on **Add UTM tags to links**, and PostHog adds `utm_source`, `utm_medium`, `utm_campaign`, and `utm_content` to every link, so [web analytics](/docs/web-analytics) shows which email sent each visitor. Leave a field empty to use the value shown, such as the email's name.
+
+Click **Save as team default**, and new emails start with the same values.

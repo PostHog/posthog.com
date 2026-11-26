@@ -37,7 +37,7 @@ Drag a block by its handle to move it, or use its menu to duplicate or delete it
 
 ## Personalize it
 
-Click `{x}` to add a variable, such as the person's first name. Variables use [Liquid](https://shopify.github.io/liquid/), so add a default for people who don't have the property:
+Click `{x}` to add a variable, such as the person's first name. Variables use [Liquid](/docs/workflows-next/email/liquid), so add a default for people who don't have the property:
 
 ```liquid
 {{ person.properties.first_name | default: 'there' }}

@@ -1,0 +1,31 @@
+---
+title: Unsubscribe links
+sidebar: Docs
+showTitle: true
+---
+
+Every marketing email needs a way out. It's the law in most places, and someone who can't find the link clicks "Report spam" instead, which hurts your [deliverability](/docs/workflows-next/channels/deliverability).
+
+## Add the link
+
+In the [email editor](/docs/workflows-next/email-editor), add the **Unsubscribe link** block, usually in the footer. Or use the variable anywhere:
+
+```liquid
+<a href="{{ unsubscribe_url }}">Unsubscribe or change what you get</a>
+```
+
+`{{ unsubscribe_url }}` opens your preferences page, where the person picks which kinds of email to stop, or stops them all.
+
+## One-click unsubscribe
+
+Gmail, Yahoo, and other mailbox providers show their own **Unsubscribe** button next to your sender name. `{{ unsubscribe_url_one_click }}` powers it: one click, and the person is unsubscribed from all marketing email, with no page to load. Large senders need it to reach Gmail and Yahoo inboxes.
+
+## What happens next
+
+- The person is opted out of that [message category](/docs/workflows-next/sending-rules#opt-outs), or of everything, and PostHog skips them from then on.
+- PostHog records a `$workflows_email_unsubscribed` event, with the `category` they left and the `source`: `one_click` or `preferences_page`.
+- The unsubscribe shows on the broadcast or automation's metrics.
+
+## Transactional emails
+
+Transactional emails, such as receipts and password resets, don't need an unsubscribe link, because people need them. They skip opt-outs, so never use them for marketing.

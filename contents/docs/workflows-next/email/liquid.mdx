@@ -1,0 +1,70 @@
+---
+title: Liquid and variables
+sidebar: Docs
+showTitle: true
+---
+
+Every email can use [Liquid](https://shopify.github.io/liquid/) to fill in names, plans, links, and anything else you know about the person. In the [email editor](/docs/workflows-next/email-editor), click `{x}` to pick one, or type it.
+
+## What you can use
+
+| Variable | What it holds | Where |
+| --- | --- | --- |
+| `{{ person.properties.first_name }}` | Any [person property](/docs/data/persons) | Broadcasts and automations |
+| `{{ event.properties.plan }}` | A property of the event that started the automation | Automations with an event trigger |
+| `{{ variables.reset_link }}` | Values your code sends, or values earlier steps saved | Transactional emails, and automations |
+| `{{ unsubscribe_url }}` | The person's unsubscribe link | Every marketing email. See [unsubscribe links](/docs/workflows-next/email/unsubscribe). |
+
+A [transactional email](/docs/workflows-next/transactional/templates#variables) can't read person properties. Your code sends everything it shows.
+
+## Add a default
+
+A property can be missing for some people. Add a default, in single quotes:
+
+```liquid
+Hi {{ person.properties.first_name | default: 'there' }},
+```
+
+Use single quotes. Double quotes break the email when it saves.
+
+## Properties that start with `$`
+
+Use brackets and single quotes:
+
+```liquid
+{{ person.properties['$email'] }}
+```
+
+`{{ person.properties.$email }}` fails, and the email doesn't send.
+
+## Show something to only some people
+
+Wrap it in an `if`:
+
+```liquid
+{% if person.properties.plan == 'pro' %}
+  Thanks for being on Pro.
+{% endif %}
+```
+
+In the email editor, you can do the same for a whole block: open **Who sees it** and pick **Show only when…**.
+
+## Filters
+
+Liquid filters change a value before it shows, such as `upcase`, `capitalize`, `date`, and `truncate`:
+
+```liquid
+Your trial ends on {{ person.properties.trial_ends_at | date: '%B %-d' }}.
+```
+
+See the [Liquid docs](https://shopify.github.io/liquid/filters/abs/) for the full list.
+
+## When it goes wrong
+
+| Error | Fix |
+| --- | --- |
+| `TokenizationError: unexpected character` | Use single quotes inside `{{ }}`, not double quotes. |
+| `expected "\|" before filter` | A property starts with `$`. Use `person.properties['$email']`. |
+| A blank where a name should be | The person doesn't have the property. Add a `default`. |
+
+If Liquid doesn't compile, the email doesn't send. Send yourself a test first, and **Preview** it as a real person.

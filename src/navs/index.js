@@ -8761,6 +8761,39 @@ export const docsMenu = {
                     icon: 'IconMessage',
                     color: 'orange',
                 },
+                {
+                    name: 'Email',
+                },
+                {
+                    name: 'Liquid and variables',
+                    url: '/docs/workflows-next/email/liquid',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Unsubscribe links',
+                    url: '/docs/workflows-next/email/unsubscribe',
+                    icon: 'IconLeave',
+                    color: 'red',
+                },
+                {
+                    name: 'Link tracking and UTM tags',
+                    url: '/docs/workflows-next/email/link-tracking',
+                    icon: 'IconCursorClick',
+                    color: 'blue',
+                },
+                {
+                    name: 'Template library',
+                    url: '/docs/workflows-next/email/library',
+                    icon: 'IconFolder',
+                    color: 'orange',
+                },
+                {
+                    name: 'Engagement events',
+                    url: '/docs/workflows-next/email/engagement-events',
+                    icon: 'IconTrends',
+                    color: 'green',
+                },
             ],
         },
         {
