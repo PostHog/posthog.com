@@ -1,0 +1,118 @@
+---
+title: Removing state-dependent requests
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+A state-dependent request is an API request whose project or organization comes from state PostHog stores about the user, such as the project or organization they last opened in the app, rather than from the request itself. When the user switches projects or organizations in the app, the same call can read from or write to a different project or organization from one request to the next.
+
+We're removing two kinds of state-dependent requests on **April 30, 2027**:
+
+- API paths that use `@current` in place of a project, environment, or organization ID
+- The old billing API at `/api/billing/...`
+
+Change these calls to put the project or organization ID in the path before that date. An ID in the path always refers to the same project or organization.
+
+Other routes that don't have an ID in the path will follow. This page will list them before they change.
+
+## Finding your IDs
+
+- **Project ID:** open [project settings](https://app.posthog.com/settings/project). The ID is also in the URL of any page in the app, after `/project/`.
+- **Organization ID:** open [organization settings](https://app.posthog.com/settings/organization-details).
+- **From the API:** `GET /api/projects/` lists the projects your key can access, and `GET /api/organizations/` lists the organizations, with their IDs.
+
+## `@current` in API paths
+
+`@current` resolves to the project or organization that the key's user last opened in PostHog. These paths are affected:
+
+- `/api/projects/@current/...`
+- `/api/environments/@current/...`
+- `/api/organizations/@current/...`
+
+`/api/personal_api_keys/@current/` is not affected, because it refers to the key that signs the request.
+
+Replace `@current` with the project or organization ID:
+
+```diff
+- GET /api/projects/@current/feature_flags/
++ GET /api/projects/12345/feature_flags/
+```
+
+## The old billing API
+
+The billing API at `/api/billing/...` takes the organization from the user's current project. Use the organization billing API at `/api/organizations/:organization_id/billing/...` instead.
+
+| Old request | New request |
+| --- | --- |
+| `GET /api/billing/` | `GET /api/organizations/:organization_id/billing/` |
+| `PATCH /api/billing/` (billing limits) | `PATCH /api/organizations/:organization_id/billing/` |
+| `POST /api/billing/activate/` | `POST /api/organizations/:organization_id/billing/activate/` |
+| `POST /api/billing/activate/authorize/` | `POST /api/organizations/:organization_id/billing/activate/authorize/` |
+| `POST /api/billing/activate/authorize/status/` | `POST /api/organizations/:organization_id/billing/activate/authorize/status/` |
+| `POST /api/billing/deactivate/` | `POST /api/organizations/:organization_id/billing/deactivate/` |
+| `GET /api/billing/portal/` | `GET /api/organizations/:organization_id/billing/portal/` |
+| `GET /api/billing/get_invoices/` | `GET /api/organizations/:organization_id/billing/get_invoices/` |
+| `GET /api/billing/credits/overview/` | `GET /api/organizations/:organization_id/billing/credits/overview/` |
+| `POST /api/billing/credits/purchase/` | `POST /api/organizations/:organization_id/billing/credits/purchase/` |
+| `GET /api/billing/coupons/overview/` | `GET /api/organizations/:organization_id/billing/coupons/overview/` |
+| `POST /api/billing/coupons/claim/` | `POST /api/organizations/:organization_id/billing/coupons/claim/` |
+| `POST /api/billing/trials/activate/` | `POST /api/organizations/:organization_id/billing/trials/activate/` |
+| `POST /api/billing/trials/cancel/` | `POST /api/organizations/:organization_id/billing/trials/cancel/` |
+| `POST /api/billing/subscription/switch-plan/` | `POST /api/organizations/:organization_id/billing/subscription/switch-plan/` |
+| `PATCH /api/billing/license/` | `PATCH /api/organizations/:organization_id/billing/license/` |
+| `POST /api/billing/startups/apply/` | `POST /api/organizations/:organization_id/billing/startups/apply/` |
+| `GET /api/billing/period/` | `GET /api/organizations/:organization_id/billing/period/` |
+
+### Usage and spend
+
+Usage and spend move to routes with different names:
+
+| Old request | New request |
+| --- | --- |
+| `GET /api/billing/usage/` | `GET /api/organizations/:organization_id/billing/usage/timeseries/` |
+| `GET /api/billing/spend/` | `GET /api/organizations/:organization_id/billing/spend/timeseries/` |
+| `GET /api/billing/usage/export/` | `GET /api/organizations/:organization_id/billing/usage/export/` |
+| `GET /api/billing/spend/export/` | `GET /api/organizations/:organization_id/billing/spend/export/` |
+| `GET /api/billing/usage/team_options/` | `GET /api/organizations/:organization_id/billing/projects/` |
+
+These routes return the organization billing API's response shapes, which differ from the old ones. Check the fields you read against the [billing API reference](/docs/api/billing).
+
+### If you only know the project
+
+To get the billing period when you have a project ID but not the organization ID, use `GET /api/projects/:project_id/billing/period/`.
+
+## How to find calls that still need to change
+
+Every response to a path with `@current` includes these headers:
+
+```http
+Deprecation: @1795564800
+Sunset: Fri, 30 Apr 2027 23:59:59 GMT
+Link: </api/projects/12345/feature_flags/>; rel="successor-version", <https://posthog.com/docs/api/state-dependent-requests>; rel="deprecation"
+```
+
+- `Deprecation` is the date the path was deprecated, in Unix seconds.
+- `Sunset` is the date after which the path stops resolving.
+- The `successor-version` link is the same request with the ID that `@current` resolved to. It's only included in successful responses.
+
+Responses from `/api/billing/...` carry the same headers. Their `successor-version` link names the organization the request used:
+
+```http
+Link: </api/organizations/01234567-89ab-cdef-0123-456789abcdef/billing/>; rel="successor-version", <https://posthog.com/docs/api/state-dependent-requests>; rel="deprecation"
+```
+
+Log these headers, or search your code for `@current` and `/api/billing/`, to find the calls to change.
+
+## What happens after April 30, 2027
+
+A request that uses `@current` and doesn't identify its project in another way gets an error. The error names the ID to use instead.
+
+The `/api/billing/...` routes stop working. Use the `/api/organizations/:organization_id/billing/...` routes instead.
+
+<CalloutBox icon="IconInfo" title="Requests that already identify their project" type="fyi">
+
+Requests authenticated with a [project secret API key](/docs/api/project-secret-api-keys) already identify their project, so they keep working with `@current`. LLM prompt requests from the PostHog SDKs that include the project token keep working too.
+
+</CalloutBox>

@@ -7900,6 +7900,11 @@
             "source": "/docs/ai-observability/playground:ext(\\.md)?",
             "destination": "/docs/experiments/playground:ext?",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/api/current-alias-deprecation:ext(\\.md)?",
+            "destination": "/docs/api/state-dependent-requests:ext?",
+            "statusCode": 301
         }
     ]
 }
