@@ -9,9 +9,9 @@ availability:
 sourceId: Raygun
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Raygun connector syncs applications, error groups, deployments, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -26,12 +26,14 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 Enter a Raygun [personal access token](https://raygun.com/documentation/product-guides/apis/personal-access-tokens/) to pull your Raygun crash reporting and real user monitoring data.
 
 Grant the token these read scopes for the tables you want to sync:
+
 - `applications:read` - Applications
 - `cr.errors:read` - Error groups
 - `deployments:read` - Deployments
 - `customers:read` - Customers
 - `rum.sessions:read` - Sessions
 - `rum.pages:read` - Pages
+- `teams:read` - Teams
 
 You'll be asked for:
 
