@@ -162,19 +162,21 @@ const CHAIN_VALUE = /^[\w./-]{1,90}\.[0-9a-z]{1,7}$/
 // would end a link early, and an encoded `@` could put an email address in the log.
 const CHAIN_PAGE = /^[\w./-]{1,90}$/
 const CHAIN_FETCH_TIMEOUT_MS = 3000
-// A /docs link in Markdown, absolute or root-relative, with its query and fragment. Links to the same page
-// (`#heading`) and to other hosts do not match.
-const DOCS_LINK = /\]\((https:\/\/posthog\.com)?(\/docs(?:\/[^)\s?#]*)?)(\?[^)\s#]*)?(#[^)\s]*)?\)/g
+// A fenced code block, which the rewrite leaves as written so code samples stay intact, or a /docs link in Markdown,
+// absolute or root-relative, with its query and fragment. Links to the same page (`#heading`) and to other hosts do
+// not match.
+const CODE_FENCE_OR_DOCS_LINK =
+    /^(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1[^\n]*$|\]\((https:\/\/posthog\.com)?(\/docs(?:\/[^)\s?#]*)?)(\?[^)\s#]*)?(#[^)\s]*)?\)/gm
 // The only agents that get tagged links: Claude and ChatGPT when they fetch a page for a person. Search engines
-// and every other crawler, ClaudeBot and GPTBot included, never see a tagged link, so they never find a second URL
-// for a page.
+// and every other crawler, ClaudeBot and GPTBot included, never see a tagged link. A tagged URL that reaches anyone
+// else, through a citation or a pasted link, redirects to the clean URL, so no one finds a second URL for a page.
 const CHAIN_AGENTS_REGEX = /\b(?:Claude-User|ChatGPT-User)\b/i
 
 // Vercel typechecks this file with tsconfig.json, whose `lib` has no ES core library and which has no
 // @types/node. Without these two declarations every build prints type errors for it.
 declare const process: { env: { [name: string]: string | undefined } }
 
-type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url' | 'mcp_client'
+type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url' | 'mcp_client' | 'chain_redirect'
 
 interface NegotiationResult {
     response: Response | undefined
@@ -189,7 +191,7 @@ interface NegotiationResult {
 }
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
-    let result = await negotiate(request)
+    let result = redirectTaggedUrl(request) || (await negotiate(request))
     // Written out in full, like MIDDLEWARE_LOG_ENABLED below. The tags exist only for the log, so without it they
     // would change responses and record nothing.
     if (process.env.MIDDLEWARE_CHAIN_LINKS === 'true' && process.env.MIDDLEWARE_LOG_ENABLED === 'true') {
@@ -254,6 +256,7 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
 async function chainLinks(request: Request, result: NegotiationResult): Promise<NegotiationResult> {
     // The MCP hint is not Markdown, and rewriting it would turn the SSE client's 405 into a 200.
     if (request.headers.has(SUBREQUEST_HEADER) || result.negotiation === 'mcp_client') return result
+    if (request.method !== 'GET') return result
     const url = new URL(request.url)
     const userAgent = request.headers.get('user-agent') || ''
     if (!LOGGED_PATHS.test(url.pathname) || !CHAIN_AGENTS_REGEX.test(userAgent)) return result
@@ -285,10 +288,8 @@ async function chainLinks(request: Request, result: NegotiationResult): Promise<
         const text = await markdown.text()
         const chainFetchMs = elapsed()
         const chainId = `${page}.${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`
-        const body = text.replace(
-            DOCS_LINK,
-            (_, host = '', path, query = '', fragment = '') =>
-                `](${host}${path}${query ? `${query}&` : '?'}${CHAIN_PARAM}=${chainId}${fragment})`
+        const body = text.replace(CODE_FENCE_OR_DOCS_LINK, (match, fence, host = '', path, query = '', fragment = '') =>
+            fence ? match : `](${host}${path}${query ? `${query}&` : '?'}${CHAIN_PARAM}=${chainId}${fragment})`
         )
         const response = new Response(body, {
             status: 200,
@@ -306,6 +307,22 @@ async function chainLinks(request: Request, result: NegotiationResult): Promise<
         const chainError = (error as { name?: string } | null)?.name || 'error'
         return { ...result, response: undefined, chainFetchMs: elapsed(), chainError }
     }
+}
+
+// Anyone but the agents that get tagged links is sent to the URL without `doc_ctx`: a search engine that finds a
+// cited or pasted link indexes the page once, and a person lands on the URL they would have shared. This runs
+// whether or not chaining is on, because tagged URLs keep circulating after the experiment stops.
+function redirectTaggedUrl(request: Request): NegotiationResult | undefined {
+    if (request.method !== 'GET' && request.method !== 'HEAD') return undefined
+    const url = new URL(request.url)
+    if (!url.searchParams.has(CHAIN_PARAM) || !LOGGED_PATHS.test(url.pathname)) return undefined
+    if (CHAIN_AGENTS_REGEX.test(request.headers.get('user-agent') || '')) return undefined
+    url.searchParams.delete(CHAIN_PARAM)
+    const response = new Response(null, {
+        status: 308,
+        headers: { location: url.toString(), 'cache-control': 'private, no-store' },
+    })
+    return { response, negotiation: 'chain_redirect' }
 }
 
 function chainParent(url: URL): string | undefined {
@@ -356,8 +373,9 @@ function logRequest(request: Request, result: NegotiationResult): void {
     )
 }
 
-function servedFormat(result: NegotiationResult): 'html' | 'markdown' | 'mcp_error' {
+function servedFormat(result: NegotiationResult): 'html' | 'markdown' | 'mcp_error' | 'redirect' {
     if (result.negotiation === 'mcp_client') return 'mcp_error'
+    if (result.negotiation === 'chain_redirect') return 'redirect'
     return result.response || result.negotiation === 'markdown_url' ? 'markdown' : 'html'
 }
 

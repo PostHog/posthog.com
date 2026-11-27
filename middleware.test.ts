@@ -305,6 +305,9 @@ const linkedMarkdown = [
     '[Events](https://posthog.com/docs/data/events.md) and [actions](/docs/data/actions.md#matching).',
     '[Funnels](https://posthog.com/docs/product-analytics/funnels.md?tab=web)',
     '[Below](#insights), [the blog](https://posthog.com/blog/post.md), [GitHub](https://github.com/PostHog/posthog).',
+    '```md',
+    '[Events](/docs/data/events.md)',
+    '```',
 ].join('\n')
 
 // Answers every fetch with `linkedMarkdown`, as Vercel serves a `.md` file, and collects the logged lines.
@@ -368,7 +371,7 @@ test('ties a request for a linked page to the response that linked it', async (t
     )
 })
 
-test('adds no doc_ctx when either flag is off, for other agents and crawlers, or for MCP clients', async (t) => {
+test('adds no doc_ctx when either flag is off or for anyone else, and sends anyone else to the clean URL', async (t) => {
     const { fetch, lines } = mockLinkedMarkdownAndLog(t)
     enableChaining(t)
     const logOff = await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
@@ -394,11 +397,20 @@ test('adds no doc_ctx when either flag is off, for other agents and crawlers, or
     }
     const script = await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
     assert.equal(script, undefined)
-    // A tagged URL can travel past the agent it was made for, so a request that carries one is logged but not tagged.
-    const forwarded = await middleware(
+    // A tagged URL can travel past the agent it was made for. Anyone else is logged and sent to the clean URL.
+    const pasted = await middleware(
         new Request(`${page}.md?doc_ctx=docs.abc`, { headers: { 'user-agent': 'curl/8.0' } })
     )
-    assert.equal(forwarded, undefined)
+    assert.equal(pasted?.status, 308)
+    assert.equal(pasted?.headers.get('location'), `${page}.md`)
+    const indexed = await middleware(
+        new Request(`${page}?utm_source=example&doc_ctx=docs.abc`, { headers: { 'user-agent': 'Googlebot/2.1' } })
+    )
+    assert.equal(indexed?.headers.get('location'), `${page}?utm_source=example`)
+    const head = await middleware(
+        new Request(`${page}.md`, { method: 'HEAD', headers: { 'user-agent': 'Claude-User' } })
+    )
+    assert.equal(head, undefined)
     const mcpClient = await middleware(
         new Request(page, { headers: { 'user-agent': 'Claude-User', accept: 'text/event-stream' } })
     )
@@ -411,8 +423,14 @@ test('adds no doc_ctx when either flag is off, for other agents and crawlers, or
             ...Array(6).fill(['/docs/product-analytics', undefined, undefined]),
             ['/docs/product-analytics.md', undefined, undefined],
             ['/docs/product-analytics.md', undefined, 'docs.abc'],
+            ['/docs/product-analytics?utm_source=example', undefined, 'docs.abc'],
+            ['/docs/product-analytics.md', undefined, undefined],
             ['/docs/product-analytics', undefined, undefined],
         ]
+    )
+    assert.deepEqual(
+        lines.slice(7, 9).map((line) => [line.served_format, line.negotiation]),
+        Array(2).fill(['redirect', 'chain_redirect'])
     )
 })
 
