@@ -35,32 +35,32 @@ The access token is encrypted and never shown again after submission. To start a
 
 For each Intercom conversation:
 
-| Item                     | Details |
-| ------------------------ | ------- |
-| Metadata                 | subject, state, and priority (see mapping tables below). The subject is the subject of the first message, or the conversation title if there is none |
-| Tags                     | Intercom tags appear as Support tags. Names are normalized and truncated to 255 characters. Empty tags are dropped. Running the import again does not update tags on tickets that are already imported |
-| Full message thread      | the first message, replies, and notes. Notes and side conversations are imported as private notes |
-| Attachments              | images are embedded in the thread and other files are linked. See [limitations](#limitations) for size limits |
-| Customer identity        | contact name and email |
-| Original timestamps      | conversation and message creation times |
-| Intercom conversation ID | stored on the ticket and shown in the sidebar |
+| Item                     | Details                                                                                                                                                                                                                                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Metadata                 | subject, state, and priority (see mapping tables below). The subject is the subject of the first message, or the conversation title if there is none                                                                                                                                                    |
+| Tags                     | Intercom tags appear as Support tags. Names are normalized and truncated to 255 characters. Empty tags are dropped. Running the import again does not update tags on tickets that are already imported                                                                                                  |
+| Full message thread      | the first message, replies, and notes. Notes and side conversations are imported as private notes                                                                                                                                                                                                       |
+| Attachments              | images are embedded in the thread and other files are linked. See [limitations](#limitations) for size limits                                                                                                                                                                                           |
+| Customer identity        | primary contact name and email. When a conversation has multiple contacts, the import picks an outside contact (one that is not your team's own email address) as the ticket customer – preferring one who wrote a reply – and adds the remaining contacts as CC participants who receive email replies |
+| Original timestamps      | conversation and message creation times                                                                                                                                                                                                                                                                 |
+| Intercom conversation ID | stored on the ticket and shown in the sidebar                                                                                                                                                                                                                                                           |
 
 ### State mapping
 
 | Intercom | PostHog Support |
 | -------- | --------------- |
-| open | Open |
-| snoozed | On hold |
-| closed | Resolved |
+| open     | Open            |
+| snoozed  | On hold         |
+| closed   | Resolved        |
 
 ### Priority mapping
 
-| Intercom | PostHog Support |
-| -------- | --------------- |
-| none | No priority |
-| low | Low |
-| medium | Medium |
-| high, urgent | High |
+| Intercom     | PostHog Support |
+| ------------ | --------------- |
+| none         | No priority     |
+| low          | Low             |
+| medium       | Medium          |
+| high, urgent | High            |
 
 ### Inbox routing
 
