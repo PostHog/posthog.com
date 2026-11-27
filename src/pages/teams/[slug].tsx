@@ -763,8 +763,9 @@ export default function TeamPage(props: TeamPageProps) {
                         }`}
                     >
                         {/* Each card grows to fill its row, so a card that wraps onto a row of its own spans the
-                            row instead of leaving an empty space beside it. */}
-                        <div className="flex flex-wrap gap-4 [&>*]:grow [&>*]:basis-56">
+                            row instead of leaving an empty space beside it. content-start keeps the cards from
+                            stretching to the height of a taller team photo beside them. */}
+                        <div className="flex flex-wrap content-start gap-4 [&>*]:grow [&>*]:basis-56">
                             <Fieldset legend="Pineapple on pizza">
                                 <PineapplePieChart percentage={pineapplePercentage} />
                             </Fieldset>
