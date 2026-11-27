@@ -1,0 +1,88 @@
+---
+title: Use the Tracing API
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: documents GA SpansViewSet endpoints registered under /api/projects/:project_id/tracing/spans/. Excludes feature-flagged /tracing/views/ (tracing-saved-views), /tracing/retention_rules/ (tracing-settings-retention-rules), and /trace/:id/ai_events/ (tracing-ai-events). */}
+
+Use the Tracing API when you want scripts, CI checks, or custom dashboards to read span data unattended.
+
+This is a project-scoped REST API authenticated with a [personal API key](/docs/api/personal-api-keys) carrying the `tracing:read` scope. To *send* spans to PostHog, export OTLP to `/i/v1/traces` using an [OpenTelemetry client or PostHog SDK](/docs/distributed-tracing/installation), rather than calling this API.
+
+## Gather what you need
+
+1. **Send spans to PostHog.** Follow [Install tracing](/docs/distributed-tracing/installation).
+2. **Create a personal API key.** Grant the `tracing:read` scope in [Personal API keys](/docs/api/personal-api-keys).
+
+## The endpoints
+
+All endpoints sit under `/api/projects/:project_id/tracing/spans/`.
+
+| Method and path | Purpose | Key defaults and limits |
+| --- | --- | --- |
+| `POST /query/` | Query traces or flat spans with filters | `limit` 1 to 1,000 (default 100), cursor pagination via `after` (timestamp sort) or `offset` (duration sort) |
+| `POST /trace/:trace_id/` | Fetch one trace's summary or spans by hex `trace_id` | Up to 2,000 spans per page via `offset`. Supports `excludeAttributes` |
+| `POST /count/` | Return matching span `count` and `traceCount` | Accepts `dateRange`, `serviceNames`, and `filterGroup` |
+| `POST /aggregate/` | Aggregate spans by service and operation | Default 100 rows, max 5,000 rows per period, supports `compareFilter` |
+| `POST /tree/` | Aggregate span call tree for an operation | Accepts `spanName`, `serviceNames`, `dateRange`, and `compareFilter` |
+| `POST /attribute-breakdown/` | Group spans by one span or resource attribute | Ordered by `count` or `error_count` DESC, max 5,000 rows |
+| `POST /sparkline/` | Span counts over time | Accepts `dateRange`, `serviceNames`, and `filterGroup` |
+| `POST /duration-histogram/` | Span duration histogram buckets | Accepts `dateRange`, `serviceNames`, and `filterGroup` |
+| `POST /latency-heatmap/` | Latency distribution over time | Accepts `dateRange`, `serviceNames`, and `filterGroup` |
+| `POST /latency_percentiles/` | Latency percentiles over time | Accepts `dateRange`, `serviceNames`, and `filterGroup` |
+| `POST /service_health/` | Score services against a baseline period | Scans up to 1,000 busiest services (`SERVICE_SCAN_LIMIT`) |
+| `GET /service-names/` | List distinct `service_name` values | Optional `search`, `date_from`, and `date_to` query params |
+| `GET /attributes/` | List span or resource attribute keys | Optional `attribute_type`, `search`, and `search_values=true` (requires at least 4 characters) |
+| `GET /values/` | List observed values for an attribute `key` | `key` query param is required |
+| `GET /has_spans/` | Check whether the project has ingested any spans | Returns `{ "hasSpans": boolean }` |
+
+## Run a span query
+
+Pass query parameters inside a `query` object on `POST /api/projects/:project_id/tracing/spans/query/`:
+
+```bash
+curl -X POST "<ph_client_api_host>/api/projects/<project_id>/tracing/spans/query/" \
+  -H "Authorization: Bearer <ph_personal_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": {
+      "dateRange": { "date_from": "-1h" },
+      "serviceNames": ["checkout-api"],
+      "flatSpans": true,
+      "filterGroup": [
+        { "key": "status_code", "type": "span", "operator": "exact", "value": "Error" },
+        { "key": "duration", "type": "span", "operator": "gt", "value": "1000" }
+      ],
+      "limit": 50
+    }
+  }'
+```
+
+Key options on `/query/`:
+
+- **`rootSpans`.** Defaults to `true` (matches traces by their root span, one row per trace). Set `false` to match traces where any child span fits your filters.
+- **`flatSpans`.** Defaults to `false`. Set `true` to return matching spans directly (root and child) without collapsing to traces.
+- **`excludeAttributes`.** Set `true` to return empty attribute maps when you only need timing and structure. This skips multi-KB fields like `db.statement`.
+- **`orderBy` and `orderDirection`.** Sort by `timestamp` (default, `DESC`) or `duration` (`DESC` or `ASC`).
+
+> **Filter durations are in milliseconds.** Pass `"1000"` for a 1-second filter threshold. Returned spans report `duration_nano` in nanoseconds.
+
+## Pick API or MCP
+
+Both surfaces read the same span endpoints with the `tracing:read` scope, so pick based on who runs the query.
+
+- **Tracing API.** Use it for scheduled exports, CI regression checks, and internal dashboards.
+- **PostHog MCP.** Use [PostHog MCP](/docs/distributed-tracing/surfaces/mcp) when you're debugging interactively with a coding agent.
+
+## Check it worked
+
+A valid request to `GET /api/projects/:project_id/tracing/spans/has_spans/` returns HTTP `200` with `{"hasSpans": true}` once spans are in your project.
+
+## Fix what goes wrong
+
+- **`401` or `403` authentication error.** Check that you're using a personal API key (`phx_...`) with the `tracing:read` scope rather than a project token (`phc_...`).
+- **Parameters ignored on `POST` endpoints.** Wrap filter fields inside the top-level `"query"` object rather than placing them at the root of the JSON body.
+- **`attributes` value search returns nothing.** When `search_values=true`, `search` must be at least 4 characters long.
+
+See also: [Use Distributed tracing over PostHog MCP](/docs/distributed-tracing/surfaces/mcp) · [Query traces with SQL](/docs/distributed-tracing/sql) · [PostHog API reference](/docs/api)

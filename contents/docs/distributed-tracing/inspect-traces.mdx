@@ -1,0 +1,74 @@
+---
+title: Inspect traces and spans
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: covers GA TraceDrawer, TraceView (Waterfall and Flame graph), and SpanInspector tabs (Attributes, Query, Logs, Errors, Operations, Raw). Excludes feature-flagged inline AI events (tracing-ai-events), Metrics tab (metrics), and shared TraceDialog (tracing-trace-dialog). */}
+
+A slow or failed row doesn't show which call broke. Open the trace drawer to see every span in the request, find where wall-clock time went, and jump to correlated logs or errors.
+
+- **When you need it.** You spotted a slow or errored row in [Tracing](https://app.posthog.com/tracing) and need the root cause inside that request.
+- **What you get.** A split view with the span waterfall or flame graph on the left and the span inspector on the right.
+- **How you know it worked.** Selecting any bar on the left updates the summary header and attributes on the right without leaving the trace.
+
+## Gather what you need
+
+Open [Tracing](https://app.posthog.com/tracing) and click any row in **Spans** or **Traces** mode. You can also open a sampled trace from an [operation detail page](/docs/distributed-tracing/operations-and-compare).
+
+## Read the waterfall
+
+The left pane shows the trace tree, and the right pane inspects the selected span. Drag the divider between panes to resize the inspector, or toggle fullscreen from the drawer header.
+
+The left pane supports two views:
+
+| View | What it shows | Reach for it when |
+| --- | --- | --- |
+| **Waterfall** | Every span laid out chronologically as nested bars, colored by service | You want to see sequence, concurrency, gaps, and which call waited on what |
+| **Flame graph** | A call tree aggregating repeated operations by total duration | A trace has loops or N+1 queries and you want the heaviest call paths grouped together |
+
+If your instrumentation missed a parent span, PostHog shows a missing-parent notice. It attaches orphan spans under the trace root, so you don't lose child timing.
+
+Use keyboard shortcuts in **Waterfall** mode to move through large traces faster:
+
+| Key | Action |
+| --- | --- |
+| `j` / `k` | Select the next or previous span |
+| `Left` / `Right` | Collapse or expand the selected span's children |
+| `Escape` | Close the trace drawer |
+
+## Navigate large traces
+
+The trace API returns up to `2,000` spans per page. To load the next page, scroll to the bottom of the waterfall or click the load-more footer in the flame graph.
+
+Click the link icon in the drawer header to copy a direct URL to the trace. The URL includes the trace timestamp as a lookup hint, so teammates open it even past the default one-hour window.
+
+## Use the span inspector
+
+The summary header shows the operation name, status badge (`OK` or `Error`), service dot, duration, timestamp, and copyable `trace_id`, `span_id`, and `parent_span_id`. If every span resolves to one person or session, the drawer header also shows person and session chips.
+
+The inspector renders up to six tabs depending on what the span carries:
+
+- **Attributes.** Lists span attributes, resource attributes, and OpenTelemetry span events. Hover an attribute to include it in your viewer filters, exclude it, or add it as a column in the span list.
+- **Query.** Appears automatically on database spans that carry query text, formatted as copyable SQL.
+- **Logs.** Shows correlated logs from [PostHog Logs](/docs/logs). Switch between **Whole trace** and **This span**, or click through to open the full Logs view with filters pre-applied.
+- **Errors.** Lists correlated issues from [Error Tracking](/docs/error-tracking). Switch between **This span**, **This trace**, and **This session** (which searches exceptions within 6 hours of the trace).
+- **Operations.** Summarizes every operation inside this trace by call count and duration. Click a row to highlight all matching spans in the waterfall or focus them in the flame graph.
+- **Raw.** Displays the full span payload as an interactive JSON tree.
+
+> **Tabs stay out of the way when empty.** If you view **Query** on a database span and click an HTTP span, the inspector falls back to **Attributes**. It restores **Query** when you select another database span.
+
+## Check it worked
+
+You can confirm the trace loaded completely when:
+
+1. The root span and child spans render in the waterfall with no missing-parent warning.
+2. Selecting a span shows its attributes and copyable `trace_id` in the inspector header.
+3. Switching to **Logs** or **Errors** loads correlated entries for that trace when your app sends matching IDs.
+
+## Fix what goes wrong
+
+- **Missing parent span notice.** A span arrived whose `parent_span_id` isn't in PostHog. This happens when an upstream service isn't instrumented, a sampler dropped the parent span, or a short-lived process exited before flushing its root span. Call `flush()` before exiting in serverless or CLI workloads.
+- **Logs or Errors tab is empty.** Check that your logger emits the same `trace_id` and `span_id` as your tracer. For **This session** error correlation, check that your spans also carry a session or person attribute. See [Link persons, sessions, logs, and errors](/docs/distributed-tracing/correlate-data).
+
+See also: [Search and filter traces](/docs/distributed-tracing/search) · [Link persons, sessions, logs, and errors](/docs/distributed-tracing/correlate-data) · [Analyze operations and compare windows](/docs/distributed-tracing/operations-and-compare)

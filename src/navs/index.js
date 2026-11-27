@@ -9011,6 +9011,47 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/distributed-tracing/search',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Search and filter traces', url: '/docs/distributed-tracing/search' },
+                        { name: 'Inspect traces and spans', url: '/docs/distributed-tracing/inspect-traces' },
+                        {
+                            name: 'Operations and comparisons',
+                            url: '/docs/distributed-tracing/operations-and-compare',
+                        },
+                        { name: 'Query traces with SQL', url: '/docs/distributed-tracing/sql' },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/distributed-tracing/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/distributed-tracing/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Correlated data',
+                },
+                {
+                    name: 'Persons, sessions, logs, and errors',
+                    url: '/docs/distributed-tracing/correlate-data',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Link traces to AI Observability',
                     url: '/docs/distributed-tracing/link-ai-observability',
                     icon: 'IconLlmAnalytics',

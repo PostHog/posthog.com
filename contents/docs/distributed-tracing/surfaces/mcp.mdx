@@ -1,0 +1,74 @@
+---
+title: Use Distributed tracing over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: documents all 13 enabled GA tools in products/tracing/mcp/tools.yaml (all read-only, tracing:read scope, gated only on feature_flag: tracing). */}
+
+The [PostHog MCP server](/docs/model-context-protocol) lets coding agents inspect your traces right beside your source code. Your agent can check service health, locate regressed operations, read a trace's critical path, and draft a fix in the same session.
+
+This works in any MCP client, including Cursor, Claude Code, Codex, Windsurf, and VS Code.
+
+## Gather what you need
+
+1. **Send traces to PostHog.** Follow [Install tracing](/docs/distributed-tracing/installation) so your project has spans to read.
+2. **Connect PostHog MCP.** Install the [PostHog MCP server](/docs/model-context-protocol) in your AI tool and grant `tracing:read` access to your project.
+
+## The tracing tools
+
+Distributed tracing exposes 13 read-only MCP tools under the `tracing:read` scope.
+
+| Tool | What it does | Reach for it when |
+| --- | --- | --- |
+| `apm-services-list` | Lists distinct `service.name` values emitting spans | You want to discover service names before filtering |
+| `apm-attributes-list` | Lists available `span_attribute` or `span_resource_attribute` keys | You want exact attribute keys rather than guessing |
+| `apm-attribute-values-list` | Lists values observed for one attribute key | You want valid filter values before querying |
+| `apm-service-health` | Scores up to 1,000 services against a baseline for throughput, error rate, and p50/p95/p99 | You're triaging an incident and need to know which service broke |
+| `apm-spans-count` | Returns total `count` and `traceCount` matching your filters | You want to size a result set before pulling rows |
+| `apm-spans-sparkline` | Returns span counts over time | You want to spot when traffic or errors spiked |
+| `apm-spans-duration-histogram` | Returns trace duration distribution buckets | You want to see if latency is bimodal |
+| `apm-spans-latency-heatmap` | Returns duration buckets over time | You want to spot when p99 outliers began |
+| `apm-spans-aggregate` | Aggregates spans by service and operation with p50/p95/p99 and optional `compareFilter` | You want to rank slow or failing operations or diff two windows |
+| `apm-spans-tree` | Returns an aggregated call tree under an operation with optional `compareFilter` | You want to see which child span slowed down across many traces |
+| `apm-attribute-breakdown` | Groups matching spans by one attribute's value (up to 5,000 rows) | You want to find which pod, version, or downstream host owns the errors |
+| `query-apm-spans` | Queries matching traces (`rootSpans: true`) or individual spans (`flatSpans: true`), up to 1,000 rows | You want concrete span rows or trace IDs matching a filter |
+| `apm-trace-get` | Fetches one trace by its hex `trace_id` | You want to diagnose a single slow or failed request |
+
+## Read trace summaries first
+
+`apm-trace-get` defaults to `summary: true` and returns a roughly 3 KB summary for traces of any size. The summary includes:
+
+- **Headline timing.** Total trace duration, root span, span count, service count, and error count.
+- **Top self-time spans.** Spans whose own duration isn't covered by children. These often point to uninstrumented work.
+- **Critical path.** The chain of spans the trace end time waits on, with N+1 loops collapsed and spans under 1% of root duration omitted.
+- **Repeated spans and errors.** Potential N+1 queries and error spans with their exception messages.
+
+Set `summary: false` only when your agent needs every raw span field. Pair it with `excludeAttributes: true` unless you need multi-KB attributes like `db.statement`, and paginate with `offset` (up to `2,000` spans per page).
+
+> **Keep units straight in tool arguments.** Pass `duration` filter values in milliseconds (`1000` for one second). Responses return `duration_nano` in nanoseconds (`1,000,000,000` for one second).
+
+## Try these prompts
+
+| Goal | Ask your agent |
+| --- | --- |
+| Triage services | `Check service health over the last hour compared to yesterday` |
+| Rank slow operations | `Show the top 10 slowest operations by p95 latency in checkout-api over the last 6 hours` |
+| Spot regressions | `Compare checkout-api operations over the last hour against the previous hour` |
+| Isolate bad infrastructure | `Break down errored spans in payments by k8s.pod.name and server.address` |
+| Find slow child spans | `Find traces in the last day with a clickhouse.query span slower than 1000ms` |
+| Inspect one trace | `Summarize trace 4bf92f3577b34da6a3ce929d0e0e4736 and point me to the slow code path` |
+
+## Guide your agent
+
+Point your agent at this sequence, so it doesn't guess attribute keys or blow through its context window:
+
+1. Call `apm-service-health` or `apm-services-list` to find the failing service.
+2. Call `apm-attributes-list` and `apm-attribute-values-list` before writing attribute filters.
+3. Use `apm-spans-aggregate` or `apm-attribute-breakdown` to isolate the operation or host causing errors.
+4. Use `query-apm-spans` (`flatSpans: true` for child attributes) to grab a concrete `trace_id`.
+5. Call `apm-trace-get` with the default summary to read the critical path and jump straight to the offending file in your repo.
+
+For full MCP setup and tool scoping options, see the [MCP tools reference](/docs/model-context-protocol/tools).
+
+See also: [Use the Tracing API](/docs/distributed-tracing/surfaces/api) · [Search and filter traces](/docs/distributed-tracing/search) · [Analyze operations and compare windows](/docs/distributed-tracing/operations-and-compare)

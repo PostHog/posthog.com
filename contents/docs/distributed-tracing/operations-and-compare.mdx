@@ -1,0 +1,96 @@
+---
+title: Analyze operations and compare windows
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: covers GA Operations tab, /tracing/operation detail scene, CompareMenuButton, ComparisonBar, TraceCompareTable, and TraceCompareFlame. Excludes feature-flagged Endpoints view (tracing-endpoints-view), alert creation presets (platform-alerts-source-traces), user impact columns (tracing-impact-strip), and service page links (application-observability). */}
+
+Individual traces explain one slow request. Group spans by operation and compare time windows to spot which endpoint regressed across all traffic after a deploy.
+
+- **When you need it.** Latency spiked or a deploy just landed, and you need to rank slow operations or diff performance against a baseline window.
+- **What you get.** Per-operation throughput, error rate, and p50/p95/p99 latency, plus a change-ranked diff table and call-tree flame graph.
+- **How you know it worked.** The **Operations** table ranks your busiest or slowest spans, and enabling **Compare** labels regressions over 20%.
+
+## Gather what you need
+
+Open [Tracing](https://app.posthog.com/tracing) with your target services and filters set. Keep span names low-cardinality (like `GET /users/:id` rather than `GET /users/123`), since aggregation groups by service and span name.
+
+## Rank operations
+
+Switch the display toggle from **Spans** to **Operations**. PostHog aggregates up to `5,000` operations matching your current filters and time range.
+
+Each row shows:
+
+| Column | What it measures |
+| --- | --- |
+| **Service** | OpenTelemetry `service.name` |
+| **Operation** | Span `name` |
+| **Requests** | Request rate (`/s`, `/min`, or `/hr`) and total span count |
+| **Error rate** | Percentage of spans with `status_code = Error` |
+| **Errors** | Total errored span count |
+| **p50 / p95 / p99** | Median, 95th, and 99th percentile duration |
+
+Click any column header to sort. Sort by **p95** or **Error rate** to find broken or slow operations without opening traces one by one.
+
+## Drill into one operation
+
+Click any row in the **Operations** table to open its operation detail page (`/tracing/operation`).
+
+The detail page combines three tools for that single operation:
+
+1. **Headline stats.** Requests, error rate, p50, p95, and p99 for the selected date range.
+2. **Histogram or latency heatmap.** Switch between **Histogram** and **Heatmap** to spot bimodal latency (such as cache hits versus cold database queries). Drag across a slow bucket to filter sampled traces to that exact duration band.
+3. **Sampled traces.** Step through example traces matching your selected duration band and inspect their full span waterfall inline.
+
+## Compare two time windows
+
+Use **Compare** in the display bar (available in **Spans** or **Traces** mode) to diff your active time window against a baseline.
+
+Pick one of four baselines from the **Compare** menu:
+
+- **vs previous period.** Shifts the baseline back by the exact length of your selected range.
+- **vs yesterday.** Compares against the same window 24 hours earlier.
+- **vs same time last week.** Compares against the same window 7 days earlier.
+- **Custom time windows.** Places two draggable windows on the sparkline, so you can compare any two time ranges inside the visible window.
+
+> **Overlapping presets disable automatically.** If your range is longer than a preset shift, like a 48-hour range **vs yesterday**, PostHog disables that preset. Otherwise, overlapping windows wash out the delta.
+
+## Read the comparison table
+
+While a comparison is active, the span list turns into a comparison table grouped by service and operation. Rows sort by biggest movers first, so regressions float to the top without clicking.
+
+PostHog classifies each row using a `±20%` p95 latency threshold and a minimum sample size of `10` spans in both windows:
+
+| Bucket | Rule |
+| --- | --- |
+| **Regressed** | p95 duration increased by more than 20%, with at least 10 spans in both windows |
+| **Improved** | p95 duration decreased by more than 20%, with at least 10 spans in both windows |
+| **New** | Operation appeared in the current window with zero spans in the baseline |
+| **Gone** | Operation appeared in the baseline with zero spans in the current window |
+| **Unchanged** | Within ±20%, or fewer than 10 spans in either window |
+
+Use the segmented filter bar above the table (**All**, **Regressed**, **Improved**, **New**, **Gone**) to focus on one bucket. Increases in latency and errors render in red, decreases render in green, and count deltas stay neutral.
+
+## Diff call trees
+
+Click any row in the comparison table to open its flame graph. It aggregates the call tree for both windows and colors each child bar by its p50 shift at the same `±20%` threshold.
+
+Hover any bar to see current and baseline call counts, p50, p95, p99, total duration, and percentage deltas. Click a bar to zoom into that subtree, or use the search input to locate a specific child span.
+
+Click **Exit comparison** in the **Compare** menu or close the comparison bar to return to the regular span list.
+
+## Check it worked
+
+You can confirm comparison data is meaningful when:
+
+1. The comparison bar above the table displays both UTC time windows with non-overlapping dates.
+2. Rows with at least 10 spans show percentage deltas and bucket tags rather than staying **Unchanged**.
+3. Clicking a regressed row opens a flame graph that shows which child span slowed down.
+
+## Fix what goes wrong
+
+- **Too many rows or noisy "New" operations.** Your span names include high-cardinality values such as user IDs, UUIDs, or raw URL paths. Replace variable segments with route templates (`GET /orders/:id`) and move variable values into span attributes.
+- **Compare preset is disabled.** Shorten your date range in the filter bar so it's narrower than the baseline shift. You can also switch to **Custom time windows** and drag the two overlays on the sparkline.
+
+See also: [Search and filter traces](/docs/distributed-tracing/search) · [Inspect traces and spans](/docs/distributed-tracing/inspect-traces) · [Use Distributed tracing over PostHog MCP](/docs/distributed-tracing/surfaces/mcp)

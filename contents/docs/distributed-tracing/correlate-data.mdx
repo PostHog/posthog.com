@@ -1,0 +1,83 @@
+---
+title: Link persons, sessions, logs, and errors
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: covers GA person/session identity correlation settings (Settings > Tracing), SpanLogsTab, TraceErrorsTab, and links to Link traces to AI Observability. Excludes feature-flagged inline AI events in waterfall (tracing-ai-events) and Metrics tab (metrics). */}
+
+A slow trace tells you which service stalled, not who felt it or what error fired alongside it. Attach PostHog identity and OpenTelemetry trace context to your spans, so you can jump between traces, persons, Session Replay, Logs, and Error Tracking.
+
+- **When you need it.** You want person and session links in the trace header, or matching records in the **Logs** and **Errors** tabs.
+- **What you get.** Automatic links from a trace to its person profile, session replay, correlated logs, and related error issues.
+- **How you know it worked.** Opening a trace shows person and session chips in the drawer header, and the **Logs** and **Errors** tabs return matching records.
+
+## Gather what you need
+
+- Spans flowing into [Tracing](https://app.posthog.com/tracing)
+- Your project's tracing setup from [Install tracing](/docs/distributed-tracing/installation)
+
+## Link persons and sessions
+
+PostHog resolves person and session identity from span and resource attributes. Both the PostHog Node.js and Python SDKs (with request context) and the PostHog OpenTelemetry context processor emit `posthogDistinctId` and `sessionId`.
+
+When those keys aren't set, PostHog also checks these built-in attribute conventions automatically:
+
+| Identity | Default key | Built-in fallback keys |
+| --- | --- | --- |
+| **Person (`distinct_id`)** | `posthogDistinctId` | `distinct.id`, `distinct_id`, `distinctId`, `distinctID`, `posthogDistinctID`, `posthog_distinct_id`, `posthog.distinct.id`, `posthog.distinct_id` |
+| **Session (`session_id`)** | `sessionId` | `session.id`, `session_id`, `sessionID`, `$session_id`, `posthogSessionId`, `posthogSessionID`, `posthog_session_id`, `posthog.session.id`, `posthog.session_id` |
+
+If your browser app uses `posthog-js`, enable [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname, so requests send `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` to your server middleware.
+
+## Configure custom attribute keys
+
+If your pipeline emits user or session IDs under other keys like `app.user_id` or `enduser.id`, map them per environment rather than rewriting instrumentation:
+
+1. Open **Settings > Tracing** in PostHog.
+2. Under **Link to person**, add the span attribute keys that hold your PostHog `distinct_id`.
+3. Under **Link to session**, add the span attribute keys that hold your PostHog session ID.
+
+PostHog checks your configured keys in order first (first match wins), then falls back to the built-in conventions above.
+
+> **Batch traces keep identities at the span level.** The drawer header shows a person or session chip only when every span with an identity agrees on one value. If a batch job mixes multiple users in one trace, the header hides the chip and each span keeps its value in **Attributes**.
+
+## Correlate with Logs
+
+Distributed tracing and [PostHog Logs](/docs/logs) share OpenTelemetry ingestion. When your logger injects the active OpenTelemetry `trace_id` and `span_id` into log records, PostHog correlates them automatically.
+
+Open any span in the trace drawer and select the **Logs** tab in the inspector:
+
+- **Whole trace.** Lists every log matching that `trace_id`. This is the default scope when you open a trace.
+- **This span.** Narrows logs to records matching both `trace_id` and the selected `span_id`.
+
+Click through from the **Logs** tab to open the full Logs viewer with those correlation filters pre-applied.
+
+## Correlate with Error Tracking
+
+Span rows display error badges when correlated exceptions exist in [Error Tracking](/docs/error-tracking). Open a trace and select the **Errors** tab in the inspector to view linked issues across three scopes:
+
+| Scope | How PostHog matches exceptions |
+| --- | --- |
+| **This span** | Exceptions tagged with the inspected `span_id` |
+| **This trace** | Exceptions tagged with the trace's `trace_id` |
+| **This session** | Exceptions in the same `session_id` within `±6 hours` of the trace |
+
+Click an issue in the **Errors** tab to jump directly to its stack trace and details in Error Tracking.
+
+## Correlate with AI Observability
+
+To join distributed traces with LLM generations (`$ai_generation`), pass the span's 32-character hex trace ID as `$ai_trace_id`. See [Link traces to AI Observability](/docs/distributed-tracing/link-ai-observability) for SDK examples and SQL conversion queries.
+
+## Check it worked
+
+1. Trigger a request from a browser session with tracing enabled.
+2. Open the resulting trace in [Tracing](https://app.posthog.com/tracing).
+3. Check that person and session chips appear in the drawer header. Open the **Logs** and **Errors** tabs in the span inspector to see linked records.
+
+## Fix what goes wrong
+
+- **Person or session chip is missing from the header.** Check the span's **Attributes** tab for a non-empty configured or built-in key. If spans have it but the header doesn't, check whether two spans in that trace carry different user or session IDs.
+- **Session errors don't appear.** **This session** matching requires a resolved session ID on the trace and only searches exceptions within 6 hours before or after the trace timestamp.
+
+See also: [Inspect traces and spans](/docs/distributed-tracing/inspect-traces) · [Link traces to AI Observability](/docs/distributed-tracing/link-ai-observability) · [Link session replay to logs](/docs/logs/link-session-replay)

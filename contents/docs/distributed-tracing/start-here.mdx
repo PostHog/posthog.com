@@ -69,10 +69,11 @@ with tracer.start_as_current_span("checkout") as span:
 
 Once spans are flowing into PostHog, you can:
 
-- **Search and filter spans** by service, status, duration, and attributes
-- **Follow a trace end to end** as a waterfall to see where time goes
-- **Spot slow and failing operations** across your services
-- **View correlated logs** in the span inspector, scoped to a single span or the whole trace
+- **[Search and filter spans](/docs/distributed-tracing/search)** by service, status, duration, and attributes
+- **[Follow a trace end to end](/docs/distributed-tracing/inspect-traces)** as a waterfall or flame graph to see where time goes
+- **[Spot slow and failing operations](/docs/distributed-tracing/operations-and-compare)** and compare latency against a baseline window
+- **[View correlated logs, errors, persons, and sessions](/docs/distributed-tracing/correlate-data)** in the span inspector and trace header
+- **[Query with SQL](/docs/distributed-tracing/sql), [PostHog MCP](/docs/distributed-tracing/surfaces/mcp), or the [Tracing API](/docs/distributed-tracing/surfaces/api)**
 
 </QuestLogItem>
 
