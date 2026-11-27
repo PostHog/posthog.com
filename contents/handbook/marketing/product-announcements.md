@@ -68,7 +68,7 @@ Here are some activities your Tier 1 launch could include:
 - Competitive comparison (can be added to the product page)
 - A case study
 - Blog announcement
-- Social media brief for Liam 
+- [Social media brief](/handbook/content/social-media#getting-your-launch-promoted-on-social) for Liam
 - Demo video
 - [Email announcement](/handbook/marketing/email-comms) (or multiple, if you want to segment users and personalize your message)
 - Custom designs for blog covers, social posts, etc. 
