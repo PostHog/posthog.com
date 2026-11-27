@@ -134,7 +134,10 @@ const LearnNav = ({
         marker:
             page.page && !page.isFrontMatter ? (
                 readChapterSlugs.has(learnChapterSlug(page)) ? (
-                    <Check className="size-full text-green" strokeWidth={2.5} aria-label="Read" />
+                    <>
+                        <Check className="size-full text-green" strokeWidth={2.5} aria-hidden="true" />
+                        <span className="sr-only">Read: </span>
+                    </>
                 ) : null
             ) : undefined,
     }))
