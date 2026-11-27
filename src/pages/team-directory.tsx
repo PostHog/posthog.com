@@ -140,7 +140,8 @@ function memberToRow(
     member: TeamMember,
     index: number,
     isEditing: boolean,
-    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>,
+    isModerator: boolean
 ) {
     return {
         key: String(member.id),
@@ -170,33 +171,37 @@ function memberToRow(
             { content: member.teams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.leadsTeams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.pineappleOnPizza === true ? 'Yes' : member.pineappleOnPizza === false ? 'No' : '—' },
-            {
-                content: isEditing ? (
-                    <EditableTShirtFitCell member={member} updateProfile={updateProfile} />
-                ) : (
-                    member.tShirtFit || '—'
-                ),
-                className: 'text-sm',
-            },
-            {
-                content: isEditing ? (
-                    <EditableTShirtSizeCell member={member} updateProfile={updateProfile} />
-                ) : (
-                    member.tShirtSize || '—'
-                ),
-                className: 'text-sm',
-            },
-            {
-                content: isEditing ? (
-                    <EditableTextCell
-                        value={member.tShirtAdditionalInfo}
-                        onSave={async (val) => updateProfile(member.id, { tShirtAdditionalInfo: val })}
-                    />
-                ) : (
-                    member.tShirtAdditionalInfo || '—'
-                ),
-                className: 'text-sm',
-            },
+            ...(isModerator
+                ? [
+                      {
+                          content: isEditing ? (
+                              <EditableTShirtFitCell member={member} updateProfile={updateProfile} />
+                          ) : (
+                              member.tShirtFit || '—'
+                          ),
+                          className: 'text-sm',
+                      },
+                      {
+                          content: isEditing ? (
+                              <EditableTShirtSizeCell member={member} updateProfile={updateProfile} />
+                          ) : (
+                              member.tShirtSize || '—'
+                          ),
+                          className: 'text-sm',
+                      },
+                      {
+                          content: isEditing ? (
+                              <EditableTextCell
+                                  value={member.tShirtAdditionalInfo}
+                                  onSave={async (val) => updateProfile(member.id, { tShirtAdditionalInfo: val })}
+                              />
+                          ) : (
+                              member.tShirtAdditionalInfo || '—'
+                          ),
+                          className: 'text-sm',
+                      },
+                  ]
+                : []),
             { content: member.startDate || '—', className: 'text-sm' },
         ],
     }
@@ -241,6 +246,7 @@ function TeamDirectory(): JSX.Element {
         { value: any; filter: (obj: any, value: any) => boolean }
     > | null>(null)
     const [isEditing, setIsEditing] = useState(false)
+    const visibleColumns = isModerator ? columns : columns.filter((c) => !c.name.startsWith('T-shirt'))
 
     const allTeamNames = useMemo(() => Array.from(new Set(teamMembers.flatMap((m) => m.teams))).sort(), [teamMembers])
 
@@ -366,22 +372,29 @@ function TeamDirectory(): JSX.Element {
                             value ? obj.leadsTeams.length > 0 : obj.leadsTeams.length === 0,
                         operator: 'equals',
                     },
-                    {
-                        label: 't-shirt fit',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'Unisex', value: 'unisex' },
-                            { label: 'Female', value: 'female' },
-                        ],
-                        filter: (obj: TeamMember, value: string) => obj.tShirtFit === value,
-                        operator: 'equals',
-                    },
-                    {
-                        label: 't-shirt size',
-                        options: [{ label: 'Any', value: null }, ...allSizes.map((s) => ({ label: s, value: s }))],
-                        filter: (obj: TeamMember, value: string) => obj.tShirtSize === value,
-                        operator: 'equals',
-                    },
+                    ...(isModerator
+                        ? [
+                              {
+                                  label: 't-shirt fit',
+                                  options: [
+                                      { label: 'Any', value: null },
+                                      { label: 'Unisex', value: 'unisex' },
+                                      { label: 'Female', value: 'female' },
+                                  ],
+                                  filter: (obj: TeamMember, value: string) => obj.tShirtFit === value,
+                                  operator: 'equals',
+                              },
+                              {
+                                  label: 't-shirt size',
+                                  options: [
+                                      { label: 'Any', value: null },
+                                      ...allSizes.map((s) => ({ label: s, value: s })),
+                                  ],
+                                  filter: (obj: TeamMember, value: string) => obj.tShirtSize === value,
+                                  operator: 'equals',
+                              },
+                          ]
+                        : []),
                 ]}
                 handleFilterChange={(filters) => setActiveFilters(filters as typeof activeFilters)}
             >
@@ -420,13 +433,13 @@ function TeamDirectory(): JSX.Element {
                             ) : null}
                         </div>
                         <OSTable
-                            columns={columns}
+                            columns={visibleColumns}
                             size="sm"
                             rows={displayMembers.map((member, index) =>
-                                memberToRow(member, index, isEditing, updateProfile)
+                                memberToRow(member, index, isEditing, updateProfile, isModerator)
                             )}
                         />
-                        {displayFutureJoiners.length > 0 && (
+                        {isModerator && displayFutureJoiners.length > 0 && (
                             <>
                                 <h3 className="mt-6 mb-2 text-base font-semibold">Future joiners</h3>
                                 <p className="!mt-0 mb-2 text-sm text-muted">
@@ -434,88 +447,90 @@ function TeamDirectory(): JSX.Element {
                                     {displayFutureJoiners.length !== 1 ? 's' : ''} with a start date in the future
                                 </p>
                                 <OSTable
-                                    columns={columns}
+                                    columns={visibleColumns}
                                     size="sm"
                                     rows={displayFutureJoiners.map((member, index) =>
-                                        memberToRow(member, index, isEditing, updateProfile)
+                                        memberToRow(member, index, isEditing, updateProfile, isModerator)
                                     )}
                                 />
                             </>
                         )}
-                        <div className="flex flex-wrap gap-8 mt-6">
-                            {unisexSizes.some((s) => sizeCounts.unisex[s]) && (
-                                <div>
-                                    <h3 className="mb-2 text-base font-semibold">Unisex</h3>
-                                    <OSTable
-                                        columns={[
-                                            { name: 'Size', width: '80px', align: 'left' as const },
-                                            { name: 'Count', width: '80px', align: 'right' as const },
-                                        ]}
-                                        size="sm"
-                                        rows={[
-                                            ...unisexSizes
-                                                .filter((s) => sizeCounts.unisex[s])
-                                                .map((s) => ({
-                                                    key: s,
+                        {isModerator && (
+                            <div className="flex flex-wrap gap-8 mt-6">
+                                {unisexSizes.some((s) => sizeCounts.unisex[s]) && (
+                                    <div>
+                                        <h3 className="mb-2 text-base font-semibold">Unisex</h3>
+                                        <OSTable
+                                            columns={[
+                                                { name: 'Size', width: '80px', align: 'left' as const },
+                                                { name: 'Count', width: '80px', align: 'right' as const },
+                                            ]}
+                                            size="sm"
+                                            rows={[
+                                                ...unisexSizes
+                                                    .filter((s) => sizeCounts.unisex[s])
+                                                    .map((s) => ({
+                                                        key: s,
+                                                        cells: [
+                                                            { content: s, className: 'text-sm font-medium' },
+                                                            { content: sizeCounts.unisex[s], className: 'text-sm' },
+                                                        ],
+                                                    })),
+                                                {
+                                                    key: 'total',
                                                     cells: [
-                                                        { content: s, className: 'text-sm font-medium' },
-                                                        { content: sizeCounts.unisex[s], className: 'text-sm' },
+                                                        { content: 'Total', className: 'text-sm font-bold' },
+                                                        {
+                                                            content: Object.values(sizeCounts.unisex).reduce(
+                                                                (a, b) => a + b,
+                                                                0
+                                                            ),
+                                                            className: 'text-sm font-bold',
+                                                        },
                                                     ],
-                                                })),
-                                            {
-                                                key: 'total',
-                                                cells: [
-                                                    { content: 'Total', className: 'text-sm font-bold' },
-                                                    {
-                                                        content: Object.values(sizeCounts.unisex).reduce(
-                                                            (a, b) => a + b,
-                                                            0
-                                                        ),
-                                                        className: 'text-sm font-bold',
-                                                    },
-                                                ],
-                                            },
-                                        ]}
-                                    />
-                                </div>
-                            )}
-                            {femaleSizes.some((s) => sizeCounts.female[s]) && (
-                                <div>
-                                    <h3 className="mb-2 text-base font-semibold">Women's</h3>
-                                    <OSTable
-                                        columns={[
-                                            { name: 'Size', width: '80px', align: 'left' as const },
-                                            { name: 'Count', width: '80px', align: 'right' as const },
-                                        ]}
-                                        size="sm"
-                                        rows={[
-                                            ...femaleSizes
-                                                .filter((s) => sizeCounts.female[s])
-                                                .map((s) => ({
-                                                    key: s,
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                )}
+                                {femaleSizes.some((s) => sizeCounts.female[s]) && (
+                                    <div>
+                                        <h3 className="mb-2 text-base font-semibold">Women's</h3>
+                                        <OSTable
+                                            columns={[
+                                                { name: 'Size', width: '80px', align: 'left' as const },
+                                                { name: 'Count', width: '80px', align: 'right' as const },
+                                            ]}
+                                            size="sm"
+                                            rows={[
+                                                ...femaleSizes
+                                                    .filter((s) => sizeCounts.female[s])
+                                                    .map((s) => ({
+                                                        key: s,
+                                                        cells: [
+                                                            { content: s, className: 'text-sm font-medium' },
+                                                            { content: sizeCounts.female[s], className: 'text-sm' },
+                                                        ],
+                                                    })),
+                                                {
+                                                    key: 'total',
                                                     cells: [
-                                                        { content: s, className: 'text-sm font-medium' },
-                                                        { content: sizeCounts.female[s], className: 'text-sm' },
+                                                        { content: 'Total', className: 'text-sm font-bold' },
+                                                        {
+                                                            content: Object.values(sizeCounts.female).reduce(
+                                                                (a, b) => a + b,
+                                                                0
+                                                            ),
+                                                            className: 'text-sm font-bold',
+                                                        },
                                                     ],
-                                                })),
-                                            {
-                                                key: 'total',
-                                                cells: [
-                                                    { content: 'Total', className: 'text-sm font-bold' },
-                                                    {
-                                                        content: Object.values(sizeCounts.female).reduce(
-                                                            (a, b) => a + b,
-                                                            0
-                                                        ),
-                                                        className: 'text-sm font-bold',
-                                                    },
-                                                ],
-                                            },
-                                        ]}
-                                    />
-                                </div>
-                            )}
-                        </div>
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </>
                 )}
             </Editor>
