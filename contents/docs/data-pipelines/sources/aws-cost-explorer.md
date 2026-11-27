@@ -41,14 +41,25 @@ To see spend across every member account, connect the management (payer) account
 
 <SourceSetupIntro />
 
-When linking AWS Cost Explorer, you'll need:
+When linking AWS Cost Explorer, you choose how PostHog authenticates with AWS:
 
-- **AWS access key ID** – the access key ID for your IAM user or role (starts with `AKIA...`).
+**Option 1: Access keys**
+
+- **AWS access key ID** – the access key ID for your IAM user (starts with `AKIA...`).
 - **AWS secret access key** – the corresponding secret access key.
 - **AWS session token** (optional) – only required if you are using temporary STS credentials.
+
+**Option 2: IAM role**
+
+Select **IAM role** and choose an AWS connection that holds your role ARN. PostHog assumes the role with short-lived credentials and stores no long-lived key. See [Creating IAM credentials](#creating-iam-credentials) for setup steps.
+
+Both options also accept:
+
 - **Start date** (optional) – the earliest date to sync from, in `YYYY-MM-DD` format. Defaults to 12 months ago.
 
 ## Creating IAM credentials
+
+### Access keys
 
 1. In the AWS Console, go to **IAM** > **Users** and create a new user (or use an existing one).
 2. Attach a policy with the following permissions:
@@ -81,7 +92,36 @@ When linking AWS Cost Explorer, you'll need:
 3. Create an access key for the user under **Security credentials** > **Access keys**.
 4. Copy the **Access key ID** and **Secret access key** – you'll need both when linking the source in PostHog.
 
-> **Note:** AWS charges $0.01 per Cost Explorer API request. PostHog uses wide date windows per request to keep costs low.
+### IAM role
+
+1. In the AWS Console, go to **IAM** > **Roles** and create a new role.
+2. Under **Trusted entity type**, choose **Custom trust policy** and paste the following. Replace `<POSTHOG_ACCOUNT_ID>` with PostHog's AWS account ID (shown in the PostHog UI when you create the connection) and `<YOUR_EXTERNAL_ID>` with the external ID PostHog displays for your organization:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<POSTHOG_ACCOUNT_ID>:root"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "<YOUR_EXTERNAL_ID>"
+        }
+      }
+    }
+  ]
+}
+```
+
+3. Attach the same permissions policy shown in the [Access keys](#access-keys) section above.
+4. Copy the role's ARN.
+5. In PostHog, go to **Data pipeline** > **Sources**, create a new **AWS connection**, and paste the role ARN.
+6. When linking the AWS Cost Explorer source, choose **IAM role** and select the connection you created.
+   > **Note:** AWS charges $0.01 per Cost Explorer API request. PostHog uses wide date windows per request to keep costs low.
 
 ## Sync modes
 
@@ -118,7 +158,7 @@ Duplicate rows are merged by primary key, so re-read periods don't create duplic
 
 ## Troubleshooting
 
-- If you see "AWS rejected the access key", check that the access key ID and secret access key are correct and that the key is still active in IAM.
+- If you see "AWS rejected the access key" or a credential error, check that the access key ID and secret access key are correct and that the key is still active in IAM. If you are using an IAM role, check that the role's trust policy allows PostHog and requires the correct external ID.
 - If you see a signature error, re-enter the secret access key. If you are using temporary credentials, the session token may have expired.
 - If you see "missing Cost Explorer permissions", grant `ce:GetCostAndUsage`, `ce:GetCostAndUsageWithResources`, `ce:GetDimensionValues`, `ce:GetReservationUtilization`, `ce:GetReservationCoverage`, `ce:GetSavingsPlansUtilization`, `ce:GetSavingsPlansCoverage`, `ce:GetSavingsPlansUtilizationDetails`, `ce:GetCostForecast`, `ce:GetRightsizingRecommendation`, and `ce:GetReservationPurchaseRecommendation` to the IAM user or role.
 - If you see "no Cost Explorer data", make sure Cost Explorer is enabled on the AWS account. It can take up to 24 hours after enabling for data to appear.
