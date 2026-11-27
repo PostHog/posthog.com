@@ -1,33 +1,33 @@
 ### Q4 2026 objectives
 
-We formed in September 2026. Our first objectives are temporary and focus on investigation. We will update them with specific delivery plans once we understand each problem and choose a direction.
+We formed in September 2026. Our first objectives are to understand where context helps agents, improve the MCP experience, and define how we measure the team's impact.
 
-#### Goal 1: Prove or disprove the context layer's value (Driver: <TeamMember name="Adam Bowker" />)
+#### Goal 1: Test how context and guidance improve agent outcomes (Driver: <TeamMember name="Adam Bowker" />)
 
-Before we invest in a context layer, we need evidence that it improves agent outcomes and solves a problem people care about.
-
-What we'll ship:
-
-- Interview 20 external users and five internal users, then synthesize what we learn
-- Write a high-level request for comments (RFC) for the context layer
-- Document how the context layer could unify Business Knowledge, the semantic layer, and PostHog's other context systems
-
-#### Goal 2: Choose the right MCP architecture (Driver: <TeamMember name="Jake Ruth" />)
-
-We need evidence that our Model Context Protocol (MCP) architecture offers the best experience for customers and agents.
+We need evidence that giving agents relevant company context and guidance helps them do better work in PostHog.
 
 What we'll ship:
 
-- Prototype and compare promising approaches, including code execution and the current tool-based architecture
-- Recommend an architecture based on what we learn
-- If the current architecture remains the best option, update this objective to focus on improving it
+- Prototype ways to give agents context from existing sources, including Business Knowledge and the semantic layer
+- Test ways to guide agents toward a useful next step in MCP
+- Compare how well agents complete common tasks with and without that context or guidance
+
+#### Goal 2: Make MCP lighter and more reliable across clients (Driver: <TeamMember name="Jake Ruth" />)
+
+We need to make common MCP workflows faster and more reliable for customers and agents across clients.
+
+What we'll ship:
+
+- Improve how agents discover the tools and skills they need
+- Reduce the amount of context MCP consumes on common workflows
+- Compare ways agents can call tools and use what we learn to guide improvements
 
 #### Goal 3: Define metrics to measure the team's impact (Driver: <TeamMember name="Richard Solomou" />)
 
-We need a set of metrics we can track to understand the team's impact on revenue, usage, or both.
+We need a set of metrics we can track to understand how customers use MCP and where the experience falls short.
 
 What we'll ship:
 
-- Define a small set of revenue and/or usage metrics that reflect the team's impact
+- Define a small set of metrics for customer adoption, repeat use, and tool reliability
 - Document how each metric is calculated and establish a baseline
 - Set up a dashboard and a regular review cadence to track progress against these metrics
