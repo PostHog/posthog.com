@@ -911,7 +911,7 @@ PostHog keeps all the data about your product in one place. Data comes in from y
 - All data belongs to a project. SDKs send events with the project token, which is write-only. The private API needs a [personal API key](https://posthog.com/docs/api/personal-api-keys.md) or [OAuth](https://posthog.com/docs/api/oauth.md).
 - PostHog Cloud has two regions: US Cloud (\`us.posthog.com\`) and EU Cloud (\`eu.posthog.com\`). A project lives in one region, so use the hosts of that region.
 - PostHog is open source and MIT licensed. You can [self-host](https://posthog.com/docs/self-host.md) it on one machine, without guarantees or commercial support, for small volumes. For most companies, PostHog recommends PostHog Cloud.
-- Pricing is usage-based. Every product has a free tier that resets every month, and there are no per-seat charges. See [pricing](https://posthog.com/pricing.md).
+- Pricing is usage-based, with no per-seat charges. Most products have a free tier that resets every month. Self-driving's free credits cover the first month only. See [pricing](https://posthog.com/pricing.md).
 `
 
 // Products and tools overview (self-driving taxonomy) — kept in sync with /platform.md via PLATFORM_ITEMS.
