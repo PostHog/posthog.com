@@ -12,25 +12,24 @@ interface BookProps {
     count: number
 }
 
-/** One volume as a card tinted in its series color, led by the hoggie from its cover. */
-function ShelfCard({ volume, count }: BookProps): JSX.Element {
+/** One volume as its cover seen edge-on: white stock and the cover's spine color, so the row matches the book it opens. */
+function SpineCard({ volume, count }: BookProps): JSX.Element {
     const Art = volumeArt(volume.id)
+    const chapterCount = volume.comingSoon ? 'Soon' : `${count} ${count === 1 ? 'chapter' : 'chapters'}`
     return (
-        <article className="relative flex items-center gap-3 overflow-hidden rounded-sm border border-primary bg-primary py-2 pl-2 pr-4 shadow-sm">
-            <span aria-hidden="true" className={`absolute inset-0 opacity-15 bg-${volume.token}`} />
-            <span aria-hidden="true" className="relative flex size-11 shrink-0 items-center justify-center">
-                {Art ? <Art size={44} /> : null}
-            </span>
-            <div className="relative flex min-w-0 flex-1 flex-col gap-0.5">
-                <h3 className="m-0 truncate text-sm font-bold leading-tight text-primary">{volume.title}</h3>
-                <p className="m-0 text-[10px] uppercase tracking-[0.16em] text-secondary tabular-nums">
-                    {volume.comingSoon ? 'Soon' : `${count} ${count === 1 ? 'chapter' : 'chapters'}`}
-                </p>
+        <article className="flex items-stretch overflow-hidden rounded-sm border border-light bg-white shadow-md dark:border-dark">
+            <span aria-hidden="true" className={`w-2.5 shrink-0 bg-${volume.token}`} />
+            <div className="flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-3 pr-3">
+                <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center">
+                    {Art ? <Art size={40} /> : null}
+                </span>
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                    <h3 className="m-0 truncate text-[15px] font-bold leading-tight text-black">{volume.title}</h3>
+                    <p className="m-0 text-[10px] uppercase tracking-wider text-black/60 tabular-nums">
+                        {chapterCount}
+                    </p>
+                </div>
             </div>
-            <span className="relative ml-auto text-2xl font-bold leading-none text-primary/40 tabular-nums">
-                <span className="sr-only">Volume </span>
-                {String(volume.volume).padStart(2, '0')}
-            </span>
         </article>
     )
 }
@@ -42,7 +41,7 @@ export default function Book(props: BookProps): JSX.Element {
     if (props.volume.comingSoon) {
         return (
             <li className="opacity-60">
-                <ShelfCard {...props} />
+                <SpineCard {...props} />
             </li>
         )
     }
@@ -63,14 +62,13 @@ export default function Book(props: BookProps): JSX.Element {
             >
                 {/* A small lift, not the cover-opening flip the face-out shelf uses. */}
                 <div className="transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.03]">
-                    <ShelfCard {...props} />
+                    <SpineCard {...props} />
                 </div>
             </Link>
         </li>
     )
 }
 
-/** The shelf. The width cap stops volumes stretching into slivers when the index stacks. */
 export function BookShelf({ children }: { children: React.ReactNode }): JSX.Element {
-    return <ul className="m-0 flex w-full max-w-[420px] list-none flex-col gap-2 p-0">{children}</ul>
+    return <ul className="m-0 flex w-full list-none flex-col gap-2 p-0">{children}</ul>
 }
