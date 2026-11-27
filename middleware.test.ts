@@ -473,3 +473,28 @@ test('tags no link for a page whose path could break a link or log an email addr
     )
     assert.match(String(lines[2].chain_id), /^product-analytics\.[0-9a-z]{1,7}$/)
 })
+
+test('counts the time spent reading the `.md` body in chain_fetch_ms', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    t.mock.method(
+        globalThis,
+        'fetch',
+        async () =>
+            new Response(
+                new ReadableStream({
+                    start(controller) {
+                        setTimeout(() => {
+                            controller.enqueue(new TextEncoder().encode(linkedMarkdown))
+                            controller.close()
+                        }, 50)
+                    },
+                })
+            )
+    )
+    const lines: Record<string, unknown>[] = []
+    t.mock.method(console, 'log', (line: string) => lines.push(JSON.parse(line)))
+
+    await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'Claude-User' } }))
+    assert.ok(Number(lines[0].chain_fetch_ms) >= 45, `chain_fetch_ms was ${lines[0].chain_fetch_ms}`)
+})

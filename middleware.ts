@@ -242,7 +242,6 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
     return { response, negotiation: 'served', reason, markdownFetchMs }
 }
 
-<<<<<<< ours
 // Adds `doc_ctx=<page>.<random>` to every /docs link in the Markdown this request gets, such as
 // `doc_ctx=product-analytics/insights.1x9k2pq`. The page is the path under /docs, so a tagged URL says which
 // page linked to it. The random part, one 32-bit value in base 36, tells two responses for the same page
@@ -263,27 +262,30 @@ async function chainLinks(request: Request, result: NegotiationResult): Promise<
     const page = pathname.replace(/\.md$/, '').replace(/^\/docs\/?/, '') || 'docs'
     if (!CHAIN_PAGE.test(page)) return result
 
-    let chainFetchMs: number | undefined
+    // The fetch time runs until the body is read, because the response waits for the whole body.
+    let started: number | undefined
+    const elapsed = () => (started === undefined ? undefined : Date.now() - started)
     // The tags only feed the log, so when anything here fails, the request is served as if chaining were off.
     try {
         let markdown = result.response
         if (result.negotiation === 'markdown_url') {
-            const started = Date.now()
+            started = Date.now()
             const file = await fetch(new URL(pathname, url.origin), {
                 headers: { [SUBREQUEST_HEADER]: '1' },
                 signal: AbortSignal.timeout(CHAIN_FETCH_TIMEOUT_MS),
             })
-            chainFetchMs = Date.now() - started
             if (!file.ok) {
                 await file.body?.cancel()
-                return { ...result, chainFetchMs, chainError: `http_${file.status}` }
+                return { ...result, chainFetchMs: elapsed(), chainError: `http_${file.status}` }
             }
             markdown = file
         }
         if (!markdown) return result
 
+        const text = await markdown.text()
+        const chainFetchMs = elapsed()
         const chainId = `${page}.${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`
-        const body = (await markdown.text()).replace(
+        const body = text.replace(
             DOCS_LINK,
             (_, host = '', path, query = '', fragment = '') =>
                 `](${host}${path}${query ? `${query}&` : '?'}${CHAIN_PARAM}=${chainId}${fragment})`
@@ -302,7 +304,7 @@ async function chainLinks(request: Request, result: NegotiationResult): Promise<
     } catch (error) {
         // A failed read can leave a negotiated body half used, so a negotiated page falls back to the HTML.
         const chainError = (error as { name?: string } | null)?.name || 'error'
-        return { ...result, response: undefined, chainFetchMs, chainError }
+        return { ...result, response: undefined, chainFetchMs: elapsed(), chainError }
     }
 }
 
@@ -310,7 +312,8 @@ function chainParent(url: URL): string | undefined {
     const value = url.searchParams.get(CHAIN_PARAM)
     if (!value) return undefined
     return CHAIN_VALUE.test(value) ? value : REDACTED
-=======
+}
+
 // The q-value of each media range in an Accept header, 1 when it has none. A range listed twice keeps its
 // first weight.
 function acceptWeights(accept: string): Map<string, number> {
@@ -323,7 +326,6 @@ function acceptWeights(accept: string): Map<string, number> {
         weights.set(range, Number.isNaN(weight) ? 0 : weight)
     }
     return weights
->>>>>>> theirs
 }
 
 function logRequest(request: Request, result: NegotiationResult): void {
