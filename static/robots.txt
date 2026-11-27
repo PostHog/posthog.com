@@ -10,4 +10,10 @@ Disallow: /*.md$
 User-agent: Yeti
 Disallow: /*.md$
 
+User-agent: Baiduspider
+Disallow: /*.md$
+
+User-agent: YandexBot
+Disallow: /*.md$
+
 Sitemap: https://posthog.com/sitemap/sitemap-index.xml
