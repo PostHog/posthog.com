@@ -41,6 +41,24 @@ To connect to your Google Sheet, PostHog uses a Google Cloud service account. Th
 
 Once the syncs are complete, you can start using Google Sheets data in PostHog.
 
+## Date and datetime handling
+
+Cells formatted as dates or datetimes in Google Sheets are imported as typed `Date` or `DateTime` columns. Date-time values use the spreadsheet's time zone and are stored as UTC.
+
+> **Note:** Columns that mix dates with text or numbers keep their display text instead of typed dates. Sheets with more than 200,000 cells also use display text for performance reasons.
+
+Use date functions when querying date columns:
+
+```sql
+-- Do this
+SELECT * FROM my_sheet WHERE toYear(date_column) = 2026
+
+-- Not this (will fail)
+SELECT * FROM my_sheet WHERE date_column = '10/13/2026'
+```
+
+For incremental syncs, existing columns remain as strings, and new rows arrive as UTC-formatted text. Run a full refresh if you want to convert existing date columns to typed dates.
+
 ## Configuration
 
 <SourceParameters />
