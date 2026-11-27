@@ -24,9 +24,10 @@ Not all survey features are available on every SDK. See the [SDK feature support
 
 ## Limitations
 
-- HTML descriptions for questions and the thank-you screen render as plain text.
+- HTML descriptions on the intro screen, questions, and thank-you screen aren't rendered. Use plain text descriptions so they aren't omitted.
 
 ## Troubleshooting
 
 - Update your SDK and run a clean build if you experience issues.
-- If surveys aren't shown, make sure `surveys = true` is set in your config and the survey is enabled in your [project settings](https://us.posthog.com/settings/project-surveys).
+- `posthog-android >= 3.49.0` auto-discovers `PostHogSurveysComposeDelegate` when `posthog-android-surveys-compose` is on the classpath. Without it, `PostHogSurveysConfig.surveysDelegate` falls back to `PostHogSurveysDefaultDelegate`, which only logs survey events and renders no UI (or pass a custom `PostHogSurveysDelegate`).
+- If surveys aren't shown, confirm `surveys = true` is set in your config and surveys are enabled in [project settings](https://app.posthog.com/settings/project-surveys).

@@ -69,9 +69,9 @@ In production, using a [reverse proxy](/docs/advanced/proxy) can help prevent th
 
 ## Survey response is not showing up on my [custom insight, webhook or action]
 
-Since February 25, [we changed the way that survey responses are captured](/docs/surveys/implementing-custom-surveys#capture-survey-responses). If you're not seeing them, it's might be because the `$survey_response` property is no longer captured.
+Survey responses are keyed by question ID (`$survey_response_<question_id>`). PostHog client SDKs (`posthog-js`, React Native, iOS, Android, and Flutter) still emit legacy `$survey_response` for question 0 alongside the ID-keyed property, while custom API submissions and multi-question queries rely on `$survey_response_<question_id>`.
 
-To fix this, you need to now use the format `event.properties['$survey_response_<question_id>']` to access the survey response.
+Access individual responses with `event.properties['$survey_response_<question_id>']`.
 
 For example, if your survey has a single question with the ID `a3071551-d599-4eeb-9ffe-69e93dc647b6`, you need to use `event.properties['$survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6']` to access the response.
 
@@ -146,10 +146,10 @@ Make sure you upgrade `posthog-js` to at least version `1.258.1`, as it updates 
 
 If you're using hosted surveys and responses appear as anonymous users instead of being linked to your identified users, you're missing the `distinct_id` query parameter.
 
-**Solution:** Add the `distinct_id` parameter to your hosted survey URL:
+**Solution:** Add the `distinct_id` parameter to your hosted survey URL (`https://posthogsurveys.com/<survey-id>` on US Cloud, `https://eu.posthogsurveys.com/<survey-id>` on EU Cloud, or `<your-app-origin>/external_surveys/<survey-id>` on self-hosted installs):
 
 ```
-https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
+https://posthogsurveys.com/your-survey-id?distinct_id=user123
 ```
 
 **Important:** The [`distinct_id` value must match exactly what you use in `posthog.identify()`](/docs/product-analytics/identify) calls in your application. This is the only way PostHog can link the external survey response to the correct user profile.

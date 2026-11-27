@@ -6,7 +6,7 @@ showTitle: true
 
 Use the API when you want surveys managed by your own tooling rather than by hand – creating a survey per experiment from a script, syncing responses into a warehouse, or building a fully custom survey UI on top of PostHog.
 
-Reading surveys requires the `survey:read` scope; creating, updating, launching, stopping, and deleting them requires `survey:write`.
+Reading surveys and stats requires `survey:read`. Listing individual responses (`GET /api/projects/:project_id/surveys/:id/responses/`) requires both `survey:read` and `query:read`. Creating, updating, launching, stopping, archiving responses, and deleting surveys require `survey:write`.
 
 ## Before you start
 

@@ -74,7 +74,7 @@ Here's a breakdown of each field in the form:
 
 ### Presentation
 
-There are three options for displaying a survey:
+PostHog supports four survey display types:
 
 1. **Popover:** Use PostHog's prebuilt user interfaces to show surveys as a popover in the bottom corner of the screen.
 
@@ -97,10 +97,12 @@ Popover, API, and feedback button surveys are considered _in-app_ surveys, meani
 
 **In-app surveys** automatically link responses to users when you [identify users](/docs/product-analytics/identify) in your app.
 
-**Hosted surveys** require manual user linking since they're accessed via external URLs. To connect survey responses to specific users, add the `distinct_id` query parameter to your survey URL:
+**Hosted surveys** require manual user linking since they're accessed via external URLs. Hosted links use `https://posthogsurveys.com/<survey-id>` on US Cloud, `https://eu.posthogsurveys.com/<survey-id>` on EU Cloud, or `<your-app-origin>/external_surveys/<survey-id>` on self-hosted installs.
+
+To connect survey responses to specific users, add the `distinct_id` query parameter to your survey URL:
 
 ```
-https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
+https://posthogsurveys.com/your-survey-id?distinct_id=user123
 ```
 
 **Important:** Use the exact same `distinct_id` value that you pass to `posthog.identify()` in your application. This ensures survey responses appear in the correct user's profile.
@@ -113,7 +115,7 @@ With the parameter, responses are attributed to the specified user, enabling you
 When directing users to a hosted survey, you can add event properties using URL parameters. These parameters are automatically captured on the survey sent event.
 
 ```
-https://us.posthog.com/external_surveys/your-survey-id?order_id=12345
+https://posthogsurveys.com/your-survey-id?order_id=12345
 ```
 
 The types for custom properties are automatically inferred with this logic, in this order:
@@ -129,7 +131,7 @@ You can pre-fill survey answers using URL parameters, which is especially useful
 **Basic syntax:**
 
 ```
-https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&q1=8
+https://posthogsurveys.com/your-survey-id?distinct_id=user123&q0=2&q1=8
 ```
 
 - `q{N}` = question index (0-based, e.g., `q0` for the first question, `q1` for the second)
@@ -171,17 +173,12 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&
 
 Survey questions that are pre-filled will be skipped (not shown to the user) if they are set to "Automatically submit on selection". Additionally, if partial responses are enabled for your survey, these responses will be recorded automatically on page load.
 
-Here's how it works:
+Here's how URL prefill works:
 
-- User clicks link to open survey page
-- Starting at the first question, we automatically advance through questions which are both prefilled **and** set to automatically submit on selection
-- If partial responses are enabled for your survey, responses are immediately stored for the questions we skipped
-- We always start the survey at the first non-prefilled question, regardless of whether some questions in the middle are pre-filled
-
-Additional notes:
-
-- If all questions are pre-filled, the user will only see a confirmation message ("Thanks! Your response was recorded")
-- If some questions in the middle of your survey are pre-filled, regardless of whether the question is set to auto-submit on selection, the user will still see the pre-selected response, and may change it
+- Starting at question 0, PostHog automatically skips consecutive prefilled questions only when **Automatically submit on selection** (`skipSubmitButton: true`) is enabled on each question.
+- If a prefilled question does not have **Automatically submit on selection** enabled, the survey opens on that question with the answer pre-selected so the user can edit or submit it.
+- When partial responses are enabled, skipped prefilled answers are captured immediately on page load.
+- If every question auto-submits from URL prefill, PostHog submits the response immediately and shows the confirmation message when `displayThankYouMessage` is enabled.
 
 Example: one-click NPS with optional follow-up
 Say you want to send an email with a "one-click" NPS survey that includes an optional follow-up question.
@@ -234,7 +231,7 @@ Here's an example with Framer:
 - **Embed customization:** The default embed code provides automatic height adjustment and minimal styling. For more control, you can create your own iframe using the hosted survey's URL + `?embed=true`. Example:
 
 ```
-https://us.posthog.com/external_surveys/my-survey-id/?embed=true
+https://posthogsurveys.com/my-survey-id?embed=true
 ```
 
 ### Steps
@@ -261,7 +258,7 @@ PostHog supports multiple question types which are all available for both popove
 Customization enables you to change the look, feel, and timing of your popover survey:
 
 - The color of the background, border, and buttons.
-- The position of the popover at the bottom of the screen.
+- The position of the popover on the screen (top, middle, or bottom alignment, or next to a trigger element).
 - The placeholder text.
 - The visibility of the PostHog branding.
 - Whether to shuffle the order of the choices and questions.
@@ -316,9 +313,9 @@ By default, surveys are shown once to each user until they either dismiss it or 
 
 ### Event-triggered surveys
 
-For surveys triggered by a specific event, you can configure the survey to repeat if the event is sent again. If you select the option `Every time the event is sent`, the survey is shown again for each event.
+Check **Show every time these events fire (otherwise: once per user)** in the survey editor to show the survey each time the event fires. In the guided wizard, check **Show every time the event is captured**.
 
-If you want to trigger a survey on a specific event, but only show it once per user, select the `Just once` option.
+Leave it unchecked to show the event-triggered survey at most once per user.
 
 <ProductScreenshot
   imageLight={surveyTriggeredByEventLight}
@@ -368,7 +365,9 @@ A few things to keep in mind:
 - **Dismissing counts as answering.** A user who dismisses the survey won't see it again until the next iteration, same as a user who submitted a response.
 - **Iteration boundaries are approximate.** PostHog processes iteration changes a few times per day, so a new iteration can begin a few hours after its scheduled start.
 - **Users must still match your display conditions** each time the survey becomes eligible to show again.
-- **The survey stops automatically when the last iteration ends.** A recurring survey is not open-ended. It runs for the number of repetitions times the cycle length, starting from the launch date. After the last iteration, PostHog sets an end date and stops showing the survey. In the example above, it runs for 90 days (3 iterations of 30 days) and then closes on its own. Removing the end date does not restart a finished survey. PostHog re-checks the schedule within a few hours and re-applies the end date.
+- **The survey stops automatically when a fixed iteration count ends.** By default, a recurring survey configured in the editor runs for the number of repetitions times the cycle length from the launch date. PostHog then sets an end date and stops showing it, so the example above closes after 90 days (3 iterations of 30 days).
+
+  To run an open-ended schedule that repeats until you stop it, set `repeat_until_stopped: true` via the [Surveys API](/docs/surveys/surfaces/api) or [MCP](/docs/surveys/surfaces/mcp). If a team member manually resumes a finished survey, PostHog keeps it open rather than re-applying the automatic end date.
 
   PostHog displays the auto-close date directly in the survey editor and overview. Before launch, it shows the total duration (e.g., "This survey will run for 90 days before it automatically closes"). Once running, it shows the exact end date (e.g., "This survey will automatically close on March 31, 2025").
 
@@ -418,7 +417,7 @@ The original does not change, and the copy does not sync with it.
 
 ## How PostHog handles partial survey responses
 
-You can enable partial responses in the "Completion conditions" section of the survey. This option is enabled by default for all new surveys. Partial responses require `posthog-js` 1.240.0, React Native 4.75.0, iOS 3.79.0, Android 3.70.0, or Flutter 5.48.0, or later. See [SDK feature support](/docs/surveys/sdk-feature-support) for other features.
+You can enable partial responses under **Completion conditions** (enabled by default for new surveys). Partial responses require `posthog-js` 1.240.0, React Native 4.75.0, iOS 3.79.0, Android 3.70.0, or Flutter 5.48.0, or later. See [SDK feature support](/docs/surveys/sdk-feature-support) for other features.
 
 **If partial responses are disabled, PostHog sends a single `survey sent` event**. This event is triggered once the user answers the last question of the survey. It contains all the user's responses. The `$survey_completed` property in this event will be `true`.
 
@@ -436,6 +435,6 @@ All `survey sent` events triggered during a single user's attempt to complete a 
 We charge based on unique survey submissions, not individual `survey sent` events. Therefore, you are charged only once per unique `$survey_submission_id`. For example, if your survey has 5 questions and a user answers 3 of them (triggering multiple `survey sent` events with `$survey_completed: false`), you will still be charged for only one survey response, as all those events will share the same `$survey_submission_id`.
 
 **The `survey abandoned` event:**
-When a user answers at least one question but navigates away or closes the page before completing all questions, PostHog automatically captures a `survey abandoned` event. This event includes the `$survey_id` property identifying the survey. It's different from `survey dismissed`, which fires when a user explicitly closes the survey without answering.
+When a user answers at least one question but navigates away or closes the page before completing all questions, PostHog automatically captures a `survey abandoned` event. This event includes the `$survey_id` property identifying the survey. It's different from `survey dismissed`, which fires when a user explicitly closes the survey (without answering, or with `$survey_partially_completed: true` after answering some questions).
 
 You can use the `survey abandoned` event in [insights](/docs/surveys/viewing-results#3-creating-your-own-insights) to measure drop-off rates and identify which surveys users start but don't finish.

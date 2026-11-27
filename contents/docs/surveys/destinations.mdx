@@ -21,7 +21,9 @@ To add a notification directly from your survey:
 5. Customize the message template. Use the **quick insert** buttons to add the survey name, respondent details, or individual question responses.
 6. Click **Add notification**.
 
-Notifications created this way are automatically scoped to the current survey and filter for completed submissions by default. If your survey has partial responses enabled, you can toggle **Only notify for full responses** off to receive notifications for partial submissions too.
+Notifications created this way are automatically scoped to the current survey. They send when a respondent completes the survey or dismisses it after answering at least one question.
+
+Intermediate `survey sent` events from partial responses (`$survey_completed: false`) don't trigger duplicate notifications.
 
 For Slack notifications, you can also include buttons to view the survey and the respondent's person profile.
 
@@ -47,6 +49,6 @@ You can extract the following properties from surveys:
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `event.properties.$survey_name`                    | The name of the survey                                                                                                                                                                                                                                                   |
 | `event.properties.$survey_questions`               | An array of objects containing the following survey question properties: `id`, `question`, and `response`                                                                                                                                                                |
-| `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey's **Results** tab and click **Copy response key** on the question card. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
+| `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, open the survey's **Summary** tab and click **Copy response key** on the question card. `response_key` matches the question's UUID. |
 | `event.properties.$survey_completed`               | Whether the survey was completed. Relevant for surveys with partial responses. This will be `true` if the user has answered all questions.                                                                                                                               |
 | `person.name` or other person properties           | The name of the person who responded or other properties                                                                                                                                                                                                                 |
