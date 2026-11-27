@@ -6,13 +6,15 @@ showTitle: true
 
 PostHog Workflows captures two types of events as standard PostHog events: **email engagement events** and **conversion events**. These are in addition to the per-step workflow metrics that are always recorded. You can use these events to build insights, funnels, retention reports, and dashboards from workflow data the same way you would for any other product event.
 
-## Enable engagement events
+## Engagement events default
 
-Go to [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and toggle **Capture email engagement events** on. You can also enable it inline from the email step in the workflow builder — the toggle in settings is the same setting.
+New projects start with **Capture email engagement events** enabled. Existing projects keep their current setting — nothing changes automatically.
+
+These events are billed like any other PostHog event. To turn them off, go to [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and toggle **Capture email engagement events** off. You can also turn them off from the banner shown on the workflows, broadcasts, and transactional pages.
 
 This setting controls whether email engagement activity is captured as standard PostHog events. It does not control whether opens and clicks are tracked — for that, use the **Track opens and link clicks** toggle on each email step (see below).
 
-The setting takes effect within a couple of minutes for future email sends. Emails that were already sent before you enabled it won't backfill, but provider callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events once the setting is on.
+The setting takes effect within a couple of minutes for future email sends. Emails that were already sent before you changed it won't backfill, but provider callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events while the setting is on.
 
 ## Email tracking controls
 
@@ -135,6 +137,6 @@ Workflow metrics (the per-step success/failure counters you see on the workflow 
 
 ## Privacy and cost
 
-Both email engagement events and conversion events count toward your PostHog event ingestion like any other event. If you send a high volume of email or have many converting users, enabling these can meaningfully increase event volume. You can disable email engagement events at any time in [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and the workflow will fall back to metrics-only without any other configuration change. Conversion events are captured automatically whenever a conversion goal is configured.
+Both email engagement events and conversion events count toward your PostHog event ingestion like any other event. New projects have email engagement events enabled by default. If you send a high volume of email or have many converting users, this can meaningfully increase event volume. You can disable email engagement events at any time in [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and the workflow will fall back to metrics-only without any other configuration change. Conversion events are captured automatically whenever a conversion goal is configured.
 
 When tracking is disabled for a send — whether via the per-step toggle or recipient consent — the email is sent without a tracking pixel and without rewritten links. Opens and clicks are never recorded for untracked sends. The workflow's **Metrics** tab shows an **Untracked** series so you can see how many sends skipped tracking. Open and click rates are shown against tracked sends (sent minus untracked) to avoid deflating engagement numbers.
