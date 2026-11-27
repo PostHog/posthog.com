@@ -79,7 +79,7 @@ Once done, visit your site running locally, click the **Count is 0** button, and
 
 When we head back to our local site, right-click, choose inspect, go to the Application tab, and check cookies, you’ll see we’ve created a tracking cookie with details about PostHog and the user. 
 
-![App cookie](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_10_at_14_59_04_2x_19bbe1f339.png)
+![App cookie](https://res.cloudinary.com/dmukukwp6/image/upload/s2_cookie_devtools_light_6ce458c32c.png)
 
 ## Step 3: Ensuring cookies aren't set on initial load
 
