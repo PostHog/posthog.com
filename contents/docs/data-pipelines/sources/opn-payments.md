@@ -9,9 +9,9 @@ availability:
 sourceId: OpnPayments
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Opn Payments (formerly Omise) connector syncs charges, customers, disputes, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -33,7 +33,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Opn Payments (formerly Omise) tables are full refresh. Each sync replaces the contents of the table.
+Most Opn Payments tables support incremental sync using `created_at` as the cursor. The Schedules, Cards, and Occurrences tables support full refresh only.
 
 ## Configuration
 
