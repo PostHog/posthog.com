@@ -82,7 +82,8 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
         if (!toolGroups.length) return null
         const remaining = new Set(filteredTools)
         const groups = toolGroups.map((g) => {
-            const tools = filteredTools.filter((t) => g.prefixes.some((p) => t.name.startsWith(p)))
+            // First match wins, so a tool never shows in two groups.
+            const tools = Array.from(remaining).filter((t) => g.prefixes.some((p) => t.name.startsWith(p)))
             tools.forEach((t) => remaining.delete(t))
             return { name: g.name, summary: g.summary, tools }
         })
