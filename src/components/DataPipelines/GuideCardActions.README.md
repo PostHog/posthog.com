@@ -15,4 +15,4 @@ import GuideCardActions from 'components/DataPipelines/GuideCardActions'
 
 The component uses `mt-auto`, so put it at the end of a `flex flex-col` card to pin the actions to the bottom.
 
-Used on `/data-pipelines/sources/stripe`, `/data-pipelines/sources/hubspot`, and `/data-pipelines/sources/supabase`.
+Used on `/data-pipelines/sources/stripe`, `/data-pipelines/sources/hubspot`, `/data-pipelines/sources/supabase`, and `/data-pipelines/sources/google-sheets`.
