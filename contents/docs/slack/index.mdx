@@ -15,12 +15,13 @@ Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work 
 See [task environment detection](/docs/tasks/agent-environment) if your scripts or agent instructions need to detect a PostHog task in a cloud sandbox.
 
 <ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
-classes="rounded"
-alt="A PostHog Desktop task running in a Slack thread"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
+  classes="rounded"
+  alt="A PostHog Desktop task running in a Slack thread"
 />
 
 Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup):
+
 - A Slack workspace connection for each project.
 - GitHub, to ship code. A personal GitHub connection lets the agent open PRs as you. Without one, a task can fall back to your project's GitHub App installation and open the PR as the PostHog bot.
 
@@ -87,12 +88,12 @@ Teammates can send follow-ups too. Each message is forwarded to the running agen
 
 Who can join is up to whoever started the thread. Set it in the [App Home tab](#the-app-home-tab) under **Who can join your threads**:
 
-| Option | What happens |
-|---|---|
-| **Let anyone join** (default) | Anyone who mentions `@PostHog` in the thread is picked up |
-| **Ask once per thread** | The first time someone else joins, you get a prompt only you can see. Approve once and anyone can join that thread |
-| **Ask for each person** | You approve each new person separately |
-| **Ignore them** | Only you can talk to the agent in your threads |
+| Option                        | What happens                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Let anyone join** (default) | Anyone who mentions `@PostHog` in the thread is picked up                                                          |
+| **Ask once per thread**       | The first time someone else joins, you get a prompt only you can see. Approve once and anyone can join that thread |
+| **Ask for each person**       | You approve each new person separately                                                                             |
+| **Ignore them**               | Only you can talk to the agent in your threads                                                                     |
 
 Follow-ups are multiplayer: each turn runs as the PostHog user who sent it. For GitHub, it depends on how the run started:
 
@@ -103,11 +104,11 @@ Follow-ups are multiplayer: each turn runs as the PostHog user who sent it. For 
 
 Once a task is running in a thread, the bot can also pick up replies that don't mention `@PostHog`. Whether it does is up to whoever started the thread. To set your preference, click **Configure** in the footer of any bot reply to open the [App Home tab](#the-app-home-tab). Then pick an option under **Reply settings > Thread follow-ups**:
 
-| Option | What happens |
-|---|---|
-| **Ask them first** (default) | If the bot thinks a reply is meant for it, it asks first with a prompt only the replier can see |
-| **Pick them up automatically** | If the bot thinks a reply is meant for it, it answers without asking |
-| **Leave them alone** | Untagged replies are ignored – mention `@PostHog` to reach the agent |
+| Option                         | What happens                                                                                    |
+| ------------------------------ | ----------------------------------------------------------------------------------------------- |
+| **Ask them first** (default)   | If the bot thinks a reply is meant for it, it asks first with a prompt only the replier can see |
+| **Pick them up automatically** | If the bot thinks a reply is meant for it, it answers without asking                            |
+| **Leave them alone**           | Untagged replies are ignored – mention `@PostHog` to reach the agent                            |
 
 The setting applies to every reply in threads you started, including your own. The bot is deliberately conservative about what counts as "meant for it" – teammates talking to each other are left alone.
 
@@ -213,11 +214,13 @@ The bot reads your [agent instructions](/docs/tasks/agent-instructions) at the s
 
 ```markdown
 # Slack replies
+
 - Start with a one-line answer, then up to three bullets.
 - Link the insight you used.
 - Show money in USD and dates in UTC.
 
 # Customer context
+
 - For questions about a customer, search Business Knowledge first.
 ```
 
@@ -245,12 +248,13 @@ Open the PostHog app's **Home** tab in Slack (or click **Configure** in the foot
 
 The bot reacts to your `@PostHog` message as it works through your request, so you can scan a busy channel and see what's still in flight without opening every thread:
 
-| Emoji | What it means |
-|---|---|
-| ⏳ `:hourglass:` | Your message is queued behind another one in the same conversation |
-| 🔍 `:mag:` | Picking which repo to run the task against |
-| 👀 `:eyes:` | The agent is working on your message |
-| ❌ `:x:` | Something went wrong |
+| Emoji               | What it means                                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| ⏳ `:hourglass:`    | Your message is queued behind another one in the same conversation                                                         |
+| 🔍 `:mag:`          | Picking which repo to run the task against                                                                                 |
+| 👀 `:eyes:`         | The agent is working on your message                                                                                       |
+| 🧡 `:orange_heart:` | Your message said "please", "thanks", or "thank you" – appears alongside `:eyes:` on the first mention that creates a task |
+| ❌ `:x:`            | Something went wrong                                                                                                       |
 
 ## Link unfurling
 
