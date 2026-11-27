@@ -63,7 +63,12 @@ Do what you need to do. The goal is to get the rubber stamp.
 >If your draft might include anything private such as screenshots of customer dashboards, keep it in an internal repo like <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">requests-for-comments-internal</PrivateLink> just to be safe.
 
 ### 7. Publish!
-Most people are excited to be featured and will sign off quickly. If you need artwork to go with the case study, use the [customer story image tool](https://brand.posthog.com/tools/images/customer-stories) made by the brand team.
+Most people are excited to be featured and will sign off quickly.
+
+To publish the story, you'll need a cover image.
+- Use the [customer story image tool](https://brand.posthog.com/tools/images/customer-stories) made by the brand team to create your image. 
+- Upload it to Cloudinary, and include it in your PR.
+
 
 Once the case study is merged and live on the website, the last step is to send a [merch credit](/handbook/company/merch-store#customers) to the participants as thank you.
 
