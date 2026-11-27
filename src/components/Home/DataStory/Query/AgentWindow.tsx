@@ -218,7 +218,11 @@ export const ClaudeTerminal = ({
         title={`claude — ${cwd}`}
         controls={controls}
         lightSize={lightSize}
-        className={cn(TERMINAL_TEXT, 'border-[#3a3835] bg-[#1F1E1D] text-[#E8E6E3]', className)}
+        className={cn(
+            TERMINAL_TEXT,
+            'border-[#3a3835] bg-[#1F1E1D] text-[#E8E6E3] [&_strong]:!text-inherit',
+            className
+        )}
     >
         <ScrollToLatest className="px-3.5 pb-3">
             <div className="mb-3 rounded-md border px-3 py-2" style={{ borderColor: CLAUDE_CLAY }}>

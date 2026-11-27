@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useProduct from 'hooks/useProduct'
-import ToolsTickerStrip from './ToolsTickerStrip'
+import ToolsTickerStrip, { ToolsTickerProduct } from './ToolsTickerStrip'
 
 // Seconds each item takes to cross one loop; total duration scales with item count
 // so the apparent speed stays constant when handles are added or removed.
@@ -46,19 +46,26 @@ export function useToolsProducts(handles = DEFAULT_HANDLES) {
 
 interface ToolsTickerProps {
     handles?: string[]
+    /** Items to scroll instead of products, such as integrations. Replaces `handles`. */
+    items?: ToolsTickerProduct[]
     label?: string
     className?: string
+    /** Keep the label on its own row until the container is wide, for a long label. */
+    stacked?: boolean
     /** Which way the names travel. `'left'` (default) is the homepage direction. */
     direction?: 'left' | 'right'
 }
 
 export default function ToolsTicker({
     handles = DEFAULT_HANDLES,
+    items,
     label = 'Built-in tools for your agents:',
     className = '',
     direction = 'left',
+    stacked = false,
 }: ToolsTickerProps): JSX.Element | null {
-    const products = useToolsProducts(handles)
+    const handleProducts = useToolsProducts(handles)
+    const products = items ?? handleProducts
     const [isPaused, setIsPaused] = useState(false)
 
     if (!products.length) {
@@ -67,7 +74,13 @@ export default function ToolsTicker({
 
     return (
         <div className={`@container not-prose ${className}`}>
-            <div className="flex flex-col @sm:flex-row @sm:items-center gap-1 @sm:gap-3">
+            <div
+                className={
+                    stacked
+                        ? 'flex flex-col gap-2 @2xl:flex-row @2xl:items-center @2xl:gap-3'
+                        : 'flex flex-col @sm:flex-row @sm:items-center gap-1 @sm:gap-3'
+                }
+            >
                 <span className="shrink-0 text-sm text-secondary">{label}</span>
                 <div
                     className="relative flex-1 min-w-0 overflow-hidden motion-reduce:overflow-x-auto [mask-image:linear-gradient(to_right,transparent,#000_1.5rem,#000_calc(100%-1.5rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_1.5rem,#000_calc(100%-1.5rem),transparent)]"

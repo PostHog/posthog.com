@@ -2,8 +2,10 @@ import React from 'react'
 import { cn } from '../../../../utils'
 import {
     IconDashboard,
+    IconDecisionTree,
     IconEye,
     IconGraph,
+    IconLetter,
     IconListCheck,
     IconLlmAnalytics,
     IconPieChart,
@@ -15,7 +17,18 @@ import { LOGOS } from '../../../../constants/logos'
 import { ticks, wordStream } from '../timeline'
 import { SCENE_SIZE } from '../sceneScale'
 
-type ProductKey = 'analytics' | 'replay' | 'errors' | 'flags' | 'vision' | 'web' | 'dashboards' | 'llm' | 'evals'
+type ProductKey =
+    | 'analytics'
+    | 'replay'
+    | 'errors'
+    | 'flags'
+    | 'vision'
+    | 'web'
+    | 'dashboards'
+    | 'llm'
+    | 'evals'
+    | 'workflows'
+    | 'email'
 type ExternalKey = 'stripe' | 'zendesk' | 'hubspot'
 export type SourceKey = ProductKey | ExternalKey
 
@@ -29,6 +42,8 @@ const PRODUCT_ICONS: Record<ProductKey, { Icon: React.ComponentType<{ className?
     dashboards: { Icon: IconDashboard, className: 'text-seagreen' },
     llm: { Icon: IconLlmAnalytics, className: 'text-purple' },
     evals: { Icon: IconListCheck, className: 'text-lilac' },
+    workflows: { Icon: IconDecisionTree, className: 'text-blue' },
+    email: { Icon: IconLetter, className: 'text-red' },
 }
 
 const SOURCE_LOGOS: Record<ExternalKey, { logo: string; className?: string }> = {

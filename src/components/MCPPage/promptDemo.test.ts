@@ -9,7 +9,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { test } from 'node:test'
 
-import { flows } from './promptDemo.data.ts'
+import { flows as mcpFlows } from './promptDemo.data.ts'
+import { emailFlows } from '../EmailPage/agentDemo.data.ts'
+
+// The /messaging page reuses the demo, so its prompts must use real tools too.
+const flows = [...mcpFlows, ...emailFlows]
 
 const root = path.resolve(import.meta.dirname, '../../..')
 const toolsData = JSON.parse(fs.readFileSync(path.join(root, 'src/data/mcp-tools.json'), 'utf8')) as {

@@ -6,6 +6,8 @@ export interface PromptFlow {
     intro: string
     calls: Pick<ToolCall, 'source' | 'mcpTool' | 'argName' | 'args' | 'result'>[]
     answer: string
+    /** The PostHog skill the agent loads for this prompt, shown under it. */
+    skill?: string
 }
 
 // Each mcpTool must be a real PostHog MCP tool and each argName a real parameter of it.
