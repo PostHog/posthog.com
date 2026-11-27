@@ -19,6 +19,7 @@ import { features } from './workflows/features'
 import { applications, keyFeatures } from './workflows/slides'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogMailboxPng from 'hoggies/mailbox.png'
 import hedgehogTransformerPng from 'hoggies/transformer.png'
 import hedgehogWorkflowsPng from 'hoggies/workflows.png'
 
@@ -139,13 +140,6 @@ export const workflows = {
             imgClasses: 'rounded-t-md shadow-2xl max-w-5xl mx-auto',
             classesMobile: 'rounded-t-md',
             imgClassesMobile: '',
-        },
-        home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/wf_landing_builder_light_da51389d7a.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/wf_landing_builder_dark_2c7e828448.png',
-            alt: 'An automation in the PostHog workflow builder',
-            classes: 'justify-center px-4 @lg:px-6',
-            imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
         },
         // From contents/docs/workflows/start-here.mdx
         builder: {
@@ -409,10 +403,11 @@ export const workflows = {
             src: hedgehogWorkflowsPng,
             alt: 'A hedgehog automating workflows',
         },
-        // Perches on the bottom-right of the Overview screenshot.
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-            alt: 'the automator hedgehog',
+            src: hedgehogMailboxPng,
+            alt: 'A hedgehog holding a letter by a mailbox',
+            // The mailbox art has more empty space than other hoggies, and cannot be cropped.
+            className: 'h-44 @3xl/reader-content:h-56 @6xl/reader-content:h-64',
         },
     },
     videos: {
