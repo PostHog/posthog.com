@@ -1723,8 +1723,8 @@
             "statusCode": 301
         },
         {
-            "source": "/handbook/marketing/social-media",
-            "destination": "/handbook/content/social-media",
+            "source": "/handbook/marketing/social-media:ext(\\.md)?",
+            "destination": "/handbook/content/social-media:ext?",
             "statusCode": 301
         },
         {
