@@ -34,7 +34,16 @@ The user-claimed device flow (`service_auth`, `anonymous`) is not supported yet.
 
 ## Scopes
 
-The protected resource metadata lists every scope a client can request in `scopes_supported`. https://posthog.com/docs/api/scopes describes what each scope grants.
+The protected resource metadata lists every scope a client can request in `scopes_supported`.
+
+Identity and token scopes:
+
+- `openid`: Sign in and read your user identifier
+- `profile`: Read your basic profile
+- `email`: Read your email address
+- `introspection`: Check whether a token you hold is still valid
+
+Every other scope is an `<object>:read` or `<object>:write` pair. https://posthog.com/docs/api/scopes describes what each one grants.
 
 ## Changing scopes
 
