@@ -6,7 +6,12 @@ showTitle: true
 
 After the trigger, add steps to send, wait, branch, and act. Click **+** between two steps, or use **Add a step or run a command** at the bottom of the canvas, to open the step list.
 
-<!-- shot: automation-add-step -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_add_step_light_a95e01418d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_add_step_dark_9953f57e52.png"
+  alt="The menu of steps you can add to an automation"
+  classes="rounded"
+/>
 
 ## Send
 
@@ -36,7 +41,12 @@ The **Email** step has these settings:
 
 A **Wait until** step resumes only for events from the person in that run. Its filters use fixed values. It can't match an event to a property of the trigger event, such as the same `order_id`.
 
-<!-- shot: automation-wait-until -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_light_fda13d917d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_dark_57b3559996.png"
+  alt="A Wait until step with its condition and time limit"
+  classes="rounded"
+/>
 
 ## Branch
 
@@ -45,7 +55,12 @@ A **Wait until** step resumes only for events from the person in that run. Its f
 | **Conditional branch** | Splits people by person properties, event properties, cohorts, or variables. Conditions are checked from top to bottom, and the first match sets the path. People who match no condition take the last path. |
 | **Cohort branch** | Splits people at random by percentage, such as 50/50, to test two versions. |
 
-<!-- shot: automation-branch -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_branch_light_12f5848111.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_branch_dark_d763058434.png"
+  alt="A branch step that sends people down different paths"
+  classes="rounded"
+/>
 
 ## Act in PostHog
 

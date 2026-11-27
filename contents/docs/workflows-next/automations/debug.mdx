@@ -15,13 +15,30 @@ Test each step before anyone gets an email. After the automation is live, follow
 
 By default, **Make real HTTP requests** is off. Messages and other outside calls don't happen. PostHog logs what they would do instead. To check an email in a real inbox, turn it on for the email step, and enter your own address. PostHog asks you to confirm before it sends.
 
-<!-- shot: automation-test -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_test_light_9207c0967a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_test_dark_f9ba03e978.png"
+  alt="The Test tab running one step of an automation"
+  classes="rounded"
+/>
 
 ## Follow every run
 
 The **Invocations** tab lists every run: its status, the person and event, when it started, and any error. Filter by status: **Running**, **Succeeded**, **Failed**, or **Canceled**. Open a run to see each step that it took, and its logs, such as why a step was skipped.
 
-<!-- shot: automation-invocations -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_invocations_light_9f0257f6db.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_invocations_dark_41df96cac4.png"
+  alt="The Invocations tab, with every run and its status"
+  classes="rounded"
+/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_invocation_logs_light_488f803f80.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_invocation_logs_dark_469bf409a4.png"
+  alt="One run opened on the Invocations tab, with the log of each step"
+  classes="rounded"
+/>
 
 A batch automation groups its runs by batch run, and shows the next scheduled runs.
 

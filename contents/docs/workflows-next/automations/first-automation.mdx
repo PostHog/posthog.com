@@ -11,7 +11,12 @@ In about 10 minutes, you build an onboarding automation. It welcomes new signups
 - **Set up your domain**, or use the [test sender](/docs/workflows-next/email/test-sender) for now. See [set up your domain](/docs/workflows-next/domain).
 - **Capture events** for what people do, such as `signed_up` and `uploaded_file`, and identify people with their email. See [installation](/docs/workflows-next/installation#capture-events-from-your-app).
 
-<!-- shot: automation-canvas -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_canvas_light_f737eac151.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_canvas_dark_59948de27c.png"
+  alt="An automation on the canvas, from its trigger to its last step"
+  classes="rounded"
+/>
 
 ## 1. Pick the trigger
 
@@ -19,7 +24,12 @@ Open [Workflows](https://app.posthog.com/workflows), click **New workflow**, and
 
 Under **Frequency**, pick **One time per period**, then change the period to **ever**. Each person gets the welcome series only once.
 
-<!-- shot: automation-trigger-event -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_trigger_event_light_023b4d9242.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_trigger_event_dark_06249cf253.png"
+  alt="An event trigger with its filters"
+  classes="rounded"
+/>
 
 ## 2. Set the goal
 
@@ -37,7 +47,12 @@ Add a **Wait until** step after the email. Under **Events to wait for**, add `up
 
 The step has two paths: one for people who upload, and one for people who reach the time limit.
 
-<!-- shot: automation-wait-until -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_light_fda13d917d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_dark_57b3559996.png"
+  alt="A Wait until step with its condition and time limit"
+  classes="rounded"
+/>
 
 ## 5. Nudge the people who didn't upload
 
@@ -49,7 +64,12 @@ Open the **Test** tab, and click **Start testing**. Pick a sample person, click 
 
 To see an email in a real inbox, select the email step, turn on **Make real HTTP requests**, and enter your own address. PostHog asks you to confirm before it sends.
 
-<!-- shot: automation-test -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_test_light_9207c0967a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_test_dark_f9ba03e978.png"
+  alt="The Test tab running one step of an automation"
+  classes="rounded"
+/>
 
 ## 7. Turn it on
 

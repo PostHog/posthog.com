@@ -32,7 +32,12 @@ Write the **Instructions**. Insert values from the trigger with braces, such as 
 | **Maximum parallel tasks** | New runs skip the step while this many tasks from this automation are still running. The default is 5. |
 | **Reply in the Slack thread** | On a **Slack message posted** trigger, the agent replies in the thread that started the run, and replies in that thread go to the agent. On by default. |
 
-<!-- shot: automation-ai-task -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_light_30a1e9f14e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_dark_960b5727c9.png"
+  alt="An AI task step, with its instructions and the fields under Agent returns"
+  classes="rounded"
+/>
 
 ### Get answers back
 
@@ -44,7 +49,12 @@ Ask the agent for specific fields, so later steps can use them:
 
 PostHog gives the agent each field's name, type, and description, and saves the answer as a variable. Each field is an output variable with the result path `output.<name>`. Later steps use it as `{variables.verdict}`, or `{{ variables.verdict }}` in an email. For example, a **Conditional branch** can post bugs to Slack and answer questions by email. To also save the agent's last message or its pull requests, click **Final message** or **PR links**.
 
-<!-- shot: automation-ai-task-branch -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_branch_light_21fbedf143.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_branch_dark_46b08fb1d4.png"
+  alt="A branch on the output of an AI task"
+  classes="rounded"
+/>
 
 You can ask for up to 20 fields. Each text field holds up to 1,500 characters, and the fields and the last message share about 4 KB. If the agent doesn't fill a field, the step still finishes, the variable stays empty, and the run's log shows a warning.
 
@@ -80,7 +90,12 @@ The **Replay Vision** step has [Replay Vision](/docs/replay-vision) watch the se
 
 Each answer also has `reasoning` (except a summary) and `confidence`. The question is fixed text, so it can't include `{event...}` or `{person...}` values. See [scanner prompts](/docs/replay-vision/scanner-prompts) for how to write one.
 
-<!-- shot: automation-replay-vision -->
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_replay_vision_light_d53ca60af5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_replay_vision_dark_08c1fc2fa6.png"
+  alt="A Replay Vision step in an automation"
+  classes="rounded"
+/>
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png"
