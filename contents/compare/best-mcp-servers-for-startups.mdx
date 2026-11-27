@@ -70,6 +70,7 @@ The servers:
 - **[PostHog MCP](/docs/model-context-protocol)** is the core: ask product questions in plain English, pull session replays of specific users or cohorts, query feature flag exposure, run [funnel](/docs/product-analytics/funnels) and [path](/docs/product-analytics/paths) analyses, look at [survey](/surveys) responses, and dig into [experiment](/experiments) results.
 - **[Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server)** pulls in the customer-facing context: what's the support team hearing? What did sales flag in the deal review channel? Did anyone post about this in #product-feedback?
 - **[Notion MCP](https://developers.notion.com/guides/mcp)** or **[Linear MCP](https://linear.app/docs/mcp)** for any related research docs, customer interview notes, or experiment write-ups.
+- **[Frank AI Researcher MCP](https://www.hifrank.ai/docs/frank-mcp-connector)** runs AI-moderated voice interviews with your own customers and returns transcripts to the assistant. You bring the participants; it does not recruit. The remote server is at `https://api.hifrank.ai/mcp` (OAuth). MCP is included on every plan, including Free.
 
 A real prompt: _"My top-three customer just churned. Use PostHog to pull session replays from their last two weeks and check which feature flags they were exposed to, search Slack #support and #sales for any recent mentions of their account, and find their latest customer interview notes in Notion."_
 
