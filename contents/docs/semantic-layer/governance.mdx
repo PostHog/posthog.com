@@ -17,11 +17,11 @@ The result: your agents build the catalog for you during normal work, and nothin
 
 ## Lifecycle across the catalog
 
-| Primitive | Lands as | Human promotes to | Demoted or terminal |
-|-----------|----------|-------------------|---------------------|
-| [Metric](/docs/semantic-layer/metrics) | `proposed` | `approved` | Editing the definition, name, description, or unit resets it to `proposed`. [Drift](/docs/semantic-layer/metrics#drift) from the source insight doesn't change the status, but a drifted metric isn't canonical. Clearing the drift resets it to `proposed`, whether you refresh the metric or unlink it. Deleting frees the name (activity-logged, no undo in the product) |
-| [Certification](/docs/semantic-layer/certifications-and-relationships#table-certifications) | `proposed` | `certified` or `deprecated` | Revoking deletes the mark (activity-logged) |
-| [Relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) | `proposed` | `accepted` (becomes a real join) | `rejected` – permanent, never re-proposed |
+| Primitive                                                                                    | Lands as   | Human promotes to                | Demoted or terminal                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------- | ---------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Metric](/docs/semantic-layer/metrics)                                                       | `proposed` | `approved`                       | Editing the definition, name, description, or unit resets it to `proposed`. [Drift](/docs/semantic-layer/metrics#drift) from the source insight doesn't change the status, but a drifted metric isn't canonical. Clearing the drift resets it to `proposed`, whether you refresh the metric or unlink it. Deleting frees the name (activity-logged, no undo in the product) |
+| [Certification](/docs/semantic-layer/certifications-and-relationships#table-certifications)  | `proposed` | `certified` or `deprecated`      | Revoking deletes the mark (activity-logged)                                                                                                                                                                                                                                                                                                                                 |
+| [Relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) | `proposed` | `accepted` (becomes a real join) | `rejected` – permanent, never re-proposed                                                                                                                                                                                                                                                                                                                                   |
 
 ## Typed confirmations
 
@@ -39,16 +39,16 @@ The point is simple: an agent can't autocomplete your signature. However agentic
 
 Two scopes split proposing from promoting:
 
-| Scope | Grants |
-|-------|--------|
-| `data_catalog` | Read and write: search the catalog, run metrics, propose metrics/certifications/relationships, update drafts |
-| `data_catalog_approval` | Promote and veto: approve metrics, certify or deprecate tables, accept or reject relationships |
+| Scope                   | Grants                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `data_catalog`          | Read and write: search the catalog, run metrics, propose metrics/certifications/relationships, update drafts |
+| `data_catalog_approval` | Promote and veto: approve metrics, certify or deprecate tables, accept or reject relationships               |
 
 Practical setup: the API key you hand your MCP server or CI agent gets `data_catalog` only – it can build and use the catalog but never bless anything. Your own key carries both scopes, so approvals happen through you. (`data-catalog-metric-run` also needs `query:read`, and `data-catalog-relationship-accept-prepare` / `-execute` needs `warehouse_view:write` to create the join. `data-catalog-metrics-refresh-from-insight-create` needs `insight:read` to re-read the source insight.)
 
 ## Provenance
 
-Every AI-authored object records its origin: `created_source: ai_generated`, the `ai_model` that wrote it, a `confidence` score from 0 to 1, and the model's `reasoning`. Reviewers see who proposed what, how sure it was, and why – before signing. Relationship proposals go further and attach sampling evidence, like key match rates from real data.
+Every AI-authored object records its origin: `created_source: ai_generated`, the `ai_model` that wrote it, a `confidence` score from 0 to 1, and the model's `reasoning`. Reviewers see who proposed what, how sure it was, and why – before signing. Relationship proposals attach sampling evidence, like key match rates from real data.
 
 ## Recommended workflow for teams
 

@@ -34,7 +34,7 @@ WHERE table_name IN ('stripe_charges', 'payments_backup')
 
 A relationship proposal is a reviewed join fact between two warehouse tables. Instead of every session rediscovering that `orders.customer_id` matches `stripe_customers.id`, an agent proposes the join once – with evidence – and a human accepts it.
 
-A proposal records the two tables, the join keys, a confidence score, reasoning, and sampling evidence: the agent shows its work, like "98% of `orders.customer_id` values match `stripe_customers.id` in a sample". Proposals are deduped regardless of direction, so `orders → stripe_customers` and `stripe_customers → orders` count as the same pair.
+A proposal records the two tables, the join keys, reasoning, and sampling evidence: the agent shows its work, like "98% of `orders.customer_id` values match `stripe_customers.id` in a sample". Proposals are deduped regardless of direction, so `orders → stripe_customers` and `stripe_customers → orders` count as the same pair.
 
 | Status     | Meaning                                                                                                        |
 | ---------- | -------------------------------------------------------------------------------------------------------------- |
@@ -52,12 +52,12 @@ Rejecting a proposal persists forever and suppresses the pair from ever being re
 
 </CalloutBox>
 
-Accepted joins become real lazy joins and surface in `system.information_schema.relationships`, carrying the proposal's confidence and reasoning:
+Accepted joins become real lazy joins and surface in `system.information_schema.relationships`, carrying the proposal's reasoning:
 
 ```sql
-SELECT source_table, source_column, target_table, target_column, confidence, reasoning
+SELECT source_table, source_column, target_table, target_column, reasoning
 FROM system.information_schema.relationships
-WHERE confidence IS NOT NULL
+WHERE reasoning IS NOT NULL
 ```
 
 ## How agents use trust marks
