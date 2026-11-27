@@ -8,7 +8,7 @@ const providers = ['Resend', 'Postmark', 'SendGrid', 'Mailgun', 'Mailchimp', 'Cu
 export function CopyPrompt({ prompt }: { prompt: string }): JSX.Element {
     const [copied, setCopied] = useState(false)
     return (
-        <div className="not-prose my-2 flex !mx-0 items-center gap-2 rounded-md border border-primary bg-accent px-3 py-2">
+        <div className="not-prose my-2 flex items-center gap-2 rounded-md border border-primary bg-accent px-3 py-2">
             <span className="flex-1 font-code text-sm">“{prompt}”</span>
             <OSButton
                 size="sm"
@@ -24,7 +24,7 @@ export function CopyPrompt({ prompt }: { prompt: string }): JSX.Element {
 export default function SwitchPrompt(): JSX.Element {
     const [provider, setProvider] = useState(providers[0])
     return (
-        <div className="not-prose my-4 max-w-xl !mx-0">
+        <div className="not-prose my-4">
             <div className="mb-2 flex flex-wrap gap-1.5">
                 {providers.map((p) => (
                     <button
