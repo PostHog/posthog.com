@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Kubecost (IBM / Apptio) tables are full refresh. Each sync replaces the contents of the table.
+The allocation tables (`allocation_by_*`) and the `assets`, `cloud_costs`, and `external_costs` tables support incremental sync on `window_start`. Each incremental sync reads the last 3 days again, because Kubecost changes recent days when cloud billing data arrives. The `request_sizing_recommendations` and `audit_events` tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 
