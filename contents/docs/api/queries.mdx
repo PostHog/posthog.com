@@ -46,7 +46,7 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 
 <CalloutBox icon="IconInfo" type="fyi" title="Query limits">
 
-By default, API queries return up to 100 rows. If you specify your own `LIMIT`, you can return up to 50k rows per query.
+By default, a single HogQL `SELECT` query returns up to 100 rows. Check `hasMore` in the response to see whether more rows exist. If you specify your own `LIMIT`, you can return up to 50k rows per query.
 
 For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#7-use-keyset-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/data-pipelines/batch-exports) or [file download exports](/docs/data-pipelines/file-download-exports) – `/query` is not a supported export path.
 
@@ -394,6 +394,29 @@ The response format depends on the query type, but all responses include:
 - `results`: The data returned by the query
 - `is_cached` (for cached responses): Indicates the result came from cache
 - `timings` (when available): Performance metrics for the query execution
+
+### HogQL pagination fields
+
+For a `HogQLQuery` with a single `SELECT` and no explicit `LIMIT`, the response includes:
+
+- `hasMore`: `true` when more rows exist beyond the returned results, or `false` when all matching rows were returned.
+- `limit`: The default row limit (100 for API queries).
+- `offset`: Rows skipped before the default row limit applied.
+
+These fields are `null` when your query includes its own `LIMIT`, uses `UNION`, or runs as raw SQL with `sendRawQuery`. For `UNION`, each `SELECT` without its own `LIMIT` gets the default 100-row limit.
+
+Use `hasMore` to detect when your results are truncated:
+
+```json
+{
+  "results": [[1], [2], ["..."]],
+  "hasMore": true,
+  "limit": 100,
+  "offset": 0
+}
+```
+
+If `hasMore` is `true`, add an explicit `LIMIT` to retrieve more rows (up to 50k), or use [keyset pagination](#7-use-keyset-pagination-instead-of-offset).
 
 ### Cached responses
 

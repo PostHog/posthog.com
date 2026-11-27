@@ -140,6 +140,12 @@ export interface HogQLQueryResponse {
   hogql?: string;
   /** Generated ClickHouse query for debugging */
   clickhouse?: string;
+  /** True when the default row limit applied and more rows exist. Null with LIMIT, UNION, or raw SQL. */
+  hasMore?: boolean | null;
+  /** The default row limit (100 for API queries). Null with LIMIT, UNION, or raw SQL. */
+  limit?: number | null;
+  /** Rows skipped before the default row limit applied. Null with LIMIT, UNION, or raw SQL. */
+  offset?: number | null;
 }
 ```
 
