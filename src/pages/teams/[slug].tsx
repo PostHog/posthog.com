@@ -577,6 +577,8 @@ export default function TeamPage(props: TeamPageProps) {
         0
 
     const teamEmojis = teamData?.emojis?.filter((emoji) => !!emoji?.name && !!emoji?.localFile?.publicURL)
+    // Matches when the column beside the stats shows something; TeamImage renders nothing without a photo.
+    const hasTeamImage = loading || editing || slug === 'platform-features' || !!teamImage?.image?.data
 
     // Create a map of team names to crest data for quick lookup
     const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
@@ -756,43 +758,39 @@ export default function TeamPage(props: TeamPageProps) {
                         </div>
                     )}
                     <div
-                        className={`col-span-2 grid @lg/reader-content:grid-cols-2 gap-4 @2xl/reader-content:gap-8 ${
-                            !teamImage?.image?.data && !editing ? '' : ''
+                        className={`col-span-2 grid gap-4 @2xl/reader-content:gap-8 ${
+                            hasTeamImage ? '@lg/reader-content:grid-cols-2' : ''
                         }`}
                     >
-                        <div className="@container/team-stats">
-                            <div className="grid @lg/team-stats:grid-cols-2 gap-4">
-                                <div>
-                                    <Fieldset legend="Pineapple on pizza">
-                                        <PineapplePieChart percentage={pineapplePercentage} />
-                                    </Fieldset>
-                                </div>
+                        {/* Each card grows to fill its row, so a card that wraps onto a row of its own spans the
+                            row instead of leaving an empty space beside it. */}
+                        <div className="flex flex-wrap gap-4 [&>*]:grow [&>*]:basis-56">
+                            <Fieldset legend="Pineapple on pizza">
+                                <PineapplePieChart percentage={pineapplePercentage} />
+                            </Fieldset>
 
-                                <SpiritAnimal
-                                    spiritAnimal={values.spiritAnimal}
-                                    editing={editing}
-                                    setFieldValue={setFieldValue}
-                                />
+                            <SpiritAnimal
+                                spiritAnimal={values.spiritAnimal}
+                                editing={editing}
+                                setFieldValue={setFieldValue}
+                            />
 
-                                <div>
-                                    {teamEmojis?.length > 0 && (
-                                        <Fieldset legend="Custom emojis">
-                                            <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
-                                                {teamEmojis?.map(({ name, localFile }) => (
-                                                    <li key={name}>
-                                                        <Tooltip
-                                                            trigger={<img className="h-8" src={localFile?.publicURL} />}
-                                                            delay={0}
-                                                        >
-                                                            :{name}:
-                                                        </Tooltip>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </Fieldset>
-                                    )}
-                                </div>
-                            </div>
+                            {teamEmojis?.length > 0 && (
+                                <Fieldset legend="Custom emojis">
+                                    <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                        {teamEmojis?.map(({ name, localFile }) => (
+                                            <li key={name}>
+                                                <Tooltip
+                                                    trigger={<img className="h-8" src={localFile?.publicURL} />}
+                                                    delay={0}
+                                                >
+                                                    :{name}:
+                                                </Tooltip>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Fieldset>
+                            )}
                         </div>
 
                         {loading ? (
