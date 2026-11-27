@@ -31,7 +31,8 @@ export interface SourceQuestion {
     iconColor: string
     question: string
     answer: string
-    href: string
+    /** Pocket guide for this question. Questions without one show no buttons. */
+    href?: string
 }
 
 export interface SourceQuestionGroup {
@@ -223,9 +224,11 @@ export default function SourcePage({
                                                 <Card.Title>{question.question}</Card.Title>
                                                 <Card.Description>{question.answer}</Card.Description>
                                             </Card.Header>
-                                            <Card.Footer className="mt-auto justify-start">
-                                                <GuideCardActions href={question.href} />
-                                            </Card.Footer>
+                                            {question.href && (
+                                                <Card.Footer className="mt-auto justify-start">
+                                                    <GuideCardActions href={question.href} />
+                                                </Card.Footer>
+                                            )}
                                         </Card.Root>
                                     ))}
                                 </div>
