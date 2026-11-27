@@ -6,7 +6,7 @@ showTitle: true
 
 Use the API when you want surveys managed by your own tooling rather than by hand – creating a survey per experiment from a script, syncing responses into a warehouse, or building a fully custom survey UI on top of PostHog.
 
-Reading surveys and stats requires `survey:read`. Listing individual responses (`GET /api/projects/:project_id/surveys/:id/responses/`) requires both `survey:read` and `query:read`. Creating, updating, launching, stopping, archiving responses, and deleting surveys require `survey:write`.
+Reading surveys and stats requires `survey:read`. Listing individual responses (`GET /api/projects/:project_id/surveys/:id/responses/`) requires both `survey:read` and `query:read`. Creating, updating, launching, stopping, archiving responses, and deleting surveys require `survey:write`. Writing targeting flags (`targeting_flag_id` or `targeting_flag_filters`) or deleting a survey with a targeting flag also requires `feature_flag:write`.
 
 ## Before you start
 

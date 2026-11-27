@@ -69,7 +69,7 @@ In production, using a [reverse proxy](/docs/advanced/proxy) can help prevent th
 
 ## Survey response is not showing up on my [custom insight, webhook or action]
 
-Survey responses are keyed by question ID (`$survey_response_<question_id>`). PostHog client SDKs (`posthog-js`, React Native, iOS, Android, and Flutter) still emit legacy `$survey_response` for question 0 alongside the ID-keyed property, while custom API submissions and multi-question queries rely on `$survey_response_<question_id>`.
+Survey responses are keyed by question ID (`$survey_response_<question_id>`). Web (`posthog-js`) and hosted surveys send only `$survey_response_<question_id>`. React Native, iOS, Android, and Flutter mobile still emit legacy `$survey_response` / `$survey_response_<index>` alongside `$survey_response_<question_id>`, while custom API submissions and multi-question queries rely on `$survey_response_<question_id>`.
 
 Access individual responses with `event.properties['$survey_response_<question_id>']`.
 

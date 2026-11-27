@@ -9,9 +9,17 @@ import ReactNativeInstall from "../../integrate/_snippets/install-react-native.m
 ## Step two: Install surveys dependencies
 
 ```bash
-yarn add react-native-safe-area-context react-native-svg
+yarn add react-native-safe-area-context
 # or
-npm i -s react-native-safe-area-context react-native-svg
+npm i -s react-native-safe-area-context
+```
+
+Add `react-native-svg` for SVG survey icons (required on `posthog-react-native` versions earlier than `4.43.7`; optional on `4.43.7+`, which falls back to plain `Text` labels):
+
+```bash
+yarn add react-native-svg
+# or
+npm i -s react-native-svg
 ```
 
 ## Step three: Add the surveys provider

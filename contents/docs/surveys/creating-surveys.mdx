@@ -76,7 +76,7 @@ Here's a breakdown of each field in the form:
 
 PostHog supports four survey display types:
 
-1. **Popover:** Use PostHog's prebuilt user interfaces to show surveys as a popover in the bottom corner of the screen.
+1. **Popover:** Use PostHog's prebuilt user interfaces to show surveys as a popover on the screen (bottom-right by default, with custom positioning available on supported SDKs).
 
 2. **API:** Implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
@@ -258,7 +258,7 @@ PostHog supports multiple question types which are all available for both popove
 Customization enables you to change the look, feel, and timing of your popover survey:
 
 - The color of the background, border, and buttons.
-- The position of the popover on the screen (top, middle, or bottom alignment, or next to a trigger element).
+- The position of the popover on the screen (top, middle, or bottom alignment, or next to a trigger element). Non-default positions require `posthog-js` 1.245.0+, `posthog-react-native` 4.43.13+, or `posthog-ios` 3.95.0+ (unsupported on Android and Flutter). Positioning next to a trigger element requires `posthog-js` 1.294.0+ and is unsupported on mobile SDKs.
 - The placeholder text.
 - The visibility of the PostHog branding.
 - Whether to shuffle the order of the choices and questions.
@@ -315,7 +315,7 @@ By default, surveys are shown once to each user until they either dismiss it or 
 
 Check **Show every time these events fire (otherwise: once per user)** in the survey editor to show the survey each time the event fires. In the guided wizard, check **Show every time the event is captured**.
 
-Leave it unchecked to show the event-triggered survey at most once per user.
+Leave it unchecked to show the survey once per user, or on the schedule you set under **Completion conditions**.
 
 <ProductScreenshot
   imageLight={surveyTriggeredByEventLight}
