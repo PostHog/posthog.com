@@ -180,7 +180,11 @@ export default function SourcePage({
 
                         <div className="mt-6 flex flex-col gap-3">
                             <h3 className="m-0 text-xl font-bold tracking-tight">{whatSyncs.modesTitle}</h3>
-                            <div className="grid grid-cols-1 gap-4 @3xl:grid-cols-3">
+                            <div
+                                className={`grid grid-cols-1 gap-4 ${
+                                    whatSyncs.modes.length > 3 ? '@md:grid-cols-2 @3xl:grid-cols-4' : '@3xl:grid-cols-3'
+                                }`}
+                            >
                                 {whatSyncs.modes.map((mode) => (
                                     <Card.Root key={mode.mode} className="h-full">
                                         <Card.TitleBar icon={<mode.Icon className="text-muted" />}>
