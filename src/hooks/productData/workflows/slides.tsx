@@ -16,7 +16,6 @@ import Link from 'components/Link'
 import PromptDemo from 'components/MCPPage/PromptDemo'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
-import { features as f } from './features'
 import { emailFlows } from './agentDemo'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 
@@ -327,6 +326,41 @@ export const applications: CarouselSlide[] = [
 export const keyFeatures: CarouselSlide[] = [
     {
         ...style,
+        slug: 'transactional',
+        label: 'Transactional',
+        icon: <IconSend className="size-5" />,
+        progressBar: 'bg-orange',
+        layout: 'stack',
+        heading: 'Transactional email that lands in your product data',
+        description: (
+            <>
+                <p>
+                    Design the email in PostHog, then send it from your code with one API call. Each send lands on the
+                    person, next to what they did before and after it.
+                </p>
+                <List
+                    items={[
+                        [
+                            'Templates',
+                            'Write the email in the editor, and your code passes in the variables, like a reset link.',
+                        ],
+                        [
+                            'Delivery stats',
+                            'Sends, deliveries, opens, clicks, and bounces for each transactional email.',
+                        ],
+                        ['What happened next', 'See who signed in after a password reset, or paid after a receipt.'],
+                    ]}
+                />
+            </>
+        ),
+        image: shot(
+            'wf_landing_transactional_create_light_2ef5f04bae.png',
+            'wf_landing_transactional_create_dark_93a4f5e1f5.png',
+            'Creating a transactional email in PostHog'
+        ),
+    },
+    {
+        ...style,
         slug: 'broadcasts',
         label: 'Broadcasts',
         icon: <IconMegaphone className="size-5" />,
@@ -494,26 +528,6 @@ export const keyFeatures: CarouselSlide[] = [
             'wf_landing_reputation_light_aed3a7f627.png',
             'wf_landing_reputation_dark_caccc6a89b.png',
             'Sending health and allowance in PostHog'
-        ),
-    },
-    {
-        ...style,
-        slug: 'channels',
-        label: 'Channels',
-        icon: <IconSend className="size-5" />,
-        progressBar: 'bg-purple',
-        layout: 'stack',
-        heading: f.channels.headline,
-        description: (
-            <>
-                <p>{f.channels.description}</p>
-                <List items={f.channels.features.map((item) => [item.title, item.description ?? ''])} />
-            </>
-        ),
-        image: shot(
-            'wf_landing_channels_light_98567d4ada.png',
-            'wf_landing_channels_dark_209d84df9b.png',
-            'Email, SMS, push, and Slack channels in PostHog'
         ),
     },
 ]
