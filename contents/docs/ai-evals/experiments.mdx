@@ -44,7 +44,15 @@ Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.co
 
 To fix the demo, pass the extracted order ID to the cancellation and refund tools, and return `look_up_order` for delivery questions. Run the same cases again with the experiment name **Support agent routing fix**. Both scorers should pass all six cases.
 
-Compare runs with the same test cases and scorer versions so changes in the test don't hide changes in your agent.
+## Compare experiments against a baseline
+
+In [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments), select the checkboxes for **Support agent baseline** and **Support agent routing fix** under **Recent experiments**. Click **Compare experiments** and choose **Support agent baseline** from the **Baseline** menu. You can compare 2 to 50 runs at a time.
+
+In the **Correct arguments** row, the routing fix passes all six cases, up from four of six in the baseline. The table shows **+33.3 pp better**, a gain of 33.3 percentage points.
+
+Each score row shows one scorer version. When some versions appear in every run, **Shared scores only** hides the others. To see a change in the overall experiment score, both runs need a score from the same formula version with a passing rule.
+
+Scores summarize the whole run. Check the dataset revision and the number of scored items before interpreting a change. Click the scored-item count to inspect the cases behind a score.
 
 ## Read the experiment score
 
