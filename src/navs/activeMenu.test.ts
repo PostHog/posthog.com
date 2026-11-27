@@ -79,6 +79,7 @@ describe('the real docs nav', () => {
 
     test('the other SDK reference pages use their SDK sidebar', () => {
         const pages = {
+            js: ['config', 'security', 'persistence', 'types', '1.x.x'],
             go: ['1.x.x', '2.x.x', 'migration'],
             rust: ['0.x.x', '1.x.x', 'migration'],
             ios: ['3.x.x', '4.x.x', 'migration'],

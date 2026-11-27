@@ -4,19 +4,28 @@ import { ConfigBuilder, ConfigState } from 'components/Docs/ConfigBuilder'
 const generateCode = (config: ConfigState): string => {
     const { selectedValue, checkboxes, inputs } = config
     const apiKey = inputs.apiKey as string
-    const apiHost = selectedValue === 'eu-cloud' ? 'https://eu.i.posthog.com' : 'https://us.i.posthog.com'
+    const isEu = selectedValue === 'eu-cloud'
+    const cloudApiHost = isEu ? 'https://eu.i.posthog.com' : 'https://us.i.posthog.com'
+    const cloudUiHost = isEu ? 'https://eu.posthog.com' : 'https://us.posthog.com'
+    const proxyHost = String(inputs.proxyHost || '/ingest').trim() || '/ingest'
 
     const configLines: string[] = []
-    configLines.push(`    api_host: '${apiHost}',`)
+    if (checkboxes.useReverseProxy) {
+        configLines.push(`    api_host: '${proxyHost}',`)
+        configLines.push(`    ui_host: '${cloudUiHost}',`)
+    } else {
+        configLines.push(`    api_host: '${cloudApiHost}',`)
+    }
 
     if (checkboxes.useDefaults) configLines.push(`    defaults: '<ph_posthog_js_defaults>',`)
     if (!checkboxes.enableAutocapture) configLines.push(`    autocapture: false,`)
-    if (checkboxes.spaMode) configLines.push(`    capture_pageview: 'history_change',`)
     if (!checkboxes.enableSessionRecording) configLines.push(`    disable_session_recording: true,`)
+    if (checkboxes.captureExceptions) configLines.push(`    capture_exceptions: true,`)
     if (checkboxes.recordConsoleLogs) configLines.push(`    enable_recording_console_log: true,`)
     if (checkboxes.enableHeatmaps) configLines.push(`    capture_heatmaps: true,`)
     if (!checkboxes.enableSurveys) configLines.push(`    disable_surveys: true,`)
     if (checkboxes.disableFeatureFlags) configLines.push(`    advanced_disable_feature_flags: true,`)
+    if (checkboxes.cookielessMode) configLines.push(`    cookieless_mode: 'on_reject',`)
     if (checkboxes.maskAllText) configLines.push(`    mask_all_text: true,`)
     if (checkboxes.maskAllAttributes) configLines.push(`    mask_all_element_attributes: true,`)
     if (checkboxes.optOutByDefault) configLines.push(`    opt_out_capturing_by_default: true,`)
@@ -49,10 +58,18 @@ export const JSConfigBuilder: React.FC = () => {
             }}
             checkboxes={[
                 {
+                    id: 'useReverseProxy',
+                    label: 'Use a reverse proxy (recommended)',
+                    description:
+                        'Route requests through your domain or PostHog managed proxy to prevent ad blockers from dropping events',
+                    defaultValue: true,
+                },
+                {
                     id: 'useDefaults',
                     label: 'Use recommended defaults',
-                    description: 'Sets defaults to the latest recommended behaviors',
-                    defaultValue: false,
+                    description:
+                        'Sets defaults to the latest snapshot (handles SPA pageviews, dead clicks, and rageclicks automatically)',
+                    defaultValue: true,
                 },
                 {
                     id: 'enableAutocapture',
@@ -61,15 +78,15 @@ export const JSConfigBuilder: React.FC = () => {
                     defaultValue: true,
                 },
                 {
-                    id: 'spaMode',
-                    label: 'Single-page app (SPA)',
-                    description: 'Detect page changes via history API instead of page loads',
-                    defaultValue: false,
-                },
-                {
                     id: 'enableSessionRecording',
                     label: 'Enable session recording',
                     description: 'Record user sessions for replay',
+                    defaultValue: true,
+                },
+                {
+                    id: 'captureExceptions',
+                    label: 'Enable error tracking',
+                    description: 'Automatically capture unhandled browser exceptions',
                     defaultValue: true,
                 },
                 {
@@ -97,6 +114,13 @@ export const JSConfigBuilder: React.FC = () => {
                     id: 'disableFeatureFlags',
                     label: 'Disable feature flags',
                     description: 'Stop requesting and evaluating feature flags (also disables surveys)',
+                    defaultValue: false,
+                    group: 'advanced',
+                },
+                {
+                    id: 'cookielessMode',
+                    label: 'Cookieless mode on reject',
+                    description: 'Track privacy-preserving cookieless events when users reject cookies',
                     defaultValue: false,
                     group: 'advanced',
                 },
@@ -149,6 +173,14 @@ export const JSConfigBuilder: React.FC = () => {
                     label: 'Project token',
                     type: 'text',
                     defaultValue: '<ph_project_token>',
+                },
+                {
+                    id: 'proxyHost',
+                    label: 'Reverse proxy host',
+                    description: 'Your proxy path (for example /ingest) or managed proxy domain',
+                    type: 'text',
+                    placeholder: '/ingest or https://e.yourdomain.com',
+                    defaultValue: '/ingest',
                 },
                 {
                     id: 'persistence',

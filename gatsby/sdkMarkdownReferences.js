@@ -8,6 +8,7 @@
  * so the build skips them. Add an SDK here to publish it.
  */
 const PUBLISHED_SDK_REFERENCES = [
+    'posthog-js',
     'posthog-python',
     'posthog-go',
     'posthog-rust',

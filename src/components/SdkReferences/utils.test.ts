@@ -109,6 +109,7 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
     })
 
     test('routes SDKs with markdown references to /docs/libraries/<sdk>', () => {
+        assert.equal(getSdkReferenceUrl('posthog-js'), '/docs/libraries/js')
         assert.equal(getSdkReferenceUrl('posthog-python'), '/docs/libraries/python')
         assert.equal(getSdkReferenceUrl('posthog-node'), '/docs/libraries/node')
         assert.equal(getSdkReferenceUrl('posthog-go'), '/docs/libraries/go')
@@ -119,7 +120,6 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
     })
 
     test('routes remaining HogRef SDKs to /docs/references/<id>', () => {
-        assert.equal(getSdkReferenceUrl('posthog-js'), '/docs/references/posthog-js')
         assert.equal(getSdkReferenceUrl('posthog-react-native'), '/docs/references/posthog-react-native')
     })
 
@@ -128,7 +128,7 @@ describe('sdkReferenceSlug, getSdkReferenceUrl, and getLegacyHogRefSdkIds', () =
         for (const migratedId of PUBLISHED_SDK_REFERENCES) {
             assert.equal(legacyIds.includes(migratedId), false, `${migratedId} must not be sourced from HogRef`)
         }
-        assert.ok(legacyIds.includes('posthog-js'))
+        assert.equal(legacyIds.includes('posthog-js'), false)
         assert.ok(legacyIds.includes('posthog-react-native'))
     })
 
@@ -213,6 +213,16 @@ describe('vercel.json SDK reference redirects', () => {
             ['/docs/libraries/ios/usage.md', '/docs/libraries/ios.md'],
             ['/docs/libraries/ios/configuration', '/docs/libraries/ios'],
             ['/docs/libraries/ios/configuration.md', '/docs/libraries/ios.md'],
+            ['/docs/libraries/js/features', '/docs/libraries/js'],
+            ['/docs/libraries/js/features.md', '/docs/libraries/js.md'],
+            ['/docs/libraries/js/usage', '/docs/libraries/js'],
+            ['/docs/libraries/js/usage.md', '/docs/libraries/js.md'],
+            ['/docs/libraries/js/snippet-versioning', '/docs/libraries/js'],
+            ['/docs/libraries/js/snippet-versioning.md', '/docs/libraries/js.md'],
+            ['/docs/references/posthog-js/types/PostHogConfig', '/docs/libraries/js'],
+            ['/docs/references/posthog-js/types/PostHogConfig.md', '/docs/libraries/js.md'],
+            ['/docs/references/posthog-js/types/Survey', '/docs/libraries/js'],
+            ['/docs/references/posthog-js/types/Survey.md', '/docs/libraries/js.md'],
         ] as const) {
             const hit = resolveFirstRedirect(source)
             assert.ok(hit, `Expected redirect for ${source}`)

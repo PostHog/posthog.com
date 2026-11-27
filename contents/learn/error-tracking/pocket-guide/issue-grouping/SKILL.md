@@ -14,7 +14,7 @@ Read the current docs first. Every PostHog docs URL returns Markdown if you appe
 - https://posthog.com/docs/error-tracking/fingerprints.md
 - https://posthog.com/docs/libraries/python.md (contexts)
 - https://posthog.com/docs/libraries/node.md (contexts)
-- https://posthog.com/docs/libraries/js/usage.md (super properties)
+- https://posthog.com/docs/libraries/js.md (super properties)
 
 Walk each issue through these checks in order, and stop at the first yes.
 

@@ -67,7 +67,18 @@ const CLIENT_FEATURES: PublishedSdkFeatures = {
 
 /** Metadata for SDKs whose reference page is generated from Strapi and carries no MDX frontmatter. */
 export const PUBLISHED_SDK_METADATA: Record<string, PublishedSdkMeta> = {
-    'posthog-node': { slug: 'node', label: 'Node.js', logoKey: 'nodejs', features: { ...SERVER_FEATURES, tracing: true } },
+    'posthog-js': {
+        slug: 'js',
+        label: 'JavaScript web',
+        logoKey: 'javascript',
+        features: { ...CLIENT_FEATURES, surveys: true },
+    },
+    'posthog-node': {
+        slug: 'node',
+        label: 'Node.js',
+        logoKey: 'nodejs',
+        features: { ...SERVER_FEATURES, tracing: true },
+    },
     'posthog-python': {
         slug: 'python',
         label: 'Python',

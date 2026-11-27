@@ -2924,16 +2924,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js',
                                 },
                                 {
-                                    name: 'Usage',
-                                    url: '/docs/libraries/js/usage',
-                                },
-                                {
                                     name: 'Configuration',
                                     url: '/docs/libraries/js/config',
-                                },
-                                {
-                                    name: 'Snippet versioning',
-                                    url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
                                     name: 'Security',
@@ -2948,8 +2940,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/types',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/references/posthog-js',
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/js/1.x.x',
                                 },
                             ],
                         },
@@ -6466,7 +6458,7 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'JavaScript web SDK',
-                            url: '/docs/references/posthog-js?filter=error-tracking',
+                            url: '/docs/libraries/js#capture-exception',
                         },
                         {
                             name: 'Node.js SDK',

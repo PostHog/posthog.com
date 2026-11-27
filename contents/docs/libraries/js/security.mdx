@@ -9,9 +9,9 @@ The [JavaScript SDK](/docs/libraries/js) runs with the same access to your page 
 
 ## Pin and update SDK versions
 
-If you need to review SDK changes before deployment, follow [snippet versioning](/docs/libraries/js/snippet-versioning) for CDN installations or the [package-manager lockfile guidance](/docs/health-checks/keeping-sdks-current#npm-and-package-manager-lockfiles) for npm installations. Use an exact dependency version, commit the lockfile, and enforce frozen installs in CI.
+If you need to review SDK changes before deployment, follow [pinning the snippet version](/docs/libraries/js#pin-the-snippet-version) for CDN installations or the [package-manager lockfile guidance](/docs/health-checks/keeping-sdks-current#npm-and-package-manager-lockfiles) for npm installations. Use an exact dependency version, commit the lockfile, and enforce frozen installs in CI.
 
-Version pins and [versioned feature scripts](/docs/libraries/js/snippet-versioning#versioned-external-scripts) select releases; they don't verify the bytes returned by a CDN or proxy. The token-specific `/array/<token>/config.js` script isn't pinned by `strict_script_versioning`. From `posthog-js` 1.451.0, the SDK only loads it when [JS snippets](/docs/js-snippets) are enabled with `opt_in_site_apps: true`.
+Version pins and versioned feature scripts select releases; they don't verify the bytes returned by a CDN or proxy. The token-specific `/array/<token>/config.js` script isn't pinned by `strict_script_versioning`. From `posthog-js` 1.451.0, the SDK only loads it when [JS snippets](/docs/js-snippets) are enabled with `opt_in_site_apps: true`.
 
 Review and deploy updates regularly so pins don't prevent security fixes from reaching your users. See [keeping SDKs current](/docs/health-checks/keeping-sdks-current).
 
@@ -103,9 +103,9 @@ Nonces authorize execution; they don't verify script contents or replace SRI.
 
 ## Bundle the SDK without external scripts
 
-To avoid runtime executable downloads, [install the SDK from npm with a package manager](/docs/libraries/js#option-2-install-via-package-manager) and follow [bundling extensions](/docs/libraries/js#bundle-extensions) for the no-external import options and feature trade-offs. Installing from npm with the default `posthog-js` import doesn't prevent dependency downloads.
+To avoid runtime executable downloads, [install the SDK from npm with a package manager](/docs/libraries/js#install-with-a-package-manager) and follow [prevent runtime script downloads](/docs/libraries/js#prevent-runtime-script-downloads) for the no-external import options and feature trade-offs. Installing from npm with the default `posthog-js` import doesn't prevent dependency downloads.
 
-Set `disable_external_dependency_loading: true` at the first initialization of every SDK instance. This blocks the standard SDK script loader, including executable `config.js` when `opt_in_site_apps` is `true`. Without preloaded configuration, the SDK requests project configuration as JSON. Configuration, flags, and events still use the network. See the [SDK configuration reference](/docs/references/posthog-js/types/PostHogConfig) for available controls.
+Set `disable_external_dependency_loading: true` at the first initialization of every SDK instance. This blocks the standard SDK script loader, including executable `config.js` when `opt_in_site_apps` is `true`. Without preloaded configuration, the SDK requests project configuration as JSON. Configuration, flags, and events still use the network. See the [SDK configuration reference](/docs/libraries/js#posthogconfig) for available controls.
 
 Don't combine this setup with the snippet, tag-manager installations, or another permissively configured SDK copy. No-external builds don't remove a shared loader or renderer already registered by another bundle.
 
