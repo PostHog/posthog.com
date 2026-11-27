@@ -23,20 +23,23 @@ const style = { color: 'bg-light dark:bg-dark', activeText: 'text-primary' }
 
 // Hedgebox demo screenshots, light and dark.
 const shot = (light: string, dark: string, alt: string) => ({
-    src: `https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/${light}`,
-    srcDark: `https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/${dark}`,
+    src: `https://res.cloudinary.com/dmukukwp6/image/upload/q_auto:best,f_auto/${light}`,
+    srcDark: `https://res.cloudinary.com/dmukukwp6/image/upload/q_auto:best,f_auto/${dark}`,
     alt,
 })
 
 // The send example from contents/docs/workflows/transactional-emails/api.mdx.
+// The send-your-own-HTML example from contents/docs/workflows/transactional-emails/api.mdx.
 const sendExamples = [
     {
         label: 'Node.js',
         language: 'js',
         code: `const { data, error } = await posthog.emails.send({
     to: "jane@example.com",
-    templateId: "<template_id>",
-    templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    html: '<p>Hi Jane, <a href="https://example.com/reset?token=abc123">reset your password</a>.</p>',
+    from: "Hedgebox <security@example.com>",
     distinctId: "user_123",
     idempotencyKey: "password-reset-8f14e45f",
 })`,
@@ -46,8 +49,10 @@ const sendExamples = [
         language: 'python',
         code: `result = posthog.emails.send(
     to="jane@example.com",
-    template_id="<template_id>",
-    template_data={"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    template_key="password-reset",
+    subject="Reset your password",
+    html='<p>Hi Jane, <a href="https://example.com/reset?token=abc123">reset your password</a>.</p>',
+    from_="Hedgebox <security@example.com>",
     distinct_id="user_123",
     idempotency_key="password-reset-8f14e45f",
 )`,
@@ -55,10 +60,12 @@ const sendExamples = [
     {
         label: 'Go',
         language: 'go',
-        code: `result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+        code: `result, err := client.Emails().Send(ctx, posthog.CodeEmail{
     To:             "jane@example.com",
-    TemplateID:     "<template_id>",
-    TemplateData:   map[string]interface{}{"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    TemplateKey:    "password-reset",
+    Subject:        "Reset your password",
+    HTML:           \`<p>Hi Jane, <a href="https://example.com/reset?token=abc123">reset your password</a>.</p>\`,
+    From:           "Hedgebox <security@example.com>",
     DistinctID:     "user_123",
     IdempotencyKey: "password-reset-8f14e45f",
 })`,
@@ -68,8 +75,10 @@ const sendExamples = [
         language: 'ruby',
         code: `result = posthog.emails.send(
   to: 'jane@example.com',
-  template_id: '<template_id>',
-  template_data: { first_name: 'Jane', reset_link: 'https://example.com/reset?token=abc123' },
+  template_key: 'password-reset',
+  subject: 'Reset your password',
+  html: '<p>Hi Jane, <a href="https://example.com/reset?token=abc123">reset your password</a>.</p>',
+  from: 'Hedgebox <security@example.com>',
   distinct_id: 'user_123',
   idempotency_key: 'password-reset-8f14e45f'
 )`,
@@ -79,8 +88,10 @@ const sendExamples = [
         language: 'php',
         code: `$result = PostHog::emails()->send([
     'to' => 'jane@example.com',
-    'template_id' => '<template_id>',
-    'template_data' => ['first_name' => 'Jane', 'reset_link' => 'https://example.com/reset?token=abc123'],
+    'template_key' => 'password-reset',
+    'subject' => 'Reset your password',
+    'html' => '<p>Hi Jane, <a href="https://example.com/reset?token=abc123">reset your password</a>.</p>',
+    'from' => 'Hedgebox <security@example.com>',
     'distinct_id' => 'user_123',
     'idempotency_key' => 'password-reset-8f14e45f',
 ]);`,
@@ -93,10 +104,12 @@ const sendExamples = [
   -H "Content-Type: application/json" \\
   -H "Idempotency-Key: password-reset-8f14e45f" \\
   -d '{
-    "template_id": "<template_id>",
+    "template_key": "password-reset",
     "to": "jane@example.com",
     "distinct_id": "user_123",
-    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
+    "subject": "Reset your password",
+    "html": "<p>Hi Jane, <a href=\\"https://example.com/reset?token=abc123\\">reset your password</a>.</p>",
+    "from": "Hedgebox <security@example.com>"
   }'`,
     },
 ]
@@ -205,7 +218,7 @@ export const applications: CarouselSlide[] = [
                     items={[
                         [
                             'Retries never double-send',
-                            'Send an idempotency key, and a retry after a timeout never sends the email twice. PostHog keeps each key for 24 hours.',
+                            'Send an idempotency key, and a retry after a timeout never sends the email twice. PostHog keeps each key for 7 days.',
                         ],
                         [
                             'Reset links stay secret',
@@ -426,6 +439,10 @@ export const keyFeatures: CarouselSlide[] = [
                         ['Triggers', 'An event, a cohort, a webhook, a schedule, or a manual run.'],
                         ['Flow logic', 'Delays, waits until a condition, and branches on properties or random splits.'],
                         ['Test runs', 'Run an automation for a test person before anyone real gets a message.'],
+                        [
+                            "See how it's going",
+                            'Started, sent, and opened counts for each automation, against the period before.',
+                        ],
                     ]}
                 />
             </>
@@ -483,13 +500,16 @@ export const keyFeatures: CarouselSlide[] = [
                 </p>
                 <List
                     items={[
-                        ['Conversions', 'Follow people from the send to the event you care about, like a paid bill.'],
-                        ['Revenue', 'Add up the revenue that came in after the email.'],
+                        [
+                            'Conversions',
+                            'Pick an event, like a paid bill, and see how many people did it after the email, and how fast.',
+                        ],
+                        ['Revenue', 'Add up the revenue from those events, from any property on them.'],
                         [
                             'Session replays',
                             <>
-                                <DocsLink to="/docs/workflows/replay-vision">Replay Vision</DocsLink> watches the
-                                sessions an email started, and groups what people did.
+                                A <DocsLink to="/docs/workflows/replay-vision">Replay Vision</DocsLink> step watches the
+                                session behind the event that started an automation, and scores or summarizes it.
                             </>,
                         ],
                     ]}
