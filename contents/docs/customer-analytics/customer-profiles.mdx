@@ -4,36 +4,36 @@ sidebar: Docs
 showTitle: true
 ---
 
-import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+import CustomerAnalyticsBetaWarning from "./_snippets/customer-analytics-beta-warning.mdx";
 
 <CustomerAnalyticsBetaWarning />
 
 Customer profiles consolidate everything about a customer in one place. Instead of jumping between different parts of PostHog to understand a customer, you get their full picture in a single view.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_34_040_Z_e0dea14b33.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_59_919_Z_8a54ff12bf.png"
-    alt="Person profile"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_34_040_Z_e0dea14b33.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_59_919_Z_8a54ff12bf.png"
+  alt="Person profile"
+  classes="rounded"
 />
 
 ## What's included in a profile
 
 Customer profiles pull together data from across PostHog and connected sources:
 
-| Data type | Source | Requirements |
-| --- | --- | --- |
-| Events | [Product analytics](/docs/product-analytics) | Automatic |
-| Errors | [Error tracking](/docs/error-tracking) | Error tracking enabled |
-| LLM traces | [LLM observability](/docs/ai-engineering/observability) | LLM observability enabled |
-| Support tickets | [Zendesk](/docs/data-pipelines/sources/zendesk) | Zendesk data warehouse source connected |
-| Customer journeys | [Customer journeys](#customer-journeys) | Journeys configured with funnel insights |
+| Data type         | Source                                                  | Requirements                             |
+| ----------------- | ------------------------------------------------------- | ---------------------------------------- |
+| Events            | [Product analytics](/docs/product-analytics)            | Automatic                                |
+| Errors            | [Error tracking](/docs/error-tracking)                  | Error tracking enabled                   |
+| LLM traces        | [LLM observability](/docs/ai-engineering/observability) | LLM observability enabled                |
+| Support tickets   | [Zendesk](/docs/data-pipelines/sources/zendesk)         | Zendesk data warehouse source connected  |
+| Customer journeys | [Customer journeys](#customer-journeys)                 | Journeys configured with funnel insights |
 
 ## Viewing a customer profile
 
 You can access customer profiles in two main ways:
 
-1. **From the dashboard**: Click on any customer in the [customer analytics dashboard](https://us.posthog.com/customer_analytics)
+1. **From the dashboard**: Click on any customer in the [customer analytics dashboard](https://app.posthog.com/customer_analytics)
 2. **From customer lists**: Click any [person](https://app.posthog.com/persons) or [group](https://app.posthog.com/groups/0) from the lists to open their profile
 
 Accessing customers from insights and other producs will also land in their profile page.
@@ -52,11 +52,38 @@ This is useful for B2B products where you care about company-level activity, not
 Each customer profile displays [usage metrics](/docs/customer-analytics/usage-metrics) you've defined.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_47_09_424_Z_893c3cd740.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_46_51_933_Z_ef9223c947.png"
-    alt="Usage metrics in customer profile"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_47_09_424_Z_893c3cd740.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_46_51_933_Z_ef9223c947.png"
+  alt="Usage metrics in customer profile"
+  classes="rounded"
 />
+
+## Pinned account properties
+
+The account sidebar displays pinned properties for quick access to the information that matters most. You can customize which properties appear by clicking the gear icon next to **Properties** in the sidebar.
+
+When viewing an account, a chip next to the **Properties** heading shows where the current pinned properties come from – for example, **Project default** or a role name.
+
+### How pinned properties are resolved
+
+PostHog resolves which properties to display using the following priority:
+
+1. **Personal pins** – If you've saved your own pinned properties, those are used.
+2. **Role defaults** – If you haven't set personal pins and your [roles](/docs/settings/access-control) have default pins configured, PostHog merges the defaults from all your roles.
+3. **Project defaults** – If neither personal pins nor role defaults exist, the project-wide defaults are used.
+
+### Reset to default
+
+To follow a default configuration instead of your personal pins, open the pin configurator by clicking the gear icon and click **Reset to default**. If multiple defaults are available (project and role), choose which one to follow.
+
+When you follow a default, your pinned properties stay in sync with that default. If an admin updates the default later, your sidebar reflects the change automatically.
+
+### Configure default pinned properties
+
+Admins can set default pinned properties in [**Settings** > **Customer analytics** > **Accounts**](https://app.posthog.com/settings/environment-customer-analytics#customer-analytics-accounts). Use the **Applies to** dropdown to configure defaults for:
+
+- **Everyone in the project** – The fallback default for all team members.
+- **A specific role** – Members of that role see these defaults instead of the project defaults, as long as they haven't saved personal pins.
 
 ## Customer journeys
 
