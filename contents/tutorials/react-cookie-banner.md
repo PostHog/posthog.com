@@ -3,7 +3,7 @@ title: Building a tracking cookies consent banner in React
 sidebar: Docs
 showTitle: true
 featuredTutorial: false
-date: 2025-08-27
+date: 2026-11-27
 author:
   - ian-vanagas
   - robbie-coomber
@@ -16,13 +16,13 @@ If you’ve spent any time online, you’ve seen a cookie consent banner. Becaus
 
 To help you stay compliant, PostHog enables you to track users either with or without cookies. In this tutorial, we are going to build a simple banner with React, JavaScript, and HTML for users to opt in or out of PostHog’s cookies.
 
-To complete this tutorial, you’ll need to a [PostHog instance](https://us.posthog.com/signup) as well as [Node installed](https://nodejs.org/en/download/) (to install, manage, and run React).
+To complete this tutorial, you’ll need a [PostHog instance](https://us.posthog.com/signup) as well as [Node installed](https://nodejs.org/en/download/) (to install, manage, and run React).
 
 ## Step 1: Setting up React
 
 This tutorial is for React, but it works for other JavaScript frameworks as well (we have specific tutorials for [Next.js](/tutorials/nextjs-cookie-banner) and [Vue](/tutorials/vue-cookie-banner)).
 
-We'll set up our React app with [Vite](https://vitejs.dev/guide/). To do this, head into the command line, then create and install the app (we name ours `react-cookie-banner`).
+We'll set up our React app with [Vite](https://vite.dev/guide/). To do this, head into the command line, then create and install the app (we name ours `react-cookie-consent`). If Vite asks **Install with npm and start now?**, choose **No**, since we run those commands ourselves.
 
 ```bash
 npm create vite@latest react-cookie-consent -- --template react
@@ -33,7 +33,7 @@ npm run dev
 
 Running these commands gives us a working React app.
 
-![React app](https://res.cloudinary.com/dmukukwp6/image/upload/react_7ecc5ce58c.png)
+![React app](https://res.cloudinary.com/dmukukwp6/image/upload/s1_react_app_light_2aaacac9ac.png)
 
 ## Step 2: Setting up PostHog
 
@@ -43,14 +43,14 @@ Next, we want to set up PostHog to track activity on our site. To do this, first
 npm install --save posthog-js@1 @posthog/react@1
 ```
 
-Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `@posthog/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))
+Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `@posthog/react` and run `posthog.init` with our project token and API host (which you can get in your [project settings](https://us.posthog.com/settings/project)).
 
 ```js file=main.jsx
 // main.jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
+import App from './App.jsx'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
@@ -59,17 +59,16 @@ posthog.init("<ph_project_token>", {
   defaults: "<ph_posthog_js_defaults>"
 })
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <PostHogProvider client={posthog}>
       <App />
     </PostHogProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )
 ```
 
-Once done, visit your site running locally, click the button, and you should start seeing events in your [PostHog activity tab](https://us.posthog.com/activity/explore).
+Once done, visit your site running locally, click the **Count is 0** button, and you should start seeing events in your [PostHog activity tab](https://us.posthog.com/activity/explore).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_10_at_14_54_53_2x_de2d28eea9.png" 
@@ -88,12 +87,12 @@ To start making this more compliant, we want to ensure we don't store any cookie
 
 To do this, we set `cookieless_mode` to `on_reject` in our initialization config like this:
 
-```js focusOnLines=8-12
+```js focusOnLines=9-13
 // main.jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
+import App from './App.jsx'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
@@ -103,17 +102,18 @@ posthog.init("<ph_project_token>", {
   cookieless_mode: 'on_reject'
 })
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <PostHogProvider client={posthog}>
       <App />
     </PostHogProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )
 ```
 
-This means that PostHog will not set any cookies until the user has given consent, which is what we rely on the cookie banner to do.
+This means PostHog doesn't set any cookies or capture any events until the user accepts or declines, which is what we rely on the cookie banner to do. If they decline, PostHog still counts them using [cookieless tracking](/docs/privacy/data-collection#cookieless-tracking), which uses a privacy-preserving hash calculated on PostHog's servers instead of a cookie.
+
+For PostHog to accept those cookieless events, go to **Settings** > **Project** > **Web analytics** in [PostHog](https://us.posthog.com/settings/project), turn on **Enable cookieless tracking**, and click **Save**. If this setting is off, PostHog discards events from users who decline.
 
 ## Step 4: Building the banner component
 
@@ -160,35 +160,34 @@ We’ll then add the new `Banner` component into `main.jsx`.
 
 ```js
 // main.jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
-import { PostHogProvider } from '@posthog/react'
+import App from './App.jsx'
 import posthog from 'posthog-js'
+import { PostHogProvider } from '@posthog/react'
 import { Banner } from './Banner'
 
 posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   defaults: "<ph_posthog_js_defaults>",
-  cookieless_mode: 'on_reject',
+  cookieless_mode: 'on_reject'
 })
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <PostHogProvider client={posthog}>
       <App />
       <Banner />
     </PostHogProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )
 
 ```
 
 When we head back to the local site, we’ll see our cookie banner at the bottom of the site. 
 
-![Tutorial banner](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_10_at_15_22_59_2x_33295f3f01.png)
+![Tutorial banner](https://res.cloudinary.com/dmukukwp6/image/upload/s4_banner_light_266a1cf617.png)
 
 ## Step 5: Setting and storing consent
 
@@ -196,7 +195,7 @@ Next, we’ll add the logic for setting and storing the user's consent. Back in 
 
 1. Add a `consentGiven` state to track the user's consent decision and connect it to PostHog's consent status.
 2. Make our `handleAcceptCookies` and `handleDeclineCookies` functions opt users in or out of tracking cookies using PostHog's consent management methods.
-3. Conditionally show our banner depending whether that decision has been made.
+3. Conditionally show our banner depending on whether that decision has been made.
 
 Together, this looks like this:
 
@@ -247,7 +246,7 @@ To make sure everything works, try the following steps:
 1. Go to the site and click accept or decline on the banner.
 2. Confirm that the banner disappears and whether cookies are set or not.
 3. Reload the page and check that the banner doesn’t load.
-4. Delete your PostHog key in local storage and try with the other consent option.
+4. Clear the site data (in the **Application** tab, go to **Storage** and click **Clear site data**), reload, and try with the other consent option.
 
 If all that works, you’ve set up a basic tracking cookies consent banner in React. From here, you can customize it to your needs (such as adding other cookies) and the rest of your site’s design.
 
@@ -256,7 +255,7 @@ If all that works, you’ve set up a basic tracking cookies consent banner in Re
 If you’re interested in going further into tracking, data management, and cookies, check out these other resources:
 
 1. A tutorial on [setting up cookieless tracking](/tutorials/cookieless-tracking).
-2. A guide to [setting up a reverse proxy](/docs/integrate/proxy) to help your data stay first-party.
+2. A guide to [setting up a reverse proxy](/docs/advanced/proxy) to help your data stay first-party.
 3. Sign up for our [EU Cloud](https://eu.posthog.com/signup).
 
 <NewsletterForm />
