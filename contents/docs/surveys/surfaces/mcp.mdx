@@ -32,6 +32,16 @@ Try these with an MCP-enabled agent:
 - `Launch the checkout feedback survey.`
 - `Stop the PMF survey – we have enough responses.`
 
+## Multi-language surveys
+
+When you create a survey in a language other than English, set the `base_language` parameter to the survey's primary language code (e.g. `es` for Spanish, `de` for German). Both `survey-create` and `survey-update` accept this parameter.
+
+Translation keys must never match the base language. If your survey content is in Spanish (`base_language: "es"`), add translations for other languages like English (`en`) or French (`fr`), but not Spanish. If the untranslated text isn't English, set `base_language` to its language code instead of adding an `en` translation entry.
+
+Example prompt for a multi-language survey:
+
+- `Create a draft NPS survey in Spanish with an English translation.`
+
 ## Install the MCP server
 
 Install the MCP server in your preferred MCP client. The recommended way is the [AI wizard](/docs/ai-engineering/ai-wizard), which walks you through setup for Claude, Cursor, Windsurf, VS Code, and more:
