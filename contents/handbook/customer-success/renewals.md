@@ -72,6 +72,19 @@ Many customers are on legacy contracts that don't follow our [contract rules](/h
 
 Prioritize migrating these customers to standard pricing and discounts. The conversations may be difficult, but stick to handbook pricing whenever reasonable — and share the handbook directly to back up your point. Use your judgment on when an irregular term is a deal-breaker worth keeping, and then get approval from <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (<TeamMember name="Ben Bradley" showOnlyFirstName photo /> as backup) before sharing it with the customer.
 
+### Customers who are leaving
+
+When a customer tells you they are leaving, they often ask to drop Enterprise before their last day. Only the [Billing Team](/handbook/growth/sales/billing#plans) can make that change, so ask in #team-billing with the organization ID.
+
+Do these in order:
+
+1. **Get the exports done first.** Removing Enterprise can lower events retention, and expired events can be deleted for good. Follow [Check retention before you suggest a downgrade](/handbook/customer-success/cost-optimization#check-retention-before-you-suggest-a-downgrade): a [batch export](/docs/data-pipelines/batch-exports) with a [backfill](/docs/data-pipelines/batch-exports#backfills-exporting-historical-data), and confirm the backfill finished.
+2. **Ask the customer to confirm in writing** that the exports are complete and that they want Enterprise off now. Keep that message to quote to billing.
+3. **Ask billing to remove it,** quoting the customer's message, and say when they leave. Ask billing to tell you what the change does before they make it.
+4. **Tell the customer what changed.** Removing Enterprise mid-cycle on pay-as-you-go has returned the unused time as credit against the next invoice, but ask billing to confirm that before you tell the customer, because the [plan update steps](/handbook/growth/sales/billing#updating-subscriptions) don't prorate. A customer who leaves before then may never use that credit. When they cancel, they get a final invoice. Tell them you'll send its total once it exists, then send it.
+
+Prepaid contracts work differently. See [When a customer doesn't renew their credit purchase](/handbook/growth/sales/contract-rules#when-a-customer-doesnt-renew-their-credit-purchase) for what happens to remaining credits, and ask billing about anything else.
+
 ## Renewal discussions
 
 Do these on a call. There are a lot of moving parts and talking through it works best.
