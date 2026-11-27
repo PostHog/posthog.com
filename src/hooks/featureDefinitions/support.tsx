@@ -22,6 +22,10 @@ export const supportFeatures = {
             name: 'Slack',
             description: 'Create tickets from messages, mentions, or reactions in shared channels',
         },
+        teams_channel: {
+            name: 'Microsoft Teams',
+            description: 'Create tickets from mentions or support channels in Teams',
+        },
         github_issues: {
             name: 'GitHub issues',
             description: 'Turn issues into tickets, with replies posting back as comments',
@@ -42,13 +46,17 @@ export const supportFeatures = {
             name: 'Workflow automation',
             description: 'Rules that set SLAs, auto-assign, tag, and change status',
         },
+        sla_tracking: {
+            name: 'SLA tracking',
+            description: 'Set response deadlines and see which tickets are on track, at risk, or breached',
+        },
         historical_import: {
             name: 'Historical ticket import',
-            description: 'Bring ticket history from traditional tools, like Zendesk',
+            description: 'Bring ticket history from tools like Zendesk and Intercom',
         },
         ai_reply_agent: {
-            name: 'AI triage',
-            description: 'Empower agents to triage and respond to tickets for you',
+            name: 'AI reply agent',
+            description: 'An AI agent that drafts or sends replies to tickets',
         },
     },
     product_context: {
@@ -64,7 +72,7 @@ export const supportFeatures = {
             },
             errors_attached: {
                 name: 'Errors attached',
-                description: 'See exceptions from the customer’s session, linked to error tracking',
+                description: "See exceptions from the customer's session, linked to error tracking",
             },
             previous_tickets: {
                 name: 'Previous tickets',
