@@ -26,9 +26,11 @@ Open the view you want to modify in the [SQL editor](https://app.posthog.com/sql
 
 ### Breaking column change protection
 
-When you remove columns from a view that other views depend on, PostHog stops the save and shows a confirmation dialog. The dialog lists the removed columns, names up to three affected downstream views you have access to, and notes whether additional views you can't access are also affected.
+When you remove columns from a view, PostHog checks whether downstream views can still resolve. Views that use `SELECT *` adapt automatically to the column change and save normally without a confirmation dialog.
 
-Click **Save anyway** to confirm the change, or **Cancel** to go back and adjust your query. If you confirm, update the downstream views afterward so they don't fail on the missing columns.
+PostHog only shows a confirmation dialog when a downstream view explicitly references a removed column or uses `SELECT * EXCLUDE (column)` where the excluded column is removed. The dialog lists the removed columns, names up to three affected views you have access to, and notes whether additional views you can't access are also affected. The check follows the full downstream lineage, so if an intermediate `SELECT *` view passes columns to a view that explicitly references them, PostHog still catches the breaking change.
+
+Click **Save anyway** to confirm the change, or **Cancel** to go back and adjust your query. If you confirm, update the affected downstream views so they don't fail on the missing columns.
 
 ## Extending PostHog models with views
 
