@@ -23,26 +23,37 @@ Once the syncs are complete, you can start using Mailjet data in PostHog.
 
 ## Available tables
 
-| Table                | Description                                 | Sync method  |
-| -------------------- | ------------------------------------------- | ------------ |
-| `contact`            | Contacts                                    | Full refresh |
-| `contactslist`       | Contact lists                               | Full refresh |
-| `listrecipient`      | Contact-to-list membership records          | Full refresh |
-| `campaign`           | Campaigns                                   | Full refresh |
-| `campaigndraft`      | Campaign drafts                             | Full refresh |
-| `message`            | Messages                                    | Full refresh |
-| `contactmetadata`    | Contact metadata definitions                | Full refresh |
-| `contactdata`        | Contact property values per contact         | Full refresh |
-| `template`           | Templates                                   | Full refresh |
-| `messageinformation` | Message sending, size, and spam information | Incremental  |
-| `openinformation`    | Email open statistics                       | Incremental  |
-| `clickstatistics`    | Email click statistics                      | Incremental  |
+| Table                | Description                                  | Sync method  |
+| -------------------- | -------------------------------------------- | ------------ |
+| `contact`            | Contacts                                     | Full refresh |
+| `contactslist`       | Contact lists                                | Full refresh |
+| `listrecipient`      | Contact-to-list membership records           | Full refresh |
+| `campaign`           | Campaigns                                    | Full refresh |
+| `campaigndraft`      | Campaign drafts                              | Full refresh |
+| `message`            | Messages                                     | Full refresh |
+| `contactmetadata`    | Contact metadata definitions                 | Full refresh |
+| `contactdata`        | Contact property values per contact          | Full refresh |
+| `template`           | Templates                                    | Full refresh |
+| `messageinformation` | Message sending, size, and spam information  | Incremental  |
+| `openinformation`    | Email open statistics                        | Incremental  |
+| `clickstatistics`    | Email click statistics                       | Incremental  |
+| `bouncestatistics`   | Email bounce statistics                      | Incremental  |
+| `statcounters`       | Daily delivery and engagement counters       | Incremental  |
+| `messageevent`       | Delivery and engagement events from webhooks | Webhook only |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
-The statistics and message information tables (`openinformation`, `clickstatistics`, and `messageinformation`) support incremental syncing, using Mailjet's `FromTS` time-window filter. The list resources have no reliable server-side time filter and are full refresh only.
+The statistics and message information tables support incremental syncing on these fields:
+
+- `messageinformation`: `CreatedAt`
+- `openinformation`: `OpenedAt`
+- `clickstatistics`: `ClickedAt`
+- `bouncestatistics`: `BouncedAt`
+- `statcounters`: `Timeslice`
+
+The `messageevent` table has no list endpoint in Mailjet. Only webhook deliveries add rows to it. The list resources have no reliable server-side time filter and are full refresh only.
 
 ## Configuration
 

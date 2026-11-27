@@ -37,7 +37,12 @@ You'll be asked for:
 
 <SyncModes />
 
-All Pardot tables are full refresh. Each sync replaces the contents of the table.
+Most Pardot tables support incremental sync on `createdAt` or `updatedAt`. These tables use different fields:
+
+- `emails`: `sentAt`
+- `lifecycle_histories` and `visitor_page_views`: `createdAt` only
+
+These tables are full refresh only: `prospect_accounts`, `forms`, `list_emails`, `custom_redirects`, `form_handlers`, `tags`, and `tagged_objects`. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

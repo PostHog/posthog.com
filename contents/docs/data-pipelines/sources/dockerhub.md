@@ -36,7 +36,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Docker Hub tables are full refresh. Each sync replaces the contents of the table.
+The `audit_logs` table supports incremental sync on `timestamp`. All other Docker Hub tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

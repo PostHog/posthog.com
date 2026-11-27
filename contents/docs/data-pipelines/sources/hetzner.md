@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Hetzner Cloud tables are full refresh. Each sync replaces the contents of the table.
+The `server_metrics` and `load_balancer_metrics` tables support incremental sync on `timestamp`. All other Hetzner Cloud tables are full refresh only, because the Hetzner Cloud API has no timestamp filter on its list endpoints. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

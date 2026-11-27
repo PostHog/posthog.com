@@ -39,7 +39,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Sumo Logic tables are full refresh. Each sync replaces the contents of the table.
+The `logs` table supports incremental sync on `message_time`. All other Sumo Logic tables are full refresh only, because the management APIs have no timestamp filter. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

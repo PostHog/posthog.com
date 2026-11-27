@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Gumroad tables are full refresh. Each sync replaces the contents of the table.
+The `sales` and `payouts` tables support incremental sync on `created_at`. All other Gumroad tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

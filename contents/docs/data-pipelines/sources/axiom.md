@@ -40,7 +40,7 @@ When linking Axiom, you'll need:
 
 <SyncModes />
 
-All Axiom tables (`datasets`, `monitors`, `annotations`, `dashboards`, `saved_queries`) use full refresh sync. The Axiom API doesn't expose incremental filtering for these endpoints.
+The `monitor_history` table supports incremental sync on `timestamp`. All other Axiom tables (`datasets`, `monitors`, `annotations`, `dashboards`, `saved_queries`, `users`, and `groups`) are full refresh only. The Axiom API has no incremental filter for these endpoints.
 
 ## Configuration
 

@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Yoco tables are full refresh. Each sync replaces the contents of the table.
+Most Yoco tables support incremental sync on `updated_at` or `created_at`. The `modifier_groups` table supports incremental sync on `created_at` only. These tables are full refresh only: `payout_entries`, `locations`, `taxes`, `active_capital_advances`, and `active_capital_offers`. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

@@ -37,7 +37,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All xMatters (Everbridge) tables are full refresh. Each sync replaces the contents of the table.
+The `events` table supports incremental sync on `created`. The `signals` table supports incremental sync on `received`. All other xMatters (Everbridge) tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 
