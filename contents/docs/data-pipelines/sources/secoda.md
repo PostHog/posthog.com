@@ -9,7 +9,7 @@ availability:
 sourceId: Secoda
 ---
 
-The Secoda connector pulls your data catalog metadata — tables, columns, collections, users, groups, and tags — into the PostHog data warehouse.
+The Secoda connector pulls your data catalog metadata — tables, columns, collections, queries, dashboards, users, groups, tags, and custom properties — into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -23,14 +23,18 @@ Once the syncs are complete, you can start using Secoda data in PostHog.
 
 ## Available tables
 
-| Table         | Description                                                  | Sync method  |
-| ------------- | ------------------------------------------------------------ | ------------ |
-| `tables`      | Tables catalogued in Secoda from connected data integrations | Full refresh |
-| `columns`     | Columns belonging to catalogued tables in Secoda             | Full refresh |
-| `collections` | Collections used to group and organise resources in Secoda   | Full refresh |
-| `users`       | Users in the Secoda workspace                                | Full refresh |
-| `groups`      | User groups (teams) in the Secoda workspace                  | Full refresh |
-| `tags`        | Tags used to label and categorise resources in Secoda        | Full refresh |
+| Table               | Description                                                                       | Sync method  |
+| ------------------- | --------------------------------------------------------------------------------- | ------------ |
+| `audit_logs`        | Actions that users, systems, and integrations take in a Secoda workspace (opt-in) | Full refresh |
+| `collections`       | Collections used to group and organize resources in Secoda                        | Full refresh |
+| `columns`           | Columns belonging to catalogued tables in Secoda                                  | Full refresh |
+| `custom_properties` | Custom property definitions in a Secoda workspace                                 | Full refresh |
+| `dashboards`        | Dashboards in the Secoda catalog                                                  | Full refresh |
+| `groups`            | User groups (teams) in the Secoda workspace                                       | Full refresh |
+| `queries`           | Queries that Secoda extracts from connected data integrations                     | Full refresh |
+| `tables`            | Tables catalogued in Secoda from connected data integrations                      | Full refresh |
+| `tags`              | Tags used to label and categorize resources in Secoda                             | Full refresh |
+| `users`             | Users in the Secoda workspace                                                     | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
