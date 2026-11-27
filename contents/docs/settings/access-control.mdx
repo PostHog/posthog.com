@@ -68,9 +68,15 @@ Each project has a default access level that applies to all organization members
 - **Member** – All organization members have member-level access
 - **Admin** – All organization members have admin-level access
 
-You can override the default access level for specific members or roles. A user's effective access level is the highest level granted from any source.
+You can override the default access level for specific members or roles. PostHog uses the most specific rule for a user, in this order:
 
-Organization owners and admins automatically receive project admin access.
+1. A rule for that member
+2. A rule for one of their roles (if their roles have different rules, the highest level applies)
+3. The project default
+
+For example, set the project default to **No access**, then give an "Analysts" role **Member** access. Members of the "Analysts" role can access the project. If you then give one analyst a member rule of **No access**, that analyst cannot access the project, even though their role grants access.
+
+Organization owners and admins always have project admin access. Member and role rules do not apply to them.
 
 <ProductScreenshot
   imageLight={projectAccessControlLight}
@@ -191,11 +197,17 @@ When a property is restricted, explicit reads return `NULL`, and results that in
 
 ## How object access control precedence works
 
-When determining what a user can access for a specific resource object, PostHog checks permissions in this order (highest priority first):
+When determining what a user can access for a specific resource object, PostHog uses the most specific rule. It checks permissions in this order (highest priority first):
 
-1. **Specific object permissions** - Direct access granted to a specific resource object (e.g., Amy can edit Dashboard X)
+1. **Specific object permissions** - Access set on a specific resource object (e.g., Amy can edit Dashboard X, or Insight Y has view access by default)
 2. **Resource type permissions** - Access set for all resources of a type (e.g., Customer Support role can view all Notebooks)
-3. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default)
+3. **System default** - The default access level for that resource type
+
+At each level, a rule for the member beats a rule for one of their roles, and a role rule beats the default. For example, if Amy has a member rule of **Viewer** on Dashboard X and Amy's role has **Editor** on Dashboard X, Amy can only view it.
+
+A rule on a specific object beats a rule for the whole resource type, even when the object rule is for a role and the resource type rule is for the member. For example, if Amy has **No access** to all dashboards, but Amy's role has **Viewer** access to Dashboard X, Amy can view Dashboard X.
+
+One exception: an object's default access does not grant access to a user whose resource type access is **No access**. To share the object with that user, add a member or role rule on the object.
 
 **Note**: Resource creators and organization admins always have full access, regardless of these precedence rules.
 
