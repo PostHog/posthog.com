@@ -22,7 +22,7 @@ export const growthbook = {
             implementation: {
                 features: {
                     local_evaluation: true,
-                    bootstrapping: false,
+                    bootstrapping: true,
                     api_access: true,
                     sdk_support: true,
                 },
