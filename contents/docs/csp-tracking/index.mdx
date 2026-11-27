@@ -134,53 +134,158 @@ You can add the `v` param to your report URL to specify the version of your CSP 
 
 
 ### Distinct ID and session ID
-Add the `distinct_id` and `session_id` params to your report URL to link each report to a person and to the session replay recording of the page that raised it. Without them, PostHog gives each report a new random ID, so the report doesn't appear in the person's events or in a recording.
+Add the `distinct_id` and `session_id` params to your report URL to link each report to a person and to the session replay recording of the page that raised it. Without them, PostHog gives each report a new random ID.
 
 ```http
 <ph_client_api_host>/report/?token=<ph_project_token>&distinct_id=REPLACE_THIS&session_id=REPLACE_THIS
 ```
 
-A browser sends the report without any context, so the values have to be in the URL. Set the header per request, and read both values from the cookie that the JavaScript Web SDK sets:
+A report doesn't say who saw the page, so both values have to be in the URL. Build the URL for each request from the cookie that the JavaScript Web SDK sets, named `ph_<ph_project_token>_posthog`:
 
-- The cookie is named `ph_<ph_project_token>_posthog` and holds URL-encoded JSON.
-- `distinct_id` is the value of the `distinct_id` key.
-- `session_id` is the second item of the `$sesid` key, which holds the last activity time, the session ID, and the session start time in milliseconds.
+- `distinct_id` is the cookie's `distinct_id`.
+- `session_id` is the second item of the cookie's `$sesid`, which holds the last activity time, the session ID, and the session start time in milliseconds.
+- Leave out `session_id` when the session has been idle for longer than `session_idle_timeout_seconds` (30 minutes by default) or started more than 24 hours ago. The SDK starts a new session when the page loads, so the report would link to the previous one.
 
-The SDK starts a new session when the page loads if the session has been idle for longer than `session_idle_timeout_seconds` (30 minutes by default) or is older than 24 hours. Leave out `session_id` in those cases, or the report links to the previous session. The first page a new visitor loads has no cookie yet, so its reports have no session.
+Put the returned URL in both `report-uri` and `Reporting-Endpoints`, and set both headers for each request. A visitor's first page has no cookie yet, so its reports carry only the token.
 
-Build the URL with a URL builder, so that the cookie value is encoded and can't change your header.
+<MultiLanguage>
 
-```javascript file=Express
+```javascript file=Node.js
 const POSTHOG_COOKIE = 'ph_<ph_project_token>_posthog'
 const SESSION_IDLE_TIMEOUT_MS = 30 * 60 * 1000 // match session_idle_timeout_seconds if you changed it
 const SESSION_LENGTH_LIMIT_MS = 24 * 60 * 60 * 1000
 
-function posthogIds(req) {
-  const cookie = req.headers.cookie?.split('; ').find((c) => c.startsWith(`${POSTHOG_COOKIE}=`))
-  if (!cookie) {
-    return {}
-  }
-  try {
-    const { distinct_id, $sesid } = JSON.parse(decodeURIComponent(cookie.slice(POSTHOG_COOKIE.length + 1)))
-    const [lastActivity, sessionId, sessionStart] = $sesid ?? []
-    const now = Date.now()
-    const sessionIsLive = now - lastActivity < SESSION_IDLE_TIMEOUT_MS && now - sessionStart < SESSION_LENGTH_LIMIT_MS
-    return { distinct_id, session_id: sessionIsLive ? sessionId : undefined }
-  } catch {
-    return {}
-  }
-}
+// With Express, pass `req.cookies` from cookie-parser, which decodes the values
+function posthogReportUrl(cookies) {
+  const url = new URL('<ph_client_api_host>/report/')
+  url.searchParams.set('token', '<ph_project_token>')
 
-app.use((req, res, next) => {
-  const reportUrl = new URL('<ph_client_api_host>/report/')
-  reportUrl.searchParams.set('token', '<ph_project_token>')
-  for (const [key, value] of Object.entries(posthogIds(req))) {
-    if (value) {
-      reportUrl.searchParams.set(key, value)
-    }
+  let posthog
+  try {
+    posthog = JSON.parse(cookies[POSTHOG_COOKIE])
+  } catch {
+    return url.toString() // no cookie yet, or one that can't be read
   }
-  res.setHeader('Content-Security-Policy-Report-Only', `default-src 'self'; report-uri ${reportUrl}; report-to posthog`)
-  res.setHeader('Reporting-Endpoints', `posthog="${reportUrl}"`)
-  next()
-})
+
+  if (posthog.distinct_id) {
+    url.searchParams.set('distinct_id', posthog.distinct_id)
+  }
+
+  const [lastActivity, sessionId, sessionStart] = posthog.$sesid ?? []
+  const now = Date.now()
+  if (sessionId && now - lastActivity < SESSION_IDLE_TIMEOUT_MS && now - sessionStart < SESSION_LENGTH_LIMIT_MS) {
+    url.searchParams.set('session_id', sessionId)
+  }
+
+  return url.toString()
+}
 ```
+
+```python file=Python
+import json
+import time
+from urllib.parse import unquote, urlencode
+
+POSTHOG_COOKIE = "ph_<ph_project_token>_posthog"
+SESSION_IDLE_TIMEOUT_MS = 30 * 60 * 1000  # match session_idle_timeout_seconds if you changed it
+SESSION_LENGTH_LIMIT_MS = 24 * 60 * 60 * 1000
+
+
+# With Django, pass `request.COOKIES`. Django doesn't decode cookie values, so this does.
+def posthog_report_url(cookies):
+    params = {"token": "<ph_project_token>"}
+
+    try:
+        posthog = json.loads(unquote(cookies[POSTHOG_COOKIE]))
+    except (KeyError, ValueError):
+        return f"<ph_client_api_host>/report/?{urlencode(params)}"  # no cookie yet, or one that can't be read
+
+    if posthog.get("distinct_id"):
+        params["distinct_id"] = posthog["distinct_id"]
+
+    last_activity, session_id, session_start = posthog.get("$sesid") or (None, None, None)
+    now = time.time() * 1000
+    if session_id and now - last_activity < SESSION_IDLE_TIMEOUT_MS and now - session_start < SESSION_LENGTH_LIMIT_MS:
+        params["session_id"] = session_id
+
+    return f"<ph_client_api_host>/report/?{urlencode(params)}"
+```
+
+```ruby file=Ruby
+require "json"
+require "uri"
+
+POSTHOG_COOKIE = "ph_<ph_project_token>_posthog"
+SESSION_IDLE_TIMEOUT_MS = 30 * 60 * 1000 # match session_idle_timeout_seconds if you changed it
+SESSION_LENGTH_LIMIT_MS = 24 * 60 * 60 * 1000
+
+# With Rails, pass `cookies`, which decodes the values
+def posthog_report_url(cookies)
+  params = { "token" => "<ph_project_token>" }
+
+  begin
+    posthog = JSON.parse(cookies[POSTHOG_COOKIE])
+  rescue TypeError, JSON::ParserError
+    return "<ph_client_api_host>/report/?#{URI.encode_www_form(params)}" # no cookie yet, or one that can't be read
+  end
+
+  params["distinct_id"] = posthog["distinct_id"] if posthog["distinct_id"]
+
+  last_activity, session_id, session_start = posthog["$sesid"]
+  now = Time.now.to_f * 1000
+  if session_id && now - last_activity < SESSION_IDLE_TIMEOUT_MS && now - session_start < SESSION_LENGTH_LIMIT_MS
+    params["session_id"] = session_id
+  end
+
+  "<ph_client_api_host>/report/?#{URI.encode_www_form(params)}"
+end
+```
+
+```go file=Go
+import (
+	"encoding/json"
+	"net/http"
+	"net/url"
+	"time"
+)
+
+const (
+	posthogCookie        = "ph_<ph_project_token>_posthog"
+	sessionIdleTimeoutMs = 30 * 60 * 1000 // match session_idle_timeout_seconds if you changed it
+	sessionLengthLimitMs = 24 * 60 * 60 * 1000
+)
+
+func posthogReportURL(r *http.Request) string {
+	params := url.Values{"token": {"<ph_project_token>"}}
+	reportURL := "<ph_client_api_host>/report/?"
+
+	var posthog struct {
+		DistinctID string `json:"distinct_id"`
+		SesID      [3]any `json:"$sesid"`
+	}
+	cookie, err := r.Cookie(posthogCookie)
+	if err != nil {
+		return reportURL + params.Encode() // no cookie yet
+	}
+	value, err := url.PathUnescape(cookie.Value)
+	if err != nil || json.Unmarshal([]byte(value), &posthog) != nil {
+		return reportURL + params.Encode() // a cookie that can't be read
+	}
+
+	if posthog.DistinctID != "" {
+		params.Set("distinct_id", posthog.DistinctID)
+	}
+
+	lastActivity, _ := posthog.SesID[0].(float64)
+	sessionID, _ := posthog.SesID[1].(string)
+	sessionStart, _ := posthog.SesID[2].(float64)
+	now := float64(time.Now().UnixMilli())
+	if sessionID != "" && now-lastActivity < sessionIdleTimeoutMs && now-sessionStart < sessionLengthLimitMs {
+		params.Set("session_id", sessionID)
+	}
+
+	return reportURL + params.Encode()
+}
+```
+
+</MultiLanguage>
