@@ -32,7 +32,7 @@ When linking Serpstat, you'll need:
 
 ### Optional fields
 
-These fields are required only if you want to sync the domain and backlink tables (`domain_info`, `domain_history`, `domain_keywords`, `backlinks`):
+These fields are required only if you want to sync the domain and backlink tables (`domain_info`, `domain_history`, `domain_keywords`, `backlinks`, `ref_domains`, `lost_backlinks`, `competitors`):
 
 - **Domain** – the domain to analyze (e.g., `example.com`). You can paste a full URL like `https://Example.com/path` and PostHog normalizes it to `example.com`.
 - **Search engine database** – the Serpstat database code (e.g., `g_us` for Google US). Defaults to `g_us` if left blank.
@@ -41,8 +41,8 @@ These fields are required only if you want to sync the domain and backlink table
 
 Syncs use your Serpstat account's API units when Serpstat applies a charge:
 
-- **Project tables** (`projects`, `project_keywords`, `project_positions`) are free of API credit charges.
-- **Domain and backlink tables** (`domain_info`, `domain_history`, `domain_keywords`, `backlinks`) use API credits for each returned row.
+- **Project tables** (`projects`, `project_keywords`, `project_positions`, `top_competitors_history`) are free of API credit charges.
+- **Domain and backlink tables** (`domain_info`, `domain_history`, `domain_keywords`, `backlinks`, `ref_domains`, `lost_backlinks`, `competitors`) use API credits for each returned row.
 
 Paginated tables include up to 500 records per sync. Position data covers the last seven days for one project region.
 
