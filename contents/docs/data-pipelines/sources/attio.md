@@ -9,7 +9,7 @@ availability:
 sourceId: Attio
 ---
 
-The Attio connector can link companies, people, deals, lists, users, workspaces, notes, tasks, workspace members, activities, objects, attributes, select options, statuses, and list entries to PostHog.
+The Attio connector can link companies, people, deals, lists, users, workspaces, notes, tasks, workspace members, activities, objects, attributes, select options, statuses, list entries, threads, meetings, and call recordings to PostHog.
 
 To link Attio:
 
@@ -17,7 +17,7 @@ To link Attio:
 
 2. Click **+ New source** and then click **Link** next to Attio.
 
-3. Next, you need an access token from Attio. Go to your [developer settings](https://attio.com/help/reference/integrations-automations/generating-an-api-key) in Attio and create a new access token with the following read scopes: `object_configuration:read`, `list_configuration:read`, `record_permission:read`, `record:read`, `list_entry:read`, `note:read`, `task:read`, `user_management:read`, and `activity_configuration:read`.
+3. Next, you need an access token from Attio. Go to your [developer settings](https://attio.com/help/reference/integrations-automations/generating-an-api-key) in Attio and create a new access token with the following read scopes: `object_configuration:read`, `list_configuration:read`, `record_permission:read`, `record:read`, `list_entry:read`, `note:read`, `task:read`, `user_management:read`, `activity_configuration:read`, `comment:read`, `meeting:read`, and `call_recording:read`.
 
 4. Back in PostHog, paste the access token in the `Access token` field and click **Next**.
 
