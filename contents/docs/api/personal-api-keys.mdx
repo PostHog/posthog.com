@@ -50,4 +50,17 @@ You can search the table by owner name, email, or scope. Click any of the **Owne
 
 The actual key secret is never exposed – only the masked value is shown.
 
+### Admin actions
+
+Organization admins and owners can also roll or revoke keys that reach their organization:
+
+- **Roll** – Invalidates the key's secret but preserves its scopes and settings. The key stops working everywhere until the owner rolls it again in their own settings to get a new usable secret.
+- **Revoke** – Permanently deletes the key globally, including in other organizations where it also works.
+
+Both actions require a recent, non-impersonated sign-in. The key owner receives an email notification when an admin changes their key.
+
+If a key works in other organizations, the confirmation dialog warns about the cross-organization impact.
+
+These actions are useful for incident response – for example, if you need to invalidate a potentially compromised key and the owner is unavailable.
+
 > **Note:** This feature requires a plan that includes organization security settings and is only visible to organization admins and owners.
