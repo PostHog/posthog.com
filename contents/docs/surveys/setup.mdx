@@ -21,11 +21,20 @@ posthog.init("<ph_project_token>", {
 ## Option 2: Custom UI (`type: "api"`)
 
 1. Enable `surveys_opt_in` in project settings and initialize `posthog-js >= 1.232.7` for `onSurveysLoaded` (`>= 1.249.2` for automatic seen-state tracking, `>= 1.435.0` for `onActiveMatchingSurveysChanged`). Set `opt_out_useragent_filter: true` in automated headless browsers so bot filtering doesn't drop events.
-2. Wait for surveys and feature flags before reading matches. Do **not** call `getActiveMatchingSurveys()` directly inside `posthog.init`'s `loaded` callback (the surveys module finishes initializing after `loaded`). Subscribe with `onActiveMatchingSurveysChanged` or nest inside `onSurveysLoaded` / `onFeatureFlags`, and filter for `survey.type === 'api'`:
+2. Wait for surveys and feature flags before reading matches. Do **not** call `getActiveMatchingSurveys()` directly inside `posthog.init`'s `loaded` callback (the surveys module finishes initializing after `loaded`). Subscribe with `onActiveMatchingSurveysChanged` (`posthog-js` 1.435.0+), or on older SDKs combine `onFeatureFlags` and `onSurveysLoaded` (`posthog-js` 1.232.7+) while cleaning up both unsubscribe functions, and filter for `survey.type === 'api'`:
 
 ```js-web
-posthog.onFeatureFlags(() => {
-    posthog.onSurveysLoaded(() => {
+// posthog-js 1.435.0+
+const unsubscribe = posthog.onActiveMatchingSurveysChanged((surveys) => {
+    const apiSurveys = surveys.filter((survey) => survey.type === 'api')
+    handleSurveys(apiSurveys)
+})
+
+// posthog-js 1.232.7 - 1.434.x (unsubscribe inner listener before re-subscribing and on cleanup)
+let unsubscribeSurveys
+const unsubscribeFlags = posthog.onFeatureFlags(() => {
+    unsubscribeSurveys?.()
+    unsubscribeSurveys = posthog.onSurveysLoaded(() => {
         posthog.getActiveMatchingSurveys((surveys) => {
             const apiSurveys = surveys.filter((survey) => survey.type === 'api')
             handleSurveys(apiSurveys)
