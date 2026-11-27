@@ -1,23 +1,32 @@
-const MODELS_URL = 'https://gateway.us.posthog.com/posthog_code/v1/models'
+const MODELS_URL = 'https://ai-gateway.us.posthog.com/v1/models'
 const COMPUTE_URL = 'https://us.posthog.com/api/code/sandbox-pricing/'
 const PRICING_CACHE_CONTROL = 's-maxage=3600, stale-while-revalidate=86400'
-const BLOCKED_DESKTOP_MODEL_IDS = new Set([
-    'gpt-5-mini',
-    'openai/gpt-5-mini',
-    'gpt-5.2',
-    'openai/gpt-5.2',
-    'gpt-5.3',
-    'openai/gpt-5.3',
-    'gpt-5.3-codex',
-    'openai/gpt-5.3-codex',
-    'claude-opus-4-5',
-    'anthropic/claude-opus-4-5',
-    'claude-opus-4-6',
-    'anthropic/claude-opus-4-6',
-    'claude-sonnet-4-5',
-    'anthropic/claude-sonnet-4-5',
-    'claude-haiku-4-5',
-    'anthropic/claude-haiku-4-5',
+const DESKTOP_MODEL_IDS = new Set([
+    'claude-fable-5-2',
+    'claude-fable-5-1',
+    'claude-fable-5',
+    'claude-opus-5-5',
+    'claude-opus-5',
+    'claude-opus-4-8',
+    'claude-sonnet-5-5',
+    'claude-sonnet-5',
+    'claude-haiku-5-5',
+    'gpt-6.2-sol',
+    'gpt-6.2-astra',
+    'gpt-6.1-sol',
+    'gpt-6-sol',
+    'gpt-6-astra',
+    'gpt-6-luna',
+    'gpt-5.6-sol',
+    'gpt-5.6-terra',
+    'gpt-5.6-luna',
+    'gpt-5.5',
+    'gpt-5',
+    'zai-org/glm-5.3',
+    'zai-org/glm-5.3-flash',
+    'moonshotai/kimi-k3.1-pro',
+    'deepseek-ai/deepseek-v4.1-flash-1017',
+    'deepseek-ai/deepseek-v4.1-flash-1017-fast',
 ])
 const MODEL_FAMILY_ORDER = ['fable', 'opus', 'sonnet', 'haiku']
 
@@ -55,7 +64,17 @@ const getPostHogDesktopPricing = async () => {
 
     return {
         models: models.data
-            .filter((model) => model.pricing !== null && !BLOCKED_DESKTOP_MODEL_IDS.has(model.id.toLowerCase()))
+            .filter((model) => model.pricing && DESKTOP_MODEL_IDS.has(model.id))
+            .map((model) => ({
+                id: model.id,
+                display_name: model.name ?? model.id,
+                pricing: {
+                    prompt: model.pricing.prompt,
+                    completion: model.pricing.completion,
+                    input_cache_read: model.pricing.cache_read ?? null,
+                    input_cache_write: model.pricing.cache_write ?? null,
+                },
+            }))
             .sort(compareModelsForPicker),
         compute: compute.current,
     }
