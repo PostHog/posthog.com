@@ -101,8 +101,6 @@ export const tools = [
         description: 'See how agents actually use your MCP server',
         slug: 'mcp-analytics',
         category: 'analytics',
-        // The app feature is alpha, but "beta" keeps this tool clickable while rendering its badge.
-        status: 'beta',
     },
     {
         handle: 'posthog_ai',
