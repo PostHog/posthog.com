@@ -1898,6 +1898,56 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/api/hog-flows:ext(\\.md)?",
+            "destination": "/docs/api/workflows:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/messaging:ext(\\.md)?",
+            "destination": "/docs/api/transactional-email:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/transactional-code-emails:ext(\\.md)?",
+            "destination": "/docs/api/transactional-email:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/messaging-templates:ext(\\.md)?",
+            "destination": "/docs/api/email-templates:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/messaging-categories:ext(\\.md)?",
+            "destination": "/docs/api/email-subscriptions:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/messaging-preferences:ext(\\.md)?",
+            "destination": "/docs/api/email-subscriptions:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/messaging-suppressions:ext(\\.md)?",
+            "destination": "/docs/api/email-subscriptions:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/transactional-email-log:ext(\\.md)?",
+            "destination": "/docs/api/email-logs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/workflow-email-log:ext(\\.md)?",
+            "destination": "/docs/api/email-logs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/hog-flows-:n(\\d+)",
+            "destination": "/docs/api/workflows-:n",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/api/environments.md",
             "destination": "/docs/api.md",
             "statusCode": 301

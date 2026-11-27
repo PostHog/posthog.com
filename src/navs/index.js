@@ -3649,6 +3649,10 @@ export const docsMenu = {
                             url: '/docs/api/batch-exports',
                         },
                         {
+                            name: 'Broadcasts',
+                            url: '/docs/api/broadcasts',
+                        },
+                        {
                             name: 'Cohorts',
                             url: '/docs/api/cohorts',
                         },
@@ -3671,6 +3675,18 @@ export const docsMenu = {
                         {
                             name: 'Early access features',
                             url: '/docs/api/early-access-feature',
+                        },
+                        {
+                            name: 'Email logs',
+                            url: '/docs/api/email-logs',
+                        },
+                        {
+                            name: 'Email subscriptions',
+                            url: '/docs/api/email-subscriptions',
+                        },
+                        {
+                            name: 'Email templates',
+                            url: '/docs/api/email-templates',
                         },
                         {
                             name: 'Endpoints',
@@ -3785,12 +3801,20 @@ export const docsMenu = {
                             url: '/docs/api/surveys',
                         },
                         {
+                            name: 'Transactional email',
+                            url: '/docs/api/transactional-email',
+                        },
+                        {
                             name: 'Users',
                             url: '/docs/api/users',
                         },
                         {
                             name: 'Web Analytics',
                             url: '/docs/api/web-analytics',
+                        },
+                        {
+                            name: 'Workflows',
+                            url: '/docs/api/workflows',
                         },
                         {
                             name: 'Data model',
