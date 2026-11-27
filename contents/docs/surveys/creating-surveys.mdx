@@ -175,8 +175,8 @@ Survey questions that are pre-filled will be skipped (not shown to the user) if 
 
 Here's how URL prefill works:
 
-- Starting at question 0, PostHog automatically skips consecutive prefilled questions only when **Automatically submit on selection** (`skipSubmitButton: true`) is enabled on each question.
-- If a prefilled question does not have **Automatically submit on selection** enabled, the survey opens on that question with the answer pre-selected so the user can edit or submit it.
+- PostHog skips consecutive prefilled questions from question 0 only when each has **Automatically submit on selection** (`skipSubmitButton: true`) enabled.
+- If a prefilled question doesn't have **Automatically submit on selection** enabled, the survey opens on that question with the answer pre-selected so the user can edit or submit it.
 - When partial responses are enabled, skipped prefilled answers are captured immediately on page load.
 - If every question auto-submits from URL prefill, PostHog submits the response immediately and shows the confirmation message when `displayThankYouMessage` is enabled.
 
@@ -202,6 +202,12 @@ Now you can send your survey link with the NPS question pre-filled, like this:
 - Choice indices are also 0-based (first choice is `0`, second is `1`, etc.)
 - Invalid indices are silently ignored
 - Pre-filling only works with choice and rating questions (not open text)
+
+#### Creating and converting hosted surveys
+
+- Select **Hosted survey** (`type: "external_survey"`) during creation, or convert an existing survey between **Hosted survey** and **Popover** from the editor.
+- Targeting fields (`linked_flag_id`, `targeting_flag_filters`), display conditions (`url`, `urlMatchType`, `selector`, `events`, `actions`, `deviceTypes`, `deviceTypesMatchType`, `seenSurveyWaitPeriodInDays`, `linkedFlagVariant`), and `surveyPopupDelaySeconds` don't apply to hosted surveys and must be omitted on API create/update.
+- Hosted surveys share the same question types and branching rules as popover surveys. HTML descriptions (`descriptionContentType: "html"`) render as sanitized read-only HTML in the hosted canvas.
 
 #### Embedding hosted surveys in iframes
 
@@ -242,7 +248,11 @@ You can also add [conditional logic](/docs/surveys/conditional-questions) to dis
 
 > **Tip:** The description supports HTML, so you can do things like add images with an `<img>` tag.
 
-PostHog supports multiple question types which are all available for both popover and API display modes.
+PostHog supports all question types across popover, hosted, feedback button, and API display modes:
+
+- **Choice limits:** Single and multiple choice questions require `2` to `20` choices via the API (the Popover editor caps added choices at `15`, hiding **Add choice** and **Shuffle options** at that limit).
+- **Open-text validation:** Open questions accept `questions[].validation` rules (`min_length`, `max_length`, and `email`).
+- **Link questions:** `link` must use an `https://` or `mailto:` scheme.
 
 | Type                       | Preview                                                                                                                                                         |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -273,6 +283,25 @@ Customization enables you to change the look, feel, and timing of your popover s
 />
 
 For hosted surveys, you can only customize colors and placeholders.
+
+To set project-wide defaults for new surveys, open **Surveys settings** (stored in `survey_config.appearance` alongside `surveys_opt_in`). Invalid appearance values fail validation before save.
+
+### Multi-language translations
+
+Surveys support localized copy without duplicating the survey or changing question order:
+
+- **Base language (`base_language`):** BCP-47 language tag (default `"en"`, max `20` characters). You can't add a translation entry matching `base_language`.
+- **Translated fields:** Set survey-level copy (`name`, `description`, `thankYouMessageHeader`, `thankYouMessageDescription`, `thankYouMessageCloseButtonText`, `introScreenHeader`, `introScreenDescription`, `introScreenButtonText`, `backButtonText`) in `translations.<lang>`, and question copy (`question`, `description`, `buttonText`, `choices`, `lowerBoundLabel`, `upperBoundLabel`, `link`) in `questions[i].translations.<lang>`.
+- **Manual and AI translations:** Add languages in the editor's **Translations** section or call `POST /api/projects/{project_id}/surveys/{id}/generate_translations/`. Editing an AI-generated translation clears its AI marker.
+- **Structural lock:** Question order, branching logic, display conditions, and schedules stay anchored to the original language. Adding a question to a translated survey initializes entries for existing languages automatically.
+
+### Quick Surveys and the User feedback tab
+
+Create context-linked surveys from feature flags or experiments via the **User feedback** tab (or from funnel insights via **Quick Survey**):
+
+- **0 linked surveys:** Shows the empty state and **Quick Survey** form pre-scoped to the current resource, plus an inline enable toggle if `surveys_opt_in` is off and SDK compatibility warnings for your project's detected SDK versions.
+- **1 linked survey:** Renders inline survey results with a **Manage in surveys** link to the full survey detail page.
+- **2+ linked surveys:** Renders a sortable table (`Name`, `Responses`, `Created at`, `Status`) ordered by `created_at` descending.
 
 ### Display conditions
 
