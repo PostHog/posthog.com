@@ -11,6 +11,7 @@ import {
     IconShieldLock,
     IconSparkles,
 } from '@posthog/icons'
+import { CodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
 import PromptDemo from 'components/MCPPage/PromptDemo'
 import MCPInstall from 'components/Products/MCPInstall'
@@ -27,6 +28,79 @@ const shot = (light: string, dark: string, alt: string) => ({
     srcDark: `https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/${dark}`,
     alt,
 })
+
+// The send example from contents/docs/workflows/transactional-emails/api.mdx.
+const sendExamples = [
+    {
+        label: 'Node.js',
+        language: 'js',
+        code: `const { data, error } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateId: "<template_id>",
+    templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
+    distinctId: "user_123",
+    idempotencyKey: "password-reset-8f14e45f",
+})`,
+    },
+    {
+        label: 'Python',
+        language: 'python',
+        code: `result = posthog.emails.send(
+    to="jane@example.com",
+    template_id="<template_id>",
+    template_data={"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    distinct_id="user_123",
+    idempotency_key="password-reset-8f14e45f",
+)`,
+    },
+    {
+        label: 'Go',
+        language: 'go',
+        code: `result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:             "jane@example.com",
+    TemplateID:     "<template_id>",
+    TemplateData:   map[string]interface{}{"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    DistinctID:     "user_123",
+    IdempotencyKey: "password-reset-8f14e45f",
+})`,
+    },
+    {
+        label: 'Ruby',
+        language: 'ruby',
+        code: `result = posthog.emails.send(
+  to: 'jane@example.com',
+  template_id: '<template_id>',
+  template_data: { first_name: 'Jane', reset_link: 'https://example.com/reset?token=abc123' },
+  distinct_id: 'user_123',
+  idempotency_key: 'password-reset-8f14e45f'
+)`,
+    },
+    {
+        label: 'PHP',
+        language: 'php',
+        code: `$result = PostHog::emails()->send([
+    'to' => 'jane@example.com',
+    'template_id' => '<template_id>',
+    'template_data' => ['first_name' => 'Jane', 'reset_link' => 'https://example.com/reset?token=abc123'],
+    'distinct_id' => 'user_123',
+    'idempotency_key' => 'password-reset-8f14e45f',
+]);`,
+    },
+    {
+        label: 'cURL',
+        language: 'bash',
+        code: `curl -X POST "https://us.posthog.com/api/messaging/send/email/" \\
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -H "Idempotency-Key: password-reset-8f14e45f" \\
+  -d '{
+    "template_id": "<template_id>",
+    "to": "jane@example.com",
+    "distinct_id": "user_123",
+    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
+  }'`,
+    },
+]
 
 const List = ({ items }: { items: [string, React.ReactNode][] }) => (
     <div className="@container">
@@ -74,12 +148,10 @@ export const applications: CarouselSlide[] = [
                         ],
                     ]}
                 />
+                <div className="not-prose mt-6">
+                    <CodeBlock currentLanguage={sendExamples[0]}>{sendExamples}</CodeBlock>
+                </div>
             </>
-        ),
-        image: shot(
-            'wf_landing_transactional_create_light_2ef5f04bae.png',
-            'wf_landing_transactional_create_dark_93a4f5e1f5.png',
-            'Creating a transactional email in PostHog'
         ),
     },
     {
