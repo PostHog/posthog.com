@@ -69,7 +69,7 @@ export const Content = () => {
                     <ResourceItem
                         type="Getting started"
                         title="Start here"
-                        description="A high-level overview of setting up tracing with OpenTelemetry"
+                        description="Set up an OpenTelemetry exporter or PostHog SDK and send your first spans"
                         url="/docs/distributed-tracing/start-here"
                     />
                     <ResourceItem
@@ -79,10 +79,46 @@ export const Content = () => {
                         url="/docs/distributed-tracing/installation"
                     />
                     <ResourceItem
-                        type="Related"
-                        title="Logs"
-                        description="Search and analyze your application logs – traces' sibling in the observability suite"
-                        url="/docs/logs"
+                        type="Web app"
+                        title="Search and filter traces"
+                        description="Filter by service, status, duration, and attributes, and brush latency heatmaps"
+                        url="/docs/distributed-tracing/search"
+                    />
+                    <ResourceItem
+                        type="Web app"
+                        title="Inspect traces and spans"
+                        description="Read span waterfalls and flame graphs, and pivot to logs, queries, and errors"
+                        url="/docs/distributed-tracing/inspect-traces"
+                    />
+                    <ResourceItem
+                        type="Web app"
+                        title="Analyze operations and compare windows"
+                        description="Rank operations by p95 latency and diff performance against a baseline window"
+                        url="/docs/distributed-tracing/operations-and-compare"
+                    />
+                    <ResourceItem
+                        type="Web app"
+                        title="Query traces with SQL"
+                        description="Run custom percentiles, breakdowns, and exports on posthog.trace_spans in HogQL"
+                        url="/docs/distributed-tracing/sql"
+                    />
+                    <ResourceItem
+                        type="Correlated data"
+                        title="Link persons, sessions, logs, and errors"
+                        description="Configure identity attribute keys and correlate traces across PostHog"
+                        url="/docs/distributed-tracing/correlate-data"
+                    />
+                    <ResourceItem
+                        type="Surfaces"
+                        title="PostHog MCP"
+                        description="Let coding agents check service health, diff operations, and summarize traces"
+                        url="/docs/distributed-tracing/surfaces/mcp"
+                    />
+                    <ResourceItem
+                        type="Surfaces"
+                        title="Tracing API"
+                        description="Query spans, aggregates, and service health programmatically over REST"
+                        url="/docs/distributed-tracing/surfaces/api"
                     />
                 </ul>
             </section>

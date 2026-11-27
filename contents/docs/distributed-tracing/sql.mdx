@@ -1,0 +1,124 @@
+---
+title: Query traces with SQL
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: covers querying posthog.trace_spans in the PostHog SQL editor (https://app.posthog.com/sql). Excludes the feature-flagged embedded SQL tab inside /tracing (tracing-scene-tabs). */}
+
+Query your spans directly in PostHog SQL when you need custom percentiles, attribute aggregations, or reports beyond the viewer controls.
+
+- **When you need it.** You want custom groupings, quantiles, or exports over raw span records in the [SQL editor](https://app.posthog.com/sql).
+- **What you get.** You get direct HogQL access to `posthog.trace_spans`, including span attributes, resource attributes, events, and links.
+- **How you know it worked.** The first starter query returns recent span rows with `trace_id_hex` and `duration_ms`.
+
+## Gather what you need
+
+Send spans to your PostHog project and open the [SQL editor](https://app.posthog.com/sql). Always qualify the table name as `posthog.trace_spans`, since spans are only registered under the `posthog.` namespace.
+
+## Read the table schema
+
+Each row in `posthog.trace_spans` represents one OpenTelemetry span.
+
+| Column | Type or encoding | Notes |
+| --- | --- | --- |
+| `uuid` | String | Unique row identifier |
+| `team_id` | Integer | Project identifier |
+| `trace_id` | Base64-encoded 16-byte ID | Decode to hex with `lower(hex(tryBase64Decode(trace_id)))` |
+| `span_id` | Base64-encoded 8-byte ID | Decode to hex with `lower(hex(tryBase64Decode(span_id)))` |
+| `parent_span_id` | Base64-encoded 8-byte ID | Empty or `AAAAAAAAAAA=` (8 zero bytes) on root spans. Filter root spans with `is_root_span` |
+| `is_root_span` | Boolean | `true` when the span has no parent |
+| `trace_state` | String | W3C `tracestate` header value |
+| `flags` | Integer | W3C trace flags bitmask |
+| `name` | String | Operation name |
+| `kind` | Integer (`0` to `5`) | `0` Unspecified, `1` Internal, `2` Server, `3` Client, `4` Producer, `5` Consumer |
+| `service_name` | String | OpenTelemetry `service.name` |
+| `status_code` | Integer (`0`, `1`, `2`) | `0` Unset, `1` OK, `2` Error |
+| `timestamp` | DateTime | Span start time |
+| `end_time` | DateTime | Span end time |
+| `observed_timestamp` | DateTime | Collector ingestion timestamp |
+| `time_bucket` | DateTime | Coarse 4-hour partition bucket |
+| `duration_nano` | Integer (nanoseconds) | Divide by `1000000` for milliseconds |
+| `attributes` | Map (`String -> String`) | Span-level OpenTelemetry attributes |
+| `resource_attributes` | Map (`String -> String`) | Resource-level attributes such as `deployment.environment.name` |
+| `resource_fingerprint` | Integer | Hash of `resource_attributes` |
+| `instrumentation_scope` | String | Emitting instrumentation library or module |
+| `events` | Array (`String`) | JSON strings with `time_unix_nano`, `name`, and `attributes` |
+| `dropped_events_count` | Integer | Span events dropped by the SDK before export |
+| `links` | Array (`String`) | JSON strings with `trace_id`, `span_id`, and `attributes` |
+| `dropped_links_count` | Integer | Span links dropped by the SDK before export |
+
+## Run starter queries
+
+List recent spans from the last hour with durations converted to milliseconds:
+
+```sql
+SELECT
+    timestamp,
+    service_name,
+    name,
+    duration_nano / 1000000 AS duration_ms,
+    status_code,
+    lower(hex(tryBase64Decode(trace_id))) AS trace_id_hex,
+    lower(hex(tryBase64Decode(span_id))) AS span_id_hex
+FROM posthog.trace_spans
+WHERE timestamp > now() - INTERVAL 1 HOUR
+ORDER BY timestamp DESC
+LIMIT 100
+```
+
+Compute p50, p95, p99 latency, and error rate per operation over the last 6 hours:
+
+```sql
+SELECT
+    service_name,
+    name,
+    count() AS spans,
+    countIf(status_code = 2) AS errors,
+    round(100.0 * errors / spans, 2) AS error_rate_pct,
+    round(quantile(0.50)(duration_nano) / 1e6, 1) AS p50_ms,
+    round(quantile(0.95)(duration_nano) / 1e6, 1) AS p95_ms,
+    round(quantile(0.99)(duration_nano) / 1e6, 1) AS p99_ms
+FROM posthog.trace_spans
+WHERE timestamp > now() - INTERVAL 6 HOUR
+GROUP BY service_name, name
+ORDER BY p95_ms DESC
+LIMIT 50
+```
+
+Look up a single trace using its 32-character hex `trace_id`:
+
+```sql
+SELECT
+    timestamp,
+    service_name,
+    name,
+    duration_nano / 1e6 AS duration_ms,
+    status_code,
+    attributes['http.response.status_code'] AS http_status
+FROM posthog.trace_spans
+WHERE trace_id = base64Encode(unhex('<trace_id_hex>'))
+  AND timestamp > now() - INTERVAL 1 DAY
+ORDER BY timestamp ASC
+```
+
+> **Convert hex IDs before filtering `trace_id`.** Pass a lowercase 32-character hex string with no dashes to `unhex()`. A dashed UUID gives the wrong byte length and silently matches zero rows.
+
+## The cluster limits
+
+Two storage boundaries apply to `posthog.trace_spans`:
+
+- **Separate ClickHouse cluster.** `posthog.trace_spans` sits on the Logs cluster, separate from `events`. A single SQL query can't join `posthog.trace_spans` with `events` and fails with `Cannot query tables from different clusters`. Run two queries when correlating with Product Analytics or [AI Observability](/docs/distributed-tracing/link-ai-observability#query-both-products-together).
+- **Default retention.** Spans expire after 14 days by default. Always include a `timestamp` filter, so ClickHouse prunes partitions quickly.
+
+## Check it worked
+
+Your query returns span rows with readable hex `trace_id_hex` values and millisecond durations.
+
+## Fix what goes wrong
+
+- **Table `trace_spans` not found.** Add the `posthog.` prefix so the query reads `FROM posthog.trace_spans`.
+- **Hex `trace_id` filter returns zero rows.** Remove dashes and wrap the 32-character hex ID in `base64Encode(unhex('...'))`.
+- **Query times out on wide ranges.** Add a tighter `WHERE timestamp > now() - INTERVAL ...` bound and filter on `service_name` before scanning `attributes`.
+
+See also: [Link traces to AI Observability](/docs/distributed-tracing/link-ai-observability) · [Use the Tracing API](/docs/distributed-tracing/surfaces/api) · [Search and filter traces](/docs/distributed-tracing/search)

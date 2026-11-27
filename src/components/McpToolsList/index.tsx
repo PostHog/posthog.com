@@ -55,6 +55,39 @@ const AIO_FAMILIES: Family[] = [
     { title: 'Summarization', description: 'AI trace summarization', match: ['llma-summarization-'] },
 ]
 
+const TRACING_FAMILIES: Family[] = [
+    {
+        title: 'Discovery',
+        description: 'List services, attribute keys, and observed attribute values before filtering',
+        match: ['apm-services-list', 'apm-attributes-list', 'apm-attribute-values-list'],
+    },
+    {
+        title: 'Health and aggregates',
+        description: 'Score service health, rank operations, diff call trees, and break down spans by attribute',
+        match: ['apm-service-health', 'apm-spans-aggregate', 'apm-spans-tree', 'apm-attribute-breakdown'],
+    },
+    {
+        title: 'Volume and latency charts',
+        description: 'Count matching spans and pull sparklines, duration histograms, and latency heatmaps',
+        match: [
+            'apm-spans-count',
+            'apm-spans-sparkline',
+            'apm-spans-duration-histogram',
+            'apm-spans-latency-heatmap',
+        ],
+    },
+    {
+        title: 'Trace and span lookup',
+        description: 'Query matching traces or spans and inspect a single trace summary or span tree',
+        match: ['query-apm-spans', 'apm-trace-get'],
+    },
+]
+
+const DEFAULT_FAMILIES: Record<string, Family[]> = {
+    llm_analytics: AIO_FAMILIES,
+    tracing: TRACING_FAMILIES,
+}
+
 const allMcpToolsQuery = graphql`
     query {
         allMcpTool {
@@ -71,11 +104,12 @@ const allMcpToolsQuery = graphql`
 type McpToolsListProps = {
     /** Feature tag in the MCP schema to list tools for, e.g. "llm_analytics" */
     feature: string
-    /** Family grouping config. Defaults to the AI Observability families. */
+    /** Family grouping config. Defaults to the feature's built-in families. */
     families?: Family[]
 }
 
-export default function McpToolsList({ feature, families = AIO_FAMILIES }: McpToolsListProps): JSX.Element {
+export default function McpToolsList({ feature, families }: McpToolsListProps): JSX.Element {
+    const resolvedFamilies = families ?? DEFAULT_FAMILIES[feature] ?? AIO_FAMILIES
     const data = useStaticQuery(allMcpToolsQuery)
     const tools = ((data?.allMcpTool?.nodes ?? []) as McpTool[])
         .filter((tool) => tool.feature === feature)
@@ -94,7 +128,7 @@ export default function McpToolsList({ feature, families = AIO_FAMILIES }: McpTo
         )
     }
 
-    const buckets = families.map((family) => ({ ...family, tools: [] as McpTool[] }))
+    const buckets = resolvedFamilies.map((family) => ({ ...family, tools: [] as McpTool[] }))
     const other = { title: 'Other', description: '', match: [] as string[], tools: [] as McpTool[] }
     tools.forEach((tool) => {
         const bucket = buckets.find((b) => b.match.some((m) => tool.name === m || tool.name.startsWith(m)))

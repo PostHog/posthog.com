@@ -1,0 +1,91 @@
+---
+title: Search and filter traces
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: covers GA viewer controls on /tracing. Excludes feature-flagged facet rail (tracing-facet-rail), saved views (tracing-saved-views), endpoints tab (tracing-endpoints-view), impact strip (tracing-impact-strip), and scene tabs (tracing-scene-tabs). */}
+
+import DurationUnits from './_snippets/duration-units.mdx'
+
+A busy service sends thousands of spans every hour, so scrolling the raw list rarely helps. Filter down to the exact service, status, duration, or attribute you care about before opening a trace.
+
+- **When you need it.** You have spans arriving in PostHog and want to isolate slow, errored, or specific requests. If you haven't instrumented an app yet, start with [Install tracing](/docs/distributed-tracing/installation).
+- **What you get.** You get a filtered list of traces or spans, paired with volume and latency charts that zoom into spikes.
+- **How you know it worked.** The count next to the display toggle updates to match your filters, and clicking a row opens its trace waterfall.
+
+## Gather what you need
+
+Send at least one span to your PostHog project over OTLP or a PostHog SDK. Open [Tracing](https://app.posthog.com/tracing) in PostHog.
+
+## Pick a display mode
+
+Use the segmented toggle above the results table to change what each row represents.
+
+| Mode | What each row shows | Reach for it when |
+| --- | --- | --- |
+| **Spans** | Every matching span individually, including child spans | You're filtering on a child attribute like a database query or downstream HTTP call |
+| **Traces** | One row per trace, shown as its root span | You want an overview of whole requests without duplicate child rows |
+| **Operations** | Spans aggregated by service and span name | You want to rank endpoints by request rate, error rate, or p95 latency |
+
+**Spans** is the default view mode. See [Analyze operations and compare windows](/docs/distributed-tracing/operations-and-compare) for the **Operations** table and time comparisons.
+
+## Narrow results with filters
+
+Use the filter bar at the top to combine filters with AND logic. The default time window is the last hour (`-1h`) in UTC.
+
+1. Pick one or more services in the **All services** dropdown.
+2. Click the search box to add a filter from three groups: **Spans**, **Span attributes**, or **Span resource attributes**.
+3. Choose an operator and a value, then press Enter.
+4. Adjust the date range picker on the right or click the refresh button to pull fresh spans.
+
+Built-in fields under **Spans** cover the core OpenTelemetry envelope:
+
+| Field | Format or values | Notes |
+| --- | --- | --- |
+| `trace_id` | 32-character hex or base64 | Matches every span in that trace |
+| `span_id` | 16-character hex or base64 | Matches one span |
+| `name` | String | Span operation name, such as `POST /checkout` |
+| `duration` | Milliseconds | Enter `1000` to filter spans slower than one second |
+| `status_code` | `OK` or `Error` | `OK` matches both OpenTelemetry `Unset` (`0`) and `OK` (`1`). `Error` matches `2` |
+| `kind` | `Unspecified`, `Internal`, `Server`, `Client`, `Producer`, `Consumer` | Maps to OpenTelemetry span kinds `0` through `5` |
+
+String fields and attributes support `exact`, `is_not`, `icontains`, `not_icontains`, prefix/suffix matches, `regex`, and `not_regex`. Numeric fields support `exact`, `gt`, and `lt`, and every attribute supports `is_set` and `is_not_set`.
+
+In the [Tracing API](/docs/distributed-tracing/surfaces/api) and [PostHog MCP](/docs/distributed-tracing/surfaces/mcp), `type: "span"` filters accept `is_root_span` (`Boolean`). In the web viewer, switch to **Traces** mode instead.
+
+<DurationUnits />
+
+## Brush charts to zoom
+
+The chart area sits directly above the list and syncs with your active filters.
+
+- **Activity sparkline.** Shows span volume over time. Drag across any spike to zoom the date range to that window.
+- **Latency heatmap.** Plots span duration against time, so p99 outliers stand out from normal traffic. Drag a box over a slow band to filter both the time window and duration range at once.
+- **Duration histogram.** Replaces the activity bars when you sort by **Duration** and shows where your slowest spans cluster.
+
+Switch between **Activity** and **Heatmap** using the chart toggle above the plot. Heatmap mode isn't available while a time comparison is active.
+
+## Check it worked
+
+Look for these signals after applying filters:
+
+- **Updated count.** The matching count beside the **Spans / Traces / Operations** toggle updates without an error banner.
+- **Synced chart.** The sparkline or heatmap redraws for your chosen services and time range.
+- **Trace drilldown.** Clicking any row opens the trace drawer anchored on that span.
+
+## Customize columns and sort
+
+The list starts with seven built-in columns: **Timestamp**, **Name**, **Service**, **Kind**, **Duration**, **Status**, and **Trace ID**. Click **Timestamp** or **Duration** in the table header to sort.
+
+- **Sort by Timestamp.** Orders newest or oldest first using cursor pagination.
+- **Sort by Duration.** Orders slowest or fastest first using offset pagination, and switches the chart to the duration histogram.
+
+Click **Configure columns** on the right of the display bar to add span or resource attributes, hide built-in columns, or reorder them. Drag column dividers to resize widths, or promote an attribute to a column from the [span inspector](/docs/distributed-tracing/inspect-traces).
+
+## Fix what goes wrong
+
+- **No spans match your filter.** Check the date range first, since the viewer defaults to the last hour. Check that `duration` is in milliseconds rather than nanoseconds. If you're filtering on a child span attribute in **Traces** mode, switch to **Spans** mode to see matching child rows.
+- **An attribute doesn't appear in autocomplete.** Autocomplete only suggests keys observed inside your active date range. Widen the date range, then search again.
+
+See also: [Inspect traces and spans](/docs/distributed-tracing/inspect-traces) · [Analyze operations and compare windows](/docs/distributed-tracing/operations-and-compare) · [Query traces with SQL](/docs/distributed-tracing/sql)
