@@ -48,6 +48,8 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 
 By default, API queries return up to 100 rows. If you specify your own `LIMIT`, you can return up to 50k rows per query.
 
+To change the default without a `LIMIT` in your SQL, set `limit` on the `HogQLQuery`, for example `"limit": 1000`. PostHog returns up to that many rows (maximum 49,999), and `hasMore` in the response shows if more rows exist. A `LIMIT` in your SQL takes priority over `limit`. Queries that use `UNION` ignore `limit`.
+
 For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#7-use-keyset-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/data-pipelines/batch-exports) or [file download exports](/docs/data-pipelines/file-download-exports) – `/query` is not a supported export path.
 
 </CalloutBox>
