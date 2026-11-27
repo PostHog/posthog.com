@@ -33,6 +33,23 @@ If all the files share the same columns, such as a daily export, turn on **Combi
 
 After you connect, select the tables to import, then choose a sync method and a sync frequency for each table.
 
+### Add a table by path
+
+To add one table to an existing source, open its **Schemas** tab and select **Add table**, when available.
+
+1. Enter a **Path** relative to the folder in the source's **Files URL**, such as `orders/2026/*.parquet`. You can also paste a full URL within that same folder and bucket or container.
+2. Select a **File format**, or leave **Detect from file names** selected.
+3. Enter a unique **Table name**.
+4. Choose whether to **Start syncing after adding**, then select **Add table**.
+
+PostHog checks only the location you entered and creates one table pinned to that path, with syncing off. **Start syncing after adding** is selected by default and enables syncing after the table is created. Clear it to add the table without syncing, then enable syncing later from the **Schemas** tab.
+
+The source's **Files URL** must point to a folder. Sources that point to a single file or wildcard pattern can't add tables by path.
+
+For sources you created, **Add table** is available when enabled for your project. Its menu includes **Find new tables** to discover tables in the source's folder. Otherwise, use **Pull new schemas** for folder discovery.
+
+Sources created by the self-managed table migration offer **Add table** only. They don't support folder discovery, manual schema refresh, or scheduled table discovery.
+
 ### Limits
 
 - A source can have up to 1,000 tables.

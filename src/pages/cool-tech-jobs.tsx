@@ -54,10 +54,11 @@ import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import { useInView } from 'react-intersection-observer'
 import ProgressBar from 'components/ProgressBar'
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { navigate } from 'gatsby'
+import hedgehogReadingIsMagicPng from 'hoggies/reading-is-magic.png'
 
 dayjs.extend(relativeTime)
 
@@ -923,11 +924,10 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
                 data-scheme="primary"
                 className="not-prose bg-primary border border-primary rounded px-4 pb-4 text-center"
             >
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
+                <HoggieImage
+                    src={hedgehogReadingIsMagicPng}
                     alt="This hog has an answer"
                     width={400}
-                    placeholder="blurred"
                     className="max-w-[300px] @xl:max-w-[300px]"
                 />
             </div>

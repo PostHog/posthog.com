@@ -39,7 +39,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Jenkins tables are full refresh. Each sync replaces the contents of the table.
+The `builds`, `build_changes`, and `test_reports` tables support incremental sync on `created_at`. The `jobs`, `nodes`, and `queue_items` tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

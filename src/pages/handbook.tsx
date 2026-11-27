@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import React from 'react'
 import { SEO } from 'components/seo'
 import ReaderView from 'components/ReaderView'
@@ -6,6 +6,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { handbookSidebar } from '../navs'
 import chapters from '../navs/handbook.json'
 import Link from 'components/Link'
+import hedgehogReadingIsMagicPng from 'hoggies/reading-is-magic.png'
 
 export const Handbook: React.FC = () => {
     return (
@@ -20,11 +21,10 @@ export const Handbook: React.FC = () => {
                 <section className="max-w-4xl">
                     <div className="flex flex-col @md:items-center @md:justify-end @md:flex-row-reverse gap-8 @md:gap-2 mb-8">
                         <div>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
+                            <HoggieImage
+                                src={hedgehogReadingIsMagicPng}
                                 alt="This hog has an answer"
                                 width={400}
-                                placeholder="blurred"
                                 className="max-w-[300px] @xl:max-w-[300px]"
                             />
                         </div>

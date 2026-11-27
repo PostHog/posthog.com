@@ -9,7 +9,7 @@ availability:
 sourceId: Matomo
 ---
 
-Connect your Matomo instance to pull web analytics data into the PostHog data warehouse. Works with both Matomo Cloud and self-hosted instances.
+Connect your Matomo instance to pull web analytics data into the PostHog Data Warehouse. Works with both Matomo Cloud and self-hosted instances.
 
 ## Adding a data source
 
@@ -48,6 +48,18 @@ Once the syncs are complete, you can query your Matomo data in PostHog.
 | `campaign_names`    | Per-day campaign name breakdown                           | Incremental  |
 | `campaign_sources`  | Per-day campaign source breakdown                         | Incremental  |
 | `campaign_mediums`  | Per-day campaign medium breakdown                         | Incremental  |
+| `product_skus`      | Per-day ecommerce SKU breakdown                           | Incremental  |
+| `product_names`     | Per-day ecommerce name breakdown                          | Incremental  |
+| `product_categories` | Per-day ecommerce category breakdown                      | Incremental  |
+| `regions`           | Per-day region breakdown                                  | Incremental  |
+| `cities`            | Per-day city breakdown                                    | Incremental  |
+| `page_titles`       | Per-day page title breakdown                              | Incremental  |
+| `site_search_keywords` | Per-day on-site search keyword breakdown                  | Incremental  |
+| `visit_frequency`   | Per-day new versus returning visitor metrics              | Incremental  |
+| `visits_by_duration` | Per-day count of visits grouped by visit duration         | Incremental  |
+| `visits_by_page_count` | Per-day count of visits grouped by number of pages viewed | Incremental  |
+| `visits_by_visit_number` | Per-day count of visits grouped by visit number of the visitor | Incremental  |
+| `visits_by_days_since_last` | Per-day count of visits grouped by days since the previous visit | Incremental  |
 | `goals`             | Goal definitions lookup table                             | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run.
@@ -60,7 +72,8 @@ Once the syncs are complete, you can query your Matomo data in PostHog.
 
 - The first sync backfills up to 365 days of history for all date-based tables.
 - The `visits` table uses `serverTimestamp` as its incremental cursor. Visits newer than one hour are deferred to the next sync to ensure their action lists are complete before storing.
-- Aggregate report tables (`visits_summary`, `actions_summary`, `referrers`, `countries`, `pages`, `entry_pages`, `exit_pages`, `goals_summary`, `referrer_types`, `search_engines`, `referrer_websites`, `social_networks`, `device_types`, `browsers`, `os_families`, `event_categories`, `event_actions`, `event_names`, `campaign_names`, `campaign_sources`, `campaign_mediums`) walk one day at a time and re-pull a 3-day trailing window on incremental runs to account for late archiving. Records are merged on `_date` (and `label` where applicable).
+- Aggregate report tables (`visits_summary`, `actions_summary`, `referrers`, `countries`, `pages`, `entry_pages`, `exit_pages`, `goals_summary`, `referrer_types`, `search_engines`, `referrer_websites`, `social_networks`, `device_types`, `browsers`, `os_families`, `event_categories`, `event_actions`, `event_names`, `campaign_names`, `campaign_sources`, `campaign_mediums`, `product_skus`, `product_names`, `product_categories`, `regions`, `cities`, `page_titles`, `site_search_keywords`, `visit_frequency`, `visits_by_duration`, `visits_by_page_count`, `visits_by_visit_number`, `visits_by_days_since_last`) walk one day at a time and re-pull a 3-day trailing window on incremental runs to account for late archiving. The incremental cursor is `_date`.
+- Aggregate records merge on `_date` and `label` where applicable. The `visit_frequency` table merges on `_date` alone. The `regions` and `cities` tables merge on `_date` and `_row_key`. For `regions`, `_row_key` combines `country` and `region`. For `cities`, it combines `country`, `region`, and `city_name`.
 - The `goals` table is a small lookup table containing goal definitions. It has no date dimension and is fully refreshed on each sync.
 
 ## Configuration

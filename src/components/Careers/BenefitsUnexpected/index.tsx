@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
+import hedgehogFloatPng from 'hoggies/float.png'
 
 const BenefitsUnexpected: React.FC = () => {
     return (
@@ -32,8 +34,9 @@ const BenefitsUnexpected: React.FC = () => {
                             alt="Look at all those empty time slots!"
                             className="w-[194px] absolute ml-24 -mt-8"
                         />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png"
+                        <HoggieImage
+                            src={hedgehogFloatPng}
+                            mirror
                             alt="Police hog sez..."
                             className="w-[106px] -scale-x-1"
                         />
@@ -58,8 +61,9 @@ const BenefitsUnexpected: React.FC = () => {
                             alt="Look at all those empty time slots!"
                             className="w-[194px] -mb-4 -ml-2 absolute left-24"
                         />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png"
+                        <HoggieImage
+                            src={hedgehogFloatPng}
+                            mirror
                             alt="Police hog sez..."
                             className="w-[106px] mt-12"
                         />

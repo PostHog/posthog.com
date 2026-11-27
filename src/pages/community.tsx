@@ -21,7 +21,9 @@ import slugify from 'slugify'
 import uniqBy from 'lodash/uniqBy'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import OSButton from 'components/OSButton'
+import hedgehogResearchPng from 'hoggies/research.png'
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
     // 'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
@@ -254,11 +256,7 @@ const Main = () => {
                         />
 
                         <div className="pt-6 pb-4 px-2">
-                            <CloudinaryImage
-                                className="size-20 float-right"
-                                width={200}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
-                            />
+                            <HoggieImage className="size-20 float-right" width={200} src={hedgehogResearchPng} />
                             <p className="mb-2 text-sm">
                                 <em>"{quote}"</em>
                             </p>

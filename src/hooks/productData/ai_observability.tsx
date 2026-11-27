@@ -18,6 +18,9 @@ import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
 import { applications, keyFeatures, wizardSupports } from './ai_observability/slides'
 import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogRobotPng from 'hoggies/robot.png'
+import hedgehogScientistPng from 'hoggies/scientist.png'
+import hedgehogXRayPng from 'hoggies/x-ray.png'
 
 export const aiObservability = {
     ...getTool('ai_observability'),
@@ -156,14 +159,14 @@ export const aiObservability = {
     },
     // Rendered in the Pricing surface footer CTA. The Product surface uses `hogs` below.
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_cash_64f561fac6.png',
-        alt: 'A hedgehog showered in the money it saved on tokens',
+        src: hedgehogRobotPng,
+        alt: 'A hedgehog tinkering with a robot',
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
-            alt: 'A hedgehog inspecting a trace with a magnifying glass',
+            src: hedgehogScientistPng,
+            alt: 'A scientist hedgehog at a microscope',
         },
         // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
@@ -336,8 +339,8 @@ export const aiObservability = {
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
-        imageAlt: 'A hedgehog inspecting a trace with a magnifying glass',
+        image: hedgehogXRayPng,
+        imageAlt: 'A doctor hedgehog checking an X-ray',
         intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
         // Prompts copy to the clipboard instead of deep-linking into in-app
         // PostHog AI while its web runtime lags the MCP tool set.

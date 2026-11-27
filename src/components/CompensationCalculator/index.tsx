@@ -20,6 +20,12 @@ const formatCur = (val: number, currency = 'USD') => {
     return formatter.format(Math.round(val * (currencyData[currency] || 1))).replace('.00', '')
 }
 
+const regionsFor = (country: string) =>
+    locationFactor
+        .filter((location) => location.country === country)
+        .map((location) => location.area)
+        .sort()
+
 const InfoTooltip = ({ description }: { description: string }) => {
     const [open, setOpen] = React.useState(false)
     return (
@@ -117,12 +123,13 @@ export const CompensationCalculator = ({
                 setJob(savedState?.job || null)
             }
 
-            if (savedState?.country) {
-                setCountry(savedState?.country || null)
-
-                if (savedState?.region) {
-                    setRegion(savedState?.region || null)
-                }
+            if (savedState?.country && regionsFor(savedState.country).length > 0) {
+                setCountry(savedState.country)
+                setRegion(
+                    savedState.region && regionsFor(savedState.country).includes(savedState.region)
+                        ? savedState.region
+                        : regionsFor(savedState.country)[0]
+                )
             }
 
             if (savedState?.level && levelModifier[savedState.level]) {
@@ -130,31 +137,22 @@ export const CompensationCalculator = ({
             }
 
             if (savedState?.step && stepModifier[savedState.step]) {
-                setRegion(savedState?.region || null)
+                setStep(savedState.step)
             }
         }
     }, [])
 
     React.useEffect(() => {
-        setJob(initialJob)
+        if (initialJob) setJob(initialJob)
     }, [initialJob])
-
-    React.useEffect(() => {
-        const newRegion = country
-            ? locationFactor
-                  .filter((location) => location.country === country)
-                  .map((location) => location.area)
-                  .sort()[0]
-            : null
-        setRegion(newRegion || null)
-    }, [country])
 
     const setItem = (type: string) => {
         return (value: any) => {
+            const defaultRegion = type === 'country' && value ? regionsFor(value)[0] || null : null
             if (type === 'job') setJob(value)
             if (type === 'country') {
                 setCountry(value)
-                setRegion(null)
+                setRegion(defaultRegion)
             }
             if (type === 'region') setRegion(value)
             if (type === 'level') setLevel(value)
@@ -170,7 +168,7 @@ export const CompensationCalculator = ({
             }
 
             if (type === 'country') {
-                state.region = null
+                state.region = defaultRegion
             }
 
             localStorage.setItem('posthog-saved-compensation', JSON.stringify(state))
@@ -211,10 +209,7 @@ export const CompensationCalculator = ({
                         hideLabel
                         value={region}
                         onChange={setItem('region')}
-                        options={locationFactor
-                            .filter((location) => location.country === country)
-                            .map((location) => location.area)
-                            .sort()}
+                        options={country ? regionsFor(country) : []}
                         display={(area) => (area ? area : '')}
                     />
                 </div>

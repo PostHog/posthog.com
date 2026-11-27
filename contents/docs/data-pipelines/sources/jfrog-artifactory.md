@@ -27,7 +27,9 @@ Connect your JFrog Platform instance to pull your Artifactory data.
 
 Enter your platform URL (e.g. `https://mycompany.jfrog.io`, or your own domain for self-hosted installs) and an access token. Generate a token from your JFrog user profile (**Edit Profile → Generate an Identity Token**) or, as an admin, under **Administration → User Management → Access Tokens**.
 
-The `artifacts` and `repositories` tables work with any authenticated token that can read your repositories. The `builds` and `storage_summary` tables require an admin user (or a token scoped to those APIs); deselect them if your token can't access them.
+The `artifacts` and `repositories` tables work with any authenticated token that can read your repositories. The `builds`, `release_bundles`, and `storage_summary` tables require an admin user (or a token scoped to those APIs); deselect them if your token can't access them. The `release_bundles` table also requires Artifactory Enterprise+ and is off by default.
+
+The `artifact_properties` table is off by default because it reads every artifact again to fetch its properties. The `xray_licenses` table is off by default because it requires JFrog Xray.
 
 You'll be asked for:
 

@@ -33,7 +33,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Lovable tables are full refresh. Each sync replaces the contents of the table.
+The `ProjectAnalytics`, `WorkspaceAnalytics`, and `ProjectAnalyticsBreakdowns` tables support incremental sync on `timestamp`. All other Lovable tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

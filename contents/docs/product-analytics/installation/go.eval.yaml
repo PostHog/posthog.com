@@ -4,9 +4,8 @@ status: active
 
 # One check for each flow the Go docs teach. Every check is a baseline: a short prompt
 # in a user's words, no docs added. The prompt names PostHog and the kind of analytics,
-# and no API. The rubrics describe the correct result for posthog-go 1.x, the major the
-# docs show. `install` runs in an app with no PostHog code. The other checks run in an
-# app that already uses posthog-go 1.x.
+# and no API. `install` grades against posthog-go v2, which the docs now show.
+# The other checks run in Chainloop on posthog-go 1.x (and -next on v2).
 checks:
     - id: install
       description: >-
@@ -20,10 +19,14 @@ checks:
           shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/go.mod lists `github.com/posthog/posthog-go` at v1.x.
+                  {folder}/go.mod lists `github.com/posthog/posthog-go/v2` at v2.x.
+              imported: >-
+                  The code imports the package as "github.com/posthog/posthog-go/v2".
+                  Cite the file and line(s).
               initialized: >-
-                  The app creates one client at startup with posthog.NewWithConfig(token,
-                  posthog.Config{ Endpoint: <host> }). Cite the file and line(s).
+                  The app creates one client at startup with client, err :=
+                  posthog.NewWithConfig(token, posthog.Config{ Endpoint: <host> }) and
+                  handles err before using the client. Cite the file and line(s).
               token-from-env: >-
                   The project token comes from an environment variable. It is not
                   written in the source.
@@ -149,34 +152,7 @@ checks:
               flag-gates-create: >-
                   Creating an invitation is refused when the flag is off.
 
-    # Next major: the same tasks for a project on posthog-go v2. Expected to fail until the
-    # docs show that major.
-    - id: install-next
-      description: >-
-          The same task as install, for posthog-go v2. Expected to fail until the docs
-          show that major.
-      codebase_to_test: oss-miniflux
-      prompt: *install-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  {folder}/go.mod lists `github.com/posthog/posthog-go/v2` at v2.x.
-              imported: >-
-                  The code imports the package as "github.com/posthog/posthog-go/v2".
-                  Cite the file and line(s).
-              initialized: >-
-                  The app creates one client at startup with client, err :=
-                  posthog.NewWithConfig(token, posthog.Config{ Endpoint: <host> }) and
-                  handles err before using the client. Cite the file and line(s).
-              token-from-env: >-
-                  The project token comes from an environment variable. It is not
-                  written in the source.
-              flushes-on-exit: >-
-                  The app calls the client's Close() when the server stops, for example
-                  with defer client.Close() in the function that runs the server. Fails
-                  if Close() is never reached on a normal shutdown.
-
+    # Next major: anonymous event check for a project on posthog-go v2.
     - id: anonymous-event-next
       description: >-
           The same task as anonymous-event, for a project on posthog-go v2. Expected to

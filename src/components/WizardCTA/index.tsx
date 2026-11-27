@@ -1,11 +1,23 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import PlatformInstall from 'components/PlatformInstall'
+import { useWindow } from '../../context/Window'
+import hedgehogWizard1Png from 'hoggies/wizard-1.png'
+import hedgehogWizard2Png from 'hoggies/wizard-2.png'
+import hedgehogWizard3Png from 'hoggies/wizard-3.png'
+import hedgehogWizard4Png from 'hoggies/wizard-4.png'
 
 const DEFAULT_TITLE = 'Install PostHog with one command'
 const DEFAULT_SUBTITLE = 'Paste this into your terminal and make AI do all the work.'
-const DEFAULT_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png'
+const WIZARD_IMAGES = [hedgehogWizard1Png, hedgehogWizard2Png, hedgehogWizard3Png, hedgehogWizard4Png]
 const DEFAULT_IMAGE_ALT = 'PostHog Wizard hedgehog'
+
+/** The same wizard every time on a page, and different wizards across pages. */
+function wizardForPath(path = ''): string {
+    let hash = 0
+    for (const char of path) hash = (hash * 31 + char.charCodeAt(0)) >>> 0
+    return WIZARD_IMAGES[hash % WIZARD_IMAGES.length]
+}
 
 /**
  * Container-query widths for the image, so it tracks the banner's own width rather than the
@@ -38,7 +50,7 @@ export default function WizardCTA({
     copyCommand,
     title = DEFAULT_TITLE,
     subtitle = DEFAULT_SUBTITLE,
-    image = DEFAULT_IMAGE,
+    image,
     imageAlt,
     imageClassName = DEFAULT_IMAGE_CLASSES,
     learnMoreTo,
@@ -55,7 +67,7 @@ export default function WizardCTA({
     copyCommand?: string
     title?: string
     subtitle?: string
-    /** Image URL, replacing the wizard hedgehog. Prefer a transparent PNG on Cloudinary. */
+    /** Image URL, replacing the wizard hedgehog (one of four, picked by page). Prefer a transparent PNG. */
     image?: string
     /**
      * Alt text for `image`. Defaults to the hedgehog's alt for the default image and to `''` for a
@@ -69,6 +81,7 @@ export default function WizardCTA({
     learnMoreTo?: string
     className?: string
 }): JSX.Element {
+    const { appWindow } = useWindow()
     return (
         <div className={`relative overflow-hidden rounded not-prose my-6 border border-secondary ${className}`}>
             <div className="max-w-2xl mx-auto">
@@ -96,8 +109,8 @@ export default function WizardCTA({
                     </div>
                     <div className="shrink-0">
                         <img
-                            src={image}
-                            alt={imageAlt ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_ALT : '')}
+                            src={image ?? wizardForPath(appWindow?.path)}
+                            alt={imageAlt ?? (image ? '' : DEFAULT_IMAGE_ALT)}
                             className={`object-contain ${imageClassName}`}
                         />
                     </div>

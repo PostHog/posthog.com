@@ -32,7 +32,7 @@ When linking Tremendous, you'll need:
 
 <SyncModes />
 
-The `orders` table supports incremental syncs on the `created_at` field. All other tables are full refresh only, as the Tremendous API doesn't expose a server-side timestamp filter for them.
+The `orders` and `balance_transactions` tables support incremental syncs on the `created_at` field. All other tables are full refresh only, as the Tremendous API doesn't expose a server-side timestamp filter for them.
 
 ## Configuration
 

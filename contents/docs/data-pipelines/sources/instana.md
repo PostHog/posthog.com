@@ -32,7 +32,7 @@ When linking Instana, you'll need:
 
 <SyncModes />
 
-The `events` table supports incremental sync using the event `start` timestamp (epoch milliseconds) and only reaches back 30 days on the initial sync, matching Instana's event retention. The other tables are configuration and topology catalogs without an updated-since filter, so they sync as full refresh.
+The `events` table supports incremental sync using the event `start` timestamp (epoch milliseconds) and only reaches back 30 days on the initial sync, matching Instana's event retention. The `application_metrics`, `service_metrics`, and `endpoint_metrics` tables support incremental sync on `timestamp`. The other tables are configuration and topology catalogs without an updated-since filter, so they sync as full refresh.
 
 ## Configuration
 
