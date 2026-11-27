@@ -43,9 +43,12 @@ const MODEL_DISPLAY_NAMES: Record<string, string> = {
     'gpt-5.5': 'GPT-5.5',
     'gpt-5.4': 'GPT-5.4',
     'zai-org/glm-5.3': 'GLM-5.3',
+    'zai-org/glm-5.3-flash': 'GLM-5.3 Flash',
     '@cf/zai-org/glm-5.2': 'GLM-5.2',
     'moonshotai/kimi-k3': 'Kimi K3',
     'deepseek-ai/deepseek-v4-flash-0731': 'DeepSeek V4 Flash',
+    'deepseek-ai/deepseek-v4.1-flash-1017': 'DeepSeek V4.1 Flash',
+    'deepseek-ai/deepseek-v4.1-flash-1017-fast': 'DeepSeek V4.1 Flash Fast',
 }
 
 const FALLBACK_PRICING: PricingResponse = {
