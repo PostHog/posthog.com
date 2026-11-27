@@ -9,7 +9,7 @@ availability:
 sourceId: Ghost
 ---
 
-Enter your Ghost Admin API credentials to pull your Ghost publication data – members, posts, pages, newsletters, tiers, offers, tags, and users – into the PostHog data warehouse. Join membership and subscription data with Stripe payments and site analytics.
+Enter your Ghost Admin API credentials to pull your Ghost publication data – members, posts, pages, newsletters, tiers, offers, tags, users, labels, roles, and custom member fields – into the PostHog data warehouse. Join membership and subscription data with Stripe payments and site analytics.
 
 ## Adding a data source
 
@@ -25,16 +25,21 @@ Once the syncs are complete, you can start using Ghost data in PostHog.
 
 ## Available tables
 
-| Table         | Description                                                                                      | Sync method  |
-| ------------- | ------------------------------------------------------------------------------------------------ | ------------ |
-| `members`     | Members with subscription details, labels, newsletter subscriptions, and email engagement totals | Full refresh |
-| `posts`       | Published, draft, and scheduled posts with authors, tags, and newsletter delivery statistics     | Full refresh |
-| `pages`       | Static pages with content, authors, and tags                                                     | Full refresh |
-| `tiers`       | Membership tiers with monthly prices, yearly prices, and benefits                                | Full refresh |
-| `offers`      | Subscription discounts and redemption totals                                                     | Full refresh |
-| `newsletters` | Newsletter settings and sender details                                                           | Full refresh |
-| `tags`        | Content tags, including internal tags                                                            | Full refresh |
-| `users`       | Staff users and author profiles                                                                  | Full refresh |
+| Table                  | Description                                                                                      | Sync method  |
+| ---------------------- | ------------------------------------------------------------------------------------------------ | ------------ |
+| `members`              | Members with subscription details, labels, newsletter subscriptions, and email engagement totals | Full refresh |
+| `posts`                | Published, draft, and scheduled posts with authors, tags, and newsletter delivery statistics     | Full refresh |
+| `pages`                | Static pages with content, authors, and tags                                                     | Full refresh |
+| `tiers`                | Membership tiers with monthly prices, yearly prices, and benefits                                | Full refresh |
+| `offers`               | Subscription discounts and redemption totals                                                     | Full refresh |
+| `newsletters`          | Newsletter settings and sender details                                                           | Full refresh |
+| `tags`                 | Content tags, including internal tags                                                            | Full refresh |
+| `users`                | Staff users and author profiles                                                                  | Full refresh |
+| `labels`               | Labels that group members into internal segments, with member counts                             | Full refresh |
+| `member_custom_fields` | Definitions of custom fields stored on members, including archived fields                        | Full refresh |
+| `roles`                | Staff and integration roles that can be assigned to users                                        | Full refresh |
+
+> **Note:** The `member_custom_fields` table requires a Ghost version that supports the custom fields API. If your Ghost site returns a 404 for this table, update Ghost or deselect it during setup.
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
