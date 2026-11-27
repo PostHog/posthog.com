@@ -36,7 +36,7 @@ Base path: `/api/projects/:project_id/surveys/`
 | `DELETE /:id/` | `survey:write` | Delete the survey and its associated `targeting_flag` and `internal_targeting_flag` records. |
 | `POST /:id/launch/` | `survey:write` | Set `start_date` to current UTC timestamp (400 if archived or `end_date` is in the past, no-op if already started). |
 | `POST /:id/stop/` | `survey:write` | Set `end_date` to current UTC timestamp (400 if archived, no-op if already ended). |
-| `GET /responses_count/` | `survey:read` | Return `{ "<survey_id>": count }` map. Optional `exclude_archived=true|false` (default `false`), `survey_ids` (comma-separated). |
+| `GET /responses_count/` | `survey:read` | Return `{ "<survey_id>": count }` map. Optional `exclude_archived` (`true` or `false`, default `false`), `survey_ids` (comma-separated). |
 | `GET /stats/` | `survey:read` | Project-wide `stats` (`survey shown`, `survey dismissed`, `survey sent`) and `rates`. Optional `date_from`, `date_to` (ISO 8601 or relative `-7d`, `-24h`, `-1m`; naive values use the project timezone). |
 | `GET /:id/stats/` | `survey:read` | Single-survey `stats`, `rates`, and optional `per_question_stats` when `include_per_question_stats=true`. Optional `date_from`, `date_to` (naive values use the project timezone), `exclude_archived`. |
 | `GET /:id/responses/` | `survey:read`, `query:read` | Paginated individual responses (`limit` default `100`, `offset` default `0`). Filters: `since`, `until`, `question_id`, `score_lte`, `score_gte` (both require `question_id`), `exclude_archived`. |

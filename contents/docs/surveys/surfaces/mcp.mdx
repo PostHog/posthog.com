@@ -22,8 +22,8 @@ You can also [configure it manually](/docs/model-context-protocol#get-started-in
 | Tool | Required scopes | Behavior & key inputs |
 | --- | --- | --- |
 | `survey-create` | `survey:write` (`feature_flag:write` when setting targeting) | Creates a survey as a **draft** by default (requires `name` and `type`). Supports `type` (`popover`, `widget`, `external_survey`, `api`), `questions` (each entry requires `type` and `question`), `appearance`, `conditions`, `schedule`, `repeat_until_stopped`, `responses_limit`, `base_language` (BCP-47, default `"en"`), and `translations`. |
-| `survey-update` | `survey:write` (`feature_flag:write` when setting targeting) | Updates questions, appearance, conditions, targeting, schedule, `responses_limit`, `archived`, or `base_language`/`translations` (prefer `survey-launch` and `survey-stop` for launching and stopping). |
-| `survey-launch` | `survey:write` | Launches a draft survey by setting `start_date` to the current UTC time. |
+| `survey-update` | `survey:write` (`feature_flag:write` when setting targeting) | Updates questions, appearance, conditions, targeting, schedule, `responses_limit`, `archived`, or `base_language`/`translations`. Setting `start_date` via `survey-update` also activates targeting flags when launching a draft. |
+| `survey-launch` | `survey:write` | Launches a draft survey by setting `start_date` to the current UTC time. Does not toggle `internal_targeting_flag` or `targeting_flag`, so for a default draft from `survey-create`, set `start_date` via `survey-update` (or activate the targeting flags first) so SDK eligibility checks pass. |
 | `survey-stop` | `survey:write` | Stops an active survey by setting `end_date` to the current UTC time while keeping collected responses. |
 | `survey-delete` | `survey:write` | Soft-deletes a survey by setting `archived: true` via `PATCH` (reversible via `survey-update`). |
 | `survey-get` | `survey:read` | Returns one survey's full configuration, question UUIDs, and feature flag keys. |
