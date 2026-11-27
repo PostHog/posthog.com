@@ -48,9 +48,9 @@ Here are three, real-world user persona examples from well-known companies:
 
 ![Vercel user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/vercel-persona.png)
 
-2. **Github's** primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
+2. **GitHub's** primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
 
-![Github user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/github-persona.png)
+![GitHub user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/github-persona.png)
 
 3. **Asana's** primary user persona is a project manager who wants to track tasks and deliver successful projects.
 
@@ -74,7 +74,7 @@ The quickest and easiest way to ask these questions is with an [in-product surve
 
 ![Example of in-product survey to create a user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/survey-personas.png)
 
-If you need to go more in-depth, you can also interview your users. Good questions to dig into in these interviews are:
+If you need to go more in-depth, you can also [interview your users](/newsletter/user-interviews). Good questions to dig into in these interviews are:
 
 - What are your main responsibilities in your current role?
 - How do you define success in your role?
@@ -156,7 +156,7 @@ Your user persona is the voice of your user. It should guide your product develo
 
 Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key user personas?". By doing so, you build a culture of empathy for your users, ensuring that you make the best products for them.
 
-For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Experiments](/teams/experiments#personas) and [Web Analytics](/teams/web-analytics#who-are-we-building-for) teams.
+For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Experiments](/teams/experiments#personas) and [Analytics](/teams/analytics#who-are-we-building-for) teams.
 
 ## Frequently asked questions
 

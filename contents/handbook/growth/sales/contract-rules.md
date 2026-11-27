@@ -70,6 +70,8 @@ Beyond optimization, we offer discounts based on three levers:
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
 > You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs or TAMs) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (CSMs), you should assume by default that the deal will not count toward your quota.
+>
+> The numbers on this page are also kept as data in <PrivateLink url="https://github.com/PostHog/deal-desk/blob/main/contract-rules.json">contract-rules.json</PrivateLink> (PostHog team only). When you change a rule on this page, change it in that file at the same time.
 
 ### Contract term length
 

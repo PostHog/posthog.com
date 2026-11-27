@@ -41,7 +41,7 @@ There are numerous ways to achieve GDPR compliance, which you can broadly catego
 - **Better:** Data is stored in EU cloud servers
 - **Best:** You self-host and control all data / no personal data is collected
 
-All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source [Google Analytics alternatives](/compare/ga4-alternatives).
+All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source [Google Analytics alternatives](/compare/best-ga4-alternatives).
 
 | Tool | Best for | EU hosting | Self-host | Cookieless | Free tier |
 |------|----------|------------|-----------|------------|-----------|
@@ -95,7 +95,7 @@ PostHog Cloud is [free to use up to 1 million events per month](/pricing), plus 
 
 ![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-[Plausible](/compare/posthog-vs-plausible) is a lightweight alternative to tools such as [Google Analytics](/compare/ga4-alternatives). It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform. 
+[Plausible](/compare/posthog-vs-plausible) is a lightweight alternative to tools such as [Google Analytics](/compare/best-ga4-alternatives). It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
@@ -221,7 +221,7 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 ### 6. Vercel Web Analytics
 
-![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/compare/ga4-alternatives/vercel.png)
+![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/vercel.png)
 
 Vercel includes a lightweight, privacy-compliant analytics tool in all its front-end-as-a-service plans. Like most privacy-first tools, it tracks basic website metrics like pageviews, unique users, time on page, and referrers. You can also set up custom events you want to track (e.g. clicking a call to action). It records no personally identifiable information, so you can use it without cookie permission banners. It also includes a useful Speed Insights tool for keeping track of your website's Web Vitals.
 
@@ -285,7 +285,7 @@ Its open source Community Edition is free to self-host, but it excludes most of 
 
 ### 8. TelemetryDeck
 
-![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/compare/ga4-alternatives/telemetrydeck.png)
+![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/telemetrydeck.png)
 
 [TelemetryDeck](https://telemetrydeck.com/) is to app analytics what Plausible and Fathom are to website analytics – a lightweight tool that collects minimal personal information. Consequently, TelemetryDeck says developers can use it without tracking permission banners.
 

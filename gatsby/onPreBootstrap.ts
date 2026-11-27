@@ -120,8 +120,8 @@ const LIBRARIES = path.resolve(__dirname, '../contents/docs/libraries')
  * so it builds like any other docs page. The SDK repo writes the page, front matter included.
  * These files are gitignored, and the ones from the last build are removed first. They render as
  * plain Markdown, never as MDX (see gatsby/sdkMarkdownReferences.js).
- * The published SDKs' landing pages redirect to these references, so `gatsby build` fails when one of them
- * is missing rather than deploying 404s; `gatsby develop` only logs it.
+ * Strapi stores the default reference as `reference`, and gatsby/onCreateNode.ts maps it to `/docs/libraries/<sdk>`.
+ * `gatsby build` fails when one of the published SDKs is missing rather than deploying 404s; `gatsby develop` only logs it.
  */
 async function writeSdkMarkdownReferences(reporter: Reporter): Promise<void> {
     const host = process.env.GATSBY_SQUEAK_API_HOST
@@ -175,7 +175,7 @@ async function writeSdkMarkdownReferences(reporter: Reporter): Promise<void> {
     )
     if (missing.length) {
         reporter.panicOnBuild(
-            `Strapi has no reference page for ${missing.join(', ')}, and their SDK pages redirect to it.`
+            `Strapi has no reference page for ${missing.join(', ')}, which serves their /docs/libraries/<sdk> pages.`
         )
     }
 }

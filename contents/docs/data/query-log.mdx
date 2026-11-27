@@ -72,6 +72,10 @@ Because the query log can be so large, it's important to query it efficiently.
 | `api_key_label` | String | Label of the API key used |
 | `api_key_mask` | String | Masked API key used |
 
+## Retention
+
+PostHog keeps query log data for 3 months. Older queries are deleted and no longer appear in the `query_log` table.
+
 ## Query log use cases and examples
 
 ### Performance optimization

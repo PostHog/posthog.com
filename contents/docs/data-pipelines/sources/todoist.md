@@ -31,7 +31,9 @@ When linking Todoist, you'll need:
 
 <SyncModes />
 
-This source is full refresh only.
+You can use incremental sync for `completed_tasks` with the `completed_at` field and for `activities` with the `event_date` field. All other tables use full refresh.
+
+The `comments` table is disabled by default because it requires a separate API request for each active task that may have comments. The `project_comments` and `collaborators` tables are also disabled by default because each requires a separate API request per project. Enable these tables if you need this data.
 
 ## Configuration
 

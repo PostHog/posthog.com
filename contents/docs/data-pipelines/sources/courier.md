@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Courier connector syncs your notification data – messages, audit events, audiences, brands, tenants, automations, notification template versions, and user preference data – into PostHog, so you can analyze notification delivery and engagement alongside your product data.
+The Courier connector syncs your notification data – messages, audit events, audiences, brands, tenants, automations, notification template versions, journey runs, automation runs, broadcasts, tenant templates, and user preference data – into PostHog, so you can analyze notification delivery and engagement alongside your product data.
 
 ## Prerequisites
 
@@ -33,7 +33,9 @@ The `Messages` table supports incremental sync on `enqueued` using Courier's ser
 
 The `PreferenceChanges` table supports incremental sync on `timestamp` using Courier's `since` filter, so ongoing syncs only fetch new preference changes.
 
-The `Automations`, `AuditEvents`, `Audiences`, `Brands`, `NotificationTemplateVersions`, `PreferenceSections`, `PreferenceTopics`, and `Tenants` tables don't have server-side timestamp filters in Courier's API, so they always sync as a full refresh.
+The `JourneyRuns` and `AutomationRuns` tables support incremental sync on `created_at` using Courier's `start_date` filter, so ongoing syncs only fetch newly created runs. Run statuses can change after creation (for example, from `PROCESSING` to `COMPLETED`), and an incremental sync does not revisit runs created before the watermark. Schedule periodic full refreshes if you need current status values. Note that Courier retains runs for 95 days, so a full refresh replaces the warehouse table with what Courier currently returns.
+
+The `Automations`, `AuditEvents`, `Audiences`, `Brands`, `Broadcasts`, `NotificationTemplateVersions`, `PreferenceSections`, `PreferenceTopics`, `Tenants`, and `TenantTemplates` tables don't have server-side timestamp filters in Courier's API, so they always sync as a full refresh.
 
 ## Configuration
 

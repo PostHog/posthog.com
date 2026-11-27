@@ -76,6 +76,8 @@ In either of the above scenarios the account owner needs to take action to ensur
 
 You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
 
+> The <SmallTeam slug="finance" /> owns collections and failed payment recovery. Finance decides how and when we chase an unpaid invoice. The steps below are the default process. If a customer asks for a different plan, ask finance before you agree to it. RevOps still owns refunds and credits.
+
 #### Automated reminders and alerts
 
 PostHog Workflows send these messages for you. Do not send the same reminder yourself.
@@ -95,7 +97,7 @@ You should reach out to any known contacts, as well as any finance email address
 
 > If the billing contact left the company, or the invoice goes to the wrong person, [update the billing details in billing admin](/handbook/growth/sales/contracts#updating-the-billing-email-and-address).
 
-> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps.
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they ask for more time, ask finance. Finance decides if we change the next steps.
 
 > If a credit-based customer asks to pay a late invoice by credit card instead, say no. Tell them to pay by bank transfer, and send the invoice PDF again. The [payment method rules](/handbook/growth/sales/contract-rules#payment-method) do not change because the invoice is late.
 
@@ -119,9 +121,9 @@ Reach out to all contacts letting them know that due to the failed payment we wi
 
 #### Step 5 - Cancelling their subscription
 
-You can cancel their subscription in Stripe - navigate to their Stripe customer page, and then click the `...` next to their active subscription to find the Cancel option.
+Only the billing and finance teams can cancel a subscription in Stripe. Reply in the alert thread, tag `@billing-support`, and ask them to cancel the subscription. Include the link to the Stripe subscription.
 
-At this point they will be notified about this automatically via the billing service.
+When the subscription is canceled, the billing service tells the customer automatically.
 
 #### Repeated failed payments
 
@@ -140,6 +142,20 @@ Make it explicit in your outreach that if we can't agree a pre-commitment, the a
 > Restoring access before the contract is signed is a judgement call for the account owner, but set and communicate the drop-dead date at the same time.
 
 RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
+
+#### Settlements, write-offs, and recoveries
+
+A customer can offer to pay only part of an overdue or uncollectible balance, or ask for a discount before they pay. Do not agree to a settlement or a partial payment yourself. Ask finance. Finance decides:
+
+- If we accept a settlement or a partial payment on an overdue or uncollectible balance.
+- When we write off a balance as uncollectible.
+- How we book a payment that we get after a write-off.
+
+If finance accepts a settlement that needs a credit note or a refund, RevOps issues it.
+
+#### Payments outside Stripe
+
+Some customers pay through a platform that is not Stripe, for example [AWS Marketplace](/handbook/growth/sales/selling-via-aws) or Vercel. Finance reconciles these payments against our invoices. If a payment does not show up, ask finance.
 
 ### Disputes and chargebacks
 
@@ -203,7 +219,9 @@ PostHog Inc is a US incorporated company and a US tax resident and we do not cla
 - Our no PE (Permanent Establishment) Certificate
 These documents are available in the <PrivateLink url="https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing">shared Finance drive</PrivateLink>. You can share them with the customer on request.
  
-The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
+The full invoice amount is due. Our terms say that taxes shall not be deducted from or set off against the fees owed to PostHog.
+
+If a customer withholds tax, we treat it as a short payment. The unpaid balance stays open on the invoice and goes through the [failed/late payments process](#failedlate-payments).
 
 
 ### Stripe Products & Prices

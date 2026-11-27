@@ -21,6 +21,7 @@ import {
 import Card from 'components/Card'
 import ResourceItem from 'components/Docs/ResourceItem'
 import CustomerAnalyticsBetaWarning from '../../../contents/docs/customer-analytics/_snippets/customer-analytics-beta-warning.mdx'
+import hedgehogPuzzlePng from 'hoggies/puzzle.png'
 
 const phFeatures = [
     {
@@ -58,8 +59,8 @@ const phFeatures = [
 ]
 
 const customerAnalyticsFeatures = [
-    { text: 'Dashboard with pre-built insights', url: '/docs/customer-analytics/dashboard-insights' },
-    { text: 'Usage metrics', url: '/docs/customer-analytics/customer-profiles' },
+    { text: 'Dashboard with pre-built insights', url: '/docs/customer-analytics/dashboard-metrics' },
+    { text: 'Usage metrics', url: '/docs/customer-analytics/usage-metrics' },
     { text: 'Session feed in person profiles', url: '/docs/customer-analytics/customer-profiles' },
     { text: 'Error tracking issues in customer profiles', url: '/docs/customer-analytics/customer-profiles' },
     { text: 'LLM traces in customer profiles', url: '/docs/customer-analytics/customer-profiles' },
@@ -86,7 +87,8 @@ export const Content = ({ quickLinks = true }) => {
                 description="Understand your customers without building dashboards from scratch. Track active users, signups, conversions, and engagement."
                 buttonText="Setup guide"
                 buttonLink="/docs/customer-analytics/start-here"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/multiple_puzzle_teamwork_f73168bc7c.png"
+                imageUrl={hedgehogPuzzlePng}
+                imageCrop={[30, 170, 940, 660]}
             />
             <section className="mb-4">
                 <h2 className="mb-4">Overview</h2>

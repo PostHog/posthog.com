@@ -1,4 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import React, { useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
@@ -14,6 +15,9 @@ import OSButton from 'components/OSButton'
 import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
+import hedgehogDrakeYahPng from 'hoggies/drake-yah.png'
+import hedgehogPhoneCallPng from 'hoggies/phone-call.png'
+import hedgehogShockedPng from 'hoggies/shocked.png'
 
 const them = [
     {
@@ -231,12 +235,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
-                        width={200}
-                    />
+                    <HoggieImage src={hedgehogShockedPng} width={200} />
                 </div>
             </>
         ),
@@ -282,11 +281,10 @@ const us = [
                 </div>
 
                 <div className="col-span-2 -mt-6 pb-8 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
+                    <HoggieImage
                         loading="eager"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/drake-hog-yes.png"
+                        src={hedgehogDrakeYahPng}
+                        mirror
                         width={234}
                         imgClassName="max-w-full"
                     />
@@ -344,12 +342,7 @@ const us = [
                 </div>
 
                 <div className="col-span-4">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-follow-up.png"
-                        width={600}
-                    />
+                    <HoggieImage src={hedgehogPhoneCallPng} width={600} />
                 </div>
             </>
         ),
@@ -660,24 +653,10 @@ export default function Sales() {
                         </div>
                         <div className="bg-tan rounded-md relative order-1 @3xl:order-2 mt-8 pt-4 pl-8">
                             <div className="dark:hidden">
-                                <CloudinaryImage
-                                    quality={100}
-                                    placeholder="none"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
-                                    loading="eager"
-                                    objectPosition="left top"
-                                    objectFit="cover"
-                                />
+                                <HoggieImage src={hedgehogPhoneCallPng} loading="eager" />
                             </div>
                             <div className="hidden dark:block">
-                                <CloudinaryImage
-                                    quality={100}
-                                    placeholder="none"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
-                                    loading="eager"
-                                    objectPosition="left top"
-                                    objectFit="cover"
-                                />
+                                <HoggieImage src={hedgehogPhoneCallPng} loading="eager" />
                             </div>
                         </div>
                     </div>
@@ -757,7 +736,7 @@ export default function Sales() {
                         </div>
                     </div>
                     <div className="w-full max-w-2xl mx-auto">
-                        <SuggestedLinksBlock links={['hate', 'pricing', 'careers']} />
+                        <SuggestedLinksBlock links={['pricing', 'careers']} />
                     </div>
                 </>
             ),

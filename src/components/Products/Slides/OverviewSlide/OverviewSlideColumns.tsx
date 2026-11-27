@@ -1,5 +1,6 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { OverviewSlideProps } from './types'
 
 export default function OverviewSlideColumns({
@@ -21,13 +22,16 @@ export default function OverviewSlideColumns({
                     imgClassName={screenshots.overview.imgClasses}
                 />
             )}
-            {hog?.src && (
-                <CloudinaryImage
-                    src={hog.src as `https://res.cloudinary.com/${string}`}
-                    alt={hog.alt}
-                    imgClassName={hog.classes}
-                />
-            )}
+            {hog?.src &&
+                (isCloudinaryImage(hog.src) ? (
+                    <CloudinaryImage
+                        src={hog.src as `https://res.cloudinary.com/${string}`}
+                        alt={hog.alt}
+                        imgClassName={hog.classes}
+                    />
+                ) : (
+                    <HoggieImage src={hog.src} mirror={hog.mirror} alt={hog.alt} imgClassName={hog.classes} />
+                ))}
             <div className="@2xl:pt-12 @2xl:pr-12 @2xl:pb-1/2 @2xl:pl-1/2">
                 <div className="inline-flex items-center gap-3 text-primary mb-4">
                     {Icon && <Icon className={`size-7 ${overview?.textColor || 'text-black'}`} />}

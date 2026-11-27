@@ -19,6 +19,8 @@ The AWS Security Hub connector syncs security findings, enabled standards, contr
 
 You need an AWS account with Security Hub CSPM enabled in your region. If you select an aggregation region, AWS can also return findings from linked regions.
 
+> **Note:** The `software_v2`, `products_v2`, `findings_trends_v2`, and `resources_trends_v2` tables require full AWS Security Hub (not just Security Hub CSPM) to be enabled in the selected region.
+
 You also need an IAM user or role with the following permissions:
 
 - `securityhub:GetFindings`
@@ -29,6 +31,10 @@ You also need an IAM user or role with the following permissions:
 - `securityhub:ListSecurityControlDefinitions`
 - `securityhub:DescribeProducts`
 - `securityhub:ListMembers`
+- `securityhub:DescribeProductsV2`
+- `securityhub:GetSoftwareV2`
+- `securityhub:GetFindingsTrendsV2`
+- `securityhub:GetResourcesTrendsV2`
 
 ## Adding a data source
 
@@ -60,7 +66,11 @@ When linking AWS Security Hub, you'll need:
         "securityhub:DescribeStandardsControls",
         "securityhub:ListSecurityControlDefinitions",
         "securityhub:DescribeProducts",
-        "securityhub:ListMembers"
+        "securityhub:ListMembers",
+        "securityhub:DescribeProductsV2",
+        "securityhub:GetSoftwareV2",
+        "securityhub:GetFindingsTrendsV2",
+        "securityhub:GetResourcesTrendsV2"
       ],
       "Resource": "*"
     }
@@ -75,7 +85,7 @@ When linking AWS Security Hub, you'll need:
 
 <SyncModes />
 
-The `findings` table supports incremental sync using `updated_at` as the cursor. All other tables use full refresh, replacing the entire table contents on each sync.
+The `findings` table supports incremental sync using `updated_at` as the cursor. All other tables use full refresh, replacing the entire table contents on each sync. The `findings_trends_v2` and `resources_trends_v2` tables sync trend data from the last 90 days.
 
 ## Configuration
 
@@ -90,7 +100,7 @@ The `findings` table supports incremental sync using `updated_at` as the cursor.
 - If you see "AWS rejected the credentials", check that the access key ID and secret access key are correct and that the key is still active in IAM.
 - If you see a signature error, re-enter the secret access key. If you're using temporary credentials, the session token may have expired.
 - If you see "Grant the required securityhub read permissions", ensure all eight `securityhub:*` permissions are attached to the IAM user or role.
-- If you see "Enable AWS Security Hub CSPM in the configured region", enable Security Hub in the AWS region you specified.
+- If you see "Enable AWS Security Hub CSPM in the configured region", enable Security Hub in the AWS region you specified. If you're trying to sync the software, trend, or V2 product tables, you need to enable full AWS Security Hub (not just Security Hub CSPM) in that region.
 - If the `standards_controls` table syncs no rows, your account may not have any enabled standards. Enable a security standard in Security Hub first.
 
 <TroubleshootingLink />

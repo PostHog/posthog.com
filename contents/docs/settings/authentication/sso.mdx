@@ -83,12 +83,6 @@ This section contains instructions on how to configure each provider in your sel
 
 Looking for a provider that's not here? [Reach out to us](https://app.posthog.com/#panel=support), we might be able to help.
 
-<blockquote>
-  Please note that you will <b>not</b> be able to use SSO with the first user of your instance. You
-  will have to create a user with a regular password and you will later be able to log in with SSO
-  (even for that first user).
-</blockquote>
-
 ### GitHub
 
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
@@ -104,8 +98,6 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 4. Add those two settings as `SOCIAL_AUTH_GITHUB_KEY` and `SOCIAL_AUTH_GITHUB_SECRET` and restart your server.
 
 5. When logging in, or signing up to a team you can now log in using PostHog!
-
-> We don't support logging in with GitHub when setting up PostHog for the very first time.
 
 ### GitLab
 

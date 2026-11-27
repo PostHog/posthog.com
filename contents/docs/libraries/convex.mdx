@@ -99,7 +99,7 @@ Environment variables:
 
 | Env var | Required | What it does |
 | --- | --- | --- |
-| `POSTHOG_PROJECT_TOKEN` | Yes | Your project token (`phc_`). Sends events and evaluates flags remotely. |
+| `POSTHOG_PROJECT_TOKEN` | Yes, in production | Your project token (`phc_`). Sends events and evaluates flags remotely. If it is not set, the component is disabled. See [disable PostHog on dev and preview deployments](#disable-posthog-on-dev-and-preview-deployments). |
 | `POSTHOG_HOST` | No | Defaults to `https://us.i.posthog.com`. Use `https://eu.i.posthog.com` for EU Cloud or your self-hosted URL. |
 | `POSTHOG_PERSONAL_API_KEY` | No | A [secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key) (`phs_`, recommended) or personal API key (`phx_`). Setting it enables local flag evaluation. |
 | `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS` | No | Cron interval for refreshing flag definitions. Defaults to `60`. Raise it on free-tier dev deployments to cut function-call usage. |
@@ -130,6 +130,37 @@ import { components } from "./_generated/api"
 
 export const posthog = new PostHog(components.posthog)
 ```
+
+#### Disable PostHog on dev and preview deployments
+
+Requires `@posthog/convex` 2.2.0 or newer.
+
+To keep test data out of your PostHog project, do not set `POSTHOG_PROJECT_TOKEN` on your dev and preview deployments. Then declare the token as optional in `convex/convex.config.ts`:
+
+```ts
+// convex/convex.config.ts
+const app = defineApp({
+    env: {
+        POSTHOG_PROJECT_TOKEN: v.optional(v.string()),
+        // ...
+    },
+})
+```
+
+When the token is not set, the component logs one warning and is disabled. It drops events and exceptions. Flag methods return `undefined`, `null`, or empty results, and the flag refresh cron does not run.
+
+If you keep `POSTHOG_PROJECT_TOKEN: v.string()`, Convex refuses to deploy when the token is missing. Use this to make sure that production always sends events.
+
+To also skip the component function calls, pass `disabled` to the client:
+
+```ts
+// convex/posthog.ts
+export const posthog = new PostHog(components.posthog, {
+    disabled: !process.env.POSTHOG_PROJECT_TOKEN,
+})
+```
+
+When `disabled` is `true`, every capture, exception, and flag method returns immediately. The client does not schedule component functions or call your `identify` and `beforeSend` callbacks.
 
 ### 4. Capture events and identify users
 

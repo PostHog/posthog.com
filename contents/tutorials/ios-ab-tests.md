@@ -81,9 +81,9 @@ Our basic set up is now complete. Build and run your app to test that it's worki
 
 ## Adding PostHog to your iOS app
 
-First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods)). To add the package dependency to your Xcode project, select File > Add Package Dependency and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
+First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app). To add the package dependency to your Xcode project, select File > Add Package Dependency and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
-Note that for this tutorial we use version `3.1.0` of the SDK.
+Note that for this tutorial we use version `4.0.0` of the SDK.
 
 ![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/swift-npm.png)
 
@@ -99,7 +99,7 @@ struct App: App {
     init() {
         let POSTHOG_API_KEY = "<ph_project_token>"
         let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) 
+        let configuration = PostHogConfig(projectToken: POSTHOG_API_KEY, host: POSTHOG_HOST)
         PostHogSDK.shared.setup(configuration)
     }
     
@@ -113,7 +113,7 @@ struct App: App {
 
 To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_token>` and `<ph_client_api_host>` with your API key and host.
 
-Finally, [capture a custom event](/docs/libraries/ios/usage#capturing-events) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
+Finally, [capture a custom event](/docs/libraries/ios#capture) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
 
 ```swift
 // in FeatureScreenView.swift

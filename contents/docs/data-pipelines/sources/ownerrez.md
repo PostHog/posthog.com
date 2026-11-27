@@ -44,9 +44,16 @@ You'll be asked for:
 
 <SourceTables />
 
+<CalloutBox icon="IconWarning" title="Listings table requires premium" type="caution">
+
+The **Listings** table requires the **WordPress Plugin + Integrated Websites** premium add-on in your OwnerRez account. Without this add-on, OwnerRez returns a 402 error and the table is not available in the table picker.
+
+</CalloutBox>
+
 ## Troubleshooting
 
 - If the connection fails with an authorization error, the personal access token is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If the Listings table shows as unavailable or syncs fail with a 402 error, your OwnerRez account does not have the WordPress Plugin + Integrated Websites premium add-on. Enable the add-on in OwnerRez, then reconnect the source.
 
 <TroubleshootingLink />

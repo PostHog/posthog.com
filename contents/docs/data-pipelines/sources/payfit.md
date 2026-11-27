@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All PayFit tables are full refresh. Each sync replaces the contents of the table.
+The `payroll_status` and `contracts_worked_time` tables support incremental sync on `month`. All other PayFit tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

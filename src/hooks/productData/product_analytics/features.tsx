@@ -4,7 +4,6 @@ import {
     IconTrends,
     IconLifecycle,
     IconUserPaths,
-    IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
     IconDatabase,
@@ -152,37 +151,6 @@ export const features = {
             {
                 title: 'Cohort creation',
                 description: 'Create cohorts of users who follow specific paths for further analysis',
-            },
-        ],
-    },
-    correlation_analysis: {
-        title: 'Correlation Analysis',
-        headline: 'Discover factors affecting conversion',
-        description: 'Automatically identify significant factors that impact user behavior and conversion rates.',
-        icon: <IconCorrelationAnalysis />,
-        color: 'red',
-        images: [
-            {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png',
-                alt: 'Correlation analysis visualization',
-            },
-        ],
-        features: [
-            {
-                title: 'Automatic detection',
-                description: 'Automatically highlight significant factors affecting conversion',
-            },
-            {
-                title: 'Property analysis',
-                description: 'Analyze how different user properties impact behavior',
-            },
-            {
-                title: 'Event correlation',
-                description: 'Discover which events are most strongly correlated with success',
-            },
-            {
-                title: 'Cohort creation',
-                description: 'Create cohorts based on correlation analysis results',
             },
         ],
     },

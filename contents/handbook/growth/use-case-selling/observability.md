@@ -4,6 +4,9 @@ showTitle: true
 hideAnchor: false
 ---
 
+> This page is about cross-selling. For the basics, read [observability foundations](/handbook/growth/sales/observability-foundations). For positioning, messaging, and pricing, read [observability positioning](/handbook/growth/sales/observability-positioning).
+
+> <PrivateLink url="https://docs.google.com/document/d/1Rswft51xDkYtkldt5BZXNYQewNjQCGMQ5V80MAvwQmg/edit?tab=t.0">Customers who switched to PostHog</PrivateLink>, with their quotes, why they moved, and what to watch out for (internal only).
 
 ## What is the job to be done?
 
@@ -44,13 +47,34 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 ### Primary expansion path
 
-**Error Tracking → + Session Replay (error context) → + Logs → + Product Analytics (impact analysis)**
+**Product Analytics → Session Replay → Error Tracking → full APM (Logs, Distributed tracing, and Metrics)**
 
-**The logic of each step:**
+This is the ideal path for an existing PostHog customer. Use the value of the product they already have to sell the next one.
 
-- Error Tracking → Session Replay: They can see the error and the stack trace. But they can't see what the user was doing when it happened. Session Replay lets them click from an error event directly to the user's session and watch the full context. This is the single most differentiated feature in our Observability story.
-- Session Replay → Logs: They're seeing errors and user sessions. They need the backend context: what was the server doing when this error fired? Centralized logs complete the debugging picture, and log lines link back to the session replay they came from.
-- Logs → Product Analytics: They're debugging individual errors. Now they want to understand the aggregate impact: how many users are hitting this error? Is it correlated with a specific funnel step? Did this bug cause a revenue drop? Product Analytics connects technical incidents to business outcomes.
+**1. Product Analytics → Session Replay**
+
+The hook is "why." Funnels and trends show where users drop off, and every funnel, trend, or retention chart links to the recordings of the users behind it.
+
+- **Listen for:** They see where users drop off, but not why.
+- **Ask:** "When conversion drops, how do you find out why?"
+
+**2. Session Replay → Error Tracking**
+
+If they watch replays to find bugs, Error Tracking finds those bugs first. Every issue comes with the affected user's replay, and an alert fires when a new issue appears. An issue only has a replay if that session was recorded, so teams that sample replays won't have one for every error.
+
+- **Listen for:** They use replays to hunt for bugs.
+- **Ask:** "How do you find out when something breaks?"
+
+**3. Error Tracking → full APM**
+
+Error Tracking tells you what's wrong. Logs show what the system was doing when it happened, and traces follow the request through every service. Log lines link to the error, person, and replay, and a slow span links to the replay of the user who waited.
+
+- **Listen for:** They see the error, then open another tool to find out why.
+- **Ask:** "After you see an error, where do you go next?"
+
+**Sell APM as one package.** Pitch Logs, Distributed tracing, and Metrics together. Customers don't leave their current provider for only one of the three. Metrics is still alpha, so push the full package once it's GA, and don't move large managed customers onto alpha products.
+
+**If they start from Error Tracking:** a team that comes in through Error Tracking, such as a Sentry replacement, can follow **Error Tracking → Session Replay → Logs → Product Analytics** instead. Session Replay shows what the user did when the error fired. Logs add what the server was doing at that moment, and log lines link back to the replay. Product Analytics then shows the impact: how many users hit the error, and whether it caused drop-off in a funnel.
 
 ### Alternate expansion paths
 
@@ -97,6 +121,16 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 | Session Replay filtered by error events | Replay usage patterns | They're connecting replay to error debugging. The integration is clicking. |
 | High error volume but no alerting configured | Error tracking settings | They're collecting errors but not acting on them. Help them set up alerts. |
 | Product Analytics queries referencing error events | Saved insights | They're starting to connect errors to business impact. Encourage this. |
+
+### Signals heard on calls
+
+| Signal | What you hear | What to pitch |
+|---|---|---|
+| They cap what they capture because of cost | "Sentry pretty much priced us out." | Error Tracking and Session Replay on usage-based pricing, with 100K exceptions and 5K recordings free each month. |
+| They want to see what the user did when it broke | "I would like to correlate a session playback with an obvious error message." | Error Tracking + Session Replay. Open an issue and play the replay attached to it. |
+| They pay for a tool nobody uses | "We're paying for Sentry and we're just not using it." | Consolidation. If they already use PostHog, Error Tracking means one fewer vendor. |
+| A renewal is coming up | "Their pricing keeps going up year after year." | Move one signal to PostHog first. A full switch can come later. |
+| A huge volume of one non-behavioral event | Events like "API successfully completed" in their usage data | Logs. See the system data row under [cross-sell pathways](#cross-sell-pathways-from-this-use-case). |
 
 ## Command of the Message
 
@@ -215,8 +249,11 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 | If Using... | They Might Need... | Why | Conversation Starter |
 |---|---|---|---|
+| Product Analytics, with errors sent as custom events | Error Tracking | Error events are only a chart, with no stack traces or alerts. One account went from $50K to $20K ARR by switching (internal). | "What happens to those error events today?" |
 | Error Tracking only | Session Replay | They see stack traces but can't reproduce the user experience | "You can see the error. Want to see exactly what the user was doing when it happened?" |
 | Error Tracking + Session Replay | Logs | They have frontend error context but need backend logs | "You can see the user's session. But what was happening on the server at the same time?" |
+| Product Analytics, with system data sent as events | Logs | Events like "API successfully completed" are system data, and logs bill per GB. See [events vs. logs](/docs/logs/best-practices#centralize-your-logs). | "Who reads that event? If it's only for debugging, that's system data, and logs are built for it." |
+| Session Replay or Error Tracking | [Replay Vision](/docs/replay-vision) | Some bugs never throw an error, and not every error reaches the user | "See the bug, then watch the user hit it, or have Replay Vision watch for you." |
 | Logs over OpenTelemetry | Distributed tracing + Metrics (*alpha*) | The hard part (an OTel pipeline) is already done; the other two pillars are a config change | "You're already exporting OTel to us. Traces and metrics are the same collector and a different endpoint. Traces bill on the same meter as your logs, and metrics are free while they're in alpha." |
 | Error Tracking or Logs active | self-driving | Both of these are already a signal source; the account has done the setup without meaning to | "You've got the signals. Want an agent to investigate them and open the PR, instead of you triaging every alert?" |
 | Error Tracking + analytics correlation | Product Intelligence (for the product team) | They're connecting errors to user impact. The product team would benefit from the same analytics. | "You're measuring error impact on users. Has your product team seen what they can do with funnels and retention in the same platform?" |
@@ -233,7 +270,6 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
 - **Product Analytics docs:** [Product Analytics](/docs/product-analytics)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
-- **Competitive battlecard:** *To be added: Sentry / Datadog competitive positioning*
 
 ## Appendix: Company archetype considerations
 

@@ -8,7 +8,7 @@ showTitle: true
 
 ## Elevator pitch
 
-PostHog Analytics covers funnels, retention, trends, user paths, correlation analysis, and SQL – with autocapture so you never miss the event that mattered. Every graph links directly to the session recordings and feature flag states behind it. And because analytics is built into the same platform as replay, flags, experiments, and the data warehouse, agents can query it mid-loop without switching tools.
+PostHog Analytics covers funnels, retention, trends, user paths, and SQL – with autocapture so you never miss the event that mattered. Every graph links directly to the session recordings and feature flag states behind it. And because analytics is built into the same platform as replay, flags, experiments, and the data warehouse, agents can query it mid-loop without switching tools.
 
 Amplitude and Mixpanel tell you what happened. PostHog tells you what happened *and* lets you act on it.
 

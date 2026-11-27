@@ -33,6 +33,14 @@ Customers can also apply their prepaid credits toward an FDE engagement on a dis
 
 ### How we invoice customers
 
+FDEs never own the commercial relationship. The account owner (the customer's CSM, TAM, or TAE) handles the order form and the deal in Salesforce:
+
+1. The FDE scopes and prices the engagement, and writes the proposal.
+2. The customer agrees to the scope and the proposal.
+3. The account owner sends the customer the order form.
+4. The customer signs the order form.
+5. The account owner creates an FDE opportunity in Salesforce and moves it to **Closed - Won**. This notifies RevOps to send the invoice.
+
 How we bill depends on the total fee and how the customer pays:
 
 - **Billable, 10,000 USD or more:** We invoice half the fee when the order form is signed, with payment due Net 30 from the term start date. As we complete each milestone, we draw its billable amount down from that upfront payment. Once the upfront payment is used up, we invoice the rest as we complete each milestone.

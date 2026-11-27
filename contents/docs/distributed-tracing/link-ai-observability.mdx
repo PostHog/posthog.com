@@ -11,8 +11,6 @@ How much work this takes depends on how you send the LLM events:
 
 In both cases, the two products store the IDs in different encodings, so you must convert them when you query.
 
-> **Note:** Distributed tracing is in beta. Setup details may change before general availability.
-
 ## Why correlate spans and LLM events
 
 - **Find the real cause of a slow request.** A trace shows that a request took 9 seconds. The LLM events show that 7 of those seconds were one model call.

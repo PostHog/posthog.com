@@ -24,14 +24,18 @@ The Outbrain connector syncs your Outbrain Amplify advertising data into PostHog
 
 ## Available tables
 
-| Table                        | Description                                                   | Sync method  |
-| ---------------------------- | ------------------------------------------------------------- | ------------ |
-| `marketers`                  | All marketers on your account                                 | Full refresh |
-| `campaigns`                  | Campaigns for each marketer                                   | Full refresh |
-| `budgets`                    | Budgets for each marketer                                     | Full refresh |
-| `promoted_links`             | Promoted links for each campaign                              | Full refresh |
-| `marketer_performance_daily` | Daily performance metrics per marketer                        | Incremental  |
-| `campaign_performance`       | Per-campaign performance totals over a trailing 30-day window | Full refresh |
+| Table                        | Description                                                                              | Sync method  |
+| ---------------------------- | ---------------------------------------------------------------------------------------- | ------------ |
+| `marketers`                  | All marketers on your account                                                            | Full refresh |
+| `campaigns`                  | Campaigns for each marketer                                                              | Full refresh |
+| `budgets`                    | Budgets for each marketer                                                                | Full refresh |
+| `promoted_links`             | Promoted links for each campaign                                                         | Full refresh |
+| `promoted_link_sequences`    | Ordered groups of promoted links in campaigns                                            | Full refresh |
+| `engagement_metrics`         | Engagement metrics for marketers with Google Analytics integration                       | Full refresh |
+| `marketer_performance_daily` | Daily performance metrics per marketer                                                   | Incremental  |
+| `campaign_performance`       | Per-campaign performance totals over a trailing 30-day window                            | Full refresh |
+| `geo_performance`            | Per-region performance metrics over a trailing 30-day window                             | Full refresh |
+| `platform_performance`       | Per-platform performance metrics (desktop, tablet, mobile) over a trailing 30-day window | Full refresh |
 
 ## Adding a data source
 

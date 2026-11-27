@@ -129,7 +129,7 @@ export const fathom = {
             built_in_analytics: false,
         },
         deployment: {
-            eu_hosting: true,
+            eu_hosting: false,
             open_source: false,
             reverse_proxy: false,
             self_host: false,

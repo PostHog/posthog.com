@@ -13,7 +13,7 @@ This page describes the event your server sends for each tool call.
 
 <CalloutBox icon="IconInfo" title="For coding agents" type="fyi">
 
-You can follow this page to instrument an MCP server. First check the server's language. For TypeScript, Python, Go, Ruby, or Rust, use that language's installation page instead, because the SDK handles redaction and sessions for you. For any other language, complete every step marked `required` and run the check in the last step. This page also has a Markdown version at [`/docs/mcp-analytics/installation/other-languages.md`](/docs/mcp-analytics/installation/other-languages.md).
+For TypeScript, Python, Go, Ruby, or Rust, use that language's installation page instead, because the SDK handles redaction and sessions, and for any other language, complete every step marked `required` and run the check in the last step. This page has a Markdown version at [`/docs/mcp-analytics/installation/other-languages.md`](/docs/mcp-analytics/installation/other-languages.md).
 
 </CalloutBox>
 
@@ -76,13 +76,11 @@ Every event needs a non-empty `$session_id`. It groups the calls of one agent co
 
 Don't use credentials, cookies, or client IP addresses as the session. Different clients can share them.
 
-The SDKs derive session IDs with a different hash, so a session served partly by an SDK and partly by your own code splits in two.
-
 </Step>
 
 <Step title="Capture a $mcp_tool_call event" badge="required">
 
-Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Most PostHog SDKs queue the event and send it in the background. Some send during the capture call. For example, the PHP SDK sends its queue when the queue reaches its batch size. With such an SDK, capture after the response is sent, such as after `fastcgi_finish_request()` in PHP.
+Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Capture after the response is sent if your SDK sends events inside the capture call.
 
 Capture only the final outcome of a call to a tool your server has. Don't capture a `$mcp_tool_call` for:
 
@@ -90,7 +88,7 @@ Capture only the final outcome of a call to a tool your server has. Don't captur
 - A result with `resultType: "input_required"`. Capture the retry that completes the call instead.
 - A task handle (`resultType: "task"`). It isn't a completed call.
 
-This is the event, as PostHog stores it. PostHog stores the `process_person_profile` [event option](/docs/api/capture-v1#event-options) as a property, so it appears in `properties` below. When you send the event, set it as an option instead, as described in [Identify the user](#identify-the-user). If you use the [capture API](/docs/api/capture-v1), wrap the event in the request body that page describes, with your project token, and put the option in the event's `options`:
+This is the event as PostHog stores it. PostHog stores the `process_person_profile` [event option](/docs/api/capture-v1#event-options) as a property. When you send the event, set it as an option instead, as in [Identify the user](#identify-the-user). With the [capture API](/docs/api/capture-v1), wrap the event in that page's request body, with your project token, and put the option in the event's `options`:
 
 ```json
 {
@@ -254,4 +252,4 @@ The SDKs include more features than this page covers. If you need one of these, 
 - `$mcp_tools_list`, `$mcp_unknown_tool`, and `$mcp_input_required` events.
 - Wider redaction, such as credential-shaped strings that no key or pattern above identifies.
 
-You can add any of these yourself. The [event reference](/docs/mcp-analytics/events) describes their events and properties.
+The [event reference](/docs/mcp-analytics/events) describes their events and properties.

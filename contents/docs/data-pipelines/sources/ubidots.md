@@ -32,7 +32,7 @@ When linking Ubidots, you'll need:
 
 <SyncModes />
 
-The `values` table supports incremental syncs on the dot `timestamp` (Unix epoch milliseconds), so after the first full sync only new data points are fetched. Device and variable metadata tables are full refresh only.
+The `values` table supports incremental syncs on the dot `timestamp` (Unix epoch milliseconds), so after the first full sync only new data points are fetched. All other tables, including `event_logs`, `organizations`, and `users`, are full refresh only.
 
 ## Configuration
 
@@ -43,6 +43,8 @@ The `values` table supports incremental syncs on the dot `timestamp` (Unix epoch
 <SourceTables />
 
 The `values` table contains one row per dot (data point), with the owning variable's ID injected in the `variable` column so you can join it to the `variables` table.
+
+The `event_logs` table records when event rules fired. Each row includes the owning event's ID in the `event` column. The `organizations` and `users` tables describe the organizations and users your token can access.
 
 ## Troubleshooting
 

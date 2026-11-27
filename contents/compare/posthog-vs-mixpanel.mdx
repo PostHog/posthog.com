@@ -1,0 +1,728 @@
+---
+date: 2026-11-24
+title: 'In-depth: PostHog vs Mixpanel'
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/comparisons_blog_post_template_2_687f229cc2.png
+featuredImageType: full
+author:
+    - natalia-amorim
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: PostHog vs Mixpanel in-depth tool comparison
+    metaDescription: Looking for the best product analytics tool? Compare PostHog vs Mixpanel on product and web analytics, feature flags, session replays, and more to find the right fit.
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import AskMax from 'components/AskMax'
+
+PostHog and [Mixpanel](/compare/best-mixpanel-alternatives) are both product analytics platforms helping teams understand user behavior and build better products. Both expanded beyond core analytics, but their approaches and feature sets differ.
+
+1. **Mixpanel** is a product analytics platform with web analytics, session replay, heatmaps, experiments, feature flags, and Metric Trees, plus a built-in AI agent and an MCP server. It's built for product managers and growth teams who want deep behavioral insights.
+
+2. **PostHog** is your product's context layer. On top of [product analytics](/product-analytics), it includes [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more. A [data warehouse](/warehouse) and [data pipelines](/data-pipelines) tie it all together and unify that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
+
+In this post, we compare features, pricing, AI and MCP access, and the best fit for different teams.
+
+## How is PostHog different?
+
+### 1. We're an all-in-one platform
+
+PostHog puts all your data in one place and combines it with every tool you need to build a successful product. This means:
+
+- **[Product analytics](/product-analytics)** for analyzing behavior, funnels, activation, and retention
+- **[Web analytics](/web-analytics)** for tracking your marketing website and content
+- **[Session replay](/session-replay)** for observing how people use your product and diagnosing problems
+- **[Feature flags](/feature-flags)** for testing in production and shipping new features
+- **[Experiments](/experiments)** for verifying improvements to your product and website
+- **[Error tracking](/error-tracking)** for monitoring exceptions and problems in your code
+- **[Logs](/logs)** for searching what your servers wrote, next to the replay and error they relate to
+- **[Surveys](/surveys)** for capturing user feedback, tracking NPS, and booking interviews
+- **[AI observability](/ai-observability)** for understanding how users interact with AI features
+- **A built-in [data warehouse](/warehouse)** for analyzing your business and event data together
+
+In other words, it's [everything you need in one app](/products) with a single login and contract. A _genuine_ single source of truth for your product and customer data.
+
+### 2. It's built by developers, for developers
+
+This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/data-warehouse/sql), so you can analyze data how you want. 
+
+Your agents get the same access you do, through a free [MCP server](/docs/model-context-protocol), a [Slack app](/slack), and a [CLI](/docs/cli).
+
+We're open source, so you can inspect [our source code](https://github.com/PostHog) and see what's coming next on [our public roadmap](/roadmap).
+
+### 3. We promise transparent and cheap pricing (forever)
+
+We pride ourselves on [having a generous free tier](/pricing). Your first 1 million events every month are free, and 97% of companies use PostHog for free.
+
+Beyond the free tier, our pricing is usage-based and transparent. Anonymous events start at $0.00005 each and identified events at $0.000248, and both get cheaper as your volume grows. There's no minimum spend and you can set [billing limits](/docs/billing/limits-alerts) (unlike in Mixpanel) so you're never surprised.
+
+Want to know how much we'll charge? See our [pricing calculator](/pricing).
+
+<details>
+<summary>PostHog vs Mixpanel: the short version</summary>
+
+- **Choose Mixpanel** if product managers and analysts own your analytics and want a polished, self-serve interface. It has experiments and feature flags on every plan, a built-in AI agent, and Metric Trees for tying metrics to goals (an Enterprise add-on). If you commit to yearly billing, its event pricing is lower than its month-to-month rate.
+- **Choose PostHog** if engineers need the context around the analytics too. Product analytics sits next to [session replay](/session-replay), [error tracking](/error-tracking), [logs](/logs), and [surveys](/surveys) on the same users, and Mixpanel has no equivalent for the last three. A built-in [data warehouse](/warehouse) brings in sources like Stripe and Zendesk. Anonymous events cost up to 80% less, and you can pay as you go without committing to a year.
+
+Both include 1 million free events a month, session replay, heatmaps, experiments, feature flags, and a hosted MCP server for your agents.
+ 
+</details>
+
+<WizardCTA
+    title="Set up PostHog with one command"
+    subtitle="The wizard installs PostHog in your app and starts capturing events automatically."
+    learnMoreTo="/docs/getting-started/install"
+/>
+
+## Comparing PostHog and Mixpanel
+
+As an all-in-one platform, PostHog isn't just [an alternative to Mixpanel](/compare/best-mixpanel-alternatives), it can also replace tools like [Hotjar](/compare/best-hotjar-alternatives) for session replay and surveys, and [LaunchDarkly](/compare/best-launchdarkly-alternatives) for experiments and feature flags.
+
+### Platform
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'error_tracking',
+        'experiments',
+        'logs',
+        'heatmaps',
+        'ai_observability',
+        'surveys',
+        'cdp',
+        'data_warehouse',
+        'product_analytics.group_analytics',
+        'platform.deployment.managed_reverse_proxy',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+> **Good to know:** If we don't have something you want now, there's a good chance we're planning on building it already. Visit [our public roadmap](/roadmap) to see what's in beta and join the waitlist for what's coming next. [We ship fast](/changelog/)!
+
+### Product analytics
+
+PostHog and Mixpanel offer broadly similar product analytics features, including the ability to [create insights using natural language](/ai).
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'product_analytics.insights.ai_insight_builder',
+        'product_analytics.insights.alerts',
+        'product_analytics.features.autocapture',
+        'heatmaps.features.clickmaps',
+        'heatmaps.features.heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics.insights.sql_editor',
+        'dashboards',
+        'product_analytics.cohorts',
+        'product_analytics.funnels.correlation_analysis',
+        'product_analytics.insights.formula_mode',
+        'product_analytics.group_analytics',
+        { label: 'Insights' },
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.retention',
+        'product_analytics.lifecycle',
+        'product_analytics.stickiness',
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+Our [generous free tier](/pricing) means every PostHog customer gets 1 million analytics events for free every single month. 97% of companies use PostHog for free, and our [startup program](/startups) comes with $50,000 in credit.
+
+</CalloutBox>
+
+### Website analytics
+
+PostHog is also a powerful [alternative to Google Analytics](/compare/best-ga4-alternatives) that bridges the gap between lightweight tools like [Plausible](/compare/best-plausible-alternatives), and expensive enterprise platforms like [Adobe Analytics](/compare/best-adobe-analytics-alternatives).
+
+Mixpanel's web analytics is a dashboard template built on its event reports. PostHog's is a dedicated, preconfigured product, with its own queries and UI built for website traffic.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.conversions',
+        'heatmaps.features.clickmaps',
+        'web_analytics.features.custom_channel_types',
+        'web_analytics.features.entry_exit_paths',
+        'heatmaps.features.heatmaps',
+        'web_analytics.features.outbound_clicks',
+        'web_analytics.features.pageviews',
+        'heatmaps.features.scrollmaps',
+        'web_analytics.features.sessions',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+        'web_analytics.features.web_vitals',
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+You can use the [PostHog toolbar](/docs/toolbar) to [view clickmaps, heatmaps, and scrollmaps](/docs/toolbar/heatmaps) for your website. You can also use the toolbar to turn feature flags on and off, debug events, and create no-code experiments.
+
+</CalloutBox>
+
+### Session replay
+
+PostHog [session replay](/session-replay) can be used by anyone, but it includes numerous developer-level features that make it useful for engineers, product managers, and support engineers who want to diagnose issues and identify potential improvements. 
+
+Features include [console logs](/docs/session-replay/console-log-recording), [network request monitoring](/docs/session-replay/network-recording), a [DOM explorer](/docs/session-replay/how-to-watch-recordings), performance metrics, and the ability to jump directly from [errors](/docs/error-tracking) or [funnel](/docs/product-analytics/funnels) drop-offs into relevant replays.
+
+PostHog keeps recordings for 30 days on the free plan, 90 days on pay-as-you-go, and up to 5 years on Enterprise. Mixpanel keeps them for 30 days, or for up to a year with an Enterprise add-on. With [Replay Vision](/replay-vision), AI can also watch your recordings in bulk with your own prompts, monitors, and classifiers. Mixpanel can summarize replays with AI, but it has no custom scanners.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'session_replay.features.canvas_recording',
+        'session_replay.features.chat_with_recordings',
+        'session_replay.analysis.console_logs',
+        'session_replay.features.conditional_recording',
+        'session_replay.analysis.dom_explorer',
+        {
+            path: 'session_replay.features.export_to_json',
+            label: 'Export recordings',
+            description: 'Save important recordings offline',
+        },
+        'session_replay.features.event_timeline',
+        'session_replay.features.iframe_recording',
+        'session_replay.identity.identity_detection',
+        'session_replay.features.minimum_duration',
+        'session_replay.analysis.performance_monitoring',
+        'session_replay.organization.playlists',
+        'session_replay.privacy.privacy_masking',
+        'session_replay.targeting.target_by_feature_flag',
+        'session_replay.targeting.target_by_sample',
+        'session_replay.features.retention_policy',
+        'session_replay.ai.ai_summaries',
+        'session_replay.ai.replay_vision',
+    ]}
+/>
+</p>
+
+#### Library support for replays
+
+Both PostHog and Mixpanel offer broad SDK support for session replay across web and mobile platforms.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'session_replay.platform_support.web_app_recordings',
+        'session_replay.platform_support.ios_recordings',
+        'session_replay.platform_support.android_recordings',
+        'session_replay.platform_support.react_native_recordings',
+        'session_replay.platform_support.flutter_recordings',
+        {
+            path: 'session_replay.features.screenshot_mode',
+            label: 'Screenshot mode',
+            description: 'Mobile session reconstructions using app screenshots',
+        },
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+You can use PostHog AI to chat with your recordings using natural language – e.g. "show me sessions over 5 minutes long" or "show me sessions from users in Belgium". For AI summaries of what happened in a session, use [Replay Vision](/docs/replay-vision).
+
+</CalloutBox>
+
+### AI and MCP
+ 
+Both tools now have a built-in AI agent and a hosted MCP server, so the question is what your agents can see in each.
+ 
+- **Mixpanel** has Mixpanel Agent, an AI analyst that builds reports and answers questions in plain language, AI summaries of session replays, and Agent Intelligence for analyzing AI agent traces, which is in beta for a limited set of customers. Its hosted MCP server can read and write, with its experiment and feature flag tools in open beta.
+
+- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) that can read and write, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents can open PRs.
+ 
+The difference is what's behind them. Mixpanel's agent and MCP server work from your events, replays, and experiments, and Mixpanel Agent can also read tools like GitHub, Jira, Linear, and Notion through MCP Connections. PostHog's work from your events, replays, and experiments plus your errors, logs, survey responses, and the external data in your warehouse.
+
+### Feature flags
+
+Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). You can also use them to [control access to beta features](/docs/feature-flags/early-access-feature-management), and make [scheduled changes to your app](/docs/feature-flags/scheduled-flag-changes).
+
+Mixpanel includes feature flags and experiments on every plan, but with limits below Enterprise: 10 active flags and 1,000 monthly experiment users on Free, and 50 active flags and 5,000 monthly experiment users on Growth. PostHog has no limit on the number of flags or experiments, and you only pay for usage.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'feature_flags.features.boolean_flags',
+        'feature_flags.features.multivariate_flags',
+        'feature_flags.features.json_payloads',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.implementation.features.bootstrapping',
+        'feature_flags.targeting.features.target_by_percentage',
+        'feature_flags.targeting.features.target_by_person_properties',
+        'feature_flags.management.features.flag_scheduling',
+        'feature_flags.management.features.multi_environment',
+        'feature_flags.management.history_activity',
+        'feature_flags.features.early_access_management',
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+Our feature flags are tightly integrated with other tools, meaning you can target session replays, surveys and other features using existing feature flags. See [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
+
+</CalloutBox>
+
+### Experiments
+
+Both PostHog and Mixpanel offer native A/B testing and feature flags. PostHog bills experiments together with feature flags. Mixpanel launched its current experiments and feature flags for Enterprise plans in October 2025, and added them to its Free and Growth plans in August 2026 with limits on monthly experiment users and active flags.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        {
+            label: 'Built-in A/B testing',
+            description: 'Setup and run A/B tests using feature flags',
+            values: [true, true],
+        },
+        {
+            path: 'experiments.features.experiment_analysis',
+            label: 'Experiment analysis',
+            description: 'Analyze results of A/B tests',
+        },
+        {
+            path: 'experiments.features.no_code_experiments',
+            label: 'No-code experiments',
+            description: 'Modify your website and run experiments without writing code',
+        },
+        'experiments.features.custom_goals',
+        'experiments.features.secondary_metrics',
+        'experiments.analysis.statistical_significance',
+        'experiments.analysis.features.statistics_engine',
+        {
+            path: 'experiments.features.split_testing',
+            label: 'Split testing',
+            description: 'Split participants into groups',
+        },
+        'experiments.supported_tests.abn_testing',
+        {
+            path: 'experiments.features.recommended_run_time',
+            label: 'Recommended run time',
+            description: 'Automatically calculate the recommended run time and sample size',
+        },
+        {
+            path: 'experiments.features.dynamic_cohorts',
+            label: 'Dynamic cohorts',
+            description: 'Add new users to an experiment automatically by setting a user property',
+        },
+        'experiments.supported_tests.features.holdout_testing',
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+You can evaluate the results of experiments using events tracked using PostHog, or [event tables stored in our data warehouse](/docs/experiments/data-warehouse). This means you can include all kinds of business event data as primary or secondary metrics in your experiments.
+
+</CalloutBox>
+
+### Surveys
+
+You can't build a successful product on data alone. Surveys are useful for [gathering feedback and booking interviews](/tutorials/feedback-interviews-site-apps), notifying users of changes, and keeping track of customer satisfaction metrics.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        {
+            path: 'surveys.features.ai_response_summaries',
+            label: 'AI response summaries',
+            description: 'Automated summary of user feedback',
+        },
+        'surveys.targeting.custom_targeting',
+        'surveys.targeting.display_conditions',
+        'surveys.targeting.event_triggered',
+        'surveys.presentation.feedback_button',
+        {
+            path: 'surveys.features.target_by_feature_flag',
+            label: 'Feature flag targeting',
+            description: 'Show surveys based on feature flags',
+        },
+        'surveys.presentation.custom_html',
+        'surveys.presentation.custom_ui',
+        'surveys.branching.conditional_logic',
+        'surveys.implementation.api_access',
+        { label: 'Question types' },
+        'surveys.question_types.freeform_text',
+        'surveys.question_types.rating',
+        'surveys.question_types.multiple_choice',
+        'surveys.question_types.multi_select',
+        { label: 'Templates' },
+        'surveys.templates.nps_surveys',
+        {
+            path: 'surveys.templates.pmf_surveys',
+            label: 'PMF surveys',
+            description: 'Product-market fit survey template',
+        },
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more. Read our [guide comparing NPS, CSAT, and CES](/product-engineers/nps-vs-csat-vs-ces) to see which survey type you should use and when.
+
+</CalloutBox>
+
+### Price comparison
+
+**PostHog charges based on usage.** Products come with a [free monthly allowance](/pricing), and past that you pay published per-unit rates, with billing limits you can set on most products. You don't need a contract, though [pre-paid annual plans](/docs/billing/pre-paid-plans) come with a discount. We've also written up [what you pay for per event](/docs/billing/what-you-pay-for-per-event).
+ 
+**Mixpanel charges by event volume.** The first 1 million events a month are free. Past that, its Growth plan is priced per event, with a lower price if you pay yearly, and add-ons like Group Analytics and Data Pipelines cost extra. Prices are public up to 20 million events a month.
+
+#### PostHog and Mixpanel pricing comparison
+ 
+| | PostHog | Mixpanel |
+|---|---|---|
+| **Free plan** | 1M events, 5,000 web + 2,500 mobile replays, 1M flag requests, 100k errors, 10 GB logs, 1M warehouse rows, and 1,500 survey responses a month | 1M events, 10,000 session replays, 1,000 monthly experiment users, and 10 active feature flags a month |
+| **Paid plans** | No base fee; usage-based per product, with a billing limit you can set on most products | Growth is usage-based on events and cheaper on yearly billing; Enterprise is sold through sales |
+| **Public pricing** | Yes, with a calculator | Yes, up to 20M events a month; add-ons and Enterprise through sales |
+| **Startup program** | [$50k in credits for 12 months](/startups) (under 2 years old, under $5M raised) | First year free with 1 billion events (under 5 years old, up to $8M raised) |
+| **Self-hosting** | Free (MIT, open core), unsupported | None |
+
+### Integrations
+
+**PostHog** has a built-in [data warehouse](/warehouse), so you can import and query data directly from [sources](/docs/data-pipelines/sources) like [Stripe](/docs/data-pipelines/sources/stripe) and [Zendesk](/docs/data-pipelines/sources/zendesk), or from an existing warehouse like [Snowflake](/docs/data-pipelines/sources/snowflake) or [BigQuery](/docs/data-pipelines/sources/bigquery).
+
+**Mixpanel** has no built-in data warehouse. Business data mostly arrives through Warehouse Connectors, available on paid plans, which sync tables from your own warehouse into Mixpanel, or through event integrations with tools like Segment and RudderStack.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        { product: 'data_warehouse' },
+        'platform.integrations.stripe',
+        'platform.integrations.zendesk',
+        'platform.integrations.hubspot',
+        'platform.integrations.sentry',
+        'platform.integrations.segment',
+        'platform.integrations.rudderstack',
+        'platform.integrations.zapier',
+        'platform.integrations.customer_io',
+        'platform.integrations.intercom',
+    ]}
+/>
+</p>
+
+See our docs for full lists of [destinations](/docs/data-pipelines) and [data warehouse sources](/docs/data-pipelines/sources).
+
+### Security and compliance
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'mixpanel']}
+    rows={[
+        'platform.security.user_privacy_options',
+        'platform.security.history_audit_logs',
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+    ]}
+/>
+</p>
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+
+A Business Associate Agreement for HIPAA compliance is available for customers with one of our [platform packages](/platform-packages) (Boost, Scale, or Enterprise). The packages also add SSO and 2FA enforcement, and priority support from Scale up. Mixpanel signs BAAs on its Enterprise plan.
+
+</CalloutBox>
+
+## When to choose PostHog vs Mixpanel
+
+Choosing the right product analytics platform depends on your team's needs and technical depth. Here's a quick guide:
+
+- Want one platform that goes beyond analytics with [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), and [surveys](/surveys), plus a [data warehouse](/warehouse) for your business data and agents that work from [Slack](/slack) or [the MCP](/mcp), with transparent pricing and a generous free tier? Go with **PostHog**.
+
+- Prefer a polished UI optimized for product managers and growth teams, with Metric Trees and connectors that sync data in from your warehouse? **Mixpanel** is a solid choice.
+
+## Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – SQL access, open-source codebase, and direct support from the engineers who build the product. Tightly integrated feature flags, experiments, and error tracking mean fewer tools to manage.
+
+**For product management teams**
+- **Mixpanel** – Purpose-built for non-technical users with a polished interface, metric trees for aligning teams on goals, and strong collaboration features.
+
+**For teams building AI products**
+- **PostHog** – Native [AI observability](/ai-observability) for tracking AI usage, model performance, token costs, and debugging LLM interactions, with 100k events free every month. Mixpanel's equivalent, Agent Intelligence, is in limited beta.
+
+**For privacy-conscious and regulated organizations**
+- Both are SOC 2 certified and GDPR-ready with EU data residency options, and both sign BAAs for HIPAA: **PostHog** on its [Boost, Scale, and Enterprise packages](/platform-packages), and **Mixpanel** on its Enterprise plan. **PostHog** also offers raw data access via its [data warehouse](/warehouse). SAML SSO is on PostHog's Scale and Enterprise packages, and on Mixpanel's Growth and Enterprise plans.
+
+**For early-stage startups**
+- **PostHog** – A single platform that scales from MVP to growth stage without rebuilding your stack. The generous free tier means you won't outgrow it quickly. [Startups can also qualify for $50k in free credits](/startups).
+
+| &nbsp;                            | **Free usage per month**                                            |
+| --------------------------------- | ------------------------------------------------------------------- |
+| **Product and web analytics**     | 1 million events                                                    |
+| **Session replay**                | 5,000 web and 2,500 mobile recordings                               |
+| **Heatmaps**                      | Free                                                                |
+| **Feature flags and A/B testing** | 1 million API requests                                              |
+| **Surveys**                       | 1,500 responses                                                     |
+| **Error tracking**                | 100k errors                                                         |
+| **Logs**                          | 10 GB                                                               |
+| **AI observability**              | 100k events                                                         |
+| **Data warehouse**                | 1 million synced rows                                               |
+| **Data pipelines**                | 10k events to realtime destinations and 1 million batch export rows |
+| **Workflows**                     | 10k messages per channel                                            |
+| **PostHog AI**                    | 500 credits                                                         |
+
+<WizardCTA
+    title="Moving from Mixpanel?"
+    subtitle="The wizard installs PostHog in your app in minutes. Our migration guide covers your historical data."
+    learnMoreTo="/docs/migrate/mixpanel"
+/>
+
+## Frequently asked questions
+ 
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+Mixpanel can tell you what your users did and what they saw; PostHog knows that too, as well as what broke, what your servers logged, and what they told you in a survey. That's because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), [surveys](/surveys), and [AI observability](/ai-observability) all share one model of users and sessions.
+ 
+The [data warehouse](/warehouse) and [data pipelines](/data-pipelines) bring in the business data that lives elsewhere, like Stripe, HubSpot, or Postgres, and push data back out, so your agents can read across all of it. They can work from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp), and they see your whole product, not just your events.
+ 
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+    <summary>What's the difference between PostHog and Mixpanel?</summary>
+
+- **Scope:** Mixpanel covers product and web analytics, session replay, heatmaps, experiments, and feature flags; PostHog adds error tracking, logs, surveys, AI observability, and a built-in data warehouse
+- **Pricing:** Both charge by event with 1 million free a month; PostHog charges less for anonymous events and is pay-as-you-go by default, while Mixpanel is cheaper on yearly billing
+- **Data warehouse:** PostHog has one built in, with sources like Stripe and Zendesk; Mixpanel syncs data in from your own warehouse with Warehouse Connectors on paid plans
+- **Goal tracking:** Mixpanel has Metric Trees (an Enterprise add-on); PostHog has no equivalent
+- **Audience:** PostHog is built for engineers and product teams; Mixpanel is built for product managers and growth teams
+- **Open source:** PostHog is open source (MIT, open core); Mixpanel is closed source
+
+</details>
+
+<details>
+<summary>What are the main similarities between PostHog and Mixpanel?</summary>
+
+Both:
+- Offer funnels, retention, cohorts, and user flows
+- Include session replay for web and mobile, heatmaps, feature flags, and A/B testing
+- Have autocapture
+- Include 1 million free events a month
+- Are SOC 2 certified, offer EU data residency, and sign BAAs for HIPAA
+- Have a built-in AI agent and a hosted MCP server
+
+</details>
+
+<details>
+    <summary>Does PostHog replace Mixpanel?</summary>
+
+**Yes, for most teams.** PostHog offers all of Mixpanel's core analytics features (funnels, retention, cohorts, user paths) plus additional tools like error tracking, AI observability, and surveys. If you're an engineering-led team that values SQL access, open-source code, and transparent pricing, PostHog is a strong replacement.
+
+**Consider keeping Mixpanel if** your team is heavily invested in Mixpanel's metric trees for goal alignment, or you prefer their polished UI for non-technical users.
+
+</details>
+
+<details>
+<summary>Is PostHog cheaper than Mixpanel?</summary>
+
+It depends on how you pay and how many of your events are anonymous. Both include 1 million free events a month. Beyond that, PostHog's pay-as-you-go price is lower than Mixpanel's month-to-month price at every volume up to 20 million events, even if all your events are identified: $352 against $378 a month at 3 million events, and $1,928 against $2,289 at 20 million.
+ 
+Mixpanel is cheaper if you commit to yearly billing ($270 a month at 3 million events), unless about a third or more of your events are anonymous, which PostHog charges up to 80% less for.
+ 
+**PostHog works best if:**
+- You want to pay as you go without committing to a year
+- A lot of your traffic is anonymous, like a marketing website
+- You want session replay, error tracking, and surveys on the same bill
+
+**Mixpanel works best if:**
+- You're happy to commit to a year upfront
+- Almost all of your events come from identified users
+
+</details>
+
+<details>
+    <summary>How much does Mixpanel cost?</summary>
+
+Mixpanel has three tiers:
+
+1. **Free:** 1M events a month, 10,000 session replays, and limited experiments and feature flags
+2. **Growth:** First 1M events free, then priced by event volume, from $140 a month for 1.5M events ($100 on yearly billing)
+3. **Enterprise:** Custom pricing, custom experiment and feature flag volumes, advanced features
+
+Add-ons like Group Analytics and Data Pipelines are separately priced. Experiments and Feature Flags are included on every plan, with limits on monthly experiment users and active flags (1,000 and 10 on Free; 5,000 and 50 on Growth). Session Replay is included up to 10,000 replays a month on Free and 20,000 on Growth. For comparison, PostHog publishes its usage-based rates on its [pricing page](/pricing).
+
+</details>
+
+<details>
+    <summary>Which has better session replay – PostHog or Mixpanel?</summary>
+
+Both offer solid session replay with web and mobile support, console logs, and network activity. **PostHog** adds a DOM explorer and performance metrics, and lets you jump from an error or a funnel drop-off straight to the replay. **Mixpanel** has a heatmap comparison mode. Both can summarize replays with AI, which PostHog does through [Replay Vision](/replay-vision). PostHog's free tier includes 5,000 web and 2,500 mobile replays a month; Mixpanel's includes 10,000.
+
+</details>
+
+<details>
+    <summary>Can I use PostHog and Mixpanel together?</summary>
+
+Yes, though most teams find it redundant. If you're migrating gradually, you can run both in parallel. You can import your Mixpanel history with our [Mixpanel to PostHog migration guide](/docs/migrate/mixpanel), keep syncing it into the data warehouse with the [Mixpanel source](/docs/data-pipelines/sources/mixpanel), or send PostHog events out through a webhook [destination](/docs/data-pipelines/destinations).
+
+</details>
+
+<details>
+    <summary>What are the best all-in-one product analytics tools in 2026?</summary>
+
+The top all-in-one product analytics platforms in 2026 include:
+
+- **PostHog**: Best for engineering-led teams wanting analytics, session replay, feature flags, experiments, error tracking, AI observability, and surveys in one place
+- **Mixpanel**: Best for product managers wanting polished analytics with session replay, heatmaps, and A/B testing
+- **Amplitude**: Best for enterprise teams wanting deep behavioral analytics with warehouse-native queries
+- **Pendo**: Best for product teams wanting analytics combined with in-app guides, feedback, and roadmap tools
+- **Heap**: Best for teams wanting comprehensive autocapture with minimal instrumentation
+- **LogRocket**: Best for frontend teams wanting session replay with error tracking and performance monitoring
+
+</details>
+
+<details>
+    <summary>Which is better for B2B SaaS – PostHog or Mixpanel?</summary>
+
+Both support group/account-level analytics for B2B use cases. **Mixpanel** added Account Profiles and Activation Metrics for B2B analysis in February 2025 (they need its Group Analytics add-on). **PostHog's** [group analytics](/docs/product-analytics/group-analytics) is also a paid add-on, and you can connect it to CRM data via the built-in [data warehouse](/warehouse). PostHog is often preferred by B2B teams that also need feature flags and experiments for enterprise rollouts.
+
+</details>
+
+<details>
+    <summary>Does Mixpanel have feature flags?</summary>
+
+Yes. Mixpanel launched feature flags with Experimentation 2.0 in October 2025 for Enterprise plans, and added them to its Free and Growth plans in August 2026 with limits on active flags. It supports local evaluation on server SDKs. PostHog also has [scheduled flag changes](/docs/feature-flags/scheduled-flag-changes) and [early access management](/docs/feature-flags/early-access-feature-management), which Mixpanel's docs don't cover.
+
+</details>
+
+<details>
+    <summary>Does Mixpanel have error tracking?</summary>
+
+No. Mixpanel does not offer error tracking or crash reporting. If you need to monitor exceptions alongside your analytics, you'd need a separate tool like Sentry or Bugsnag. **PostHog** includes [error tracking](/error-tracking) natively, connected to session replays and user behavior data.
+
+</details>
+
+<details>
+    <summary>Does Mixpanel have LLM observability?</summary>
+
+Not as a generally available product. Mixpanel's Agent Intelligence, which analyzes AI agent traces, is in beta for a limited set of customers. **PostHog** includes [AI observability](/ai-observability) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions – useful for teams building AI-powered features.
+
+</details>
+
+<details>
+    <summary>Which is easier to set up – PostHog or Mixpanel?</summary>
+
+Both are designed for quick implementation. **PostHog** offers an [AI install wizard](/docs/ai-engineering/ai-wizard) that gets you running in minutes, plus autocapture that starts collecting events immediately. **Mixpanel** also supports autocapture and has straightforward SDK installation. The main difference is PostHog's broader feature set means there's more to explore, but you can adopt features incrementally.
+
+</details>
+
+<details>
+    <summary>Which has better data warehouse integration?</summary>
+
+Different approaches. **Mixpanel** connects to external warehouses to import data and run queries in Mixpanel. **PostHog** offers an integrated data warehouse approach: you can use PostHog as your warehouse (data stays in PostHog and is accessible across all PostHog tools), or connect external warehouses (like Snowflake or BigQuery) as sources to sync the tables and fields you need into PostHog.
+
+**PostHog is better if:**
+- You want to eliminate tool sprawl (Mixpanel is analytics-focused, with Warehouse Connectors on its paid plans)
+- You value having the warehouse and analytics in one platform
+- You want features Mixpanel doesn&apos;t offer, like surveys
+- You want transparent, usage-based pricing (1 million synced rows free per month)
+
+**Mixpanel&apos;s approach is better if** your existing warehouse is already your source of truth and you only want product analytics on top of it.
+
+Companies like [HeadshotPro](/customers/headshotpro) and [Webshare](/customers/webshare) use PostHog&apos;s integrated warehouse as their single source of truth, eliminating the need to stitch together multiple vendors.
+
+</details>
+
+<details>
+    <summary>How do I reduce costs on PostHog vs Mixpanel?</summary>
+
+**PostHog** charges up to 80% less for anonymous events, so tracking your marketing website anonymously significantly reduces costs. You can also set billing limits on most products to avoid surprises. **Mixpanel** doesn't price anonymous and identified events differently, but it charges less on yearly billing. Both offer free tiers with 1M events per month and no credit card required. See our [pricing page](/pricing) for a detailed calculator.
+
+</details>
+
+<details>
+    <summary>Which has better support?</summary>
+
+**PostHog** support is handled by engineers: support engineers first, backed by the engineers who build each product. Paid plans get faster response targets, and the free plan relies on our [community forums](/forum) and [documentation](/docs). **Mixpanel** offers email support on every plan, with paid add-ons on Enterprise for faster response times and 24/7 coverage.
+
+</details>
+
+<details>
+    <summary>Is PostHog or Mixpanel better for startups?</summary>
+
+**PostHog** is generally better for early-stage startups. The generous free tier covers most startup needs, and the [PostHog for Startups](/startups) program offers $50k in additional credits. More importantly, you get a single platform that scales from MVP to growth stage without needing to add tools as you grow. Mixpanel's startup program gives eligible companies (under five years old, up to $8M raised) their first year free, but you may need additional tools for error tracking and surveys.
+
+</details>
+
+<details>
+    <summary>Can I migrate my data from Mixpanel to PostHog?</summary>
+
+Yes. See our [Mixpanel to PostHog migration guide](/docs/migrate/mixpanel).
+
+</details>
+
+<details>
+    <summary>Can PostHog replace Google Analytics?</summary>
+
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can also integrate PostHog into your website using Google Tag Manager.
+
+See our comparison of [PostHog and Google Analytics 4](/compare/posthog-vs-ga4) and [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+
+</details>
+
+<details>
+    <summary>Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)</summary>
+
+Yes. **PostHog** includes a [built-in CDP](/data-pipelines) that lets you import, transform, and export data without needing a separate tool. You can also integrate PostHog with third-party CDPs like Segment and Rudderstack. 
+
+See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for setup instructions, or browse our comparison of the [best customer data platforms for developers](/compare/best-customer-data-platforms-for-developers) if you're evaluating options.
+
+</details>
+
+<details>
+    <summary>What about ad blockers?</summary>
+
+We recommend all users deploy a reverse proxy, which enables you to send events to PostHog Cloud using your own domain. Events sent from your own domain are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible.
+
+We make this super easy by offering a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) – a no code solution that takes minutes to set up. We also have [reverse proxy setup guides](/docs/advanced/proxy) for AWS CloudFront, Caddy, Cloudflare, Netlify, Vercel, and more in our docs.
+
+</details>
+
+<NewsletterForm />

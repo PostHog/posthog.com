@@ -13,7 +13,7 @@ seo:
 
 "People with a chronic illness spend 99.99% of their lives outside the medical system," says Marshall Gould, Juno's CEO, who studied genetics at UCL and genomic medicine at Oxford University. "I've experienced that personally as someone who has myalgic encephalomyelitis/chronic fatigue syndrome and I know that not everyone can afford a personal care assistant. So much attention goes into doctor's appointments, but people still have to manage their health between visits, often with little day-to-day support. We built Juno to help fill that gap."
 
-Marshall built the app himself, but a side-effect of the rapid success and growing user base was that he found he couldn't keep up with bug reports and feature requests. Rather than balloon the size of the team, he created a system of agents to fix simple issues for him by pulling data from [Mixpanel](/blog/posthog-vs-mixpanel).
+Marshall built the app himself, but a side-effect of the rapid success and growing user base was that he found he couldn't keep up with bug reports and feature requests. Rather than balloon the size of the team, he created a system of agents to fix simple issues for him by pulling data from [Mixpanel](/compare/posthog-vs-mixpanel).
 
 "Someone would report a bug, we'd pull the context from Mixpanel if we could and the AI would test whether it could replicate the bug, fix it, and push a PR with a simulator recording I could watch," he says. "Then I'd review the code and press merge. It worked, but was cumbersome and Mixpanel didn't reliably have all of the data the agents needed."
 

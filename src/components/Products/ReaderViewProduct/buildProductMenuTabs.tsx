@@ -10,7 +10,14 @@ import {
     IconVideoCamera,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
+import {
+    learnChapterPath,
+    learnChapterSlug,
+    normalizeUrl,
+    sectionPages,
+    useBookPages,
+} from 'components/Learn/PocketGuides/bookModel'
+import { useMarkChapterReadOnMove } from 'components/Learn/PocketGuides/chapterProgress'
 import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -109,6 +116,7 @@ const LearnNav = ({
 }) => {
     const pages = sectionPages(useBookPages(volumeId), section)
     const posthog = usePostHog()
+    const markChapterReadOnMove = useMarkChapterReadOnMove()
     const volume = volumeById(volumeId)
     const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
@@ -159,7 +167,11 @@ const LearnNav = ({
             page.isFrontMatter ? 'introduction' : learnChapterSlug(page),
         ])
     )
+    const currentSlug = currentPath ? chapterByUrl.get(normalizeUrl(currentPath)) : undefined
     const trackClick = ({ url }: { url?: string }) => {
+        if (url && currentSlug) {
+            markChapterReadOnMove({ volumeId, pages, basePath: guideBasePath, currentSlug, targetHref: url })
+        }
         const chapter = url && chapterByUrl.get(url)
         if (chapter) {
             posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })

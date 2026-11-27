@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The BoldDesk connector syncs your help desk data – tickets, ticket updates, ticket worklogs, contacts, contact groups, agents, satisfaction ratings, groups, and brands – into PostHog, so you can analyze support activity alongside your product data.
+The BoldDesk connector syncs your help desk data – tickets, ticket updates, ticket worklogs, ticket metrics, contacts, contact groups, agents, satisfaction ratings, SLAs, groups, brands, and knowledge base content – into PostHog, so you can analyze support activity alongside your product data.
 
 ## Prerequisites
 
@@ -53,6 +53,14 @@ When linking BoldDesk, you'll need:
 | `satisfaction_ratings` | Customer satisfaction (CSAT) ratings        | Incremental  |
 | `groups`               | Agent groups                                | Full refresh |
 | `brands`               | Help desk portals                           | Full refresh |
+| `ticket_statuses`      | Ticket statuses like Open or Closed         | Full refresh |
+| `ticket_priorities`    | Ticket priorities like High or Low          | Full refresh |
+| `ticket_sources`       | Ticket sources like Email or Agent portal   | Full refresh |
+| `ticket_metrics`       | Response, resolution, and SLA metrics       | Incremental  |
+| `slas`                 | SLA policies with targets                   | Full refresh |
+| `kb_articles`          | Knowledge base articles                     | Incremental  |
+| `kb_categories`        | Knowledge base categories                   | Full refresh |
+| `kb_sections`          | Knowledge base sections                     | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

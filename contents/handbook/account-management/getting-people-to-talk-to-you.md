@@ -74,7 +74,7 @@ _Note:_ ask MCP to ignore weekend events — weekend dips create false positives
 
 ## Pick your reason
 
-Apply the [rules of thumb](#rules-of-thumb) to whichever you pick. If you have other examples, add them here!
+Apply the [rules of thumb](#outreach-rules-of-thumb) to whichever you pick. If you have other examples, add them here!
 
 ### SDK health — flag outdated SDKs
 
@@ -202,7 +202,7 @@ Getting the reason right is only half of it — most failed outreach dies becaus
 - **Their language.** If the customer's main language isn't English, that alone can make them hesitant to engage over Slack or email. Try writing your message in their language – but AI translation can read as unnatural depending on the language, so use it with discretion, ideally where you can spot-check the result. Better still, pull in a teammate who speaks the language (credit to Steven) – they don't need to own the account, just to remove the friction. (<PrivateLink url="https://posthog.slack.com/archives/C08M011SBCM/p1781285664051099?thread_ts=1781285664.051099&amp;cid=C08M011SBCM">Slack discussion</PrivateLink>)
 - **Ask the wider team for help** - we have to get creative here! You'd be surprised how often somebody knows someone...
 
-Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission.
+Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#5-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission.
 
 ## Crafting the message
 

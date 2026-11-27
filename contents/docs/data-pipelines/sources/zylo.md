@@ -35,19 +35,21 @@ You need:
 
 Different tables require different API key scopes. If your token doesn't have a particular scope, those tables show a permission error but other tables still sync successfully.
 
-| Tables                                                               | Required scope                                         |
-| -------------------------------------------------------------------- | ------------------------------------------------------ |
-| Applications, ApplicationLicenses, SavingsEvents, ApplicationBudgets | `applications:read`                                    |
-| Contracts, ContractLineItems, Suppliers                              | `contracts:read`                                       |
-| Payments                                                             | `spend:read`                                           |
-| ApplicationUsers, ActivityHistory                                    | `team:read`                                            |
-| PurchaseOrders, POLineItems                                          | `applications:read` and `spend:read` (premium feature) |
+| Tables                                                                                           | Required scope                                          |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| Applications, ApplicationLicenses, SavingsEvents, ApplicationBudgets, ApplicationFunctionalities | `applications:read`                                     |
+| Contracts, ContractLineItems, Suppliers, PendingContracts, PendingContractLineItems              | `contracts:read`                                        |
+| Payments                                                                                         | `spend:read`                                            |
+| ApplicationUsers, ActivityHistory, Users                                                         | `team:read`                                             |
+| PurchaseOrders, POLineItems                                                                      | `applications:read` and `spend:read` (premium feature)  |
+| ApplicationStats                                                                                 | `applications:read`, `spend:read`, and `contracts:read` |
+| Views, CustomFields                                                                              | `admin`                                                 |
 
 ## Sync modes
 
 <SyncModes />
 
-All Zylo tables support incremental sync using either `zylo_created_at` or `zylo_modified_at` timestamps. Full refresh is also available for all tables.
+All Zylo tables except `application_stats` (ApplicationStats) support incremental sync using either `zylo_created_at` or `zylo_modified_at` timestamps. The `application_stats` table uses full refresh because its spend and usage aggregates change independently of the application's timestamps. Full refresh is available for all tables.
 
 ## Configuration
 
@@ -69,6 +71,13 @@ All Zylo tables support incremental sync using either `zylo_created_at` or `zylo
 - **savings_events** - Cost-savings events like license reductions
 - **application_budgets** - Yearly budget allocations per application
 - **activity_history** - Audit log of changes to Zylo records
+- **pending_contracts**: A contract document uploaded to Zylo whose extracted data is not yet a committed contract
+- **application_stats**: Aggregated spend, license utilization, user, contract, and renewal stats, one row per application
+- **users**: A person in the company's Zylo team directory, from direct, HR, or SSO integrations
+- **views**: A named grouping of applications in Zylo, such as a cost center or business unit
+- **pending_contract_line_items**: A line item on a pending contract, one row per product or license on the contract
+- **application_functionalities**: A functionality tagged on an application, used to find applications that do the same job
+- **custom_fields**: A custom field definition that a company added to applications, payments, contracts, or users
 
 ## Troubleshooting
 

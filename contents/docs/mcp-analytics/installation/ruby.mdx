@@ -56,7 +56,7 @@ If your app uses [`posthog-rails`](/docs/libraries/ruby) and calls `PostHog.init
 PostHog::MCP.instrument(server)
 ```
 
-`instrument` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). On Ruby 3.2+, `analytics.capture` also works from a thread or fiber that the tool starts. On Ruby 3.0 and 3.1, such an event gets its own `$session_id` on HTTP servers.
+`instrument` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). On Ruby 3.2+, `analytics.capture` also works from a thread or fiber that the tool starts.
 
 </Step>
 
@@ -80,7 +80,7 @@ Connect an agent to your server and call a tool. Then open the [activity feed](h
 
 ## Log to stderr on stdio servers
 
-A stdio MCP server uses `$stdout` for the protocol. The SDK's own messages go only to the `logger:` you pass. The experimental notice and configuration warnings go to stderr. Point the core SDK's logger away from stdout too:
+A stdio MCP server uses `$stdout` for the protocol. The SDK's own messages go only to the `logger:` you pass. Point the core SDK's logger away from stdout too:
 
 ```ruby
 PostHog::Logging.logger = Logger.new($stderr)
@@ -90,7 +90,7 @@ PostHog::Logging.logger = Logger.new($stderr)
 
 A stateless server creates a new instance for each request, often on a different pod. Without correlation, each request gets its own `$session_id`, and events after `initialize` lose the client name and version.
 
-When `MCP::Server::Transports::StreamableHTTPTransport` runs with `stateless: true`, the SDK puts a token in the `Mcp-Session-Id` response header at `initialize`. The token carries the session ID and client metadata. Clients send it back, so any pod reads the same values. There's nothing to configure.
+When `MCP::Server::Transports::StreamableHTTPTransport` runs with `stateless: true`, the SDK carries the session and client name in a token on the `Mcp-Session-Id` header on `2025-11-25`, so any pod reads the same values. There's nothing to configure. On `2026-07-28`, use [conversation IDs](/docs/mcp-analytics/conversation-id) or [`identify`](/docs/mcp-analytics/identifying-users).
 
 When you build the Rack app yourself, add the middleware once:
 
@@ -98,9 +98,7 @@ When you build the Rack app yourself, add the middleware once:
 use PostHog::MCP::RackMiddleware
 ```
 
-The middleware reads no request or response body. The decoded token is available to your app as `env["posthog_mcp.session"]`.
-
-Stateful HTTP servers need nothing. The SDK hashes the transport's session ID, so a session survives restarts. On `2026-07-28` requests, the SDK never sends `Mcp-Session-Id`, so use [conversation IDs](/docs/mcp-analytics/conversation-id) or [`identify`](/docs/mcp-analytics/identifying-users) to group calls there.
+The middleware reads no request or response body. The decoded token is available to your app as `env["posthog_mcp.session"]`. Stateful HTTP servers need nothing.
 
 ## Configuration
 
@@ -138,11 +136,9 @@ identify = lambda do |_request, extra|
 end
 ```
 
-The SDK doesn't capture `extra["headers"]`. It only records `User-Agent` and `X-Anthropic-Client`, as `$mcp_client_user_agent` and `$mcp_vendor_client`. Don't return a raw token, cookie, or API key in `properties:` or from `event_properties`, because the SDK doesn't redact those, and person properties persist on the person profile. Resolve the header to an ID first.
+Don't return a raw token, cookie, or API key in `properties:` or from `event_properties`, because the SDK doesn't redact those, and person properties persist on the person profile. Resolve the header to an ID first.
 
-The SDK removes the arguments it adds before your tool's `call` runs, so `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` uses `oneOf`, `allOf`, `anyOf`, or `$ref` gets no added arguments.
-
-Events are truncated to the 32 KB message limit of `posthog-ruby`, because the client drops larger messages. MCP events report `$lib: "posthog-ruby-mcp"`. The client you pass in keeps its own `$lib` for everything else it sends.
+A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` uses `oneOf`, `allOf`, `anyOf`, or `$ref` gets no added arguments.
 
 ## Custom dispatchers
 
@@ -251,7 +247,7 @@ session = env["posthog_mcp.mint"]&.call(
 )
 ```
 
-The middleware sends the token in the `Mcp-Session-Id` header. On later requests, pass `session_id: env["posthog_mcp.session"]&.session_id`. The hook is `nil` when the client already sent a token back, and returns `nil` for a `2026-07-28` client. If you issue your own session header instead, pass `PostHog::MCP.derive_session_id_from_mcp_session(your_id)`, so one connection always maps to one `$session_id`.
+The middleware sends the token in the `Mcp-Session-Id` header. On later requests, pass `session_id: env["posthog_mcp.session"]&.session_id`. If you issue your own session header instead, pass `PostHog::MCP.derive_session_id_from_mcp_session(your_id)`, so one connection always maps to one `$session_id`.
 
 ### 5. Flush
 

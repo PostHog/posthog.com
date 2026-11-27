@@ -64,7 +64,6 @@ import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
 import { RainbowText } from './components/RainbowText'
 import { Signatures } from './components/Signatures'
-import { SlackPage } from './components/SlackPage'
 import SmallTeam from './components/SmallTeam'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
@@ -73,6 +72,7 @@ import TeamMember from './components/TeamMember'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { CalloutBox } from './components/Docs/CalloutBox'
+import HoggieCallout from './components/HoggieCallout'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
 import WizardCommand from './components/WizardCommand'
@@ -86,6 +86,7 @@ export const shortcodes = {
     BrandLogos,
     CallToAction,
     CalloutBox,
+    HoggieCallout,
     Caption,
     HearAboutUsCarousel,
     CloudinaryImage,
@@ -136,7 +137,6 @@ export const shortcodes = {
     QuickLinks,
     Quote2,
     Signatures,
-    SlackPage,
     Squeak,
     StarRepoButton,
     TracksCTA,

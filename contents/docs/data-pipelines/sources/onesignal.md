@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The OneSignal connector pulls your push notification, email, and SMS message data along with audience segments into the PostHog data warehouse.
+The OneSignal connector pulls your push notification, email, and SMS message data along with audience segments, message templates, and journey automation data into the PostHog data warehouse.
 
 > **Note:** OneSignal retains API messages for 30 days, so the first sync backfills at most the last 30 days of message history.
 
@@ -36,10 +36,13 @@ Paste both values into the corresponding fields in PostHog and click **Next**. S
 
 <SyncModes />
 
-Both tables use **full refresh** on every sync:
+All tables use **full refresh** on every sync:
 
 - **notifications** – Delivery and engagement totals change over time, so a full refresh captures the latest counts.
 - **segments** – The OneSignal segments API has no timestamp filter, so a full refresh is the only option.
+- **templates** – The templates API has no timestamp filter, so a full refresh is the only option.
+- **journeys** – The journeys API has no timestamp filter, so a full refresh is the only option.
+- **journey_stats** – Stats are point-in-time totals, so a full refresh captures the latest counts.
 
 ## Configuration
 
@@ -49,10 +52,13 @@ Both tables use **full refresh** on every sync:
 
 <SourceTables />
 
-| Table           | Description                                                                                                    | Sync method  |
-| --------------- | -------------------------------------------------------------------------------------------------------------- | ------------ |
-| `notifications` | Push, email, and SMS messages with delivery and engagement totals. Journey messages are excluded.              | Full refresh |
-| `segments`      | Audience segment metadata, including names, creation times, and status. Excludes filters and audience members. | Full refresh |
+| Table           | Description                                                                                                                          | Sync method  |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `notifications` | Push, email, and SMS messages with delivery and engagement totals. Journey messages are excluded.                                    | Full refresh |
+| `segments`      | Audience segment metadata, including names, creation times, and status. Excludes filters and audience members.                       | Full refresh |
+| `templates`     | Push, email, and SMS message templates with names and timestamps. Excludes template content.                                         | Full refresh |
+| `journeys`      | Journeys (automated messaging flows) with their state, schedule, and audience kind. Excludes nodes and the full audience definition. | Full refresh |
+| `journey_stats` | All-time counts for each journey, with counts per node and per branch and delivery totals for message nodes. One row per journey.    | Full refresh |
 
 ## Troubleshooting
 

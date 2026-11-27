@@ -10,7 +10,8 @@ import { SEO } from 'components/seo'
 import { useApp } from '../context/App'
 import type { SiteSettings } from '../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import Tooltip from 'components/RadixUI/Tooltip'
+import { Popover as InfoPopover } from 'components/UI/Popover'
+import { focusRing } from 'components/UI/styles'
 import { Screensaver } from '../components/Screensaver'
 import useTheme, { type ThemeOption } from '../hooks/useTheme'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -295,11 +296,25 @@ export default function DisplayOptions() {
                 <div className="bg-primary grid grid-cols-2 gap-2">
                     <div className="flex items-center gap-1 mb-1">
                         <span className="text-sm">Hedgehog mode</span>
-                        <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                            <p className="max-w-sm my-0 leading-snug">
-                                Hedgehogs walk around the screen, sit on windows, and follow your cursor.
-                            </p>
-                        </Tooltip>
+                        <InfoPopover.Root>
+                            <InfoPopover.Trigger
+                                openOnHover
+                                delay={0}
+                                aria-label="About hedgehog mode"
+                                className={`${focusRing} inline-flex rounded-sm`}
+                            >
+                                <IconInfo className="size-4" />
+                            </InfoPopover.Trigger>
+                            <InfoPopover.Popup
+                                aria-label="About hedgehog mode"
+                                className="max-w-sm text-sm leading-snug"
+                            >
+                                <InfoPopover.Arrow />
+                                <InfoPopover.Description className="text-primary">
+                                    Hedgehogs walk around the screen, sit on windows, and follow your cursor.
+                                </InfoPopover.Description>
+                            </InfoPopover.Popup>
+                        </InfoPopover.Root>
                     </div>
                     <div>
                         <ToggleGroup

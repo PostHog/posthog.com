@@ -1,5 +1,6 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { OverviewSlideProps } from './types'
 
 export default function OverviewSlideOverlay({
@@ -48,11 +49,20 @@ export default function OverviewSlideOverlay({
             {/* Hog decoration */}
             {hog?.src && (
                 <div className="absolute bottom-8 right-8">
-                    <CloudinaryImage
-                        src={hog.src as `https://res.cloudinary.com/${string}`}
-                        alt={hog.alt}
-                        imgClassName={hog.classes || 'w-32 h-32 opacity-80'}
-                    />
+                    {isCloudinaryImage(hog.src) ? (
+                        <CloudinaryImage
+                            src={hog.src as `https://res.cloudinary.com/${string}`}
+                            alt={hog.alt}
+                            imgClassName={hog.classes || 'w-32 h-32 opacity-80'}
+                        />
+                    ) : (
+                        <HoggieImage
+                            src={hog.src}
+                            mirror={hog.mirror}
+                            alt={hog.alt}
+                            imgClassName={hog.classes || 'w-32 h-32 opacity-80'}
+                        />
+                    )}
                 </div>
             )}
         </div>

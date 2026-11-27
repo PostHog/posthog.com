@@ -5,6 +5,7 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
 If you're already using Datadog to collect logs, you can forward them to PostHog by configuring your existing Datadog log exporters (like the Datadog Agent) to send logs to PostHog's Datadog-compatible endpoint.
@@ -41,6 +42,31 @@ Alternatively, you can set this in your `datadog.yaml` configuration file:
 logs_config:
   logs_dd_url: "<ph_client_api_host>/i/v1/logs/datadog/<ph_project_token>"
 ```
+
+</Step>
+
+<Step title="Dual-ship to Datadog and PostHog" badge="optional">
+
+To compare PostHog and Datadog side by side, send the same logs to both at the same time. Keep `logs_dd_url` set to PostHog as shown in the previous step, then add Datadog as an additional endpoint, as described in Datadog's [dual shipping docs](https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm#logs):
+
+```yaml file=datadog.yaml
+logs_config:
+  logs_dd_url: "<ph_client_api_host>/i/v1/logs/datadog/<ph_project_token>"
+  force_use_http: true
+  additional_endpoints:
+    - api_key: "<YOUR_DATADOG_API_KEY>"
+      Host: "agent-http-intake.logs.<YOUR_DATADOG_SITE>" # For example, datadoghq.com
+      Port: 443
+      is_reliable: true
+```
+
+With `is_reliable: true`, the Agent treats both endpoints equally. If one is unavailable, logs keep flowing to the other.
+
+<CalloutBox icon="IconInfo" title="Get a discounted trial while you test" type="fyi">
+
+Dual-shipping means you pay for the same logs twice while you compare. [Contact sales](/talk-to-a-human) to get a discounted trial period for the time you're testing.
+
+</CalloutBox>
 
 </Step>
 

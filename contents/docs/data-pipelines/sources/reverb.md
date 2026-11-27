@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Reverb connector syncs orders, listings, payouts, payments, refund requests, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Reverb connector syncs orders, listings, payouts, payments, refund requests, offers, conversations, and received feedback into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,9 +23,9 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Reverb personal access token to pull your shop's orders, listings, payouts, payments, and refund requests.
+Enter your Reverb personal access token to pull your shop's orders, listings, payouts, payments, refund requests, offers, conversations, and feedback.
 
-Create a token from **My Profile → API & Integrations** in your Reverb account, with the `read_listings`, `read_orders`, and `read_payouts` scopes. The token doesn't expire.
+Create a token from **My Profile → API & Integrations** in your Reverb account, with the `read_listings`, `read_orders`, and `read_payouts` scopes. To sync offers, conversations, or received feedback, also add the `read_offers`, `read_messages`, or `read_feedback` scope. The token doesn't expire.
 
 You'll be asked for:
 

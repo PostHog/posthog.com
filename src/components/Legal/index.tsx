@@ -1,9 +1,15 @@
+import Layout from 'components/Layout'
 import OSTabs from 'components/OSTabs'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import { navigate } from 'gatsby'
 import React from 'react'
 
-export default function Legal({ children, defaultTab }: { children: React.ReactNode; defaultTab: string }) {
+export default function Legal({ children, currentTab }: { children: React.ReactNode; currentTab: string }) {
+    const content = (
+        <Layout scrollAreaDataScheme="secondary" scrollAreaClassName="bg-primary rounded">
+            {children}
+        </Layout>
+    )
+
     return (
         <OSTabs
             padding
@@ -12,35 +18,38 @@ export default function Legal({ children, defaultTab }: { children: React.ReactN
                 {
                     label: 'Terms',
                     value: '/terms',
-                    content: children,
+                    content: content,
                 },
                 {
                     label: 'Privacy',
                     value: '/privacy',
-                    content: children,
+                    content: content,
                 },
                 {
                     label: 'DPA generator',
                     value: '/dpa',
-                    content: children,
+                    content: content,
                 },
                 {
                     label: 'BAA generator',
                     value: '/baa',
-                    content: children,
+                    content: content,
                 },
                 {
                     label: 'Subprocessors',
                     value: '/subprocessors',
-                    content: children,
+                    content: content,
                 },
             ]}
-            defaultValue={defaultTab}
+            value={currentTab}
+            defaultValue={currentTab}
             onValueChange={(value) => {
                 navigate(value)
             }}
             centerTabs
             className="h-full"
+            scrollable={false}
+            tabContentClassName="h-full"
         />
     )
 }

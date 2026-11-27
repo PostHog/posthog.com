@@ -28,6 +28,7 @@ export const isMarkdownContentPath = (path: string): boolean => {
 }
 
 // Hosted PostHog MCP server (streamable HTTP). Shared by the install UI and the WebMCP tools.
+// middleware.ts keeps its own copy, and its test checks that the two match.
 export const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
 
 // Twig is PostHog's interactive learning environment. Keep every website touchpoint on this

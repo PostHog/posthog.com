@@ -22,8 +22,11 @@ type ProductConfig = {
 // team in Strapi means updating them here too — otherwise the page renders empty.
 // `scripts/check-product-changelogs.js` fails CI when a page has no entry.
 const productConfigMap: Record<string, ProductConfig> = {
-    'product analytics': { topic: 'Product analytics', teams: ['product analytics', 'analytics platform'] },
-    'web analytics': { topic: 'Web analytics', teams: ['web analytics'] },
+    'product analytics': {
+        topic: 'Product analytics',
+        teams: ['product analytics', 'analytics platform', 'dashboards and charts'],
+    },
+    'web analytics': { topic: 'Web analytics', teams: ['web analytics', 'analytics'] },
     'session replay': { topic: 'Session replay', teams: ['replay'] },
     'feature flags': { topic: 'Feature flags', teams: ['feature flags'] },
     experiments: { topic: 'Experiments', teams: ['experiments'] },

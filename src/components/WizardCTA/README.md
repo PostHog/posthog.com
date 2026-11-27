@@ -67,7 +67,7 @@ Set `imageAlt` whenever the image conveys meaning. It defaults to the hedgehog's
 | `copyCommand` | `string?` | – | Clipboard override, if it should differ from what's displayed |
 | `title` | `string?` | "Install PostHog with one command" | Bold headline |
 | `subtitle` | `string?` | "Paste this into your terminal and make AI do all the work." | Supporting line |
-| `image` | `string?` | wizard hedgehog | Image URL; prefer a transparent PNG on Cloudinary |
+| `image` | `string?` | wizard hedgehog | Image URL; prefer a transparent PNG. By default the banner shows one of four brand wizards (`wizard-1` to `wizard-4` from `@posthog/brand`), picked from the page path, so a page always shows the same one |
 | `imageAlt` | `string?` | hedgehog alt, or `''` for a replacement | Alt text; set it if the image carries meaning |
 | `imageClassName` | `string?` | `w-36 @lg:w-32 @xl:w-40 @2xl:w-48` | Sizing classes, replacing the responsive width defaults |
 | `learnMoreTo` | `string?` | `/wizard` | "Learn more" link target under the command |

@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Kestra connector syncs workflow executions, task runs, metrics, flow definitions, flow revisions, trigger state, and logs from your [Kestra](https://kestra.io/) instance into the PostHog data warehouse, so you can analyze orchestration data alongside your product data.
+The Kestra connector syncs workflow executions, task runs, task outputs, metrics, flow definitions, flow revisions, trigger state, logs, and daily execution statistics from your [Kestra](https://kestra.io/) instance into the PostHog data warehouse, so you can analyze orchestration data alongside your product data.
 
 ## Prerequisites
 
@@ -49,21 +49,27 @@ You'll be asked for:
 
 <SyncModes />
 
-| Table               | Supported modes             |
-| ------------------- | --------------------------- |
-| `executions`        | Incremental or full refresh |
-| `task_runs`         | Incremental or full refresh |
-| `execution_metrics` | Incremental or full refresh |
-| `flows`             | Full refresh                |
-| `flow_revisions`    | Full refresh                |
-| `triggers`          | Full refresh                |
-| `logs`              | Incremental or full refresh |
+| Table                        | Supported modes                     |
+| ---------------------------- | ----------------------------------- |
+| `executions`                 | Incremental or full refresh         |
+| `task_runs`                  | Incremental or full refresh         |
+| `execution_metrics`          | Incremental or full refresh         |
+| `flows`                      | Full refresh                        |
+| `flow_revisions`             | Full refresh                        |
+| `triggers`                   | Full refresh                        |
+| `logs`                       | Incremental or full refresh         |
+| `task_outputs`               | Incremental or full refresh         |
+| `daily_execution_statistics` | Incremental (merge on `start_date`) |
 
 The `executions` table uses `start_date` as its incremental cursor. By default, each incremental sync re-reads the previous seven days so that recently updated executions are captured. To pick up changes older than seven days, run a full refresh.
 
 The `task_runs` and `execution_metrics` tables fan out over executions, fetching detailed data for each execution in the sync window. They use `execution_start_date` as their incremental cursor and share the same seven-day lookback as `executions`.
 
 The `logs` table uses `timestamp` as its incremental cursor. Because workers write logs asynchronously, each incremental sync re-reads the last hour to capture late-arriving entries. The `logs` table is disabled by default in the schema picker since it can contain a large volume of data.
+
+The `task_outputs` table fetches the outputs that each task run stored. It fans out over executions in the sync window, then over each task run with outputs. It uses `execution_start_date` as its incremental cursor and shares the same seven-day lookback as `executions`. Because it sends one request per task run, `task_outputs` is disabled by default in the schema picker.
+
+The `daily_execution_statistics` table holds one row per day for the whole Kestra instance. Each sync reads the last 30 days from the usage endpoint and merges on `start_date`, so older days are preserved. The first (oldest) day returned is always a partial count, so the sync drops it to avoid overwriting a full count from an earlier sync.
 
 ## Configuration
 
@@ -81,6 +87,8 @@ The `logs` table uses `timestamp` as its incremental cursor. Because workers wri
 - Deleted or purged executions can't be recovered from the API. If executions are removed from Kestra, those rows won't reappear in PostHog.
 - Log and metric entries don't have native identifiers in Kestra. PostHog generates an `entry_id` column using a hash of the entry content, which serves as the primary key for merges.
 - Offset pagination can shift if records are deleted during a sync, which may cause rows to be skipped or duplicated in that run.
+- The `task_outputs` table sends one request per task run that stored outputs. For executions with many task runs, syncs can be slow. Leave the table disabled unless you need output data.
+- The `daily_execution_statistics` table fetches only the last 30 days. Switching to full refresh does not recover data older than that window.
 
 ## Troubleshooting
 
@@ -89,5 +97,7 @@ The `logs` table uses `timestamp` as its incremental cursor. Because workers wri
 - **Older executions aren't updating** – incremental syncs only re-read the last seven days. Run a full refresh to update older execution rows.
 - **Task runs or metrics missing for long-running executions** – `task_runs` and `execution_metrics` share the same seven-day lookback as `executions`. If an execution runs for more than seven days, its task run data won't be refreshed after the watermark passes. Run a full refresh to update these rows.
 - **Logs table has high data volume** – the `logs` table captures every log line from every task, which can be substantial. If you don't need log data, leave the table disabled in the schema picker.
+- **Task outputs table is slow** – `task_outputs` sends one request per task run with outputs. If you don't need output data, leave the table disabled in the schema picker.
+- **Daily statistics older than 30 days aren't present** – the Kestra usage endpoint returns only the last 30 days. Older statistics can't be recovered via the API.
 
 <TroubleshootingLink />

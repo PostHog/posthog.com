@@ -9,7 +9,7 @@ availability:
 sourceId: Aiven
 ---
 
-The Aiven connector syncs your projects, services, and billing data from [Aiven](https://aiven.io) into the PostHog data warehouse.
+The Aiven connector syncs your projects, services, billing data, service integrations, and plan details from [Aiven](https://aiven.io) into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -23,17 +23,20 @@ Once the syncs are complete, you can start using Aiven data in PostHog.
 
 ## Available tables
 
-| Table                | Description                                                                         | Sync method  |
-| -------------------- | ----------------------------------------------------------------------------------- | ------------ |
-| `projects`           | Aiven projects — the container that groups services and their billing               | Full refresh |
-| `organizations`      | Aiven organizations — the top-level tenant that owns projects and billing           | Full refresh |
-| `services`           | Running Aiven managed services (Kafka, PostgreSQL, ClickHouse, OpenSearch, etc.)    | Full refresh |
-| `billing_groups`     | Billing groups that aggregate charges for one or more projects                      | Full refresh |
-| `invoices`           | Issued invoices for a billing group                                                 | Full refresh |
-| `invoice_lines`      | Per-service cost breakdown on invoices, used for BI cost export                     | Full refresh |
-| `organization_users` | Members of an Aiven organization                                                    | Full refresh |
-| `user_groups`        | User groups within an organization for grouping members and permissions             | Full refresh |
-| `clouds`             | Global catalogue of Aiven cloud regions across AWS, GCP, and Azure (off by default) | Full refresh |
+| Table                   | Description                                                                                                          | Sync method  |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `projects`              | Aiven projects — the container that groups services and their billing                                                | Full refresh |
+| `organizations`         | Aiven organizations — the top-level tenant that owns projects and billing                                            | Full refresh |
+| `services`              | Running Aiven managed services (Kafka, PostgreSQL, ClickHouse, OpenSearch, etc.)                                     | Full refresh |
+| `service_integrations`  | Integrations between Aiven services and endpoints, such as metrics or log shipping                                   | Full refresh |
+| `service_plans`         | Service plans available to an Aiven project, with size, backup configuration, and per-region prices (off by default) | Full refresh |
+| `billing_groups`        | Billing groups that aggregate charges for one or more projects                                                       | Full refresh |
+| `billing_group_credits` | Credits applied to a billing group that offset the group's invoices                                                  | Full refresh |
+| `invoices`              | Issued invoices for a billing group                                                                                  | Full refresh |
+| `invoice_lines`         | Per-service cost breakdown on invoices, used for BI cost export                                                      | Full refresh |
+| `organization_users`    | Members of an Aiven organization                                                                                     | Full refresh |
+| `user_groups`           | User groups within an organization for grouping members and permissions                                              | Full refresh |
+| `clouds`                | Global catalogue of Aiven cloud regions across AWS, GCP, and Azure (off by default)                                  | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 

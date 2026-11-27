@@ -9,7 +9,7 @@ showTitle: true
 ## Roles
 
 We have three types of roles:
-- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
+- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/new-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
 - Business Development Reps, aka BDRs - generating leads for new business, including via [cold outbound](/handbook/growth/sales/outbound-sales)
 

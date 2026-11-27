@@ -147,6 +147,8 @@ These signals require an enabled Endpoints source configuration.
 
 External sources pull issue context into the same inbox queue as your product signals. Connect any of these via the [data warehouse](/docs/data-warehouse) and the inbox surfaces actionable items for research.
 
+Sync the corresponding warehouse tables, then enable the source in the inbox **settings**. Sources for different tables from the same service can have separate toggles.
+
 ### Search analytics
 
 Search-performance opportunities from connected analytics sources. The inbox identifies pages that rank and receive meaningful impressions but have unusually low click-through rates, then surfaces the query, landing page, impressions, clicks, CTR, and average position for investigation.
@@ -195,20 +197,27 @@ Customer support tickets and conversations. The inbox turns actionable bug repor
 - Gorgias
 - HubSpot
 - Intercom
+- Intercom tickets: open support tickets from `tickets`
+- Pylon: open support issues from `issues`
 - Kustomer
 - Dixa
 - Plain
+
+**Intercom tickets** is separate from the existing **Intercom** conversations source, which uses `conversations`. Enable each source you want to use.
 
 ### Error tracking
 
 Errors and exceptions from external error monitoring services. The inbox surfaces new errors and error patterns for investigation.
 
-- AppSignal
+- AppSignal: unresolved errors, slow actions, and anomaly alerts from `exception_incidents`, `performance_incidents`, and `anomaly_incidents`
+- Airbrake: unresolved error groups from `groups`
 - Azure Application Insights
 - Bugsnag
 - Checkly
 - Google Play Console
 - Honeybadger
+- Mux: recurring video playback errors from `errors`
+- New Relic: activated alert issues from `alert_issues`, plus recurring errors from `javascript_errors` and `transaction_errors`
 - Raygun
 - Roark
 - Rollbar
@@ -258,16 +267,34 @@ Feature requests, ideas, and product feedback from feedback management platforms
 - LangSmith
 - Sprig
 - Gainsight PX
+- Sentry user feedback
+- Beamer: feature requests from `feature_requests`
+- Beamer NPS: Net Promoter Score (NPS) comments from `nps`
+- Chameleon: open-ended survey answers from `responses`
+- Featurebase surveys: open-ended survey answers from `survey_responses`
+- UserVoice NPS: NPS comments from `nps_ratings`
+- Vitally NPS: NPS comments from `NPS_Responses`
+
+The NPS and survey sources listed above require a text comment. **Featurebase surveys** and **UserVoice NPS** have separate toggles from **Featurebase** and **UserVoice**.
 
 ### Reviews
 
 App store and product reviews. The inbox identifies actionable feedback from user reviews.
 
+- App Store Connect
 - Appfigures
 - AppFollow
 - Judge.me
 - Trustpilot
 - Okendo
+- Etsy: reviews from `reviews`
+- G2: written review answers from `reviews`
+- Gumroad: product reviews from `product_reviews`
+- Trustpilot product reviews: product reviews from `product_reviews`
+- WooCommerce: product reviews from `product_reviews`
+- Yotpo: reviews from `reviews`
+
+Reviews without text are skipped. **Trustpilot product reviews** is separate from **Trustpilot**, which uses `service_reviews`.
 
 ### Incident management
 
@@ -277,6 +304,8 @@ Open incidents and problems from status monitoring and incident tracking tools. 
 - Statuspage
 - Cronitor
 - Instatus
+- Amazon CloudWatch: alarm history entries that change to `ALARM` from `alarm_history`
+- LogicMonitor: alerts that have not cleared from `alerts`
 
 ## Steer a source with guidance
 

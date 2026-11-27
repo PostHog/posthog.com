@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Vultr connector syncs your cloud infrastructure inventory and billing data into PostHog – instances, bare metal servers, Kubernetes clusters, block storage, snapshots, load balancers, managed databases, users, billing history, and invoices. Use it to join spend and resource usage with your product and revenue data, or to build cost dashboards across your compute, storage, and managed services.
+The Vultr connector syncs your cloud infrastructure inventory and billing data into PostHog – instances, bare metal servers, Kubernetes clusters, block storage, snapshots, load balancers, managed databases, users, billing history, invoices, invoice line items, instance bandwidth, regions, plans, and bare metal plans. Use it to join spend and resource usage with your product and revenue data, or to build cost dashboards across your compute, storage, and managed services.
 
 ## Prerequisites
 
@@ -50,6 +50,11 @@ The Vultr API doesn't expose an updated-since filter or webhooks on any list end
 | `users`               | Full refresh |
 | `billing_history`     | Full refresh |
 | `invoices`            | Full refresh |
+| `invoice_items`       | Full refresh |
+| `instance_bandwidth`  | Full refresh |
+| `regions`             | Full refresh |
+| `plans`               | Full refresh |
+| `bare_metal_plans`    | Full refresh |
 
 ## Configuration
 

@@ -9,11 +9,11 @@ availability:
 sourceId: LlamaCloud
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The LlamaCloud connector syncs your document-processing data from [LlamaCloud](https://cloud.llamaindex.ai) (LlamaIndex's hosted platform) – parse, extract, classify, split, and spreadsheet jobs, batches, pipelines, projects, files, and usage metrics with credit consumption – into PostHog, so you can analyze your document pipelines and AI costs alongside your product data.
+The LlamaCloud connector syncs your document-processing data from [LlamaCloud](https://cloud.llamaindex.ai) (LlamaIndex's hosted platform) – parse, extract, classify, split, and spreadsheet jobs, batches, pipelines and their files, data sources, retrievers, projects, files, indexes, and usage metrics with credit consumption – into PostHog, so you can analyze your document pipelines and AI costs alongside your product data.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ The job tables (`parse_jobs`, `extract_jobs`, `classify_jobs`, `batches`, `split
 
 The `usage_metrics` table supports incremental sync on `day`, and re-reads the boundary day each sync so its still-accumulating totals stay up to date.
 
-The `projects`, `pipelines`, and `files` tables don't expose a timestamp filter in the LlamaCloud API, so they sync with a full refresh.
+The `projects`, `pipelines`, `files`, `pipeline_files`, `data_sources`, and `retrievers` tables don't expose a timestamp filter in the LlamaCloud API, so they sync with a full refresh.
 
 ## Configuration
 

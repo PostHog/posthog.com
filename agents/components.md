@@ -39,6 +39,13 @@ Custom components (outside Radix scope) use the `OS` prefix:
 | `<OSTable />` | `/src/components/OSTable` |
 | `<OSTabs />` | `/src/components/OSTabs` |
 
+## Callouts
+
+- Use `CalloutBox` for admonitions: `fyi`, `action`, and `caution`.
+- Use `HoggieCallout` with `layout="featured"` to send readers to a marketing asset, tool, playground, leaderboard, or sparks-joy page. Suggest one when a page links to one of these. Use one per page at most, and never for warnings or required steps.
+
+When you insert a `HoggieCallout`, follow the steps in the [README](src/components/HoggieCallout/README.md#add-one-to-a-page): change the copy, pick a hog from [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies) (never draw or generate one), review the speech bubble lines, and use `interactive={false}` on sensitive pages. Keep the title to 45 characters, the description to 160, and the button label to 24. New `hoggieLines` are 24 characters or fewer, warm, and free of links, and they never tell the reader to stop or go away.
+
 ## When to create new components
 
 - Accessible primitive needed (menu, dialog, select, tooltip, and so on) → `/src/components/UI`

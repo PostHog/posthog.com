@@ -9,11 +9,11 @@ availability:
 sourceId: Jumpcloud
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-[JumpCloud](https://jumpcloud.com) is a cloud directory platform for identity, access, and device management. Linking it as a source syncs your users, devices, groups, SSO applications, device policies and their results, alerts, identity risk events, System Insights device data, and Directory Insights activity events into the PostHog data warehouse, so you can join identity and security data with your product data.
+[JumpCloud](https://jumpcloud.com) is a cloud directory platform for identity, access, and device management. Linking it as a source syncs your users, devices, groups, SSO applications, device policies and their results, alerts, identity risk events, commands and their results, managed software, connected directories, SaaS Management applications, System Insights device data, and Directory Insights activity events into the PostHog data warehouse, so you can join identity and security data with your product data.
 
 ## Prerequisites
 
@@ -23,6 +23,7 @@ To connect JumpCloud, you need:
 - Your admin API key, found in the JumpCloud Admin Portal under your account menu (click your initials in the top-right corner, then **My API Key**).
 - A Directory Insights subscription if you want to sync the `events` table. How far back events are available depends on your Directory Insights retention (up to 90 days).
 - System Insights enabled for your devices if you want to sync the `system_insights_*` tables.
+- JumpCloud SaaS Management if you want to sync the `saas_*` tables.
 
 ## Adding a data source
 
@@ -48,6 +49,8 @@ The `events` table (Directory Insights) supports **incremental** sync: each run 
 The association tables (`user_group_members`, `system_group_members`, `application_users`, `application_user_groups`, and `system_users`) request JumpCloud once per parent group, application, or system, so a large directory takes longer to sync.
 
 The `policies`, `policy_results`, `policy_statuses`, `alerts`, `alert_occurrences`, `identity_risk_events`, and `system_insights_*` tables also sync as a full refresh. `policy_statuses` holds the latest result of each policy on each device, and `alert_occurrences` holds each time an alert fired. Both request JumpCloud once per policy or alert. The `system_insights_*` tables hold device inventory and security posture (installed apps and programs, patches, disk encryption, browser extensions, OS versions, and more). Join them to `systems` on `system_id`.
+
+The `commands`, `command_results`, `software_apps`, `software_app_statuses`, `directories`, and `saas_*` tables also sync as a full refresh. The script text of commands and the output of command results are not synced, because they can hold credentials. `software_app_statuses`, `saas_application_accounts`, and `saas_application_usage` request JumpCloud once per software or SaaS application. `saas_application_usage` holds the latest use of each account in the last 90 days.
 
 ## Configuration
 

@@ -107,7 +107,7 @@ Each activity log entry contains the following information:
 
 | Field      | Description                                                                                                                                                                                                    |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Timestamp  | When the action occurred (UTC)                                                                                                                                                                                 |
+| Timestamp  | When the action occurred. Displayed in your project timezone in the UI; stored and returned as UTC in the API.                                                                                                 |
 | Actor      | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user.                                                          |
 | Action     | The type of action performed (created, updated, deleted, etc.)                                                                                                                                                 |
 | Scope      | The type of resource affected (feature flag, dashboard, etc.)                                                                                                                                                  |
@@ -288,7 +288,7 @@ Activity logs support a range of filters to help you find specific events.
 ### Available filters
 
 **Date range**
-Filter events to a specific time period. Use preset ranges like "Last 7 days" or select custom start and end dates.
+Filter events to a specific time period. Use preset ranges like "Last 7 days" or "Last 2 hours", select custom start and end dates with optional time of day, or use **Jump to timestamp** to center a window of up to 1 hour around a specific moment. The jump option is useful when you have a timestamp from an alert or incident and want to see activity in the minutes around it. All times display in your project timezone, matching the behavior of insights.
 
 **User**
 Filter by the team member who performed the action. Select one or multiple users to see only their changes.

@@ -1,17 +1,7 @@
 import { IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useRef, useState } from 'react'
 import { slideButtons } from './slideButtons'
-import {
-    Funnels,
-    Trends,
-    UserPaths,
-    CorrelationAnalysis,
-    Retention,
-    Stickiness,
-    Lifecycle,
-    Dashboards,
-    HogQL,
-} from './Slides'
+import { Funnels, Trends, UserPaths, Retention, Stickiness, Lifecycle, Dashboards, HogQL } from './Slides'
 
 const SlideButton = ({ title, Icon, color, activeSlide, setSlide, index }) => {
     const active = activeSlide === index
@@ -40,7 +30,7 @@ const SlideButton = ({ title, Icon, color, activeSlide, setSlide, index }) => {
         </li>
     )
 }
-const slides = [Funnels, Trends, UserPaths, CorrelationAnalysis, Retention, Stickiness, Lifecycle, Dashboards, HogQL]
+const slides = [Funnels, Trends, UserPaths, Retention, Stickiness, Lifecycle, Dashboards, HogQL]
 
 const SlideContainer = ({ children, index }) => {
     return (

@@ -268,7 +268,7 @@ posthog.project_api_key = '<ph_project_token>'
 posthog.host = '<ph_client_api_host>'
 ```
 
-Once you’ve done this, you can import PostHog where ever you want it. See more details about setup and PostHog Python features in the [Python docs here](/docs/integrate/server/python).
+Once you’ve done this, you can import PostHog where ever you want it. See more details about setup and PostHog Python features in the [Python docs here](/docs/libraries/python).
 
 ## 4. Setting up more PostHog features
 
@@ -413,7 +413,7 @@ Finally, when we go back to our site, the feature flag is active and the CTA is 
 
 ## Wrapping up
 
-With autocapture, session recordings, feature flags, identification, and custom events out of the way, you implemented many of the most important features of PostHog on your new Django project. Next is customizing further with group analytics, experiments, and integrations, all of which you can find out more about in [our Python documentation](/docs/integrate/server/python).
+With autocapture, session recordings, feature flags, identification, and custom events out of the way, you implemented many of the most important features of PostHog on your new Django project. Next is customizing further with group analytics, experiments, and integrations, all of which you can find out more about in [our Python documentation](/docs/libraries/python).
 
 ## Further reading
 

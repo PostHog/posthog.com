@@ -9,9 +9,9 @@ availability:
 sourceId: TVMaze
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The TVmaze connector syncs the [TVmaze](https://www.tvmaze.com/) TV show catalog – shows, people (cast and crew), and their last-updated timestamps – into PostHog.
 
@@ -41,7 +41,9 @@ TVmaze has no server-side change filter, so every table syncs as a full refresh.
 
 <SourceTables />
 
-The connector doesn't sync per-show child resources like episodes, seasons, or cast: TVmaze allows around 20 requests per 10 seconds, so fetching them for the full catalog of tens of thousands of shows isn't practical.
+The `seasons`, `episodes`, and `cast` tables include a `show_id` column to join them to `shows`. The `episodes` table includes specials. Cast rows also include `person_id` and `character_id`.
+
+These three tables make one request per show on every full refresh, so syncing the full catalog can take a long time.
 
 ## Troubleshooting
 

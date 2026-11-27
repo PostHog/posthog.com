@@ -38,7 +38,9 @@ You'll be asked for:
 
 <SyncModes />
 
-All Freshchat tables are full refresh. Each sync replaces the contents of the table.
+The `historical_metrics` table supports incremental sync on `interval_start`. Each incremental sync reads only the new daily metric intervals. Full refresh is also available for this table.
+
+All other Freshchat tables use full refresh only. Each sync replaces the contents of the table. The Freshchat API has no cursor that PostHog can use to read only changed records from these tables.
 
 ## Configuration
 

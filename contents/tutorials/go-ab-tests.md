@@ -150,7 +150,7 @@ Once created, set the primary metric to a trend of `pageview` and then click **L
 
 To implement the A/B test, we: 
 
-1. Fetch the `my-cool-experiment` flag using [`client.GetFeatureFlag()`](/docs/libraries/go/reference#get-feature-flag). 
+1. Fetch the `my-cool-experiment` flag using [`client.GetFeatureFlag()`](/docs/libraries/go#get-feature-flag). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```js file=server.js

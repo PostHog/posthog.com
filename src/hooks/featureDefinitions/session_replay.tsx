@@ -58,7 +58,7 @@ export const sessionReplayFeatures = {
         },
         wireframe_mode: {
             name: 'Wireframe mode',
-            description: 'Low performance impact mobile recordings using wireframes',
+            description: 'Mobile recordings drawn as wireframes from the view hierarchy instead of screenshots',
         },
         ai_summaries: {
             name: 'AI summaries',

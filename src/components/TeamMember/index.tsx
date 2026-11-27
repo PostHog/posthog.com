@@ -1,9 +1,9 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { Link } from 'gatsby'
+import hogProfile from '../../images/hog-profile.png'
 
 const PHOTO_AVATAR_SIZE = 'size-4 [:is(h1,h2,h3,h4,h5,h6)_&]:size-6'
 const PHOTO_NAME_SIZE = '!text-[13px] !leading-none [:is(h1,h2,h3,h4,h5,h6)_&]:!text-sm'
@@ -55,13 +55,7 @@ export const TeamMemberLink = ({
                                     className={`${PHOTO_AVATAR_SIZE} bg-${color ? color : 'red'}`}
                                 />
                             ) : (
-                                <CloudinaryImage
-                                    alt=""
-                                    width={40}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                    className={`${PHOTO_AVATAR_SIZE} bg-red`}
-                                    imgClassName={PHOTO_AVATAR_SIZE}
-                                />
+                                <img src={hogProfile} alt="" className={`${PHOTO_AVATAR_SIZE} bg-red`} />
                             )}
                         </span>
                         <span className={`${PHOTO_NAME_SIZE} hover:underline font-semibold inline-block truncate`}>
@@ -86,13 +80,7 @@ export const TeamMemberLink = ({
                                         className={`${PHOTO_AVATAR_SIZE} bg-${color ? color : 'red'}`}
                                     />
                                 ) : (
-                                    <CloudinaryImage
-                                        alt=""
-                                        width={40}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                        className={`${PHOTO_AVATAR_SIZE} bg-red`}
-                                        imgClassName={PHOTO_AVATAR_SIZE}
-                                    />
+                                    <img src={hogProfile} alt="" className={`${PHOTO_AVATAR_SIZE} bg-red`} />
                                 )}
                             </span>
                             <span className={`${PHOTO_NAME_SIZE} hover:underline font-semibold inline-block truncate`}>
@@ -119,12 +107,7 @@ export const TeamMemberLink = ({
                                         </div>
                                     ) : (
                                         <div className="inline-block size-24 bg-yellow rounded-full overflow-hidden p-1 border border-primary">
-                                            <CloudinaryImage
-                                                alt=""
-                                                width={100}
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                                className="w-24"
-                                            />
+                                            <img src={hogProfile} alt="" className="w-24" />
                                         </div>
                                     )}
                                     <strong className="text-[15px] mt-1">{displayName}</strong>

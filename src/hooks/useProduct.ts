@@ -15,7 +15,6 @@ import {
     IconTerminal,
     IconFunnels,
     IconUserPaths,
-    IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
     IconAsterisk,
@@ -33,6 +32,11 @@ import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
 import { dataPipelines } from './productData/data_pipelines'
 import { getTool } from '../data/tools'
+import hedgehogBallerPng from 'hoggies/baller.png'
+import hedgehogChartPng from 'hoggies/chart.png'
+import hedgehogOrganizedPng from 'hoggies/organized.png'
+import hedgehogRollerCoasterPng from 'hoggies/roller-coaster.png'
+import hedgehogTrenchcoatPng from 'hoggies/trenchcoat.png'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -168,8 +172,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             },
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Hedgehog monitoring dashboards',
+                src: hedgehogChartPng,
+                alt: 'A hedgehog presenting a chart',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -801,49 +805,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            ...getTool('correlation_analysis'),
-            Icon: IconCorrelationAnalysis,
-            color: 'purple',
-            colorSecondary: 'lilac',
-            overview: {
-                title: 'Discover what events correlate with conversion or churn',
-                description:
-                    'When analyzing funnels, correlation analysis highlights significant events or properties that may be useful in determining how likely someone is to converting or churning.',
-                textColor: 'text-black',
-            },
-            screenshots: {
-                overview: {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-correlation-analysis.png',
-                    alt: 'Correlation analysis',
-                    classes: '',
-                },
-            },
-            features: [
-                {
-                    title: 'Event correlation',
-                    headline: 'Event correlation',
-                    description: 'Identify which events are most strongly correlated with successful conversion.',
-                },
-                {
-                    title: 'Property analysis',
-                    headline: 'Property analysis',
-                    description: 'Discover which user or event properties correlate with conversion or churn.',
-                },
-                {
-                    title: 'Automatic significance testing',
-                    headline: 'Automatic significance testing',
-                    description:
-                        'Statistical significance is automatically calculated to surface meaningful correlations.',
-                },
-                {
-                    title: 'Funnel integration',
-                    headline: 'Funnel integration',
-                    description:
-                        'Works seamlessly with funnel analysis to provide deeper insights into conversion factors.',
-                },
-            ],
-        },
-        {
             ...getTool('retention'),
             Icon: IconRetention,
             color: 'salmon',
@@ -1054,8 +1015,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Toolbar hedgehog',
+                src: hedgehogChartPng,
+                alt: 'A hedgehog presenting a chart',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1313,8 +1274,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Hedgehog in beta',
+                src: hedgehogTrenchcoatPng,
+                alt: 'A hedgehog in a trenchcoat full of sticky notes',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1734,8 +1695,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Note-taking hedgehog',
+                src: hedgehogOrganizedPng,
+                alt: 'A hedgehog keeping notes on a clipboard',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1986,8 +1947,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Heat-detecting hedgehog',
+                src: hedgehogRollerCoasterPng,
+                alt: 'A hedgehog riding a roller coaster',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -2237,8 +2198,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'A hedgehog analyzing user patterns',
+                src: hedgehogBallerPng,
+                alt: 'A hedgehog going for a slam dunk',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {

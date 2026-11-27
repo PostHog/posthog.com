@@ -342,3 +342,12 @@ SELECT *
 FROM events
 -- WHERE event = '$pageview'
 ```
+
+## Inspecting tables and views
+
+Hover over any table or view name in a `FROM` or `JOIN` clause to see information about it.
+
+- **Tables** show the table name and description.
+- **Saved views** show the view name, its SQL definition, and a link to open the full view definition in the SQL editor.
+
+This works for all tables in your project, including external sources connected through the [data warehouse](/docs/data-warehouse). CTE names defined with `WITH` are excluded from hover results since they are local to the query.

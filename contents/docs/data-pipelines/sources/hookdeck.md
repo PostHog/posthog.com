@@ -9,9 +9,9 @@ availability:
 sourceId: Hookdeck
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Hookdeck connector syncs events, attempts, requests, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -37,7 +37,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Hookdeck tables are full refresh. Each sync replaces the contents of the table.
+Hookdeck tables use either incremental or full refresh sync. Tables with incremental sync only fetch new and updated rows on each run. Check the supported tables below for the sync mode of each table.
 
 ## Configuration
 

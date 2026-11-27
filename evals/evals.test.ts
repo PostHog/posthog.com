@@ -5,6 +5,9 @@
  * Run: pnpm test:evals
  */
 import assert from 'node:assert/strict'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { describe, test } from 'node:test'
 
 import { toGaugeSpecs, toSessionResults } from './gauge/send-to-gauge.ts'
@@ -17,6 +20,7 @@ import {
     pageForEvalFile,
     pageForSourceFile,
     pageIndex,
+    pageSourceFile,
     parseEvalFile,
     type EvalFile,
 } from './load-eval-files.ts'
@@ -172,6 +176,62 @@ describe('eval file validation', () => {
             (page) => page !== 'docs/gone'
         )
         assert.ok(result.problems.some((p) => p.message.includes('no page at contents/docs/gone')))
+    })
+
+    test('a generated page of a published SDK counts as a page', () => {
+        for (const page of ['docs/libraries/node', 'docs/libraries/node/migration', 'docs/libraries/python/7.x.x']) {
+            const result = parseEvalFile(
+                'contents/docs/a.eval.yaml',
+                { ...answerOnly, checks: [{ ...answerOnly.checks[0], pages: [page] }] },
+                shared
+            )
+            assert.deepEqual(
+                result.problems.filter((p) => p.message.includes('no page at') || p.message.includes('should look like')),
+                [],
+                page
+            )
+        }
+    })
+
+    test('dots are rejected outside a trailing <N>.x.x version segment', () => {
+        const result = parseEvalFile(
+            'contents/docs/a.eval.yaml',
+            { ...answerOnly, checks: [{ ...answerOnly.checks[0], pages: ['docs/../tutorials/ios-analytics'] }] },
+            shared
+        )
+        assert.ok(result.problems.some((p) => p.message.includes('should look like')))
+    })
+
+    test('pageSourceFile ignores build-generated SDK reference files written on disk', () => {
+        const dir = mkdtempSync(join(tmpdir(), 'evals-ref-'))
+        try {
+            mkdirSync(join(dir, 'contents/docs/libraries/node'), { recursive: true })
+            writeFileSync(join(dir, 'contents/docs/libraries/node/reference.md'), '# Node')
+            assert.equal(pageSourceFile('docs/libraries/node/reference', dir), null)
+        } finally {
+            rmSync(dir, { recursive: true, force: true })
+        }
+    })
+
+    test('a generated page of an unpublished SDK, or a non-reference path, still fails', () => {
+        for (const page of [
+            'docs/libraries/swift',
+            'docs/libraries/swift/migration',
+            'docs/libraries/node/reference',
+            'docs/libraries/node/other',
+            'docs/libraries/node/x.x.x',
+            'docs/other/node',
+        ]) {
+            const result = parseEvalFile(
+                'contents/docs/a.eval.yaml',
+                { ...answerOnly, checks: [{ ...answerOnly.checks[0], pages: [page] }] },
+                shared
+            )
+            assert.ok(
+                result.problems.some((p) => p.message.includes(`no page at contents/${page}`)),
+                page
+            )
+        }
     })
 })
 

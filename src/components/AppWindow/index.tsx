@@ -82,7 +82,7 @@ const Router = (props) => {
         )
     }
     if (['/terms', '/privacy', '/dpa', '/baa', '/subprocessors'].includes(path)) {
-        return <Legal defaultTab={path}>{children}</Legal>
+        return <Legal currentTab={path}>{children}</Legal>
     }
     return (
         <>

@@ -132,6 +132,8 @@ Past a certain spend, it's worth challenging the tool or contract itself, if fea
   - Add [Janani](https://posthog.com/community/profiles/34497) as the Billing Admin to manage payments.
 - If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
+- A vendor or partner asks where to send their invoices – what do I tell them?
+  - Tell them to send all invoices to finance@posthog.com.
 - A vendor contract we rely on is running into overages / about to cost more – what do I do?
   - Flag it early - see [High-value & ongoing vendor contracts](#high-value--ongoing-vendor-contracts). Whoever has the most context on the contract should drive, keep your team lead and the responsible exec aware, and ping `@finance-folks` in Slack as soon as the overage looks material so Finance can forecast it. Use your judgement to assess what counts as material.
 - What if I'm driving for work-related purposes?

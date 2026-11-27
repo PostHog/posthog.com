@@ -842,6 +842,12 @@
         "profile_id": 43006
     },
     {
+        "handle": "sinan-kucukkoseler",
+        "name": "Sinan Kucukkoseler",
+        "role": "Product Engineer",
+        "profile_id": 44760
+    },
+    {
         "handle": "juraj-majerik",
         "name": "Juraj Majerik",
         "role": "Product Engineer",
@@ -864,5 +870,11 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/sara-verdi-a61677135/",
         "profile_id": 49660
+    },
+    {
+        "handle": "magda-olszewska",
+        "name": "Magda Olszewska",
+        "role": "Scaled CSM",
+        "profile_id": 33065
     }
 ]

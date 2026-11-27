@@ -119,7 +119,7 @@ The wins are even more magnified if more than one property filter is used at a t
 
 Using `OPTIMIZE TABLE` after adding columns is often not a good idea, since it will involve a lot of I/O as the whole table gets rewritten.
 
-As of writing, there's a feature request on [Github](https://github.com/ClickHouse/ClickHouse/issues/27730) for adding specific commands for materializing specific columns on ClickHouse data parts.
+As of writing, there's a feature request on [GitHub](https://github.com/ClickHouse/ClickHouse/issues/27730) for adding specific commands for materializing specific columns on ClickHouse data parts.
 
 Here's how you can use `DEFAULT` type columns to backfill more efficiently:
 

@@ -19,5 +19,5 @@ checks:
                   com.posthog:posthog-kmp to the commonMain dependencies.
               initialized: >-
                   The app calls PostHog.setup() once, early in its lifecycle, with
-                  PostHogConfig(apiKey = <project token>, host = <PostHog host>) and a
+                  PostHogConfig(<project token>) { host = <PostHog host> } and a
                   PostHogContext. Cite the file and line(s).

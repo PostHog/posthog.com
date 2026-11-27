@@ -109,7 +109,7 @@ export const posthog_ai = {
         {
             title: 'Product Analytics',
             headline: 'Product Analytics',
-            team: 'product-analytics',
+            team: 'analytics',
             layout: 'ai',
             icon: <IconGraph className="size-5" />,
             color: 'blue',
@@ -160,7 +160,7 @@ export const posthog_ai = {
         {
             title: 'Web Analytics',
             headline: 'Web Analytics',
-            team: 'web-analytics',
+            team: 'analytics',
             layout: 'ai',
             icon: <IconPieChart className="size-5" />,
             color: 'green',

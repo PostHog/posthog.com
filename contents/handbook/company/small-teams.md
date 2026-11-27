@@ -113,7 +113,7 @@ Similar to product, designers support small teams. [Read our guide](/handbook/en
 
 ## Managing larger cross-team projects
 
-Each project should be owned by an individual within a single small team. However, some projects affect multiple other teams and require their support. For example, the performance work owned by Karl in product analytics requires support from the pipeline and infrastructure team.
+Each project should be owned by an individual within a single small team. However, some projects affect multiple other teams and require their support. For example, the performance work owned by Karl in product analytics requires support from the pipeline and infrastructure team. It's often useful to create a `#project-` channel for managing cross-team projects.
 
 For these projects, we recommend the individual owning it write a "Status update" every 2 weeks on slack and add a link to this update in the "Updates on bigger projects that affect multiple teams" section of the all hands doc. These status updates might include: what's been done since the last update, any blockers, and what are the next steps.
 
@@ -135,6 +135,19 @@ These should all be visible in the Handbook, updated when changes are made & con
 See the [list of all small teams](/small-teams).
 
 ## Forming new small teams
+
+When deciding whether to split, merge, or close a team, use these principles:
+
+-   **Improve focus and reduce accidental collaboration.** This is the most important test. Teams should need less coordination to do their work.
+-   **Give the new team full ownership of its area.** We usually avoid horizontal teams that own one layer across many products.
+-   **Be clear about the team's type.** Teams have a few useful shapes, as described in [Team Topologies](https://teamtopologies.com/key-concepts). Ignoring these shapes leads to unclear responsibilities:
+    -   Product teams, such as Session Replay. Team Topologies calls these stream-aligned teams.
+    -   Enabling teams, such as DevEx, which help other teams build capabilities.
+    -   Platform teams, such as Infrastructure, which provide internal services that help other teams deliver.
+    -   Complicated subsystem teams, such as HogQL, which own work that needs specialist technical knowledge.
+-   **Account for the cost of change.** Closing or merging teams, or hiring people, takes effort. People need to learn how to work together, which reduces the time available for other work. Choosing not to change teams or hire can be the right decision.
+-   **Consider moving ownership instead.** We can move an area between existing teams without creating a new team.
+-   **Compare the team's stated purpose with its actual work.** A team name can hide a much wider scope. For example, we called a team "Web Analytics" while it worked on at least five other things.
 
 We have a defined [process for proposing changes to teams](/handbook/company/team-changes), or creating a new team.
 
@@ -171,14 +184,6 @@ No more than 6 people, but that's the only rule. It could be any group of people
 ### Will this lead to inconsistent design?
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
-
-### Can I still [step on toes](/handbook/values)?
-
-Yes. In fact, it's actively encouraged. 
-
-We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
-
-You're actively encouraged to raise pull requests or propose changes to stuff that doesn't have anything to do with your small team.
 
 ### Can people change teams?
 

@@ -65,7 +65,7 @@ The team-specific tools for this team are:
 
 - Onboarding hub in PostHog Customer Analytics, and <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts?view=01a11d0a-3430-73f3-be27-777e0b6c904b">comprehensive onboarding view</PrivateLink> with Onboarding accounts.
 - [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
-- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
+- [GitHub project board](https://github.com/orgs/PostHog/projects/134/views/1).
 - <PrivateLink url="https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA">Onboarding Google Drive</PrivateLink> with all relevant documents.
 - <PrivateLink url="https://github.com/PostHog/company-internal/tree/master/onboarding-team">Alfred workflows</PrivateLink>.
 

@@ -3,7 +3,7 @@ export const ga4 = {
     key: 'ga4',
     assets: {
         icon: '/images/competitors/ga4.svg',
-        comparisonArticle: '/blog/posthog-vs-ga4',
+        comparisonArticle: '/compare/posthog-vs-ga4',
     },
     products: {
         product_analytics: {
@@ -18,7 +18,7 @@ export const ga4 = {
                 predictive_insights: true,
                 real_time_view: true,
                 toolbar: false,
-                user_profiles: 'Anonymous',
+                user_profiles: 'User explorer',
                 trends: {
                     available: true,
                     features: {},
@@ -39,11 +39,11 @@ export const ga4 = {
                     features: {},
                 },
                 lifecycle: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
                 stickiness: {
-                    available: false,
+                    available: 'DAU/MAU ratios only',
                     features: {},
                 },
                 group_analytics: {
@@ -54,7 +54,7 @@ export const ga4 = {
                     available: true,
                     features: {
                         ai_insight_builder: true,
-                        formula_mode: false,
+                        formula_mode: 'Calculated metrics',
                         ready_made_insight_types: true,
                         sampling: false,
                         sql_editor: false,
@@ -120,6 +120,9 @@ export const ga4 = {
         surveys: {
             available: false,
         },
+        ai_observability: {
+            available: false,
+        },
         cdp: {
             available: false,
         },
@@ -166,11 +169,11 @@ export const ga4 = {
             email_reports: true,
             google_ads: true,
             google_search_console: true,
-            hubspot: false,
+            hubspot: 'Purchase import only (alpha)',
             intercom: false,
-            salesforce: false,
+            salesforce: 'Purchase import only (alpha)',
             sentry: false,
-            stripe: true,
+            stripe: false,
             self_serve: true,
             zapier: true,
         },

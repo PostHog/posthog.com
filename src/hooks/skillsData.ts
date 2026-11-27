@@ -1165,19 +1165,6 @@ export const skillsData: IncomingSkill[] = [
         ],
     },
     {
-        name: 'Configure LLM tagger',
-        stage: 'Scale',
-        tags: ['Engineering', 'Data'],
-        description: 'Sets up a tagger to label LLM traces with intents for downstream analysis',
-        tools_used: 'LLM Observability',
-        flow: 'llma-tagger-list, llma-tagger-create, llma-tagger-test-hog',
-        example_prompts: [
-            'Set up a tagger that labels traces by user intent',
-            'Auto-tag LLM traces so I can analyze them by topic',
-            'Create and test a tagger for refund-related conversations',
-        ],
-    },
-    {
         name: 'Define an LLM score',
         stage: 'Scale',
         tags: ['Engineering', 'Product Management'],
