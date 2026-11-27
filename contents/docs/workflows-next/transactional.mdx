@@ -55,3 +55,5 @@ See [transactional email metrics](/docs/workflows-next/metrics#transactional-ema
 Delivery webhooks are rolling out, so your project might not have the **Webhooks** tab yet.
 
 On the **Webhooks** tab, add an endpoint URL and pick the events: sent, delivered, bounced, marked as spam, failed, opened, and link clicked. PostHog posts them with types such as `email.delivered` and `email.clicked`, so a webhook handler that you wrote for another provider needs few changes. See [delivery webhooks](/docs/workflows-next/transactional/webhooks).
+
+For every sending endpoint and field, see the [transactional email API reference](/docs/api/messaging).

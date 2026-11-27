@@ -18,7 +18,7 @@ There are two kinds of endpoint:
 
 ## Send email
 
-`POST /api/messaging/send/email/` sends one email from a template, or with content that you pass. The [server SDKs](/docs/workflows-next/installation) call it for you.
+`POST /api/messaging/send/email/` sends one email from a template, or with content that you pass. The [server SDKs](/docs/workflows-next/installation) call it for you. The project path, `POST /api/projects/:project_id/messaging/send/email/`, also works.
 
 ```bash
 curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
@@ -37,23 +37,17 @@ curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
 
 See [send email with the API](/docs/workflows-next/installation/api) for the full request, the errors, and how to retry safely.
 
-## See what you sent
+## API reference
 
-| Endpoint | What it does |
+Each area has its own reference page, with every endpoint and field.
+
+| Reference | What it covers |
 | --- | --- |
-| `/api/projects/:project_id/transactional_email_log/` | List your transactional sends from the last 30 days, get one with its timeline, and count sends by outcome. See the [send log reference](/docs/api/transactional-email-log). |
-| `/api/projects/:project_id/transactional_code_emails/` | List the transactional emails whose content comes from your code. See the [code emails reference](/docs/api/transactional-code-emails). |
-| `/api/projects/:project_id/workflow_email_log/` | List the emails that a broadcast or automation sent. See the [email log reference](/docs/api/workflow-email-log). |
-
-## Manage templates, broadcasts, and automations
-
-| Endpoint | What it does |
-| --- | --- |
-| `/api/projects/:project_id/messaging_templates/` | Manage the email templates in the library. See the [templates reference](/docs/api/messaging-templates). |
-| `/api/projects/:project_id/hog_flows/` | Manage broadcasts and automations, and cancel their runs. See the [hog flows reference](/docs/api/hog-flows). |
-| `/api/projects/:project_id/messaging_categories/` | Manage the categories that people can opt out of. See the [categories reference](/docs/api/messaging-categories). |
-| `/api/projects/:project_id/messaging_preferences/` | List, add, and remove opt-outs, one at a time or in bulk. See the [preferences reference](/docs/api/messaging-preferences). |
-| `/api/projects/:project_id/messaging_suppressions/` | List, add, and remove suppressed addresses. See the [suppressions reference](/docs/api/messaging-suppressions). |
+| [Transactional email](/docs/api/messaging) | Send email, upload attachments, and read a send's status. |
+| [Email templates](/docs/api/messaging-templates) | Manage the email templates in the library, and make one transactional. |
+| [Automations and broadcasts](/docs/api/hog-flows) | Create, update, and publish automations and broadcasts, and cancel their runs. `POST /api/projects/:project_id/hog_flows/user_blast_radius/` counts how many people a set of filters reaches, so you can check an audience before you send. |
+| [Opt-outs and suppressions](/docs/api/messaging-preferences) | Keep opt-outs in sync with your own systems. Also see [message categories](/docs/api/messaging-categories) and the [suppression list](/docs/api/messaging-suppressions). |
+| [Email logs](/docs/api/transactional-email-log) | List your transactional sends from the last 30 days, with each one's timeline. For the emails that broadcasts and automations sent, see the [workflow email log](/docs/api/workflow-email-log). |
 
 ## Authentication
 
