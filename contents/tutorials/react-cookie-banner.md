@@ -111,9 +111,9 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
-This means PostHog doesn't set any cookies or capture any events until the user accepts or declines, which is what we rely on the cookie banner to do. If they decline, PostHog still counts them using [cookieless tracking](/docs/privacy/data-collection#cookieless-tracking), which uses a privacy-preserving hash calculated on PostHog's servers instead of a cookie.
+This means PostHog doesn't set any cookies or capture any events until the user accepts or declines. If they decline, PostHog uses [cookieless tracking](/docs/privacy/data-collection#cookieless-tracking), which uses a privacy-preserving hash instead of a cookie.
 
-For PostHog to accept those cookieless events, go to **Settings** > **Project** > **Web analytics** in [PostHog](https://us.posthog.com/settings/project), turn on **Enable cookieless tracking**, and click **Save**. If this setting is off, PostHog discards events from users who decline.
+For PostHog to accept those cookieless events, go to **Settings** > **Project** > **Web analytics** in [PostHog](https://us.posthog.com/settings/project), turn on **Enable cookieless tracking**, and click **Save**. If this is off, PostHog discards events from users who decline.
 
 ## Step 4: Building the banner component
 
