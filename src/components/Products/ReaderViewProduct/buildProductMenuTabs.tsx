@@ -9,6 +9,7 @@ import {
     IconTerminal,
     IconVideoCamera,
 } from '@posthog/icons'
+import { Check } from 'lucide-react'
 import { TreeMenu } from 'components/TreeMenu'
 import {
     learnChapterPath,
@@ -17,7 +18,7 @@ import {
     sectionPages,
     useBookPages,
 } from 'components/Learn/PocketGuides/bookModel'
-import { useMarkChapterReadOnMove } from 'components/Learn/PocketGuides/chapterProgress'
+import { useMarkChapterReadOnMove, useReadChapterSlugs } from 'components/Learn/PocketGuides/chapterProgress'
 import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -117,6 +118,7 @@ const LearnNav = ({
     const pages = sectionPages(useBookPages(volumeId), section)
     const posthog = usePostHog()
     const markChapterReadOnMove = useMarkChapterReadOnMove()
+    const readChapterSlugs = useReadChapterSlugs(volumeId)
     const volume = volumeById(volumeId)
     const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
@@ -129,6 +131,14 @@ const LearnNav = ({
         url: learnChapterPath(guideBasePath, page),
         // Full titles are questions, often longer than the sidebar is wide.
         wrap: fullTitles,
+        icon:
+            page.page && !page.isFrontMatter ? (
+                readChapterSlugs.has(learnChapterSlug(page)) ? (
+                    <Check className="size-4 text-green" strokeWidth={2.5} aria-label="Read" />
+                ) : (
+                    <span />
+                )
+            ) : undefined,
     }))
     const hub = volume?.learnHub
     const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
