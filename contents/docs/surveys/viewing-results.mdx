@@ -21,7 +21,7 @@ export const surveyResultsDark =
 
 Survey results can be viewed in three places:
 
-1. On the survey page, in the "Results" tab.
+1. On the survey page, in the **Summary** and **Responses** tabs (launched surveys display **Summary**, **Responses**, **Notifications**, and **History** tabs).
 2. On a [dashboard](/docs/product-analytics/dashboards) using the Survey Results widget.
 3. By creating your own [insights](/docs/product-analytics/insights).
 
@@ -84,7 +84,7 @@ To create insights from survey results, navigate to the [insights tab](https://a
 There are four survey-related events you can create insights from:
 
 1. `survey shown` - fires when a survey is displayed to a user
-2. `survey sent` - fires when a user responds to a question
+2. `survey sent` - fires when a user completes the survey (or after each answered question when partial responses are enabled)
 3. `survey dismissed` - fires when a user explicitly closes the survey
 4. `survey abandoned` - (for surveys with partial completion enabled) fires when a user navigates away from the page before completing the survey
 
