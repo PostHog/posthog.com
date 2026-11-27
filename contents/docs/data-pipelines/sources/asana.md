@@ -15,26 +15,11 @@ The Asana connector pulls your Asana data — workspaces, users, projects, tasks
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click **+ New source** and then click **Link** next to Asana.
-3. You need a personal access token from Asana. Create one from the [Asana developer console](https://app.asana.com/0/my-apps). Grant these read scopes so every table can sync: `workspaces:read`, `users:read`, `projects:read`, `tasks:read`, `tags:read`, `teams:read`, and `custom_fields:read`. Copy the token value.
-4. Back in PostHog, paste the token in the `Personal access token` field and click **Next**.
-5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
+3. You need a personal access token from Asana. Create one from the [Asana developer console](https://app.asana.com/0/my-apps). Grant these read scopes so every table can sync: `workspaces:read`, `users:read`, `projects:read`, `tasks:read`, `stories:read`, `goals:read`, `time_tracking_entries:read`, `tags:read`, `teams:read`, `custom_fields:read`, `team_memberships:read`, `portfolios:read`, and `time_tracking_categories:read`. Copy the token value.
+
+> **Note:** The `allocations` table has no read scope of its own, so it needs a token with full access (the `default` scope). Skip it if your token is scoped. The AI Studio tables (`ai_studio_runs`, `ai_studio_seats`) need the `admin.ai_studio_usage:read` scope on an AI Studio-licensed organization. 4. Back in PostHog, paste the token in the `Personal access token` field and click **Next**. 5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
 
 Once the syncs are complete, you can start using Asana data in PostHog.
-
-## Available tables
-
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `workspaces` | Workspaces your token can access | Full refresh |
-| `users` | Users across your visible workspaces | Full refresh |
-| `projects` | Projects in each workspace | Full refresh |
-| `tasks` | Tasks across all projects | Full refresh |
-| `tags` | Tags in each workspace | Full refresh |
-| `sections` | Sections within each project | Full refresh |
-| `teams` | Teams in each organization workspace | Full refresh |
-| `custom_fields` | Custom field definitions per workspace | Full refresh |
-
-**Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
