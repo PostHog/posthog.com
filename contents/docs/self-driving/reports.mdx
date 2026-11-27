@@ -6,6 +6,7 @@ showTitle: true
 ---
 
 import { CallToAction } from 'components/CallToAction'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 A report groups related [signals](/docs/self-driving/signals) into one item of work. Instead of triaging a noisy stream of findings, you get a single, framed problem with the evidence behind it.
 
@@ -34,6 +35,12 @@ Some reports arrive with suggested questions above the question box. The [scout]
 ## Where reports go
 
 Reports land in your [inbox](/docs/self-driving/inbox), ranked by priority. An agent investigates each one. Actionable reports get a pull request to review and merge – the rest wait in your inbox for your input.
+
+<CalloutBox icon="IconFlask" title="See reports as soon as you log in" type="action">
+
+With the new UI, your highest-priority reports are on Home under **For you today**, with the evidence and a shortcut to ask PostHog AI. [Try the new UI](https://app.posthog.com/settings/user-feature-previews#today-rail-nav).
+
+</CalloutBox>
 
 ## When a report is done
 

@@ -8,6 +8,7 @@ import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import hogProfile from '../../../images/hog-profile.png'
 
 interface VideoChapter {
     title: string
@@ -411,13 +412,11 @@ function AuthorInfo({ name }: { name: string }) {
                     </Link>
                 ) : (
                     <Link to={`/community/profiles/${person.squeakId}`} state={{ newWindow: true }}>
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                            alt={fullName}
-                            className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
-                            imgClassName={`object-cover rounded-full bg-${color}`}
-                            width={80}
-                        />
+                        <div
+                            className={`inline-block size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
+                        >
+                            <img src={hogProfile} alt={fullName} className={`object-cover rounded-full bg-${color}`} />
+                        </div>
                     </Link>
                 )}
                 <div className="text-left">

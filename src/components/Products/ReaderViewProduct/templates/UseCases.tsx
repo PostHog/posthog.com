@@ -1,6 +1,7 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { SectionHeading } from '../helpers'
 import { SectionComponentProps } from '../types'
 
@@ -41,20 +42,29 @@ const UseCases = ({ id, productData }: SectionComponentProps) => {
                 <div className="min-w-0">
                     <OSTable columns={columns} rows={tableRows} size="sm" rowAlignment="top" width="full" />
                 </div>
-                {hog?.src && (
+                {hog?.src &&
                     // `relative` with no in-flow children means this grid item
                     // contributes zero height to the row, so the row (and this
                     // item, via `items-stretch`) is sized by the table alone –
                     // the image can never end up taller than it, whatever its
                     // native aspect ratio. `object-contain` then fits the image
                     // into that box without distorting it.
-                    <CloudinaryImage
-                        src={hog.src}
-                        alt={hog.alt || `${productData?.name} hedgehog`}
-                        className="hidden @5xl/reader-content:block relative"
-                        imgClassName="absolute inset-0 size-full object-contain"
-                    />
-                )}
+                    (isCloudinaryImage(hog.src) ? (
+                        <CloudinaryImage
+                            src={hog.src}
+                            alt={hog.alt || `${productData?.name} hedgehog`}
+                            className="hidden @5xl/reader-content:block relative"
+                            imgClassName="absolute inset-0 size-full object-contain"
+                        />
+                    ) : (
+                        <HoggieImage
+                            src={hog.src}
+                            mirror={hog.mirror}
+                            alt={hog.alt || `${productData?.name} hedgehog`}
+                            className="hidden @5xl/reader-content:block relative"
+                            imgClassName="absolute inset-0 size-full object-contain"
+                        />
+                    ))}
             </div>
         </section>
     )

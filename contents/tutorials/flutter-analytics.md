@@ -231,10 +231,12 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.2.2
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^6.0.0
 
 # rest of your code
 ```
+
+`posthog_flutter` 6 needs Flutter 3.41 or later on every platform.
 
 Next, we configure PostHog using our project token and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
@@ -246,7 +248,7 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
     <application>
         <!-- ... other configuration ... -->
-        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_token>" />
+        <meta-data android:name="com.posthog.posthog.PROJECT_TOKEN" android:value="<ph_project_token>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" /> <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
@@ -254,13 +256,13 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 </manifest>
 ```
 
-You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
+You'll also need to update the minimum Android SDK version to `23` in `android/app/build.gradle`:
 
 ```gradle_kotlin file=android/app/build.gradle
 // rest of your config
 
     defaultConfig {
-      minSdkVersion 21
+      minSdkVersion 23
       // rest of your config
     }
 
@@ -269,7 +271,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 ### iOS setup
 
-For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project token and instance address to the `Info.plist` file located in the `ios/Runner` directory:
+For iOS, `posthog_flutter` version 6 installs through [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers), which is on by default from Flutter 3.44. On Flutter 3.41 to 3.43, run `flutter config --enable-swift-package-manager`. Add your PostHog configuration with your project token and instance address to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -277,7 +279,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
 <plist version="1.0">
 <dict>
 <!-- rest of your configuration -->
-  <key>com.posthog.posthog.API_KEY</key>
+  <key>com.posthog.posthog.PROJECT_TOKEN</key>
   <string><ph_project_token></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_client_api_host></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
@@ -289,13 +291,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
 </plist>
 ```
 
-Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
-
-```yaml file=ios/Podfile
-platform :ios, '13.0'
-
-# rest of your config
-```
+Then set the minimum platform version to iOS 15.0 in Xcode (**Runner > General > Minimum Deployments**). Building for iOS requires Xcode 26 or later.
 
 ### Web setup
 
@@ -325,7 +321,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [Posthog().capture()](/docs/libraries/flutter#capturing-events):
+To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [Posthog().capture()](/docs/libraries/flutter#capture):
 
 ```dart file=main.dart
 import 'package:flutter/material.dart';
@@ -380,7 +376,7 @@ class _HomePageState extends State<HomePage> {
 
 ### Identifying users
 
-Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identifying-users) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identify) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
 
 To show you an example, update the code for the login button to the following:
 
@@ -410,7 +406,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#removing-stored-super-properties). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...
@@ -427,7 +423,7 @@ class _HomePageState extends State<HomePage> {
 
 To enable group analytics, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include them. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million events per month – so you won't be charged anything yet.
 
-To create groups in PostHog, simply include them in your code by calling [`Posthog().group()`](/docs/libraries/flutter#group-analytics):
+To create groups in PostHog, simply include them in your code by calling [`Posthog().group()`](/docs/libraries/flutter#group):
 
 ```dart file=main.dart
 class LoginPage extends StatelessWidget {

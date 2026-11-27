@@ -1,0 +1,84 @@
+---
+title: Import from Pylon
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Pylon import is in beta.
+
+</CalloutBox>
+
+Migrate your existing Pylon issues to PostHog, including the original message threads, tags, attachments, and timestamps. Each Pylon issue becomes one Support ticket. Prerequisites and behavior shared across all imports are covered in [Import historical tickets](/docs/support/imports).
+
+## Pylon credentials
+
+In addition to the [shared import prerequisites](/docs/support/imports#prerequisites), you need:
+
+- **API token** - a Pylon admin can create one under **Settings** > **Integrations & dev** > **API tokens**. The token's role must be able to read issues, messages, and contacts
+
+US and EU workspaces both work. The region is detected from the token.
+
+## How to run an import
+
+1. Go to **Project settings** > **Support** > **Imports**
+2. Select **Pylon**
+3. Enter your API token
+4. Optionally select a [reply inbox](/docs/support/imports#prerequisites)
+5. Click **Start import**
+
+The API token is encrypted and never shown again after submission. To start a new import you must enter it again.
+
+## What gets imported
+
+For each Pylon issue:
+
+| Item                | Details |
+| ------------------- | ------- |
+| Metadata            | subject, status, and priority (see mapping tables below). The subject is the issue's customer portal title |
+| Tags                | Pylon tags appear as Support tags. Names are normalized and truncated to 255 characters. Empty tags are dropped. Running the import again does not update tags on tickets that are already imported |
+| Full message thread | replies and internal notes. Internal notes are imported as private notes |
+| Attachments         | images are embedded in the thread and other files are linked. See [limitations](#limitations) for size limits |
+| Customer identity   | requester name and email |
+| Original timestamps | issue and message creation times |
+| Pylon issue ID      | stored on the ticket and shown in the sidebar |
+
+### Status mapping
+
+| Pylon | PostHog Support |
+| ----- | --------------- |
+| New | New |
+| On You | Open |
+| On Customer | Pending |
+| On Hold | On hold |
+| Closed | Resolved |
+
+A custom status uses the mapping of the standard status it belongs to. An issue with a status that can't be matched is imported as Open.
+
+### Priority mapping
+
+| Pylon | PostHog Support |
+| ----- | --------------- |
+| low | Low |
+| medium | Medium |
+| high, urgent | High |
+
+### Inbox routing
+
+Tickets route to the email channel matching the support address the issue was sent to. Unmatched tickets use the reply inbox selected at import time.
+
+## What does not get imported
+
+- Assignees, teams, or accounts
+- Custom fields other than priority
+- CSAT responses
+- The internal issue title. Replies send the ticket subject to the customer, so only the customer portal title is used
+
+## Limitations
+
+**Import speed** - Pylon limits how fast issues can be read, so a large workspace can take several hours.
+
+**Attachments** - files over 20 MiB are skipped, and so are attachments past the first 20 on a message. One issue can bring over up to 200 MiB of attachments. The message is still imported when a file is skipped.
+
+**Very long issues** - an issue with more than 50,000 messages fails and is counted as failed.

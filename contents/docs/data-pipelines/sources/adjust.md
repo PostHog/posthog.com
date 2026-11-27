@@ -43,7 +43,13 @@ All Adjust report tables use **incremental** sync on the `day` field. Each sync 
 - **`retention_report`** – 31-day lookback (cohort metrics keep changing until the d30 window elapses)
 - **`skad_report`** – 35-day lookback (SKAdNetwork postbacks have privacy delays of up to ~5 weeks)
 
-The `events` catalog table uses **full refresh** – the whole table is reloaded on every sync.
+The following lookup tables use **full refresh** – the whole table is reloaded on every sync:
+
+- **`events`** – catalog of in-app events configured in Adjust
+- **`filters_data`** – lookups for the IDs used to filter reports, such as apps, partners, networks, channels, and countries
+- **`partners`** – ad network partners available in Adjust
+- **`links`** – network-level tracking links (trackers) of each app
+- **`sublinks`** – campaign, ad group, and creative sublinks nested under each tracking link
 
 ## Configuration
 

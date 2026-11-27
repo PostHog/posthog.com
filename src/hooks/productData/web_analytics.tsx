@@ -20,6 +20,9 @@ import MCPInstall from 'components/Products/MCPInstall'
 import { getTool } from '../../data/tools'
 import { features } from './web_analytics/features'
 import { applications, keyFeatures } from './web_analytics/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogCursorPng from 'hoggies/cursor.png'
+import hedgehogSwirlPng from 'hoggies/swirl.png'
 
 export const webAnalytics = {
     ...getTool('web_analytics'),
@@ -27,9 +30,9 @@ export const webAnalytics = {
     type: 'product_analytics',
     // Billed as product analytics events – Plans/calculator resolve against this billing product.
     billingType: 'product_analytics',
-    teamSlug: 'web-analytics',
+    teamSlug: 'analytics',
     forumTag: 'web-analytics',
-    color: 'green-2',
+    color: PRODUCT_COLORS.web_analytics,
     colorSecondary: '[#37945D]',
     wizardSupport: true,
     billedWith: 'Product Analytics',
@@ -165,8 +168,8 @@ export const webAnalytics = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png',
-        alt: 'A hedgehog at a desk surrounded by charts',
+        src: hedgehogSwirlPng,
+        alt: 'A hedgehog surrounded by swirling charts',
         classes: 'absolute bottom-0 right-0 max-w-md',
         footerClasses: 'max-w-[240px]',
     },
@@ -176,7 +179,8 @@ export const webAnalytics = {
             alt: 'PostHog AI and web analytics',
         },
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_cursor_hog_2e5fec02ad.png',
+            src: hedgehogCursorPng,
+            crop: [61, 40, 878, 920],
             alt: 'A hedgehog with a web analytics cursor',
         },
     },
@@ -367,7 +371,7 @@ export const webAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
+        image: hedgehogSwirlPng,
         imageAlt: 'A hedgehog looking at web analytics',
         imageClasses: 'w-96',
         // Reshaped from presenterNotes.ai (existing MCP blurb)

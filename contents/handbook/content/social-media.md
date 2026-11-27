@@ -4,9 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
+> **Got a launch, beta, GA, or project you want promoted on social?** Tag <TeamMember name="Liam Graham" /> in Slack and use the [checklist below](#getting-your-launch-promoted-on-social) to give him the information he needs.
+
 ## Where we post
 
-PostHog has a presence on [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
+PostHog has a presence on [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />. If you need something posted from an official account, want a reply sent from one, or have a question about our presence on a platform, he's your point of contact.
 
 Our primary platforms are X, LinkedIn, and YouTube. We optimize for them. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
 
@@ -28,7 +30,7 @@ Posts from the brand account follow our [style guide](/handbook/content/posthog-
 
 Replies should be done in lowercase. This humanizes the brand slightly as it underscores that a human would have written it, and is in the same style that [James](https://x.com/james406) uses on social media. More details on this can be found on the [voice & tone handbook page](/handbook/brand/tone).
 
-If you are a PM and looking to have posts go out about a specific product or campaign, hop on over to the [product marketing handbook section on social media](/handbook/marketing/social-media).
+If you are a PM and want posts to go out about a specific product or campaign, see [getting your launch promoted on social](#getting-your-launch-promoted-on-social).
 
 ## What metrics we look at
 
@@ -87,3 +89,44 @@ Because our offering is thinner on these two platforms, we can take more liberti
 Instagram's a platform we are actively trying to mature on. Our goal is to set a cadence of posting articles in carousel format, interspersed with short-form video content.
 
 Like Threads and Bluesky, we can take more liberties with the mentions and interactions we have, especially if someone tags us in an IG story when they're at a conference or event.
+
+## Getting your launch promoted on social
+
+When we promote a launch on social, Liam needs a handful of things to turn it into great posts.
+
+### What to share
+
+In the first (or second) message you share about a launch, beta, GA, or project, add this list where you'd normally tag <TeamMember name="Liam Graham" />:
+
+- **ELI5** of what's getting promoted, and how you want it presented on social.
+- **Messaging doc(s).** Do you have email copy that lives somewhere? A general messaging doc? Send both if you have them.
+- **Link(s) to the main video or photo asset(s).** As a reminder, **4:5** is best for graphics and photos, and **9:16** is best for video.
+- **Link(s) to the blog post**, if we've got one.
+- **When should the first post go live?**
+- **Confirm the OpenGraph image is updated on the product page.** See [OpenGraph images](#opengraph-images-for-product-pages) below.
+
+That's the whole ask. If something doesn't apply (for example, there's no blog post yet), just say so.
+
+### Where and when to send it
+
+Give as much notice as you can, ideally at least a week. Share the checklist in either:
+
+- A widely broadcast Slack message you're already sending about the launch.
+- The `#team-marketing` or `#team-editorial` Slack channels.
+
+In both cases, tag <TeamMember name="Liam Graham" />. Don't send it by DM. We want everyone to be able to see it.
+
+### OpenGraph images for product pages
+
+Every _product_ page should have a custom OpenGraph (OG) image, so that when someone shares a link on social media it shows a purpose-built visual rather than defaulting to the website homepage image or, worse, showing up as a missing image.
+
+- **What's needed:** a custom OG image for each product page. This is an [art request](/handbook/brand/art-requests) rather than a copy request, so there's usually no messaging doc to go with it.
+- **Good examples:** the [Feature Flags](/feature-flags) and [Session Replay](/session-replay) product pages already have working OG images. Use these as a reference.
+- **Design guidance:** these render on small screens, so keep designs and copy simple. Bright colors and chunky text work best.
+- **Check your work:** paste the product page URL into [opengraph.xyz](https://www.opengraph.xyz/) to preview how the OG image renders across platforms.
+
+If you can sort the OG image yourself as you pick up assignments, that's one less thing to coordinate.
+
+## Using your personal accounts for PostHog work
+
+If you use your personal social media accounts for PostHog work, read our [guidance on personal accounts](/handbook/brand/ambassador#using-your-personal-accounts-for-posthog-work). It covers what we expect, account security, verification and badges, and what to do if you get abuse.

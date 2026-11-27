@@ -170,12 +170,6 @@ const PlaceholderComparisonTable = () => {
                 </Link>{' '}
                 page.
             </p>
-            <p>
-                Still not sure if PostHog is right for you?{' '}
-                <Link to="/vibe-check" state={{ newWindow: true }}>
-                    Find out if you'll hate PostHog.
-                </Link>
-            </p>
         </div>
     )
 }

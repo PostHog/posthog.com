@@ -32,7 +32,7 @@ The identity source signs an ID-JAG that tells PostHog who the signed-in user is
 - **IdP-issued:** your identity provider, such as Okta, issues the ID-JAG. You control access with the assignments and scopes in your identity provider.
 - **Client-issued:** the MCP client issues the ID-JAG itself, under an issuer URL that is unique to your organization in that client. You don't need an identity provider or SSO. Claude supports this as **Claude-issued** identity.
 
-PostHog handles both kinds the same way. It trusts the issuer URL that you enter in your XAA configuration.
+PostHog handles both kinds the same way. It trusts the issuer URL in your XAA configuration, whether you enter it yourself or the client registers it with [automatic setup](#automatic-setup).
 
 ## What every setup needs
 
@@ -42,6 +42,10 @@ PostHog handles both kinds the same way. It trusts the issuer URL that you enter
 - These scopes, at minimum: `user:read`, `organization:read`, and `project:read`. The MCP server needs them to list your organizations and projects. Add scopes for the tools you want to use. Start with the [recommended scopes](/docs/settings/authentication/id-jag#which-scopes-should-i-grant). [API scopes](/docs/api/scopes) explains what each one covers.
 
 ## Set up PostHog
+
+If your MCP client offers [automatic setup](#automatic-setup), as Claude does, use it. The client creates the XAA configuration for you, so you don't need the numbered steps below.
+
+To create the XAA configuration yourself:
 
 1. Go to [**Organization settings → Authentication**](https://app.posthog.com/settings/organization-authentication). You need to be an organization admin.
 2. Under **Authentication domains**, add and verify your email domain if it isn't verified yet. See the [SSO docs](/docs/settings/authentication/sso) for the steps.
@@ -56,7 +60,7 @@ You can leave **JWKS URL** and **Allowed client IDs** empty. PostHog finds the s
 
 A client that issues its own ID-JAGs can register its issuer URL for you, so you don't paste it. The client sends you to a PostHog consent screen, where an organization admin approves it. PostHog then creates a read-only XAA configuration for all of the organization's verified domains, tagged with the client's name. To stop trusting the client, delete that configuration.
 
-Only clients that PostHog approves can request this, with the `ema_issuer:manage` scope. Claude is the first. See [Claude automatic setup](/docs/model-context-protocol/claude-managed-authorization#automatic-setup).
+Only clients that PostHog approves can request this, with the `ema_issuer:manage` scope. Claude is the first: click **Connect PostHog** in Claude's setup guide for the PostHog connector. See [Claude automatic setup](/docs/model-context-protocol/claude-managed-authorization#automatic-setup).
 
 ## Set up your MCP client
 

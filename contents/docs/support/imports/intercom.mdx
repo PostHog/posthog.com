@@ -1,0 +1,81 @@
+---
+title: Import from Intercom
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Intercom import is in beta.
+
+</CalloutBox>
+
+Migrate your existing Intercom conversations to PostHog, including the original message threads, tags, attachments, and timestamps. Each Intercom conversation becomes one Support ticket. Prerequisites and behavior shared across all imports are covered in [Import historical tickets](/docs/support/imports).
+
+## Intercom credentials
+
+In addition to the [shared import prerequisites](/docs/support/imports#prerequisites), you need:
+
+- **Workspace region** - where your Intercom workspace is hosted: United States, Europe, or Australia
+- **Access token** - create an app in Intercom's Developer Hub and copy its access token from **Configure** > **Authentication**
+
+The import can only read conversations that the teammate who installed the app has access to.
+
+## How to run an import
+
+1. Go to **Project settings** > **Support** > **Imports**
+2. Select **Intercom**
+3. Select your workspace region and enter your access token
+4. Optionally select a [reply inbox](/docs/support/imports#prerequisites)
+5. Click **Start import**
+
+The access token is encrypted and never shown again after submission. To start a new import you must enter it again.
+
+## What gets imported
+
+For each Intercom conversation:
+
+| Item                     | Details |
+| ------------------------ | ------- |
+| Metadata                 | subject, state, and priority (see mapping tables below). The subject is the subject of the first message, or the conversation title if there is none |
+| Tags                     | Intercom tags appear as Support tags. Names are normalized and truncated to 255 characters. Empty tags are dropped. Running the import again does not update tags on tickets that are already imported |
+| Full message thread      | the first message, replies, and notes. Notes and side conversations are imported as private notes |
+| Attachments              | images are embedded in the thread and other files are linked. See [limitations](#limitations) for size limits |
+| Customer identity        | contact name and email |
+| Original timestamps      | conversation and message creation times |
+| Intercom conversation ID | stored on the ticket and shown in the sidebar |
+
+### State mapping
+
+| Intercom | PostHog Support |
+| -------- | --------------- |
+| open | Open |
+| snoozed | On hold |
+| closed | Resolved |
+
+### Priority mapping
+
+| Intercom | PostHog Support |
+| -------- | --------------- |
+| none | No priority |
+| low | Low |
+| medium | Medium |
+| high, urgent | High |
+
+### Inbox routing
+
+All imported tickets are attached to the reply inbox you select at import time. Without one, imported tickets have no email channel. Agents can read them but can't reply to those customers by email.
+
+## What does not get imported
+
+- Assignees, teams, or companies
+- Custom attributes or conversation ratings
+- Conversation events with no message text, such as assignments
+
+## Limitations
+
+**Attachments** - files over 20 MiB are skipped, and so are attachments past the first 20 on a message. One conversation can bring over up to 200 MiB of attachments. The message is still imported when a file is skipped.
+
+**Unrecognized message types** - a message whose type Intercom's API does not describe is imported as a private note, so content that was never sent to the customer does not appear as a reply.
+
+**Very long conversations** - a conversation with more than 50,000 messages fails and is counted as failed.

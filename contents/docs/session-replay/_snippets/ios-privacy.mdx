@@ -56,12 +56,12 @@ Support for the `ph-no-mask` identifier is added in iOS SDK version 3.71.0.
 
 Apps built with Xcode 26 use a new SwiftUI rendering model that changes how SwiftUI views map to UIKit. This can cause `postHogMask()` and `postHogNoMask()` to behave inconsistently on primitive views like `Text`, `Image`, and `Button`.
 
-**If you're building with Xcode 26**, update to [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later to ensure these modifiers work correctly.
+Version 4.x requires Xcode 26 and includes the fix. **If you're on 3.x and building with Xcode 26**, use [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later so these modifiers work correctly.
 
 </CalloutBox>
 
 ### Precedence and propagation
 
-`ph-no-mask` applies to the view it is set on and all of its subviews, and it takes precedence over both `ph-no-capture` and PostHog's default masking heuristics. A view marked with `ph-no-capture` that sits inside a `ph-no-mask` subtree is **not** masked, and neither are sensitive views such as text fields that PostHog would otherwise mask automatically. Only set `ph-no-mask` on a subtree you know contains no sensitive data.
+`ph-no-mask` applies to the view it is set on and all of its subviews, and it takes precedence over both `ph-no-capture` and PostHog's default masking heuristics. A view marked with `ph-no-capture` that sits inside a `ph-no-mask` subtree is **not** masked, and neither are sensitive views such as text fields that PostHog would otherwise mask automatically. From version 4.0, secure-entry text fields, such as password fields and SwiftUI `SecureField`, stay masked inside a `ph-no-mask` subtree. Only set `ph-no-mask` on a subtree you know contains no sensitive data.
 
 <SensitiveThirdPartyScreens />

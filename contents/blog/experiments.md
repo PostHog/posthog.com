@@ -19,7 +19,7 @@ tags:
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
 
-It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing? Plus, what is the world without a [great open-source A/B testing tool](/blog/best-open-source-ab-testing-tools)?
+It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing? Plus, what is the world without a [great open-source A/B testing tool](/compare/best-open-source-ab-testing-tools)?
 
 Experiments allow you to choose a target metric, choose specific people to run this experiment on, and set how long the experiment runs for.
 
@@ -113,6 +113,6 @@ To solve the Taking-action-without-enough-information problem, we made it clear 
 
 [^1]: If you're looking for how we calculate this, see the [user guide](/docs/user-guides/experimentation)
 
-That's all for this post, we'd love to have you start your own experiments and tell us what you learn. Feel free to open an issue in [our Github repo](https://github.com/PostHog/posthog), join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team, or [submit a ticket](https://app.posthog.com/home#supportModal) if you have feedback to share.
+That's all for this post, we'd love to have you start your own experiments and tell us what you learn. Feel free to open an issue in [our GitHub repo](https://github.com/PostHog/posthog), join us directly for a [call](https://calendly.com/posthog-feedback) with our Product & Engineering team, or [submit a ticket](https://app.posthog.com/home#supportModal) if you have feedback to share.
 
 <NewsletterForm />

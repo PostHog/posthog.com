@@ -17,6 +17,10 @@ import {
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, keyFeatures } from './surveys/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogSurveyPng from 'hoggies/survey.png'
+import hedgehogSpeaker2Png from 'hoggies/speaker-2.png'
+import hedgehogTownCrierPng from 'hoggies/town-crier.png'
 
 export const surveys = {
     ...getTool('surveys'),
@@ -28,7 +32,7 @@ export const surveys = {
     slug: 'surveys',
     teamSlug: 'surveys',
     forumTag: 'surveys',
-    color: 'salmon',
+    color: PRODUCT_COLORS.surveys,
     colorSecondary: 'red',
     shortDescription: 'Ask users anything with no-code surveys',
     pricingDescription:
@@ -139,18 +143,19 @@ export const surveys = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png',
-        alt: 'A hedgehog posting a survey response',
+        src: hedgehogSurveyPng,
+        alt: 'A hedgehog holding up survey faces',
         classes: 'absolute bottom-0 right-0 max-w-md',
         footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
-            alt: 'A hedgehog taking a survey with a rating scale',
+            src: hedgehogTownCrierPng,
+            alt: 'A town crier hedgehog with a bell and a scroll',
         },
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
+            src: hedgehogSurveyPng,
+            crop: [73, 117, 854, 807],
             alt: 'A hedgehog looking at survey results',
         },
     },
@@ -302,8 +307,8 @@ export const surveys = {
         ],
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_284d9e66f4.png',
-        imageAlt: 'PostHog AI and surveys',
+        image: hedgehogSpeaker2Png,
+        imageAlt: 'A hedgehog speaking into a microphone',
         description: 'collect what users say and act on the feedback to ship the fix',
         intro: 'Ask PostHog AI to create surveys, refine targeting, and summarize responses.',
         mcpFeatures: ['surveys'],

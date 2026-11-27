@@ -382,9 +382,19 @@ Work that the callback starts keeps the context after the callback settles, incl
 export { onRequestError } from '@posthog/next'
 ```
 
-Next.js calls this hook when a Server Component, Route Handler, or Server Action throws during a request. When available, the PostHog identity cookie links the exception to the same user and session. Import this hook from `@posthog/next` for both App Router and Pages Router applications.
+Next.js calls this hook when a Server Component, Route Handler, Server Action, or edge middleware throws during a request. The hook links the exception to the user and session from the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` [tracing headers](#tracing-headers), otherwise from the PostHog identity cookie while its session is still active. It also adds the request URL (without the query string), method, path, and user agent. Import this hook from `@posthog/next` for both App Router and Pages Router applications.
 
-Use `createOnRequestError()` when you need to add properties, filter errors, or customize the server client. You can disable automatic browser exception capture with `clientOptions={{ capture_exceptions: false }}`.
+Use `createOnRequestError()` when you need to add properties, filter errors, or customize the server client. It reads the project token from `NEXT_PUBLIC_POSTHOG_KEY`; pass `apiKey` if yours is in another variable. You can disable automatic browser exception capture with `clientOptions={{ capture_exceptions: false }}`.
+
+Next.js does not report errors thrown in `proxy.ts` (Next.js 16) or in Node.js middleware (Next.js 15) to `onRequestError`. Wrap your proxy with `withPostHogProxy` to capture them. It rethrows each error at once, so the response does not wait for PostHog, and `onRequestError` skips an error the wrapper already captured:
+
+```ts file=proxy.ts
+import { postHogMiddleware, withPostHogProxy } from '@posthog/next'
+
+export const proxy = withPostHogProxy(postHogMiddleware({ proxy: true }))
+```
+
+Both need `@posthog/next` 0.11.0 or later. To also capture uncaught exceptions and unhandled promise rejections outside a request, follow the [Next.js error tracking guide](/docs/error-tracking/installation/nextjs).
 
 </Step>
 

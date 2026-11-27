@@ -539,7 +539,7 @@ The code we wrote in the client-side rendering section did all of this after the
 This is done by moving the flag evaluation to the server-side. And because flag evaluation happens on the server-side, we need to install the `posthog-node` library:
 
 ```bash
-npm i posthog-node@5
+npm i posthog-node@6
 ```
 
 We then replace `getStaticProps` in `[id].js` with `getServerSideProps`. This enables us to both get the post details and evaluate feature flags on the server-side. In it, we use `posthog-node` to create a client that we use to `getAllFlags` using the `session.user.email` for the user. This means the user needs to be signed in for this to work.

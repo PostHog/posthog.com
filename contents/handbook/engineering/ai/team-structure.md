@@ -10,7 +10,7 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### The PostHog AI team
 
-<SmallTeam slug="posthog-ai" /> is responsible for the architecture, performance, and UX/UI of the AI platform. We build and maintain the core infrastructure – the MCP server, skills system, PostHog AI in the web, background sandboxed agents, and shared tooling (`search`, `read_data`, `read_taxonomy`, `enable_mode`). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products, like SQL generation or universal filtering.
+The <SmallTeam slug="posthog-ai" /> is responsible for the architecture, performance, and UX/UI of the AI platform. We build and maintain the core infrastructure – the MCP server, skills system, PostHog AI in the web, background sandboxed agents, and shared tooling (`search`, `read_data`, `read_taxonomy`, `enable_mode`). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products, like SQL generation or universal filtering.
 
 ### The PostHog Desktop team
 
@@ -34,7 +34,7 @@ Once you ship a tool or skill, it's automatically available across every surface
 
 ## How the teams connect
 
-Together, these teams form the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy):
+Together, these teams form the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-self-driving-product):
 
 - **Signals** surfaces useful data from PostHog, creates a task with context, and the cloud agent works on it. You review and iterate in PostHog Desktop.
 - **PostHog AI** owns the background sandboxed agents and can start coding agent tasks during chats. These tasks are inspectable in both the web product and PostHog Desktop.
@@ -43,7 +43,7 @@ Together, these teams form the [product autonomy loop](/handbook/engineering/ai/
 
 ## Integration vectors for product teams
 
-There are multiple ways product teams can contribute to PostHog's [product autonomy vision](/handbook/engineering/ai/ai-platform#vision-product-autonomy). These are listed roughly in order of effort, from easiest to most ambitious.
+There are multiple ways product teams can contribute to PostHog's [product autonomy vision](/handbook/engineering/ai/ai-platform#vision-self-driving-product). These are listed roughly in order of effort, from easiest to most ambitious.
 
 ### MCP: Expose your APIs to agents
 
@@ -63,7 +63,7 @@ If you've already exposed your APIs, the next step is explaining how an agent sh
 
 ### Signals: Feed the autonomy loop
 
-If your product produces actionable or near-actionable signals — an insight threshold reached, a new error-tracking issue, a frustration pattern detected — use the signals API so agents can discover these hints and act on them later. Signals are what enable the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy). PostHog Desktop acts on plans generated from these signals.
+If your product produces actionable or near-actionable signals — an insight threshold reached, a new error-tracking issue, a frustration pattern detected — use the signals API so agents can discover these hints and act on them later. Signals are what enable the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-self-driving-product). PostHog Desktop acts on plans generated from these signals.
 
 **Effort**: Low to medium.
 

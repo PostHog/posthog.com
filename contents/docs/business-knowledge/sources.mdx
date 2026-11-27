@@ -74,6 +74,14 @@ Turn this on for guidance that should be in every reply: tone, policies, and com
 
 The text injected from these sources is capped at 20,000 characters combined. PostHog leaves out content past that cap.
 
+## Group sources into libraries
+
+A library is a group of sources and repositories. Use libraries to keep sources organized, and to limit what a search or an agent reads. For example, a key for [your own agent](/docs/business-knowledge/connect-your-agent) can cover one library and nothing else.
+
+Choose libraries when you add a source, or change them on the source's page. On the **Sources** tab, the library filter shows the sources in one library, and **No library** shows the sources that aren't in any.
+
+See [libraries](/docs/business-knowledge/libraries) to create a library and connect an agent to it.
+
 ## Status and checks
 
 ### Source status
@@ -117,6 +125,7 @@ Delete removes the source and its chunks. PostHog records the change in the acti
 | --- | --- |
 | Sources you add | 500 per project |
 | Learned sources | 10,000 per project |
+| Libraries | 100 per project |
 | Chunks | 250,000 per project |
 | Pasted text | 1 MB |
 | Uploaded file | 50 MB |

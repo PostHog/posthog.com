@@ -424,7 +424,7 @@ export const AppLink = ({
                 {badge}
             </span>
             <figcaption
-                className={`text-[13px] font-medium leading-tight ${
+                className={`text-[13px] font-medium leading-tight [overflow-wrap:anywhere] ${
                     source === 'desktop' ? 'text-white' : 'text-primary'
                 } ${orientation === 'row' ? 'text-left' : 'text-center text-balance'}`}
             >

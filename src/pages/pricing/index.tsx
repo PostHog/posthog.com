@@ -25,7 +25,7 @@ import AskMax from 'components/AskMax'
  */
 export default function Pricing(): JSX.Element {
     return (
-        <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
+        <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false}>
             <SEO
                 title="PostHog pricing – Start free, scale when you need"
                 description="97% of companies use PostHog for free. Generous monthly free tiers on every product, usage-based pricing after that, and no surprise bills."

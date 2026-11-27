@@ -59,7 +59,7 @@ He wanted to build it, but I thought it was a terrible idea. I thought it would 
 
 Karl disagreed and built it anyway. It ended up being wildly popular with customers, and changed our entire company strategy!
 
-This success made me realize PostHog could be more than just product analytics. So we built [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), and we’re still extending it with [web analytics](/web-analytics), a [data warehouse](/data-warehouse), and error monitoring (currently in alpha).
+This success made me realize PostHog could be more than just product analytics. So we built [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), and we’re still extending it with [web analytics](/web-analytics), a [data warehouse](/warehouse), and error monitoring (currently in alpha).
 
 And all this because a single engineer disagreed with the CEO.
 
@@ -115,7 +115,7 @@ Now, the outcome of our quarterly planning sessions is a list of things teams ar
 
 2. **Engineers brainstorm what they should build to achieve them**. If needed, they ask for advice or guidance from the exec team, but it’s ultimately up to engineers to decide what they build.
 
-3. **Product teams meet to decide goals**. The output will be a list of things they want to build, and who is owning them. Here’s an example from our <SmallTeam slug="product-analytics" />’s Q4 objectives:
+3. **Product teams meet to decide goals**. The output will be a list of things they want to build, and who is owning them. Here’s an example from our product analytics team’s Q4 objectives:
 
 ![Example of product analytics team's Q4 objectives](https://res.cloudinary.com/dmukukwp6/image/upload/d36eb308_0253_46b1_919e_cf0270cbf02d_1584x1818_b0379e47e4.png)
 

@@ -56,7 +56,7 @@ If it is worth turning into a case study, draft a PR right away while it's still
 - **Keep it concise** - Aim for between 700-1400 words including quotes
 
 ### 6. Review and approval
-PR looking good? Tag the customer in Github for review. You're not asking for copy edits – just a quick fact check. Legal and PR teams will sometimes want to be looped in for approval as well. They might also request using Google Docs instead of GitHub. 
+PR looking good? Tag the customer in GitHub for review. You're not asking for copy edits – just a quick fact check. Legal and PR teams will sometimes want to be looped in for approval as well. They might also request using Google Docs instead of GitHub. 
 
 Do what you need to do. The goal is to get the rubber stamp.
 

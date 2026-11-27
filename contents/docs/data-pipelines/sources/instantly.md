@@ -33,6 +33,8 @@ Instantly API keys are scope-gated. The key needs a read scope for every table y
 
 The `emails` table supports **incremental sync** on `timestamp_created`, so scheduled syncs only fetch emails created since the last run. Instantly rate-limits the emails endpoint to 20 requests per minute, so incremental sync is strongly recommended there – a full refresh of a large inbox can take a while.
 
+The `account_daily_analytics` table supports incremental sync on `date`. The `audit_logs` table supports incremental sync on `timestamp`.
+
 The other tables have no "updated since" filter in the Instantly API, so they sync as full refreshes. They are typically small (campaigns, accounts, lead lists), with `leads` being the largest.
 
 ## Webhooks for real-time events

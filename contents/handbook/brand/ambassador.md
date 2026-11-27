@@ -50,6 +50,36 @@ It's okay to be helpful or respond to posts from frustrated users, but be mindfu
 
 **The simplest test:** would you be comfortable with a screenshot of that tweet being shared in the `#general` Slack channel? If yes, go for it!
 
+### Using your personal accounts for PostHog work
+
+Your social media accounts are your own. PostHog doesn't require you to have one. If you want to use your personal account for work, you can, but we broadly expect you to stay professional.
+
+#### What we expect
+
+If you use social media for work, we expect you to:
+
+- **Disclose that you work at PostHog.** For example, in your bio or when engaging with customers.
+
+- **Engage with others kindly or professionally. This includes not disparaging competitors.**
+
+- **Keep private user data out of personal channels.** Don't ask for it, and don't accept it. If a user needs help with their account, point them to [in-app support](https://app.posthog.com/home#supportModal).
+
+- **Keep confidential information private.** See the list above.
+
+- **Keep your account secure.** At a minimum, enable 2FA, especially if your account is verified or has a PostHog badge. If you think someone else has access to your account, tell the [security team](/teams/security) in `#team-security` immediately.
+
+- **Mute, don't block.** We strongly suggest you don't block people you don't want to hear from. Mute them instead. This keeps them out of your timelines and feeds, but avoids creating issues for the wider team.
+
+If you also use your accounts for other business, such as influencer work or a side project, follow our [side gigs policy](/handbook/people/side-gigs). This includes offers of paid posts and sponsored content.
+
+#### Verification and PostHog badges
+
+If you post a lot for PostHog, we often consider verifying your account or adding a PostHog badge. This comes out of <TeamMember name="Liam Graham" />'s budget, so it isn't guaranteed. Ask him if you want it.
+
+#### Dealing with abuse
+
+We don't expect you to tolerate abuse, harassment, or other troublesome activity, from users or anyone else, because you use your personal account for work. If this happens to you, tell your team lead or a relevant member of the [Blitzscale team](/teams/blitzscale), so we can support you without making the situation worse.
+
 ## Our users are brand ambassadors too
 
 Our brand is ultimately owned by the people who use us, talk about us, and advocate for us. We can shape it, but never fully control it.

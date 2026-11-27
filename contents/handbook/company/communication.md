@@ -27,7 +27,7 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 ## Public by default
 
-We make things public by default because [transparency](/handbook/company/culture#transparency) is core to our culture. The kinds of information we share falls into one of three buckets:
+We make things public by default because [transparency](/handbook/company/culture#were-extremely-transparent) is core to our culture. The kinds of information we share falls into one of three buckets:
 
 -   _Public_ - most things, including our product, roadmap, handbook and strategy.
 -   _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
@@ -123,7 +123,7 @@ Keeping track of everything that's happening in GitHub can be daunting, but it's
 
 To keep on top of this, we suggest going through issues where you've been mentioned regularly. Some tricks which can help are:
 
--   (Highly recommended) [Turn on Github slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
+-   (Highly recommended) [Turn on GitHub slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
     -   This will send you a slack notification when someone mentions you in a PR or issue. You can also get periodic reminders for PRs that you've been requested to review.
 -   (Highly recommended) Join the `#github-rfcs` channel on Slack. This is where we post all the RFCs.
 -   [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and use filters to focus on your teams activity.
@@ -131,7 +131,7 @@ To keep on top of this, we suggest going through issues where you've been mentio
 
 #### Tip for easy searching through everything
 
-To search all code, PRs and issues ever written at PostHog you can search everything in the PostHog organization on Github. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
+To search all code, PRs and issues ever written at PostHog you can search everything in the PostHog organization on GitHub. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
 
 For extra convenience, you can also add this search as a 'search engine' in Chrome. That way you can type in `ph <tab>` and instantly find anything. To do that, follow these steps:
 
@@ -322,3 +322,11 @@ By email: Only trust `@posthog.com` senders. Verify via the company directory. B
 Phone/SMS/WhatsApp: **Never** used for initiating requests, approvals, or asking for sensitive info.
 
 If something feels off, it probably is. When in doubt, slow down and verify in Slack.
+
+## Disaster recovery
+
+### If Slack is down
+
+If Slack has an outage, we use [Google Chat](https://chat.google.com/app/home) as our backup. Sign in with your `@posthog.com` Google account. We'll also send an email to everyone to say that we've moved to Google Chat.
+
+Google Chat is only a temporary fallback. Move back to Slack when it is up again.

@@ -4,24 +4,33 @@ import React from 'react'
 import { PocketGuideVolume, pocketGuideUrl } from '../../../constants/pocketGuides'
 import usePostHog from '../../../hooks/usePostHog'
 
+import { volumeArt } from './volumeArt'
+
 interface BookProps {
     volume: PocketGuideVolume
     /** Count configured for this volume, printed the way a series prints its contents. */
     count: number
 }
 
-/** One volume as a spine. Fixed height across the series – the count is printed, not implied by size. */
-function Spine({ volume, count }: BookProps): JSX.Element {
-    // Title on its own line – sharing a row with the meta left it ~70px, which clipped every title.
+/** One volume as a card tinted in its series color, led by the hoggie from its cover. */
+function ShelfCard({ volume, count }: BookProps): JSX.Element {
+    const Art = volumeArt(volume.id)
     return (
-        <article className="relative flex flex-col gap-0.5 overflow-hidden rounded-sm border border-primary bg-primary py-3 pl-5 pr-4 shadow-sm">
-            <span aria-hidden="true" className={`absolute inset-y-0 left-0 w-1.5 bg-${volume.token}`} />
-            <h3 className="m-0 truncate text-sm font-bold leading-tight text-primary">{volume.title}</h3>
-            <p className="m-0 flex items-baseline gap-2 text-[10px] uppercase tracking-[0.16em] text-secondary tabular-nums">
-                <span>Vol. {volume.volume}</span>
-                <span aria-hidden="true">&middot;</span>
-                <span>{volume.comingSoon ? 'Soon' : `${count} ${count === 1 ? 'guide' : 'guides'}`}</span>
-            </p>
+        <article className="relative flex items-center gap-3 overflow-hidden rounded-sm border border-primary bg-primary py-2 pl-2 pr-4 shadow-sm">
+            <span aria-hidden="true" className={`absolute inset-0 opacity-15 bg-${volume.token}`} />
+            <span aria-hidden="true" className="relative flex size-11 shrink-0 items-center justify-center">
+                {Art ? <Art size={44} /> : null}
+            </span>
+            <div className="relative flex min-w-0 flex-1 flex-col gap-0.5">
+                <h3 className="m-0 truncate text-sm font-bold leading-tight text-primary">{volume.title}</h3>
+                <p className="m-0 text-[10px] uppercase tracking-[0.16em] text-secondary tabular-nums">
+                    {volume.comingSoon ? 'Soon' : `${count} ${count === 1 ? 'chapter' : 'chapters'}`}
+                </p>
+            </div>
+            <span className="relative ml-auto text-2xl font-bold leading-none text-primary/40 tabular-nums">
+                <span className="sr-only">Volume </span>
+                {String(volume.volume).padStart(2, '0')}
+            </span>
         </article>
     )
 }
@@ -33,7 +42,7 @@ export default function Book(props: BookProps): JSX.Element {
     if (props.volume.comingSoon) {
         return (
             <li className="opacity-60">
-                <Spine {...props} />
+                <ShelfCard {...props} />
             </li>
         )
     }
@@ -54,7 +63,7 @@ export default function Book(props: BookProps): JSX.Element {
             >
                 {/* A small lift, not the cover-opening flip the face-out shelf uses. */}
                 <div className="transition-transform duration-200 ease-out motion-safe:group-hover:scale-[1.03]">
-                    <Spine {...props} />
+                    <ShelfCard {...props} />
                 </div>
             </Link>
         </li>

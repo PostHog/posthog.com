@@ -1,0 +1,456 @@
+---
+date: 2026-11-20
+title: 'In-depth: PostHog vs Google Analytics 4'
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/comparisons_blog_post_template_1_784c98f99f.png
+featuredImageType: full
+author:
+    - natalia-amorim
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: PostHog vs Google Analytics 4 in-depth tool comparison
+    metaDescription: Looking for the best web analytics tool? Compare PostHog vs GA4 on analytics, integrations, compliance, pricing, and more to find the right fit.
+---
+
+PostHog and [Google Analytics 4 (GA4)](/compare/best-ga4-alternatives) are both popular tools for understanding how users interact with your website or app – but they're built with very different goals.
+
+1. **GA4** is designed to track traffic, campaigns, and user behavior across websites and apps, with tight integration into Google's advertising ecosystem. It's one of the most widely deployed analytics tools in the world, and the default choice for teams who want marketing and attribution data in a familiar interface. It's built for marketers and growth teams.
+
+2. **PostHog** is your product's context layer. On top of [web analytics](/web-analytics), it includes [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more. A [data warehouse](/warehouse) and [data pipelines](/data-pipelines) tie it all together and unify that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
+
+If you're looking for a [GA4 alternative](/compare/best-ga4-alternatives) – whether for privacy reasons, because you need more than web analytics, or because you just don't like GA4 – this comparison will help you decide if PostHog is the right fit.
+
+## How is PostHog different?
+
+### 1. We're an all-in-one platform
+
+PostHog combines [product analytics](/product-analytics) and [web analytics](/web-analytics) with [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [experiments](/experiments), [surveys](/surveys), a baked-in [data warehouse](/docs/data-warehouse), and more into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+
+GA4 is a powerful web analytics tool, but it doesn't include session replay, feature flags, A/B testing, error tracking, or surveys. For those features, you'd need separate tools like [FullStory](/compare/posthog-vs-fullstory), [LaunchDarkly](/compare/posthog-vs-launchdarkly), and [Optimizely](/compare/posthog-vs-optimizely), and a way to stitch the data together.
+
+### 2. It's built for developers
+
+This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/data-warehouse/sql) so you can analyze data how you want. Your agents get the same access you do, through a free [MCP server](/docs/model-context-protocol), a [Slack app](/slack), and a [CLI](/docs/cli). 
+
+We're open source, so you can inspect [our source code](https://github.com/PostHog). And we ship fast – check out [the weekly changelog](/changelog) to see what's new.
+
+GA4 is primarily designed for marketers and growth teams. It integrates tightly with Google Ads and the broader Google Marketing Platform. For developers, it has reporting and admin APIs, BigQuery export, and an MCP server you run yourself, but you need BigQuery to query raw events with SQL.
+
+### 3. Transparent and cheap pricing (forever)
+
+We pride ourselves on [having a generous free tier](/pricing). Web analytics is billed with product analytics, so your first 1 million events every month are free across both, and 97% of companies use PostHog for free. 
+
+Beyond the free tier, our pricing is usage-based and transparent. Anonymous events, which is what most website traffic is, start at $0.00005 each and get cheaper as your volume grows. There's no minimum spend, no per-seat charge, and no annual contract, and you can set [billing limits](/docs/billing/limits-alerts) so you're never surprised. 
+
+Want to know how much we'll charge? See our [pricing calculator](/pricing).
+
+GA4's core product is free, but once you hit the limits of the free tier you'll need to evaluate GA360, which starts at approximately [$50,000/year according to third party sources](/blog/google-analytics-cost) (Google doesn't publish pricing).
+
+<details>
+<summary>PostHog vs Google Analytics: the short version</summary>
+
+- **Choose GA4** if marketing owns your analytics and your budget goes through Google. It's free, and it links natively to Google Ads, Search Console, AdSense, and Ad Manager, so ad costs and attribution show up next to your traffic reports. It also predicts purchase and churn for properties with enough data, and it's the default most marketing teams and agencies already work in.
+- **Choose PostHog** if you need to know what people do after they land. Every visit is tied to the same user's [session replays](/session-replay), [funnels](/docs/product-analytics/funnels), [errors](/error-tracking), and [feature flags](/feature-flags), so you can go from a traffic source to what those users did in your product. You can query the raw events [with SQL](/docs/data-warehouse/sql) without exporting them, choose [EU hosting](/blog/posthog-cloud-eu), and sign a [BAA for HIPAA](/docs/privacy/hipaa-compliance), and most products have their own [free tier](/pricing).
+
+Both are free to start, cover the core web analytics reports, export to BigQuery, and have an MCP server for your agents. You can also run them side by side, with GA4 for ad reporting and PostHog for product.
+
+</details>
+
+<WizardCTA
+    title="Set up PostHog with one command"
+    subtitle="The wizard installs PostHog in your app and starts capturing pageviews and events automatically."
+    learnMoreTo="/docs/web-analytics/installation"
+/>
+
+## Comparing PostHog and Google Analytics
+
+### Analytics
+
+GA4 is primarily built for web analytics, so this is where the comparison matters most. PostHog's [web analytics](/web-analytics) dashboard covers all the core metrics – traffic sources, pageviews, sessions, UTM tracking, and more – while also adding [web vitals](/docs/web-analytics/web-vitals) monitoring, which GA4 lacks, and a [cookieless tracking](/docs/privacy/data-collection#cookieless-tracking) mode that counts visitors with a privacy-preserving hash instead of cookies.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.sessions',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+        'web_analytics.features.entry_exit_paths',
+        'web_analytics.features.outbound_clicks',
+        'web_analytics.features.conversions',
+        'web_analytics.features.custom_channel_types',
+        'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'web_analytics.features.search_tools',
+    ]}
+/>
+</p>
+
+PostHog goes significantly deeper on product analytics. [Group analytics](/docs/product-analytics/group-analytics) lets you analyze behavior at the account or company level (ideal for B2B SaaS), which GA4 has no built-in way to do. [Person profiles](/docs/data/persons) tie an identified user's events, [session replays](/docs/session-replay), and [feature flags](/docs/feature-flags) together. You can also write [SQL](/docs/data-warehouse/sql) against the raw events behind any [funnel](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), or [user paths](/docs/product-analytics/paths) insight, and ask [PostHog AI](/docs/posthog-ai/start-here) what correlates with conversion or drop-off.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'product_analytics.group_analytics',
+        'product_analytics.features.user_profiles',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.retention',
+        'product_analytics.features.monetization_analytics',
+        'product_analytics.features.advertising_analytics',
+        'product_analytics.features.real_time_view',
+        'product_analytics.features.predictive_insights',
+    ]}
+/>
+</p>
+
+You can also go deeper on user behavior with [heatmaps](/docs/toolbar/heatmaps), which GA4 doesn't have. They're free in PostHog: heatmap data doesn't add to your bill, and you get clickmaps, scrollmaps, rage clicks, and mouse movement. There are also [formulas](/docs/product-analytics/trends/formulas) and [custom SQL insights](/docs/data-warehouse/sql).
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'heatmaps.features.heatmaps',
+        'heatmaps.features.clickmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.movement_maps',
+        'product_analytics.funnels.features.correlation_analysis',
+        'product_analytics.lifecycle',
+        'product_analytics.stickiness',
+        'product_analytics.insights.features.formula_mode',
+        'product_analytics.insights.features.sql_editor',
+        'product_analytics.features.toolbar',
+    ]}
+/>
+</p>
+
+### Platform
+
+When you choose PostHog, you get more than analytics.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'error_tracking',
+        'experiments',
+        'logs',
+        'workflows',
+        'heatmaps',
+        'ai_observability',
+        'surveys',
+        'cdp',
+        'data_warehouse',
+    ]}
+/>
+</p>
+
+### AI and MCP
+ 
+Both tools now have built-in AI and an MCP server, so the question is what your agents can see in each.
+ 
+- **GA4** has Ask Advisor, a Gemini-powered assistant in beta for English-language properties, AI overviews that summarize what changed on the Home page and in reports, Analytics Intelligence for automated insights and anomaly detection, and predictive metrics for properties with enough purchase or churn data. Its [MCP server](https://github.com/googleanalytics/google-analytics-mcp) is open source and left experimental status in November 2026. You run it yourself, and it's read-only by default.
+
+- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) (in beta) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents can open PRs.
+
+The difference is what's behind them. GA4's AI and MCP server work from your traffic and conversion reports. PostHog's work from those plus your replays, errors, logs, flags, and external data in the warehouse.
+
+### Price comparison
+  
+**PostHog charges based on usage.** Products come with a [free monthly allowance](/pricing), and past that you pay published per-unit rates, with billing limits you can set on most products. The price covers the infrastructure, upgrades, and support, and we've written up [what you pay for per event](/docs/billing/what-you-pay-for-per-event).
+  
+**GA4 is free, and the paid tier is sold through sales.** Standard properties cost nothing, but have limits on sampling, data retention, and BigQuery exports. Analytics 360 raises those limits. Google doesn't publish a price for it, and third-party estimates [start at around $50,000 a year](/blog/google-analytics-cost).
+ 
+#### PostHog and Google Analytics pricing comparison
+ 
+| | PostHog | GA4 |
+|---|---|---|
+| **Free plan** | 1M events, 5,000 web + 2,500 mobile replays, 1M flag requests, 100k errors, 10 GB logs, 1M warehouse rows, and 1,500 survey responses a month | Free, with explorations sampled above 10M events, up to 14 months of event-level data, and a daily BigQuery export of 1M events |
+| **Paid plans** | No base fee; usage-based per product, with a billing limit you can set on most products | Analytics 360, sold through Google's sales team and sales partners |
+| **Public pricing** | Yes, with a calculator | No |
+| **Startup program** | [$50k in credits for 12 months](/startups) (under 2 years old, under $5M raised) | Not applicable |
+| **Self-hosting** | Free (MIT, open core), unsupported | None |
+
+### Integrations
+
+It's hard to import data into Google Analytics because:
+
+1. The data type and format you're allowed to [import](https://support.google.com/analytics/answer/10071301) is restrictive.
+2. Most imports mean uploading CSV files manually or setting up an SFTP server. Google's newer [import connectors](https://support.google.com/analytics/answer/16308752) for sources like BigQuery, Snowflake, and Google Sheets only cover campaign data and purchase events.
+
+In contrast, PostHog is built to be your single source of truth, so it's simple to import data from other sources using our [built-in data warehouse](/docs/data-warehouse), or send PostHog data to other tools using our [realtime destinations](/docs/data-pipelines/destinations).
+
+Below is a comparison of some of the most popular apps – see our [data pipeline](/docs/data-pipelines) and [warehouse docs](/docs/data-warehouse) for a complete list of integrations.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'platform.integrations.stripe',
+        'platform.integrations.zapier',
+        'platform.integrations.hubspot',
+        'platform.integrations.salesforce',
+        'platform.integrations.intercom',
+        'platform.integrations.customer_io',
+        'platform.integrations.sentry',
+        'platform.integrations.google_ads',
+        'platform.integrations.google_search_console',
+        'platform.integrations.bigquery',
+    ]}
+/>
+</p>
+
+### Security and compliance
+
+PostHog makes [GDPR compliance](/compare/best-gdpr-compliant-analytics-tools) easy by letting you choose where your data is hosted: EU or US. 
+
+Google also offers various [privacy controls](https://support.google.com/analytics/answer/9019185), but you can't choose where your data is stored – a meaningful concern for teams in regulated industries or those serving EU users.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'ga4']}
+    rows={[
+        'platform.deployment.eu_hosting',
+        'platform.security.hipaa_ready',
+        'platform.security.data_anonymization',
+        'platform.security.role_based_access_control',
+        'platform.security.security_certification',
+        'platform.security.saml_sso',
+        'platform.security.two_factor_auth',
+    ]}
+/>
+</p>
+
+## When to choose PostHog vs Google Analytics 4
+
+- Want one platform that goes beyond [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), and [error tracking](/error-tracking), plus a [data warehouse](/warehouse) for your business data and agents that work from [Slack](/slack) or [the MCP](/mcp)? Go with **PostHog**.
+- Need deep integration with Google Ads, Search Console, and the broader Google Marketing Platform for marketing attribution and campaign reporting? **GA4** is built for that.
+
+### Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – [SQL access](/docs/data-warehouse/sql), an [MCP server](/mcp), open-source codebase, [error tracking](/error-tracking), and [AI observability](/ai-observability). Everything a developer needs to understand users, ship features, and debug problems without leaving the platform.
+
+**For marketing and growth teams**
+- **GA4** – Best-in-class integration with Google Ads, Search Console, and Google's attribution ecosystem. If your team lives in Google's marketing stack, GA4 is the natural fit.
+
+**For product managers and UX teams**
+- **PostHog** – [Funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [session replay](/session-replay), and [surveys](/surveys) in one place means PMs can answer behavioral questions and gather user feedback without stitching together multiple tools.
+
+**For B2B SaaS companies**
+- **PostHog** – [Group analytics](/docs/product-analytics/group-analytics) enables account-level analysis, so you can understand behavior at the company level, not just the individual user level. 
+
+**For privacy-conscious and regulated organizations**
+- **PostHog** – [EU hosting](/blog/posthog-cloud-eu) in Frankfurt, a [BAA for HIPAA](/docs/privacy/hipaa-compliance) on the Boost, Scale, and Enterprise packages, [cookieless tracking](/docs/privacy/data-collection#cookieless-tracking), and raw data access via the built-in [data warehouse](/warehouse). GA4 doesn't offer HIPAA compliance or EU-only data residency.
+
+**For content and media sites**
+- **GA4** – If your primary need is understanding content performance, audience demographics, and ad revenue attribution across a high-traffic publishing site, GA4's native integrations with Google AdSense, Ad Manager, and Search Console are hard to beat. 
+
+**For early-stage startups**
+- **PostHog** – A single platform that covers analytics, replays, feature flags, and more from day one. The [generous free tier](/pricing) includes 1 million events, 5,000 web and 2,500 mobile session replays, and 1 million feature flag requests per month. [Startups can also qualify for $50k in free credits](/startups).
+
+**For enterprise teams**
+- **Tied** – GA360 raises the sampling threshold in explorations from 10 million to 1 billion events, adds unsampled explorations, and keeps event data for up to 50 months, with deep Google Marketing Platform integration for large marketing organizations. PostHog offers [SSO enforcement](/docs/settings/authentication/sso), a [BAA for HIPAA compliance](/docs/privacy/hipaa-compliance), priority support, and a complete product development stack with transparent pricing. 
+
+<WizardCTA
+    title="Start your move from Google Analytics"
+    subtitle="The wizard installs PostHog in your app in minutes. Our migration guide covers the rest."
+    learnMoreTo="/docs/migrate/google-analytics"
+/>
+
+## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+GA4 can tell you where your visitors came from and which pages they viewed; PostHog knows that too, as well as what they did in your product, what they saw, what broke, which flags they were in, and what they pay you. That's because [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), and [AI observability](/ai-observability) all share one model of users and sessions.
+ 
+The [data warehouse](/warehouse) and [data pipelines](/data-pipelines) bring in the business data that lives elsewhere, like Stripe, HubSpot, Postgres, or Google Ads, and push data back out, so your agents can read across all of it. They can work from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp), and they see your whole product, not just your traffic.
+ 
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+
+<summary>Does PostHog have reports, dimensions, and other GA4 features?</summary>
+
+Yes, PostHog has much of the same functionality as Google Analytics, but we use different terminology. Here’s a quick comparison of the two:
+
+| GA4 name | PostHog equivalent | What it is |
+|---|---|---|
+| Report or exploration | [Insight](/docs/product-analytics/insights) | Query and filter analytics data and visualize results. Types include trends, funnels, retention, and more. |
+| Dimensions | [Properties](/docs/data/events) | Additional details added to events, persons, and groups, such as location, browser, and status. |
+| Dashboard | [Dashboard](/docs/product-analytics/dashboards) | A collection of insights displayed together. |
+| Audience | [Cohort](/docs/data/cohorts) | A set of users grouped by shared properties or behaviors. |
+| Segment | [Filter](/docs/product-analytics/trends/filters) | A way to create a subset of your data. |
+| Key event (formerly conversion) | [Conversion goal](/docs/web-analytics/conversion-goals) or [action](/docs/data/actions) | An event or collection of events representing a target behavior. |
+| Client ID | [Distinct ID](/docs/getting-started/identify-users) | A unique identifier for a user. |
+| Measurement ID | [Project token](/docs/settings/projects) | The unique identifier for your project, used to send data to your PostHog instance. |
+
+</details>
+
+<details>
+<summary>What are the main differences between PostHog and Google Analytics?</summary>
+
+- **Scope:** GA4 covers web and app analytics for marketing; PostHog adds session replay, feature flags, experiments, error tracking, surveys, logs, AI observability, and a data warehouse
+- **Pricing:** GA4 is free with limits on sampling, retention, and exports, and Analytics 360 is sold through sales; PostHog has a free tier and then published usage-based pricing
+- **Ads and attribution:** GA4 links natively to Google Ads, Search Console, AdSense, and Ad Manager; PostHog's [marketing analytics](/docs/web-analytics/marketing-analytics) is in beta
+- **Data access:** PostHog lets you query raw events with SQL in the app; GA4 needs the BigQuery export for that
+- **Privacy and compliance:** PostHog offers EU hosting in Frankfurt and a BAA on its Boost, Scale, and Enterprise packages; GA4 has no EU-only data residency and no BAA
+- **Agents:** PostHog's MCP server is hosted and can read and write across its products; Google's is self-run and read-only by default
+- **Open source:** PostHog is open source (MIT, open core); GA4 is closed source
+
+</details>
+
+<details>
+<summary>What are the main similarities between PostHog and Google Analytics?</summary>
+
+Both:
+- Track pageviews, sessions, traffic sources, UTMs, and conversions
+- Are event-based, with custom events and properties
+- Offer funnels, user paths, and retention analysis
+- Measure websites and mobile apps
+- Have a free plan
+- Exclude known bot traffic by default
+- Export to BigQuery and have an MCP server
+
+</details>
+
+<details>
+<summary>Can PostHog replace Google Analytics?</summary>
+
+Yes, for most use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. PostHog's [web analytics](/web-analytics) covers the core reports most teams use in GA4, including traffic sources, pageviews, sessions, bounce rate, UTMs, and [conversion goals](/docs/web-analytics/conversion-goals), and you can install it through [Google Tag Manager](/docs/libraries/google-tag-manager).
+ 
+The main exception is Google's ad ecosystem. GA4 links natively to Google Ads, Search Console, AdSense, and Ad Manager, and PostHog's [marketing analytics](/docs/web-analytics/marketing-analytics) is still in beta. If your reporting depends on Google's attribution, run both. See our [guide to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+ 
+</details>
+
+<details>
+<summary>How much do PostHog and Google Analytics cost?</summary>
+
+**Google Analytics 4** is free for most users. However, there are limits: GA4 free keeps event-level data for explorations for up to 14 months, applies data sampling to large exploration queries (over 10M events), and limits the daily BigQuery export to 1 million events.
+
+For teams that consistently hit these limits, **Google Analytics 360 (GA360)** is the enterprise tier. Pricing isn't publicly listed – it's sold through Google's sales team and sales partners, and [third-party estimates](/blog/google-analytics-cost) start at around $50,000 a year.
+
+**PostHog** uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required. Every month you get 1 million analytics events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests, 1,500 survey responses, and more for free. 
+
+After the free allowance, you pay only for what you use, with pricing that scales down at volume. You can set [billing limits](/docs/billing/limits-alerts) on most products to avoid surprises.
+
+</details>
+
+<details>
+<summary>Does PostHog offer a free trial?</summary>
+
+With PostHog, it's free to get started – no trial needed. You get a generous monthly free allowance of events, replays, feature flag requests, and more. If you stay within those limits, PostHog is free forever. 
+
+See our [pricing page](/pricing) for the full breakdown.
+
+</details>
+
+<details>
+<summary>Can I migrate from Google Analytics to PostHog?</summary>
+
+Yes – see our [Google Analytics to PostHog migration guide](/docs/migrate/google-analytics) for step-by-step instructions. You can also run PostHog alongside GA4 during a transition period, since both can be deployed simultaneously.
+
+</details>
+
+<details>
+<summary>Does PostHog block bots by default?</summary>
+
+Yes, **PostHog's** JavaScript SDK blocks most known bots by default, so they never send events. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default). 
+
+In GA4, bot filtering is also on by default, but the filter lists differ – this can cause discrepancies between the two tools.
+
+</details>
+
+<details>
+<summary>What about ad blockers?</summary>
+
+We recommend [deploying a reverse proxy](/docs/advanced/proxy), which lets you send events to PostHog using your own domain. Events sent from your own domain are far less likely to be intercepted by tracking blockers, giving you more complete data. 
+
+We have reverse proxy setup guides for AWS CloudFront, Caddy, Cloudflare, Netlify, Vercel, Railway, and more.
+
+</details>
+
+<details>
+<summary>Does PostHog have session replay?</summary>
+
+Yes. **PostHog** includes [session replay](/session-replay) with console logs, network request monitoring, a DOM explorer, and performance metrics – built for debugging as much as UX analysis. [Replay Vision](/docs/replay-vision) uses AI to scan and summarize recordings for you. 
+
+GA4 does not include session replay.
+
+</details>
+
+<details>
+<summary>Does PostHog have feature flags and A/B testing?</summary>
+
+Yes. PostHog includes both [feature flags](/feature-flags) and [experiments](/experiments) natively, tightly integrated with analytics and session replay. GA4 does not offer either of these features.
+
+</details>
+
+<details>
+<summary>Does GA4 support BigQuery export for free?</summary>
+
+Yes. Standard GA4 properties include a native BigQuery export, with the daily export capped at 1 million events. You can use BigQuery's free sandbox, but you pay BigQuery for anything beyond its limits and for streaming export, which has no event cap. GA360 raises the daily limit to billions of events.
+
+Not that you asked, but PostHog also has a [BigQuery batch export](/docs/data-pipelines/batch-exports/bigquery). 
+
+</details>
+
+<details>
+<summary>Is PostHog GDPR-compliant and HIPAA-compliant?</summary>
+
+Yes. **PostHog** [supports GDPR compliance](/docs/privacy/gdpr-compliance) with EU hosting in Frankfurt and cookieless tracking, offers a [BAA for HIPAA](/docs/privacy/hipaa-compliance) on the Boost, Scale, and Enterprise packages, and is SOC 2 Type 2 certified. 
+
+GA4 does not support HIPAA and doesn't offer EU-only data residency.
+
+</details>
+
+<details>
+<summary>Are there discounts for non-profits and startups?</summary>
+
+Yes. Non-profit organizations [can get an additional discount](/handbook/growth/sales/contract-rules#non-profit-discounts) when they prepay for PostHog credits. 
+
+Startups can apply for $50,000 in free credits (plus additional perks) through the [PostHog for Startups program](/startups).
+
+</details>
+
+<details>
+<summary>What are the best alternatives to Google Analytics in 2026?</summary>
+
+The [top GA4 alternatives](/compare/best-ga4-alternatives) include:
+
+- **[PostHog](/web-analytics):** Best all-in-one platform for product and engineering teams wanting analytics, replay, feature flags, experiments, and more together
+- **[Plausible](/compare/posthog-vs-plausible):** Best lightweight, privacy-focused option for simple web analytics
+- **[Matomo](/compare/posthog-vs-matomo):** Best self-hosted GA alternative with full data ownership
+- **[Amplitude](/compare/posthog-vs-amplitude):** Best for marketing-led teams needing advanced product analytics
+- **[Mixpanel](/compare/posthog-vs-mixpanel):** Best for product teams wanting event-based analytics with a clean UI
+
+See our full guide to [GA4 alternatives](/compare/best-ga4-alternatives) for more options.
+
+</details>

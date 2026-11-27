@@ -130,40 +130,6 @@ Unlike the other tables, the `sessions` table stores all its properties as separ
 
 The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
 
-### `session_replay_features`
-
-The `session_replay_features` table contains aggregated behavioral metrics for [Session Replay](/docs/session-replay) sessions. It's useful for analyzing user interaction patterns, detecting frustration signals like rage clicks and dead clicks, and understanding session quality.
-
-Some of the columns in the `session_replay_features` table are:
-
-| Column                            | Description                                                          |
-| --------------------------------- | -------------------------------------------------------------------- |
-| `session_id`                      | Unique identifier for the session                                    |
-| `distinct_id`                     | Unique identifier for the user                                       |
-| `min_first_timestamp`             | Timestamp of the first event in the session                          |
-| `max_last_timestamp`              | Timestamp of the last event in the session                           |
-| `event_count`                     | Total number of events in the session                                |
-| `click_count`                     | Number of click events                                               |
-| `keypress_count`                  | Number of keypress events                                            |
-| `rage_click_count`                | Number of rage clicks detected                                       |
-| `dead_click_count`                | Number of dead clicks detected                                       |
-| `scroll_event_count`              | Number of scroll events                                              |
-| `total_scroll_magnitude`          | Total scroll distance                                                |
-| `max_scroll_y`                    | Maximum scroll depth reached                                         |
-| `mouse_distance_traveled`         | Total distance traveled by the mouse in pixels                       |
-| `mouse_direction_change_count`    | Number of mouse direction changes                                    |
-| `page_visit_count`                | Number of pages visited                                              |
-| `console_error_count`             | Number of console errors                                             |
-| `console_error_after_click_count` | Console errors that occurred after a click                           |
-| `network_request_count`           | Number of network requests                                           |
-| `network_failed_request_count`    | Number of failed network requests                                    |
-| `max_idle_gap_ms`                 | Maximum idle time between actions in milliseconds                    |
-| `text_selection_count`            | Number of text selections                                            |
-| `unique_url_count`                | Count of unique URLs (requires `uniqExactMerge()` to query)          |
-| `unique_click_target_count`       | Count of unique click targets (requires `uniqExactMerge()` to query) |
-
-> **Note:** The `unique_url_count` and `unique_click_target_count` columns store ClickHouse aggregate function states. Wrap them with `uniqExactMerge()` in your query to get the actual count, e.g. `SELECT uniqExactMerge(unique_url_count) FROM session_replay_features`.
-
 ### `query_log`
 
 The `query_log` table provides access to query execution metadata and performance metrics. You can learn more about it in the [query log data docs](/docs/data/query-log).
@@ -448,14 +414,22 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 
 The `system.event_definitions` table contains the [event definitions](/docs/data/events#managing-event-definitions) in your project: every event PostHog has ingested or that someone defined ahead of time. It has one row per event name.
 
-| Column         | Description                                                                                        |
-| -------------- | -------------------------------------------------------------------------------------------------- |
-| `id`           | Unique identifier for the event definition                                                         |
-| `team_id`      | Team ID the event definition belongs to                                                            |
-| `name`         | Event name, like `$pageview` or `signed_up`                                                        |
-| `created_at`   | When the event was first seen or defined                                                           |
-| `last_seen_at` | When the event was last ingested (null if it hasn't been seen since PostHog started tracking this) |
-| `tags.names`   | Sorted list of the tag names applied to the event                                                  |
+| Column           | Description                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| `id`             | Unique identifier for the event definition                                                         |
+| `team_id`        | Team ID the event definition belongs to                                                            |
+| `name`           | Event name, like `$pageview` or `signed_up`                                                        |
+| `created_at`     | When the event was first seen or defined                                                           |
+| `last_seen_at`   | When the event was last ingested (null if it hasn't been seen since PostHog started tracking this) |
+| `tags.names`     | Sorted list of the tag names applied to the event                                                  |
+| `description`    | Description of the event (null if nobody described it)                                             |
+| `owner_id`       | User ID of the event's owner (null if it has no owner)                                             |
+| `verified`       | Whether someone marked the event as verified (1 = yes, 0 = no)                                     |
+| `verified_at`    | When someone marked the event as verified (null if it isn't verified)                              |
+| `verified_by_id` | User ID of the person who marked the event as verified                                             |
+| `hidden`         | Whether someone marked the event as hidden (1 = yes, 0 = no)                                       |
+| `updated_at`     | When someone last edited the event's metadata (null if nobody edited it)                           |
+| `updated_by_id`  | User ID of the person who last edited the event's metadata                                         |
 
 For example, to find events that stopped arriving more than 30 days ago:
 
@@ -465,6 +439,16 @@ FROM system.event_definitions
 WHERE last_seen_at < now() - INTERVAL 30 DAY
 ORDER BY last_seen_at
 ```
+
+The columns from `description` to `updated_by_id` contain the metadata that your team sets on the [events management page](https://app.posthog.com/data-management/events): the description, the owner, and the **Verified** or **Hidden** status. `SELECT *` doesn't return these columns, so name them in your query. For example, to list the events that have a description:
+
+```sql
+SELECT name, description, verified, hidden
+FROM system.event_definitions
+WHERE description IS NOT NULL AND description != ''
+```
+
+Keep the `IS NOT NULL` check. An event without metadata returns null for `description`, and HogQL treats `NULL != ''` as true. Without the check, the query also returns events that have no description.
 
 > **Note:** This table is scoped by `team_id`, so in a project with multiple environments it can return fewer events than the REST API.
 
@@ -582,8 +566,17 @@ The `system.property_definitions` table contains the property definitions in you
 | `property_type`    | Detected value type: `String`, `Numeric`, `Boolean`, `DateTime`, or `Duration` (null if not detected yet) |
 | `is_numerical`     | Whether the property's values can be used in numeric aggregations (1 = yes, 0 = no)                       |
 | `tags.names`       | Sorted list of the tag names applied to the property                                                      |
+| `description`      | Description of the property (null if nobody described it)                                                 |
+| `verified`         | Whether someone marked the property as verified (1 = yes, 0 = no)                                         |
+| `verified_at`      | When someone marked the property as verified (null if it isn't verified)                                  |
+| `verified_by_id`   | User ID of the person who marked the property as verified                                                 |
+| `hidden`           | Whether someone marked the property as hidden (1 = yes, 0 = no)                                           |
+| `updated_at`       | When someone last edited the property's metadata (null if nobody edited it)                               |
+| `updated_by_id`    | User ID of the person who last edited the property's metadata                                             |
 
-> **Note:** Properties that [property access control](/docs/settings/property-access-control) hides from you are not included, the same as in the properties list in data management. Like `system.event_definitions`, this table is scoped by `team_id`, so in a project with multiple environments it can return fewer properties than the REST API.
+The metadata columns, from `description` to `updated_by_id`, work the same way as in `system.event_definitions` above. `SELECT *` doesn't return them, so name them in your query. To filter on `description`, check for `IS NOT NULL` as well as `!= ''`.
+
+> **Note:** Properties that [property access control](/docs/settings/property-access-control) hides from you are not included, the same as in the properties list in data management. Their metadata isn't included either. Like `system.event_definitions`, this table is scoped by `team_id`, so in a project with multiple environments it can return fewer properties than the REST API.
 
 ### `system.support_tickets`
 

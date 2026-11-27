@@ -45,9 +45,9 @@ Some Skyvern tables sync incrementally, so later runs only fetch new or updated 
 
 ## Supported tables
 
-<CalloutBox icon="IconInfo" title="run_timeline is disabled by default" type="fyi">
+<CalloutBox icon="IconInfo" title="Some tables are disabled by default" type="fyi">
 
-The `run_timeline` table is disabled by default because it makes one API request per run. For accounts with many runs, this can significantly impact sync performance. To enable it, select it during source setup or edit your existing source configuration.
+The `run_timeline`, `run_tags`, and `run_artifacts` tables are disabled by default because they each make one API request per run. For accounts with many runs, this can significantly impact sync performance. To enable them, select them during source setup or edit your existing source configuration.
 
 </CalloutBox>
 

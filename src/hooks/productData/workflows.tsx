@@ -18,6 +18,9 @@ import {
 import { features } from './workflows/features'
 import { applications, keyFeatures } from './workflows/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogTransformerPng from 'hoggies/transformer.png'
+import hedgehogWorkflowsPng from 'hoggies/workflows.png'
 
 export const workflows = {
     ...getTool('workflows_emails'),
@@ -26,7 +29,7 @@ export const workflows = {
     type: 'workflows_emails',
     teamSlug: 'workflows',
     forumTag: 'workflows',
-    color: 'teal',
+    color: PRODUCT_COLORS.workflows_emails,
     colorSecondary: 'green-2',
     includeAddonRates: true,
     // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).
@@ -311,7 +314,7 @@ export const workflows = {
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png',
+        image: hedgehogTransformerPng,
         imageAlt: 'A robot hedgehog running a workflow',
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
@@ -378,14 +381,14 @@ export const workflows = {
         },
     ],
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png',
-        alt: 'A hedgehog wiring up a workflow',
+        src: hedgehogWorkflowsPng,
+        alt: 'A hedgehog holding up a workflow',
         footerClasses: 'max-w-[360px]',
         classes: 'absolute bottom-0 right-0 w-auto h-auto max-w-[min(90vw,480px)] @2xl:max-w-xl',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+            src: hedgehogWorkflowsPng,
             alt: 'A hedgehog automating workflows',
         },
         // Perches on the bottom-right of the Overview screenshot.

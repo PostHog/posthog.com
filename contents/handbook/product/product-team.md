@@ -70,8 +70,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="query-performance" />
 -   <SmallTeam slug="mcp-analytics" />
--   <SmallTeam slug="product-analytics" />
--   <SmallTeam slug="web-analytics" />
+-   <SmallTeam slug="analytics" />
+-   <SmallTeam slug="dashboards-and-charts" />
 
 
 </fieldset>

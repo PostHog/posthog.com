@@ -1,0 +1,17 @@
+diff --git a/node_modules/gatsby/cache-dir/loader.js b/node_modules/gatsby/cache-dir/loader.js
+index 2caf7c8..d776cdf 100644
+--- a/node_modules/gatsby/cache-dir/loader.js
++++ b/node_modules/gatsby/cache-dir/loader.js
+@@ -326,10 +326,10 @@ export class BaseLoader {
+       const page = this.pageDb.get(pagePath)
+       if (process.env.BUILD_STAGE !== `develop` || !page.payload.stale) {
+         if (page.error) {
+-          return {
++          return Promise.resolve({
+             error: page.error,
+             status: page.status,
+-          }
++          })
+         }
+ 
+         return Promise.resolve(page.payload)

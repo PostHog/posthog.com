@@ -51,7 +51,7 @@ export const counter = {
     platform: {
         available: true,
         deployment: {
-            eu_hosting: false,
+            eu_hosting: true,
             open_source: true,
         },
     },

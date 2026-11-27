@@ -23,18 +23,20 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Connect your Whop company to sync payments, memberships, members, products, promo codes, invoices, refunds, and disputes. Create a company API key in the [Developer tab](https://whop.com/dashboard/developer) of your Whop dashboard.
+Connect your Whop company to sync payments, memberships, members, products, promo codes, invoices, refunds, disputes, payouts, financial activity, variants, transfers, reviews, and courses. Create a company API key in the [Developer tab](https://whop.com/dashboard/developer) of your Whop dashboard.
 
 You'll be asked for:
 
-- **API key**: create a company API key in the [Developer tab](https://whop.com/dashboard/developer) of your Whop dashboard. Grant it read access to the resources you want to sync: `company:basic:read`, `member:basic:read`, `payment:basic:read`, `access_pass:basic:read`, `plan:basic:read`, `promo_code:basic:read` and `invoice:basic:read`, plus `developer:manage_webhook` if you want PostHog to register the webhook for you.
+- **API key**: create a company API key in the [Developer tab](https://whop.com/dashboard/developer) of your Whop dashboard. Grant it read access to the resources you want to sync: `company:basic:read`, `member:basic:read`, `payment:basic:read`, `access_pass:basic:read`, `plan:basic:read`, `promo_code:basic:read`, `invoice:basic:read`, `social_account:read`, `payout:withdrawal:read`, `company:balance:read`, `payout:transfer:read`, and `courses:read`, plus `developer:manage_webhook` if you want PostHog to register the webhook for you.
 - **Company ID**: the ID of the Whop company to sync, shown in your Whop dashboard URL.
+
+The `payouts`, `financial_activity`, `variants`, `transfers`, `reviews`, and `courses` tables are available on API versions `2026-10-13-1` and `2026-10-29-8`. They aren't available on the `2025-01-01` pin.
 
 ## Sync modes
 
 <SyncModes />
 
-All Whop tables are full refresh. Each sync replaces the contents of the table.
+Some Whop tables sync incrementally; tables without a supported time filter use full refresh. The `financial_activity` table syncs incrementally on `posted_at`.
 
 ## Configuration
 

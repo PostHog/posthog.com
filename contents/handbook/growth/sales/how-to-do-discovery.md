@@ -95,7 +95,7 @@ When you understand their goals, you can frame PostHog around outcomes instead o
 
 ### The demo
 
-[Demoing PostHog](/handbook/growth/sales/new-sales#3-initial-demo) is an important part of our sales process and how we first introduce PostHog to customers. It brings immediate value to a call, is consistent with other messaging and builds credibility with technical folks. 
+[Demoing PostHog](/handbook/growth/sales/new-sales#3-first-call-30-minutes---discovery--initial-demo) is an important part of our sales process and how we first introduce PostHog to customers. It brings immediate value to a call, is consistent with other messaging and builds credibility with technical folks. 
 
 A demo can also be a great format where questions bubble naturally.
 
@@ -136,7 +136,7 @@ A demo can also be a great format where questions bubble naturally.
 
 ## Qualifying
 
-A key component of discovery is qualifying customers to ensure they are a good fit and whether they're speaking with the right people at PostHog. You can find more about how we qualify at PostHog in the [new sales qualification guide](/handbook/growth/sales/new-sales#2-we-assign-and-qualify).
+A key component of discovery is qualifying customers to ensure they are a good fit and whether they're speaking with the right people at PostHog. You can find more about how we qualify at PostHog in the [new sales qualification guide](/handbook/growth/sales/new-sales#2-you-qualify).
 
 **Qualifiers:**
 
@@ -153,7 +153,7 @@ A key component of discovery is qualifying customers to ensure they are a good f
 - **Can't meet technical requirements** - To be successful, the customer needs to (at minimum), be able to implement PostHog via the JS/SDKs
 - **Support request** - Be helpful, but if it's better suited for support, you can send them thru the available [Support](/docs/support-options) channels
 - **Startup program** - For companies who qualify, we have a special program designed for [startups](/handbook/marketing/startups) interested in PostHog
-- **Needs to vary our terms** - Either to start [an evaluation/PoC of PostHog](/handbook/growth/sales/contract-rules#varying-terms-for-trials-and-proofs-of-concept-pocs) [or generally](/handbook/growth/sales/contract-rules#varying-terms) but without a path to >=$20k in annual spend
+- **Needs to vary our terms** - Either to start [an evaluation/PoC of PostHog](/handbook/growth/sales/contract-rules#varying-terms-for-trials-and-proofs-of-concept-pocs-for-prospective-customers) [or generally](/handbook/growth/sales/contract-rules#varying-terms-for-trials-and-proofs-of-concept-pocs-for-prospective-customers) but without a path to >=$20k in annual spend
 - **No engineering resources** - There is some coding required for a tool like PostHog and customers will need some engineering support to be successful
 - **Strict compliance constraints** - A customer may ask for a very niche [security or privacy](/handbook/company/security) certification that we don't have
 - **Need self-hosted** - PostHog's [self-hosted](/docs/self-host/open-source/disclaimer) open-source deployment is made for hobbyists and since we're a small team, we can only provide limited support for it
@@ -215,7 +215,7 @@ Champions aren't just customers you're friendly with - they're people who will a
 
 **Goal:** Show PostHog, focus on relevant features, establish technical credibility, get feedback and ask questions.
 
-Reference the demo section above for how you can incorporate discovery into your demo and learn more about how we do sales in the [initial demo playbook](/handbook/growth/sales/new-sales#3-initial-demo).
+Reference the demo section above for how you can incorporate discovery into your demo and learn more about how we do sales in the [initial demo playbook](/handbook/growth/sales/new-sales#3-first-call-30-minutes---discovery--initial-demo).
 
 ### 3. Closing and next steps (~3-10min)
 
@@ -225,7 +225,7 @@ Reference the demo section above for how you can incorporate discovery into your
 - If there is a clear opportunity, offer up some actionable next steps (free trial, invite to Slack, generating a quote, help reduce spend, scheduling a call etc.)
 - Set expectation that you'll follow up via email or Slack
 - Gain an understanding of their timeline
-- [Route the customer](/handbook/growth/sales/new-sales#2-we-assign-and-qualify) to the next best channel if they are better handled by a separate team (Support, Startup program etc.)
+- [Route the customer](/handbook/growth/sales/new-sales#2-you-qualify) to the next best channel if they are better handled by a separate team (Support, Startup program etc.)
 
 We like to keep things conversational - if you're genuinely curious about their situation, this should all come naturally!
 

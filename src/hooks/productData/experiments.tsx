@@ -19,6 +19,9 @@ import {
 } from '@posthog/icons'
 import { features } from './experiments/features'
 import { applications, keyFeatures } from './experiments/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogDrManhattanPng from 'hoggies/dr-manhattan.png'
+import hedgehogExperimentPng from 'hoggies/experiment.png'
 
 export const experiments = {
     ...getTool('experiments'),
@@ -30,7 +33,7 @@ export const experiments = {
     slug: 'experiments',
     teamSlug: 'experiments',
     forumTag: 'experiments',
-    color: 'purple',
+    color: PRODUCT_COLORS.experiments,
     colorSecondary: 'lilac',
     wizardSupport: 'In development',
     billedWith: 'Feature Flags',
@@ -158,14 +161,14 @@ export const experiments = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/celebration.png',
-        alt: 'Hedgehogs celebrating a shipped experiment',
+        src: hedgehogExperimentPng,
+        alt: 'A hedgehog in a test tube',
         footerClasses: 'max-w-[420px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
+            src: hedgehogDrManhattanPng,
             alt: 'Hedgehog experimenting',
         },
         mobileHog: {

@@ -63,7 +63,7 @@ In this 30-minute interview, you'll meet with [Ben](/community/profiles/30205), 
 
 #### Sales and Onboarding SuperDay
 
-The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule. 
 
 We will share the task with you at the start of the day. The task is representative of the work someone in this role at PostHog is doing, and it is always the same for each candidate, so we can make clear comparisons. It will typically involve doing actual PostHog work, e.g. prioritizing customers, doing a demo, etc. 
 
@@ -92,11 +92,11 @@ The small team interview with the relevant team lead usually lasts 45 minutes.  
 
 #### Culture and motivation interview
 
-In this 30-minute interview, you'll meet with [Simon](/community/profiles/28895), who will be trying to answer "Are they a good cultural fit for the Sales team at PostHog?".
+In this 30-minute interview, you'll meet with [Simon](/community/profiles/28895), who will be trying to answer "Are they a good cultural fit for the Customer Success team at PostHog?".
 
 #### Customer Success SuperDay
 
-If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday), here's what to expect and how to set yourself up for success.
+If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday), here's what to expect and how to set yourself up for success.
 
 ##### What the SuperDay looks like
 

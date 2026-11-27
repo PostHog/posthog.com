@@ -7,6 +7,7 @@ import { useTeamMembers, TeamMember } from 'hooks/useTeamMembers'
 import { IconSpinner, IconPencil, IconDownload } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
+import { useApp } from '../context/App'
 
 const columns = [
     { name: '#', width: 'auto', align: 'center' as const },
@@ -202,6 +203,36 @@ function memberToRow(
 }
 
 export default function Team(): JSX.Element {
+    const { user, isModerator, isValidating } = useUser()
+    const { openSignIn } = useApp()
+
+    if (isModerator) return <TeamDirectory />
+
+    return (
+        <>
+            <SEO title="Team directory – PostHog" description="" noindex />
+            <Editor maxWidth="100%" title="team-directory" type="mdx" slug="/team-directory">
+                {isValidating ? (
+                    <div className="flex items-center justify-center py-12">
+                        <IconSpinner className="size-8 animate-spin opacity-50" />
+                    </div>
+                ) : (
+                    <div className="bg-accent p-4 rounded border border-primary">
+                        <h3 className="mt-0 mb-0">Access denied</h3>
+                        <p className="mb-4 text-muted">This page is only available to PostHog team members.</p>
+                        {!user && (
+                            <OSButton variant="primary" size="md" onClick={() => openSignIn()}>
+                                Sign in
+                            </OSButton>
+                        )}
+                    </div>
+                )}
+            </Editor>
+        </>
+    )
+}
+
+function TeamDirectory(): JSX.Element {
     const { isModerator } = useUser()
     const { teamMembers, futureJoiners, loading, updateProfile } = useTeamMembers()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -287,7 +318,7 @@ export default function Team(): JSX.Element {
 
     return (
         <>
-            <SEO title="Team directory – PostHog" description="" />
+            <SEO title="Team directory – PostHog" description="" noindex />
             <Editor
                 showFilters
                 maxWidth="100%"

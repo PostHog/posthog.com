@@ -260,7 +260,7 @@ require 'posthog'
 require 'webmock/rspec'
 
 RSpec.describe 'password reset email' do
-  let(:send_url) { 'https://us.posthog.com/api/projects/@current/messaging/send/email/' }
+  let(:send_url) { %r{/messaging/send/email/\z} }
   let(:posthog) { PostHog::Client.new(api_key: 'phc_test', secret_key: 'phs_test', test_mode: true) }
 
   before do

@@ -1,0 +1,272 @@
+---
+title: Terraform provider
+sidebar: Docs
+showTitle: true
+---
+
+The PostHog Terraform provider lets you manage PostHog resources, such as feature flags, insights, dashboards, alerts, and access rules, as [Terraform](https://developer.hashicorp.com/terraform) code. You can review changes in pull requests, apply them from your CI/CD pipeline, and set up several projects the same way from one configuration.
+
+The provider is published to the Terraform Registry as [`PostHog/posthog`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs) and is open source on [GitHub](https://github.com/PostHog/terraform-provider-posthog). It needs Terraform 1.0 or later.
+
+## Install the provider
+
+Add the provider to your Terraform configuration:
+
+```hcl
+terraform {
+  required_providers {
+    posthog = {
+      source  = "PostHog/posthog"
+      version = "~> 1.0"
+    }
+  }
+}
+```
+
+Then run `terraform init` to download it.
+
+The `~> 1.0` constraint accepts any release in major version 1. The [Terraform Registry](https://registry.terraform.io/providers/PostHog/posthog/latest) lists the latest version, and the [changelog](https://github.com/PostHog/terraform-provider-posthog/blob/main/CHANGELOG.md) lists what changed in each one.
+
+## Authenticate
+
+The provider calls the PostHog API with a [personal API key](/docs/api/personal-api-keys). You can set each of its arguments in the provider block or with an environment variable:
+
+| Argument | Environment variable | Description |
+| --- | --- | --- |
+| `api_key` | `POSTHOG_API_KEY` | Your personal API key. Required. |
+| `host` | `POSTHOG_HOST` | The PostHog URL to call. Defaults to `https://us.posthog.com`. Use `https://eu.posthog.com` for EU Cloud, or your instance's URL if you self-host. |
+| `project_id` | `POSTHOG_PROJECT_ID` | The project that project-level resources, such as feature flags and insights, belong to. Each resource can override it with its own `project_id`. |
+| `organization_id` | `POSTHOG_ORGANIZATION_ID` | The organization that organization-level resources, such as projects, members, roles, and proxy records, belong to. Accepts the organization's UUID or slug. Each resource can override it with its own `organization_id`. |
+
+To set up authentication:
+
+1. [Create a personal API key](https://app.posthog.com/settings/user-api-keys). Give it the [scopes](/docs/api/scopes) for the resource types you manage, and limit it to the organization or projects your configuration covers.
+2. Copy your project ID from [**Settings** > **Project** > **General**](https://app.posthog.com/settings/project#variables).
+3. If you manage organization-level resources, copy your organization ID from [**Settings** > **Organization** > **General**](https://app.posthog.com/settings/organization-details#organization-id).
+
+Keep the API key out of your configuration files. Pass it as an environment variable and set the other arguments in the provider block:
+
+```bash
+export POSTHOG_API_KEY="<your-personal-api-key>"
+```
+
+```hcl
+provider "posthog" {
+  host            = "https://eu.posthog.com"
+  project_id      = "12345"
+  organization_id = "0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b"
+}
+```
+
+## Examples
+
+### Roll out a feature flag
+
+This flag is on for 25% of users. Change `rollout_percentage` and apply again to roll it out further.
+
+```hcl
+resource "posthog_feature_flag" "new_onboarding" {
+  key                = "new-onboarding"
+  name               = "New onboarding flow"
+  rollout_percentage = 25
+  tags               = ["managed-by:terraform"]
+}
+```
+
+For multivariate flags, payloads, and release conditions, set `filters`. See the [`posthog_feature_flag` reference](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/feature_flag) for every attribute.
+
+### Add an insight to a dashboard
+
+This creates a dashboard and a trends insight that counts pageviews, and places the insight on the dashboard:
+
+```hcl
+resource "posthog_dashboard" "growth" {
+  name        = "Growth"
+  description = "Weekly growth metrics"
+  tags        = ["managed-by:terraform"]
+}
+
+resource "posthog_insight" "pageviews" {
+  name          = "Pageviews"
+  dashboard_ids = [posthog_dashboard.growth.id]
+
+  query_json = jsonencode({
+    kind = "InsightVizNode"
+    source = {
+      kind = "TrendsQuery"
+      series = [{
+        kind  = "EventsNode"
+        event = "$pageview"
+        math  = "total"
+      }]
+    }
+  })
+}
+```
+
+To write the insight in SQL instead, replace `query_json` with `query_sql`. To control where each tile sits on the dashboard, see [managing dashboards with Terraform](/docs/product-analytics/dashboards#managing-dashboards-with-terraform).
+
+### Send an alert to a webhook
+
+An alert checks an insight on a schedule and fires when its value crosses a threshold. To deliver the alert, add a destination: a `posthog_hog_function` that listens for the `$insight_alert_firing` event of that alert.
+
+```hcl
+resource "posthog_alert" "pageview_spike" {
+  name                 = "Pageview spike"
+  insight              = posthog_insight.pageviews.id
+  subscribed_users     = []
+  condition_type       = "absolute_value"
+  threshold_type       = "absolute"
+  threshold_upper      = 10000
+  series_index         = 0
+  calculation_interval = "daily"
+}
+
+resource "posthog_hog_function" "pageview_spike_webhook" {
+  name        = "Pageview spike webhook"
+  type        = "internal_destination"
+  template_id = "template-webhook"
+
+  filters_json = jsonencode({
+    events = [{
+      id   = "$insight_alert_firing"
+      type = "events"
+    }]
+    properties = [{
+      key      = "alert_id"
+      value    = posthog_alert.pageview_spike.id
+      operator = "exact"
+      type     = "event"
+    }]
+  })
+
+  inputs_json = jsonencode({
+    url = {
+      value = "https://example.com/hooks/posthog-alert"
+    }
+    method = {
+      value = "POST"
+    }
+    body = {
+      value = {
+        alert_name = "{event.properties.alert_name}"
+        value      = "{event.properties.alert_calculated_value}"
+      }
+      templating = "hog"
+    }
+  })
+}
+```
+
+To post to Slack instead, use `template_id = "template-slack"`. The provider repository has a [full Slack example](https://github.com/PostHog/terraform-provider-posthog/blob/main/examples/alert-notifications/main.tf).
+
+## Manage existing resources
+
+You don't have to recreate resources that already exist in PostHog. There are three ways to bring them under Terraform.
+
+### Export from the PostHog app
+
+Dashboards, insights, and the project's access control settings have a **Manage with Terraform** button. It generates a configuration for the resource and related resources, such as a dashboard's insights and alerts, with `import` blocks so that Terraform adopts them instead of creating copies. Copy it into your configuration and run `terraform apply`.
+
+### Write import blocks
+
+An `import` block (Terraform 1.5 or later) adopts an existing resource on the next apply:
+
+```hcl
+import {
+  to = posthog_feature_flag.new_onboarding
+  id = "12345/678"
+}
+```
+
+You can also import from the command line:
+
+```bash
+terraform import posthog_feature_flag.new_onboarding 12345/678
+```
+
+The import ID depends on the resource:
+
+- Project-level resources use `<project_id>/<resource_id>`, for example `12345/678`. If the provider sets `project_id`, the resource ID on its own works too.
+- Organization-level resources use `<organization_id>/<resource_id>`. A project's import ID always includes the organization ID.
+
+Each resource's page in the [registry docs](https://registry.terraform.io/providers/PostHog/posthog/latest/docs) shows its import ID format.
+
+### Adopt many feature flags at once
+
+The `posthog_feature_flags` data source lists a project's flags, so a `for_each` import block (Terraform 1.7 or later) can adopt every flag your configuration declares without you looking up flag IDs:
+
+```hcl
+locals {
+  feature_flags = {
+    "new-onboarding" = { name = "New onboarding flow", rollout = 25 }
+    "beta-dashboard" = { name = "Beta dashboard", rollout = 0 }
+  }
+}
+
+data "posthog_feature_flags" "existing" {}
+
+resource "posthog_feature_flag" "this" {
+  for_each           = local.feature_flags
+  key                = each.key
+  name               = each.value.name
+  rollout_percentage = each.value.rollout
+}
+
+import {
+  for_each = {
+    for flag in data.posthog_feature_flags.existing.flags : flag.key => flag.id
+    if contains(keys(local.feature_flags), flag.key)
+  }
+  to = posthog_feature_flag.this[each.key]
+  id = "${data.posthog_feature_flags.existing.project_id}/${each.value}"
+}
+```
+
+Flags that already exist are imported, and the rest are created.
+
+## Resources and data sources
+
+The provider includes these resources:
+
+| Resource | Manages |
+| --- | --- |
+| [`posthog_access_control`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/access_control) | Access rules for a resource type or a single resource |
+| [`posthog_action`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/action) | Actions |
+| [`posthog_alert`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/alert) | Alerts on insights |
+| [`posthog_cohort`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/cohort) | Cohorts |
+| [`posthog_dashboard`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/dashboard) | Dashboards |
+| [`posthog_dashboard_layout`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/dashboard_layout) | The tiles on a dashboard and where they sit |
+| [`posthog_early_access_feature`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/early_access_feature) | Early access features |
+| [`posthog_experiment`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/experiment) | Experiments |
+| [`posthog_external_data_source`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/external_data_source) | Data Warehouse sources, such as Stripe or Postgres |
+| [`posthog_feature_flag`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/feature_flag) | Feature flags |
+| [`posthog_hog_function`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/hog_function) | Destinations, transformations, and webhooks |
+| [`posthog_insight`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/insight) | Insights |
+| [`posthog_insight_variable`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/insight_variable) | SQL variables |
+| [`posthog_logs_alert`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/logs_alert) | Log alerts |
+| [`posthog_logs_alert_destination`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/logs_alert_destination) | Where a log alert sends notifications |
+| [`posthog_organization_member`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/organization_member) | Organization members |
+| [`posthog_project`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/project) | Projects |
+| [`posthog_project_default_access`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/project_default_access) | A project's default access level |
+| [`posthog_project_member`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/project_member) | A role's or member's access to a project |
+| [`posthog_project_settings`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/project_settings) | Project settings |
+| [`posthog_proxy_record`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/proxy_record) | Managed reverse proxy domains |
+| [`posthog_role`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/role) | Roles |
+| [`posthog_role_membership`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/role_membership) | Role members |
+| [`posthog_subscription`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/subscription) | Dashboard and insight subscriptions |
+| [`posthog_survey`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/survey) | Surveys |
+| [`posthog_warehouse_table`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/warehouse_table) | Data Warehouse tables backed by files in your own bucket |
+
+It also includes these data sources:
+
+| Data source | Looks up |
+| --- | --- |
+| [`posthog_feature_flags`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/data-sources/feature_flags) | The feature flags in a project |
+| [`posthog_insight`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/data-sources/insight) | An insight, by the short ID in its URL |
+| [`posthog_role`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/data-sources/role) | A role, by name |
+| [`posthog_user`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/data-sources/user) | An organization member, by email |
+
+## Upgrading
+
+To move to a newer release, raise the `version` constraint if needed and run `terraform init -upgrade`. Before you upgrade, read the [changelog](https://github.com/PostHog/terraform-provider-posthog/blob/main/CHANGELOG.md) for breaking changes and upgrade notes, and run `terraform plan` to check the changes before you apply them.

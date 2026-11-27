@@ -9,11 +9,11 @@ availability:
 sourceId: CapsuleCRM
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Capsule CRM connector syncs your CRM data – parties, opportunities, projects, and tasks – into PostHog, so you can analyze your sales pipeline alongside your product data.
+The Capsule CRM connector syncs your CRM data – parties, opportunities, projects, tasks, activity timeline, and supporting reference data – into PostHog, so you can analyze your sales pipeline alongside your product data.
 
 ## Prerequisites
 
@@ -30,6 +30,10 @@ When linking Capsule CRM, you'll need:
 ## Sync modes
 
 <SyncModes />
+
+Parties, opportunities, and projects support **incremental** syncs using Capsule's `since` change filter (tracked on `updatedAt`), so ongoing syncs only pull records that changed since the last run. The remaining tables (entries, tasks, users, milestones, pipelines, categories, lost reasons, boards, stages, teams, goals, track definitions, and the tag and custom field definition tables) are full refresh only, since Capsule does not expose a server-side change filter for them.
+
+The `entries` table holds your activity timeline: notes, emails, and completed tasks. It's usually the largest table in a Capsule account, and Capsule has no change filter for it, so every sync pulls the full history. Sync it on a schedule that suits its size.
 
 ## Configuration
 

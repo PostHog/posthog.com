@@ -4,9 +4,8 @@ status: active
 
 # One check for each flow the Node.js docs teach. Every check is a baseline: a short
 # prompt in a user's words, no docs added. The prompt names PostHog and the kind of
-# analytics, and no API. The rubrics describe the correct result for posthog-node 5, the
-# major the docs show. `install` runs in an app with no PostHog code. The other checks run
-# in an app that already uses posthog-node 5.
+# analytics, and no API. `install` grades against posthog-node 6, which the docs now show.
+# The other checks run in Hoppscotch's backend on posthog-node 5 (and -next on 6).
 checks:
     - id: install
       description: >-
@@ -20,7 +19,7 @@ checks:
           shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/package.json lists `posthog-node` at 5.x.
+                  {folder}/package.json lists `posthog-node` at 6.x.
               initialized: >-
                   The app creates one client at startup with new PostHog(token, { host
                   }) from posthog-node. Cite the file and line(s).
@@ -91,11 +90,13 @@ checks:
           shared: [docs-read]
           rubrics:
               no-person-profile: >-
-                  The event sets `$process_person_profile: false` in its properties.
-                  Cite the file and line(s).
+                  The event is personless: its properties set `$process_person_profile`
+                  to false, or capture() is called with no distinctId and no distinctId
+                  in the active context, which the SDK marks personless. Cite the file
+                  and line(s).
               distinct-id-per-visitor: >-
-                  Each visitor gets their own distinct ID, such as a generated ID, a
-                  cookie or a hash. It is not one constant shared by all visitors.
+                  Visitors don't share one constant distinct ID. A generated ID, a
+                  cookie, a hash or the SDK's auto-generated ID passes.
 
     - id: error
       description: >-
@@ -137,29 +138,7 @@ checks:
               flag-gates-create: >-
                   Creating an invitation is refused when the flag is off.
 
-    # Next major: the same tasks for a project on posthog-node 6. Expected to fail until
-    # the docs show that major.
-    - id: install-next
-      description: >-
-          The same task as `install`, graded for posthog-node 6. The agent installs the
-          newest release, so this check is expected to fail until posthog-node 6 ships
-          and the docs show it.
-      codebase_to_test: oss-etherpad
-      prompt: *install-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  {folder}/package.json lists `posthog-node` at 6.x.
-              initialized: >-
-                  The app creates one client at startup with new PostHog(token, { host
-                  }) from posthog-node. Cite the file and line(s).
-              token-from-env: >-
-                  The project token comes from an environment variable. It is not
-                  written in the source.
-              flushes-on-exit: >-
-                  The app awaits the client's shutdown() when the server stops.
-
+    # Next major: anonymous event and error checks for a project on posthog-node 6.
     - id: anonymous-event-next
       description: >-
           The same task as `anonymous-event`, for a project on posthog-node 6. Expected

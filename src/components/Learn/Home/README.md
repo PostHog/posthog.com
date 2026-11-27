@@ -7,6 +7,7 @@ The Learn home at `/learn`. It uses the Reader template: a docs-style sidebar on
 | Route | Page file | Section |
 | --- | --- | --- |
 | `/learn` | `src/pages/learn/index.tsx` | Pocket guides: one collection of every volume in `POCKET_GUIDE_VOLUMES` |
+| `/learn/videos` | `src/pages/learn/videos/index.tsx` | Videos: `LearnTV/VideoLibrary` with every Learn TV video, grouped by product. Each card opens the video in its own window. See [`LearnTV`](../LearnTV/README.md) |
 | `/learn/prompts` | `src/pages/learn/prompts.tsx` | Prompt library: every prompt from `learnPrompts.ts`, with search and a product filter |
 | `/learn/playground` | `src/pages/learn/playground.tsx` | Tinker with Twig: an Explore Twig link and a preview of Twig with its PostHog panel |
 
@@ -24,7 +25,7 @@ Each page renders `<LearnHome section="..." />`. Every section shows the same si
 
 The sidebar is a `TreeMenu` with `appearance="sidebar"`.
 
-- **Videos** has no page yet. It uses `disabled: true` with a "Coming soon" badge, so it shows grayed out and is not a link. When videos exist, add a page, give the item a `url`, and remove `disabled` and the badge.
+- **Videos** links to `/learn/videos`.
 - **Founders hub** links to the existing `/founders` page. Learn does not have its own Founders hub.
 
 ## Search

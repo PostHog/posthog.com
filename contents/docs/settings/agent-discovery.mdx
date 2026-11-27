@@ -26,14 +26,15 @@ An agent does not need to be told where PostHog's endpoints are. It finds them b
 3. Read the authorization server metadata (RFC 8414)
    →  the agent_auth block names the auth.md manifest and the identity endpoint
 
-4. Read the auth.md manifest at /auth.md
-   →  the available ways to create an account and authenticate, plus the scope inventory
+4. Read the auth.md manifest at https://posthog.com/auth.md
+   →  the available ways to create an account and authenticate
 ```
 
 ```mermaid
 sequenceDiagram
     participant A as Agent
     participant PH as PostHog
+    participant W as posthog.com
 
     A->>PH: GET /api/... (no credentials)
     PH-->>A: 401 WWW-Authenticate: Bearer resource_metadata="..."
@@ -41,8 +42,8 @@ sequenceDiagram
     PH-->>A: authorization server, scopes, bearer method
     A->>PH: GET /.well-known/oauth-authorization-server
     PH-->>A: agent_auth block (auth.md manifest + identity endpoint)
-    A->>PH: GET /auth.md
-    PH-->>A: account-creation and auth options, scopes
+    A->>W: GET /auth.md
+    W-->>A: account-creation and auth options
 ```
 
 ### Protected resource metadata
@@ -72,7 +73,7 @@ The authorization server metadata ([RFC 8414](https://datatracker.ietf.org/doc/r
 {
   "issuer": "https://us.posthog.com",
   "agent_auth": {
-    "skill": "https://us.posthog.com/auth.md",
+    "skill": "https://posthog.com/auth.md",
     "identity_endpoint": "https://us.posthog.com/oauth/token/",
     "identity_types_supported": ["identity_assertion"],
     "identity_assertion": {
@@ -87,14 +88,16 @@ The authorization server metadata ([RFC 8414](https://datatracker.ietf.org/doc/r
 
 ### The auth.md manifest
 
-The manifest at [`/auth.md`](https://us.posthog.com/auth.md) lists the available ways to create an account (wizard, provisioning API) and authenticate (OAuth, personal API keys, ID-JAG), with the scope inventory, in a format an agent can read. It is the agent-readable index of everything above.
+The manifest at [`posthog.com/auth.md`](https://posthog.com/auth.md) lists the available ways to create an account (Wizard, provisioning API) and authenticate (OAuth, personal API keys, ID-JAG), in a format an agent can read. It is the agent-readable index of everything above.
+
+Both regions point at the same manifest. It lists each region's endpoints, and the metadata of the region an agent discovered stays the source of truth for them. For the scopes a client can request, read `scopes_supported` in the protected resource metadata, or see [API scopes](/docs/api/scopes).
 
 ## Regions
 
-PostHog's US and EU regions each serve their own metadata, manifest, and endpoints, pinned per region. Because discovery starts from a single `401` on the API, an agent that follows the chain picks up the right region's URLs without hardcoding any of them.
+PostHog's US and EU regions each serve their own metadata and endpoints, pinned per region. The auth.md manifest is shared. Because discovery starts from a single `401` on the API, an agent that follows the chain picks up the right region's URLs without hardcoding any of them.
 
 | | US | EU |
 |---|---|---|
 | Protected resource metadata | `https://us.posthog.com/.well-known/oauth-protected-resource` | `https://eu.posthog.com/.well-known/oauth-protected-resource` |
 | Authorization server metadata | `https://us.posthog.com/.well-known/oauth-authorization-server` | `https://eu.posthog.com/.well-known/oauth-authorization-server` |
-| auth.md manifest | `https://us.posthog.com/auth.md` | `https://eu.posthog.com/auth.md` |
+| auth.md manifest | `https://posthog.com/auth.md` | `https://posthog.com/auth.md` |

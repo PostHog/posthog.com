@@ -9,7 +9,7 @@ availability:
 sourceId: Moneybird
 ---
 
-Moneybird is an accounting platform popular in the Netherlands and Belgium. The Moneybird connector syncs your accounting data — contacts, invoices, bank transactions, and more — into the PostHog data warehouse.
+Moneybird is an accounting platform popular in the Netherlands and Belgium. The Moneybird connector syncs your accounting data – contacts, invoices, documents, bank transactions, outgoing payments, assets, and aging reports – into the PostHog Data Warehouse.
 
 ## Adding a data source
 
@@ -47,6 +47,11 @@ Once the syncs are complete, you can start using Moneybird data in PostHog.
 | `users`                     | Users of the administration, including inactive users and accountants           | Full refresh |
 | `workflows`                 | Workflows for sending, reminding, and collecting invoices and estimates         | Full refresh |
 | `custom_fields`             | Custom fields added to sales invoices, contacts, and identities                 | Full refresh |
+| `typeless_documents`        | Uploaded documents that are not yet typed as a purchase invoice, receipt, or other document | Incremental on `updated_at` |
+| `purchase_transactions`     | Outgoing payments prepared in Moneybird to pay purchase invoices and other payables, batched or not | Full refresh |
+| `assets`                    | Fixed assets of the administration with their purchase value, current value, depreciation plan, and value changes, including disposed assets | Full refresh |
+| `debtors_aging`             | Open receivables per contact with aging buckets, as of the current month. Each sync replaces the table with the current report | Full refresh |
+| `creditors_aging`           | Open payables per contact with aging buckets, as of the current month. Each sync replaces the table with the current report | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

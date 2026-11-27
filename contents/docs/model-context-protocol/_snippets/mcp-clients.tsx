@@ -52,6 +52,11 @@ const MCPClients = () => {
             icon: 'IconApps',
         },
         {
+            label: 'Superhuman',
+            url: '/docs/integrations/superhuman',
+            icon: 'IconApps',
+        },
+        {
             label: 'v0',
             url: '/docs/integrations/v0',
             icon: 'IconApps',

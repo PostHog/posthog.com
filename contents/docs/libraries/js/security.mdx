@@ -11,7 +11,7 @@ The [JavaScript SDK](/docs/libraries/js) runs with the same access to your page 
 
 If you need to review SDK changes before deployment, follow [snippet versioning](/docs/libraries/js/snippet-versioning) for CDN installations or the [package-manager lockfile guidance](/docs/health-checks/keeping-sdks-current#npm-and-package-manager-lockfiles) for npm installations. Use an exact dependency version, commit the lockfile, and enforce frozen installs in CI.
 
-Version pins and [versioned feature scripts](/docs/libraries/js/snippet-versioning#versioned-external-scripts) select releases; they don't verify the bytes returned by a CDN or proxy. The token-specific `/array/<token>/config.js` script isn't pinned by `strict_script_versioning`.
+Version pins and [versioned feature scripts](/docs/libraries/js/snippet-versioning#versioned-external-scripts) select releases; they don't verify the bytes returned by a CDN or proxy. The token-specific `/array/<token>/config.js` script isn't pinned by `strict_script_versioning`. From `posthog-js` 1.451.0, the SDK only loads it when [JS snippets](/docs/js-snippets) are enabled with `opt_in_site_apps: true`.
 
 Review and deploy updates regularly so pins don't prevent security fixes from reaching your users. See [keeping SDKs current](/docs/health-checks/keeping-sdks-current).
 
@@ -59,13 +59,37 @@ Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide t
 
 ### Understand the coverage
 
-These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js`. For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+These hashes protect only `loader.js` and `array.js`. By default, they don't protect the additional scripts the SDK loads at runtime, such as the recorder, surveys, toolbar, or `config.js` (from `posthog-js` 1.451.0, loaded only with `opt_in_site_apps: true`). To verify the SDK's feature scripts too, [require integrity for extension scripts](#require-integrity-for-extension-scripts). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
+
+### Require integrity for extension scripts
+
+From `posthog-js` [1.452.0](https://github.com/PostHog/posthog-js/releases/tag/posthog-js%401.452.0), set `require_subresource_integrity: true` to also verify the scripts the SDK loads at runtime, such as the session recorder and surveys:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    require_subresource_integrity: true,
+})
+```
+
+With the loader, add it to `data-config` instead.
+
+The hashes are built into the SDK, so you don't copy any new ones. Pin the SDK itself first, with the loader hashes above or an exact npm version. If a script doesn't match, the browser blocks it and that feature stays off.
+
+With this option on:
+
+-   The [toolbar](/docs/toolbar) and [JS snippets](/docs/js-snippets) don't load, because their code can't be pinned to a hash.
+-   Your asset host or [reverse proxy](/docs/advanced/proxy) must serve `/static/<SDK_VERSION>/*` unchanged, with CORS headers. PostHog's asset hosts already do.
+
+It doesn't cover third-party widgets such as Intercom. Set it on every PostHog SDK instance on the page.
 
 ## Configure Content Security Policy
 
 CSP limits which resources the browser can load and which scripts it can execute. Follow the [CSP directives guide](/docs/advanced/content-security-policy#content-security-policy-directives-needed) for SDK scripts, API connections, workers, and optional toolbar resources.
 
-Keep `script-src` and `connect-src` separate in your review: permitting event ingestion doesn't require permitting remote JavaScript. Bundling the SDK doesn't remove the need to permit its API requests. Test the features you enable before enforcing your policy, and use browser console reports to find blocked resources rather than broadly adding `unsafe-inline` or `unsafe-eval`.
+Keep `script-src` and `connect-src` separate in your review: permitting event ingestion doesn't require permitting remote JavaScript. From `posthog-js` 1.451.0, the SDK fetches project configuration from the assets host as JSON, so `connect-src` must allow the assets host. The SDK loads executable `config.js` through `script-src` only when `opt_in_site_apps` is `true`. Bundling the SDK doesn't remove the need to permit its API requests. Test the features you enable before enforcing your policy, and use browser console reports to find blocked resources rather than broadly adding `unsafe-inline` or `unsafe-eval`.
+
+CSP limits where code can load from and send data to. It doesn't stop code that already runs on your page from changing the page, for example by swapping a payment detail or a wallet address. `connect-src` also doesn't cover every way data can leave the page, such as navigation or image requests. Treat CSP as one layer, alongside SRI and pinned versions.
 
 Use [CSP tracking](/docs/csp-tracking) to test your policy in report-only mode before enforcement and monitor violations after deployment.
 
@@ -81,7 +105,7 @@ Nonces authorize execution; they don't verify script contents or replace SRI.
 
 To avoid runtime executable downloads, [install the SDK from npm with a package manager](/docs/libraries/js#option-2-install-via-package-manager) and follow [bundling extensions](/docs/libraries/js#bundle-extensions) for the no-external import options and feature trade-offs. Installing from npm with the default `posthog-js` import doesn't prevent dependency downloads.
 
-Set `disable_external_dependency_loading: true` at the first initialization of every SDK instance. This blocks the standard SDK script loader, including executable `config.js`. Without preloaded configuration, the SDK requests project configuration as JSON instead. Configuration, flags, and events still use the network. See the [SDK configuration reference](/docs/references/posthog-js/types/PostHogConfig) for available controls.
+Set `disable_external_dependency_loading: true` at the first initialization of every SDK instance. This blocks the standard SDK script loader, including executable `config.js` when `opt_in_site_apps` is `true`. Without preloaded configuration, the SDK requests project configuration as JSON. Configuration, flags, and events still use the network. See the [SDK configuration reference](/docs/references/posthog-js/types/PostHogConfig) for available controls.
 
 Don't combine this setup with the snippet, tag-manager installations, or another permissively configured SDK copy. No-external builds don't remove a shared loader or renderer already registered by another bundle.
 
@@ -98,4 +122,4 @@ Before deployment and after each upgrade:
 -   Use a clean browser profile to check the Network panel during initialization, event capture, feature flag evaluation, and optional features.
 -   Check for duplicate SDK installations, unexpected executable downloads, CSP violations, and integrity failures.
 -   For the no-external setup, verify that JSON configuration, flags, and events work without vendor script downloads. Test without CSP first, then with CSP, so blocked requests don't hide unwanted loading attempts.
--   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. Check any proxy or CDN transformations that could change the bytes.
+-   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. With `require_subresource_integrity`, also check that feature scripts load with an `integrity` attribute. Check any proxy or CDN transformations that could change the bytes.

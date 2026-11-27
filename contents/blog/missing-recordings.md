@@ -14,7 +14,7 @@ author:
 category: Engineering
 ---
 
-[Session Recording](/product/session-recording) is one of PostHog's core features, and one of the few completely [open source ression replay tools](/blog/best-open-source-session-replay-tools) available. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
+[Session Recording](/product/session-recording) is one of PostHog's core features, and one of the few completely [open source ression replay tools](/compare/best-open-source-session-replay-tools) available. It allows you to see how real users use your website, mouse clicks and all. It's really cool and addictive (give it a try and you'll see what I mean).
 
 Recently, we made a ton of improvements to the feature. To name a few, we:
 
@@ -27,7 +27,7 @@ But there was one fix that stood out in this quality push. Customers would often
 
 This is the story of how we decreased the number of missing recordings from 15% to <1%, and in doing so, moved the feature out of beta.
 
->Rick Marron is a software engineer at PostHog. In previous lives Rick was a Program Manager at Microsoft, and he spent over a year in Nairobi, Kenya where he developed the first publicly available real-time source for traffic data in the city using computer vision and street cameras. He's a native of Rochester, New York but lives in Los Angeles now because... sunshine. Follow him [on Twitter](https://twitter.com/rick_marron) and [Github](https://github.com/rcmarron). 
+>Rick Marron is a software engineer at PostHog. In previous lives Rick was a Program Manager at Microsoft, and he spent over a year in Nairobi, Kenya where he developed the first publicly available real-time source for traffic data in the city using computer vision and street cameras. He's a native of Rochester, New York but lives in Los Angeles now because... sunshine. Follow him [on Twitter](https://twitter.com/rick_marron) and [GitHub](https://github.com/rcmarron). 
 
 ## Measuring the issue
 

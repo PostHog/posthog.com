@@ -30,7 +30,7 @@ crates.io's read APIs are public, so no credentials are required. There is no pr
 ```
 serde
 tokio
-posthog-rs
+posthog
 ```
 
 Each sync fetches the current data for every configured crate. crates.io has no server-side "changed since" filter, and daily download counts only cover the trailing ~90 days, so all tables sync as a full refresh.
@@ -39,7 +39,7 @@ You'll be asked for:
 
 - **Crates**: for example `serde
 tokio
-posthog-rs`.
+posthog`.
 
 ## Sync modes
 

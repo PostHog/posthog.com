@@ -95,7 +95,7 @@ test('all published chapters have unique static public routes and source identit
     }
 })
 
-test('only retired AIO chapters redirect under Learn; current chapters stay generated', () => {
+test('only retired AIO chapters and moved hub parents redirect under Learn; current chapters stay generated', () => {
     const retired = new Map([
         ['101', 'traces-and-conversations'],
         ['unexplained-answers', 'traces-and-conversations'],
@@ -105,14 +105,35 @@ test('only retired AIO chapters redirect under Learn; current chapters stay gene
         ['prompts-and-offline-evaluations', 'offline-evaluations'],
         ['ai-cost', 'cost-and-performance'],
     ])
+    const subpagedHubParents = new Map<string, string>()
+    for (const volume of POCKET_GUIDE_VOLUMES) {
+        if (!volume.learnPath?.startsWith('/learn/')) continue
+        const hubSlug = volume.learnPath.split('/')[2]
+        for (const [page, subpages] of Object.entries(volume.learnHub?.subpages ?? {})) {
+            if (subpages?.[0]) {
+                subpagedHubParents.set(`/learn/${hubSlug}/${page}`, `/learn/${hubSlug}/${page}/${subpages[0].slug}`)
+            }
+        }
+    }
     for (const { source, destination } of [...vercelConfig.redirects, ...vercelConfig.rewrites]) {
         if (!/^\/learn(?:\/|$)/.test(source)) continue
+        if (subpagedHubParents.has(source)) {
+            assert.equal(destination, subpagedHubParents.get(source))
+            continue
+        }
         const oldChapter = source.replace('/learn/ai-observability/pocket-guide/', '').replace(/\.md$/, '')
         assert.ok(retired.has(oldChapter), `${source} must not redirect a current Learn route`)
         assert.equal(
             destination,
             `/learn/ai-observability/pocket-guide/${retired.get(oldChapter)}${source.endsWith('.md') ? '.md' : ''}`
         )
+    }
+    for (const [parentPath, firstSubpagePath] of subpagedHubParents) {
+        assert.equal(existsSync(new URL(`../../pages${parentPath}.tsx`, import.meta.url)), false)
+        assert.ok(existsSync(new URL(`../../pages${firstSubpagePath}.tsx`, import.meta.url)))
+        const redirect = vercelConfig.redirects.find(({ source }: { source: string }) => source === parentPath)
+        assert.equal(redirect?.destination, firstSubpagePath)
+        assert.equal(redirect?.statusCode, 301)
     }
     for (const [oldChapter, newChapter] of retired) {
         assert.equal(

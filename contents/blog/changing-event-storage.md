@@ -16,7 +16,7 @@ tags:
     - Infrastructure
 seo:
     metaTitle: Queries are 2x faster, but we're making some event properties temporary
-    metaDescription: "We're rebuilding how PostHog stores events. Queries are about a third faster on average, and up to 2x faster for common queries. Here's what changes on November 30."
+    metaDescription: "We're rebuilding how PostHog stores events. Queries are about a third faster on average, and up to 2x faster for common queries. Here's what changes on December 2."
 ---
 
 ## TL;DR
@@ -25,10 +25,10 @@ seo:
 - `$set`, `$set_once` and other short-lived debugging properties on events are now kept for 60 days instead of forever.
 - `$feature_flag_called` events and `$feature/*` properties move to dedicated storage built for them. Most queries on flag calls keep working, but [a few need a change](#do-you-need-to-change-anything-for-flag-calls).
 - We're removing some deprecated properties, mostly flag payloads and internal SDK state.
-- We'll drop `null` values and empty objects from properties, and store a few built-in properties as text. [See what this changes](#how-some-property-values-change).
-- These changes will also impact batch exports of events: flags arrive as one map, and some properties are left out or added as empty values. [See what changes for batch exports](#what-changes-for-batch-exports).
+- We'll drop `null` values and empty objects from properties, store a few built-in properties as text, and show text that holds a JSON object or list as that object or list. [See what this changes](#how-some-property-values-change).
+- These changes will also impact batch exports of events: flags arrive as one map, and some properties are left out or change format. [See what changes for batch exports](#what-changes-for-batch-exports).
 - Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
-- All of this takes effect on November 30.
+- We'll roll out all of this starting December 2.
 
 ## We're making queries faster
 
@@ -53,7 +53,7 @@ We looked at how event properties get queried. A small set, mostly SDK diagnosti
 
 `$set` and `$set_once` are the biggest part of this. They're instructions to our person-merging engine ("update this person's properties"), which we apply the moment an event arrives. The result is stored on the person and on every event as person properties. Keeping the raw instruction forever also meant storing the same data twice, both the properties and the instructions on how to change the properties.
 
-From November 30 2026, we will keep these properties for 60 days before dropping them. This means you can still inspect them and use them to debug, but they won't be included on persons or events forever. This means less data stored twice in PostHog and faster queries for everyone. 
+From December 2 2026, we will keep these properties for 60 days before dropping them. This means you can still inspect them and use them to debug, but they won't be included on persons or events forever. This means less data stored twice in PostHog and faster queries for everyone. 
 
 ## Moving feature flag data to its own table
 
@@ -68,12 +68,15 @@ Here's more details on what this means:
 
 ### Do you need to change anything for flag calls?
 
-Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations and workflows that explicitly set `$feature_flag_called` as a trigger will continue to work. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
+Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From December 2, they show at most the last 90 days of flag calls. Destinations and workflows keep receiving `$feature_flag_called` events. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
 
-Two exceptions:
+From December 2, queries that read every event and don't name `$feature_flag_called` don't count new flag calls. This includes insight series and retention steps on **All events**, funnel steps on **All events** (unless the funnel also has a `$feature_flag_called` step), and SQL such as `SELECT count() FROM events` or `SELECT event, count() FROM events GROUP BY event`. Their totals drop by the number of flag calls you send. Unique-user counts, such as daily active users, also drop if you evaluate flags for users who send no other events. Server-side flag evaluation often does this. Queries that name `$feature_flag_called` still return flag calls, from at most the last 90 days.
 
-- **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
-- **Batch exports and Destinations:** from November 30, exports of the `events` table or `all events` will not include `$feature_flag_called` events. To keep exporting them with batch exports, see [What changes for batch exports](#what-changes-for-batch-exports). For destinations, [tell us](/support) if you need them.
+Three exceptions:
+
+- **SQL with `SELECT *` or some `SAMPLE` forms:** a query that reads `$feature_flag_called` with `SELECT *`, `COLUMNS(...)`, a `SAMPLE` with an `OFFSET`, or a `SAMPLE` of a row count returns an error. List the columns you need instead of `*`, and write `SAMPLE` as a ratio, such as `SAMPLE 0.1`.
+- **Batch exports:** from December 2, exports of the `events` table will not include `$feature_flag_called` events. To keep exporting them, see [What changes for batch exports](#what-changes-for-batch-exports).
+- **Legacy apps:** from December 2, legacy apps won't receive `$feature_flag_called` events. To keep receiving them, switch to the matching destination, such as [Customer.io](/docs/data-pipelines/destinations/customerio) or [RudderStack](/docs/data-pipelines/destinations/rudderstack).
 
 We'll email you before your organization moves. For details, see [Where does PostHog store flag calls?](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls)
 
@@ -94,7 +97,7 @@ Good to know:
 
 - **Person properties are not affected.** We apply `$set` and `$set_once` to the person as soon as the event arrives. The resulting person properties stay on every event and stay queryable as before. Only the raw instruction on the event expires.
 - **The 60 days count from when we received the event**, not from the event's timestamp.
-- **Historical events:** on November 30, events we received more than 60 days earlier (before roughly October 1) lose `$set`, `$set_once` and the other properties in this table. Their person properties are kept.
+- **Historical events:** on December 2, events we received more than 60 days earlier (before roughly October 3) lose `$set`, `$set_once` and the other properties in this table. Their person properties are kept.
 - **Not affected:** `$sent_at`, `$sdk_debug_current_session_duration` and `$debug_images` stay permanent, because people use them in longer-term queries and for error symbolication.
 
 ## What properties we're removing
@@ -115,24 +118,27 @@ Queries using `$active_feature_flags` keep working. HogQL translates them to the
 
 ## How some property values change
 
-We'll drop `null` values and empty objects from properties, and store a few built-in properties as text. You'll mostly see this where PostHog shows a whole event, like batch exports, the API, and event details.
+We'll drop `null` values and empty objects from properties, store a few built-in properties as text, and show text that holds a JSON object or list as that object or list. You'll mostly see this where PostHog shows a whole event, like batch exports, the API, and event details.
 
 | What you send | Before | After | Do you need to do anything? |
 | --- | --- | --- | --- |
 | A property set to `null`, like `{"plan": null}` | Stored as `null` | Dropped. Filters already treat `null` as not set, so they work as before. Whole events leave the property out instead of showing `null` | Only if a tool that reads your batch exports expects the `null` |
 | An empty object, like `{"filters": {}}` | Stored as sent | Dropped. The property counts as not set everywhere, including in filters and whole events. An object that only holds `null` values counts as not set too | Only if you filter on whether the property is set, or a tool that reads your batch exports expects the object |
-| A number in a built-in text property, like `$browser_version` or the group keys `$group_0` to `$group_4` | Stored as a number, like `155` | Stored as text, like `"155"`. An empty value (`""` or `[]`) in these properties is left out of whole events, except in [batch exports](#what-changes-for-batch-exports) | Only if a tool that reads your batch exports expects a number |
+| A number in a built-in text property, like `$browser_version` or the group keys `$group_0` to `$group_4` | Stored as a number, like `155` | Stored as text, like `"155"`. An empty value (`""` or `[]`) in these properties is left out of whole events | Only if a tool that reads your batch exports expects a number |
+| Text that holds a JSON object or list, like `{"details": "{\"step\": 2}"}` | Stored and shown as text | Shown as the object or list in whole events, like `{"details": {"step": 2}}`. Text that isn't valid JSON stays text | Only if a tool that reads your batch exports expects text |
 
 ## What changes for batch exports
 
-From November 30, [batch exports](/docs/data-pipelines/batch-exports) that use the [events model](/docs/data-pipelines/batch-exports#events-model) change in two ways:
+From December 2, [batch exports](/docs/data-pipelines/batch-exports) that use the [events model](/docs/data-pipelines/batch-exports#events-model) change in two ways:
 
 - They no longer include `$feature_flag_called` events, because these events move to their own table. You can export that table separately (see below).
 - They send `properties` and `person_properties` in the new storage format. This format stores feature flags more efficiently, so events with many flags are much smaller.
 
 This applies to every destination. The persons and sessions models don't change.
 
-Here's everything that changes in exported events:
+To test the new format before your project is migrated, you can move individual exports, such as a copy of a production export. You'll find an **Export from the new events table** option on your batch export's page. With the [API](/docs/api) or the [MCP server](/docs/model-context-protocol), set `use_new_events_schema` to `true` in the export's destination config. Once we migrate your project, this setting has no effect.
+
+Here's what changes in exported events:
 
 | What | Before | After | What to do |
 | --- | --- | --- | --- |
@@ -140,14 +146,12 @@ Here's everything that changes in exported events:
 | Feature flag values | One property for each flag, like `"$feature/new-checkout": true` | One `$feature_flags` object for each event, like `"$feature_flags": {"new-checkout": "true"}`. The values are text: `"true"`, `"false"`, or the variant name | Read flag values from `$feature_flags`, and compare them as text |
 | `$active_feature_flags` | The list of active flags | Not included | Use the keys in `$feature_flags` that have a value other than `"false"` |
 | Flag payloads, product tour and survey state, data pipeline debugging properties, and raw LLM payloads | Included | Not included. See [What properties we're removing](#what-properties-were-removing) for the full list | None. We no longer store these properties |
-| `$set`, `$set_once`, and the other [properties that expire after 60 days](#what-properties-expire-after-60-days) | Included in `properties`. `$set` and `$set_once` also fill the `set` and `set_once` fields | Not included, and the `set` and `set_once` fields are empty | Use `person_properties`, which holds the person properties that these updates produce |
-| A property set to `null`, like `{"plan": null}` | Included as `null` | Not included | Treat a missing property as not set |
-| An empty object, like `{"filters": {}}` | Included as `{}` | Not included | Treat a missing property as not set |
+| `$set`, `$set_once`, and the other [properties that expire after 60 days](#what-properties-expire-after-60-days) | Included in `properties` for every event. `$set` and `$set_once` also fill the `set` and `set_once` fields | Included as before for events we received in the last 60 days. Not included for older events, for example when you backfill older data | For older events, use `person_properties`, which holds the person properties that these updates produce |
+| A top-level property set to `null`, like `{"plan": null}` | Included as `null` | Not included. A `null` inside an object or list, like `{"cart": {"note": null}}`, is still included | Treat a missing property as not set |
 | A number in a built-in text property, like `$browser_version` or `$group_0` to `$group_4` | A number, like `155` | Text, like `"155"` | Convert the value to a number if your tools need one |
-| Built-in properties that an event didn't send, like `$browser` or `$exception_list` | Left out | Included with an empty value: `""` for text, `[]` for lists, and `{}` for `$feature_flags` | Treat `""`, `[]`, and an empty `$feature_flags` as not set |
-| Built-in person properties that a person doesn't have, like `$initial_os` | Left out of `person_properties` | Included as `""` | Treat `""` as not set |
+| A property whose text holds a JSON object or list, like `"details": "{\"step\": 2}"` | Text, like `"{\"step\": 2}"` | The object or list, like `{"step": 2}`. Text that isn't valid JSON stays text | Convert the value to text if your tools need text |
 
-Here's an example of the `properties` of one event in a **batch export** before November 30:
+Here's an example of the `properties` of one event in a **batch export** before December 2:
 
 ```json
 {
@@ -162,21 +166,17 @@ Here's an example of the `properties` of one event in a **batch export** before 
 }
 ```
 
-And the same event in a **batch export** after November 30. The list of empty built-in properties is shortened:
+And the same event in a **batch export** after December 2:
 
 ```json
 {
   "$browser": "Chrome",
-  "$browser_language": "",
   "$browser_version": "131",
-  "$device_type": "",
-  "$exception_list": [],
   "$feature_flags": {"legacy-nav": "false", "new-checkout": "true", "pricing-test": "variant-b"},
-  "$os": "",
-  "$session_id": ""
+  "$set": {"email": "user@example.com"}
 }
 ```
 
 ## When
 
-The changes take effect on November 30. Questions? [Get in touch with support](/support).
+We'll roll out these changes starting December 2. Questions? [Get in touch with support](/support).

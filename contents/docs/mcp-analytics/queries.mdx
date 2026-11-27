@@ -4,7 +4,7 @@ title: Sample queries
 
 Use these HogQL queries after you install the SDK and capture `$mcp_tool_call` events. See the [event reference](/docs/mcp-analytics/events) for property definitions.
 
-For a live example, the [MCP leaderboard](/mcp/leaderboard) runs queries like these over PostHog's own MCP server – shares by client and model, plus error rate and p95 latency per tool – and serves the results through [Endpoints](/docs/endpoints).
+See the [MCP leaderboard](/mcp/leaderboard) for these queries running on PostHog's own server.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sql_editor_light_94f83dc27e.png"
@@ -75,7 +75,7 @@ ORDER BY calls DESC
 
 ## Active sessions per client
 
-[Conversation IDs](/docs/mcp-analytics/conversation-id) are on by default, but clients must echo the handle to group calls across requests. Clients that ignore it can inflate the session count. The Go SDK sends no `$mcp_initialize`, so only its tool calls count.
+[Conversation IDs](/docs/mcp-analytics/conversation-id) are on by default, but clients must echo the handle to group calls across requests. Clients that ignore it can inflate the session count.
 
 ```sql
 SELECT
@@ -90,7 +90,7 @@ ORDER BY sessions DESC
 
 ## Advertised tools that never get called
 
-This query finds tools in `tools/list` responses that agents never called. The Go SDK sends no `$mcp_tools_list`, so this query returns nothing for Go servers.
+This query finds tools that agents never called. It needs `$mcp_tools_list`, which Go doesn't send.
 
 ```sql
 WITH listed AS (

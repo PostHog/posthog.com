@@ -39,6 +39,9 @@ If you're setting up a proxy to protect your PostHog instance and prevent access
 | `/flags`           | Endpoint that enables autocapture, session recording, feature flags & compression on events. |
 | `/decide`          | Legacy endpoint. Use `/flags` instead.                                                                                               |
 | `/i/v0/e`          | Endpoint for ingesting/capturing events.                                                     |
+| `/i/v0/ai`         | Endpoint for AI events, including `/i/v0/ai/batch` and `/i/v0/ai/otel`.                      |
+| `/i/v1/analytics/events` | [Capture v1](/docs/api/capture-v1) endpoint for events from capture v1 SDKs.           |
+| `/i/v1/ai/events`  | [Capture v1](/docs/api/capture-v1) endpoint for AI events from capture v1 SDKs.              |
 | `/capture`         | Legacy endpoint for ingesting/capturing events. Use `/i/v0/e` instead.                       |
 | `/engage`          | Legacy endpoint for ingesting/capturing events. Use `/i/v0/e` instead.                       |
 | `/s`               | Endpoint for capturing session recordings.                                                   |

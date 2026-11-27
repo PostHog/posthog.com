@@ -96,7 +96,7 @@ posthog.capture("distinct_id", "$set", new HashMap<String, Object>() {
 
 ```rust
 use std::collections::HashMap;
-use posthog_rs::Event;
+use posthog::Event;
 
 let mut event = Event::new("$set", "distinct_id");
 

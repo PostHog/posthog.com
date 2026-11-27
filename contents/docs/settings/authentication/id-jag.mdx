@@ -86,7 +86,7 @@ Under **Domains**, choose **All domains** to cover every verified domain in your
 
 Use one XAA configuration per IdP and domain. If two configurations cover the same IdP and domain, PostHog rejects the request.
 
-Some MCP clients, such as Claude, can create the configuration for you after an admin approves them. PostHog tags that configuration with the client's name, for example **Set up from Claude**, and shows it read-only. ID-JAGs for it must carry your organization ID in `aud_tenant`, which the client sets. See [automatic setup](/docs/model-context-protocol/enterprise-managed-authorization#automatic-setup).
+Some MCP clients, such as Claude, can create the configuration for you after an admin approves them. For Claude, this is the recommended setup: click **Connect PostHog** in Claude's setup guide instead of filling in this form. PostHog tags that configuration with the client's name, for example **Set up from Claude**, and shows it read-only. ID-JAGs for it must carry your organization ID in `aud_tenant`, which the client sets. See [automatic setup](/docs/model-context-protocol/enterprise-managed-authorization#automatic-setup).
 
 ### 3. Register the client
 

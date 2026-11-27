@@ -36,7 +36,7 @@ After creating your app, go into the newly created folder and install the requir
 
 ```bash
 cd openrouter-observability
-npm install --save posthog-node@5 @posthog/ai@8 openai
+npm install --save posthog-node@6 @posthog/ai@8 openai
 ```
 
 Now, we can create our frontend. It will be:

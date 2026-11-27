@@ -97,15 +97,21 @@ You can:
 
 If you delete a review, it disappears from the active reviews list and you can create a new active review for that trace later.
 
+## Programmatic access
+
+Use `/api/projects/:project_id/llm_analytics/trace_reviews/` to save scores on a trace review. A result uploaded for an offline experiment belongs to its experiment item, even if the item links to a trace. Edit that result through the [offline experiment API](/docs/ai-evals/experiments#edit-experiment-items-and-results).
+
+Authenticate with a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys). Grant `llm_analytics:read` to read reviews or `llm_analytics:write` to create, update, or delete a review and its scores. Each review records whether it was last saved by a user or a project key, and the activity log tracks project key changes.
+
 ## Trace Reviews vs. evaluations
 
 Trace Reviews and [evaluations](/docs/ai-evals) solve different problems:
 
-| | Trace Reviews | Evaluations |
-|---|---|---|
-| **Who runs it** | A human reviewer | An LLM judge or code |
-| **Best for** | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
-| **Workflow** | Queues, scorers, and notes | Prompts or code running automatically |
+|                 | Trace Reviews                                         | Evaluations                             |
+| --------------- | ----------------------------------------------------- | --------------------------------------- |
+| **Who runs it** | A human reviewer                                      | An LLM judge or code                    |
+| **Best for**    | Escalations, QA, nuanced judgment, manual spot checks | Automated quality checks and monitoring |
+| **Workflow**    | Queues, scorers, and notes                            | Prompts or code running automatically   |
 
 In practice, they work well together:
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import CTA from 'components/Home/CTA'
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import hedgehogHahaBizznissPng from 'hoggies/haha-bizzniss.png'
 
 export const ShamelessCTA = () => {
     const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
@@ -19,10 +20,7 @@ export const ShamelessCTA = () => {
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
                         transition={{ delay: 0.2 }}
                     >
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/haha_bizzniss_5bc44659ec.svg"
-                            className="w-full"
-                        />
+                        <HoggieImage src={hedgehogHahaBizznissPng} className="w-full" />
                     </motion.div>
                 </div>
                 <CTA headline={false} card />

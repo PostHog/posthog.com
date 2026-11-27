@@ -28,7 +28,6 @@ export function renderOverview(): JSX.Element {
                 leftSidebar={<TreeMenu items={libraryNav} expandOnly />}
                 tableOfContents={tableOfContents}
                 showQuestions={false}
-                hideMobileTableOfContents
             >
                 <div className="@container">
                     <p className="lead">

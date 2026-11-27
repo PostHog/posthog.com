@@ -70,7 +70,7 @@ Log-based metric rules are evaluated during log ingestion, in this order:
 
 What follows from that order:
 
-- **Dropped logs still count.** A line that a drop rule removes is already tallied, so dropping it doesn't create a gap in the metric.
+- **Dropped logs still count toward the metric.** A line that a drop rule removes is already tallied, so dropping it doesn't create a gap in the metric, but you don't pay for lines that a drop rule removes.
 - **Only new logs count.** Rules aren't retroactive, and there's no backfill. A log line with a timestamp more than 20 minutes old never feeds a metric, so replaying old logs can't distort the current data point.
 - **Points land on 10-second buckets.**
 - **Emission is best-effort.** If the export of an aggregation window fails, that window is dropped rather than retried indefinitely — log ingestion is never blocked or delayed by metric emission.

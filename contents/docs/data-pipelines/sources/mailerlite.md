@@ -9,7 +9,7 @@ availability:
 sourceId: MailerLite
 ---
 
-The MailerLite connector pulls your MailerLite email marketing data into the PostHog data warehouse.
+The MailerLite connector pulls your MailerLite email marketing data into the PostHog Data Warehouse.
 
 ## Adding a data source
 
@@ -35,6 +35,12 @@ Once the syncs are complete, you can start using MailerLite data in PostHog.
 | `forms_embedded` | Embedded forms | Full refresh |
 | `forms_promotion` | Promotion forms | Full refresh |
 | `webhooks` | Configured webhooks | Full refresh |
+| `ecommerce_customers` | A customer of a connected shop, linked to the matching subscriber, one row per shop and customer | Full refresh |
+| `forms_popup_subscribers` | A subscriber who signed up through a popup form, one row per form and subscriber | Full refresh |
+| `forms_embedded_subscribers` | A subscriber who signed up through an embedded form, one row per form and subscriber | Full refresh |
+| `forms_promotion_subscribers` | A subscriber who signed up through a promotion form, one row per form and subscriber | Full refresh |
+| `timezones` | A timezone that can be set on subscribers and account settings | Full refresh |
+| `campaign_languages` | A language that campaigns can be localized to | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

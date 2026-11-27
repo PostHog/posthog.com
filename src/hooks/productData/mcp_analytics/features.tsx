@@ -17,9 +17,9 @@ export const features = {
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/NEW_MCP_analytics_dashboard_light_ab100d9fb3.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_analytics_dashboard_light_f4327f4709.png',
                 srcDark:
-                    'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/NEW_MCP_analytics_dashboard_dark_44a5c6b92a.png',
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_analytics_dashboard_dark_aa82abfd74.png',
                 alt: 'MCP Analytics dashboard showing tool calls, error rates, and latency',
             },
         ],

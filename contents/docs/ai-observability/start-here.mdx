@@ -41,6 +41,27 @@ Prefer to do it by hand? Choose your platform below:
 
 </QuestLogItem>
 
+<QuestLogItem
+  title="Structure your traces"
+  subtitle="Recommended"
+  icon="IconWrench"
+>
+
+The wrappers capture each LLM call. Pass a few more fields, and those calls become traces you can debug and evaluate:
+
+- **Trace ID** – The same ID on every call in one run, so you see each step
+- **Session ID** – `$ai_session_id` on every turn, so you see whole conversations
+- **User ID** – Your real user ID as `distinct_id`, so you see cost per user
+- **Tool calls** – Captured by the wrappers, so you see which tools run
+
+The **Instrumentation checklist** on the [AI Observability dashboard](https://app.posthog.com/ai-observability) tells you which of these are missing.
+
+<OSButton variant="primary" asLink to="/docs/ai-observability/instrumentation">
+  Instrumentation best practices
+</OSButton>
+
+</QuestLogItem>
+
 <QuestLogItem 
   title="Track AI generations"
   subtitle="Required"

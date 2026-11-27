@@ -3,7 +3,7 @@ import SEO from 'components/seo'
 import Wizard from 'components/Wizard'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { parseVersionedReferenceSlug } from 'components/SdkReferences/utils'
+import { getSdkReferenceUrl, parseVersionedReferenceSlug } from 'components/SdkReferences/utils'
 
 /**
  * Served (via a vercel.json rewrite) for versioned SDK reference URLs the build no longer
@@ -30,6 +30,8 @@ export default function VersionUnavailable(): JSX.Element {
                 (override ? parseVersionedReferenceSlug(override) : null)
         )
     }, [])
+
+    const canonicalUrl = requested ? getSdkReferenceUrl(requested.sdk) : null
 
     return (
         <>
@@ -61,9 +63,9 @@ export default function VersionUnavailable(): JSX.Element {
                                 latest release:
                             </p>
                             <p className="mb-4">
-                                {requested ? (
-                                    <Link to={`/docs/references/${requested.sdk}`} className="underline font-medium">
-                                        /docs/references/{requested.sdk}
+                                {canonicalUrl ? (
+                                    <Link to={canonicalUrl} className="underline font-medium">
+                                        {canonicalUrl}
                                     </Link>
                                 ) : (
                                     <Link to="/docs/libraries" className="underline font-medium">

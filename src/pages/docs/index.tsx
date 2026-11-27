@@ -232,9 +232,12 @@ export const DocsIndex = () => {
                         </Panel>
                     </div>
 
-                    {/* The library: the same volumes as /pocket-guides, as spines. */}
+                    {/* The library: the same volumes as /pocket-guides, as compact cards. */}
                     <aside className="@3xl/docs:w-1/3 shrink-0">
-                        <Panel eyebrow="Guides" description="Guides for the human reader on the go.">
+                        <Panel
+                            eyebrow="Pocket guides"
+                            description="Short books, one per product, that teach PostHog one chapter at a time."
+                        >
                             <BookShelf>
                                 {volumes.map((volume) => (
                                     <Book key={volume.id} volume={volume} count={guideCounts[volume.id] ?? 0} />
@@ -251,7 +254,7 @@ export const DocsIndex = () => {
                                     })
                                 }
                             >
-                                All guides &rarr;
+                                All pocket guides &rarr;
                             </Link>
                         </Panel>
                     </aside>

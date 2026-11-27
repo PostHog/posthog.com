@@ -1,6 +1,7 @@
 import React from 'react'
 import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { SectionComponentProps } from '../types'
 
 const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
@@ -41,9 +42,16 @@ const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
                                 className="w-full h-auto object-contain object-bottom opacity-80"
                                 title={hog.alt || ''}
                             />
-                        ) : (
+                        ) : isCloudinaryImage(hog.src) ? (
                             <CloudinaryImage
                                 src={hog.src}
+                                alt={hog.alt || ''}
+                                className="object-contain object-bottom opacity-80"
+                            />
+                        ) : (
+                            <HoggieImage
+                                src={hog.src}
+                                mirror={hog.mirror}
                                 alt={hog.alt || ''}
                                 className="object-contain object-bottom opacity-80"
                             />

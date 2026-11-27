@@ -96,7 +96,6 @@ export default function SdkMarkdownReference({ data: { sdkMarkdownReference } })
                 contentMaxWidthClass={contentMaxWidthClass}
                 showSurvey
                 // The reference lists dozens of sections, so the Jump to panel holds them, not an inline list.
-                hideMobileTableOfContents
             />
         </>
     )

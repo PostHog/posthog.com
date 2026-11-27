@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a living page for how we pitch PostHog making _your_ product self-driving. It covers [the concepts](#what-youre-actually-selling) (so you can explain scouts, signals, and sources without tying yourself in knots), [the strengths of each and which to lead with](#scouts-and-signal-sources-the-strengths-of-each), the core pitch, how to run it, and a [reverse demo](#the-reverse-demo) format that lets the customer experience self-driving on their own data. We're still early, so treat this as a starting point and iterate on it as we practice the pitch and learn what lands.
+This is a living page for how we pitch PostHog making _your_ product self-driving. It covers [the concepts](#what-youre-selling) (so you can explain scouts, signals, and sources without tying yourself in knots), [the strengths of each and which to lead with](#scouts-and-signal-sources-the-strengths-of-each), the core pitch, how to run it, and a [reverse demo](#the-reverse-demo) format that lets the customer experience self-driving on their own data. We're still early, so treat this as a starting point and iterate on it as we practice the pitch and learn what lands.
 
 This pitch sits on top of our [brand story](/handbook/brand/foundations#how-we-describe-posthog), so keep it consistent with how we describe PostHog everywhere else. Two things carry through from there: **self-driving is the story** (the narrative everything sits under), and the customer's product stays the subject – we make _your_ product self-driving, PostHog isn't "a self-driving product" itself. 
 

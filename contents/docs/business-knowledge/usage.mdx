@@ -1,0 +1,66 @@
+---
+title: See Business Knowledge usage
+sidebarTitle: Usage
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+The [**Usage**](https://app.posthog.com/business-knowledge/usage) tab shows how much knowledge your project ingested, how often it was searched, and which sources the Support AI agent cited. Choose the last 7, 30, or 90 days. Days are in UTC.
+
+<ProductScreenshot
+    imageLight="/images/docs/business-knowledge/usage-light.png"
+    imageDark="/images/docs/business-knowledge/usage-dark.png"
+    alt="The Business Knowledge Usage tab, with chunks ingested by source type, searches by where they came from, and citations by the support agent"
+    classes="rounded"
+/>
+
+## Chunks ingested
+
+PostHog splits each source into [chunks](/docs/business-knowledge/how-it-works#from-a-source-to-chunks). This number counts every chunk PostHog writes.
+
+- A new source counts all its chunks
+- A refresh that finds changed content counts the chunks of the changed pages again
+- A refresh that finds no change counts nothing
+- Deleting a source doesn't lower the number
+
+The breakdown shows where the chunks came from:
+
+| Row | Source |
+| --- | --- |
+| **Websites** | URL sources |
+| **Files** | Uploaded files |
+| **Text** | Pasted text |
+| **Learned from support tickets** | Answers from [Learn from support](/docs/business-knowledge/learn-from-support) |
+
+To ingest fewer chunks, refresh a large site less often, set **Max pages**, or skip sections with **Skip paths**. See [URL sources](/docs/business-knowledge/sources#url).
+
+## Searches
+
+This number counts each search of your knowledge, whatever the search returns.
+
+| Row | Who searched |
+| --- | --- |
+| **API and MCP** | [Your own agents](/docs/business-knowledge/connect-your-agent), and MCP clients signed in as a PostHog user |
+| **Support agent** | The Support [AI agent](/docs/support/ai-agent) while it works on a ticket |
+| **PostHog AI** | [PostHog AI](/docs/posthog-ai) when it answers a question about your business |
+| **Learning from support tickets** | Searches PostHog makes while it [learns from resolved tickets](/docs/business-knowledge/learn-from-support) |
+
+One answer can use more than one search. An agent often searches again with different words before it replies.
+
+## Citations
+
+Citations show whether your knowledge is used in real replies. The numbers count runs of the Support AI agent that cited a source.
+
+| Number | Meaning |
+| --- | --- |
+| **Agent runs that cited knowledge** | Runs where the agent used at least one source |
+| **Cited knowledge learned from tickets** | Of those runs, how many used a learned source |
+| **Sources cited** | How many of your sources were cited at least once |
+
+**Most cited sources** lists the 10 sources the agent used most. A source that is never cited is either not needed or not found. Ask a question it should answer in the [Playground](/docs/business-knowledge/playground) to find out which.
+
+Citations count only sources that still exist.

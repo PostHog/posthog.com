@@ -36,7 +36,7 @@ Storage for your whole retention period is part of the event price. [What you ac
 
 Retention applies to every project on PostHog Cloud, and it affects any events that are stored in our events table. This includes autocapture events, pageviews, custom events, exceptions, survey responses, web vitals, and more.
 
-When an event's `timestamp` goes past your retention period, it is considered expired. Expired events may be deleted at any point, and **we can't restore deleted events**.
+When an event's `timestamp` goes past your retention period, it is considered expired. You can delete events at any point, and **we can't restore deleted events**.
 
 #### Events are not automatically deleted as soon as they expire
 
@@ -45,7 +45,7 @@ We may hold onto expired events for one of two reasons:
 - Not all customers are aware that their retention period has ended, and we want to give them time to extend it
 - We delete events in batches, so there is a delay between when an event expires and when it is deleted
 
-If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).
+If you need more specificity around when your events will be deleted, see the [data deletion docs](/docs/privacy/data-storage#data-deletion).
 
 #### Migrated events may expire as soon as they are uploaded
 
@@ -101,7 +101,7 @@ If your organization was on a paid plan before November 5, 2026, see [Organizati
 
 #### When are expired events deleted?
 
-Expired events may be deleted at any point, and once they are deleted, they can't be restored. However, we do not automatically delete events as soon as they expire, so they may be stored longer than your retention period. If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).
+You can delete events at any point, and once they are deleted, they can't be restored. However, we do not automatically delete events as soon as they expire, so they may be stored longer than your retention period. If you need more specificity around when your events will be deleted, see the [data deletion docs](/docs/privacy/data-storage#data-deletion).
 
 #### If I extend my retention period, will I get my events back?
 

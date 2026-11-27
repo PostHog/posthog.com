@@ -58,7 +58,7 @@ You can also create custom evals to suit the specific use cases of your AI featu
 ## Why use evals? A tale of two math problems
 **Problem 1: Manual review doesn’t scale**
 
-[LLM observability tools](/blog/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
+[LLM observability tools](/compare/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
 
 Slop (a disguting yet accurate term) is any output from an LLM that feels generic, low quality, or just plain wrong.
 

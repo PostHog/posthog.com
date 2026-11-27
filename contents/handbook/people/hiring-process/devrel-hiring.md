@@ -55,7 +55,7 @@ Most developer relations roles will go into detail about the candidates experien
 
 #### DevRel SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
 
 We will share the task with you at the start of the day. The task is representative of the work someone in this role at PostHog is doing, and it is always the same for each candidate, so we can make clear comparisons.Day
  

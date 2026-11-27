@@ -50,7 +50,6 @@ export function renderDocsPage(doc: ComponentDoc): JSX.Element {
                 leftSidebar={<TreeMenu items={libraryNav} expandOnly />}
                 tableOfContents={tableOfContents}
                 showQuestions={false}
-                hideMobileTableOfContents
             >
                 <div className="@container">
                     <p className="lead">{entry.description}</p>

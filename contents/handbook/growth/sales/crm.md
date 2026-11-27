@@ -161,7 +161,7 @@ Billing, finance, and RevOps questions look similar but go to different teams. R
 
 - **Invoices → revops team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="revops" /> owns the invoice itself.
 
-- **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, and chasing overdue payments.
+- **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, chasing overdue payments, and failed payment recovery. Finance also decides if we accept a settlement or a partial payment on an overdue or uncollectible balance, when we write off a balance, and how we book a payment that we get after a write-off. Finance reconciles payments that come through platforms other than Stripe, for example AWS Marketplace or Vercel. See [failed/late payments](/handbook/growth/sales/billing#failedlate-payments).
 
 - **Contracts and credits → RevOps team** Anything about how a prepaid contract turns into credits and invoices — which invoices a credit balance pays, when credits start and expire, how much [rolls over at renewal](/handbook/growth/sales/contract-rules#when-they-will-end-the-contract-term-with-credit-remaining), contract start and end dates, upfront invoices for signed order forms, credit notes, and refunds that need an invoice change. The <SmallTeam slug="revops" /> sets up the subscription after an order form closes, so ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
@@ -334,7 +334,7 @@ The renewal pipeline stages are:
 3. Product Evaluation (50%) - This step becomes relevant if decision makers have changed in organization or if new teams within the company are considering using us.
 4. Commercial & Legal Review (80%) - We are now working with them on contractual items such as custom pricing, MSAs etc.
 5. Closed Won (100%) - They have signed the contract.
-6. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
+6. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap. This includes customers who move to monthly payments, even for one month. See [customers moving to monthly](/handbook/customer-success/renewals#customers-moving-to-monthly).
 
 ### Opportunity notes
 

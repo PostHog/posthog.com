@@ -15,10 +15,10 @@ Sentiment classification automatically labels user messages in your LLM [traces]
 Sentiment classification runs as a [sentiment analysis evaluation](/docs/ai-evals#sentiment-analysis-evaluations). Once you configure one, PostHog classifies the user messages in your sampled generations and stores the results, which then power the **Sentiment** tab and the sentiment bars shown on traces and generations.
 
 1. Create a sentiment evaluation in **AI Evals** > **Evaluations** (see [Creating a sentiment evaluation](/docs/ai-evals#creating-a-sentiment-evaluation)).
-2. As generations are captured and sampled, a local ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest), converted to ONNX) classifies each user message as positive, neutral, or negative.
-3. Results are stored and displayed across AI observability.
+2. As generations are captured and sampled, a local ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest), converted to ONNX) classifies each user message as positive, neutral, or negative, with a confidence score. It only reads user messages (the `$ai_input` property), not LLM outputs.
+3. Results are stored and displayed across AI Observability.
 
-**No data is sent to third-party services.** The model runs entirely within PostHog's infrastructure.
+The model runs entirely within PostHog's infrastructure, so no data is sent to third-party services and there's no LLM cost.
 
 ## What you'll see
 

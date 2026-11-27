@@ -7,9 +7,18 @@ import {
     IconPiggyBank,
     IconPresent,
     IconTerminal,
+    IconVideoCamera,
 } from '@posthog/icons'
+import { Check } from 'lucide-react'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
+import {
+    learnChapterPath,
+    learnChapterSlug,
+    normalizeUrl,
+    sectionPages,
+    useBookPages,
+} from 'components/Learn/PocketGuides/bookModel'
+import { useMarkChapterReadOnMove, useReadChapterSlugs } from 'components/Learn/PocketGuides/chapterProgress'
 import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -20,6 +29,7 @@ import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
 
 const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    videos: { name: 'Videos', icon: <IconVideoCamera className="size-4" /> },
     'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
     'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
 }
@@ -107,6 +117,8 @@ const LearnNav = ({
 }) => {
     const pages = sectionPages(useBookPages(volumeId), section)
     const posthog = usePostHog()
+    const markChapterReadOnMove = useMarkChapterReadOnMove()
+    const readChapterSlugs = useReadChapterSlugs(volumeId)
     const volume = volumeById(volumeId)
     const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
@@ -119,6 +131,15 @@ const LearnNav = ({
         url: learnChapterPath(guideBasePath, page),
         // Full titles are questions, often longer than the sidebar is wide.
         wrap: fullTitles,
+        marker:
+            page.page && !page.isFrontMatter ? (
+                readChapterSlugs.has(learnChapterSlug(page)) ? (
+                    <>
+                        <Check className="size-full text-green" strokeWidth={2.5} aria-hidden="true" />
+                        <span className="sr-only">Read: </span>
+                    </>
+                ) : null
+            ) : undefined,
     }))
     const hub = volume?.learnHub
     const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
@@ -157,7 +178,11 @@ const LearnNav = ({
             page.isFrontMatter ? 'introduction' : learnChapterSlug(page),
         ])
     )
+    const currentSlug = currentPath ? chapterByUrl.get(normalizeUrl(currentPath)) : undefined
     const trackClick = ({ url }: { url?: string }) => {
+        if (url && currentSlug) {
+            markChapterReadOnMove({ volumeId, pages, basePath: guideBasePath, currentSlug, targetHref: url })
+        }
         const chapter = url && chapterByUrl.get(url)
         if (chapter) {
             posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })

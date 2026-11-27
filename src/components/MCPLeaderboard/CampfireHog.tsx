@@ -55,7 +55,6 @@ const ESCAPES = [
     { to: '/coloring-book.pdf', text: 'Here, color something. Stay inside the lines.' },
     { to: '/photobooth', text: 'Take a selfie with me. Then go.' },
     { to: '/posthug', text: 'You look like you need a hug. Not from me.' },
-    { to: '/vibe-check', text: "Your vibes are off, partner. Let's check 'em." },
     { to: '/deskhog', text: 'Go buy a DeskHog. Oh wait, they sold out.' },
     { to: '/side-project-insurance', text: 'Got a side project? Insure it before it burns.' },
     { to: '/cool-tech-jobs', text: 'Go find a job that lets you click less.' },

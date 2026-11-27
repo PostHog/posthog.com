@@ -4,6 +4,7 @@ import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { getLogo } from '../../../constants/logos'
 import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxonomy'
+import { PUBLISHED_SDK_LIST } from '../../SdkReferences/utils'
 
 /**
  * Shared framework picker driven by the install `TAXONOMY` (single source of
@@ -90,6 +91,11 @@ const InstallFrameworkGrid = ({
             const fm = node.frontmatter || {}
             const logo = fm.platformLogo ? getLogo(fm.platformLogo) : fm.icon?.publicURL
             map.set(match[1], { logo, title: fm.title })
+        })
+        PUBLISHED_SDK_LIST.forEach((sdk) => {
+            if (!map.has(sdk.slug)) {
+                map.set(sdk.slug, { logo: getLogo(sdk.logoKey), title: sdk.label })
+            }
         })
         return map
     }, [data])

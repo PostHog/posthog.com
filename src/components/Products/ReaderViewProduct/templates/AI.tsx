@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage, { isCloudinaryImage } from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { SectionComponentProps } from '../types'
 
 const DEFAULT_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png'
@@ -53,12 +54,21 @@ const AI = ({ id, productData }: SectionComponentProps) => {
                     )}
                 </div>
                 <aside className="w-full @2xl:w-64 shrink-0 text-center">
-                    <CloudinaryImage
-                        src={image}
-                        alt={imageAlt}
-                        className="w-full max-w-[240px] mx-auto"
-                        imgClassName="h-auto w-full object-contain"
-                    />
+                    {isCloudinaryImage(image) ? (
+                        <CloudinaryImage
+                            src={image}
+                            alt={imageAlt}
+                            className="w-full max-w-[240px] mx-auto"
+                            imgClassName="h-auto w-full object-contain"
+                        />
+                    ) : (
+                        <HoggieImage
+                            src={image}
+                            alt={imageAlt}
+                            className="w-full max-w-[240px] mx-auto"
+                            imgClassName="h-auto w-full object-contain"
+                        />
+                    )}
                     <p className="text-xs text-secondary mt-3 m-0">
                         Looking for PostHog MCP?{' '}
                         <Link to="/docs/model-context-protocol" state={{ newWindow: true }} className="underline">

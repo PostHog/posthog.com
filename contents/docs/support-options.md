@@ -75,7 +75,7 @@ There are three ways to get official support:
 
 -   Open a ticket through our [in-app support modal](https://app.posthog.com/home#supportModal).
 -   Ask a community question directly in the Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions.
--   Open an bug report on [our main Github repo](https://github.com/posthog/posthog).
+-   Open a bug report in [our main GitHub repo](https://github.com/posthog/posthog).
 
 We are very grateful to people that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)
 

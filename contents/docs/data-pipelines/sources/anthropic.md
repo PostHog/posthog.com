@@ -9,11 +9,11 @@ availability:
 sourceId: Anthropic
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Anthropic connector syncs users, invites, workspaces, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Anthropic connector syncs users, invites, workspaces, spend limits, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -32,6 +32,10 @@ Some tables need a Claude Enterprise key instead, created by your primary owner 
 The per-seat activity, cost and token usage tables, and the connector, plugin, skill and summary tables, come from the Claude Enterprise Analytics API. They need a Claude Enterprise key carrying the `read:analytics` scope.
 
 The group, group membership and custom role tables come from the Claude Enterprise user management API. They need an Admin API key carrying the `read:rbac_groups` scope for the group tables, or `read:members` for the custom role tables.
+
+The spend limit tables (`spend_limits` and `spend_limits_effective`) come from the Claude Enterprise Admin API. They need an Admin API key created in claude.ai carrying the `read:spend_limits` scope.
+
+The dimensional cost and token usage tables (`analytics_cost` and `analytics_usage`) provide organization-wide cost and usage breakdowns by actor type, API key, workspace, model, and product. These are beta endpoints that need either a Claude Console Admin API key or a Claude Enterprise key carrying the `read:analytics` scope.
 
 You'll be asked for:
 

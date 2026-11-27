@@ -17,17 +17,17 @@ The Expo connector syncs EAS builds and store submissions for one project into t
 
 ## Prerequisites
 
-An Expo account with access to the project you want to sync, and an access token. A robot user's token works too, and is the better choice for a shared integration.
+An Expo account with access to the project you want to sync, and a personal, robot, or single sign-on (SSO) user access token. A robot user's token is the better choice for a shared integration.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-Create a personal access token at [expo.dev under Access tokens](https://expo.dev/settings/access-tokens).
+Create an access token at [expo.dev under Access tokens](https://expo.dev/settings/access-tokens) while signed in with your personal or SSO user account. You can also use a robot user's token.
 
 You'll be asked for:
 
-- **Access token**: a personal or robot access token.
+- **Access token**: a personal, robot, or SSO user access token.
 - **Project ID**: run `eas project:info` to see it, or copy it from the project page on expo.dev.
 
 One source syncs one project, so add a source per project you want to track.

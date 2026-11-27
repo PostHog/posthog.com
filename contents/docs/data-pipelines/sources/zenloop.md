@@ -9,13 +9,13 @@ availability:
 sourceId: Zenloop
 ---
 
-The Zenloop connector syncs your Zenloop data – surveys, survey groups, and properties – into the PostHog data warehouse.
+The Zenloop connector syncs your Zenloop data – surveys, survey groups, properties, survey answers, and NPS summaries – into the PostHog Data Warehouse.
 
 ## Adding a data source
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click **+ New source** and then click **Link** next to Zenloop.
-3. You need an API token from Zenloop. In the [Zenloop app](https://app.zenloop.com/settings/api), go to **Settings → API** and generate a token. The token inherits the generating user's account permissions and grants read access to surveys, survey groups, and properties.
+3. You need an API token from Zenloop. In the [Zenloop app](https://app.zenloop.com/settings/api), go to **Settings → API** and generate a token. The token inherits the generating user's account permissions and grants read access to surveys, survey groups, properties, and survey answers.
 4. Back in PostHog, enter the token in the **API token** field and click **Next**.
 5. Select the tables you want to sync, set the sync frequency, then click **Import**.
 
@@ -28,6 +28,10 @@ Once the sync completes, you can query your Zenloop data in PostHog.
 | `surveys`       | NPS or feedback questionnaires that collect answers from recipients              | Full refresh |
 | `survey_groups` | Bundles of surveys aggregated together for combined reporting                    | Full refresh |
 | `properties`    | Custom metadata fields attached to survey answers for segmentation and filtering | Full refresh |
+| `survey_answers` | An answer to a Zenloop survey: the recipient's NPS score, comment, labels, and recipient data. One row per answer per survey | Full refresh |
+| `survey_summaries` | The all-time NPS summary of a Zenloop survey: the score and the promoter, passive, and detractor shares. One row per survey | Full refresh |
+| `survey_group_answers` | An answer to a survey in a Zenloop survey group. An answer appears once for each group that holds its survey | Full refresh |
+| `survey_group_summaries` | The all-time NPS summary of a Zenloop survey group across its surveys. One row per survey group | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
 

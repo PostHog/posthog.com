@@ -68,10 +68,10 @@ Leave the setup window open. You fill in the rest after you add the hook in Supa
 
 In the PostHog setup window, fill in:
 
-| Field | What to enter |
-| --- | --- |
+| Field                    | What to enter                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------- |
 | **Supabase project URL** | Your project URL, such as `https://abcdefgh.supabase.co`. It must use `https` and have no path. |
-| **Hook secret** | The full secret from Supabase, including the `v1,whsec_` prefix. |
+| **Hook secret**          | The full secret from Supabase, including the `v1,whsec_` prefix.                                |
 
 Click **Save connection**. PostHog uses the secret to check that each hook request comes from your Supabase project. The secret isn't shown again after you save it. To replace it, paste a new one. **Done** stays disabled while you have connection changes that aren't saved.
 
@@ -91,16 +91,21 @@ The security notifications have no starter templates. To send them through PostH
 
 Each email gets these variables from the hook:
 
-| Variable | What it contains |
-| --- | --- |
-| `{{ variables.confirmation_url }}` | The link that confirms the action, pointing at your Supabase project's `/auth/v1/verify` endpoint. Empty for reauthentication, which uses a code only. |
-| `{{ variables.token }}` | The one-time code the user can type instead of clicking the link. |
-| `{{ variables.token_hash }}` | The hashed token, for building your own confirmation link. |
-| `{{ variables.redirect_to }}` | Where Supabase sends the user after they confirm. |
-| `{{ variables.email }}` | The user's current email address. |
-| `{{ variables.new_email }}` | The new address, for email change emails. |
-| `{{ variables.user_metadata }}` | The user's metadata from Supabase. |
-| `{{ variables.email_action_type }}` | The Supabase email type, such as `signup` or `recovery`. |
+| Variable                            | What it contains                                                                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `{{ variables.confirmation_url }}`  | The link that confirms the action, pointing at your Supabase project's `/auth/v1/verify` endpoint. Empty for reauthentication, which uses a code only. |
+| `{{ variables.token }}`             | The one-time code the user can type instead of clicking the link.                                                                                      |
+| `{{ variables.token_hash }}`        | The hashed token, for building your own confirmation link.                                                                                             |
+| `{{ variables.redirect_to }}`       | Where Supabase sends the user after they confirm.                                                                                                      |
+| `{{ variables.email }}`             | The user's current email address.                                                                                                                      |
+| `{{ variables.new_email }}`         | The new address, for email change emails.                                                                                                              |
+| `{{ variables.user_metadata }}`     | The user's metadata from Supabase.                                                                                                                     |
+| `{{ variables.email_action_type }}` | The Supabase email type, such as `signup` or `recovery`.                                                                                               |
+| `{{ variables.old_email }}`         | The email address the user changed away from. Set on security notifications about email changes. Empty when not applicable.                            |
+| `{{ variables.phone }}`             | The user's phone number from Supabase. Empty when the user has no phone number.                                                                        |
+| `{{ variables.old_phone }}`         | The phone number the user changed away from. Set on security notifications about phone changes. Empty when not applicable.                             |
+| `{{ variables.provider }}`          | The sign-in provider, such as `google` or `github`. Set on security notifications about linked or removed sign-in methods. Empty when not applicable.  |
+| `{{ variables.factor_type }}`       | The MFA factor type, such as `totp`. Set on security notifications about added or removed MFA methods. Empty when not applicable.                      |
 
 When a user changes their email address with secure email change turned on in Supabase, PostHog sends the change email twice: once to the current address and once to the new one. Each email gets its own link and code. The email address changed notification goes to the old address.
 
@@ -116,11 +121,11 @@ From now on, Supabase sends its auth emails through PostHog.
 
 The Supabase card on the **Channels** tab shows how many emails are mapped, and one of these statuses:
 
-| Status | What it means |
-| --- | --- |
-| **Connected** | The project URL and hook secret are saved. |
+| Status         | What it means                                                         |
+| -------------- | --------------------------------------------------------------------- |
+| **Connected**  | The project URL and hook secret are saved.                            |
 | **Incomplete** | You started the setup, but the project URL or hook secret is missing. |
-| **Not set up** | Nothing is saved yet. |
+| **Not set up** | Nothing is saved yet.                                                 |
 
 PostHog can't see whether the hook is on in Supabase, so **Connected** only means the connection is saved. To check that emails send, test the hook. Test it by signing up a new user or requesting a password reset in your app.
 
@@ -132,7 +137,7 @@ To go back to Supabase's own emails, turn the hook off in Supabase. To remove th
 
 Supabase limits how many auth emails your project sends per hour, and checks that limit before it calls PostHog. With Supabase's built-in mailer, the limit is 2 an hour. When a user goes over it, Supabase shows "email rate limit exceeded" and PostHog never gets the request.
 
-Now that PostHog sends your auth emails, Supabase lets you change the limit. In Supabase, open **Authentication** > **Rate Limits** and raise **Rate limit for sending emails** to a value that fits your sign-up traffic. Auth emails count against your PostHog [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers) like any other email, so pick a Supabase limit that fits inside it.
+Now that PostHog sends your auth emails, Supabase lets you change the limit. In Supabase, open **Authentication** > **Rate Limits** and raise **Rate limit for sending emails** to a value that fits your sign-up traffic. Auth emails are transactional, so they never wait for your PostHog [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers). They still use it up like any other email, which leaves less for your marketing emails, so pick a Supabase limit that fits inside it.
 
 </Step>
 
@@ -140,15 +145,15 @@ Now that PostHog sends your auth emails, Supabase lets you change the limit. In 
 
 Supabase waits for the hook before it finishes the user's action. If PostHog takes longer than 5 seconds or returns an error, Supabase fails the action, such as the sign up or password reset, and shows the user an error.
 
-| Issue | Solution |
-| --- | --- |
-| Sign up or sign in fails with "No PostHog template is set for the ... email." | Map a template to that email. A core auth email with no template fails in Supabase. A security notification with no template is skipped, and the user's action still succeeds. |
-| Every hook request fails, and Supabase's auth logs show a 401 from the hook | The hook secret in PostHog doesn't match Supabase. Paste the full secret again, including `v1,whsec_`, and click **Save connection**. |
-| Supabase shows "email rate limit exceeded" | Supabase's own hourly email limit stopped the email before it reached PostHog. Raise it under **Authentication** > **Rate Limits** in Supabase. |
-| Auth emails fail with "We couldn't send your email. Try again in a few minutes." | Check that the **Supabase project URL** is saved, that each mapped template still exists and is transactional and marked sensitive, and that your email channel still has a verified sending domain. If all of that is fine, the send was slow or hit your [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers). Try again. |
-| A template doesn't appear in the picker | The template must be transactional and marked sensitive. Turn both on in the template's **API** tab, or use **Create starter templates**. |
-| **Create starter templates** fails | Verify a sending domain on your [email channel](/docs/workflows/configure-channels) first. |
-| Links in emails point to the wrong place | Check the **Supabase project URL**. Confirmation links use it to build the `/auth/v1/verify` link. |
+| Issue                                                                            | Solution                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Sign up or sign in fails with "No PostHog template is set for the ... email."    | Map a template to that email. A core auth email with no template fails in Supabase. A security notification with no template is skipped, and the user's action still succeeds.                                                                                                                                                                                     |
+| Every hook request fails, and Supabase's auth logs show a 401 from the hook      | The hook secret in PostHog doesn't match Supabase. Paste the full secret again, including `v1,whsec_`, and click **Save connection**.                                                                                                                                                                                                                              |
+| Supabase shows "email rate limit exceeded"                                       | Supabase's own hourly email limit stopped the email before it reached PostHog. Raise it under **Authentication** > **Rate Limits** in Supabase.                                                                                                                                                                                                                    |
+| Auth emails fail with "We couldn't send your email. Try again in a few minutes." | Check that the **Supabase project URL** is saved, that each mapped template still exists and is transactional and marked sensitive, and that your email channel still has a verified sending domain. If all of that is fine, the send was slow, or your project is over its email quota. Check your [billing limits](/docs/billing/limits-alerts), then try again. |
+| A template doesn't appear in the picker                                          | The template must be transactional and marked sensitive. Turn both on in the template's **API** tab, or use **Create starter templates**.                                                                                                                                                                                                                          |
+| **Create starter templates** fails                                               | Verify a sending domain on your [email channel](/docs/workflows/configure-channels) first.                                                                                                                                                                                                                                                                         |
+| Links in emails point to the wrong place                                         | Check the **Supabase project URL**. Confirmation links use it to build the `/auth/v1/verify` link.                                                                                                                                                                                                                                                                 |
 
 If Supabase retries a hook request, PostHog doesn't send the same email twice.
 

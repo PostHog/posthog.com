@@ -4,6 +4,7 @@ import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 import Link from '../Link'
 import OSTable from '../OSTable'
+import { PUBLISHED_SDK_LIST } from '../SdkReferences/utils'
 
 type LibraryNode = {
     fields: {
@@ -28,6 +29,15 @@ type LibraryFeatures = {
     logs?: boolean
     tracing?: boolean
 }
+
+// These SDKs' docs are their generated references, which carry no frontmatter, so their features live here.
+const referenceSdk = (sdk: string, title: string, features: LibraryFeatures): LibraryNode => ({
+    fields: { slug: `/docs/libraries/${sdk}` },
+    frontmatter: { title, features },
+})
+const REFERENCE_SDKS: LibraryNode[] = PUBLISHED_SDK_LIST.map((sdk) =>
+    referenceSdk(sdk.slug, sdk.label, sdk.features)
+)
 
 export const LibraryComparison = () => {
     const {
@@ -60,7 +70,6 @@ export const LibraryComparison = () => {
                     groupAnalytics
                     errorTracking
                     logs
-                    tracing
                 }
             }
         }
@@ -86,8 +95,9 @@ export const LibraryComparison = () => {
         { name: 'Tracing', width: '1fr', align: 'center' as const },
     ]
 
-    const rows = sdks.nodes
+    const rows = [...sdks.nodes, ...REFERENCE_SDKS]
         .filter((lib) => lib.frontmatter.features)
+        .sort((a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title))
         .map((lib) => ({
             key: lib.fields.slug,
             cells: [

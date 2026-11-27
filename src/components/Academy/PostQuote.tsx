@@ -1,8 +1,8 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import slugify from 'slugify'
+import hogProfile from '../../images/hog-profile.png'
 
 interface PostQuoteProps {
     title?: string
@@ -90,12 +90,7 @@ const PostQuote: React.FC<PostQuoteProps> = ({
                                             className="size-24"
                                         />
                                     ) : (
-                                        <CloudinaryImage
-                                            alt=""
-                                            width={24}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                            className="size-24"
-                                        />
+                                        <img src={hogProfile} alt="" className="size-24" />
                                     )}
                                 </div>
                             </div>

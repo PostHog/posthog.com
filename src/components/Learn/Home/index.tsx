@@ -11,14 +11,19 @@ import usePocketGuideCounts from '../../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides'
 import PlaygroundPreview from './PlaygroundPreview'
 import PromptLibrary from './PromptLibrary'
+import VideoLibrary from '../LearnTV/VideoLibrary'
 
-export type LearnHomeSection = 'pocket-guides' | 'prompts' | 'playground'
+export type LearnHomeSection = 'pocket-guides' | 'videos' | 'prompts' | 'playground'
 
 const SECTIONS: Record<LearnHomeSection, { title: string; description: string }> = {
     'pocket-guides': {
         title: 'Learn – PostHog',
         description:
             'Guides, videos, agent prompts, and real apps to tinker with. Learn PostHog however works best for you.',
+    },
+    videos: {
+        title: 'Videos – Learn – PostHog',
+        description: 'Short lessons about PostHog products. For your viewing pleasure.',
     },
     prompts: {
         title: 'Prompts for your agent – Learn – PostHog',
@@ -31,16 +36,11 @@ const SECTIONS: Record<LearnHomeSection, { title: string; description: string }>
     },
 }
 
-// Videos has no page yet, so it shows grayed out with a badge. Founders hub is the existing /founders page.
+// Founders hub is the existing /founders page.
 const NAV_ITEMS = [
     { name: 'Learn' },
     { name: 'Pocket guides', url: '/learn', icon: <IconBook className="text-brand-purple" /> },
-    {
-        name: 'Videos',
-        disabled: true,
-        badge: { title: 'Coming soon' },
-        icon: <IconVideoCamera className="text-brand-tangerine" />,
-    },
+    { name: 'Videos', url: '/learn/videos', icon: <IconVideoCamera className="text-brand-tangerine" /> },
     { name: 'Prompts', url: '/learn/prompts', icon: <IconCode className="text-brand-blue" /> },
     { name: 'Playground', url: '/learn/playground', icon: <IconPlay className="text-brand-teal" /> },
     { name: 'Building a company?' },
@@ -147,7 +147,7 @@ function PocketGuideCollection(): JSX.Element {
     )
 }
 
-/** The Learn home at `/learn`, `/learn/prompts`, and `/learn/playground`: a sidebar, the hero, then one section. */
+/** The Learn home at `/learn`, `/learn/videos`, `/learn/prompts`, and `/learn/playground`: a sidebar, the hero, then one section. */
 export default function LearnHome({ section }: { section: LearnHomeSection }): JSX.Element {
     const { title, description } = SECTIONS[section]
     return (
@@ -166,6 +166,7 @@ export default function LearnHome({ section }: { section: LearnHomeSection }): J
                 <div className="@container not-prose">
                     <Hero />
                     {section === 'pocket-guides' && <PocketGuideCollection />}
+                    {section === 'videos' && <VideoLibrary />}
                     {section === 'prompts' && <PromptLibrary />}
                     {section === 'playground' && <PlaygroundPreview />}
                 </div>

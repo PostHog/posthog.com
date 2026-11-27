@@ -26,6 +26,9 @@ Keep it concise. We're looking for signal, not noise.
     - 4-6: Marginal fit (some alignment but missing key characteristics)
     - 7-8: Good fit (matches most ICP criteria)
     - 9-10: Perfect fit (textbook ICP customer)
+- **Data pipeline:** Direct SDK / CDP-fronted (name the CDP) / warehouse sync / unclear
+- **Product footprint:** list the PostHog products with paid usage; flag single-product concentration (85%+ of MRR in one product, especially on B2C)
+- **Trial history:** which product trials ran during tenure, which converted, which didn't
 - **Primary reason for churn:** One sentence
 
 ### What we did well
@@ -72,6 +75,8 @@ When an account in a TAM's book contracts or fails to grow and the TAM wants it 
 - **Tenure:** X months/years\
 - **Time in book:**
 - **Number of products adopted:**
+- **Data pipeline:** Direct SDK / CDP-fronted (name the CDP) / warehouse sync / unclear
+- **Trial history:** which product trials ran during tenure, which converted, which didn't
 
 **Primary reason for contraction / lack of growth:** This is the meat of the retro and what we care about qualitatively to help us refine book composition.
 
@@ -90,6 +95,9 @@ When an account in a TAM's book contracts or fails to grow and the TAM wants it 
 **ARR at churn:** $42,000  
 **Tenure:** 14 months  
 **ICP fit:** 8/10 - B2B SaaS, 75 employees, solid PMF  
+**Data pipeline:** Direct SDK (web + Node)  
+**Product footprint:** Product analytics (78% of MRR), feature flags (15%), session replay (7%)  
+**Trial history:** Experiments trial ran in month 8, did not convert  
 **Primary reason for churn:** Switched to Amplitude due to advanced analytics needs we couldn't meet
 
 **What we did well:**

@@ -3,7 +3,7 @@ export const mixpanel = {
     key: 'mixpanel',
     assets: {
         icon: '/images/competitors/mixpanel.svg',
-        comparisonArticle: '/blog/posthog-vs-mixpanel',
+        comparisonArticle: '/compare/posthog-vs-mixpanel',
     },
     available: true,
     products: {
@@ -47,7 +47,7 @@ export const mixpanel = {
             features: {
                 advertising_analytics: true,
                 autocapture: true,
-                cohorts: true,
+                cohorts: 'Limited on Free',
                 custom_events: true,
                 custom_properties: true,
                 monetization_analytics: true,
@@ -59,7 +59,7 @@ export const mixpanel = {
                     available: true,
                     features: {
                         ai_insight_builder: true,
-                        alerts: true,
+                        alerts: 'Paid (up to 5 on Growth)',
                         formula_mode: true,
                         ready_made_insight_types: true,
                         sampling: false,
@@ -73,7 +73,7 @@ export const mixpanel = {
                 funnels: {
                     available: true,
                     features: {
-                        correlation_analysis: true,
+                        correlation_analysis: 'Enterprise',
                     },
                 },
                 retention: {
@@ -85,7 +85,7 @@ export const mixpanel = {
                     features: {},
                 },
                 lifecycle: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
                 stickiness: {
@@ -93,7 +93,7 @@ export const mixpanel = {
                     features: {},
                 },
                 group_analytics: {
-                    available: true,
+                    available: 'Add-on',
                     features: {},
                 },
             },
@@ -120,13 +120,13 @@ export const mixpanel = {
                 migration: true,
                 movement_maps: false,
                 open_source: false,
-                outbound_clicks: true,
+                outbound_clicks: false,
                 pageviews: true,
                 pre_configured_dashboards: true,
                 real_time_reporting: true,
                 revenue_tracking: false,
                 script_size: '95kb',
-                scrollmaps: false,
+                scrollmaps: true,
                 session_and_duration_tracking: true,
                 sessions: true,
                 snippet_install: true,
@@ -143,24 +143,24 @@ export const mixpanel = {
                 free_tier: '10,000 recordings',
             },
             features: {
-                canvas_recording: false,
-                chat_with_recordings: false,
+                canvas_recording: 'Beta',
+                chat_with_recordings: true,
                 clickmaps: true,
-                conditional_recording: false,
+                conditional_recording: 'Add-on',
                 event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
                 filter_by_user_or_event: true,
                 identity_detection: true,
-                iframe_recording: false,
-                minimum_duration: false,
+                iframe_recording: true,
+                minimum_duration: true,
                 movement_maps: false,
                 notes_on_replays: false,
-                playlists: false,
+                playlists: true,
                 privacy_masking: true,
-                retention_policy: true,
+                retention_policy: '30 days (up to 1 year on Enterprise add-on)',
                 screenshot_mode: true,
-                scrollmaps: false,
+                scrollmaps: true,
                 search_by_network: false,
                 share_replays: true,
                 single_page_app: true,
@@ -176,21 +176,22 @@ export const mixpanel = {
                     ios_recordings: true,
                     android_recordings: true,
                     react_native_recordings: true,
-                    flutter_recordings: false,
+                    flutter_recordings: true,
                 },
             },
             analysis: {
                 features: {
                     heatmaps: true,
-                    console_logs: false,
-                    performance_monitoring: false,
-                    network_monitor: false,
+                    console_logs: true,
+                    performance_monitoring: true,
+                    network_monitor: true,
                     dom_explorer: false,
                 },
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    ai_summaries: true,
+                    replay_vision: 'Partial',
                 },
             },
         },
@@ -199,14 +200,14 @@ export const mixpanel = {
             features: {
                 boolean_flags: true,
                 early_access_management: false,
-                json_payloads: false,
+                json_payloads: true,
                 multivariate_flags: true,
                 release_conditions: true,
             },
             implementation: {
                 features: {
                     local_evaluation: true,
-                    bootstrapping: true,
+                    bootstrapping: false,
                 },
             },
             targeting: {
@@ -219,10 +220,10 @@ export const mixpanel = {
             management: {
                 features: {
                     approvals: false,
-                    multi_environment: false,
+                    multi_environment: true,
                     flag_administration: true,
                     flag_scheduling: false,
-                    history_activity: false,
+                    history_activity: true,
                 },
             },
             testing: {
@@ -246,13 +247,13 @@ export const mixpanel = {
                 funnel_metrics: false,
                 namespacing: false,
                 native_goal_tracking: true,
-                no_code_experiments: true,
+                no_code_experiments: 'Beta',
                 ratio_metrics: false,
-                recommended_run_time: false,
+                recommended_run_time: true,
                 secondary_metrics: true,
                 shared_metrics_library: true,
                 split_testing: true,
-                visual_editor: true,
+                visual_editor: 'Beta',
             },
             supported_tests: {
                 features: {
@@ -281,7 +282,7 @@ export const mixpanel = {
                 features: {
                     api_access: true,
                     feature_flag_foundation: true,
-                    json_payloads: false,
+                    json_payloads: true,
                     multivariate_testing: true,
                 },
             },
@@ -290,7 +291,7 @@ export const mixpanel = {
                     results_visualization: true,
                     side_effect_monitoring: false,
                     statistical_significance: true,
-                    statistics_engine: 'Bayesian or Frequentist',
+                    statistics_engine: 'Sequential, Frequentist, or Bayesian',
                 },
             },
             platforms: {
@@ -306,7 +307,7 @@ export const mixpanel = {
                 clickmaps: true,
                 heatmaps: true,
                 rage_clicks: true,
-                scrollmaps: false,
+                scrollmaps: true,
             },
         },
         surveys: {
@@ -382,7 +383,7 @@ export const mixpanel = {
             available: true,
         },
         cdp: {
-            available: false,
+            available: 'Add-on',
         },
         data_warehouse: {
             available: false,
@@ -414,7 +415,7 @@ export const mixpanel = {
     platform: {
         deployment: {
             eu_hosting: true,
-            managed_reverse_proxy: false,
+            managed_reverse_proxy: 'Enterprise',
             open_source: false,
             self_host: false,
         },
@@ -450,7 +451,7 @@ export const mixpanel = {
             hipaa_ready: true,
             history_audit_logs: true,
             role_based_access_control: true,
-            saml_sso: 'Enterprise',
+            saml_sso: 'Growth and Enterprise',
             soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,

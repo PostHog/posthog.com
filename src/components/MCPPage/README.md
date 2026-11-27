@@ -61,7 +61,7 @@ To keep the brief true:
 - **Quotes** (`MCPNoUI`): each is the `mcp` product quote (`quotes.<author>.products.mcp`) of a person in `mcpQuotes`, from `useCustomers`. Use only a real quote from a published customer story, word for word. Mark a cut with `[…]`. The first quote gets the big card, so put the longest one first.
 - **Stat** (`mcpStat`): use only a number from a published post. The current one is from [How AI agents behave](/blog/how-ai-agents-behave).
 - **Chips** (`whatItIs` in `WhatIsMCP`): one plain claim each, in two lines or fewer. "Light on context" is true in CLI mode (the default in Claude, Claude Code, Cowork, and Codex), not in tools mode (the default in Cursor).
-- **Clients** (`connectors`): check the list against the [MCP overview](/docs/model-context-protocol) before you change it. The "Want skills too?" note describes the [PostHog AI plugin](https://github.com/PostHog/ai-plugin).
+- **Clients** (`connectors`): check the list against the [MCP overview](/docs/model-context-protocol) before you change it. The "Want skills too?" note says skills ship with the MCP server and links to [Skills](/docs/skills).
 - **FAQ** (`faq`): each answer is a short version of an [MCP FAQ](/docs/model-context-protocol/faq) answer, and links to that heading. Check the docs before you change a number. Update the link anchor when a docs heading changes.
 - **Setup CTA** (`MCPSetupCTA`): the copy comes from "Install PostHog from chat" in the [MCP use cases](/docs/model-context-protocol/use-cases).
 - **Header:** the copy comes from the [MCP docs](/docs/model-context-protocol). Under `lg`, the install card is hidden and a "Read the setup guide" button shows, because a phone visitor is unlikely to run an install command.

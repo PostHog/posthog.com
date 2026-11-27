@@ -1,5 +1,9 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
-const { isNoindexSdkReference, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
+const {
+    PUBLISHED_SDK_REFERENCES,
+    isNoindexSdkReference,
+    isSdkReferenceFile,
+} = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
@@ -243,8 +247,22 @@ module.exports = {
                     // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
+                    // These SDKs' HogRef pages redirect to their Markdown references (see vercel.json).
+                    const isRedirectedSdkReference = (path) =>
+                        PUBLISHED_SDK_REFERENCES.some(
+                            (id) =>
+                                path === `/docs/references/${id}` ||
+                                path.startsWith(`/docs/references/${id}/`) ||
+                                path.startsWith(`/docs/references/${id}-`)
+                        )
+
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isNoindexSdkReference(path))
+                        .filter(
+                            ({ path }) =>
+                                !VERSIONED_SDK_REFERENCE.test(path) &&
+                                !isNoindexSdkReference(path) &&
+                                !isRedirectedSdkReference(path)
+                        )
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

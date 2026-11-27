@@ -59,3 +59,15 @@ diff --git a/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.j
 -          const { mdast } = await processMDX({ node: mdxNode })
 +          const { content } = grayMatter(mdxNode.rawBody, options)
 +          const mdast = mdx.createMdxAstCompiler(options).parse(content)
+diff --git a/node_modules/gatsby-plugin-mdx/loaders/mdx-loader.js b/node_modules/gatsby-plugin-mdx/loaders/mdx-loader.js
+--- a/node_modules/gatsby-plugin-mdx/loaders/mdx-loader.js
++++ b/node_modules/gatsby-plugin-mdx/loaders/mdx-loader.js
+@@ -7,1 +7,2 @@
+ const { createRequireFromPath, slash } = require(`gatsby-core-utils`)
++const filesByCompilation = new WeakMap()
+@@ -131,1 +132,4 @@
+-  let fileNode = getNodes().find(
++  if (!filesByCompilation.has(this._compilation)) {
++    filesByCompilation.set(this._compilation, getNodesByType(`File`))
++  }
++  let fileNode = filesByCompilation.get(this._compilation).find(

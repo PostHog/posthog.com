@@ -12,6 +12,8 @@ Some recurring reasons customers churn, and what we can do about them.
 
 If our champion was the main user, their departure is high risk. The best defense: get more people across the org using PostHog before it happens. More teams using PostHog, more products adopted, more relationships across the org. Build relationships with more than one champion.
 
+When a champion leaves anyway, follow the [champion leaves playbook](/handbook/customer-success/champion-leaves).
+
 ### Your contact is a coach, not a champion
 
 A great relationship with a [coach](/handbook/growth/sales/customer-journey#champions-and-coaches) is good for context, but limits influence over PostHog adoption. Use them to introduce you to a champion who can actually move things, and remember champions aren't always in leadership roles. Ensure team adoption, new feature roll-outs, or other key wins are consistently visible to the people who make the decisions.

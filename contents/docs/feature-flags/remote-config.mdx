@@ -46,7 +46,7 @@ import ConfigureSecretAPIKey from "../integrate/_snippets/configure-secret-api-k
 
 <ConfigureSecretAPIKey />
 
-> **Note:** By default, initializing PostHog with your secret API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
+> **Note:** By default, initializing PostHog with your secret API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config. In the Java SDK, `.personalApiKey(...)` also enables local evaluation, and `.localEvaluation(false)` turns it off.
 
 
 ### Step 3: Use remote config flags
@@ -78,9 +78,45 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 // config is a JsonDocument
 ```
 
+```php
+// Requires posthog-php 4.26.0+.
+$config = PostHog::getRemoteConfigPayload('landing-page-config');
+// config is returned as a parsed value. A JSON object becomes an associative array.
+// It is null when the flag has no payload.
+```
+
+```java
+// Requires posthog-server 2.25.0+.
+Object remoteConfig = posthog.getRemoteConfigPayload("landing-page-config");
+// remoteConfig is a parsed JSON value: a Map, List, String, Number, Boolean, or null.
+// It is null when the call fails or the flag has no payload.
+```
+
+```rust
+// Requires posthog 1.2.0+.
+let config = client.get_remote_config_payload("landing-page-config").await?;
+// config is an Option<serde_json::Value>.
+// It is None when the flag has no payload or the client is disabled.
+```
+
+```elixir
+# Requires posthog 2.23.0+.
+{:ok, config} = PostHog.FeatureFlags.get_remote_config_payload("landing-page-config")
+# config is a decoded JSON value, such as a map. It is nil when the flag has no payload.
+```
+
 </MultiLanguage>
 
 > **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
+
+### Which method to use
+
+Use `getRemoteConfigPayload` to read a remote config flag on the server, and always when its payload is encrypted. You can also read the payload from a flag evaluation, such as `evaluateFlags` followed by `getFlagPayload`. That works on the server only for a payload that isn't encrypted, and it needs a distinct ID.
+
+| Method | Needs a distinct ID | Key used | Encrypted payloads |
+| --- | --- | --- | --- |
+| `getRemoteConfigPayload` | No | Secret API key or personal API key | Returned decrypted with a personal API key, redacted with a secret API key. See [encrypted payloads](#encrypted-payloads) |
+| Flag evaluation (`evaluateFlags` and `getFlagPayload`) | Yes | Project token | Excluded from `/flags` |
 
 ## Encrypted payloads
 

@@ -9,9 +9,9 @@ availability:
 sourceId: Sleekplan
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Sleekplan connector syncs users, posts, comments, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -49,5 +49,6 @@ All Sleekplan tables are full refresh. Each sync replaces the contents of the ta
 
 - If the connection fails with an authorization error, the API key is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- If the Groups, GroupMembers, or Documents tables fail with an "upgrade_required" error, your Sleekplan plan doesn't include these features. Upgrade your Sleekplan plan or disable those tables in the source settings.
 
 <TroubleshootingLink />

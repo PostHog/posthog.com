@@ -18,6 +18,7 @@ import { applications, keyFeatures } from './mcp_analytics/slides'
 import MCPAnalyticsInstall from './mcp_analytics/install'
 import { LeaderboardSection } from './mcp_analytics/sections'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // MCP Analytics (@posthog/mcp on npm) has a dedicated scene in the app. Copy comes from the reviewed copy draft,
 // checked against contents/docs/mcp-analytics/.
@@ -27,7 +28,7 @@ export const mcpAnalytics = {
     Icon: IconMCP,
     type: 'mcp_analytics',
     teamSlug: 'mcp-analytics',
-    color: 'purple',
+    color: PRODUCT_COLORS.mcp_analytics,
     colorSecondary: 'sky-blue',
     wizardSupport: true,
     wizardCommand: 'mcp-analytics',
@@ -35,6 +36,7 @@ export const mcpAnalytics = {
         title: 'MCP Analytics – See everything agents do on your MCP server',
         description:
             'Every tool call, agent intent, failure, and missing capability from your MCP server, captured as PostHog events. Wrap your server once and start learning what agents actually need.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_og_os_notes_b5b230d92d.png',
     },
     /**
      * Sections rendered on the Product surface (`/mcp-analytics`), in page order. Each entry resolves to a
@@ -99,9 +101,9 @@ export const mcpAnalytics = {
         // No `q_auto,f_auto` here: CloudinaryImage renders a URL with a comma as a plain <img> and drops the
         // class that hides the other color mode's image, so both would show.
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/NEW_MCP_analytics_dashboard_light_ab100d9fb3.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_light_f4327f4709.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/NEW_MCP_analytics_dashboard_dark_44a5c6b92a.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/mcp_analytics_dashboard_dark_aa82abfd74.png',
             alt: 'MCP Analytics dashboard showing tool calls, error rates, and latency',
         },
     },

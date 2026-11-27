@@ -2,30 +2,10 @@ import React, { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { slideButtons } from '../Slider/slideButtons'
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-    Funnels,
-    Trends,
-    UserPaths,
-    CorrelationAnalysis,
-    Retention,
-    Stickiness,
-    Lifecycle,
-    Dashboards,
-    HogQL,
-} from '../Slider/Slides'
+import { Funnels, Trends, UserPaths, Retention, Stickiness, Lifecycle, Dashboards, HogQL } from '../Slider/Slides'
 import { Chevron } from 'components/Icons'
 
-const slideContents = [
-    Funnels,
-    Trends,
-    UserPaths,
-    CorrelationAnalysis,
-    Retention,
-    Stickiness,
-    Lifecycle,
-    Dashboards,
-    HogQL,
-]
+const slideContents = [Funnels, Trends, UserPaths, Retention, Stickiness, Lifecycle, Dashboards, HogQL]
 
 export default function MobileSlides(): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)

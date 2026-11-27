@@ -9,15 +9,9 @@ availability:
 sourceId: Apollo
 ---
 
-The Apollo connector syncs your Apollo CRM data to PostHog. The following objects are supported:
+The Apollo connector syncs your Apollo CRM data – contacts, accounts, opportunities, emails, phone calls, tasks, sequences, users, pipeline stages, conversations, lists, and custom fields – into PostHog, so you can analyze your sales and outreach data alongside your product data.
 
-| Object        | Sync mode    | Description                   |
-| ------------- | ------------ | ----------------------------- |
-| Contacts      | Incremental  | People in your Apollo CRM     |
-| Accounts      | Incremental  | Companies and organizations   |
-| Opportunities | Full refresh | Sales opportunities and deals |
-
-Contacts and accounts support incremental sync using the `updated_at` field, so only new or changed records are fetched after the first sync. Opportunities always perform a full refresh because Apollo doesn't support sorting on this endpoint.
+Contacts and accounts support incremental sync using the `updated_at` field, so only new or changed records are fetched after the first sync. All other tables perform a full refresh on each sync.
 
 ## How to link Apollo
 

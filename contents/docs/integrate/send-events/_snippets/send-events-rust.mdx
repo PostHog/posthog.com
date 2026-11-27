@@ -27,8 +27,8 @@ client.capture(event);
 To capture multiple events at once, use `capture_batch()`:
 
 ```rust
-let event1 = posthog_rs::Event::new("event 1", "distinct_id_of_user_A");
-let event2 = posthog_rs::Event::new("event 2", "distinct_id_of_user_B");
+let event1 = posthog::Event::new("event 1", "distinct_id_of_user_A");
+let event2 = posthog::Event::new("event 2", "distinct_id_of_user_B");
 
 client.capture_batch(vec![event1, event2], false);
 ```
@@ -46,3 +46,9 @@ client.shutdown().await;
 ```
 
 With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`.
+
+With `default-features = false`, the Rust SDK 1.x.x has no TLS. Add the `tls` feature:
+
+```toml
+posthog = { version = "1", default-features = false, features = ["tls"] }
+```

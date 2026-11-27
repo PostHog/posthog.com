@@ -1,6 +1,6 @@
 import React from 'react'
 import { HedgehogEinstein, HedgehogRobot } from '@posthog/brand/hoggies'
-import { IconBook, IconPlay, IconTerminal } from '@posthog/icons'
+import { IconBook, IconPlay, IconTerminal, IconVideoCamera } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { PRODUCT_SURFACE_H1 } from 'components/Products/ReaderViewProduct'
 import { TWIG_URL } from '../../constants'
@@ -8,6 +8,8 @@ import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import usePostHog from '../../hooks/usePostHog'
 import Cover from './PocketGuides/Cover'
+import VideoCard from './LearnTV/VideoCard'
+import { LEARN_VIDEOS } from './LearnTV/videos'
 import { openPocketGuide } from './PocketGuides/bookOpening'
 import { learnChapterPath, useBookPages } from './PocketGuides/bookModel'
 import { handOffToTwig } from './learnTracking'
@@ -117,6 +119,10 @@ export default function LearnLanding({
     playground,
 }: LearnLandingProps & LearnLandingContent): JSX.Element {
     const volume = volumeById(volumeId)
+    // Like the agent preview, the hub's pages decide: a hub that lists 'videos' shows its first video here.
+    const video = volume?.learnHub?.pages?.includes('videos')
+        ? LEARN_VIDEOS.find((v) => v.productHandle === volume.productHandle)
+        : undefined
     const counts = usePocketGuideCounts()
     const coverRef = React.useRef<HTMLDivElement>(null)
     const posthog = usePostHog()
@@ -187,6 +193,34 @@ export default function LearnLanding({
                     )}
                 </div>
             </section>
+
+            {video && (
+                <section
+                    id="watch-the-lesson"
+                    className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
+                >
+                    <div className="grid min-w-0 items-start gap-6 @lg/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
+                        <div>
+                            <div className="mb-5 flex items-center gap-3">
+                                <IconVideoCamera className="size-6 shrink-0 text-brand-tangerine" />
+                                <h2 className="m-0 text-2xl font-bold">Watch the lesson</h2>
+                            </div>
+                            <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">{video.title}</p>
+                            <p className="mt-0 mb-5 leading-relaxed text-secondary">{video.description}</p>
+                            <OSButton
+                                asLink
+                                to={`${learnUrl}/videos`}
+                                onClick={() => selectResource('video', 'all_videos')}
+                                variant="secondary"
+                                size="md"
+                            >
+                                All videos
+                            </OSButton>
+                        </div>
+                        <VideoCard video={video} onOpen={() => selectResource('video', video.slug)} />
+                    </div>
+                </section>
+            )}
 
             {volume?.learnHub?.pages?.includes('agent-prompts-and-mcp') && (
                 <section

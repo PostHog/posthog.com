@@ -9,11 +9,11 @@ availability:
 sourceId: Zenduty
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Zenduty connector syncs teams, account members, incidents, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Zenduty connector syncs teams, account members, incidents, priorities, on-call snapshots, and more into the PostHog data warehouse, so you can analyze incident volume, responder load, and on-call coverage alongside your product data.
 
 ## Prerequisites
 
@@ -42,6 +42,12 @@ All Zenduty tables are full refresh. Each sync replaces the contents of the tabl
 <SourceParameters />
 
 ## Supported tables
+
+Zenduty organizes most resources under a team, so the team-scoped tables (services, escalation policies, schedules, and so on) carry a `_zenduty_team_id` column identifying the parent team.
+
+The `incident_alerts` and `incident_responders` tables carry a `_zenduty_incident_number` column identifying the parent incident. Each sync makes one request per incident for these tables, so they're off by default. Turn them on in the table list if you need them.
+
+The `oncall` table shows who is on call at the time of the sync for each escalation policy. It's a snapshot, not a history of shifts.
 
 <SourceTables />
 

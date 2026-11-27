@@ -15,6 +15,7 @@ import {
 } from '@posthog/icons'
 import { StickerPath } from 'components/Stickers/Stickers'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const posthog_ai = {
     ...getTool('posthog_ai'),
@@ -22,7 +23,7 @@ export const posthog_ai = {
     Icon: IconSparkles,
     role: 'Helpful chatbot',
     type: 'posthog_ai',
-    color: 'blue',
+    color: PRODUCT_COLORS.posthog_ai,
     colorSecondary: 'lilac',
     slider: {
         marks: [500, 3000, 10000, 50000, 100000],
@@ -108,7 +109,7 @@ export const posthog_ai = {
         {
             title: 'Product Analytics',
             headline: 'Product Analytics',
-            team: 'product-analytics',
+            team: 'analytics',
             layout: 'ai',
             icon: <IconGraph className="size-5" />,
             color: 'blue',
@@ -159,7 +160,7 @@ export const posthog_ai = {
         {
             title: 'Web Analytics',
             headline: 'Web Analytics',
-            team: 'web-analytics',
+            team: 'analytics',
             layout: 'ai',
             icon: <IconPieChart className="size-5" />,
             color: 'green',

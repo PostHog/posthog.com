@@ -9,11 +9,11 @@ availability:
 sourceId: WeightsAndBiases
 ---
 
-The Weights & Biases connector syncs your ML experiment tracking data into PostHog, including projects, runs, sweeps, reports, and artifact versions across every project in your entity.
+The Weights & Biases connector syncs your ML experiment tracking data into PostHog, including projects, runs, sweeps, reports, artifact versions, run files, system metrics, and entity details across every project in your entity.
 
 <CalloutBox icon="IconInfo" title="What this source syncs" type="fyi">
 
-Per-step run metric history is not synced. Runs include their final summary metrics instead.
+The `runs` table includes final summary metrics. For per-step logged metrics, sync the `run_history` table. For system telemetry (CPU, GPU, memory, disk, network), sync the `run_system_metrics` table.
 
 </CalloutBox>
 
@@ -49,8 +49,9 @@ Once the sync completes, you can start querying your Weights & Biases data in Po
 
 ## Sync details
 
-- **Incremental sync** – The `runs` table supports incremental syncs on `createdAt` or `heartbeatAt`. PostHog filters server-side, so only matching runs are fetched on each sync. Pick `heartbeatAt` to also pick up state and summary metric changes on recently active runs; a `createdAt` cursor only fetches newly created runs. The other tables are full refresh.
+- **Incremental sync** – The `runs` table supports incremental syncs on `createdAt` or `heartbeatAt`. PostHog filters server-side, so only matching runs are fetched on each sync. Pick `heartbeatAt` to also pick up state and summary metric changes on recently active runs; a `createdAt` cursor only fetches newly created runs. The `run_artifacts`, `run_history`, `run_files`, and `run_system_metrics` tables support incremental syncs on `runHeartbeatAt`, which re-reads only the data for runs active since the last sync. The remaining tables are full refresh.
 - **JSON columns** – Run `config`, `summaryMetrics`, and `systemMetrics` are JSON-encoded strings, matching what the W&B API returns. Parse them in queries with `JSONExtract` functions.
+- **System metrics sampling** – The `run_system_metrics` table returns at most 5,000 evenly spaced samples per run. This is a W&B API limitation; runs with more samples are automatically downsampled.
 - **Partitioning** – Data is partitioned by month on the `createdAt` field.
 - **Pagination** – Uses cursor pagination. If a sync is interrupted, it resumes from the last successfully synced page.
 - **Rate limits** – The W&B API allows roughly 50 requests per minute on free plans and 200 on paid plans. PostHog backs off and retries automatically, but very large entities can take a while to sync.

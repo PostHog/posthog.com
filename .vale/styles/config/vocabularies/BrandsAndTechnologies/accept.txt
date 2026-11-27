@@ -30,6 +30,7 @@ Anduril
 Ansible
 [Aa]nthropic
 [Aa]sana
+Ashby
 Assembla
 [Aa]stro
 Atlassian

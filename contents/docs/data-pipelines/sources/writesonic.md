@@ -9,15 +9,15 @@ availability:
 sourceId: Writesonic
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Writesonic connector syncs performance summary, performance prompts, performance answers, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+[Writesonic](https://writesonic.com) tracks your brand's visibility in AI search — how often, how prominently, and in what context AI platforms like ChatGPT, Perplexity, and Google AI Overviews mention your brand (GEO, generative engine optimization). This connector pulls your daily performance metrics, raw AI answers with brand mentions, citations, keywords, tracked configuration (topics, prompts, platforms, websites), and content optimization pages, issues, and recommended fixes into the PostHog data warehouse, where you can join AI visibility with your product analytics.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+You need a Writesonic account on a plan with API access to GEO data, with at least one website tracked. Your API key is revealed in the API dashboard of your Writesonic account.
 
 ## Adding a data source
 
@@ -40,7 +40,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Writesonic tables are full refresh. Each sync replaces the contents of the table.
+The performance and content tables (`performance_summary`, `performance_prompts`, `performance_answers`, `content_citations`, `content_keywords`) are exported one UTC day at a time and support incremental sync by date when you select it — the first sync backfills up to the last 365 days, and each later sync picks up from the last synced day. In full refresh mode, each sync fetches the last 365 days again. The configuration tables (`topics`, `platforms`, `websites`, `prompts`) are small and sync as full refresh. The content optimization tables (`content_optimize_pages`, `content_optimize_issues`, `content_optimize_recommendations`, `content_optimize_issues_summary`) sync as full refresh. The issues and recommendations tables make one request for each page in the content optimization pages list.
 
 ## Configuration
 
@@ -52,7 +52,8 @@ All Writesonic tables are full refresh. Each sync replaces the contents of the t
 
 ## Troubleshooting
 
-- If the connection fails with an authorization error, the API key is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
-- If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- **Invalid or inactive API key** — the key is wrong or was deactivated. Check the key in your Writesonic API dashboard and reconnect.
+- **Site not found** — Writesonic couldn't match the configured site URL (and project ID, if set) to a tracked website in your account. Copy the URL exactly as it appears in your Writesonic workspace.
+- **Plan does not include API access** — GEO data exports require a Writesonic plan with API access. Upgrade your plan and reconnect.
 
 <TroubleshootingLink />

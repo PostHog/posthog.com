@@ -107,7 +107,7 @@ This first step runs any [transformations](/docs/data-pipelines) you have enable
 
 ### 2. Person processing
 
-The next step in the ingestion pipeline is processing the [person](/docs/how-posthog-works/data-model#person-fields) who sent the event, which is determined by the `distinct_id` field. This step can be skipped for events sent with `$process_person_profile` set to `false` (personless mode), which avoids the PostgreSQL lookup and uses a deterministic UUID instead.
+The next step in the ingestion pipeline is processing the [person](/docs/how-posthog-works/data-model#person-fields) who sent the event, which is determined by the `distinct_id` field. This step can be skipped for events sent with person processing turned off (personless mode), which avoids the PostgreSQL lookup and uses a deterministic UUID instead.
 
 Many actions can happen here depending on if we've seen this `distinct_id` before, as well as which type of event is being sent.
 

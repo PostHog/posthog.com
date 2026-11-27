@@ -1,5 +1,6 @@
 import React from 'react'
 import { Gallery } from 'components/UI/Gallery'
+import hedgehogCoffeeCupPng from 'hoggies/coffee-cup.png'
 
 export default function PhotoColumns(): JSX.Element {
     return (
@@ -13,10 +14,9 @@ export default function PhotoColumns(): JSX.Element {
                     caption: 'The Toronto builder community.',
                 },
                 {
-                    imageLight:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/mug-hog.png',
-                    alt: 'PostHog mug illustration',
-                    caption: 'A mug hog from the PostHog EU page.',
+                    imageLight: hedgehogCoffeeCupPng,
+                    alt: 'A hedgehog holding a coffee cup',
+                    caption: 'A hedgehog with its morning coffee.',
                 },
                 {
                     imageLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/ucd_0_da36c8b7ef.jpeg',

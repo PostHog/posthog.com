@@ -2,7 +2,7 @@
 title: Custom events and metadata
 ---
 
-Use an event properties callback (`eventProperties` in TypeScript, `event_properties` in Python and Ruby, `WithProperties` in Go) to add metadata to captured events. Use `analytics.capture()` for events that are not MCP requests.
+Add metadata to captured events with an event properties callback, or send your own events with `analytics.capture()`.
 
 ## Add metadata to every event
 
@@ -56,8 +56,6 @@ analytics = PostHog::MCP.instrument(
 
 </MultiLanguage>
 
-In TypeScript, `getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors).
-
 The returned object is spread flat onto the event's properties alongside the built-in `$mcp_*` keys:
 
 ```json
@@ -72,11 +70,11 @@ The returned object is spread flat onto the event's properties alongside the bui
 }
 ```
 
-Return constants from the callback to add the same values to captured MCP events. This is similar to `posthog.register(...)` in other SDKs. Return values from the request context when metadata must vary between calls.
+Return constants for values that never change, or read the request context for values that vary.
 
 For group analytics, return `groups` from [`identify`](/docs/mcp-analytics/identifying-users). The SDK adds `$groups` to events for the session.
 
-The Go SDK drops returned keys that start with `$mcp_` or equal `$groups`, `$set`, `$process_person_profile`, `$session_id`, or `$exception_level`.
+Don't return `$mcp_*`, `$groups`, `$set`, or `$session_id` keys. Go drops them. Set person processing with the `process_person_profile` [event option](#set-event-options), not a property.
 
 Returned values must be JSON-serializable. The SDK catches callback errors and sends them to your `logger`. These errors do not interrupt tool execution.
 
@@ -115,17 +113,49 @@ analytics.capture("feedback_submitted", { rating: 5 })
 
 The Go SDK has no analytics handle. Call `client.Enqueue(posthog.Capture{...})` on your `posthog-go` client instead. That path has no SDK redaction.
 
-PostHog receives:
+## Set event options
 
-- One event under the verbatim `event` name you passed, with your `properties` merged in.
-- The current server session and cached identity apply. These may differ from the session of a concurrent tool request.
+[Event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, control how PostHog processes an event. MCP SDKs take them under a name that keeps them apart from the SDK's own MCP options. TypeScript needs `@posthog/mcp` 1.3.0, Python needs posthog-python 8.0, Go needs posthog-go v2, and Rust needs the `posthog` crate 1.0.
 
-`capture()` is a method on the handle that `instrument()` returns, so you call it on the instrumented server's analytics handle directly.
+| SDK | Every auto-captured event | One event |
+|---|---|---|
+| TypeScript | `eventOptions` callback in `instrument()` | `eventOptions` on `analytics.capture()` and the `PostHogMCP` capture methods |
+| Python | `MCPAnalyticsOptions(event_options=...)` | `event_options` on `analytics.capture()` and the `PostHogMCP` `capture_*` methods |
+| Go | `posthogmcpsdk.WithEventOptions`, for tool calls and their `$exception` | `ToolCall.EventOptions` and `EventContext.EventOptions` |
+| Rust | `McpOptionsBuilder::event_options` | `ToolCallRequest::event_option` |
 
-## Which one to use
+Your SDK's [installation page](/docs/mcp-analytics/installation) has an example of each. To set options on a custom event:
 
-| You want to... | Use |
-|---|---|
-| Attach the same properties to every auto-captured event | The event properties callback |
-| Emit a one-off event that isn't an MCP request | `analytics.capture()` |
-| Attach data only to matching requests | Check the request in the callback and return properties only for matches. |
+<MultiLanguage>
+
+```ts file=TypeScript
+await analytics.capture({
+  event: "feedback_submitted",
+  properties: { rating: 5 },
+  eventOptions: { cookieless_mode: true },
+})
+```
+
+```python file=Python
+await analytics.capture("feedback_submitted", {"rating": 5}, event_options={"cookieless_mode": True})
+```
+
+```go file=Go
+client.Enqueue(posthog.Capture{
+	DistinctId: userID,
+	Event:      "feedback_submitted",
+	Properties: posthog.NewProperties().Set("rating", 5),
+	Options:    posthog.NewOptions().Set("cookieless_mode", true),
+})
+```
+
+```rust file=Rust
+let mut event = posthog::Event::new("feedback_submitted", user_id);
+event.insert_prop("rating", 5)?;
+event.insert_option("cookieless_mode", true)?;
+client.capture(event);
+```
+
+</MultiLanguage>
+
+An MCP event without an identity always gets `process_person_profile: false`. In TypeScript, an explicit `process_person_profile` in `eventOptions` wins over that default.

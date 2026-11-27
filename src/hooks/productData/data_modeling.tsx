@@ -1,17 +1,25 @@
 import React from 'react'
 import { IconStack } from '@posthog/icons'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
+import hedgehogIdeaPng from 'hoggies/idea.png'
 
 // Data modeling has no product page. It will be billed as data warehouse, but that rate
 // is not final, so the pricing page shows no price. Same shape as Marketing analytics
 // (`billedWith`), without a parent billing product to inherit a rate from.
 export const dataModeling = {
     ...getTool('data_modeling'),
+    hog: {
+        src: hedgehogIdeaPng,
+        alt: 'A hedgehog with a bright idea',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
     name: 'Data Modeling',
     parentIcon: 'dataBlender',
     Icon: IconStack,
     type: 'data_modeling',
-    color: 'lilac',
+    color: PRODUCT_COLORS.data_modeling,
     colorSecondary: 'lilac',
     seo: {
         title: 'Transform, enrich, and model your data',

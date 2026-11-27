@@ -1,7 +1,13 @@
 import { useContext } from 'react'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import qs from 'qs'
 import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
+import {
+    forgetLocalChaptersSavedIn,
+    hasChaptersMissingFrom,
+    readLocalProgress,
+    type ReadChapterSlugsByVolume,
+} from 'lib/learnProgress'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
@@ -64,6 +70,8 @@ export type User = {
     // True when a PostHog OAuth identity is linked to this account.
     hasPosthogLogin?: boolean
     distinctId?: string | null
+    // Undefined until the Strapi `me` override returns it; null means nothing saved yet.
+    learnProgress?: ReadChapterSlugsByVolume | null
 }
 
 export type DisambiguationResult = {
@@ -126,6 +134,7 @@ type UserContextValue = {
     addBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
     removeBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
     reportSpam: (type: 'reply' | 'question', id: number) => Promise<void>
+    syncLocalLearnProgress: (signedInUser: User) => void
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -159,6 +168,7 @@ export const UserContext = createContext<UserContextValue>({
     addBookmark: async () => undefined,
     removeBookmark: async () => undefined,
     reportSpam: async () => undefined,
+    syncLocalLearnProgress: () => undefined,
 })
 
 type UserProviderProps = {
@@ -169,6 +179,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isValidating, setIsValidating] = useState(true)
     const [user, setUser] = useState<User | null>(null)
+    const learnProgressSaveQueue = useRef<Promise<void>>(Promise.resolve())
     const [jwt, setJwt] = useState<string | null>(null)
     const [notifications, setNotifications] = useState<any>([])
     const { addToast } = useToast()
@@ -177,11 +188,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     const validateUser = async () => {
         const jwt = localStorage.getItem('jwt')
-        if (jwt && (await fetchUser(jwt))) {
-            setJwt(jwt)
-        } else {
+        const validatedUser = jwt ? await fetchUser(jwt) : null
+        if (!validatedUser) {
             clearUser()
+            setIsValidating(false)
+            return
         }
+        setJwt(jwt)
+        syncLocalLearnProgress(validatedUser)
         setIsValidating(false)
     }
 
@@ -205,6 +219,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         localStorage.setItem('jwt', token)
         setJwt(token)
+        syncLocalLearnProgress(user)
 
         // Fire-and-forget: the achievements check does not gate sign-in.
         // `.catch` keeps a failed request from surfacing as an unhandled rejection.
@@ -445,6 +460,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const clearUser = async (): Promise<void> => {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
+        if (user && user.learnProgress !== undefined) forgetLocalChaptersSavedIn(user.learnProgress)
 
         setUser(null)
         setJwt(null)
@@ -505,6 +521,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)
+            if (user) syncLocalLearnProgress(user)
 
             posthog?.capture('squeak signup success', {
                 email,
@@ -825,6 +842,46 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
+    const sendLearnProgress = async (progress: ReadChapterSlugsByVolume, signedInUser: User): Promise<void> => {
+        try {
+            const token = await getJwt()
+            const res = await fetch(`${SQUEAK_HOST}/api/profiles/${signedInUser.profile.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ data: { learnProgress: progress } }),
+            })
+            if (!res.ok) throw new Error(`Saving Learn progress failed with ${res.status}`)
+            const savedProgress: ReadChapterSlugsByVolume | undefined = (await res.json())?.data?.attributes
+                ?.learnProgress
+            if (!savedProgress) return
+            setUser((currentUser) =>
+                currentUser?.profile?.id === signedInUser.profile.id
+                    ? { ...currentUser, learnProgress: savedProgress }
+                    : currentUser
+            )
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    // One save at a time: the server only grows the map, so in-order responses never replace a newer one with an older one.
+    const saveLearnProgress = (progress: ReadChapterSlugsByVolume, signedInUser: User): Promise<void> => {
+        learnProgressSaveQueue.current = learnProgressSaveQueue.current.then(() =>
+            sendLearnProgress(progress, signedInUser)
+        )
+        return learnProgressSaveQueue.current
+    }
+
+    const syncLocalLearnProgress = (signedInUser: User): void => {
+        if (signedInUser.learnProgress === undefined) return
+        const localProgress = readLocalProgress()
+        if (!hasChaptersMissingFrom(localProgress, signedInUser.learnProgress)) return
+        void saveLearnProgress(localProgress, signedInUser)
+    }
+
     const voteReply = async (id: number, vote: 'up' | 'down', user: User) => {
         const profileID = user?.profile?.id
         if (!profileID) return
@@ -948,6 +1005,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         addBookmark,
         removeBookmark,
         reportSpam,
+        syncLocalLearnProgress,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
