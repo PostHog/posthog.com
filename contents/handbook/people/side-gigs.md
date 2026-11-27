@@ -38,10 +38,6 @@ If a team wants to pay for it, run it on PostHog infrastructure, rely on it for 
 
 > Getting this stuff right is in your best interest too! If you create something that one day becomes a company, investors will want to know that there is no ambiguity around PostHog potentially being entitled to the IP in some way.
 
-## Paid posts and sponsored content
-
-Paid social media posts, sponsored content, and influencer work are side gigs. If a company offers to pay you to post about them, get signoff in the same way as any other side gig. If you use your social media accounts for PostHog work too, read our [guidance on personal accounts](/handbook/brand/ambassador#using-your-personal-accounts-for-posthog-work).
-
 ## Getting signoff
 
 Generally we ask you to please just check in with the relevant Blitzscale team member for your team to get their confirmation before going ahead with any side gigs. They may loop in Hector or Fraser if they're not sure. 
