@@ -47,6 +47,19 @@ Here you can:
 
 </CalloutBox>
 
+## Saving query results as a cohort
+
+You can save SQL query results as a [static cohort](/docs/data/cohorts) directly from the SQL editor. After running a query, click **Save as cohort** to create a snapshot of the people matching your query.
+
+Your query must:
+
+- Be a single SQL query (not multiple queries separated by semicolons)
+- Use PostHog (ClickHouse) as the connection, not a direct external source
+- Return a person identifier column: `person_id`, `actor_id`, `distinct_id`, or `id` (when querying the `persons` table)
+- Have current results (run the query successfully before saving)
+
+The cohort captures the people at that moment and does not update automatically. See [cohorts](/docs/data/cohorts) for more on working with static and dynamic cohorts.
+
 ## Searching the schema sidebar
 
 The schema sidebar supports searching by name and filtering by materialization status. Type in the search field to filter tables and views by name.
