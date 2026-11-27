@@ -9,7 +9,7 @@ availability:
 sourceId: SamCart
 ---
 
-The SamCart connector syncs orders, charges, subscriptions, and refunds from your SamCart account into PostHog.
+The SamCart connector syncs orders, charges, failed charges, subscriptions, refunds, customers, products, and coupons from your SamCart account into PostHog.
 
 ## Adding a data source
 
@@ -35,7 +35,9 @@ Once the syncs are complete, you can start using SamCart data in PostHog.
 
 ## Sync methods
 
-All four tables support incremental syncing using `created_at` as the replication key.
+The `Orders`, `Charges`, `FailedCharges`, `Subscriptions`, `Refunds`, and `Customers` tables support incremental syncing using `created_at` as the replication key.
+
+The `Products` and `Coupons` tables support full refresh syncs only. Products and coupons can change after they are created (for example, a price change or an archived state), so each sync reads the full catalog.
 
 **Incremental syncs only pick up new records.** They do not capture changes to existing records – for example, a refund that changes the status of an order, charge, or subscription. To pick up these changes, run a full refresh sync.
 
