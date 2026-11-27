@@ -51,12 +51,33 @@ Each question card also includes a **Copy response key** button. This copies the
 
 ### Filtering results
 
-You can filter survey results to focus on specific responses or user segments:
+Filter survey results by date, answers, properties, or archive state (click **Clear filters** to reset answer filters, property filters, date bounds to survey start/end, and **Show archived** to `false`):
 
-- **Date range** - Select a date range to view responses from a specific time period.
-- **Filter by response** - Click **Filter by response** to filter results based on specific answers to each question. This works for rating, multiple choice, and open-ended questions.
-- **Property filters** - Add filters for event properties, person properties, feature flags, cohorts, or HogQL expressions.
-- **Show archived** - Toggle **Show archived** to include or exclude archived responses.
+- **Date range:** Restrict results to a date range in your project's timezone.
+- **Responses filters:** Click **Filters** and set answer filters under **Responses**, available when at least one question supports answer filtering:
+  - **Rating:** equals, doesn't equal, matches regex, or doesn't match regex.
+  - **Open text and single choice:** contains, doesn't contain, matches regex, doesn't match regex, equals, or doesn't equal.
+  - **Multiple choice:** contains, doesn't contain, matches regex, or doesn't match regex.
+  - **Link:** No answer filter operators.
+- **Property filters:** Filter by event properties, person properties, feature flags, cohorts, or HogQL expressions.
+- **Show archived:** Toggle **Show archived** to include archived responses in tables and charts.
+
+### Archiving individual responses
+
+Exclude noisy or test submissions without deleting raw ClickHouse events:
+
+1. Open the **Responses** tab, click the **...** actions menu on a row, and select **Archive response** (or **Unarchive response** to restore it).
+2. PostHog stores the archived `response_uuid` per team and prevents duplicate archive records.
+3. Archived rows stay hidden by default and render at `50%` opacity when **Show archived** is enabled.
+4. Programmatic access: `POST /api/projects/{project_id}/surveys/{id}/responses/{response_uuid}/archive/`, `unarchive/`, and `GET /api/projects/{project_id}/surveys/{id}/archived-response-uuids/`.
+
+### Exporting responses (CSV and Excel)
+
+Export filtered survey responses from any non-draft survey:
+
+1. Open the **Export** panel tab on the survey detail page.
+2. Select **Export as CSV** or **Export as Excel** (`XLSX`).
+3. Requirements and output: requires **Editor** access on `Export`. Export is available on any non-draft survey (a survey with zero responses exports an empty file), names the file `survey-<survey.name>-responses`, and omits UI-only `response` and `actions` columns.
 
 ## 2. On a dashboard
 
