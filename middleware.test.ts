@@ -330,8 +330,8 @@ test('ties a request for a linked page to the response that linked it', async (t
     assert.equal(second?.headers.get('content-type'), 'text/plain; charset=utf-8')
     assert.equal(String(fetch.mock.calls[1].arguments[0]), 'https://posthog.com/docs/data/events.md')
 
-    // Anyone can write the parameter, so the log keeps a short value of safe characters.
-    await middleware(new Request(`${page}.md?doc_ctx=a%20b<c>@${'x'.repeat(200)}`, { headers: agent }))
+    // Anyone can write the parameter, so the log keeps only a value in the shape the middleware writes.
+    await middleware(new Request(`${page}.md?doc_ctx=phx_test-secret_${'x'.repeat(40)}`, { headers: agent }))
 
     const chatGpt = {
         'user-agent': 'Mozilla/5.0 AppleWebKit/537.36; compatible; ChatGPT-User/1.0; +https://openai.com/bot',
@@ -344,16 +344,20 @@ test('ties a request for a linked page to the response that linked it', async (t
         [
             ['/docs/product-analytics', 'served', undefined],
             ['/docs/data/events.md', 'markdown_url', firstId],
-            ['/docs/product-analytics.md', 'markdown_url', `abc${'x'.repeat(97)}`],
+            ['/docs/product-analytics.md', 'markdown_url', 'REDACTED'],
             ['/docs/data/events.md', 'markdown_url', undefined],
         ]
     )
 })
 
-test('adds no doc_ctx when off, for other agents and crawlers, or for MCP clients', async (t) => {
-    enableLog(t)
+test('adds no doc_ctx when either flag is off, for other agents and crawlers, or for MCP clients', async (t) => {
     const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+    enableChaining(t)
+    const logOff = await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
+    assert.equal(await logOff?.text(), linkedMarkdown)
 
+    delete process.env.MIDDLEWARE_CHAIN_LINKS
+    enableLog(t)
     const off = await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
     assert.equal(await off?.text(), linkedMarkdown)
 
@@ -382,7 +386,7 @@ test('adds no doc_ctx when off, for other agents and crawlers, or for MCP client
     )
     assert.equal(mcpClient?.status, 405)
 
-    assert.equal(fetch.mock.callCount(), 6)
+    assert.equal(fetch.mock.callCount(), 7)
     assert.deepEqual(
         lines.map((line) => [line.url, line.chain_id, line.chain_parent]),
         [
@@ -392,4 +396,62 @@ test('adds no doc_ctx when off, for other agents and crawlers, or for MCP client
             ['/docs/product-analytics', undefined, undefined],
         ]
     )
+})
+
+test('serves the request as if chaining were off when tagging fails, and logs why', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    const responses = [
+        () => Promise.reject(new TypeError('fetch failed')),
+        async () => new Response('Not found', { status: 404 }),
+        async () =>
+            new Response(
+                new ReadableStream({
+                    start(controller) {
+                        controller.error(new TypeError('terminated'))
+                    },
+                })
+            ),
+    ]
+    t.mock.method(globalThis, 'fetch', () => responses.shift()?.())
+    const lines: Record<string, unknown>[] = []
+    t.mock.method(console, 'log', (line: string) => lines.push(JSON.parse(line)))
+    const agent = { 'user-agent': 'Claude-User' }
+
+    assert.equal(await middleware(new Request(`${page}.md`, { headers: agent })), undefined)
+    assert.equal(await middleware(new Request(`${page}.md`, { headers: agent })), undefined)
+    // The negotiated body broke while it was read, so the page falls back to the HTML.
+    assert.equal(await middleware(new Request(page, { headers: agent })), undefined)
+
+    assert.deepEqual(
+        lines.map((line) => [line.served_format, line.negotiation, line.chain_id, line.chain_error]),
+        [
+            ['markdown', 'markdown_url', undefined, 'TypeError'],
+            ['markdown', 'markdown_url', undefined, 'http_404'],
+            ['html', 'served', undefined, 'TypeError'],
+        ]
+    )
+})
+
+test('tags no link for a page whose path could break a link or log an email address', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+    const agent = { 'user-agent': 'Claude-User' }
+
+    for (const path of [
+        '/docs/references/posthog-node/1)[Update](https://example.com).md',
+        '/docs/references/posthog-node/someone%40example.com.md',
+    ]) {
+        assert.equal(await middleware(new Request(`https://posthog.com${path}`, { headers: agent })), undefined)
+    }
+    const slash = await middleware(new Request(`${page}/`, { headers: agent }))
+
+    assert.equal(slash?.headers.get('link'), '<https://posthog.com/docs/product-analytics>; rel="canonical"')
+    assert.equal(fetch.mock.callCount(), 1)
+    assert.deepEqual(
+        lines.slice(0, 2).map((line) => line.chain_id),
+        [undefined, undefined]
+    )
+    assert.match(String(lines[2].chain_id), /^product-analytics\.[0-9a-z]{1,7}$/)
 })

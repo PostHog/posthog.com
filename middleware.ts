@@ -23,9 +23,11 @@
  * of the MCP server, so they show where the server is rather than a parse
  * error. `/mcp.md` is in the matcher only for those clients.
  *
- * With MIDDLEWARE_CHAIN_LINKS on, it runs an experiment for Claude and ChatGPT
- * fetches only: it ties a follow-up /docs request to the request whose Markdown
- * linked to it, without a cookie or a session. See `chainLinks`.
+ * With MIDDLEWARE_CHAIN_LINKS and MIDDLEWARE_LOG_ENABLED on, it runs an
+ * experiment for Claude and ChatGPT fetches only: it ties a follow-up /docs
+ * request to the request whose Markdown linked to it, without a cookie or a
+ * session. Both values are read at build time, so turning it off takes a
+ * redeploy. See `chainLinks`.
  */
 export const config = {
     matcher: [
@@ -152,9 +154,13 @@ const EMAIL_SEGMENT = /^[^/]*(?:@|%40)[^/]*\.[A-Za-z]{2,}$/i
 // The query parameter that names the response a link came from. It is dropped from the logged URL, so a page
 // logs as one URL whether or not a request followed a link.
 const CHAIN_PARAM = 'doc_ctx'
-// Anyone can put any value in the parameter, so the log keeps only these characters, up to this length.
-const CHAIN_PARENT_UNSAFE = /[^\w./~-]/g
-const CHAIN_PARENT_MAX_LENGTH = 100
+// Anyone can put any value in the parameter, so the log keeps it only in the shape the middleware writes: a page,
+// a dot and the random part. Any other value, a token pasted into a URL for example, is logged as REDACTED.
+const CHAIN_VALUE = /^[\w./-]{1,90}\.[0-9a-z]{1,7}$/
+// The page goes into Markdown links and the log as it is, so a path with other characters is never tagged: a `)`
+// would end a link early, and an encoded `@` could put an email address in the log.
+const CHAIN_PAGE = /^[\w./-]{1,90}$/
+const CHAIN_FETCH_TIMEOUT_MS = 3000
 // A /docs link in Markdown, absolute or root-relative, with its query and fragment. Links to the same page
 // (`#heading`) and to other hosts do not match.
 const DOCS_LINK = /\]\((https:\/\/posthog\.com)?(\/docs(?:\/[^)\s?#]*)?)(\?[^)\s#]*)?(#[^)\s]*)?\)/g
@@ -177,12 +183,17 @@ interface NegotiationResult {
     // The value put in this response's /docs links, and the time spent fetching a `.md` URL to put it there.
     chainId?: string
     chainFetchMs?: number
+    // Why the links were not tagged after all: the `.md` fetch's status, or the name of the error it threw.
+    chainError?: string
 }
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
     let result = await negotiate(request)
-    // Written out in full, like MIDDLEWARE_LOG_ENABLED below.
-    if (process.env.MIDDLEWARE_CHAIN_LINKS === 'true') result = await chainLinks(request, result)
+    // Written out in full, like MIDDLEWARE_LOG_ENABLED below. The tags exist only for the log, so without it they
+    // would change responses and record nothing.
+    if (process.env.MIDDLEWARE_CHAIN_LINKS === 'true' && process.env.MIDDLEWARE_LOG_ENABLED === 'true') {
+        result = await chainLinks(request, result)
+    }
     logRequest(request, result)
     return result.response
 }
@@ -238,39 +249,57 @@ async function chainLinks(request: Request, result: NegotiationResult): Promise<
     const userAgent = request.headers.get('user-agent') || ''
     if (!LOGGED_PATHS.test(url.pathname) || !CHAIN_AGENTS_REGEX.test(userAgent)) return result
 
-    let markdown = result.response
-    let chainFetchMs: number | undefined
-    if (result.negotiation === 'markdown_url') {
-        const started = Date.now()
-        const file = await fetch(new URL(url.pathname, url.origin), { headers: { [SUBREQUEST_HEADER]: '1' } })
-        chainFetchMs = Date.now() - started
-        if (file.ok) markdown = file
-    }
-    if (!markdown) return { ...result, chainFetchMs }
+    const pathname = url.pathname.replace(/\/$/, '')
+    const page = pathname.replace(/\.md$/, '').replace(/^\/docs\/?/, '') || 'docs'
+    if (!CHAIN_PAGE.test(page)) return result
 
-    const page = url.pathname.replace(/\.md$/, '').replace(/^\/docs\/?/, '') || 'docs'
-    const chainId = `${page}.${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`
-    const body = (await markdown.text()).replace(
-        DOCS_LINK,
-        (_, host = '', path, query = '', fragment = '') =>
-            `](${host}${path}${query ? `${query}&` : '?'}${CHAIN_PARAM}=${chainId}${fragment})`
-    )
-    const response = new Response(body, {
-        status: 200,
-        headers: {
-            'content-type': markdown.headers.get('content-type') || 'text/markdown; charset=utf-8',
-            // The body holds an id for this response only, so no shared cache may keep it.
-            'cache-control': 'private, no-store',
-            link: `<${new URL(url.pathname.replace(/\.md$/, ''), url.origin)}>; rel="canonical"`,
-            vary: 'Accept, User-Agent',
-        },
-    })
-    return { ...result, response, chainId, chainFetchMs }
+    let chainFetchMs: number | undefined
+    // The tags only feed the log, so when anything here fails, the request is served as if chaining were off.
+    try {
+        let markdown = result.response
+        if (result.negotiation === 'markdown_url') {
+            const started = Date.now()
+            const file = await fetch(new URL(pathname, url.origin), {
+                headers: { [SUBREQUEST_HEADER]: '1' },
+                signal: AbortSignal.timeout(CHAIN_FETCH_TIMEOUT_MS),
+            })
+            chainFetchMs = Date.now() - started
+            if (!file.ok) {
+                await file.body?.cancel()
+                return { ...result, chainFetchMs, chainError: `http_${file.status}` }
+            }
+            markdown = file
+        }
+        if (!markdown) return result
+
+        const chainId = `${page}.${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`
+        const body = (await markdown.text()).replace(
+            DOCS_LINK,
+            (_, host = '', path, query = '', fragment = '') =>
+                `](${host}${path}${query ? `${query}&` : '?'}${CHAIN_PARAM}=${chainId}${fragment})`
+        )
+        const response = new Response(body, {
+            status: 200,
+            headers: {
+                'content-type': markdown.headers.get('content-type') || 'text/markdown; charset=utf-8',
+                // The body holds an id for this response only, so no shared cache may keep it.
+                'cache-control': 'private, no-store',
+                link: `<${new URL(pathname.replace(/\.md$/, ''), url.origin)}>; rel="canonical"`,
+                vary: 'Accept, User-Agent',
+            },
+        })
+        return { ...result, response, chainId, chainFetchMs }
+    } catch (error) {
+        // A failed read can leave a negotiated body half used, so a negotiated page falls back to the HTML.
+        const chainError = (error as { name?: string } | null)?.name || 'error'
+        return { ...result, response: undefined, chainFetchMs, chainError }
+    }
 }
 
 function chainParent(url: URL): string | undefined {
-    const value = (url.searchParams.get(CHAIN_PARAM) || '').replace(CHAIN_PARENT_UNSAFE, '')
-    return value.slice(0, CHAIN_PARENT_MAX_LENGTH) || undefined
+    const value = url.searchParams.get(CHAIN_PARAM)
+    if (!value) return undefined
+    return CHAIN_VALUE.test(value) ? value : REDACTED
 }
 
 function logRequest(request: Request, result: NegotiationResult): void {
@@ -294,6 +323,7 @@ function logRequest(request: Request, result: NegotiationResult): void {
             chain_id: result.chainId,
             chain_parent: chainParent(url),
             chain_fetch_ms: result.chainFetchMs,
+            chain_error: result.chainError,
             request_headers: headers.values,
             other_header_names: headers.otherNames,
         })
