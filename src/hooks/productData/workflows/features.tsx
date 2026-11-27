@@ -5,7 +5,7 @@ import MCPInstall from 'components/Products/MCPInstall'
 
 /**
  * Feature content reshaped from the previous workflows.tsx features array.
- * MCP bullets reshaped from contents/docs/workflows/surfaces/mcp.mdx
+ * MCP bullets reshaped from contents/docs/workflows/mcp.mdx
  * ("What you can do here") – no invented blurbs.
  */
 export const features = {
@@ -139,10 +139,10 @@ export const features = {
             },
         ],
     },
-    // Reshaped from contents/docs/workflows/surfaces/mcp.mdx ("What you can do here").
+    // Reshaped from contents/docs/workflows/mcp.mdx ("What you can do here").
     mcp: {
         title: 'MCP',
-        // Headline/description reshaped from contents/docs/workflows/surfaces/mcp.mdx
+        // Headline/description reshaped from contents/docs/workflows/mcp.mdx
         headline: 'Build and ship a workflow without leaving your editor',
         description:
             'Create a draft, edit its graph, test it, publish it, and read its stats and logs from Claude Code, Cursor, and other AI tools.',

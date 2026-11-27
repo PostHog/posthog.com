@@ -1,0 +1,43 @@
+---
+title: Unsubscribes and the preferences page
+sidebar: Docs
+showTitle: true
+---
+
+Every marketing email needs a way out. It's the law in most places, and someone who can't find the link clicks "Report spam" instead, which hurts your [deliverability](/docs/workflows/email/deliverability).
+
+## Add the link
+
+In the [email editor](/docs/workflows/email-editor), add the **Unsubscribe link** block, usually in the footer. The editor warns you when a marketing email has no unsubscribe link. Or use the variable anywhere:
+
+```liquid
+<a href="{{ unsubscribe_url }}">Unsubscribe or change what you get</a>
+```
+
+`{{ unsubscribe_url }}` opens the person's preferences page.
+
+## The preferences page
+
+The page lists your marketing [categories](/docs/workflows/email/opt-outs), each with its public description and a toggle, and an **All marketing communications** toggle. Changes save as soon as the person makes them. Turning off every category also turns off all marketing email.
+
+If you use [tracking consent](/docs/workflows/email/link-tracking#tracking-consent), the page also has an **Open and click tracking** toggle.
+
+To see the page, go to **Messaging** > **Opt-outs**, and click **Preview opt-out page**.
+
+<!-- shot: preferences-page: the recipient preferences page with marketing category toggles, All marketing communications, and Open and click tracking, using demo data -->
+
+## One-click unsubscribe
+
+PostHog adds `List-Unsubscribe` and `List-Unsubscribe-Post` headers to every marketing email. Gmail, Yahoo, and other mailbox providers use them to show their own **Unsubscribe** button next to your sender name. One click there unsubscribes the person from all marketing email. You don't need to do anything. Large senders need these headers to reach Gmail and Yahoo inboxes.
+
+To put the same one-click link in the email body, use `{{ unsubscribe_url_one_click }}`. When someone opens it, PostHog asks them to confirm first, so link scanners can't unsubscribe people by mistake.
+
+## What happens next
+
+- PostHog opts the person out of that category, or of all marketing email, and skips them from then on.
+- If [engagement events](/docs/workflows/email/engagement-events) are on, PostHog records a `$workflows_email_unsubscribed` event, with `source` set to `one_click` or `preferences_page`.
+- A broadcast's results count its unsubscribes.
+
+## Transactional emails
+
+Transactional emails, such as receipts and password resets, don't get an unsubscribe header, and ignore opt-outs, because people need them. Never use them for marketing.

@@ -1,0 +1,37 @@
+---
+title: Workflows in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+In the [PostHog web app](https://app.posthog.com/workflows), you manage transactional emails, send broadcasts, write emails, and build automations. Every send uses the same events and people as the rest of PostHog, so you can go from an email to the [session replay](/docs/session-replay) of what the person did next.
+
+Workflows has three apps in PostHog: **Transactional**, **Broadcasts**, and **Workflows** for automations. Each app has a **Messaging** tab with your channels, opt-outs, suppression list, reputation, and settings.
+
+## Before you start
+
+1. **Set up your domain:** [verify the domain](/docs/workflows/domain) that you send from, or try it first with the [test sender](/docs/workflows/email/test-sender).
+2. **Capture your users:** [install PostHog in your app](/docs/workflows/installation#capture-events-from-your-app), so broadcasts and automations know who to email and when.
+
+## What you can do here
+
+- **[Manage transactional emails](/docs/workflows/transactional):** your code sends them. In PostHog, you create templates, read the log of every send, and see what each person did next.
+- **[Send broadcasts](/docs/workflows/broadcasts):** email a group of people once or on a schedule, and plan your sends on the calendar.
+- **[Build automations](/docs/workflows/automations):** start on something a person does, then wait, branch, and send email, push, or a Slack message.
+- **[Get suggestions for your automations](/docs/workflows/self-driving):** PostHog suggests changes to steps that underperform. You approve them.
+- **[Write emails](/docs/workflows/email-editor):** use the block editor, or start from a template.
+- **[See how every send did](/docs/workflows/metrics):** deliveries, opens, clicks, bounces, and conversions.
+- **[Set your sending rules](/docs/workflows/sending-rules):** opt-outs, the suppression list, and a frequency cap that every send follows.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_light_900a17d154.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_dark_d3910ae42d.png"
+  alt="Broadcasts and scheduled automations on the send calendar"
+  classes="rounded"
+/>
+
+## Other ways to use Workflows
+
+- Send email from your code with the [server SDKs](/docs/workflows/installation).
+- Do the same work from your editor over [MCP](/docs/workflows/mcp).
+- Script it from your own systems with the [API](/docs/workflows/api).

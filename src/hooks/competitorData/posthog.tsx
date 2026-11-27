@@ -699,8 +699,8 @@ export const posthog = {
             features: {
                 visual_builder: true,
                 // PostHog AI + MCP: create/edit workflows and email templates via natural language
-                // https://posthog.com/docs/workflows/surfaces/mcp
-                // https://posthog.com/docs/workflows/create-emails-ai
+                // https://posthog.com/docs/workflows/mcp
+                // https://posthog.com/docs/workflows/email-editor
                 ai_assistant: true,
                 campaign_tracking: true,
                 real_time_triggers: true,

@@ -210,15 +210,15 @@ export const workflows = {
     questions: [
         {
             question: 'How do I set up an email drip campaign?',
-            url: '/docs/workflows/email-drip-campaign',
+            url: '/docs/workflows/automations/first-automation',
         },
         {
             question: 'How do I create emails with PostHog AI?',
-            url: '/docs/workflows/create-emails-ai',
+            url: '/docs/workflows/email-editor',
         },
         {
             question: 'How do I configure email, Slack, or other channels?',
-            url: '/docs/workflows/configure-channels',
+            url: '/docs/workflows/domain',
         },
         {
             question: 'How do I run A/B tests inside workflows?',
@@ -230,7 +230,7 @@ export const workflows = {
         },
         {
             question: 'How do I manage opt-outs and suppressions?',
-            url: '/docs/workflows/opt-outs',
+            url: '/docs/workflows/email/opt-outs',
         },
     ],
     comparison: {
@@ -318,7 +318,7 @@ export const workflows = {
         imageAlt: 'A robot hedgehog running a workflow',
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
-        // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
+        // Reshaped from ai.skills + contents/docs/workflows/email-editor.mdx
         intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
         mcpFeatures: ['workflows'],
         skills: [
@@ -326,7 +326,7 @@ export const workflows = {
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
             'Recommends which workflows to build and when to run them based on your product metrics',
         ],
-        // Prompts reshaped from previous ai.prompts + contents/docs/workflows/create-emails-ai.mdx.
+        // Prompts reshaped from previous ai.prompts + contents/docs/workflows/email-editor.mdx.
         // Tool names verified against src/data/mcp-tools.json (feature: workflows).
         groups: [
             {

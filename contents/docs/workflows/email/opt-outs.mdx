@@ -1,0 +1,59 @@
+---
+title: Opt-outs and categories
+sidebar: Docs
+showTitle: true
+---
+
+People don't want all of your email, or none of it. Message categories let them choose: they can leave your newsletter, and still get product updates and receipts.
+
+## Message categories
+
+In [Workflows](https://app.posthog.com/workflows/opt-outs), go to **Messaging** > **Opt-outs**, and click **New category**. Fill in:
+
+- **Name**, such as "Newsletter".
+- **Key**, such as `newsletter`. The API uses it. You can't change it later.
+- **Message type:** **Marketing** or **Transactional**. See below.
+- **Public description**, which people see on the [preferences page](/docs/workflows/email/unsubscribes#the-preferences-page), such as "Tips and stories, once a month".
+
+Then pick a **Message category** on each broadcast and automation email step. PostHog skips everyone who opted out of that category, or out of all marketing email.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_light_8ffe0244a4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/opt_outs_categories_dark_f0182f29ef.png"
+  alt="Message categories and the marketing opt-out list on the Opt-outs tab"
+  classes="rounded"
+/>
+
+## Marketing or transactional
+
+| | Marketing | Transactional |
+| --- | --- | --- |
+| **For** | Newsletters, product updates, offers | Receipts, password resets, security alerts |
+| **Opt-outs** | Respected | Ignored, because people need these |
+| **[Frequency cap](/docs/workflows/email/frequency-cap)** | Counts | Doesn't count |
+| **[Suppression list](/docs/workflows/email/suppression)** | Any entry blocks it | Only a hard bounce blocks it |
+
+Use transactional only for emails a person needs. Sending marketing as transactional breaks the law in most places, and gets you reported as spam.
+
+## See who opted out
+
+The **Marketing opt-out list** shows who left all marketing email, and when. Expand a marketing category to see who left only that one. Transactional categories have no opt-outs.
+
+People get on a list when they:
+
+- Click unsubscribe, in an email or in their email app. See [unsubscribes](/docs/workflows/email/unsubscribes).
+- Change their choices on the preferences page.
+
+You can also add people yourself:
+
+- **Add opt-out** adds one address.
+- **Import CSV** adds many. The file needs an `email` column, and can have a `category_key` column.
+- **Import from another tool** brings opt-outs over from your old email provider. See [move from another provider](/docs/workflows/migrate).
+
+**Export CSV** downloads the list.
+
+## From your own systems
+
+If your product has its own email settings, keep them in sync with the [messaging preferences API](/docs/api/messaging-preferences). You can list a category's opt-outs, add them one at a time or up to 1,000 at once, and remove one when someone opts back in. Leave out the category to work with the opt-out from all marketing email.
+
+When you opt someone back in to one marketing category, PostHog also lifts their opt-out from all marketing email. Their other marketing categories stay off.

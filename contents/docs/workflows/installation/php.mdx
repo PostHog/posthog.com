@@ -1,0 +1,292 @@
+---
+platformLabel: "PHP"
+platformLogo: php
+title: Send transactional emails with PHP
+sidebar: Docs
+showTitle: true
+---
+
+The [PHP SDK](/docs/libraries/php) sends transactional emails from version 4.22.0. Before you start, you need a transactional email ([templates and variables](/docs/workflows/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up both and sends a test email in a few minutes.
+
+New to sending from code? Read [send emails from code](/docs/workflows/transactional/send-from-code) first.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
+
+```text
+Add PostHog transactional email to this PHP app with posthog/posthog-php.
+
+Read https://posthog.com/docs/workflows/installation/php.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's PostHog client. Pass secretKey from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. Build the client with loadFeatureFlags: false unless the app evaluates feature flags locally with this client.
+- Send only from server code. Never print the secret key into a page or a JavaScript bundle.
+- Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- send() throws PostHog\EmailError when PostHog doesn't queue the email. Branch on getErrorCode(), never on getMessage().
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. Never resend the email through another email provider. Finish every retry within 7 days, because PostHog keeps an idempotency key for 7 days.
+- In a Laravel queued job, pass 'max_retries' => 0, rethrow the codes above, and call $this->fail() for every other code.
+- Pass the distinct_id that the app passes to identify(). Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- PostHog\Emails is a final class with no HTTP hook. In tests, fake your own wrapper around the send, not the SDK.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
+
+## Install
+
+```bash
+composer require "posthog/posthog-php:^4.22"
+```
+
+## Set up the client
+
+Pass your project secret API key as `secretKey` to the PostHog client that your app already has. The project token keeps capturing events. The secret key sends email, so keep it on your server and never send it to the browser.
+
+```php
+use PostHog\Client;
+use PostHog\PostHog;
+
+$client = new Client(
+    '<ph_project_token>',
+    ['host' => '<ph_client_api_host>'],
+    // This client only sends email, so it doesn't load flag definitions with the secret key
+    loadFeatureFlags: false,
+    secretKey: getenv('POSTHOG_PROJECT_SECRET_API_KEY') ?: null,
+);
+
+PostHog::init(client: $client);
+```
+
+Keep `loadFeatureFlags: false` unless this client also [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With it on, the client loads flag definitions with the secret key when it starts, and a key with only the **Transactional email** scope can't read them. If you do evaluate flags locally with this client, give the key the **Feature flag** read scope too.
+
+If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
+
+## Send an email
+
+```php
+use PostHog\PostHog;
+
+function sendPasswordReset(User $user, string $resetLink, string $resetRequestId): string
+{
+    // Throws PostHog\EmailError when PostHog doesn't queue the email. Branch on getErrorCode()
+    $result = PostHog::emails()->send([
+        'to' => $user->email,
+        'template_id' => '<template_id>',
+        'template_data' => ['first_name' => $user->firstName, 'reset_link' => $resetLink],
+        'distinct_id' => (string) $user->id,
+        // Identifies this one email, so a retry never sends it twice
+        'idempotency_key' => "password-reset-{$resetRequestId}",
+    ]);
+    return $result->getId();
+}
+```
+
+`send()` returns a `SendEmailResult`, and `getId()` is the message ID. When PostHog doesn't queue the email, `send()` throws a `PostHog\EmailError`, and its `getErrorCode()` is one of the codes in the [errors table](/docs/workflows/transactional/retries-and-errors#what-to-retry). A wrong argument throws `EmailError` with an `invalid_*` code before any request.
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
+
+### Fields
+
+Fields marked "template only" work only with a template made in PostHog. Fields marked "code only" work only with content from your code.
+
+| Field | Required | What it does |
+| --- | --- | --- |
+| `to` | Yes | The recipient's email address. |
+| `template_id` | Yes, template only | The ID of the transactional email in PostHog. |
+| `template_data` | No, template only | Values for the template's variables. |
+| `distinct_id` | No | Links the email to your user's person in PostHog. |
+| `idempotency_key` | No | Identifies this one email, so a retry never sends it twice. |
+| `max_retries` | No | How many times the client retries this send. |
+| `template_key` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
+| `subject` | Yes, code only | The subject line. |
+| `html` | One of `html` or `text`, code only | The HTML body. |
+| `text` | One of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `from` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
+| `reply_to` | No, code only | One reply-to address or a list. |
+| `cc` | No, code only | One copy address or a list. |
+| `bcc` | No, code only | One blind copy address or a list. |
+| `attachments` | No, code only | A list of files to attach. |
+| `sensitive` | No, code only | Marks the email as sensitive, for login links, reset tokens, or codes. |
+| `tracking` | No, code only | What PostHog tracks: opens, clicks, and engagement events. |
+
+Sending needs version 4.22.0 or later. `sensitive` and `tracking` need 4.24.0, and `cc`, `bcc`, and `attachments` need 4.25.0.
+
+### Timeouts and retries
+
+The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or as long as the server's `Retry-After` asks, up to 30 seconds. When `Retry-After` asks for more than 30 seconds, the client throws at once. Each request times out after 15 seconds. A send blocks the request until it finishes.
+
+To change this, set the `email_request_timeout_ms` and `email_request_max_retries` options on the client, or `max_retries` on one send.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Set `max_retries` to `0`, so that the client doesn't retry inside the job.
+- Keep the idempotency key the same on every attempt.
+- Finish the retries within 7 days. PostHog remembers an idempotency key for 7 days after it queues the email, so a later retry can send the email twice.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+This example uses a [Laravel queued job](https://laravel.com/docs/queues). Laravel retries a job that throws, up to `$tries` attempts, and waits the `$backoff` seconds between them. `$this->fail()` marks the job as failed, so Laravel doesn't retry it. Set up the PostHog client in a service provider, so that the queue worker has it too.
+
+```php
+namespace App\Jobs;
+
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
+use PostHog\EmailError;
+use PostHog\PostHog;
+
+class SendPasswordResetEmail implements ShouldQueue
+{
+    use Queueable;
+
+    // A later attempt can fix these. Any other code fails the same way again.
+    private const RETRYABLE_CODES = ['network_error', 'idempotency_key_in_flight', 'throttled', 'delivery_unavailable'];
+
+    public $tries = 5;
+
+    public $backoff = [10, 60, 300];
+
+    public function __construct(
+        public string $userId,
+        public string $email,
+        public string $firstName,
+        public string $resetLink,
+        public string $resetRequestId,
+    ) {}
+
+    public function handle(): void
+    {
+        try {
+            PostHog::emails()->send([
+                'to' => $this->email,
+                'template_id' => '<template_id>',
+                'template_data' => ['first_name' => $this->firstName, 'reset_link' => $this->resetLink],
+                'distinct_id' => $this->userId,
+                // The same key on every attempt, so a retried job never sends the email twice
+                'idempotency_key' => "password-reset-{$this->resetRequestId}",
+                // Laravel retries the job, so the client doesn't retry on its own
+                'max_retries' => 0,
+            ]);
+        } catch (EmailError $error) {
+            if (in_array($error->getErrorCode(), self::RETRYABLE_CODES, true)) {
+                throw $error;
+            }
+            $this->fail($error);
+        }
+    }
+}
+```
+
+Dispatch the job with the values that the send needs:
+
+```php
+SendPasswordResetEmail::dispatch((string) $user->id, $user->email, $user->firstName, $resetLink, $resetRequestId);
+```
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinct_id`, and leave it out for someone who isn't a user yet. See [link emails to your users](/docs/workflows/transactional/send-from-code#link-emails-to-your-users) for how PostHog records each case.
+
+## Send content from your code
+
+`send()` also takes content that your code rendered, with no template in PostHog. Render it with your template engine first, such as Blade or Twig.
+
+```php
+function sendPasswordReset(User $user, string $html, string $resetRequestId): string
+{
+    $result = PostHog::emails()->send([
+        'to' => $user->email,
+        'template_key' => 'password-reset',
+        'subject' => 'Reset your password',
+        'html' => $html,
+        'from' => 'Hedgebox <security@example.com>',
+        'distinct_id' => (string) $user->id,
+        'idempotency_key' => "password-reset-{$resetRequestId}",
+    ]);
+    return $result->getId();
+}
+```
+
+`capture_engagement` is deprecated. Pass `'tracking' => ['engagement' => false]` instead, and don't set both.
+
+See [content from your code](/docs/workflows/transactional/from-code) for what each field does and the checks PostHog runs.
+
+### Copies and attachments
+
+From version 4.25.0, `send()` takes `cc`, `bcc`, and `attachments`. Each file in `attachments` is an array with `filename` and the file's bytes as `content`, such as `file_get_contents()` returns, and can also have `content_type` and `content_id`. Don't pass Base64. If you have Base64, pass `base64_decode($content)`. The client uploads each file before it sends the email, and checks the limits first. If an upload fails, `send` throws an error, and PostHog sends nothing.
+
+```php
+PostHog::emails()->send([
+    'to' => $user->email,
+    'template_key' => 'receipt',
+    'subject' => 'Your receipt',
+    'html' => $html,
+    'cc' => 'billing@example.com',
+    'attachments' => [
+        ['filename' => 'receipt.pdf', 'content' => file_get_contents($pdfPath), 'content_type' => 'application/pdf'],
+    ],
+    'distinct_id' => (string) $user->id,
+]);
+```
+
+See [attachments](/docs/workflows/transactional/attachments) for the limits, inline images, and errors.
+
+### Open and click tracking
+
+From version 4.24.0, `send()` takes `sensitive` and `tracking`. For example, to track the clicks of an email with no secrets:
+
+```php
+PostHog::emails()->send([
+    'to' => 'ada@example.com',
+    'template_key' => 'order-shipped',
+    'subject' => 'Your order shipped',
+    'html' => $html,
+    'sensitive' => false,
+    'tracking' => ['clicks' => true],
+]);
+```
+
+`tracking` takes `true`, `false`, or an array with `'opens'`, `'clicks'`, and `'engagement'`. See [sensitive data and tracking](/docs/workflows/transactional/sensitive-data) for the defaults and rules.
+
+## Check an email's status
+
+```php
+use PostHog\EmailError;
+use PostHog\PostHog;
+
+function emailBounced(string $messageId): ?bool
+{
+    try {
+        $status = PostHog::emails()->get($messageId);
+    } catch (EmailError $error) {
+        if ($error->getErrorCode() === 'not_found') {
+            // The first status can take a few seconds to arrive. Try again later.
+            return null;
+        }
+        throw $error;
+    }
+    return $status->getStatus() === 'bounced';
+}
+```
+
+`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects. A `null` from the helper means "not known yet", not "not bounced".
+
+The client doesn't retry a `not_found`, which you can get right after a send. Try again a few times with a short wait before you treat the email as missing.
+
+See [status and troubleshooting](/docs/workflows/transactional/status) for what each status and reason means.
+
+## Test without sending email
+
+`PostHog\Emails` is a final class with no HTTP hook, so you can't fake it. Put the send in a small class of your own, and fake that class in your tests. To test delivery, send a real email to your own address and open the send in the [**Log**](/docs/workflows/transactional#see-each-send) tab.
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set the `app_host` option to your PostHog app URL. Without it, `send()` throws `EmailError` with the code `missing_app_host`, because the client doesn't send the secret key to a host that might be a proxy.
+
+From version 4.26.1, the client sends to `/api/messaging/`. A self-hosted PostHog from before 2026-11-18 answers those requests with a `404`.
+
+Flag definitions for local evaluation still load from `host` with the secret key. If that host is a proxy that must not see the key, build the client with `loadFeatureFlags: false` and don't call `loadFlags()`.

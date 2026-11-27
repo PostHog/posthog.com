@@ -75,7 +75,7 @@ Here are few specific examples:
 
 Every day, an “Enter queue” workflow adds newly eligible accounts to our onboarding program. Customer Analytics triggers an event when an account property changes, allowing subsequent workflows to pick up where they left off.
 
-[Our main email sequence](/docs/workflows/email-drip-campaign) lives in a single workflow, but not every customer follows the same path. For eligible customers forecasting under $600/month, we send an automated first email offering help with setup and billing. For higher-paying customers, we take a more personal approach: we review their account and write tailored advice based on their setup and usage.
+[Our main email sequence](/docs/workflows/automations/first-automation) lives in a single workflow, but not every customer follows the same path. For eligible customers forecasting under $600/month, we send an automated first email offering help with setup and billing. For higher-paying customers, we take a more personal approach: we review their account and write tailored advice based on their setup and usage.
 
 ![Onboarding email sequence workflow](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_onboarding_email_workflow_4f4039b00f.png)
 
@@ -103,7 +103,7 @@ Combining customer data with [Scouts](/docs/self-driving/scouts) and automation 
 
 Some of our favorite workflows don't send emails at all - they save time and reduce manual effort.
 
-For example, Workflows creates follow-up tasks after onboarding meetings, add [Gong](/docs/data-pipelines/sources/gong) call summaries to customer notes using [AI tasks](/docs/workflows/ai-tasks), and generate tasks from customer research reports.
+For example, Workflows creates follow-up tasks after onboarding meetings, add [Gong](/docs/data-pipelines/sources/gong) call summaries to customer notes using [AI tasks](/docs/workflows/automations/ai-steps), and generate tasks from customer research reports.
 
 ![Workflow creating follow-up tasks and adding call summaries to customer notes](https://res.cloudinary.com/dmukukwp6/image/upload/scaled_cs_meeting_followup_tasks_workflow_0b27dfc540.png)
 

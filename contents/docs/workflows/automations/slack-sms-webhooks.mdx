@@ -1,0 +1,38 @@
+---
+title: Slack, SMS, and webhooks
+sidebar: Docs
+showTitle: true
+---
+
+Automations can do more than send email. They can post to your team's Slack, text your users, or call any system. Connect Slack and Twilio once on the [**Channels** tab](https://app.posthog.com/workflows/channels). Only project admins can add a channel.
+
+## Slack
+
+Post a message to a Slack channel from an automation, such as when a big customer signs up. A Slack message can also [start an automation](/docs/workflows/automations/triggers).
+
+1. On the **Channels** tab, click **New channel**, then **Slack**.
+2. In Slack, click **Allow** to add the PostHog app to your workspace.
+3. Add PostHog to each channel that it posts in. In the channel, click the channel name, open **Integrations**, click **Add an app**, and pick **PostHog**. You can also mention `@PostHog` in the channel.
+
+Then add a **Slack** step to an automation, and pick the channel.
+
+## SMS
+
+Send text messages through Twilio. On the **Channels** tab, click **New channel**, then **Twilio**, and enter:
+
+| Field | Where to find it |
+| --- | --- |
+| **Account SID** | [Twilio Console](https://help.twilio.com/articles/14726256820123-What-is-a-Twilio-Account-SID-and-where-can-I-find-it-) |
+| **Auth token** | [Twilio Console](https://help.twilio.com/articles/223136027-Auth-Tokens-and-How-to-Change-Them) |
+
+Then add an **SMS** step to an automation.
+
+## Webhooks and destinations
+
+A **Webhook** step sends a request to any URL, such as your own API, with data from the person and the event. To use the response in later steps, save it as a variable. See [use results in later steps](/docs/workflows/automations/steps#use-results-in-later-steps).
+
+To send to one of PostHog's other [destinations](/docs/data-pipelines/destinations), such as a CRM or an ad platform, click **More** in the step list.
+
+## Push notifications
+
+See [push notifications](/docs/workflows/push).

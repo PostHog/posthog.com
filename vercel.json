@@ -1336,7 +1336,207 @@
         },
         {
             "source": "/docs/workflows/customerio-import:ext(\\.md)?",
-            "destination": "/docs/workflows/import-customerio-optouts:ext?",
+            "destination": "/docs/workflows/migrate/customer-io:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/ai-tasks:ext(\\.md)?",
+            "destination": "/docs/workflows/automations/ai-steps:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/best-practices:ext(\\.md)?",
+            "destination": "/docs/workflows/resources/best-practices:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/changelog:ext(\\.md)?",
+            "destination": "/docs/workflows/resources/changelog:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/configure-channels:ext(\\.md)?",
+            "destination": "/docs/workflows/domain:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/create-emails-ai:ext(\\.md)?",
+            "destination": "/docs/workflows/email-editor:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/editing-live-workflows:ext(\\.md)?",
+            "destination": "/docs/workflows/automations/editing-live:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/email-drip-campaign:ext(\\.md)?",
+            "destination": "/docs/workflows/automations/first-automation:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/engagement-events:ext(\\.md)?",
+            "destination": "/docs/workflows/email/engagement-events:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/frequency-cap:ext(\\.md)?",
+            "destination": "/docs/workflows/email/frequency-cap:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/import-customerio-optouts:ext(\\.md)?",
+            "destination": "/docs/workflows/migrate/customer-io:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/launch-workflow:ext(\\.md)?",
+            "destination": "/docs/workflows/automations/first-automation:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/library:ext(\\.md)?",
+            "destination": "/docs/workflows/email/library:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/opt-outs:ext(\\.md)?",
+            "destination": "/docs/workflows/email/opt-outs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/replay-vision:ext(\\.md)?",
+            "destination": "/docs/workflows/automations/ai-steps:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/sending-reputation:ext(\\.md)?",
+            "destination": "/docs/workflows/email/deliverability:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/supabase-auth-emails:ext(\\.md)?",
+            "destination": "/docs/workflows/transactional/supabase:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/surfaces/api:ext(\\.md)?",
+            "destination": "/docs/workflows/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/surfaces/mcp:ext(\\.md)?",
+            "destination": "/docs/workflows/mcp:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/surfaces/web-app:ext(\\.md)?",
+            "destination": "/docs/workflows/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/api:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/examples:ext(\\.md)?",
+            "destination": "/docs/workflows/transactional/examples:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/react-email:ext(\\.md)?",
+            "destination": "/docs/workflows/transactional/from-code:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails:ext(\\.md)?",
+            "destination": "/docs/workflows/transactional:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/troubleshooting:ext(\\.md)?",
+            "destination": "/docs/workflows/resources/troubleshooting:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/workflow-builder:ext(\\.md)?",
+            "destination": "/docs/workflows/automations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications:ext(\\.md)?",
+            "destination": "/docs/workflows/push:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/android:ext(\\.md)?",
+            "destination": "/docs/workflows/push/android:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/flutter:ext(\\.md)?",
+            "destination": "/docs/workflows/push/flutter:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/import-device-tokens:ext(\\.md)?",
+            "destination": "/docs/workflows/push/import-device-tokens:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/ios:ext(\\.md)?",
+            "destination": "/docs/workflows/push/ios:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/push-step-options:ext(\\.md)?",
+            "destination": "/docs/workflows/push/push-step-options:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/push-notifications/react-native:ext(\\.md)?",
+            "destination": "/docs/workflows/push/react-native:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/dotnet:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/dotnet:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/elixir:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/elixir:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/go:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/go:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/node:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/php:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/php:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/python:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/ruby:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/ruby:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/transactional-emails/rust:ext(\\.md)?",
+            "destination": "/docs/workflows/installation/rust:ext?",
             "statusCode": 301
         },
         {

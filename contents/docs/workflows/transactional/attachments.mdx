@@ -1,0 +1,164 @@
+---
+title: Attachments
+sidebar: Docs
+showTitle: true
+---
+
+[Emails your code writes](/docs/workflows/transactional/from-code) can carry files, such as a PDF receipt or a calendar invite. A template send can't.
+
+## Attach files
+
+Give the SDK each file's bytes and name. It hashes, uploads, and attaches the file. A file PostHog already has, such as your terms, isn't uploaded again.
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+await posthog.emails.send({
+    to: "ada@example.com",
+    templateKey: "receipt",
+    subject: "Your receipt for order 1042",
+    html,
+    attachments: [{ filename: "invoice-1042.pdf", content: pdfBytes, contentType: "application/pdf" }],
+    idempotencyKey: "receipt-1042",
+})
+```
+
+```python file=Python
+posthog.emails.send(
+    to="ada@example.com",
+    template_key="receipt",
+    subject="Your receipt for order 1042",
+    html=html,
+    attachments=[{"filename": "invoice-1042.pdf", "content": pdf_bytes, "content_type": "application/pdf"}],
+    idempotency_key="receipt-1042",
+)
+```
+
+```ruby file=Ruby
+$posthog.emails.send(
+  to: 'ada@example.com',
+  template_key: 'receipt',
+  subject: 'Your receipt for order 1042',
+  html: html,
+  attachments: [{ filename: 'invoice-1042.pdf', content: File.binread(pdf_path), content_type: 'application/pdf' }],
+  idempotency_key: 'receipt-1042'
+)
+```
+
+```rust file=Rust
+posthog
+    .emails()
+    .send(
+        CodeEmail::new("ada@example.com", "receipt", "Your receipt for order 1042")
+            .html(html)
+            // Call attachment once for each file
+            .attachment(EmailAttachment::new("invoice-1042.pdf", pdf_bytes).content_type("application/pdf"))
+            .idempotency_key("receipt-1042"),
+    )
+    .await?;
+```
+
+```php file=PHP
+PostHog::emails()->send([
+    'to' => 'ada@example.com',
+    'template_key' => 'receipt',
+    'subject' => 'Your receipt for order 1042',
+    'html' => $html,
+    'attachments' => [
+        ['filename' => 'invoice-1042.pdf', 'content' => file_get_contents($pdfPath), 'content_type' => 'application/pdf'],
+    ],
+    'idempotency_key' => 'receipt-1042',
+]);
+```
+
+```go file=Go
+_, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:          "ada@example.com",
+    TemplateKey: "receipt",
+    Subject:     "Your receipt for order 1042",
+    HTML:        html,
+    Attachments: []posthog.EmailAttachment{
+        {Filename: "invoice-1042.pdf", Content: pdfBytes, ContentType: "application/pdf"},
+    },
+    IdempotencyKey: "receipt-1042",
+})
+```
+
+```csharp file=.NET
+await emails.SendAsync(new SendCodeEmailOptions
+{
+    To = "ada@example.com",
+    TemplateKey = "receipt",
+    Subject = "Your receipt for order 1042",
+    Html = html,
+    Attachments =
+    [
+        new EmailAttachment { Filename = "invoice-1042.pdf", Content = pdfBytes, ContentType = "application/pdf" },
+    ],
+    IdempotencyKey = "receipt-1042",
+});
+```
+
+```elixir file=Elixir
+PostHog.Emails.send(
+  to: "ada@example.com",
+  template_key: "receipt",
+  subject: "Your receipt for order 1042",
+  html: html,
+  attachments: [%{filename: "invoice-1042.pdf", content: pdf_bytes, content_type: "application/pdf"}],
+  idempotency_key: "receipt-1042"
+)
+```
+
+```bash file=REST
+# Upload the file first (see "Send files with the API" below), then send its sha256 and filename
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: receipt-1042" \
+  -d '{"to": "ada@example.com", "template_key": "receipt", "subject": "Your receipt for order 1042", "html": "<p>Your invoice is attached.</p>", "attachments": [{"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "filename": "invoice-1042.pdf", "content_type": "application/pdf"}]}'
+```
+
+</MultiLanguage>
+
+- **Limits:** 10 files, and 40 MB per email after Base64 encoding, which is about 29 MB of files.
+- **Inline images:** give the file a content ID, such as `logo`, and use it in the HTML as `<img src="cid:logo">`.
+- **Calendar invites:** send `text/calendar; method=REQUEST` as the content type, so mail apps show the file as an invite.
+- **Blocked files:** PostHog refuses types that mailbox providers block, such as `.exe`.
+- **Viruses:** if the email provider finds a virus, the email fails with the reason `provider_rejected`.
+
+## Send files with the API
+
+Files go to PostHog before the email:
+
+1. **Hash each file:** its SHA-256, as 64 lowercase hex characters, and its size in bytes.
+2. **Ask where to upload:** `POST /api/messaging/attachments/uploads/` with the `files` for this email. PostHog answers `present` for a file it already has, and `upload` with a URL for the rest.
+3. **Upload:** `PUT` each `upload` file's bytes to its URL, with the headers exactly as given, within 15 minutes. Don't send your PostHog key.
+4. **Send:** list each file's `sha256` and `filename` in `attachments`.
+
+```bash
+curl -X POST "https://us.posthog.com/api/messaging/attachments/uploads/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"files": [{"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "size": 48213}]}'
+```
+
+Uploads go to Amazon S3. If your network limits outgoing traffic, allow hosts that end in `.s3.us-east-1.amazonaws.com` (US) or `.s3.eu-central-1.amazonaws.com` (EU). The SDKs upload the same way.
+
+The [receipt with a PDF](/docs/workflows/transactional/examples#receipt-with-a-pdf) example is a complete script.
+
+## Errors
+
+| Code | Cause | Fix |
+| --- | --- | --- |
+| `too_many_attachments` | More than 10 files. | Link to the rest from the email. |
+| `message_too_large` | Over 40 MB after encoding. | Send fewer or smaller files, or link to them. |
+| `attachment_not_uploaded` | PostHog has no file with this hash. The upload didn't finish or expired. | Ask where to upload again, upload, and resend. |
+| `blocked_file_type` | Mailbox providers block this type. | Send another type, or link to it. |
+| `unsafe_filename` | `filename` has a path or a line break. | Send only the name, such as `invoice.pdf`. |
+| `not_mime_type` | `content_type` isn't a MIME type, or it has a `name` parameter. | Send a type such as `application/pdf`, or leave it out. |
+| `unsafe_content_id` | The content ID has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
+| `upload_quota_exceeded` | Your project hit today's upload limit. Resets at midnight UTC. | Reuse files PostHog already has, or link to new ones. |
+| `field_not_accepted` | Your project can't send files yet. | Send without files. |
+
+Other problems with a file, such as a hash that isn't 64 lowercase hex characters, return `invalid_request`, and `attr` names the field. Each of these errors returns `400`, except `upload_quota_exceeded`, which returns `429`. PostHog sends nothing when a check fails.

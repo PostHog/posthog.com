@@ -1,0 +1,106 @@
+---
+title: Steps
+sidebar: Docs
+showTitle: true
+---
+
+After the trigger, add steps to send, wait, branch, and act. Click **+** between two steps, or use **Add a step or run a command** at the bottom of the canvas, to open the step list.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_add_step_light_a95e01418d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_add_step_dark_9953f57e52.png"
+  alt="The menu of steps you can add to an automation"
+  classes="rounded"
+/>
+
+## Send
+
+| Step | What it does |
+| --- | --- |
+| **Email** | Sends an email that you write in the [email editor](/docs/workflows/email-editor). |
+| **SMS** | Sends a text message through Twilio. See [SMS](/docs/workflows/automations/slack-sms-webhooks#sms). |
+| **Slack** | Posts a message to a Slack channel. See [Slack](/docs/workflows/automations/slack-sms-webhooks#slack). |
+| **Webhook** | Sends a request to a URL, such as your own API. |
+| **Push** | Sends a [push notification](/docs/workflows/push) to the person's devices. Rolling out. |
+| **More** | Sends to one of PostHog's other [destinations](/docs/data-pipelines/destinations), such as a CRM. |
+
+The **Email** step has these settings:
+
+- **Message category:** lets people opt out of this kind of email. See [opt-outs](/docs/workflows/email/opt-outs).
+- **Track opens and link clicks:** on by default. See [link tracking](/docs/workflows/email/link-tracking).
+- **Add UTM tags to links:** off by default.
+- **Skip the frequency cap:** for emails people need on time, such as a welcome email. Opt-outs still apply. See [frequency cap](/docs/workflows/email/frequency-cap).
+
+## Wait
+
+| Step | What it does |
+| --- | --- |
+| **Delay** | Waits a set time, such as 2 days, or until a date on the person or event, such as 1 day before `trial_ends_at`. |
+| **Time window** | Waits for the next allowed time, such as weekdays from 9 to 5, in a time zone you pick or the person's own. |
+| **Wait until** | Waits until the person does an event or matches a property condition, up to a **Max time to wait**. It has one path for a match, and one for the time limit. |
+
+A **Wait until** step resumes only for events from the person in that run. Its filters use fixed values. It can't match an event to a property of the trigger event, such as the same `order_id`.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_light_fda13d917d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_dark_57b3559996.png"
+  alt="A Wait until step with its condition and time limit"
+  classes="rounded"
+/>
+
+## Branch
+
+| Step | What it does |
+| --- | --- |
+| **Conditional branch** | Splits people by person properties, event properties, cohorts, or variables. Conditions are checked from top to bottom, and the first match sets the path. People who match no condition take the last path. |
+| **Cohort branch** | Splits people at random by percentage, such as 50/50, to test two versions. |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_branch_light_12f5848111.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_branch_dark_d763058434.png"
+  alt="A branch step that sends people down different paths"
+  classes="rounded"
+/>
+
+## Act in PostHog
+
+| Step | What it does |
+| --- | --- |
+| **Set variable** | Saves a value for later steps. |
+| **Capture event** | Records an event, to start another automation or to measure this one in insights. |
+| **Update person property** | Sets a person property, such as `onboarding_stage`. |
+| **Set group property** | Sets a property on a group. |
+| **Add to static cohort** | Adds the person to a static cohort. Rolling out. |
+| **Opt out of messages** | Opts the person out of a message category, or of all marketing messages. Rolling out. |
+
+The **Support** section has **Get ticket**, **Update ticket**, and **Send message** steps for [support](/docs/support/workflows) tickets.
+
+## AI
+
+Classify text, start an AI task, run a scout, or have Replay Vision watch the person's session. Then branch on the answer. See [AI steps](/docs/workflows/automations/ai-steps).
+
+## Settings on every step
+
+Below its main settings, each step has:
+
+- **Conditions:** the step runs only for people who match. Everyone else skips to the next step. Branch steps and **Wait until** don't have this.
+- **Output variables:** saves the step's result for later steps. See below.
+- **Error handling:** what happens when the step fails, such as when a message can't be sent. **Continue to next step** is the default. **Exit the workflow** ends the run.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/error_handling_28a45d2ecf.png"
+  alt="The Error handling setting on a step, with Continue to next step and Exit the workflow"
+  classes="rounded"
+/>
+
+## Use results in later steps
+
+Save part of a step's result as a variable, such as the ID that a webhook returns:
+
+1. Open **Output variables** on the step.
+2. Pick a variable, or type a name to create one, and pick its type.
+3. Set **Result path** to the part you need, such as `body.id`. Leave it empty to save the whole result.
+
+Later steps read the variable as `{variables.ticket_id}`, such as in a webhook or a Slack message. In an email, use Liquid: `{{ variables.ticket_id }}`. A branch can also split on it.
+
+All of a run's variables together must fit in 5 KB, so save only the fields you need.

@@ -396,23 +396,14 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     // dedicated `pages/docs/<product-slug>.tsx` and `pages/<product-slug>` so
     // the sidebar feels continuous when navigating into individual docs pages.
     const allProducts = useProduct() as any[]
-    // Preview only: the Workflows docs rebuild at /docs/workflows-next uses the Workflows tabs. Drop at the swap.
-    const docsProductSlug =
-        typeof slug === 'string' && slug.startsWith('/docs/')
-            ? slug.split('/')[2].replace(/^workflows-next$/, 'workflows')
-            : null
-    const matchedProductData = docsProductSlug
+    const docsProductSlug = typeof slug === 'string' && slug.startsWith('/docs/') ? slug.split('/')[2] : null
+    const productSurfaceData = docsProductSlug
         ? allProducts
               // `docsSlug` covers the products whose docs don't sit at
               // `/docs/<product slug>` (Traces docs live at /docs/distributed-tracing).
               .filter((p: any) => (p.docsSlug ?? p.slug?.split('/').pop()) === docsProductSlug)
               .sort((a: any, b: any) => (b.productMenu?.length ? 1 : 0) - (a.productMenu?.length ? 1 : 0))[0]
         : null
-    // Preview only: point the Docs tab at the rebuild's own sidebar. Drop at the swap.
-    const productSurfaceData =
-        typeof slug === 'string' && slug.startsWith('/docs/workflows-next') && matchedProductData
-            ? { ...matchedProductData, docsSlug: 'workflows-next' }
-            : matchedProductData
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
     const productMenuTabs = isProductDocsPage
         ? buildProductMenuTabs({

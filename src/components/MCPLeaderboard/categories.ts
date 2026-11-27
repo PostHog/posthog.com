@@ -94,7 +94,7 @@ export const CATEGORIES: Record<
     'MCP analytics': { product: 'mcp_analytics', docs: '/docs/mcp-analytics' },
     'MCP registry': { Icon: IconServer, color: 'purple', docs: '/docs/posthog-desktop/mcp-servers' },
     'MCP Store': { Icon: IconStore, color: 'purple', docs: '/docs/posthog-desktop/mcp-servers' },
-    Messaging: { Icon: IconShieldLock, color: 'green', docs: '/docs/workflows/opt-outs' },
+    Messaging: { Icon: IconShieldLock, color: 'green', docs: '/docs/workflows/email/opt-outs' },
     Metrics: { product: 'metrics', docs: '/docs/metrics' },
     Notebooks: { product: 'notebooks', docs: '/docs/notebooks' },
     'Organization & project management': { Icon: IconBuilding, color: 'blue', docs: '/docs/settings/organizations' },

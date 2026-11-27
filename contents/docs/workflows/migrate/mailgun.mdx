@@ -1,0 +1,45 @@
+---
+title: Move from Mailgun
+sidebar: Docs
+showTitle: true
+---
+
+import { CopyPrompt } from '../_snippets/switch-prompt'
+
+PostHog imports your Mailgun bounces, complaints, unsubscribes, mailing lists, and templates across all your domains, in one background import.
+
+> The Mailgun import is rolling out. If Mailgun isn't in the list, your project doesn't have it yet.
+
+## What moves
+
+| From Mailgun | In PostHog |
+| --- | --- |
+| Bounces | [Suppression list](/docs/workflows/email/suppression). Blocks all email. |
+| Spam complaints | Suppression list. Blocks marketing email. Mailgun blocks all email to them. |
+| Unsubscribes | Opted out of all marketing email. An unsubscribe from a tag opts out of a new category named after the tag. |
+| Mailing lists, and who left each | Marketing [categories](/docs/workflows/email/opt-outs) and opt-outs |
+| Templates, Handlebars or Go | Templates, converted to Liquid |
+| Domains and allowlists | A list, so you know what to set up |
+
+Mailgun has no automations. Routes, webhooks, tracking settings, send history, and stats stay in Mailgun.
+
+## Run the import
+
+1. Create an account API key in [Mailgun](https://app.mailgun.com/settings/api_security), with the **Support** role if you have it. A domain sending key can't read your data, and an Analyst key can't read suppressions. PostHog deletes the key when the import ends.
+2. In [Workflows](https://app.posthog.com/workflows/opt-outs), go to **Messaging** > **Opt-outs** and click **Import from another tool**.
+3. Pick **Mailgun** and paste the key. Pick your **Mailgun region**: US, EU, or both. PostHog only sends your key to the region you pick.
+4. Pick **Template versions**: **Active version only**, or **Every version, each as its own template**. Import every version if your app names a version when it sends. Then pick what to import, and click **Start import**.
+
+<!-- shot: mailgun-import: the Mailgun import, with the Mailgun region and Template versions settings -->
+
+Or ask your agent:
+
+<CopyPrompt prompt="Move our email from Mailgun to PostHog." />
+
+## Switch your sending
+
+- **Unsubscribe footer:** Mailgun adds one on some domains. PostHog doesn't, so add an [unsubscribe link](/docs/workflows/email/unsubscribes) to your marketing emails. The imported domain list says which domains this applies to.
+- **Variables:** pass the values you sent in `t:variables` or `recipient-variables` as the template data of each send.
+- **Preferences page:** people see your imported list and tag names, so rename any that read badly.
+
+See [switch over safely](/docs/workflows/migrate#switch-over-safely) for the full checklist.

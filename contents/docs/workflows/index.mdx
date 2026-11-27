@@ -5,81 +5,310 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMagic, IconBrackets, IconMegaphone, IconPalette, IconShieldLock } from '@posthog/icons'
+import { IconCode, IconMagic, IconLaptop } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
+import MCPInstallCTA from 'components/MCPInstallCTA'
+import SwitchPrompt, { CopyPrompt } from './_snippets/switch-prompt'
 
-Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to your users. You decide when a workflow is triggered, who it reaches, and what happens at each step – triggers, delays, audience splits, message sends, and PostHog actions.
+Send email from your code, send broadcasts, and build automations with email and push notifications, all next to your product data.
 
-Because workflows run on the same events and person properties you already send to PostHog, you can act on real product behavior instead of a separate marketing dataset. Any [real-time destination](/docs/data-pipelines/destinations) in PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and automation.
+Every send, open, click, and bounce is an event on the person who got it. You see if an email made someone act, and you can watch the session replay of what they did after they clicked.
 
-<OSButton variant="primary" asLink to="/docs/workflows/start-here">Get started</OSButton>
+<div className="not-prose max-w-xl !mx-0 my-6">
+  <PlatformInstall
+    schema={{ ...wizardInstallSchema, title: "Send your first email", supports: undefined }}
+    command="email"
+    hideSecondaryAction
+    className="!mb-0 !shadow-none"
+  />
+</div>
 
-## Where you can use it
+Your first 10,000 emails each month are free. See [pricing](/pricing).
 
-You build and launch workflows in the PostHog web app. MCP and the API are for scripting, reviewing, and automating that same work from outside the app.
+<OSButton variant="primary" asLink to="https://app.posthog.com/signup">Get started - free</OSButton>
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+## Three ways to use Workflows
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+<div className="not-prose grid grid-cols-1 @md:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex flex-col gap-2 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-orange" />
     <div>
-      <p className="m-0 font-bold text-primary">PostHog Web</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Build workflows in the drag-and-drop builder, design message templates, and manage channels.</p>
-      <a href="/docs/workflows/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build a workflow →</a>
+      <p className="m-0 font-bold text-primary">Your code</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Send transactional email, such as password resets and receipts, with one call from the PostHog SDK.</p>
+      <a href="#send-email-from-your-code" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Send from code →</a>
     </div>
   </div>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+  <div className="flex flex-col gap-2 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple" />
     <div>
-      <p className="m-0 font-bold text-primary">PostHog MCP</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Create, edit, test, and publish workflows – and read their stats and logs – from any MCP client.</p>
-      <a href="/docs/workflows/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use Workflows over PostHog MCP →</a>
+      <p className="m-0 font-bold text-primary">Your agent</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Ask Claude Code, Cursor, or Codex to build automations, move you off another provider, and report on results.</p>
+      <a href="#or-ask-your-agent" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the MCP →</a>
     </div>
   </div>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+  <div className="flex flex-col gap-2 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue" />
     <div>
-      <p className="m-0 font-bold text-primary">API</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Manage workflows and templates programmatically over the PostHog REST API.</p>
-      <a href="/docs/workflows/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See the API →</a>
+      <p className="m-0 font-bold text-primary">The PostHog app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Send broadcasts, plan them on a calendar, write emails, and build automations.</p>
+      <a href="#send-a-broadcast" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build in the app →</a>
     </div>
   </div>
 
 </div>
 
-## Where its data comes from
+## Send email from your code
 
-A workflow is only as good as what it can trigger on and who it can reach. Three things feed it: the events and person data already in your project, the channels you connect, and the templates and opt-out rules that decide what gets sent to whom.
+Send the subject and HTML with one call from the PostHog SDK on your server:
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+<MultiLanguage selector="tabs">
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconMegaphone className="size-6 shrink-0 text-red mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Channels</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Email, Slack, and any real-time destination in PostHog. Sends and opens come back as events.</p>
-      <a href="/docs/workflows/configure-channels" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Configure a channel →</a>
-    </div>
-  </div>
+```js file=Node.js
+import { PostHog } from "posthog-node"
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconPalette className="size-6 shrink-0 text-yellow mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Templates</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Reusable message templates in the content library, personalized with person properties.</p>
-      <a href="/docs/workflows/library" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Content library →</a>
-    </div>
-  </div>
+const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    enableLocalEvaluation: false,
+})
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconShieldLock className="size-6 shrink-0 text-green mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Opt-outs</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Message categories, per-recipient preferences, and a suppression list built from bounces.</p>
-      <a href="/docs/workflows/opt-outs" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage opt-outs →</a>
-    </div>
-  </div>
+await posthog.emails.send({
+    to: "ada@example.com",
+    templateKey: "welcome",
+    subject: "Welcome aboard",
+    html: "<p>Hi Ada, thanks for signing up.</p>",
+    distinctId: "user_123",
+})
+```
 
+```python file=Python
+import os
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
+)
+
+posthog.emails.send(
+    to="ada@example.com",
+    template_key="welcome",
+    subject="Welcome aboard",
+    html="<p>Hi Ada, thanks for signing up.</p>",
+    distinct_id="user_123",
+)
+```
+
+```go file=Go
+import (
+    "context"
+    "os"
+
+    "github.com/posthog/posthog-go/v2"
+)
+
+client, _ := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
+    Endpoint:  "<ph_client_api_host>",
+    SecretKey: os.Getenv("POSTHOG_PROJECT_SECRET_API_KEY"),
+})
+defer client.Close()
+
+client.Emails().Send(context.Background(), posthog.CodeEmail{
+    To:          "ada@example.com",
+    TemplateKey: "welcome",
+    Subject:     "Welcome aboard",
+    HTML:        "<p>Hi Ada, thanks for signing up.</p>",
+    DistinctID:  "user_123",
+})
+```
+
+```csharp file=.NET
+using PostHog;
+using PostHog.Emails;
+
+await using var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "<ph_project_token>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+    SecretKey = Environment.GetEnvironmentVariable("POSTHOG_PROJECT_SECRET_API_KEY"),
+});
+
+await posthog.Emails.SendAsync(new SendCodeEmailOptions
+{
+    To = "ada@example.com",
+    TemplateKey = "welcome",
+    Subject = "Welcome aboard",
+    Html = "<p>Hi Ada, thanks for signing up.</p>",
+    DistinctId = "user_123",
+});
+```
+
+```rust file=Rust
+use posthog::{ClientOptionsBuilder, CodeEmail};
+
+let options = ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
+    .secret_key(std::env::var("POSTHOG_PROJECT_SECRET_API_KEY")?)
+    .build()?;
+let posthog = posthog::client(options).await;
+
+posthog
+    .emails()
+    .send(
+        CodeEmail::new("ada@example.com", "welcome", "Welcome aboard")
+            .html("<p>Hi Ada, thanks for signing up.</p>")
+            .distinct_id("user_123"),
+    )
+    .await?;
+```
+
+```ruby file=Ruby
+require 'posthog'
+
+posthog = PostHog::Client.new({
+  api_key: '<ph_project_token>',
+  host: '<ph_client_api_host>',
+  secret_key: ENV.fetch('POSTHOG_PROJECT_SECRET_API_KEY')
+})
+
+posthog.emails.send(
+  to: 'ada@example.com',
+  template_key: 'welcome',
+  subject: 'Welcome aboard',
+  html: '<p>Hi Ada, thanks for signing up.</p>',
+  distinct_id: 'user_123'
+)
+```
+
+```elixir file=Elixir
+# config/runtime.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>",
+  secret_key: System.fetch_env!("POSTHOG_PROJECT_SECRET_API_KEY")
+
+# Your app
+PostHog.Emails.send(
+  to: "ada@example.com",
+  template_key: "welcome",
+  subject: "Welcome aboard",
+  html: "<p>Hi Ada, thanks for signing up.</p>",
+  distinct_id: "user_123"
+)
+```
+
+```php file=PHP
+use PostHog\Client;
+use PostHog\PostHog;
+
+PostHog::init(client: new Client(
+    '<ph_project_token>',
+    ['host' => '<ph_client_api_host>'],
+    secretKey: getenv('POSTHOG_PROJECT_SECRET_API_KEY') ?: null,
+));
+
+PostHog::emails()->send([
+    'to' => 'ada@example.com',
+    'template_key' => 'welcome',
+    'subject' => 'Welcome aboard',
+    'html' => '<p>Hi Ada, thanks for signing up.</p>',
+    'distinct_id' => 'user_123',
+]);
+```
+
+</MultiLanguage>
+
+The distinct ID links the email to the person, so its events land next to everything else they did. To let anyone change the email without a deploy, create it in PostHog and send it by [template ID](/docs/workflows/transactional/templates) instead. You can also send over the [API](/docs/workflows/installation/api), or render your [React Email](/docs/workflows/transactional/from-code#react-email) components. To set up your key, see [install the SDK](/docs/workflows/installation).
+
+## Or ask your agent
+
+The [PostHog MCP](/docs/workflows/mcp) lets Claude Code, Cursor, Codex, and other agents build and test automations, and report how each one performs. For example:
+
+<CopyPrompt prompt="Build an onboarding automation that emails new signups who haven't created a dashboard after 2 days." />
+<CopyPrompt prompt="Which of our automations had the most unsubscribes last month, and why?" />
+<CopyPrompt prompt="Move my email from Resend to PostHog." />
+
+Your agent saves its changes as drafts. You review each draft and publish it.
+
+## Send a broadcast
+
+PostHog looks at what people do in your product and suggests who to email next. Pick an audience, and PostHog AI drafts the email. Then pick a day to send it. See [broadcasts](/docs/workflows/broadcasts).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_light_6f107e725f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_dark_9f93dbd97f.png"
+  alt="Suggested audiences for a new broadcast"
+  classes="rounded"
+/>
+
+## Plan sends on the calendar
+
+See your broadcasts and scheduled automations on one calendar. When a send would reach the same people too soon after another marketing email, PostHog warns you and suggests a better day. The spacing follows your [frequency cap](/docs/workflows/email/frequency-cap), or 2 days when you have none. See [scheduling and the calendar](/docs/workflows/broadcasts/scheduling).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_light_900a17d154.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pp_broadcasts_calendar_dark_d3910ae42d.png"
+  alt="The send calendar in PostHog"
+  classes="rounded"
+/>
+
+## Write emails
+
+Type `/` to add a block and `{{` to add a person property, then preview the email at desktop, tablet, and phone widths. See the [email editor](/docs/workflows/email-editor).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_editor_hero_light_ca4d960fd5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_editor_hero_dark_6013fa8f2a.png"
+  alt="The email editor in PostHog"
+  classes="rounded"
+/>
+
+## Build automations
+
+An automation starts when someone does something, then waits, branches, and sends email or push notifications. It can also send a Slack message to your team. See [automations](/docs/workflows/automations).
+
+With [self-driving](/docs/workflows/self-driving) turned on, PostHog watches how each step performs and suggests changes. Nothing changes until you approve it.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_dark_8fe8f4567b.png"
+  alt="An automation in the PostHog builder"
+  classes="rounded"
+/>
+
+## See how each send did
+
+Each automation and broadcast shows its sends, opens, clicks, bounces, and complaints, next to what people did in your product afterward. Each one is an [engagement event](/docs/workflows/email/engagement-events) on the person, so you can use it in insights and funnels like any other event. See [metrics](/docs/workflows/metrics).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_light_252909e556.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_overview_dark_bc23dd407a.png"
+  alt="The metrics for an automation in PostHog"
+  classes="rounded"
+/>
+
+## Deliverability
+
+- **No IP address to warm up.** Email goes out over shared Amazon SES IP addresses with a good reputation. See [deliverability](/docs/workflows/email/deliverability).
+- **Transactional email never waits.** Password resets and receipts go out at once, even when your daily allowance for other email is used up.
+- **Opt-out categories.** People can turn off your newsletter and still get their password reset. See [opt-outs](/docs/workflows/email/opt-outs).
+- **Automatic suppression list.** A hard bounce blocks all email to the address. A spam complaint blocks marketing email. No automation step can skip this check. See [suppression list](/docs/workflows/email/suppression).
+- **Frequency cap.** Set how many marketing messages one person can get in a window of days. See [frequency cap](/docs/workflows/email/frequency-cap).
+
+## Move from another provider
+
+Connect the PostHog MCP, then ask your agent to move you over. It imports your suppressions, unsubscribes, and templates. Imported automations are drafts, so nothing sends until you turn them on. See [move from another provider](/docs/workflows/migrate).
+
+<div className="not-prose max-w-md !mx-0 my-6">
+  <MCPInstallCTA showDesktopLink={false} className="w-full" />
 </div>
+
+Then pick your provider and ask your agent:
+
+<SwitchPrompt />

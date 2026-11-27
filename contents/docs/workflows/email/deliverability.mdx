@@ -1,0 +1,71 @@
+---
+title: Deliverability
+sidebar: Docs
+showTitle: true
+---
+
+Landing in the inbox comes down to three things: a domain that's set up correctly, a clean sending record, and email people want. PostHog runs the sending infrastructure. You bring the domain and the list.
+
+## What PostHog handles
+
+- **No IP to warm up.** Email goes out through Amazon SES on shared IP addresses that already carry steady traffic.
+- **Transactional email goes first.** It never waits for your allowance, and goes out ahead of marketing email.
+- **Marketing grows with your record.** Your [sending allowance](/docs/workflows/broadcasts/large-audiences#your-sending-allowance) starts small and grows as you send clean email.
+
+All projects in a region share one Amazon SES account, so one bad list can hurt everyone. That's why PostHog judges and limits each project on its own record.
+
+## Watch your sending health
+
+The **Reputation** tab, under **Messaging**, shows your bounce and spam complaint rates over the last 30 days: for the project, by mailbox provider, and by workflow. See [sending health](/docs/workflows/metrics#sending-health).
+
+| Rate | Keep it under |
+| --- | --- |
+| Bounce rate (hard bounces) | 2% |
+| Spam complaint rate | 0.1% |
+
+A few sends don't decide a rate. The bounce rate counts from 200 emails, and the complaint rate from 1,000 emails or 3 complaints.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/reputation_light_fef7099e90.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/reputation_dark_a3a33576f5.png"
+  alt="Sending health by mailbox provider and by workflow on the Reputation tab"
+  classes="rounded"
+/>
+
+## When something goes wrong
+
+- **Your tier drops.** If your rates over the last 7 days are over a line, your project drops one tier, at most once a week. It climbs back the same way it [climbed the first time](/docs/workflows/broadcasts/large-audiences#your-sending-allowance).
+- **One workflow can pause.** PostHog can pause email from one workflow whose rates spike. Sends from it return `sending_paused`.
+- **Sending can be suspended.** PostHog or Amazon can stop all email from a project. Sends return `sending_suspended`, and a banner asks you to contact support. When sending starts again, the project starts again at tier 0.
+
+PostHog also puts hard-bounced addresses and spam complaints on your [suppression list](/docs/workflows/email/suppression), so you don't email them again.
+
+## Keep your rates low
+
+- **Send only to people who asked:** signups, customers, and opt-ins. Never a bought or scraped list.
+- **Leave the suppression list alone.** Retrying a bounced address only bounces again.
+- **Make unsubscribing easy.** Add an [unsubscribe link](/docs/workflows/email/unsubscribes) to every marketing email. Someone who can't find it clicks "Report spam" instead.
+- **Use a sender people know.** The same name and from address every time.
+- **Write a subject that matches the email.** No all caps, and no "RE:" on emails that aren't replies.
+- **Send steadily.** A weekly email to active people builds your record. A blast to a list that hasn't heard from you in months damages it.
+- **Drop people who never engage.** Send to a [cohort](/docs/data/cohorts) of active people, not everyone.
+
+Before a big send, send a test to your own address and to a personal Gmail or Outlook account. If it lands in spam for you, it will for them. Check **Reputation** the next day, because complaints arrive hours later.
+
+## Keep marketing away from transactional
+
+1. **Pick a transactional [category](/docs/workflows/email/opt-outs#marketing-or-transactional)** for emails people need. They go out first and never wait.
+2. **Use a subdomain per stream,** such as `news.example.com` for marketing and `account.example.com` for transactional. A complaint spike on marketing then stays on the marketing subdomain.
+3. **Use a project per stream** for full separation. Each project has its own tier, allowance, and suspension.
+
+## Questions
+
+**Can I get a dedicated IP?** No. A dedicated IP only builds a reputation with large, regular volume, and [Amazon recommends shared IPs](https://docs.aws.amazon.com/ses/latest/dg/dedicated-ip.html) for everyone else.
+
+**Can I use my own SMTP server or email provider?** No. You bring the domain, and PostHog sends through Amazon SES.
+
+**Can I get a higher allowance sooner?** If the **Sending allowance** card on the **Reputation** tab shows **Request a higher allowance**, click it. It opens a support request with your sending record filled in.
+
+**Does this apply to push, SMS, or webhooks?** No. Only email has a sending reputation and allowance.
+
+**Moving from another provider?** See [move from another provider](/docs/workflows/migrate).

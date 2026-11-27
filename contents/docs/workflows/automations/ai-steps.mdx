@@ -1,0 +1,150 @@
+---
+title: AI steps
+sidebar: Docs
+showTitle: true
+---
+
+AI steps let an automation look at something and decide, such as what a support message is about, or whether a new signup struggled. The automation waits for the answer, then continues with it. Add them from the **AI** section of the step list.
+
+| Step | What it does |
+| --- | --- |
+| **Create AI task** | Starts an AI agent with your instructions, repositories, and connectors, then continues with its result. Beta. |
+| **Replay Vision** | Watches the person's session recording and answers a question about it. |
+| **Classify with AI** | Picks one category for some text, such as a ticket, from 2 to 16 categories that you define. It saves `category` and `confidence` as variables. Rolling out. |
+| **Run scout** | Starts a [scout](/docs/self-driving/scouts) run, with an optional note about what triggered it. The scout files what it finds to your inbox. |
+
+## AI tasks
+
+The **Create AI task** step starts an agent with instructions that you write. The agent can read your PostHog data, work in your GitHub repositories, and call your tools. The automation waits up to about 3 hours for the agent to finish, then continues with what it returned. Each task also shows in [Tasks](/docs/tasks), where you can follow the agent's work.
+
+### Set it up
+
+Write the **Instructions**. Insert values from the trigger with braces, such as `Read ticket {event.properties.ticket_id} and decide which team should handle it.` Then pick what the agent can use. All of these are optional:
+
+| Field | What it does |
+| --- | --- |
+| **Task title** | The name in the task list. When empty, PostHog names the task from the instructions. |
+| **Model** | The model and reasoning effort. When empty, PostHog uses the default model. |
+| **Repositories** | GitHub repositories that the agent can work in, as `org/repo`. Up to 20. |
+| **Connectors** | MCP servers that the agent can call. Only servers shared with everyone in the project show. |
+| **Skills** | Skills from your project's skills store. |
+| **PostHog access** | **Read only** is the default. **Full access** lets the agent change things, such as person properties. |
+| **Maximum parallel tasks** | New runs skip the step while this many tasks from this automation are still running. The default is 5. |
+| **Reply in the Slack thread** | On a **Slack message posted** trigger, the agent replies in the thread that started the run, and replies in that thread go to the agent. On by default. |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_light_30a1e9f14e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_dark_960b5727c9.png"
+  alt="An AI task step, with its instructions and the fields under Agent returns"
+  classes="rounded"
+/>
+
+### Get answers back
+
+Ask the agent for specific fields, so later steps can use them:
+
+1. On the step, open **Agent returns**, and click **Add field**.
+2. Name the field, such as `verdict`, and pick its type: **Text**, **Number**, **True or false**, or **JSON**.
+3. Under **What the agent puts here**, describe the value, such as "`bug`, `question`, or `feature_request`".
+
+PostHog gives the agent each field's name, type, and description, and saves the answer as a variable. Each field is an output variable with the result path `output.<name>`. Later steps use it as `{variables.verdict}`, or `{{ variables.verdict }}` in an email. For example, a **Conditional branch** can post bugs to Slack and answer questions by email. To also save the agent's last message or its pull requests, click **Final message** or **PR links**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_branch_light_21fbedf143.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_ai_task_branch_dark_46b08fb1d4.png"
+  alt="A branch on the output of an AI task"
+  classes="rounded"
+/>
+
+You can ask for up to 20 fields. Each text field holds up to 1,500 characters, and the fields and the last message share about 4 KB. If the agent doesn't fill a field, the step still finishes, the variable stays empty, and the run's log shows a warning.
+
+The step's full result holds:
+
+| Result path | What it holds |
+| --- | --- |
+| `status` | `completed`, `failed`, or `cancelled` |
+| `output.<name>` | The fields you asked for |
+| `final_message` | The agent's last message |
+| `pr_urls` | Pull requests that the agent opened |
+| `error_message` | Why the task failed |
+
+### When it fails
+
+If the task fails, is canceled, or runs out of time, the step fails. The step's **Error handling** setting decides what happens next. With **Continue to next step**, the fields you asked for stay empty, so branch on whether a field is set.
+
+### Limits
+
+Each automation can create 100 tasks in a rolling 24 hours, and each project 500. Change the limits in **Settings** > **Workflows** > **AI task limits**, up to 500 per automation and 2,500 per project. Set a limit to zero to pause new tasks. When a limit blocks a task, the step fails with the reason.
+
+## Replay Vision
+
+The **Replay Vision** step has [Replay Vision](/docs/replay-vision) watch the session recording behind the trigger event. Under **What should Replay Vision do?**, pick what you want back:
+
+| Option | What you get back |
+| --- | --- |
+| **Ask a question** | A yes or no `verdict`, such as for "Did they get stuck setting up?" |
+| **Categorize** | The `tags` from your categories that fit the session |
+| **Score** | A `score` on a scale that you set, such as 1 to 5 |
+| **Summarize** | A `title`, a `summary`, and `chapters` |
+| **Use a saved scanner** | The answer of a [scanner](/docs/replay-vision/creating-scanners) that you already have |
+
+Each answer also has `reasoning` (except a summary) and `confidence`. The question is fixed text, so it can't include `{event...}` or `{person...}` values. See [scanner prompts](/docs/replay-vision/scanner-prompts) for how to write one.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_replay_vision_light_d53ca60af5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_replay_vision_dark_08c1fc2fa6.png"
+  alt="A Replay Vision step in an automation"
+  classes="rounded"
+/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_dark_c31893e45c.png"
+  alt="An automation that scores a signup's first session with Replay Vision, then branches on the score"
+  classes="rounded"
+/>
+
+The step has two more settings:
+
+- **Session ID:** the recording to watch. The default is the trigger event's `$session_id`.
+- **Wait for the session to end:** on by default. Replay Vision waits until the session is quiet for 35 minutes, then watches all of it. Turn it off when the trigger event comes after the session ends.
+
+The automation waits up to 8 hours on the step for the answer.
+
+### Use the answer
+
+The step's result has `state`, `output`, and `warnings`. Save the parts you need with **Output variables**, such as `output.score` into a `friction_score` variable. Then a **Conditional branch** can send scores of 2 or lower to Slack.
+
+When there's no answer, the run still continues to the next step. `state` says why, and `warnings` explains it:
+
+| `state` | What happened |
+| --- | --- |
+| `succeeded` | `output` holds the answer. |
+| `skipped` | A limit stopped the scan, such as the daily scan limit or your Replay Vision credits. |
+| `ineligible` | The session can't be scanned, such as when it has no recording or is too short. |
+| `failed` | The scan failed. |
+| `lost` | The scan ran out of time. |
+
+### Requirements and limits
+
+- The project records sessions with [Session Replay](/docs/session-replay), and the trigger event has a `$session_id`.
+- Your organization allows AI data processing.
+- The automation is in the project's main environment.
+- The automation's owner can view session recordings. The step scans as the owner.
+
+Each scan uses [Replay Vision credits](/docs/replay-vision/quota-and-limits). Each automation can request 100 scans in a rolling 24 hours, and each project 500. Change the limits in **Settings** > **Workflows** > **Replay Vision scan limits**, up to 500 per automation and 2,500 per project.
+
+Three templates start with a Replay Vision step: **Onboarding friction alerts**, **Support tickets with session context**, and **Negative survey feedback with session context**. See [templates](/docs/workflows/automations/templates).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_templates_1039fd7269.png"
+  alt="The three Replay Vision automation templates"
+  classes="rounded"
+/>
+
+## Tips
+
+- **Ask one clear question.** "Did they upload a file?" works better than "How did onboarding go?"
+- **Say what counts as proof.** "Answer yes only if an error message shows on screen" works better than "Did they hit an error?"
+- **Branch on the answer.** An AI step is most useful when the next step depends on it.
+- **Plan for no answer.** Every AI step can fail or come back empty, so give that path somewhere to go.

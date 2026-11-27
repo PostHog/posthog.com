@@ -1,0 +1,145 @@
+---
+title: Sensitive data and tracking
+sidebar: Docs
+showTitle: true
+---
+
+Sign-in codes, reset links, and magic links are secrets. Mark those emails as sensitive, and PostHog handles them more carefully.
+
+## Protect sensitive data
+
+For a sensitive email, PostHog:
+
+- **Keeps links direct.** Click tracking is off by default, so a token never goes through a redirect. If you turn click tracking on, PostHog records only the site address of a clicked link, not the full link.
+- **Keeps no copy.** It doesn't store the subject or body. The Log says so instead of showing the email.
+- **Leaves the subject off events.** Engagement events and delivery webhooks don't carry it.
+
+PostHog still tracks deliveries, opens, bounces, and the status.
+
+**Templates:** turn on **Protect sensitive data** when you create the email, or later on its **API** tab. Under it, **Track link clicks** turns click tracking on for links that carry no secrets.
+
+**Emails your code writes:** send `sensitive`. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when there isn't one. Send `"sensitive": false` for an email with no secrets, such as an order confirmation, so its clicks are tracked. A send can't set `false` when the template with the same key is sensitive.
+
+## Tracking
+
+[Emails your code writes](/docs/workflows/transactional/from-code) take `tracking`:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | The template's setting. Without one, off when sensitive and on otherwise. | On |
+| `true` | On | On | On |
+| `false` | Off | Off | Off |
+| An object with `opens`, `clicks`, and `engagement` | Your choice | Your choice | Your choice |
+
+A kind that the object leaves out keeps its default.
+
+For example, to send an email with no secrets and track its clicks:
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+await posthog.emails.send({
+    to: "ada@example.com",
+    templateKey: "order-shipped",
+    subject: "Your order shipped",
+    html,
+    sensitive: false,
+    tracking: { clicks: true },
+})
+```
+
+```python file=Python
+posthog.emails.send(
+    to="ada@example.com",
+    template_key="order-shipped",
+    subject="Your order shipped",
+    html=html,
+    sensitive=False,
+    tracking={"clicks": True},
+)
+```
+
+```ruby file=Ruby
+$posthog.emails.send(
+  to: 'ada@example.com',
+  template_key: 'order-shipped',
+  subject: 'Your order shipped',
+  html: html,
+  sensitive: false,
+  tracking: { clicks: true }
+)
+```
+
+```rust file=Rust
+posthog
+    .emails()
+    .send(
+        CodeEmail::new("ada@example.com", "order-shipped", "Your order shipped")
+            .html(html)
+            .sensitive(false)
+            .tracking(EmailTrackingOptions::new().clicks(true)),
+    )
+    .await?;
+```
+
+```php file=PHP
+PostHog::emails()->send([
+    'to' => 'ada@example.com',
+    'template_key' => 'order-shipped',
+    'subject' => 'Your order shipped',
+    'html' => $html,
+    'sensitive' => false,
+    'tracking' => ['clicks' => true],
+]);
+```
+
+```go file=Go
+_, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:          "ada@example.com",
+    TemplateKey: "order-shipped",
+    Subject:     "Your order shipped",
+    HTML:        html,
+    Sensitive:   posthog.Ptr(false),
+    Tracking:    posthog.EmailTrackingWith(posthog.EmailTrackingOptions{Clicks: posthog.Ptr(true)}),
+})
+```
+
+```csharp file=.NET
+await emails.SendAsync(new SendCodeEmailOptions
+{
+    To = "ada@example.com",
+    TemplateKey = "order-shipped",
+    Subject = "Your order shipped",
+    Html = html,
+    Sensitive = false,
+    Tracking = new EmailTracking { Clicks = true },
+});
+```
+
+```elixir file=Elixir
+PostHog.Emails.send(
+  to: "ada@example.com",
+  template_key: "order-shipped",
+  subject: "Your order shipped",
+  html: html,
+  sensitive: false,
+  tracking: %{clicks: true}
+)
+```
+
+```bash file=REST
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"template_key": "order-shipped", "to": "ada@example.com", "subject": "Your order shipped", "html": "<p>Your order shipped.</p>", "sensitive": false, "tracking": {"clicks": true}}'
+```
+
+</MultiLanguage>
+
+- **A sensitive email with safe links:** send `"tracking": {"clicks": true}` to count clicks and keep the other protections.
+- **One link untracked:** add `data-ph-no-track` to its `<a>` tag. Use this for app deep links, which break when rewritten.
+- **Clicks need opens:** PostHog refuses `{"opens": false, "clicks": true}`.
+
+A template send uses the template's own settings, so it takes neither `sensitive` nor `tracking`.
+
+Opens and clicks only become events when [engagement events](/docs/workflows/email/engagement-events) are on for your project. If they're off for the project, `tracking` can't turn them on.

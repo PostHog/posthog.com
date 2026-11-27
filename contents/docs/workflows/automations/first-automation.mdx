@@ -1,0 +1,82 @@
+---
+title: Build your first automation
+sidebar: Docs
+showTitle: true
+---
+
+In about 10 minutes, you build an onboarding automation. It welcomes new signups, waits up to 2 days for them to upload their first file, and nudges the people who don't.
+
+## Before you start
+
+- **Set up your domain**, or use the [test sender](/docs/workflows/email/test-sender) for now. See [set up your domain](/docs/workflows/domain).
+- **Capture events** for what people do, such as `signed_up` and `uploaded_file`, and identify people with their email. See [installation](/docs/workflows/installation#capture-events-from-your-app).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_canvas_light_f737eac151.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_canvas_dark_59948de27c.png"
+  alt="An automation on the canvas, from its trigger to its last step"
+  classes="rounded"
+/>
+
+## 1. Pick the trigger
+
+Open [Workflows](https://app.posthog.com/workflows), click **New workflow**, and pick **Blank workflow**. Click the trigger step, set **Trigger type** to **Event**, and add the `signed_up` event.
+
+Under **Frequency**, pick **One time per period**, then change the period to **ever**. Each person gets the welcome series only once.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_trigger_event_light_023b4d9242.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_trigger_event_dark_06249cf253.png"
+  alt="An event trigger with its filters"
+  classes="rounded"
+/>
+
+## 2. Set the goal
+
+On the same trigger step, go to **Conversion goal**. Under **Detect conversion from events**, add `uploaded_file`. PostHog now counts how many people convert.
+
+To take people out of the automation when they convert, set **Exit condition** to **Exit when conversion goal is met**.
+
+## 3. Send the welcome email
+
+Click **+** below the trigger, and pick **Email**. Pick a sender, write the subject, and write the email in the [email editor](/docs/workflows/email-editor). To greet people by name, use `{{ person.properties.first_name | default: 'there' }}`.
+
+## 4. Wait for the first upload
+
+Add a **Wait until** step after the email. Under **Events to wait for**, add `uploaded_file`. Set **Max time to wait** to 2 days.
+
+The step has two paths: one for people who upload, and one for people who reach the time limit.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_light_fda13d917d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_wait_until_dark_57b3559996.png"
+  alt="A Wait until step with its condition and time limit"
+  classes="rounded"
+/>
+
+## 5. Nudge the people who didn't upload
+
+On the time-limit path, add a second **Email** with a short tip about how to upload a file. Leave the other path empty, so it goes to the exit.
+
+## 6. Test it
+
+Open the **Test** tab, and click **Start testing**. Pick a sample person, click **Run test**, then **Go to next step** to move through the automation. By default, nothing sends: PostHog logs what each step would do.
+
+To see an email in a real inbox, select the email step, turn on **Make real HTTP requests**, and enter your own address. PostHog asks you to confirm before it sends.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_test_light_9207c0967a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/automation_test_dark_f9ba03e978.png"
+  alt="The Test tab running one step of an automation"
+  classes="rounded"
+/>
+
+## 7. Turn it on
+
+Save the automation, then click **Enable**. Nothing sends until you enable it. After that, everyone who signs up goes through it.
+
+## What's next
+
+- See how it performs on the **Overview** and **Metrics** tabs. See [metrics](/docs/workflows/metrics#automations).
+- Let PostHog suggest improvements with [self-driving](/docs/workflows/self-driving).
+- Learn every option for [triggers](/docs/workflows/automations/triggers) and [steps](/docs/workflows/automations/steps).

@@ -1,0 +1,72 @@
+---
+title: Audiences
+sidebar: Docs
+showTitle: true
+---
+
+A broadcast goes to people in your PostHog project, so you can target anything you track about them: their plan, their signup date, what they did, or a cohort they're in.
+
+## Filter people
+
+On the **Recipients** step, click **Add condition** and filter by:
+
+- **[Person properties](/docs/data/persons):** such as `plan` equals `pro`.
+- **[Cohorts](/docs/data/cohorts):** such as people who used a feature in the last 30 days.
+- **`distinct_id`:** to target specific people by their ID.
+
+A person must match every condition. With no conditions, the broadcast goes to everyone in the project.
+
+**This broadcast will reach** shows about how many people match. Click **View list** to see them. The list is checked again at send time, so people who match by then get it too.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_recipients_light_92b51f54e5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_recipients_dark_9e89e406d6.png"
+  alt="The Recipients step with a filter and an audience estimate"
+  classes="rounded"
+/>
+
+## Upload a list
+
+Click **Upload a list**, drop in a CSV, give the list a name, and click **Add to audience**. PostHog saves the list as a static cohort, so you can reuse it in other broadcasts.
+
+- The file needs an `email` column. To match people by the ID your app uses, add a `distinct_id` column.
+- Every other column is saved as a person property, with the column name as the property name. Use it in the email, such as `{{ person.properties.plan }}` for a `plan` column.
+- People who aren't in PostHog yet are created. A blank cell leaves the existing value as it is.
+- Each row is sent as one event, so it counts toward your event usage.
+
+If you also have filters, a person must be on the list and match the filters.
+
+## Pick a message category
+
+Under **Message category**, pick the kind of email this is, such as a newsletter. People who unsubscribed from that category don't get the broadcast. A transactional category goes to everyone, including people who unsubscribed, so use it only for email people need. See [opt-outs](/docs/workflows/email/opt-outs).
+
+## Let PostHog suggest one
+
+The **Broadcasts** tab can show **Audiences you could send to**: up to three audiences that AI suggests from your events, such as people who signed up but never uploaded a file. Each card shows about how many people have an email address, why the audience is worth a send, and its rule.
+
+Click **Draft the email**. PostHog saves the audience as a static cohort, opens a new broadcast with it, and AI writes the first draft in the style of your last broadcast or a saved template. You check it before it sends.
+
+Suggestions are in beta. They need your organization to approve AI data processing, and they're hidden from people who can't see email addresses. To send one, you need a [verified sender on your own domain](/docs/workflows/domain).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_light_6f107e725f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_audience_suggestions_dark_9f93dbd97f.png"
+  alt="Suggested audiences on the Broadcasts tab"
+  classes="rounded"
+/>
+
+## Who doesn't get it
+
+PostHog skips some people in the audience when it sends:
+
+- **Shared addresses:** people who share an email address get one email.
+- **No email address:** people without a usable address are skipped.
+- **Opted out:** people who unsubscribed from the broadcast's message category, or from all marketing email. See [opt-outs](/docs/workflows/email/opt-outs).
+- **Suppressed:** addresses that bounced or marked your email as spam. See the [suppression list](/docs/workflows/email/suppression).
+- **Over the frequency cap:** people who already got their share of marketing email. If your cap has a hold time, they wait up to that long, then they're skipped. To send to them anyway, turn on **Send even if people reached your frequency cap** on the **Schedule** step. See the [frequency cap](/docs/workflows/email/frequency-cap).
+
+After the send, the broadcast counts each group, so you can see why someone didn't get it.
+
+## When the audience is too big
+
+Each project has a [sending allowance](/docs/workflows/broadcasts/large-audiences) that limits how many people one email broadcast can reach. When the audience is bigger, the **Recipients** step tells you. Add filters to narrow it, or limit the sending rate.

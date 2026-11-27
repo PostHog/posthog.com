@@ -35,11 +35,11 @@ In Zendesk, triage was mostly manual – customers had to pick a product area an
 
 It was also a lot of upkeep for me and for engineering teams. Every time a team was created, renamed, or split, we had to update the sidebar topics and the Zendesk triggers that routed tickets.
 
-Moving to PostHog Support, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket the workflow:
+Moving to PostHog Support, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/automations/ai-steps). It helps us do all of our triage and categorization in one workflow. On every new ticket the workflow:
 
 1. Fetches the ticket.
 2. Checks for spam and prompt injection. It auto-resolves spam and sends anything suspicious to a person.
-3. Runs a read-only [PostHog AI task](/docs/workflows/ai-tasks) that:
+3. Runs a read-only [PostHog AI task](/docs/workflows/automations/ai-steps) that:
     1. Works out a team tag and an SME tag in a format I've defined.
     2. Works out the ticket's priority, based on the examples in our handbook.
 4. Checks the response from the AI step is in the format I expect, then applies the team and SME tags, and sets the priority.
@@ -220,7 +220,7 @@ A few habits make this work:
 - Plan for edge cases. Data won't always be there when a workflow runs, so give every workflow a fallback. When ours can't set an SLA, it alerts `#alerts-support` instead of failing silently.
 - Test changes before you trust them. For bigger changes, I run a shadow copy of the workflow alongside the live one and compare the results before switching over.
 - AI tasks are attributed to the workflow's creator, so their cost shows up under that person, not the workflow.
-- AI tasks have limits. By default, each workflow can create 100 AI tasks in a rolling 24 hours, and each project 500, but you can [raise these limits yourself](/docs/workflows/ai-tasks#limits).
+- AI tasks have limits. By default, each workflow can create 100 AI tasks in a rolling 24 hours, and each project 500, but you can [raise these limits yourself](/docs/workflows/automations/ai-steps#limits).
 - Not everything a workflow can do shows up in the UI. For example, in the template that clears the SLA deadline when a ticket goes to on hold, pending, or resolved, you can't see all of the trigger conditions in the editor. I'd recommend getting your agent to build you a draft.
 
 ## Set up these workflows yourself

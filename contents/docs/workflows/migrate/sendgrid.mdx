@@ -1,0 +1,47 @@
+---
+title: Move from SendGrid
+sidebar: Docs
+showTitle: true
+---
+
+import { CopyPrompt } from '../_snippets/switch-prompt'
+
+PostHog imports your SendGrid suppressions, unsubscribe groups, templates, and Single Sends in one background import.
+
+> The SendGrid import is rolling out. If SendGrid isn't in the list, your project doesn't have it yet.
+
+## What moves
+
+| From SendGrid | In PostHog |
+| --- | --- |
+| Bounces and invalid addresses | [Suppression list](/docs/workflows/email/suppression). Blocks all email. |
+| Spam reports | Suppression list. Blocks marketing email. SendGrid blocks all email to them. |
+| Global unsubscribes | Opted out of all marketing email |
+| Unsubscribe groups, and who left each | Marketing [categories](/docs/workflows/email/opt-outs) and opt-outs |
+| Dynamic and legacy templates, and Design Library designs | Templates. Only the active version imports. |
+| Single Sends | Templates. Nothing sends, and anything scheduled stays scheduled in SendGrid. |
+| Verified senders, authenticated domains, and contact lists | A list, so you know what to set up |
+
+SendGrid's API only shares stats for automations, so rebuild them as [automations](/docs/workflows/automations). Blocks, webhooks, API keys, stats, send history, and inactive template versions stay in SendGrid.
+
+## Run the import
+
+1. Create a **restricted** API key in [SendGrid](https://app.sendgrid.com/settings/api_keys) with read access to what you import: suppressions, unsubscribe groups, templates, the Design Library, marketing, and sender authentication. Each step in PostHog lists the scopes it needs. PostHog checks the key before it starts, and names any scope a selected step is missing. It deletes the key when the import ends.
+2. In [Workflows](https://app.posthog.com/workflows/opt-outs), go to **Messaging** > **Opt-outs** and click **Import from another tool**.
+3. Pick **SendGrid**, paste the key, pick what to import, and click **Start import**.
+
+<!-- shot: sendgrid-import: the SendGrid import, with the key field and the list of steps and their scopes -->
+
+A key belongs to one account, so import each subuser with its own key.
+
+Or ask your agent:
+
+<CopyPrompt prompt="Move our email from SendGrid to PostHog." />
+
+## Switch your sending
+
+- **Global unsubscribes:** SendGrid stops transactional email to these people. PostHog doesn't, so receipts and password resets still reach them.
+- **Code:** send each template by its key, which is its SendGrid template ID. Pass your data as variables.
+- **Automations:** rebuild each one with the imported templates, and turn it off in SendGrid when its PostHog automation goes live.
+
+See [switch over safely](/docs/workflows/migrate#switch-over-safely) for the full checklist.

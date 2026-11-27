@@ -1,0 +1,48 @@
+---
+title: Test, send, and follow up
+sidebar: Docs
+showTitle: true
+---
+
+Sent email can't be unsent, so check it in a real inbox first.
+
+## Send a test
+
+On the **Review** step, click **Send test email** and enter your address. You can also send one from the preview on the **Content** step. Nobody in the audience gets a test.
+
+The test fills in variables with the values of the person in the preview. Read it in your inbox, on desktop and on your phone, and click its links.
+
+For a push broadcast, click **Send test notification**. The test goes to the devices of the distinct ID you enter. See [push broadcasts](/docs/workflows/broadcasts/push).
+
+<!-- shot: broadcast-review-test: the Review step, with the "Send yourself a test first" card at the top and the review rows below -->
+
+## Launch
+
+On the **Review** step, click **Send now**, or **Schedule broadcast** for a later or recurring send. If something needs fixing, such as an unverified sender or an audience over your [sending allowance](/docs/workflows/broadcasts/large-audiences), PostHog tells you what to fix and doesn't send.
+
+## After you send
+
+The broadcast's **Overview** shows who was in the audience and why some people didn't get it. Then it shows sends, deliveries, opens, clicks, and conversions. **Runs** lists each send of a recurring broadcast. See [metrics](/docs/workflows/metrics#broadcasts).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_performance_light_4c1822200a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcast_performance_dark_f67752af13.png"
+  alt="A broadcast's latest send, with its audience, delivery, engagement, and top clicked links"
+  classes="rounded"
+/>
+
+## Send it again
+
+A sent broadcast can't change. Click **Actions**, then **Send again as a new broadcast**. PostHog makes a copy with the same audience and email, which you can change before you send it.
+
+To change a broadcast that is scheduled and hasn't sent, use **Stop and edit**. See [change or stop a scheduled broadcast](/docs/workflows/broadcasts/scheduling#change-or-stop-a-scheduled-broadcast).
+
+## Turn it into an automation
+
+To add delays, branches, or a follow-up email, click **Actions**, then **Open in workflow editor**. You can also click **Continue in the workflow editor** on the **Review** step. After you add steps, the broadcast shows read-only on **Broadcasts**, and you keep editing it as an [automation](/docs/workflows/automations).
+
+## Archive it
+
+To archive a broadcast, click **Archive** in its **Actions** menu, or in its menu in the list. Any schedule stops sending. You can't archive a broadcast while it's sending.
+
+An archived broadcast can go back to a draft with **Restore as draft**, or you can **Delete** it for good.

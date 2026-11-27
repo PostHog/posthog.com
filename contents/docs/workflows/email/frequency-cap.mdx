@@ -1,0 +1,50 @@
+---
+title: Frequency cap
+sidebar: Docs
+showTitle: true
+---
+
+The frequency cap stops people getting too much marketing from you, such as no more than 2 marketing messages in 7 days. It counts every broadcast and automation together.
+
+## Set the cap
+
+You need to be a project admin. In [Workflows](https://app.posthog.com/workflows/settings), go to **Messaging** > **Settings** > **Frequency cap**, fill in these fields, and click **Save**:
+
+- **Messages per person:** the most marketing messages one person gets, from 1 to 1,000.
+- **Within this many days:** the window, from 1 to 30 days.
+- **Hold capped messages for up to (hours):** optional. How long a message over the cap waits for a free slot, from 1 to 168 hours.
+
+To turn the cap off, clear the first two fields.
+
+<!-- shot: frequency-cap-settings: the Frequency cap section under Messaging > Settings, with 2 messages per person within 7 days and a 24-hour hold -->
+
+## What counts
+
+- **Marketing email, SMS, and push** count, from every broadcast and automation.
+- **Transactional messages** never count, and are never capped.
+- **Skipped messages** don't count, such as one skipped for an opt-out or a suppressed address.
+- **Test sends** don't count.
+
+An automation run without a person, such as one triggered by an event with no person profile, isn't capped.
+
+## Skip it for one email
+
+Some emails need to arrive on time, such as a welcome email. Turn on **Skip the frequency cap** on the automation's email step, or **Send even if people reached your frequency cap** on a broadcast email. The email doesn't count toward the cap either. Opt-outs still apply.
+
+## Messages over the cap
+
+By default, PostHog skips a message over the cap, and doesn't send it later. The automation moves on to its next step, and the message shows as **Frequency capped** in its metrics.
+
+To keep these messages instead, set a hold time. A held message waits on its step, and sends when one of the person's earlier messages leaves the window. If no slot opens before the hold ends, PostHog skips it. Later steps wait until the held message sends or is skipped.
+
+A hold works best when it's close to the window. With a cap of 1 in 7 days and a 24-hour hold, a held message only sends if the person's last message was more than 6 days ago.
+
+## Frequency cap or trigger frequency
+
+| | Frequency cap | Trigger frequency |
+| --- | --- | --- |
+| **Covers** | Every broadcast and automation | One automation |
+| **Limits** | Marketing messages | How often one person enters |
+| **Transactional** | Not limited | Limited |
+
+To stop one automation running too often for the same person, use its trigger's [**Frequency**](/docs/workflows/automations/triggers#how-often-one-person-can-enter).

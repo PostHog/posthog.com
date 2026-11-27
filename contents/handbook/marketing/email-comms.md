@@ -57,7 +57,7 @@ All new broadcasts and automations should use these defaults:
 
 A good thing about using Workflows is that we can be very intentional about the goal we want that email to achieve. 
 
-Besides tracking open and click rates, having access to all of the PostHog data means we can track the thing that users do after they read your email. Workflows use [conversion goals](/docs/workflows/workflow-builder#conversion-goals) to measure it.
+Besides tracking open and click rates, having access to all of the PostHog data means we can track the thing that users do after they read your email. Workflows use [conversion goals](/docs/workflows/automations#conversion-goals) to measure it.
 
 Don’t treat it like a mandatory rule, but when creating a new email, it's helpful to ask yourself:
 
@@ -93,7 +93,7 @@ If you're sending the email and are happy to receive replies, feel free to set y
 
 A couple of changes that impact who we send our emails to.
 
-Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/workflows/sending-reputation) and our emails end up in spam.
+Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/workflows/email/deliverability) and our emails end up in spam.
 
 The way users interact with PostHog is also changing. Previously, we relied on a `user has logged in` property to check if they were active. Now, users don't need to login at all to interact with their PostHog data, if they use our MCP, for example.
 
@@ -110,12 +110,12 @@ If you want to notify a specific group of users about a breaking change, inciden
 - **Pick the right message category.** Every email needs the correct category so unsubscribes work. Never label a marketing email as transactional or `Service updates` to get around opt-outs.
 - **Add alt text to every image.** Some email clients block images, so never put important information only in an image.
 - **Do a test run of your workflow**: a test run pushes one made-up person through the workflow, one step at a time. This lets you know if it's working as you planned, and logs any errors you need to fix. Pro tip: ask PostHog AI to run it for you, and flag any edits needed. 
-- **Take care when you edit a live workflow.** Your changes also reach people who are already in the workflow. Read [editing a live workflow](/docs/workflows/editing-live-workflows) before you publish a change.
+- **Take care when you edit a live workflow.** Your changes also reach people who are already in the workflow. Read [editing a live workflow](/docs/workflows/automations/editing-live) before you publish a change.
 
 ## After you send
 
 - **Watch bounces and complaints.** Check them after every large send. If Workflows pauses a broadcast, find out why before you resume it. The cause is usually the audience.
-- **Measure the result.** Add an <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">annotation</PrivateLink> on the send date. About a week later, check the [engagement events](/docs/workflows/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
+- **Measure the result.** Add an <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">annotation</PrivateLink> on the send date. About a week later, check the [engagement events](/docs/workflows/email/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
 
 ## Linking to the PostHog app or PostHog AI
 

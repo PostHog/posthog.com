@@ -1,0 +1,638 @@
+---
+title: Examples
+sidebar: Docs
+showTitle: true
+---
+
+These examples cover the transactional emails that most products send. Each one gives the settings to use, how to build its idempotency key, and whether to pass a distinct ID. Then it shows the send.
+
+Each example assumes that you already set up the client from your [SDK page](/docs/workflows/installation), and [created the email](/docs/workflows/transactional/templates) with the variables that the example sends.
+
+## Sign-in code
+
+Send a one-time code when someone signs in without a password.
+
+| Setting | Value |
+| --- | --- |
+| Template variables | `code`, `expires_in_minutes` |
+| [Protect sensitive data](/docs/workflows/transactional/sensitive-data) | On, so PostHog keeps no copy of the code |
+| Distinct ID | The user's ID |
+| Idempotency key | `sign-in-code-{code_id}`, one key for each code that you issue |
+
+```liquid
+Your sign-in code is {{ variables.code }}. It expires in {{ variables.expires_in_minutes }} minutes.
+```
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+const { error } = await posthog.emails.send({
+    to: user.email,
+    templateId: "<template_id>",
+    templateData: { code: signInCode.code, expires_in_minutes: 10 },
+    distinctId: user.id,
+    idempotencyKey: `sign-in-code-${signInCode.id}`,
+})
+if (error) {
+    throw error
+}
+```
+
+```python file=Python
+posthog.emails.send(
+    to=user.email,
+    template_id="<template_id>",
+    template_data={"code": sign_in_code.code, "expires_in_minutes": 10},
+    distinct_id=str(user.id),
+    idempotency_key=f"sign-in-code-{sign_in_code.id}",
+)
+```
+
+```ruby file=Ruby
+$posthog.emails.send(
+  to: user.email,
+  template_id: '<template_id>',
+  template_data: { code: sign_in_code.code, expires_in_minutes: 10 },
+  distinct_id: user.id.to_s,
+  idempotency_key: "sign-in-code-#{sign_in_code.id}"
+)
+```
+
+```rust file=Rust
+posthog
+    .emails()
+    .send(
+        TemplateEmail::new(&user.email, "<template_id>")
+            .template_data(json!({ "code": sign_in_code.code, "expires_in_minutes": 10 }))
+            .distinct_id(&user.id)
+            .idempotency_key(format!("sign-in-code-{}", sign_in_code.id)),
+    )
+    .await?;
+```
+
+```php file=PHP
+PostHog::emails()->send([
+    'to' => $user->email,
+    'template_id' => '<template_id>',
+    'template_data' => ['code' => $signInCode->code, 'expires_in_minutes' => 10],
+    'distinct_id' => (string) $user->id,
+    'idempotency_key' => "sign-in-code-{$signInCode->id}",
+]);
+```
+
+```go file=Go
+_, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:             user.Email,
+    TemplateID:     "<template_id>",
+    TemplateData:   map[string]interface{}{"code": signInCode.Code, "expires_in_minutes": 10},
+    DistinctID:     user.ID,
+    IdempotencyKey: "sign-in-code-" + signInCode.ID,
+})
+if err != nil {
+    return err
+}
+```
+
+```csharp file=.NET
+await emails.SendAsync(new SendTemplateEmailOptions
+{
+    To = user.Email,
+    TemplateId = Guid.Parse("<template_id>"),
+    TemplateData = new Dictionary<string, object>
+    {
+        ["code"] = signInCode.Code,
+        ["expires_in_minutes"] = 10,
+    },
+    DistinctId = user.Id,
+    IdempotencyKey = $"sign-in-code-{signInCode.Id}",
+});
+```
+
+```elixir file=Elixir
+{:ok, _result} =
+  PostHog.Emails.send(
+    to: user.email,
+    template_id: "<template_id>",
+    template_data: %{code: sign_in_code.code, expires_in_minutes: 10},
+    distinct_id: to_string(user.id),
+    idempotency_key: "sign-in-code-#{sign_in_code.id}"
+  )
+```
+
+```bash file=REST
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: sign-in-code-8f14e45f" \
+  -d '{"template_id": "<template_id>", "to": "ada@example.com", "distinct_id": "user_123", "message_data": {"code": "482913", "expires_in_minutes": 10}}'
+```
+
+</MultiLanguage>
+
+When the person asks for a new code, issue a new code with a new ID. The new ID makes a new key, so PostHog sends a new email. A retry of the same code sends nothing new.
+
+## Email address check
+
+Send a link that confirms that a new user owns their email address.
+
+| Setting | Value |
+| --- | --- |
+| Template variables | `first_name`, `verify_link` |
+| Protect sensitive data | On, so the link's token never goes through a tracking redirect |
+| Distinct ID | The new user's ID. Call `identify()` with the same ID when the user signs up. |
+| Idempotency key | `verify-email-{verification_id}` |
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+const { error } = await posthog.emails.send({
+    to: user.email,
+    templateId: "<template_id>",
+    templateData: {
+        first_name: user.firstName,
+        verify_link: `https://example.com/verify?token=${verification.token}`,
+    },
+    distinctId: user.id,
+    idempotencyKey: `verify-email-${verification.id}`,
+})
+if (error) {
+    throw error
+}
+```
+
+```python file=Python
+posthog.emails.send(
+    to=user.email,
+    template_id="<template_id>",
+    template_data={
+        "first_name": user.first_name,
+        "verify_link": f"https://example.com/verify?token={verification.token}",
+    },
+    distinct_id=str(user.id),
+    idempotency_key=f"verify-email-{verification.id}",
+)
+```
+
+```ruby file=Ruby
+$posthog.emails.send(
+  to: user.email,
+  template_id: '<template_id>',
+  template_data: {
+    first_name: user.first_name,
+    verify_link: "https://example.com/verify?token=#{verification.token}"
+  },
+  distinct_id: user.id.to_s,
+  idempotency_key: "verify-email-#{verification.id}"
+)
+```
+
+```rust file=Rust
+posthog
+    .emails()
+    .send(
+        TemplateEmail::new(&user.email, "<template_id>")
+            .template_data(json!({
+                "first_name": user.first_name,
+                "verify_link": format!("https://example.com/verify?token={}", verification.token),
+            }))
+            .distinct_id(&user.id)
+            .idempotency_key(format!("verify-email-{}", verification.id)),
+    )
+    .await?;
+```
+
+```php file=PHP
+PostHog::emails()->send([
+    'to' => $user->email,
+    'template_id' => '<template_id>',
+    'template_data' => [
+        'first_name' => $user->firstName,
+        'verify_link' => "https://example.com/verify?token={$verification->token}",
+    ],
+    'distinct_id' => (string) $user->id,
+    'idempotency_key' => "verify-email-{$verification->id}",
+]);
+```
+
+```go file=Go
+_, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:         user.Email,
+    TemplateID: "<template_id>",
+    TemplateData: map[string]interface{}{
+        "first_name":  user.FirstName,
+        "verify_link": "https://example.com/verify?token=" + verification.Token,
+    },
+    DistinctID:     user.ID,
+    IdempotencyKey: "verify-email-" + verification.ID,
+})
+if err != nil {
+    return err
+}
+```
+
+```csharp file=.NET
+await emails.SendAsync(new SendTemplateEmailOptions
+{
+    To = user.Email,
+    TemplateId = Guid.Parse("<template_id>"),
+    TemplateData = new Dictionary<string, object>
+    {
+        ["first_name"] = user.FirstName,
+        ["verify_link"] = $"https://example.com/verify?token={verification.Token}",
+    },
+    DistinctId = user.Id,
+    IdempotencyKey = $"verify-email-{verification.Id}",
+});
+```
+
+```elixir file=Elixir
+{:ok, _result} =
+  PostHog.Emails.send(
+    to: user.email,
+    template_id: "<template_id>",
+    template_data: %{
+      first_name: user.first_name,
+      verify_link: "https://example.com/verify?token=#{verification.token}"
+    },
+    distinct_id: to_string(user.id),
+    idempotency_key: "verify-email-#{verification.id}"
+  )
+```
+
+```bash file=REST
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: verify-email-c9f0f895" \
+  -d '{"template_id": "<template_id>", "to": "ada@example.com", "distinct_id": "user_123", "message_data": {"first_name": "Ada", "verify_link": "https://example.com/verify?token=abc"}}'
+```
+
+</MultiLanguage>
+
+Send it from a background job after you save the user, so a slow send never holds up the sign-up. Your [SDK page](/docs/workflows/installation) shows a job that retries only the errors that a later attempt can fix.
+
+## Team invite
+
+Send an invite to someone who doesn't have an account yet.
+
+| Setting | Value |
+| --- | --- |
+| Template variables | `inviter_name`, `team_name`, `accept_link` |
+| Protect sensitive data | On, because the link carries the invite token |
+| Distinct ID | Leave it out. The invitee isn't a user yet, so you have no distinct ID for them. |
+| Idempotency key | `invite-{invite_id}` |
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+const { error } = await posthog.emails.send({
+    to: invite.email,
+    templateId: "<template_id>",
+    templateData: {
+        inviter_name: inviter.name,
+        team_name: team.name,
+        accept_link: `https://example.com/invites/${invite.token}`,
+    },
+    idempotencyKey: `invite-${invite.id}`,
+})
+if (error) {
+    throw error
+}
+```
+
+```python file=Python
+posthog.emails.send(
+    to=invite.email,
+    template_id="<template_id>",
+    template_data={
+        "inviter_name": inviter.name,
+        "team_name": team.name,
+        "accept_link": f"https://example.com/invites/{invite.token}",
+    },
+    idempotency_key=f"invite-{invite.id}",
+)
+```
+
+```ruby file=Ruby
+$posthog.emails.send(
+  to: invite.email,
+  template_id: '<template_id>',
+  template_data: {
+    inviter_name: inviter.name,
+    team_name: team.name,
+    accept_link: "https://example.com/invites/#{invite.token}"
+  },
+  idempotency_key: "invite-#{invite.id}"
+)
+```
+
+```rust file=Rust
+posthog
+    .emails()
+    .send(
+        TemplateEmail::new(&invite.email, "<template_id>")
+            .template_data(json!({
+                "inviter_name": inviter.name,
+                "team_name": team.name,
+                "accept_link": format!("https://example.com/invites/{}", invite.token),
+            }))
+            .idempotency_key(format!("invite-{}", invite.id)),
+    )
+    .await?;
+```
+
+```php file=PHP
+PostHog::emails()->send([
+    'to' => $invite->email,
+    'template_id' => '<template_id>',
+    'template_data' => [
+        'inviter_name' => $inviter->name,
+        'team_name' => $team->name,
+        'accept_link' => "https://example.com/invites/{$invite->token}",
+    ],
+    'idempotency_key' => "invite-{$invite->id}",
+]);
+```
+
+```go file=Go
+_, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:         invite.Email,
+    TemplateID: "<template_id>",
+    TemplateData: map[string]interface{}{
+        "inviter_name": inviter.Name,
+        "team_name":    team.Name,
+        "accept_link":  "https://example.com/invites/" + invite.Token,
+    },
+    IdempotencyKey: "invite-" + invite.ID,
+})
+if err != nil {
+    return err
+}
+```
+
+```csharp file=.NET
+await emails.SendAsync(new SendTemplateEmailOptions
+{
+    To = invite.Email,
+    TemplateId = Guid.Parse("<template_id>"),
+    TemplateData = new Dictionary<string, object>
+    {
+        ["inviter_name"] = inviter.Name,
+        ["team_name"] = team.Name,
+        ["accept_link"] = $"https://example.com/invites/{invite.Token}",
+    },
+    IdempotencyKey = $"invite-{invite.Id}",
+});
+```
+
+```elixir file=Elixir
+{:ok, _result} =
+  PostHog.Emails.send(
+    to: invite.email,
+    template_id: "<template_id>",
+    template_data: %{
+      inviter_name: inviter.name,
+      team_name: team.name,
+      accept_link: "https://example.com/invites/#{invite.token}"
+    },
+    idempotency_key: "invite-#{invite.id}"
+  )
+```
+
+```bash file=REST
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: invite-45c48cce" \
+  -d '{"template_id": "<template_id>", "to": "grace@example.com", "message_data": {"inviter_name": "Ada", "team_name": "Hedgebox", "accept_link": "https://example.com/invites/abc"}}'
+```
+
+</MultiLanguage>
+
+Without a distinct ID, PostHog records the email on a person whose distinct ID is the email address. To resend an invite, issue a new invite with a new ID.
+
+## Receipt with a PDF
+
+Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional/from-code), so your code renders the email.
+
+| Setting | Value |
+| --- | --- |
+| Template key | `receipt` |
+| Copies | `cc` to the customer's billing contact |
+| Attachment | The invoice PDF. See the [limits](/docs/workflows/transactional/attachments#attach-files). |
+| Distinct ID | The customer's user ID |
+| Idempotency key | `receipt-{order_id}` |
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+import { readFile } from "node:fs/promises"
+
+const { error } = await posthog.emails.send({
+    to: order.customer.email,
+    templateKey: "receipt",
+    subject: `Your receipt for order ${order.number}`,
+    html,
+    cc: order.customer.billingEmail,
+    attachments: [
+        { filename: `invoice-${order.number}.pdf`, content: await readFile(invoicePath), contentType: "application/pdf" },
+    ],
+    distinctId: order.customer.userId,
+    idempotencyKey: `receipt-${order.id}`,
+})
+if (error) {
+    throw error
+}
+```
+
+```python file=Python
+from pathlib import Path
+
+posthog.emails.send(
+    to=order.customer.email,
+    template_key="receipt",
+    subject=f"Your receipt for order {order.number}",
+    html=html,
+    cc=order.customer.billing_email,
+    attachments=[
+        {
+            "filename": f"invoice-{order.number}.pdf",
+            "content": Path(invoice_path).read_bytes(),
+            "content_type": "application/pdf",
+        }
+    ],
+    distinct_id=str(order.customer.user_id),
+    idempotency_key=f"receipt-{order.id}",
+)
+```
+
+```ruby file=Ruby
+$posthog.emails.send(
+  to: order.customer.email,
+  template_key: 'receipt',
+  subject: "Your receipt for order #{order.number}",
+  html: html,
+  cc: order.customer.billing_email,
+  attachments: [
+    { filename: "invoice-#{order.number}.pdf", content: File.binread(invoice_path), content_type: 'application/pdf' }
+  ],
+  distinct_id: order.customer.user_id.to_s,
+  idempotency_key: "receipt-#{order.id}"
+)
+```
+
+```rust file=Rust
+let invoice_pdf = std::fs::read(invoice_path)?;
+posthog
+    .emails()
+    .send(
+        CodeEmail::new(&order.customer.email, "receipt", format!("Your receipt for order {}", order.number))
+            .html(html)
+            .cc(&order.customer.billing_email)
+            .attachment(
+                EmailAttachment::new(format!("invoice-{}.pdf", order.number), invoice_pdf)
+                    .content_type("application/pdf"),
+            )
+            .distinct_id(&order.customer.user_id)
+            .idempotency_key(format!("receipt-{}", order.id)),
+    )
+    .await?;
+```
+
+```php file=PHP
+PostHog::emails()->send([
+    'to' => $order->customer->email,
+    'template_key' => 'receipt',
+    'subject' => "Your receipt for order {$order->number}",
+    'html' => $html,
+    'cc' => $order->customer->billingEmail,
+    'attachments' => [
+        ['filename' => "invoice-{$order->number}.pdf", 'content' => file_get_contents($invoicePath), 'content_type' => 'application/pdf'],
+    ],
+    'distinct_id' => (string) $order->customer->userId,
+    'idempotency_key' => "receipt-{$order->id}",
+]);
+```
+
+```go file=Go
+invoicePDF, err := os.ReadFile(invoicePath)
+if err != nil {
+    return err
+}
+_, err = client.Emails().Send(ctx, posthog.CodeEmail{
+    To:          order.Customer.Email,
+    TemplateKey: "receipt",
+    Subject:     "Your receipt for order " + order.Number,
+    HTML:        html,
+    Cc:          []string{order.Customer.BillingEmail},
+    Attachments: []posthog.EmailAttachment{
+        {Filename: "invoice-" + order.Number + ".pdf", Content: invoicePDF, ContentType: "application/pdf"},
+    },
+    DistinctID:     order.Customer.UserID,
+    IdempotencyKey: "receipt-" + order.ID,
+})
+if err != nil {
+    return err
+}
+```
+
+```csharp file=.NET
+await emails.SendAsync(new SendCodeEmailOptions
+{
+    To = order.Customer.Email,
+    TemplateKey = "receipt",
+    Subject = $"Your receipt for order {order.Number}",
+    Html = html,
+    Cc = [order.Customer.BillingEmail],
+    Attachments =
+    [
+        new EmailAttachment
+        {
+            Filename = $"invoice-{order.Number}.pdf",
+            Content = await File.ReadAllBytesAsync(invoicePath),
+            ContentType = "application/pdf",
+        },
+    ],
+    DistinctId = order.Customer.UserId,
+    IdempotencyKey = $"receipt-{order.Id}",
+});
+```
+
+```elixir file=Elixir
+{:ok, _result} =
+  PostHog.Emails.send(
+    to: order.customer.email,
+    template_key: "receipt",
+    subject: "Your receipt for order #{order.number}",
+    html: html,
+    cc: order.customer.billing_email,
+    attachments: [
+      %{
+        filename: "invoice-#{order.number}.pdf",
+        content: File.read!(invoice_path),
+        content_type: "application/pdf"
+      }
+    ],
+    distinct_id: to_string(order.customer.user_id),
+    idempotency_key: "receipt-#{order.id}"
+  )
+```
+
+```bash file=REST
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="invoice-1042.pdf"
+SHA256=$(shasum -a 256 "$FILE" | cut -d " " -f 1)
+SIZE=$(wc -c < "$FILE" | tr -d " ")
+
+# 1. Ask where to upload the file
+ANSWER=$(curl -sS --fail-with-body -X POST "https://us.posthog.com/api/messaging/attachments/uploads/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{\"files\": [{\"sha256\": \"$SHA256\", \"size\": $SIZE}]}") || { echo "$ANSWER" >&2; exit 1; }
+SLOT=$(jq ".files[0]" <<< "$ANSWER")
+
+# 2. Upload the file, if PostHog doesn't have it yet
+if [ "$(jq -r .status <<< "$SLOT")" = "upload" ]; then
+  HEADERS=()
+  while IFS= read -r HEADER; do
+    HEADERS+=(-H "$HEADER")
+  done < <(jq -r '.headers | to_entries[] | "\(.key): \(.value)"' <<< "$SLOT")
+  curl -sS --fail-with-body -X PUT "$(jq -r .url <<< "$SLOT")" "${HEADERS[@]}" --data-binary "@$FILE"
+fi
+
+# 3. Send the email with the file
+curl -sS --fail-with-body -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: receipt-ord_1042" \
+  -d '{
+    "template_key": "receipt",
+    "to": "ada@example.com",
+    "cc": ["billing@example.com"],
+    "subject": "Your receipt for order 1042",
+    "html": "<p>Thanks for your order. Your invoice is attached.</p>",
+    "distinct_id": "user_123",
+    "attachments": [
+      {"sha256": "'"$SHA256"'", "filename": "invoice-1042.pdf", "content_type": "application/pdf"}
+    ]
+  }'
+```
+
+</MultiLanguage>
+
+The SDKs hash and upload the file for you, and upload nothing when PostHog already has it. With the API, the script does these steps itself. It needs `bash`, `curl`, `shasum`, and [`jq`](https://jqlang.org). On Linux without `shasum`, use `sha256sum "$FILE"` in its place. See [send files with the API](/docs/workflows/transactional/attachments#send-files-with-the-api) for each step.
+
+## Measure whether an email works
+
+Each send lands on the recipient's person, so you can measure what people do after an email with the rest of your product data. First, turn on [engagement events](/docs/workflows/email/engagement-events) for your project.
+
+For example, to see how many people finish a password reset after they get the email, build a [funnel](/docs/product-analytics/funnels) with these steps:
+
+1. `$workflows_email_delivered`, filtered to `$email_template_id` equals your reset email's template ID. For an email your code writes, filter on `$email_template_key` instead.
+2. Your own event for a finished reset, such as `password_reset_completed`.
+
+Filter on the template, not on `$email_subject`, because a sensitive email's events leave out the subject. And use `$workflows_email_delivered` as the first step, not `$workflows_email_link_clicked`: a sensitive email doesn't track clicks by default, so a click step counts nobody.
+
+For this funnel to work, pass the same distinct ID in the send and in the event that your app captures.

@@ -1,0 +1,80 @@
+---
+title: Automations
+sidebar: Docs
+showTitle: true
+---
+
+An automation starts when someone does something, then waits, branches, and sends email or push notifications. It can also send a Slack message or call a webhook. Use it for onboarding, win-backs, trial reminders, and alerts to your team.
+
+Open **Workflows** in [PostHog](https://app.posthog.com/workflows) and click **New workflow**. Start from a template or a blank canvas, and add one step at a time. For a step-by-step example, see [build your first automation](/docs/workflows/automations/first-automation).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_light_03ea72779a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_canvas_dark_8fe8f4567b.png"
+  alt="An automation on the canvas, with the list of steps you can add"
+  classes="rounded"
+/>
+
+## Pick a trigger
+
+The trigger decides who enters the automation, and when.
+
+- **Event:** someone does something in your product, such as `signed_up`.
+- **Batch:** run once or on a schedule, for everyone in an audience.
+- **Schedule:** run once or on a schedule, with no person, such as for an AI task or a report.
+- **Webhook:** your own system starts it with an HTTP request.
+- **Survey response:** someone answers a [survey](/docs/surveys).
+- **Slack, GitHub, and support tickets:** a message, GitHub activity, or a ticket starts it.
+- **Cohort membership:** someone joins or leaves a [cohort](/docs/data/cohorts). This trigger is rolling out, so your project might not have it yet.
+
+Under **Frequency**, pick how often one person can enter, such as every time the trigger fires or once a day. See [triggers](/docs/workflows/automations/triggers).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_trigger_panel_light_65045a7652.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_trigger_panel_dark_bf54d41ffd.png"
+  alt="The trigger panel with an event trigger"
+  classes="rounded"
+/>
+
+## Add steps
+
+| Group | Steps |
+| --- | --- |
+| **Dispatch** | Send an email, SMS, Slack message, webhook, or push notification. Write emails in the [email editor](/docs/workflows/email-editor). |
+| **AI** | Start an AI task, classify a message, or have [Replay Vision](#ask-about-the-session-with-replay-vision) watch the person's session. |
+| **Delays** | Wait a set time, wait until something happens, or wait for a time window, such as weekdays 9 to 5. |
+| **Audience split** | Branch on event or person properties, or split people at random by percentage to test two versions. |
+| **PostHog actions** | Capture an event, update a person property, or set a workflow variable. |
+
+On the trigger, set an optional **Conversion goal**, such as `subscription_started`, to count how many people convert. You can also take people out of the automation once they convert. See [steps](/docs/workflows/automations/steps).
+
+## Ask about the session with Replay Vision
+
+The **Replay Vision** step reads the session recording behind the trigger event and answers a question about it, such as "did they get stuck setting up?". It can also score, categorize, or summarize the session. Branch on the answer in the next step, so you email only the people who struggled.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_light_bdd322e059.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_dark_c31893e45c.png"
+  alt="An automation that scores a signup's first session with Replay Vision, then branches on the score"
+  classes="rounded"
+/>
+
+See [Replay Vision](/docs/workflows/automations/ai-steps#replay-vision) for the settings.
+
+## Test and go live
+
+Test a step on a sample person before anyone gets an email. Your work saves as a draft, and nothing sends until you click **Enable**. After that, changes to the live automation save as a draft until you click **Publish**. See [test and debug](/docs/workflows/automations/debug) and [edit a live automation](/docs/workflows/automations/editing-live).
+
+To stop it, click **Disable**. Nobody new enters. People already in it stop at their next step, unless you enable the automation again before they reach it.
+
+## After it's live
+
+The **Overview** tab shows how many people entered and converted, how far they got, and how each email and push step did. See [automation metrics](/docs/workflows/metrics#automations).
+
+Turn on [self-driving](/docs/workflows/self-driving), and PostHog suggests changes to the steps that underperform. You approve them.
+
+## Build it with your agent
+
+Ask your coding agent over [MCP](/docs/workflows/mcp): "Email new signups who haven't created a dashboard after 2 days." It builds the automation as a draft for you to check.
+
+To create and manage automations from your own code, see the [automations API reference](/docs/api/hog-flows).

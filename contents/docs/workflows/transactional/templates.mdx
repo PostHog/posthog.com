@@ -1,0 +1,66 @@
+---
+title: Templates and variables
+sidebar: Docs
+showTitle: true
+---
+
+Write a transactional email in PostHog, and your code sends it by its template ID with the values it needs. Anyone on your team can change the copy without a deploy.
+
+To keep the content in your code instead, see [emails your code writes](/docs/workflows/transactional/from-code).
+
+## Create a transactional email
+
+1. Open [**Transactional**](https://app.posthog.com/transactional) and click **New transactional email**.
+2. **Name:** name the email. Turn on [**Protect sensitive data**](/docs/workflows/transactional/sensitive-data) if it carries sign-in codes or reset links.
+3. **Sender:** pick a verified sender. See [set up your domain](/docs/workflows/domain).
+4. **Content:** write the subject and body in the [email editor](/docs/workflows/email-editor). Add the **Variables your code sends**, such as `reset_link`, and insert them from **Merge tags**. In the subject, type them as `{{ variables.reset_link }}`.
+5. **Send from your code:** check the summary, and click **Create transactional email**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_light_0ca2f74599.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_dark_703e57c7eb.png"
+  alt="The Content step of a new transactional email, with the variables your code sends"
+  classes="rounded"
+/>
+
+The email's **API** tab then shows its template ID and an example send.
+
+Transactional emails skip marketing opt-outs and the frequency cap, so use them only for emails a person needs. A transactional email stays transactional.
+
+## Use an existing template
+
+Open the template on the **Templates** tab, go to its **API** tab, and click **Make transactional**. The template needs a subject, a body, a verified sender, and no marketing category. You can't undo this, so if you still use the template elsewhere, **Duplicate** it first and make the copy transactional.
+
+With the API, call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `transactional_email:write` scope.
+
+## Variables
+
+Everything the email shows comes from the send. The template can't read person properties, so pass all the data it needs in `message_data` (`templateData` or `template_data` in the SDKs):
+
+```json
+{
+  "template_id": "<template_id>",
+  "to": "ada@example.com",
+  "distinct_id": "user_123",
+  "message_data": { "first_name": "Ada", "reset_link": "https://example.com/reset?token=abc" }
+}
+```
+
+Use the same names in the template:
+
+```liquid
+Hi {{ variables.first_name | default: 'there' }}, reset your password here: {{ variables.reset_link }}
+```
+
+Variables use [Liquid](/docs/workflows/email/liquid). Add a default for anything that might be missing.
+
+For the other fields of a send, see [what a send needs](/docs/workflows/transactional/send-from-code#what-a-send-needs).
+
+## Edit, publish, and roll back
+
+- **Drafts:** edits save as a draft. Sends use the live version until you click **Publish**. **Discard draft** throws your edits away.
+- **Versions:** each publish adds a version on the **Versions** tab.
+- **Sender:** change the sender, its display name, or the reply-to address in the **From** and **Reply-to** fields at the top of the editor. The address must be on the sender's verified domain.
+- **Checks:** PostHog won't save a change that would stop the email from sending, such as an empty subject.
+
+For every template endpoint, see the [email templates API reference](/docs/api/messaging-templates).

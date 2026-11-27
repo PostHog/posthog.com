@@ -1,0 +1,60 @@
+---
+title: Set up your domain
+---
+
+PostHog sends email to your users only from a domain you verified. Transactional email, broadcasts, and automations all use the same senders, so you set up your domain once per project.
+
+Not ready to touch DNS? The [test sender](/docs/workflows/email/test-sender) lets you send to your own team first.
+
+## Add your sender
+
+You need to be a project admin.
+
+1. In [Workflows](https://app.posthog.com/workflows/channels), go to **Messaging** > **Channels**, click **New channel**, and select **Email**.
+2. Enter your domain and pick a **Sending subdomain**. The default is `mail.`, such as `mail.example.com`, which keeps your main domain safe if a campaign lands in spam. You can also pick `send.`, **No subdomain**, or **Custom**.
+3. Enter the **Name** and **Email address** that people see in their inbox, and click **Continue**.
+4. Add the DNS records that PostHog shows. Pick one:
+   - **Add them to Cloudflare for me** (or Vercel): approve the change once at your DNS host.
+   - **I'll add them myself:** copy each record into your DNS host, such as Route 53 or Namecheap.
+   - **Let an agent do it:** copy a prompt with the exact records, and the checks to run, into your coding agent.
+
+<!-- shot: domain-wizard-settings: the email domain wizard's "Add N settings at <host>" step, with the DNS records and the three setup choices, using demo data -->
+
+PostHog checks your records while you wait. When all records are in place, the sender shows as **Verified**, and every other sender on the same domain in this project is verified too.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/channels_verified_sender_light_40b68e9f2e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/channels_verified_sender_dark_9772de6b18.png"
+  alt="A verified email sender on the Channels tab"
+  classes="rounded"
+/>
+
+Confirming the records can take up to 72 hours. If the email provider gives up waiting, you see **Verification stopped**. Check the records, then click **Restart verification**.
+
+## The DNS records
+
+Copy each value from PostHog, not from this page. The tokens are unique to your domain.
+
+| Record | Type | What it does |
+| --- | --- | --- |
+| DKIM (three records) | CNAME | Signs your email, so inboxes can check that it came from your domain. |
+| SPF | TXT | Lists the servers that can send for your domain. If you already have an SPF record, add `include:amazonses.com` to it instead of adding a second one. |
+| Custom MAIL FROM, such as `feedback.mail.example.com` | MX and TXT | Sends bounces back to PostHog. |
+| DMARC | TXT | Tells inboxes what to do with email that fails the checks. PostHog needs one before it verifies the domain. An existing DMARC record counts. |
+
+PostHog can also ask for a verification TXT record at `_amazonses`, or an ownership record when another organization already uses the domain.
+
+## Already sending from this domain?
+
+Add PostHog's records next to your old provider's. Both can send from the same domain, so you can move one email at a time. See [move from another provider](/docs/workflows/migrate#switch-over-safely).
+
+## Troubleshooting
+
+| Problem | Fix |
+| --- | --- |
+| Domain still pending | Some DNS hosts, such as Namecheap, add your domain to the end of the name, so `feedback.mail.example.com` becomes `feedback.mail.example.com.example.com`. Enter only the part before your domain. |
+| Cloudflare records don't verify | Turn off the proxy (gray cloud) for the DKIM CNAME records. |
+| No address in the **From** menu | Add a sender on the **Channels** tab first. |
+| Emails go to spam | Check that DKIM, SPF, and DMARC pass, then see [deliverability](/docs/workflows/email/deliverability). |
+
+Your domain is ready. Next, read [deliverability](/docs/workflows/email/deliverability) to learn how your sending allowance grows, and how to keep email out of spam.

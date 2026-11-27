@@ -63,11 +63,7 @@ export const applications: CarouselSlide[] = [
             <>
                 <p>
                     The{' '}
-                    <Link
-                        to="/docs/workflows/surfaces/web-app"
-                        state={{ newWindow: true }}
-                        className="underline font-semibold"
-                    >
+                    <Link to="/docs/workflows/web-app" state={{ newWindow: true }} className="underline font-semibold">
                         PostHog web app
                     </Link>{' '}
                     is where workflows are built – the drag-and-drop builder, the content library where message
@@ -121,11 +117,7 @@ export const applications: CarouselSlide[] = [
             <>
                 <p>
                     Workflows are stored as hog flows and available over the PostHog{' '}
-                    <Link
-                        to="/docs/workflows/surfaces/api"
-                        state={{ newWindow: true }}
-                        className="underline font-semibold"
-                    >
+                    <Link to="/docs/workflows/api" state={{ newWindow: true }} className="underline font-semibold">
                         REST API
                     </Link>
                     . Use it when you want workflows under version control, generated from your own system, or created
