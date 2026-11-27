@@ -36,7 +36,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Medusa tables are full refresh. Each sync replaces the contents of the table.
+Most Medusa tables support incremental sync on `updated_at`. These tables are full refresh only: `PriceLists`, `InventoryItems`, `Campaigns`, and `RefundReasons`. The Medusa API has no timestamp filter for them. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

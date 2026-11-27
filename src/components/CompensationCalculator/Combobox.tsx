@@ -17,6 +17,7 @@ type ComboboxProps = {
 export const Combobox = (props: ComboboxProps) => {
     const [query, setQuery] = React.useState<string>('')
     const [focused, setFocused] = React.useState<boolean>(false)
+    const inputRef = React.useRef<HTMLInputElement>(null)
 
     const filteredOptions =
         query === ''
@@ -35,6 +36,9 @@ export const Combobox = (props: ComboboxProps) => {
             onChange={(value) => {
                 props.onChange(value)
                 setQuery('')
+                if (inputRef.current) {
+                    inputRef.current.value = (props.display ? props.display(value) : value) ?? ''
+                }
             }}
             nullable
         >
@@ -50,6 +54,7 @@ export const Combobox = (props: ComboboxProps) => {
                         className="flex items-center relative w-full focus:outline-none shadow-sm mt-1.5"
                     >
                         <HeadlessCombobox.Input
+                            ref={inputRef}
                             autoComplete="off"
                             onBlur={() => setFocused(false)}
                             onFocus={(event: React.FocusEvent<HTMLInputElement>) => {

@@ -55,12 +55,18 @@ import {
     StickerRobot,
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import Glow from 'components/Glow'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { DownloadButtons } from 'components/Code/DownloadButtons'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
+import hedgehogBananaPng from 'hoggies/banana.png'
+import hedgehogFloatPng from 'hoggies/float.png'
+import hedgehogKatyPerryPng from 'hoggies/katy-perry.png'
+import hedgehogLemonWrangler2Png from 'hoggies/lemon-wrangler-2.png'
+import hedgehogTwoPlayerPng from 'hoggies/two-player.png'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -424,11 +430,11 @@ function HeroSection() {
                             imgClassName="w-full h-auto rounded-lg"
                         />
                         <div className="pointer-events-none absolute -bottom-8 -right-4 h-24 @xl/editor:h-32">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_hogs_41ec7dc243.png"
+                            <HoggieImage
+                                src={hedgehogTwoPlayerPng}
                                 alt="Two hedgehogs building something together"
+                                crop={[2, 141, 991, 718]}
                                 className="h-full"
-                                imgClassName="h-full w-auto"
                             />
                         </div>
                     </Glow>
@@ -507,7 +513,7 @@ function OldWaySection() {
                     <div className="relative mx-auto w-full max-w-xs">
                         {/* Lemon hog tucked behind the receipt's upper-right corner, peeking out */}
                         <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/lemon_9cb7b3a156.png"
+                            src={hedgehogLemonWrangler2Png}
                             alt=""
                             aria-hidden
                             className="pointer-events-none absolute -right-20 top-8 z-0 w-28 rotate-12 @xl:w-32"
@@ -517,7 +523,7 @@ function OldWaySection() {
                         </div>
                         {/* Banana hog lounging on top of the receipt's bottom-left */}
                         <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/banana_relax_83149feac6.png"
+                            src={hedgehogBananaPng}
                             alt="A hedgehog relaxing with a banana"
                             className="pointer-events-none absolute -bottom-10 -left-20 z-20 w-32 @xl:w-36"
                         />
@@ -1027,10 +1033,11 @@ const featureTabs: TabbedCarouselTab[] = [
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_358aba9c5b.png"
                 imageAlt="Manage multiple coding agents in parallel"
             >
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/coastal_hog_79dc4dff47.png"
+                <HoggieImage
+                    src={hedgehogFloatPng}
+                    mirror
                     alt="A hedgehog relaxing on a pool float with a laptop"
-                    imgClassName="float-right ml-4 mb-2 w-32 @sm:w-40"
+                    className="float-right ml-4 mb-2 w-32 @sm:w-40"
                 />
                 <p className="m-0">
                     Open the Command Center and run up to nine agents at once, mixing local and cloud tasks in the same
@@ -1836,8 +1843,8 @@ const CloudAgentsCallout = () => {
                             imgClassName="w-full"
                         />
                         <div className="relative z-10">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_hog_katy_237c11a9fe.png"
+                            <HoggieImage
+                                src={hedgehogKatyPerryPng}
                                 alt="A hedgehog in a pink wig lounging on a cloud with a candy swirl"
                                 className="w-full"
                                 imgClassName="w-full"

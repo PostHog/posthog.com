@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import ReaderView from 'components/ReaderView'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from 'components/RadixUI/Accordion'
 import Link from 'components/Link'
@@ -34,6 +35,9 @@ import {
     IconTelescope,
 } from '@posthog/icons'
 import posthogIcon from '../../images/posthog-icon-white.svg'
+import hedgehogPeekOverPng from 'hoggies/peek-over.png'
+import hedgehogSwirlPng from 'hoggies/swirl.png'
+import hedgehogWizard2Png from 'hoggies/wizard-2.png'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const APP_AI_URL = 'https://app.posthog.com/ai'
@@ -167,8 +171,8 @@ const HeroSection = () => {
                     animate={reducedMotion ? undefined : { y: [0, -6, 0] }}
                     transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
                 >
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/context_hog_32f1181f4a.png"
+                    <HoggieImage
+                        src={hedgehogSwirlPng}
                         alt="A hedgehog floating in a ring of dashboards, charts, maps, and logs"
                         width={800}
                         className="w-full"
@@ -375,12 +379,13 @@ const PromptsSection = (): JSX.Element => {
                     <p className="mb-0 mt-2 text-base text-secondary @3xl/reader-content:mr-36">
                         Prompts for the work PostHog AI can take off your plate.
                     </p>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/curious_hog_d91b1a8b89.png"
+                    <HoggieImage
+                        src={hedgehogPeekOverPng}
                         alt=""
                         loading="lazy"
                         width={224}
-                        imgClassName="pointer-events-none absolute -bottom-2 right-0 hidden w-28 @3xl/reader-content:block"
+                        crop={[183, 312, 635, 376]}
+                        className="pointer-events-none absolute -bottom-2 right-0 hidden w-28 @3xl/reader-content:block"
                     />
                 </div>
             </SectionHeader>
@@ -748,8 +753,8 @@ export default function PostHogAIPage(): JSX.Element {
                         className="bg-purple/10 border border-purple rounded-md p-5 shadow-xl @md/reader-content:p-7 my-6"
                     >
                         <div className="grid @lg/reader-content:grid-cols-[180px_minmax(0,1fr)] gap-6 items-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_indigo_hog_d7099863ad.png"
+                            <HoggieImage
+                                src={hedgehogWizard2Png}
                                 alt=""
                                 loading="lazy"
                                 width={360}

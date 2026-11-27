@@ -3,7 +3,8 @@ import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
+import hedgehogPhoneCallPng from 'hoggies/phone-call.png'
 
 export default function QuickCallsScript(): JSX.Element {
     return (
@@ -13,26 +14,10 @@ export default function QuickCallsScript(): JSX.Element {
                 <ScrollArea>
                     <div className="bg-tan rounded-md relative @xl:float-right @xl:w-1/2 @xl:ml-4">
                         <div className="dark:hidden">
-                            <CloudinaryImage
-                                quality={100}
-                                placeholder="none"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
-                                className=""
-                                loading="eager"
-                                objectPosition="left top"
-                                objectFit="cover"
-                            />
+                            <HoggieImage src={hedgehogPhoneCallPng} className="" loading="eager" />
                         </div>
                         <div className="hidden dark:block">
-                            <CloudinaryImage
-                                quality={100}
-                                placeholder="none"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
-                                className=""
-                                loading="eager"
-                                objectPosition="left top"
-                                objectFit="cover"
-                            />
+                            <HoggieImage src={hedgehogPhoneCallPng} className="" loading="eager" />
                         </div>
                     </div>
 

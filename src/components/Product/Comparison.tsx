@@ -11,7 +11,7 @@ const companies = {
         comparisonURL: '',
     },
     Mixpanel: {
-        comparisonURL: '/blog/posthog-vs-mixpanel',
+        comparisonURL: '/compare/posthog-vs-mixpanel',
     },
     Heap: {
         comparisonURL: '/compare/posthog-vs-heap',

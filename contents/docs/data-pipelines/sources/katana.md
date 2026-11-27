@@ -35,7 +35,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Katana tables are full refresh. Each sync replaces the contents of the table.
+Most Katana tables support incremental sync on `updated_at` or `created_at`. The `inventory_movements` table supports incremental sync on `created_at` only. These tables are full refresh only: `inventory`, `price_lists`, `price_list_rows`, `locations`, `bin_locations`, `bin_inventory`, `operators`, `tax_rates`, and `manufacturing_order_production_ingredients`. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

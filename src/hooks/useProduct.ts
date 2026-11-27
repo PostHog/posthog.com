@@ -32,6 +32,11 @@ import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
 import { dataPipelines } from './productData/data_pipelines'
 import { getTool } from '../data/tools'
+import hedgehogBallerPng from 'hoggies/baller.png'
+import hedgehogChartPng from 'hoggies/chart.png'
+import hedgehogOrganizedPng from 'hoggies/organized.png'
+import hedgehogRollerCoasterPng from 'hoggies/roller-coaster.png'
+import hedgehogTrenchcoatPng from 'hoggies/trenchcoat.png'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -167,8 +172,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             },
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Hedgehog monitoring dashboards',
+                src: hedgehogChartPng,
+                alt: 'A hedgehog presenting a chart',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1010,8 +1015,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Toolbar hedgehog',
+                src: hedgehogChartPng,
+                alt: 'A hedgehog presenting a chart',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1269,8 +1274,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Hedgehog in beta',
+                src: hedgehogTrenchcoatPng,
+                alt: 'A hedgehog in a trenchcoat full of sticky notes',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1690,8 +1695,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Note-taking hedgehog',
+                src: hedgehogOrganizedPng,
+                alt: 'A hedgehog keeping notes on a clipboard',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -1942,8 +1947,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'Heat-detecting hedgehog',
+                src: hedgehogRollerCoasterPng,
+                alt: 'A hedgehog riding a roller coaster',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {
@@ -2193,8 +2198,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-                alt: 'A hedgehog analyzing user patterns',
+                src: hedgehogBallerPng,
+                alt: 'A hedgehog going for a slam dunk',
                 classes: 'absolute bottom-0 right-4 max-w-lg',
             },
             customers: {

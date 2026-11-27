@@ -9,7 +9,7 @@ availability:
 sourceId: Aircall
 ---
 
-The Aircall connector syncs your call center data – calls, contacts, users, teams, numbers, tags, outbound campaigns, and conversation trackers – into PostHog.
+The Aircall connector syncs your call center data – calls, contacts, users, teams, numbers, tags, outbound campaigns, user availability, conversation trackers, predicted satisfaction scores, and call summaries – into PostHog.
 
 ## Adding a data source
 
@@ -36,6 +36,10 @@ Once the syncs are complete, you can start using Aircall data in PostHog.
 | `campaign_stats`         | Progress statistics per campaign                                       | Full refresh |
 | `campaign_call_outcomes` | Disposition log per campaign contact                                   | Full refresh |
 | `trackers`               | Conversation Intelligence keyword trackers (requires AI Assist add-on) | Full refresh |
+| `user_availabilities`    | The current availability of each Aircall user, as shown in the Activity Feed, one row per user | Full refresh |
+| `call_predicted_csats`   | AI-predicted customer satisfaction (CSAT) score for a call, with the drivers behind it, one row per call. Requires the AI Assist add-on | Full refresh |
+| `call_summaries`         | AI-generated summary of a call, one row per call. Requires the AI Assist add-on | Full refresh |
+| `call_custom_summary_results` | Result of a custom summary template applied to a call, one row per call. Requires the AI Assist Pro package | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

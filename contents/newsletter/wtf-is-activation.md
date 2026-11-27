@@ -12,6 +12,11 @@ crosspost:
   - Product engineers
   - Founders
   - Blog
+seo:
+  metaTitle: What is activation? Why it matters and how to measure it
+  metaDescription: >-
+    Activation is when users first get real value from your product. Learn why
+    it matters, how PostHog finds activation metrics, and how to improve yours.
 ---
 
 Improving activation is one of the most impactful things a [product engineer](/product-engineer/what-is-a-product-engineer) can do, but it’s also weirdly hard to define.

@@ -35,9 +35,9 @@ When linking SmartReach, you'll need:
 
 This source is full-refresh only. Every table is fully re-synced on each run.
 
-The `campaign_prospects` and `campaign_stats` tables are read one campaign at a time. If a sync stops, the next run continues after the last campaign that finished.
+The `campaign_prospects`, `campaign_stats`, and `campaign_channel_settings` tables are read one campaign at a time. If a sync stops, the next run continues after the last campaign that finished.
 
-The `campaign_prospects`, `campaign_stats`, `teams`, and `users` tables are only available on SmartReach API v3. A source that uses API v1 lists only `prospects` and `campaigns`.
+The `campaign_prospects`, `campaign_stats`, `teams`, `users`, `email_settings`, `do_not_contacts`, and `campaign_channel_settings` tables are only available on SmartReach API v3. A source that uses API v1 lists only `prospects` and `campaigns`.
 
 ## Configuration
 

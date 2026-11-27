@@ -46,7 +46,6 @@ const AIO_FAMILIES: Family[] = [
         description: 'Define and version custom scores',
         match: ['llma-score-definition-'],
     },
-    { title: 'Taggers', description: 'Auto-tag generations with Hog-based taggers', match: ['llma-tagger-'] },
     { title: 'Provider keys', description: 'LLM provider keys used by evaluations', match: ['llma-provider-key-'] },
     {
         title: 'Custom parsers',

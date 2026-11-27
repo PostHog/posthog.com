@@ -301,7 +301,7 @@ const faqs = [
                 <p>
                     You can read how we stack up against competitors like{' '}
                     <Link to="/compare/posthog-vs-amplitude">Amplitude</Link>,{' '}
-                    <Link to="/blog/posthog-vs-mixpanel">Mixpanel</Link>,{' '}
+                    <Link to="/compare/posthog-vs-mixpanel">Mixpanel</Link>,{' '}
                     <Link to="/compare/posthog-vs-heap">Heap</Link>,{' '}
                     <Link to="/compare/posthog-vs-fullstory">FullStory</Link>,{' '}
                     <Link to="/compare/posthog-vs-hotjar">Hotjar</Link>, <Link to="/blog/posthog-vs-ga4">GA4</Link>, and

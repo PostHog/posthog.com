@@ -9,7 +9,7 @@ The API is both how trace data gets into PostHog and how you drive AI Observabil
 ## Before you start
 
 1. **Set up AI Observability** – [install a PostHog LLM SDK or provider integration](/docs/ai-observability/installation) so traces are captured.
-2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+2. **Get API access** – Choose a [credential for the operations you need](#authentication).
 
 ## What you can do here
 
@@ -23,7 +23,7 @@ The [query API](/docs/api/query) runs HogQL against your LLM events, so cost by 
 
 **Run evaluations and reviews**
 
-[Evaluations](/docs/ai-evals), their runs, and their scheduled reports are all API resources, alongside the [taggers](/docs/ai-evals#categories) and score definitions that decide what gets scored. [Datasets](/docs/ai-evals/datasets) and dataset items, review queues, and individual trace reviews are too, so a human-review workflow can be built into your own tools.
+[Evaluations](/docs/ai-evals), their runs, and their scheduled reports are all API resources, alongside the score definitions that decide what gets scored. [Datasets](/docs/ai-evals/datasets) and dataset items, review queues, and individual trace reviews are too, so a human-review workflow can be built into your own tools.
 
 **Manage enrichment**
 
@@ -35,14 +35,16 @@ Provider keys and their validation are managed through the API, as is the list o
 
 ## Authentication
 
-Use a [personal API key](/docs/api#authentication) passed as a bearer token, scoped to the least it needs.
+A [project secret API key](/docs/api/project-secret-api-keys) can manage datasets, scorers, offline experiments, and trace reviews in its project. For example, list datasets with `dataset:read`:
 
 ```bash
-curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://us.posthog.com/api/projects/:project_id/evaluations/
+curl -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  "https://us.posthog.com/api/projects/$POSTHOG_PROJECT_ID/datasets/"
 ```
 
-Two things worth being careful about here. A personal API key belongs in a secret store, never in client-side code or a committed file. And provider keys – the credentials PostHog uses to call your model provider – are write-only through the API: you can set and validate one, but you can't read it back.
+You can also use a [personal API key](/docs/api/personal-api-keys) with your own project and resource access. Use one for dataset exports and other endpoints that require a user. Store either key on the server or in your CI secret store.
+
+Provider keys, the credentials PostHog uses to call your model provider, are write-only through the API. You can set and validate them.
 
 ## Related
 

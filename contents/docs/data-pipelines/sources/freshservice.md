@@ -38,7 +38,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Freshservice tables are full refresh. Each sync replaces the contents of the table.
+The `tickets` and `alerts` tables support incremental sync on `updated_at`. All other Freshservice tables are full refresh only. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

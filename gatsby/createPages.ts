@@ -159,8 +159,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
     const BlogTemplate = path.resolve(`src/templates/Blog.tsx`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
-    const AppTemplate = path.resolve(`src/templates/App.js`)
-    const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
     const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
@@ -315,28 +313,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
                 contributors: group(field: frontmatter___authorData___name) {
                     fieldValue
-                }
-            }
-            apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        documentation
-                    }
-                }
-            }
-            cdp: allMdx(filter: { fields: { slug: { regex: "/^/cdp/" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        documentation
-                    }
                 }
             }
             ${POCKET_GUIDE_QUERY_FIELDS}
@@ -1010,32 +986,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug,
                 post: true,
                 article: true,
-            },
-        })
-    })
-
-    result.data.apps.nodes.forEach((node) => {
-        const { slug } = node.fields
-        const { documentation } = node.frontmatter
-        createPage({
-            path: slug,
-            component: AppTemplate,
-            context: {
-                id: node.id,
-                documentation: documentation || '',
-            },
-        })
-    })
-
-    result.data.cdp.nodes.forEach((node) => {
-        const { slug } = node.fields
-        const { documentation } = node.frontmatter
-        createPage({
-            path: slug,
-            component: PipelineTemplate,
-            context: {
-                id: node.id,
-                documentation: documentation || '',
             },
         })
     })

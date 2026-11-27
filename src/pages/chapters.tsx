@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import HoggieImage from 'components/HoggieImage'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -11,6 +11,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { companyMenu } from '../navs'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
+import hedgehogReadingIsMagicPng from 'hoggies/reading-is-magic.png'
 
 export const HandbookToc: React.FC = () => {
     return (
@@ -27,12 +28,7 @@ export const HandbookToc: React.FC = () => {
                 <section className="p-4 @xl:p-8 max-w-4xl mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-4 @lg:-mt-12">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
-                                alt="This hog has an answer"
-                                width={400}
-                                placeholder="blurred"
-                            />
+                            <HoggieImage src={hedgehogReadingIsMagicPng} alt="This hog has an answer" width={400} />
                         </div>
                         <div className="md:flex-1">
                             <h1>Company handbook</h1>
