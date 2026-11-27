@@ -232,7 +232,7 @@ export const DocsIndex = () => {
                         </Panel>
                     </div>
 
-                    {/* The library: the same volumes as /pocket-guides, as spines. */}
+                    {/* The library: the same volumes as /pocket-guides, as compact cards. */}
                     <aside className="@3xl/docs:w-1/3 shrink-0">
                         <Panel
                             eyebrow="Pocket guides"

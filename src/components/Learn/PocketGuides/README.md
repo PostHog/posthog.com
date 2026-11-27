@@ -152,7 +152,7 @@ For changes:
 
 ## Discovery surfaces
 
-- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact spine and exports `BookShelf`. Covers show no volume number. The shelf lists volumes in `POCKET_GUIDE_VOLUMES` order.
+- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact card (cover hoggie, series tint, chapter count, volume number) and exports `BookShelf`. Covers show no volume number. The shelf lists volumes in `POCKET_GUIDE_VOLUMES` order.
 - Both use `pocketGuideUrl(volume)` for their default destination. `Cover` also accepts a destination override; the shelf, introductions, and the Product Analytics overview pass chapter 1. `Cover` opens its destination with the book-opening transition in the current window; `Book` opens a new window. Keep routing decisions in the shared helpers.
 - `VolumeCard.tsx` combines a cover, description, and CTA. `GuidesForProduct.tsx` selects a volume by `docsProduct` and returns nothing when none matches.
 - `usePocketGuideCounts.ts` controls displayed counts. By default it counts chapter paths with numeric order greater than 0 and excludes `isPrimer` pages. `countOrientationPages` instead includes numeric orders starting at 0. This display logic does not prescribe a chapter outline.
