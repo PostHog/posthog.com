@@ -66,7 +66,7 @@ Do what you need to do. The goal is to get the rubber stamp.
 Most people are excited to be featured and will sign off quickly.
 
 To publish the story, you'll need a cover image.
-- Use the [customer story image tool](https://brand.posthog.com/tools/images/customer-stories) made by the brand team to create your image. 
+- Use the [customer story image tool](https://brand.posthog.com/tools/images/customer-stories) made by team graphics to create your image. 
 - Upload it to Cloudinary, and include it in your PR.
 
 
