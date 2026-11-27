@@ -9,7 +9,7 @@ availability:
 sourceId: Tavus
 ---
 
-The Tavus connector syncs your AI video generation and conversational AI data into PostHog, including videos, faces, PALs, conversations, transcriptions, and canvas interactions.
+The Tavus connector syncs your AI video generation and conversational AI data into PostHog, including videos, faces, PALs, conversations, transcriptions, canvas interactions, deployments, objectives, documents, and skills.
 
 ## Adding a data source
 
@@ -30,7 +30,7 @@ To connect Tavus to PostHog, you need a Tavus API key:
 3. Create a new API key or copy an existing one.
 4. Paste the key into PostHog when linking the source.
 
-The API key provides read access to all your Tavus data, including videos, faces, PALs, conversations, transcriptions, and canvas interactions.
+The API key provides read access to all your Tavus data, including videos, faces, PALs, conversations, transcriptions, canvas interactions, deployments, objectives, documents, and skills.
 
 ## Configuration
 
@@ -54,6 +54,11 @@ All Tavus tables use full refresh sync. Tavus's API doesn't support incremental 
 | `pals`                | Full refresh |
 | `transcriptions`      | Full refresh |
 | `canvas_interactions` | Full refresh |
+| `deployments`         | Full refresh |
+| `objectives`          | Full refresh |
+| `documents`           | Full refresh |
+| `skills`              | Full refresh |
+| `pal_skills`          | Full refresh |
 
 ## Available tables
 
@@ -67,3 +72,8 @@ All Tavus tables use full refresh sync. Tavus's API doesn't support incremental 
 | `pals`                | Agent configurations (system prompt, layers, default face) for conversations (current name for personas) |
 | `transcriptions`      | Speech-to-text jobs for video files                                                                      |
 | `canvas_interactions` | Magic Canvas interactions recorded in conversations (submit, skip, dismiss actions on cards)             |
+| `deployments`         | Managed deployments (widget, embed, or landing page) that serve conversations with a PAL                 |
+| `objectives`          | Goals a PAL works toward during conversations, with the variables it collects                            |
+| `documents`           | Knowledge base documents (files or websites) that PALs can reference during conversations                |
+| `skills`              | Pre-built capabilities authored by Tavus that can be attached to a PAL                                   |
+| `pal_skills`          | Skills attached to specific PALs, with their configuration                                               |
