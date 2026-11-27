@@ -25,6 +25,8 @@ It's a project-scoped REST API and uses the same [authentication](/docs/api) as 
 
 Each collection supports the usual list, retrieve, create, update, and delete operations. See the [API reference](/docs/api) for request and response shapes.
 
+To query logs from Grafana, `logcli`, or another tool that speaks LogQL, use the [Loki-compatible LogQL API](/docs/logs/surfaces/logql-api).
+
 ## When to use the API instead of MCP
 
 Both let you work with logs outside the web app, but they're for different jobs. Use the API when something needs to run repeatably and unattended – a nightly export, an alert defined in [Terraform](/docs/terraform), a status page. Use [MCP](/docs/logs/surfaces/mcp) when you're the one investigating and want an agent to do the querying for you.
@@ -33,5 +35,6 @@ Both let you work with logs outside the web app, but they're for different jobs.
 
 - Explore the same data in the [web app](/docs/logs/surfaces/web-app).
 - Query it conversationally over [MCP](/docs/logs/surfaces/mcp).
+- Query it with LogQL from Grafana using the [LogQL API](/docs/logs/surfaces/logql-api).
 - See the full [PostHog API reference](/docs/api).
 - Send logs in with an [OpenTelemetry client](/docs/logs/installation).
