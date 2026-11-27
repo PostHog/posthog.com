@@ -12,58 +12,6 @@ Your code sends the subject and HTML, so the email lives in your codebase. Befor
 
 ## Send an email
 
-```
-POST https://us.posthog.com/api/messaging/send/email/
-```
-
-- **Host** - Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project** - The path has no project ID. PostHog sends from the project that the key belongs to.
-
-### Request
-
-Send these headers:
-
-| Header | Value |
-| --- | --- |
-| `Authorization` | `Bearer` followed by your project secret API key |
-| `Content-Type` | `application/json` |
-| `Idempotency-Key` | Optional. 1 to 255 visible ASCII characters that identify this one email, so a retry never sends it twice. See [idempotency keys](/docs/workflows/transactional/retries-and-errors#idempotency-keys). |
-
-Send a JSON body with these fields. Name the email with `template_key`, and send the content in the body. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`.
-
-| Field | Required | Description |
-| --- | --- | --- |
-| `template_key` | Yes | A name for this email, such as `password-reset`: up to 256 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time. A project can have up to 1,000 keys. |
-| `to` | Yes | The recipient's email address. One address for each request. |
-| `subject` | Yes | The subject line. |
-| `html` | One of `html` and `text` | The HTML body, up to 5 MiB. PostHog sends it as you wrote it and fills no placeholders. |
-| `text` | One of `html` and `text` | The plain text body, up to 5 MiB. If you leave it out, PostHog makes it from `html`. |
-| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the email's [engagement events](/docs/workflows/email/engagement-events) on this person. See [link emails to your users](#link-emails-to-your-users). |
-| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender, or its only verified sender when it has no default. |
-| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
-| `sensitive` | No | `true` when the email carries login links, reset tokens, or codes. See [sensitive emails](#sensitive-emails). |
-| `tracking` | No | What PostHog tracks: opens, clicks, and [engagement events](/docs/workflows/email/engagement-events). Send `true`, `false`, or an object. See [open and click tracking](#open-and-click-tracking). |
-| `capture_engagement` | No | Deprecated. Send `"tracking": {"engagement": false}` instead. `false` still turns off engagement events for this email. A request can't have both `capture_engagement` and `tracking`. |
-
-The body also takes [copies and attachments](#copies-and-attachments). To send a [template from PostHog](#send-a-template-from-posthog) instead, send `template_id` and `message_data` in place of `template_key`, `subject`, and the body.
-
-### Response
-
-A successful request returns `202 Accepted`:
-
-```json
-{
-  "message_id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
-  "replayed": false
-}
-```
-
-A `202` means that PostHog queued the email, not that it was delivered. To see what happened to it, [check its status](#check-an-emails-status) with its `message_id`, or open the send in the [**Log**](/docs/workflows/transactional#see-each-send) tab.
-
-`replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. PostHog then sends no new email, and `message_id` is the ID of the first send. A retry with the same `Idempotency-Key` counts as the [same request](/docs/workflows/transactional/retries-and-errors#idempotency-keys) when every field has the same value as in the first request.
-
-### Example
-
 <MultiLanguage selector="tabs">
 
 ```bash file=REST
@@ -183,6 +131,52 @@ $result = PostHog::emails()->send([
 </MultiLanguage>
 
 Each SDK page shows how to set up the client and handle errors.
+
+- **Host** - The examples send to `https://us.posthog.com/api/messaging/send/email/`. Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project** - The path has no project ID. PostHog sends from the project that the key belongs to.
+
+### Request
+
+Send these headers:
+
+| Header | Value |
+| --- | --- |
+| `Authorization` | `Bearer` followed by your project secret API key |
+| `Content-Type` | `application/json` |
+| `Idempotency-Key` | Optional. 1 to 255 visible ASCII characters that identify this one email, so a retry never sends it twice. See [idempotency keys](/docs/workflows/transactional/retries-and-errors#idempotency-keys). |
+
+Send a JSON body with these fields. Name the email with `template_key`, and send the content in the body. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`.
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `template_key` | Yes | A name for this email, such as `password-reset`: up to 256 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time. A project can have up to 1,000 keys. |
+| `to` | Yes | The recipient's email address. One address for each request. |
+| `subject` | Yes | The subject line. |
+| `html` | One of `html` and `text` | The HTML body, up to 5 MiB. PostHog sends it as you wrote it and fills no placeholders. |
+| `text` | One of `html` and `text` | The plain text body, up to 5 MiB. If you leave it out, PostHog makes it from `html`. |
+| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the email's [engagement events](/docs/workflows/email/engagement-events) on this person. See [link emails to your users](#link-emails-to-your-users). |
+| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender, or its only verified sender when it has no default. |
+| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
+| `sensitive` | No | `true` when the email carries login links, reset tokens, or codes. See [sensitive emails](#sensitive-emails). |
+| `tracking` | No | What PostHog tracks: opens, clicks, and [engagement events](/docs/workflows/email/engagement-events). Send `true`, `false`, or an object. See [open and click tracking](#open-and-click-tracking). |
+| `capture_engagement` | No | Deprecated. Send `"tracking": {"engagement": false}` instead. `false` still turns off engagement events for this email. A request can't have both `capture_engagement` and `tracking`. |
+
+The body also takes [copies and attachments](#copies-and-attachments). To send a [template from PostHog](#send-a-template-from-posthog) instead, send `template_id` and `message_data` in place of `template_key`, `subject`, and the body.
+
+### Response
+
+A successful request returns `202 Accepted`:
+
+```json
+{
+  "message_id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "replayed": false
+}
+```
+
+A `202` means that PostHog queued the email, not that it was delivered. To see what happened to it, [check its status](#check-an-emails-status) with its `message_id`, or open the send in the [**Log**](/docs/workflows/transactional#see-each-send) tab.
+
+`replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. PostHog then sends no new email, and `message_id` is the ID of the first send. A retry with the same `Idempotency-Key` counts as the [same request](/docs/workflows/transactional/retries-and-errors#idempotency-keys) when every field has the same value as in the first request.
 
 When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional/retries-and-errors#what-to-retry), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files). A `404` with the code `not_found` on every send means that the send API isn't on for your project yet.
 
@@ -471,34 +465,6 @@ A request has `template_id` or `template_key`, not both. Content from your code 
 
 To find out what happened to an email, read its status with the `message_id` from the send:
 
-```
-GET https://us.posthog.com/api/messaging/emails/:message_id/
-```
-
-Send the same `Authorization` header as for a send. Only a project secret API key can read a status, and it needs the `transactional_email:read` or `transactional_email:write` scope. A key with a `hog_flow` scope still works.
-
-A found email returns `200`:
-
-```json
-{
-  "id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
-  "status": "delivered",
-  "created_at": "2026-10-28T16:27:44.364000Z",
-  "status_at": "2026-10-28T16:27:49.625000Z",
-  "reason": null
-}
-```
-
-See [statuses and reasons](/docs/workflows/transactional/status) for what each value means.
-
-A `404` with the code `not_found` right after a send means that the status isn't there yet. A new send can take a few seconds to get its first status, so retry after a short wait. Later, a `404` means that the email is older than 30 days or the ID is wrong. See [check a status](/docs/workflows/transactional/status#check-a-status). The route returns `401` when the request has no project secret API key, `403` when the key doesn't have the scope, and `429` when you read too often.
-
-If you lost the response of a send, read the status by its idempotency key instead: `GET https://us.posthog.com/api/messaging/emails/status/?idempotency_key=<key>`. It answers the same way, for the latest send with that key.
-
-Each project secret API key can read 600 statuses per minute and 20,000 per hour, and all the keys of one project share those limits. Reads have their own limits, so they don't use up the limits for sends.
-
-### Example
-
 <MultiLanguage selector="tabs">
 
 ```bash file=REST
@@ -539,3 +505,26 @@ $status = PostHog::emails()->get('<message_id>');
 ```
 
 </MultiLanguage>
+
+The examples read `https://us.posthog.com/api/messaging/emails/<message_id>/`. Send the same `Authorization` header as for a send. Only a project secret API key can read a status, and it needs the `transactional_email:read` or `transactional_email:write` scope. A key with a `hog_flow` scope still works.
+
+A found email returns `200`:
+
+```json
+{
+  "id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "status": "delivered",
+  "created_at": "2026-10-28T16:27:44.364000Z",
+  "status_at": "2026-10-28T16:27:49.625000Z",
+  "reason": null
+}
+```
+
+See [statuses and reasons](/docs/workflows/transactional/status) for what each value means.
+
+A `404` with the code `not_found` right after a send means that the status isn't there yet. A new send can take a few seconds to get its first status, so retry after a short wait. Later, a `404` means that the email is older than 30 days or the ID is wrong. See [check a status](/docs/workflows/transactional/status#check-a-status). The route returns `401` when the request has no project secret API key, `403` when the key doesn't have the scope, and `429` when you read too often.
+
+If you lost the response of a send, read the status by its idempotency key instead: `GET https://us.posthog.com/api/messaging/emails/status/?idempotency_key=<key>`. It answers the same way, for the latest send with that key.
+
+Each project secret API key can read 600 statuses per minute and 20,000 per hour, and all the keys of one project share those limits. Reads have their own limits, so they don't use up the limits for sends.
+
