@@ -1273,7 +1273,7 @@ export const generatePricingMd = (products: any[]) => {
     const content = `# PostHog Pricing
 
 > PostHog is an open-source product and data tools platform with fully transparent, usage-based pricing.
-> Every product has a generous free tier — no credit card required.
+> Most products have a generous free tier — no credit card required.
 > You only pay for what you use, and the more you use, the cheaper it gets.
 
 All prices are in USD. Full interactive pricing calculator: https://posthog.com/pricing
@@ -1283,7 +1283,7 @@ All prices are in USD. Full interactive pricing calculator: https://posthog.com/
 PostHog has two plans:
 
 - **Free** — No credit card required. Generous monthly usage limits on every product. 1 project. 1 year data retention. Community support.
-- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 2-year data retention. Email support.
+- **Paid** (pay-as-you-go) — $0/mo base price. Most products have a free tier, and you pay only for what you use above it. The free tier resets every month, except for Self-driving, whose free credits cover the first month only. 6 projects. 2-year data retention. Email support.
 
 There are no per-seat charges. Your whole team can use PostHog.
 
@@ -1324,11 +1324,11 @@ For full details on how discounts work, see our transparent contract rules: http
 
 ## Common questions
 
-- **Is there a free trial?** No trial is needed. The free tier of every product resets every month, and you can use PostHog for free for as long as you want.
+- **Is there a free trial?** No trial is needed. Most products have a free tier that resets every month, so you can use them for free for as long as you want. The tier tables above show each free tier. Self-driving is the exception: its free credits cover the first month only, and there is no recurring free tier. See [Self-driving pricing](https://posthog.com/docs/self-driving/pricing.md).
 - **Can I cap my bill?** Yes. Set a billing limit for each product in your organization's [billing settings](https://app.posthog.com/organization/billing). At the limit, PostHog stops ingesting that product's data, and data it does not store is not billed. Owners get alert emails at 80% and 100% of each limit and of the free tier. Logs custom retention can't have a limit. See [billing limits and alerts](https://posthog.com/docs/billing/limits-alerts.md).
 - **Do projects share the free tier?** Yes. Billing is per organization, so the usage of all its projects adds up to one bill with one free tier.
 - **What counts as a billed event?** PostHog bills only data it receives and stores. Custom events, \`$pageview\`, \`$autocapture\`, and \`$identify\` bill as Product analytics events. Events that another product bills, such as \`$exception\`, don't also bill as Product analytics events, and events a transformation drops are free. See [what each product bills for](https://posthog.com/docs/billing/common-questions.md#what-does-each-product-bill-for).
-- **Anonymous or identified events?** Identified events are tied to a person profile, for logged-in users. They bill the Product analytics price plus the Identified events add-on. Anonymous events, such as visits to a marketing site, bill only the Product analytics price. See [anonymous vs identified events](https://posthog.com/docs/data/anonymous-vs-identified-events.md).
+- **Anonymous or identified events?** An identified event is one that PostHog processes with a person profile. It bills the Product analytics price plus the Identified events add-on. An anonymous event has no person profile and bills only the Product analytics price. Login state does not decide it. The web and mobile SDKs default to \`person_profiles: 'identified_only'\`, which creates a profile only after you identify the user, and \`'always'\` makes every event identified. Backend SDKs and the API capture identified events by default, unless the event sets \`process_person_profile: false\`. See [anonymous vs identified events](https://posthog.com/docs/data/anonymous-vs-identified-events.md).
 - **How do I estimate my bill?** Start from the example bills above or the [pricing calculator](https://posthog.com/pricing), and see [estimating usage and costs](https://posthog.com/docs/billing/estimating-usage-costs.md).
 
 ## Definitions
