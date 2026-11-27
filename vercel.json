@@ -198,6 +198,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/libraries/react-native/reference:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/libraries/python/reference:ext(\\.md)?",
             "destination": "/docs/libraries/python:ext?",
             "statusCode": 301
@@ -403,7 +408,7 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/:sdk(node|python|go|rust|ios|android|flutter)/:major(\\d+):ext(\\.md)?",
+            "source": "/docs/libraries/:sdk(node|python|go|rust|ios|android|flutter|react-native)/:major(\\d+):ext(\\.md)?",
             "destination": "/docs/libraries/:sdk/:major.x.x:ext?",
             "statusCode": 301
         },
@@ -411,6 +416,26 @@
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
+        },
+        {
+            "source": "/docs/references/posthog-react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?",
+            "statusCode": 301
         },
         {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations.md",
@@ -2114,6 +2139,11 @@
         {
             "source": "/docs/integrate/:side(client|server)/flutter:ext(\\.md)?",
             "destination": "/docs/libraries/flutter:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/integrate/:side(client|server)/react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?",
             "statusCode": 301
         },
         {

@@ -15,6 +15,7 @@ const PUBLISHED_SDK_REFERENCES = [
     'posthog-ios',
     'posthog-android',
     'posthog-flutter',
+    'posthog-react-native',
 ]
 
 /** The pages a row can write: reference, migration, and one per major version, such as 7.x.x.md. */

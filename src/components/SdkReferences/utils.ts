@@ -84,6 +84,12 @@ export const PUBLISHED_SDK_METADATA: Record<string, PublishedSdkMeta> = {
         logoKey: 'flutter',
         features: { ...CLIENT_FEATURES, autoCapture: false, surveys: true },
     },
+    'posthog-react-native': {
+        slug: 'react-native',
+        label: 'React Native',
+        logoKey: 'reactNative',
+        features: { ...CLIENT_FEATURES, surveys: true },
+    },
 }
 
 export const PUBLISHED_SDK_LIST: PublishedSdkMeta[] = Object.values(PUBLISHED_SDK_METADATA)

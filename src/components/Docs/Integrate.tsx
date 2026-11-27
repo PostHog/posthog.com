@@ -108,7 +108,6 @@ const query = graphql`
                             "/docs/libraries/kmp"
                             "/docs/libraries/php"
                             "/docs/libraries/react"
-                            "/docs/libraries/react-native"
                             "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
                             "/docs/libraries/unity"
