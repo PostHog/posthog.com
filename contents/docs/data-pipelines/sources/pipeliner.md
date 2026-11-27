@@ -9,11 +9,11 @@ availability:
 sourceId: Pipeliner
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Pipeliner connector syncs your Pipeliner CRM (Coevera) accounts, contacts, leads, opportunities, activities, and product catalog into the PostHog Data warehouse, so you can analyze your sales pipeline alongside your product data.
+The Pipeliner connector syncs your Pipeliner CRM (Coevera) data – accounts, contacts, leads, opportunities, quotes, tasks, appointments, pipelines, and your product catalog – into the PostHog data warehouse, so you can analyze your sales pipeline alongside your product data.
 
 ## Prerequisites
 
