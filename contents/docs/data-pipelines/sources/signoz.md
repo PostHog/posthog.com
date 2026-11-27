@@ -9,9 +9,9 @@ availability:
 sourceId: SigNoz
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 Connect your SigNoz workspace to sync logs, traces, alert rules, dashboards, and notification channels into the PostHog data warehouse. This lets you join observability data with product analytics, for example correlating error logs or slow traces with user behavior.
 
@@ -44,6 +44,13 @@ The `logs` and `traces` tables support incremental syncs on their `timestamp` fi
 ## Supported tables
 
 <SourceTables />
+
+## Version-specific fields
+
+The connector automatically detects which SigNoz API version the instance supports. No action is required — the right API is selected for you.
+
+- **Alert rules**: Pre-v0.150 instances return full rule definitions including query conditions, evaluation windows, frequencies, and annotations. Instances on v0.150+ return rule metadata only (name, state, type, description, labels, and timestamps).
+- **Dashboards**: Pre-v0.150 instances return complete dashboard definitions including panels, variables, and layouts. Instances on v0.150+ return display metadata only (name, locked status, and timestamps).
 
 ## Troubleshooting
 
