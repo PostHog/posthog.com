@@ -1672,6 +1672,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
                     {
+                        name: 'Enterprise motion',
+                        url: '/handbook/forward-deployed-engineering/enterprise-motion',
+                    },
+                    {
                         name: 'How we work with AI',
                         url: '/handbook/forward-deployed-engineering/working-with-ai',
                     },
