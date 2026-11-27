@@ -8,11 +8,11 @@ import Pricing from "components/Pricing/PricingCalculator/SingleProduct";
 
 AI features in PostHog consume **AI credits**. Each time you interact with an AI-powered feature – whether you're asking PostHog AI to write SQL, summarize data, or analyze sessions – credits are spent based on the resources required to complete your request.
 
-This means you pay for what you use. There’s no fixed subscription and every organization gets a monthly free tier worth $5 (500 AI credits) to explore PostHog AI's features.
+This means you pay for what you use. There's no fixed subscription and every organization gets a monthly free tier worth $5 (500 AI credits) to explore PostHog AI's features.
 
 For reference, **100 AI credits = $1**.
 
-We apply a simple, consistent 20% markup over the underlying LLM provider’s cost. So 1 PostHog AI credit corresponds to $0.008333 of raw inference.
+We apply a simple, consistent 20% markup over the underlying LLM provider's cost. So 1 PostHog AI credit corresponds to $0.008333 of raw inference.
 
 The markup applies to LLM costs only. We charge [sandbox compute](#sandbox-compute) at cost.
 
@@ -20,7 +20,7 @@ The markup applies to LLM costs only. We charge [sandbox compute](#sandbox-compu
 
 ## What consumes AI credits
 
-AI credits are consumed whenever PostHog performs intelligent work for you. You’ll spot these features by the <span className="inline-block"><IconSparkles className="h-4 w-4" /></span> icon or when using the in-app chat.
+AI credits are consumed whenever PostHog performs intelligent work for you. You'll spot these features by the <span className="inline-block"><IconSparkles className="h-4 w-4" /></span> icon or when using the in-app chat.
 
 Examples include:
 
@@ -47,7 +47,7 @@ AI credits are based on the **underlying token costs**, which reflect the effort
 - More complex tasks like analyzing hundreds of session recordings or rewriting a SQL query multiple times use more tokens and consume more credits.
 - PostHog automatically selects the most efficient model for each AI feature.
 
-While exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper insights and time savings. You’ll always see **real-time cost information** while using AI features.
+While exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper insights and time savings. You'll always see **real-time cost information** while using AI features.
 
 ## Sandbox compute
 
@@ -55,8 +55,8 @@ Some tasks need more than a model call. When PostHog AI or the [Slack app](/docs
 
 A task in a cloud sandbox uses AI credits for two things:
 
-- **Tokens** - The LLM work, priced as described above
-- **Compute** - The CPU and memory that the sandbox uses while it runs
+- **Tokens** – The LLM work, priced as described above
+- **Compute** – The CPU and memory that the sandbox uses while it runs
 
 We charge compute at cost, with no markup:
 
@@ -100,7 +100,7 @@ Credit data may take up to 24 hours to appear on the billing overview and billin
 
 ## Control your AI credit spend
 
-You’re always in control of your AI credit usage:
+You're always in control of your AI credit usage:
 
 - **Real-time tracking:** See costs as you go
 - **Custom billing limit:** Set hard caps to prevent overspending
