@@ -58,9 +58,9 @@ Your social media accounts are your own. PostHog doesn't require you to have one
 
 If you use social media for work, we expect you to:
 
-- **Disclose that you work at PostHog.** For example, in your bio.
+- **Disclose that you work at PostHog.** For example, in your bio or when engaging with customers.
 
-- **Engage with users professionally.**
+- **Engage with others kindly or professionally. This includes not disparaging competitors.**
 
 - **Keep private user data out of personal channels.** Don't ask for it, and don't accept it. If a user needs help with their account, point them to [in-app support](https://app.posthog.com/home#supportModal).
 
