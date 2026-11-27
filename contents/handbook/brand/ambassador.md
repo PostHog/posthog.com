@@ -50,6 +50,8 @@ It's okay to be helpful or respond to posts from frustrated users, but be mindfu
 
 **The simplest test:** would you be comfortable with a screenshot of that tweet being shared in the `#general` Slack channel? If yes, go for it!
 
+If you use your personal accounts for PostHog work, also read our [guidance on personal accounts](/handbook/content/social-media#using-your-personal-accounts-for-posthog-work).
+
 ## Our users are brand ambassadors too
 
 Our brand is ultimately owned by the people who use us, talk about us, and advocate for us. We can shape it, but never fully control it.
