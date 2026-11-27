@@ -14,4 +14,6 @@ export POSTHOG_RELEASE_ID=$(posthog-cli release resolve)
 
 The command prints only the release ID. It reads the repository name and commit from Git. To choose your own, add `--release-name` and `--release-version`.
 
+If Git metadata is unavailable and the release name or version is missing, the command prints nothing and exits `0` — the build can continue without a release. Pass both `--release-name` and `--release-version` to resolve a release in a Git-free environment.
+
 Then give `POSTHOG_RELEASE_ID` to your deployed app, so that it is in the app's environment when the app starts.
