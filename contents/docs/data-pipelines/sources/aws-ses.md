@@ -46,17 +46,50 @@ SES data is regional. Connect one source per AWS region you send email from.
 
 <SourceSetupIntro />
 
-When linking Amazon SES, you'll need:
+When linking Amazon SES, you choose between two authentication methods: **IAM role** (recommended) or **access keys**.
 
-- **AWS access key ID**: the access key ID for your IAM user or role (starts with `AKIA...`).
-- **AWS secret access key**: the corresponding secret access key.
+You'll also need:
+
 - **AWS region**: the region your SES account sends from, like `us-east-1`.
-- **AWS session token** (optional): only required if you are using temporary STS credentials.
 
-## Creating IAM credentials
+## Authentication
 
-1. In the AWS Console, go to **IAM** > **Users** and create a new user (or use an existing one).
-2. Attach a policy with the following permissions:
+### IAM role (recommended)
+
+With IAM role assumption, PostHog uses AWS STS to assume a role in your AWS account and obtain short-lived credentials. This avoids storing long-lived access keys.
+
+To set up IAM role authentication:
+
+1. Create an IAM role in your AWS account with the SES permissions listed in [Prerequisites](#prerequisites).
+2. Add a trust policy that allows PostHog's role to assume it. The PostHog role ARN depends on your cloud region:
+   - **US Cloud** - `arn:aws:iam::309986977637:role/posthog-external-batch-exports`
+   - **EU Cloud** - `arn:aws:iam::623789312881:role/posthog-external-batch-exports`
+3. Add an `sts:ExternalId` condition to the trust policy. Set the value to `posthog-<your_organization_id>` (your organization ID is shown in the setup modal).
+4. Paste the role ARN into the **IAM role ARN** field when linking the source.
+
+Here's an example trust policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::309986977637:role/posthog-external-batch-exports"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "posthog-<your_organization_id>"
+        }
+      }
+    }
+  ]
+}
+```
+
+And an example permissions policy:
 
 ```json
 {
@@ -88,6 +121,16 @@ When linking Amazon SES, you'll need:
 }
 ```
 
+> **Note:** Self-hosted users should check with their instance administrator for the correct PostHog role ARN to trust.
+
+### Access keys
+
+With access keys, you provide an AWS Access Key ID and Secret Access Key that PostHog stores encrypted. This method works but uses long-lived credentials. Prefer IAM role assumption when possible.
+
+To set up access key authentication:
+
+1. In the AWS Console, go to **IAM** > **Users** and create a new user (or use an existing one).
+2. Attach a policy with the SES permissions listed in [Prerequisites](#prerequisites). You can use the same permissions policy shown in the [IAM role](#iam-role-recommended) section.
 3. Create an access key for the user under **Security credentials** > **Access keys**.
 4. Copy the **Access key ID** and **Secret access key**. You'll need both when linking the source in PostHog.
 
@@ -111,9 +154,10 @@ The other tables are small and sync as a full refresh. The `account` table is a 
 
 ## Troubleshooting
 
-- If you see "AWS rejected the access key", check that the access key ID and secret access key are correct and that the key is still active in IAM.
+- If you see "AWS rejected the access key", check that the access key ID and secret access key are correct and that the key is still active in IAM. If you're using an IAM role, check that the role ARN is correct and the trust policy allows PostHog to assume it.
+- If the connection fails with an `sts:AssumeRole` error, verify the trust policy includes the correct PostHog role ARN and `sts:ExternalId` condition.
 - If you see a signature error, re-enter the secret access key. If you are using temporary credentials, the session token may have expired.
-- If you see "missing SES read permissions", grant the `ses:` permissions listed above to the IAM user or role.
+- If you see "missing SES read permissions", grant the `ses:` permissions listed in [Prerequisites](#prerequisites) to the IAM user or role.
 - If a sync fails with a region error, check that the region is a valid AWS region code like `us-east-1` and that your SES account sends from that region.
 
 <TroubleshootingLink />
