@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Featurebase connector syncs your customer feedback data – posts, boards, comments, upvoters, changelogs, companies, and contacts – into the PostHog Data warehouse, so you can rank feature demand and join feedback against your product usage data.
+The Featurebase connector syncs your customer feedback data – posts, boards, comments, upvoters, changelogs, companies, contacts, teams, help center articles, and audit logs – into the PostHog Data Warehouse, so you can rank feature demand and join feedback against your product usage data.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ When linking Featurebase, you'll need:
 
 <SyncModes />
 
-Posts, comments, and changelogs support incremental sync. Everything else syncs via full refresh.
+Posts, comments, changelogs, tickets, and audit logs support incremental sync. The `audit_logs` table uses `createdAt` as its incremental field. Everything else, including `teams` and `help_center_articles`, syncs via full refresh.
 
 The `post_voters` table is off by default because it makes one request chain per post – enable it when you want to join upvoters against companies and contacts to rank feature demand by customer.
 

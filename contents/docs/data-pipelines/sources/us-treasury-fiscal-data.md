@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The US Treasury Fiscal Data connector syncs exchange rates, average interest rates, and federal debt totals into the PostHog data warehouse, so you can analyze them alongside your product data.
+The US Treasury Fiscal Data connector syncs exchange rates, average interest rates, federal debt totals, interest expense, monthly federal receipts and outlays, Treasury securities auctions, and estimated ownership of Treasury securities into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 Data comes from the [US Treasury Fiscal Data API](https://fiscaldata.treasury.gov/api-documentation/), a free public service that requires no API key or account.
 
@@ -31,9 +31,9 @@ Because this is a public API, there are no credentials or configuration fields t
 
 <SyncModes />
 
-All US Treasury Fiscal Data tables support both incremental and full refresh sync modes.
+All US Treasury Fiscal Data tables support full refresh. The `auctions_query` and `ofs2_estimated_ownership_treasury_securities` tables support full refresh only.
 
-- **Incremental sync** fetches rows where the incremental field is on or after the last synced date. The incremental field is `effective_date` for `rates_of_exchange` and `record_date` for the other tables.
+- **Incremental sync** fetches rows where the incremental field is on or after the last synced date. The incremental field is `effective_date` for `rates_of_exchange` and `record_date` for `avg_interest_rates`, `debt_to_penny`, `interest_expense`, and `mts_table_1`.
 
 - **Full refresh** re-downloads all rows each sync.
 

@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Creem connector syncs products, customers, subscriptions, transactions, discounts, licenses, affiliates, affiliate invites, splits, meters, usage events, and credit accounts into the PostHog data warehouse, so you can analyze your billing and payment data alongside your product data.
+The Creem connector syncs products, customers, subscriptions, transactions, discounts, licenses, affiliates, affiliate commissions, affiliate invites, splits, meters, usage events, credit accounts, credit account entries, product groups, and product prices into the PostHog Data Warehouse, so you can analyze your billing and payment data alongside your product data.
 
 ## Prerequisites
 

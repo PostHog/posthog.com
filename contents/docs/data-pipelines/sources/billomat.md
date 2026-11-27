@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Sync clients, suppliers, invoices, estimates, credit notes, incoming supplier bills, reminders, articles, delivery notes, and the activity feed from Billomat.
+Sync clients, suppliers, invoices, invoice comments, estimates, credit notes, incoming supplier bills, reminders, articles, delivery notes, and the activity feed from Billomat.
 
 You'll be asked for:
 
@@ -36,7 +36,7 @@ You'll be asked for:
 
 Billomat tables use one of two sync modes:
 
-- **Full refresh:** Each sync replaces the contents of the table. Used by Clients, Suppliers, Recurrings, ClientContacts, Articles, and ActivityFeed.
+- **Full refresh:** Each sync replaces the contents of the table. Used by Clients, Suppliers, Recurrings, ClientContacts, Articles, ActivityFeed, and InvoiceComments.
 - **Incremental:** Only new and updated records since the last sync are fetched (based on the `date` field). Used by Invoices, Estimates, CreditNotes, Incomings, InvoicePayments, Confirmations, Reminders, and DeliveryNotes.
 
 ## Configuration

@@ -13,11 +13,11 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The WordPress connector syncs posts, pages, comments, media, categories, tags, and users from a self-hosted WordPress site into the PostHog Data warehouse via the core REST API (`/wp-json/wp/v2`).
+The WordPress connector syncs posts, pages, comments, media, categories, tags, users, post types, taxonomies, and post and page revisions from a self-hosted WordPress site into the PostHog Data Warehouse via the core REST API (`/wp-json/wp/v2`).
 
 ## Prerequisites
 
-You need a self-hosted WordPress site with the core REST API available. Public, published content syncs without credentials. To sync private content or authenticate, you need WordPress 5.6+ on an HTTPS site so you can create an application password.
+You need a self-hosted WordPress site with the core REST API available. Public, published content syncs without credentials. To sync private content, sync revisions, or authenticate, you need WordPress 5.6+ on an HTTPS site so you can create an application password. Post and page revisions require credentials for a user who can edit the content.
 
 ## Adding a data source
 
@@ -26,8 +26,8 @@ You need a self-hosted WordPress site with the core REST API available. Public, 
 When linking WordPress, you'll need:
 
 - **Site URL** – your WordPress site URL, for example `https://example.com`.
-- **Username** – optional. Required only to authenticate or sync private content.
-- **Application password** – optional. Create one under **Users > Profile > Application Passwords**. Required only to authenticate or sync private content, and requires WordPress 5.6+ on an HTTPS site.
+- **Username**: optional. Required to authenticate, sync private content, or sync post and page revisions.
+- **Application password**: optional. Create one under **Users > Profile > Application Passwords**. Required to authenticate, sync private content, or sync post and page revisions, and requires WordPress 5.6+ on an HTTPS site.
 
 ## Sync modes
 

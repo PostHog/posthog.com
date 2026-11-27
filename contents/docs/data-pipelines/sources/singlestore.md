@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The SingleStore, Inc. connector syncs organization, regions, workspace groups, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The SingleStore, Inc. connector syncs organization, regions, workspace groups, projects, starter clusters, audit logs, and more into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All SingleStore, Inc. tables are full refresh. Each sync replaces the contents of the table.
+The `audit_logs` table supports incremental sync using `createdAt` or full refresh. The `billing_usage` table also supports incremental sync, using `startTime`. All other SingleStore, Inc. tables, including `projects` and `starter_clusters`, use full refresh. Each full refresh replaces the contents of the table.
 
 ## Configuration
 

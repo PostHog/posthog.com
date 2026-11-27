@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Zoho CRM connector syncs leads, contacts, accounts, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Zoho CRM connector syncs leads, contacts, accounts, appointments, services, deal contact roles, and more into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ You'll be asked for:
 
 <SyncModes />
 
-Most Zoho CRM tables use full refresh, where each sync replaces the entire table. The `Deal_Timeline` table supports incremental sync using the `audited_time` field – after the first full import, subsequent syncs only fetch entries created since the last sync.
+Zoho CRM record modules, including `Appointments` and `Services`, support incremental sync using `Modified_Time` or full refresh. The `Deal_Timeline` table supports incremental sync using the `audited_time` field – after the first full import, subsequent syncs only fetch entries created since the last sync. Other tables, including `Deal_Contact_Roles`, use full refresh, where each sync replaces the entire table.
 
 > **Note:** Incremental `Deal_Timeline` syncs read only deals that changed since the last sync. Timeline-only changes (like a note added to a deal) don't update the deal's `Modified_Time`, so they can be missed until the deal changes for another reason.
 
@@ -48,15 +48,18 @@ Most Zoho CRM tables use full refresh, where each sync replaces the entire table
 
 ### Tables requiring additional scopes
 
-Some Zoho CRM tables require OAuth scopes beyond the base setup. These tables are deselected by default:
+Some Zoho CRM tables require OAuth scopes beyond the base setup or make one API request per deal. These tables are deselected by default:
 
-| Table           | Required scope                                                    | Notes                                            |
-| --------------- | ----------------------------------------------------------------- | ------------------------------------------------ |
-| `Territories`   | `ZohoCRM.settings.territories.READ`                               | Requires territory management to be enabled      |
-| `Pipelines`     | `ZohoCRM.settings.pipeline.READ`, `ZohoCRM.settings.layouts.READ` | Reads pipelines for every Deals layout           |
-| `Deal_Timeline` | Uses existing scopes                                              | One API request per deal; opt-in due to API cost |
+| Table                | Required scope                                                    | Notes                                            |
+| -------------------- | ----------------------------------------------------------------- | ------------------------------------------------ |
+| `Territories`        | `ZohoCRM.settings.territories.READ`                               | Requires territory management to be enabled      |
+| `Pipelines`          | `ZohoCRM.settings.pipeline.READ`, `ZohoCRM.settings.layouts.READ` | Reads pipelines for every Deals layout           |
+| `Deal_Timeline`      | Uses existing scopes                                              | One API request per deal; opt-in due to API cost |
+| `Deal_Contact_Roles` | Uses existing scopes                                              | One API request per deal; opt-in due to API cost |
 
 If you see a scope error when enabling these tables, add the required scope to your Self Client and generate a new refresh token.
+
+`Appointments` and `Services` are also deselected by default because appointment management modules aren't available in every Zoho CRM setup. They use the base setup scopes, including `ZohoCRM.modules.ALL`, with no additional scopes required.
 
 ### Custom modules
 

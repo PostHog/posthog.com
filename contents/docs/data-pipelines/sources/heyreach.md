@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The HeyReach connector syncs campaigns, campaign leads, company lists, sender networks, conversations, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The HeyReach connector syncs campaigns and their sequences, campaign leads, company lists, leads excluded from outreach, companies excluded from outreach, sender networks, conversations, and more into the PostHog Data Warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Import campaigns, leads, company lists, LinkedIn sender accounts and their networks, inbox conversations, and daily outreach stats from HeyReach. Create an API key in HeyReach under Settings > Integrations > HeyReach API.
+Import campaigns and their sequences, leads, company lists, leads excluded from outreach, companies excluded from outreach, LinkedIn sender accounts and their networks, inbox conversations, and daily outreach stats from HeyReach. Create an API key in HeyReach under Settings > Integrations > HeyReach API.
 
 You'll be asked for:
 
