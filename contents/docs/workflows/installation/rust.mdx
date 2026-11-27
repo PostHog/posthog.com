@@ -6,7 +6,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [Rust SDK](/docs/libraries/rust) sends transactional emails. This page uses the `posthog` crate, and every release from 1.0.0 can send. On the older `posthog-rs` crate, sending needs 0.31.0 or later. Before you start, you need a transactional email ([templates and variables](/docs/workflows/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up both and sends a test email in a few minutes.
+The [Rust SDK](/docs/libraries/rust) sends transactional emails. This page uses the `posthog` crate, and every release from 1.0.0 can send. On the older `posthog-rs` crate, sending needs 0.31.0 or later. Your code sends the subject and HTML, so the email lives in your codebase. Before you start, you need a [verified sending domain](/docs/workflows/domain) and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up the key and sends a test email in a few minutes.
 
 New to sending from code? Read [send emails from code](/docs/workflows/transactional/send-from-code) first.
 
@@ -29,7 +29,7 @@ Read https://posthog.com/docs/workflows/installation/rust.md first. Follow it ov
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - Add a test that starts an httpmock MockServer, sets its base_url() as app_host, and checks the request.
 
-Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+Send each email's subject and html from code with CodeEmail::new, with a template key that names it, such as password-reset. Only send a TemplateEmail with a template ID if I tell you the email is a template in PostHog. Don't create the API key. I create it.
 ```
 
 </details>
@@ -64,8 +64,7 @@ Shut the client down when your app exits, not after each send. If your app sends
 ## Send an email
 
 ```rust
-use posthog::TemplateEmail;
-use serde_json::json;
+use posthog::CodeEmail;
 
 async fn send_password_reset(
     posthog: &posthog::Client,
@@ -76,8 +75,11 @@ async fn send_password_reset(
     let result = posthog
         .emails()
         .send(
-            TemplateEmail::new(&user.email, "<template_id>")
-                .template_data(json!({ "first_name": user.first_name, "reset_link": reset_link }))
+            // "password-reset" names the email, so PostHog groups its sends and metrics
+            CodeEmail::new(&user.email, "password-reset", "Reset your password")
+                .html(format!(
+                    r#"<p>Reset your password <a href="{reset_link}">here</a>. The link works for 1 hour.</p>"#
+                ))
                 .distinct_id(&user.id)
                 // Identifies this one email, so a retry never sends it twice
                 .idempotency_key(format!("password-reset-{reset_request_id}")),
@@ -92,29 +94,31 @@ async fn send_password_reset(
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
+For a longer email, render the HTML first with your template engine, such as Askama or Tera, and pass the result to `html`. See [emails your code writes](/docs/workflows/transactional/from-code) for what each field does and the checks PostHog runs.
+
 ### Fields
 
-Fields marked "template only" work only with a template made in PostHog. Fields marked "code only" work only with content from your code. After `new`, each field is a builder method.
+`send` takes a `CodeEmail` for an email that your code writes, and a `TemplateEmail` for a template from PostHog. After `new`, each field is a builder method.
 
 | Field | Required | What it does |
 | --- | --- | --- |
-| `TemplateEmail::new` | Yes, template only | Takes the recipient's email address and the template ID. |
-| `CodeEmail::new` | Yes, code only | Takes the recipient's email address, a template key that names the email, and the subject. |
-| `template_data` | No, template only | Values for the template's variables. |
+| `CodeEmail::new` | Yes | Takes the recipient's email address, a template key that names the email, and the subject. |
+| `html` | At least one of `html` or `text` | The HTML body. |
+| `text` | At least one of `html` or `text` | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `from` | No | The sender. Without it, PostHog uses the project's default sender. |
+| `reply_to` | No | Call once for each reply-to address. |
 | `distinct_id` | No | Links the email to your user's person in PostHog. |
 | `idempotency_key` | No | Identifies this one email, so a retry never sends it twice. |
 | `max_retries` | No | How many times the client retries this email. |
-| `html` | At least one of `html` or `text`, code only | The HTML body. |
-| `text` | At least one of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
-| `from` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
-| `reply_to` | No, code only | Call once for each reply-to address. |
-| `cc` | No, code only | Call once for each copy address. |
-| `bcc` | No, code only | Call once for each blind copy address. |
-| `attachment` | No, code only | Call once for each file, with `EmailAttachment::new`. |
-| `sensitive` | No, code only | Marks the email as sensitive, for login links, reset tokens, or codes. |
-| `tracking` | No, code only | What PostHog tracks: opens, clicks, and engagement events. |
+| `cc` | No | Call once for each copy address. |
+| `bcc` | No | Call once for each blind copy address. |
+| `attachment` | No | Call once for each file, with `EmailAttachment::new`. |
+| `sensitive` | No | Marks the email as sensitive, for login links, reset tokens, or codes. |
+| `tracking` | No | What PostHog tracks: opens, clicks, and engagement events. |
 
-Every `posthog` release takes every field. On `posthog-rs`, `sensitive` and `tracking` need 0.32.0, and `cc`, `bcc`, and `attachment` need 0.33.0.
+To send a [template from PostHog](#send-a-template-from-posthog) instead, use `TemplateEmail::new`, which takes the recipient's email address and the template ID, and `template_data` in place of the template key, the subject, and the body.
+
+Every `posthog` release takes every field. On `posthog-rs`, sending needs 0.31.0 or later, `sensitive` and `tracking` need 0.32.0, and `cc`, `bcc`, and `attachment` need 0.33.0.
 
 ### Timeouts and retries
 
@@ -134,8 +138,7 @@ Send from a job queue when the email shouldn't slow down the request, such as an
 Rust has no job queue that most apps use, so this sketch shows the pattern without one. The job function sorts each error into a retry or a permanent failure. Map the two to your queue's own ways to run a job again later and to fail it for good.
 
 ```rust
-use posthog::{EmailError, TemplateEmail};
-use serde_json::json;
+use posthog::{CodeEmail, EmailError};
 
 // A later attempt can fix these. Any other code fails the same way again.
 const RETRYABLE_CODES: [&str; 4] = ["network_error", "idempotency_key_in_flight", "throttled", "delivery_unavailable"];
@@ -150,7 +153,6 @@ pub enum JobError {
 pub struct PasswordResetJob {
     pub user_id: String,
     pub email: String,
-    pub first_name: String,
     pub reset_link: String,
     pub reset_request_id: String,
 }
@@ -159,8 +161,8 @@ pub async fn run_password_reset_job(
     posthog: &posthog::Client,
     job: &PasswordResetJob,
 ) -> Result<String, JobError> {
-    let email = TemplateEmail::new(&job.email, "<template_id>")
-        .template_data(json!({ "first_name": job.first_name, "reset_link": job.reset_link }))
+    let email = CodeEmail::new(&job.email, "password-reset", "Reset your password")
+        .html(format!(r#"<p>Reset your password <a href="{}">here</a>.</p>"#, job.reset_link))
         .distinct_id(&job.user_id)
         // The same key on every attempt, so a retried job never sends the email twice
         .idempotency_key(format!("password-reset-{}", job.reset_request_id))
@@ -178,36 +180,7 @@ pub async fn run_password_reset_job(
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`, and leave it out for someone who isn't a user yet. See [link emails to your users](/docs/workflows/transactional/send-from-code#link-emails-to-your-users) for how PostHog records each case.
 
-## Send content from your code
-
-`send` also takes a `CodeEmail`, with content that your code rendered and no template in PostHog. Render it first with your template engine, such as Askama or Tera.
-
-```rust
-use posthog::CodeEmail;
-
-async fn send_password_reset(
-    posthog: &posthog::Client,
-    user: &User,
-    html: String,
-    reset_request_id: &str,
-) -> Result<String, posthog::EmailError> {
-    let result = posthog
-        .emails()
-        .send(
-            CodeEmail::new(&user.email, "password-reset", "Reset your password")
-                .html(html)
-                .from("Hedgebox <security@example.com>")
-                .distinct_id(&user.id)
-                .idempotency_key(format!("password-reset-{reset_request_id}")),
-        )
-        .await?;
-    Ok(result.id)
-}
-```
-
-`capture_engagement` is deprecated. Call `.tracking(EmailTrackingOptions::new().engagement(false))` instead, and don't set both.
-
-See [content from your code](/docs/workflows/transactional/from-code) for what each field does and the checks PostHog runs.
+## Copies, attachments, and tracking
 
 ### Copies and attachments
 
@@ -251,6 +224,29 @@ posthog
 
 `tracking` takes `EmailTracking::On`, `EmailTracking::Off`, or `EmailTrackingOptions::new()` with its `opens`, `clicks`, and `engagement` builder methods. See [sensitive data and tracking](/docs/workflows/transactional/sensitive-data) for the defaults and rules.
 
+`capture_engagement` is deprecated. Call `.tracking(EmailTrackingOptions::new().engagement(false))` instead, and don't set both.
+
+## Send a template from PostHog
+
+You can also keep an email in PostHog as a [template](/docs/workflows/transactional/templates), so your team edits the copy without a deploy. Send a `TemplateEmail` with its template ID and the values for its variables:
+
+```rust
+use posthog::TemplateEmail;
+use serde_json::json;
+
+posthog
+    .emails()
+    .send(
+        TemplateEmail::new(&user.email, "<template_id>")
+            .template_data(json!({ "first_name": user.first_name, "reset_link": reset_link }))
+            .distinct_id(&user.id)
+            .idempotency_key(format!("password-reset-{reset_request_id}")),
+    )
+    .await?;
+```
+
+A template send takes no subject, body, sender, copies, or attachments. The template sets them.
+
 ## Check an email's status
 
 ```rust
@@ -286,7 +282,7 @@ cargo add --dev tokio --features macros,rt
 
 ```rust
 use httpmock::prelude::*;
-use posthog::{ClientOptionsBuilder, TemplateEmail};
+use posthog::{ClientOptionsBuilder, CodeEmail};
 use serde_json::json;
 
 #[tokio::test]
@@ -313,8 +309,8 @@ async fn sends_password_reset() {
     let result = posthog
         .emails()
         .send(
-            // The client checks that this is a UUID before it sends, so use any UUID
-            TemplateEmail::new("jane@example.com", "0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b")
+            CodeEmail::new("jane@example.com", "password-reset", "Reset your password")
+                .html("<p>Reset your password.</p>")
                 .idempotency_key("password-reset-1"),
         )
         .await

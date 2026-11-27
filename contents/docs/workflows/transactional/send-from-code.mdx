@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Your server sends a transactional email with one call: the recipient, the email, and the data it needs. PostHog checks it, sends it, and records what happens next on the person, next to everything else they do in your product.
+Your server sends a transactional email with one call: the recipient, the subject, and the HTML. PostHog checks it, sends it, and records what happens next on the person, next to everything else they do in your product.
 
 This page covers how that works. For your language's calls and fields, see its [SDK page](/docs/workflows/installation).
 
@@ -31,8 +31,8 @@ The key can send emails and read their status, and nothing else. Keep it on your
 
 ## Pick where the email lives
 
+- **[In your code](/docs/workflows/transactional/from-code):** send a key, subject, and HTML, such as from React Email. It can also carry copies and [attachments](/docs/workflows/transactional/attachments). Most teams start here.
 - **[A template in PostHog](/docs/workflows/transactional/templates):** send its template ID and the values for its variables. Your team edits the copy without a deploy.
-- **[Content from your code](/docs/workflows/transactional/from-code):** send a key, subject, and HTML, such as from React Email. It can also carry copies and [attachments](/docs/workflows/transactional/attachments).
 
 Both get the same checks, statuses, events, and metrics.
 
@@ -41,8 +41,8 @@ Both get the same checks, statuses, events, and metrics.
 | | |
 | --- | --- |
 | **Recipient** | One address per send. |
-| **The email** | A template ID, or a key with a subject and body. |
-| **Data** | The values for the template's variables. The template can't read person properties, so send everything it shows. |
+| **The email** | A key with a subject and body, or a template ID. |
+| **Data** | For a template, the values for its variables. The template can't read person properties, so send everything it shows. |
 | **Distinct ID** | Optional. Who the email is for. See below. |
 | **Idempotency key** | Optional, but send one so a retry never sends twice. See [retries and errors](/docs/workflows/transactional/retries-and-errors). |
 
@@ -75,6 +75,7 @@ Without engagement events, you still get statuses, the Log, and [metrics](/docs/
 
 ## Next
 
-- [Templates and variables](/docs/workflows/transactional/templates)
+- [Emails your code writes](/docs/workflows/transactional/from-code)
+- [Templates in PostHog](/docs/workflows/transactional/templates)
 - [Retries and errors](/docs/workflows/transactional/retries-and-errors)
 - [Examples](/docs/workflows/transactional/examples): sign-in codes, invites, and receipts with a PDF.

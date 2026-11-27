@@ -4,13 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-If your code already renders its emails, such as with [React Email](https://react.email), send the subject and body yourself. There's no template in PostHog, but you still get statuses, suppression checks, metrics, and the Log.
+Most transactional emails live in your code: your server sends the subject and body, rendered however you like, such as with [React Email](https://react.email). You get statuses, suppression checks, metrics, and the Log, with no template in PostHog. To let your team edit an email without a deploy, use a [template in PostHog](/docs/workflows/transactional/templates) instead.
 
-| | Template in PostHog | Content from your code |
+| | Content from your code | Template in PostHog |
 | --- | --- | --- |
-| Who edits it | Anyone, in PostHog, with no deploy | Engineers, in your codebase |
-| A send carries | `template_id` and `message_data` | `template_key`, `subject`, and `html` or `text` |
-| Copies and files | No | `cc`, `bcc`, and [attachments](/docs/workflows/transactional/attachments) |
+| Who edits it | Engineers, in your codebase | Anyone, in PostHog, with no deploy |
+| A send carries | `template_key`, `subject`, and `html` or `text` | `template_id` and `message_data` |
+| Copies and files | `cc`, `bcc`, and [attachments](/docs/workflows/transactional/attachments) | No |
 
 ## Send it
 

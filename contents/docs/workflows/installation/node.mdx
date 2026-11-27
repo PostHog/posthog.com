@@ -6,7 +6,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 5.61.2. Before you start, you need a transactional email ([templates and variables](/docs/workflows/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up both and sends a test email in a few minutes.
+The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 5.62.0. Your code sends the subject and HTML, so the email lives in your codebase. Before you start, you need a [verified sending domain](/docs/workflows/domain) and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up the key and sends a test email in a few minutes.
 
 New to sending from code? Read [send emails from code](/docs/workflows/transactional/send-from-code) first.
 
@@ -29,7 +29,7 @@ Read https://posthog.com/docs/workflows/installation/node.md first. Follow it ov
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - Add a test that passes a fake fetch to the client and checks the request.
 
-Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+Send each email's subject and HTML from code, with a templateKey that names it, such as password-reset. Only send a templateId if I tell you the email is a template in PostHog. Don't create the API key. I create it.
 ```
 
 </details>
@@ -62,11 +62,13 @@ Shut the client down when your app exits, not after each send. If your app sends
 ## Send an email
 
 ```js
-export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
+export async function sendPasswordReset({ userId, email, resetLink, resetRequestId }) {
     const { data, error } = await posthog.emails.send({
         to: email,
-        templateId: "<template_id>",
-        templateData: { first_name: firstName, reset_link: resetLink },
+        // Names the email, so PostHog groups its sends and metrics
+        templateKey: "password-reset",
+        subject: "Reset your password",
+        html: `<p>Reset your password <a href="${resetLink}">here</a>. The link works for 1 hour.</p>`,
         distinctId: userId,
         // Identifies this one email, so a retry never sends it twice
         idempotencyKey: `password-reset-${resetRequestId}`,
@@ -83,32 +85,32 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
-### Fields
+See [emails your code writes](/docs/workflows/transactional/from-code) for what each field does and the checks PostHog runs.
 
-Fields marked "template only" work only with a template made in PostHog. Fields marked "code only" work only with content from your code.
+### Fields
 
 | Field | Required | What it does |
 | --- | --- | --- |
 | `to` | Yes | The recipient's email address. |
-| `templateId` | Yes, template only | The ID of the transactional email in PostHog. |
-| `templateData` | No, template only | Values for the template's variables. |
+| `templateKey` | Yes | Names the email, so PostHog groups its metrics and sends. |
+| `subject` | Yes | The subject line. |
+| `html` | At least one of `html`, `text`, or `react` | The HTML body. |
+| `text` | At least one of `html`, `text`, or `react` | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `react` | At least one of `html`, `text`, or `react` | A React Email element, in place of `html`. The SDK renders it. |
+| `from` | No | The sender. Without it, PostHog uses the project's default sender. |
+| `replyTo` | No | One reply-to address or a list. |
 | `distinctId` | No | Links the email to your user's person in PostHog. |
 | `idempotencyKey` | No | Identifies this one email, so a retry never sends it twice. |
 | `maxRetries` | No | How many times the client retries this send. |
-| `templateKey` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
-| `subject` | Yes, code only | The subject line. |
-| `html` | At least one of `html`, `text`, or `react`, code only | The HTML body. |
-| `text` | At least one of `html`, `text`, or `react`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
-| `react` | At least one of `html`, `text`, or `react`, code only | A React Email element, in place of `html`. The SDK renders it. |
-| `from` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
-| `replyTo` | No, code only | One reply-to address or a list. |
-| `cc` | No, code only | One copy address or a list. |
-| `bcc` | No, code only | One blind copy address or a list. |
-| `attachments` | No, code only | A list of files to attach. |
-| `sensitive` | No, code only | Marks the email as sensitive, for login links, reset tokens, or codes. |
-| `tracking` | No, code only | What PostHog tracks: opens, clicks, and engagement events. |
+| `cc` | No | One copy address or a list. |
+| `bcc` | No | One blind copy address or a list. |
+| `attachments` | No | A list of files to attach. |
+| `sensitive` | No | Marks the email as sensitive, for login links, reset tokens, or codes. |
+| `tracking` | No | What PostHog tracks: opens, clicks, and engagement events. |
 
-Sending needs version 5.61.2 or later. Content from your code needs 5.62.0, `react` needs 5.69.0, `sensitive` and `tracking` need 5.71.0, and `cc`, `bcc`, and `attachments` need 5.72.0.
+To send a [template from PostHog](#send-a-template-from-posthog) instead, pass `templateId` and `templateData` in place of `templateKey`, `subject`, and the body.
+
+Sending needs version 5.62.0 or later. `react` needs 5.69.0, `sensitive` and `tracking` need 5.71.0, and `cc`, `bcc`, and `attachments` need 5.72.0.
 
 ### Timeouts and retries
 
@@ -134,7 +136,7 @@ const emails = new Queue("emails", { connection: { host: "localhost", port: 6379
 
 await emails.add(
     "password-reset",
-    { userId, email, firstName, resetLink, resetRequestId },
+    { userId, email, resetLink, resetRequestId },
     { attempts: 5, backoff: { type: "exponential", delay: 10_000 } }
 )
 ```
@@ -150,11 +152,12 @@ const RETRYABLE_CODES = new Set(["network_error", "idempotency_key_in_flight", "
 new Worker(
     "emails",
     async (job) => {
-        const { userId, email, firstName, resetLink, resetRequestId } = job.data
+        const { userId, email, resetLink, resetRequestId } = job.data
         const { data, error } = await posthog.emails.send({
             to: email,
-            templateId: "<template_id>",
-            templateData: { first_name: firstName, reset_link: resetLink },
+            templateKey: "password-reset",
+            subject: "Reset your password",
+            html: `<p>Reset your password <a href="${resetLink}">here</a>.</p>`,
             distinctId: userId,
             // The same key on every attempt, so a retried job never sends the email twice
             idempotencyKey: `password-reset-${resetRequestId}`,
@@ -174,33 +177,27 @@ new Worker(
 
 Pass the distinct ID that you pass to `identify()` as `distinctId`, and leave it out for someone who isn't a user yet. See [link emails to your users](/docs/workflows/transactional/send-from-code#link-emails-to-your-users) for how PostHog records each case.
 
-## Send content from your code
+## Send React Email components
 
-From version 5.62.0, `send` also takes content that your code rendered, with no template in PostHog. From version 5.69.0, you can pass a [React Email](https://react.email) component as `react`, in place of `html`. The SDK renders its HTML and plain text with `@react-email/render`, which you install next to `posthog-node`. If you bundle your app, such as for Cloudflare Workers or Vercel Edge, also pass `reactEmailRenderer: await import("@react-email/render")` to the client.
+From version 5.69.0, you can pass a [React Email](https://react.email) component as `react`, in place of `html`. The SDK renders its HTML and plain text with `@react-email/render`, which you install next to `posthog-node`. If you bundle your app, such as for Cloudflare Workers or Vercel Edge, also pass `reactEmailRenderer: await import("@react-email/render")` to the client.
 
 ```jsx
 import { PasswordResetEmail } from "./emails/password-reset"
 
-export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
-    const { data, error } = await posthog.emails.send({
-        to: email,
-        templateKey: "password-reset",
-        subject: "Reset your password",
-        react: <PasswordResetEmail firstName={firstName} resetLink={resetLink} />,
-        from: "Hedgebox <security@example.com>",
-        distinctId: userId,
-        idempotencyKey: `password-reset-${resetRequestId}`,
-    })
-    if (error) {
-        throw error
-    }
-    return data.id
-}
+const { data, error } = await posthog.emails.send({
+    to: email,
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    react: <PasswordResetEmail resetLink={resetLink} />,
+    from: "Hedgebox <security@example.com>",
+    distinctId: userId,
+    idempotencyKey: `password-reset-${resetRequestId}`,
+})
 ```
 
-`captureEngagement` is deprecated. Pass `tracking: { engagement: false }` instead, and don't set both.
+See [React Email](/docs/workflows/transactional/from-code#react-email) for the errors that a React send can return.
 
-See [content from your code](/docs/workflows/transactional/from-code) for what each field does, the [React Email](/docs/workflows/transactional/from-code#react-email) errors, and the checks PostHog runs.
+## Copies, attachments, and tracking
 
 ### Copies and attachments
 
@@ -240,6 +237,24 @@ await posthog.emails.send({
 ```
 
 `tracking` takes `true`, `false`, or an object with `opens`, `clicks`, and `engagement`. See [sensitive data and tracking](/docs/workflows/transactional/sensitive-data) for the defaults and rules.
+
+`captureEngagement` is deprecated. Pass `tracking: { engagement: false }` instead, and don't set both.
+
+## Send a template from PostHog
+
+You can also keep an email in PostHog as a [template](/docs/workflows/transactional/templates), so your team edits the copy without a deploy. Send its template ID and the values for its variables:
+
+```js
+const { data, error } = await posthog.emails.send({
+    to: email,
+    templateId: "<template_id>",
+    templateData: { first_name: firstName, reset_link: resetLink },
+    distinctId: userId,
+    idempotencyKey: `password-reset-${resetRequestId}`,
+})
+```
+
+A template send takes no subject, body, sender, copies, or attachments. The template sets them.
 
 ## Check an email's status
 
@@ -283,7 +298,9 @@ const posthog = new PostHog("phc_test", {
 
 const { data } = await posthog.emails.send({
     to: "jane@example.com",
-    templateId: "0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b",
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    html: "<p>Reset your password.</p>",
     idempotencyKey: "password-reset-1",
 })
 

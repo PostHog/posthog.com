@@ -6,7 +6,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [PHP SDK](/docs/libraries/php) sends transactional emails from version 4.22.0. Before you start, you need a transactional email ([templates and variables](/docs/workflows/transactional/templates#create-a-transactional-email)) or content from your code, and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up both and sends a test email in a few minutes.
+The [PHP SDK](/docs/libraries/php) sends transactional emails from version 4.22.0. Your code sends the subject and HTML, so the email lives in your codebase. Before you start, you need a [verified sending domain](/docs/workflows/domain) and a project secret API key ([create an API key](/docs/workflows/transactional/send-from-code#create-an-api-key)). The [quick start](/docs/workflows/installation) sets up the key and sends a test email in a few minutes.
 
 New to sending from code? Read [send emails from code](/docs/workflows/transactional/send-from-code) first.
 
@@ -30,7 +30,7 @@ Read https://posthog.com/docs/workflows/installation/php.md first. Follow it ove
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - PostHog\Emails is a final class with no HTTP hook. In tests, fake your own wrapper around the send, not the SDK.
 
-Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+Send each email's subject and HTML from code, with a template_key that names it, such as password-reset. Only send a template_id if I tell you the email is a template in PostHog. Don't create the API key. I create it.
 ```
 
 </details>
@@ -74,8 +74,10 @@ function sendPasswordReset(User $user, string $resetLink, string $resetRequestId
     // Throws PostHog\EmailError when PostHog doesn't queue the email. Branch on getErrorCode()
     $result = PostHog::emails()->send([
         'to' => $user->email,
-        'template_id' => '<template_id>',
-        'template_data' => ['first_name' => $user->firstName, 'reset_link' => $resetLink],
+        // Names the email, so PostHog groups its sends and metrics
+        'template_key' => 'password-reset',
+        'subject' => 'Reset your password',
+        'html' => "<p>Reset your password <a href=\"{$resetLink}\">here</a>. The link works for 1 hour.</p>",
         'distinct_id' => (string) $user->id,
         // Identifies this one email, so a retry never sends it twice
         'idempotency_key' => "password-reset-{$resetRequestId}",
@@ -88,29 +90,31 @@ function sendPasswordReset(User $user, string $resetLink, string $resetRequestId
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
-### Fields
+For a longer email, render the HTML first with your template engine, such as Blade or Twig, and pass the result as `html`.
 
-Fields marked "template only" work only with a template made in PostHog. Fields marked "code only" work only with content from your code.
+See [emails your code writes](/docs/workflows/transactional/from-code) for what each field does and the checks PostHog runs.
+
+### Fields
 
 | Field | Required | What it does |
 | --- | --- | --- |
 | `to` | Yes | The recipient's email address. |
-| `template_id` | Yes, template only | The ID of the transactional email in PostHog. |
-| `template_data` | No, template only | Values for the template's variables. |
+| `template_key` | Yes | Names the email, so PostHog groups its metrics and sends. |
+| `subject` | Yes | The subject line. |
+| `html` | One of `html` or `text` | The HTML body. |
+| `text` | One of `html` or `text` | The plain text body. PostHog makes it from `html` if you leave it out. |
+| `from` | No | The sender. Without it, PostHog uses the project's default sender. |
+| `reply_to` | No | One reply-to address or a list. |
 | `distinct_id` | No | Links the email to your user's person in PostHog. |
 | `idempotency_key` | No | Identifies this one email, so a retry never sends it twice. |
 | `max_retries` | No | How many times the client retries this send. |
-| `template_key` | Yes, code only | Names the email, so PostHog groups its metrics and sends. |
-| `subject` | Yes, code only | The subject line. |
-| `html` | One of `html` or `text`, code only | The HTML body. |
-| `text` | One of `html` or `text`, code only | The plain text body. PostHog makes it from `html` if you leave it out. |
-| `from` | No, code only | The sender. Without it, PostHog uses the project's default sender. |
-| `reply_to` | No, code only | One reply-to address or a list. |
-| `cc` | No, code only | One copy address or a list. |
-| `bcc` | No, code only | One blind copy address or a list. |
-| `attachments` | No, code only | A list of files to attach. |
-| `sensitive` | No, code only | Marks the email as sensitive, for login links, reset tokens, or codes. |
-| `tracking` | No, code only | What PostHog tracks: opens, clicks, and engagement events. |
+| `cc` | No | One copy address or a list. |
+| `bcc` | No | One blind copy address or a list. |
+| `attachments` | No | A list of files to attach. |
+| `sensitive` | No | Marks the email as sensitive, for login links, reset tokens, or codes. |
+| `tracking` | No | What PostHog tracks: opens, clicks, and engagement events. |
+
+To send a [template from PostHog](#send-a-template-from-posthog) instead, pass `template_id` and `template_data` in place of `template_key`, `subject`, and the body.
 
 Sending needs version 4.22.0 or later. `sensitive` and `tracking` need 4.24.0, and `cc`, `bcc`, and `attachments` need 4.25.0.
 
@@ -153,7 +157,6 @@ class SendPasswordResetEmail implements ShouldQueue
     public function __construct(
         public string $userId,
         public string $email,
-        public string $firstName,
         public string $resetLink,
         public string $resetRequestId,
     ) {}
@@ -163,8 +166,9 @@ class SendPasswordResetEmail implements ShouldQueue
         try {
             PostHog::emails()->send([
                 'to' => $this->email,
-                'template_id' => '<template_id>',
-                'template_data' => ['first_name' => $this->firstName, 'reset_link' => $this->resetLink],
+                'template_key' => 'password-reset',
+                'subject' => 'Reset your password',
+                'html' => "<p>Reset your password <a href=\"{$this->resetLink}\">here</a>.</p>",
                 'distinct_id' => $this->userId,
                 // The same key on every attempt, so a retried job never sends the email twice
                 'idempotency_key' => "password-reset-{$this->resetRequestId}",
@@ -184,36 +188,14 @@ class SendPasswordResetEmail implements ShouldQueue
 Dispatch the job with the values that the send needs:
 
 ```php
-SendPasswordResetEmail::dispatch((string) $user->id, $user->email, $user->firstName, $resetLink, $resetRequestId);
+SendPasswordResetEmail::dispatch((string) $user->id, $user->email, $resetLink, $resetRequestId);
 ```
 
 ## Link emails to your users
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`, and leave it out for someone who isn't a user yet. See [link emails to your users](/docs/workflows/transactional/send-from-code#link-emails-to-your-users) for how PostHog records each case.
 
-## Send content from your code
-
-`send()` also takes content that your code rendered, with no template in PostHog. Render it with your template engine first, such as Blade or Twig.
-
-```php
-function sendPasswordReset(User $user, string $html, string $resetRequestId): string
-{
-    $result = PostHog::emails()->send([
-        'to' => $user->email,
-        'template_key' => 'password-reset',
-        'subject' => 'Reset your password',
-        'html' => $html,
-        'from' => 'Hedgebox <security@example.com>',
-        'distinct_id' => (string) $user->id,
-        'idempotency_key' => "password-reset-{$resetRequestId}",
-    ]);
-    return $result->getId();
-}
-```
-
-`capture_engagement` is deprecated. Pass `'tracking' => ['engagement' => false]` instead, and don't set both.
-
-See [content from your code](/docs/workflows/transactional/from-code) for what each field does and the checks PostHog runs.
+## Copies, attachments, and tracking
 
 ### Copies and attachments
 
@@ -251,6 +233,24 @@ PostHog::emails()->send([
 ```
 
 `tracking` takes `true`, `false`, or an array with `'opens'`, `'clicks'`, and `'engagement'`. See [sensitive data and tracking](/docs/workflows/transactional/sensitive-data) for the defaults and rules.
+
+`capture_engagement` is deprecated. Pass `'tracking' => ['engagement' => false]` instead, and don't set both.
+
+## Send a template from PostHog
+
+You can also keep an email in PostHog as a [template](/docs/workflows/transactional/templates), so your team edits the copy without a deploy. Send its template ID and the values for its variables:
+
+```php
+$result = PostHog::emails()->send([
+    'to' => $user->email,
+    'template_id' => '<template_id>',
+    'template_data' => ['first_name' => $user->firstName, 'reset_link' => $resetLink],
+    'distinct_id' => (string) $user->id,
+    'idempotency_key' => "password-reset-{$resetRequestId}",
+]);
+```
+
+A template send takes no subject, body, sender, copies, or attachments. The template sets them.
 
 ## Check an email's status
 

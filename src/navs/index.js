@@ -8584,16 +8584,16 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Templates and variables',
-                    url: '/docs/workflows/transactional/templates',
-                    icon: 'IconLetter',
-                    color: 'blue',
-                },
-                {
                     name: 'Emails your code writes',
                     url: '/docs/workflows/transactional/from-code',
                     icon: 'IconCode',
                     color: 'purple',
+                },
+                {
+                    name: 'Templates in PostHog',
+                    url: '/docs/workflows/transactional/templates',
+                    icon: 'IconLetter',
+                    color: 'blue',
                 },
                 {
                     name: 'Attachments',

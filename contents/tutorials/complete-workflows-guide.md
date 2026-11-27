@@ -35,7 +35,7 @@ The cool thing is that workflows can be built independently of your code. Only t
 ## Getting started
 ### Sending emails 
 
-Email sending is very easy to [configure and set up](/docs/workflows/domain#create-a-new-workflows-channel). Four DNS entries need to be made, which are displayed directly in the setup window. Once the entries are verified, the email address is marked as verified and can be used for email sending.
+Email sending is very easy to [configure and set up](/docs/workflows/domain). Four DNS entries need to be made, which are displayed directly in the setup window. Once the entries are verified, the email address is marked as verified and can be used for email sending.
 
 ![email setup screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr1_c1a2a6db00.webp)
 
@@ -53,7 +53,7 @@ In the template itself, global settings such as colors, font, or alignment can a
 
 ### Building workflows
 
-Building workflows is very intuitive. First, a [trigger](/docs/workflows/automations#triggers) for the workflow is selected. This can be a specific event, a manual trigger, a webhook, tracking pixel, or schedule.
+Building workflows is very intuitive. First, a [trigger](/docs/workflows/automations/triggers) for the workflow is selected. This can be a specific event, a manual trigger, a webhook, tracking pixel, or schedule.
 
 Further steps and actions can be added, like emails, webhooks or third party integrations like Slack.
 
@@ -67,7 +67,7 @@ During the implementation of workflows, we encountered some smaller challenges, 
 
 ### i18n
 
-Currently, it's not yet directly possible to translate texts. However, [conditional branches](/docs/workflows/automations#audience-splits) can be used to check variables and customize the further course of the flow depending on conditions.
+Currently, it's not yet directly possible to translate texts. However, [conditional branches](/docs/workflows/automations/steps#branch) can be used to check variables and customize the further course of the flow depending on conditions.
 
 We check the user's language with conditional branches, which we store in the person. This allows us to split the flow based on language and ensure that the user receives emails or push notifications in the correct language.
 
@@ -103,13 +103,13 @@ The same can be done for other variables like the name `{{person.properties.firs
 
 ### Automations
 
-In addition to messaging workflows, [automation workflows](/docs/workflows/automations#posthog-actions) exist. These can be used to set user properties once an event has been executed. A typical use case is when the user has completed onboarding.
+In addition to messaging workflows, [automation workflows](/docs/workflows/automations/steps#act-in-posthog) exist. These can be used to set user properties once an event has been executed. A typical use case is when the user has completed onboarding.
 
 ![automating workflows screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr8_f2a7b9719f.webp)
 
 ### Using delays
 
-Another exciting feature is [delays](/docs/workflows/automations#delays), which allow waiting for a defined period after an event. For example, after an event like user_created, a welcome email can be sent to the user after five minutes.
+Another exciting feature is [delays](/docs/workflows/automations/steps#wait), which allow waiting for a defined period after an event. For example, after an event like user_created, a welcome email can be sent to the user after five minutes.
 
 ![delays with workflows](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/b42_workflows_scr9_a44289298d.webp)
 

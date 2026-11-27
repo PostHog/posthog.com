@@ -57,7 +57,7 @@ All new broadcasts and automations should use these defaults:
 
 A good thing about using Workflows is that we can be very intentional about the goal we want that email to achieve. 
 
-Besides tracking open and click rates, having access to all of the PostHog data means we can track the thing that users do after they read your email. Workflows use [conversion goals](/docs/workflows/automations#conversion-goals) to measure it.
+Besides tracking open and click rates, having access to all of the PostHog data means we can track the thing that users do after they read your email. Workflows use [conversion goals](/docs/workflows/automations/triggers#conversion-goal-and-exit) to measure it.
 
 Don’t treat it like a mandatory rule, but when creating a new email, it's helpful to ask yourself:
 

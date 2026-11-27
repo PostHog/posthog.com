@@ -4,13 +4,17 @@ sidebar: Docs
 showTitle: true
 ---
 
-A transactional email goes to one person when your code sends it, such as a password reset, a sign-in code, or a receipt. In the **Transactional** app in [PostHog](https://app.posthog.com/transactional), you create these emails, see every send, and see what each person did next.
+A transactional email goes to one person when your code sends it, such as a password reset, a sign-in code, or a receipt. Your code sends them, and the **Transactional** app in [PostHog](https://app.posthog.com/transactional) shows every send and what each person did next.
 
 New here? [Send your first one from code](/docs/workflows/installation).
 
-## Create an email
+## Send from your code
 
-Click **New transactional email**. Give it a name, pick a sender, and write it in the [email editor](/docs/workflows/email-editor). Under **Variables your code sends**, add the values your code passes with each send, such as `first_name`. Your code then sends the email by its template ID. See [templates and variables](/docs/workflows/transactional/templates).
+Your server sends the subject and HTML with one call from the [PostHog SDK](/docs/workflows/installation), named by a key such as `password-reset`. The email lives in your codebase, and you can render it with [React Email](/docs/workflows/transactional/from-code#react-email). Each key shows in the list, with its sends and metrics. Link it to the file that sends it, and **Copy prompt for your agent** tells your coding agent which email to change and where. See [emails your code writes](/docs/workflows/transactional/from-code).
+
+## Or build it in PostHog
+
+To let your team change an email without a deploy, build it in PostHog instead. Click **New transactional email**. Give it a name, pick a sender, and write it in the [email editor](/docs/workflows/email-editor). Under **Variables your code sends**, add the values your code passes with each send, such as `first_name`. Your code then sends the email by its template ID. See [templates in PostHog](/docs/workflows/transactional/templates).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/transactional_create_light_0ca2f74599.png"
@@ -22,10 +26,6 @@ Click **New transactional email**. Give it a name, pick a sender, and write it i
 Transactional emails ignore marketing opt-outs, so don't use them for marketing. After you publish an email, later edits save as a draft until you publish again.
 
 For sign-in codes and reset links, turn on **Protect sensitive data** on the email's **API** tab. PostHog keeps no copy of what each email contained, and turns off link click tracking by default. See [sensitive data and tracking](/docs/workflows/transactional/sensitive-data).
-
-## Emails your code writes
-
-When your code renders the content itself, such as with [React Email](/docs/workflows/transactional/from-code#react-email), the email shows in the list under the key that your code sends. Link it to the file that sends it, and **Copy prompt for your agent** tells your coding agent which email to change and where. See [send content from your code](/docs/workflows/transactional/from-code).
 
 ## See each send
 

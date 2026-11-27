@@ -8,7 +8,7 @@ showTitle: true
 
 Use the API to send transactional emails from any language. The SDKs for [Node.js](/docs/workflows/installation/node), [Python](/docs/workflows/installation/python), [Go](/docs/workflows/installation/go), [.NET](/docs/workflows/installation/dotnet), [Rust](/docs/workflows/installation/rust), [Ruby](/docs/workflows/installation/ruby), [Elixir](/docs/workflows/installation/elixir), and [PHP](/docs/workflows/installation/php) call this API and retry with idempotency keys for you. If your language has an SDK, start there. The examples on this page show each SDK next to cURL.
 
-Before you start, you need a [transactional email](/docs/workflows/transactional/templates#create-a-transactional-email) or content from your code, and a [project secret API key](/docs/workflows/transactional/send-from-code#create-an-api-key). The [quick start](/docs/workflows/installation) sets up both and sends a test email in a few minutes. New to sending from code? Read [send emails from code](/docs/workflows/transactional/send-from-code) first.
+Your code sends the subject and HTML, so the email lives in your codebase. Before you start, you need a [verified sending domain](/docs/workflows/domain) and a [project secret API key](/docs/workflows/transactional/send-from-code#create-an-api-key). The [quick start](/docs/workflows/installation) sets up the key and sends a test email in a few minutes. New to sending from code? Read [send emails from code](/docs/workflows/transactional/send-from-code) first.
 
 ## Send an email
 
@@ -29,20 +29,23 @@ Send these headers:
 | `Content-Type` | `application/json` |
 | `Idempotency-Key` | Optional. 1 to 255 visible ASCII characters that identify this one email, so a retry never sends it twice. See [idempotency keys](/docs/workflows/transactional/retries-and-errors#idempotency-keys). |
 
-Send a JSON body with these fields:
+Send a JSON body with these fields. Name the email with `template_key`, and send the content in the body. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`.
 
 | Field | Required | Description |
 | --- | --- | --- |
-| `template_id` | Yes | The ID of the transactional email to send. |
+| `template_key` | Yes | A name for this email, such as `password-reset`: up to 256 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time. A project can have up to 1,000 keys. |
 | `to` | Yes | The recipient's email address. One address for each request. |
-| `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
+| `subject` | Yes | The subject line. |
+| `html` | One of `html` and `text` | The HTML body, up to 5 MiB. PostHog sends it as you wrote it and fills no placeholders. |
+| `text` | One of `html` and `text` | The plain text body, up to 5 MiB. If you leave it out, PostHog makes it from `html`. |
 | `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the email's [engagement events](/docs/workflows/email/engagement-events) on this person. See [link emails to your users](#link-emails-to-your-users). |
+| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender, or its only verified sender when it has no default. |
+| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
+| `sensitive` | No | `true` when the email carries login links, reset tokens, or codes. See [sensitive emails](#sensitive-emails). |
+| `tracking` | No | What PostHog tracks: opens, clicks, and [engagement events](/docs/workflows/email/engagement-events). Send `true`, `false`, or an object. See [open and click tracking](#open-and-click-tracking). |
+| `capture_engagement` | No | Deprecated. Send `"tracking": {"engagement": false}` instead. `false` still turns off engagement events for this email. A request can't have both `capture_engagement` and `tracking`. |
 
-In the template, use the same names that you send in `message_data`:
-
-```liquid
-Hi {{ variables.first_name }}, use this link to reset your password: {{ variables.reset_link }}
-```
+The body also takes [copies and attachments](#copies-and-attachments). To send a [template from PostHog](#send-a-template-from-posthog) instead, send `template_id` and `message_data` in place of `template_key`, `subject`, and the body.
 
 ### Response
 
@@ -57,151 +60,9 @@ A successful request returns `202 Accepted`:
 
 A `202` means that PostHog queued the email, not that it was delivered. To see what happened to it, [check its status](#check-an-emails-status) with its `message_id`, or open the send in the [**Log**](/docs/workflows/transactional#see-each-send) tab.
 
-`replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. PostHog then sends no new email, and `message_id` is the ID of the first send.
+`replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. PostHog then sends no new email, and `message_id` is the ID of the first send. A retry with the same `Idempotency-Key` counts as the [same request](/docs/workflows/transactional/retries-and-errors#idempotency-keys) when every field has the same value as in the first request.
 
 ### Example
-
-<MultiLanguage selector="tabs">
-
-```bash file=REST
-curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
-  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: password-reset-8f14e45f" \
-  -d '{
-    "template_id": "<template_id>",
-    "to": "jane@example.com",
-    "distinct_id": "user_123",
-    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
-  }'
-```
-
-```js file=Node.js
-const { data, error } = await posthog.emails.send({
-    to: "jane@example.com",
-    templateId: "<template_id>",
-    templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
-    distinctId: "user_123",
-    idempotencyKey: "password-reset-8f14e45f",
-})
-```
-
-```python file=Python
-result = posthog.emails.send(
-    to="jane@example.com",
-    template_id="<template_id>",
-    template_data={"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
-    distinct_id="user_123",
-    idempotency_key="password-reset-8f14e45f",
-)
-```
-
-```go file=Go
-result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
-    To:             "jane@example.com",
-    TemplateID:     "<template_id>",
-    TemplateData:   map[string]interface{}{"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
-    DistinctID:     "user_123",
-    IdempotencyKey: "password-reset-8f14e45f",
-})
-```
-
-```csharp file=.NET
-var result = await posthog.Emails.SendAsync(new SendTemplateEmailOptions
-{
-    To = "jane@example.com",
-    TemplateId = Guid.Parse("<template_id>"),
-    TemplateData = new Dictionary<string, object>
-    {
-        ["first_name"] = "Jane",
-        ["reset_link"] = "https://example.com/reset?token=abc123",
-    },
-    DistinctId = "user_123",
-    IdempotencyKey = "password-reset-8f14e45f",
-});
-```
-
-```rust file=Rust
-let result = posthog
-    .emails()
-    .send(
-        TemplateEmail::new("jane@example.com", "<template_id>")
-            .template_data(json!({ "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }))
-            .distinct_id("user_123")
-            .idempotency_key("password-reset-8f14e45f"),
-    )
-    .await?;
-```
-
-```ruby file=Ruby
-result = posthog.emails.send(
-  to: 'jane@example.com',
-  template_id: '<template_id>',
-  template_data: { first_name: 'Jane', reset_link: 'https://example.com/reset?token=abc123' },
-  distinct_id: 'user_123',
-  idempotency_key: 'password-reset-8f14e45f'
-)
-```
-
-```elixir file=Elixir
-{:ok, result} =
-  PostHog.Emails.send(
-    to: "jane@example.com",
-    template_id: "<template_id>",
-    template_data: %{first_name: "Jane", reset_link: "https://example.com/reset?token=abc123"},
-    distinct_id: "user_123",
-    idempotency_key: "password-reset-8f14e45f"
-  )
-```
-
-```php file=PHP
-$result = PostHog::emails()->send([
-    'to' => 'jane@example.com',
-    'template_id' => '<template_id>',
-    'template_data' => ['first_name' => 'Jane', 'reset_link' => 'https://example.com/reset?token=abc123'],
-    'distinct_id' => 'user_123',
-    'idempotency_key' => 'password-reset-8f14e45f',
-]);
-```
-
-</MultiLanguage>
-
-Each SDK page shows how to set up the client and handle errors.
-
-When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional/retries-and-errors#what-to-retry), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files). A `404` with the code `not_found` on every send means that the send API isn't on for your project yet.
-
-### `delivery_unavailable`
-
-A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. PostHog can still send it, so retry with the same `Idempotency-Key`. If you resend the email through another email provider, the recipient can get it twice. The SDKs retry a `503` for you.
-
-## Link emails to your users
-
-Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/email/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
-
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
-
-## Send content from your code
-
-You can also send the subject and the body from your code, with no template in PostHog. Use the same `POST` route and headers as for a [template send](#send-an-email). Name the email with `template_key`, and send the content in the body. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`.
-
-| Field | Required | Description |
-| --- | --- | --- |
-| `template_key` | Yes | A name for this email, such as `password-reset`: up to 256 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time. A project can have up to 1,000 keys. |
-| `to` | Yes | The recipient's email address. |
-| `distinct_id` | No | The distinct ID of the recipient's person, as for a template send. |
-| `subject` | Yes | The subject line. |
-| `html` | One of `html` and `text` | The HTML body, up to 5 MiB. PostHog sends it as you wrote it and fills no placeholders. |
-| `text` | One of `html` and `text` | The plain text body, up to 5 MiB. If you leave it out, PostHog makes it from `html`. |
-| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender, or its only verified sender when it has no default. |
-| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
-| `sensitive` | No | `true` when the email carries login links, reset tokens, or codes. See [sensitive emails](#sensitive-emails). |
-| `tracking` | No | What PostHog tracks: opens, clicks, and [engagement events](/docs/workflows/email/engagement-events). Send `true`, `false`, or an object. See [open and click tracking](#open-and-click-tracking). |
-| `capture_engagement` | No | Deprecated. Send `"tracking": {"engagement": false}` instead. `false` still turns off engagement events for this email. A request can't have both `capture_engagement` and `tracking`. |
-
-A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog fills no placeholders. A template send takes none of the other fields in this table, because the template uses its own settings. PostHog refuses a field in the wrong kind of send with a `400` that names the field in `attr`.
-
-The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` counts as the [same request](/docs/workflows/transactional/retries-and-errors#idempotency-keys) when every field has the same value as in the first request.
 
 <MultiLanguage selector="tabs">
 
@@ -321,6 +182,14 @@ $result = PostHog::emails()->send([
 
 </MultiLanguage>
 
+Each SDK page shows how to set up the client and handle errors.
+
+When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional/retries-and-errors#what-to-retry), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files). A `404` with the code `not_found` on every send means that the send API isn't on for your project yet.
+
+### `delivery_unavailable`
+
+A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. PostHog can still send it, so retry with the same `Idempotency-Key`. If you resend the email through another email provider, the recipient can get it twice. The SDKs retry a `503` for you.
+
 ### Sensitive emails
 
 Mark the email as sensitive when it carries login links, reset tokens, or codes. For a sensitive email, PostHog:
@@ -393,11 +262,11 @@ PostHog returns a `400` and sends nothing when:
 - **An unknown key** - The object has a key other than `opens`, `clicks`, and `engagement`.
 - **Clicks without opens** - `opens` is `false` and `clicks` is `true`. Click tracking needs open tracking. With `opens` set to `false` and `clicks` left out, PostHog tracks no clicks.
 - **Both fields** - The request has `tracking` and `capture_engagement`. Move the value of `capture_engagement` to `tracking.engagement`.
-- **A template send** - The request has `template_id` and `tracking` or `sensitive`. A template uses its own settings.
+- **A [template send](#send-a-template-from-posthog)** - The request has `template_id` and `tracking` or `sensitive`. A template uses its own settings.
 
 ### Copies and attachments
 
-Content from your code also takes these fields. A template send takes none of them.
+A send also takes these fields. A [template send](#send-a-template-from-posthog) takes none of them.
 
 | Field | Required | Description |
 | --- | --- | --- |
@@ -560,6 +429,43 @@ These checks apply to content from your code, in addition to the [errors](/docs/
 | `400` | `sender_required` | The request has no `from`, and the project has more than one verified sender and no default sender. | Send `from`, or set a default sender. |
 | `400` | `sensitive_template` | The request has `"sensitive": false`, and the template with the same key has **Protect sensitive data** on. | Leave out `sensitive`, or turn off the template's setting. |
 | `400` | `too_many_keys` | The `template_key` is new, and the project already has 1,000 keys. | Reuse one key for each type of email. |
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/email/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+
+## Send a template from PostHog
+
+You can also keep an email in PostHog as a [template](/docs/workflows/transactional/templates#create-a-transactional-email), so your team edits the copy without a deploy. Use the same route and headers. Send these fields in place of `template_key`, `subject`, and the body:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `template_id` | Yes | The ID of the transactional email to send. |
+| `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
+
+`to` and `distinct_id` work as for any send. In the template, use the same names that you send in `message_data`:
+
+```liquid
+Hi {{ variables.first_name }}, use this link to reset your password: {{ variables.reset_link }}
+```
+
+```bash
+curl -X POST "https://us.posthog.com/api/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: password-reset-8f14e45f" \
+  -d '{
+    "template_id": "<template_id>",
+    "to": "jane@example.com",
+    "distinct_id": "user_123",
+    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
+  }'
+```
+
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog fills no placeholders. A template send takes no field of the [request table](#request) other than `to` and `distinct_id`, and no [copies or attachments](#copies-and-attachments), because the template uses its own settings. PostHog refuses a field in the wrong kind of send with a `400` that names the field in `attr`.
 
 ## Check an email's status
 
