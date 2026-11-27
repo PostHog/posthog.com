@@ -2,34 +2,18 @@
 title: How to filter out internal users
 sidebar: Docs
 showTitle: true
-featuredVideo: "https://www.youtube-nocookie.com/embed/2bptTniYPGc"
 featuredTutorial: false
 author:
   - joe-martin
 tags:
   - configuration
   - product os
-date: 2022-02-14T00:00:00.000Z
+date: 2026-11-27
 ---
 
-export const step1Light =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step1-light-mode.png";
-export const step1Dark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step1-dark-mode.png";
-export const step2Light =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step2-light-mode.png";
-export const step2Dark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step2-dark-mode.png";
-export const step3Light =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step3-light-mode.png";
-export const step3Dark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step3-dark-mode.png";
+When you’re investigating an insight, it’s important to make sure you’re looking at the best possible data and that your findings aren’t skewed. That means checking you understand the definition of events or actions you’re using and, if needed, filtering out internal users, beta testers, contractors, and agencies.
 
-_Estimated reading time: 5 minutes_ ☕
-
-When you’re investigating an insight, it’s important to make sure you’re looking at the best possible data and that your findings aren’t skewed. That means checking you understand the definition of events or actions you’re using and, if need be, filtering out groups such as internal users, beta testers and contractors or agencies.
-
-Filtering out these sorts of users can be especially important for large organizations where they may be hundreds, or thousands of internal team members using your product. It can also be important for early-stage organizations, where such users may make up a larger proportion of the total users due to the small sample size.
+Filtering out these sorts of users can be especially important for large organizations where there may be hundreds, or thousands of internal team members using your product. It can also be important for early-stage organizations, where such users may make up a larger proportion of the total due to the small sample size.
 
 To make it easier to get accurate insights, PostHog includes tools to filter internal users out – and here’s how to use them.
 
@@ -37,35 +21,29 @@ To make it easier to get accurate insights, PostHog includes tools to filter int
 
 PostHog identifies internal users on a project-by-project basis, so head to your project's [Customization settings](https://app.posthog.com/settings/project-customization#internal-user-filtering) to get started. If your PostHog instance spans multiple projects then you must repeat this tutorial for each project.
 
-<ProductScreenshot
-  imageLight={step1Light}
-  imageDark={step1Dark}
-  classes="rounded"
-  alt="Filter Internal Users Step 1"
-/>
+![Filter Internal Users Step 1](https://res.cloudinary.com/dmukukwp6/image/upload/s1_settings_light_e47b56d1ec.png)
 
 Any internal users you identify for a project will apply for _all_ users on that project.
 
+New projects start with one filter already in place. It excludes the **Internal / Test users** [cohort](/docs/data/cohorts), which contains anyone with the `$internal_or_test_user` person property set to `true`, plus anyone whose email ends with the domain of the person who created the project (unless it's a generic one like Gmail). To add yourself to this cohort, call [`posthog.setInternalOrTestUser()`](/docs/product-analytics/best-practices#exclude-your-own-browser) in your browser. You can keep this filter and add your own alongside it.
+
 ## Step 2: Add an internal user filter
 
-> **Tip:** Inline person property filters (e.g., "email does not end with @your-domain.com") work everywhere, including real-time [CDP](/docs/data-pipelines) destinations. Alternatively, you can [create a cohort](/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page) and add it with a "not in" operator – this works well for analytics queries (insights, dashboards) and also works in CDP destinations if the cohort contains **exclusively person property filters**. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error.
+> **Tip:** Inline person property filters (e.g. "email does not end with @your-domain.com") work everywhere, including real-time [CDP](/docs/data-pipelines) destinations. Alternatively, you can [create a cohort](/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page) and add it with a "not in" operator – this works well for analytics queries (insights, dashboards) and also works in CDP destinations if the cohort contains **exclusively person property filters**. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error.
 
-In project settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin.
+In project settings, scroll down to the **Filter out internal and test users** section and click **+ Filter** (or **Add filter** if the list is empty) to begin.
 
-Adding a filter here works exactly the same as it does when you add a filter to any other insight, with a list of available events, properties, and cohorts to choose from as a base for your filter. You can add several filters at once, to create an inclusive list of ways to identify groups of internal users or beta testers.
+Adding a filter here works exactly as it does in any insight, with a list of available event properties, person properties, and cohorts to choose from. You can add several filters at once, to create a list of ways to identify groups of internal users or beta testers.
 
-One of the easiest filters to create is to filter out internal users identified by their email address. We do this at PostHog, using the following filter to create insights based only on users who do not have a PostHog email address:
+One of the easiest filters to create is by email addresses. We do this at PostHog, using the following filter to create insights based only on users who do not have a PostHog email address:
 
 > email ⇻ (doesn’t end with) @posthog.com
 
-<ProductScreenshot
-  imageLight={step2Light}
-  imageDark={step2Dark}
-  classes="rounded"
-  alt="Filter Internal Users Step 2"
-/>
+This only catches people you've [identified](/docs/product-analytics/identify), because anonymous visitors don't have an email property.
 
-The filters you apply are added as extra filters when the toggle is switched on. So, if you apply a Cohort filter, it means toggling filtering on will match only this specific cohort.
+![Filter Internal Users Step 2](https://res.cloudinary.com/dmukukwp6/image/upload/s2_filters_light_de0483e235.png)
+
+Each filter describes the traffic you want to keep, so use a negative operator such as **doesn't end with**, **doesn't equal**, or **user not in**. When the toggle is switched on, PostHog only shows events that match every filter. A positive operator does the opposite: a cohort filter with **user in**, for example, shows only that cohort.
 
 <MaxCTA question="Show me user analytics with internal users filtered out" />
 
@@ -77,16 +55,11 @@ You can create filters which include more than one value by separating values wi
 
 > Host ≠ (doesn’t equal) localhost:8000,localhost:5000,127.0.0.1:8000
 
-You can also create filters based on pre-prepared cohorts of users, which is especially useful if you’re using cohorts with [Feature Flags](/docs/user-guides/feature-flags) or to run [Experiments](/docs/user-guides/experimentation). To do this, simply select the cohort you wish to add to your internal and test user list.
+You can also create filters based on pre-prepared cohorts of users, which is especially useful if you’re using cohorts with [Feature Flags](/docs/feature-flags) or to run [Experiments](/docs/experiments). To do this, select the cohort you wish to add to your internal and test user list, and choose **user not in**.
 
 ## Step 4: Apply the filter to your insights
 
-<ProductScreenshot
-  imageLight={step3Light}
-  imageDark={step3Dark}
-  classes="rounded"
-  alt="Filter Internal Users Step 3"
-/>
+![Filter Internal Users Step 3](https://res.cloudinary.com/dmukukwp6/image/upload/s4_toggle_light_12f1291e3d.png)
 
 The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together.
 
