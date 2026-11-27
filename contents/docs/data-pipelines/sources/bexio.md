@@ -74,6 +74,15 @@ Bexio tables sync in one of two modes depending on whether the Bexio API support
 | `currencies`             | Currencies available in the company               | Full refresh |
 | `taxes`                  | Tax rates set up for sales and purchases          | Full refresh |
 | `users`                  | Users of the Bexio company                        | Full refresh |
+| `countries`              | Countries that contacts and addresses can use     | Full refresh |
+| `languages`              | Languages that contacts and documents can use     | Full refresh |
+| `salutations`            | Salutations that contacts can use                 | Full refresh |
+| `titles`                 | Titles that contacts can use                      | Full refresh |
+| `contact_branches`       | Branches (industries) that contacts belong to     | Full refresh |
+| `task_statuses`          | Statuses a task can have                          | Full refresh |
+| `task_priorities`        | Priorities a task can have                        | Full refresh |
+| `payment_types`          | Payment types that sales documents can use        | Full refresh |
+| `units`                  | Units that items and document positions can use   | Full refresh |
 
 ## Configuration
 
