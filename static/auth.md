@@ -1,6 +1,6 @@
 # PostHog
 
-PostHog is an open-source platform for product analytics, session replay, feature flags, experiments, surveys, and data warehousing.
+PostHog is an open-source platform with Product Analytics, Session Replay, Feature Flags, Experiments, Surveys, and Data Warehouse.
 
 PostHog runs in two cloud regions. Each region is its own authorization server, so use the endpoints of the region the user's data lives in:
 
@@ -23,7 +23,7 @@ The metadata documents are the source of truth for endpoints and supported flows
 - OAuth 2.0: standard authorization-code flow for an app acting on behalf of a user. See https://posthog.com/docs/api/oauth
 - Personal API keys: long-lived keys for scripts and server-to-server use. See https://posthog.com/docs/api/personal-api-keys
 
-## Agent registration via ID-JAG (Scale and Enterprise)
+## Agent registration with ID-JAG
 
 Available to organizations on the Scale or Enterprise platform add-on that have XAA configured. It only works once an organization admin sets up XAA, so most clients should use one of the options above. With it configured, an agent presents an [ID-JAG](https://xaa.dev) identity assertion (`identity_assertion`) to the region's token endpoint using the JWT-bearer grant (`urn:ietf:params:oauth:grant-type:jwt-bearer`) and receives a scoped, short-lived OAuth access token bound to the user. The agent must also authenticate as a registered client, with a client secret or `private_key_jwt`, and the ID-JAG's `client_id` must name that client. See https://posthog.com/docs/settings/authentication/id-jag
 
