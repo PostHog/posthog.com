@@ -12,12 +12,12 @@ You should be able to find answers to most of your payroll questions here. If yo
 - UK (Hiberly Ltd): paid on the last working day of the month. You'll find all your payslips in Sage.
 - Germany (PostHog GmbH): paid on the last working day of the month. You'll find all your payslips in Deel.
 
-**Deel (EOR)**
+**EOR**
 
 - Paid on the last working day of the month. You'll find all your payslips in Deel.
-- Canada is the exception: you're paid every two weeks.
+- In Canada, you're paid every two weeks.
 
-**Deel Contractors**
+**Contractors**
 
 - Paid monthly through your Deel invoice.
 
@@ -28,12 +28,13 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 - Pay review changes take effect from the 1st of the month after your review. See [pay reviews](/handbook/people/compensation#pay-reviews).
 - Any change needs to reach payroll before that month's cutoff. If it misses the cutoff, it will be paid in the next payroll and backdated.
 - If you're under EOR or you're a contractor, you need to sign the pay change in Deel before it can be applied.
-- 
+
 ## Your first payroll
 
 - Complete all your onboarding tasks in Deel (and BambooHR if you're in the US) during your first week. If anything is missing, you may not be included in your first payroll.
 - If you start after the payroll cutoff, you'll get your first payment in the next payroll cycle.
-- **UK only**
+
+**UK only**
 
 - We'll send you a new joiner form to fill in with your personal details.
 - Send us your P45 from your previous employer, or fill in the [HMRC starter checklist](https://www.gov.uk/government/publications/paye-starter-checklist) if you don't have one. Without it, you may be put on an emergency tax code.
