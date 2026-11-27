@@ -17,7 +17,9 @@ The Watchmode connector syncs streaming availability metadata into the PostHog D
 
 ## Prerequisites
 
-You need a Watchmode account and an API key. Every plan works, including the free Developer plan, but keep your monthly request quota in mind: each sync makes API requests that count against it, with the `titles` table needing one request per 250 titles. The per-title tables (`title_sources`, `title_details`, `title_cast_crew`) each make **one request per title** in the catalog, so they use significantly more quota.
+You need a Watchmode account and an API key. The `title_release_dates` table requires a paid Watchmode plan. The other tables work with every plan, including the free Developer plan.
+
+Keep your monthly request quota in mind: each sync makes API requests that count against it, with the `titles` table needing one request per 250 titles. The per-title tables (`title_sources`, `title_details`, `title_cast_crew`) each make **one request per title** in the catalog. The `title_seasons` and `title_episodes` tables only read TV series and miniseries. Seasons need one request per series, and episodes need one request per page of up to 500 episodes per series. The `title_release_dates` table reads the release calendar in windows of up to 30 days.
 
 ## Adding a data source
 
@@ -42,6 +44,8 @@ All Watchmode tables sync as full refresh: the API doesn't offer a change filter
 <SourceTables />
 
 The `title_sources`, `title_details`, and `title_cast_crew` tables are per-title: each sync walks the full title catalog and makes one API request per title for each selected table. If a title returns a 404 (removed from Watchmode between the catalog listing and the detail fetch), it is skipped automatically. Interrupted syncs resume from the last checkpointed page of the catalog rather than starting over.
+
+The `title_seasons` and `title_episodes` tables use the same checkpointing and skip removed titles, but only read TV series and miniseries. The `title_release_dates` table reads the release calendar by country, from one year ago to six months ahead.
 
 ## Troubleshooting
 

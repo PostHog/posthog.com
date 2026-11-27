@@ -41,6 +41,24 @@ test('gives agents the HTML when their Accept names text/html, as the Codex fetc
     assert.equal(response?.headers.get('content-type'), 'text/markdown; charset=utf-8')
 })
 
+test('weighs text/markdown against text/html in Accept', async (t) => {
+    t.mock.method(globalThis, 'fetch', async () => new Response('# Product analytics'))
+    const cases: [string, string, string | undefined][] = [
+        ['Mozilla/5.0', 'text/markdown,text/html;q=0.9,*/*;q=0.5', 'text/markdown; charset=utf-8'],
+        ['Mozilla/5.0', 'text/html,text/plain,text/markdown', 'text/markdown; charset=utf-8'],
+        ['Mozilla/5.0', 'text/html,application/json;q=0.8,text/markdown;q=0.7,*/*;q=0.5', undefined],
+        ['Mozilla/5.0', 'text/markdown;q=0.5, */*', undefined],
+        ['Mozilla/5.0', 'text/markdown;q=0', undefined],
+        ['ChatGPT-User/1.0', 'text/html;q=0, */*', 'text/markdown; charset=utf-8'],
+        ['ChatGPT-User/1.0', 'text/html;q=0, text/*;q=0, */*', undefined],
+    ]
+
+    for (const [agent, accept, contentType] of cases) {
+        const response = await middleware(new Request(page, { headers: { 'user-agent': agent, accept } }))
+        assert.equal(response?.headers.get('content-type'), contentType, accept)
+    }
+})
+
 test('leaves browsers, crawlers, and unrelated user agents alone', async (t) => {
     const fetch = t.mock.method(globalThis, 'fetch', async () => new Response())
 

@@ -29,14 +29,14 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Joining the `cs@posthog.com` [Google Group](https://groups.google.com/a/posthog.com/g/cs/about). It's self-serve, and it's how you get the emails that go out to the CS team. Don't mark them as spam, Google will quietly unsubscribe you.
 - Adding your GitHub handle to your region's sprint workflow YAML in the private `company-internal` repo, so you're assigned to the weekly `[SPRINT] Customer Success` issue where you post your retro and plans.
 - Reading the [CS](/handbook/customer-success/customer-success) and [sales](/handbook/growth/sales/overview) sections of the handbook.
-- Preparing your PostHog demo.
-- Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
-- Meet with a couple of CSMs on the team to learn how they approach the role.
+- Preparing your PostHog demo for in-person onboarding (30 minutes, you set the context!).
+- Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule. Duplicate the invite onto your own calendar and give the host a heads up that you're joining.
+- Meet with a couple of CSMs, and some teammates from the other GTM teams (sales, product-led sales (TAMs), new business (TAEs), onboarding, and RevOps) to learn how they approach the role and how each team works with CS.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/customer-success/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
-- Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook. Channels to join from day one: #team-customer-success (ask questions here by default), #group-cs-sales-support, #team-product-led-sales, #closed-won, #spike-detector, #customer-churn, and your local city/country channel. For #spike-detector, ask your team lead to add you and tag you as owner on your accounts.
+- Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook. Channels to join from day one: #team-customer-success (ask questions here by default), #group-cs-sales-support, #team-product-led-sales, #closed-won, #sales-alerts, #spike-detector, #project-managed-customers-consolidated-scouts, #customer-churn, and your local city/country channel. For #spike-detector, ask your team lead to add you and tag you as owner on your accounts.
 - Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts. Clone [PostHog/posthog](https://github.com/PostHog/posthog) too, so Claude Code can read the code behind a customer's problem. Some tips can be found in the [developing locally guide](/handbook/engineering/developing-locally#cloning-the-repository).
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
@@ -51,7 +51,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 
 ## Week 2 – in-person onboarding, your customers
 
-In-person onboarding typically happens this week (3-4 days led by your team lead). You'll get your book of customers, work through how to prioritise it, start digging in, and see how all the systems we use come together.
+In-person onboarding typically happens this week (3-4 days led by your team lead). You'll have had your book of customers for a few days by now, and you'll work through how to prioritise it, start digging in, and see how all the systems we use come together.
 
 **Focus on:**
 

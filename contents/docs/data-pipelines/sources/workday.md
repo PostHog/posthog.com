@@ -25,7 +25,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Pull your Workday HCM data over the Workday REST API.
 
-Register an API client for integrations in Workday (**Register API Client for Integrations**) with the `staffing` scope, then paste its client ID, client secret and refresh token below.
+Register an API client for integrations in Workday (**Register API Client for Integrations**) with the `staffing` scope, then paste its client ID, client secret, and refresh token below. Also add the `Time Tracking` scope for the `worker_time_blocks` table and the `Core Payroll` scope for the `worker_pay_slips` table.
 
 Your hostname and tenant are the first two parts of your Workday URL - for `https://wd2-impl-services1.workday.com/acme_pt1`, the hostname is `wd2-impl-services1.workday.com` and the tenant is `acme_pt1`.
 

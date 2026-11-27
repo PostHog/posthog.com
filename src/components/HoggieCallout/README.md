@@ -14,7 +14,7 @@ The button opens its link in a new window, with `state={{ newWindow: true }}` on
 | Component or page | Layout | Where it shows |
 | --- | --- | --- |
 | `MCPLeaderboardCallout` | `compact` | `/mcp-analytics` (the leaderboard section) |
-| `EvalsPlaygroundCallout` | `compact` | `/docs/ai-evals` and `/docs/ai-evals/offline-evals` |
+| `EvalsPlaygroundCallout` | `featured`, `tight` | `/docs/ai-evals` and `/docs/ai-evals/offline-evals` |
 | `contents/handbook/wizard-and-docs/mdx-and-components.mdx` | `featured` | `/handbook/wizard-and-docs/mdx-and-components` (the live example) |
 
 For the compact layout in a `.tsx` page, make a small wrapper component for each callout, so a page imports one component with no props. Put the copy in the wrapper. In MDX, use the featured layout directly, with no wrapper.
@@ -26,21 +26,19 @@ Add a row here when you add a callout to a page.
 ## Usage
 
 ```tsx
-import { HedgehogJudge } from '@posthog/brand/hoggies'
+import { HedgehogBasketballCoach } from '@posthog/brand/hoggies'
 import HoggieCallout from 'components/HoggieCallout'
 
-export default function EvalsPlaygroundCallout({ className = '' }: { className?: string }): JSX.Element {
+export default function MCPLeaderboardCallout({ className = '' }: { className?: string }): JSX.Element {
     return (
         <HoggieCallout
-            hoggie={HedgehogJudge}
-            hoggieTitle="A hedgehog judge in a robe and lace collar, raising a gavel"
-            hoggieAlign="bottom"
-            hoggieBreakout={false}
-            ariaLabel="Evals playground"
-            title="Before you ship, or after?"
-            description="Learn the differences between offline and online evals in our live playground."
-            buttonLabel="Evals playground"
-            to="/learn/ai-observability/live-playground/online-and-offline-evals"
+            hoggie={HedgehogBasketballCoach}
+            hoggieTitle="A hedgehog basketball coach spinning a ball, holding a clipboard"
+            ariaLabel="MCP leaderboard"
+            title="We just had to rank the robots"
+            description="Watch agents fight over who calls the PostHog MCP the most. The agents did not ask for this, but the humans are having fun watching it."
+            buttonLabel="MCP Leaderboard"
+            to="/mcp/leaderboard"
             className={className}
         />
     )
@@ -66,6 +64,7 @@ export default function EvalsPlaygroundCallout({ className = '' }: { className?:
 | `hoggieSide` | `'left'` or `'right'` | Featured only. The side the hog sits on in a medium or wide container. In a narrow container, the hog is always centered. Defaults to `left`. |
 | `interactive` | `boolean` | Featured only. Turns on the hover nudge and the poke. Defaults to `true`. |
 | `hoggieLines` | `string[]` | Featured only. Extra speech bubble lines for the chosen hog. They are added to the standard lines, not used instead of them. |
+| `tight` | `boolean` | Featured only. A shorter box with a smaller hog next to the copy. See [Tight box](#tight-box). Defaults to `false`. |
 
 ## Hoggie size and placement
 
@@ -153,6 +152,17 @@ The outer `aside` is a size container. The layout changes on the callout's width
 | `@4xl` (56rem) and up | One row: the hog, the copy, then the button | As in the medium layout. The box has a minimum height of 168px, so the hog goes 24px over the top border. |
 
 The box uses `bg-lemon-lighter` (`#FFEBA3`) in light mode and `bg-accent` in dark mode.
+
+### Tight box
+
+Use `tight` when the callout sits in the middle of a page and must take less space. The docs window with the table of contents is usually narrower than `@xl`, so the default featured box stacks the hog above the copy. A tight box puts the hog next to the copy from `@md` (28rem) instead.
+
+| Container | Layout | Hog |
+| --- | --- | --- |
+| Below `@md` (28rem) | The hog, then the copy, then a full-width button | 80px tall, centered, 28px over the top border |
+| `@md` and up | An 88px hog column, a 32px gap, then the copy. The button is under the description and fits its label. | 104px tall, 12px above the bottom border |
+
+A tight box has 16px padding, a smaller title, and a margin of 32px above and 24px below. It ignores `hoggieAlign`, `hoggieBreakout`, `hoggieSize`, and `hoggieSide`. The interactions do not change.
 
 ### Interactions
 
