@@ -114,7 +114,7 @@ After deleting an affected person, their next event creates a new person profile
 
 ## Ingested event after shortening its distinct ID to the 200 character limit
 
-PostHog shortens any `distinct_id` longer than 200 characters to its first 200 characters and ingests the event under the shortened ID. The same limit applies to [session replay](/docs/session-replay) events, which are ingested under the shortened ID without a warning.
+PostHog shortens any `distinct_id` longer than 200 characters to its first 200 characters and ingests the event under the shortened ID. [Session replay](/docs/session-replay) events are shortened the same way and raise this warning too.
 
 [Capture v1](/docs/api/capture-v1#limits-and-validation) doesn't shorten distinct IDs. It drops an event whose distinct ID is over 200 bytes and raises [Discarded event whose distinct ID exceeds the size limit](#capture-v1-validation-warnings) instead.
 
