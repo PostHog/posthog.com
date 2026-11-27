@@ -13,6 +13,8 @@ interface MenuItem {
     url?: string
     children?: MenuItem[]
     icon?: React.ReactNode
+    /** `sidebar` appearance only: a status mark in a nested item's left padding, so the label keeps its place. `null` keeps the slot empty. */
+    marker?: React.ReactNode
     /** Renders a trailing ↗ and opens in a new tab. Also inferred for `http(s)` URLs. */
     external?: boolean
     /** Start this collapsible item expanded (otherwise it only opens when a child is active). */
@@ -205,6 +207,16 @@ const MarqueeLabel = ({
 const SidebarIcon = ({ icon }: { icon: MenuItem['icon'] }) =>
     icon && typeof icon !== 'string' ? <span className="mr-1 size-4 inline-flex shrink-0">{icon}</span> : null
 
+/** A nested item's padding (20px and up) holds the marker; a top-level item's 8px does not, so there it takes an inline slot. */
+const SidebarMarker = ({ marker, index }: { marker: MenuItem['marker']; index: number }) => {
+    if (marker === undefined) return null
+    return index > 0 ? (
+        <span className="absolute left-1 top-1/2 -translate-y-1/2 inline-flex size-3.5">{marker}</span>
+    ) : (
+        <span className="mr-1 size-4 inline-flex shrink-0">{marker}</span>
+    )
+}
+
 /** ProductNav-matching link used by the `sidebar` appearance. */
 const SidebarLink = ({
     menuItem,
@@ -251,13 +263,14 @@ const SidebarLink = ({
             onMouseLeave={() => setHovering(false)}
             // Hover stays lighter than the selected state so the current page remains dominant.
             // `outline-offset-[-2px]`: keep the focus ring inside the link so the scroll container doesn't clip it.
-            className={`flex items-center gap-1 w-full min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
+            className={`relative flex items-center gap-1 w-full min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                 active
                     ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
                     : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
             }`}
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
+            <SidebarMarker marker={menuItem.marker} index={index} />
             <SidebarIcon icon={menuItem.icon} />
             <MarqueeLabel hovering={hovering} wrap={menuItem.wrap}>
                 {menuItem.name}
@@ -412,13 +425,14 @@ function SidebarCollapsibleItem({
                     // `contextMenu={false}` avoids Link's inline <span> wrapper, which would
                     // otherwise size to content in this flex row and prevent `flex-1` from filling.
                     contextMenu={false}
-                    className={`flex items-center gap-1 flex-1 min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
+                    className={`relative flex items-center gap-1 flex-1 min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                         active
                             ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
                             : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
                     }`}
                     style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
                 >
+                    <SidebarMarker marker={item.marker} index={index} />
                     <SidebarIcon icon={item.icon} />
                     <MarqueeLabel hovering={hovering}>{item.name}</MarqueeLabel>
                     <Badge badge={item.badge} />

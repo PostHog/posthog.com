@@ -131,13 +131,11 @@ const LearnNav = ({
         url: learnChapterPath(guideBasePath, page),
         // Full titles are questions, often longer than the sidebar is wide.
         wrap: fullTitles,
-        icon:
+        marker:
             page.page && !page.isFrontMatter ? (
                 readChapterSlugs.has(learnChapterSlug(page)) ? (
-                    <Check className="size-4 text-green" strokeWidth={2.5} aria-label="Read" />
-                ) : (
-                    <span />
-                )
+                    <Check className="size-full text-green" strokeWidth={2.5} aria-label="Read" />
+                ) : null
             ) : undefined,
     }))
     const hub = volume?.learnHub
