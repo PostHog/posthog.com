@@ -329,11 +329,11 @@ Set `advanced_disable_flags` to `true` to skip remote config and `/flags`. Remot
 
 > **Warning:** These features don't work when `advanced_disable_flags` is `true`.
 
--   **Feature Flags and Experiments**. Flags aren't fetched, so only [bootstrapped](/docs/feature-flags/bootstrapping) values are available.
+-   **Feature Flags and Experiments**. Flags aren't fetched. Only [bootstrapped](/docs/feature-flags/bootstrapping) values and values cached from an earlier session are available.
 -   **Session Replay**. Recording starts only when your project's remote config turns it on.
--   **Surveys**. Surveys are turned on by your project's remote config.
+-   **Surveys**. Surveys don't load unless you set `advanced_enable_surveys: true`.
 
-Features that you can also turn on in your project settings, such as heatmaps, web vitals, and exception autocapture, only use your `init` options. Set their options in `init` to turn them on.
+Features that you turn on in your project settings, such as heatmaps, web vitals, and exception autocapture, don't get those settings. If a feature has an `init` option, set it to turn the feature on.
 
 #### Features that keep working
 
