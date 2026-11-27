@@ -12,22 +12,23 @@ You should be able to find answers to most of your payroll questions here. If yo
 - UK (Hiberly Ltd): paid on the last working day of the month. You'll find all your payslips in Sage.
 - Germany (PostHog GmbH): paid on the last working day of the month. You'll find all your payslips in Deel.
 
-**EOR**
+**Deel (EOR)**
 
 - Paid on the last working day of the month. You'll find all your payslips in Deel.
-- In Canada, you're paid every two weeks.
+- Canada is the exception: you're paid every two weeks.
+
+If payday falls on a weekend or public holiday, you're paid on the working day before.
 
 **Contractors**
 
-- Paid monthly through your Deel invoice.
-
-If payday falls on a weekend or public holiday, you're paid on the working day before.
+- You invoice us monthly through Deel.
+- Your bank details and any rate changes are managed in Deel.
 
 ## When changes show up in your pay
 
 - Pay review changes take effect from the 1st of the month after your review. See [pay reviews](/handbook/people/compensation#pay-reviews).
 - Any change needs to reach payroll before that month's cutoff. If it misses the cutoff, it will be paid in the next payroll and backdated.
-- If you're under EOR or you're a contractor, you need to sign the pay change in Deel before it can be applied.
+- If you're under EOR, you need to sign the pay change in Deel before it can be applied.
 
 ## Your first payroll
 
@@ -44,7 +45,7 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 
 **Bank details**
 
-- Germany, EOR or contractor: update them in Deel.
+- Germany or EOR: update them in Deel.
 - UK: send them to <PrivateLink url="https://posthog.slack.com/team/U0B4W74LN83">@Milagros</PrivateLink> through a 1Password share link.
 - US: update them in BambooHR.
 
@@ -58,7 +59,6 @@ We'll never ask you to change your bank details through an email link or a messa
 **Moving**
 
 - If you're moving to another state or country, tell us before you move. It can change your taxes or the entity you're in.
-
 
 ## Retirement contributions
 
