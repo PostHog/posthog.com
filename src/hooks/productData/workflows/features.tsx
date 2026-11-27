@@ -106,7 +106,7 @@ export const features = {
         title: 'Channels',
         headline: 'Channels',
         description:
-            'Reach users wherever they are. Pick from the standard channels or connect to one of the 35+ integrations (and counting) that we have.',
+            'Send email, SMS, and Slack messages from the same workflow, or call a webhook. You can also send to one of 35+ other destinations, such as Discord and GitHub.',
         icon: <IconSend />,
         color: 'purple',
         images: [

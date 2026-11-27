@@ -6,14 +6,17 @@ import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '
 
 interface KeyFeaturesProps extends SectionComponentProps {
     slides?: CarouselSlideType[]
+    heading?: string
+    intro?: React.ReactNode
 }
 
-const KeyFeatures = ({ id, productData, slides = [] }: KeyFeaturesProps) => {
+const KeyFeatures = ({ id, productData, slides = [], heading = 'Key features', intro }: KeyFeaturesProps) => {
     if (!slides.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className={SECTION_H2}>Key features</h2>
+            <h2 className={SECTION_H2}>{heading}</h2>
+            {intro && <div className="prose dark:prose-invert max-w-none">{intro}</div>}
             <TabbedCarousel
                 tabs={slides.map((s) => ({
                     value: s.slug,
