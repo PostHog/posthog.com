@@ -29,29 +29,33 @@ Once the syncs are complete, you can start using HighLevel data in PostHog.
 
 ## Available tables
 
-| Table                | Description                               | Sync method  |
-| -------------------- | ----------------------------------------- | ------------ |
-| `contacts`           | People and businesses in the CRM          | Incremental  |
-| `opportunities`      | Deals in the sales pipelines              | Full refresh |
-| `pipelines`          | Sales pipelines and their stages          | Full refresh |
-| `calendars`          | Booking calendars                         | Full refresh |
-| `calendar_groups`    | Groups that organize calendars            | Full refresh |
-| `conversations`      | Conversation threads across channels      | Full refresh |
-| `messages`           | Messages for all channels except email    | Incremental  |
-| `email_messages`     | Email messages in conversations           | Incremental  |
-| `custom_fields`      | Custom fields defined in the sub-account  | Full refresh |
-| `tags`               | Tags defined in the sub-account           | Full refresh |
-| `forms`              | Forms built in the sub-account            | Full refresh |
-| `form_submissions`   | Submissions of forms                      | Incremental  |
-| `surveys`            | Surveys built in the sub-account          | Full refresh |
-| `survey_submissions` | Submissions of surveys                    | Incremental  |
-| `invoices`           | Invoices sent from the sub-account        | Full refresh |
-| `transactions`       | Payment transactions                      | Full refresh |
-| `orders`             | Orders from funnels, websites, and stores | Full refresh |
-| `subscriptions`      | Recurring payment subscriptions           | Full refresh |
-| `products`           | Products sold in the sub-account          | Full refresh |
-| `workflows`          | Automation workflows                      | Full refresh |
-| `campaigns`          | Campaigns                                 | Full refresh |
+| Table                | Description                                | Sync method  |
+| -------------------- | ------------------------------------------ | ------------ |
+| `contacts`           | People and businesses in the CRM           | Incremental  |
+| `contact_notes`      | Notes recorded on contacts                 | Full refresh |
+| `opportunities`      | Deals in the sales pipelines               | Full refresh |
+| `pipelines`          | Sales pipelines and their stages           | Full refresh |
+| `calendars`          | Booking calendars                          | Full refresh |
+| `calendar_groups`    | Groups that organize calendars             | Full refresh |
+| `calendar_events`    | Appointments booked on calendars           | Full refresh |
+| `conversations`      | Conversation threads across channels       | Full refresh |
+| `messages`           | Messages for all channels except email     | Incremental  |
+| `email_messages`     | Email messages in conversations            | Incremental  |
+| `custom_fields`      | Custom fields defined in the sub-account   | Full refresh |
+| `tags`               | Tags defined in the sub-account            | Full refresh |
+| `forms`              | Forms built in the sub-account             | Full refresh |
+| `form_submissions`   | Submissions of forms                       | Incremental  |
+| `surveys`            | Surveys built in the sub-account           | Full refresh |
+| `survey_submissions` | Submissions of surveys                     | Incremental  |
+| `invoices`           | Invoices sent from the sub-account         | Full refresh |
+| `lost_reasons`       | Reasons when an opportunity is marked lost | Full refresh |
+| `transactions`       | Payment transactions                       | Full refresh |
+| `orders`             | Orders from funnels, websites, and stores  | Full refresh |
+| `subscriptions`      | Recurring payment subscriptions            | Full refresh |
+| `products`           | Products sold in the sub-account           | Full refresh |
+| `workflows`          | Automation workflows                       | Full refresh |
+| `campaigns`          | Campaigns                                  | Full refresh |
+| `users`              | Team members of the sub-account            | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
@@ -63,12 +67,14 @@ The private integration token needs the following read scopes for the tables you
 
 - `calendars.readonly`
 - `calendars/groups.readonly`
+- `calendars/events.readonly`
 - `campaigns.readonly`
 - `contacts.readonly`
 - `conversations.readonly`
 - `conversations/message.readonly`
 - `forms.readonly`
 - `invoices.readonly`
+- `locations.readonly`
 - `locations/customFields.readonly`
 - `locations/tags.readonly`
 - `opportunities.readonly`
@@ -77,6 +83,7 @@ The private integration token needs the following read scopes for the tables you
 - `payments/transactions.readonly`
 - `products.readonly`
 - `surveys.readonly`
+- `users.readonly`
 - `workflows.readonly`
 
 You only need to enable the scopes for the tables you plan to sync.
