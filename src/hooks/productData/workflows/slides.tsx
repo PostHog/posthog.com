@@ -86,7 +86,7 @@ const sendExamples = [
 ]);`,
     },
     {
-        label: 'cURL',
+        label: 'REST',
         language: 'bash',
         code: `curl -X POST "https://us.posthog.com/api/messaging/send/email/" \\
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \\
@@ -117,6 +117,7 @@ const apiExamples = [
   -d '{
     "name": "Shared folders launch",
     "origin_product": "broadcasts",
+    "exit_condition": "exit_only_at_end",
     "actions": [
       { "id": "trigger_node", "name": "Free plan", "type": "trigger", "config": {
           "type": "batch",
@@ -125,6 +126,7 @@ const apiExamples = [
           "template_id": "template-email",
           "inputs": { "email": { "value": {
             "to": { "email": "{{ person.properties.email }}", "name": "" },
+            "from": { "email": "hello@hedgebox.net", "name": "Hedgebox" },
             "subject": "New: shared folders",
             "html": "<p>Share a whole folder with one link.</p>",
             "text": "Share a whole folder with one link." } } } } },
@@ -152,9 +154,11 @@ const apiExamples = [
       { "id": "delay_1", "name": "Wait 3 days", "type": "delay", "config": { "delay_duration": "3d" } },
       { "id": "email_1", "name": "Upload nudge", "type": "function_email", "config": {
           "template_id": "template-email",
-          "template_uuid": "<template_id>",
+          "template_uuid": "<saved_template_uuid>",
           "message_category_type": "marketing",
-          "inputs": { "email": { "value": { "to": { "email": "{{ person.properties.email }}", "name": "" } } } } } },
+          "inputs": { "email": { "value": {
+            "to": { "email": "{{ person.properties.email }}", "name": "" },
+            "from": { "email": "hello@hedgebox.net", "name": "Hedgebox" } } } } } },
       { "id": "exit_node", "name": "Exit", "type": "exit", "config": { "reason": "Done" } }
     ],
     "edges": [
@@ -299,7 +303,10 @@ export const applications: CarouselSlide[] = [
             <>
                 <p>
                     Use the <DocsLink to="/docs/workflows/surfaces/api">REST API</DocsLink> when you want automations
-                    under version control, generated from your own system, or created as part of a deploy.
+                    under version control, generated from your own system, or created as part of a deploy. A new
+                    broadcast or automation starts as a draft, so nothing sends until you publish it. See the{' '}
+                    <DocsLink to="/docs/api/hog-flows">workflows API reference</DocsLink> and the{' '}
+                    <DocsLink to="/docs/api/messaging">sending API reference</DocsLink>.
                 </p>
                 <List
                     items={[
