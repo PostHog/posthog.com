@@ -9,9 +9,9 @@ availability:
 sourceId: PabblySubscriptionsBilling
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Pabbly Subscription Billing connector syncs your customers, subscriptions, products, invoices, transactions, refunds, and related billing data into the PostHog Data Warehouse, so you can analyze your recurring revenue alongside your product data.
 
@@ -45,5 +45,6 @@ Pabbly Subscription Billing exposes no server-side change filter, so every table
 
 - If you see an authentication error, your API key or secret key is invalid or has been regenerated. Generate new keys under **Settings → API Settings** in Pabbly Subscription Billing, then reconnect.
 - Pabbly Subscription Billing limits accounts to 10,000 API requests per day. Very large accounts syncing many tables on a frequent schedule can hit this quota; if syncs start failing late in the day, reduce the sync frequency or the number of synced tables.
+- The `scheduled_changes` table makes one API request per subscription on every sync. For accounts with thousands of subscriptions, this can consume a large portion of the daily quota. If you don't need scheduled change data, consider disabling this table to preserve API quota for other tables.
 
 <TroubleshootingLink />
