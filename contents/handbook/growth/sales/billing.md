@@ -7,7 +7,7 @@ showTitle: true
 
 ## Managing billing
 
-> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Use Billing admin to [switch an existing platform package](#switch-an-existing-platform-package) at the standard price. Sales should coordinate with the billing team for other billing modifications, pricing changes, or technical billing tasks.
 >
 > Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
@@ -292,12 +292,22 @@ When calculating usage limits, discounts are taken into consideration _before_ t
 1. Add custom metadata if needed.
 
 ### Plans
-> ⚠️ Plan modifications are handled exclusively by the <SmallTeam slug="billing" />. Do not attempt to modify plans directly, contact the billing team for any plan related requests.
+> ⚠️ The <SmallTeam slug="billing" /> handles plan modifications, with one exception for [standard-price switches between existing platform packages](#switch-an-existing-platform-package) in Billing admin.
 
-You can find a list of available plans in the billing repo. These are found inside `costants/plans`, divided by folder.
+You can find a list of available plans in the billing repo. These are found inside `billing/constants/plans`, divided by folder.
 Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
-You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
+Editing a customer's `plans_map` changes feature access in PostHog only.
+
+### Switch an existing platform package
+
+Members of the `Sales/CS/Support` group in Billing admin can switch a customer with one existing platform package and a direct Stripe subscription to Boost, Scale, or Enterprise at the standard price.
+
+1. Open the customer in <PrivateLink url="https://billing.posthog.com/admin/billing/customer/">Billing admin</PrivateLink>. Cancel any active platform trial in **Trials** first.
+2. Click **Change platform package** next to **History**. Select the agreed package, then click **Change package**.
+3. Confirm the switch in **History**.
+
+Stripe invoices the prorated difference immediately for an upgrade. A downgrade adds a credit to the next invoice.
 
 ### Paid features for employee side projects
 
@@ -313,7 +323,7 @@ The flag only changes what a trial lends where the customer set no limit. If the
 
 ### Updating subscriptions
 
-Stripe subscriptions can be modified relatively freely for example if moving to a custom pricing plan. 
+The Billing team uses these Stripe steps for manual changes such as custom pricing. For standard-price package switches, use the [Billing admin steps](#switch-an-existing-platform-package).
 
 ![Stripe subscription update](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth/sales/stripe-update-subscription.png)
 
