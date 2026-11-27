@@ -9,7 +9,7 @@ availability:
 sourceId: CampaignMonitor
 ---
 
-The Campaign Monitor (CreateSend) connector syncs your email marketing data – clients, campaigns, lists, segments, templates, suppression lists, subscriber states, and campaign performance reports – into PostHog.
+The Campaign Monitor (CreateSend) connector syncs your email marketing data – clients, campaigns, lists, segments, templates, tags, suppression lists, subscriber states, campaign performance reports, and transactional emails – into PostHog.
 
 ## Adding a data source
 
@@ -34,16 +34,20 @@ Once the syncs are complete, you can start using Campaign Monitor data in PostHo
 | `lists`                    | Subscriber lists for the client                                                                                     | Full refresh |
 | `segments`                 | Segments defined on the client's lists                                                                              | Full refresh |
 | `templates`                | Email templates for the client                                                                                      | Full refresh |
+| `tags`                     | Tags applied to the client's campaigns                                                                              | Full refresh |
 | `suppression_list`         | The client's suppression list                                                                                       | Full refresh |
 | `active_subscribers`       | Active subscribers across the client's lists                                                                        | Full refresh |
 | `unsubscribed_subscribers` | Unsubscribed subscribers across the client's lists                                                                  | Full refresh |
 | `bounced_subscribers`      | Bounced subscribers across the client's lists                                                                       | Full refresh |
+| `unconfirmed_subscribers`  | Subscribers who joined a list but have not yet confirmed their subscription (double opt-in)                         | Full refresh |
+| `deleted_subscribers`      | Subscribers who were deleted from a list                                                                            | Full refresh |
 | `campaign_summary`         | Aggregate performance summary per sent campaign (recipients, opens, clicks, unsubscribes, bounces, spam complaints) | Full refresh |
 | `campaign_opens`           | Individual open events for each sent campaign                                                                       | Full refresh |
 | `campaign_clicks`          | Individual link click events for each sent campaign                                                                 | Full refresh |
 | `campaign_unsubscribes`    | Recipients who unsubscribed from each sent campaign                                                                 | Full refresh |
 | `campaign_bounces`         | Recipients whose email bounced for each sent campaign                                                               | Full refresh |
 | `campaign_spam_complaints` | Recipients who marked each sent campaign as spam                                                                    | Full refresh |
+| `transactional_messages`   | Transactional emails (classic and smart) sent through Campaign Monitor                                              | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
