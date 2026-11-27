@@ -140,12 +140,11 @@ export const applications: CarouselSlide[] = [
                 />
             </>
         ),
-        image: {
-            ref: 'builder',
-            maxWidth: 'max-w-none',
-            containerClassName: 'pb-0 leading-[0]',
-            imgClassName: 'border-b-0 rounded-b-none',
-        },
+        image: shot(
+            'wf_landing_calendar_light_eaa2380cb1.png',
+            'wf_landing_calendar_dark_14632ec78e.png',
+            'Broadcasts and automated emails on the send calendar'
+        ),
     },
     {
         ...style,
@@ -363,7 +362,7 @@ export const keyFeatures: CarouselSlide[] = [
         label: 'Channels',
         icon: <IconSend className="size-5" />,
         progressBar: 'bg-purple',
-        layout: 'float',
+        layout: 'stack',
         heading: f.channels.headline,
         description: (
             <>
@@ -371,9 +370,10 @@ export const keyFeatures: CarouselSlide[] = [
                 <List items={f.channels.features.map((item) => [item.title, item.description ?? ''])} />
             </>
         ),
-        image: {
-            src: f.channels.images[0].src,
-            alt: f.channels.images[0].alt,
-        },
+        image: shot(
+            'wf_landing_channels_light_98567d4ada.png',
+            'wf_landing_channels_dark_209d84df9b.png',
+            'Email, SMS, push, and Slack channels in PostHog'
+        ),
     },
 ]

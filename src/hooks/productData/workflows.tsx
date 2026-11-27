@@ -141,9 +141,9 @@ export const workflows = {
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_light_1_7afd43fd88.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_dark_1_9ebe26d46e.png',
-            alt: 'Workflows screenshot',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/wf_landing_builder_light_da51389d7a.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/wf_landing_builder_dark_2c7e828448.png',
+            alt: 'An automation in the PostHog workflow builder',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
         },
