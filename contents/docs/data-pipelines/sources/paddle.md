@@ -9,7 +9,7 @@ availability:
 sourceId: Paddle
 ---
 
-The Paddle connector syncs customers, discounts, prices, products, subscriptions, transactions, adjustments, and explore metrics from your Paddle account into PostHog.
+The Paddle connector syncs customers, discounts, discount groups, prices, products, subscriptions, transactions, adjustments, explore metrics, customer addresses, customer businesses, and subscription history from your Paddle account into PostHog.
 
 ## Adding a data source
 
@@ -25,7 +25,11 @@ The Paddle connector syncs customers, discounts, prices, products, subscriptions
    - Subscriptions
    - Transactions
    - Adjustments
-   - Metrics (only required for the `explore_metrics` table — a key without this permission can still sync all other tables)
+   - Addresses (only required for the `customer_addresses` table)
+   - Businesses (only required for the `customer_businesses` table)
+   - Metrics (only required for the `explore_metrics` table)
+
+   A key without the Addresses, Businesses, or Metrics permissions can still sync all other tables.
 
    Copy the generated API key (it starts with `pdl_live_...` for live keys or `pdl_sdbx_...` for sandbox keys).
 
@@ -45,4 +49,4 @@ Once the syncs are complete, you can start using Paddle data in PostHog.
 
 ## Sync methods
 
-The `transactions` and `explore_metrics` tables support incremental syncing. The `transactions` table uses `billed_at` as its replication key, while `explore_metrics` uses `timestamp`. All other tables (customers, discounts, prices, products, subscriptions, and adjustments) are synced via full table refresh.
+The `transactions`, `explore_metrics`, and `subscription_history` tables support incremental syncing. The `transactions` table uses `billed_at` as its replication key, `explore_metrics` uses `timestamp`, and `subscription_history` uses `occurred_at`. All other tables (customers, discounts, discount groups, prices, products, subscriptions, adjustments, customer addresses, and customer businesses) are synced via full table refresh.
