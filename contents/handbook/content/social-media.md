@@ -8,9 +8,7 @@ showTitle: true
 
 ## Where we post
 
-PostHog has a presence on [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
-
-Liam owns and runs these accounts. If you need something posted from an official account, want a reply sent from one, or have a question about our presence on a platform, he's your point of contact.
+PostHog has a presence on [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />. If you need something posted from an official account, want a reply sent from one, or have a question about our presence on a platform, he's your point of contact.
 
 Our primary platforms are X, LinkedIn, and YouTube. We optimize for them. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
 
@@ -116,7 +114,7 @@ Give as much notice as you can, ideally at least a week. Share the checklist in 
 - A widely broadcast Slack message you're already sending about the launch.
 - The `#team-marketing` or `#team-editorial` Slack channels.
 
-In both cases, tag <TeamMember name="Liam Graham" />. Don't send it by DM. We want this to be transparent.
+In both cases, tag <TeamMember name="Liam Graham" />. Don't send it by DM. We want everyone to be able to see it.
 
 ### OpenGraph images for product pages
 

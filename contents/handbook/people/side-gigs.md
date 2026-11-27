@@ -40,7 +40,7 @@ If a team wants to pay for it, run it on PostHog infrastructure, rely on it for 
 
 ## Paid posts and sponsored content
 
-Paid social media posts and sponsored content count as side gigs. This includes offers from companies to pay you to post about them, and work as an influencer. Get signoff for these in the same way as any other side gig. If you use your social media accounts for PostHog work too, read our [guidance on personal accounts](/handbook/brand/ambassador#using-your-personal-accounts-for-posthog-work).
+Paid social media posts, sponsored content, and influencer work are side gigs. If a company offers to pay you to post about them, get signoff in the same way as any other side gig. If you use your social media accounts for PostHog work too, read our [guidance on personal accounts](/handbook/brand/ambassador#using-your-personal-accounts-for-posthog-work).
 
 ## Getting signoff
 
