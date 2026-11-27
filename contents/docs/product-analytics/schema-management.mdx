@@ -191,6 +191,17 @@ track("button_clicked", {
 
 ### Go
 
+The Go package that `schema pull` generates imports posthog-go 1.x (`github.com/posthog/posthog-go`). If your app uses posthog-go 2.x (`github.com/posthog/posthog-go/v2`), download the 2.x package from the API instead. Use a [personal API key](/docs/api/personal-api-keys) with the `event_definition:read` scope:
+
+```bash
+mkdir -p posthog-typed
+curl -s -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "https://us.posthog.com/api/projects/<project_id>/event_definitions/golang/?sdk=posthog-go-v2" \
+  | jq -r .content > posthog-typed/posthog-typed.go
+```
+
+For EU Cloud, use `https://eu.posthog.com`. The example below uses posthog-go 2.x. With the 1.x package, import `github.com/posthog/posthog-go` instead.
+
 ```go
 import (
     "github.com/posthog/posthog-go/v2"
