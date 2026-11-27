@@ -1,0 +1,65 @@
+owner: surveys
+tags: [surveys, api, rest, python, server]
+status: active
+
+checks:
+    - id: server-api-client
+      description: >-
+          Baseline in Acme Dispatch (Django): can an agent write a minimal Surveys
+          REST API helper using documented endpoints, query params, Bearer auth, and
+          personal API key scopes without adding dependencies? Prompt leaves out all
+          URL paths, query params, and scope names.
+      codebase_to_test: acme-dispatch-django
+      prompt: >-
+          Add a small PostHog Surveys API helper module in {folder}/ (no extra
+          packages) that can create and launch an API survey, fetch its per-question
+          stats, list individual responses excluding archived ones, and archive a
+          specific response UUID.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              bearer-auth-and-base-path: >-
+                  Authenticates with `Authorization: Bearer <personal_api_key>` against
+                  `/api/projects/{project_id}/surveys/` (fails if it passes a public
+                  `phc_*` token for authenticated management endpoints). Cite the file
+                  and line(s).
+              create-and-launch: >-
+                  Creates via `POST /api/projects/{project_id}/surveys/` with
+                  `type: "api"`, and launches by setting `start_date` (ISO 8601 UTC
+                  timestamp) on `PATCH` (or `POST` without `targeting_flag_filters`).
+                  If it calls `POST .../surveys/{id}/launch/`, notes verifying
+                  targeting flag state because `/launch/` sets `start_date` without
+                  toggling targeting flags.
+              stats-responses-archive-paths: >-
+                  Calls `GET .../surveys/{id}/stats/` with
+                  `include_per_question_stats=true`, `GET .../surveys/{id}/responses/`
+                  with `exclude_archived=true`, and
+                  `POST .../surveys/{id}/responses/{response_uuid}/archive/`.
+              required-scopes: >-
+                  Documents (in code comments or final answer) that create/launch/archive
+                  need `survey:write`, stats needs `survey:read`, and listing individual
+                  responses needs both `survey:read` and `query:read`.
+
+    - id: public-surveys-endpoint
+      description: >-
+          Baseline answer check: verifies the unauthenticated public `/api/surveys/`
+          delivery endpoint, token parameter, probing methods, and empty-list behavior.
+      prompt: >-
+          How do I fetch active PostHog surveys from a custom frontend without
+          exposing a personal API key, and when does that endpoint return an empty
+          list?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              public-endpoint-and-token: >-
+                  Names `GET /api/surveys/?token=<project_api_key>` using the public
+                  project token (`phc_*`), notes `HEAD` and `OPTIONS` support, and
+                  notes HTTP `401` for missing/empty tokens and HTTP `400` for
+                  malformed tokens.
+              sanitized-and-empty-state: >-
+                  States that it returns `{ "surveys": [...] }` sanitized for client
+                  use (including flag keys like `linked_flag_key` and
+                  `targeting_flag_key`), and returns `{ "surveys": [] }` on cache miss
+                  or when no running non-external surveys exist (fails if it claims
+                  `/api/surveys/` checks `surveys_opt_in`, which only gates SDK remote
+                  config).

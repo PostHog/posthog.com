@@ -1,0 +1,30 @@
+owner: surveys
+tags: [surveys, setup, javascript, nextjs]
+status: active
+
+checks:
+    - id: setup-prebuilt-surveys
+      description: >-
+          Baseline: can an agent enable pre-built PostHog Surveys in a Next.js App
+          Router app without referencing the removed opt_in_site_apps flag? The prompt
+          leaves out project settings and init flags on purpose.
+      codebase_to_test: starter-nextjs
+      prompt: >-
+          Set up PostHog surveys in the Next.js app in {folder}/ so I can launch a
+          built-in popover survey from the PostHog dashboard.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json installs `posthog-js` and the app initializes
+                  PostHog with a project token and `api_host` (using
+                  `<ph_posthog_js_defaults>` if `defaults` is passed). Fails if
+                  `disable_surveys` is set to `true`. Cite the file and line(s).
+              no-legacy-site-apps-flag: >-
+                  Neither the code nor the final answer tells the user to set
+                  `opt_in_site_apps` or enable site apps. Fails if `opt_in_site_apps`
+                  appears anywhere.
+              project-setting-mentioned: >-
+                  The final answer tells the user to turn on Surveys
+                  (`surveys_opt_in`) in PostHog project survey settings before
+                  surveys will show.

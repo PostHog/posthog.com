@@ -1,0 +1,65 @@
+owner: surveys
+tags: [surveys, custom-ui, javascript, react, nextjs]
+status: active
+
+checks:
+    - id: custom-api-survey
+      description: >-
+          Baseline: can an agent fetch active API surveys after flags and surveys
+          load, filter by type === 'api', and capture lifecycle events with ID-keyed
+          responses? Prompt intentionally omits onFeatureFlags, onSurveysLoaded,
+          onActiveMatchingSurveysChanged, and $survey_response_<question.id>.
+      codebase_to_test: starter-nextjs
+      pages:
+          - docs/surveys/setup
+      prompt: >-
+          Build a custom feedback form in the Next.js app in {folder}/ that fetches
+          active PostHog API surveys, shows the first matching survey, and sends the
+          user's response back to PostHog.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              waits-for-flags-and-surveys: >-
+                  Fetches matching surveys via `posthog.onActiveMatchingSurveysChanged`
+                  or calls `posthog.getActiveMatchingSurveys` inside
+                  `posthog.onFeatureFlags` and `posthog.onSurveysLoaded`. Fails if
+                  `getActiveMatchingSurveys` runs synchronously inside `posthog.init`'s
+                  `loaded` callback or before feature flags load. Cite the file and
+                  line(s).
+              filters-api-type: >-
+                  Filters matching surveys to `survey.type === 'api'` before rendering.
+                  Fails if `popover` or `widget` surveys can be rendered by the custom
+                  form.
+              captures-shown-and-sent: >-
+                  Captures `survey shown` (with `$survey_id` and `$survey_iteration`)
+                  and `survey sent` with `$survey_id`, `$survey_iteration`,
+                  `$survey_submission_id`, `$survey_completed: true`, and ID-keyed
+                  response property `$survey_response_${question.id}`. Fails if it only
+                  sends legacy `$survey_response` without the question UUID.
+              null-safe-initial-state: >-
+                  Initializes survey state to `null` or `undefined` (not `{}`) and
+                  guards rendering until a matching survey with questions is present.
+
+    - id: programmatic-thumbs-widget
+      description: >-
+          Baseline: can an agent wire a thumbs up / thumbs down trigger that opens a
+          PostHog popover survey pre-filled with the selected thumb using the current
+          React hook or displaySurvey API instead of deprecated renderSurvey?
+      codebase_to_test: starter-nextjs
+      prompt: >-
+          Add a thumbs up / thumbs down feedback widget to the Next.js app in
+          {folder}/ that opens a PostHog popover survey with the chosen thumb
+          pre-selected.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              uses-current-api: >-
+                  Uses `useThumbSurvey` from `@posthog/react/surveys` (attaching
+                  `triggerRef` and calling `respond('up')` / `respond('down')`) or
+                  calls `posthog.displaySurvey` with `DisplaySurveyType.Popover` and
+                  `initialResponses`. Fails if it uses the deprecated
+                  `posthog.renderSurvey` or imports `useThumbSurvey` from the
+                  `@posthog/react` root. Cite the file and line(s).
+              avoids-inline-prefill-bug: >-
+                  Uses popover display mode for pre-filled answers rather than inline
+                  display mode (which ignores `initialResponses`).

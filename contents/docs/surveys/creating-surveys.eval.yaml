@@ -1,0 +1,60 @@
+owner: surveys
+tags: [surveys, authoring, hosted, translations]
+status: active
+
+checks:
+    - id: hosted-prefill-and-limits
+      description: >-
+          Baseline answer check: tests hosted survey URL prefill rules
+          (skipSubmitButton requirement, deprecated auto_submit params), hosted
+          display-condition omission, and behavioral cohort limits.
+      prompt: >-
+          I want to send a hosted PostHog survey link by email that pre-fills
+          question 1 with an NPS score of 9, skips straight to question 2, and targets
+          users in a behavioral cohort. How do I configure it and what limitations
+          apply?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              hosted-url-and-prefill: >-
+                  Uses 0-based query parameters (`?q0=9`, optionally with
+                  `distinct_id`) and notes hosted Cloud domains (`posthogsurveys.com`
+                  or `eu.posthogsurveys.com`).
+              skip-submit-button-rule: >-
+                  Explains that consecutive pre-filled questions from question 0 are
+                  skipped only when **Automatically submit on selection**
+                  (`skipSubmitButton: true`) is enabled on each skipped question, and
+                  does not recommend the deprecated `auto_submit` URL param or
+                  `autoSubmitIfComplete`.
+              hosted-no-cohort-targeting: >-
+                  States that hosted surveys (`external_survey`) take no cohort or
+                  flag targeting at all (the API rejects `linked_flag_id` and
+                  `targeting_flag_filters`, and display conditions don't apply), so
+                  audience selection happens by who you send the link to. If it
+                  mentions non-behavioral or real-time cohorts, clarifies those apply
+                  to in-app surveys only.
+
+    - id: translations-and-open-ended-recurrence
+      description: >-
+          Baseline answer check: tests multi-language translation constraints and
+          open-ended recurring schedules (repeat_until_stopped: true via API/MCP).
+      prompt: >-
+          How do I localize one PostHog survey into Spanish and German without
+          duplicating it, and make it repeat every 30 days indefinitely until we
+          manually stop it?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              translations-rules: >-
+                  Explains setting `base_language` (BCP-47, default `"en"`, max 20
+                  chars), survey-level copy in `translations.<lang>`, and question copy
+                  in `questions[i].translations.<lang>` (or calling
+                  `POST /api/projects/{project_id}/surveys/{id}/generate_translations/`),
+                  noting translation keys can't repeat `base_language` and question
+                  order, branching, and display conditions stay locked to the base
+                  language.
+              open-ended-recurrence: >-
+                  Explains that fixed recurring schedules in the editor auto-close
+                  after `iteration_count * iteration_frequency_days`, and to repeat
+                  indefinitely until manually stopped you must set
+                  `repeat_until_stopped: true` via the Surveys API or PostHog MCP.

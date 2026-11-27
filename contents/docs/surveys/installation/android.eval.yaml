@@ -1,0 +1,34 @@
+owner: surveys
+tags: [surveys, install, android, kotlin, mobile]
+status: active
+
+checks:
+    - id: enable-compose-surveys
+      description: >-
+          Baseline in Tasks.org (Kotlin Android + Jetpack Compose, already on
+          posthog-android 3.72.3): can an agent enable built-in Compose surveys with
+          posthog-android-surveys-compose and surveys = true (explicit delegate
+          optional since 3.49.0 auto-discovers PostHogSurveysComposeDelegate)? Prompt
+          omits the Compose artifact and the HTML omission limitation. Android does
+          not build in Gauge, so no `builds` shared rubric.
+      codebase_to_test: oss-tasks-android
+      pages:
+          - docs/surveys/sdk-feature-support
+      prompt: >-
+          Enable built-in PostHog Surveys UI in this Android app and note any
+          formatting limitations our product team should avoid in survey copy.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              compose-delegate-configured: >-
+                  Adds `posthog-android-surveys-compose` and sets `surveys = true`
+                  (explicitly assigning `surveysConfig.surveysDelegate =
+                  PostHogSurveysComposeDelegate(...)` also passes, since 3.49.0+
+                  auto-discovers it when the Compose artifact is on the classpath).
+                  Fails if it only sets `surveys = true` without adding
+                  `posthog-android-surveys-compose` or a custom
+                  `PostHogSurveysDelegate`. Cite the file and line(s).
+              plain-text-html-limitation: >-
+                  Final answer warns that Android omits HTML descriptions on intro
+                  screens, questions, and thank-you screens (use plain text), and notes
+                  Android API >= 23 and `surveys_opt_in` in project settings.

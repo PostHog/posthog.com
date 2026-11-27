@@ -1,0 +1,48 @@
+owner: surveys
+tags: [surveys, mcp, ai]
+status: active
+
+checks:
+    - id: mcp-tools-and-scopes
+      description: >-
+          Baseline answer check: verifies PostHog MCP Surveys tool names, draft-by-default
+          create behavior, and the dual scope requirement on surveys-responses-list.
+      prompt: >-
+          What PostHog MCP tools exist for creating a localized recurring survey and
+          reading individual survey responses, what scopes do they need, and does
+          creating a survey via MCP launch it immediately?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              draft-by-default: >-
+                  States that `survey-create` creates a survey as a draft by default
+                  and does not launch it immediately.
+              tool-names-and-inputs: >-
+                  Names `survey-create` (with `base_language`, `translations`,
+                  `schedule`, and `repeat_until_stopped`), `survey-update`, and
+                  `surveys-responses-list` (with `exclude_archived` or score filters).
+              required-scopes: >-
+                  States `survey:write` for `survey-create` / `survey-update`, and both
+                  `survey:read` and `query:read` for `surveys-responses-list`.
+
+    - id: mcp-create-draft-survey
+      description: >-
+          Live MCP check (skipped until gauge/mcp-servers.yml pins the eval posthog
+          MCP server): verifies an agent uses survey-create to author a draft
+          multi-language open-ended recurring survey without setting start_date.
+      suite: deep
+      attach_mcp: posthog
+      prompt: >-
+          Create a draft PostHog popover survey in English with a Spanish translation
+          asking users to rate onboarding 1 to 5, set to repeat every 30 days until
+          manually stopped. Do not launch it.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              created-as-draft: >-
+                  Calls `survey-create` without setting `start_date`, leaving the
+                  survey as a draft.
+              localization-and-recurrence: >-
+                  Passes `base_language: "en"`, a Spanish entry under `translations`,
+                  `schedule: "recurring"`, `iteration_frequency_days: 30`, and
+                  `repeat_until_stopped: true`.
