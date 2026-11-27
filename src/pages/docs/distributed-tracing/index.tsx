@@ -62,6 +62,12 @@ export const Content = () => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-2">
                     <ResourceItem
                         type="Getting started"
+                        title="Why you need tracing"
+                        description="What a trace is, what it shows you that nothing else does, and when it saves you"
+                        url="/docs/distributed-tracing/basics"
+                    />
+                    <ResourceItem
+                        type="Getting started"
                         title="Start here"
                         description="Set up an OpenTelemetry exporter or PostHog SDK and send your first spans"
                         url="/docs/distributed-tracing/start-here"
@@ -91,6 +97,12 @@ export const Content = () => {
                         url="/docs/distributed-tracing/operations-and-compare"
                     />
                     <ResourceItem
+                        type="Web app"
+                        title="Query traces with SQL"
+                        description="Run custom percentiles, breakdowns, and exports on posthog.trace_spans in HogQL"
+                        url="/docs/distributed-tracing/sql"
+                    />
+                    <ResourceItem
                         type="Correlated data"
                         title="Link persons, sessions, logs, and errors"
                         description="Configure identity attribute keys and correlate traces across PostHog"
@@ -104,8 +116,8 @@ export const Content = () => {
                     />
                     <ResourceItem
                         type="Surfaces"
-                        title="Tracing API & SQL"
-                        description="Query spans programmatically via REST endpoints or posthog.trace_spans SQL"
+                        title="Tracing API"
+                        description="Query spans, aggregates, and service health programmatically over REST"
                         url="/docs/distributed-tracing/surfaces/api"
                     />
                 </ul>

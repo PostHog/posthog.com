@@ -9015,11 +9015,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'PostHog Web',
-                    url: '/docs/distributed-tracing/search',
+                    url: '/docs/distributed-tracing/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'blue',
                     featured: true,
                     children: [
+                        { name: 'Overview', url: '/docs/distributed-tracing/surfaces/web-app' },
                         { name: 'Search and filter traces', url: '/docs/distributed-tracing/search' },
                         { name: 'Inspect traces and spans', url: '/docs/distributed-tracing/inspect-traces' },
                         {

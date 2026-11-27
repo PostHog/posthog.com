@@ -1,0 +1,25 @@
+---
+title: Use distributed tracing in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+{/* Scope: overview of GA Distributed tracing workflows in the PostHog web app (/tracing, /tracing/operation, /sql, and Settings > Tracing). */}
+
+Use [Tracing](https://app.posthog.com/tracing) in the PostHog web app to isolate slow or failing requests, read span waterfalls, compare deploys, and jump to logs, errors, or replays.
+
+## Gather what you need
+
+Send spans to your PostHog project over OTLP or a PostHog SDK. Follow [Install tracing](/docs/distributed-tracing/installation) if your app isn't exporting spans yet.
+
+## Pick a workflow
+
+| Workflow | Where it lives | Reach for it when |
+| --- | --- | --- |
+| **[Search and filter traces](/docs/distributed-tracing/search)** | **Tracing** (`Spans` and `Traces` modes) | You want to filter by service, status, duration, or attributes and zoom into latency spikes |
+| **[Inspect traces and spans](/docs/distributed-tracing/inspect-traces)** | Trace drawer (`Waterfall` and `Flame graph`) | You spotted a slow or errored trace and want to see where wall-clock time went |
+| **[Analyze operations and compare windows](/docs/distributed-tracing/operations-and-compare)** | **Tracing** (`Operations` mode and `Compare`) and `/tracing/operation` | You want per-endpoint p50/p95/p99/p99.9 rankings or a baseline diff after a deploy |
+| **[Query traces with SQL](/docs/distributed-tracing/sql)** | [SQL editor](https://app.posthog.com/sql) (`posthog.trace_spans`) | You need custom percentiles, attribute breakdowns, or exports beyond viewer controls |
+| **[Link persons, sessions, logs, and errors](/docs/distributed-tracing/correlate-data)** | **Settings > Tracing** and the trace drawer | You want person and session chips on traces or correlated Logs and Error Tracking records |
+
+See also: [Use distributed tracing over PostHog MCP](/docs/distributed-tracing/surfaces/mcp) · [Use the Tracing API](/docs/distributed-tracing/surfaces/api) · [Getting started with distributed tracing](/docs/distributed-tracing/start-here)

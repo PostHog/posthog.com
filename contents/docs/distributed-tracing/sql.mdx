@@ -9,8 +9,8 @@ showTitle: true
 Query your spans directly in PostHog SQL when you need custom percentiles, attribute aggregations, or reports beyond the viewer controls.
 
 - **When you need it.** You want custom groupings, quantiles, or exports over raw span records in the [SQL editor](https://app.posthog.com/sql).
-- **What you get.** Direct HogQL access to `posthog.trace_spans` with full span attributes, resource attributes, and span events.
-- **How you know it worked.** The starter query below returns your recent spans within a few seconds.
+- **What you get.** You get direct HogQL access to `posthog.trace_spans`, including span attributes, resource attributes, events, and links.
+- **How you know it worked.** The first starter query returns recent span rows with `trace_id_hex` and `duration_ms`.
 
 ## Gather what you need
 
@@ -22,21 +22,31 @@ Each row in `posthog.trace_spans` represents one OpenTelemetry span.
 
 | Column | Type or encoding | Notes |
 | --- | --- | --- |
-| `uuid` | UUID | Unique row identifier |
+| `uuid` | String | Unique row identifier |
+| `team_id` | Integer | Project identifier |
 | `trace_id` | Base64-encoded 16-byte ID | Decode to hex with `lower(hex(tryBase64Decode(trace_id)))` |
 | `span_id` | Base64-encoded 8-byte ID | Decode to hex with `lower(hex(tryBase64Decode(span_id)))` |
-| `parent_span_id` | Base64-encoded 8-byte ID | Empty on root spans |
+| `parent_span_id` | Base64-encoded 8-byte ID | Empty or `AAAAAAAAAAA=` (8 zero bytes) on root spans. Filter root spans with `is_root_span` |
+| `is_root_span` | Boolean | `true` when the span has no parent |
+| `trace_state` | String | W3C `tracestate` header value |
+| `flags` | Integer | W3C trace flags bitmask |
 | `name` | String | Operation name |
 | `kind` | Integer (`0` to `5`) | `0` Unspecified, `1` Internal, `2` Server, `3` Client, `4` Producer, `5` Consumer |
 | `service_name` | String | OpenTelemetry `service.name` |
 | `status_code` | Integer (`0`, `1`, `2`) | `0` Unset, `1` OK, `2` Error |
 | `timestamp` | DateTime | Span start time |
 | `end_time` | DateTime | Span end time |
+| `observed_timestamp` | DateTime | Collector ingestion timestamp |
+| `time_bucket` | DateTime | Coarse 4-hour partition bucket |
 | `duration_nano` | Integer (nanoseconds) | Divide by `1000000` for milliseconds |
-| `is_root_span` | Boolean | `true` for root spans |
 | `attributes` | Map (`String -> String`) | Span-level OpenTelemetry attributes |
 | `resource_attributes` | Map (`String -> String`) | Resource-level attributes such as `deployment.environment.name` |
-| `events` | Array | OpenTelemetry span events |
+| `resource_fingerprint` | Integer | Hash of `resource_attributes` |
+| `instrumentation_scope` | String | Emitting instrumentation library or module |
+| `events` | Array (`String`) | JSON strings with `time_unix_nano`, `name`, and `attributes` |
+| `dropped_events_count` | Integer | Span events dropped by the SDK before export |
+| `links` | Array (`String`) | JSON strings with `trace_id`, `span_id`, and `attributes` |
+| `dropped_links_count` | Integer | Span links dropped by the SDK before export |
 
 ## Run starter queries
 
@@ -98,7 +108,7 @@ ORDER BY timestamp ASC
 
 Two storage boundaries apply to `posthog.trace_spans`:
 
-- **Separate ClickHouse cluster.** `posthog.trace_spans` sits on the Logs cluster, separate from `events`. A single SQL query can't join `posthog.trace_spans` with `events` and fails with `Cannot query tables from different clusters`. Run two queries when correlating with Product Analytics or AI Observability events.
+- **Separate ClickHouse cluster.** `posthog.trace_spans` sits on the Logs cluster, separate from `events`. A single SQL query can't join `posthog.trace_spans` with `events` and fails with `Cannot query tables from different clusters`. Run two queries when correlating with Product Analytics or [AI Observability](/docs/distributed-tracing/link-ai-observability#query-both-products-together).
 - **Default retention.** Spans expire after 14 days by default. Always include a `timestamp` filter, so ClickHouse prunes partitions quickly.
 
 ## Check it worked

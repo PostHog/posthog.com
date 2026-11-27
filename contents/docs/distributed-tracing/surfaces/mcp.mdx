@@ -1,12 +1,15 @@
 ---
-title: Use Distributed tracing over PostHog MCP
+title: Use distributed tracing over PostHog MCP
 sidebar: Docs
 showTitle: true
 ---
 
-{/* Scope: documents all 13 enabled GA tools in products/tracing/mcp/tools.yaml (all read-only, tracing:read scope, gated only on feature_flag: tracing). */}
+{/* Scope: documents enabled GA tools in products/tracing/mcp/tools.yaml (all read-only, tracing:read scope, gated only on feature_flag: tracing). */}
 
-The [PostHog MCP server](/docs/model-context-protocol) lets coding agents inspect your traces right beside your source code. Your agent can check service health, locate regressed operations, read a trace's critical path, and draft a fix in the same session.
+import McpToolsList from 'components/McpToolsList'
+import DurationUnits from '../_snippets/duration-units.mdx'
+
+Connect the [PostHog MCP server](/docs/model-context-protocol) so coding agents can inspect your traces beside your source code. Your agent can check service health, locate regressed operations, read a trace's critical path, and draft a fix in the same session.
 
 This works in any MCP client, including Cursor, Claude Code, Codex, Windsurf, and VS Code.
 
@@ -17,36 +20,22 @@ This works in any MCP client, including Cursor, Claude Code, Codex, Windsurf, an
 
 ## The tracing tools
 
-Distributed tracing exposes 13 read-only MCP tools under the `tracing:read` scope.
+Distributed tracing exposes read-only MCP tools under the `tracing:read` scope, defined in the [PostHog MCP schema](https://github.com/PostHog/posthog/tree/master/services/mcp/schema):
 
-| Tool | What it does | Reach for it when |
-| --- | --- | --- |
-| `apm-services-list` | Lists distinct `service.name` values emitting spans | You want to discover service names before filtering |
-| `apm-attributes-list` | Lists available `span_attribute` or `span_resource_attribute` keys | You want exact attribute keys rather than guessing |
-| `apm-attribute-values-list` | Lists values observed for one attribute key | You want valid filter values before querying |
-| `apm-service-health` | Scores up to 1,000 services against a baseline for throughput, error rate, and p50/p95/p99 | You're triaging an incident and need to know which service broke |
-| `apm-spans-count` | Returns total `count` and `traceCount` matching your filters | You want to size a result set before pulling rows |
-| `apm-spans-sparkline` | Returns span counts over time | You want to spot when traffic or errors spiked |
-| `apm-spans-duration-histogram` | Returns trace duration distribution buckets | You want to see if latency is bimodal |
-| `apm-spans-latency-heatmap` | Returns duration buckets over time | You want to spot when p99 outliers began |
-| `apm-spans-aggregate` | Aggregates spans by service and operation with p50/p95/p99 and optional `compareFilter` | You want to rank slow or failing operations or diff two windows |
-| `apm-spans-tree` | Returns an aggregated call tree under an operation with optional `compareFilter` | You want to see which child span slowed down across many traces |
-| `apm-attribute-breakdown` | Groups matching spans by one attribute's value (up to 5,000 rows) | You want to find which pod, version, or downstream host owns the errors |
-| `query-apm-spans` | Queries matching traces (`rootSpans: true`) or individual spans (`flatSpans: true`), up to 1,000 rows | You want concrete span rows or trace IDs matching a filter |
-| `apm-trace-get` | Fetches one trace by its hex `trace_id` | You want to diagnose a single slow or failed request |
+<McpToolsList feature="tracing" />
 
 ## Read trace summaries first
 
 `apm-trace-get` defaults to `summary: true` and returns a roughly 3 KB summary for traces of any size. The summary includes:
 
-- **Headline timing.** Total trace duration, root span, span count, service count, and error count.
-- **Top self-time spans.** Spans whose own duration isn't covered by children. These often point to uninstrumented work.
-- **Critical path.** The chain of spans the trace end time waits on, with N+1 loops collapsed and spans under 1% of root duration omitted.
-- **Repeated spans and errors.** Potential N+1 queries and error spans with their exception messages.
+- **Headline timing.** Shows total trace duration, root span, span count, service count, and error count.
+- **Top self-time spans.** Lists spans whose own duration isn't covered by children, which often point to uninstrumented work.
+- **Critical path.** Traces the chain of spans the end time waits on, collapsing N+1 loops and omitting spans under 1% of root duration.
+- **Repeated spans and errors.** Flags repeated span names (potential N+1 queries) and error spans with their exception messages.
 
-Set `summary: false` only when your agent needs every raw span field. Pair it with `excludeAttributes: true` unless you need multi-KB attributes like `db.statement`, and paginate with `offset` (up to `2,000` spans per page).
+Set `summary: false` only when your agent needs every raw span field. Pair it with `excludeAttributes: true` unless you need multi-KB attributes like `db.statement`. Paginate with `offset` (up to `2,000` spans per page).
 
-> **Keep units straight in tool arguments.** Pass `duration` filter values in milliseconds (`1000` for one second). Responses return `duration_nano` in nanoseconds (`1,000,000,000` for one second).
+<DurationUnits />
 
 ## Try these prompts
 
@@ -71,4 +60,4 @@ Point your agent at this sequence, so it doesn't guess attribute keys or blow th
 
 For full MCP setup and tool scoping options, see the [MCP tools reference](/docs/model-context-protocol/tools).
 
-See also: [Use the Tracing API](/docs/distributed-tracing/surfaces/api) · [Search and filter traces](/docs/distributed-tracing/search) · [Analyze operations and compare windows](/docs/distributed-tracing/operations-and-compare)
+See also: [Use distributed tracing in PostHog Web](/docs/distributed-tracing/surfaces/web-app) · [Use the Tracing API](/docs/distributed-tracing/surfaces/api) · [Search and filter traces](/docs/distributed-tracing/search)

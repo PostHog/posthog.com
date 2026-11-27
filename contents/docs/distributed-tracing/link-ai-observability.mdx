@@ -127,22 +127,9 @@ with posthog.start_span(
 
 ## Query both products together
 
-Spans and LLM events live in different tables, and the tables store the trace ID in different encodings:
+`posthog.trace_spans` stores base64-encoded 16-byte IDs on a separate ClickHouse cluster from `events`, so a single SQL query can't join the two tables. See [Query traces with SQL](/docs/distributed-tracing/sql) for the full `posthog.trace_spans` schema, base64 conversion rules, cluster limits, and 14-day retention.
 
-- `posthog.trace_spans.trace_id` holds the 16-byte trace ID, base64-encoded. The [SQL editor](https://app.posthog.com/sql) returns it in that form.
-- `$ai_trace_id` on the `events` table holds 32 lowercase hexadecimal characters, or a dashed UUID if a proxy wrote it.
-
-Convert between them with these two expressions:
-
-```sql
--- Span trace ID to the AI Observability format
-lower(hex(tryBase64Decode(trace_id)))
-
--- AI Observability trace ID to the span format
-base64Encode(unhex('<trace_id_hex>'))
-```
-
-You cannot join the two tables in one query. The spans table sits on a different ClickHouse cluster from the events table, and a query that reads both fails with `Cannot query tables from different clusters`. Run the correlation as two queries instead.
+Run the correlation as two queries using `lower(hex(tryBase64Decode(trace_id)))` on spans and `base64Encode(unhex('<trace_id_hex>'))` on 32-character lowercase hex IDs.
 
 ### From spans to LLM events
 
@@ -198,12 +185,11 @@ To read the prompts and the model responses, query the `posthog.ai_events` table
 
 ## Limitations
 
-- **The trace IDs must hold the same 16 bytes.** A dashed UUID that a proxy writes from a `traceparent` header is the correct ID in a different format. Remove the dashes before you pass it to `unhex`. `unhex` accepts a dashed UUID without an error, but it returns a value of the wrong length, so the query silently finds nothing. A random UUID that your code generates does not match any span.
-- **One query cannot read both tables.** Spans and events sit on different clusters, so you must correlate in two steps.
-- **With a PostHog SDK, only the trace ID joins the two products.** `$ai_span_id` from an SDK identifies a generation or a span inside AI Observability. It does not match `posthog.trace_spans.span_id`. With OpenTelemetry, `$ai_span_id` is the span ID in hexadecimal, so `base64Encode(unhex(...))` converts it to a `span_id`.
-- **A trace can arrive without its root span.** If a process stops before the exporter sends the root span, the child spans still arrive. Do not filter on `is_root_span` alone when you collect trace IDs.
-- **PostHog does not link the two products in the UI.** A span does not show a button to its LLM trace, and an LLM trace does not show a button to its span.
-- **Spans and events expire at different times.** Spans stay for 14 days by default. Events in [Product Analytics](/docs/product-analytics) stay for much longer.
+- **The trace IDs must hold the same 16 bytes.** Strip dashes from proxy-written UUIDs before calling `unhex`, since a random UUID or dashed string won't match any span.
+- **With a PostHog SDK, only the trace ID joins the two products.** `$ai_span_id` from an SDK identifies a generation or a span inside AI Observability and doesn't match `posthog.trace_spans.span_id`. With OpenTelemetry, `$ai_span_id` is the span ID in hexadecimal, so `base64Encode(unhex(...))` converts it to `span_id`.
+- **A trace can arrive without its root span.** If a process stops before flushing its root span, child spans still arrive, so don't filter on `is_root_span` alone when collecting trace IDs.
+- **PostHog does not link the two products in the UI.** A span doesn't show a button to its LLM trace, and an LLM trace doesn't show a button to its span.
+- **Spans sit on a separate cluster and expire after 14 days.** See [Query traces with SQL](/docs/distributed-tracing/sql#the-cluster-limits) for `posthog.trace_spans` limits.
 
 ## Next steps
 

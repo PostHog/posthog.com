@@ -4,7 +4,10 @@
  * Run: pnpm test:navs
  */
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import path from 'node:path'
 import { describe, test } from 'node:test'
+import { fileURLToPath } from 'node:url'
 
 import { getActiveMenuSection } from './activeMenu.ts'
 import type { MenuNode } from './activeMenu.ts'
@@ -133,6 +136,52 @@ describe('the real docs nav', () => {
             const section = getActiveMenuSection<NamedNode>(docsSections, url)
             if (inSomeSidebar.has(url)) {
                 assert.ok(section?.children?.length, `${url} resolves to "${section?.name}", which has no children`)
+            }
+        }
+    })
+
+    test('every Distributed tracing MDX page resolves to the Distributed tracing sidebar without duplicate non-Overview parent URLs', () => {
+        const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
+        const tracingRoot = path.join(repoRoot, 'contents/docs/distributed-tracing')
+
+        const walkMdx = (dir: string): string[] => {
+            const found: string[] = []
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+                if (entry.name.startsWith('_')) continue
+                const full = path.join(dir, entry.name)
+                if (entry.isDirectory()) {
+                    found.push(...walkMdx(full))
+                } else if (entry.name.endsWith('.mdx')) {
+                    found.push(full)
+                }
+            }
+            return found
+        }
+
+        const files = walkMdx(tracingRoot)
+        assert.ok(files.length >= 18, `expected Distributed tracing MDX pages, got ${files.length}`)
+
+        for (const file of files) {
+            const rel = path
+                .relative(path.join(repoRoot, 'contents'), file)
+                .replace(/\\/g, '/')
+                .replace(/(\/index)?\.mdx$/, '')
+            const url = `/${rel}`
+            assert.equal(sectionFor(url), 'Distributed tracing', `${url} is missing from the Distributed tracing sidebar`)
+        }
+
+        const tracingSection = docsSections.find((s) => s.name === 'Distributed tracing')
+        assert.ok(tracingSection?.children)
+        for (const item of tracingSection.children) {
+            if (item.url && item.children?.length) {
+                const first = item.children[0]
+                if (first.url === item.url) {
+                    assert.equal(
+                        first.name,
+                        'Overview',
+                        `Distributed tracing "${item.name}" shares ${item.url} with non-Overview child "${first.name}"`
+                    )
+                }
             }
         }
     })

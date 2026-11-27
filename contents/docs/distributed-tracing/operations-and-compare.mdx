@@ -9,7 +9,7 @@ showTitle: true
 Individual traces explain one slow request. Group spans by operation and compare time windows to spot which endpoint regressed across all traffic after a deploy.
 
 - **When you need it.** Latency spiked or a deploy just landed, and you need to rank slow operations or diff performance against a baseline window.
-- **What you get.** Per-operation throughput, error rate, and p50/p95/p99 latency, plus a change-ranked diff table and call-tree flame graph.
+- **What you get.** You get per-operation throughput, error rate, and p50/p95/p99/p99.9 latency, plus a change-ranked diff table and call-tree flame graph.
 - **How you know it worked.** The **Operations** table ranks your busiest or slowest spans, and enabling **Compare** labels regressions over 20%.
 
 ## Gather what you need
@@ -29,7 +29,8 @@ Each row shows:
 | **Requests** | Request rate (`/s`, `/min`, or `/hr`) and total span count |
 | **Error rate** | Percentage of spans with `status_code = Error` |
 | **Errors** | Total errored span count |
-| **p50 / p95 / p99** | Median, 95th, and 99th percentile duration |
+| **p50 / p95 / p99 / p99.9** | Median, 95th, 99th, and 99.9th percentile duration |
+| **Total time** | Cumulative duration across matching spans |
 
 Click any column header to sort. Sort by **p95** or **Error rate** to find broken or slow operations without opening traces one by one.
 
@@ -39,7 +40,7 @@ Click any row in the **Operations** table to open its operation detail page (`/t
 
 The detail page combines three tools for that single operation:
 
-1. **Headline stats.** Requests, error rate, p50, p95, and p99 for the selected date range.
+1. **Headline stats.** Shows requests, error rate, p50, p95, and p99 for the selected date range.
 2. **Histogram or latency heatmap.** Switch between **Histogram** and **Heatmap** to spot bimodal latency (such as cache hits versus cold database queries). Drag across a slow bucket to filter sampled traces to that exact duration band.
 3. **Sampled traces.** Step through example traces matching your selected duration band and inspect their full span waterfall inline.
 
@@ -82,15 +83,16 @@ Click **Exit comparison** in the **Compare** menu or close the comparison bar to
 
 ## Check it worked
 
-You can confirm comparison data is meaningful when:
+Check for these signals:
 
-1. The comparison bar above the table displays both UTC time windows with non-overlapping dates.
-2. Rows with at least 10 spans show percentage deltas and bucket tags rather than staying **Unchanged**.
-3. Clicking a regressed row opens a flame graph that shows which child span slowed down.
+- **Operations table.** Rows rank service and span names with request rates, error rates, p50/p95/p99/p99.9 durations, and total time.
+- **Comparison bar.** Both UTC time windows appear above the table with non-overlapping dates.
+- **Comparison rows.** Operations with at least 10 spans in both windows show percentage deltas and bucket tags rather than staying **Unchanged**.
+- **Diff flame graph.** Clicking a regressed row opens a flame graph showing which child span slowed down.
 
 ## Fix what goes wrong
 
 - **Too many rows or noisy "New" operations.** Your span names include high-cardinality values such as user IDs, UUIDs, or raw URL paths. Replace variable segments with route templates (`GET /orders/:id`) and move variable values into span attributes.
 - **Compare preset is disabled.** Shorten your date range in the filter bar so it's narrower than the baseline shift. You can also switch to **Custom time windows** and drag the two overlays on the sparkline.
 
-See also: [Search and filter traces](/docs/distributed-tracing/search) · [Inspect traces and spans](/docs/distributed-tracing/inspect-traces) · [Use Distributed tracing over PostHog MCP](/docs/distributed-tracing/surfaces/mcp)
+See also: [Search and filter traces](/docs/distributed-tracing/search) · [Inspect traces and spans](/docs/distributed-tracing/inspect-traces) · [Use distributed tracing over PostHog MCP](/docs/distributed-tracing/surfaces/mcp)
