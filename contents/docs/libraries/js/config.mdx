@@ -278,6 +278,27 @@ posthog.init('<ph_project_token>', {
 
 `posthog-js` doesn't create spans. To link backend traces to browser sessions, set [`tracing_headers`](#tracing-headers). To send spans from the server, see [Node.js](/docs/distributed-tracing/installation/nodejs) or [Python](/docs/distributed-tracing/installation/python).
 
+## How the SDK sends data
+
+The SDK doesn't send a request for every `capture` call. This is what it does on the network, and the options that change it.
+
+| Behavior | Default | Option |
+|----------|---------|--------|
+| Batching | Events are queued and sent together on a 3-second flush interval. | `request_queue_config: { flush_interval_ms }` (250 to 5000). `request_batching: false` skips the queue for every event, and `send_instantly: true` on a `capture` call skips it for that event. |
+| Page unload | The SDK tries to send what's still queued, using [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) when available so it doesn't delay navigation. Delivery and send order aren't guaranteed. | `disable_beacon` |
+| Compression | Payloads are compressed with `gzip` from the start, and your project's remote config can turn it off once it arrives. Where the browser supports [`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream), most requests compress asynchronously instead of on the main thread. Page-unload beacons and `send_instantly` captures, including the initial pageview, still compress synchronously. | `disable_compression` |
+| Retries | Event requests that fail with a `5xx` response are retried up to 10 times after the first attempt, or up to 3 times on a network error or when no response arrives, with exponential backoff and jitter starting at about 3 seconds. Later retries can wait more than 30 minutes. A readable `Retry-After` header sets a minimum wait of up to 30 seconds. `4xx` responses, including `429`, aren't retried. Remote config isn't retried. `/flags` retries once after 500 ms on a `502`, `504`, or timeout. | `feature_flag_request_max_retries` (for `/flags`) |
+| Startup | The SDK fetches your project's remote config, unless it's already on the page, and evaluates Feature Flags with `/flags`. Session Replay and Surveys may load extra scripts, depending on your project settings and the bundle you use. `capture` calls made after `init` don't wait for these responses. | [`advanced_disable_flags`](#disable-flags-endpoint), `advanced_disable_feature_flags_on_first_load`, `disable_surveys` |
+| Flag refresh | Feature Flags are re-evaluated in the background every 5 minutes, less often on pages without user interaction. | `remote_config_refresh_interval_ms` (`0` turns it off) |
+
+To check what a page sends, filter your browser's network tab by your `api_host`. Without a reverse proxy, scripts and remote config load from the assets host (for example `us-assets.i.posthog.com`), and `/flags` uses `flags_api_host` if you set it.
+
+### Initializing after page load
+
+You can call `posthog.init` later, for example after login, but attribution is read from the page when the SDK captures an event. UTM and other campaign parameters come from the URL at that moment, and the initial URL is stored with the first event captured for a user. If your app has already navigated away from the landing URL, those values are lost. Client-side navigation doesn't change the referrer.
+
+To keep attribution, initialize on page load and let the first event, such as the automatic pageview, be captured before the URL changes. If you've turned off `capture_pageview`, capture your own event on landing. Features you don't need yet can start turned off (for example `disable_session_recording: true`) and be turned on later with methods such as [`posthog.startSessionRecording()`](/docs/libraries/js/usage#session-replay). This only postpones Session Replay. Your project settings and consent still apply.
+
 ## Advanced configuration
 
 These are features for advanced users and may lead to unintended side effects if not reviewed carefully.
@@ -292,7 +313,7 @@ These are features for advanced users and may lead to unintended side effects if
 | `advanced_feature_flags_dedup_per_session`<br/><br/>**Type:** Boolean<br/>**Default:** `false`     | Scopes `$feature_flag_called` deduplication to the current session instead of per identity. Useful for [experiments](/docs/experiments) where a flag was evaluated before the experiment launched. Without this, returning users won't generate new [exposures](/docs/experiments/exposures). Mobile SDKs already deduplicate per session by default. |
 | `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000`               | Sets timeout for fetching feature flags                                                                                                                                                                                                                                                                                                                                                                                                |
 | `feature_flag_cache_ttl_ms`<br/><br/>**Type:** Integer<br/>**Default:** `0` (disabled) | Sets a time-to-live for cached feature flag values. When enabled, `getFeatureFlag()` returns `undefined` instead of stale cached values if the cache is older than the TTL, and stale `$feature/` properties are not attached to events. This is useful when `/flags` requests fail (e.g., due to ad blockers or network issues) and you want to avoid using outdated flag values indefinitely. By default (`0` or `undefined`), cached values never expire. |
-| `remote_config_refresh_interval_ms`<br/><br/>**Type:** Integer<br/>**Default:** `300000` (5 minutes) | Controls how often feature flags and remote config are automatically refreshed in long-running sessions. Shorter intervals mean fresher flags but more network requests. Longer intervals reduce traffic but flag changes propagate slower. Set to `0` to disable periodic refresh entirely. Flags then only update on page load or when you manually call `posthog.reloadFeatureFlags()`. |
+| `remote_config_refresh_interval_ms`<br/><br/>**Type:** Integer<br/>**Default:** `300000` (5 minutes) | Controls how often feature flags are automatically refreshed in long-running sessions. It doesn't reload remote config. Shorter intervals mean fresher flags but more network requests. Longer intervals reduce traffic but flag changes propagate slower. Set to `0` to disable periodic refresh entirely. Flags then only update on page load or when you manually call `posthog.reloadFeatureFlags()`. |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS.                                                                                                                                                                                                                                                                                                                         |
 | `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`                           | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) )                                                                                                                                                                                                                                                                                                                               |
 | `fetch_options.cache` <br/><br/>**Type:** string<br/>**Default:** `undefined`                      | `fetch` call cache behavior (see [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#cache) to understand available options). It's important when using NextJS, see [companion documentation](https://nextjs.org/docs/app/api-reference/functions/fetch#fetchurl-options). This is a tricky option, avoid using it unless you are aware of the changes this could cause – such as cached feature flag values, etc. |
@@ -301,23 +322,24 @@ These are features for advanced users and may lead to unintended side effects if
 
 ### Disable `/flags` endpoint
 
-> **Note:** This feature was introduced in `posthog-js` 1.10.0. Previously, disabling autocapture would inherently disable the `/flags` endpoint altogether. This meant that disabling autocapture would inadvertently turn off session recording, feature flags, compression, and the toolbar too.
+After it initializes, the SDK loads your project's remote config and calls [the `/flags` endpoint](/docs/api/flags) to evaluate Feature Flags. If you don't use the features that depend on them, you can turn off both requests to reduce network traffic.
 
-One of the first things the PostHog does after initializing is make a request to [the `/flags` endpoint](/docs/api/flags) on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend and is required to run most features of the library (detailed below).
+Set `advanced_disable_flags` to `true` to skip remote config and `/flags`. Remote config that's already on the page, such as config that loads with the snippet, still applies.
 
-If you're not using any of these features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.
+#### Features that depend on `/flags`
 
-The `/flags` endpoint can be disabled by setting `advanced_disable_flags` to `true`.
+> **Warning:** These features don't work when `advanced_disable_flags` is `true`.
 
-#### Resources dependent on `/flags`
+-   **Feature Flags and Experiments**. Flags aren't fetched. Only [bootstrapped](/docs/feature-flags/bootstrapping) values and values cached from an earlier session are available.
+-   **Session Replay**. Recording needs your project's remote config, so it doesn't start unless an earlier session stored that config.
+-   **Surveys**. Surveys don't load unless you set `advanced_enable_surveys: true`.
 
-> **Warning:** These are features/resources that are fully disabled when the `/flags` endpoint is disabled.
+Features that you turn on in your [project settings](#init-config-and-project-settings), such as heatmaps, web vitals, and exception autocapture, don't get new values for those settings. Values that an earlier session stored still apply. If a feature has an `init` option, set it to turn the feature on.
 
--   **Autocapture**. The `/flags` endpoint contains information on whether autocapture should be enabled or not (apart from local configuration).
--   **Session recording**. The endpoint contains information on where to send relevant session recording events.
--   **Compression**. The endpoint contains information on what compression methods are supported on the backend (e.g. LZ64, gzip) for event payloads.
--   **Feature flags**. The endpoint contains the feature flags enabled for the current person.
--   **Surveys**. The endpoint contains information on whether surveys should be enabled or not.
--   **Toolbar**. The endpoint contains authentication information and other toolbar capabilities information required to run it.
+#### Features that keep working
 
-Any custom event captures (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/flags` is disabled.
+-   **Autocapture**. It uses your local config.
+-   **Compression**. Payloads are compressed with `gzip` unless you set `disable_compression: true`.
+-   **Toolbar**. It loads from the URL or `localStorage`, not from `/flags`.
+
+`posthog.capture`, `identify`, `$set`, `$set_once`, and other calls that don't depend on the features above work as expected.
