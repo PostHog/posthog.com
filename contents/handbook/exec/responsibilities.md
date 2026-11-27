@@ -16,3 +16,13 @@ This page lists which teams each Blitzscale team member is responsible for.
 | Charles Cook | [People & Ops](/teams/people), [Talent](/teams/talent), [Support](/teams/support), [Developer Marketing](/teams/developer-marketing), [Demand Gen](/teams/demand-gen), [Docs Wizard](/teams/wizard-and-docs), [Editorial](/teams/editorial), [YouTube](/teams/youtube), [Builder Relations](/teams/builder-relations), [Graphics](/teams/graphics), [Website](/teams/website) |
 | Ben Bradley | [New Business Sales](/teams/sales-cs), [Product Led Sales East](/teams/sales-product-led), [Product Led Sales West](/teams/product-led-sales-west), [Customer Success EU](/teams/customer-success-eu), [Customer Success NA North](/teams/customer-success-na-north), [Customer Success NA West](/teams/customer-success-na-west),[GTM Engineering](/teams/gtm-engineering), [Scaled Customer Success](/teams/scaled-customer-success), [Forward Deployed Engineering](/teams/forward-deployed-engineering) |
 | Matt Ghering | [Finance](/teams/finance), [RevOps](/teams/revops) |
+
+## Focus areas
+
+The table above shows reporting lines. It doesn't limit which teams a Blitzscale member works with. Raquel, Ben, and Paul each also own a problem space across all product and engineering teams:
+
+- Raquel Smith: product and growth
+- Ben White: infrastructure
+- Paul D'Ambra: developer experience and software quality
+
+For example, if a team that reports to Raquel has an infrastructure problem, Ben works with them on it. Some teams also report to a [group lead](/handbook/company/management#group-leads) first.

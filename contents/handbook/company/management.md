@@ -52,6 +52,51 @@ Management is intentionally spread thin at PostHog. This is a forcing function f
 
 > You'll sometimes hear us use the term "team lead". [A team lead is the leader of a small team](/handbook/company/small-teams#what-is-the-role-of-the-team-lead). By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
 
+## Group leads
+
+A group lead looks after a group of related small teams – for example, all of our infrastructure teams.
+
+Until now, the Blitzscale team was the only layer of people and performance management above team leads. That worked when we were smaller. With more teams, Blitzscale members spend most of their time switching between teams and on people management, and too little time on the bigger problems in their area.
+
+Team leads can't fill this gap on their own. Most small teams have only a few people, so a team lead rarely gets enough practice at people management to get good at it. A group lead looks after enough people that these issues come up regularly, so they build the skill.
+
+### What a group lead does
+
+- Owns people and performance management for their group. This means regular 1-1s with the team leads in the group, making sure everyone gets honest feedback, and having a clear, critical opinion of how each person is doing.
+- Gives the Blitzscale team detailed input on performance, levels, and pay. When a group lead says someone should get a raise, or that someone isn't working out, we should be able to trust that call.
+- Is the first person team leads go to with a cross-team issue inside the group.
+- Helps set direction for the group – for engineering groups, this is mostly engineering direction – together with the product manager for that area and the Blitzscale member the group reports to.
+- Works out what company-level decisions mean for each team in the group. For example, if we decide to change how we price storage, the Blitzscale team sets the direction and the group lead figures out what each team needs to do.
+- Tells the Blitzscale team about gaps – a missing team, a missing skill, or a problem that keeps coming up.
+
+### What a group lead doesn't do
+
+- Stop doing IC work. Group leads still spend most of their time building. Spending around a third of your time on the group is normal.
+- Make the final call on pay, hiring, or firing. The Blitzscale team still decides, but relies heavily on the group lead's input.
+- Set product strategy alone. Product direction for an area comes from the product manager, the Blitzscale member, and the group lead together.
+
+### Is it official?
+
+Yes. Each group and its group lead is in the org chart, so team leads know who to go to. Like team leads, group leads don't get a new job title.
+
+Being a group lead is a responsibility. It doesn't change your level or your pay, and like [any management role at PostHog](#what-you-can-expect-as-a-manager), you can move back to a pure IC role. It is a good way to get exposure to more senior work, and we take it into account when we look at someone's level.
+
+### Why don't we call them engineering managers?
+
+We've talked about engineering managers a lot, and decided against the term:
+
+- Group leads aren't only in engineering. Marketing and customer success already have people who work like this.
+- At many companies, engineering managers only manage people and get moved between teams, so they lose touch with the work. We want group leads who stay close to the work and still build.
+- We don't want every team lead to become a manager in name. A group lead only makes sense across several teams.
+
+What has worked well at PostHog is people who step up to look after several teams, with a lean toward people. Group leads make this explicit.
+
+### Who are the group leads?
+
+We keep track of groups and group leads in the org chart. Not every team has a group lead. Many teams will report straight to a Blitzscale member for a long time, and that's fine. We'll add group leads where they make sense.
+
+If you want to do more of this kind of work, talk to the Blitzscale member you report to. We also want to get better at hiring people with management experience who could grow into group leads.
+
 ## How do I set context?
 
 At PostHog, we hire highly experienced people for 99% of roles. That means managers won't need to spend time telling their direct reports what to do.
