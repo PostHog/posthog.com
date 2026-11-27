@@ -286,8 +286,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_builder_light_da51389d7a.png',
-            'wf_landing_builder_dark_2c7e828448.png',
+            'wf_landing_builder_v2_light_b6a97d75df.png',
+            'wf_landing_builder_v2_dark_66a98614e5.png',
             'An automation in the PostHog workflow builder'
         ),
     },
