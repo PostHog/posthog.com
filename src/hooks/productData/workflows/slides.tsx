@@ -193,22 +193,27 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Password resets, sign-in codes, and receipts go out with one API call. PostHog records each send on
-                    the person, next to their product events, so you can see who opened the reset email and whether they
-                    signed in after it. Read the{' '}
+                    Password resets, sign-in codes, and receipts go out with one API call, from Node.js, Python, Go,
+                    Ruby, PHP, .NET, Rust, Elixir, or plain REST. Read the{' '}
                     <DocsLink to="/docs/workflows/transactional-emails">transactional email docs</DocsLink>.
                 </p>
                 <List
                     items={[
-                        ['SDKs', 'Node.js, Python, Go, Ruby, PHP, .NET, Rust, and Elixir, or plain REST.'],
-                        ['React Email', 'Keep writing emails as React components, and pass them to the Node.js SDK.'],
                         [
-                            'Never waits',
-                            'Transactional email goes out at once, even when your daily allowance for marketing email is used up.',
+                            'Retries never double-send',
+                            'Send an idempotency key, and a retry after a timeout never sends the email twice. PostHog keeps each key for 24 hours.',
                         ],
                         [
-                            'Gets through',
-                            'Marketing opt-outs and the frequency cap never block a password reset. Only a hard bounce does.',
+                            'Reset links stay secret',
+                            'Turn on Protect sensitive data, and PostHog keeps no copy of the email and skips click tracking, so a token never goes through a redirect.',
+                        ],
+                        [
+                            'On the person, not in a log',
+                            'Pass a distinct_id, and each send lands on the person, next to their product events.',
+                        ],
+                        [
+                            'See what happened next',
+                            'See who signed in after the reset email, or paid after the receipt.',
                         ],
                     ]}
                 />
@@ -348,7 +353,10 @@ export const keyFeatures: CarouselSlide[] = [
                             'Delivery stats',
                             'Sends, deliveries, opens, clicks, and bounces for each transactional email.',
                         ],
-                        ['What happened next', 'See who signed in after a password reset, or paid after a receipt.'],
+                        [
+                            'Status for every send',
+                            'Look up one email by its message ID for 30 days, and see if it was delivered, bounced, or marked as spam.',
+                        ],
                     ]}
                 />
             </>
