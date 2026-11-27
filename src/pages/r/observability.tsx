@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { CallToAction } from 'components/CallToAction'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
-import List from 'components/List'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import WizardCTA from 'components/WizardCTA'
-import usePlatformList from 'hooks/docs/usePlatformList'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import HeygenLogo from 'components/CustomerLogos/HeygenLogo'
 import FireworksAILogo from 'components/CustomerLogos/FireworksAILogo'
@@ -18,79 +16,10 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 import useProduct from 'hooks/useProduct'
 import 'components/Home/HeroCarousel/ProductContextDemo/animations.css'
 import { Popover } from 'components/RadixUI/Popover'
-import { IconRewindPlay, IconWarning, IconCode2, IconGanttChart, IconTrends } from '@posthog/icons'
+import OSTabs from 'components/OSTabs'
+import { IconPlus, IconTrends } from '@posthog/icons'
 
 const CONNECTIONS = [
-    {
-        source: 'error_tracking',
-        label: 'Errors',
-        from: 'From an error',
-        cards: [
-            {
-                handles: ['session_replay'],
-                name: 'Session replay',
-                description: 'Watch the replay of the user who hit it.',
-            },
-            { handles: ['logs'], name: 'Logs', description: 'Read the logs from the same trace, span, or session.' },
-            {
-                handles: ['traces'],
-                name: 'Tracing',
-                description: 'Open the trace behind it, when your server SDK attaches trace context.',
-            },
-        ],
-    },
-    {
-        source: 'session_replay',
-        label: 'Replays',
-        from: 'From a replay',
-        cards: [
-            {
-                handles: ['error_tracking'],
-                name: 'Error tracking',
-                description: 'See the exceptions from the same session.',
-            },
-            {
-                handles: ['logs'],
-                name: 'Logs',
-                description: 'See the backend logs from the same session.',
-            },
-        ],
-    },
-    {
-        source: 'logs',
-        label: 'Logs',
-        from: 'From a log',
-        cards: [
-            {
-                handles: ['session_replay'],
-                name: 'Session replay',
-                description: 'Jump to the replay of the user who triggered it.',
-            },
-            {
-                handles: ['error_tracking'],
-                name: 'Error tracking',
-                description: 'See error tracking issues from the same session.',
-            },
-        ],
-    },
-    {
-        source: 'traces',
-        label: 'Traces',
-        from: 'From a trace',
-        cards: [
-            {
-                handles: ['session_replay'],
-                name: 'Session replay',
-                description: 'Watch the replay of the user who waited through it.',
-            },
-            {
-                handles: ['error_tracking'],
-                name: 'Error tracking',
-                description: 'See the exceptions from the span, the trace, or the session.',
-            },
-            { handles: ['logs'], name: 'Logs', description: 'Read the logs for one span or the whole trace.' },
-        ],
-    },
     {
         source: 'metrics',
         label: 'Metrics',
@@ -109,22 +38,308 @@ const CONNECTIONS = [
             },
         ],
     },
+    {
+        source: 'traces',
+        label: 'Traces',
+        from: 'From a trace',
+        cards: [
+            {
+                handles: ['session_replay'],
+                name: 'Session Replay',
+                description: 'Watch the replay of the user who waited through it.',
+            },
+            {
+                handles: ['error_tracking'],
+                name: 'Error Tracking',
+                description: 'See the exceptions from the span, the trace, or the session.',
+            },
+            { handles: ['logs'], name: 'Logs', description: 'Read the logs for one span or the whole trace.' },
+        ],
+    },
+    {
+        source: 'error_tracking',
+        label: 'Errors',
+        from: 'From an error',
+        cards: [
+            {
+                handles: ['session_replay'],
+                name: 'Session Replay',
+                description: 'Watch the replay of the user who hit it.',
+            },
+            { handles: ['logs'], name: 'Logs', description: 'Read the logs from the same trace, span, or session.' },
+            {
+                handles: ['traces'],
+                name: 'Tracing',
+                description: 'Open the trace behind it, when your server SDK attaches trace context.',
+            },
+        ],
+    },
+    {
+        source: 'logs',
+        label: 'Logs',
+        from: 'From a log',
+        cards: [
+            {
+                handles: ['session_replay'],
+                name: 'Session Replay',
+                description: 'Jump to the replay of the user who triggered it.',
+            },
+            {
+                handles: ['error_tracking'],
+                name: 'Error Tracking',
+                description: 'See Error Tracking issues from the same session.',
+            },
+        ],
+    },
+    {
+        source: 'session_replay',
+        label: 'Replays',
+        from: 'From a replay',
+        cards: [
+            {
+                handles: ['error_tracking'],
+                name: 'Error Tracking',
+                description: 'Spot the exceptions the user ran into along the way.',
+            },
+            {
+                handles: ['logs'],
+                name: 'Logs',
+                description: 'See the backend logs from the same session.',
+            },
+        ],
+    },
 ]
 
-/** Each product's QuestLog step on this page */
-const PRODUCT_STEPS: Record<string, string> = {
-    error_tracking: 'quest-item-catch-every-exception',
-    session_replay: 'quest-item-watch-the-session-with-the-console-open',
-    logs: 'quest-item-search-and-tail-your-logs',
-    traces: 'quest-item-follow-a-request-across-services',
-}
+/** The QuestLog step that holds the product explorer */
+const EXPLORER_STEP = 'quest-item-meet-your-debugging-toolkit'
 
-/** Words in each connection's description that link to the product's step, most specific first */
+const CLOUDINARY = 'https://res.cloudinary.com/dmukukwp6/image/upload'
+
+const PRODUCT_TABS = [
+    {
+        handle: 'error_tracking',
+        label: 'Error Tracking',
+        description: 'Find and fix exceptions before more users encounter them.',
+        intro: (
+            <>
+                <p>
+                    <code>$exception</code> events land the moment they're thrown, with stack traces down to the file,
+                    line, and function.
+                </p>
+                <p>Assign issues, resolve them, and make sure the right person hears about it instead of your users.</p>
+            </>
+        ),
+        docs: '/docs/error-tracking',
+        bullets: [
+            'Browser, mobile, and server-side exception autocapture',
+            'Stack traces mapped to your original source code',
+            'Custom issue grouping rules',
+            'Alerts in Slack, Discord, Teams, or via webhooks',
+        ],
+        imageLight: `${CLOUDINARY}/SCR_20250728_ryub_aa8398de10.png`,
+        imageDark: `${CLOUDINARY}/SCR_20250728_rzmm_23fa3181c4.png`,
+        alt: 'Error Tracking issue with stack trace',
+    },
+    {
+        handle: 'session_replay',
+        label: 'Session Replay',
+        description: 'See what the user saw when something broke.',
+        intro: (
+            <>
+                <p>
+                    Sure, you get the video, but you also get dev-tools level context, performance data, and craaaazy
+                    clicks. (Yes, even those.)
+                </p>
+                <p>
+                    When a user says "it just broke," you get the full picture with frontend context and backend
+                    visibility.
+                </p>
+            </>
+        ),
+        docs: '/docs/session-replay',
+        bullets: [
+            'Console logs, network requests, and clicks synced to the timeline',
+            'Automatic rage-click and dead-click detection',
+            'Jump to any event to skip to what matters',
+            'Saved filters your team can reuse',
+        ],
+        imageLight: `${CLOUDINARY}/q_auto,f_auto/annotated_replay_inspector_ec4ceb5761.png`,
+        imageDark: `${CLOUDINARY}/q_auto,f_auto/annotated_replay_inspector_dark_c040e66ee5.png`,
+        alt: 'Session Replay activity panel',
+    },
+    {
+        handle: 'logs',
+        label: 'Logs',
+        description: 'Find out what your server was doing when something went wrong.',
+        intro: (
+            <p>
+                Point your existing OTel SDK at PostHog, drop in your project token, and your structured logs land
+                alongside everything else.
+            </p>
+        ),
+        docs: '/docs/logs',
+        bullets: [
+            'Works with any OpenTelemetry client, no PostHog packages required',
+            'Full-text search with multiple tokens and negative filters',
+            'Filter by time, service, resource attributes, or log level',
+            'Alerts when error logs spike or a pattern appears',
+        ],
+        imageLight: `${CLOUDINARY}/w_1600,c_limit,q_auto,f_auto/logs_light_dd81ff5093.png`,
+        imageDark: `${CLOUDINARY}/w_1600,c_limit,q_auto,f_auto/logs_dark_d7135f1b22.png`,
+        alt: 'PostHog Logs search interface',
+    },
+    {
+        handle: 'traces',
+        label: 'Tracing',
+        description: 'Find the slow or failing service behind a request.',
+        intro: (
+            <>
+                <p>
+                    A trace follows one request through every service it touches. Open the waterfall and find the slow
+                    query six services deep, or the background job a stack trace never shows.
+                </p>
+                <p>
+                    On Node.js and Python, <code>posthog-node</code> and the Python SDK can create spans themselves.
+                </p>
+            </>
+        ),
+        docs: '/docs/distributed-tracing',
+        bullets: [
+            'Point any OpenTelemetry exporter at PostHog',
+            'Search and filter spans by service, status, duration, and attributes',
+            'Read any trace end to end as a waterfall',
+            'Logs for one span or the whole trace in the span inspector',
+        ],
+        imageLight: `${CLOUDINARY}/image_3_c7dd33ad13.png`,
+        imageDark: `${CLOUDINARY}/image_3_c7dd33ad13.png`,
+        alt: 'A distributed trace shown as a waterfall of spans',
+    },
+    {
+        handle: 'metrics',
+        label: 'Metrics',
+        description: 'Know when your services slow down, and why.',
+        intro: (
+            <p>
+                Track request counts, latencies, and queue depths. Or run <code>npx @posthog/wizard metrics</code> and
+                let it instrument your services.
+            </p>
+        ),
+        docs: '/docs/metrics',
+        bullets: [
+            'Send with posthog.metrics, any OpenTelemetry SDK, or the metrics agent for Prometheus',
+            'An anomaly badge shows what changed and which values drove it',
+            'Jump to the logs and traces for the same service and time',
+            'Alerts in Slack, Microsoft Teams, or a webhook',
+        ],
+        imageLight: `${CLOUDINARY}/q_auto,f_auto/Clean_Shot_2026_11_26_at_15_40_59_2x_9d105b5447.png`,
+        imageDark: `${CLOUDINARY}/q_auto,f_auto/metrics_ui_dark_2c3efe79e9.png`,
+        alt: 'The metrics viewer charting p95 request duration grouped by status code, with the anomaly badge open to show the biggest movers',
+    },
+]
+
+const ProductExplorer = ({
+    allProducts,
+    value,
+    onValueChange,
+}: {
+    allProducts: any[]
+    value: string
+    onValueChange: (value: string) => void
+}) => (
+    <div className="not-prose my-4">
+        <OSTabs
+            value={value}
+            onValueChange={onValueChange}
+            scrollable={false}
+            // OSTabs can't measure icon labels to wrap them, so the row scrolls sideways when it doesn't fit
+            tabContainerClassName="overflow-x-auto overflow-y-hidden pb-px -mb-px"
+            tabs={PRODUCT_TABS.map((tab) => {
+                const product = allProducts.find((product) => product.handle === tab.handle)
+                return {
+                    value: tab.handle,
+                    label: (
+                        <span className="flex items-center gap-1.5 whitespace-nowrap">
+                            <span
+                                className={`inline-block shrink-0 size-4 ${
+                                    product ? `text-${product.color}` : 'text-secondary'
+                                }`}
+                            >
+                                {/* Metrics has no product data entry */}
+                                {product?.Icon ? <product.Icon /> : <IconTrends />}
+                            </span>
+                            {tab.label}
+                        </span>
+                    ),
+                    content: (
+                        <div>
+                            <p className="flex items-start gap-2 text-[15px] leading-relaxed mt-0 mb-3">
+                                <span
+                                    className={`inline-block shrink-0 size-5 mt-0.5 ${
+                                        product ? `text-${product.color}` : 'text-secondary'
+                                    }`}
+                                >
+                                    {/* Metrics has no product data entry */}
+                                    {product?.Icon ? <product.Icon /> : <IconTrends />}
+                                </span>
+                                <strong>{tab.description}</strong>
+                            </p>
+                            <div className="pl-7 text-[15px] leading-relaxed [&_p]:mt-0 [&_p]:mb-3 [&_code]:text-sm">
+                                {tab.intro}
+                            </div>
+                            <ul className="list-disc pl-12 m-0 mb-4 space-y-1.5 text-sm text-secondary leading-snug">
+                                {tab.bullets.map((bullet) => (
+                                    <li key={bullet} className="m-0">
+                                        {bullet}
+                                    </li>
+                                ))}
+                            </ul>
+                            <ProductScreenshot
+                                imageLight={tab.imageLight}
+                                imageDark={tab.imageDark}
+                                alt={tab.alt}
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
+                            {tab.handle === 'session_replay' && (
+                                <div className="mt-4">
+                                    <CalloutBox icon="IconEye" title="Let AI watch your recordings" type="fyi">
+                                        <p>
+                                            Tell Replay Vision what to look for in plain English. It scans your
+                                            recordings and surfaces sessions with bugs, payment failures, or frustrated
+                                            users.{' '}
+                                            <Link
+                                                to="/docs/replay-vision"
+                                                state={{ newWindow: true }}
+                                                className="font-semibold underline"
+                                            >
+                                                Explore Replay Vision
+                                            </Link>
+                                        </p>
+                                    </CalloutBox>
+                                </div>
+                            )}
+                            <Link
+                                to={tab.docs}
+                                state={{ newWindow: true }}
+                                className="inline-block mt-3 text-sm font-semibold"
+                            >
+                                Explore {tab.label} →
+                            </Link>
+                        </div>
+                    ),
+                }
+            })}
+        />
+    </div>
+)
+
+/** Words in each connection's description that open the product's tab, most specific first */
 const ANCHOR_TEXT: Record<string, string[]> = {
     session_replay: ['replay'],
     logs: ['backend logs', 'logs'],
     traces: ['trace'],
-    error_tracking: ['error tracking issues', 'exceptions'],
+    error_tracking: ['Error Tracking issues', 'exceptions'],
 }
 
 const ConnectionCards = ({
@@ -134,7 +349,7 @@ const ConnectionCards = ({
 }: {
     cards: (typeof CONNECTIONS)[number]['cards']
     allProducts: any[]
-    onNavigate: () => void
+    onNavigate: (handle: string) => void
 }) => (
     <ul className="list-none m-0 p-0 not-prose space-y-1.5">
         {cards.map((card) => {
@@ -143,13 +358,11 @@ const ConnectionCards = ({
             const anchor = ANCHOR_TEXT[handle]?.find((text) => card.description.includes(text)) || ''
             const index = anchor ? card.description.indexOf(anchor) : -1
             const goToStep = () => {
-                onNavigate()
+                onNavigate(handle)
                 // Wait for the popover to close and hand focus back, or that cancels the scroll
                 setTimeout(
                     () =>
-                        document
-                            .getElementById(PRODUCT_STEPS[handle])
-                            ?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+                        document.getElementById(EXPLORER_STEP)?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
                     50
                 )
             }
@@ -181,16 +394,47 @@ const ConnectionCards = ({
     </ul>
 )
 
-/** Node positions share the map SVG's 1000 × 620 coordinate system */
+/** A typical debugging path, shown on the connection map's nodes */
+const BUG_JOURNEY = [
+    { handle: 'metrics', label: 'Metrics', title: 'Spot the spike', description: 'Checkout latency has doubled.' },
+    {
+        handle: 'traces',
+        label: 'Tracing',
+        title: 'Find the slow span',
+        description: 'Requests are getting stuck at the payment service.',
+    },
+    {
+        handle: 'error_tracking',
+        label: 'Error Tracking',
+        title: 'Find the error',
+        description: 'A new exception is affecting checkout.',
+    },
+    { handle: 'logs', label: 'Logs', title: 'Inspect the logs', description: 'Payment requests are timing out.' },
+    {
+        handle: 'session_replay',
+        label: 'Session Replay',
+        title: 'Watch it break',
+        description: 'Customers are clicking Pay, but nothing happens.',
+    },
+]
+
+/** Node positions share the map SVG's 1000 × 760 coordinate system */
+const MAP_HEIGHT = 760
 const MAP_NODES: Record<string, { x: number; y: number }> = {
-    error_tracking: { x: 500, y: 90 },
-    session_replay: { x: 850, y: 250 },
-    traces: { x: 730, y: 530 },
-    metrics: { x: 270, y: 530 },
-    logs: { x: 150, y: 250 },
+    metrics: { x: 500, y: 110 },
+    traces: { x: 840, y: 320 },
+    error_tracking: { x: 730, y: 640 },
+    logs: { x: 270, y: 640 },
+    session_replay: { x: 160, y: 320 },
 }
 
-const ConnectionMap = ({ allProducts }: { allProducts: any[] }) => {
+const ConnectionMap = ({
+    allProducts,
+    onSelectProduct,
+}: {
+    allProducts: any[]
+    onSelectProduct: (handle: string) => void
+}) => {
     const [selected, setSelected] = useState(CONNECTIONS[0].source)
     const [openNode, setOpenNode] = useState<string | null>(null)
     const active = CONNECTIONS.find((connection) => connection.source === selected) || CONNECTIONS[0]
@@ -207,21 +451,27 @@ const ConnectionMap = ({ allProducts }: { allProducts: any[] }) => {
         `M ${MAP_NODES[from].x} ${MAP_NODES[from].y} L ${MAP_NODES[to].x} ${MAP_NODES[to].y}`
 
     return (
-        <div className="not-prose mb-6">
-            <p className="text-sm text-secondary mb-2">Click a product to see what it links to.</p>
+        <div className="@container not-prose mb-6">
+            <p className="text-sm text-secondary mb-2">Click a product to see the next clue it hands you.</p>
             <figure
-                className="product-context-demo @container aspect-[1000/620] paper-desk relative w-full m-0 mb-4 border border-primary rounded"
+                className="product-context-demo grid gap-2 p-3 @sm:block @sm:p-0 @sm:aspect-[1000/800] @sm:[--node-w:31cqw] @lg:[--node-w:28cqw] paper-desk relative w-full m-0 mb-4 border border-primary rounded"
                 data-running="true"
             >
                 <figcaption className="sr-only">Pick a starting point to see which products it links to.</figcaption>
-                <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 620" fill="none" aria-hidden="true">
+                <svg
+                    className="hidden @sm:block absolute inset-0 h-full w-full"
+                    viewBox={`0 0 1000 ${MAP_HEIGHT}`}
+                    preserveAspectRatio="none"
+                    fill="none"
+                    aria-hidden="true"
+                >
                     {Array.from(allEdges).map((edge) => {
                         const [a, b] = edge.split('|')
                         return (
                             <path
                                 key={edge}
                                 d={edgePath(a, b)}
-                                className="stroke-[rgb(var(--border))] stroke-2 [stroke-dasharray:6_6]"
+                                className="stroke-[rgb(var(--border))] stroke-2 [stroke-dasharray:6_6] [vector-effect:non-scaling-stroke]"
                             />
                         )
                     })}
@@ -229,23 +479,23 @@ const ConnectionMap = ({ allProducts }: { allProducts: any[] }) => {
                         <g key={`${active.source}-${handle}`} className={`text-${productFor(handle)?.color}`}>
                             <path
                                 d={edgePath(active.source, handle)}
-                                className="stroke-current stroke-[3] opacity-40"
+                                className="stroke-current stroke-[3] opacity-40 [vector-effect:non-scaling-stroke]"
                             />
                             <path
                                 d={edgePath(active.source, handle)}
                                 pathLength="100"
-                                className="context-pulse stroke-current stroke-[6] [stroke-linecap:round] [stroke-dasharray:8_100]"
+                                className="context-pulse stroke-current stroke-[6] [stroke-linecap:round] [stroke-dasharray:8_100] [vector-effect:non-scaling-stroke]"
                                 style={{ animationDelay: `${index * -0.6}s` }}
                             />
                         </g>
                     ))}
                 </svg>
 
-                {CONNECTIONS.map(({ source, label, from, cards }) => {
+                {CONNECTIONS.map(({ source, from, cards }) => {
                     const product = productFor(source)
+                    const step = BUG_JOURNEY.find((item) => item.handle === source)
                     const Icon = product?.Icon || IconTrends // Metrics has no product data entry
                     const isSelected = source === active.source
-                    const isLit = isSelected || connected.has(source)
                     return (
                         <Popover
                             key={source}
@@ -253,9 +503,9 @@ const ConnectionMap = ({ allProducts }: { allProducts: any[] }) => {
                             header
                             title={from}
                             side={
-                                MAP_NODES[source].y < 150
+                                MAP_NODES[source].y < 200
                                     ? 'bottom'
-                                    : MAP_NODES[source].y > 400
+                                    : MAP_NODES[source].y > 500
                                     ? 'top'
                                     : MAP_NODES[source].x < 500
                                     ? 'right'
@@ -274,30 +524,52 @@ const ConnectionMap = ({ allProducts }: { allProducts: any[] }) => {
                                     aria-pressed={isSelected}
                                     onClick={() => setSelected(source)}
                                     aria-haspopup="dialog"
-                                    className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-[1cqw] px-[2cqw] py-[1.2cqw] rounded-md border bg-primary whitespace-nowrap font-semibold text-primary text-[clamp(12px,3cqw,17px)] transition-all hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                                    className={`static @sm:absolute @sm:-translate-x-1/2 @sm:-translate-y-1/2 w-full @sm:w-[var(--node-w)] flex flex-col items-start gap-1 p-2.5 @lg:p-[1.6cqw] rounded-md border bg-primary text-left text-primary transition-all hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
                                         isSelected
-                                            ? 'border-primary shadow-lg scale-110 hover:scale-110'
+                                            ? 'border-primary shadow-lg @sm:scale-105 @sm:hover:scale-105'
                                             : 'border-primary'
-                                    } ${isLit ? 'opacity-100' : 'opacity-40'}`}
+                                    }`}
                                     style={{
-                                        left: `${MAP_NODES[source].x / 10}%`,
-                                        top: `${(MAP_NODES[source].y / 620) * 100}%`,
+                                        // Keep the whole node inside the map when it gets narrow
+                                        left: `clamp(calc(var(--node-w) / 2 + 4px), ${
+                                            MAP_NODES[source].x / 10
+                                        }%, calc(100% - var(--node-w) / 2 - 4px))`,
+                                        top: `${(MAP_NODES[source].y / MAP_HEIGHT) * 100}%`,
                                     }}
                                 >
-                                    <Icon
-                                        aria-hidden="true"
-                                        className={`size-[clamp(14px,3.4cqw,22px)] shrink-0 ${
-                                            product ? `text-${product.color}` : 'text-secondary'
-                                        }`}
-                                    />
-                                    {label}
+                                    <span className="flex items-center gap-1.5 w-full whitespace-nowrap text-[clamp(11px,2cqw,13px)] text-secondary">
+                                        <Icon
+                                            aria-hidden="true"
+                                            className={`size-[clamp(13px,2.4cqw,18px)] shrink-0 ${
+                                                product ? `text-${product.color}` : 'text-secondary'
+                                            }`}
+                                        />
+                                        {step?.label}
+                                        {/* Turns into an × while the node's popover is open */}
+                                        <IconPlus
+                                            aria-hidden="true"
+                                            className={`ml-auto size-4 shrink-0 text-secondary transition-transform ${
+                                                openNode === source ? 'rotate-45' : ''
+                                            }`}
+                                        />
+                                    </span>
+                                    <strong className="block text-[clamp(14px,2.8cqw,18px)] leading-tight">
+                                        {step?.title}
+                                    </strong>
+                                    {/* Too tight for the description on a narrow map; the list and the wide map have room */}
+                                    <span className="block @sm:hidden @lg:block text-[clamp(11px,2cqw,13px)] leading-snug text-secondary">
+                                        {step?.description}
+                                    </span>
                                 </button>
                             }
                         >
                             <ConnectionCards
                                 cards={cards}
                                 allProducts={allProducts}
-                                onNavigate={() => setOpenNode(null)}
+                                onNavigate={(handle) => {
+                                    setOpenNode(null)
+                                    onSelectProduct(handle)
+                                }}
                             />
                             {source === 'error_tracking' && (
                                 <div className="mt-3">
@@ -366,30 +638,10 @@ const ConnectionMap = ({ allProducts }: { allProducts: any[] }) => {
     )
 }
 
-const TOP_COUNT = 8
-const PLATFORM_ORDER = [
-    '/docs/error-tracking/installation/nextjs',
-    '/docs/error-tracking/installation/react',
-    '/docs/error-tracking/installation/web',
-    '/docs/error-tracking/installation/react-native',
-    '/docs/error-tracking/installation/node',
-    '/docs/error-tracking/installation/python',
-    '/docs/error-tracking/installation/manual',
-    '/docs/error-tracking/installation/flutter',
-    '/docs/error-tracking/installation/nuxt',
-    '/docs/error-tracking/installation/angular',
-    '/docs/error-tracking/installation/android',
-    '/docs/error-tracking/installation/svelte',
-    '/docs/error-tracking/installation/hono',
-    '/docs/error-tracking/installation/ruby',
-    '/docs/error-tracking/installation/ios',
-    '/docs/error-tracking/installation/go',
-]
-
 export default function PostHogObservabilityLanding(): JSX.Element {
-    const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
     const allProducts = useProduct() as any[]
+    const [explorerTab, setExplorerTab] = useState(PRODUCT_TABS[0].handle)
 
     const handleScrollToMCP = () => {
         document.getElementById('quest-item-let-your-ai-agent-debug-for-you')?.scrollIntoView({ behavior: 'smooth' })
@@ -402,15 +654,6 @@ export default function PostHogObservabilityLanding(): JSX.Element {
         setInstallMCPCopied(true)
         setTimeout(() => setInstallMCPCopied(false), 2000)
     }
-
-    const allPlatforms = usePlatformList('docs/error-tracking/installation', 'observability installation')
-    const sortedPlatforms = useMemo(() => {
-        const indexed = new Map(allPlatforms.map((p) => [p.url, p]))
-        const ordered = PLATFORM_ORDER.map((url) => indexed.get(url)).filter(Boolean) as typeof allPlatforms
-        const unlisted = allPlatforms.filter((p) => !PLATFORM_ORDER.includes(p.url))
-        const all = [...ordered, ...unlisted]
-        return { top: all.slice(0, TOP_COUNT), rest: all.slice(TOP_COUNT) }
-    }, [allPlatforms])
 
     useEffect(() => {
         let idleTimer: ReturnType<typeof setTimeout>
@@ -440,7 +683,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
         <>
             <SEO
                 title="Observability built for product engineers"
-                description="PostHog Observability bundles error tracking, session replay, logs, traces, and metrics into one tool, wired up to MCP so your AI agent can investigate issues end to end. Free tier covers 100k exceptions, 5k recordings, and 10 GB of logs and traces every month."
+                description="PostHog Observability bundles Error Tracking, Session Replay, Logs, Tracing, and Metrics into one tool, wired up to MCP so your AI agent can investigate issues end to end. Free tier covers 100k exceptions, 5k recordings, and 10 GB of logs and traces every month."
                 noindex
             />
             <ReaderView
@@ -451,18 +694,13 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[2fr_0.6fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 @lg:grid-cols-[2fr_0.6fr] gap-10 items-center mb-12 max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl md:text-5xl !mb-4">
-                            Your errors, replays, logs, and traces already know each other
-                        </h1>
+                        <h1 className="text-3xl md:text-5xl !mb-4">The observability stack that knows your product</h1>
                         <p className="text-lg md:text-xl !mb-6 text-secondary">
-                            Error tracking, session replay, logs, traces, and metrics in one place. Frontend errors and
-                            replays share the same user and session out of the box. Backend errors, logs, and traces
-                            join them once your server passes the PostHog session ID. An MCP server so you can debug
-                            without ever opening a dashboard or learning a UI.
-                            <br />
-                            Time to make it official.
+                            Debug production issues with the context you already have on your users. Errors, recordings,
+                            logs, traces, and metrics sit next to your product data, and your AI agent can investigate
+                            all of it through MCP.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
@@ -473,148 +711,130 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             </CallToAction>
                         </div>
                         <p className="text-sm !mb-0 text-secondary">
-                            The wizard sets up{' '}
-                            <Link to="/docs/error-tracking" state={{ newWindow: true }}>
+                            Install{' '}
+                            <Link to="/docs/error-tracking/installation" state={{ newWindow: true }}>
                                 error tracking
-                            </Link>{' '}
-                            and{' '}
-                            <Link to="/docs/logs" state={{ newWindow: true }}>
+                            </Link>
+                            ,{' '}
+                            <Link to="/docs/session-replay/installation" state={{ newWindow: true }}>
+                                session replay
+                            </Link>
+                            , and{' '}
+                            <Link to="/docs/logs/installation" state={{ newWindow: true }}>
                                 logs
+                            </Link>{' '}
+                            with{' '}
+                            <Link to="/docs/ai-engineering/ai-wizard" state={{ newWindow: true }}>
+                                one command
                             </Link>
-                            , and adds the SDK that records{' '}
-                            <Link to="/docs/session-replay" state={{ newWindow: true }}>
-                                session replays
-                            </Link>
-                            . Add{' '}
-                            <Link to="/docs/distributed-tracing" state={{ newWindow: true }}>
+                            . Send{' '}
+                            <Link to="/docs/distributed-tracing/installation" state={{ newWindow: true }}>
                                 traces
                             </Link>{' '}
-                            with OpenTelemetry or the PostHog SDK, and{' '}
-                            <Link to="/docs/metrics" state={{ newWindow: true }}>
+                            and{' '}
+                            <Link to="/docs/metrics/installation" state={{ newWindow: true }}>
                                 metrics
                             </Link>{' '}
-                            with <code>npx @posthog/wizard metrics</code>. Free for 100k exceptions, 5k web + 2.5k
-                            mobile recordings, and 10 GB of logs and traces every month. No credit card, no per-seat
-                            pricing.
+                            via OpenTelemetry or PostHog's SDKs. Free for 100k exceptions, 5k web + 2.5k mobile
+                            recordings, and 10 GB of logs and traces every month. No credit card, no per-seat pricing.
                         </p>
                     </div>
-                    <div className="flex justify-center">
+                    {/* On wide windows the hedgehog spans the logo row too, so the tall image leaves no gap above it */}
+                    <div className="flex justify-center @lg:row-span-2">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bug_catcher_719a67117f.png"
                             alt="PostHog hedgehog with a magnifying glass"
                             className="w-full max-w-[220px] mx-auto"
                         />
                     </div>
-                </div>
 
-                <div className="mb-12 max-w-7xl mx-auto">
-                    <div className="flex flex-wrap items-center gap-x-10 gap-y-6 text-primary dark:text-primary-dark">
-                        <ElevenLabsLogo className="fill-current object-contain max-w-full h-7" />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2025_MG_Logo_Full_9fdb693543.png"
-                            alt="MoneyGram"
-                            imgClassName="h-9 w-auto object-contain max-w-full dark:brightness-0 dark:invert"
-                        />
-                        <HeygenLogo className="object-contain max-w-full h-11" />
-                        <FireworksAILogo className="object-contain max-w-full h-5" />
+                    <div className="-mt-4 @lg:mt-0">
+                        <div className="flex flex-wrap items-center gap-x-10 gap-y-6 text-primary dark:text-primary-dark">
+                            <ElevenLabsLogo className="fill-current object-contain max-w-full h-7" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2025_MG_Logo_Full_9fdb693543.png"
+                                alt="MoneyGram"
+                                imgClassName="h-9 w-auto object-contain max-w-full dark:brightness-0 dark:invert"
+                            />
+                            <HeygenLogo className="object-contain max-w-full h-11" />
+                            <FireworksAILogo className="object-contain max-w-full h-5" />
+                        </div>
+                        <p className="text-xs mt-3 !mb-0">
+                            <span className="font-semibold">
+                                A few PostHog customers debugging with us in production.
+                            </span>
+                            <br />
+                            <span className="text-muted">
+                                (Yes they actually use us, no it's not just some random engineer who tried us out 2+
+                                years ago.)
+                            </span>
+                        </p>
                     </div>
-                    <p className="text-xs mt-3 !mb-0">
-                        <span className="font-semibold">A few PostHog customers debugging with us in production.</span>
-                        <br />
-                        <span className="text-muted">
-                            (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years
-                            ago.)
-                        </span>
-                    </p>
                 </div>
 
                 <div className={isIdle ? 'quest-idle' : ''}>
                     <QuestLog firstSpeechBubble="Let's get observable!" lastSpeechBubble="Time to start shipping!">
                         <QuestLogItem
-                            title="Start with the wizard, then add your backend"
-                            subtitle="Errors and logs from the wizard, traces and metrics from your backend"
-                            icon="IconMagicWand"
+                            title="Follow one bug from spike to impact"
+                            subtitle="Investigate a checkout slowdown end to end"
+                            icon="IconLogomark"
                         >
                             <p>
-                                Run the wizard. It sets up <strong>error tracking</strong> and <strong>logs</strong>,
-                                and adds the SDK that records <strong>session replays</strong>. No copy-pasting three
-                                different snippets.
+                                Your checkout is slowing down. Investigate the problem and its impact on your users
+                                without leaving PostHog.
                             </p>
+
+                            <ConnectionMap allProducts={allProducts} onSelectProduct={setExplorerTab} />
+
+                            <CalloutBox icon="IconGraph" title="Find the errors that cost you customers" type="fyi">
+                                <p>
+                                    Compare checkout conversion rates for users who encountered an error. See which bugs
+                                    are worth fixing first using the product data you already have.{' '}
+                                    <Link to="/docs/product-analytics" state={{ newWindow: true }}>
+                                        Explore Product Analytics
+                                    </Link>
+                                </p>
+                            </CalloutBox>
+
+                            <div className="mt-4">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
+                                    Get started free
+                                </CallToAction>
+                            </div>
+                        </QuestLogItem>
+
+                        <QuestLogItem
+                            title="Install with one command"
+                            subtitle="Errors, logs, and replays with one command"
+                            icon="IconMagicWand"
+                        >
+                            <p>Set up Error Tracking, Logs, and Session Replay with one command.</p>
 
                             <WizardCTA />
 
-                            <h3>Add your backend</h3>
-
-                            <ul>
-                                <li>
-                                    <strong>Traces:</strong> point any OpenTelemetry exporter at PostHog, or create
-                                    spans with <code>posthog-node</code> or the Python SDK. See the{' '}
-                                    <Link to="/docs/distributed-tracing/installation" state={{ newWindow: true }}>
-                                        tracing install guides
-                                    </Link>
-                                    .
-                                </li>
-                                <li>
-                                    <strong>Metrics:</strong> run <code>npx @posthog/wizard metrics</code>. You can also
-                                    use <code>posthog.metrics</code> in posthog-js, posthog-node, or the Python SDK, or
-                                    any OpenTelemetry exporter. See the{' '}
-                                    <Link to="/docs/metrics/installation" state={{ newWindow: true }}>
-                                        metrics install guides
-                                    </Link>
-                                    .
-                                </li>
-                                <li>
-                                    Logs and traces use the same OpenTelemetry setup, so one exporter config covers
-                                    both.
-                                </li>
-                            </ul>
+                            <h3>Connect your backend</h3>
 
                             <p>
-                                Everything lands in the same project. Frontend errors and replays share the user and
-                                session automatically. Backend logs, spans, and errors link to them when your server
-                                passes the PostHog session ID. Set <code>tracing_headers</code> in posthog-js and use
-                                the PostHog request context on your server.
-                            </p>
-
-                            <h3>Or install the SDK directly</h3>
-
-                            <List
-                                className="grid gap-4 grid-cols-2 @md:grid-cols-2 not-prose"
-                                items={sortedPlatforms.top}
-                            />
-
-                            {showMore && sortedPlatforms.rest.length > 0 && (
-                                <List
-                                    className="grid gap-4 grid-cols-2 @md:grid-cols-2 not-prose mt-4"
-                                    items={sortedPlatforms.rest}
-                                />
-                            )}
-
-                            <button
-                                onClick={() => setShowMore(!showMore)}
-                                className="mt-3 text-red dark:text-yellow font-semibold text-sm cursor-pointer hover:underline"
-                            >
-                                {showMore ? 'Show less' : 'See more platforms'}
-                            </button>
-
-                            <p className="mt-4 text-sm text-secondary">
-                                Need platform-specific instructions for just one signal? See the{' '}
-                                <Link to="/docs/session-replay/installation" state={{ newWindow: true }}>
-                                    session replay
-                                </Link>
-                                ,{' '}
-                                <Link to="/docs/logs/installation" state={{ newWindow: true }}>
-                                    logs
-                                </Link>
-                                ,{' '}
+                                Send{' '}
                                 <Link to="/docs/distributed-tracing/installation" state={{ newWindow: true }}>
-                                    tracing
-                                </Link>
-                                , or{' '}
+                                    traces
+                                </Link>{' '}
+                                and{' '}
                                 <Link to="/docs/metrics/installation" state={{ newWindow: true }}>
                                     metrics
                                 </Link>{' '}
-                                install guides.
+                                with OpenTelemetry or PostHog's SDKs. Pass the PostHog session ID to connect backend
+                                data to user sessions.
+                            </p>
+
+                            <h3>Prefer to install manually?</h3>
+
+                            <p>
+                                Follow our{' '}
+                                <Link to="/docs/getting-started/install" state={{ newWindow: true }}>
+                                    platform-specific installation guides
+                                </Link>
+                                .
                             </p>
 
                             <div className="mt-4">
@@ -625,21 +845,26 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
+                            title="Meet your debugging toolkit"
+                            subtitle="Errors, replays, logs, traces, and metrics"
+                            icon="IconApps"
+                        >
+                            <ProductExplorer
+                                allProducts={allProducts}
+                                value={explorerTab}
+                                onValueChange={setExplorerTab}
+                            />
+                        </QuestLogItem>
+
+                        <QuestLogItem
                             title="Let your AI agent debug for you"
                             subtitle="MCP across errors, replays, logs, traces, and metrics"
                             icon="IconSparkles"
                         >
                             <p>
-                                <strong>
-                                    Already shipping with PostHog Code, Claude Code, Cursor, Codex, or Windsurf? Boy
-                                    howdy, you're going to love this.
-                                </strong>{' '}
-                                Wire up the PostHog MCP server and your agent can investigate an exception, pull the
-                                replay of the user who hit it, read the trace, and tail the surrounding logs, all from
-                                your editor.
+                                Connect PostHog to your AI coding agent and investigate production issues without
+                                leaving your editor.
                             </p>
-
-                            <h3>Install in 30 seconds</h3>
 
                             <SingleCodeBlock language="bash" showAskAI={false}>
                                 npx @posthog/wizard mcp add
@@ -653,353 +878,39 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                 loop={true}
                             />
 
-                            <h3>Try prompts like</h3>
+                            <h3>Try asking</h3>
 
-                            <ul>
-                                <li>
-                                    <em>
-                                        "Why are checkout errors spiking? Show me a replay of a user who hit one and the
-                                        surrounding logs."
-                                    </em>
+                            <ul className="list-none m-0 p-0 not-prose space-y-3">
+                                <li className="m-0 border border-primary rounded p-4">
+                                    "Why are checkout errors spiking? Show me a recording of a user who hit one and the
+                                    surrounding logs."
                                 </li>
-                                <li>
-                                    <em>
-                                        "A user reported the dashboard is broken at 2pm. Find the session, the
-                                        exception, and the matching log lines."
-                                    </em>
+                                <li className="m-0 border border-primary rounded p-4">
+                                    "Which service is slowing down checkout, and which users are affected?"
                                 </li>
-                                <li>
-                                    <em>
-                                        "Generate a regression test from the failing session in replay 12345 using the
-                                        stack trace and request payload."
-                                    </em>
-                                </li>
-                                <li>
-                                    <em>"Show error logs from the API service in the last hour and group by route."</em>
-                                </li>
-                                <li>
-                                    <em>
-                                        "Find every session where CheckoutButton threw an error in the last 24h and
-                                        summarize the pattern."
-                                    </em>
-                                </li>
-                                <li>
-                                    <em>"Show me the slowest spans in the checkout service over the last hour."</em>
-                                </li>
-                                <li>
-                                    <em>
-                                        "Pull the full span tree for trace ID abc123 and tell me where the time went."
-                                    </em>
+                                <li className="m-0 border border-primary rounded p-4">
+                                    "Generate a regression test from this failing session using the stack trace and
+                                    request payload."
                                 </li>
                             </ul>
 
-                            <h3>Or use PostHog AI inside the app</h3>
-
-                            <p>
-                                Don't want to leave the browser?{' '}
+                            <p className="text-secondary mt-4">
+                                Prefer the browser? Investigate issues with{' '}
                                 <Link to="/docs/posthog-ai" state={{ newWindow: true }}>
                                     PostHog AI
-                                </Link>{' '}
-                                lives in the app and can search replays, summarize log patterns, and triage errors in
-                                plain language.
+                                </Link>
+                                .
                             </p>
 
-                            <div className="flex flex-wrap gap-2 mt-4">
+                            <div className="mt-4">
                                 <CallToAction type="primary" size="md" onClick={handleCopyMCP}>
                                     {installMCPCopied ? 'npx command copied! 🚀' : 'Install MCP'}
                                 </CallToAction>
-                                <CallToAction type="secondary" size="md" to="https://app.posthog.com/signup">
-                                    Get started free
-                                </CallToAction>
                             </div>
                         </QuestLogItem>
 
                         <QuestLogItem
-                            title="Every clue, already connected"
-                            subtitle="Why the bundle beats three vendors"
-                            icon="IconLogomark"
-                        >
-                            <p>
-                                Most observability stacks are a pile of tools stitched together with hope. PostHog
-                                Observability is one tool with five lenses on the same data. Every frontend exception
-                                already knows the session it came from. Every replay already has the network calls and
-                                console errors attached. Backend logs and traces join in once your server passes the
-                                session ID.
-                            </p>
-
-                            <ConnectionMap allProducts={allProducts} />
-
-                            <p className="text-sm text-secondary">
-                                Logs, traces, and backend errors link to replays when your server passes the PostHog
-                                session ID.
-                            </p>
-
-                            <CalloutBox icon="IconGraph" title="And it all feeds product analytics" type="fyi">
-                                <p>
-                                    Exceptions are regular PostHog events. Chart them in trends, funnels, or retention
-                                    insights next to the rest of your product data. Click any data point to watch the
-                                    recordings behind it. That's how you find the errors that cost you signups, not just
-                                    the loudest ones.{' '}
-                                    <Link to="/docs/product-analytics" state={{ newWindow: true }}>
-                                        Explore product analytics
-                                    </Link>
-                                </p>
-                            </CalloutBox>
-
-                            <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
-                                    Try the bundle – free
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Catch every exception"
-                            subtitle="Autocapture errors with real stack traces"
-                            icon="IconWarning"
-                        >
-                            <p>
-                                Autocapture in Error Tracking catches <code>$exception</code> events the moment they're
-                                thrown, client- or server-side. Upload your source maps and stack traces point straight
-                                to your original code – file, line, and function.
-                            </p>
-
-                            <p>
-                                Exceptions group into issues automatically. Assign them, resolve them, or wire up Slack,
-                                Discord, Teams, or a webhook so the right person hears about it instead of your users.
-                            </p>
-
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_ryub_aa8398de10.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_rzmm_23fa3181c4.png"
-                                alt="Error tracking issue with stack trace"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
-
-                            <ul>
-                                <li>Autocapture exceptions in the browser, mobile, and server-side</li>
-                                <li>Accurate stack traces via source maps</li>
-                                <li>Customize issue grouping with rules</li>
-                                <li>Alerts on triggers, filters, and trends</li>
-                                <li>
-                                    <IconRewindPlay className="text-yellow w-5 -mt-1 inline-block" /> Jump from any
-                                    exception straight into the replay of the user who hit it
-                                </li>
-                                <li>
-                                    <IconCode2 className="text-purple w-5 -mt-1 inline-block" /> See the logs from the
-                                    same trace, span, or session in the exception's Logs tab
-                                </li>
-                                <li>
-                                    <IconGanttChart className="text-blue w-5 -mt-1 inline-block" /> Open the trace
-                                    behind an exception in its Trace tab, when your server SDK attaches trace context
-                                </li>
-                            </ul>
-
-                            <div className="mt-4">
-                                <CallToAction
-                                    type="primary"
-                                    size="md"
-                                    to="/docs/error-tracking"
-                                    state={{ newWindow: true }}
-                                >
-                                    Explore error tracking
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Watch the session with the console open"
-                            subtitle="Session replay with DevTools context"
-                            icon="IconRewindPlay"
-                        >
-                            <p>
-                                Rethink what replays look like with PostHog. Sure, you get the video, but you also get
-                                dev-tools level context synced to the timeline: console logs, network requests,
-                                performance data, rage clicks, dead clicks, craaaazy clicks. (Yes, even those.)
-                                <br />
-                                <br />
-                                When a user says "it just broke," you get the full picture with frontend context and
-                                backend visibility.
-                            </p>
-
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/annotated_replay_inspector_ec4ceb5761.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/annotated_replay_inspector_dark_c040e66ee5.png"
-                                alt="Session replay activity panel"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
-
-                            <ul>
-                                <li>Jump to any event in the timeline to skip to what matters</li>
-                                <li>See console errors and network failures in exact context</li>
-                                <li>Automatic rage-click and dead-click detection (no tagging needed)</li>
-                                <li>Save filters as collections your team can reuse</li>
-                                <li>
-                                    <IconWarning className="text-orange w-5 -mt-1 inline-block" /> Replays show the
-                                    exceptions and <IconCode2 className="text-purple w-5 -mt-1 inline-block" /> backend
-                                    logs from the same session
-                                </li>
-                            </ul>
-
-                            <CalloutBox icon="IconEye" title="Replay Vision" type="fyi">
-                                <p>
-                                    Nobody has time to watch every replay. Replay Vision does. Tell it what to look for
-                                    in plain English. AI watches your recordings and surfaces the sessions where
-                                    something went wrong: failures, struggles, payment problems. Run{' '}
-                                    <code>npx @posthog/wizard replay-vision</code> and it writes three scanners for your
-                                    product. 2,500 free credits every month.{' '}
-                                    <Link to="/docs/replay-vision" state={{ newWindow: true }}>
-                                        Explore Replay Vision
-                                    </Link>
-                                </p>
-                            </CalloutBox>
-
-                            <div className="mt-4">
-                                <CallToAction
-                                    type="primary"
-                                    size="md"
-                                    to="/docs/session-replay"
-                                    state={{ newWindow: true }}
-                                >
-                                    Explore session replay
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Search and tail your logs"
-                            subtitle="OTel-native logs with full-text search"
-                            icon="IconCode2"
-                        >
-                            <p>
-                                PostHog Logs works with any OpenTelemetry client – no PostHog-specific packages
-                                required. Point your existing OTel SDK at PostHog, drop in your project token, and your
-                                structured logs land alongside everything else.
-                            </p>
-
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_light_dd81ff5093.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_dark_d7135f1b22.png"
-                                alt="PostHog Logs search interface"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
-
-                            <ul>
-                                <li>Full-text search with multiple tokens and negative filters</li>
-                                <li>Filter by time, service, resource attributes, or log level</li>
-                                <li>Alert when error logs spike or specific patterns appear</li>
-                                <li>
-                                    <IconRewindPlay className="text-yellow w-5 -mt-1 inline-block" /> One click from a
-                                    log line to the session replay of the user who triggered it
-                                </li>
-                                <li>
-                                    <IconWarning className="text-orange w-5 -mt-1 inline-block" /> See error tracking
-                                    issues from the same session in the log details
-                                </li>
-                            </ul>
-
-                            <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="/docs/logs" state={{ newWindow: true }}>
-                                    Explore logs
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Follow a request across services"
-                            subtitle="Distributed tracing on OpenTelemetry"
-                            icon="IconGanttChart"
-                        >
-                            <p>
-                                A trace follows one request through every service it touches. Open the waterfall and
-                                find the slow query six services deep, or the background job a stack trace never shows.
-                            </p>
-
-                            <p>
-                                Point any OpenTelemetry exporter at PostHog. On Node.js and Python,{' '}
-                                <code>posthog-node</code> and the Python SDK can create spans themselves.
-                            </p>
-
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/image_3_c7dd33ad13.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/image_3_c7dd33ad13.png"
-                                alt="A distributed trace shown as a waterfall of spans"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
-
-                            <ul>
-                                <li>Search and filter spans by service, status, duration, and attributes</li>
-                                <li>Read any trace end to end as a waterfall</li>
-                                <li>See the logs for one span or the whole trace in the span inspector</li>
-                                <li>See the errors from the same span, trace, or session</li>
-                                <li>
-                                    <IconRewindPlay className="text-yellow w-5 -mt-1 inline-block" /> Jump to the replay
-                                    of the user behind a trace, when spans carry the PostHog session ID
-                                </li>
-                            </ul>
-
-                            <div className="mt-4">
-                                <CallToAction
-                                    type="primary"
-                                    size="md"
-                                    to="/docs/distributed-tracing"
-                                    state={{ newWindow: true }}
-                                >
-                                    Explore tracing
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Chart your service metrics"
-                            subtitle="Counters, gauges, and histograms next to your logs and traces"
-                            icon="IconTrends"
-                        >
-                            <p>
-                                Send request counts, latencies, and queue depths with <code>posthog.metrics</code>, any
-                                OpenTelemetry SDK, or the metrics agent for existing Prometheus endpoints. Or run{' '}
-                                <code>npx @posthog/wizard metrics</code> and let it instrument your services.
-                            </p>
-
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_11_26_at_15_40_59_2x_9d105b5447.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/metrics_ui_dark_2c3efe79e9.png"
-                                alt="The metrics viewer charting p95 request duration grouped by status code, with the anomaly badge open to show the biggest movers"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
-
-                            <ul>
-                                <li>Chart any metric, then group and filter it by attribute</li>
-                                <li>An anomaly badge shows what changed and which values drove it</li>
-                                <li>
-                                    Click an exemplar to open the trace behind it, for metrics sent with trace context
-                                </li>
-                                <li>Jump to the logs, error logs, and traces for the same service and time window</li>
-                                <li>
-                                    Get alerted in Slack, Microsoft Teams, or a webhook when a metric crosses a
-                                    threshold
-                                </li>
-                            </ul>
-
-                            <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="/docs/metrics" state={{ newWindow: true }}>
-                                    Explore metrics
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Use for free"
+                            title="Free to start. Pay as you grow."
                             subtitle="100k exceptions, 5k recordings, 10 GB of logs and traces"
                             icon="IconPiggyBank"
                         >
@@ -1011,15 +922,15 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             <ul>
                                 <li>No credit card required to start</li>
                                 <li>
-                                    <strong>Error tracking:</strong> 100k exceptions/mo free, then $0.000370 per
+                                    <strong>Error Tracking:</strong> 100k exceptions/mo free, then $0.000370 per
                                     exception with volume discounts
                                 </li>
                                 <li>
-                                    <strong>Session replay:</strong> 5,000 web + 2,500 mobile recordings/mo free, then
+                                    <strong>Session Replay:</strong> 5,000 web + 2,500 mobile recordings/mo free, then
                                     from $0.005 per recording
                                 </li>
                                 <li>
-                                    <strong>Logs and tracing:</strong> 10 GB/mo free, shared across both, then $0.25/GB,
+                                    <strong>Logs and Tracing:</strong> 10 GB/mo free, shared across both, then $0.25/GB,
                                     down to $0.15/GB at volume
                                 </li>
                                 <li>
@@ -1034,15 +945,15 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                 <li>
                                     See full pricing for{' '}
                                     <Link to="/docs/error-tracking/pricing" state={{ newWindow: true }}>
-                                        error tracking
+                                        Error Tracking
                                     </Link>
                                     ,{' '}
                                     <Link to="/docs/session-replay/pricing" state={{ newWindow: true }}>
-                                        session replay
+                                        Session Replay
                                     </Link>
                                     ,{' '}
                                     <Link to="/docs/logs/pricing" state={{ newWindow: true }}>
-                                        logs and tracing
+                                        Logs and Tracing
                                     </Link>
                                     , and{' '}
                                     <Link to="/docs/replay-vision/quota-and-limits" state={{ newWindow: true }}>
@@ -1050,10 +961,6 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                     </Link>
                                 </li>
                             </ul>
-
-                            <hr className="my-6" />
-
-                            <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
                                 <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
