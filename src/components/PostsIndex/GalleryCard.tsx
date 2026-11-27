@@ -5,7 +5,13 @@ import { PostSummary } from './types'
 import { getByline, getSubtitle } from './utils'
 
 /** One tile in the all-posts grid. */
-export default function GalleryCard({ post }: { post: PostSummary }): JSX.Element {
+export default function GalleryCard({
+    post,
+    hideReadingTime = false,
+}: {
+    post: PostSummary
+    hideReadingTime?: boolean
+}): JSX.Element {
     return (
         <Link to={post.fields.slug} state={{ newWindow: true }} className="group block no-underline text-primary">
             <div className="relative aspect-video overflow-hidden rounded-sm border border-primary bg-white shadow-[0_6px_12px_rgba(0,0,0,0.18)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_24px_rgba(0,0,0,0.25)]">
@@ -21,7 +27,7 @@ export default function GalleryCard({ post }: { post: PostSummary }): JSX.Elemen
                 </h3>
                 <p className="m-0 mt-1 text-xs text-secondary line-clamp-2">{getSubtitle(post)}</p>
                 <p className="m-0 mt-1.5 text-[11px] font-medium uppercase tracking-wide text-muted">
-                    {getByline(post, post.frontmatter.fullDate)}
+                    {getByline(post, post.frontmatter.fullDate, { hideReadingTime })}
                 </p>
             </div>
         </Link>

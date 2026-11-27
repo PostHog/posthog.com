@@ -171,12 +171,14 @@ export default function PostsGallery({
     searchName = 'posts-search',
     accent = 'red',
     tagOrderOverride = [],
+    hideReadingTime = false,
 }: {
     posts: PostSummary[]
     heading?: string
     searchName?: string
     accent?: Accent
     tagOrderOverride?: string[]
+    hideReadingTime?: boolean
 }): JSX.Element {
     const { query, setQuery, activeTag, setActiveTag, sort, setSort, tags, filteredPosts, isFiltered, clear } =
         usePostFilters(posts)
@@ -248,7 +250,7 @@ export default function PostsGallery({
                     {currentPage > 1 && <div className="mb-8 pt-4">{pagination}</div>}
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 @lg:grid-cols-2 @lg:gap-x-6 @lg:gap-y-10 @3xl:grid-cols-3">
                         {visiblePosts.map((post) => (
-                            <GalleryCard key={post.id} post={post} />
+                            <GalleryCard key={post.id} post={post} hideReadingTime={hideReadingTime} />
                         ))}
                     </div>
                     {totalPages > 1 && <div className="mt-8">{pagination}</div>}

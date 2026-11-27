@@ -1,4 +1,4 @@
-import { PostSummary } from './types'
+import type { PostSummary } from './types'
 
 /** Deterministic pseudo-random in [0, 1) — stable across SSR/hydration, varied per index. */
 export const rand = (index: number, salt: number): number => {
@@ -18,14 +18,20 @@ export const getSubtitle = (post: PostSummary): string => {
 
 export const getAuthorName = (post: PostSummary): string | undefined => post.frontmatter.authors?.[0]?.name
 
+export interface GetBylineOptions {
+    hideReadingTime?: boolean
+    showReadingTime?: boolean
+}
+
 /** `MMM D · Author` byline, with the separator dropped when there's no author. */
-export const getByline = (post: PostSummary, date: string): string => {
+export const getByline = (post: PostSummary, date: string, options?: GetBylineOptions): string => {
     const author = getAuthorName(post)
     let byline = date
     if (author) {
         byline += ` · ${author}`
     }
-    if (post.fields.wordCount && post.fields.wordCount > 0) {
+    const showReadingTime = options?.showReadingTime ?? !options?.hideReadingTime
+    if (showReadingTime && post.fields.wordCount && post.fields.wordCount > 0) {
         byline += ` · ${getReadingTime(post)}`
     }
     return byline
