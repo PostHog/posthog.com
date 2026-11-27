@@ -97,6 +97,62 @@ Once you've mocked up your email, you can preview what the email would look like
   alt="viewing-as-desktop"
 />
 
+### New email editor
+
+<CalloutBox icon="IconFlask" title="The new email editor is in beta" type="action">
+
+The new email editor isn't on for every project yet, and it might change while we work on it.
+If new emails open in the drag-and-drop builder above, it isn't on for your project.
+
+</CalloutBox>
+
+The new email editor lets you write an email the way you write a document, and add blocks as you go. It changes how you draft an email, and sending stays the same.
+
+Blank emails and the sample in a new template open in the new editor. Existing emails stay in the old editor until you [move them](#try-the-new-editor-on-an-existing-email).
+
+You can add these blocks: text, headings, images, buttons, columns (up to four), dividers, spacers, lists, quotes, custom HTML, and an unsubscribe link. Use the **Page style** panel for the email's background, fonts, and preview text.
+
+To add a variable, type `{{ person.properties.name }}` or pick one from the list. Click the variable to set **Fallback, if it's empty**. The canvas shows the variable, and doesn't show its fallback. A warning on a variable means that it will probably be empty unless you add a fallback.
+
+To show blocks on a condition, write `{% if %}` and `{% endif %}` on lines of their own, around those blocks.
+
+#### Try the new editor on an existing email
+
+<CalloutBox icon="IconWarning" title="Duplicate the template first" type="caution">
+
+Saving after you move an email is permanent. It replaces the old editor's version, and PostHog can't restore it. If you edit the email in the old editor later, it opens there as one custom HTML block.
+
+</CalloutBox>
+
+1. Duplicate the template, and open the copy.
+2. Click **Try the new editor**. PostHog shows the current email and the new version side by side.
+3. Check that the new version looks right. Small differences are possible, such as a dashed divider that becomes solid.
+4. Click **Use the new editor**, and edit the email.
+5. Save the email. If you close the email without saving, nothing changes.
+
+A move keeps text, headings, buttons, images, dividers, columns, HTML blocks, and the unsubscribe block. These change:
+
+- **Text with styling the new editor can't hold** becomes a custom HTML block. It looks the same, but you edit it as HTML.
+- **Social icons** become a custom HTML block.
+- **Button colors on hover** aren't kept. PostHog warns you before you move the email.
+
+#### What stays on the old editor
+
+PostHog doesn't move an email that uses any of these, and tells you which ones it found. Nothing changes.
+
+- Menus, videos, countdown timers, carousels, and tables
+- Custom blocks, other than the unsubscribe link
+- Rows or blocks shown on a condition, or hidden on some screen sizes
+- Right-to-left text
+- Row background images
+- Buttons or columns with a border that isn't the same solid style on all sides
+
+These also use the old editor:
+
+- Emails in [destinations](/docs/data-pipelines/destinations).
+- Emails you start from a template made in the old editor.
+- Emails changed through the API or [MCP](#create-templates-with-mcp) after you saved them in the new editor. The email opens in the old editor as one custom HTML block, and the API or MCP change is what's kept.
+
 ### Using Liquid in email templates
 
 You can type Liquid syntax directly into your email template. We also provide a merge tags dropdown that you can click to see all available user properties and easily insert them into your template.
