@@ -50,7 +50,30 @@ It's okay to be helpful or respond to posts from frustrated users, but be mindfu
 
 **The simplest test:** would you be comfortable with a screenshot of that tweet being shared in the `#general` Slack channel? If yes, go for it!
 
-If you use your personal accounts for PostHog work, also read our [guidance on personal accounts](/handbook/content/social-media#using-your-personal-accounts-for-posthog-work).
+### Using your personal accounts for PostHog work
+
+Your social media accounts are your own. PostHog doesn't require you to have one. If you'd like to use your personal account for work purposes, you can, but we broadly expect you to remain professional.
+
+#### What we expect
+
+If you use social media in a professional capacity, we expect you to:
+
+- **Disclose that you work at PostHog.** For example, in your bio.
+- **Engage with users professionally.**
+- **Keep private user data out of personal channels.** Don't ask for it, and don't accept it. If a user needs help with their account, point them to [in-app support](https://app.posthog.com/home#supportModal).
+- **Keep confidential information private.** See the list above.
+- **Keep your account secure.** At a minimum, enable 2FA, especially if your account is verified or has a PostHog badge. If you think someone else has access to your account, tell the [security team](/teams/security) in `#team-security` immediately.
+- **Mute, don't block.** We strongly suggest you don't block people you don't want to hear from. Mute them instead. This keeps them out of your timelines and feeds, but avoids creating issues for the wider team.
+
+If you use your accounts for other business purposes, such as being an influencer or posting about a side project, you need to follow our [side gigs policy](/handbook/people/side-gigs). This includes offers of paid posts or sponsored content.
+
+#### Verification and PostHog badges
+
+For people who post a lot in a PostHog capacity, we often consider verifying their account or adding a PostHog badge. This costs money from <TeamMember name="Liam Graham" />'s budget, so it isn't guaranteed, but reach out to him if you want it.
+
+#### Dealing with abuse
+
+We don't expect you to tolerate abuse, harassment, or other troublesome activity, from users or anyone else, as a result of using your personal account in a professional capacity. If this happens to you, tell your team lead or a relevant member of the [Blitzscale team](/teams/blitzscale), so we can support you without making the situation worse.
 
 ## Our users are brand ambassadors too
 

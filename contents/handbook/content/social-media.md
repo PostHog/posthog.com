@@ -131,25 +131,4 @@ If you can sort the OG image yourself as you pick up assignments, that's one les
 
 ## Using your personal accounts for PostHog work
 
-PostHog doesn't require you to have a social media account, and doesn't take responsibility for how you use one. If you'd like to use your personal account for work purposes, you can, but we broadly expect you to remain professional. For what this looks like in practice, see [being a brand ambassador](/handbook/brand/ambassador#for-everyone-on-social-media).
-
-### What we expect
-
-If you use social media in a professional capacity, we expect you to:
-
-- **Disclose that you work at PostHog.** For example, in your bio.
-- **Engage with users professionally.**
-- **Keep private user data out of personal channels.** Don't ask for it, and don't accept it. If a user needs help with their account, point them to [support](/support).
-- **Keep confidential information private.** This includes unannounced features, customer details, and financial information.
-- **Keep your account secure.** At a minimum, enable 2FA, especially if your account is verified or has a PostHog badge.
-- **Mute, don't block.** We strongly suggest you don't block people you don't want to hear from. Mute them instead. This keeps them out of your timelines and feeds, but avoids creating issues for the wider team.
-
-If you use your accounts for other business purposes, such as being an influencer or posting about a side project, you need to follow our [side gigs policy](/handbook/people/side-gigs). This includes offers of paid posts or sponsored content.
-
-### Verification and PostHog badges
-
-For people who post a lot in a PostHog capacity, we often consider verifying their account or adding a PostHog badge. This costs money, so it isn't guaranteed, but reach out to <TeamMember name="Liam Graham" /> if you want it.
-
-### Dealing with abuse
-
-We don't expect you to tolerate abuse, harassment, or other troublesome activity, from users or anyone else, as a result of using your personal account in a professional capacity. If this happens to you, tell your team lead or a relevant member of the [Blitzscale team](/teams/blitzscale), so we can support you without making the situation worse.
+If you use your personal social media accounts for PostHog work, read our [guidance on personal accounts](/handbook/brand/ambassador#using-your-personal-accounts-for-posthog-work). It covers what we expect, account security, verification and badges, and what to do if you get abuse.
