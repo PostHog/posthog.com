@@ -102,7 +102,6 @@ const query = graphql`
                 fields: {
                     slug: {
                         in: [
-                            "/docs/libraries/js"
                             "/docs/libraries/elixir"
                             "/docs/libraries/java"
                             "/docs/libraries/kmp"

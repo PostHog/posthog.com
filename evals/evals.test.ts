@@ -186,7 +186,9 @@ describe('eval file validation', () => {
                 shared
             )
             assert.deepEqual(
-                result.problems.filter((p) => p.message.includes('no page at') || p.message.includes('should look like')),
+                result.problems.filter(
+                    (p) => p.message.includes('no page at') || p.message.includes('should look like')
+                ),
                 [],
                 page
             )
