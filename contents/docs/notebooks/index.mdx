@@ -239,6 +239,46 @@ Flowcharts, sequence diagrams, class diagrams, and [anything else Mermaid suppor
 
 Diagrams render in view mode. In edit mode you see the raw source and can edit it directly. If your syntax is invalid, you get the source back with an error message instead of a diagram.
 
+### Column layouts
+
+You can organize notebook content into two, three, or four side-by-side columns. This is useful for comparing charts, pairing text with visualizations, or building structured reports.
+
+To add columns, use the slash command `/columns` or click the **+** icon and select **Columns**. Then choose the number of columns (2, 3, or 4) in the **Configure columns** popover.
+
+Each column can hold any notebook content – text, insights, replays, and other blocks. The underlying MDX syntax uses paired `<Columns>` and `<Column>` tags:
+
+```mdx
+<Columns>
+
+<Column width={2}>
+
+## Acquisition
+
+Notes for the acquisition chart.
+
+<Query query={{ kind: "SavedInsightNode", shortId: "example-acquisition" }} />
+
+</Column>
+
+<Column>
+
+## Activation
+
+<Query query={{ kind: "SavedInsightNode", shortId: "example-activation" }} />
+
+Notes for the activation chart.
+
+</Column>
+
+</Columns>
+```
+
+Each `<Column>` accepts an optional `width` prop (1–12) that sets its relative size. Omitting `width` defaults to 1. In the example above, the first column is twice as wide as the second.
+
+The **Configure columns** popover also provides width sliders for each column and an **Equal widths** button to reset them.
+
+Reducing the column count moves content from removed columns into the last remaining column. Choosing **Remove layout** keeps all content in document order at full width. Narrow notebook containers automatically stack columns vertically without changing the saved layout.
+
 ## Canvas
 
 A canvas is like a Notebook whose entire contents is persisted in the URL so that it can be easily shared with members of your organisation. Canvases support all the same content types as Notebooks but do not get persisted to the database or come with any form of history tracking. They are a great way of doing some quick explorations that you may want to share with a colleague but don't necessarily need to save for future use. The shareable link changes as you make edits, so updates to you notebook will require a new link to be shared.
