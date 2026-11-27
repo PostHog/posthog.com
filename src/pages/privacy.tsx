@@ -1,5 +1,4 @@
 import cntl from 'cntl'
-import Layout from 'components/Layout'
 import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
@@ -7,7 +6,6 @@ import Tooltip from 'components/Tooltip'
 import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
-import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
 import { Tweet } from 'components/Tweet'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -70,10 +68,7 @@ function Privacy() {
     }, [])
 
     return (
-        <Layout
-            parent={sexyLegalMenu}
-            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'privacy')}
-        >
+        <>
             <SEO
                 title="Privacy policy, PostHog style"
                 description="Privacy policy, but PostHog style"
@@ -1622,7 +1617,7 @@ function Privacy() {
                 </div>
                 <p className="text-center text-sm opacity-60 mt-8 pb-12">Last Updated: June 29, 2026</p>
             </div>
-        </Layout>
+        </>
     )
 }
 
