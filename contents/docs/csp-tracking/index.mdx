@@ -133,9 +133,54 @@ You can add the `v` param to your report URL to specify the version of your CSP 
 ```
 
 
-### Distinct ID and Session ID
-If your framework allows for setting the header dynamically per-request, you can add the `distinct_id` and `session_id` params to your report URL, to associate the report with a specific user and session.
+### Distinct ID and session ID
+Add the `distinct_id` and `session_id` params to your report URL to link each report to a person and to the session replay recording of the page that raised it. Without them, PostHog gives each report a new random ID, so the report doesn't appear in the person's events or in a recording.
 
 ```http
 <ph_client_api_host>/report/?token=<ph_project_token>&distinct_id=REPLACE_THIS&session_id=REPLACE_THIS
+```
+
+A browser sends the report without any context, so the values have to be in the URL. Set the header per request, and read both values from the cookie that the JavaScript Web SDK sets:
+
+- The cookie is named `ph_<ph_project_token>_posthog` and holds URL-encoded JSON.
+- `distinct_id` is the value of the `distinct_id` key.
+- `session_id` is the second item of the `$sesid` key, which holds the last activity time, the session ID, and the session start time in milliseconds.
+
+The SDK starts a new session when the page loads if the session has been idle for longer than `session_idle_timeout_seconds` (30 minutes by default) or is older than 24 hours. Leave out `session_id` in those cases, or the report links to the previous session. The first page a new visitor loads has no cookie yet, so its reports have no session.
+
+Build the URL with a URL builder, so that the cookie value is encoded and can't change your header.
+
+```javascript file=Express
+const POSTHOG_COOKIE = 'ph_<ph_project_token>_posthog'
+const SESSION_IDLE_TIMEOUT_MS = 30 * 60 * 1000 // match session_idle_timeout_seconds if you changed it
+const SESSION_LENGTH_LIMIT_MS = 24 * 60 * 60 * 1000
+
+function posthogIds(req) {
+  const cookie = req.headers.cookie?.split('; ').find((c) => c.startsWith(`${POSTHOG_COOKIE}=`))
+  if (!cookie) {
+    return {}
+  }
+  try {
+    const { distinct_id, $sesid } = JSON.parse(decodeURIComponent(cookie.slice(POSTHOG_COOKIE.length + 1)))
+    const [lastActivity, sessionId, sessionStart] = $sesid ?? []
+    const now = Date.now()
+    const sessionIsLive = now - lastActivity < SESSION_IDLE_TIMEOUT_MS && now - sessionStart < SESSION_LENGTH_LIMIT_MS
+    return { distinct_id, session_id: sessionIsLive ? sessionId : undefined }
+  } catch {
+    return {}
+  }
+}
+
+app.use((req, res, next) => {
+  const reportUrl = new URL('<ph_client_api_host>/report/')
+  reportUrl.searchParams.set('token', '<ph_project_token>')
+  for (const [key, value] of Object.entries(posthogIds(req))) {
+    if (value) {
+      reportUrl.searchParams.set(key, value)
+    }
+  }
+  res.setHeader('Content-Security-Policy-Report-Only', `default-src 'self'; report-uri ${reportUrl}; report-to posthog`)
+  res.setHeader('Reporting-Endpoints', `posthog="${reportUrl}"`)
+  next()
+})
 ```
