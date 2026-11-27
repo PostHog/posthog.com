@@ -7,9 +7,9 @@ title: Summarize Surveys with PostHog AI
 ## Capabilities and limits
 
 - **PostHog AI tool (`analyze_survey_responses`):** Fetches up to `50` non-empty answers per open-ended (`type: "open"`) question within the survey date window (defaulting to `survey.start_date` or `survey.created_at`, falling back to `365` days, through `survey.end_date` or now) and passes them to PostHog AI to summarize themes, sentiment, insights, and recommendations.
-- **Per-question summary schema (`summarize_responses/`):** Returns structured `overview`, `1` to `5` `themes` (with frequency bucket), and a single `key_insight`.
+- **Per-question summary API (`summarize_responses/`):** Returns a markdown `content` string (overview, `1` to `5` themes with frequency buckets, and a key insight) plus `response_count`, `generated_at`, `trace_id`, and `cached`. PostHog Cloud only (returns `400` on self-hosted).
 - **Headline summary API:** `POST /api/projects/{project_id}/surveys/{id}/summary_headline/` (`survey:read` scope) samples up to `100` responses across all non-link questions, returns `headline`, `responses_sampled`, and `has_more`, and uses the cached headline when `headline_response_count > 0` unless `force_refresh: true` is passed.
-- **Permissions and guards:** Requires **Viewer** access on `survey`, collected responses matching the endpoint's question types (`analyze_survey_responses` requires open-ended responses, while `summary_headline/` includes rating and choice questions), and organization-level **AI data processing** approval (`summary_headline/` and `summarize_responses/` return `403 Forbidden` if unapproved).
+- **Permissions and guards:** Requires **Viewer** access on `survey`, collected responses matching the endpoint's question types (`analyze_survey_responses` requires open-ended responses, while `summary_headline/` includes rating and choice questions), and organization-level **AI data processing** approval. Both `summary_headline/` and `summarize_responses/` return cached summaries before the AI-approval check, so `403 Forbidden` applies only when generating a new summary (cache miss or `force_refresh: true`).
 
 ## Example prompts
 
@@ -23,5 +23,6 @@ Select a prompt to run in PostHog AI:
 
 ## Setup and pricing
 
+- PostHog Cloud is required for per-question response summarization (`summarize_responses/`).
 - [Enable PostHog AI](/docs/posthog-ai/start-here) and approve AI data processing in your organization settings.
 - Summarizing responses consumes [AI credits](/docs/posthog-ai/pricing) based on response volume.

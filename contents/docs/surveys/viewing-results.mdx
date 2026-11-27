@@ -53,8 +53,8 @@ Each question card also includes a **Copy response key** button. This copies the
 
 Filter survey results by date, answers, properties, or archive state (click **Clear filters** to reset answer filters, property filters, date bounds to survey start/end, and **Show archived** to `false`):
 
-- **Date range:** Restrict results to a UTC date range.
-- **Filter by response:** Available when at least one question supports answer filtering:
+- **Date range:** Restrict results to a date range in your project's timezone.
+- **Responses filters:** Click **Filters** and set answer filters under **Responses**, available when at least one question supports answer filtering:
   - **Rating:** equals, doesn't equal, matches regex, or doesn't match regex.
   - **Open text and single choice:** contains, doesn't contain, matches regex, doesn't match regex, equals, or doesn't equal.
   - **Multiple choice:** contains, doesn't contain, matches regex, or doesn't match regex.
@@ -75,9 +75,9 @@ Exclude noisy or test submissions without deleting raw ClickHouse events:
 
 Export filtered survey responses from any non-draft survey:
 
-1. Open the **Export** sub-tab in the survey side panel or click **Export responses** on the **Summary** tab.
+1. Open the **Export** panel tab on the survey detail page.
 2. Select **Export as CSV** or **Export as Excel** (`XLSX`).
-3. Requirements and output: requires **Editor** access on `Export`, disabled until responses exist (`No responses to export yet.`), exports as `survey-<survey.name>-responses`, and omits UI-only `response` and `actions` columns.
+3. Requirements and output: requires **Editor** access on `Export`. Export is available on any non-draft survey (a survey with zero responses exports an empty file), names the file `survey-<survey.name>-responses`, and omits UI-only `response` and `actions` columns.
 
 ## 2. On a dashboard
 
