@@ -24,30 +24,34 @@ The data warehouse then starts syncing your Intercom data. You can see details, 
 
 ## Available tables
 
-| Table              | Sync mode                             | Description                              |
-| ------------------ | ------------------------------------- | ---------------------------------------- |
-| admins             | Full refresh                          | Workspace admins                         |
-| teams              | Full refresh                          | Teams                                    |
-| tags               | Full refresh                          | Tags                                     |
-| segments           | Full refresh                          | Customer segments                        |
-| companies          | Full refresh                          | Companies                                |
-| company_segments   | Full refresh                          | Segments associated with each company    |
-| articles           | Full refresh                          | Help center articles                     |
-| company_attributes | Full refresh                          | Custom company-level data attributes     |
-| contact_attributes | Full refresh                          | Custom contact-level data attributes     |
-| contacts           | Incremental (`updated_at`)            | Contacts and leads                       |
-| conversations      | Incremental (`updated_at`)            | Customer conversations                   |
-| tickets            | Incremental (`updated_at`)            | Support tickets                          |
-| activity_logs      | Incremental (`created_at`)            | Admin activity logs                      |
-| conversation_parts | Incremental (`updated_at` via parent) | Individual messages within conversations |
+| Table                        | Sync mode                             | Description                                           |
+| ---------------------------- | ------------------------------------- | ----------------------------------------------------- |
+| admins                       | Full refresh                          | Workspace admins                                      |
+| teams                        | Full refresh                          | Teams                                                 |
+| tags                         | Full refresh                          | Tags                                                  |
+| segments                     | Full refresh                          | Customer segments                                     |
+| companies                    | Full refresh                          | Companies                                             |
+| company_segments             | Full refresh                          | Segments associated with each company                 |
+| articles                     | Full refresh                          | Help center articles                                  |
+| company_attributes           | Full refresh                          | Custom company-level data attributes                  |
+| contact_attributes           | Full refresh                          | Custom contact-level data attributes                  |
+| calls                        | Full refresh                          | Phone calls                                           |
+| contact_notes                | Full refresh                          | Notes associated with contacts                        |
+| data_connectors              | Full refresh                          | Data connector configurations                         |
+| contacts                     | Incremental (`updated_at`)            | Contacts and leads                                    |
+| conversations                | Incremental (`updated_at`)            | Customer conversations                                |
+| tickets                      | Incremental (`updated_at`)            | Support tickets                                       |
+| activity_logs                | Incremental (`created_at`)            | Admin activity logs                                   |
+| conversation_parts           | Incremental (`updated_at` via parent) | Individual messages within conversations              |
+| conversation_handling_events | Incremental (`updated_at` via parent) | Teammate pause and resume events within conversations |
 
 ## Sync modes
 
 Intercom tables support both full refresh and incremental syncing depending on the table:
 
-- **Full refresh** – Re-imports all records from Intercom on every sync. Used for tables where Intercom's API doesn't support server-side filtering by timestamp (admins, teams, tags, segments, companies, company_segments, articles, company_attributes, contact_attributes).
+- **Full refresh** – Re-imports all records from Intercom on every sync. Used for tables where Intercom's API doesn't support server-side filtering by timestamp (admins, teams, tags, segments, companies, company_segments, articles, company_attributes, contact_attributes, calls, contact_notes, data_connectors).
 
-- **Incremental** – Only imports records modified since the last sync. Available for contacts, conversations, tickets, activity_logs, and conversation_parts. These tables use a server-side `updated_at` or `created_at` filter, so only changed data is fetched.
+- **Incremental** – Only imports records modified since the last sync. Available for contacts, conversations, tickets, activity_logs, conversation_parts, and conversation_handling_events. These tables use a server-side `updated_at` or `created_at` filter, so only changed data is fetched.
 
 When you enable incremental sync for a supported table:
 
