@@ -1,0 +1,34 @@
+owner: surveys
+tags: [surveys, results, analytics, export]
+status: active
+
+checks:
+    - id: results-archive-export-and-sql
+      description: >-
+          Baseline answer check: verifies exact survey page tab names (Summary and
+          Responses, not Results), response archiving without deleting ClickHouse
+          events, CSV/Excel export requirements, and getSurveyResponse() in SQL.
+      prompt: >-
+          Where do I view PostHog survey responses, exclude test submissions without
+          deleting raw events, export filtered responses to Excel, and break down a
+          multiple choice question in SQL?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exact-tab-names: >-
+                  Names the **Summary** and **Responses** tabs on the survey page.
+                  Fails if it instructs the user to open a nonexistent "Results" tab.
+              response-archiving: >-
+                  Explains archiving rows via **Archive response** in the **Responses**
+                  tab (or `POST /api/projects/{project_id}/surveys/{id}/responses/{response_uuid}/archive/`),
+                  noting ClickHouse events aren't deleted and **Show archived** shows
+                  archived rows again.
+              export-requirements: >-
+                  Explains **Export as CSV** or **Export as Excel** (`XLSX`) from the
+                  **Export** panel tab, noting export is available on any non-draft
+                  survey (including one with zero responses) and requires **Editor**
+                  access on `Export`.
+              hogql-function: >-
+                  Uses `getSurveyResponse(question_index, question_id, is_multiple_choice)`
+                  with `is_multiple_choice` set to `true` for a multiple choice
+                  question.

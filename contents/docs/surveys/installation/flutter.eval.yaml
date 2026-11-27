@@ -1,0 +1,29 @@
+owner: surveys
+tags: [surveys, install, flutter, mobile]
+status: active
+
+checks:
+    - id: enable-flutter-surveys
+      description: >-
+          Baseline in Spark at the commit before screen tracking (Flutter app on
+          posthog_flutter without PosthogObserver): can an agent wire PosthogObserver
+          so surveys have a valid BuildContext and state platform version floors?
+          Prompt omits PosthogObserver and version floors. Flutter does not build in
+          Gauge, so no `builds` shared rubric.
+      codebase_to_test: oss-spark-before-screens
+      pages:
+          - docs/surveys/sdk-feature-support
+      prompt: >-
+          Set up PostHog Surveys in this Flutter app so popover surveys can appear on
+          screens, and list any platform requirements we need to keep.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              posthog-observer-registered: >-
+                  Registers `PosthogObserver()` in the router's `navigatorObservers`
+                  (placed first if multiple observers exist) so `currentContext` is
+                  available to show surveys. Cite the file and line(s).
+              platform-floors-and-opt-in: >-
+                  Final answer notes Android API >= 23, iOS 15.0+, `posthog_flutter`
+                  `>= 5.8.0` (`5.14.0+` recommended), disabling automatic SDK init if
+                  needed, and enabling `surveys_opt_in` in project survey settings.

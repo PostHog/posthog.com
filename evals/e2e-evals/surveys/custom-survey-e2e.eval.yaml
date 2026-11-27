@@ -1,0 +1,53 @@
+# End-to-end Surveys eval spanning client setup, custom API survey rendering,
+# lifecycle event capture, and post-launch QA response archiving.
+owner: surveys
+tags: [surveys, e2e, nextjs, javascript, custom-ui]
+status: active
+pages:
+    - docs/surveys/setup
+    - docs/surveys/implementing-custom-surveys
+    - docs/surveys/surfaces/api
+    - docs/surveys/viewing-results
+
+checks:
+    - id: custom-survey-end-to-end
+      description: >-
+          End-to-end check in Acme Dispatch (Next.js App Router with sign-in): tests
+          whether an agent wires PostHog client setup, fetches API surveys after flags
+          and surveys load, captures shown/dismissed/sent events with ID-keyed
+          responses, and explains how to archive QA submissions without deleting raw
+          ClickHouse events. Prompt omits all PostHog method and property names.
+      codebase_to_test: acme-dispatch-nextjs
+      suite: deep
+      prompt: >-
+          Add PostHog Surveys to the Next.js app in {folder}/ using our own custom UI
+          for API surveys, capture when a user sees, dismisses, or answers a survey,
+          and explain how our team can hide QA test submissions from results later
+          without deleting raw events.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              posthog-initialized-for-surveys: >-
+                  Installs `posthog-js` in `{folder}/package.json` and initializes it
+                  with project token and `api_host` (using `<ph_posthog_js_defaults>`
+                  if `defaults` is passed). Fails if `disable_surveys: true` or legacy
+                  `opt_in_site_apps` is set. Cite the file and line(s).
+              async-api-survey-fetch: >-
+                  Uses `posthog.onActiveMatchingSurveysChanged` or calls
+                  `posthog.getActiveMatchingSurveys` inside `posthog.onFeatureFlags`
+                  and `posthog.onSurveysLoaded`, filtering `survey.type === 'api'`.
+                  Fails if called synchronously inside `posthog.init`'s `loaded`
+                  callback. Cite the file and line(s).
+              complete-lifecycle-events: >-
+                  Captures `survey shown`, `survey dismissed`, and `survey sent` with
+                  `$survey_id` and `$survey_iteration`, and includes
+                  `$survey_submission_id`, `$survey_completed`, and ID-keyed
+                  `$survey_response_${question.id}` on `survey sent` (not
+                  `$survey_completed` on `survey shown` or `survey dismissed`). Fails
+                  if responses only use legacy `$survey_response` without question
+                  UUIDs.
+              qa-response-archiving: >-
+                  Final answer explains archiving QA test responses via **Archive
+                  response** in the **Responses** tab or
+                  `POST /api/projects/{project_id}/surveys/{id}/responses/{response_uuid}/archive/`,
+                  without deleting ClickHouse events.

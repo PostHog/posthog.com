@@ -1,0 +1,32 @@
+owner: surveys
+tags: [surveys, notifications, workflows, destinations]
+status: active
+
+checks:
+    - id: notifications-partial-and-workflow-trigger
+      description: >-
+          Baseline answer check: verifies partial-response notification deduping,
+          Send test live payload testing, and triggering surveys via the Show Survey
+          workflow action.
+      prompt: >-
+          Will Slack survey notifications spam our channel on every partial response,
+          how can I test a notification before real users reply, and can I trigger an
+          in-app survey from a backend workflow?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              partial-response-dedup: >-
+                  States that intermediate partial `survey sent` events
+                  (`$survey_completed: false`) don't trigger duplicate notifications,
+                  and notifications fire on completion or dismissal after answering at
+                  least one question.
+              send-test-flow: >-
+                  Explains opening the notification, clicking **Send test**, choosing
+                  **With sample data** or **With last response** to send a live test
+                  payload, and inspecting the status banner and logs.
+              show-survey-workflow: >-
+                  Explains that the **Show survey** step in Workflows is in beta
+                  (rolling out behind a feature flag), sets
+                  `$survey_triggered/<survey-id>` on the person, and uses **Show only
+                  to workflow recipients** so only people the workflow reaches see the
+                  survey on their next active SDK session.
