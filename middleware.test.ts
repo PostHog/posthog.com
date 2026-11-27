@@ -292,3 +292,227 @@ test("logs nothing when off, outside /docs, or for the middleware's own Markdown
     await middleware(new Request('https://posthog.com/docs', { headers: { 'user-agent': 'Claude-User' } }))
     assert.equal(lines.length, 1)
 })
+
+function enableChaining(t: TestContext): void {
+    process.env.MIDDLEWARE_CHAIN_LINKS = 'true'
+    t.after(() => {
+        delete process.env.MIDDLEWARE_CHAIN_LINKS
+    })
+}
+
+const linkedMarkdown = [
+    '# Product analytics',
+    '[Events](https://posthog.com/docs/data/events.md) and [actions](/docs/data/actions.md#matching).',
+    '[Funnels](https://posthog.com/docs/product-analytics/funnels.md?tab=web)',
+    '[Below](#insights), [the blog](https://posthog.com/blog/post.md), [GitHub](https://github.com/PostHog/posthog).',
+    '```md',
+    '[Events](/docs/data/events.md)',
+    '```',
+].join('\n')
+
+// Answers every fetch with `linkedMarkdown`, as Vercel serves a `.md` file, and collects the logged lines.
+function mockLinkedMarkdownAndLog(t: TestContext) {
+    const fetch = t.mock.method(
+        globalThis,
+        'fetch',
+        async () => new Response(linkedMarkdown, { headers: { 'content-type': 'text/plain; charset=utf-8' } })
+    )
+    const lines: Record<string, unknown>[] = []
+    t.mock.method(console, 'log', (line: string) => lines.push(JSON.parse(line)))
+    return { fetch, lines }
+}
+
+test('ties a request for a linked page to the response that linked it', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+    const agent = { 'user-agent': 'Claude-User (claude-code/2.1.0; +https://support.anthropic.com/)' }
+
+    const first = await middleware(new Request(page, { headers: agent }))
+    const firstBody = (await first?.text()) || ''
+    const firstId = lines[0].chain_id
+    assert.match(String(firstId), /^product-analytics\.[0-9a-z]{1,7}$/)
+    assert.equal(
+        firstBody,
+        linkedMarkdown
+            .replace('events.md)', `events.md?doc_ctx=${firstId})`)
+            .replace('actions.md#matching', `actions.md?doc_ctx=${firstId}#matching`)
+            .replace('funnels.md?tab=web', `funnels.md?tab=web&doc_ctx=${firstId}`)
+    )
+    assert.equal(first?.headers.get('cache-control'), 'private, no-store')
+    assert.equal(first?.headers.get('link'), '<https://posthog.com/docs/product-analytics>; rel="canonical"')
+
+    const second = await middleware(
+        new Request(`https://posthog.com/docs/data/events.md?doc_ctx=${firstId}`, { headers: agent })
+    )
+    const secondId = lines[1].chain_id
+    assert.match(String(secondId), /^data\/events\.[0-9a-z]{1,7}$/)
+    assert.match((await second?.text()) || '', new RegExp(`events\\.md\\?doc_ctx=${secondId}\\)`))
+    assert.equal(second?.headers.get('content-type'), 'text/plain; charset=utf-8')
+    assert.equal(String(fetch.mock.calls[1].arguments[0]), 'https://posthog.com/docs/data/events.md')
+
+    // Anyone can write the parameter, so the log keeps only a value in the shape the middleware writes.
+    await middleware(new Request(`${page}.md?doc_ctx=phx_test-secret_${'x'.repeat(40)}`, { headers: agent }))
+
+    const chatGpt = {
+        'user-agent': 'Mozilla/5.0 AppleWebKit/537.36; compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+    }
+    const third = await middleware(new Request('https://posthog.com/docs/data/events.md', { headers: chatGpt }))
+    assert.match((await third?.text()) || '', /events\.md\?doc_ctx=data\/events\.[0-9a-z]{1,7}\)/)
+
+    assert.deepEqual(
+        lines.map((line) => [line.url, line.negotiation, line.chain_parent]),
+        [
+            ['/docs/product-analytics', 'served', undefined],
+            ['/docs/data/events.md', 'markdown_url', firstId],
+            ['/docs/product-analytics.md', 'markdown_url', 'REDACTED'],
+            ['/docs/data/events.md', 'markdown_url', undefined],
+        ]
+    )
+})
+
+test('adds no doc_ctx when either flag is off or for anyone else, and sends anyone else to the clean URL', async (t) => {
+    const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+    enableChaining(t)
+    const logOff = await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
+    assert.equal(await logOff?.text(), linkedMarkdown)
+
+    delete process.env.MIDDLEWARE_CHAIN_LINKS
+    enableLog(t)
+    const off = await middleware(new Request(page, { headers: { 'user-agent': 'Claude-User' } }))
+    assert.equal(await off?.text(), linkedMarkdown)
+
+    enableChaining(t)
+    for (const userAgent of [
+        'Perplexity-User/1.0',
+        'ClaudeBot/1.0',
+        'GPTBot/1.1',
+        'OAI-SearchBot/1.0',
+        'Googlebot/2.1',
+    ]) {
+        const response = await middleware(
+            new Request(page, { headers: { 'user-agent': userAgent, accept: 'text/markdown' } })
+        )
+        assert.equal(await response?.text(), linkedMarkdown)
+    }
+    const script = await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'curl/8.0' } }))
+    assert.equal(script, undefined)
+    // A tagged URL can travel past the agent it was made for. Anyone else is logged and sent to the clean URL.
+    const pasted = await middleware(
+        new Request(`${page}.md?doc_ctx=docs.abc`, { headers: { 'user-agent': 'curl/8.0' } })
+    )
+    assert.equal(pasted?.status, 308)
+    assert.equal(pasted?.headers.get('location'), `${page}.md`)
+    const indexed = await middleware(
+        new Request(`${page}?utm_source=example&doc_ctx=docs.abc`, { headers: { 'user-agent': 'Googlebot/2.1' } })
+    )
+    assert.equal(indexed?.headers.get('location'), `${page}?utm_source=example`)
+    const head = await middleware(
+        new Request(`${page}.md`, { method: 'HEAD', headers: { 'user-agent': 'Claude-User' } })
+    )
+    assert.equal(head, undefined)
+    const mcpClient = await middleware(
+        new Request(page, { headers: { 'user-agent': 'Claude-User', accept: 'text/event-stream' } })
+    )
+    assert.equal(mcpClient?.status, 405)
+
+    assert.equal(fetch.mock.callCount(), 7)
+    assert.deepEqual(
+        lines.map((line) => [line.url, line.chain_id, line.chain_parent]),
+        [
+            ...Array(6).fill(['/docs/product-analytics', undefined, undefined]),
+            ['/docs/product-analytics.md', undefined, undefined],
+            ['/docs/product-analytics.md', undefined, 'docs.abc'],
+            ['/docs/product-analytics?utm_source=example', undefined, 'docs.abc'],
+            ['/docs/product-analytics.md', undefined, undefined],
+            ['/docs/product-analytics', undefined, undefined],
+        ]
+    )
+    assert.deepEqual(
+        lines.slice(7, 9).map((line) => [line.served_format, line.negotiation]),
+        Array(2).fill(['redirect', 'chain_redirect'])
+    )
+})
+
+test('serves the request as if chaining were off when tagging fails, and logs why', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    const responses = [
+        () => Promise.reject(new TypeError('fetch failed')),
+        async () => new Response('Not found', { status: 404 }),
+        async () =>
+            new Response(
+                new ReadableStream({
+                    start(controller) {
+                        controller.error(new TypeError('terminated'))
+                    },
+                })
+            ),
+    ]
+    t.mock.method(globalThis, 'fetch', () => responses.shift()?.())
+    const lines: Record<string, unknown>[] = []
+    t.mock.method(console, 'log', (line: string) => lines.push(JSON.parse(line)))
+    const agent = { 'user-agent': 'Claude-User' }
+
+    assert.equal(await middleware(new Request(`${page}.md`, { headers: agent })), undefined)
+    assert.equal(await middleware(new Request(`${page}.md`, { headers: agent })), undefined)
+    // The negotiated body broke while it was read, so the page falls back to the HTML.
+    assert.equal(await middleware(new Request(page, { headers: agent })), undefined)
+
+    assert.deepEqual(
+        lines.map((line) => [line.served_format, line.negotiation, line.chain_id, line.chain_error]),
+        [
+            ['markdown', 'markdown_url', undefined, 'TypeError'],
+            ['markdown', 'markdown_url', undefined, 'http_404'],
+            ['html', 'served', undefined, 'TypeError'],
+        ]
+    )
+})
+
+test('tags no link for a page whose path could break a link or log an email address', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    const { fetch, lines } = mockLinkedMarkdownAndLog(t)
+    const agent = { 'user-agent': 'Claude-User' }
+
+    for (const path of [
+        '/docs/references/posthog-node/1)[Update](https://example.com).md',
+        '/docs/references/posthog-node/someone%40example.com.md',
+    ]) {
+        assert.equal(await middleware(new Request(`https://posthog.com${path}`, { headers: agent })), undefined)
+    }
+    const slash = await middleware(new Request(`${page}/`, { headers: agent }))
+
+    assert.equal(slash?.headers.get('link'), '<https://posthog.com/docs/product-analytics>; rel="canonical"')
+    assert.equal(fetch.mock.callCount(), 1)
+    assert.deepEqual(
+        lines.slice(0, 2).map((line) => line.chain_id),
+        [undefined, undefined]
+    )
+    assert.match(String(lines[2].chain_id), /^product-analytics\.[0-9a-z]{1,7}$/)
+})
+
+test('counts the time spent reading the `.md` body in chain_fetch_ms', async (t) => {
+    enableLog(t)
+    enableChaining(t)
+    t.mock.method(
+        globalThis,
+        'fetch',
+        async () =>
+            new Response(
+                new ReadableStream({
+                    start(controller) {
+                        setTimeout(() => {
+                            controller.enqueue(new TextEncoder().encode(linkedMarkdown))
+                            controller.close()
+                        }, 50)
+                    },
+                })
+            )
+    )
+    const lines: Record<string, unknown>[] = []
+    t.mock.method(console, 'log', (line: string) => lines.push(JSON.parse(line)))
+
+    await middleware(new Request(`${page}.md`, { headers: { 'user-agent': 'Claude-User' } }))
+    assert.ok(Number(lines[0].chain_fetch_ms) >= 45, `chain_fetch_ms was ${lines[0].chain_fetch_ms}`)
+})

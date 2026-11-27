@@ -23,6 +23,12 @@
  * It also answers MCP clients that people point at a posthog.com page instead
  * of the MCP server, so they show where the server is rather than a parse
  * error. `/mcp.md` is in the matcher only for those clients.
+ *
+ * With MIDDLEWARE_CHAIN_LINKS and MIDDLEWARE_LOG_ENABLED on, it runs an
+ * experiment for Claude and ChatGPT fetches only: it ties a follow-up /docs
+ * request to the request whose Markdown linked to it, without a cookie or a
+ * session. Both values are read at build time, so turning it off takes a
+ * redeploy. See `chainLinks`.
  */
 export const config = {
     matcher: [
@@ -146,21 +152,51 @@ const REDACTED = 'REDACTED'
 // readable.
 const EMAIL_SEGMENT = /^[^/]*(?:@|%40)[^/]*\.[A-Za-z]{2,}$/i
 
+// The query parameter that names the response a link came from. It is dropped from the logged URL, so a page
+// logs as one URL whether or not a request followed a link.
+const CHAIN_PARAM = 'doc_ctx'
+// Anyone can put any value in the parameter, so the log keeps it only in the shape the middleware writes: a page,
+// a dot and the random part. Any other value, a token pasted into a URL for example, is logged as REDACTED.
+const CHAIN_VALUE = /^[\w./-]{1,90}\.[0-9a-z]{1,7}$/
+// The page goes into Markdown links and the log as it is, so a path with other characters is never tagged: a `)`
+// would end a link early, and an encoded `@` could put an email address in the log.
+const CHAIN_PAGE = /^[\w./-]{1,90}$/
+const CHAIN_FETCH_TIMEOUT_MS = 3000
+// A fenced code block, which the rewrite leaves as written so code samples stay intact, or a /docs link in Markdown,
+// absolute or root-relative, with its query and fragment. Links to the same page (`#heading`) and to other hosts do
+// not match.
+const CODE_FENCE_OR_DOCS_LINK =
+    /^(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1[^\n]*$|\]\((https:\/\/posthog\.com)?(\/docs(?:\/[^)\s?#]*)?)(\?[^)\s#]*)?(#[^)\s]*)?\)/gm
+// The only agents that get tagged links: Claude and ChatGPT when they fetch a page for a person. Search engines
+// and every other crawler, ClaudeBot and GPTBot included, never see a tagged link. A tagged URL that reaches anyone
+// else, through a citation or a pasted link, redirects to the clean URL, so no one finds a second URL for a page.
+const CHAIN_AGENTS_REGEX = /\b(?:Claude-User|ChatGPT-User)\b/i
+
 // Vercel typechecks this file with tsconfig.json, whose `lib` has no ES core library and which has no
 // @types/node. Without these two declarations every build prints type errors for it.
 declare const process: { env: { [name: string]: string | undefined } }
 
-type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url' | 'mcp_client'
+type Negotiation = 'not_requested' | 'served' | 'no_sibling' | 'markdown_url' | 'mcp_client' | 'chain_redirect'
 
 interface NegotiationResult {
     response: Response | undefined
     negotiation: Negotiation
     reason?: 'accept' | 'agent_fetcher'
     markdownFetchMs?: number
+    // The value put in this response's /docs links, and the time spent fetching a `.md` URL to put it there.
+    chainId?: string
+    chainFetchMs?: number
+    // Why the links were not tagged after all: the `.md` fetch's status, or the name of the error it threw.
+    chainError?: string
 }
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
-    const result = await negotiate(request)
+    let result = redirectTaggedUrl(request) || (await negotiate(request))
+    // Written out in full, like MIDDLEWARE_LOG_ENABLED below. The tags exist only for the log, so without it they
+    // would change responses and record nothing.
+    if (process.env.MIDDLEWARE_CHAIN_LINKS === 'true' && process.env.MIDDLEWARE_LOG_ENABLED === 'true') {
+        result = await chainLinks(request, result)
+    }
     logRequest(request, result)
     return result.response
 }
@@ -208,6 +244,93 @@ async function negotiate(request: Request): Promise<NegotiationResult> {
     return { response, negotiation: 'served', reason, markdownFetchMs }
 }
 
+// Adds `doc_ctx=<page>.<random>` to every /docs link in the Markdown this request gets, such as
+// `doc_ctx=product-analytics/insights.1x9k2pq`. The page is the path under /docs, so a tagged URL says which
+// page linked to it. The random part, one 32-bit value in base 36, tells two responses for the same page
+// apart. A request that follows one of the links is logged with `chain_parent` set to that value, and the
+// request that served the link is logged with the same `chain_id`. The value is in no cookie or header, so it
+// ties one request to the one before it and nothing more.
+//
+// Links in the Markdown point at `.md` URLs, which Vercel serves as static files. For the next hop to carry a
+// `doc_ctx` as well, the middleware fetches the `.md` file itself for those agents.
+async function chainLinks(request: Request, result: NegotiationResult): Promise<NegotiationResult> {
+    // The MCP hint is not Markdown, and rewriting it would turn the SSE client's 405 into a 200.
+    if (request.headers.has(SUBREQUEST_HEADER) || result.negotiation === 'mcp_client') return result
+    if (request.method !== 'GET') return result
+    const url = new URL(request.url)
+    const userAgent = request.headers.get('user-agent') || ''
+    if (!LOGGED_PATHS.test(url.pathname) || !CHAIN_AGENTS_REGEX.test(userAgent)) return result
+
+    const pathname = url.pathname.replace(/\/$/, '')
+    const page = pathname.replace(/\.md$/, '').replace(/^\/docs\/?/, '') || 'docs'
+    if (!CHAIN_PAGE.test(page)) return result
+
+    // The fetch time runs until the body is read, because the response waits for the whole body.
+    let started: number | undefined
+    const elapsed = () => (started === undefined ? undefined : Date.now() - started)
+    // The tags only feed the log, so when anything here fails, the request is served as if chaining were off.
+    try {
+        let markdown = result.response
+        if (result.negotiation === 'markdown_url') {
+            started = Date.now()
+            const file = await fetch(new URL(pathname, url.origin), {
+                headers: { [SUBREQUEST_HEADER]: '1' },
+                signal: AbortSignal.timeout(CHAIN_FETCH_TIMEOUT_MS),
+            })
+            if (!file.ok) {
+                await file.body?.cancel()
+                return { ...result, chainFetchMs: elapsed(), chainError: `http_${file.status}` }
+            }
+            markdown = file
+        }
+        if (!markdown) return result
+
+        const text = await markdown.text()
+        const chainFetchMs = elapsed()
+        const chainId = `${page}.${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`
+        const body = text.replace(CODE_FENCE_OR_DOCS_LINK, (match, fence, host = '', path, query = '', fragment = '') =>
+            fence ? match : `](${host}${path}${query ? `${query}&` : '?'}${CHAIN_PARAM}=${chainId}${fragment})`
+        )
+        const response = new Response(body, {
+            status: 200,
+            headers: {
+                'content-type': markdown.headers.get('content-type') || 'text/markdown; charset=utf-8',
+                // The body holds an id for this response only, so no shared cache may keep it.
+                'cache-control': 'private, no-store',
+                link: `<${new URL(pathname.replace(/\.md$/, ''), url.origin)}>; rel="canonical"`,
+                vary: 'Accept, User-Agent',
+            },
+        })
+        return { ...result, response, chainId, chainFetchMs }
+    } catch (error) {
+        // A failed read can leave a negotiated body half used, so a negotiated page falls back to the HTML.
+        const chainError = (error as { name?: string } | null)?.name || 'error'
+        return { ...result, response: undefined, chainFetchMs: elapsed(), chainError }
+    }
+}
+
+// Anyone but the agents that get tagged links is sent to the URL without `doc_ctx`: a search engine that finds a
+// cited or pasted link indexes the page once, and a person lands on the URL they would have shared. This runs
+// whether or not chaining is on, because tagged URLs keep circulating after the experiment stops.
+function redirectTaggedUrl(request: Request): NegotiationResult | undefined {
+    if (request.method !== 'GET' && request.method !== 'HEAD') return undefined
+    const url = new URL(request.url)
+    if (!url.searchParams.has(CHAIN_PARAM) || !LOGGED_PATHS.test(url.pathname)) return undefined
+    if (CHAIN_AGENTS_REGEX.test(request.headers.get('user-agent') || '')) return undefined
+    url.searchParams.delete(CHAIN_PARAM)
+    const response = new Response(null, {
+        status: 308,
+        headers: { location: url.toString(), 'cache-control': 'private, no-store' },
+    })
+    return { response, negotiation: 'chain_redirect' }
+}
+
+function chainParent(url: URL): string | undefined {
+    const value = url.searchParams.get(CHAIN_PARAM)
+    if (!value) return undefined
+    return CHAIN_VALUE.test(value) ? value : REDACTED
+}
+
 // The q-value of each media range in an Accept header, 1 when it has none. A range listed twice keeps its
 // first weight.
 function acceptWeights(accept: string): Map<string, number> {
@@ -240,14 +363,19 @@ function logRequest(request: Request, result: NegotiationResult): void {
             negotiation: result.negotiation,
             markdown_reason: result.reason,
             markdown_fetch_ms: result.markdownFetchMs,
+            chain_id: result.chainId,
+            chain_parent: chainParent(url),
+            chain_fetch_ms: result.chainFetchMs,
+            chain_error: result.chainError,
             request_headers: headers.values,
             other_header_names: headers.otherNames,
         })
     )
 }
 
-function servedFormat(result: NegotiationResult): 'html' | 'markdown' | 'mcp_error' {
+function servedFormat(result: NegotiationResult): 'html' | 'markdown' | 'mcp_error' | 'redirect' {
     if (result.negotiation === 'mcp_client') return 'mcp_error'
+    if (result.negotiation === 'chain_redirect') return 'redirect'
     return result.response || result.negotiation === 'markdown_url' ? 'markdown' : 'html'
 }
 
@@ -309,12 +437,11 @@ function scrubUrl(url: URL): string {
         .split('/')
         .map((segment) => (EMAIL_SEGMENT.test(segment) ? '{email}' : segment))
         .join('/')
-    if (!url.search) return path
     const query = new URLSearchParams()
     url.searchParams.forEach((value, name) => {
-        query.append(name, QUERY_PARAM_ALLOWLIST_REGEX.test(name) ? value : REDACTED)
+        if (name !== CHAIN_PARAM) query.append(name, QUERY_PARAM_ALLOWLIST_REGEX.test(name) ? value : REDACTED)
     })
-    return `${path}?${query}`
+    return query.toString() ? `${path}?${query}` : path
 }
 
 function splitHeaders(headers: Headers): { values: { [name: string]: string }; otherNames: string[] } {
