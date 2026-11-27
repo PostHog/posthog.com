@@ -9,11 +9,11 @@ availability:
 sourceId: Appdynamics
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Splunk AppDynamics (Cisco) connector syncs your APM data into the PostHog Data warehouse, including applications, business transactions, tiers, nodes, health rule violations, and metric time series. This lets you join application performance signals with your product data for SLA and SLO reporting.
+The Splunk AppDynamics (Cisco) connector syncs your APM data into the PostHog Data warehouse, including applications, business transactions, tiers, nodes, health rule violations, metric time series, database server health data, and controller audit history. This lets you join application performance signals with your product data for SLA and SLO reporting.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ When linking AppDynamics, you'll need:
 
 <SyncModes />
 
-The `health_rule_violations` and `metric_data` tables sync incrementally using the row's start time (`startTimeInMillis`). Violations are synced when they start, so status changes to previously synced violations (for example, a violation resolving) are only picked up on a full refresh. The other tables support full refresh only.
+The `health_rule_violations`, `metric_data`, `database_health_rule_violations`, `metric_data_v2`, and `controller_audit_history` tables sync incrementally. The `health_rule_violations`, `metric_data`, `database_health_rule_violations`, and `metric_data_v2` tables use the row's start time (`startTimeInMillis`) as the cursor field, while `controller_audit_history` uses `timeStamp`. Violations (both application and database) are synced when they start, so status changes to previously synced violations (for example, a violation resolving) are only picked up on a full refresh. The other tables support full refresh only.
 
 ## Configuration
 
