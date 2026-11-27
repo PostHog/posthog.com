@@ -47,7 +47,7 @@ interface WindowControls {
     install?: { label: string; url: string }
 }
 
-const LINE_ENTER = {
+export const LINE_ENTER = {
     initial: { opacity: 0, transform: transform({ y: 4 }) },
     animate: { opacity: 1, transform: transform() },
     transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
@@ -165,7 +165,7 @@ export const Caret = ({ className }: { className?: string }) => (
     />
 )
 
-const WindowFrame = ({
+export const WindowFrame = ({
     title,
     controls,
     className,

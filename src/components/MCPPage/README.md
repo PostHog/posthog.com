@@ -7,6 +7,7 @@ The page at `/mcp`. It has two readers: a person, and the agent that the person 
 - `index.tsx`: the page and most of its sections.
 - `PromptDemo.tsx`, `promptDemo.data.ts`: the prompt list and the terminal demo.
 - `WaitingRoom.tsx`: the magazine covers near the end of the page.
+- `IconChipRows.tsx`: icon items in pairs, divided by rules. `/slack` uses it too.
 - `Highlight.tsx`: the highlighted word in headings (`red` for red). It is a copy of the `/ai` part, because that one is not shared.
 - `agentBrief.ts`: `buildMcpBrief()` returns the agent brief as Markdown.
 - `agentBrief.test.ts`, `promptDemo.test.ts`: run them before you change the brief or the demo.

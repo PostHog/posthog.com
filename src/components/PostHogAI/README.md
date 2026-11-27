@@ -4,6 +4,10 @@ Sections for the `/ai` page (`src/pages/ai/index.tsx`). The page renders in `Rea
 
 Product names, icons, and colors come from `useProduct`. Refer to a product by its `handle`. If no product has that handle, its row does not show, so check the page after you add one.
 
+## `IconChipRow`
+
+A two-column grid of icon items. With `to`, the icon and the name are one link. `/slack` uses it too.
+
 ## `ContextDiagram`
 
 Three sample PostHog AI conversations (conversion, activation, churn) in a `TabbedCarousel` with `variant="flush"`. Each tab renders `ThreadMockup` with a `scenario`. The slides are static, and each stays up for 15 seconds. On wide windows the slide is no taller than the column beside it, so keep new conversations short.
