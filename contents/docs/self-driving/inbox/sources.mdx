@@ -12,7 +12,7 @@ Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) 
 
 ## Configure sources
 
-From the inbox, open **settings** and configure your sources. Toggle the ones you want to enable, then follow the authentication prompts for any external services. The inbox is available across surfaces – the [web app](/docs/self-driving/web) and Slack – and your sources stay the same wherever you open it.
+From the inbox, open the **Sources** tab and configure your sources. Toggle the ones you want to enable, then follow the authentication prompts for any external services. The inbox is available across surfaces – the [web app](/docs/self-driving/web) and Slack – and your sources stay the same wherever you open it.
 
 You can browse all available external sources using search and category filters. Sources are organized by type – issue trackers, error monitoring, support tools, and more. GitHub, Linear, Zendesk, Sentry, and Jira appear first, followed by the remaining sources sorted by connection status and name.
 
@@ -147,7 +147,7 @@ These signals require an enabled Endpoints source configuration.
 
 External sources pull issue context into the same inbox queue as your product signals. Connect any of these via the [data warehouse](/docs/data-warehouse) and the inbox surfaces actionable items for research.
 
-Sync the corresponding warehouse tables, then enable the source in the inbox **settings**. Sources for different tables from the same service can have separate toggles.
+Sync the corresponding warehouse tables, then enable the source in the inbox **Sources** tab. Sources for different tables from the same service can have separate toggles.
 
 ### Search analytics
 
@@ -172,7 +172,7 @@ New issues from connected project management and issue tracking tools. The inbox
 
 #### Comment back on GitHub issues
 
-If you use GitHub Issues as a source, you can let PostHog reply on the issue. In the inbox **settings**, under **PR generation**, turn on **Comment back on GitHub issues**. When an issue contributes to a report and that report becomes ready, PostHog adds a comment to the issue with a link to the report. If an issue joins the report later, it gets a comment too.
+If you use GitHub Issues as a source, you can let PostHog reply on the issue. In [**Settings > Self-driving**](https://app.posthog.com/settings/environment-self-driving#self-driving-autonomy), under **Pull requests**, turn on **Comment back on GitHub issues**. When an issue contributes to a report and that report becomes ready, PostHog adds a comment to the issue with a link to the report. If an issue joins the report later, it gets a comment too.
 
 PostHog comments through the project's GitHub App connection, not through the data source. [Connect GitHub](/docs/libraries/github), and make sure the App can access each repository that has issues. A source that authenticates with a personal access token is not enough. Without the App connection, PostHog adds no comment and shows no error.
 
@@ -311,7 +311,7 @@ Open incidents and problems from status monitoring and incident tracking tools. 
 
 A source does not have to process everything the same way. You can give a source **guidance**: rules in plain language that tell the agent what matters to your team and what to skip. The agent reads the guidance when it decides which new records become signals.
 
-To add guidance, open the inbox **settings**, find the source, and click **Add guidance**. Write it like a note to a teammate. For example:
+To add guidance, open the inbox **Sources** tab, find the source, and click **Add guidance**. Write it like a note to a teammate. For example:
 
 ```text
 - Skip issues with the `skip-self-driving` label. We scope and build those ourselves.
