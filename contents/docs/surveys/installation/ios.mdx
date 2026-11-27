@@ -24,5 +24,6 @@ Not all survey features are available on every SDK. See the [SDK feature support
 
 ## Limitations
 
-- Surveys are only available on iOS
-- Surveys require iOS 15.0 or later
+- Available on iOS only (`iOS 15.0+`).
+- Turn on **Enable surveys** (`surveys_opt_in`) in [project survey settings](https://app.posthog.com/settings/project-surveys) before surveys load on clients.
+- Conditional questions require `posthog-ios >= 3.25.0`. To render custom native UI instead of the built-in sheet, implement `PostHogSurveysDelegate`.
