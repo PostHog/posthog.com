@@ -28,7 +28,6 @@ const shot = (light: string, dark: string, alt: string) => ({
     alt,
 })
 
-// The send example from contents/docs/workflows/transactional-emails/api.mdx.
 // The send-your-own-HTML example from contents/docs/workflows/transactional-emails/api.mdx.
 const sendExamples = [
     {
@@ -299,8 +298,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_builder_v2_light_b6a97d75df.png',
-            'wf_landing_builder_v2_dark_66a98614e5.png',
+            'wf_landing_builder_v2_crisp_light_9510853c2e.png',
+            'wf_landing_builder_v2_crisp_dark_dcf65ae4f1.png',
             'An automation in the PostHog workflow builder'
         ),
     },
@@ -382,8 +381,8 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_transactional_create_light_2ef5f04bae.png',
-            'wf_landing_transactional_create_dark_93a4f5e1f5.png',
+            'wf_landing_transactional_create_crisp_light_ce90cfb066.png',
+            'wf_landing_transactional_create_crisp_dark_68bb06e243.png',
             'Creating a transactional email in PostHog'
         ),
     },
@@ -414,8 +413,8 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_calendar_light_eaa2380cb1.png',
-            'wf_landing_calendar_dark_14632ec78e.png',
+            'wf_landing_calendar_crisp_light_277a306e5c.png',
+            'wf_landing_calendar_crisp_dark_e5ce4a40d5.png',
             'Broadcasts and automated emails on the send calendar'
         ),
     },
@@ -448,8 +447,8 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_automation_overview_light_99f9d9cac2.png',
-            'wf_landing_automation_overview_dark_6fa6877c4c.png',
+            'wf_landing_automation_overview_crisp_light_0f2621a3e1.png',
+            'wf_landing_automation_overview_crisp_dark_3a017f0fd8.png',
             'An automation with its metrics and suggested changes'
         ),
     },
@@ -479,8 +478,8 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_email_editor_hero_light_c32cbbf051.png',
-            'wf_landing_email_editor_hero_dark_14dd78cc67.png',
+            'wf_landing_email_editor_hero_crisp_light_015bddf59b.png',
+            'wf_landing_email_editor_hero_crisp_dark_12a3135f87.png',
             'The PostHog email editor'
         ),
     },
@@ -517,8 +516,8 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_transactional_impact_light_8fa12a5309.png',
-            'wf_landing_transactional_impact_dark_6721526a00.png',
+            'c_crop,w_1860,h_556,g_north_west/wf_landing_transactional_what_happened_after_crisp_light_a7d66335f9.png',
+            'c_crop,w_1860,h_556,g_north_west/wf_landing_transactional_what_happened_after_crisp_dark_2dcbe62be5.png',
             'Conversions from send to paid bill'
         ),
     },
@@ -560,8 +559,8 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_reputation_light_aed3a7f627.png',
-            'wf_landing_reputation_dark_caccc6a89b.png',
+            'wf_landing_reputation_crisp_light_58988351a3.png',
+            'wf_landing_reputation_crisp_dark_90b3f7ecc1.png',
             'Sending health and allowance in PostHog'
         ),
     },
