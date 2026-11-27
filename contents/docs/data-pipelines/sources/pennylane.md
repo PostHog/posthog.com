@@ -38,26 +38,30 @@ Once the syncs complete, you can start using Pennylane data in PostHog.
 
 Each table requires a specific read-only scope on your API token. Some tables share a scope.
 
-| Table                   | Required scope                   |
-| ----------------------- | -------------------------------- |
-| `customers`             | `customers:readonly`             |
-| `suppliers`             | `suppliers:readonly`             |
-| `products`              | `products:readonly`              |
-| `customer_invoices`     | `customer_invoices:readonly`     |
-| `supplier_invoices`     | `supplier_invoices:readonly`     |
-| `quotes`                | `quotes:readonly`                |
-| `commercial_documents`  | `commercial_documents:readonly`  |
-| `billing_subscriptions` | `billing_subscriptions:readonly` |
-| `purchase_requests`     | `purchase_requests:readonly`     |
-| `transactions`          | `transactions:readonly`          |
-| `bank_accounts`         | `bank_accounts:readonly`         |
-| `journals`              | `journals:readonly`              |
-| `ledger_accounts`       | `ledger_accounts:readonly`       |
-| `ledger_entries`        | `ledger_entries:readonly`        |
-| `ledger_entry_lines`    | `ledger_entries:readonly`        |
-| `fiscal_years`          | `fiscal_years:readonly`          |
-| `categories`            | `categories:readonly`            |
-| `category_groups`       | `categories:readonly`            |
+| Table                       | Required scope                   |
+| --------------------------- | -------------------------------- |
+| `bank_accounts`             | `bank_accounts:readonly`         |
+| `billing_subscriptions`     | `billing_subscriptions:readonly` |
+| `categories`                | `categories:readonly`            |
+| `category_groups`           | `categories:readonly`            |
+| `commercial_documents`      | `commercial_documents:readonly`  |
+| `customer_contacts`         | `customers:readonly`             |
+| `customer_invoice_lines`    | `customer_invoices:readonly`     |
+| `customer_invoice_payments` | `customer_invoices:readonly`     |
+| `customer_invoices`         | `customer_invoices:readonly`     |
+| `customers`                 | `customers:readonly`             |
+| `fiscal_years`              | `fiscal_years:readonly`          |
+| `journals`                  | `journals:readonly`              |
+| `ledger_accounts`           | `ledger_accounts:readonly`       |
+| `ledger_entries`            | `ledger_entries:readonly`        |
+| `ledger_entry_lines`        | `ledger_entries:readonly`        |
+| `products`                  | `products:readonly`              |
+| `purchase_requests`         | `purchase_requests:readonly`     |
+| `quotes`                    | `quotes:readonly`                |
+| `supplier_invoice_lines`    | `supplier_invoices:readonly`     |
+| `supplier_invoices`         | `supplier_invoices:readonly`     |
+| `suppliers`                 | `suppliers:readonly`             |
+| `transactions`              | `transactions:readonly`          |
 
 ## Configuration
 
@@ -83,7 +87,7 @@ There are two limitations to be aware of:
 
 ### Full refresh sync
 
-Full refresh re-downloads the entire table on each sync. This is available for all 18 tables and is the only sync method for the nine tables without changelogs.
+Full refresh re-downloads the entire table on each sync. This is available for all 22 tables and is the only sync method for the thirteen tables without changelogs.
 
 Use full refresh when you need to capture deletions or when a table doesn't support incremental sync.
 
