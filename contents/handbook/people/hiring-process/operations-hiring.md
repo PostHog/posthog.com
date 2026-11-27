@@ -50,3 +50,13 @@ An Operations SuperDay usually looks like this  (_there is a degree of flexibili
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 
 > In line with our [values](/handbook/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
+
+#### Finance SuperDay
+
+We expect you to use AI on your SuperDay the same way you would on the job. We score your judgment and not the AI's output. This means:
+
+- Your submission should show which assumptions, conclusions, and fixes are yours
+- You should be able to explain and defend every number and position you submit
+- Check the AI output
+
+Tell us briefly which tools you used and what you used them for, as part of your reflection.
