@@ -14,7 +14,7 @@ import {
 import { CodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
 import PromptDemo from 'components/MCPPage/PromptDemo'
-import MCPInstall from 'components/Products/MCPInstall'
+import MCPInstallCTA from 'components/MCPInstallCTA'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { emailFlows } from './agentDemo'
@@ -102,6 +102,71 @@ const sendExamples = [
     },
 ]
 
+// Workflow shapes from the building-workflows skill and the broadcasts-create MCP tool in PostHog/posthog.
+const apiExamples = [
+    {
+        label: 'Transactional email',
+        language: 'bash',
+        code: sendExamples[sendExamples.length - 1].code,
+    },
+    {
+        label: 'Broadcast',
+        language: 'bash',
+        code: `curl -X POST "https://us.posthog.com/api/projects/$PROJECT_ID/hog_flows/" \\
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "name": "Shared folders launch",
+    "origin_product": "broadcasts",
+    "actions": [
+      { "id": "trigger_node", "name": "Free plan", "type": "trigger", "config": {
+          "type": "batch",
+          "filters": { "properties": [{ "key": "plan", "value": ["free"], "operator": "exact", "type": "person" }] } } },
+      { "id": "email_1", "name": "Launch email", "type": "function_email", "config": {
+          "template_id": "template-email",
+          "inputs": { "email": { "value": {
+            "to": { "email": "{{ person.properties.email }}", "name": "" },
+            "subject": "New: shared folders",
+            "html": "<p>Share a whole folder with one link.</p>",
+            "text": "Share a whole folder with one link." } } } } },
+      { "id": "exit_node", "name": "Exit", "type": "exit", "config": { "reason": "Done" } }
+    ],
+    "edges": [
+      { "from": "trigger_node", "to": "email_1", "type": "continue" },
+      { "from": "email_1", "to": "exit_node", "type": "continue" }
+    ]
+  }'`,
+    },
+    {
+        label: 'Automation',
+        language: 'bash',
+        code: `curl -X POST "https://us.posthog.com/api/projects/$PROJECT_ID/hog_flows/" \\
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "name": "Nudge after signup",
+    "exit_condition": "exit_only_at_end",
+    "actions": [
+      { "id": "trigger_node", "name": "Signed up", "type": "trigger", "config": {
+          "type": "event",
+          "filters": { "events": [{ "id": "signed_up", "name": "signed_up", "type": "events", "order": 0 }] } } },
+      { "id": "delay_1", "name": "Wait 3 days", "type": "delay", "config": { "delay_duration": "3d" } },
+      { "id": "email_1", "name": "Upload nudge", "type": "function_email", "config": {
+          "template_id": "template-email",
+          "template_uuid": "<template_id>",
+          "message_category_type": "marketing",
+          "inputs": { "email": { "value": { "to": { "email": "{{ person.properties.email }}", "name": "" } } } } } },
+      { "id": "exit_node", "name": "Exit", "type": "exit", "config": { "reason": "Done" } }
+    ],
+    "edges": [
+      { "from": "trigger_node", "to": "delay_1", "type": "continue" },
+      { "from": "delay_1", "to": "email_1", "type": "continue" },
+      { "from": "email_1", "to": "exit_node", "type": "continue" }
+    ]
+  }'`,
+    },
+]
+
 const List = ({ items }: { items: [string, React.ReactNode][] }) => (
     <div className="@container">
         <LabeledList items={items.map(([label, description]) => ({ label, description }))} />
@@ -168,10 +233,10 @@ export const applications: CarouselSlide[] = [
                     The PostHog MCP lets Claude Code, Cursor, or Codex build automations, draft broadcasts, move you off
                     another provider, and tell you what an email actually did. Pick a prompt to watch the tool calls.
                 </p>
-                <div className="not-prose my-6">
+                <MCPInstallCTA className="not-prose my-6 max-w-md" showDesktopLink={false} />
+                <div className="not-prose">
                     <PromptDemo flows={emailFlows} placement="workflows_page" cwd="~/hedgebox" />
                 </div>
-                <MCPInstall />
             </>
         ),
     },
@@ -213,9 +278,9 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_calendar_light_eaa2380cb1.png',
-            'wf_landing_calendar_dark_14632ec78e.png',
-            'Broadcasts and automated emails on the send calendar'
+            'wf_landing_builder_light_da51389d7a.png',
+            'wf_landing_builder_dark_2c7e828448.png',
+            'An automation in the PostHog workflow builder'
         ),
     },
     {
@@ -248,6 +313,9 @@ export const applications: CarouselSlide[] = [
                         ],
                     ]}
                 />
+                <div className="not-prose mt-6">
+                    <CodeBlock currentLanguage={apiExamples[0]}>{apiExamples}</CodeBlock>
+                </div>
             </>
         ),
     },
@@ -284,9 +352,9 @@ export const keyFeatures: CarouselSlide[] = [
             </>
         ),
         image: shot(
-            'wf_landing_broadcast_audience_suggestions_light_0fa06d48ee.png',
-            'wf_landing_broadcast_audience_suggestions_dark_2ebc70b17d.png',
-            'Audiences PostHog suggests for a broadcast'
+            'wf_landing_calendar_light_eaa2380cb1.png',
+            'wf_landing_calendar_dark_14632ec78e.png',
+            'Broadcasts and automated emails on the send calendar'
         ),
     },
     {

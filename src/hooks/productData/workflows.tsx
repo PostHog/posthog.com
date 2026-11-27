@@ -265,29 +265,37 @@ export const workflows = {
             ],
         },
         companies: [
-            {
-                name: 'Zapier',
-                key: 'zapier',
-            },
-            {
-                name: 'Make',
-                key: 'make',
-            },
-            {
-                name: 'Customer.io',
-                key: 'customer_io',
-            },
-            {
-                name: 'Brevo',
-                key: 'brevo',
-            },
-            {
-                name: 'PostHog',
-                key: 'posthog',
-            },
+            { name: 'Resend', key: 'resend' },
+            { name: 'Loops', key: 'loops' },
+            { name: 'Customer.io', key: 'customer_io' },
+            { name: 'PostHog', key: 'posthog' },
         ],
-        rows: ['workflows'],
-        excluded_sections: ['platform'],
+        // From the Workflows team's feature matrix (November 2026). Columns: PostHog, Resend, Loops, Customer.io.
+        rows: [
+            { label: "Where we're different" },
+            { label: 'Email events in funnels and cohorts', values: [true, false, 'Partly', 'Partly'] },
+            { label: 'Session replay of the people you email', values: [true, false, false, false] },
+            { label: 'Replay Vision on the session behind a send', values: [true, false, false, false] },
+            { label: 'Slack, webhooks, and hundreds of other destinations', values: [true, false, false, 'Partly'] },
+            { label: 'SMS and push', values: [true, false, false, true] },
+            { label: 'React Email', values: [true, true, false, false] },
+            { label: 'Free every month', values: ['10,000 emails', '3,000 emails', '4,000 sends', 'None'] },
+            { label: 'Send from code' },
+            { label: 'Transactional send API', values: [true, true, true, true] },
+            { label: 'Official SDKs', values: ['8', '9', '4', '4'] },
+            { label: 'cc and bcc, attachments, idempotency', values: [true, true, 'Partly', 'Partly'] },
+            { label: 'Delivery webhooks', values: [true, true, true, true] },
+            { label: 'Custom headers and tags', values: [true, true, false, true] },
+            { label: 'Batch and scheduled send', values: [true, true, false, 'Partly'] },
+            { label: 'Inbound email', values: [false, true, false, false] },
+            { label: 'SMTP relay', values: [false, true, false, false] },
+            { label: 'Broadcasts and automations' },
+            { label: 'Broadcasts, segments, and a journey builder', values: [true, true, true, true] },
+            { label: 'A/B test emails and send the winner', values: ['Partly', false, true, true] },
+            { label: 'Agents' },
+            { label: 'MCP server and agent skills', values: ['79 tools, 9 skills', true, true, true] },
+            { label: 'CLI', values: [true, true, true, true] },
+        ],
     },
     pairsWith: [
         {
@@ -325,51 +333,144 @@ export const workflows = {
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
             'Recommends which workflows to build and when to run them based on your product metrics',
         ],
-        // Prompts reshaped from previous ai.prompts + contents/docs/workflows/create-emails-ai.mdx.
-        // Tool names verified against src/data/mcp-tools.json (feature: workflows).
+        // One group per agent skill in PostHog/posthog products/workflows/skills and products/messaging/skills.
         groups: [
             {
-                title: 'Create workflows',
-                tool: 'workflows-create',
+                title: 'Send transactional email',
+                tool: 'sending-transactional-emails',
                 prompts: [
-                    'Build an onboarding email sequence to help new users get started',
-                    'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
-                    'Generate a SMS sequence to encourage users to complete a survey',
-                ],
-            },
-            {
-                title: 'Create email templates',
-                tool: 'workflows-create-email-template',
-                prompts: [
-                    'Create a welcome email for new users who just signed up',
-                    "Write a re-engagement email for users who haven't logged in for 30 days",
-                    'Generate an email template for announcing a new feature',
-                    'Create an onboarding drip email series for trial users',
-                    "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button",
+                    'Send our password reset emails through PostHog from our Node.js backend',
+                    'Send a receipt from our order template every time someone pays',
                 ],
             },
             {
                 title: 'Draft broadcasts',
-                tool: 'broadcasts-create',
+                tool: 'building-workflows',
                 prompts: [
                     'Draft a broadcast about our new feature for users who were active this month',
                     'Turn last month’s newsletter into a broadcast for free-plan users',
                 ],
             },
             {
+                title: 'Build automations',
+                tool: 'building-workflows',
+                prompts: [
+                    'Build an onboarding email sequence to help new users get started',
+                    "Email people 3 days after they sign up if they haven't uploaded a file",
+                    'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
+                ],
+            },
+            {
+                title: 'Design email templates',
+                tool: 'designing-email-templates',
+                prompts: [
+                    'Create a welcome email for new users who just signed up',
+                    "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button",
+                    'Update the onboarding template to include their company name in the subject',
+                ],
+            },
+            {
                 title: 'Check results',
-                tool: 'workflows-transactional-email-stats',
-                prompts: ['How many password reset emails bounced this week?'],
+                tool: 'measuring-email-performance',
+                prompts: [
+                    "How did last week's launch email do, and did people use the feature after?",
+                    'How many password reset emails bounced this week?',
+                ],
+            },
+            {
+                title: 'Set up a sending domain',
+                tool: 'setting-up-an-email-domain',
+                prompts: ['Set up and verify our domain so we can send email from it'],
             },
             {
                 title: 'Move from another provider',
-                tool: 'provider-imports-create',
-                prompts: ['Import our templates, suppressions, and unsubscribes from Resend'],
+                tool: 'migrating-from-email-providers',
+                prompts: [
+                    'Import our templates, suppressions, and unsubscribes from Resend',
+                    'Move our Customer.io automations into PostHog',
+                ],
+            },
+        ],
+        // The MCP tools tab: one row per use case, in the same order as the prompts.
+        // A tool lands in the first group whose prefix it matches.
+        toolGroups: [
+            {
+                name: 'Send transactional email',
+                summary: 'Send one email from a template, and see what happened to it.',
+                prefixes: [
+                    'workflows-send-email',
+                    'workflows-make-email-template-transactional',
+                    'workflows-transactional-',
+                ],
             },
             {
-                title: 'Update templates',
-                tool: 'workflows-update-email-template',
-                prompts: ['Update the onboarding template to include their company name in the subject'],
+                name: 'Draft broadcasts',
+                summary: 'Draft a broadcast, and check how many people it reaches.',
+                prefixes: ['broadcasts-', 'workflows-convert-to-broadcast', 'workflows-blast-radius'],
+            },
+            {
+                name: 'Design email templates',
+                summary: 'Create and edit the emails in your template library.',
+                prefixes: [
+                    'workflows-create-email-template',
+                    'workflows-get-email-template',
+                    'workflows-list-email-templates',
+                    'workflows-patch-email-template',
+                    'workflows-show-email-template',
+                    'workflows-update-email-template',
+                ],
+            },
+            {
+                name: 'Build, test, and debug automations',
+                summary: 'Build an automation, test it, turn it on, and see why a run did what it did.',
+                prefixes: [
+                    'workflows-create',
+                    'workflows-email-drafts-create',
+                    'workflows-data-suggestions-',
+                    'workflows-suggest',
+                    'workflows-list-proposals',
+                    'workflows-get',
+                    'workflows-list',
+                    'workflows-update',
+                    'workflows-patch-',
+                    'workflows-test-run',
+                    'workflows-publish',
+                    'workflows-enable',
+                    'workflows-disable',
+                    'workflows-discard-draft',
+                    'workflows-archive',
+                    'workflows-schedule-create',
+                    'workflows-run-batch',
+                    'workflows-logs',
+                    'workflows-restore-revision',
+                ],
+            },
+            {
+                name: 'Check results',
+                summary: 'Sends, opens, clicks, and what people did after an email.',
+                prefixes: ['workflows-stats', 'workflows-global-stats', 'workflows-version-stats', 'workflows-email'],
+            },
+            {
+                name: 'Deliverability and opt-outs',
+                summary: 'Sending health, frequency caps, suppressions, and opt-outs.',
+                prefixes: [
+                    'workflows-setup-status',
+                    'workflows-reputation-get',
+                    'workflows-sending-rules-',
+                    'suppressions-',
+                    'opt-outs-',
+                    'message-categories-',
+                ],
+            },
+            {
+                name: 'Move from another provider',
+                summary: 'Bring templates, lists, and automations from Customer.io, Resend, and others.',
+                prefixes: ['provider-imports-', 'workflows-import-'],
+            },
+            {
+                name: 'Supabase auth emails',
+                summary: 'Send Supabase sign-up and sign-in emails through your PostHog templates.',
+                prefixes: ['supabase-auth-emails-'],
             },
         ],
     },
