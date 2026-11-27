@@ -136,6 +136,8 @@ From December 2, [batch exports](/docs/data-pipelines/batch-exports) that use th
 
 This applies to every destination. The persons and sessions models don't change.
 
+To test the new format before December 2, you can move one export, such as a copy of a production export. On the export's page, turn on **Export from the new events table** under **Events table** in the **Data** section. With the [API](/docs/api) or the [MCP server](/docs/model-context-protocol), set `use_new_events_schema` to `true` in the export's destination config. You can turn it off again until we move your project.
+
 Here's what changes in exported events:
 
 | What | Before | After | What to do |
