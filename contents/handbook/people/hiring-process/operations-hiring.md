@@ -51,14 +51,12 @@ Overall, you should spend at least 80% of your time and energy on the task and l
 
 > In line with our [values](/handbook/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
 
-##### AI usage during finance SuperDays
+#### Finance SuperDay
 
-We expect you to use AI on your SuperDay the same way you would on the job. Most of our finance work is done with AI, and we want to see how you work with it.
+We expect you to use AI on your SuperDay the same way you would on the job. We score your judgment and not the AI's output. This means:
 
-We score your judgment, not the AI's output. This means:
+- Your submission should show which assumptions, conclusions, and fixes are yours
+- You should be able to explain and defend every number and position you submit
+- Check the AI output
 
-- Your submission should show which assumptions, conclusions, and fixes are yours: where you agreed with the AI, where you corrected it, and why.
-- You should be able to explain and defend every number and position you submit. A polished output you can't explain doesn't count in your favor.
-- Check what the AI gives you. Outputs that don't tie out, or checks that pass when the numbers don't, count against you, even if AI produced them.
-
-Tell us briefly which tools you used and what you used them for. A couple of lines in your reflection is enough.
+Tell us briefly which tools you used and what you used them for, as part of your reflection.
