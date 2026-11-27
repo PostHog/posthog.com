@@ -137,11 +137,13 @@ const TEAM_MINI_CREST_QUERY = graphql`
 export default function PeopleMap({
     members: membersProp,
     coordsByQuery: coordsByQueryProp,
+    focusedMember,
     focusArea,
     focusNonce,
 }: {
     members?: any[]
     coordsByQuery?: Record<string, Coordinates>
+    focusedMember?: unknown
     focusArea?: GeocodedArea | null
     // Bump to re-fly to focusArea even when the area is unchanged (e.g. re-selecting after panning)
     focusNonce?: number
@@ -184,6 +186,7 @@ export default function PeopleMap({
     const jitteredPositionsByGroupRef = useRef<Record<string, Array<{ longitude: number; latitude: number }>>>({})
     const showClustersRef = useRef<boolean>(true)
     const badgeTypeRef = useRef<BadgeType>('none')
+    const focusedMemberRef = useRef<unknown>(null)
     const teamMiniCrestMapRef = useRef<Record<string, string>>({})
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
@@ -233,6 +236,17 @@ export default function PeopleMap({
             }
         }
     }, [badgeType])
+
+    useEffect(() => {
+        focusedMemberRef.current = focusedMember ?? null
+        if (mapRef.current && isStyleReady(mapRef.current)) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                console.error('Error rendering markers')
+            }
+        }
+    }, [focusedMember])
 
     // Precompute static spread positions for members that share the same location query
     useEffect(() => {
@@ -350,6 +364,7 @@ export default function PeopleMap({
                 return acc
             }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string; key: string }>)
 
+            const focusedMarkerElements: HTMLElement[] = []
             Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label, key }) => {
                 const positions = jitteredPositionsByGroupRef.current[key] || []
                 profiles.forEach((p, idx) => {
@@ -403,6 +418,9 @@ export default function PeopleMap({
                         .setLngLat([pos.longitude, pos.latitude])
                         .setPopup(popup)
                         .addTo(mapRef.current)
+                    if (p === focusedMemberRef.current) {
+                        focusedMarkerElements.push(marker.getElement())
+                    }
                     marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
                     marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
                     if (href) {
@@ -414,6 +432,7 @@ export default function PeopleMap({
                     markersRef.current.push(marker)
                 })
             })
+            focusedMarkerElements.forEach((element) => element.parentElement?.appendChild(element))
         }
         renderMarkersRef.current = renderMarkers
 
