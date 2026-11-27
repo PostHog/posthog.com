@@ -25,7 +25,9 @@ function SpineCard({ volume, count }: BookProps): JSX.Element {
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                     <h3 className="m-0 truncate text-[15px] font-bold leading-tight text-black">{volume.title}</h3>
-                    <p className="m-0 text-[10px] uppercase tracking-wider text-gray tabular-nums">{chapterCount}</p>
+                    <p className="m-0 text-[10px] uppercase tracking-wider text-black/60 tabular-nums">
+                        {chapterCount}
+                    </p>
                 </div>
             </div>
         </article>
