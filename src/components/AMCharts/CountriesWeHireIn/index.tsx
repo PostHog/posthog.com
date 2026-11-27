@@ -161,8 +161,55 @@ export default function CountriesWeHireIn({
 
         am5.addLicense('AM5M-1930-8548-3690-4255')
 
-        const root = am5.Root.new(chartRef.current)
+        // Use SVGRenderer when available: it uses geometric vector hit-testing,
+        // completely bypassing canvas getImageData which Brave Shields scrambles ("farbling").
+        const rootOptions: any = {}
+        if (am5.SVGRenderer) {
+            rootOptions.renderer = am5.SVGRenderer
+        }
+
+        const root = am5.Root.new(chartRef.current, rootOptions)
         root.setThemes([am5themes_Animated.new(root)])
+
+        // Fallback guard for CanvasRenderer if SVGRenderer is not active:
+        // Brave Shields injects pseudo-random noise (±1 to ±3) into canvas getImageData pixel values.
+        // If exact color lookup fails in _colorMap, perform a fuzzy nearest-color match.
+        const renderer = (root.container as any)?._display?._renderer
+        if (renderer && renderer._colorMap && typeof renderer._getHitTarget === 'function') {
+            const originalGetHitTarget = renderer._getHitTarget
+            renderer._getHitTarget = function (point: any, bbox: any, target: any) {
+                const hit = originalGetHitTarget.call(this, point, bbox, target)
+                if (hit || hit === false) {
+                    return hit
+                }
+                try {
+                    const pixel = this._ghostLayer?.getImageData(point, bbox)
+                    if (!pixel || (pixel.data[0] === 0 && pixel.data[1] === 0 && pixel.data[2] === 0)) {
+                        return false
+                    }
+                    const [pr, pg, pb] = [pixel.data[0], pixel.data[1], pixel.data[2]]
+                    let bestHit: any = undefined
+                    let minDiff = 12 // farbling noise is typically within ±1 to ±3 per channel
+                    for (const colorKey in this._colorMap) {
+                        const m = colorKey.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/)
+                        if (m) {
+                            const diff =
+                                Math.abs(pr - Number(m[1])) +
+                                Math.abs(pg - Number(m[2])) +
+                                Math.abs(pb - Number(m[3]))
+                            if (diff < minDiff) {
+                                minDiff = diff
+                                bestHit = this._colorMap[colorKey]
+                                if (diff === 1) break
+                            }
+                        }
+                    }
+                    return bestHit
+                } catch {
+                    return hit
+                }
+            }
+        }
 
         const chart = root.container.children.push(
             am5map.MapChart.new(root, {
@@ -176,12 +223,8 @@ export default function CountriesWeHireIn({
         )
 
         // Add zoom control
-        chart.set(
-            'zoomControl',
-            am5map.ZoomControl.new(root, {
-                position: 'absolute',
-            })
-        )
+        const zoomControl = am5map.ZoomControl.new(root, {})
+        chart.set('zoomControl', zoomControl)
 
         // Log zoom level and rotation when they change
         chart.events.on('wheelended', function () {
@@ -203,6 +246,7 @@ export default function CountriesWeHireIn({
             fill: am5.color(0xf5f5f5),
             stroke: am5.color(0xcccccc),
             strokeWidth: 1,
+            interactive: false,
         })
 
         backgroundSeries.data.push({
@@ -280,9 +324,8 @@ export default function CountriesWeHireIn({
             if (restriction) {
                 const icon = restriction.reason === 'contractors' ? '' : xIcon
                 const marginStyle = restriction.reason === 'contractors' ? '' : 'margin-left: 28px;'
-                return `<div class="not-prose" style="color: #000;">${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${
-                    restriction.reasonLabel ?? reasonLabels[restriction.reason]
-                }</span></div>`
+                return `<div class="not-prose" style="color: #000;">${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${restriction.reasonLabel ?? reasonLabels[restriction.reason]
+                    }</span></div>`
             }
             return `<div class="not-prose" style="color: #000;">${checkIcon} We hire from ${name}!</div>`
         })
