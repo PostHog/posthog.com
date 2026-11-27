@@ -152,7 +152,7 @@ import { PostHogProvider } from 'posthog-react-native'
 export default function App() {
   return (
     <NavigationContainer>
-      <PostHogProvider apiKey="<ph_project_token>" options={{
+      <PostHogProvider projectToken="<ph_project_token>" options={{
         host: "<ph_client_api_host>", // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
       }}>
         <AppNavigator />
@@ -215,14 +215,14 @@ The final step is to add the experiment code. We'll add code that does the follo
 1. Fetch the `my-cool-experiment` flag.
 2. Change the background color of `SecondScreen` based on the value of the flag (`control` or `test`).
 
-To do this, we implement the [`useFeatureFlag`](/docs/libraries/react-native#feature-flags) hook:
+To do this, we implement the [`useFeatureFlagVariantKey`](/docs/libraries/react-native#feature-flags) hook:
 
 ```js file=SecondScreen.js
 import { View, Button, StyleSheet } from 'react-native';
-import { usePostHog, useFeatureFlag } from 'posthog-react-native'
+import { usePostHog, useFeatureFlagVariantKey } from 'posthog-react-native'
 
 function SecondScreen() {
-  const multiVariantFeature = useFeatureFlag('my-cool-experiment')
+  const multiVariantFeature = useFeatureFlagVariantKey('my-cool-experiment')
   const backgroundColor = (multiVariantFeature === 'test') ? 'green' : 'red';
 
   // rest of your code
@@ -234,8 +234,10 @@ If you want to test both variants of your experiment to make sure they are worki
 
 ```js file=SecondScreen.js
 const posthog = usePostHog()
-posthog.overrideFeatureFlag({'my-cool-experiment': 'control'}) 
+posthog.updateFlags({ 'my-cool-experiment': 'control' }, undefined, { merge: true })
 ```
+
+The next flag load replaces this value. To keep it while you test, set `disableRemoteFeatureFlags: true` in your PostHog options.
 
 Lastly, you can [view your test results](/docs/experiments/analyzing-results) on the experiment page.
 
