@@ -4,40 +4,90 @@ sidebar: Docs
 showTitle: true
 ---
 
-Use the API when you want surveys managed by your own tooling rather than by hand – creating a survey per experiment from a script, syncing responses into a warehouse, or building a fully custom survey UI on top of PostHog.
+Manage surveys, read responses and stats, and fetch sanitized active surveys for custom clients.
 
-Reading surveys and stats requires `survey:read`. Listing individual responses (`GET /api/projects/:project_id/surveys/:id/responses/`) requires both `survey:read` and `query:read`. Creating, updating, launching, stopping, archiving responses, and deleting surveys require `survey:write`. Writing targeting flags (`targeting_flag_id` or `targeting_flag_filters`) or deleting a survey with a targeting flag also requires `feature_flag:write`.
+## Authentication and scopes
 
-## Before you start
-
-1. **Set up Surveys** – [install a PostHog SDK](/docs/surveys/installation) so they can be shown to users.
-2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
-
-## What you can do here
-
-**Manage surveys**
-
-Create, read, update, and delete surveys, including their questions, appearance, schedule, display conditions, and targeting. Launching and stopping a survey is a matter of setting its start and end dates.
-
-**Read responses and stats**
-
-List a survey's responses, pull per-survey stats, or fetch project-wide stats across every survey. Responses are also captured as `survey sent`, `survey shown`, and `survey dismissed` events, so you can query them directly through the [query API](/docs/api/query) alongside the rest of your data.
-
-**Serve surveys yourself**
-
-For a headless implementation, use the `api` survey type and fetch the active surveys for a user with `posthog.getSurveys()` or `posthog.getActiveMatchingSurveys()`, then render your own UI and capture the response events. See [implementing custom surveys](/docs/surveys/implementing-custom-surveys).
-
-## Authentication
-
-Use a [personal API key](/docs/api#authentication) with the scopes above, passed as a bearer token:
+Pass a [personal API key](/docs/api/personal-api-keys) as a Bearer token on all `/api/projects/:project_id/surveys/` endpoints:
 
 ```bash
 curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
   https://us.posthog.com/api/projects/:project_id/surveys/
 ```
 
+| Scope | Required for |
+| --- | --- |
+| `survey:read` | List/get surveys, `responses_count/`, `stats/`, `archived-response-uuids/`, `question_labels/`, `summary_headline/`, `summarize_responses/` |
+| `survey:read` + `query:read` | `GET /surveys/:id/responses/` (resolved individual responses) |
+| `survey:write` | Create, update, `launch/`, `stop/`, `responses/:uuid/archive/`, `unarchive/`, `duplicate_to_projects/`, `generate_translations/`, delete |
+| `feature_flag:write` | Setting or updating `targeting_flag_id`, `targeting_flag_filters`, `remove_targeting_flag`, or deleting a survey that has a targeting flag (enforced per org) |
+| `activity_log:read` | `GET /surveys/activity/` and `GET /surveys/:id/activity/` |
+
+## Authenticated endpoints
+
+Base path: `/api/projects/:project_id/surveys/`
+
+| Method & path | Scope | Purpose & key parameters |
+| --- | --- | --- |
+| `GET /` | `survey:read` | List surveys ordered by `-created_at`. Optional `search` (trigram match on `name` and `description`). Excludes product-tour surveys. |
+| `POST /` | `survey:write` | Create a survey (`name` unique per project max `400` chars, `type` in `popover`/`widget`/`external_survey`/`api`, `questions` array). Omit `questions[].id` to generate UUIDs. |
+| `GET /:id/` | `survey:read` | Read full survey definition including computed `conditions`, `questions[].id`, and `feature_flag_keys`. |
+| `PATCH /:id/` | `survey:write` | Update questions, `appearance`, `conditions`, `start_date`, `end_date`, `schedule`, `responses_limit`, `base_language`, `translations`, or `targeting_flag_filters`. |
+| `DELETE /:id/` | `survey:write` | Delete the survey and its associated `targeting_flag` and `internal_targeting_flag` records. |
+| `POST /:id/launch/` | `survey:write` | Set `start_date` to current UTC timestamp (400 if archived or `end_date` is in the past, no-op if already started). |
+| `POST /:id/stop/` | `survey:write` | Set `end_date` to current UTC timestamp (400 if archived, no-op if already ended). |
+| `GET /responses_count/` | `survey:read` | Return `{ "<survey_id>": count }` map. Optional `exclude_archived=true|false` (default `false`), `survey_ids` (comma-separated). |
+| `GET /stats/` | `survey:read` | Project-wide `stats` (`survey shown`, `survey dismissed`, `survey sent`) and `rates`. Optional `date_from`, `date_to` (ISO 8601 or relative `-7d`, `-24h`, `-1m`; naive values use the project timezone). |
+| `GET /:id/stats/` | `survey:read` | Single-survey `stats`, `rates`, and optional `per_question_stats` when `include_per_question_stats=true`. Optional `date_from`, `date_to` (naive values use the project timezone), `exclude_archived`. |
+| `GET /:id/responses/` | `survey:read`, `query:read` | Paginated individual responses (`limit` default `100`, `offset` default `0`). Filters: `since`, `until`, `question_id`, `score_lte`, `score_gte` (both require `question_id`), `exclude_archived`. |
+| `POST /:id/responses/:response_uuid/archive/` | `survey:write` | Archive one response UUID (400 on invalid UUID, prevents duplicates per team). Pair with `POST .../unarchive/` and `GET /:id/archived-response-uuids/`. |
+| `POST /:id/duplicate_to_projects/` | `survey:write` | Atomically duplicate a survey into one or more target projects in the organization as drafts. |
+| `POST /:id/generate_translations/` | `survey:write` | Returns AI-generated `translations` for required `target_language` (`overwrite` defaults to `false` for that language) without saving them; PATCH them back to apply. PostHog Cloud only (`400` outside Cloud/DEBUG or without Gemini; `403` without org AI data-processing approval). |
+| `POST /:id/summary_headline/` | `survey:read` | Return cached `headline`, `responses_sampled`, and `has_more` (pass `force_refresh: true` to regenerate; returns `403` on cache miss or `force_refresh: true` if org AI data processing isn't approved). |
+| `POST /:id/summarize_responses/` | `survey:read` | With `question_id` or `question_index`, returns `{ content, response_count, generated_at, trace_id, cached }` where `content` is markdown rendered from overview, themes, and key insight (PostHog Cloud only; `400` outside Cloud/DEBUG or without Gemini; `403` on cache miss or `force_refresh: true` without org AI approval). Without either param, dispatches to `summary_headline/`. |
+| `GET /question_labels/` | `survey:read` | Return `{ labels: [{ question_id, question_text, question_index, survey_id, survey_name }] }` across accessible surveys. |
+| `GET /activity/` and `GET /:id/activity/` | `activity_log:read` | Paginated survey audit history (`limit`, `page`). |
+
+## Create and launch payload rules
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/$PROJECT_ID/surveys/" \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Checkout API feedback",
+    "type": "api",
+    "questions": [
+      { "type": "open", "question": "What slowed you down at checkout?" }
+    ],
+    "schedule": "once",
+    "start_date": "2026-01-01T00:00:00Z"
+  }'
+```
+
+Key payload rules and schema limits:
+
+- `questions[]`: documented types are `open`, `link`, `rating`, `single_choice`, and `multiple_choice` (schema documents `2` to `20` choices; runtime validates non-blank choice strings without counting them). Runtime enforces `https://` or `mailto:` schemes on `link` questions and validates open-question `validation` rule types (`min_length`, `max_length`, `email`).
+- `conditions`: supports `url`, `urlMatchType` (`regex`, `not_regex`, `exact`, `is_not`, `icontains`, `not_icontains`), `selector`, `seenSurveyWaitPeriodInDays`, `events`, `deviceTypes`, and `linkedFlagVariant` (requires `linked_flag_id`). Omit display conditions and `surveyPopupDelaySeconds` on `type: "external_survey"`.
+- `targeting_flag_filters`: `{ groups: [{ properties, rollout_percentage }] }`. Runtime rejects `100%` rollout with an empty `properties` list, and rejects cohorts containing behavioral filters.
+- Recurring surveys: set `schedule: "recurring"` with `iteration_frequency_days` (positive integer; schema documents `1-365`) and `iteration_count` (`min_value=0` at runtime where `0` disables repeats; schema documents `1-500`), or set `repeat_until_stopped: true` (rejected unless `iteration_frequency_days` is also set).
+- Localization: `base_language` is BCP-47 (default `"en"`, max `20` chars). Runtime rejects `translations` keys that repeat `base_language`.
+- **Launching:** Passing `start_date` on `PATCH` activates the survey and its `targeting_flag` and `internal_targeting_flag` immediately (`POST` activates `internal_targeting_flag`, but leaves a newly created `targeting_flag` inactive if `targeting_flag_filters` is supplied in the same request). Calling `POST /:id/launch/` sets `start_date` without toggling targeting flags, so verify targeting flags are active before testing client delivery (or toggle `start_date` via `PATCH`).
+
+## Public delivery endpoint (`/api/surveys/`)
+
+Client SDKs and custom frontends fetch sanitized active surveys using the public project token (`phc_*`), without a personal API key:
+
+```bash
+curl "https://us.posthog.com/api/surveys/?token=$POSTHOG_PROJECT_TOKEN"
+```
+
+- **Authentication:** Requires `token=<project_api_key>`. Missing or empty tokens return HTTP `401`. Overly long or invalid-character tokens return HTTP `400`.
+- **Probing:** Supports `HEAD` and `OPTIONS` for availability and CORS checks.
+- **Response:** Returns HTTP `200` with `{ "surveys": [...] }` containing active survey definitions sanitized for client use. Flag keys (`linked_flag_key`, `targeting_flag_key`, `internal_targeting_flag_key`) are included so custom clients can check eligibility; client sanitization strips top-level `survey_config`, per-survey `base_language`, per-question `isNpsQuestion`, and action fields other than `id`, `name`, and `steps`. Returns an empty `surveys` list on cache miss or when no running non-external surveys exist (`surveys_opt_in` only gates SDK remote config).
+
 ## Related
 
-- See the full endpoint reference in the [Surveys API docs](/docs/api/surveys).
-- Build the same things conversationally over [MCP](/docs/surveys/surfaces/mcp).
-- Roll your own UI with [implementing custom surveys](/docs/surveys/implementing-custom-surveys).
+- Full OpenAPI schema: [Surveys API reference](/docs/api/surveys).
+- Custom client rendering and event capture: [implementing custom surveys](/docs/surveys/implementing-custom-surveys).
+- MCP tools: [PostHog MCP](/docs/surveys/surfaces/mcp).

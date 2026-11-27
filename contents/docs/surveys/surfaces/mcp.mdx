@@ -4,48 +4,44 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) exposes PostHog's API as function calling tools to any MCP client, so an agent in Cursor, Claude Code, Windsurf, or VS Code can run your surveys for you.
+The [PostHog MCP server](/docs/model-context-protocol) exposes Surveys API operations as tool calls for MCP clients (Cursor, Claude Code, Windsurf, VS Code).
 
-That means you can spin up a survey while you're still writing the feature it asks about, launch it when you ship, and pull the responses back into your editor when they land – without opening the PostHog web app.
+## Prerequisites
 
-## Before you start
-
-1. **Set up Surveys** – [install a PostHog SDK](/docs/surveys/installation) so they can be shown to users.
-2. **Connect the MCP server** – [install it in your AI tool](#install-the-mcp-server) and give it access to your project.
-
-## What you can do here
-
-- **Create a survey** – describe the questions, type, targeting, and display conditions, and the agent creates it. Surveys are created as drafts by default, so nothing goes live until you say so.
-- **Update a survey** – change questions, appearance, targeting, or the response limit on an existing survey.
-- **Launch and stop surveys** – start a survey when you're ready and stop it once you have enough responses.
-- **List and fetch surveys** – pull every survey in the project, or one survey's full configuration.
-- **Read responses** – list the raw responses for a survey to inspect what people actually wrote.
-- **Pull survey stats** – per-survey stats or project-wide stats across every survey.
-- **Summarize responses** – have PostHog summarize open-text answers into themes without dumping hundreds of rows into your context.
-- **Delete a survey** – remove a survey you no longer need.
-
-Try these with an MCP-enabled agent:
-
-- `Create a draft NPS survey for users who visited /pricing in the last week.`
-- `What are people saying in my onboarding feedback survey?`
-- `Summarize the open-text responses from the churn survey.`
-- `Launch the checkout feedback survey.`
-- `Stop the PMF survey – we have enough responses.`
-
-## Install the MCP server
-
-Install the MCP server in your preferred MCP client. The recommended way is the [AI wizard](/docs/ai-engineering/ai-wizard), which walks you through setup for Claude, Cursor, Windsurf, VS Code, and more:
+1. Enable **Surveys** (`surveys_opt_in`) in [project survey settings](https://app.posthog.com/settings/project-surveys) and [install a PostHog SDK](/docs/surveys/installation).
+2. Install the PostHog MCP server:
 
 ```bash
 npx @posthog/wizard mcp add
 ```
 
-You can also [configure it manually](/docs/model-context-protocol#get-started-in-30-seconds). Required personal API key scopes: `survey:read` for listing/reading surveys and stats, `survey:read` + `query:read` for listing individual responses (`surveys-responses-list`), and `survey:write` for creating, updating, launching, stopping, and deleting surveys. Setting or changing targeting flags also requires `feature_flag:write`.
+You can also [configure it manually](/docs/model-context-protocol#get-started-in-30-seconds).
 
-See the [MCP server documentation](/docs/model-context-protocol) for the full setup guide.
+## Available tools and scopes
+
+| Tool | Required scopes | Behavior & key inputs |
+| --- | --- | --- |
+| `survey-create` | `survey:write` (`feature_flag:write` when setting targeting) | Creates a survey as a **draft** by default (requires `name` and `type`). Supports `type` (`popover`, `widget`, `external_survey`, `api`), `questions` (each entry requires `type` and `question`), `appearance`, `conditions`, `schedule`, `repeat_until_stopped`, `responses_limit`, `base_language` (BCP-47, default `"en"`), and `translations`. |
+| `survey-update` | `survey:write` (`feature_flag:write` when setting targeting) | Updates questions, appearance, conditions, targeting, schedule, `responses_limit`, `archived`, or `base_language`/`translations` (prefer `survey-launch` and `survey-stop` for launching and stopping). |
+| `survey-launch` | `survey:write` | Launches a draft survey by setting `start_date` to the current UTC time. |
+| `survey-stop` | `survey:write` | Stops an active survey by setting `end_date` to the current UTC time while keeping collected responses. |
+| `survey-delete` | `survey:write` | Soft-deletes a survey by setting `archived: true` via `PATCH` (reversible via `survey-update`). |
+| `survey-get` | `survey:read` | Returns one survey's full configuration, question UUIDs, and feature flag keys. |
+| `surveys-get-all` | `survey:read` | Lists project surveys with optional search filter. |
+| `surveys-global-stats` | `survey:read` | Returns project-wide `survey shown`, `survey dismissed`, and `survey sent` counts and conversion rates across an optional date window (ISO 8601 or relative `-7d`; naive values use the project timezone). |
+| `survey-stats` | `survey:read` | Returns single-survey engagement counts, conversion rates, and optional per-question answer distributions when `include_per_question_stats: true` is passed. |
+| `surveys-responses-list` | `survey:read`, `query:read` | Lists individual responses with resolved question text, score filters, and `exclude_archived` filtering. |
+| `surveys-summarize-responses-create` | `survey:read` | Generates an LLM theme summary for one question (`question_id` or `question_index`, PostHog Cloud only), or a survey-wide headline summary when omitted. |
+
+## Example prompts
+
+- `Create a draft NPS survey with base_language "en" for users who visited /pricing in the last week.`
+- `Launch the checkout feedback survey.`
+- `Pull per-question stats and raw responses for the onboarding survey.`
+- `Stop the PMF survey now that we hit our response target.`
 
 ## Related
 
-- Build and read surveys in the [web app](/docs/surveys/surfaces/web-app).
-- Manage surveys programmatically with the [API](/docs/surveys/surfaces/api).
-- Ask [PostHog AI](/docs/surveys/create-surveys-ai) to build a survey inside PostHog instead.
+- Web app workflow: [PostHog Web](/docs/surveys/surfaces/web-app).
+- Direct HTTP endpoints and public `/api/surveys/`: [Surveys API](/docs/surveys/surfaces/api).
+- In-app AI assistant: [Create surveys with PostHog AI](/docs/surveys/create-surveys-ai).
