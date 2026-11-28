@@ -1,6 +1,9 @@
 import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { IconCheckCircle } from '@posthog/icons'
+import CloudinaryImage from 'components/CloudinaryImage'
 import Panel from 'components/Docs/Panel'
 import { questionsTagFilter, questionsTagForLabel } from 'components/Forum/questionTags'
 import Link from 'components/Link'
@@ -8,7 +11,7 @@ import OSButton from 'components/OSButton'
 import { Progress } from 'components/UI/Progress'
 import type { ColorName } from 'components/UI/colors'
 import { useQuestions } from 'hooks/useQuestions'
-import { useUser } from 'hooks/useUser'
+import { useUser, User } from 'hooks/useUser'
 import type { ForumTagData, StrapiRecord } from 'lib/strapi'
 import { useApp } from '../../../context/App'
 import { POCKET_GUIDE_VOLUMES, PocketGuideVolume, pocketGuideUrl } from '../../../constants/pocketGuides'
@@ -19,6 +22,7 @@ import { useReadChapterSlugs, useReadProgress } from '../PocketGuides/chapterPro
 dayjs.extend(relativeTime)
 
 const HELP_QUESTION_LIMIT = 5
+const THANKS_LIMIT = 5
 
 const PROGRESS_COLOR_BY_TOKEN: Record<PocketGuideVolume['token'], ColorName> = {
     blue: 'blue',
@@ -207,6 +211,156 @@ function QuestionsToHelp({
     )
 }
 
+function askerLabel(askerFirstName?: string | null): string {
+    return askerFirstName ? `Asked by ${askerFirstName}` : ''
+}
+
+function Thanks({ profileId }: { profileId: number }): JSX.Element {
+    const { questions, total, isLoading } = useQuestions({
+        limit: THANKS_LIMIT,
+        sortBy: 'activity',
+        fields: ['subject', 'permalink', 'activeAt'],
+        populate: { profile: { fields: ['firstName'] } },
+        filters: {
+            resolved: { $eq: true },
+            resolvedBy: { profile: { id: { $eq: profileId } } },
+            profile: { id: { $ne: profileId } },
+        },
+    })
+    const solvedThreads = questions.data
+    const hasSolved = solvedThreads.length > 0
+
+    return (
+        <Panel
+            eyebrow="Thanks you received"
+            description={
+                hasSolved && total
+                    ? `${total} of your answers ${total === 1 ? 'was' : 'were'} marked as the solution.`
+                    : 'Answers of yours that someone marked as the solution.'
+            }
+        >
+            {!isLoading && !hasSolved && (
+                <EmptyLine>None yet. When someone marks your answer as the solution, it shows here.</EmptyLine>
+            )}
+            <ul className="m-0 list-none p-0">
+                {solvedThreads.map(({ id, attributes }) => (
+                    <li
+                        key={id}
+                        className="flex items-start gap-3 border-t border-primary py-3 first:border-t-0 first:pt-0"
+                    >
+                        <IconCheckCircle className="mt-0.5 size-5 shrink-0 text-green" />
+                        <div className="min-w-0 flex-1">
+                            <Link
+                                to={`/forum/p/${attributes.permalink}`}
+                                className="block truncate text-[15px] font-bold !text-primary"
+                            >
+                                {attributes.subject}
+                            </Link>
+                            <p className="m-0 text-sm text-secondary">
+                                {[
+                                    askerLabel(attributes.profile?.data?.attributes?.firstName),
+                                    dayjs(attributes.activeAt).fromNow(),
+                                ]
+                                    .filter(Boolean)
+                                    .join(' · ')}
+                            </p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </Panel>
+    )
+}
+
+type AchievementTier = {
+    id: number
+    attributes: {
+        title: string
+        description: string
+        icon?: { data?: { attributes?: { url?: `https://res.cloudinary.com/${string}` } } }
+    }
+}
+
+type TieredAchievementGroups = {
+    allAchievementGroup: { nodes: { achievements?: { data?: AchievementTier[] } }[] }
+}
+
+type ProfileWithAchievements = User['profile'] & { achievements?: { achievement?: { id: number } | null }[] }
+
+function achievementIdsHeldBy(profile: ProfileWithAchievements): number[] {
+    return (profile.achievements ?? []).flatMap((profileAchievement) =>
+        profileAchievement.achievement ? [profileAchievement.achievement.id] : []
+    )
+}
+
+function HelperAchievements({ heldAchievementIds }: { heldAchievementIds: number[] }): JSX.Element | null {
+    const { allAchievementGroup } = useStaticQuery<TieredAchievementGroups>(graphql`
+        query YourLearningAchievementLadders {
+            allAchievementGroup(filter: { tiered: { eq: true } }) {
+                nodes {
+                    achievements {
+                        data {
+                            id
+                            attributes {
+                                title
+                                description
+                                icon {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+    const isHeld = (tier: AchievementTier) => heldAchievementIds.includes(Number(tier.id))
+    const nextTiers = allAchievementGroup.nodes.flatMap((group) => {
+        const nextTier = (group.achievements?.data ?? []).find((tier) => !isHeld(tier))
+        return nextTier ? [nextTier] : []
+    })
+    const shownTiers = allAchievementGroup.nodes.flatMap((group) =>
+        (group.achievements?.data ?? []).filter((tier) => isHeld(tier) || nextTiers.includes(tier))
+    )
+    if (shownTiers.length === 0) return null
+
+    return (
+        <Panel
+            eyebrow={
+                <Link to="/community/achievements" className="!text-primary hover:underline">
+                    Achievements
+                </Link>
+            }
+            description="The tiers you hold, and the next one to earn."
+        >
+            <ul className="m-0 list-none p-0">
+                {shownTiers.map((tier) => {
+                    const isNext = nextTiers.includes(tier)
+                    const iconUrl = tier.attributes.icon?.data?.attributes?.url
+                    return (
+                        <li key={tier.id} className={`flex items-center gap-3 py-2 ${isNext ? 'opacity-60' : ''}`}>
+                            <span className={`size-9 shrink-0 ${isNext ? 'grayscale' : ''}`}>
+                                {iconUrl && <CloudinaryImage width={36} height={36} src={iconUrl} />}
+                            </span>
+                            <div className="min-w-0">
+                                <p className="m-0 text-[15px] font-bold text-primary">
+                                    {isNext ? 'Next: ' : ''}
+                                    {tier.attributes.title}
+                                </p>
+                                <p className="m-0 text-sm text-secondary">{tier.attributes.description}</p>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+        </Panel>
+    )
+}
+
 function SignInPanel(): JSX.Element {
     const { openSignIn } = useApp()
     return (
@@ -243,15 +397,25 @@ export default function YourLearning(): JSX.Element {
                         </div>
                     )}
                     {profileId && (
-                        <div className="order-2">
-                            <QuestionsToHelp profileId={profileId} startedVolumes={volumes} />
-                        </div>
+                        <>
+                            <div className="order-2">
+                                <QuestionsToHelp profileId={profileId} startedVolumes={volumes} />
+                            </div>
+                            <div className="order-3">
+                                <Thanks profileId={profileId} />
+                            </div>
+                        </>
                     )}
                 </div>
                 <aside className="contents @3xl:flex @3xl:w-1/3 @3xl:shrink-0 @3xl:flex-col @3xl:gap-4">
                     <div className="order-1">
                         <GuideProgress volumes={volumes} isSignedIn={isSignedIn} />
                     </div>
+                    {user?.profile && (
+                        <div className="order-4">
+                            <HelperAchievements heldAchievementIds={achievementIdsHeldBy(user.profile)} />
+                        </div>
+                    )}
                 </aside>
             </div>
         </div>

@@ -229,6 +229,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     return {
         hasMore,
+        total,
         questions,
         fetchMore: () => setSize(size + 1),
         isLoading: isLoading || isValidating,
