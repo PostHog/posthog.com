@@ -9,6 +9,7 @@ import {
     readLocalProgress,
     readStoredProgress,
     writeLocalProgress,
+    type ReadChapterSlugsByVolume,
 } from '../../../lib/learnProgress'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, type BookPageEntry } from './bookModel'
 
@@ -66,15 +67,28 @@ const useSyncExternalStore = (
     }
 ).useSyncExternalStore
 
-export function useReadChapterSlugs(volumeId: string): Set<string> {
+/** Chapters read per volume, from this browser and the signed-in profile together. */
+export function useReadProgress(): ReadChapterSlugsByVolume {
     const storedProgress = useSyncExternalStore(subscribeToProgressInOtherTabs, readStoredProgress, () => null)
     const profileProgress = useUser().user?.learnProgress
-    return useMemo(
-        () =>
-            new Set([
-                ...readChapterSlugs(parseProgress(storedProgress), volumeId),
-                ...readChapterSlugs(profileProgress, volumeId),
-            ]),
-        [storedProgress, profileProgress, volumeId]
-    )
+    return useMemo(() => {
+        const localProgress = parseProgress(storedProgress)
+        const volumeIds = Array.from(new Set([...Object.keys(localProgress), ...Object.keys(profileProgress ?? {})]))
+        return Object.fromEntries(
+            volumeIds.map((volumeId) => [
+                volumeId,
+                Array.from(
+                    new Set([
+                        ...readChapterSlugs(localProgress, volumeId),
+                        ...readChapterSlugs(profileProgress, volumeId),
+                    ])
+                ),
+            ])
+        )
+    }, [storedProgress, profileProgress])
+}
+
+export function useReadChapterSlugs(volumeId: string): Set<string> {
+    const readProgress = useReadProgress()
+    return useMemo(() => new Set(readChapterSlugs(readProgress, volumeId)), [readProgress, volumeId])
 }

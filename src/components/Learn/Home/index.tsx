@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconBook, IconCode, IconPlay, IconRocket, IconVideoCamera } from '@posthog/icons'
+import { IconBadge, IconBook, IconCode, IconPlay, IconRocket, IconVideoCamera } from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
@@ -11,9 +11,10 @@ import usePocketGuideCounts from '../../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides'
 import PlaygroundPreview from './PlaygroundPreview'
 import PromptLibrary from './PromptLibrary'
+import YourLearning from './YourLearning'
 import VideoLibrary from '../LearnTV/VideoLibrary'
 
-export type LearnHomeSection = 'pocket-guides' | 'videos' | 'prompts' | 'playground'
+export type LearnHomeSection = 'pocket-guides' | 'videos' | 'prompts' | 'playground' | 'you'
 
 const SECTIONS: Record<LearnHomeSection, { title: string; description: string }> = {
     'pocket-guides': {
@@ -34,6 +35,10 @@ const SECTIONS: Record<LearnHomeSection, { title: string; description: string }>
         description:
             'Twig is a demo vacation rental site with PostHog built in. Click around, then see the events behind it.',
     },
+    you: {
+        title: 'Your learning – Learn – PostHog',
+        description: 'Your progress in each pocket guide you started.',
+    },
 }
 
 // Founders hub is the existing /founders page.
@@ -43,6 +48,8 @@ const NAV_ITEMS = [
     { name: 'Videos', url: '/learn/videos', icon: <IconVideoCamera className="text-brand-tangerine" /> },
     { name: 'Prompts', url: '/learn/prompts', icon: <IconCode className="text-brand-blue" /> },
     { name: 'Playground', url: '/learn/playground', icon: <IconPlay className="text-brand-teal" /> },
+    { name: 'You' },
+    { name: 'Your learning', url: '/learn/you', icon: <IconBadge className="text-brand-green" /> },
     { name: 'Building a company?' },
     { name: 'Founders hub', url: '/founders', external: true, icon: <IconRocket className="text-primary" /> },
 ]
@@ -147,7 +154,7 @@ function PocketGuideCollection(): JSX.Element {
     )
 }
 
-/** The Learn home at `/learn`, `/learn/videos`, `/learn/prompts`, and `/learn/playground`: a sidebar, the hero, then one section. */
+/** The Learn home at `/learn`, `/learn/videos`, `/learn/prompts`, `/learn/playground`, and `/learn/you`: a sidebar, the hero (not on `/learn/you`), then one section. */
 export default function LearnHome({ section }: { section: LearnHomeSection }): JSX.Element {
     const { title, description } = SECTIONS[section]
     return (
@@ -164,11 +171,12 @@ export default function LearnHome({ section }: { section: LearnHomeSection }): J
                 leftSidebar={<TreeMenu items={NAV_ITEMS} appearance="sidebar" />}
             >
                 <div className="@container not-prose">
-                    <Hero />
+                    {section !== 'you' && <Hero />}
                     {section === 'pocket-guides' && <PocketGuideCollection />}
                     {section === 'videos' && <VideoLibrary />}
                     {section === 'prompts' && <PromptLibrary />}
                     {section === 'playground' && <PlaygroundPreview />}
+                    {section === 'you' && <YourLearning />}
                 </div>
             </ReaderView>
         </>

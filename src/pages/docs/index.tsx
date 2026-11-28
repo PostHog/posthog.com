@@ -5,31 +5,13 @@ import * as Icons from '@posthog/icons'
 import ReaderView from 'components/ReaderView'
 import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
+import Panel from 'components/Docs/Panel'
 import Book, { BookShelf } from 'components/Learn/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 import { TWIG_URL } from '../../constants'
 import usePostHog from '../../hooks/usePostHog'
 import { useApp } from '../../context/App'
-
-/** A surface on the page ground, after `FeaturePanel` on `/desktop`. Colour lives in the icons only. */
-const Panel = ({
-    eyebrow,
-    description,
-    children,
-}: {
-    eyebrow: string
-    description?: string
-    children: React.ReactNode
-}): JSX.Element => (
-    <section className="@container flex h-full flex-col rounded border border-primary bg-primary p-4 @xl:p-5">
-        <h2 className={`m-0 text-sm font-bold uppercase tracking-wide text-primary ${description ? 'mb-1' : 'mb-3'}`}>
-            {eyebrow}
-        </h2>
-        {description && <p className="m-0 mb-3 text-sm leading-snug text-secondary">{description}</p>}
-        {children}
-    </section>
-)
 
 /** An icon link, the size and weight the product pages use for their icon rows. */
 const IconLink = ({
