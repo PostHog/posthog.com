@@ -1,15 +1,24 @@
 import React from 'react'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import Panel from 'components/Docs/Panel'
+import { questionsTagFilter, questionsTagForLabel } from 'components/Forum/questionTags'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { Progress } from 'components/UI/Progress'
 import type { ColorName } from 'components/UI/colors'
+import { useQuestions } from 'hooks/useQuestions'
 import { useUser } from 'hooks/useUser'
+import type { ForumTagData, StrapiRecord } from 'lib/strapi'
 import { useApp } from '../../../context/App'
 import { POCKET_GUIDE_VOLUMES, PocketGuideVolume, pocketGuideUrl } from '../../../constants/pocketGuides'
 import { readChapterSlugs, ReadChapterSlugsByVolume } from '../../../lib/learnProgress'
 import { learnChapterSlug, useBookPages } from '../PocketGuides/bookModel'
 import { useReadChapterSlugs, useReadProgress } from '../PocketGuides/chapterProgress'
+
+dayjs.extend(relativeTime)
+
+const HELP_QUESTION_LIMIT = 5
 
 const PROGRESS_COLOR_BY_TOKEN: Record<PocketGuideVolume['token'], ColorName> = {
     blue: 'blue',
@@ -94,6 +103,110 @@ function GuideProgress({ volumes, isSignedIn }: { volumes: PocketGuideVolume[]; 
     )
 }
 
+const notArchivedOrResolved = [
+    { $or: [{ resolved: { $null: true } }, { resolved: { $eq: false } }] },
+    { $or: [{ archived: { $null: true } }, { archived: { $eq: false } }] },
+]
+
+type VolumeWithForumTag = { volume: PocketGuideVolume; forumTag: string }
+
+function volumesWithForumTags(volumes: PocketGuideVolume[]): VolumeWithForumTag[] {
+    return volumes.flatMap((volume) => {
+        const forumTag = questionsTagForLabel(volume.docsProduct?.replace(/-/g, ' '))
+        return forumTag ? [{ volume, forumTag }] : []
+    })
+}
+
+function replyCountLabel(replyCount: number): string {
+    if (replyCount === 0) return 'no reply yet'
+    return `${replyCount} ${replyCount === 1 ? 'reply' : 'replies'}`
+}
+
+function OpenQuestionList({
+    profileId,
+    taggedVolumes,
+}: {
+    profileId: number
+    taggedVolumes: VolumeWithForumTag[]
+}): JSX.Element {
+    const { questions, isLoading } = useQuestions({
+        limit: HELP_QUESTION_LIMIT,
+        sort: ['createdAt:desc'],
+        fields: ['subject', 'permalink', 'numReplies', 'createdAt'],
+        populate: { profile: { fields: ['firstName'] }, forumTags: { fields: ['slug'] } },
+        filters: {
+            profile: { id: { $ne: profileId } },
+            subject: { $ne: '' },
+            $and: [
+                ...notArchivedOrResolved,
+                { $or: taggedVolumes.map(({ forumTag }) => questionsTagFilter(forumTag)) },
+            ],
+        },
+    })
+    const unansweredFirst = [...questions.data].sort(
+        (first, second) =>
+            Number((first.attributes.numReplies ?? 0) > 0) - Number((second.attributes.numReplies ?? 0) > 0)
+    )
+    const productTitle = (forumTags: StrapiRecord<ForumTagData>[] = []) =>
+        taggedVolumes.find(({ forumTag }) => forumTags.some((tag) => tag.attributes.slug === forumTag))?.volume.title
+
+    if (!isLoading && unansweredFirst.length === 0) return <EmptyLine>No open questions right now.</EmptyLine>
+
+    return (
+        <ul className="m-0 list-none p-0">
+            {unansweredFirst.map(({ id, attributes }) => {
+                const threadUrl = `/forum/p/${attributes.permalink}`
+                return (
+                    <li
+                        key={id}
+                        className="flex items-center gap-3 border-t border-primary py-3 first:border-t-0 first:pt-0"
+                    >
+                        <div className="min-w-0 flex-1">
+                            <Link to={threadUrl} className="block truncate text-[15px] font-bold !text-primary">
+                                {attributes.subject}
+                            </Link>
+                            <p className="m-0 truncate text-sm text-secondary">
+                                {[
+                                    attributes.profile?.data?.attributes?.firstName,
+                                    productTitle(attributes.forumTags?.data),
+                                    dayjs(attributes.createdAt).fromNow(),
+                                    replyCountLabel(attributes.numReplies ?? 0),
+                                ]
+                                    .filter(Boolean)
+                                    .join(' · ')}
+                            </p>
+                        </div>
+                        <OSButton asLink to={threadUrl} variant="secondary" size="sm" className="shrink-0">
+                            Answer
+                        </OSButton>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
+function QuestionsToHelp({
+    profileId,
+    startedVolumes,
+}: {
+    profileId: number
+    startedVolumes: PocketGuideVolume[]
+}): JSX.Element {
+    const taggedVolumes = volumesWithForumTags(startedVolumes)
+    return (
+        <Panel
+            eyebrow="Questions you can help with"
+            description="Open forum questions about the products in guides you started."
+        >
+            {taggedVolumes.length === 0 && (
+                <EmptyLine>Start a pocket guide and questions about its product show here.</EmptyLine>
+            )}
+            {taggedVolumes.length > 0 && <OpenQuestionList profileId={profileId} taggedVolumes={taggedVolumes} />}
+        </Panel>
+    )
+}
+
 function SignInPanel(): JSX.Element {
     const { openSignIn } = useApp()
     return (
@@ -112,7 +225,8 @@ function SignInPanel(): JSX.Element {
 
 export default function YourLearning(): JSX.Element {
     const { user, isValidating } = useUser()
-    const isSignedIn = Boolean(user?.profile?.id)
+    const profileId = user?.profile?.id
+    const isSignedIn = Boolean(profileId)
     const volumes = volumesWithSavedProgress(useReadProgress())
 
     return (
@@ -126,6 +240,11 @@ export default function YourLearning(): JSX.Element {
                     {!isValidating && !isSignedIn && (
                         <div className="order-2">
                             <SignInPanel />
+                        </div>
+                    )}
+                    {profileId && (
+                        <div className="order-2">
+                            <QuestionsToHelp profileId={profileId} startedVolumes={volumes} />
                         </div>
                     )}
                 </div>
