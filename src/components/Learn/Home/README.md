@@ -10,7 +10,7 @@ The Learn home at `/learn`. It uses the Reader template: a docs-style sidebar on
 | `/learn/videos` | `src/pages/learn/videos/index.tsx` | Videos: `LearnTV/VideoLibrary` with every Learn TV video, grouped by product. Each card opens the video in its own window. See [`LearnTV`](../LearnTV/README.md) |
 | `/learn/prompts` | `src/pages/learn/prompts.tsx` | Prompt library: every prompt from `learnPrompts.ts`, with search and a product filter |
 | `/learn/playground` | `src/pages/learn/playground.tsx` | Tinker with Twig: an Explore Twig link and a preview of Twig with its PostHog panel |
-| `/learn/you` | `src/pages/learn/you.tsx` | Your learning: the reader's progress in each pocket guide they started |
+| `/learn/you` | `src/pages/learn/you.tsx` | Your learning: the reader's guide progress, forum questions they can answer, and what their answers earned |
 
 Each page renders `<LearnHome section="..." />`. Every section shows the same sidebar. Every section except Your learning shows the hero.
 
@@ -46,7 +46,14 @@ The search matches each volume's title and description. The collection is one gr
 
 ## Your learning
 
-The page reads the chapter progress saved in this browser and the `learnProgress` of the signed-in profile. It shows one progress row for each pocket guide with at least one read chapter. A signed-out reader also sees a sign-in panel. The hero is not shown on this page.
+The page is private to the reader, and the hero is not shown on it. It has four panels:
+
+- **Your guides.** The chapter progress saved in this browser and the `learnProgress` of the signed-in profile. One row for each pocket guide with at least one read chapter.
+- **Questions you can help with.** Open forum questions that have the forum tag of a product whose guide the reader started.
+- **Thanks you received.** Forum questions where the reader's reply was marked as the solution. The filter is the rule the forum API uses to award the solution achievements, so the count agrees with the tiers.
+- **Achievements.** The tiers the reader holds in each tiered achievement group, and the next tier. Groups are selected by the `tiered` flag, not by name.
+
+The last three panels need a signed-in reader. A signed-out reader sees one sign-in panel in their place.
 
 ## Analytics
 
