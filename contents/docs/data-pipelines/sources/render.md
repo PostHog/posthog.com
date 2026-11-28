@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Render connector syncs your services, deploys, one-off jobs, service events, managed databases, blueprints, disk snapshots, Postgres query insights, and service metrics into the PostHog Data warehouse, so you can analyze deploy frequency, job outcomes, database performance, and infrastructure changes alongside your product data.
+The Render connector syncs your services, deploys, one-off jobs, service events, managed databases, blueprints, disk snapshots, Postgres query insights, workflows, tasks, scheduled maintenance, and service metrics into the PostHog Data warehouse, so you can analyze deploy frequency, job outcomes, database performance, and infrastructure changes alongside your product data.
 
 ## Prerequisites
 
@@ -35,6 +35,8 @@ When linking Render, you'll need:
 Deploys, jobs, and events are fetched per service, so syncs make one or more requests for each service in your workspace. Use incremental sync for these tables to keep ongoing syncs fast.
 
 Metrics tables (CPU, memory, HTTP requests, HTTP latency, instance count, and bandwidth) are opt-in and not synced by default. Enable them individually after connecting the source. These tables use incremental sync and merge on timestamp.
+
+The `task_runs` table is also opt-in and not synced by default. Enable it after connecting the source.
 
 ## Configuration
 
