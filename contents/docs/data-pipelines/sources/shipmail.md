@@ -43,7 +43,7 @@ The `messages` table supports incremental syncs using `updated_at`. Incremental 
 
 The `mailboxes`, `domains`, `suppressions`, `threads`, `inbox_threads`, `newsletters`, `audiences`, `audience_subscribers`, and `members` tables use full refresh because their API endpoints don't support filtering by update time.
 
-The `inbox_threads` table is partitioned by `first_message_at`. A thread that gets a new message during a sync can move to a later page of results. PostHog keeps the first copy of that thread, so its attention state can be out of date until the next sync.
+The `inbox_threads` table is partitioned by `first_message_at`. A thread that gets a new message during a sync can move to a later page of results. PostHog keeps the first copy of that thread, so its attention state can be out of date until the next sync. If a sync stops and then resumes, the table can contain a duplicate row for that thread until the next sync.
 
 ## Configuration
 
@@ -55,7 +55,7 @@ The `messages` table contains an analytics-safe projection. It excludes message 
 
 The `threads` table requires both `threads:read` and `mailboxes:read` scopes because thread data is scoped to the mailboxes your API key can access.
 
-The `inbox_threads` table contains the inbox conversations of each mailbox, with their attention state, assignment, follow-up date, and reply target. PostHog reads the inbox of each mailbox and adds a `mailbox_id` column. It syncs threads in all attention states: `needs_reply`, `waiting_on_them`, `done`, `follow_up_due`, `delivery_failed`, and `no_action`. The table requires both `messages:read` and `mailboxes:read` scopes.
+The `inbox_threads` table contains the inbox conversations of each mailbox, with their attention state, assignment, follow-up date, and reply target. PostHog reads the inbox of each mailbox and adds a `mailbox_id` column. It syncs threads in all attention states: `needs_reply`, `waiting_on_them`, `done`, `follow_up_due`, `delivery_failed`, and `no_action`. The table requires both `messages:read` and `mailboxes:read` scopes. Unlike the `messages` table, it includes the thread `subject` and the `latest_from_address` sender email address.
 
 The `audience_subscribers` table contains subscriber email addresses and display names. The `members` table contains organization member email addresses.
 
