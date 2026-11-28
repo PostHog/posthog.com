@@ -23,7 +23,7 @@ Both behaviors are on by default. An app that already has push configured and th
 
 ```react-native
 <PostHogProvider
-    apiKey="<ph_project_token>"
+    projectToken="<ph_project_token>"
     options={{
         host: '<ph_client_api_host>',
         // Both default to true, shown here for clarity:
@@ -153,7 +153,7 @@ If your push channel requires [identity verification](/docs/workflows/push-notif
 
 ```react-native
 <PostHogProvider
-    apiKey="<ph_project_token>"
+    projectToken="<ph_project_token>"
     options={{
         host: '<ph_client_api_host>',
         pushIdentityProvider: async (distinctId, appId) => {

@@ -67,7 +67,7 @@ export default function RootLayout() {
 
   return (
     <PostHogProvider
-      apiKey="<ph_project_token>"
+      projectToken="<ph_project_token>"
       options={{
         host: "<ph_client_api_host>", // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
       }}
@@ -113,17 +113,17 @@ With PostHog set up, let's create a remote config flags to control a message in 
 
 ## 4. Creating and showing our remote config message
 
-Next, create a new file in your `components` directory named `RemoteConfigDemo.tsx`. In it, we will check the feature flag with `useFeatureFlagWithPayload` and display the message:
+Next, create a new file in your `components` directory named `RemoteConfigDemo.tsx`. In it, we will get the feature flag payload with `useFeatureFlagPayload` and display the message:
 
 ```tsx
 import React from 'react';
 import { StyleSheet, Text, View, useColorScheme } from 'react-native';
-import { useFeatureFlagWithPayload } from 'posthog-react-native';
+import { useFeatureFlagPayload } from 'posthog-react-native';
 import { Colors } from '@/constants/Colors';
 
 export default function RemoteConfigDemo() {
   const colorScheme = useColorScheme() ?? 'light';
-  const payload = useFeatureFlagWithPayload('welcome-message');
+  const payload = useFeatureFlagPayload('welcome-message') as { message?: string } | undefined;
   const welcomeMessage = payload?.message || 'Welcome!';
 
   return (

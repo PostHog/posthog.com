@@ -77,11 +77,11 @@ function App() {
 ```
 
 ```react-native
-// With the useFeatureFlag hook
-import { useFeatureFlag } from 'posthog-react-native'
+// With the useFeatureFlagVariantKey hook (posthog-react-native 5.0 and later; in 4.x, use useFeatureFlag)
+import { useFeatureFlagVariantKey } from 'posthog-react-native'
 
 const MyComponent = () => {
-    const variant = useFeatureFlag('experiment-feature-flag-key')
+    const variant = useFeatureFlagVariantKey('experiment-feature-flag-key')
 
     if (variant === undefined) {
         // the response is undefined if the flags are being loaded

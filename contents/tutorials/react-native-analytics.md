@@ -209,7 +209,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <PostHogProvider 
-        apiKey="<ph_project_token>"
+        projectToken="<ph_project_token>"
         options={{
           host: "<ph_client_api_host>",
         }}
@@ -295,16 +295,16 @@ We use a feature flag to add a call-to-action button on our About page. To do th
 
 ![Feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/feature-flag.gif)
 
-Copy the key value, and head back to your code. To use feature flags in your app, import `useFeatureFlag` and then call it with the flag key where you want the decision made. Add it to our `About()` function like this:
+Copy the key value, and head back to your code. To use feature flags in your app, import `useFeatureFlagEnabled` and then call it with the flag key where you want the decision made. Add it to our `About()` function like this:
 
 ```js
 // ...
-import { PostHogProvider, usePostHog, useFeatureFlag } from 'posthog-react-native'
+import { PostHogProvider, usePostHog, useFeatureFlagEnabled } from 'posthog-react-native'
 
 // ...
 
 function About() {
-  const showCTA = useFeatureFlag('about-cta')
+  const showCTA = useFeatureFlagEnabled('about-cta')
 
   return (
     <View style={styles.container}>
