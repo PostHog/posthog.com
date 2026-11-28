@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Shipmail connector syncs message analytics, mailboxes, domains, suppressions, threads, newsletters, audience subscribers, and organization members into the PostHog Data warehouse, so you can analyze email activity alongside your product data.
+The Shipmail connector syncs message analytics, mailboxes, domains, suppressions, threads, inbox threads, newsletters, audiences, audience subscribers, and organization members into the PostHog Data warehouse, so you can analyze email activity alongside your product data.
 
 ## Prerequisites
 
@@ -25,7 +25,8 @@ You need a Shipmail account and an API key. Grant the key the read scopes for th
 - `suppressions:read` for suppressions
 - `threads:read` and `mailboxes:read` for threads
 - `newsletters:read` for newsletters
-- `audiences:read` for audience subscribers
+- `audiences:read` for audiences and audience subscribers
+- `messages:read` and `mailboxes:read` for inbox threads
 - `members:read` for organization members
 
 ## Adding a data source
@@ -40,7 +41,7 @@ When linking Shipmail, create an **API key** in your [Shipmail API settings](htt
 
 The `messages` table supports incremental syncs using `updated_at`. Incremental sync is recommended because it captures new messages and status updates without reloading the full table.
 
-The `mailboxes`, `domains`, `suppressions`, `threads`, `newsletters`, `audience_subscribers`, and `members` tables use full refresh because their API endpoints don't support filtering by update time.
+The `mailboxes`, `domains`, `suppressions`, `threads`, `inbox_threads`, `newsletters`, `audiences`, `audience_subscribers`, and `members` tables use full refresh because their API endpoints don't support filtering by update time.
 
 ## Configuration
 
@@ -53,6 +54,10 @@ The `messages` table contains an analytics-safe projection. It excludes message 
 The `threads` table requires both `threads:read` and `mailboxes:read` scopes because thread data is scoped to the mailboxes your API key can access.
 
 The `audience_subscribers` table contains subscriber email addresses and display names. The `members` table contains organization member email addresses.
+
+The `audiences` table contains newsletter audiences with their subscriber counts, consent source, and list cleanup settings. It requires the `audiences:read` scope.
+
+The `inbox_threads` table contains inbox conversations for each mailbox with their attention state (such as `needs_reply`, `waiting_on_them`, `done`, `follow_up_due`, `delivery_failed`, or `no_action`), assignment, follow-up date, and reply target. It requires both `messages:read` and `mailboxes:read` scopes because inbox data is scoped to the mailboxes your API key can access.
 
 <SourceTables />
 
