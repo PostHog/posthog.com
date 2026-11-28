@@ -9,9 +9,9 @@ availability:
 sourceId: Vantage
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Vantage connector syncs cost reports, budgets, folders, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -44,6 +44,16 @@ All Vantage tables are full refresh. Each sync replaces the contents of the tabl
 ## Supported tables
 
 <SourceTables />
+
+## Working with forecasted costs
+
+<CalloutBox icon="IconWarning" title="Avoid double-counting forecast amounts" type="caution">
+
+The `forecasted_costs` table contains both overall totals (where `provider = 'all'` and `service = 'all'`) and detailed provider/service breakdowns for the same dates. Summing the `amount` column without filtering counts spend twice.
+
+To get overall report totals, filter to `provider = 'all'` AND `service = 'all'`.
+
+</CalloutBox>
 
 ## Troubleshooting
 
