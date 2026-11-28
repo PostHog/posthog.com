@@ -43,7 +43,7 @@ The `messages` table supports incremental syncs using `updated_at`. Incremental 
 
 The `mailboxes`, `domains`, `suppressions`, `threads`, `inbox_threads`, `newsletters`, `audiences`, `audience_subscribers`, and `members` tables use full refresh because their API endpoints don't support filtering by update time.
 
-The `inbox_threads` table is partitioned by `first_message_at`. A thread that gets a new message during a sync can move to a later page of results. PostHog keeps the first copy of that thread, so its attention state can be out of date until the next sync. If a sync stops and then resumes, the table can contain a duplicate row for that thread until the next sync.
+The `inbox_threads` table is partitioned by `first_message_at`. A thread that gets a new message during a sync can move to a later page of results. PostHog keeps the first copy of that thread. The fields on that row can be out of date until the next sync. These include the attention state, `message_count`, `last_message_at`, and `latest_from_address`. If a sync stops and then resumes, the table can contain a duplicate row for that thread until the next sync.
 
 ## Configuration
 
