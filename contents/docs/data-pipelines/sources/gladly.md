@@ -9,7 +9,7 @@ availability:
 sourceId: Gladly
 ---
 
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Gladly connector pulls your customer service data into the PostHog data warehouse: customers, conversation items, agents, and topics, plus conversations and the lifecycle events behind them.
 
@@ -32,7 +32,7 @@ Once the syncs are complete, you can start using Gladly data in PostHog.
 
 <SourceTables />
 
-Gladly has no traditional REST API for bulk data, so these tables come from two different places, and each place has its own limits on how far back you can go.
+Gladly has no traditional REST API for bulk data, so these tables come from three different places, and each place has its own limits on how far back you can go.
 
 ### Export job tables
 
@@ -56,6 +56,12 @@ Gladly limits the reports endpoint to 10 requests per minute, so PostHog paces i
 Gladly also caps a single report at roughly 100,000 rows and truncates anything past it without saying so. PostHog sizes its report windows to stay clear of that cap, and logs a warning if a window gets close.
 
 The report tables merge on their primary key and cannot run as append only, because PostHog re-reads a report window whenever a sync resumes.
+
+### Lookup tables
+
+`teams`, `inboxes`, `answers`, and `audiences` come from Gladly's REST API. Each endpoint returns the entire list in a single unpaginated response with no change filter, so these tables sync in full refresh mode only.
+
+They are small reference tables useful for resolving IDs in other tables to human-readable names — for example, joining `audienceIds` from the `answers` table to actual audience names in `audiences`.
 
 ## Troubleshooting
 
