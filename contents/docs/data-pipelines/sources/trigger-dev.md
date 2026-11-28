@@ -30,15 +30,19 @@ When linking Trigger.dev, you'll need:
 
 ## Available tables
 
-| Table       | Description                                                  | Sync method                |
-| ----------- | ------------------------------------------------------------ | -------------------------- |
-| `runs`      | A single execution of a task, with status, timings, and cost | Incremental on `createdAt` |
-| `schedules` | Schedules that trigger tasks on recurring cron expressions   | Full refresh               |
-| `queues`    | Task queues with live concurrency and depth counters         | Full refresh               |
+| Table          | Description                                                  | Sync method                |
+| -------------- | ------------------------------------------------------------ | -------------------------- |
+| `runs`         | A single execution of a task, with status, timings, and cost | Incremental on `createdAt` |
+| `schedules`    | Schedules that trigger tasks on recurring cron expressions   | Full refresh               |
+| `queues`       | Task queues with live concurrency and depth counters         | Full refresh               |
+| `sessions`     | A Trigger.dev session that can span multiple task runs       | Incremental on `createdAt` |
+| `bulk_actions` | An operation that cancels or replays multiple task runs      | Full refresh               |
 
-**Incremental** syncs on the `runs` table use a 3-day lookback window. Runs are created with an immutable `createdAt` timestamp, but fields like `status` and `costInCents` keep updating after creation. The lookback re-reads recently created runs each sync to pick up those late changes. Merge deduplication on the run `id` prevents duplicates.
+**Incremental** syncs on the `runs` table use a 3-day lookback window, while `sessions` uses a 7-day lookback. Runs are created with an immutable `createdAt` timestamp, but fields like `status` and `costInCents` keep updating after creation. The lookback re-reads recently created runs each sync to pick up those late changes. Merge deduplication on the run `id` prevents duplicates.
 
-**Full refresh** tables (`schedules` and `queues`) reload all data on each sync. These are typically small and have no stable timestamp to sync on.
+**Full refresh** tables (`schedules`, `queues`, and `bulk_actions`) reload all data on each sync. These are typically small and have no stable timestamp to sync on.
+
+> **Note:** The `sessions` and `bulk_actions` tables are opt-in and not synced by default. Enable them when configuring your Trigger.dev source.
 
 ## Sync modes
 
