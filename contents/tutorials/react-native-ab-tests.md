@@ -215,7 +215,7 @@ The final step is to add the experiment code. We'll add code that does the follo
 1. Fetch the `my-cool-experiment` flag.
 2. Change the background color of `SecondScreen` based on the value of the flag (`control` or `test`).
 
-To do this, we implement the [`useFeatureFlagVariantKey`](/docs/libraries/react-native#feature-flags) hook:
+To do this, we implement the [`useFeatureFlagVariantKey`](/docs/libraries/react-native#usefeatureflagvariantkey) hook:
 
 ```js file=SecondScreen.js
 import { View, Button, StyleSheet } from 'react-native';
