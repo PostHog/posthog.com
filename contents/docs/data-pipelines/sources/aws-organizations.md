@@ -9,9 +9,9 @@ availability:
 sourceId: AwsOrganizations
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The AWS Organizations connector syncs accounts, organization, organizational units, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -25,7 +25,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Sync your AWS organization structure, so cost and usage data can be read by account name, organizational unit, and tag.
 
-Create an IAM user or role with the `organizations:DescribeOrganization`, `organizations:ListAccounts`, `organizations:ListRoots`, `organizations:ListOrganizationalUnitsForParent`, `organizations:ListPolicies` and `organizations:ListTagsForResource` permissions, then paste its access key ID and secret access key. Add a session token too if you are using temporary credentials.
+Create an IAM user or role with the `organizations:DescribeOrganization`, `organizations:ListAccounts`, `organizations:ListAWSServiceAccessForOrganization`, `organizations:ListCreateAccountStatus`, `organizations:ListHandshakesForOrganization`, `organizations:ListInboundResponsibilityTransfers`, `organizations:ListOrganizationalUnitsForParent`, `organizations:ListPolicies`, `organizations:ListRoots`, and `organizations:ListTagsForResource` permissions, then paste its access key ID and secret access key. Add a session token too if you are using temporary credentials.
 
 Use a key from the management account or from a member account that is a delegated administrator. Keys from other member accounts can only read the organization table.
 
